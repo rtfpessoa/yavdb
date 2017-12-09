@@ -1,0 +1,357 @@
+---
+- id: snykio:maven:org.apache.james:james-server:2017-10-18
+  title: Deserialization of Untrusted Data
+  description: "[`org.apache.james:james-server`][1] is the Java Apache Mail Enterprise\nServer.\n\nAffected
+    versions of this package are vulnerable to Deserialization of\nUntrusted Data.\n\nThe
+    JMX server embedded in Apache James, also used by the command line\nclient is
+    exposed to a java de-serialization issue, and thus can be used\nto execute arbitrary
+    commands. As James exposes JMX socket by default\nonly on local-host, this vulnerability
+    can only be used for privilege\nescalation. Release 3.0.1 upgrades the incriminated
+    library.\n\n\n\n[1]: https://james.apache.org\n\\n[`org.apache.james:james-server`][1]
+    is the Java Apache Mail Enterprise\nServer.\n\nAffected versions of this package
+    are vulnerable to Deserialization of\nUntrusted Data.\n\nThe JMX server embedded
+    in Apache James, also used by the command line\nclient is exposed to a java de-serialization
+    issue, and thus can be used\nto execute arbitrary commands. As James exposes JMX
+    socket by default\nonly on local-host, this vulnerability can only be used for
+    privilege\nescalation. Release 3.0.1 upgrades the incriminated library.\n\n\n\n[1]:
+    https://james.apache.org\n\\n[`org.apache.james:james-server`][1] is the Java
+    Apache Mail Enterprise\nServer.\n\nAffected versions of this package are vulnerable
+    to Deserialization of\nUntrusted Data.\n\nThe JMX server embedded in Apache James,
+    also used by the command line\nclient is exposed to a java de-serialization issue,
+    and thus can be used\nto execute arbitrary commands. As James exposes JMX socket
+    by default\nonly on local-host, this vulnerability can only be used for privilege\nescalation.
+    Release 3.0.1 upgrades the incriminated library.\n\n\n\n[1]: https://james.apache.org\n\\n[`org.apache.james:james-server`][1]
+    is the Java Apache Mail Enterprise\nServer.\n\nAffected versions of this package
+    are vulnerable to Deserialization of\nUntrusted Data.\n\nThe JMX server embedded
+    in Apache James, also used by the command line\nclient is exposed to a java de-serialization
+    issue, and thus can be used\nto execute arbitrary commands. As James exposes JMX
+    socket by default\nonly on local-host, this vulnerability can only be used for
+    privilege\nescalation. Release 3.0.1 upgrades the incriminated library.\n\n\n\n[1]:
+    https://james.apache.org\n\\nSerialization is a process of converting an object
+    into a sequence of\nbytes which can be persisted to a disk or database or can
+    be sent\nthrough streams. The reverse process of creating object from sequence
+    of\nbytes is called deserialization. Serialization is commonly used for\ncommunication
+    (sharing objects between multiple hosts) and persistence\n(store the object state
+    in a file or a database). It is an integral part\nof popular protocols like *Remote
+    Method Invocation (RMI)*, *Java\nManagement Extension (JMX)*, *Java Messaging
+    System (JMS)*, *Action\nMessage Format (AMF)*, *Java Server Faces (JSF) ViewState*,
+    etc.\n\n*Deserialization of untrusted data* ([CWE-502][1]), is when the\napplication
+    deserializes untrusted data without sufficiently verifying\nthat the resulting
+    data will be valid, letting the attacker to control\nthe state or the flow of
+    the execution.\n\nJava deserialization issues have been known for years. However,
+    interest\nin the issue intensified greatly in 2015, when classes that could be\nabused
+    to achieve remote code execution were found in a [popular library\n(Apache Commons
+    Collection)][2]. These classes were used in zero-days\naffecting IBM WebSphere,
+    Oracle WebLogic and many other products.\n\nAn attacker just needs to identify
+    a piece of software that has both a\nvulnerable class on its path, and performs
+    deserialization on untrusted\ndata. Then all they need to do is send the payload
+    into the\ndeserializer, getting the command executed.\n\n> Developers put too
+    much trust in Java Object Serialization. Some even\n> de-serialize objects pre-authentication.
+    When deserializing an Object\n> in Java you typically cast it to an expected type,
+    and therefore\n> Java\\'s strict type system will ensure you only get valid object\n>
+    trees. Unfortunately, by the time the type checking happens, platform\n> code
+    has already created and executed significant logic. So, before\n> the final type
+    is checked a lot of code is executed from the\n> readObject() methods of various
+    objects, all of which is out of the\n> developer\\'s control. By combining the
+    readObject() methods of various\n> classes which are available on the classpath
+    of the vulnerable\n> application an attacker can execute functions (including
+    calling\n> Runtime.exec() to execute local OS commands).\n> \n> * Apache Blog\n\nThe
+    vulnerability, also know as *Mad Gadget*\n\n> Mad Gadget is one of the most pernicious
+    vulnerabilities we’ve seen.\n> By merely existing on the Java classpath, seven
+    “gadget” classes in\n> Apache Commons Collections (versions 3.0, 3.1, 3.2, 3.2.1,
+    and 4.0)\n> make object deserialization for the entire JVM process Turing complete\n>
+    with an exec function. Since many business applications use object\n> deserialization
+    to send messages across the network, it would be like\n> hiring a bank teller
+    who was trained to hand over all the money in the\n> vault if asked to do so politely,
+    and then entrusting that teller with\n> the key. The only thing that would keep
+    a bank safe in such a\n> circumstance is that most people wouldn’t consider asking
+    such a\n> question.\n> \n> * Google\n\n\n\n[1]: https://cwe.mitre.org/data/definitions/502.html\n[2]:
+    https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078\n\\nSerialization is a
+    process of converting an object into a sequence of\nbytes which can be persisted
+    to a disk or database or can be sent\nthrough streams. The reverse process of
+    creating object from sequence of\nbytes is called deserialization. Serialization
+    is commonly used for\ncommunication (sharing objects between multiple hosts) and
+    persistence\n(store the object state in a file or a database). It is an integral
+    part\nof popular protocols like *Remote Method Invocation (RMI)*, *Java\nManagement
+    Extension (JMX)*, *Java Messaging System (JMS)*, *Action\nMessage Format (AMF)*,
+    *Java Server Faces (JSF) ViewState*, etc.\n\n*Deserialization of untrusted data*
+    ([CWE-502][1]), is when the\napplication deserializes untrusted data without sufficiently
+    verifying\nthat the resulting data will be valid, letting the attacker to control\nthe
+    state or the flow of the execution.\n\nJava deserialization issues have been known
+    for years. However, interest\nin the issue intensified greatly in 2015, when classes
+    that could be\nabused to achieve remote code execution were found in a [popular
+    library\n(Apache Commons Collection)][2]. These classes were used in zero-days\naffecting
+    IBM WebSphere, Oracle WebLogic and many other products.\n\nAn attacker just needs
+    to identify a piece of software that has both a\nvulnerable class on its path,
+    and performs deserialization on untrusted\ndata. Then all they need to do is send
+    the payload into the\ndeserializer, getting the command executed.\n\n> Developers
+    put too much trust in Java Object Serialization. Some even\n> de-serialize objects
+    pre-authentication. When deserializing an Object\n> in Java you typically cast
+    it to an expected type, and therefore\n> Java\\'s strict type system will ensure
+    you only get valid object\n> trees. Unfortunately, by the time the type checking
+    happens, platform\n> code has already created and executed significant logic.
+    So, before\n> the final type is checked a lot of code is executed from the\n>
+    readObject() methods of various objects, all of which is out of the\n> developer\\'s
+    control. By combining the readObject() methods of various\n> classes which are
+    available on the classpath of the vulnerable\n> application an attacker can execute
+    functions (including calling\n> Runtime.exec() to execute local OS commands).\n>
+    \n> * Apache Blog\n\nThe vulnerability, also know as *Mad Gadget*\n\n> Mad Gadget
+    is one of the most pernicious vulnerabilities we’ve seen.\n> By merely existing
+    on the Java classpath, seven “gadget” classes in\n> Apache Commons Collections
+    (versions 3.0, 3.1, 3.2, 3.2.1, and 4.0)\n> make object deserialization for the
+    entire JVM process Turing complete\n> with an exec function. Since many business
+    applications use object\n> deserialization to send messages across the network,
+    it would be like\n> hiring a bank teller who was trained to hand over all the
+    money in the\n> vault if asked to do so politely, and then entrusting that teller
+    with\n> the key. The only thing that would keep a bank safe in such a\n> circumstance
+    is that most people wouldn’t consider asking such a\n> question.\n> \n> * Google\n\n\n\n[1]:
+    https://cwe.mitre.org/data/definitions/502.html\n[2]: https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078\n\\nSerialization
+    is a process of converting an object into a sequence of\nbytes which can be persisted
+    to a disk or database or can be sent\nthrough streams. The reverse process of
+    creating object from sequence of\nbytes is called deserialization. Serialization
+    is commonly used for\ncommunication (sharing objects between multiple hosts) and
+    persistence\n(store the object state in a file or a database). It is an integral
+    part\nof popular protocols like *Remote Method Invocation (RMI)*, *Java\nManagement
+    Extension (JMX)*, *Java Messaging System (JMS)*, *Action\nMessage Format (AMF)*,
+    *Java Server Faces (JSF) ViewState*, etc.\n\n*Deserialization of untrusted data*
+    ([CWE-502][1]), is when the\napplication deserializes untrusted data without sufficiently
+    verifying\nthat the resulting data will be valid, letting the attacker to control\nthe
+    state or the flow of the execution.\n\nJava deserialization issues have been known
+    for years. However, interest\nin the issue intensified greatly in 2015, when classes
+    that could be\nabused to achieve remote code execution were found in a [popular
+    library\n(Apache Commons Collection)][2]. These classes were used in zero-days\naffecting
+    IBM WebSphere, Oracle WebLogic and many other products.\n\nAn attacker just needs
+    to identify a piece of software that has both a\nvulnerable class on its path,
+    and performs deserialization on untrusted\ndata. Then all they need to do is send
+    the payload into the\ndeserializer, getting the command executed.\n\n> Developers
+    put too much trust in Java Object Serialization. Some even\n> de-serialize objects
+    pre-authentication. When deserializing an Object\n> in Java you typically cast
+    it to an expected type, and therefore\n> Java\\'s strict type system will ensure
+    you only get valid object\n> trees. Unfortunately, by the time the type checking
+    happens, platform\n> code has already created and executed significant logic.
+    So, before\n> the final type is checked a lot of code is executed from the\n>
+    readObject() methods of various objects, all of which is out of the\n> developer\\'s
+    control. By combining the readObject() methods of various\n> classes which are
+    available on the classpath of the vulnerable\n> application an attacker can execute
+    functions (including calling\n> Runtime.exec() to execute local OS commands).\n>
+    \n> * Apache Blog\n\nThe vulnerability, also know as *Mad Gadget*\n\n> Mad Gadget
+    is one of the most pernicious vulnerabilities we’ve seen.\n> By merely existing
+    on the Java classpath, seven “gadget” classes in\n> Apache Commons Collections
+    (versions 3.0, 3.1, 3.2, 3.2.1, and 4.0)\n> make object deserialization for the
+    entire JVM process Turing complete\n> with an exec function. Since many business
+    applications use object\n> deserialization to send messages across the network,
+    it would be like\n> hiring a bank teller who was trained to hand over all the
+    money in the\n> vault if asked to do so politely, and then entrusting that teller
+    with\n> the key. The only thing that would keep a bank safe in such a\n> circumstance
+    is that most people wouldn’t consider asking such a\n> question.\n> \n> * Google\n\n\n\n[1]:
+    https://cwe.mitre.org/data/definitions/502.html\n[2]: https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078\n\\nSerialization
+    is a process of converting an object into a sequence of\nbytes which can be persisted
+    to a disk or database or can be sent\nthrough streams. The reverse process of
+    creating object from sequence of\nbytes is called deserialization. Serialization
+    is commonly used for\ncommunication (sharing objects between multiple hosts) and
+    persistence\n(store the object state in a file or a database). It is an integral
+    part\nof popular protocols like *Remote Method Invocation (RMI)*, *Java\nManagement
+    Extension (JMX)*, *Java Messaging System (JMS)*, *Action\nMessage Format (AMF)*,
+    *Java Server Faces (JSF) ViewState*, etc.\n\n*Deserialization of untrusted data*
+    ([CWE-502][1]), is when the\napplication deserializes untrusted data without sufficiently
+    verifying\nthat the resulting data will be valid, letting the attacker to control\nthe
+    state or the flow of the execution.\n\nJava deserialization issues have been known
+    for years. However, interest\nin the issue intensified greatly in 2015, when classes
+    that could be\nabused to achieve remote code execution were found in a [popular
+    library\n(Apache Commons Collection)][2]. These classes were used in zero-days\naffecting
+    IBM WebSphere, Oracle WebLogic and many other products.\n\nAn attacker just needs
+    to identify a piece of software that has both a\nvulnerable class on its path,
+    and performs deserialization on untrusted\ndata. Then all they need to do is send
+    the payload into the\ndeserializer, getting the command executed.\n\n> Developers
+    put too much trust in Java Object Serialization. Some even\n> de-serialize objects
+    pre-authentication. When deserializing an Object\n> in Java you typically cast
+    it to an expected type, and therefore\n> Java\\'s strict type system will ensure
+    you only get valid object\n> trees. Unfortunately, by the time the type checking
+    happens, platform\n> code has already created and executed significant logic.
+    So, before\n> the final type is checked a lot of code is executed from the\n>
+    readObject() methods of various objects, all of which is out of the\n> developer\\'s
+    control. By combining the readObject() methods of various\n> classes which are
+    available on the classpath of the vulnerable\n> application an attacker can execute
+    functions (including calling\n> Runtime.exec() to execute local OS commands).\n>
+    \n> * Apache Blog\n\nThe vulnerability, also know as *Mad Gadget*\n\n> Mad Gadget
+    is one of the most pernicious vulnerabilities we’ve seen.\n> By merely existing
+    on the Java classpath, seven “gadget” classes in\n> Apache Commons Collections
+    (versions 3.0, 3.1, 3.2, 3.2.1, and 4.0)\n> make object deserialization for the
+    entire JVM process Turing complete\n> with an exec function. Since many business
+    applications use object\n> deserialization to send messages across the network,
+    it would be like\n> hiring a bank teller who was trained to hand over all the
+    money in the\n> vault if asked to do so politely, and then entrusting that teller
+    with\n> the key. The only thing that would keep a bank safe in such a\n> circumstance
+    is that most people wouldn’t consider asking such a\n> question.\n> \n> * Google\n\n\n\n[1]:
+    https://cwe.mitre.org/data/definitions/502.html\n[2]: https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078\n\\nSerialization
+    is a process of converting an object into a sequence of\nbytes which can be persisted
+    to a disk or database or can be sent\nthrough streams. The reverse process of
+    creating object from sequence of\nbytes is called deserialization. Serialization
+    is commonly used for\ncommunication (sharing objects between multiple hosts) and
+    persistence\n(store the object state in a file or a database). It is an integral
+    part\nof popular protocols like *Remote Method Invocation (RMI)*, *Java\nManagement
+    Extension (JMX)*, *Java Messaging System (JMS)*, *Action\nMessage Format (AMF)*,
+    *Java Server Faces (JSF) ViewState*, etc.\n\n*Deserialization of untrusted data*
+    ([CWE-502][1]), is when the\napplication deserializes untrusted data without sufficiently
+    verifying\nthat the resulting data will be valid, letting the attacker to control\nthe
+    state or the flow of the execution.\n\nJava deserialization issues have been known
+    for years. However, interest\nin the issue intensified greatly in 2015, when classes
+    that could be\nabused to achieve remote code execution were found in a [popular
+    library\n(Apache Commons Collection)][2]. These classes were used in zero-days\naffecting
+    IBM WebSphere, Oracle WebLogic and many other products.\n\nAn attacker just needs
+    to identify a piece of software that has both a\nvulnerable class on its path,
+    and performs deserialization on untrusted\ndata. Then all they need to do is send
+    the payload into the\ndeserializer, getting the command executed.\n\n> Developers
+    put too much trust in Java Object Serialization. Some even\n> de-serialize objects
+    pre-authentication. When deserializing an Object\n> in Java you typically cast
+    it to an expected type, and therefore\n> Java\\'s strict type system will ensure
+    you only get valid object\n> trees. Unfortunately, by the time the type checking
+    happens, platform\n> code has already created and executed significant logic.
+    So, before\n> the final type is checked a lot of code is executed from the\n>
+    readObject() methods of various objects, all of which is out of the\n> developer\\'s
+    control. By combining the readObject() methods of various\n> classes which are
+    available on the classpath of the vulnerable\n> application an attacker can execute
+    functions (including calling\n> Runtime.exec() to execute local OS commands).\n>
+    \n> * Apache Blog\n\nThe vulnerability, also know as *Mad Gadget*\n\n> Mad Gadget
+    is one of the most pernicious vulnerabilities we’ve seen.\n> By merely existing
+    on the Java classpath, seven “gadget” classes in\n> Apache Commons Collections
+    (versions 3.0, 3.1, 3.2, 3.2.1, and 4.0)\n> make object deserialization for the
+    entire JVM process Turing complete\n> with an exec function. Since many business
+    applications use object\n> deserialization to send messages across the network,
+    it would be like\n> hiring a bank teller who was trained to hand over all the
+    money in the\n> vault if asked to do so politely, and then entrusting that teller
+    with\n> the key. The only thing that would keep a bank safe in such a\n> circumstance
+    is that most people wouldn’t consider asking such a\n> question.\n> \n> * Google\n\n\n\n[1]:
+    https://cwe.mitre.org/data/definitions/502.html\n[2]: https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078\n\\nSerialization
+    is a process of converting an object into a sequence of\nbytes which can be persisted
+    to a disk or database or can be sent\nthrough streams. The reverse process of
+    creating object from sequence of\nbytes is called deserialization. Serialization
+    is commonly used for\ncommunication (sharing objects between multiple hosts) and
+    persistence\n(store the object state in a file or a database). It is an integral
+    part\nof popular protocols like *Remote Method Invocation (RMI)*, *Java\nManagement
+    Extension (JMX)*, *Java Messaging System (JMS)*, *Action\nMessage Format (AMF)*,
+    *Java Server Faces (JSF) ViewState*, etc.\n\n*Deserialization of untrusted data*
+    ([CWE-502][1]), is when the\napplication deserializes untrusted data without sufficiently
+    verifying\nthat the resulting data will be valid, letting the attacker to control\nthe
+    state or the flow of the execution.\n\nJava deserialization issues have been known
+    for years. However, interest\nin the issue intensified greatly in 2015, when classes
+    that could be\nabused to achieve remote code execution were found in a [popular
+    library\n(Apache Commons Collection)][2]. These classes were used in zero-days\naffecting
+    IBM WebSphere, Oracle WebLogic and many other products.\n\nAn attacker just needs
+    to identify a piece of software that has both a\nvulnerable class on its path,
+    and performs deserialization on untrusted\ndata. Then all they need to do is send
+    the payload into the\ndeserializer, getting the command executed.\n\n> Developers
+    put too much trust in Java Object Serialization. Some even\n> de-serialize objects
+    pre-authentication. When deserializing an Object\n> in Java you typically cast
+    it to an expected type, and therefore\n> Java\\'s strict type system will ensure
+    you only get valid object\n> trees. Unfortunately, by the time the type checking
+    happens, platform\n> code has already created and executed significant logic.
+    So, before\n> the final type is checked a lot of code is executed from the\n>
+    readObject() methods of various objects, all of which is out of the\n> developer\\'s
+    control. By combining the readObject() methods of various\n> classes which are
+    available on the classpath of the vulnerable\n> application an attacker can execute
+    functions (including calling\n> Runtime.exec() to execute local OS commands).\n>
+    \n> * Apache Blog\n\nThe vulnerability, also know as *Mad Gadget*\n\n> Mad Gadget
+    is one of the most pernicious vulnerabilities we’ve seen.\n> By merely existing
+    on the Java classpath, seven “gadget” classes in\n> Apache Commons Collections
+    (versions 3.0, 3.1, 3.2, 3.2.1, and 4.0)\n> make object deserialization for the
+    entire JVM process Turing complete\n> with an exec function. Since many business
+    applications use object\n> deserialization to send messages across the network,
+    it would be like\n> hiring a bank teller who was trained to hand over all the
+    money in the\n> vault if asked to do so politely, and then entrusting that teller
+    with\n> the key. The only thing that would keep a bank safe in such a\n> circumstance
+    is that most people wouldn’t consider asking such a\n> question.\n> \n> * Google\n\n\n\n[1]:
+    https://cwe.mitre.org/data/definitions/502.html\n[2]: https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078\n\\nSerialization
+    is a process of converting an object into a sequence of\nbytes which can be persisted
+    to a disk or database or can be sent\nthrough streams. The reverse process of
+    creating object from sequence of\nbytes is called deserialization. Serialization
+    is commonly used for\ncommunication (sharing objects between multiple hosts) and
+    persistence\n(store the object state in a file or a database). It is an integral
+    part\nof popular protocols like *Remote Method Invocation (RMI)*, *Java\nManagement
+    Extension (JMX)*, *Java Messaging System (JMS)*, *Action\nMessage Format (AMF)*,
+    *Java Server Faces (JSF) ViewState*, etc.\n\n*Deserialization of untrusted data*
+    ([CWE-502][1]), is when the\napplication deserializes untrusted data without sufficiently
+    verifying\nthat the resulting data will be valid, letting the attacker to control\nthe
+    state or the flow of the execution.\n\nJava deserialization issues have been known
+    for years. However, interest\nin the issue intensified greatly in 2015, when classes
+    that could be\nabused to achieve remote code execution were found in a [popular
+    library\n(Apache Commons Collection)][2]. These classes were used in zero-days\naffecting
+    IBM WebSphere, Oracle WebLogic and many other products.\n\nAn attacker just needs
+    to identify a piece of software that has both a\nvulnerable class on its path,
+    and performs deserialization on untrusted\ndata. Then all they need to do is send
+    the payload into the\ndeserializer, getting the command executed.\n\n> Developers
+    put too much trust in Java Object Serialization. Some even\n> de-serialize objects
+    pre-authentication. When deserializing an Object\n> in Java you typically cast
+    it to an expected type, and therefore\n> Java\\'s strict type system will ensure
+    you only get valid object\n> trees. Unfortunately, by the time the type checking
+    happens, platform\n> code has already created and executed significant logic.
+    So, before\n> the final type is checked a lot of code is executed from the\n>
+    readObject() methods of various objects, all of which is out of the\n> developer\\'s
+    control. By combining the readObject() methods of various\n> classes which are
+    available on the classpath of the vulnerable\n> application an attacker can execute
+    functions (including calling\n> Runtime.exec() to execute local OS commands).\n>
+    \n> * Apache Blog\n\nThe vulnerability, also know as *Mad Gadget*\n\n> Mad Gadget
+    is one of the most pernicious vulnerabilities we’ve seen.\n> By merely existing
+    on the Java classpath, seven “gadget” classes in\n> Apache Commons Collections
+    (versions 3.0, 3.1, 3.2, 3.2.1, and 4.0)\n> make object deserialization for the
+    entire JVM process Turing complete\n> with an exec function. Since many business
+    applications use object\n> deserialization to send messages across the network,
+    it would be like\n> hiring a bank teller who was trained to hand over all the
+    money in the\n> vault if asked to do so politely, and then entrusting that teller
+    with\n> the key. The only thing that would keep a bank safe in such a\n> circumstance
+    is that most people wouldn’t consider asking such a\n> question.\n> \n> * Google\n\n\n\n[1]:
+    https://cwe.mitre.org/data/definitions/502.html\n[2]: https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078\n\\nSerialization
+    is a process of converting an object into a sequence of\nbytes which can be persisted
+    to a disk or database or can be sent\nthrough streams. The reverse process of
+    creating object from sequence of\nbytes is called deserialization. Serialization
+    is commonly used for\ncommunication (sharing objects between multiple hosts) and
+    persistence\n(store the object state in a file or a database). It is an integral
+    part\nof popular protocols like *Remote Method Invocation (RMI)*, *Java\nManagement
+    Extension (JMX)*, *Java Messaging System (JMS)*, *Action\nMessage Format (AMF)*,
+    *Java Server Faces (JSF) ViewState*, etc.\n\n*Deserialization of untrusted data*
+    ([CWE-502][1]), is when the\napplication deserializes untrusted data without sufficiently
+    verifying\nthat the resulting data will be valid, letting the attacker to control\nthe
+    state or the flow of the execution.\n\nJava deserialization issues have been known
+    for years. However, interest\nin the issue intensified greatly in 2015, when classes
+    that could be\nabused to achieve remote code execution were found in a [popular
+    library\n(Apache Commons Collection)][2]. These classes were used in zero-days\naffecting
+    IBM WebSphere, Oracle WebLogic and many other products.\n\nAn attacker just needs
+    to identify a piece of software that has both a\nvulnerable class on its path,
+    and performs deserialization on untrusted\ndata. Then all they need to do is send
+    the payload into the\ndeserializer, getting the command executed.\n\n> Developers
+    put too much trust in Java Object Serialization. Some even\n> de-serialize objects
+    pre-authentication. When deserializing an Object\n> in Java you typically cast
+    it to an expected type, and therefore\n> Java\\'s strict type system will ensure
+    you only get valid object\n> trees. Unfortunately, by the time the type checking
+    happens, platform\n> code has already created and executed significant logic.
+    So, before\n> the final type is checked a lot of code is executed from the\n>
+    readObject() methods of various objects, all of which is out of the\n> developer\\'s
+    control. By combining the readObject() methods of various\n> classes which are
+    available on the classpath of the vulnerable\n> application an attacker can execute
+    functions (including calling\n> Runtime.exec() to execute local OS commands).\n>
+    \n> * Apache Blog\n\nThe vulnerability, also know as *Mad Gadget*\n\n> Mad Gadget
+    is one of the most pernicious vulnerabilities we’ve seen.\n> By merely existing
+    on the Java classpath, seven “gadget” classes in\n> Apache Commons Collections
+    (versions 3.0, 3.1, 3.2, 3.2.1, and 4.0)\n> make object deserialization for the
+    entire JVM process Turing complete\n> with an exec function. Since many business
+    applications use object\n> deserialization to send messages across the network,
+    it would be like\n> hiring a bank teller who was trained to hand over all the
+    money in the\n> vault if asked to do so politely, and then entrusting that teller
+    with\n> the key. The only thing that would keep a bank safe in such a\n> circumstance
+    is that most people wouldn’t consider asking such a\n> question.\n> \n> * Google\n\n\n\n[1]:
+    https://cwe.mitre.org/data/definitions/502.html\n[2]: https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078\n"
+  affected_package: org.apache.james:james-server
+  vulnerable_versions:
+  - "< 3.0.1"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2017-12628
+  cwe:
+  - CWE-502
+  credit:
+  - Benoit Tellier
+  references:
+  - https://www.mail-archive.com/server-user@james.apache.org/msg15633.html
+  - https://nvd.nist.gov/vuln/detail/CVE-2017-12628
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEJAMES-31571

@@ -1,0 +1,275 @@
+---
+- id: nodesecurity:npm:hoek:2018-02-15
+  title: Prototype pollution attack
+  description: |-
+    Versions of `hoek` prior to 4.2.1 and 5.0.3 are vulnerable to prototype pollution.
+
+    The `merge` function, and the `applyToDefaults` and `applyToDefaultsWithShallow` functions which leverage `merge` behind the scenes, are vulnerable to a prototype pollution attack when provided an _unvalidated_ payload created from a JSON string containing the `__proto__` property.
+
+    This can be demonstrated like so:
+
+    ```javascript
+    var Hoek = require('hoek');
+    var malicious_payload = '{"__proto__":{"oops":"It works !"}}';
+
+    var a = {};
+    console.log("Before : " + a.oops);
+    Hoek.merge({}, JSON.parse(malicious_payload));
+    console.log("After : " + a.oops);
+    ```
+
+    This type of attack can be used to overwrite existing properties causing a potential denial of service.
+  affected_package: hoek
+  vulnerable_versions:
+  - "<= 4.2.0 || >= 5.0.0 < 5.0.3"
+  patched_versions:
+  - "> 4.2.0 < 5.0.0 || >= 5.0.3"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2018-3728
+  cvss_v3_vector: CVSS:3.0/AV:L/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L
+  credit:
+  - HoLyVieR
+  references:
+  - ''
+  source_url: https://nodesecurity.io/advisories/566
+- id: ossindex:npm:hoek:2017-07-30
+  title: Cross Site Scripting (XSS)
+  description: Cross site scripting is possible due to insufficient escaping.
+  affected_package: hoek
+  vulnerable_versions:
+  - "<0.7.3"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - https://cwe.mitre.org/data/definitions/79.html
+  - https://github.com/hapijs/boom/commit/0f8640bdba65aec6e6799bfc16ff5753150bfcaf
+  - https://github.com/hapijs/boom/pull/3
+  - https://github.com/hapijs/hoek/commit/e09fc9114453c8d77516eb67263088ed1fc1e7d3
+  - https://github.com/hapijs/hoek/pull/23
+  source_url: https://ossindex.net/resource/package/7013849008/vulnerabilities
+- id: snykio:npm:hoek:2018-02-12
+  title: Prototype Pollution
+  description: |
+    [hoek][1] is a Utility methods for the hapi ecosystem.
+
+    Affected versions of this package are vulnerable to Prototype Pollution.
+    The utilities function allow modification of the `Object` prototype. If
+    an attacker can control part of the structure passed to this function,
+    they could add or modify an existing property.
+
+
+
+    [1]: https://github.com/hapijs/hoek
+    \n[hoek][1] is a Utility methods for the hapi ecosystem.
+
+    Affected versions of this package are vulnerable to Prototype Pollution.
+    The utilities function allow modification of the `Object` prototype. If
+    an attacker can control part of the structure passed to this function,
+    they could add or modify an existing property.
+
+
+
+    [1]: https://github.com/hapijs/hoek
+    \n[hoek][1] is a Utility methods for the hapi ecosystem.
+
+    Affected versions of this package are vulnerable to Prototype Pollution.
+    The utilities function allow modification of the `Object` prototype. If
+    an attacker can control part of the structure passed to this function,
+    they could add or modify an existing property.
+
+
+
+    [1]: https://github.com/hapijs/hoek
+  affected_package: hoek
+  vulnerable_versions:
+  - "<4.2.1 || >=5.0.0 <5.0.3"
+  severity: low
+  package_manager: npm
+  cve:
+  - CVE-2018-3728
+  cwe:
+  - CWE-400
+  credit:
+  - Olivier Arteau (HoLyVieR)
+  references:
+  - https://hackerone.com/reports/310439
+  - https://github.com/hapijs/hoek/pull/227
+  - https://github.com/hapijs/hoek/issues/230
+  - https://github.com/hapijs/hoek/commit/32ed5c9413321fbc37da5ca81a7cbab693786dee
+  - https://github.com/hapijs/hoek/commit/5aed1a8c4a3d55722d1c799f2368857bf418d6df
+  source_url: https://snyk.io/vuln/npm:hoek:20180212
+- id: snykio:npm:hoek:2013-03-25
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [`hoek`][1] is an npm package used as a central place to store
+    hapi-specific utility methods. Affected versions of the package are
+    vulnerable to Cross-site Scripting (XSS). The fix was introduced in
+    version 0.7.3 by adding comprehensive html and javascript escaping.
+
+
+
+    [1]: https://www.npmjs.com/package/hoek
+    \n[`hoek`][1] is an npm package used as a central place to store
+    hapi-specific utility methods. Affected versions of the package are
+    vulnerable to Cross-site Scripting (XSS). The fix was introduced in
+    version 0.7.3 by adding comprehensive html and javascript escaping.
+
+
+
+    [1]: https://www.npmjs.com/package/hoek
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+  affected_package: hoek
+  vulnerable_versions:
+  - "<0.7.3"
+  severity: medium
+  package_manager: npm
+  cwe:
+  - CWE-79
+  credit:
+  - Wyatt Preul
+  references:
+  - https://github.com/hapijs/hoek
+  - https://github.com/hapijs/hoek/pull/23
+  source_url: https://snyk.io/vuln/npm:hoek:20130326

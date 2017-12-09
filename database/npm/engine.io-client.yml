@@ -1,0 +1,103 @@
+---
+- id: nodesecurity:npm:engine.io-client:2016-04-26
+  title: Insecure Defaults Allow MITM Over TLS
+  description: "Affected versions of `engine.io-client` do not verify certificates
+    by default, and as such may be vulnerable to Man-in-the-Middle attacks.\n\nThe
+    vulnerability is related to the way that node.js handles the `rejectUnauthorized`
+    setting. If the value is something that evaluates to false, such as undefined
+    or null, certificate verification will be disabled. \n"
+  affected_package: engine.io-client
+  vulnerable_versions:
+  - "<= 1.6.8"
+  patched_versions:
+  - ">= 1.6.9"
+  severity: high
+  package_manager: npm
+  cvss_v3_vector: CVSS:3.0/AV:A/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N
+  credit:
+  - David Johansson
+  references:
+  - |-
+    https://github.com/socketio/engine.io-client/commit/2c55b278a491bf45313ecc0825cf800e2f7ff5c1)
+    https://www.cigital.com/blog/node-js-socket-io/)
+  source_url: https://nodesecurity.io/advisories/99
+- id: ossindex:npm:engine.io-client:2016-05-18
+  title: Man-in-the-middle attack on TLS-protected communication
+  description: Invalid/untrusted certificates were accepted by default due to a flaw
+    in the setting/handling of the rejectUnauthorized setting.
+  affected_package: engine.io-client
+  vulnerable_versions:
+  - "<=1.6.8"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - https://github.com/socketio/engine.io-client/commit/2c55b278a491bf45313ecc0825cf800e2f7ff5c1
+  - https://github.com/socketio/engine.io-client/issues/468
+  - https://nodesecurity.io/advisories/99
+  - https://www.cigital.com/blog/node-js-socket-io/
+  source_url: https://ossindex.net/resource/package/7013541377/vulnerabilities
+- id: snykio:npm:engine.io-client:2016-04-26
+  title: Insecure Defaults
+  description: |
+    [engine.io-client][1], the client for [engine.io][2] and [socket.io][3],
+    disables the core SSL/TLS verification checks by default.
+
+    This allows an active attacker, for instance one operating a malicious
+    WiFi, to intercept these encrypted connections using the attacker\'s
+    spoofed certificate and keys. Doing so compromises the data communicated
+    over this channel, as well as allowing an attacker to impersonate both
+    the server and the client during the live session, sending spoofed data
+    to either side.
+
+
+
+    [1]: https://www.npmjs.com/package/engine.io-client
+    [2]: https://github.com/socketio/engine.io
+    [3]: https://github.com/socketio/socket.io
+    \n[engine.io-client][1], the client for [engine.io][2] and [socket.io][3],
+    disables the core SSL/TLS verification checks by default.
+
+    This allows an active attacker, for instance one operating a malicious
+    WiFi, to intercept these encrypted connections using the attacker\'s
+    spoofed certificate and keys. Doing so compromises the data communicated
+    over this channel, as well as allowing an attacker to impersonate both
+    the server and the client during the live session, sending spoofed data
+    to either side.
+
+
+
+    [1]: https://www.npmjs.com/package/engine.io-client
+    [2]: https://github.com/socketio/engine.io
+    [3]: https://github.com/socketio/socket.io
+    \n[engine.io-client][1], the client for [engine.io][2] and [socket.io][3],
+    disables the core SSL/TLS verification checks by default.
+
+    This allows an active attacker, for instance one operating a malicious
+    WiFi, to intercept these encrypted connections using the attacker\'s
+    spoofed certificate and keys. Doing so compromises the data communicated
+    over this channel, as well as allowing an attacker to impersonate both
+    the server and the client during the live session, sending spoofed data
+    to either side.
+
+
+
+    [1]: https://www.npmjs.com/package/engine.io-client
+    [2]: https://github.com/socketio/engine.io
+    [3]: https://github.com/socketio/socket.io
+  affected_package: engine.io-client
+  vulnerable_versions:
+  - "<1.6.9"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2016-10536
+  cwe:
+  - CWE-300
+  - CWE-295
+  credit:
+  - David Johansson
+  references:
+  - https://www.cigital.com/blog/node-js-socket-io/
+  - https://github.com/socketio/engine.io-client/commit/2c55b278a491bf45313ecc0825cf800e2f7ff5c1
+  source_url: https://snyk.io/vuln/npm:engine.io-client:20160426

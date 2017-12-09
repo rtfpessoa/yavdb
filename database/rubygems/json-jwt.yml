@@ -1,0 +1,332 @@
+---
+- id: rubyadvisory:rubygems:json-jwt:2018-04-30
+  title: Auth tag forgery vulnerability with AES-GCM encrypted JWT
+  description: |
+    Ruby's OpenSSL bindings do not check the length of the supplied
+    authentication tag when decrypting an authenticated encryption mode
+    such as AES-GCM, leaving this up to the authors of a gem/app to
+    implement for properly validating the message.
+
+    json-jwt was not checking for the authentication tag length, meaning
+    that with a one byte tag the JWT would be considered not tampered
+    with. This means that with an average of 128 (max 256) attempts an
+    attacker can forge a valid signature.
+  affected_package: json-jwt
+  unaffected_versions:
+  - "< 0.5.1"
+  patched_versions:
+  - ">= 1.9.4"
+  package_manager: rubygems
+  cve:
+  - CVE-2018-1000539
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://github.com/nov/json-jwt/pull/62
+- id: snykio:rubygems:json-jwt:2018-05-02
+  title: Signature Validation Bypass
+  description: |
+    [json-jwt][1] is a JSON Web Token and its family (JSON Web Signature,
+    JSON Web Encryption and JSON Web Key) in Ruby.
+
+    Affected versions of this package are vulnerable to Signature Validation
+    Bypass. Due to Improper Verification of Cryptographic Signature, an
+    attacker could forge an forge an authentication tag.
+
+
+
+    [1]: https://rubygems.org/gems/json-jwt
+    \n[json-jwt][1] is a JSON Web Token and its family (JSON Web Signature,
+    JSON Web Encryption and JSON Web Key) in Ruby.
+
+    Affected versions of this package are vulnerable to Signature Validation
+    Bypass. Due to Improper Verification of Cryptographic Signature, an
+    attacker could forge an forge an authentication tag.
+
+
+
+    [1]: https://rubygems.org/gems/json-jwt
+    \n[json-jwt][1] is a JSON Web Token and its family (JSON Web Signature,
+    JSON Web Encryption and JSON Web Key) in Ruby.
+
+    Affected versions of this package are vulnerable to Signature Validation
+    Bypass. Due to Improper Verification of Cryptographic Signature, an
+    attacker could forge an forge an authentication tag.
+
+
+
+    [1]: https://rubygems.org/gems/json-jwt
+  affected_package: json-jwt
+  vulnerable_versions:
+  - "<1.9.4"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2018-1000539
+  cwe:
+  - CWE-347
+  credit:
+  - Unknown
+  references:
+  - https://github.com/nov/json-jwt/pull/62
+  - https://github.com/nov/json-jwt/commit/a3b2147f0f6d9aca653e7a30e453d3a92b33413f
+  source_url: https://snyk.io/vuln/SNYK-RUBY-JSONJWT-22038
+- id: snykio:rubygems:json-jwt:2014-02-18
+  title: Timing Attack
+  description: |
+    [`json-jwt`][1] is JSON Web Token and its family (JSON Web Signature,
+    JSON Web Encryption and JSON Web Key) in Ruby.
+
+    Affected versions of the package are vulnerable to Timing Attacks due to
+    not comparing the HMAC hashes in constant time. A malicious user could
+    guess the valid HMAC hash during the comparison time with an algorithm.
+
+
+
+    [1]: https://rubygems.org/gems/json-jwt
+    \n[`json-jwt`][1] is JSON Web Token and its family (JSON Web Signature,
+    JSON Web Encryption and JSON Web Key) in Ruby.
+
+    Affected versions of the package are vulnerable to Timing Attacks due to
+    not comparing the HMAC hashes in constant time. A malicious user could
+    guess the valid HMAC hash during the comparison time with an algorithm.
+
+
+
+    [1]: https://rubygems.org/gems/json-jwt
+    \n[`json-jwt`][1] is JSON Web Token and its family (JSON Web Signature,
+    JSON Web Encryption and JSON Web Key) in Ruby.
+
+    Affected versions of the package are vulnerable to Timing Attacks due to
+    not comparing the HMAC hashes in constant time. A malicious user could
+    guess the valid HMAC hash during the comparison time with an algorithm.
+
+
+
+    [1]: https://rubygems.org/gems/json-jwt
+  affected_package: json-jwt
+  vulnerable_versions:
+  - "<0.6.1"
+  severity: medium
+  package_manager: rubygems
+  cwe:
+  - CWE-208
+  credit:
+  - Stephane Bellity
+  references:
+  - https://github.com/nov/json-jwt/pull/15
+  - https://github.com/nov/json-jwt/commit/5c97c7ed650bb1d0bce6224710c7a53647489429
+  source_url: https://snyk.io/vuln/SNYK-RUBY-JSONJWT-20385
+- id: snykio:rubygems:json-jwt:2013-01-23
+  title: Denial of Service (DoS)
+  description: |+
+    [`json-jwt`][1] is JSON Web Token and its family (JSON Web Signature,
+    JSON Web Encryption and JSON Web Key) in Ruby. Affected versions of the
+    package are vulnerable to Denial of Service (DoS).
+
+
+
+    [1]: https://rubygems.org/gems/json-jwt
+    \n[`json-jwt`][1] is JSON Web Token and its family (JSON Web Signature,
+    JSON Web Encryption and JSON Web Key) in Ruby. Affected versions of the
+    package are vulnerable to Denial of Service (DoS).
+
+
+
+    [1]: https://rubygems.org/gems/json-jwt
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+  affected_package: json-jwt
+  vulnerable_versions:
+  - "<0.4.2"
+  severity: medium
+  package_manager: rubygems
+  cwe:
+  - CWE-400
+  credit:
+  - Stephen Touset
+  references:
+  - https://github.com/nov/json-jwt/issues/9
+  - https://github.com/nov/json-jwt/commit/8dc171c4530573a5aa33c52d707a13d26d6f7461
+  source_url: https://snyk.io/vuln/SNYK-RUBY-JSONJWT-20384

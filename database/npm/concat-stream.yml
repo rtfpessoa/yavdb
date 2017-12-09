@@ -1,0 +1,351 @@
+---
+- id: nodesecurity:npm:concat-stream:2018-04-25
+  title: Memory Exposure
+  description: |
+    Versions of `concat-stream` before 1.5.2 are vulnerable to memory exposure if userp provided input is passed into `write()`
+
+    Versions <1.3.0 are not affected due to not using unguarded Buffer constructor.
+  affected_package: concat-stream
+  vulnerable_versions:
+  - ">=1.3.0 <1.3.2 || >=1.4.0 <1.4.11 || >=1.5.0 <1.5.2"
+  patched_versions:
+  - ">=1.5.2 || >=1.4.11 <1.5.0 || >=1.3.2 <1.4.0"
+  severity: medium
+  package_manager: npm
+  credit:
+  - Сковорода Никита Андреевич
+  references:
+  - |-
+    https://gist.github.com/ChALkeR/c2d2fd3f1d72d51ad883df195be03a85)
+    https://github.com/maxogden/concat-stream/pull/47)
+  source_url: https://nodesecurity.io/advisories/597
+- id: ossindex:npm:concat-stream:2017-03-31
+  title: Information Exposure
+  description: A possible information exposure exists when `number` objects are provided
+    to stringConcat, resulting in uninitialized memory being written to the stream.
+  affected_package: concat-stream
+  vulnerable_versions:
+  - "<1.5.2"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - https://cwe.mitre.org/data/definitions/200.html
+  - https://github.com/maxogden/concat-stream/commit/b617fbcd369b8b39600fc5ec93e78dc5378033ef
+  - https://github.com/maxogden/concat-stream/issues/55
+  - https://github.com/maxogden/concat-stream/pull/47
+  source_url: https://ossindex.net/resource/package/7012218022/vulnerabilities
+- id: ossindex:npm:concat-stream:2017-03-31
+  title: Possible Denial of Service (DoS)
+  description: Putting the word "Array" in a utf8 buffer causes the program to crash,
+    which could affect programs who use this package to process requests.
+  affected_package: concat-stream
+  vulnerable_versions:
+  - "<1.4.7"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - https://github.com/maxogden/concat-stream/commit/f82f2255423c03bddc8518af9b978d057425bee0
+  - https://github.com/maxogden/concat-stream/issues/3
+  source_url: https://ossindex.net/resource/package/7012218022/vulnerabilities
+- id: snykio:npm:concat-stream:2016-08-31
+  title: Uninitialized Memory Exposure
+  description: |
+    [`concat-stream`][1] is writable stream that concatenates strings or
+    binary data and calls a callback with the result. Affected versions of
+    the package are vulnerable to Uninitialized Memory Exposure.
+
+    A possible memory disclosure vulnerability exists when a value of type
+    `number` is provided to the `stringConcat()` method and results in
+    concatenation of uninitialized memory to the stream collection.
+
+    This is a result of unobstructed use of the `Buffer` constructor, whose
+    [insecure default constructor increases the odds of memory leakage][2].
+
+
+
+    [1]: https://www.npmjs.com/package/concat-stream
+    [2]: https://snyk.io/blog/exploiting-buffer/
+    \n[`concat-stream`][1] is writable stream that concatenates strings or
+    binary data and calls a callback with the result. Affected versions of
+    the package are vulnerable to Uninitialized Memory Exposure.
+
+    A possible memory disclosure vulnerability exists when a value of type
+    `number` is provided to the `stringConcat()` method and results in
+    concatenation of uninitialized memory to the stream collection.
+
+    This is a result of unobstructed use of the `Buffer` constructor, whose
+    [insecure default constructor increases the odds of memory leakage][2].
+
+
+
+    [1]: https://www.npmjs.com/package/concat-stream
+    [2]: https://snyk.io/blog/exploiting-buffer/
+    \n[`concat-stream`][1] is writable stream that concatenates strings or
+    binary data and calls a callback with the result. Affected versions of
+    the package are vulnerable to Uninitialized Memory Exposure.
+
+    A possible memory disclosure vulnerability exists when a value of type
+    `number` is provided to the `stringConcat()` method and results in
+    concatenation of uninitialized memory to the stream collection.
+
+    This is a result of unobstructed use of the `Buffer` constructor, whose
+    [insecure default constructor increases the odds of memory leakage][2].
+
+
+
+    [1]: https://www.npmjs.com/package/concat-stream
+    [2]: https://snyk.io/blog/exploiting-buffer/
+    \n[`concat-stream`][1] is writable stream that concatenates strings or
+    binary data and calls a callback with the result. Affected versions of
+    the package are vulnerable to Uninitialized Memory Exposure.
+
+    A possible memory disclosure vulnerability exists when a value of type
+    `number` is provided to the `stringConcat()` method and results in
+    concatenation of uninitialized memory to the stream collection.
+
+    This is a result of unobstructed use of the `Buffer` constructor, whose
+    [insecure default constructor increases the odds of memory leakage][2].
+
+
+
+    [1]: https://www.npmjs.com/package/concat-stream
+    [2]: https://snyk.io/blog/exploiting-buffer/
+    \nConstructing a `Buffer` class with integer `N` creates a `Buffer` of
+    length `N` with raw (not \"zero-ed\") memory.
+
+    In the following example, the first call would allocate 100 bytes of
+    memory, while the second example will allocate the memory needed for the
+    string \"100\":
+
+        // uninitialized Buffer of length 100
+        x = new Buffer(100);
+        // initialized Buffer with value of '100'
+        x = new Buffer('100');
+
+    `concat-stream`\'s `stringConcat` function uses the default `Buffer`
+    constructor as-is, making it easy to append uninitialized memory to an
+    existing list. If the value of the buffer list is exposed to users, it
+    may expose raw server side memory, potentially holding secrets, private
+    data and code. This is a similar vulnerability to the infamous
+    [`Heartbleed`][1] flaw in OpenSSL.
+
+    You can read more about the insecure `Buffer` behavior [on our blog][2].
+
+    Similar vulnerabilities were discovered in [request][3], [mongoose][4],
+    [ws][5] and [sequelize][6].
+
+
+
+    [1]: http://heartbleed.com/
+    [2]: https://snyk.io/blog/exploiting-buffer/
+    [3]: https://snyk.io/vuln/npm:request:20160119
+    [4]: https://snyk.io/vuln/npm:mongoose:20160116
+    [5]: https://snyk.io/vuln/npm:ws:20160104
+    [6]: https://snyk.io/vuln/npm:sequelize:20160115
+    \nConstructing a `Buffer` class with integer `N` creates a `Buffer` of
+    length `N` with raw (not \"zero-ed\") memory.
+
+    In the following example, the first call would allocate 100 bytes of
+    memory, while the second example will allocate the memory needed for the
+    string \"100\":
+
+        // uninitialized Buffer of length 100
+        x = new Buffer(100);
+        // initialized Buffer with value of '100'
+        x = new Buffer('100');
+
+    `concat-stream`\'s `stringConcat` function uses the default `Buffer`
+    constructor as-is, making it easy to append uninitialized memory to an
+    existing list. If the value of the buffer list is exposed to users, it
+    may expose raw server side memory, potentially holding secrets, private
+    data and code. This is a similar vulnerability to the infamous
+    [`Heartbleed`][1] flaw in OpenSSL.
+
+    You can read more about the insecure `Buffer` behavior [on our blog][2].
+
+    Similar vulnerabilities were discovered in [request][3], [mongoose][4],
+    [ws][5] and [sequelize][6].
+
+
+
+    [1]: http://heartbleed.com/
+    [2]: https://snyk.io/blog/exploiting-buffer/
+    [3]: https://snyk.io/vuln/npm:request:20160119
+    [4]: https://snyk.io/vuln/npm:mongoose:20160116
+    [5]: https://snyk.io/vuln/npm:ws:20160104
+    [6]: https://snyk.io/vuln/npm:sequelize:20160115
+    \nConstructing a `Buffer` class with integer `N` creates a `Buffer` of
+    length `N` with raw (not \"zero-ed\") memory.
+
+    In the following example, the first call would allocate 100 bytes of
+    memory, while the second example will allocate the memory needed for the
+    string \"100\":
+
+        // uninitialized Buffer of length 100
+        x = new Buffer(100);
+        // initialized Buffer with value of '100'
+        x = new Buffer('100');
+
+    `concat-stream`\'s `stringConcat` function uses the default `Buffer`
+    constructor as-is, making it easy to append uninitialized memory to an
+    existing list. If the value of the buffer list is exposed to users, it
+    may expose raw server side memory, potentially holding secrets, private
+    data and code. This is a similar vulnerability to the infamous
+    [`Heartbleed`][1] flaw in OpenSSL.
+
+    You can read more about the insecure `Buffer` behavior [on our blog][2].
+
+    Similar vulnerabilities were discovered in [request][3], [mongoose][4],
+    [ws][5] and [sequelize][6].
+
+
+
+    [1]: http://heartbleed.com/
+    [2]: https://snyk.io/blog/exploiting-buffer/
+    [3]: https://snyk.io/vuln/npm:request:20160119
+    [4]: https://snyk.io/vuln/npm:mongoose:20160116
+    [5]: https://snyk.io/vuln/npm:ws:20160104
+    [6]: https://snyk.io/vuln/npm:sequelize:20160115
+    \nConstructing a `Buffer` class with integer `N` creates a `Buffer` of
+    length `N` with raw (not \"zero-ed\") memory.
+
+    In the following example, the first call would allocate 100 bytes of
+    memory, while the second example will allocate the memory needed for the
+    string \"100\":
+
+        // uninitialized Buffer of length 100
+        x = new Buffer(100);
+        // initialized Buffer with value of '100'
+        x = new Buffer('100');
+
+    `concat-stream`\'s `stringConcat` function uses the default `Buffer`
+    constructor as-is, making it easy to append uninitialized memory to an
+    existing list. If the value of the buffer list is exposed to users, it
+    may expose raw server side memory, potentially holding secrets, private
+    data and code. This is a similar vulnerability to the infamous
+    [`Heartbleed`][1] flaw in OpenSSL.
+
+    You can read more about the insecure `Buffer` behavior [on our blog][2].
+
+    Similar vulnerabilities were discovered in [request][3], [mongoose][4],
+    [ws][5] and [sequelize][6].
+
+
+
+    [1]: http://heartbleed.com/
+    [2]: https://snyk.io/blog/exploiting-buffer/
+    [3]: https://snyk.io/vuln/npm:request:20160119
+    [4]: https://snyk.io/vuln/npm:mongoose:20160116
+    [5]: https://snyk.io/vuln/npm:ws:20160104
+    [6]: https://snyk.io/vuln/npm:sequelize:20160115
+    \nConstructing a `Buffer` class with integer `N` creates a `Buffer` of
+    length `N` with raw (not \"zero-ed\") memory.
+
+    In the following example, the first call would allocate 100 bytes of
+    memory, while the second example will allocate the memory needed for the
+    string \"100\":
+
+        // uninitialized Buffer of length 100
+        x = new Buffer(100);
+        // initialized Buffer with value of '100'
+        x = new Buffer('100');
+
+    `concat-stream`\'s `stringConcat` function uses the default `Buffer`
+    constructor as-is, making it easy to append uninitialized memory to an
+    existing list. If the value of the buffer list is exposed to users, it
+    may expose raw server side memory, potentially holding secrets, private
+    data and code. This is a similar vulnerability to the infamous
+    [`Heartbleed`][1] flaw in OpenSSL.
+
+    You can read more about the insecure `Buffer` behavior [on our blog][2].
+
+    Similar vulnerabilities were discovered in [request][3], [mongoose][4],
+    [ws][5] and [sequelize][6].
+
+
+
+    [1]: http://heartbleed.com/
+    [2]: https://snyk.io/blog/exploiting-buffer/
+    [3]: https://snyk.io/vuln/npm:request:20160119
+    [4]: https://snyk.io/vuln/npm:mongoose:20160116
+    [5]: https://snyk.io/vuln/npm:ws:20160104
+    [6]: https://snyk.io/vuln/npm:sequelize:20160115
+    \nConstructing a `Buffer` class with integer `N` creates a `Buffer` of
+    length `N` with raw (not \"zero-ed\") memory.
+
+    In the following example, the first call would allocate 100 bytes of
+    memory, while the second example will allocate the memory needed for the
+    string \"100\":
+
+        // uninitialized Buffer of length 100
+        x = new Buffer(100);
+        // initialized Buffer with value of '100'
+        x = new Buffer('100');
+
+    `concat-stream`\'s `stringConcat` function uses the default `Buffer`
+    constructor as-is, making it easy to append uninitialized memory to an
+    existing list. If the value of the buffer list is exposed to users, it
+    may expose raw server side memory, potentially holding secrets, private
+    data and code. This is a similar vulnerability to the infamous
+    [`Heartbleed`][1] flaw in OpenSSL.
+
+    You can read more about the insecure `Buffer` behavior [on our blog][2].
+
+    Similar vulnerabilities were discovered in [request][3], [mongoose][4],
+    [ws][5] and [sequelize][6].
+
+
+
+    [1]: http://heartbleed.com/
+    [2]: https://snyk.io/blog/exploiting-buffer/
+    [3]: https://snyk.io/vuln/npm:request:20160119
+    [4]: https://snyk.io/vuln/npm:mongoose:20160116
+    [5]: https://snyk.io/vuln/npm:ws:20160104
+    [6]: https://snyk.io/vuln/npm:sequelize:20160115
+    \nConstructing a `Buffer` class with integer `N` creates a `Buffer` of
+    length `N` with raw (not \"zero-ed\") memory.
+
+    In the following example, the first call would allocate 100 bytes of
+    memory, while the second example will allocate the memory needed for the
+    string \"100\":
+
+        // uninitialized Buffer of length 100
+        x = new Buffer(100);
+        // initialized Buffer with value of '100'
+        x = new Buffer('100');
+
+    `concat-stream`\'s `stringConcat` function uses the default `Buffer`
+    constructor as-is, making it easy to append uninitialized memory to an
+    existing list. If the value of the buffer list is exposed to users, it
+    may expose raw server side memory, potentially holding secrets, private
+    data and code. This is a similar vulnerability to the infamous
+    [`Heartbleed`][1] flaw in OpenSSL.
+
+    You can read more about the insecure `Buffer` behavior [on our blog][2].
+
+    Similar vulnerabilities were discovered in [request][3], [mongoose][4],
+    [ws][5] and [sequelize][6].
+
+
+
+    [1]: http://heartbleed.com/
+    [2]: https://snyk.io/blog/exploiting-buffer/
+    [3]: https://snyk.io/vuln/npm:request:20160119
+    [4]: https://snyk.io/vuln/npm:mongoose:20160116
+    [5]: https://snyk.io/vuln/npm:ws:20160104
+    [6]: https://snyk.io/vuln/npm:sequelize:20160115
+  affected_package: concat-stream
+  vulnerable_versions:
+  - "<1.3.2 || >=1.4.0 <1.4.11 || >=1.5.0 <1.5.2"
+  severity: medium
+  package_manager: npm
+  cwe:
+  - CWE-201
+  credit:
+  - ChALkeR
+  references:
+  - https://github.com/maxogden/concat-stream/pull/47
+  - https://github.com/maxogden/concat-stream/pull/47/commits/3e285ba5e5b10b7c98552217f5c1023829efe69e
+  source_url: https://snyk.io/vuln/npm:concat-stream:20160901

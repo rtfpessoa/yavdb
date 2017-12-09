@@ -1,0 +1,2555 @@
+---
+- id: nodesecurity:npm:electron:2018-03-25
+  title: Code Execution by Re-enabling Node.js integration
+  description: "Versions of electron \nA vulnerability has been discovered which allows
+    Node.js integration to be re-enabled in some Electron applications that disable
+    it.\n\nFor the application to be impacted by this vulnerability it must meet all
+    of these conditions\n\n- Runs on Electron 1.7, 1.8, or a 2.0.0-beta\n- Allows
+    execution of arbitrary remote code\n- Disables Node.js integration\n- Does not
+    explicitly declare webviewTag: false in its webPreferences\n- Does not enable
+    the nativeWindowOption option\n- Does not intercept new-window events and manually
+    override event.newGuest without using the supplied options tag"
+  affected_package: electron
+  vulnerable_versions:
+  - "<= 1.7.12 || >=1.8.0 <= 1.8.3 || >=2.0.0-beta.1 <= 2.0.0-beta.4"
+  patched_versions:
+  - 1.7.13 < 1.8.0 || 1.8.4 < 2.0.0 || >=2.0.0-beta.5
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2018-1000136
+  credit:
+  - Brendan Scarvell
+  references:
+  - https://electronjs.org/blog/webview-fix
+  source_url: https://nodesecurity.io/advisories/574
+- id: nodesecurity:npm:electron:2018-01-23
+  title: Remote Code Execution
+  description: |-
+    Affected versions of `electron` may be susceptible to a remote code execution flaw when certain conditions are met:
+    1. The electron application is running on Windows.
+    2. The electron application registers as the default handler for a protocol, such as `nodeapp://`.
+
+    This vulnerability is caused by a failure to sanitize additional arguments to chromium in the command line handler for Electron.
+
+    MacOS and Linux are not vulnerable.
+  affected_package: electron
+  vulnerable_versions:
+  - "< 1.6.16 || >=1.7 <1.7.11 || >= 1.8 <1.8.2-beta.4"
+  patched_versions:
+  - ">=1.6.16 <1.7.0|| >=1.7.11 > 1.8.0 || >=1.8.2-beta.4"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2018-1000006
+  cvss_v3_vector: CVSS:3.0/AV:A/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H
+  credit:
+  - Zeke Sikelianos
+  references:
+  - https://electronjs.org/blog/protocol-handler-fix
+  source_url: https://nodesecurity.io/advisories/563
+- id: nodesecurity:npm:electron:2017-09-28
+  title: Chromium Remote Code Execution
+  description: 'Affected versions of `ElectronJS` are susceptible to a remote code
+    execution vulnerability that occurs when an affected application access remote
+    content, even if the [sandbox option](https://electron.atom.io/docs/api/sandbox-option)
+    is enabled.
+
+'
+  affected_package: electron
+  vulnerable_versions:
+  - "< 1.6.14 || >= 1.7.0 < 1.7.8"
+  patched_versions:
+  - ">= 1.6.14 < 1.7.0 ||  >= 1.7.8"
+  severity: high
+  package_manager: npm
+  cvss_v3_vector: CVSS:3.0/AV:L/AC:H/PR:N/UI:R/S:C/C:H/I:H/A:H
+  credit:
+  - Electron Team
+  references:
+  - https://electron.atom.io/blog/2017/09/27/chromium-rce-vulnerability-fix)
+  source_url: https://nodesecurity.io/advisories/539
+- id: snykio:npm:electron:2018-08-22
+  title: Arbitrary Code Execution
+  description: |
+    [electron][1] is a Build cross-platform desktop apps with JavaScript,
+    HTML, and CSS.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution.
+
+    **Note:** This vulnerability affects only users who embed any remote
+    user content, even in a sandbox and accept user input with any XSS
+    vulnerabilities.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+    \n[electron][1] is a Build cross-platform desktop apps with JavaScript,
+    HTML, and CSS.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution.
+
+    **Note:** This vulnerability affects only users who embed any remote
+    user content, even in a sandbox and accept user input with any XSS
+    vulnerabilities.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+    \n[electron][1] is a Build cross-platform desktop apps with JavaScript,
+    HTML, and CSS.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution.
+
+    **Note:** This vulnerability affects only users who embed any remote
+    user content, even in a sandbox and accept user input with any XSS
+    vulnerabilities.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+    \n[electron][1] is a Build cross-platform desktop apps with JavaScript,
+    HTML, and CSS.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution.
+
+    **Note:** This vulnerability affects only users who embed any remote
+    user content, even in a sandbox and accept user input with any XSS
+    vulnerabilities.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+  affected_package: electron
+  vulnerable_versions:
+  - ">=1.7.0 <1.7.16 || >=1.8.0 <1.8.8 || >=2.0.0 <2.0.8 || >=3.0.0-beta6 <3.0.0-beta.7"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2018-15685
+  cwe:
+  - CWE-94
+  credit:
+  - Matt Austin
+  references:
+  - https://electronjs.org/blog/web-preferences-fix
+  source_url: https://snyk.io/vuln/npm:electron:20180822
+- id: snykio:npm:electron:2018-03-23
+  title: Arbitrary Code Execution
+  description: |
+    [electron][1] lets you write cross-platform desktop applications using
+    JavaScript, HTML and CSS. It is based on Node.js and Chromium and is
+    used by the Atom editor and many other apps.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution. It contains an improper handling of values vulnerability in
+    Webviews. This attack appear to be exploitable via an app which allows
+    execution of 3rd party code AND disallows node integration AND has not
+    specified if webview is enabled/disabled.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+    \n[electron][1] lets you write cross-platform desktop applications using
+    JavaScript, HTML and CSS. It is based on Node.js and Chromium and is
+    used by the Atom editor and many other apps.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution. It contains an improper handling of values vulnerability in
+    Webviews. This attack appear to be exploitable via an app which allows
+    execution of 3rd party code AND disallows node integration AND has not
+    specified if webview is enabled/disabled.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+    \n[electron][1] lets you write cross-platform desktop applications using
+    JavaScript, HTML and CSS. It is based on Node.js and Chromium and is
+    used by the Atom editor and many other apps.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution. It contains an improper handling of values vulnerability in
+    Webviews. This attack appear to be exploitable via an app which allows
+    execution of 3rd party code AND disallows node integration AND has not
+    specified if webview is enabled/disabled.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+  affected_package: electron
+  vulnerable_versions:
+  - ">=1.7 <1.7.13 || >=0.8 <1.8.4 || >=2.0.0 <2.0.0-beta.4"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2018-1000136
+  cwe:
+  - CWE-228
+  credit:
+  - Unknown
+  references:
+  - https://bugzilla.redhat.com/show_bug.cgi?id=1560094
+  - https://nvd.nist.gov/vuln/detail/CVE-2018-1000136
+  source_url: https://snyk.io/vuln/npm:electron:20180323
+- id: snykio:npm:electron:2018-03-07
+  title: Arbitrary Code Execution
+  description: |
+    [electron][1] lets you write cross-platform desktop applications using
+    JavaScript, HTML and CSS.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution. It appears to be exploitable via the victim opening an
+    electron protocol handler in their browser.
+
+    This issue is due to an incomplete fix for [CVE-2018-1000006][2],
+    specifically the black list used was not case insensitive allowing an
+    attacker to potentially bypass it.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+    [2]: https://snyk.io/vuln/npm:electron:20180123
+    \n[electron][1] lets you write cross-platform desktop applications using
+    JavaScript, HTML and CSS.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution. It appears to be exploitable via the victim opening an
+    electron protocol handler in their browser.
+
+    This issue is due to an incomplete fix for [CVE-2018-1000006][2],
+    specifically the black list used was not case insensitive allowing an
+    attacker to potentially bypass it.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+    [2]: https://snyk.io/vuln/npm:electron:20180123
+    \n[electron][1] lets you write cross-platform desktop applications using
+    JavaScript, HTML and CSS.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution. It appears to be exploitable via the victim opening an
+    electron protocol handler in their browser.
+
+    This issue is due to an incomplete fix for [CVE-2018-1000006][2],
+    specifically the black list used was not case insensitive allowing an
+    attacker to potentially bypass it.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+    [2]: https://snyk.io/vuln/npm:electron:20180123
+    \n[electron][1] lets you write cross-platform desktop applications using
+    JavaScript, HTML and CSS.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution. It appears to be exploitable via the victim opening an
+    electron protocol handler in their browser.
+
+    This issue is due to an incomplete fix for [CVE-2018-1000006][2],
+    specifically the black list used was not case insensitive allowing an
+    attacker to potentially bypass it.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+    [2]: https://snyk.io/vuln/npm:electron:20180123
+  affected_package: electron
+  vulnerable_versions:
+  - "<1.8.2-beta.5"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2018-1000118
+  cwe:
+  - CWE-264
+  credit:
+  - Unknown
+  references:
+  - https://nvd.nist.gov/vuln/detail/CVE-2018-1000118
+  - https://github.com/electron/electron/commit/ce361a12e355f9e1e99c989f1ea056c9e502dbe7
+  - https://electronjs.org/releases#1.8.2-beta.5
+  source_url: https://snyk.io/vuln/npm:electron:20180307
+- id: snykio:npm:electron:2018-01-02
+  title: URL Spoofing
+  description: |
+    [Electron][1] is a framework that lets you write cross-platform desktop
+    applications using JavaScript, HTML and CSS.
+
+    Affected version of this package are vulnerable to URL Spoofing, when
+    opening PDFs in PDFium resulting loading arbitrary PDFs that a hacker
+    can control.
+
+
+
+    [1]: https://electronjs.org/
+    \n[Electron][1] is a framework that lets you write cross-platform desktop
+    applications using JavaScript, HTML and CSS.
+
+    Affected version of this package are vulnerable to URL Spoofing, when
+    opening PDFs in PDFium resulting loading arbitrary PDFs that a hacker
+    can control.
+
+
+
+    [1]: https://electronjs.org/
+    \n[Electron][1] is a framework that lets you write cross-platform desktop
+    applications using JavaScript, HTML and CSS.
+
+    Affected version of this package are vulnerable to URL Spoofing, when
+    opening PDFs in PDFium resulting loading arbitrary PDFs that a hacker
+    can control.
+
+
+
+    [1]: https://electronjs.org/
+  affected_package: electron
+  vulnerable_versions:
+  - "<1.7.6"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2017-1000424
+  cwe:
+  - CWE-19
+  credit:
+  - Unknown
+  references:
+  - https://github.com/electron/electron/pull/10008
+  - https://github.com/electron/electron/pull/10008/commits/9a7651a93faaaef0534df1ab77268d7deb9d3165
+  - https://nvd.nist.gov/vuln/detail/CVE-2017-1000424
+  source_url: https://snyk.io/vuln/npm:electron:20180102
+- id: snykio:npm:electron:2018-01-23
+  title: Directory Traversal
+  description: |
+    [`electron`][1] is a framework that lets you write cross-platform
+    desktop applications using JavaScript, HTML and CSS.
+
+    Electron apps running on Windows that register themselves as the default
+    handler for a protocol, like myapp://, are vulnerable.
+
+    Such apps can be affected regardless of how the protocol is registered,
+    e.g. using native code, the Windows registry, or Electron\'s
+    app.setAsDefaultProtocolClient API.
+
+    **Note:** MacOS and Linux are not affected by this vulnerability.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+    \n[`electron`][1] is a framework that lets you write cross-platform
+    desktop applications using JavaScript, HTML and CSS.
+
+    Electron apps running on Windows that register themselves as the default
+    handler for a protocol, like myapp://, are vulnerable.
+
+    Such apps can be affected regardless of how the protocol is registered,
+    e.g. using native code, the Windows registry, or Electron\'s
+    app.setAsDefaultProtocolClient API.
+
+    **Note:** MacOS and Linux are not affected by this vulnerability.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+    \n[`electron`][1] is a framework that lets you write cross-platform
+    desktop applications using JavaScript, HTML and CSS.
+
+    Electron apps running on Windows that register themselves as the default
+    handler for a protocol, like myapp://, are vulnerable.
+
+    Such apps can be affected regardless of how the protocol is registered,
+    e.g. using native code, the Windows registry, or Electron\'s
+    app.setAsDefaultProtocolClient API.
+
+    **Note:** MacOS and Linux are not affected by this vulnerability.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+    \n[`electron`][1] is a framework that lets you write cross-platform
+    desktop applications using JavaScript, HTML and CSS.
+
+    Electron apps running on Windows that register themselves as the default
+    handler for a protocol, like myapp://, are vulnerable.
+
+    Such apps can be affected regardless of how the protocol is registered,
+    e.g. using native code, the Windows registry, or Electron\'s
+    app.setAsDefaultProtocolClient API.
+
+    **Note:** MacOS and Linux are not affected by this vulnerability.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+    \n[`electron`][1] is a framework that lets you write cross-platform
+    desktop applications using JavaScript, HTML and CSS.
+
+    Electron apps running on Windows that register themselves as the default
+    handler for a protocol, like myapp://, are vulnerable.
+
+    Such apps can be affected regardless of how the protocol is registered,
+    e.g. using native code, the Windows registry, or Electron\'s
+    app.setAsDefaultProtocolClient API.
+
+    **Note:** MacOS and Linux are not affected by this vulnerability.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+    \nA Directory Traversal attack (also known as path traversal) aims to
+    access files and directories that are stored outside the intended
+    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
+    its variations, or by using absolute file paths, it may be possible to
+    access arbitrary files and directories stored on file system, including
+    application source code, configuration, and other critical system files.
+
+    Directory Traversal vulnerabilities can be generally divided into two
+    types:
+
+    * **Information Disclosure**\: Allows the attacker to gain information
+      about the folder structure or read the contents of sensitive files on
+      the system.
+
+    `st` is a module for serving static files on web pages, and contains a
+    [vulnerability of this type][1]. In our example, we will serve files
+    from the `public` route.
+
+    If an attacker requests the following URL from our server, it will in
+    turn leak the sensitive private key of the root user.
+
+        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
+
+    **Note** `%2e` is the URL encoded version of `.` (dot).
+
+    * **Writing arbitrary files**\: Allows the attacker to create or replace
+      existing files. This type of vulnerability is also known as
+      `Zip-Slip`.
+
+    One way to achieve this is by using a malicious `zip` archive that holds
+    path traversal filenames. When each filename in the zip archive gets
+    concatenated to the target extraction folder, without validation, the
+    final path ends up outside of the target folder. If an executable or a
+    configuration file is overwritten with a file containing malicious code,
+    the problem can turn into an arbitrary code execution issue quite
+    easily.
+
+    The following is an example of a `zip` archive with one benign file and
+    one malicious file. Extracting the malicious file will result in
+    traversing out of the target folder, ending up in `/root/.ssh/`
+    overwriting the `authorized_keys` file:
+
+        2018-04-15 22:04:29 .....           19           19  good.txt
+        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
+
+
+
+    [1]: https://snyk.io/vuln/npm:st:20140206
+    \nA Directory Traversal attack (also known as path traversal) aims to
+    access files and directories that are stored outside the intended
+    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
+    its variations, or by using absolute file paths, it may be possible to
+    access arbitrary files and directories stored on file system, including
+    application source code, configuration, and other critical system files.
+
+    Directory Traversal vulnerabilities can be generally divided into two
+    types:
+
+    * **Information Disclosure**\: Allows the attacker to gain information
+      about the folder structure or read the contents of sensitive files on
+      the system.
+
+    `st` is a module for serving static files on web pages, and contains a
+    [vulnerability of this type][1]. In our example, we will serve files
+    from the `public` route.
+
+    If an attacker requests the following URL from our server, it will in
+    turn leak the sensitive private key of the root user.
+
+        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
+
+    **Note** `%2e` is the URL encoded version of `.` (dot).
+
+    * **Writing arbitrary files**\: Allows the attacker to create or replace
+      existing files. This type of vulnerability is also known as
+      `Zip-Slip`.
+
+    One way to achieve this is by using a malicious `zip` archive that holds
+    path traversal filenames. When each filename in the zip archive gets
+    concatenated to the target extraction folder, without validation, the
+    final path ends up outside of the target folder. If an executable or a
+    configuration file is overwritten with a file containing malicious code,
+    the problem can turn into an arbitrary code execution issue quite
+    easily.
+
+    The following is an example of a `zip` archive with one benign file and
+    one malicious file. Extracting the malicious file will result in
+    traversing out of the target folder, ending up in `/root/.ssh/`
+    overwriting the `authorized_keys` file:
+
+        2018-04-15 22:04:29 .....           19           19  good.txt
+        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
+
+
+
+    [1]: https://snyk.io/vuln/npm:st:20140206
+    \nA Directory Traversal attack (also known as path traversal) aims to
+    access files and directories that are stored outside the intended
+    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
+    its variations, or by using absolute file paths, it may be possible to
+    access arbitrary files and directories stored on file system, including
+    application source code, configuration, and other critical system files.
+
+    Directory Traversal vulnerabilities can be generally divided into two
+    types:
+
+    * **Information Disclosure**\: Allows the attacker to gain information
+      about the folder structure or read the contents of sensitive files on
+      the system.
+
+    `st` is a module for serving static files on web pages, and contains a
+    [vulnerability of this type][1]. In our example, we will serve files
+    from the `public` route.
+
+    If an attacker requests the following URL from our server, it will in
+    turn leak the sensitive private key of the root user.
+
+        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
+
+    **Note** `%2e` is the URL encoded version of `.` (dot).
+
+    * **Writing arbitrary files**\: Allows the attacker to create or replace
+      existing files. This type of vulnerability is also known as
+      `Zip-Slip`.
+
+    One way to achieve this is by using a malicious `zip` archive that holds
+    path traversal filenames. When each filename in the zip archive gets
+    concatenated to the target extraction folder, without validation, the
+    final path ends up outside of the target folder. If an executable or a
+    configuration file is overwritten with a file containing malicious code,
+    the problem can turn into an arbitrary code execution issue quite
+    easily.
+
+    The following is an example of a `zip` archive with one benign file and
+    one malicious file. Extracting the malicious file will result in
+    traversing out of the target folder, ending up in `/root/.ssh/`
+    overwriting the `authorized_keys` file:
+
+        2018-04-15 22:04:29 .....           19           19  good.txt
+        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
+
+
+
+    [1]: https://snyk.io/vuln/npm:st:20140206
+    \nA Directory Traversal attack (also known as path traversal) aims to
+    access files and directories that are stored outside the intended
+    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
+    its variations, or by using absolute file paths, it may be possible to
+    access arbitrary files and directories stored on file system, including
+    application source code, configuration, and other critical system files.
+
+    Directory Traversal vulnerabilities can be generally divided into two
+    types:
+
+    * **Information Disclosure**\: Allows the attacker to gain information
+      about the folder structure or read the contents of sensitive files on
+      the system.
+
+    `st` is a module for serving static files on web pages, and contains a
+    [vulnerability of this type][1]. In our example, we will serve files
+    from the `public` route.
+
+    If an attacker requests the following URL from our server, it will in
+    turn leak the sensitive private key of the root user.
+
+        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
+
+    **Note** `%2e` is the URL encoded version of `.` (dot).
+
+    * **Writing arbitrary files**\: Allows the attacker to create or replace
+      existing files. This type of vulnerability is also known as
+      `Zip-Slip`.
+
+    One way to achieve this is by using a malicious `zip` archive that holds
+    path traversal filenames. When each filename in the zip archive gets
+    concatenated to the target extraction folder, without validation, the
+    final path ends up outside of the target folder. If an executable or a
+    configuration file is overwritten with a file containing malicious code,
+    the problem can turn into an arbitrary code execution issue quite
+    easily.
+
+    The following is an example of a `zip` archive with one benign file and
+    one malicious file. Extracting the malicious file will result in
+    traversing out of the target folder, ending up in `/root/.ssh/`
+    overwriting the `authorized_keys` file:
+
+        2018-04-15 22:04:29 .....           19           19  good.txt
+        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
+
+
+
+    [1]: https://snyk.io/vuln/npm:st:20140206
+    \nA Directory Traversal attack (also known as path traversal) aims to
+    access files and directories that are stored outside the intended
+    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
+    its variations, or by using absolute file paths, it may be possible to
+    access arbitrary files and directories stored on file system, including
+    application source code, configuration, and other critical system files.
+
+    Directory Traversal vulnerabilities can be generally divided into two
+    types:
+
+    * **Information Disclosure**\: Allows the attacker to gain information
+      about the folder structure or read the contents of sensitive files on
+      the system.
+
+    `st` is a module for serving static files on web pages, and contains a
+    [vulnerability of this type][1]. In our example, we will serve files
+    from the `public` route.
+
+    If an attacker requests the following URL from our server, it will in
+    turn leak the sensitive private key of the root user.
+
+        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
+
+    **Note** `%2e` is the URL encoded version of `.` (dot).
+
+    * **Writing arbitrary files**\: Allows the attacker to create or replace
+      existing files. This type of vulnerability is also known as
+      `Zip-Slip`.
+
+    One way to achieve this is by using a malicious `zip` archive that holds
+    path traversal filenames. When each filename in the zip archive gets
+    concatenated to the target extraction folder, without validation, the
+    final path ends up outside of the target folder. If an executable or a
+    configuration file is overwritten with a file containing malicious code,
+    the problem can turn into an arbitrary code execution issue quite
+    easily.
+
+    The following is an example of a `zip` archive with one benign file and
+    one malicious file. Extracting the malicious file will result in
+    traversing out of the target folder, ending up in `/root/.ssh/`
+    overwriting the `authorized_keys` file:
+
+        2018-04-15 22:04:29 .....           19           19  good.txt
+        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
+
+
+
+    [1]: https://snyk.io/vuln/npm:st:20140206
+    \nA Directory Traversal attack (also known as path traversal) aims to
+    access files and directories that are stored outside the intended
+    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
+    its variations, or by using absolute file paths, it may be possible to
+    access arbitrary files and directories stored on file system, including
+    application source code, configuration, and other critical system files.
+
+    Directory Traversal vulnerabilities can be generally divided into two
+    types:
+
+    * **Information Disclosure**\: Allows the attacker to gain information
+      about the folder structure or read the contents of sensitive files on
+      the system.
+
+    `st` is a module for serving static files on web pages, and contains a
+    [vulnerability of this type][1]. In our example, we will serve files
+    from the `public` route.
+
+    If an attacker requests the following URL from our server, it will in
+    turn leak the sensitive private key of the root user.
+
+        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
+
+    **Note** `%2e` is the URL encoded version of `.` (dot).
+
+    * **Writing arbitrary files**\: Allows the attacker to create or replace
+      existing files. This type of vulnerability is also known as
+      `Zip-Slip`.
+
+    One way to achieve this is by using a malicious `zip` archive that holds
+    path traversal filenames. When each filename in the zip archive gets
+    concatenated to the target extraction folder, without validation, the
+    final path ends up outside of the target folder. If an executable or a
+    configuration file is overwritten with a file containing malicious code,
+    the problem can turn into an arbitrary code execution issue quite
+    easily.
+
+    The following is an example of a `zip` archive with one benign file and
+    one malicious file. Extracting the malicious file will result in
+    traversing out of the target folder, ending up in `/root/.ssh/`
+    overwriting the `authorized_keys` file:
+
+        2018-04-15 22:04:29 .....           19           19  good.txt
+        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
+
+
+
+    [1]: https://snyk.io/vuln/npm:st:20140206
+    \nA Directory Traversal attack (also known as path traversal) aims to
+    access files and directories that are stored outside the intended
+    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
+    its variations, or by using absolute file paths, it may be possible to
+    access arbitrary files and directories stored on file system, including
+    application source code, configuration, and other critical system files.
+
+    Directory Traversal vulnerabilities can be generally divided into two
+    types:
+
+    * **Information Disclosure**\: Allows the attacker to gain information
+      about the folder structure or read the contents of sensitive files on
+      the system.
+
+    `st` is a module for serving static files on web pages, and contains a
+    [vulnerability of this type][1]. In our example, we will serve files
+    from the `public` route.
+
+    If an attacker requests the following URL from our server, it will in
+    turn leak the sensitive private key of the root user.
+
+        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
+
+    **Note** `%2e` is the URL encoded version of `.` (dot).
+
+    * **Writing arbitrary files**\: Allows the attacker to create or replace
+      existing files. This type of vulnerability is also known as
+      `Zip-Slip`.
+
+    One way to achieve this is by using a malicious `zip` archive that holds
+    path traversal filenames. When each filename in the zip archive gets
+    concatenated to the target extraction folder, without validation, the
+    final path ends up outside of the target folder. If an executable or a
+    configuration file is overwritten with a file containing malicious code,
+    the problem can turn into an arbitrary code execution issue quite
+    easily.
+
+    The following is an example of a `zip` archive with one benign file and
+    one malicious file. Extracting the malicious file will result in
+    traversing out of the target folder, ending up in `/root/.ssh/`
+    overwriting the `authorized_keys` file:
+
+        2018-04-15 22:04:29 .....           19           19  good.txt
+        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
+
+
+
+    [1]: https://snyk.io/vuln/npm:st:20140206
+    \nA Directory Traversal attack (also known as path traversal) aims to
+    access files and directories that are stored outside the intended
+    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
+    its variations, or by using absolute file paths, it may be possible to
+    access arbitrary files and directories stored on file system, including
+    application source code, configuration, and other critical system files.
+
+    Directory Traversal vulnerabilities can be generally divided into two
+    types:
+
+    * **Information Disclosure**\: Allows the attacker to gain information
+      about the folder structure or read the contents of sensitive files on
+      the system.
+
+    `st` is a module for serving static files on web pages, and contains a
+    [vulnerability of this type][1]. In our example, we will serve files
+    from the `public` route.
+
+    If an attacker requests the following URL from our server, it will in
+    turn leak the sensitive private key of the root user.
+
+        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
+
+    **Note** `%2e` is the URL encoded version of `.` (dot).
+
+    * **Writing arbitrary files**\: Allows the attacker to create or replace
+      existing files. This type of vulnerability is also known as
+      `Zip-Slip`.
+
+    One way to achieve this is by using a malicious `zip` archive that holds
+    path traversal filenames. When each filename in the zip archive gets
+    concatenated to the target extraction folder, without validation, the
+    final path ends up outside of the target folder. If an executable or a
+    configuration file is overwritten with a file containing malicious code,
+    the problem can turn into an arbitrary code execution issue quite
+    easily.
+
+    The following is an example of a `zip` archive with one benign file and
+    one malicious file. Extracting the malicious file will result in
+    traversing out of the target folder, ending up in `/root/.ssh/`
+    overwriting the `authorized_keys` file:
+
+        2018-04-15 22:04:29 .....           19           19  good.txt
+        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
+
+
+
+    [1]: https://snyk.io/vuln/npm:st:20140206
+    \nA Directory Traversal attack (also known as path traversal) aims to
+    access files and directories that are stored outside the intended
+    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
+    its variations, or by using absolute file paths, it may be possible to
+    access arbitrary files and directories stored on file system, including
+    application source code, configuration, and other critical system files.
+
+    Directory Traversal vulnerabilities can be generally divided into two
+    types:
+
+    * **Information Disclosure**\: Allows the attacker to gain information
+      about the folder structure or read the contents of sensitive files on
+      the system.
+
+    `st` is a module for serving static files on web pages, and contains a
+    [vulnerability of this type][1]. In our example, we will serve files
+    from the `public` route.
+
+    If an attacker requests the following URL from our server, it will in
+    turn leak the sensitive private key of the root user.
+
+        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
+
+    **Note** `%2e` is the URL encoded version of `.` (dot).
+
+    * **Writing arbitrary files**\: Allows the attacker to create or replace
+      existing files. This type of vulnerability is also known as
+      `Zip-Slip`.
+
+    One way to achieve this is by using a malicious `zip` archive that holds
+    path traversal filenames. When each filename in the zip archive gets
+    concatenated to the target extraction folder, without validation, the
+    final path ends up outside of the target folder. If an executable or a
+    configuration file is overwritten with a file containing malicious code,
+    the problem can turn into an arbitrary code execution issue quite
+    easily.
+
+    The following is an example of a `zip` archive with one benign file and
+    one malicious file. Extracting the malicious file will result in
+    traversing out of the target folder, ending up in `/root/.ssh/`
+    overwriting the `authorized_keys` file:
+
+        2018-04-15 22:04:29 .....           19           19  good.txt
+        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
+
+
+
+    [1]: https://snyk.io/vuln/npm:st:20140206
+    \nA Directory Traversal attack (also known as path traversal) aims to
+    access files and directories that are stored outside the intended
+    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
+    its variations, or by using absolute file paths, it may be possible to
+    access arbitrary files and directories stored on file system, including
+    application source code, configuration, and other critical system files.
+
+    Directory Traversal vulnerabilities can be generally divided into two
+    types:
+
+    * **Information Disclosure**\: Allows the attacker to gain information
+      about the folder structure or read the contents of sensitive files on
+      the system.
+
+    `st` is a module for serving static files on web pages, and contains a
+    [vulnerability of this type][1]. In our example, we will serve files
+    from the `public` route.
+
+    If an attacker requests the following URL from our server, it will in
+    turn leak the sensitive private key of the root user.
+
+        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
+
+    **Note** `%2e` is the URL encoded version of `.` (dot).
+
+    * **Writing arbitrary files**\: Allows the attacker to create or replace
+      existing files. This type of vulnerability is also known as
+      `Zip-Slip`.
+
+    One way to achieve this is by using a malicious `zip` archive that holds
+    path traversal filenames. When each filename in the zip archive gets
+    concatenated to the target extraction folder, without validation, the
+    final path ends up outside of the target folder. If an executable or a
+    configuration file is overwritten with a file containing malicious code,
+    the problem can turn into an arbitrary code execution issue quite
+    easily.
+
+    The following is an example of a `zip` archive with one benign file and
+    one malicious file. Extracting the malicious file will result in
+    traversing out of the target folder, ending up in `/root/.ssh/`
+    overwriting the `authorized_keys` file:
+
+        2018-04-15 22:04:29 .....           19           19  good.txt
+        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
+
+
+
+    [1]: https://snyk.io/vuln/npm:st:20140206
+    \nA Directory Traversal attack (also known as path traversal) aims to
+    access files and directories that are stored outside the intended
+    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
+    its variations, or by using absolute file paths, it may be possible to
+    access arbitrary files and directories stored on file system, including
+    application source code, configuration, and other critical system files.
+
+    Directory Traversal vulnerabilities can be generally divided into two
+    types:
+
+    * **Information Disclosure**\: Allows the attacker to gain information
+      about the folder structure or read the contents of sensitive files on
+      the system.
+
+    `st` is a module for serving static files on web pages, and contains a
+    [vulnerability of this type][1]. In our example, we will serve files
+    from the `public` route.
+
+    If an attacker requests the following URL from our server, it will in
+    turn leak the sensitive private key of the root user.
+
+        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
+
+    **Note** `%2e` is the URL encoded version of `.` (dot).
+
+    * **Writing arbitrary files**\: Allows the attacker to create or replace
+      existing files. This type of vulnerability is also known as
+      `Zip-Slip`.
+
+    One way to achieve this is by using a malicious `zip` archive that holds
+    path traversal filenames. When each filename in the zip archive gets
+    concatenated to the target extraction folder, without validation, the
+    final path ends up outside of the target folder. If an executable or a
+    configuration file is overwritten with a file containing malicious code,
+    the problem can turn into an arbitrary code execution issue quite
+    easily.
+
+    The following is an example of a `zip` archive with one benign file and
+    one malicious file. Extracting the malicious file will result in
+    traversing out of the target folder, ending up in `/root/.ssh/`
+    overwriting the `authorized_keys` file:
+
+        2018-04-15 22:04:29 .....           19           19  good.txt
+        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
+
+
+
+    [1]: https://snyk.io/vuln/npm:st:20140206
+    \nA Directory Traversal attack (also known as path traversal) aims to
+    access files and directories that are stored outside the intended
+    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
+    its variations, or by using absolute file paths, it may be possible to
+    access arbitrary files and directories stored on file system, including
+    application source code, configuration, and other critical system files.
+
+    Directory Traversal vulnerabilities can be generally divided into two
+    types:
+
+    * **Information Disclosure**\: Allows the attacker to gain information
+      about the folder structure or read the contents of sensitive files on
+      the system.
+
+    `st` is a module for serving static files on web pages, and contains a
+    [vulnerability of this type][1]. In our example, we will serve files
+    from the `public` route.
+
+    If an attacker requests the following URL from our server, it will in
+    turn leak the sensitive private key of the root user.
+
+        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
+
+    **Note** `%2e` is the URL encoded version of `.` (dot).
+
+    * **Writing arbitrary files**\: Allows the attacker to create or replace
+      existing files. This type of vulnerability is also known as
+      `Zip-Slip`.
+
+    One way to achieve this is by using a malicious `zip` archive that holds
+    path traversal filenames. When each filename in the zip archive gets
+    concatenated to the target extraction folder, without validation, the
+    final path ends up outside of the target folder. If an executable or a
+    configuration file is overwritten with a file containing malicious code,
+    the problem can turn into an arbitrary code execution issue quite
+    easily.
+
+    The following is an example of a `zip` archive with one benign file and
+    one malicious file. Extracting the malicious file will result in
+    traversing out of the target folder, ending up in `/root/.ssh/`
+    overwriting the `authorized_keys` file:
+
+        2018-04-15 22:04:29 .....           19           19  good.txt
+        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
+
+
+
+    [1]: https://snyk.io/vuln/npm:st:20140206
+  affected_package: electron
+  vulnerable_versions:
+  - "<1.6.16 || >=1.7 <1.7.11 || >=1.8 <1.8.2-beta.4"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2018-1000006
+  cwe:
+  - CWE-22
+  credit:
+  - Zeke Sikelianos
+  references:
+  - https://electronjs.org/blog/protocol-handler-fix
+  - https://github.com/electron/electron/pull/12294
+  source_url: https://snyk.io/vuln/npm:electron:20180123
+- id: snykio:npm:electron:2017-04-25
+  title: Denial of Service (DoS)
+  description: |+
+    [`electron`][1] is a framework for creating native applications with web
+    technologies like JavaScript, HTML, and CSS. It takes care of the hard
+    parts so you can focus on the core of your application.
+
+    Affected versions of the package are vulnerable to Denial of Service
+    (DoS). When specifying `webPreferences` in the `features` parameter to
+    the `window.open` function, it would throw an error in the main process
+    and cause the service to crash.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+    \n[`electron`][1] is a framework for creating native applications with web
+    technologies like JavaScript, HTML, and CSS. It takes care of the hard
+    parts so you can focus on the core of your application.
+
+    Affected versions of the package are vulnerable to Denial of Service
+    (DoS). When specifying `webPreferences` in the `features` parameter to
+    the `window.open` function, it would throw an error in the main process
+    and cause the service to crash.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+    \n[`electron`][1] is a framework for creating native applications with web
+    technologies like JavaScript, HTML, and CSS. It takes care of the hard
+    parts so you can focus on the core of your application.
+
+    Affected versions of the package are vulnerable to Denial of Service
+    (DoS). When specifying `webPreferences` in the `features` parameter to
+    the `window.open` function, it would throw an error in the main process
+    and cause the service to crash.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+  affected_package: electron
+  vulnerable_versions:
+  - "<1.6.8"
+  severity: medium
+  package_manager: npm
+  cwe:
+  - CWE-248
+  credit:
+  - Unknown
+  references:
+  - https://github.com/electron/electron/pull/9289
+  - https://github.com/electron/electron/commit/8460a580b98f26e8a59ad421c33c87aec20c6a82
+  source_url: https://snyk.io/vuln/npm:electron:20170426
+- id: snykio:npm:electron:2017-04-24
+  title: Denial of Service (DoS)
+  description: |+
+    [`electron`][1] is a framework for creating native applications with web
+    technologies like JavaScript, HTML, and CSS. It takes care of the hard
+    parts so you can focus on the core of your application.
+
+    Affected versions of the package are vulnerable to Denial of Service
+    (DoS). Valid frame names passed into `window.open` would throw errors
+    and cause the service to crash.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+    \n[`electron`][1] is a framework for creating native applications with web
+    technologies like JavaScript, HTML, and CSS. It takes care of the hard
+    parts so you can focus on the core of your application.
+
+    Affected versions of the package are vulnerable to Denial of Service
+    (DoS). Valid frame names passed into `window.open` would throw errors
+    and cause the service to crash.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+    \n[`electron`][1] is a framework for creating native applications with web
+    technologies like JavaScript, HTML, and CSS. It takes care of the hard
+    parts so you can focus on the core of your application.
+
+    Affected versions of the package are vulnerable to Denial of Service
+    (DoS). Valid frame names passed into `window.open` would throw errors
+    and cause the service to crash.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+  affected_package: electron
+  vulnerable_versions:
+  - "<1.6.8"
+  severity: medium
+  package_manager: npm
+  cwe:
+  - CWE-248
+  credit:
+  - Unknown
+  references:
+  - https://github.com/electron/electron/pull/9287
+  - https://github.com/electron/electron/commit/0aa53f4af7d13ea4c516999605b5d644a48a8f81
+  source_url: https://snyk.io/vuln/npm:electron:20170425
+- id: snykio:npm:electron:2017-04-20
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [`electron`][1] is a framework for creating native applications with web
+    technologies like JavaScript, HTML, and CSS. It takes care of the hard
+    parts so you can focus on the core of your application.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS) attacks. A new window opened from within a window that had
+    javascript disabled, would have javascript enabled by default.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+    \n[`electron`][1] is a framework for creating native applications with web
+    technologies like JavaScript, HTML, and CSS. It takes care of the hard
+    parts so you can focus on the core of your application.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS) attacks. A new window opened from within a window that had
+    javascript disabled, would have javascript enabled by default.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+    \n[`electron`][1] is a framework for creating native applications with web
+    technologies like JavaScript, HTML, and CSS. It takes care of the hard
+    parts so you can focus on the core of your application.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS) attacks. A new window opened from within a window that had
+    javascript disabled, would have javascript enabled by default.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+  affected_package: electron
+  vulnerable_versions:
+  - "<1.6.8"
+  severity: medium
+  package_manager: npm
+  cwe:
+  - CWE-79
+  credit:
+  - Unknown
+  references:
+  - https://github.com/electron/electron/pull/9250
+  - https://github.com/electron/electron/commit/c9ec45d9d8b6f3fa82b5f47ab8a6f7f1cece436c
+  source_url: https://snyk.io/vuln/npm:electron:20170421
+- id: snykio:npm:electron:2017-04-20
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [`electron`][1] is a framework for creating native applications with web
+    technologies like JavaScript, HTML, and CSS. It takes care of the hard
+    parts so you can focus on the core of your application.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS) attacks.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+    \n[`electron`][1] is a framework for creating native applications with web
+    technologies like JavaScript, HTML, and CSS. It takes care of the hard
+    parts so you can focus on the core of your application.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS) attacks.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+    \n[`electron`][1] is a framework for creating native applications with web
+    technologies like JavaScript, HTML, and CSS. It takes care of the hard
+    parts so you can focus on the core of your application.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS) attacks.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+  affected_package: electron
+  vulnerable_versions:
+  - "<1.6.8"
+  severity: medium
+  package_manager: npm
+  cwe:
+  - CWE-79
+  credit:
+  - Unknown
+  references:
+  - https://github.com/electron/electron/pull/9249
+  - https://github.com/electron/electron/commit/c146f8a308a5eb8d74fcd2fc566dc43e4eeca467
+  source_url: https://snyk.io/vuln/npm:electron:20170423
+- id: snykio:npm:electron:2017-04-20
+  title: Denial of Service (DoS)
+  description: |+
+    [`electron`][1] is a framework for creating native applications with web
+    technologies like JavaScript, HTML, and CSS. It takes care of the hard
+    parts so you can focus on the core of your application.
+
+    Affected versions of the package are vulnerable to Denial of Service
+    (DoS). Certain built-in window APIs like `alert`, `confirm`, `open`,
+    `history.go`, and `postMessage` would throw errors in the main process
+    instead of the renderer processes when the arguments were invalid,
+    causing the service to crash.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+    \n[`electron`][1] is a framework for creating native applications with web
+    technologies like JavaScript, HTML, and CSS. It takes care of the hard
+    parts so you can focus on the core of your application.
+
+    Affected versions of the package are vulnerable to Denial of Service
+    (DoS). Certain built-in window APIs like `alert`, `confirm`, `open`,
+    `history.go`, and `postMessage` would throw errors in the main process
+    instead of the renderer processes when the arguments were invalid,
+    causing the service to crash.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+    \n[`electron`][1] is a framework for creating native applications with web
+    technologies like JavaScript, HTML, and CSS. It takes care of the hard
+    parts so you can focus on the core of your application.
+
+    Affected versions of the package are vulnerable to Denial of Service
+    (DoS). Certain built-in window APIs like `alert`, `confirm`, `open`,
+    `history.go`, and `postMessage` would throw errors in the main process
+    instead of the renderer processes when the arguments were invalid,
+    causing the service to crash.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+  affected_package: electron
+  vulnerable_versions:
+  - "<1.6.8"
+  severity: low
+  package_manager: npm
+  cwe:
+  - CWE-248
+  credit:
+  - Unknown
+  references:
+  - https://github.com/electron/electron/pull/9252
+  - https://github.com/electron/electron/commit/2e223288d23ba9fb95d08d0d006e9a7ec9a7f583
+  source_url: https://snyk.io/vuln/npm:electron:20170422
+- id: snykio:npm:electron:2017-01-04
+  title: Arbitrary Code Injection
+  description: |
+    [`electron`][1] is a framework for creating native applications with web
+    technologies like JavaScript, HTML, and CSS. It takes care of the hard
+    parts so you can focus on the core of your application.
+
+    Affected versions of the package are vulnerable to Arbitrary Code
+    Injection. A malicious user can create a specially crafted site which
+    will be loaded in the `preload` script and would run in the main
+    JavaScript context.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+    \n[`electron`][1] is a framework for creating native applications with web
+    technologies like JavaScript, HTML, and CSS. It takes care of the hard
+    parts so you can focus on the core of your application.
+
+    Affected versions of the package are vulnerable to Arbitrary Code
+    Injection. A malicious user can create a specially crafted site which
+    will be loaded in the `preload` script and would run in the main
+    JavaScript context.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+    \n[`electron`][1] is a framework for creating native applications with web
+    technologies like JavaScript, HTML, and CSS. It takes care of the hard
+    parts so you can focus on the core of your application.
+
+    Affected versions of the package are vulnerable to Arbitrary Code
+    Injection. A malicious user can create a specially crafted site which
+    will be loaded in the `preload` script and would run in the main
+    JavaScript context.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+  affected_package: electron
+  vulnerable_versions:
+  - "<1.4.15"
+  severity: high
+  package_manager: npm
+  cwe:
+  - CWE-284
+  credit:
+  - Unknown
+  references:
+  - https://github.com/electron/electron/pull/8348
+  - https://github.com/electron/electron/commit/feac8685f41fabbdce6c659db0a9be971e33c291
+  source_url: https://snyk.io/vuln/npm:electron:20170105
+- id: snykio:npm:electron:2016-12-09
+  title: Man-in-the-Middle (MitM)
+  description: |
+    [`electron`][1] is a framework for creating native applications with web
+    technologies like JavaScript, HTML, and CSS. It takes care of the hard
+    parts so you can focus on the core of your application.
+
+    Affected versions of the package would incorrectly reject certain
+    certificates during HTTPS requests, due to a flaw in Chrome where
+    SSL/TLS certificates are incorrectly rejected 10 weeks from the build
+    time of `libchromiumcontent`. This could cause users to use an insecure
+    protocol and be vulnerable to a Man-in-the-Middle (MitM) attack.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+    \n[`electron`][1] is a framework for creating native applications with web
+    technologies like JavaScript, HTML, and CSS. It takes care of the hard
+    parts so you can focus on the core of your application.
+
+    Affected versions of the package would incorrectly reject certain
+    certificates during HTTPS requests, due to a flaw in Chrome where
+    SSL/TLS certificates are incorrectly rejected 10 weeks from the build
+    time of `libchromiumcontent`. This could cause users to use an insecure
+    protocol and be vulnerable to a Man-in-the-Middle (MitM) attack.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+    \n[`electron`][1] is a framework for creating native applications with web
+    technologies like JavaScript, HTML, and CSS. It takes care of the hard
+    parts so you can focus on the core of your application.
+
+    Affected versions of the package would incorrectly reject certain
+    certificates during HTTPS requests, due to a flaw in Chrome where
+    SSL/TLS certificates are incorrectly rejected 10 weeks from the build
+    time of `libchromiumcontent`. This could cause users to use an insecure
+    protocol and be vulnerable to a Man-in-the-Middle (MitM) attack.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+  affected_package: electron
+  vulnerable_versions:
+  - "<1.4.12 >=1.4.0"
+  severity: medium
+  package_manager: npm
+  cwe:
+  - CWE-295
+  credit:
+  - Unknown
+  references:
+  - https://electron.atom.io/blog/2016/12/09/certificate-transparency-fix
+  - https://github.com/electron/electron/pull/8176
+  - https://github.com/electron/electron/commit/c751d42d1a98e9428e6bcb7992a7d495a79aec6a
+  - https://github.com/electron/electron/releases/tag/v1.4.12
+  source_url: https://snyk.io/vuln/npm:electron:20161210
+- id: snykio:npm:electron:2016-09-25
+  title: Denial of Service (DoS)
+  description: |+
+    [`electron`][1] is a framework for creating native applications with web
+    technologies like JavaScript, HTML, and CSS. It takes care of the hard
+    parts so you can focus on the core of your application.
+
+    Affected versions of the package are vulnerable to Denial of Service
+    (DoS) due to an uncaught error when handling the `window.alert`,
+    `window.close`, and `window.confirm` functions, causing the service to
+    crash.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+    \n[`electron`][1] is a framework for creating native applications with web
+    technologies like JavaScript, HTML, and CSS. It takes care of the hard
+    parts so you can focus on the core of your application.
+
+    Affected versions of the package are vulnerable to Denial of Service
+    (DoS) due to an uncaught error when handling the `window.alert`,
+    `window.close`, and `window.confirm` functions, causing the service to
+    crash.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+    \n[`electron`][1] is a framework for creating native applications with web
+    technologies like JavaScript, HTML, and CSS. It takes care of the hard
+    parts so you can focus on the core of your application.
+
+    Affected versions of the package are vulnerable to Denial of Service
+    (DoS) due to an uncaught error when handling the `window.alert`,
+    `window.close`, and `window.confirm` functions, causing the service to
+    crash.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+  affected_package: electron
+  vulnerable_versions:
+  - ">=1.3.0 <1.3.13 || >=1.4.0 <1.4.11"
+  severity: high
+  package_manager: npm
+  cwe:
+  - CWE-248
+  credit:
+  - Paul Pirosca
+  references:
+  - https://github.com/electron/electron/pull/8110
+  - https://github.com/electron/electron/issues/7351
+  - https://github.com/electron/electron/commit/3fe9762082f6cfdc071053995a41af5bfcca6057
+  - https://github.com/electron/electron/commit/a9d4d9ad85f8969dbc532dc9781645c01da4bdbc
+  - https://github.com/electron/electron/releases/tag/v1.4.11
+  - https://github.com/electron/electron/releases/tag/v1.3.13
+  source_url: https://snyk.io/vuln/npm:electron:20160926
+- id: snykio:npm:electron:2016-09-02
+  title: Uninitialized Memory Exposure
+  description: |
+    [`electron`][1] is a framework for creating native applications with web
+    technologies like JavaScript, HTML, and CSS. It takes care of the hard
+    parts so you can focus on the core of your application.
+
+    Affected versions of the package are vulnerable to Uninitialized Memory
+    Exposure. The [Buffer][2] class in Node.js is available as global, even
+    if the `nodeintegration` attribute is not added. This could result in
+    concatenation of uninitialized memory to the buffer collection.
+
+    This is a result of unobstructed use of the `Buffer` constructor, whose
+    [insecure default constructor increases the odds of memory leakage][3].
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+    [2]: https://nodejs.org/api/buffer.html
+    [3]: https://snyk.io/blog/exploiting-buffer/
+    \n[`electron`][1] is a framework for creating native applications with web
+    technologies like JavaScript, HTML, and CSS. It takes care of the hard
+    parts so you can focus on the core of your application.
+
+    Affected versions of the package are vulnerable to Uninitialized Memory
+    Exposure. The [Buffer][2] class in Node.js is available as global, even
+    if the `nodeintegration` attribute is not added. This could result in
+    concatenation of uninitialized memory to the buffer collection.
+
+    This is a result of unobstructed use of the `Buffer` constructor, whose
+    [insecure default constructor increases the odds of memory leakage][3].
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+    [2]: https://nodejs.org/api/buffer.html
+    [3]: https://snyk.io/blog/exploiting-buffer/
+    \n[`electron`][1] is a framework for creating native applications with web
+    technologies like JavaScript, HTML, and CSS. It takes care of the hard
+    parts so you can focus on the core of your application.
+
+    Affected versions of the package are vulnerable to Uninitialized Memory
+    Exposure. The [Buffer][2] class in Node.js is available as global, even
+    if the `nodeintegration` attribute is not added. This could result in
+    concatenation of uninitialized memory to the buffer collection.
+
+    This is a result of unobstructed use of the `Buffer` constructor, whose
+    [insecure default constructor increases the odds of memory leakage][3].
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+    [2]: https://nodejs.org/api/buffer.html
+    [3]: https://snyk.io/blog/exploiting-buffer/
+    \n[`electron`][1] is a framework for creating native applications with web
+    technologies like JavaScript, HTML, and CSS. It takes care of the hard
+    parts so you can focus on the core of your application.
+
+    Affected versions of the package are vulnerable to Uninitialized Memory
+    Exposure. The [Buffer][2] class in Node.js is available as global, even
+    if the `nodeintegration` attribute is not added. This could result in
+    concatenation of uninitialized memory to the buffer collection.
+
+    This is a result of unobstructed use of the `Buffer` constructor, whose
+    [insecure default constructor increases the odds of memory leakage][3].
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+    [2]: https://nodejs.org/api/buffer.html
+    [3]: https://snyk.io/blog/exploiting-buffer/
+  affected_package: electron
+  vulnerable_versions:
+  - "<1.6.1"
+  severity: high
+  package_manager: npm
+  cwe:
+  - CWE-200
+  credit:
+  - Unknown
+  references:
+  - https://github.com/electron/electron/pull/8605
+  - https://github.com/electron/electron/issues/7081
+  - https://github.com/electron/electron/commit/624e44dd6fb585cc9acd4a0b56c0568c789b5bd1
+  - https://github.com/electron/electron/releases/tag/v1.6.1
+  source_url: https://snyk.io/vuln/npm:electron:20160903
+- id: snykio:npm:electron:2017-09-26
+  title: Arbitrary Code Execution
+  description: |
+    [`electron`][1] is a framework that lets you write cross-platform
+    desktop applications.
+
+    An arbitrary code execution vulnerability was discovered in Google
+    Chromium, affecting many versions of Electron. Any Electron app that
+    accesses remote content is vulnerable to this exploit, regardless of
+    whether the sandbox option is enabled.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+    \n[`electron`][1] is a framework that lets you write cross-platform
+    desktop applications.
+
+    An arbitrary code execution vulnerability was discovered in Google
+    Chromium, affecting many versions of Electron. Any Electron app that
+    accesses remote content is vulnerable to this exploit, regardless of
+    whether the sandbox option is enabled.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+    \n[`electron`][1] is a framework that lets you write cross-platform
+    desktop applications.
+
+    An arbitrary code execution vulnerability was discovered in Google
+    Chromium, affecting many versions of Electron. Any Electron app that
+    accesses remote content is vulnerable to this exploit, regardless of
+    whether the sandbox option is enabled.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+  affected_package: electron
+  vulnerable_versions:
+  - "<1.6.14 || >=1.7.0 <1.7.8 || >=1.8.0 <1.8.1"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2017-16151
+  cwe:
+  - CWE-94
+  credit:
+  - Electron Team
+  references:
+  - https://electron.atom.io/blog/2017/09/27/chromium-rce-vulnerability-fix
+  - https://electronjs.org/releases#1.8.1
+  source_url: https://snyk.io/vuln/npm:electron:20170927

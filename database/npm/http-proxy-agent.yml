@@ -1,0 +1,144 @@
+---
+- id: nodesecurity:npm:http-proxy-agent:2018-04-25
+  title: Denial of Service
+  description: Versions of `http-proxy-agent` before 2.1.0 are vulnerable to denial
+    of service and uninitialized memory leak when unsanitized options are passed to
+    `Buffer`.
+  affected_package: http-proxy-agent
+  vulnerable_versions:
+  - "<=2.0.0"
+  patched_versions:
+  - ">=2.1.0"
+  severity: high
+  package_manager: npm
+  credit:
+  - Сковорода Никита Андреевич
+  references:
+  - |-
+    https://github.com/TooTallNate/node-http-proxy-agent/blob/2.0.0/index.js#L80
+    https://hackerone.com/reports/321631)
+  source_url: https://nodesecurity.io/advisories/607
+- id: snykio:npm:http-proxy-agent:2018-04-06
+  title: Uninitialized Memory Exposure
+  description: |+
+    [http-proxy-agent][1] provides an http.Agent implementation that
+    connects to a specified HTTP or HTTPS proxy server, and can be used with
+    the built-in http module.
+
+    Affected versions of this package are vulnerable to Uninitialized Memory
+    Exposure and Denial of Service (DoS) attacks due to passing unsanitized
+    options to Buffer(arg).
+
+
+
+    [1]: https://www.npmjs.com/package/http-proxy-agent
+    \n[http-proxy-agent][1] provides an http.Agent implementation that
+    connects to a specified HTTP or HTTPS proxy server, and can be used with
+    the built-in http module.
+
+    Affected versions of this package are vulnerable to Uninitialized Memory
+    Exposure and Denial of Service (DoS) attacks due to passing unsanitized
+    options to Buffer(arg).
+
+
+
+    [1]: https://www.npmjs.com/package/http-proxy-agent
+    \n[http-proxy-agent][1] provides an http.Agent implementation that
+    connects to a specified HTTP or HTTPS proxy server, and can be used with
+    the built-in http module.
+
+    Affected versions of this package are vulnerable to Uninitialized Memory
+    Exposure and Denial of Service (DoS) attacks due to passing unsanitized
+    options to Buffer(arg).
+
+
+
+    [1]: https://www.npmjs.com/package/http-proxy-agent
+    \nThe Buffer class on Node.js is a mutable array of binary data, and can
+    be initialized with a string, array or number.
+
+        const buf1 = new Buffer([1,2,3]);
+        // creates a buffer containing [01, 02, 03]
+        const buf2 = new Buffer('test');
+        // creates a buffer containing ASCII bytes [74, 65, 73, 74]
+        const buf3 = new Buffer(10);
+        // creates a buffer of length 10
+
+    The first two variants simply create a binary representation of the
+    value it received. The last one, however, pre-allocates a buffer of the
+    specified size, making it a useful buffer, especially when reading data
+    from a stream. When using the number constructor of Buffer, it will
+    allocate the memory, but will not fill it with zeros. Instead, the
+    allocated buffer will hold whatever was in memory at the time. If the
+    buffer is not `zeroed` by using `buf.fill(0)`, it may leak sensitive
+    information like keys, source code, and system info.
+
+    \nThe Buffer class on Node.js is a mutable array of binary data, and can
+    be initialized with a string, array or number.
+
+        const buf1 = new Buffer([1,2,3]);
+        // creates a buffer containing [01, 02, 03]
+        const buf2 = new Buffer('test');
+        // creates a buffer containing ASCII bytes [74, 65, 73, 74]
+        const buf3 = new Buffer(10);
+        // creates a buffer of length 10
+
+    The first two variants simply create a binary representation of the
+    value it received. The last one, however, pre-allocates a buffer of the
+    specified size, making it a useful buffer, especially when reading data
+    from a stream. When using the number constructor of Buffer, it will
+    allocate the memory, but will not fill it with zeros. Instead, the
+    allocated buffer will hold whatever was in memory at the time. If the
+    buffer is not `zeroed` by using `buf.fill(0)`, it may leak sensitive
+    information like keys, source code, and system info.
+
+    \nThe Buffer class on Node.js is a mutable array of binary data, and can
+    be initialized with a string, array or number.
+
+        const buf1 = new Buffer([1,2,3]);
+        // creates a buffer containing [01, 02, 03]
+        const buf2 = new Buffer('test');
+        // creates a buffer containing ASCII bytes [74, 65, 73, 74]
+        const buf3 = new Buffer(10);
+        // creates a buffer of length 10
+
+    The first two variants simply create a binary representation of the
+    value it received. The last one, however, pre-allocates a buffer of the
+    specified size, making it a useful buffer, especially when reading data
+    from a stream. When using the number constructor of Buffer, it will
+    allocate the memory, but will not fill it with zeros. Instead, the
+    allocated buffer will hold whatever was in memory at the time. If the
+    buffer is not `zeroed` by using `buf.fill(0)`, it may leak sensitive
+    information like keys, source code, and system info.
+
+    \nThe Buffer class on Node.js is a mutable array of binary data, and can
+    be initialized with a string, array or number.
+
+        const buf1 = new Buffer([1,2,3]);
+        // creates a buffer containing [01, 02, 03]
+        const buf2 = new Buffer('test');
+        // creates a buffer containing ASCII bytes [74, 65, 73, 74]
+        const buf3 = new Buffer(10);
+        // creates a buffer of length 10
+
+    The first two variants simply create a binary representation of the
+    value it received. The last one, however, pre-allocates a buffer of the
+    specified size, making it a useful buffer, especially when reading data
+    from a stream. When using the number constructor of Buffer, it will
+    allocate the memory, but will not fill it with zeros. Instead, the
+    allocated buffer will hold whatever was in memory at the time. If the
+    buffer is not `zeroed` by using `buf.fill(0)`, it may leak sensitive
+    information like keys, source code, and system info.
+
+  affected_package: http-proxy-agent
+  vulnerable_versions:
+  - "<2.0.0"
+  severity: high
+  package_manager: npm
+  cwe:
+  - CWE-399
+  credit:
+  - ChALkeR
+  references:
+  - https://hackerone.com/reports/321631
+  source_url: https://snyk.io/vuln/npm:http-proxy-agent:20180406

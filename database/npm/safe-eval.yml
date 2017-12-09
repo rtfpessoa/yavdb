@@ -1,0 +1,101 @@
+---
+- id: nodesecurity:npm:safe-eval:2017-08-30
+  title: Sandbox Breakout
+  description: "Affected versions of `safe-eval` are vulnerable to a sandbox escape.
+    By accessing object constructors, un-sanitized user input can access the entire
+    standard library and effectively break out of the sandbox. \n\n## Proof of Concept:\nThis
+    code accesses the process object and calls `.exit()`\n```\nvar safeEval = require('safe-eval');\nsafeEval(\"this.constructor.constructor('return
+    process')().exit()\");\n```"
+  affected_package: safe-eval
+  vulnerable_versions:
+  - "<99.999.9999"
+  patched_versions:
+  - "<0.0.0"
+  severity: high
+  package_manager: npm
+  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H
+  credit:
+  - Alessandro Nadalin
+  references:
+  - |-
+    https://github.com/hacksparrow/safe-eval/issues/5)
+    https://github.com/patriksimek/vm2/issues/59)
+  source_url: https://nodesecurity.io/advisories/337
+- id: snykio:npm:safe-eval:2017-08-30
+  title: Sandbox Escaping
+  description: |+
+    \[`safe-eval`\] is a version of `eval`, claiming to be safer.
+
+    Affected versions of this package are vulnerable to Sandbox Escaping.
+    User input is not sanitized before being passed on to the safeEval
+    function. A malicious user could access the object constructors,
+    allowing access to the standard library, then escaping the sandbox.
+
+    Proof of Concept:
+
+        var safeEval = require('safe-eval');
+        safeEval("this.constructor.constructor('return process')().exit()");
+
+    \n\[`safe-eval`\] is a version of `eval`, claiming to be safer.
+
+    Affected versions of this package are vulnerable to Sandbox Escaping.
+    User input is not sanitized before being passed on to the safeEval
+    function. A malicious user could access the object constructors,
+    allowing access to the standard library, then escaping the sandbox.
+
+    Proof of Concept:
+
+        var safeEval = require('safe-eval');
+        safeEval("this.constructor.constructor('return process')().exit()");
+
+    \n\[`safe-eval`\] is a version of `eval`, claiming to be safer.
+
+    Affected versions of this package are vulnerable to Sandbox Escaping.
+    User input is not sanitized before being passed on to the safeEval
+    function. A malicious user could access the object constructors,
+    allowing access to the standard library, then escaping the sandbox.
+
+    Proof of Concept:
+
+        var safeEval = require('safe-eval');
+        safeEval("this.constructor.constructor('return process')().exit()");
+
+    \n\[`safe-eval`\] is a version of `eval`, claiming to be safer.
+
+    Affected versions of this package are vulnerable to Sandbox Escaping.
+    User input is not sanitized before being passed on to the safeEval
+    function. A malicious user could access the object constructors,
+    allowing access to the standard library, then escaping the sandbox.
+
+    Proof of Concept:
+
+        var safeEval = require('safe-eval');
+        safeEval("this.constructor.constructor('return process')().exit()");
+
+    \n\[`safe-eval`\] is a version of `eval`, claiming to be safer.
+
+    Affected versions of this package are vulnerable to Sandbox Escaping.
+    User input is not sanitized before being passed on to the safeEval
+    function. A malicious user could access the object constructors,
+    allowing access to the standard library, then escaping the sandbox.
+
+    Proof of Concept:
+
+        var safeEval = require('safe-eval');
+        safeEval("this.constructor.constructor('return process')().exit()");
+
+  affected_package: safe-eval
+  vulnerable_versions:
+  - "<0.4.0"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2017-16088
+  cwe:
+  - CWE-265
+  credit:
+  - Alessandro Nadalin
+  references:
+  - https://github.com/hacksparrow/safe-eval/issues/5
+  - https://github.com/patriksimek/vm2/issues/59
+  source_url: https://snyk.io/vuln/npm:safe-eval:20170830

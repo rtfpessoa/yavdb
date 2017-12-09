@@ -1,0 +1,60 @@
+---
+- id: snykio:rubygems:devise_invitable:2014-04-09
+  title: Cross-site Request Forgery (CSRF)
+  description: |
+    [`devise_invitable`][1] adds support for send invitations by email (it
+    requires to be authenticated) and accept the invitation by setting a
+    password.
+
+    Affected versions of the package are vulnerable to Cross-site Request
+    Forgery (CSRF) attacks when the forgery protection strategy is set to
+    `:null_session` or `:reset_session`. The value returned by the
+    `current_inviter` function is memoized before the session is checked, so
+    the session is cleaned but the current inviter remains memoized. Thus
+    attackers can use the CSRF token to authenticate malicious requests.
+
+
+
+    [1]: https://rubygems.org/gems/devise_invitable
+    \n[`devise_invitable`][1] adds support for send invitations by email (it
+    requires to be authenticated) and accept the invitation by setting a
+    password.
+
+    Affected versions of the package are vulnerable to Cross-site Request
+    Forgery (CSRF) attacks when the forgery protection strategy is set to
+    `:null_session` or `:reset_session`. The value returned by the
+    `current_inviter` function is memoized before the session is checked, so
+    the session is cleaned but the current inviter remains memoized. Thus
+    attackers can use the CSRF token to authenticate malicious requests.
+
+
+
+    [1]: https://rubygems.org/gems/devise_invitable
+    \n[`devise_invitable`][1] adds support for send invitations by email (it
+    requires to be authenticated) and accept the invitation by setting a
+    password.
+
+    Affected versions of the package are vulnerable to Cross-site Request
+    Forgery (CSRF) attacks when the forgery protection strategy is set to
+    `:null_session` or `:reset_session`. The value returned by the
+    `current_inviter` function is memoized before the session is checked, so
+    the session is cleaned but the current inviter remains memoized. Thus
+    attackers can use the CSRF token to authenticate malicious requests.
+
+
+
+    [1]: https://rubygems.org/gems/devise_invitable
+  affected_package: devise_invitable
+  vulnerable_versions:
+  - "<1.3.5"
+  - ">=0.0.0"
+  severity: medium
+  package_manager: rubygems
+  cwe:
+  - CWE-352
+  credit:
+  - Nicola Racco
+  references:
+  - https://github.com/scambra/devise_invitable/issues/457
+  - https://github.com/scambra/devise_invitable/commit/d1bb19efca8e35885e1c2f0931d6171fce8cf74e
+  source_url: https://snyk.io/vuln/SNYK-RUBY-DEVISEINVITABLE-20356

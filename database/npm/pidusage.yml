@@ -1,0 +1,113 @@
+---
+- id: nodesecurity:npm:pidusage:2017-06-05
+  title: Command Injection
+  description: "Affected versions of `pidusage` pass unsanitized input to `child_process.exec()`,
+    resulting in arbitrary code execution in the `ps` method.\n \nThis package is
+    vulnerable to this PoC on Darwin, SunOS, FreeBSD, and AIX.\n\nWindows and Linux
+    are not vulnerable. \n\n## Proof of Concept\n```\nvar pid = require('pidusage');\npid.stat('1
+    && /usr/local/bin/python');\n```"
+  affected_package: pidusage
+  vulnerable_versions:
+  - "<=1.1.4"
+  patched_versions:
+  - ">=1.1.5"
+  severity: high
+  package_manager: npm
+  cvss_v3_vector: CVSS:3.0/AV:L/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H
+  credit:
+  - micaksica
+  references:
+  - ''
+  source_url: https://nodesecurity.io/advisories/356
+- id: ossindex:npm:pidusage:2017-07-29
+  title: Command Injection
+  description: "> The pidusage module passes unsanitized input to child_process.exec,
+    resulting in command injection in the ps method, as the pid is never cast to an
+    integer as the comment expects. This module is vulnerable to this PoC on Darwin,
+    SunOS, FreeBSD, and AIX. Windows and Linux are not vulnerable.\n> \n> -- [nodesecurity.io](https://nodesecurity.io/advisories/356)"
+  affected_package: pidusage
+  vulnerable_versions:
+  - "<=1.1.4"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - https://nodesecurity.io/advisories/356
+  source_url: https://ossindex.net/resource/package/7014295539/vulnerabilities
+- id: snykio:npm:pidusage:2017-06-05
+  title: Arbitrary Command Injection
+  description: |
+    [`pidusage`][1] is a package for Cross-platform process cpu % and memory
+    usage of a PID. Affected versions of the package are vulnerable to
+    Arbitrary Command Injection. It passes user input to
+    `child_process.exec` without sanitization, which causes a command
+    injection vulnerability in the `ps` function due to never casting the
+    PID to an integer.
+
+    PoC:
+
+        var pid = require('pidusage');
+        pid.stat('1 && /usr/local/bin/python');
+
+
+
+    [1]: https://www.npmjs.com/package/pidusage
+    \n[`pidusage`][1] is a package for Cross-platform process cpu % and memory
+    usage of a PID. Affected versions of the package are vulnerable to
+    Arbitrary Command Injection. It passes user input to
+    `child_process.exec` without sanitization, which causes a command
+    injection vulnerability in the `ps` function due to never casting the
+    PID to an integer.
+
+    PoC:
+
+        var pid = require('pidusage');
+        pid.stat('1 && /usr/local/bin/python');
+
+
+
+    [1]: https://www.npmjs.com/package/pidusage
+    \n[`pidusage`][1] is a package for Cross-platform process cpu % and memory
+    usage of a PID. Affected versions of the package are vulnerable to
+    Arbitrary Command Injection. It passes user input to
+    `child_process.exec` without sanitization, which causes a command
+    injection vulnerability in the `ps` function due to never casting the
+    PID to an integer.
+
+    PoC:
+
+        var pid = require('pidusage');
+        pid.stat('1 && /usr/local/bin/python');
+
+
+
+    [1]: https://www.npmjs.com/package/pidusage
+    \n[`pidusage`][1] is a package for Cross-platform process cpu % and memory
+    usage of a PID. Affected versions of the package are vulnerable to
+    Arbitrary Command Injection. It passes user input to
+    `child_process.exec` without sanitization, which causes a command
+    injection vulnerability in the `ps` function due to never casting the
+    PID to an integer.
+
+    PoC:
+
+        var pid = require('pidusage');
+        pid.stat('1 && /usr/local/bin/python');
+
+
+
+    [1]: https://www.npmjs.com/package/pidusage
+  affected_package: pidusage
+  vulnerable_versions:
+  - "<1.1.5"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2017-1000220
+  cwe:
+  - CWE-77
+  credit:
+  - micaksica
+  references:
+  - https://github.com/soyuka/pidusage/commit/b70eca15f7ca7f1b82a15f8a5d4bb48737f5a89d
+  source_url: https://snyk.io/vuln/npm:pidusage:20170605

@@ -1,0 +1,404 @@
+---
+- id: ossindex:maven:com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2017-01-30
+  title: "[CVE-2016-3720] Possible XML External Entity (XXE) vulnerability"
+  description: "> XML external entity (XXE) vulnerability in XmlMapper in the Data
+    format extension for Jackson (aka jackson-dataformat-xml) allows attackers to
+    have unspecified impact via unknown vectors.\n> \n> -- [NIST](https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-3720)"
+  affected_package: com.fasterxml.jackson.dataformat:jackson-dataformat-xml
+  vulnerable_versions:
+  - "<2.7.4"
+  package_manager: maven
+  credit:
+  - OSSIndex
+  references:
+  - https://github.com/FasterXML/jackson-core/issues/292
+  - https://github.com/FasterXML/jackson-dataformat-xml/issues/190
+  - https://github.com/FasterXML/jackson-dataformat-xml/issues/199
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-3720
+  source_url: https://ossindex.net/resource/package/7015502409/vulnerabilities
+- id: snykio:maven:com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2016-04-15
+  title: Server-Side Request Forgery (SSRF)
+  description: |
+    [`com.fasterxml.jackson.dataformat:jackson-dataformat-xml`][1] is a Data
+    format extension for [Jackson][2] to offer alternative support for
+    serializing POJOs as XML and deserializing XML as pojos. A flaw was
+    found in jackson-dataformat-xml\'s XmlMapper which allows XXE Out of
+    Band attack. An attacker could use this flaw to launch a SSRF attack.
+
+
+
+    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22jackson-dataformat-xml%22
+    [2]: http://jackson.codehaus.org
+    \n[`com.fasterxml.jackson.dataformat:jackson-dataformat-xml`][1] is a Data
+    format extension for [Jackson][2] to offer alternative support for
+    serializing POJOs as XML and deserializing XML as pojos. A flaw was
+    found in jackson-dataformat-xml\'s XmlMapper which allows XXE Out of
+    Band attack. An attacker could use this flaw to launch a SSRF attack.
+
+
+
+    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22jackson-dataformat-xml%22
+    [2]: http://jackson.codehaus.org
+  affected_package: com.fasterxml.jackson.dataformat:jackson-dataformat-xml
+  vulnerable_versions:
+  - ">= 2.7.4 < 2.7.8"
+  - ">= 2.8 <= 2.8.4"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2016-7051
+  cwe:
+  - CWE-918
+  credit:
+  - Adith Sudhakar
+  references:
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-7051
+  - https://github.com/FasterXML/jackson-dataformat-xml/commit/eeff2c312e9d4caa8c9f27b8f740c7529d00524a
+  - https://bugzilla.redhat.com/show_bug.cgi?id=1378673#c5
+  source_url: https://snyk.io/vuln/SNYK-JAVA-COMFASTERXMLJACKSONDATAFORMAT-30243
+- id: snykio:maven:com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2016-04-15
+  title: XML External Entity (XXE) Injection
+  description: |+
+    [`com.fasterxml.jackson.dataformat:jackson-dataformat-xml`][1] is a Data
+    format extension for [Jackson][2] to offer alternative support for
+    serializing POJOs as XML and deserializing XML as pojos. Affected
+    versions of this package are vulnerable to an XML external entity (XXE)
+    vulnerability via the XmlMapper in the Data format extension for Jackson
+    (aka jackson-dataformat-xml).
+
+
+
+    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22jackson-dataformat-xml%22
+    [2]: http://jackson.codehaus.org
+    \n[`com.fasterxml.jackson.dataformat:jackson-dataformat-xml`][1] is a Data
+    format extension for [Jackson][2] to offer alternative support for
+    serializing POJOs as XML and deserializing XML as pojos. Affected
+    versions of this package are vulnerable to an XML external entity (XXE)
+    vulnerability via the XmlMapper in the Data format extension for Jackson
+    (aka jackson-dataformat-xml).
+
+
+
+    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22jackson-dataformat-xml%22
+    [2]: http://jackson.codehaus.org
+    \nXXE Injection is a type of attack against an application that parses XML
+    input. XML is a markup language that defines a set of rules for encoding
+    documents in a format that is both human-readable and machine-readable.
+    By default, many XML processors allow specification of an external
+    entity, a URI that is dereferenced and evaluated during XML processing.
+    When an XML document is being parsed, the parser can make a request and
+    include the content at the specified URI inside of the XML document.
+
+    Attacks can include disclosing local files, which may contain sensitive
+    data such as passwords or private user data, using file: schemes or
+    relative paths in the system identifier.
+
+    For example, below is a sample XML document, containing an XML element-
+    username.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+           <username>John</username>
+        </xml>
+
+    An external XML entity - `xxe`, is defined using a system identifier and
+    present within a DOCTYPE header. These entities can access local or
+    remote content. For example the below code contains an external XML
+    entity that would fetch the content of `/etc/passwd` and display it to
+    the user rendered by `username`.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+        <!DOCTYPE foo [
+           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
+           <username>&xxe;</username>
+        </xml>
+
+    Other XXE Injection attacks can access local resources that may not stop
+    returning data, possibly impacting application availability and leading
+    to Denial of Service.
+
+    \nXXE Injection is a type of attack against an application that parses XML
+    input. XML is a markup language that defines a set of rules for encoding
+    documents in a format that is both human-readable and machine-readable.
+    By default, many XML processors allow specification of an external
+    entity, a URI that is dereferenced and evaluated during XML processing.
+    When an XML document is being parsed, the parser can make a request and
+    include the content at the specified URI inside of the XML document.
+
+    Attacks can include disclosing local files, which may contain sensitive
+    data such as passwords or private user data, using file: schemes or
+    relative paths in the system identifier.
+
+    For example, below is a sample XML document, containing an XML element-
+    username.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+           <username>John</username>
+        </xml>
+
+    An external XML entity - `xxe`, is defined using a system identifier and
+    present within a DOCTYPE header. These entities can access local or
+    remote content. For example the below code contains an external XML
+    entity that would fetch the content of `/etc/passwd` and display it to
+    the user rendered by `username`.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+        <!DOCTYPE foo [
+           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
+           <username>&xxe;</username>
+        </xml>
+
+    Other XXE Injection attacks can access local resources that may not stop
+    returning data, possibly impacting application availability and leading
+    to Denial of Service.
+
+    \nXXE Injection is a type of attack against an application that parses XML
+    input. XML is a markup language that defines a set of rules for encoding
+    documents in a format that is both human-readable and machine-readable.
+    By default, many XML processors allow specification of an external
+    entity, a URI that is dereferenced and evaluated during XML processing.
+    When an XML document is being parsed, the parser can make a request and
+    include the content at the specified URI inside of the XML document.
+
+    Attacks can include disclosing local files, which may contain sensitive
+    data such as passwords or private user data, using file: schemes or
+    relative paths in the system identifier.
+
+    For example, below is a sample XML document, containing an XML element-
+    username.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+           <username>John</username>
+        </xml>
+
+    An external XML entity - `xxe`, is defined using a system identifier and
+    present within a DOCTYPE header. These entities can access local or
+    remote content. For example the below code contains an external XML
+    entity that would fetch the content of `/etc/passwd` and display it to
+    the user rendered by `username`.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+        <!DOCTYPE foo [
+           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
+           <username>&xxe;</username>
+        </xml>
+
+    Other XXE Injection attacks can access local resources that may not stop
+    returning data, possibly impacting application availability and leading
+    to Denial of Service.
+
+    \nXXE Injection is a type of attack against an application that parses XML
+    input. XML is a markup language that defines a set of rules for encoding
+    documents in a format that is both human-readable and machine-readable.
+    By default, many XML processors allow specification of an external
+    entity, a URI that is dereferenced and evaluated during XML processing.
+    When an XML document is being parsed, the parser can make a request and
+    include the content at the specified URI inside of the XML document.
+
+    Attacks can include disclosing local files, which may contain sensitive
+    data such as passwords or private user data, using file: schemes or
+    relative paths in the system identifier.
+
+    For example, below is a sample XML document, containing an XML element-
+    username.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+           <username>John</username>
+        </xml>
+
+    An external XML entity - `xxe`, is defined using a system identifier and
+    present within a DOCTYPE header. These entities can access local or
+    remote content. For example the below code contains an external XML
+    entity that would fetch the content of `/etc/passwd` and display it to
+    the user rendered by `username`.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+        <!DOCTYPE foo [
+           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
+           <username>&xxe;</username>
+        </xml>
+
+    Other XXE Injection attacks can access local resources that may not stop
+    returning data, possibly impacting application availability and leading
+    to Denial of Service.
+
+    \nXXE Injection is a type of attack against an application that parses XML
+    input. XML is a markup language that defines a set of rules for encoding
+    documents in a format that is both human-readable and machine-readable.
+    By default, many XML processors allow specification of an external
+    entity, a URI that is dereferenced and evaluated during XML processing.
+    When an XML document is being parsed, the parser can make a request and
+    include the content at the specified URI inside of the XML document.
+
+    Attacks can include disclosing local files, which may contain sensitive
+    data such as passwords or private user data, using file: schemes or
+    relative paths in the system identifier.
+
+    For example, below is a sample XML document, containing an XML element-
+    username.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+           <username>John</username>
+        </xml>
+
+    An external XML entity - `xxe`, is defined using a system identifier and
+    present within a DOCTYPE header. These entities can access local or
+    remote content. For example the below code contains an external XML
+    entity that would fetch the content of `/etc/passwd` and display it to
+    the user rendered by `username`.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+        <!DOCTYPE foo [
+           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
+           <username>&xxe;</username>
+        </xml>
+
+    Other XXE Injection attacks can access local resources that may not stop
+    returning data, possibly impacting application availability and leading
+    to Denial of Service.
+
+    \nXXE Injection is a type of attack against an application that parses XML
+    input. XML is a markup language that defines a set of rules for encoding
+    documents in a format that is both human-readable and machine-readable.
+    By default, many XML processors allow specification of an external
+    entity, a URI that is dereferenced and evaluated during XML processing.
+    When an XML document is being parsed, the parser can make a request and
+    include the content at the specified URI inside of the XML document.
+
+    Attacks can include disclosing local files, which may contain sensitive
+    data such as passwords or private user data, using file: schemes or
+    relative paths in the system identifier.
+
+    For example, below is a sample XML document, containing an XML element-
+    username.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+           <username>John</username>
+        </xml>
+
+    An external XML entity - `xxe`, is defined using a system identifier and
+    present within a DOCTYPE header. These entities can access local or
+    remote content. For example the below code contains an external XML
+    entity that would fetch the content of `/etc/passwd` and display it to
+    the user rendered by `username`.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+        <!DOCTYPE foo [
+           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
+           <username>&xxe;</username>
+        </xml>
+
+    Other XXE Injection attacks can access local resources that may not stop
+    returning data, possibly impacting application availability and leading
+    to Denial of Service.
+
+    \nXXE Injection is a type of attack against an application that parses XML
+    input. XML is a markup language that defines a set of rules for encoding
+    documents in a format that is both human-readable and machine-readable.
+    By default, many XML processors allow specification of an external
+    entity, a URI that is dereferenced and evaluated during XML processing.
+    When an XML document is being parsed, the parser can make a request and
+    include the content at the specified URI inside of the XML document.
+
+    Attacks can include disclosing local files, which may contain sensitive
+    data such as passwords or private user data, using file: schemes or
+    relative paths in the system identifier.
+
+    For example, below is a sample XML document, containing an XML element-
+    username.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+           <username>John</username>
+        </xml>
+
+    An external XML entity - `xxe`, is defined using a system identifier and
+    present within a DOCTYPE header. These entities can access local or
+    remote content. For example the below code contains an external XML
+    entity that would fetch the content of `/etc/passwd` and display it to
+    the user rendered by `username`.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+        <!DOCTYPE foo [
+           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
+           <username>&xxe;</username>
+        </xml>
+
+    Other XXE Injection attacks can access local resources that may not stop
+    returning data, possibly impacting application availability and leading
+    to Denial of Service.
+
+    \nXXE Injection is a type of attack against an application that parses XML
+    input. XML is a markup language that defines a set of rules for encoding
+    documents in a format that is both human-readable and machine-readable.
+    By default, many XML processors allow specification of an external
+    entity, a URI that is dereferenced and evaluated during XML processing.
+    When an XML document is being parsed, the parser can make a request and
+    include the content at the specified URI inside of the XML document.
+
+    Attacks can include disclosing local files, which may contain sensitive
+    data such as passwords or private user data, using file: schemes or
+    relative paths in the system identifier.
+
+    For example, below is a sample XML document, containing an XML element-
+    username.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+           <username>John</username>
+        </xml>
+
+    An external XML entity - `xxe`, is defined using a system identifier and
+    present within a DOCTYPE header. These entities can access local or
+    remote content. For example the below code contains an external XML
+    entity that would fetch the content of `/etc/passwd` and display it to
+    the user rendered by `username`.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+        <!DOCTYPE foo [
+           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
+           <username>&xxe;</username>
+        </xml>
+
+    Other XXE Injection attacks can access local resources that may not stop
+    returning data, possibly impacting application availability and leading
+    to Denial of Service.
+
+  affected_package: com.fasterxml.jackson.dataformat:jackson-dataformat-xml
+  vulnerable_versions:
+  - ">= 2.0.0 < 2.7.4"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2016-3720
+  cwe:
+  - CWE-611
+  credit:
+  - Adith Sudhakar
+  references:
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-3720
+  - https://github.com/FasterXML/jackson-dataformat-xml/issues/190
+  - https://github.com/FasterXML/jackson-dataformat-xml/commit/f0f19a4c924d9db9a1e2830434061c8640092cc0
+  - https://bugzilla.redhat.com/show_bug.cgi?id=1328427
+  source_url: https://snyk.io/vuln/SNYK-JAVA-COMFASTERXMLJACKSONDATAFORMAT-30242
+- id: victims:maven:com.fasterxml.jackson.dataformat:jackson-dataformat-xml:date
+  title: 'jackson-dataformat-xml: XmlMapper is vulnerable to XXE attack'
+  description: 'XML external entity (XXE) vulnerability in XmlMapper in the Data format
+    extension for Jackson (aka jackson-dataformat-xml) allows attackers to have unspecified
+    impact via unknown vectors.
+
+'
+  affected_package: com.fasterxml.jackson.dataformat:jackson-dataformat-xml
+  vulnerable_versions:
+  - "<=2.7.3"
+  patched_versions:
+  - ">=2.7.4"
+  - '2.7'
+  - ">=2.8.0"
+  severity: high
+  package_manager: maven
+  cve:
+  - 2016-3720
+  credit:
+  - Victims CVE Database
+  references:
+  - https://github.com/FasterXML/jackson-dataformat-xml/issues/190
+  - https://bugzilla.redhat.com/show_bug.cgi?id=1328427
+  source_url: https://github.com/victims/victims-cve-db/blob/master/database/java/2016/3720.yaml

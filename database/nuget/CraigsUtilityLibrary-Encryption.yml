@@ -1,0 +1,33 @@
+---
+- id: ossindex:nuget:CraigsUtilityLibrary-Encryption:1970-01-01
+  title: Default Salt Use
+  description: |-
+    "See here: https://github.com/JaCraig/Craig-s-Utility-Library/blob/master/Utilities/IO/Encryption/BaseClasses/SymmetricBase.cs#L140
+
+    This code supplies a default salt of Kosher - this use defeats the purpose. Please here here for a detailed discussion of how salts should be applied - the key point is that to be effective, they should be random. Relying on a fixed or default salt defeats the purpose.
+
+    I would suggest removing the default, and add a method to generate a random salt using a CSPRNG."
+  affected_package: CraigsUtilityLibrary-Encryption
+  vulnerable_versions:
+  - ">=0.0.0"
+  package_manager: nuget
+  credit:
+  - OSSIndex
+  references:
+  - https://github.com/JaCraig/Craig-s-Utility-Library/issues/7
+  source_url: https://ossindex.net/resource/package/7099081535/vulnerabilities
+- id: ossindex:nuget:CraigsUtilityLibrary-Encryption:1970-01-01
+  title: Use of default initialization vector
+  description: |-
+    "The use of a default initialzation vector is a security flaw - see here for a breakdown of why this is a bad idea, that document goes into detail for how IVs should be handled for CBC mode, so I won't repeat it all here.
+
+    To protect the integrity of encrypted data, this default IV should not be used."
+  affected_package: CraigsUtilityLibrary-Encryption
+  vulnerable_versions:
+  - ">=0.0.0"
+  package_manager: nuget
+  credit:
+  - OSSIndex
+  references:
+  - https://github.com/JaCraig/Craig-s-Utility-Library/issues/5
+  source_url: https://ossindex.net/resource/package/7099081535/vulnerabilities

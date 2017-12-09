@@ -1,0 +1,29 @@
+---
+- id: ossindex:nuget:structuremap-signed:1970-01-01
+  title: 'Security issue : Xml External Entity Injection'
+  description: |-
+    we use the structure map to achieve the dependency injection. we ran the security scan against our code. In the recent scan, the tool identified 6 high issue against the structure map library
+
+
+    XML External Entities attacks benefit from an XML feature to build documents dynamically at the time of processing. An XML entity allows to include data dynamically from a given resource. External entities allow an XML document to include data from an external URI. Unless configured to do otherwise, external entities force the XML parser to access the resource specified by the URI, e.g., a file on the local machine or on a remote systems. This behavior exposes the application to XML External Entity (XXE) attacks, which can be used to perform denial of service of the local system, gain unauthorized access to files on the local machine, scan remote machines, and perform denial of service of remote systems.
+
+    The following XML document shows an example of an XXE attack.
+
+    ```
+    <?xml version="1.0" encoding="ISO-8859-1"?>
+    <!DOCTYPE foo [
+
+    <!ELEMENT foo ANY >
+    <!ENTITY xxe SYSTEM "file:///c:/winnt/win.ini" >]>&xxe;
+    ```
+
+    This example could disclose the contents of the C:\winnt\win.ini system file, if the XML parser attempts to substitute the entity with the contents of the file.
+  affected_package: structuremap-signed
+  vulnerable_versions:
+  - "<3.0.0"
+  package_manager: nuget
+  credit:
+  - OSSIndex
+  references:
+  - https://github.com/structuremap/structuremap/issues/306
+  source_url: https://ossindex.net/resource/package/7103966923/vulnerabilities

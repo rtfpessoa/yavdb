@@ -1,0 +1,75 @@
+---
+- id: nodesecurity:npm:droppy:2016-03-28
+  title: No CSRF Validation
+  description: Affected versions of `droppy`  are vulnerable to cross-site socket
+    forgery. The package does not perform verification for cross-domain websocket
+    requests, and as a result, an attacker can create a web page that opens up a websocket
+    connection on behalf of the user visiting the page. The attacker can then perform
+    any action that the target user could, including adding a new admin account under
+    their control, or deleting others.
+  affected_package: droppy
+  vulnerable_versions:
+  - "<3.5.0"
+  patched_versions:
+  - ">=3.5.0"
+  severity: medium
+  package_manager: npm
+  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N
+  credit:
+  - Craig Arendt
+  references:
+  - ''
+  source_url: https://nodesecurity.io/advisories/91
+- id: snykio:npm:droppy:2016-03-28
+  title: Cross-site Request Forgery (CSRF)
+  description: |+
+    `droopy` prior to 3.5.0 lacks cross-domain websocket requests
+    verification. This allows attackers to send malicious requests while
+    inheriting the identity and privileges of the currently logged in user.
+
+    \n`droopy` prior to 3.5.0 lacks cross-domain websocket requests
+    verification. This allows attackers to send malicious requests while
+    inheriting the identity and privileges of the currently logged in user.
+
+    \nCross-site Request Forgery (CSRF) is an attack that forces an end user
+    to execute unwanted actions on a web application in which they\'re
+    currently authenticated. CSRF attacks specifically target state-changing
+    requests, not theft of data, since the attacker has no way to see the
+    response to the forged request. With a little help of social engineering
+    (such as sending a link via email or chat), an attacker may trick the
+    users of a web application into executing actions of the attacker\'s
+    choosing. If the victim is a normal user, a successful CSRF attack can
+    force the user to perform state changing requests like transferring
+    funds, changing their email address, and so forth. If the victim is an
+    administrative account, CSRF can compromise the entire web application.
+    \[1\]
+
+    \nCross-site Request Forgery (CSRF) is an attack that forces an end user
+    to execute unwanted actions on a web application in which they\'re
+    currently authenticated. CSRF attacks specifically target state-changing
+    requests, not theft of data, since the attacker has no way to see the
+    response to the forged request. With a little help of social engineering
+    (such as sending a link via email or chat), an attacker may trick the
+    users of a web application into executing actions of the attacker\'s
+    choosing. If the victim is a normal user, a successful CSRF attack can
+    force the user to perform state changing requests like transferring
+    funds, changing their email address, and so forth. If the victim is an
+    administrative account, CSRF can compromise the entire web application.
+    \[1\]
+
+  affected_package: droppy
+  vulnerable_versions:
+  - "<3.5.0"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2016-10529
+  cwe:
+  - CWE-352
+  credit:
+  - Craig Arendt
+  references:
+  - https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)
+  - https://github.com/silverwind/droppy/blob/fc023e8163e3a5830a73f055af308aeda7fb78cc/CHANGELOG.md#version-350---10122015
+  - https://github.com/silverwind/droppy/commit/62ae2cbc87e0e4b7b61205b3d926e275c8f1accc
+  source_url: https://snyk.io/vuln/npm:droppy:20160328

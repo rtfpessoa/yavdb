@@ -1,0 +1,56 @@
+---
+- id: nodesecurity:npm:secure-compare:2015-10-24
+  title: Insecure Comparison
+  description: Versions of `secure-compare` prior to 3.0.1 are affected by a vulnerability
+    that results in the package always returning true when comparing two strings of
+    the same length, despite differences in the contents of those strings.
+  affected_package: secure-compare
+  vulnerable_versions:
+  - "<=3.0.0"
+  patched_versions:
+  - ">3.0.0"
+  severity: medium
+  package_manager: npm
+  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N
+  credit:
+  - Joshua Dague
+  references:
+  - https://github.com/vdemedes/secure-compare/pull/1)
+  source_url: https://nodesecurity.io/advisories/50
+- id: snykio:npm:secure-compare:2015-10-24
+  title: Insecure Comparison
+  description: |
+    [secure-compare][1] is a node implementation of constant-time comparison
+    algorithm to prevent timing attacks for Node.js. In versions prior to
+    3.0.1, the `compare` function made sure that the length of the two
+    arguments is the same, and then mistakenly compared the first argument
+    to itself, meaning that the function would return true for any two
+    arguments of the same length.
+
+
+
+    [1]: https://www.npmjs.com/package/secure-compare
+    \n[secure-compare][1] is a node implementation of constant-time comparison
+    algorithm to prevent timing attacks for Node.js. In versions prior to
+    3.0.1, the `compare` function made sure that the length of the two
+    arguments is the same, and then mistakenly compared the first argument
+    to itself, meaning that the function would return true for any two
+    arguments of the same length.
+
+
+
+    [1]: https://www.npmjs.com/package/secure-compare
+  affected_package: secure-compare
+  vulnerable_versions:
+  - "<=3.0.0"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2015-9238
+  cwe:
+  - CWE-697
+  credit:
+  - Joshua Dague
+  references:
+  - https://github.com/vdemedes/secure-compare/pull/1
+  source_url: https://snyk.io/vuln/npm:secure-compare:20151024

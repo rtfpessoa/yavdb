@@ -1,0 +1,90 @@
+---
+- id: nodesecurity:npm:sync-exec:2017-04-14
+  title: Tmp files readable by other users
+  description: Affected versions of `sync-exec` use files located in `/tmp/` to buffer
+    command results before returning values. As `/tmp/` is almost always set with
+    world readable permissions, this may allow low privilege users on the system to
+    read the results of commands run via `sync-exec` under a higher privilege user.
+  affected_package: sync-exec
+  vulnerable_versions:
+  - "<=99.999.99999"
+  patched_versions:
+  - "<0.0.0"
+  severity: medium
+  package_manager: npm
+  cvss_v3_vector: CVSS:3.0/AV:L/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N
+  credit:
+  - maxnikulin
+  references:
+  - |-
+    https://github.com/gvarsanyi/sync-exec/issues/17)
+    https://cwe.mitre.org/data/definitions/377.html)
+  source_url: https://nodesecurity.io/advisories/310
+- id: ossindex:npm:sync-exec:2017-04-16
+  title: Tmp files readable by other users
+  description: "> Sync-exec uses tmp directories as a buffer before returning values.
+    Other users on the server have read access to the tmp directory, possibly allowing
+    an attacker on the server to obtain confidential information from the buffer/tmp
+    file, while it exists.\n> \n> -- [nodesecurity.io](https://nodesecurity.io/advisories/310)"
+  affected_package: sync-exec
+  vulnerable_versions:
+  - ">=0"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - https://cwe.mitre.org/data/definitions/377.html
+  - https://github.com/gvarsanyi/sync-exec/issues/17
+  - https://nodesecurity.io/advisories/310
+  - https://www.owasp.org/index.php/Insecure_Temporary_File
+  source_url: https://ossindex.net/resource/package/7014513179/vulnerabilities
+- id: snykio:npm:sync-exec:2016-01-24
+  title: Insecure use of Tmp files
+  description: |
+    [`sync-exec`][1] is an fs.execSync replacement for node &lt;0.12.
+
+    Affected versions of this package use tmp directories in an insecure
+    way. The file to create will allways return `true`, regardess if the
+    directory already exists and/or belongs to another user. Any user on the
+    server may read the contents of this tmp file and may expose
+    confidential information to an attacker.
+
+
+
+    [1]: https://www.npmjs.com/package/sync-exec
+    \n[`sync-exec`][1] is an fs.execSync replacement for node &lt;0.12.
+
+    Affected versions of this package use tmp directories in an insecure
+    way. The file to create will allways return `true`, regardess if the
+    directory already exists and/or belongs to another user. Any user on the
+    server may read the contents of this tmp file and may expose
+    confidential information to an attacker.
+
+
+
+    [1]: https://www.npmjs.com/package/sync-exec
+    \n[`sync-exec`][1] is an fs.execSync replacement for node &lt;0.12.
+
+    Affected versions of this package use tmp directories in an insecure
+    way. The file to create will allways return `true`, regardess if the
+    directory already exists and/or belongs to another user. Any user on the
+    server may read the contents of this tmp file and may expose
+    confidential information to an attacker.
+
+
+
+    [1]: https://www.npmjs.com/package/sync-exec
+  affected_package: sync-exec
+  vulnerable_versions:
+  - "*"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2017-16024
+  cwe:
+  - CWE-377
+  credit:
+  - maxnikulin
+  references:
+  - https://github.com/gvarsanyi/sync-exec/issues/17
+  source_url: https://snyk.io/vuln/npm:sync-exec:20160124

@@ -1,0 +1,539 @@
+---
+- id: nodesecurity:npm:remarkable:2017-03-09
+  title: XSS in Data URI
+  description: "Affected versions of `remarkable` are vulnerable to cross-site scripting.
+    Vulnerable versions of the package allow the use of `data:` URIs in links, and
+    can therefore execute javascript. \n\n\n## Proof of Concept\n\n```\n[link](data:text/html,<script>alert('0')</script>)\n```"
+  affected_package: remarkable
+  vulnerable_versions:
+  - "<=1.6.2"
+  patched_versions:
+  - ">=1.7.0"
+  severity: medium
+  package_manager: npm
+  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:L/A:N
+  credit:
+  - Sophie Alpert
+  references:
+  - https://github.com/jonschlinkert/remarkable/issues/227)
+  source_url: https://nodesecurity.io/advisories/319
+- id: nodesecurity:npm:remarkable:2014-11-13
+  title: Content Injection
+  description: "Versions 1.4.0 and earlier of `remarkable` are affected by a cross-site
+    scripting vulnerability. This occurs because vulnerable versions of `remarkable`
+    did not properly whitelist link protocols, and consequently allowed `javascript:`
+    to be used. \n\n\n### Proof of Concept\n\nMarkdown Source:\n```\n[link](<javascript:alert(1)>)\n```\n\nRendered
+    HTML:\n```\n<a href=\"javascript:alert(1)\">link</a>\n```"
+  affected_package: remarkable
+  vulnerable_versions:
+  - "<1.4.1"
+  patched_versions:
+  - ">=1.4.1"
+  severity: medium
+  package_manager: npm
+  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N
+  credit:
+  - Adam Baldwin
+  references:
+  - https://github.com/jonschlinkert/remarkable/issues/97
+  source_url: https://nodesecurity.io/advisories/30
+- id: ossindex:npm:remarkable:2016-10-05
+  title: Cross Site Scripting (XSS)
+  description: Cross Site Scripting is possible by creation of a link which uses the
+    `data:` URI
+  affected_package: remarkable
+  vulnerable_versions:
+  - "<=1.6.2"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - https://cwe.mitre.org/data/definitions/79.html
+  - https://github.com/jonschlinkert/remarkable/commit/49e24e8f2a431c095ddbb74ecb67cf1cf8f88c47
+  - https://github.com/jonschlinkert/remarkable/issues/227
+  - https://github.com/jonschlinkert/remarkable/pull/228
+  - https://nodesecurity.io/advisories/319
+  source_url: https://ossindex.net/resource/package/7014376319/vulnerabilities
+- id: ossindex:npm:remarkable:2016-05-17
+  title: Content Injection
+  description: The bad protocol check can be bypassed with certain input, allowing
+    `javascript:` URLs.
+  affected_package: remarkable
+  vulnerable_versions:
+  - "<1.4.1"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - https://cwe.mitre.org/data/definitions/74.html
+  - https://github.com/jonschlinkert/remarkable/issues/97
+  - https://nodesecurity.io/advisories/30
+  - https://nodesecurity.io/advisories/remarkable_content_injection
+  - https://www.owasp.org/index.php/Content_Spoofing
+  source_url: https://ossindex.net/resource/package/7014376319/vulnerabilities
+- id: snykio:npm:remarkable:2016-08-19
+  title: Cross-site Scripting (XSS)
+  description: |
+    [`remarkable`][1] is markdown parser.
+
+    Affected versions of the package are allowed the use of `data:` URIs for
+    all mime types by default potentially opening a door for Cross-site
+    Scripting (XSS) attacks.
+
+    Data URIs enable embedding small files in line in HTML documents,
+    provided in the URL itself. Attackers can craft malicious web pages
+    containing either HTML or script code that utilizes the data URI scheme,
+    allowing them to bypass access controls or steal sensitive information.
+
+    An example of data URI used to deliver javascript code. The data holds
+    `<script>alert('XSS')</script>` tag in base64 encoded format.
+
+        [xss link](data:text/html;base64,PHNjcmlwdD5hbGVydCgnWFNTJyk8L3NjcmlwdD4K)
+
+
+
+    [1]: https://www.npmjs.com/package/remarkable
+    \n[`remarkable`][1] is markdown parser.
+
+    Affected versions of the package are allowed the use of `data:` URIs for
+    all mime types by default potentially opening a door for Cross-site
+    Scripting (XSS) attacks.
+
+    Data URIs enable embedding small files in line in HTML documents,
+    provided in the URL itself. Attackers can craft malicious web pages
+    containing either HTML or script code that utilizes the data URI scheme,
+    allowing them to bypass access controls or steal sensitive information.
+
+    An example of data URI used to deliver javascript code. The data holds
+    `<script>alert('XSS')</script>` tag in base64 encoded format.
+
+        [xss link](data:text/html;base64,PHNjcmlwdD5hbGVydCgnWFNTJyk8L3NjcmlwdD4K)
+
+
+
+    [1]: https://www.npmjs.com/package/remarkable
+    \n[`remarkable`][1] is markdown parser.
+
+    Affected versions of the package are allowed the use of `data:` URIs for
+    all mime types by default potentially opening a door for Cross-site
+    Scripting (XSS) attacks.
+
+    Data URIs enable embedding small files in line in HTML documents,
+    provided in the URL itself. Attackers can craft malicious web pages
+    containing either HTML or script code that utilizes the data URI scheme,
+    allowing them to bypass access controls or steal sensitive information.
+
+    An example of data URI used to deliver javascript code. The data holds
+    `<script>alert('XSS')</script>` tag in base64 encoded format.
+
+        [xss link](data:text/html;base64,PHNjcmlwdD5hbGVydCgnWFNTJyk8L3NjcmlwdD4K)
+
+
+
+    [1]: https://www.npmjs.com/package/remarkable
+    \n[`remarkable`][1] is markdown parser.
+
+    Affected versions of the package are allowed the use of `data:` URIs for
+    all mime types by default potentially opening a door for Cross-site
+    Scripting (XSS) attacks.
+
+    Data URIs enable embedding small files in line in HTML documents,
+    provided in the URL itself. Attackers can craft malicious web pages
+    containing either HTML or script code that utilizes the data URI scheme,
+    allowing them to bypass access controls or steal sensitive information.
+
+    An example of data URI used to deliver javascript code. The data holds
+    `<script>alert('XSS')</script>` tag in base64 encoded format.
+
+        [xss link](data:text/html;base64,PHNjcmlwdD5hbGVydCgnWFNTJyk8L3NjcmlwdD4K)
+
+
+
+    [1]: https://www.npmjs.com/package/remarkable
+    \n[`remarkable`][1] is markdown parser.
+
+    Affected versions of the package are allowed the use of `data:` URIs for
+    all mime types by default potentially opening a door for Cross-site
+    Scripting (XSS) attacks.
+
+    Data URIs enable embedding small files in line in HTML documents,
+    provided in the URL itself. Attackers can craft malicious web pages
+    containing either HTML or script code that utilizes the data URI scheme,
+    allowing them to bypass access controls or steal sensitive information.
+
+    An example of data URI used to deliver javascript code. The data holds
+    `<script>alert('XSS')</script>` tag in base64 encoded format.
+
+        [xss link](data:text/html;base64,PHNjcmlwdD5hbGVydCgnWFNTJyk8L3NjcmlwdD4K)
+
+
+
+    [1]: https://www.npmjs.com/package/remarkable
+    \n[`remarkable`][1] is markdown parser.
+
+    Affected versions of the package are allowed the use of `data:` URIs for
+    all mime types by default potentially opening a door for Cross-site
+    Scripting (XSS) attacks.
+
+    Data URIs enable embedding small files in line in HTML documents,
+    provided in the URL itself. Attackers can craft malicious web pages
+    containing either HTML or script code that utilizes the data URI scheme,
+    allowing them to bypass access controls or steal sensitive information.
+
+    An example of data URI used to deliver javascript code. The data holds
+    `<script>alert('XSS')</script>` tag in base64 encoded format.
+
+        [xss link](data:text/html;base64,PHNjcmlwdD5hbGVydCgnWFNTJyk8L3NjcmlwdD4K)
+
+
+
+    [1]: https://www.npmjs.com/package/remarkable
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    You can read more about `Cross-site Scripting (XSS)` on our [blog][1].
+
+
+
+    [1]: https://snyk.io/blog/marked-xss-vulnerability/
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    You can read more about `Cross-site Scripting (XSS)` on our [blog][1].
+
+
+
+    [1]: https://snyk.io/blog/marked-xss-vulnerability/
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    You can read more about `Cross-site Scripting (XSS)` on our [blog][1].
+
+
+
+    [1]: https://snyk.io/blog/marked-xss-vulnerability/
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    You can read more about `Cross-site Scripting (XSS)` on our [blog][1].
+
+
+
+    [1]: https://snyk.io/blog/marked-xss-vulnerability/
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    You can read more about `Cross-site Scripting (XSS)` on our [blog][1].
+
+
+
+    [1]: https://snyk.io/blog/marked-xss-vulnerability/
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    You can read more about `Cross-site Scripting (XSS)` on our [blog][1].
+
+
+
+    [1]: https://snyk.io/blog/marked-xss-vulnerability/
+  affected_package: remarkable
+  vulnerable_versions:
+  - "<1.7.0"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2017-16006
+  cwe:
+  - CWE-79
+  credit:
+  - Ben Alpert
+  references:
+  - https://github.com/jonschlinkert/remarkable/pull/228
+  - https://github.com/jonschlinkert/remarkable/issues/227
+  - https://github.com/jonschlinkert/remarkable/commit/49e24e8f2a431c095ddbb74ecb67cf1cf8f88c47
+  source_url: https://snyk.io/vuln/npm:remarkable:20160820
+- id: snykio:npm:remarkable:2014-11-13
+  title: Content Injection
+  description: |+
+    Certain input when passed into remarkable will bypass the bad prototcol
+    check that disallows the javascript: scheme allowing for javascript:
+    url\'s to be injected into the rendered content.
+
+    *Source: [Node Security Project][1]*
+
+
+
+    [1]: https://nodesecurity.io/advisories/30
+    \nCertain input when passed into remarkable will bypass the bad prototcol
+    check that disallows the javascript: scheme allowing for javascript:
+    url\'s to be injected into the rendered content.
+
+    *Source: [Node Security Project][1]*
+
+
+
+    [1]: https://nodesecurity.io/advisories/30
+    \nCertain input when passed into remarkable will bypass the bad prototcol
+    check that disallows the javascript: scheme allowing for javascript:
+    url\'s to be injected into the rendered content.
+
+    *Source: [Node Security Project][1]*
+
+
+
+    [1]: https://nodesecurity.io/advisories/30
+    \n**Example:**
+
+        [link](<javascript:alert(1)>)
+
+    This will be turned into `<a href="javascript:alert(1)">link</a>`
+
+    where as
+
+        [link](javascript:alert(1))
+
+    Would be rendered as `[link](javascript:alert(1))` because it\'s an
+    invalid scheme.
+
+    \n**Example:**
+
+        [link](<javascript:alert(1)>)
+
+    This will be turned into `<a href="javascript:alert(1)">link</a>`
+
+    where as
+
+        [link](javascript:alert(1))
+
+    Would be rendered as `[link](javascript:alert(1))` because it\'s an
+    invalid scheme.
+
+    \n**Example:**
+
+        [link](<javascript:alert(1)>)
+
+    This will be turned into `<a href="javascript:alert(1)">link</a>`
+
+    where as
+
+        [link](javascript:alert(1))
+
+    Would be rendered as `[link](javascript:alert(1))` because it\'s an
+    invalid scheme.
+
+    \n**Example:**
+
+        [link](<javascript:alert(1)>)
+
+    This will be turned into `<a href="javascript:alert(1)">link</a>`
+
+    where as
+
+        [link](javascript:alert(1))
+
+    Would be rendered as `[link](javascript:alert(1))` because it\'s an
+    invalid scheme.
+
+    \n**Example:**
+
+        [link](<javascript:alert(1)>)
+
+    This will be turned into `<a href="javascript:alert(1)">link</a>`
+
+    where as
+
+        [link](javascript:alert(1))
+
+    Would be rendered as `[link](javascript:alert(1))` because it\'s an
+    invalid scheme.
+
+    \n**Example:**
+
+        [link](<javascript:alert(1)>)
+
+    This will be turned into `<a href="javascript:alert(1)">link</a>`
+
+    where as
+
+        [link](javascript:alert(1))
+
+    Would be rendered as `[link](javascript:alert(1))` because it\'s an
+    invalid scheme.
+
+    \n**Example:**
+
+        [link](<javascript:alert(1)>)
+
+    This will be turned into `<a href="javascript:alert(1)">link</a>`
+
+    where as
+
+        [link](javascript:alert(1))
+
+    Would be rendered as `[link](javascript:alert(1))` because it\'s an
+    invalid scheme.
+
+  affected_package: remarkable
+  vulnerable_versions:
+  - "<1.4.1"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2014-10065
+  cwe:
+  - CWE-74
+  credit:
+  - Adam Baldwin
+  references:
+  - https://github.com/jonschlinkert/remarkable/issues/97
+  source_url: https://snyk.io/vuln/npm:remarkable:20141113

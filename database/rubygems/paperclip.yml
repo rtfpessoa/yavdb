@@ -1,0 +1,356 @@
+---
+- id: rubyadvisory:rubygems:paperclip:2018-01-23
+  title: |
+    Paperclip ruby gem suffers from a Server-Side Request Forgery (SSRF) vulnerability
+    in the Paperclip::UriAdapter and Paperclip::HttpUrlProxyAdapter class.
+  description: |
+    Paperclip gem provides multiple ways a file can be uploaded to a web server.
+    The vulnerability affects two of Paperclip’s IO adapters that accept URLs as
+    attachment data (UriAdapter and HttpUrlProxyAdapter). When these adapters are
+    used, Paperclip acts as a proxy and downloads the file from the website URI
+    that is passed in. The library does not perform any validation to protect
+    against Server Side Request Forgery (SSRF) exploits by default. This may allow
+    a remote attacker to access information about internal network resources.
+  affected_package: paperclip
+  patched_versions:
+  - ">= 5.2.0"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2017-0889
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  - https://nvd.nist.gov/vuln/detail/CVE-2017-0889
+  - https://github.com/thoughtbot/paperclip/commit/4ebedfbd11d20d03ed03a1274ed281eee62715d4
+  source_url: https://github.com/thoughtbot/paperclip/pull/2435
+- id: rubyadvisory:rubygems:paperclip:2014-01-31
+  title: Paperclip Gem for Ruby contains a flaw
+  description: Paperclip Gem for Ruby contains a flaw that is due to the application
+    failing to properly validate the file extension, instead only validating the Content-Type
+    header during file uploads. This may allow a remote attacker to bypass restrictions
+    on file types for uploaded files by spoofing the content-type.
+  affected_package: paperclip
+  patched_versions:
+  - ">= 4.0.0"
+  package_manager: rubygems
+  cve:
+  - CVE-
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: http://osvdb.org/show/osvdb/103151
+- id: rubyadvisory:rubygems:paperclip:2015-06-05
+  title: 'Paperclip Gem for Ruby vulnerable to content type spoofing
+
+'
+  description: |
+    There is an issue where if an HTML file is uploaded with a .html
+    extension, but the content type is listed as being `image/jpeg`, this
+    will bypass a validation checking for images. But it will also pass the
+    spoof check, because a file named .html and containing actual HTML
+    passes the spoof check.
+  affected_package: paperclip
+  patched_versions:
+  - ">= 4.2.2"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2015-2963
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://robots.thoughtbot.com/paperclip-security-release
+- id: snykio:rubygems:paperclip:2017-04-21
+  title: Server-Side Request Forgery (SSRF)
+  description: |
+    [`Paperclip`][1] is an upload management gem for ActiveRecord.
+
+    Affected versions of this package are vulnerable to Server-Side Request
+    Forgery (SSRF) attacks. Paperclip ruby gem version 3.1.4 and later
+    suffers from a Server-Side Request Forgery (SSRF) vulnerability in the
+    Paperclip::UriAdapter class. Attackers may be able to access information
+    about internal network resources.
+
+
+
+    [1]: https://rubygems.org/gems/paperclip
+    \n[`Paperclip`][1] is an upload management gem for ActiveRecord.
+
+    Affected versions of this package are vulnerable to Server-Side Request
+    Forgery (SSRF) attacks. Paperclip ruby gem version 3.1.4 and later
+    suffers from a Server-Side Request Forgery (SSRF) vulnerability in the
+    Paperclip::UriAdapter class. Attackers may be able to access information
+    about internal network resources.
+
+
+
+    [1]: https://rubygems.org/gems/paperclip
+    \n[`Paperclip`][1] is an upload management gem for ActiveRecord.
+
+    Affected versions of this package are vulnerable to Server-Side Request
+    Forgery (SSRF) attacks. Paperclip ruby gem version 3.1.4 and later
+    suffers from a Server-Side Request Forgery (SSRF) vulnerability in the
+    Paperclip::UriAdapter class. Attackers may be able to access information
+    about internal network resources.
+
+
+
+    [1]: https://rubygems.org/gems/paperclip
+  affected_package: paperclip
+  vulnerable_versions:
+  - ">=3.1.4"
+  - "<5.2.1"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2017-0889
+  cwe:
+  - CWE-918
+  credit:
+  - Unknown
+  references:
+  - https://github.com/thoughtbot/paperclip/pull/2435
+  - https://hackerone.com/reports/209430
+  - https://hackerone.com/reports/713
+  source_url: https://snyk.io/vuln/SNYK-RUBY-PAPERCLIP-22001
+- id: snykio:rubygems:paperclip:2015-06-04
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [`paperclip`][1] is an upload management for ActiveRecord.
+
+    Affected versions of this gem are vulnerable to Cross-site Scripting
+    attacks. There is an issue where if an HTML file is uploaded with a
+    `.html` extension, but the content type is listed as being `image/jpeg`,
+    this will bypass a validation checking for images. But it will also pass
+    the spoof check, because a file named `.html` and containing actual HTML
+    passes the spoof check.
+
+
+
+    [1]: https://rubygems.org/gems/paperclip
+    \n[`paperclip`][1] is an upload management for ActiveRecord.
+
+    Affected versions of this gem are vulnerable to Cross-site Scripting
+    attacks. There is an issue where if an HTML file is uploaded with a
+    `.html` extension, but the content type is listed as being `image/jpeg`,
+    this will bypass a validation checking for images. But it will also pass
+    the spoof check, because a file named `.html` and containing actual HTML
+    passes the spoof check.
+
+
+
+    [1]: https://rubygems.org/gems/paperclip
+    \n[`paperclip`][1] is an upload management for ActiveRecord.
+
+    Affected versions of this gem are vulnerable to Cross-site Scripting
+    attacks. There is an issue where if an HTML file is uploaded with a
+    `.html` extension, but the content type is listed as being `image/jpeg`,
+    this will bypass a validation checking for images. But it will also pass
+    the spoof check, because a file named `.html` and containing actual HTML
+    passes the spoof check.
+
+
+
+    [1]: https://rubygems.org/gems/paperclip
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+  affected_package: paperclip
+  vulnerable_versions:
+  - "< 4.2.2"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2015-2963
+  cwe:
+  - CWE-79
+  credit:
+  - Jon Yurek
+  - Mike Burns
+  - MORI Shingo
+  references:
+  - https://rubysec.com/advisories/paperclip-CVE-2015-2963
+  - https://robots.thoughtbot.com/paperclip-security-release
+  source_url: https://snyk.io/vuln/SNYK-RUBY-PAPERCLIP-20223
+- id: snykio:rubygems:paperclip:2014-01-30
+  title: Access Restriction Bypass
+  description: |+
+    [`paperclip`][1] is an upload management for ActiveRecord. Affected
+    versions of this gem are vulnerable to Restriction Bypass By Spoofing
+    Content-Type Header.
+
+
+
+    [1]: https://rubygems.org/gems/paperclip
+    \n[`paperclip`][1] is an upload management for ActiveRecord. Affected
+    versions of this gem are vulnerable to Restriction Bypass By Spoofing
+    Content-Type Header.
+
+
+
+    [1]: https://rubygems.org/gems/paperclip
+    \nPaperclip Gem for Ruby contains a flaw that is due to the application
+    failing to properly validate the file extension, instead only validating
+    the Content-Type header during file uploads. This may allow a remote
+    attacker to bypass restrictions on file types for uploaded files by
+    spoofing the content-type.
+
+    \nPaperclip Gem for Ruby contains a flaw that is due to the application
+    failing to properly validate the file extension, instead only validating
+    the Content-Type header during file uploads. This may allow a remote
+    attacker to bypass restrictions on file types for uploaded files by
+    spoofing the content-type.
+
+  affected_package: paperclip
+  vulnerable_versions:
+  - "< 4.0.0"
+  severity: medium
+  package_manager: rubygems
+  cwe:
+  - CWE-284
+  credit:
+  - Unknown
+  references:
+  - http://rubysec.com/advisories/OSVDB-103151
+  source_url: https://snyk.io/vuln/SNYK-RUBY-PAPERCLIP-20144

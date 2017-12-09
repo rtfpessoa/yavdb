@@ -1,0 +1,125 @@
+---
+- id: nodesecurity:npm:atob:2018-05-16
+  title: Out-of-bounds Read
+  description: Versions of `atob` before 2.1.0  uninitialized Buffers when number
+    is passed in input on Node.js 4.x and below.
+  affected_package: atob
+  vulnerable_versions:
+  - "<=2.0.3"
+  patched_versions:
+  - ">=2.1.0"
+  severity: medium
+  package_manager: npm
+  cvss_v3_vector: CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:N/A:H
+  credit:
+  - Сковорода Никита Андреевич
+  references:
+  - https://hackerone.com/reports/321686)
+  source_url: https://nodesecurity.io/advisories/646
+- id: snykio:npm:atob:2018-04-29
+  title: Uninitialized Memory Exposure
+  description: |+
+    Affected versions of [atob][1] are vulnerable to Uninitialized Memory
+    Exposure. It allocates uninitialized Buffers when a number is passed in
+    user provided fields.
+
+
+
+    [1]: https://www.npmjs.com/package/atob
+    \nAffected versions of [atob][1] are vulnerable to Uninitialized Memory
+    Exposure. It allocates uninitialized Buffers when a number is passed in
+    user provided fields.
+
+
+
+    [1]: https://www.npmjs.com/package/atob
+    \nThe Buffer class on Node.js is a mutable array of binary data, and can
+    be initialized with a string, array or number.
+
+        const buf1 = new Buffer([1,2,3]);
+        // creates a buffer containing [01, 02, 03]
+        const buf2 = new Buffer('test');
+        // creates a buffer containing ASCII bytes [74, 65, 73, 74]
+        const buf3 = new Buffer(10);
+        // creates a buffer of length 10
+
+    The first two variants simply create a binary representation of the
+    value it received. The last one, however, pre-allocates a buffer of the
+    specified size, making it a useful buffer, especially when reading data
+    from a stream. When using the number constructor of Buffer, it will
+    allocate the memory, but will not fill it with zeros. Instead, the
+    allocated buffer will hold whatever was in memory at the time. If the
+    buffer is not `zeroed` by using `buf.fill(0)`, it may leak sensitive
+    information like keys, source code, and system info.
+
+    \nThe Buffer class on Node.js is a mutable array of binary data, and can
+    be initialized with a string, array or number.
+
+        const buf1 = new Buffer([1,2,3]);
+        // creates a buffer containing [01, 02, 03]
+        const buf2 = new Buffer('test');
+        // creates a buffer containing ASCII bytes [74, 65, 73, 74]
+        const buf3 = new Buffer(10);
+        // creates a buffer of length 10
+
+    The first two variants simply create a binary representation of the
+    value it received. The last one, however, pre-allocates a buffer of the
+    specified size, making it a useful buffer, especially when reading data
+    from a stream. When using the number constructor of Buffer, it will
+    allocate the memory, but will not fill it with zeros. Instead, the
+    allocated buffer will hold whatever was in memory at the time. If the
+    buffer is not `zeroed` by using `buf.fill(0)`, it may leak sensitive
+    information like keys, source code, and system info.
+
+    \nThe Buffer class on Node.js is a mutable array of binary data, and can
+    be initialized with a string, array or number.
+
+        const buf1 = new Buffer([1,2,3]);
+        // creates a buffer containing [01, 02, 03]
+        const buf2 = new Buffer('test');
+        // creates a buffer containing ASCII bytes [74, 65, 73, 74]
+        const buf3 = new Buffer(10);
+        // creates a buffer of length 10
+
+    The first two variants simply create a binary representation of the
+    value it received. The last one, however, pre-allocates a buffer of the
+    specified size, making it a useful buffer, especially when reading data
+    from a stream. When using the number constructor of Buffer, it will
+    allocate the memory, but will not fill it with zeros. Instead, the
+    allocated buffer will hold whatever was in memory at the time. If the
+    buffer is not `zeroed` by using `buf.fill(0)`, it may leak sensitive
+    information like keys, source code, and system info.
+
+    \nThe Buffer class on Node.js is a mutable array of binary data, and can
+    be initialized with a string, array or number.
+
+        const buf1 = new Buffer([1,2,3]);
+        // creates a buffer containing [01, 02, 03]
+        const buf2 = new Buffer('test');
+        // creates a buffer containing ASCII bytes [74, 65, 73, 74]
+        const buf3 = new Buffer(10);
+        // creates a buffer of length 10
+
+    The first two variants simply create a binary representation of the
+    value it received. The last one, however, pre-allocates a buffer of the
+    specified size, making it a useful buffer, especially when reading data
+    from a stream. When using the number constructor of Buffer, it will
+    allocate the memory, but will not fill it with zeros. Instead, the
+    allocated buffer will hold whatever was in memory at the time. If the
+    buffer is not `zeroed` by using `buf.fill(0)`, it may leak sensitive
+    information like keys, source code, and system info.
+
+  affected_package: atob
+  vulnerable_versions:
+  - "<2.1.0"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2018-3745
+  cwe:
+  - CWE-201
+  credit:
+  - ChALkeR
+  references:
+  - https://hackerone.com/reports/321686
+  source_url: https://snyk.io/vuln/npm:atob:20180429

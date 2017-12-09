@@ -1,0 +1,57 @@
+---
+- id: snykio:npm:traceroute:2017-11-09
+  title: Shell Command Injection
+  description: "[`traceroute`][1] is an npm package used for listing references in
+    a\nremote git repository.\n\nAffected versions of this package are vulnerable
+    to Arbitrary Command\nInjection due to the insecure use of `exec`. An attacker
+    can add a\nnewline `%0a` after the host addr, and inject malicious shell commands\nto
+    disrupt server operation or obtain sensitive information.\n\n### PoC by Dor Dali
+    \  {#poc-by-dor-dali}\n\n    traceroute = require('traceroute');\n    \n    host
+    = '127.0.0.1\\ntouch /tmp/malicious';\n    \n    traceroute.trace(host, function
+    (err,hops) {\n        // the file /tmp/malicious was created\n        console.log(hops);\n
+    \   });\n\n\n\n[1]: https://www.npmjs.com/package/traceroute\n\\n[`traceroute`][1]
+    is an npm package used for listing references in a\nremote git repository.\n\nAffected
+    versions of this package are vulnerable to Arbitrary Command\nInjection due to
+    the insecure use of `exec`. An attacker can add a\nnewline `%0a` after the host
+    addr, and inject malicious shell commands\nto disrupt server operation or obtain
+    sensitive information.\n\n### PoC by Dor Dali   {#poc-by-dor-dali}\n\n    traceroute
+    = require('traceroute');\n    \n    host = '127.0.0.1\\ntouch /tmp/malicious';\n
+    \   \n    traceroute.trace(host, function (err,hops) {\n        // the file /tmp/malicious
+    was created\n        console.log(hops);\n    });\n\n\n\n[1]: https://www.npmjs.com/package/traceroute\n\\n[`traceroute`][1]
+    is an npm package used for listing references in a\nremote git repository.\n\nAffected
+    versions of this package are vulnerable to Arbitrary Command\nInjection due to
+    the insecure use of `exec`. An attacker can add a\nnewline `%0a` after the host
+    addr, and inject malicious shell commands\nto disrupt server operation or obtain
+    sensitive information.\n\n### PoC by Dor Dali   {#poc-by-dor-dali}\n\n    traceroute
+    = require('traceroute');\n    \n    host = '127.0.0.1\\ntouch /tmp/malicious';\n
+    \   \n    traceroute.trace(host, function (err,hops) {\n        // the file /tmp/malicious
+    was created\n        console.log(hops);\n    });\n\n\n\n[1]: https://www.npmjs.com/package/traceroute\n\\n[`traceroute`][1]
+    is an npm package used for listing references in a\nremote git repository.\n\nAffected
+    versions of this package are vulnerable to Arbitrary Command\nInjection due to
+    the insecure use of `exec`. An attacker can add a\nnewline `%0a` after the host
+    addr, and inject malicious shell commands\nto disrupt server operation or obtain
+    sensitive information.\n\n### PoC by Dor Dali   {#poc-by-dor-dali}\n\n    traceroute
+    = require('traceroute');\n    \n    host = '127.0.0.1\\ntouch /tmp/malicious';\n
+    \   \n    traceroute.trace(host, function (err,hops) {\n        // the file /tmp/malicious
+    was created\n        console.log(hops);\n    });\n\n\n\n[1]: https://www.npmjs.com/package/traceroute\n\\n[`traceroute`][1]
+    is an npm package used for listing references in a\nremote git repository.\n\nAffected
+    versions of this package are vulnerable to Arbitrary Command\nInjection due to
+    the insecure use of `exec`. An attacker can add a\nnewline `%0a` after the host
+    addr, and inject malicious shell commands\nto disrupt server operation or obtain
+    sensitive information.\n\n### PoC by Dor Dali   {#poc-by-dor-dali}\n\n    traceroute
+    = require('traceroute');\n    \n    host = '127.0.0.1\\ntouch /tmp/malicious';\n
+    \   \n    traceroute.trace(host, function (err,hops) {\n        // the file /tmp/malicious
+    was created\n        console.log(hops);\n    });\n\n\n\n[1]: https://www.npmjs.com/package/traceroute\n"
+  affected_package: traceroute
+  vulnerable_versions:
+  - "<=1.0.0"
+  severity: high
+  package_manager: npm
+  cwe:
+  - CWE-78
+  credit:
+  - Dor Dali
+  references:
+  - https://github.com/jaw187/node-traceroute/commit/b99ee024a01a40d3d20a92ad3769cc78a3f6386f
+  - https://github.com/jaw187/node-traceroute/issues/13
+  source_url: https://snyk.io/vuln/npm:traceroute:20160311

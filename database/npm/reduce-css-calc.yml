@@ -1,0 +1,71 @@
+---
+- id: nodesecurity:npm:reduce-css-calc:2016-10-17
+  title: Arbitrary Code Injection
+  description: |
+    Affected versions of `reduce-css-calc` pass input directly to `eval`. If user input is passed into the calc function, this may result in cross-site scripting on the browser, or remote code execution on the server.
+
+    ## Proof of Concept
+
+    ```
+    const reduceCSSCalc = require('reduce-css-calc');
+    console.log(reduceCSSCalc(`calc(                       (Buffer(10000)))`));
+    console.log(reduceCSSCalc(`calc(                       (global['fs'] = require('fs')))`));
+    console.log(reduceCSSCalc(`calc(                       (fs['readFileSync']("/etc/passwd", "utf-8")))`));
+    ```
+  affected_package: reduce-css-calc
+  vulnerable_versions:
+  - "<=1.2.4"
+  patched_versions:
+  - ">=1.2.5"
+  severity: high
+  package_manager: npm
+  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H
+  credit:
+  - Сковорода Никита Андреевич
+  references:
+  - https://gist.github.com/ChALkeR/415a41b561ebea9b341efbb40b802fc9
+  source_url: https://nodesecurity.io/advisories/144
+- id: ossindex:npm:reduce-css-calc:2017-07-29
+  title: Arbitrary Code Injection
+  description: "> Arbitrary code execution is possible through crafted css. This makes
+    cross sites scripting (XSS) possible on the client and arbitrary code injection
+    possible on the server and user input is passed to the calc function.\n> \n> --
+    [nodesecurity.io](https://nodesecurity.io/advisories/144)"
+  affected_package: reduce-css-calc
+  vulnerable_versions:
+  - "<=1.2.4"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - https://gist.github.com/ChALkeR/415a41b561ebea9b341efbb40b802fc9
+  - https://nodesecurity.io/advisories/144
+  source_url: https://ossindex.net/resource/package/7014372605/vulnerabilities
+- id: snykio:npm:reduce-css-calc:2016-08-20
+  title: Arbitrary Code Injection
+  description: |+
+    `reduce-css-calc` is a package that reduces CSS calc() function to the
+    maximum. Affected versions of the package used `eval()` for evaluation
+    the expression, allowing the attacker to gain arbitrary code execution
+    via specially crafted input.
+
+    \n`reduce-css-calc` is a package that reduces CSS calc() function to the
+    maximum. Affected versions of the package used `eval()` for evaluation
+    the expression, allowing the attacker to gain arbitrary code execution
+    via specially crafted input.
+
+  affected_package: reduce-css-calc
+  vulnerable_versions:
+  - "<1.2.5"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2016-10548
+  cwe:
+  - CWE-94
+  credit:
+  - Сковорода Никита Андреевич (ChALkeR)
+  references:
+  - https://gist.github.com/ChALkeR/415a41b561ebea9b341efbb40b802fc9
+  - https://github.com/MoOx/reduce-css-calc/blob/master/CHANGELOG.md#125---2016-08-22
+  source_url: https://snyk.io/vuln/npm:reduce-css-calc:20160913

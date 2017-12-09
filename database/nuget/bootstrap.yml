@@ -1,0 +1,221 @@
+---
+- id: ossindex:nuget:bootstrap:2016-08-16
+  title: Default tooltip option allows users to have XSS vulnerability in some situations
+  description: |
+    There is an html option for popover/tooltip again. The option is defaulted to true.
+
+    Having this option allows us to force the popover to use the .text() method to set the title and content of the popover no matter if bootstrap thinks it detects html or not. The problem is that jQuery seems to unescape values grabbed with the .attr() method, so even if you escape <script>alert('data');</script> to <script>alert("data")</script> and set it as your data-content, bootstrap will get the unescaped value from .attr(), detect that this is html and use the .html() method to set the content of the popover causing an XSS issue. Forcing the use of the .text() method by setting the html option to false lets us make sure that doesn't happen.
+  affected_package: bootstrap
+  vulnerable_versions:
+  - "<2.1.0"
+  package_manager: nuget
+  credit:
+  - OSSIndex
+  references:
+  - https://cwe.mitre.org/data/definitions/79.html
+  - https://github.com/twbs/bootstrap/commit/f836473129819c2e348f821ed268451b9b8bf2e4
+  - https://github.com/twbs/bootstrap/pull/3421
+  source_url: https://ossindex.net/resource/package/8396450686/vulnerabilities
+- id: ossindex:nuget:bootstrap:2016-10-17
+  title: Cross Site Scripting (XSS) in data-target attribute
+  description: The data-target attribute is vulnerable to Cross-Site Scripting attacks
+    when user-data is supplied to the data-target attribute.
+  affected_package: bootstrap
+  vulnerable_versions:
+  - "<= 3.3.7"
+  package_manager: nuget
+  credit:
+  - OSSIndex
+  references:
+  - https://cwe.mitre.org/data/definitions/79.html
+  - https://github.com/twbs/bootstrap/issues/20184
+  source_url: https://ossindex.net/resource/package/8396450686/vulnerabilities
+- id: snykio:nuget:bootstrap:2017-02-27
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [`bootstrap`][1] is a popular front-end framework for developing
+    responsive, mobile first projects on the web.
+
+    Affected versions of the package are vulnerable to Cross-site Scripting
+    (XSS). The html option for popovers/tooltips is unescaped when grabbed
+    with jQuery\'s `.attr()` method. This may allow attackers to execute XSS
+    attacks.
+
+
+
+    [1]: https://www.npmjs.com/package/bootstrap
+    \n[`bootstrap`][1] is a popular front-end framework for developing
+    responsive, mobile first projects on the web.
+
+    Affected versions of the package are vulnerable to Cross-site Scripting
+    (XSS). The html option for popovers/tooltips is unescaped when grabbed
+    with jQuery\'s `.attr()` method. This may allow attackers to execute XSS
+    attacks.
+
+
+
+    [1]: https://www.npmjs.com/package/bootstrap
+    \n[`bootstrap`][1] is a popular front-end framework for developing
+    responsive, mobile first projects on the web.
+
+    Affected versions of the package are vulnerable to Cross-site Scripting
+    (XSS). The html option for popovers/tooltips is unescaped when grabbed
+    with jQuery\'s `.attr()` method. This may allow attackers to execute XSS
+    attacks.
+
+
+
+    [1]: https://www.npmjs.com/package/bootstrap
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+  affected_package: bootstrap
+  vulnerable_versions:
+  - "< 2.1.0"
+  severity: medium
+  package_manager: nuget
+  cwe:
+  - CWE-79
+  credit:
+  - Peter Corsaro
+  references:
+  - https://github.com/twbs/bootstrap/pull/3421
+  - https://github.com/twbs/bootstrap/commit/f836473129819c2e348f821ed268451b9b8bf2e4
+  source_url: https://snyk.io/vuln/SNYK-DOTNET-BOOTSTRAP-60130

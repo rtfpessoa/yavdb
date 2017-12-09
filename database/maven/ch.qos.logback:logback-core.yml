@@ -1,0 +1,337 @@
+---
+- id: ossindex:maven:ch.qos.logback:logback-core:2017-03-13
+  title: "[CVE-2017-5929]  Deserialization of Untrusted Data"
+  description: QOS.ch Logback before 1.2.0 has a serialization vulnerability affecting
+    the SocketServer and ServerSocketReceiver components.
+  affected_package: ch.qos.logback:logback-core
+  vulnerable_versions:
+  - "<1.2.0"
+  package_manager: maven
+  cve:
+  - CVE-2017-5929
+  credit:
+  - OSSIndex
+  references:
+  - https://access.redhat.com/errata/RHSA-2017:1675
+  - https://access.redhat.com/errata/RHSA-2017:1676
+  - https://access.redhat.com/errata/RHSA-2017:1832
+  - https://logback.qos.ch/news.html
+  source_url: https://ossindex.net/resource/package/7015460505/vulnerabilities
+- id: snykio:maven:ch.qos.logback:logback-core:2017-03-19
+  title: Arbitrary Code Execution
+  description: "[`ch.qos.logback:logback-core`][1] Affected versions of this package
+    are\nvulnerable Arbitrary Code Execution. A configuration can be turned on to\nallow
+    remote logging through interfaces that accept untrusted serialized\ndata. Authenticated
+    attackers on the adjacent network can exploit this\nvulnerability to run arbitrary
+    code through the deserialization of\ncustom gadget chains.\n\n# Details   {#details}\n\nSerialization
+    is a process of converting an object into a sequence of\nbytes which can be persisted
+    to a disk or database or can be sent\nthrough streams. The reverse process of
+    creating object from sequence of\nbytes is called deserialization. Serialization
+    is commonly used for\ncommunication (sharing objects between multiple hosts) and
+    persistence\n(store the object state in a file or a database). It is an integral
+    part\nof popular protocols like *Remote Method Invocation (RMI)*, *Java\nManagement
+    Extension (JMX)*, *Java Messaging System (JMS)*, *Action\nMessage Format (AMF)*,
+    *Java Server Faces (JSF) ViewState*, etc.\n\n*Deserialization of untrusted data*
+    ([CWE-502][2]), is when the\napplication deserializes untrusted data without sufficiently
+    verifying\nthat the resulting data will be valid, letting the attacker to control\nthe
+    state or the flow of the execution.\n\nJava deserialization issues have been known
+    for years. However, interest\nin the issue intensified greatly in 2015, when classes
+    that could be\nabused to achieve remote code execution were found in a [popular
+    library\n(Apache Commons Collection)][3]. These classes were used in zero-days\naffecting
+    IBM WebSphere, Oracle WebLogic and many other products.\n\nAn attacker just needs
+    to identify a piece of software that has both a\nvulnerable class on its path,
+    and performs deserialization on untrusted\ndata. Then all they need to do is send
+    the payload into the\ndeserializer, getting the command executed.\n\n> Developers
+    put too much trust in Java Object Serialization. Some even\n> de-serialize objects
+    pre-authentication. When deserializing an Object\n> in Java you typically cast
+    it to an expected type, and therefore\n> Java\\'s strict type system will ensure
+    you only get valid object\n> trees. Unfortunately, by the time the type checking
+    happens, platform\n> code has already created and executed significant logic.
+    So, before\n> the final type is checked a lot of code is executed from the\n>
+    readObject() methods of various objects, all of which is out of the\n> developer\\'s
+    control. By combining the readObject() methods of various\n> classes which are
+    available on the classpath of the vulnerable\n> application an attacker can execute
+    functions (including calling\n> Runtime.exec() to execute local OS commands).\n>
+    \n> * Apache Blog\n\n\n\n[1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22logback-core%22\n[2]:
+    https://cwe.mitre.org/data/definitions/502.html\n[3]: https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078\n\\n[`ch.qos.logback:logback-core`][1]
+    Affected versions of this package are\nvulnerable Arbitrary Code Execution. A
+    configuration can be turned on to\nallow remote logging through interfaces that
+    accept untrusted serialized\ndata. Authenticated attackers on the adjacent network
+    can exploit this\nvulnerability to run arbitrary code through the deserialization
+    of\ncustom gadget chains.\n\n# Details   {#details}\n\nSerialization is a process
+    of converting an object into a sequence of\nbytes which can be persisted to a
+    disk or database or can be sent\nthrough streams. The reverse process of creating
+    object from sequence of\nbytes is called deserialization. Serialization is commonly
+    used for\ncommunication (sharing objects between multiple hosts) and persistence\n(store
+    the object state in a file or a database). It is an integral part\nof popular
+    protocols like *Remote Method Invocation (RMI)*, *Java\nManagement Extension (JMX)*,
+    *Java Messaging System (JMS)*, *Action\nMessage Format (AMF)*, *Java Server Faces
+    (JSF) ViewState*, etc.\n\n*Deserialization of untrusted data* ([CWE-502][2]),
+    is when the\napplication deserializes untrusted data without sufficiently verifying\nthat
+    the resulting data will be valid, letting the attacker to control\nthe state or
+    the flow of the execution.\n\nJava deserialization issues have been known for
+    years. However, interest\nin the issue intensified greatly in 2015, when classes
+    that could be\nabused to achieve remote code execution were found in a [popular
+    library\n(Apache Commons Collection)][3]. These classes were used in zero-days\naffecting
+    IBM WebSphere, Oracle WebLogic and many other products.\n\nAn attacker just needs
+    to identify a piece of software that has both a\nvulnerable class on its path,
+    and performs deserialization on untrusted\ndata. Then all they need to do is send
+    the payload into the\ndeserializer, getting the command executed.\n\n> Developers
+    put too much trust in Java Object Serialization. Some even\n> de-serialize objects
+    pre-authentication. When deserializing an Object\n> in Java you typically cast
+    it to an expected type, and therefore\n> Java\\'s strict type system will ensure
+    you only get valid object\n> trees. Unfortunately, by the time the type checking
+    happens, platform\n> code has already created and executed significant logic.
+    So, before\n> the final type is checked a lot of code is executed from the\n>
+    readObject() methods of various objects, all of which is out of the\n> developer\\'s
+    control. By combining the readObject() methods of various\n> classes which are
+    available on the classpath of the vulnerable\n> application an attacker can execute
+    functions (including calling\n> Runtime.exec() to execute local OS commands).\n>
+    \n> * Apache Blog\n\n\n\n[1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22logback-core%22\n[2]:
+    https://cwe.mitre.org/data/definitions/502.html\n[3]: https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078\n\\n[`ch.qos.logback:logback-core`][1]
+    Affected versions of this package are\nvulnerable Arbitrary Code Execution. A
+    configuration can be turned on to\nallow remote logging through interfaces that
+    accept untrusted serialized\ndata. Authenticated attackers on the adjacent network
+    can exploit this\nvulnerability to run arbitrary code through the deserialization
+    of\ncustom gadget chains.\n\n# Details   {#details}\n\nSerialization is a process
+    of converting an object into a sequence of\nbytes which can be persisted to a
+    disk or database or can be sent\nthrough streams. The reverse process of creating
+    object from sequence of\nbytes is called deserialization. Serialization is commonly
+    used for\ncommunication (sharing objects between multiple hosts) and persistence\n(store
+    the object state in a file or a database). It is an integral part\nof popular
+    protocols like *Remote Method Invocation (RMI)*, *Java\nManagement Extension (JMX)*,
+    *Java Messaging System (JMS)*, *Action\nMessage Format (AMF)*, *Java Server Faces
+    (JSF) ViewState*, etc.\n\n*Deserialization of untrusted data* ([CWE-502][2]),
+    is when the\napplication deserializes untrusted data without sufficiently verifying\nthat
+    the resulting data will be valid, letting the attacker to control\nthe state or
+    the flow of the execution.\n\nJava deserialization issues have been known for
+    years. However, interest\nin the issue intensified greatly in 2015, when classes
+    that could be\nabused to achieve remote code execution were found in a [popular
+    library\n(Apache Commons Collection)][3]. These classes were used in zero-days\naffecting
+    IBM WebSphere, Oracle WebLogic and many other products.\n\nAn attacker just needs
+    to identify a piece of software that has both a\nvulnerable class on its path,
+    and performs deserialization on untrusted\ndata. Then all they need to do is send
+    the payload into the\ndeserializer, getting the command executed.\n\n> Developers
+    put too much trust in Java Object Serialization. Some even\n> de-serialize objects
+    pre-authentication. When deserializing an Object\n> in Java you typically cast
+    it to an expected type, and therefore\n> Java\\'s strict type system will ensure
+    you only get valid object\n> trees. Unfortunately, by the time the type checking
+    happens, platform\n> code has already created and executed significant logic.
+    So, before\n> the final type is checked a lot of code is executed from the\n>
+    readObject() methods of various objects, all of which is out of the\n> developer\\'s
+    control. By combining the readObject() methods of various\n> classes which are
+    available on the classpath of the vulnerable\n> application an attacker can execute
+    functions (including calling\n> Runtime.exec() to execute local OS commands).\n>
+    \n> * Apache Blog\n\n\n\n[1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22logback-core%22\n[2]:
+    https://cwe.mitre.org/data/definitions/502.html\n[3]: https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078\n\\n[`ch.qos.logback:logback-core`][1]
+    Affected versions of this package are\nvulnerable Arbitrary Code Execution. A
+    configuration can be turned on to\nallow remote logging through interfaces that
+    accept untrusted serialized\ndata. Authenticated attackers on the adjacent network
+    can exploit this\nvulnerability to run arbitrary code through the deserialization
+    of\ncustom gadget chains.\n\n# Details   {#details}\n\nSerialization is a process
+    of converting an object into a sequence of\nbytes which can be persisted to a
+    disk or database or can be sent\nthrough streams. The reverse process of creating
+    object from sequence of\nbytes is called deserialization. Serialization is commonly
+    used for\ncommunication (sharing objects between multiple hosts) and persistence\n(store
+    the object state in a file or a database). It is an integral part\nof popular
+    protocols like *Remote Method Invocation (RMI)*, *Java\nManagement Extension (JMX)*,
+    *Java Messaging System (JMS)*, *Action\nMessage Format (AMF)*, *Java Server Faces
+    (JSF) ViewState*, etc.\n\n*Deserialization of untrusted data* ([CWE-502][2]),
+    is when the\napplication deserializes untrusted data without sufficiently verifying\nthat
+    the resulting data will be valid, letting the attacker to control\nthe state or
+    the flow of the execution.\n\nJava deserialization issues have been known for
+    years. However, interest\nin the issue intensified greatly in 2015, when classes
+    that could be\nabused to achieve remote code execution were found in a [popular
+    library\n(Apache Commons Collection)][3]. These classes were used in zero-days\naffecting
+    IBM WebSphere, Oracle WebLogic and many other products.\n\nAn attacker just needs
+    to identify a piece of software that has both a\nvulnerable class on its path,
+    and performs deserialization on untrusted\ndata. Then all they need to do is send
+    the payload into the\ndeserializer, getting the command executed.\n\n> Developers
+    put too much trust in Java Object Serialization. Some even\n> de-serialize objects
+    pre-authentication. When deserializing an Object\n> in Java you typically cast
+    it to an expected type, and therefore\n> Java\\'s strict type system will ensure
+    you only get valid object\n> trees. Unfortunately, by the time the type checking
+    happens, platform\n> code has already created and executed significant logic.
+    So, before\n> the final type is checked a lot of code is executed from the\n>
+    readObject() methods of various objects, all of which is out of the\n> developer\\'s
+    control. By combining the readObject() methods of various\n> classes which are
+    available on the classpath of the vulnerable\n> application an attacker can execute
+    functions (including calling\n> Runtime.exec() to execute local OS commands).\n>
+    \n> * Apache Blog\n\n\n\n[1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22logback-core%22\n[2]:
+    https://cwe.mitre.org/data/definitions/502.html\n[3]: https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078\n\\n[`ch.qos.logback:logback-core`][1]
+    Affected versions of this package are\nvulnerable Arbitrary Code Execution. A
+    configuration can be turned on to\nallow remote logging through interfaces that
+    accept untrusted serialized\ndata. Authenticated attackers on the adjacent network
+    can exploit this\nvulnerability to run arbitrary code through the deserialization
+    of\ncustom gadget chains.\n\n# Details   {#details}\n\nSerialization is a process
+    of converting an object into a sequence of\nbytes which can be persisted to a
+    disk or database or can be sent\nthrough streams. The reverse process of creating
+    object from sequence of\nbytes is called deserialization. Serialization is commonly
+    used for\ncommunication (sharing objects between multiple hosts) and persistence\n(store
+    the object state in a file or a database). It is an integral part\nof popular
+    protocols like *Remote Method Invocation (RMI)*, *Java\nManagement Extension (JMX)*,
+    *Java Messaging System (JMS)*, *Action\nMessage Format (AMF)*, *Java Server Faces
+    (JSF) ViewState*, etc.\n\n*Deserialization of untrusted data* ([CWE-502][2]),
+    is when the\napplication deserializes untrusted data without sufficiently verifying\nthat
+    the resulting data will be valid, letting the attacker to control\nthe state or
+    the flow of the execution.\n\nJava deserialization issues have been known for
+    years. However, interest\nin the issue intensified greatly in 2015, when classes
+    that could be\nabused to achieve remote code execution were found in a [popular
+    library\n(Apache Commons Collection)][3]. These classes were used in zero-days\naffecting
+    IBM WebSphere, Oracle WebLogic and many other products.\n\nAn attacker just needs
+    to identify a piece of software that has both a\nvulnerable class on its path,
+    and performs deserialization on untrusted\ndata. Then all they need to do is send
+    the payload into the\ndeserializer, getting the command executed.\n\n> Developers
+    put too much trust in Java Object Serialization. Some even\n> de-serialize objects
+    pre-authentication. When deserializing an Object\n> in Java you typically cast
+    it to an expected type, and therefore\n> Java\\'s strict type system will ensure
+    you only get valid object\n> trees. Unfortunately, by the time the type checking
+    happens, platform\n> code has already created and executed significant logic.
+    So, before\n> the final type is checked a lot of code is executed from the\n>
+    readObject() methods of various objects, all of which is out of the\n> developer\\'s
+    control. By combining the readObject() methods of various\n> classes which are
+    available on the classpath of the vulnerable\n> application an attacker can execute
+    functions (including calling\n> Runtime.exec() to execute local OS commands).\n>
+    \n> * Apache Blog\n\n\n\n[1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22logback-core%22\n[2]:
+    https://cwe.mitre.org/data/definitions/502.html\n[3]: https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078\n\\n[`ch.qos.logback:logback-core`][1]
+    Affected versions of this package are\nvulnerable Arbitrary Code Execution. A
+    configuration can be turned on to\nallow remote logging through interfaces that
+    accept untrusted serialized\ndata. Authenticated attackers on the adjacent network
+    can exploit this\nvulnerability to run arbitrary code through the deserialization
+    of\ncustom gadget chains.\n\n# Details   {#details}\n\nSerialization is a process
+    of converting an object into a sequence of\nbytes which can be persisted to a
+    disk or database or can be sent\nthrough streams. The reverse process of creating
+    object from sequence of\nbytes is called deserialization. Serialization is commonly
+    used for\ncommunication (sharing objects between multiple hosts) and persistence\n(store
+    the object state in a file or a database). It is an integral part\nof popular
+    protocols like *Remote Method Invocation (RMI)*, *Java\nManagement Extension (JMX)*,
+    *Java Messaging System (JMS)*, *Action\nMessage Format (AMF)*, *Java Server Faces
+    (JSF) ViewState*, etc.\n\n*Deserialization of untrusted data* ([CWE-502][2]),
+    is when the\napplication deserializes untrusted data without sufficiently verifying\nthat
+    the resulting data will be valid, letting the attacker to control\nthe state or
+    the flow of the execution.\n\nJava deserialization issues have been known for
+    years. However, interest\nin the issue intensified greatly in 2015, when classes
+    that could be\nabused to achieve remote code execution were found in a [popular
+    library\n(Apache Commons Collection)][3]. These classes were used in zero-days\naffecting
+    IBM WebSphere, Oracle WebLogic and many other products.\n\nAn attacker just needs
+    to identify a piece of software that has both a\nvulnerable class on its path,
+    and performs deserialization on untrusted\ndata. Then all they need to do is send
+    the payload into the\ndeserializer, getting the command executed.\n\n> Developers
+    put too much trust in Java Object Serialization. Some even\n> de-serialize objects
+    pre-authentication. When deserializing an Object\n> in Java you typically cast
+    it to an expected type, and therefore\n> Java\\'s strict type system will ensure
+    you only get valid object\n> trees. Unfortunately, by the time the type checking
+    happens, platform\n> code has already created and executed significant logic.
+    So, before\n> the final type is checked a lot of code is executed from the\n>
+    readObject() methods of various objects, all of which is out of the\n> developer\\'s
+    control. By combining the readObject() methods of various\n> classes which are
+    available on the classpath of the vulnerable\n> application an attacker can execute
+    functions (including calling\n> Runtime.exec() to execute local OS commands).\n>
+    \n> * Apache Blog\n\n\n\n[1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22logback-core%22\n[2]:
+    https://cwe.mitre.org/data/definitions/502.html\n[3]: https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078\n\\n[`ch.qos.logback:logback-core`][1]
+    Affected versions of this package are\nvulnerable Arbitrary Code Execution. A
+    configuration can be turned on to\nallow remote logging through interfaces that
+    accept untrusted serialized\ndata. Authenticated attackers on the adjacent network
+    can exploit this\nvulnerability to run arbitrary code through the deserialization
+    of\ncustom gadget chains.\n\n# Details   {#details}\n\nSerialization is a process
+    of converting an object into a sequence of\nbytes which can be persisted to a
+    disk or database or can be sent\nthrough streams. The reverse process of creating
+    object from sequence of\nbytes is called deserialization. Serialization is commonly
+    used for\ncommunication (sharing objects between multiple hosts) and persistence\n(store
+    the object state in a file or a database). It is an integral part\nof popular
+    protocols like *Remote Method Invocation (RMI)*, *Java\nManagement Extension (JMX)*,
+    *Java Messaging System (JMS)*, *Action\nMessage Format (AMF)*, *Java Server Faces
+    (JSF) ViewState*, etc.\n\n*Deserialization of untrusted data* ([CWE-502][2]),
+    is when the\napplication deserializes untrusted data without sufficiently verifying\nthat
+    the resulting data will be valid, letting the attacker to control\nthe state or
+    the flow of the execution.\n\nJava deserialization issues have been known for
+    years. However, interest\nin the issue intensified greatly in 2015, when classes
+    that could be\nabused to achieve remote code execution were found in a [popular
+    library\n(Apache Commons Collection)][3]. These classes were used in zero-days\naffecting
+    IBM WebSphere, Oracle WebLogic and many other products.\n\nAn attacker just needs
+    to identify a piece of software that has both a\nvulnerable class on its path,
+    and performs deserialization on untrusted\ndata. Then all they need to do is send
+    the payload into the\ndeserializer, getting the command executed.\n\n> Developers
+    put too much trust in Java Object Serialization. Some even\n> de-serialize objects
+    pre-authentication. When deserializing an Object\n> in Java you typically cast
+    it to an expected type, and therefore\n> Java\\'s strict type system will ensure
+    you only get valid object\n> trees. Unfortunately, by the time the type checking
+    happens, platform\n> code has already created and executed significant logic.
+    So, before\n> the final type is checked a lot of code is executed from the\n>
+    readObject() methods of various objects, all of which is out of the\n> developer\\'s
+    control. By combining the readObject() methods of various\n> classes which are
+    available on the classpath of the vulnerable\n> application an attacker can execute
+    functions (including calling\n> Runtime.exec() to execute local OS commands).\n>
+    \n> * Apache Blog\n\n\n\n[1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22logback-core%22\n[2]:
+    https://cwe.mitre.org/data/definitions/502.html\n[3]: https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078\n\\n[`ch.qos.logback:logback-core`][1]
+    Affected versions of this package are\nvulnerable Arbitrary Code Execution. A
+    configuration can be turned on to\nallow remote logging through interfaces that
+    accept untrusted serialized\ndata. Authenticated attackers on the adjacent network
+    can exploit this\nvulnerability to run arbitrary code through the deserialization
+    of\ncustom gadget chains.\n\n# Details   {#details}\n\nSerialization is a process
+    of converting an object into a sequence of\nbytes which can be persisted to a
+    disk or database or can be sent\nthrough streams. The reverse process of creating
+    object from sequence of\nbytes is called deserialization. Serialization is commonly
+    used for\ncommunication (sharing objects between multiple hosts) and persistence\n(store
+    the object state in a file or a database). It is an integral part\nof popular
+    protocols like *Remote Method Invocation (RMI)*, *Java\nManagement Extension (JMX)*,
+    *Java Messaging System (JMS)*, *Action\nMessage Format (AMF)*, *Java Server Faces
+    (JSF) ViewState*, etc.\n\n*Deserialization of untrusted data* ([CWE-502][2]),
+    is when the\napplication deserializes untrusted data without sufficiently verifying\nthat
+    the resulting data will be valid, letting the attacker to control\nthe state or
+    the flow of the execution.\n\nJava deserialization issues have been known for
+    years. However, interest\nin the issue intensified greatly in 2015, when classes
+    that could be\nabused to achieve remote code execution were found in a [popular
+    library\n(Apache Commons Collection)][3]. These classes were used in zero-days\naffecting
+    IBM WebSphere, Oracle WebLogic and many other products.\n\nAn attacker just needs
+    to identify a piece of software that has both a\nvulnerable class on its path,
+    and performs deserialization on untrusted\ndata. Then all they need to do is send
+    the payload into the\ndeserializer, getting the command executed.\n\n> Developers
+    put too much trust in Java Object Serialization. Some even\n> de-serialize objects
+    pre-authentication. When deserializing an Object\n> in Java you typically cast
+    it to an expected type, and therefore\n> Java\\'s strict type system will ensure
+    you only get valid object\n> trees. Unfortunately, by the time the type checking
+    happens, platform\n> code has already created and executed significant logic.
+    So, before\n> the final type is checked a lot of code is executed from the\n>
+    readObject() methods of various objects, all of which is out of the\n> developer\\'s
+    control. By combining the readObject() methods of various\n> classes which are
+    available on the classpath of the vulnerable\n> application an attacker can execute
+    functions (including calling\n> Runtime.exec() to execute local OS commands).\n>
+    \n> * Apache Blog\n\n\n\n[1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22logback-core%22\n[2]:
+    https://cwe.mitre.org/data/definitions/502.html\n[3]: https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078\n"
+  affected_package: ch.qos.logback:logback-core
+  vulnerable_versions:
+  - "< 1.2.0"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2017-5929
+  cwe:
+  - CWE-502
+  credit:
+  - Unknown
+  references:
+  - https://logback.qos.ch/news.html
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2017-5929/
+  source_url: https://snyk.io/vuln/SNYK-JAVA-CHQOSLOGBACK-30208
+- id: victims:maven:ch.qos.logback:logback-core:date
+  title: 'QOS.ch Logback 1.2.0 serialization vulnerability '
+  description: 'QOS.ch Logback before 1.2.0 has a serialization vulnerability affecting
+    the SocketServer and ServerSocketReceiver components.
+
+'
+  affected_package: ch.qos.logback:logback-core
+  vulnerable_versions:
+  - "<=1.1.10"
+  patched_versions:
+  - ">=1.2.0"
+  severity: high
+  package_manager: maven
+  cve:
+  - 2017-5929
+  credit:
+  - Victims CVE Database
+  references:
+  - https://logback.qos.ch/news.html
+  - http://www.cvedetails.com/cve/CVE-2017-5929/
+  source_url: https://github.com/victims/victims-cve-db/blob/master/database/java/2017/5929.yaml

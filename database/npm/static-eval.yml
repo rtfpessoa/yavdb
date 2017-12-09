@@ -1,0 +1,82 @@
+---
+- id: nodesecurity:npm:static-eval:2017-10-18
+  title: Sandbox Breakout / Arbitrary Code Execution
+  description: |-
+    Affected versions of `static-eval` pass untrusted user input directly to the global function constructor, resulting in an arbitrary code execution vulnerability when user input is parsed via the package.
+
+    ## Proof of concept
+    ```
+    var evaluate = require('static-eval');
+    var parse = require('esprima').parse;
+    var src = '(function(){console.log(process.pid)})()';
+    var ast = parse(src).body[0].expression;
+    var res = evaluate(ast, {});
+    // Will print the process id
+    ```
+  affected_package: static-eval
+  vulnerable_versions:
+  - "<=1.1.1"
+  patched_versions:
+  - ">=2.0.0"
+  severity: medium
+  package_manager: npm
+  cvss_v3_vector: CVSS:3.0/AV:L/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N
+  credit:
+  - Matt Austin
+  references:
+  - |-
+    https://maustin.net/articles/2017-10/static_eval)
+    https://github.com/substack/static-eval/pull/18)
+  source_url: https://nodesecurity.io/advisories/548
+- id: snykio:npm:static-eval:2017-10-16
+  title: Arbitrary Code Execution
+  description: |
+    [`static-eval`][1] is a module to evaluate statically-analyzable
+    expressions.
+
+    Affected versions of the package are vulnerable to Arbitrary Code
+    Execution. If un-sanitized user input is passed to `static-eval`, it is
+    possible to break out of the sandboxed instance, and execute arbitrary
+    code from the standard library.
+
+
+
+    [1]: https://www.npmjs.com/package/static-eval
+    \n[`static-eval`][1] is a module to evaluate statically-analyzable
+    expressions.
+
+    Affected versions of the package are vulnerable to Arbitrary Code
+    Execution. If un-sanitized user input is passed to `static-eval`, it is
+    possible to break out of the sandboxed instance, and execute arbitrary
+    code from the standard library.
+
+
+
+    [1]: https://www.npmjs.com/package/static-eval
+    \n[`static-eval`][1] is a module to evaluate statically-analyzable
+    expressions.
+
+    Affected versions of the package are vulnerable to Arbitrary Code
+    Execution. If un-sanitized user input is passed to `static-eval`, it is
+    possible to break out of the sandboxed instance, and execute arbitrary
+    code from the standard library.
+
+
+
+    [1]: https://www.npmjs.com/package/static-eval
+  affected_package: static-eval
+  vulnerable_versions:
+  - "<2.0.0"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2017-16226
+  cwe:
+  - CWE-94
+  credit:
+  - Matt Austin
+  references:
+  - https://maustin.net/articles/2017-10/static_eval
+  - https://github.com/substack/static-eval/pull/18
+  - https://github.com/substack/static-eval/pull/18/commits/c06f1b8c0a0cd1cc989c025fbb4c5776fc661c2c
+  source_url: https://snyk.io/vuln/npm:static-eval:20171016

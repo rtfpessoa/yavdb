@@ -1,0 +1,43 @@
+---
+- id: snykio:nuget:semver:2015-11-06
+  title: Regular Expression Denial of Service (DoS)
+  description: |
+    The semver module uses regular expressions when parsing a version
+    string. For a carefully crafted input, the time it takes to process
+    these regular expressions is not linear to the length of the input.
+    Since the semver module did not enforce a limit on the version string
+    length, an attacker could provide a long string that would take up a
+    large amount of resources, potentially taking a server down. This issue
+    therefore enables a potential Denial of Service attack. This is a
+    slightly differnt variant of a typical Regular Expression Denial of
+    Service ([ReDoS][1]) vulnerability.
+
+
+
+    [1]: https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS
+    \nThe semver module uses regular expressions when parsing a version
+    string. For a carefully crafted input, the time it takes to process
+    these regular expressions is not linear to the length of the input.
+    Since the semver module did not enforce a limit on the version string
+    length, an attacker could provide a long string that would take up a
+    large amount of resources, potentially taking a server down. This issue
+    therefore enables a potential Denial of Service attack. This is a
+    slightly differnt variant of a typical Regular Expression Denial of
+    Service ([ReDoS][1]) vulnerability.
+
+
+
+    [1]: https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS
+  affected_package: semver
+  vulnerable_versions:
+  - "< 4.3.2"
+  severity: medium
+  package_manager: nuget
+  cwe:
+  - CWE-400
+  credit:
+  - Adam Baldwin
+  references:
+  - https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS
+  - https://github.com/npm/npm/releases/tag/v2.7.5
+  source_url: https://snyk.io/vuln/SNYK-DOTNET-SEMVER-60208

@@ -1,0 +1,923 @@
+---
+- id: nodesecurity:npm:connect:2013-07-01
+  title: methodOverride Middleware Reflected Cross-Site Scripting
+  description: |+
+    Connect is a stack of middleware that is executed in order in each request.
+
+    The "methodOverride" middleware allows the http post to override the method of the request with the value of the "_method" post key or with the header "x-http-method-override".
+
+    Because the user post input was not checked, req.method could contain any kind of value. Because the req.method did not match any common method VERB, connect answered with a 404 page containing the "Cannot `[method]` `[url]`" content. The method was not properly encoded for output in the browser.
+
+
+    ###Example:
+    ```
+    ~ curl "localhost:3000" -d "_method=<script src=http://nodesecurity.io/xss.js></script>"
+    Cannot <SCRIPT SRC=HTTP://NODESECURITY.IO/XSS.JS></SCRIPT> /
+    ```
+
+  affected_package: connect
+  vulnerable_versions:
+  - "<=2.8.0"
+  patched_versions:
+  - ">=2.8.1"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2013-7370
+  - CVE-2013-7371
+  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N
+  credit:
+  - Sergio Arcos
+  references:
+  - |-
+    (2013-06-27) Bug reported:
+    https://github.com/senchalabs/connect/issues/831
+
+    (2013-06-27) First fix: escape req.method output
+    https://github.com/senchalabs/connect/commit/277e5aad6a95d00f55571a9a0e11f2fa190d8135
+
+    (2013-06-27) Second fix: whitelist
+    https://github.com/senchalabs/connect/commit/126187c4e12162e231b87350740045e5bb06e93a
+  source_url: https://nodesecurity.io/advisories/3
+- id: ossindex:npm:connect:2017-03-03
+  title: Denial of Service (DoS)
+  description: "> When using the static middleware, if the URL contains a valid file
+    name and a trailing backslash the node server will crash with `Error: ENOENT,
+    no such file or directory`.\n> \n> -- [github.com](https://github.com/senchalabs/connect/issues/452)"
+  affected_package: connect
+  vulnerable_versions:
+  - "<0.8.6"
+  - ">0.8.6 <2.0.0"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - https://github.com/senchalabs/connect/commit/2b0e8d69a14312fa2fd3449685be0c0896dfe53e
+  - https://github.com/senchalabs/connect/issues/452
+  source_url: https://ossindex.net/resource/package/7012220816/vulnerabilities
+- id: ossindex:npm:connect:2017-03-03
+  title: Directory traversal vulnerability in staticProvider
+  description: "> staticProvider lets attacker to use relative paths in requests by
+    escaping the \"..\" with \"%2e%2e\". It checks for containing relative paths _before_
+    unescaping so it never gets caught.\n> \n> -- [github.com](https://github.com/senchalabs/connect/issues/198)"
+  affected_package: connect
+  vulnerable_versions:
+  - "<0.5.10"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - https://cwe.mitre.org/data/definitions/22.html
+  - https://github.com/senchalabs/connect/commit/e59091052709411390343d2252fb17833649aeaf
+  - https://github.com/senchalabs/connect/issues/198
+  source_url: https://ossindex.net/resource/package/7012220816/vulnerabilities
+- id: ossindex:npm:connect:2017-03-03
+  title: Path Traversal
+  description: 'A mishandling of adding `directory(''.'')` to `connect()` results
+    any path beginning with `.` to pass the malicious directory check, allowing access
+    to any file on the system.
+
+'
+  affected_package: connect
+  vulnerable_versions:
+  - "<2.9.2"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - https://cwe.mitre.org/data/definitions/22.html
+  - https://github.com/senchalabs/connect/commit/c2afb242d4fa9843fed52cb27fc9d940cf9bc69c
+  - https://github.com/senchalabs/connect/issues/771
+  source_url: https://ossindex.net/resource/package/7012220816/vulnerabilities
+- id: ossindex:npm:connect:2017-03-03
+  title: Cross Site Scripting (XSS)
+  description: A cross site scripting attack is possible in 404 messages due to missing
+    escaping.
+  affected_package: connect
+  vulnerable_versions:
+  - "<0.8.6"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - https://cwe.mitre.org/data/definitions/79.html
+  - https://github.com/senchalabs/connect/commit/c1daf27b2067b07fe3e9a66ce7f9121a0fa597b3
+  - https://github.com/senchalabs/connect/issues/473
+  source_url: https://ossindex.net/resource/package/7012220816/vulnerabilities
+- id: ossindex:npm:connect:1970-01-01
+  title: Cross-Site Scripting with connect.methodOverride()
+  description: |-
+    This middleware overwrite req.method with the req.body['_method'] value. When you don't catch the error it responds with a default error msg: "Cannot [METHOD] [URL]" (https://github.com/senchalabs/connect/blob/6db901f967036ccc3c892b4bcb5bcb59e0b0dca9/lib/proto.js#L155). Because this is not enough sanitized, you can force a Cross-Site Scripting in the response:
+
+    ~ curl "localhost:3000" -d "_method=<script src=http://martes13.net/a.js></script>"
+    Cannot <SCRIPT SRC=HTTP://MARTES13.NET/A.JS></SCRIPT> /
+    This is very dangerous because in a server like ExpressJS it won't be handled with a app.all('/*', ...), so all servers using this middleware are vulnerable.
+  affected_package: connect
+  vulnerable_versions:
+  - "<=2.8.0"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-7370
+  - https://github.com/senchalabs/connect/issues/831
+  - https://nodesecurity.io/advisories/3
+  source_url: https://ossindex.net/resource/package/7012220816/vulnerabilities
+- id: snykio:npm:connect:2012-01-06
+  title: Denial of Service (DoS)
+  description: |+
+    [`connect`][1] is a high performance middleware framework.
+
+    Affected versions of the package are vulnerable to Denial of Service
+    (DoS) attacks. It is possible to crash the node server by requesting a
+    url with a trailing backslash in the end.
+
+
+
+    [1]: https://www.npmjs.com/package/connect
+    \n[`connect`][1] is a high performance middleware framework.
+
+    Affected versions of the package are vulnerable to Denial of Service
+    (DoS) attacks. It is possible to crash the node server by requesting a
+    url with a trailing backslash in the end.
+
+
+
+    [1]: https://www.npmjs.com/package/connect
+    \n[`connect`][1] is a high performance middleware framework.
+
+    Affected versions of the package are vulnerable to Denial of Service
+    (DoS) attacks. It is possible to crash the node server by requesting a
+    url with a trailing backslash in the end.
+
+
+
+    [1]: https://www.npmjs.com/package/connect
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+  affected_package: connect
+  vulnerable_versions:
+  - ">=1.4.0 <2.0.0"
+  severity: medium
+  package_manager: npm
+  cwe:
+  - CWE-400
+  credit:
+  - bunkat
+  references:
+  - https://github.com/senchalabs/connect/issues/452
+  - https://github.com/senchalabs/connect/commit/2b0e8d69a14312fa2fd3449685be0c0896dfe53e
+  source_url: https://snyk.io/vuln/npm:connect:20120107
+- id: snykio:npm:connect:2013-06-30
+  title: Cross-site Scripting (XSS)
+  description: |+
+    Connect is a stack of middleware that is executed in order in each
+    request.
+
+    The \"methodOverride\" middleware allows the http post to override the
+    method of the request with the value of the `_method` post key or with
+    the header \"x-http-method-override\".
+
+    Because the user post input was not checked, req.method could contain
+    any kind of value. Because the req.method did not match any common
+    method VERB, connect answered with a 404 page containing the \"Cannot
+    \[method\] \[url\]\" content. The method was not properly encoded for
+    output in the browser.
+
+    *Source: [Node Security Project][1]*
+
+    **Example**
+
+        ~ curl "localhost:3000" -d "_method=<script src=http://nodesecurity.io/xss.js></script>"
+        Cannot <SCRIPT SRC=HTTP://NODESECURITY.IO/XSS.JS></SCRIPT> /
+
+    **Mitigation factors**
+
+    Update to the newest version of Connect or disable methodOverride. It is
+    not possible to avoid the vulnerability if you have enabled this
+    middleware in the top of your stack.
+
+    **History**
+
+    * (2013-06-27) [Bug reported][2]
+    * (2013-06-27) [First fix: escape req.method output][3]
+    * (2013-06-27) [Second fix: whitelist][4]
+
+
+
+    [1]: https://nodesecurity.io/advisories/3
+    [2]: https://github.com/senchalabs/connect/issues/831
+    [3]: https://github.com/senchalabs/connect/commit/277e5aad6a95d00f55571a9a0e11f2fa190d8135
+    [4]: https://github.com/senchalabs/connect/commit/126187c4e12162e231b87350740045e5bb06e93a
+    \nConnect is a stack of middleware that is executed in order in each
+    request.
+
+    The \"methodOverride\" middleware allows the http post to override the
+    method of the request with the value of the `_method` post key or with
+    the header \"x-http-method-override\".
+
+    Because the user post input was not checked, req.method could contain
+    any kind of value. Because the req.method did not match any common
+    method VERB, connect answered with a 404 page containing the \"Cannot
+    \[method\] \[url\]\" content. The method was not properly encoded for
+    output in the browser.
+
+    *Source: [Node Security Project][1]*
+
+    **Example**
+
+        ~ curl "localhost:3000" -d "_method=<script src=http://nodesecurity.io/xss.js></script>"
+        Cannot <SCRIPT SRC=HTTP://NODESECURITY.IO/XSS.JS></SCRIPT> /
+
+    **Mitigation factors**
+
+    Update to the newest version of Connect or disable methodOverride. It is
+    not possible to avoid the vulnerability if you have enabled this
+    middleware in the top of your stack.
+
+    **History**
+
+    * (2013-06-27) [Bug reported][2]
+    * (2013-06-27) [First fix: escape req.method output][3]
+    * (2013-06-27) [Second fix: whitelist][4]
+
+
+
+    [1]: https://nodesecurity.io/advisories/3
+    [2]: https://github.com/senchalabs/connect/issues/831
+    [3]: https://github.com/senchalabs/connect/commit/277e5aad6a95d00f55571a9a0e11f2fa190d8135
+    [4]: https://github.com/senchalabs/connect/commit/126187c4e12162e231b87350740045e5bb06e93a
+    \nConnect is a stack of middleware that is executed in order in each
+    request.
+
+    The \"methodOverride\" middleware allows the http post to override the
+    method of the request with the value of the `_method` post key or with
+    the header \"x-http-method-override\".
+
+    Because the user post input was not checked, req.method could contain
+    any kind of value. Because the req.method did not match any common
+    method VERB, connect answered with a 404 page containing the \"Cannot
+    \[method\] \[url\]\" content. The method was not properly encoded for
+    output in the browser.
+
+    *Source: [Node Security Project][1]*
+
+    **Example**
+
+        ~ curl "localhost:3000" -d "_method=<script src=http://nodesecurity.io/xss.js></script>"
+        Cannot <SCRIPT SRC=HTTP://NODESECURITY.IO/XSS.JS></SCRIPT> /
+
+    **Mitigation factors**
+
+    Update to the newest version of Connect or disable methodOverride. It is
+    not possible to avoid the vulnerability if you have enabled this
+    middleware in the top of your stack.
+
+    **History**
+
+    * (2013-06-27) [Bug reported][2]
+    * (2013-06-27) [First fix: escape req.method output][3]
+    * (2013-06-27) [Second fix: whitelist][4]
+
+
+
+    [1]: https://nodesecurity.io/advisories/3
+    [2]: https://github.com/senchalabs/connect/issues/831
+    [3]: https://github.com/senchalabs/connect/commit/277e5aad6a95d00f55571a9a0e11f2fa190d8135
+    [4]: https://github.com/senchalabs/connect/commit/126187c4e12162e231b87350740045e5bb06e93a
+    \nConnect is a stack of middleware that is executed in order in each
+    request.
+
+    The \"methodOverride\" middleware allows the http post to override the
+    method of the request with the value of the `_method` post key or with
+    the header \"x-http-method-override\".
+
+    Because the user post input was not checked, req.method could contain
+    any kind of value. Because the req.method did not match any common
+    method VERB, connect answered with a 404 page containing the \"Cannot
+    \[method\] \[url\]\" content. The method was not properly encoded for
+    output in the browser.
+
+    *Source: [Node Security Project][1]*
+
+    **Example**
+
+        ~ curl "localhost:3000" -d "_method=<script src=http://nodesecurity.io/xss.js></script>"
+        Cannot <SCRIPT SRC=HTTP://NODESECURITY.IO/XSS.JS></SCRIPT> /
+
+    **Mitigation factors**
+
+    Update to the newest version of Connect or disable methodOverride. It is
+    not possible to avoid the vulnerability if you have enabled this
+    middleware in the top of your stack.
+
+    **History**
+
+    * (2013-06-27) [Bug reported][2]
+    * (2013-06-27) [First fix: escape req.method output][3]
+    * (2013-06-27) [Second fix: whitelist][4]
+
+
+
+    [1]: https://nodesecurity.io/advisories/3
+    [2]: https://github.com/senchalabs/connect/issues/831
+    [3]: https://github.com/senchalabs/connect/commit/277e5aad6a95d00f55571a9a0e11f2fa190d8135
+    [4]: https://github.com/senchalabs/connect/commit/126187c4e12162e231b87350740045e5bb06e93a
+    \nConnect is a stack of middleware that is executed in order in each
+    request.
+
+    The \"methodOverride\" middleware allows the http post to override the
+    method of the request with the value of the `_method` post key or with
+    the header \"x-http-method-override\".
+
+    Because the user post input was not checked, req.method could contain
+    any kind of value. Because the req.method did not match any common
+    method VERB, connect answered with a 404 page containing the \"Cannot
+    \[method\] \[url\]\" content. The method was not properly encoded for
+    output in the browser.
+
+    *Source: [Node Security Project][1]*
+
+    **Example**
+
+        ~ curl "localhost:3000" -d "_method=<script src=http://nodesecurity.io/xss.js></script>"
+        Cannot <SCRIPT SRC=HTTP://NODESECURITY.IO/XSS.JS></SCRIPT> /
+
+    **Mitigation factors**
+
+    Update to the newest version of Connect or disable methodOverride. It is
+    not possible to avoid the vulnerability if you have enabled this
+    middleware in the top of your stack.
+
+    **History**
+
+    * (2013-06-27) [Bug reported][2]
+    * (2013-06-27) [First fix: escape req.method output][3]
+    * (2013-06-27) [Second fix: whitelist][4]
+
+
+
+    [1]: https://nodesecurity.io/advisories/3
+    [2]: https://github.com/senchalabs/connect/issues/831
+    [3]: https://github.com/senchalabs/connect/commit/277e5aad6a95d00f55571a9a0e11f2fa190d8135
+    [4]: https://github.com/senchalabs/connect/commit/126187c4e12162e231b87350740045e5bb06e93a
+    \nConnect is a stack of middleware that is executed in order in each
+    request.
+
+    The \"methodOverride\" middleware allows the http post to override the
+    method of the request with the value of the `_method` post key or with
+    the header \"x-http-method-override\".
+
+    Because the user post input was not checked, req.method could contain
+    any kind of value. Because the req.method did not match any common
+    method VERB, connect answered with a 404 page containing the \"Cannot
+    \[method\] \[url\]\" content. The method was not properly encoded for
+    output in the browser.
+
+    *Source: [Node Security Project][1]*
+
+    **Example**
+
+        ~ curl "localhost:3000" -d "_method=<script src=http://nodesecurity.io/xss.js></script>"
+        Cannot <SCRIPT SRC=HTTP://NODESECURITY.IO/XSS.JS></SCRIPT> /
+
+    **Mitigation factors**
+
+    Update to the newest version of Connect or disable methodOverride. It is
+    not possible to avoid the vulnerability if you have enabled this
+    middleware in the top of your stack.
+
+    **History**
+
+    * (2013-06-27) [Bug reported][2]
+    * (2013-06-27) [First fix: escape req.method output][3]
+    * (2013-06-27) [Second fix: whitelist][4]
+
+
+
+    [1]: https://nodesecurity.io/advisories/3
+    [2]: https://github.com/senchalabs/connect/issues/831
+    [3]: https://github.com/senchalabs/connect/commit/277e5aad6a95d00f55571a9a0e11f2fa190d8135
+    [4]: https://github.com/senchalabs/connect/commit/126187c4e12162e231b87350740045e5bb06e93a
+    \nConnect is a stack of middleware that is executed in order in each
+    request.
+
+    The \"methodOverride\" middleware allows the http post to override the
+    method of the request with the value of the `_method` post key or with
+    the header \"x-http-method-override\".
+
+    Because the user post input was not checked, req.method could contain
+    any kind of value. Because the req.method did not match any common
+    method VERB, connect answered with a 404 page containing the \"Cannot
+    \[method\] \[url\]\" content. The method was not properly encoded for
+    output in the browser.
+
+    *Source: [Node Security Project][1]*
+
+    **Example**
+
+        ~ curl "localhost:3000" -d "_method=<script src=http://nodesecurity.io/xss.js></script>"
+        Cannot <SCRIPT SRC=HTTP://NODESECURITY.IO/XSS.JS></SCRIPT> /
+
+    **Mitigation factors**
+
+    Update to the newest version of Connect or disable methodOverride. It is
+    not possible to avoid the vulnerability if you have enabled this
+    middleware in the top of your stack.
+
+    **History**
+
+    * (2013-06-27) [Bug reported][2]
+    * (2013-06-27) [First fix: escape req.method output][3]
+    * (2013-06-27) [Second fix: whitelist][4]
+
+
+
+    [1]: https://nodesecurity.io/advisories/3
+    [2]: https://github.com/senchalabs/connect/issues/831
+    [3]: https://github.com/senchalabs/connect/commit/277e5aad6a95d00f55571a9a0e11f2fa190d8135
+    [4]: https://github.com/senchalabs/connect/commit/126187c4e12162e231b87350740045e5bb06e93a
+    \nConnect is a stack of middleware that is executed in order in each
+    request.
+
+    The \"methodOverride\" middleware allows the http post to override the
+    method of the request with the value of the `_method` post key or with
+    the header \"x-http-method-override\".
+
+    Because the user post input was not checked, req.method could contain
+    any kind of value. Because the req.method did not match any common
+    method VERB, connect answered with a 404 page containing the \"Cannot
+    \[method\] \[url\]\" content. The method was not properly encoded for
+    output in the browser.
+
+    *Source: [Node Security Project][1]*
+
+    **Example**
+
+        ~ curl "localhost:3000" -d "_method=<script src=http://nodesecurity.io/xss.js></script>"
+        Cannot <SCRIPT SRC=HTTP://NODESECURITY.IO/XSS.JS></SCRIPT> /
+
+    **Mitigation factors**
+
+    Update to the newest version of Connect or disable methodOverride. It is
+    not possible to avoid the vulnerability if you have enabled this
+    middleware in the top of your stack.
+
+    **History**
+
+    * (2013-06-27) [Bug reported][2]
+    * (2013-06-27) [First fix: escape req.method output][3]
+    * (2013-06-27) [Second fix: whitelist][4]
+
+
+
+    [1]: https://nodesecurity.io/advisories/3
+    [2]: https://github.com/senchalabs/connect/issues/831
+    [3]: https://github.com/senchalabs/connect/commit/277e5aad6a95d00f55571a9a0e11f2fa190d8135
+    [4]: https://github.com/senchalabs/connect/commit/126187c4e12162e231b87350740045e5bb06e93a
+    \nConnect is a stack of middleware that is executed in order in each
+    request.
+
+    The \"methodOverride\" middleware allows the http post to override the
+    method of the request with the value of the `_method` post key or with
+    the header \"x-http-method-override\".
+
+    Because the user post input was not checked, req.method could contain
+    any kind of value. Because the req.method did not match any common
+    method VERB, connect answered with a 404 page containing the \"Cannot
+    \[method\] \[url\]\" content. The method was not properly encoded for
+    output in the browser.
+
+    *Source: [Node Security Project][1]*
+
+    **Example**
+
+        ~ curl "localhost:3000" -d "_method=<script src=http://nodesecurity.io/xss.js></script>"
+        Cannot <SCRIPT SRC=HTTP://NODESECURITY.IO/XSS.JS></SCRIPT> /
+
+    **Mitigation factors**
+
+    Update to the newest version of Connect or disable methodOverride. It is
+    not possible to avoid the vulnerability if you have enabled this
+    middleware in the top of your stack.
+
+    **History**
+
+    * (2013-06-27) [Bug reported][2]
+    * (2013-06-27) [First fix: escape req.method output][3]
+    * (2013-06-27) [Second fix: whitelist][4]
+
+
+
+    [1]: https://nodesecurity.io/advisories/3
+    [2]: https://github.com/senchalabs/connect/issues/831
+    [3]: https://github.com/senchalabs/connect/commit/277e5aad6a95d00f55571a9a0e11f2fa190d8135
+    [4]: https://github.com/senchalabs/connect/commit/126187c4e12162e231b87350740045e5bb06e93a
+    \nConnect is a stack of middleware that is executed in order in each
+    request.
+
+    The \"methodOverride\" middleware allows the http post to override the
+    method of the request with the value of the `_method` post key or with
+    the header \"x-http-method-override\".
+
+    Because the user post input was not checked, req.method could contain
+    any kind of value. Because the req.method did not match any common
+    method VERB, connect answered with a 404 page containing the \"Cannot
+    \[method\] \[url\]\" content. The method was not properly encoded for
+    output in the browser.
+
+    *Source: [Node Security Project][1]*
+
+    **Example**
+
+        ~ curl "localhost:3000" -d "_method=<script src=http://nodesecurity.io/xss.js></script>"
+        Cannot <SCRIPT SRC=HTTP://NODESECURITY.IO/XSS.JS></SCRIPT> /
+
+    **Mitigation factors**
+
+    Update to the newest version of Connect or disable methodOverride. It is
+    not possible to avoid the vulnerability if you have enabled this
+    middleware in the top of your stack.
+
+    **History**
+
+    * (2013-06-27) [Bug reported][2]
+    * (2013-06-27) [First fix: escape req.method output][3]
+    * (2013-06-27) [Second fix: whitelist][4]
+
+
+
+    [1]: https://nodesecurity.io/advisories/3
+    [2]: https://github.com/senchalabs/connect/issues/831
+    [3]: https://github.com/senchalabs/connect/commit/277e5aad6a95d00f55571a9a0e11f2fa190d8135
+    [4]: https://github.com/senchalabs/connect/commit/126187c4e12162e231b87350740045e5bb06e93a
+    \nConnect is a stack of middleware that is executed in order in each
+    request.
+
+    The \"methodOverride\" middleware allows the http post to override the
+    method of the request with the value of the `_method` post key or with
+    the header \"x-http-method-override\".
+
+    Because the user post input was not checked, req.method could contain
+    any kind of value. Because the req.method did not match any common
+    method VERB, connect answered with a 404 page containing the \"Cannot
+    \[method\] \[url\]\" content. The method was not properly encoded for
+    output in the browser.
+
+    *Source: [Node Security Project][1]*
+
+    **Example**
+
+        ~ curl "localhost:3000" -d "_method=<script src=http://nodesecurity.io/xss.js></script>"
+        Cannot <SCRIPT SRC=HTTP://NODESECURITY.IO/XSS.JS></SCRIPT> /
+
+    **Mitigation factors**
+
+    Update to the newest version of Connect or disable methodOverride. It is
+    not possible to avoid the vulnerability if you have enabled this
+    middleware in the top of your stack.
+
+    **History**
+
+    * (2013-06-27) [Bug reported][2]
+    * (2013-06-27) [First fix: escape req.method output][3]
+    * (2013-06-27) [Second fix: whitelist][4]
+
+
+
+    [1]: https://nodesecurity.io/advisories/3
+    [2]: https://github.com/senchalabs/connect/issues/831
+    [3]: https://github.com/senchalabs/connect/commit/277e5aad6a95d00f55571a9a0e11f2fa190d8135
+    [4]: https://github.com/senchalabs/connect/commit/126187c4e12162e231b87350740045e5bb06e93a
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+  affected_package: connect
+  vulnerable_versions:
+  - "<=2.8.0"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2013-7370
+  cwe:
+  - CWE-79
+  credit:
+  - Sergio Arcos
+  source_url: https://snyk.io/vuln/npm:connect:20130701

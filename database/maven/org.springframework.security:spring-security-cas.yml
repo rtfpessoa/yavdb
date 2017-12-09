@@ -1,0 +1,91 @@
+---
+- id: ossindex:maven:org.springframework.security:spring-security-cas:2017-05-25
+  title: "[CVE-2014-3527]  Improper Authentication"
+  description: When using the CAS Proxy ticket authentication from Spring Security
+    3.1 to 3.2.4 a malicious CAS Service could trick another CAS Service into authenticating
+    a proxy ticket that was not associated. This is due to the fact that the proxy
+    ticket authentication uses the information from the HttpServletRequest which is
+    populated based upon untrusted information within the HTTP request. This means
+    if there are access control restrictions on which CAS services can authenticate
+    to one another, those restrictions can be bypassed. If users are not using CAS
+    Proxy tickets and not basing access control decisions based upon the CAS Service,
+    then there is no impact to users.
+  affected_package: org.springframework.security:spring-security-cas
+  vulnerable_versions:
+  - "> >=3.1.0 <=3.1.6"
+  - "> >=3.2.0 <=3.2.4"
+  package_manager: maven
+  cve:
+  - CVE-2014-3527
+  credit:
+  - OSSIndex
+  references:
+  - https://pivotal.io/security/cve-2014-3527
+  source_url: https://ossindex.net/resource/package/7015475499/vulnerabilities
+- id: snykio:maven:org.springframework.security:spring-security-cas:2016-12-25
+  title: Access Restriction Bypass
+  description: |
+    [`org.springframework.security:spring-security-cas`][1] When using
+    Spring Security\'s CAS Proxy ticket authentication, a malicious CAS
+    Service could trick another CAS Service into authenticating a proxy
+    ticket that was not associated. A remote attacker could use this flaw to
+    bypass any access control restrictions on which CAS services can
+    authenticate to one another.
+
+
+
+    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22spring-security-cas%22
+    \n[`org.springframework.security:spring-security-cas`][1] When using
+    Spring Security\'s CAS Proxy ticket authentication, a malicious CAS
+    Service could trick another CAS Service into authenticating a proxy
+    ticket that was not associated. A remote attacker could use this flaw to
+    bypass any access control restrictions on which CAS services can
+    authenticate to one another.
+
+
+
+    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22spring-security-cas%22
+  affected_package: org.springframework.security:spring-security-cas
+  vulnerable_versions:
+  - ">= 3.2 <= 3.2.4.RELEASE"
+  - ">= 3.1 <= 3.1.6.RELEASE"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2014-3527
+  cwe:
+  - CWE-284
+  credit:
+  - David Ohsie
+  references:
+  - http://www.gopivotal.com/security/cve-2014-3527
+  - https://bugzilla.redhat.com/CVE-2014-3527
+  - https://spring.io/blog/2014/08/15/cve-2014-3527-fixed-in-spring-security-3-2-5-and-3-1-7
+  - https://jira.spring.io/browse/SEC-2688
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGSPRINGFRAMEWORKSECURITY-30173
+- id: victims:maven:org.springframework.security:spring-security-cas:date
+  title: 'Spring Security CAS: Access control bypass via untrusted infomation usage
+    in proxy ticket authentication'
+  affected_package: org.springframework.security:spring-security-cas
+  vulnerable_versions:
+  - "<=3.2.4.RELEASE"
+  - '3.2'
+  - "<=3.1.6.RELEASE"
+  - '3.1'
+  patched_versions:
+  - ">=3.2.5.RELEASE"
+  - '3.2'
+  - ">=3.1.7.RELEASE"
+  - '3.1'
+  severity: medium
+  package_manager: maven
+  cve:
+  - 2014-3527
+  credit:
+  - Victims CVE Database
+  references:
+  - http://www.gopivotal.com/security/cve-2014-3527
+  - https://bugzilla.redhat.com/CVE-2014-3527
+  - https://spring.io/blog/2014/08/15/cve-2014-3527-fixed-in-spring-security-3-2-5-and-3-1-7
+  - https://jira.spring.io/browse/SEC-2688
+  source_url: https://github.com/victims/victims-cve-db/blob/master/database/java/2014/3527.yaml

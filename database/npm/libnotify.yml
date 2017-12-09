@@ -1,0 +1,110 @@
+---
+- id: nodesecurity:npm:libnotify:2013-05-15
+  title: Potential Command Injection
+  description: |-
+    Versions 1.0.3 and earlier of libnotify are affected by a shell command injection vulnerability. This may result in execution of arbitrary shell commands, if user input is passed into libnotify.notify.
+
+    Untrusted input passed in the call to libnotify.notify could result in execution of shell commands. Callers may be unaware of this.
+
+    ### Example
+    ```
+    var libnotify = require('libnotify')
+    libnotify.notify('UNTRUSTED INPUT', { title: \"\" }, function () {
+        console.log(arguments);
+    })
+    ```
+
+    Special thanks to Neal Poole for submitting the pull request to fix this issue.
+  affected_package: libnotify
+  vulnerable_versions:
+  - "<= 1.0.3"
+  patched_versions:
+  - ">= 1.0.4"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2013-7381
+  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N
+  credit:
+  - Adam Baldwin
+  references:
+  - ''
+  source_url: https://nodesecurity.io/advisories/20
+- id: ossindex:npm:libnotify:2016-05-23
+  title: Remote Command Injection
+  description: "> node-libnotify is prone to a remote command-injection vulnerability.
+    \n> \nSuccessfully exploiting this issue may allow an attacker to execute arbitrary
+    commands in context of the affected application. \n> \n> -- [nodesecurity.io](https://nodesecurity.io/advisories/libnotify_potential_command_injection_in_libnotify.notify)"
+  affected_package: libnotify
+  vulnerable_versions:
+  - "<=1.0.3"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - http://www.securityfocus.com/bid/67353/info
+  - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-7381
+  - https://cwe.mitre.org/data/definitions/77.html
+  - https://nodesecurity.io/advisories/20
+  - https://nodesecurity.io/advisories/libnotify_potential_command_injection_in_libnotify.notify
+  source_url: https://ossindex.net/resource/package/7014068058/vulnerabilities
+- id: snykio:npm:libnotify:2013-05-15
+  title: Potential Command Injection
+  description: |+
+    Untrusted input passed in the call to libnotify.notify could result in
+    execution of shell commands. Callers may be unaware of this.
+
+    *Source: [Node Security Project][1]*
+
+
+
+    [1]: https://nodesecurity.io/advisories/20
+    \nUntrusted input passed in the call to libnotify.notify could result in
+    execution of shell commands. Callers may be unaware of this.
+
+    *Source: [Node Security Project][1]*
+
+
+
+    [1]: https://nodesecurity.io/advisories/20
+    \nUntrusted input passed in the call to libnotify.notify could result in
+    execution of shell commands. Callers may be unaware of this.
+
+    *Source: [Node Security Project][1]*
+
+
+
+    [1]: https://nodesecurity.io/advisories/20
+    \n**Example:**
+
+        var libnotify = require('libnotify')
+        libnotify.notify('UNTRUSTED INPUT', { title: \"\" }, function () {
+            console.log(arguments);
+        })
+
+    \n**Example:**
+
+        var libnotify = require('libnotify')
+        libnotify.notify('UNTRUSTED INPUT', { title: \"\" }, function () {
+            console.log(arguments);
+        })
+
+    \n**Example:**
+
+        var libnotify = require('libnotify')
+        libnotify.notify('UNTRUSTED INPUT', { title: \"\" }, function () {
+            console.log(arguments);
+        })
+
+  affected_package: libnotify
+  vulnerable_versions:
+  - "<= 1.0.3"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2013-7381
+  cwe:
+  - CWE-77
+  credit:
+  - Adam Baldwin
+  source_url: https://snyk.io/vuln/npm:libnotify:20130515

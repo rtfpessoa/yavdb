@@ -1,0 +1,87 @@
+---
+- id: nodesecurity:npm:jsonwebtoken:2015-04-01
+  title: Verification Bypass
+  description: "Versions 4.2.1 and earlier of `jsonwebtoken` are affected by a verification
+    bypass vulnerability. This is a result of weak validation of the JWT algorithm
+    type, occuring when an attacker is allowed to arbitrarily specify the JWT algorithm.\n\n"
+  affected_package: jsonwebtoken
+  vulnerable_versions:
+  - "<4.2.2"
+  patched_versions:
+  - ">=4.2.2"
+  severity: high
+  package_manager: npm
+  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N
+  credit:
+  - Tim McLean
+  references:
+  - |-
+    https://github.com/auth0/node-jsonwebtoken/commit/1bb584bc382295eeb7ee8c4452a673a77a68b687
+    https://www.timmclean.net/2015/02/25/jwt-alg-none.html
+    https://auth0.com/blog/2015/03/31/critical-vulnerabilities-in-json-web-token-libraries/
+  source_url: https://nodesecurity.io/advisories/17
+- id: ossindex:npm:jsonwebtoken:1970-01-01
+  title: Verification Bypass
+  description: |-
+    There is a vulnerability in this module when the verification part is expecting a token digitally signed with an asymetric key (RS/ES family) of algorithms but instead the attacker send a token digitally signed with a symmetric algorithm (HS* family).
+
+    The issue is because this library has the very same signature to verify both type of tokens (parameter: `secretOrPublicKey`).
+
+    This change adds a new parameter to the verify called `algorithms`. This can be used to specify a list of supported algorithms, but the default value depends on the secret used: if the secretOrPublicKey contains the string `BEGIN CERTIFICATE` the default is `[ 'RS256','RS384','RS512','ES256','ES384','ES512' ]` otherwise is `[ 'HS256','HS384','HS512' ]`
+  affected_package: jsonwebtoken
+  vulnerable_versions:
+  - "<4.2.2"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - https://auth0.com/blog/2015/03/31/critical-vulnerabilities-in-json-web-token-libraries/
+  - https://github.com/auth0/node-jsonwebtoken/commit/1bb584bc382295eeb7ee8c4452a673a77a68b687
+  - https://nodesecurity.io/advisories/17
+  - https://www.chosenplaintext.ca/2015/03/31/jwt-algorithm-confusion.html
+  source_url: https://ossindex.net/resource/package/7014020909/vulnerabilities
+- id: snykio:npm:jsonwebtoken:2015-03-31
+  title: Authentication Bypass
+  description: |
+    [`jsonwebtoken`][1] is a JSON Web token implementation for symmetric and
+    asymmetric keys. Affected versions of this package are vulnerable to an
+    Authentication Bypass attack, due to the \"algorithm\" not being
+    enforced. Attackers are given the opportunity to choose the algorithm
+    sent to the server and generate signatures with arbitrary contents. The
+    server expects an asymmetric key (RSA) but is sent a symmetric key
+    (HMAC-SHA) with RSA\'s public key, so instead of going through a key
+    validation process, the server will think the public key is actually an
+    HMAC private key.
+
+
+
+    [1]: https://www.npmjs.com/package/jsonwebtoken
+    \n[`jsonwebtoken`][1] is a JSON Web token implementation for symmetric and
+    asymmetric keys. Affected versions of this package are vulnerable to an
+    Authentication Bypass attack, due to the \"algorithm\" not being
+    enforced. Attackers are given the opportunity to choose the algorithm
+    sent to the server and generate signatures with arbitrary contents. The
+    server expects an asymmetric key (RSA) but is sent a symmetric key
+    (HMAC-SHA) with RSA\'s public key, so instead of going through a key
+    validation process, the server will think the public key is actually an
+    HMAC private key.
+
+
+
+    [1]: https://www.npmjs.com/package/jsonwebtoken
+  affected_package: jsonwebtoken
+  vulnerable_versions:
+  - "<4.2.2"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2015-9235
+  cwe:
+  - CWE-592
+  credit:
+  - Tim McLean
+  references:
+  - https://github.com/auth0/node-jsonwebtoken/commit/1bb584bc382295eeb7ee8c4452a673a77a68b687
+  - https://www.timmclean.net/2015/02/25/jwt-alg-none.html
+  - https://auth0.com/blog/2015/03/31/critical-vulnerabilities-in-json-web-token-libraries/
+  source_url: https://snyk.io/vuln/npm:jsonwebtoken:20150331

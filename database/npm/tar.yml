@@ -1,0 +1,72 @@
+---
+- id: nodesecurity:npm:tar:2015-11-03
+  title: Symlink Arbitrary File Overwrite
+  description: 'Versions of `tar` prior to 2.0.0 are affected by an arbitrary file
+    write vulnerability. The vulnerability occurs because `tar` does not verify that
+    extracted symbolic links to not resolve to targets outside of the extraction root
+    directory.
+
+'
+  affected_package: tar
+  vulnerable_versions:
+  - "<2.0.0"
+  patched_versions:
+  - ">=2.0.0"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2015-8860
+  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N
+  credit:
+  - Tim Cuthbertson
+  references:
+  - https://github.com/npm/npm/releases/tag/v2.7.5)
+  source_url: https://nodesecurity.io/advisories/57
+- id: ossindex:npm:tar:2017-01-23
+  title: '[CVE-2015-8860]  Improper Link Resolution Before File Access ("Link Following")'
+  description: The tar package before 2.0.0 for Node.js allows remote attackers to
+    write to arbitrary files via a symlink attack in an archive.
+  affected_package: tar
+  vulnerable_versions:
+  - "<2.0.0"
+  package_manager: npm
+  cve:
+  - CVE-2015-8860
+  credit:
+  - OSSIndex
+  references:
+  - http://www.openwall.com/lists/oss-security/2016/04/20/11
+  - https://nodesecurity.io/advisories/57
+  source_url: https://ossindex.net/resource/package/7014519406/vulnerabilities
+- id: snykio:npm:tar:2015-11-03
+  title: Symlink File Overwrite
+  description: |
+    The [`tar`][1] module prior to version 2.0.0 does not properly normalize
+    symbolic links pointing to targets outside the extraction root. As a
+    result, packages may hold symbolic links to parent and sibling
+    directories and overwrite those files when the package is extracted.
+
+
+
+    [1]: https://www.npmjs.com/package/tar
+    \nThe [`tar`][1] module prior to version 2.0.0 does not properly normalize
+    symbolic links pointing to targets outside the extraction root. As a
+    result, packages may hold symbolic links to parent and sibling
+    directories and overwrite those files when the package is extracted.
+
+
+
+    [1]: https://www.npmjs.com/package/tar
+  affected_package: tar
+  vulnerable_versions:
+  - "<2.0.0"
+  severity: high
+  package_manager: npm
+  cwe:
+  - CWE-208
+  credit:
+  - Tim Cuthbertson
+  references:
+  - https://github.com/npm/node-tar/commit/a5337a6cd58a2d800fc03b3781a25751cf459f28
+  - https://github.com/npm/npm/releases/tag/v2.7.5
+  source_url: https://snyk.io/vuln/npm:tar:20151103

@@ -1,0 +1,148 @@
+---
+- id: snykio:nuget:npm:2017-02-13
+  title: Symlink attack due to predictable tmp folder names
+  description: |
+    [`npm`][1] is a package manager for JavaScript. Affected versions of the
+    package are vulnerable to Symlink attack due to predictable tmp folder
+    names, which were named `/tmp/npm-$PID`. An attacker waiting for a
+    process named `npm-` to load could then go to the folder and arbitrarily
+    change the files in the tmp folder.
+
+
+
+    [1]: https://www.npmjs.com/package/npm
+    \n[`npm`][1] is a package manager for JavaScript. Affected versions of the
+    package are vulnerable to Symlink attack due to predictable tmp folder
+    names, which were named `/tmp/npm-$PID`. An attacker waiting for a
+    process named `npm-` to load could then go to the folder and arbitrarily
+    change the files in the tmp folder.
+
+
+
+    [1]: https://www.npmjs.com/package/npm
+  affected_package: npm
+  vulnerable_versions:
+  - "< 1.3.3"
+  severity: medium
+  package_manager: nuget
+  cve:
+  - CVE-2013-4116
+  cwe:
+  - CWE-377
+  credit:
+  - Daniel Kahn Gillmor
+  references:
+  - https://github.com/npm/npm/issues/3635
+  - https://github.com/npm/npm/commit/f4d31693
+  - http://www.openwall.com/lists/oss-security/2013/07/10/17
+  source_url: https://snyk.io/vuln/SNYK-DOTNET-NPM-60199
+- id: snykio:nuget:npm:2016-04-20
+  title: npm Token Leak
+  description: |+
+    This vulnerability could cause the unintentional leakage of bearer
+    tokens. A design flaw in npm\'s registry allows an attacker to set up an
+    HTTP server that could collect authentication information, and then use
+    this authentication information to impersonate the users whose tokens
+    they collected. The attacker could do anything the compromised users
+    could do, including publishing new versions of packages.
+
+    \nThis vulnerability could cause the unintentional leakage of bearer
+    tokens. A design flaw in npm\'s registry allows an attacker to set up an
+    HTTP server that could collect authentication information, and then use
+    this authentication information to impersonate the users whose tokens
+    they collected. The attacker could do anything the compromised users
+    could do, including publishing new versions of packages.
+
+    \nThe primary npm registry has, since late 2014, used HTTP bearer tokens
+    to authenticate requests from the npm command-line interface. Due to a
+    design flaw in the CLI, these bearer tokens were sent with every request
+    made by logged-in users, regardless of the destination of the request.
+    (The bearers only should have been included for requests made against a
+    registry or registries used for the current install.)
+
+    This flaw allows an attacker to set up an HTTP server that could collect
+    authentication information. They could then use this information to
+    impersonate the users whose tokens they collected. This impersonation
+    would allow them to do anything the compromised users could do,
+    including publishing new versions of packages.
+
+    With the fixes npm have released, the CLI will only send bearer tokens
+    with requests made against a registry. npm’s CLI team believe that the
+    fix won’t break any existing registry setups. However, it’s possible the
+    change will be breaking in some cases, due to the large number of
+    registry software suites used.
+
+    \nThe primary npm registry has, since late 2014, used HTTP bearer tokens
+    to authenticate requests from the npm command-line interface. Due to a
+    design flaw in the CLI, these bearer tokens were sent with every request
+    made by logged-in users, regardless of the destination of the request.
+    (The bearers only should have been included for requests made against a
+    registry or registries used for the current install.)
+
+    This flaw allows an attacker to set up an HTTP server that could collect
+    authentication information. They could then use this information to
+    impersonate the users whose tokens they collected. This impersonation
+    would allow them to do anything the compromised users could do,
+    including publishing new versions of packages.
+
+    With the fixes npm have released, the CLI will only send bearer tokens
+    with requests made against a registry. npm’s CLI team believe that the
+    fix won’t break any existing registry setups. However, it’s possible the
+    change will be breaking in some cases, due to the large number of
+    registry software suites used.
+
+    \nThe primary npm registry has, since late 2014, used HTTP bearer tokens
+    to authenticate requests from the npm command-line interface. Due to a
+    design flaw in the CLI, these bearer tokens were sent with every request
+    made by logged-in users, regardless of the destination of the request.
+    (The bearers only should have been included for requests made against a
+    registry or registries used for the current install.)
+
+    This flaw allows an attacker to set up an HTTP server that could collect
+    authentication information. They could then use this information to
+    impersonate the users whose tokens they collected. This impersonation
+    would allow them to do anything the compromised users could do,
+    including publishing new versions of packages.
+
+    With the fixes npm have released, the CLI will only send bearer tokens
+    with requests made against a registry. npm’s CLI team believe that the
+    fix won’t break any existing registry setups. However, it’s possible the
+    change will be breaking in some cases, due to the large number of
+    registry software suites used.
+
+    \nThe primary npm registry has, since late 2014, used HTTP bearer tokens
+    to authenticate requests from the npm command-line interface. Due to a
+    design flaw in the CLI, these bearer tokens were sent with every request
+    made by logged-in users, regardless of the destination of the request.
+    (The bearers only should have been included for requests made against a
+    registry or registries used for the current install.)
+
+    This flaw allows an attacker to set up an HTTP server that could collect
+    authentication information. They could then use this information to
+    impersonate the users whose tokens they collected. This impersonation
+    would allow them to do anything the compromised users could do,
+    including publishing new versions of packages.
+
+    With the fixes npm have released, the CLI will only send bearer tokens
+    with requests made against a registry. npm’s CLI team believe that the
+    fix won’t break any existing registry setups. However, it’s possible the
+    change will be breaking in some cases, due to the large number of
+    registry software suites used.
+
+  affected_package: npm
+  vulnerable_versions:
+  - "<= 2.15.0"
+  - ">= 3 < 3.8.2"
+  severity: medium
+  package_manager: nuget
+  cwe:
+  - CWE-200
+  credit:
+  - Mitar
+  - Will White & the team at Mapbox
+  - Max Motovilov
+  - James Taylor
+  references:
+  - https://nodejs.org/en/blog/vulnerability/npm-tokens-leak-march-2016/
+  - http://blog.npmjs.org/post/142036323955/fixing-a-bearer-token-vulnerability
+  source_url: https://snyk.io/vuln/SNYK-DOTNET-NPM-60200

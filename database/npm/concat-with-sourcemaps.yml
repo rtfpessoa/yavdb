@@ -1,0 +1,141 @@
+---
+- id: nodesecurity:npm:concat-with-sourcemaps:2018-05-16
+  title: Out-of-bounds Read
+  description: Versions of `concat-with-sourcemaps` before 1.0.6 allocates uninitialized
+    Buffers when a number is passed as a separator.
+  affected_package: concat-with-sourcemaps
+  vulnerable_versions:
+  - "<=1.0.5"
+  patched_versions:
+  - ">=1.0.6"
+  severity: medium
+  package_manager: npm
+  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H
+  credit:
+  - Сковорода Никита Андреевич
+  references:
+  - |-
+    https://hackerone.com/reports/320166)
+    https://github.com/floridoo/concat-with-sourcemaps/blob/v1.0.5/index.js#L18)
+  source_url: https://nodesecurity.io/advisories/644
+- id: snykio:npm:concat-with-sourcemaps:2018-04-29
+  title: Uninitialized Memory Exposure
+  description: |+
+    [concat-with-sourcemaps][1] is a NPM module for concatenating files and
+    generating source maps.
+
+    Affected versions of this package are vulnerable to Uninitialized Memory
+    Exposure. It allocates uninitialized Buffers when a number is passed as
+    a separator.
+
+
+
+    [1]: https://www.npmjs.com/package/concat-with-sourcemaps
+    \n[concat-with-sourcemaps][1] is a NPM module for concatenating files and
+    generating source maps.
+
+    Affected versions of this package are vulnerable to Uninitialized Memory
+    Exposure. It allocates uninitialized Buffers when a number is passed as
+    a separator.
+
+
+
+    [1]: https://www.npmjs.com/package/concat-with-sourcemaps
+    \n[concat-with-sourcemaps][1] is a NPM module for concatenating files and
+    generating source maps.
+
+    Affected versions of this package are vulnerable to Uninitialized Memory
+    Exposure. It allocates uninitialized Buffers when a number is passed as
+    a separator.
+
+
+
+    [1]: https://www.npmjs.com/package/concat-with-sourcemaps
+    \nThe Buffer class on Node.js is a mutable array of binary data, and can
+    be initialized with a string, array or number.
+
+        const buf1 = new Buffer([1,2,3]);
+        // creates a buffer containing [01, 02, 03]
+        const buf2 = new Buffer('test');
+        // creates a buffer containing ASCII bytes [74, 65, 73, 74]
+        const buf3 = new Buffer(10);
+        // creates a buffer of length 10
+
+    The first two variants simply create a binary representation of the
+    value it received. The last one, however, pre-allocates a buffer of the
+    specified size, making it a useful buffer, especially when reading data
+    from a stream. When using the number constructor of Buffer, it will
+    allocate the memory, but will not fill it with zeros. Instead, the
+    allocated buffer will hold whatever was in memory at the time. If the
+    buffer is not `zeroed` by using `buf.fill(0)`, it may leak sensitive
+    information like keys, source code, and system info.
+
+    \nThe Buffer class on Node.js is a mutable array of binary data, and can
+    be initialized with a string, array or number.
+
+        const buf1 = new Buffer([1,2,3]);
+        // creates a buffer containing [01, 02, 03]
+        const buf2 = new Buffer('test');
+        // creates a buffer containing ASCII bytes [74, 65, 73, 74]
+        const buf3 = new Buffer(10);
+        // creates a buffer of length 10
+
+    The first two variants simply create a binary representation of the
+    value it received. The last one, however, pre-allocates a buffer of the
+    specified size, making it a useful buffer, especially when reading data
+    from a stream. When using the number constructor of Buffer, it will
+    allocate the memory, but will not fill it with zeros. Instead, the
+    allocated buffer will hold whatever was in memory at the time. If the
+    buffer is not `zeroed` by using `buf.fill(0)`, it may leak sensitive
+    information like keys, source code, and system info.
+
+    \nThe Buffer class on Node.js is a mutable array of binary data, and can
+    be initialized with a string, array or number.
+
+        const buf1 = new Buffer([1,2,3]);
+        // creates a buffer containing [01, 02, 03]
+        const buf2 = new Buffer('test');
+        // creates a buffer containing ASCII bytes [74, 65, 73, 74]
+        const buf3 = new Buffer(10);
+        // creates a buffer of length 10
+
+    The first two variants simply create a binary representation of the
+    value it received. The last one, however, pre-allocates a buffer of the
+    specified size, making it a useful buffer, especially when reading data
+    from a stream. When using the number constructor of Buffer, it will
+    allocate the memory, but will not fill it with zeros. Instead, the
+    allocated buffer will hold whatever was in memory at the time. If the
+    buffer is not `zeroed` by using `buf.fill(0)`, it may leak sensitive
+    information like keys, source code, and system info.
+
+    \nThe Buffer class on Node.js is a mutable array of binary data, and can
+    be initialized with a string, array or number.
+
+        const buf1 = new Buffer([1,2,3]);
+        // creates a buffer containing [01, 02, 03]
+        const buf2 = new Buffer('test');
+        // creates a buffer containing ASCII bytes [74, 65, 73, 74]
+        const buf3 = new Buffer(10);
+        // creates a buffer of length 10
+
+    The first two variants simply create a binary representation of the
+    value it received. The last one, however, pre-allocates a buffer of the
+    specified size, making it a useful buffer, especially when reading data
+    from a stream. When using the number constructor of Buffer, it will
+    allocate the memory, but will not fill it with zeros. Instead, the
+    allocated buffer will hold whatever was in memory at the time. If the
+    buffer is not `zeroed` by using `buf.fill(0)`, it may leak sensitive
+    information like keys, source code, and system info.
+
+  affected_package: concat-with-sourcemaps
+  vulnerable_versions:
+  - "<1.0.6"
+  severity: medium
+  package_manager: npm
+  cwe:
+  - CWE-201
+  credit:
+  - ChALkeR
+  references:
+  - https://hackerone.com/reports/320166
+  source_url: https://snyk.io/vuln/npm:concat-with-sourcemaps:20180429

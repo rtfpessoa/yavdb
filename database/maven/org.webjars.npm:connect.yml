@@ -1,0 +1,85 @@
+---
+- id: ossindex:maven:org.webjars.npm:connect:2017-03-03
+  title: Denial of Service (DoS)
+  description: "> When using the static middleware, if the URL contains a valid file
+    name and a trailing backslash the node server will crash with `Error: ENOENT,
+    no such file or directory`.\n> \n> -- [github.com](https://github.com/senchalabs/connect/issues/452)"
+  affected_package: org.webjars.npm:connect
+  vulnerable_versions:
+  - "<0.8.6"
+  - ">0.8.6 <2.0.0"
+  package_manager: maven
+  credit:
+  - OSSIndex
+  references:
+  - https://github.com/senchalabs/connect/commit/2b0e8d69a14312fa2fd3449685be0c0896dfe53e
+  - https://github.com/senchalabs/connect/issues/452
+  source_url: https://ossindex.net/resource/package/7107639528/vulnerabilities
+- id: ossindex:maven:org.webjars.npm:connect:2017-03-03
+  title: Directory traversal vulnerability in staticProvider
+  description: "> staticProvider lets attacker to use relative paths in requests by
+    escaping the \"..\" with \"%2e%2e\". It checks for containing relative paths _before_
+    unescaping so it never gets caught.\n> \n> -- [github.com](https://github.com/senchalabs/connect/issues/198)"
+  affected_package: org.webjars.npm:connect
+  vulnerable_versions:
+  - "<0.5.10"
+  package_manager: maven
+  credit:
+  - OSSIndex
+  references:
+  - https://cwe.mitre.org/data/definitions/22.html
+  - https://github.com/senchalabs/connect/commit/e59091052709411390343d2252fb17833649aeaf
+  - https://github.com/senchalabs/connect/issues/198
+  source_url: https://ossindex.net/resource/package/7107639528/vulnerabilities
+- id: ossindex:maven:org.webjars.npm:connect:2017-03-03
+  title: Path Traversal
+  description: 'A mishandling of adding `directory(''.'')` to `connect()` results
+    any path beginning with `.` to pass the malicious directory check, allowing access
+    to any file on the system.
+
+'
+  affected_package: org.webjars.npm:connect
+  vulnerable_versions:
+  - "<2.9.2"
+  package_manager: maven
+  credit:
+  - OSSIndex
+  references:
+  - https://cwe.mitre.org/data/definitions/22.html
+  - https://github.com/senchalabs/connect/commit/c2afb242d4fa9843fed52cb27fc9d940cf9bc69c
+  - https://github.com/senchalabs/connect/issues/771
+  source_url: https://ossindex.net/resource/package/7107639528/vulnerabilities
+- id: ossindex:maven:org.webjars.npm:connect:2017-03-03
+  title: Cross Site Scripting (XSS)
+  description: A cross site scripting attack is possible in 404 messages due to missing
+    escaping.
+  affected_package: org.webjars.npm:connect
+  vulnerable_versions:
+  - "<0.8.6"
+  package_manager: maven
+  credit:
+  - OSSIndex
+  references:
+  - https://cwe.mitre.org/data/definitions/79.html
+  - https://github.com/senchalabs/connect/commit/c1daf27b2067b07fe3e9a66ce7f9121a0fa597b3
+  - https://github.com/senchalabs/connect/issues/473
+  source_url: https://ossindex.net/resource/package/7107639528/vulnerabilities
+- id: ossindex:maven:org.webjars.npm:connect:1970-01-01
+  title: Cross-Site Scripting with connect.methodOverride()
+  description: |-
+    This middleware overwrite req.method with the req.body['_method'] value. When you don't catch the error it responds with a default error msg: "Cannot [METHOD] [URL]" (https://github.com/senchalabs/connect/blob/6db901f967036ccc3c892b4bcb5bcb59e0b0dca9/lib/proto.js#L155). Because this is not enough sanitized, you can force a Cross-Site Scripting in the response:
+
+    ~ curl "localhost:3000" -d "_method=<script src=http://martes13.net/a.js></script>"
+    Cannot <SCRIPT SRC=HTTP://MARTES13.NET/A.JS></SCRIPT> /
+    This is very dangerous because in a server like ExpressJS it won't be handled with a app.all('/*', ...), so all servers using this middleware are vulnerable.
+  affected_package: org.webjars.npm:connect
+  vulnerable_versions:
+  - "<=2.8.0"
+  package_manager: maven
+  credit:
+  - OSSIndex
+  references:
+  - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-7370
+  - https://github.com/senchalabs/connect/issues/831
+  - https://nodesecurity.io/advisories/3
+  source_url: https://ossindex.net/resource/package/7107639528/vulnerabilities

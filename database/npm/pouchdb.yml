@@ -1,0 +1,192 @@
+---
+- id: nodesecurity:npm:pouchdb:2016-10-17
+  title: Arbitrary Code Injection
+  description: Affected versions of `pouchdb` do not properly sandbox the code execution
+    engine which executes the map/reduce functions for temporary views and design
+    documents. Under certain circumstances, an attacker could uses this to run arbitrary
+    code on the server.
+  affected_package: pouchdb
+  vulnerable_versions:
+  - "<=6.0.4"
+  patched_versions:
+  - ">=6.0.5"
+  severity: high
+  package_manager: npm
+  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H
+  credit:
+  - micaksica
+  references:
+  - ''
+  source_url: https://nodesecurity.io/advisories/143
+- id: ossindex:npm:pouchdb:2017-07-29
+  title: Arbitrary Code Injection
+  description: "> An arbitrary code injection vector was found in PouchDB 5.4.5 and
+    lesser via the map/reduce functions used in PouchDB temporary views and design
+    documents. The code execution engine for this branch is not properly sandboxed
+    and may be used to run arbitrary JavaScript as well as system commands.\n> \n>
+    -- [nodesecurity.io](https://nodesecurity.io/advisories/143)"
+  affected_package: pouchdb
+  vulnerable_versions:
+  - "<=6.0.4"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - https://nodesecurity.io/advisories/143
+  source_url: https://ossindex.net/resource/package/7014313298/vulnerabilities
+- id: ossindex:npm:pouchdb:2017-03-31
+  title: SQL Injection
+  description: allDocs() doesn't properly escape the startkey/endkey resulting in
+    possible SQL Injection attacks.
+  affected_package: pouchdb
+  vulnerable_versions:
+  - "<1.1.0"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - https://github.com/pouchdb/pouchdb/commit/59b1f9e003b9858796bbbe7f5f476b3cba527c26
+  - https://github.com/pouchdb/pouchdb/issues/1170
+  source_url: https://ossindex.net/resource/package/7014313298/vulnerabilities
+- id: ossindex:npm:pouchdb:2017-03-31
+  title: SQL Injection
+  description: An SQL Injection is possible due to incorrect query escaping.
+  affected_package: pouchdb
+  vulnerable_versions:
+  - "<2.1.0"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - https://cwe.mitre.org/data/definitions/89.html
+  - https://github.com/daleharvey/pouchdb/commit/7c69b64d1d65b4078fa97d74704e8310d905c08c
+  - https://github.com/pouchdb/pouchdb/issues/1743
+  source_url: https://ossindex.net/resource/package/7014313298/vulnerabilities
+- id: ossindex:npm:pouchdb:2017-03-31
+  title: Safely allocate attachment buffers in PouchDB/Node.js
+  description: "> Due to [Buffer (number) is unsafe](https://github.com/nodejs/node/issues/4660)
+    in Node and PouchDB's usage of the now-deprecated [Buffer(number) constructor](https://nodejs.org/dist/latest-v4.x/docs/api/buffer.html#buffer_new_buffer_size)
+    for attachments, PouchDB attachment buffers allocate potentially uninitialized
+    memory via `malloc` from the Node.js process. These buffers may contain data left
+    over from GC'd / freed heap memory from other parts of the Node.js process, and
+    may lead to exploitable memory corruption if Buffer() types are not properly checked
+    in PouchDB.\n> \n> -- [https://github.com](https://github.com/pouchdb/pouchdb/issues/5531)"
+  affected_package: pouchdb
+  vulnerable_versions:
+  - "<6.1.0"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - https://github.com/pouchdb/pouchdb/commit/3a44b630808cbd5283584eb84bde2a01f66ff8a8
+  - https://github.com/pouchdb/pouchdb/issues/5531
+  source_url: https://ossindex.net/resource/package/7014313298/vulnerabilities
+- id: snykio:npm:pouchdb:2013-12-20
+  title: SQL Injection
+  description: |
+    [`pouchdb`][1] is PouchDB is a pocket-sized database. Affected versions
+    of the package are vulnerable to SQL Injection due to not properly
+    escaping the startkey/endkey in the allDocs() function. You can read
+    more about `SQL Injection` on our [blog][2].
+
+
+
+    [1]: https://www.npmjs.com/package/pouchdb
+    [2]: https://snyk.io/blog/sql-injection-orm-vulnerabilities/
+    \n[`pouchdb`][1] is PouchDB is a pocket-sized database. Affected versions
+    of the package are vulnerable to SQL Injection due to not properly
+    escaping the startkey/endkey in the allDocs() function. You can read
+    more about `SQL Injection` on our [blog][2].
+
+
+
+    [1]: https://www.npmjs.com/package/pouchdb
+    [2]: https://snyk.io/blog/sql-injection-orm-vulnerabilities/
+  affected_package: pouchdb
+  vulnerable_versions:
+  - "<1.1.0"
+  severity: medium
+  package_manager: npm
+  cwe:
+  - CWE-89
+  credit:
+  - Nolan Lawson
+  references:
+  - https://github.com/pouchdb/pouchdb/issues/1170
+  - https://github.com/pouchdb/pouchdb/commit/59b1f9e003b9858796bbbe7f5f476b3cba527c26
+  source_url: https://snyk.io/vuln/npm:pouchdb:20131221
+- id: snykio:npm:pouchdb:2016-08-30
+  title: Arbitrary Code Injection
+  description: |
+    [`pouchDB`][1] is an open-source JavaScript database inspired by `Apache
+    CouchDB` that is designed to run well within the browser.
+
+    Vulnerable versions of the package had the `evalView` function in
+    `pouchdb-core` to execute the view function without a sandbox. The fix
+    was introduced in version `6.0.5`, executing the view function in a
+    sandbox and enforcing strict mode when running in Node.js.
+
+    The vulnerability was reported by [micaksica][2].
+
+
+
+    [1]: https://www.npmjs.com/package/pouchdb
+    [2]: https://github.com/micaksica
+    \n[`pouchDB`][1] is an open-source JavaScript database inspired by `Apache
+    CouchDB` that is designed to run well within the browser.
+
+    Vulnerable versions of the package had the `evalView` function in
+    `pouchdb-core` to execute the view function without a sandbox. The fix
+    was introduced in version `6.0.5`, executing the view function in a
+    sandbox and enforcing strict mode when running in Node.js.
+
+    The vulnerability was reported by [micaksica][2].
+
+
+
+    [1]: https://www.npmjs.com/package/pouchdb
+    [2]: https://github.com/micaksica
+    \n[`pouchDB`][1] is an open-source JavaScript database inspired by `Apache
+    CouchDB` that is designed to run well within the browser.
+
+    Vulnerable versions of the package had the `evalView` function in
+    `pouchdb-core` to execute the view function without a sandbox. The fix
+    was introduced in version `6.0.5`, executing the view function in a
+    sandbox and enforcing strict mode when running in Node.js.
+
+    The vulnerability was reported by [micaksica][2].
+
+
+
+    [1]: https://www.npmjs.com/package/pouchdb
+    [2]: https://github.com/micaksica
+    \n[`pouchDB`][1] is an open-source JavaScript database inspired by `Apache
+    CouchDB` that is designed to run well within the browser.
+
+    Vulnerable versions of the package had the `evalView` function in
+    `pouchdb-core` to execute the view function without a sandbox. The fix
+    was introduced in version `6.0.5`, executing the view function in a
+    sandbox and enforcing strict mode when running in Node.js.
+
+    The vulnerability was reported by [micaksica][2].
+
+
+
+    [1]: https://www.npmjs.com/package/pouchdb
+    [2]: https://github.com/micaksica
+  affected_package: pouchdb
+  vulnerable_versions:
+  - "<=6.0.4"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2016-10546
+  cwe:
+  - CWE-94
+  credit:
+  - micaksica
+  references:
+  - https://github.com/pouchdb/pouchdb/issues/5612
+  - https://github.com/pouchdb/pouchdb/compare/6.0.3...6.0.5
+  - https://medium.com/@micaksica/from-pouchdb-to-rce-a-node-js-injection-vector-ffd1d1dd2807
+  source_url: https://snyk.io/vuln/npm:pouchdb:20160830

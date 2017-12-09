@@ -1,0 +1,311 @@
+---
+- id: nodesecurity:npm:socket.io:2017-04-14
+  title: Insecure randomness
+  description: Affected versions of `socket.io` depend on `Math.random()` to create
+    socket IDs, and therefore the IDs are predictable. With enough information on
+    prior IDs, an attacker may be able to guess the socket ID and gain access to socket.io
+    servers without authorization.
+  affected_package: socket.io
+  vulnerable_versions:
+  - "<=0.9.6"
+  patched_versions:
+  - ">=0.9.7"
+  severity: medium
+  package_manager: npm
+  cvss_v3_vector: CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:N
+  credit:
+  - Martin Thomson
+  references:
+  - |-
+    https://github.com/socketio/socket.io/issues/856)
+    https://github.com/socketio/socket.io/pull/857)
+    https://github.com/socketio/socket.io/commit/67b4eb9abdf111dfa9be4176d1709374a2b4ded8)
+  source_url: https://nodesecurity.io/advisories/321
+- id: ossindex:npm:socket.io:2017-03-03
+  title: ID generation prediction vulnerability
+  description: The generation of new IDs for new sockets is vulnerable to prediction
+    attacks. Potentially, though highly unlikely, collisions are also possible.
+  affected_package: socket.io
+  vulnerable_versions:
+  - "< 0.9.7"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - https://github.com/LearnBoost/socket.io/issues/857
+  - https://github.com/socketio/socket.io/commit/de1afe13172529801e1e091a471441e11ffd85a3
+  - https://github.com/socketio/socket.io/issues/856
+  source_url: https://ossindex.net/resource/package/7014464362/vulnerabilities
+- id: ossindex:npm:socket.io:2017-07-29
+  title: Insecure randomness
+  description: "> Because socket.io depends on Math.random() to create socket IDs,
+    the IDs are predictable. An attacker is able to guess the socket ID and gain access
+    to socket.io servers, potentially obtaining sensitive information.\n> \n> -- [nodesecurity.io](https://nodesecurity.io/advisories/321)"
+  affected_package: socket.io
+  vulnerable_versions:
+  - "<=0.9.6"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - https://github.com/socketio/socket.io/issues/856
+  - https://nodesecurity.io/advisories/321
+  source_url: https://ossindex.net/resource/package/7014464362/vulnerabilities
+- id: ossindex:npm:socket.io:2017-03-03
+  title: Cross Site Scripting (XSS)
+  description: A cross site scripting attack can be performed by sending messages
+    by using socket.io from the console.
+  affected_package: socket.io
+  vulnerable_versions:
+  - "<1.0.3"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - https://cwe.mitre.org/data/definitions/79.html
+  - https://github.com/socketio/socket.io/commit/199a479ebc1408cc79b46938b0fffacea911a26e
+  - https://github.com/socketio/socket.io/issues/1545
+  source_url: https://ossindex.net/resource/package/7014464362/vulnerabilities
+- id: ossindex:npm:socket.io:2017-03-03
+  title: Cross Site Scripting (XSS) in example chat app
+  description: A Cross Site Scripting attack was possible in the example chat app
+    due to the use of concatenation of user input to generate HTML.
+  affected_package: socket.io
+  vulnerable_versions:
+  - "<1.0.3"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - https://github.com/socketio/socket.io/issues/1554
+  source_url: https://ossindex.net/resource/package/7014464362/vulnerabilities
+- id: snykio:npm:socket.io:2012-03-22
+  title: Insecure Randomness
+  description: |
+    [`socket.io`][1] is a node.js realtime framework server. Affected
+    versions of the package are vulnerable to Insecure Randomness due to the
+    cryptographically insecure `Math.random` function which can produce
+    predictable values and should not be used in security-sensitive context.
+
+
+
+    [1]: https://www.npmjs.com/package/socket.io
+    \n[`socket.io`][1] is a node.js realtime framework server. Affected
+    versions of the package are vulnerable to Insecure Randomness due to the
+    cryptographically insecure `Math.random` function which can produce
+    predictable values and should not be used in security-sensitive context.
+
+
+
+    [1]: https://www.npmjs.com/package/socket.io
+  affected_package: socket.io
+  vulnerable_versions:
+  - "<0.9.7"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2017-16031
+  cwe:
+  - CWE-330
+  credit:
+  - Martin Thomson
+  references:
+  - https://github.com/socketio/socket.io/blob/master/History.md#097--2012-07-24
+  - https://github.com/socketio/socket.io/pull/857
+  - https://github.com/socketio/socket.io/issues/856
+  - https://github.com/socketio/socket.io/commit/67b4eb9abdf111dfa9be4176d1709374a2b4ded8
+  - https://groups.google.com/forum/#!topic/socket_io/Peq-R_BTSx0/discussion
+  source_url: https://snyk.io/vuln/npm:socket.io:20120323
+- id: snykio:npm:socket.io:2012-04-16
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [`socket.io`][1] is a node.js realtime framework server. Affected
+    versions of the package are vulnerable to Cross-site Scripting (XSS) due
+    to insufficient user input validation in the `jsonp-polling` function.
+    Attackers may exploit this by injecting arbitrary script into the
+    browser.
+
+    You can read more about `Cross-site Scripting (XSS)` on our [blog][2].
+
+
+
+    [1]: https://www.npmjs.com/package/socket.io
+    [2]: https://snyk.io/blog/marked-xss-vulnerability/
+    \n[`socket.io`][1] is a node.js realtime framework server. Affected
+    versions of the package are vulnerable to Cross-site Scripting (XSS) due
+    to insufficient user input validation in the `jsonp-polling` function.
+    Attackers may exploit this by injecting arbitrary script into the
+    browser.
+
+    You can read more about `Cross-site Scripting (XSS)` on our [blog][2].
+
+
+
+    [1]: https://www.npmjs.com/package/socket.io
+    [2]: https://snyk.io/blog/marked-xss-vulnerability/
+    \n[`socket.io`][1] is a node.js realtime framework server. Affected
+    versions of the package are vulnerable to Cross-site Scripting (XSS) due
+    to insufficient user input validation in the `jsonp-polling` function.
+    Attackers may exploit this by injecting arbitrary script into the
+    browser.
+
+    You can read more about `Cross-site Scripting (XSS)` on our [blog][2].
+
+
+
+    [1]: https://www.npmjs.com/package/socket.io
+    [2]: https://snyk.io/blog/marked-xss-vulnerability/
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+  affected_package: socket.io
+  vulnerable_versions:
+  - "<0.9.6"
+  severity: medium
+  package_manager: npm
+  cwe:
+  - CWE-79
+  credit:
+  - Almog Melamed
+  references:
+  - https://github.com/socketio/socket.io/blob/master/History.md#096--2012-04-17
+  - https://github.com/socketio/socket.io/issues/925
+  - https://github.com/socketio/socket.io/commit/e98fc7bc865640e777c26dbb1040f33ff103aa78
+  source_url: https://snyk.io/vuln/npm:socket.io:20120417

@@ -1,0 +1,202 @@
+---
+- id: nodesecurity:npm:js-yaml:2013-06-23
+  title: Deserialization Code Execution
+  description: "Versions 2.0.4 and earlier of `js-yaml` are affected by a code execution
+    vulnerability in the YAML deserializer.\n\n## Proof of Concept\n```\nconst yaml
+    = require('js-yaml');\n\nconst x = `test: !!js/function >\nfunction f() { \nconsole.log(1);
+    \n}();`\n\nyaml.load(x);\n```"
+  affected_package: js-yaml
+  vulnerable_versions:
+  - "<  2.0.5"
+  patched_versions:
+  - ">= 2.0.5"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2013-4660
+  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N
+  credit:
+  - Neal Poole
+  references:
+  - https://nealpoole.com/blog/2013/06/code-execution-via-yaml-in-js-yaml-nodejs-module/)
+  source_url: https://nodesecurity.io/advisories/16
+- id: ossindex:npm:js-yaml:2013-06-28
+  title: "[CVE-2013-4660]  Improper Input Validation"
+  description: The JS-YAML module before 2.0.5 for Node.js parses input without properly
+    considering the unsafe !!js/function tag, which allows remote attackers to execute
+    arbitrary code via a crafted string that triggers an eval operation.
+  affected_package: js-yaml
+  vulnerable_versions:
+  - 0.3.1
+  - 1.0.1
+  - 0.3.2
+  - 1.0.2
+  - 0.3.3
+  - 1.0.3
+  - 0.3.4
+  - 2.0.0
+  - 0.2.0
+  - 0.3.5
+  - 2.0.1
+  - 0.2.1
+  - 0.3.6
+  - 2.0.2
+  - 0.2.2
+  - 0.3.7
+  - 2.0.3
+  - 0.3.0
+  - 1.0.0
+  - 2.0.4
+  package_manager: npm
+  cve:
+  - CVE-2013-4660
+  credit:
+  - OSSIndex
+  references:
+  - http://portal.nodesecurity.io/advisories/js-yaml
+  - https://nealpoole.com/blog/2013/06/code-execution-via-yaml-in-js-yaml-nodejs-module/
+  source_url: https://ossindex.net/resource/package/7014007971/vulnerabilities
+- id: snykio:npm:js-yaml:2013-06-23
+  title: Code Execution due to Deserialization
+  description: "The JS-YAML module for Node.js contained a code execution vulnerability\nprior
+    to version 2.0.5. The maintainers of JS-YAML have patched this\nvulnerability
+    and, beginning in version 2.1.0, have provided a safeLoad\nmethod for parsing
+    YAML. Developers that use this module should make\nsure they have upgraded and
+    should strongly consider porting their code\nto use the new safeLoad method.\n\n*Source:
+    [Node Security Project][1]*\n\n### Details   {#details}\n\nThe module allowed
+    code execution due to a custom data-type that it\ndefined and parsed called !!js/function.
+    The way it would parse the data\nwas to create a new Function object in JavaScript
+    based on the input,\nwhich is equivalent to calling eval on the input:\n\n    function
+    resolveJavascriptFunction(object /*, explicit*/) {\n      /*jslint evil:true*/\n
+    \     var func;\n    \n      try {\n        func = new Function('return ' + object);\n
+    \       return func();\n      } catch (error) {\n        return NIL;\n      }\n
+    \   }\n\nThat meant the code snippet below, when run, would execute code instead\nof
+    simply defining a function:\n\n    var yaml = require('js-yaml');\n    \n    x
+    = \"test: !!js/function > \\n  \\\n    function f() { \\n    \\\n    console.log(1);
+    \\n  \\\n    }();\"\n    \n    yaml.load(x);\n\n\n\n[1]: https://nodesecurity.io/advisories/16\n\\nThe
+    JS-YAML module for Node.js contained a code execution vulnerability\nprior to
+    version 2.0.5. The maintainers of JS-YAML have patched this\nvulnerability and,
+    beginning in version 2.1.0, have provided a safeLoad\nmethod for parsing YAML.
+    Developers that use this module should make\nsure they have upgraded and should
+    strongly consider porting their code\nto use the new safeLoad method.\n\n*Source:
+    [Node Security Project][1]*\n\n### Details   {#details}\n\nThe module allowed
+    code execution due to a custom data-type that it\ndefined and parsed called !!js/function.
+    The way it would parse the data\nwas to create a new Function object in JavaScript
+    based on the input,\nwhich is equivalent to calling eval on the input:\n\n    function
+    resolveJavascriptFunction(object /*, explicit*/) {\n      /*jslint evil:true*/\n
+    \     var func;\n    \n      try {\n        func = new Function('return ' + object);\n
+    \       return func();\n      } catch (error) {\n        return NIL;\n      }\n
+    \   }\n\nThat meant the code snippet below, when run, would execute code instead\nof
+    simply defining a function:\n\n    var yaml = require('js-yaml');\n    \n    x
+    = \"test: !!js/function > \\n  \\\n    function f() { \\n    \\\n    console.log(1);
+    \\n  \\\n    }();\"\n    \n    yaml.load(x);\n\n\n\n[1]: https://nodesecurity.io/advisories/16\n\\nThe
+    JS-YAML module for Node.js contained a code execution vulnerability\nprior to
+    version 2.0.5. The maintainers of JS-YAML have patched this\nvulnerability and,
+    beginning in version 2.1.0, have provided a safeLoad\nmethod for parsing YAML.
+    Developers that use this module should make\nsure they have upgraded and should
+    strongly consider porting their code\nto use the new safeLoad method.\n\n*Source:
+    [Node Security Project][1]*\n\n### Details   {#details}\n\nThe module allowed
+    code execution due to a custom data-type that it\ndefined and parsed called !!js/function.
+    The way it would parse the data\nwas to create a new Function object in JavaScript
+    based on the input,\nwhich is equivalent to calling eval on the input:\n\n    function
+    resolveJavascriptFunction(object /*, explicit*/) {\n      /*jslint evil:true*/\n
+    \     var func;\n    \n      try {\n        func = new Function('return ' + object);\n
+    \       return func();\n      } catch (error) {\n        return NIL;\n      }\n
+    \   }\n\nThat meant the code snippet below, when run, would execute code instead\nof
+    simply defining a function:\n\n    var yaml = require('js-yaml');\n    \n    x
+    = \"test: !!js/function > \\n  \\\n    function f() { \\n    \\\n    console.log(1);
+    \\n  \\\n    }();\"\n    \n    yaml.load(x);\n\n\n\n[1]: https://nodesecurity.io/advisories/16\n\\nThe
+    JS-YAML module for Node.js contained a code execution vulnerability\nprior to
+    version 2.0.5. The maintainers of JS-YAML have patched this\nvulnerability and,
+    beginning in version 2.1.0, have provided a safeLoad\nmethod for parsing YAML.
+    Developers that use this module should make\nsure they have upgraded and should
+    strongly consider porting their code\nto use the new safeLoad method.\n\n*Source:
+    [Node Security Project][1]*\n\n### Details   {#details}\n\nThe module allowed
+    code execution due to a custom data-type that it\ndefined and parsed called !!js/function.
+    The way it would parse the data\nwas to create a new Function object in JavaScript
+    based on the input,\nwhich is equivalent to calling eval on the input:\n\n    function
+    resolveJavascriptFunction(object /*, explicit*/) {\n      /*jslint evil:true*/\n
+    \     var func;\n    \n      try {\n        func = new Function('return ' + object);\n
+    \       return func();\n      } catch (error) {\n        return NIL;\n      }\n
+    \   }\n\nThat meant the code snippet below, when run, would execute code instead\nof
+    simply defining a function:\n\n    var yaml = require('js-yaml');\n    \n    x
+    = \"test: !!js/function > \\n  \\\n    function f() { \\n    \\\n    console.log(1);
+    \\n  \\\n    }();\"\n    \n    yaml.load(x);\n\n\n\n[1]: https://nodesecurity.io/advisories/16\n\\nThe
+    JS-YAML module for Node.js contained a code execution vulnerability\nprior to
+    version 2.0.5. The maintainers of JS-YAML have patched this\nvulnerability and,
+    beginning in version 2.1.0, have provided a safeLoad\nmethod for parsing YAML.
+    Developers that use this module should make\nsure they have upgraded and should
+    strongly consider porting their code\nto use the new safeLoad method.\n\n*Source:
+    [Node Security Project][1]*\n\n### Details   {#details}\n\nThe module allowed
+    code execution due to a custom data-type that it\ndefined and parsed called !!js/function.
+    The way it would parse the data\nwas to create a new Function object in JavaScript
+    based on the input,\nwhich is equivalent to calling eval on the input:\n\n    function
+    resolveJavascriptFunction(object /*, explicit*/) {\n      /*jslint evil:true*/\n
+    \     var func;\n    \n      try {\n        func = new Function('return ' + object);\n
+    \       return func();\n      } catch (error) {\n        return NIL;\n      }\n
+    \   }\n\nThat meant the code snippet below, when run, would execute code instead\nof
+    simply defining a function:\n\n    var yaml = require('js-yaml');\n    \n    x
+    = \"test: !!js/function > \\n  \\\n    function f() { \\n    \\\n    console.log(1);
+    \\n  \\\n    }();\"\n    \n    yaml.load(x);\n\n\n\n[1]: https://nodesecurity.io/advisories/16\n\\nThe
+    JS-YAML module for Node.js contained a code execution vulnerability\nprior to
+    version 2.0.5. The maintainers of JS-YAML have patched this\nvulnerability and,
+    beginning in version 2.1.0, have provided a safeLoad\nmethod for parsing YAML.
+    Developers that use this module should make\nsure they have upgraded and should
+    strongly consider porting their code\nto use the new safeLoad method.\n\n*Source:
+    [Node Security Project][1]*\n\n### Details   {#details}\n\nThe module allowed
+    code execution due to a custom data-type that it\ndefined and parsed called !!js/function.
+    The way it would parse the data\nwas to create a new Function object in JavaScript
+    based on the input,\nwhich is equivalent to calling eval on the input:\n\n    function
+    resolveJavascriptFunction(object /*, explicit*/) {\n      /*jslint evil:true*/\n
+    \     var func;\n    \n      try {\n        func = new Function('return ' + object);\n
+    \       return func();\n      } catch (error) {\n        return NIL;\n      }\n
+    \   }\n\nThat meant the code snippet below, when run, would execute code instead\nof
+    simply defining a function:\n\n    var yaml = require('js-yaml');\n    \n    x
+    = \"test: !!js/function > \\n  \\\n    function f() { \\n    \\\n    console.log(1);
+    \\n  \\\n    }();\"\n    \n    yaml.load(x);\n\n\n\n[1]: https://nodesecurity.io/advisories/16\n\\nThe
+    JS-YAML module for Node.js contained a code execution vulnerability\nprior to
+    version 2.0.5. The maintainers of JS-YAML have patched this\nvulnerability and,
+    beginning in version 2.1.0, have provided a safeLoad\nmethod for parsing YAML.
+    Developers that use this module should make\nsure they have upgraded and should
+    strongly consider porting their code\nto use the new safeLoad method.\n\n*Source:
+    [Node Security Project][1]*\n\n### Details   {#details}\n\nThe module allowed
+    code execution due to a custom data-type that it\ndefined and parsed called !!js/function.
+    The way it would parse the data\nwas to create a new Function object in JavaScript
+    based on the input,\nwhich is equivalent to calling eval on the input:\n\n    function
+    resolveJavascriptFunction(object /*, explicit*/) {\n      /*jslint evil:true*/\n
+    \     var func;\n    \n      try {\n        func = new Function('return ' + object);\n
+    \       return func();\n      } catch (error) {\n        return NIL;\n      }\n
+    \   }\n\nThat meant the code snippet below, when run, would execute code instead\nof
+    simply defining a function:\n\n    var yaml = require('js-yaml');\n    \n    x
+    = \"test: !!js/function > \\n  \\\n    function f() { \\n    \\\n    console.log(1);
+    \\n  \\\n    }();\"\n    \n    yaml.load(x);\n\n\n\n[1]: https://nodesecurity.io/advisories/16\n\\nThe
+    JS-YAML module for Node.js contained a code execution vulnerability\nprior to
+    version 2.0.5. The maintainers of JS-YAML have patched this\nvulnerability and,
+    beginning in version 2.1.0, have provided a safeLoad\nmethod for parsing YAML.
+    Developers that use this module should make\nsure they have upgraded and should
+    strongly consider porting their code\nto use the new safeLoad method.\n\n*Source:
+    [Node Security Project][1]*\n\n### Details   {#details}\n\nThe module allowed
+    code execution due to a custom data-type that it\ndefined and parsed called !!js/function.
+    The way it would parse the data\nwas to create a new Function object in JavaScript
+    based on the input,\nwhich is equivalent to calling eval on the input:\n\n    function
+    resolveJavascriptFunction(object /*, explicit*/) {\n      /*jslint evil:true*/\n
+    \     var func;\n    \n      try {\n        func = new Function('return ' + object);\n
+    \       return func();\n      } catch (error) {\n        return NIL;\n      }\n
+    \   }\n\nThat meant the code snippet below, when run, would execute code instead\nof
+    simply defining a function:\n\n    var yaml = require('js-yaml');\n    \n    x
+    = \"test: !!js/function > \\n  \\\n    function f() { \\n    \\\n    console.log(1);
+    \\n  \\\n    }();\"\n    \n    yaml.load(x);\n\n\n\n[1]: https://nodesecurity.io/advisories/16\n"
+  affected_package: js-yaml
+  vulnerable_versions:
+  - "<  2.0.5"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2013-4660
+  cwe:
+  - CWE-20
+  credit:
+  - Neal Poole
+  references:
+  - https://nealpoole.com/blog/2013/06/code-execution-via-yaml-in-js-yaml-nodejs-module/
+  source_url: https://snyk.io/vuln/npm:js-yaml:20130623

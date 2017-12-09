@@ -1,0 +1,94 @@
+---
+- id: snykio:pypi:celery:2016-12-16
+  title: Insecure Default
+  description: |
+    [`celery`][1] is a Distributed Task Queue. Affected versions of this
+    package are vulnerable due to an Insecure Default. The `accept_content`
+    setting was set to: `app.conf.accept_content = ['json', 'pickle',
+    'msgpack', 'yaml']` by default, allowed deserialization of pickled
+    messages, even if the software is configured to send messages in the
+    JSON format.
+
+    **Note** An attacker requires access to the message broker used to send
+    messages to Celery workers in order to exploit this vulnerability.
+
+
+
+    [1]: https://pypi.python.org/pypi/celery
+    \n[`celery`][1] is a Distributed Task Queue. Affected versions of this
+    package are vulnerable due to an Insecure Default. The `accept_content`
+    setting was set to: `app.conf.accept_content = ['json', 'pickle',
+    'msgpack', 'yaml']` by default, allowed deserialization of pickled
+    messages, even if the software is configured to send messages in the
+    JSON format.
+
+    **Note** An attacker requires access to the message broker used to send
+    messages to Celery workers in order to exploit this vulnerability.
+
+
+
+    [1]: https://pypi.python.org/pypi/celery
+    \n[`celery`][1] is a Distributed Task Queue. Affected versions of this
+    package are vulnerable due to an Insecure Default. The `accept_content`
+    setting was set to: `app.conf.accept_content = ['json', 'pickle',
+    'msgpack', 'yaml']` by default, allowed deserialization of pickled
+    messages, even if the software is configured to send messages in the
+    JSON format.
+
+    **Note** An attacker requires access to the message broker used to send
+    messages to Celery workers in order to exploit this vulnerability.
+
+
+
+    [1]: https://pypi.python.org/pypi/celery
+  affected_package: celery
+  vulnerable_versions:
+  - ">= 4.0.0 < 4.0.1"
+  severity: high
+  package_manager: pypi
+  cwe:
+  - CWE-276
+  credit:
+  - Unknown
+  references:
+  - https://github.com/celery/celery/blob/master/docs/sec/CELERYSA-0003.txt
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-CELERY-40579
+- id: snykio:pypi:celery:2016-02-25
+  title: Privilege Escalation
+  description: |
+    [`celery`][1] is a Distributed Task Queue. Celery 2.1 and 2.2 before
+    2.2.8, 2.3 before 2.3.4, and 2.4 before 2.4.4 changes the effective id
+    but not the real id during processing of the --uid and --gid arguments
+    to celerybeat, celeryd\_detach, celeryd-multi, and celeryev, which
+    allows local users to gain privileges via vectors involving crafted code
+    that is executed by the worker process.
+
+
+
+    [1]: https://pypi.python.org/pypi/celery
+    \n[`celery`][1] is a Distributed Task Queue. Celery 2.1 and 2.2 before
+    2.2.8, 2.3 before 2.3.4, and 2.4 before 2.4.4 changes the effective id
+    but not the real id during processing of the --uid and --gid arguments
+    to celerybeat, celeryd\_detach, celeryd-multi, and celeryev, which
+    allows local users to gain privileges via vectors involving crafted code
+    that is executed by the worker process.
+
+
+
+    [1]: https://pypi.python.org/pypi/celery
+  affected_package: celery
+  vulnerable_versions:
+  - ">= 2.4.0 <= 2.4.3"
+  severity: high
+  package_manager: pypi
+  cve:
+  - CVE-2011-4356
+  cwe:
+  - CWE-264
+  credit:
+  - Unknown
+  references:
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2011-4356
+  - https://github.com/ask/celery/blob/master/docs/sec/CELERYSA-0001.txt
+  - https://github.com/ask/celery/pull/544
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-CELERY-40086

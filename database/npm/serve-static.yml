@@ -1,0 +1,177 @@
+---
+- id: nodesecurity:npm:serve-static:2015-01-13
+  title: Open Redirect
+  description: |-
+    Versions of `serve-static` prior to 1.6.5 ( or 1.7.x prior to 1.7.2 ) are affected by an open redirect vulnerability on some browsers when configured to mount at the root directory.
+
+
+    ## Proof of Concept
+
+    A link to `http://example.com//www.google.com/%2e%2e` will redirect to `//www.google.com/%2e%2e`
+
+    Some browsers will interpret this as `http://www.google.com/%2e%2e`, resulting in an external redirect.
+  affected_package: serve-static
+  vulnerable_versions:
+  - "<1.6.5 || >=1.7.0 <1.7.2"
+  patched_versions:
+  - "~1.6.5 || >=1.7.2"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2015-1164
+  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N
+  credit:
+  - Pierre-Élie Fauché
+  references:
+  - 'https://github.com/expressjs/serve-static/issues/26)
+
+'
+  source_url: https://nodesecurity.io/advisories/35
+- id: ossindex:npm:serve-static:1970-01-01
+  title: Open redirect vulnerability
+  description: Open redirect vulnerability in the serve-static plugin before 1.7.2
+    for Node.js, when mounted at the root, allows remote attackers to redirect users
+    to arbitrary web sites and conduct phishing attacks via a // (slash slash) followed
+    by a domain in the PATH_INFO to the default URI.
+  affected_package: serve-static
+  vulnerable_versions:
+  - "<1.7.2"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - https://github.com/expressjs/serve-static/issues/26
+  - https://nodesecurity.io/advisories/35
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-1164
+  - https://www.owasp.org/index.php/Open_redirect
+  source_url: https://ossindex.net/resource/package/7014432489/vulnerabilities
+- id: ossindex:npm:serve-static:2015-01-21
+  title: "[CVE-2015-1164] Open redirect vulnerability in the serve-static plugin before
+    1.7.2 for Node.js,..."
+  description: Open redirect vulnerability in the serve-static plugin before 1.7.2
+    for Node.js, when mounted at the root, allows remote attackers to redirect users
+    to arbitrary web sites and conduct phishing attacks via a // (slash slash) followed
+    by a domain in the PATH_INFO to the default URI.
+  affected_package: serve-static
+  vulnerable_versions:
+  - 1.7.1
+  package_manager: npm
+  cve:
+  - CVE-2015-1164
+  credit:
+  - OSSIndex
+  references:
+  - http://nodesecurity.io/advisories/serve-static-open-redirect
+  - http://www.securityfocus.com/bid/72064
+  - http://xforce.iss.net/xforce/xfdb/99936
+  - https://bugzilla.redhat.com/show_bug.cgi?id=1181917
+  - https://exchange.xforce.ibmcloud.com/vulnerabilities/99936
+  - https://github.com/expressjs/serve-static/issues/26
+  source_url: https://ossindex.net/resource/package/7014432489/vulnerabilities
+- id: snykio:npm:serve-static:2015-01-20
+  title: Information Exposure
+  description: |
+    [serve-static][1] is a Node.js module available through the npm
+    registry.
+
+    Affected versions of this package are vulnerable to Information
+    Exposure. The roots path would be exposed via the `express.static`,
+    `res.sendfile`, and `res.sendFile` methods.
+
+
+
+    [1]: https://github.com/expressjs/serve-static
+    \n[serve-static][1] is a Node.js module available through the npm
+    registry.
+
+    Affected versions of this package are vulnerable to Information
+    Exposure. The roots path would be exposed via the `express.static`,
+    `res.sendfile`, and `res.sendFile` methods.
+
+
+
+    [1]: https://github.com/expressjs/serve-static
+    \n[serve-static][1] is a Node.js module available through the npm
+    registry.
+
+    Affected versions of this package are vulnerable to Information
+    Exposure. The roots path would be exposed via the `express.static`,
+    `res.sendfile`, and `res.sendFile` methods.
+
+
+
+    [1]: https://github.com/expressjs/serve-static
+  affected_package: serve-static
+  vulnerable_versions:
+  - "<1.8.1"
+  severity: low
+  package_manager: npm
+  cwe:
+  - CWE-211
+  references:
+  - https://github.com/expressjs/serve-static/commit/30fe8b1596e8879923610c0421598669c39aecc2
+  - https://github.com/expressjs/serve-static/blob/master/HISTORY.md#181--2015-01-20
+  source_url: https://snyk.io/vuln/npm:serve-static:20150120
+- id: snykio:npm:serve-static:2015-01-13
+  title: Open Redirect
+  description: |+
+    When using serve-static middleware version &lt; 1.7.2 and it\'s
+    configured to mount at the root, it creates an open redirect on the
+    site.
+
+    *Source: [Node Security Project][1]*
+
+
+
+    [1]: https://nodesecurity.io/advisories/35
+    \nWhen using serve-static middleware version &lt; 1.7.2 and it\'s
+    configured to mount at the root, it creates an open redirect on the
+    site.
+
+    *Source: [Node Security Project][1]*
+
+
+
+    [1]: https://nodesecurity.io/advisories/35
+    \nWhen using serve-static middleware version &lt; 1.7.2 and it\'s
+    configured to mount at the root, it creates an open redirect on the
+    site.
+
+    *Source: [Node Security Project][1]*
+
+
+
+    [1]: https://nodesecurity.io/advisories/35
+    \nFor example:
+
+    If a user visits `http://example.com//www.google.com/%2e%2e` they will
+    be redirected to `//www.google.com/%2e%2e`, which some browsers
+    interpret as `http://www.google.com/%2e%2e`.
+
+    \nFor example:
+
+    If a user visits `http://example.com//www.google.com/%2e%2e` they will
+    be redirected to `//www.google.com/%2e%2e`, which some browsers
+    interpret as `http://www.google.com/%2e%2e`.
+
+    \nFor example:
+
+    If a user visits `http://example.com//www.google.com/%2e%2e` they will
+    be redirected to `//www.google.com/%2e%2e`, which some browsers
+    interpret as `http://www.google.com/%2e%2e`.
+
+  affected_package: serve-static
+  vulnerable_versions:
+  - "<1.6.5 || >=1.7.0 <1.7.2"
+  severity: low
+  package_manager: npm
+  cve:
+  - CVE-2015-1164
+  cwe:
+  - CWE-601
+  credit:
+  - PierreÉlie Fauché
+  references:
+  - https://github.com/expressjs/serve-static/issues/26
+  - https://www.owasp.org/index.php/Open_redirect
+  source_url: https://snyk.io/vuln/npm:serve-static:20150113

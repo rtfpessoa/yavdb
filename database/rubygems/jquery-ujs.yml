@@ -1,0 +1,105 @@
+---
+- id: rubyadvisory:rubygems:jquery-ujs:2015-06-16
+  title: CSRF Vulnerability in jquery-ujs
+  description: |
+    In the scenario where an attacker might be able to control the href attribute
+    of an anchor tag or the action attribute of a form tag that will trigger a
+    POST action, the attacker can set the href or action to
+    " https://attacker.com" (note the leading space) that will be passed to
+    JQuery, who will see this as a same origin request, and send the user's CSRF
+    token to the attacker domain.
+
+    To work around this problem, change code that allows users to control the
+    href attribute of an anchor tag or the action attribute of a form tag to
+    filter the user parameters.
+
+    For example, code like this:
+
+      link_to params
+
+    to code like this:
+
+      link_to filtered_params
+
+      def filtered_params
+        \# Filter just the parameters that you trust
+      end
+
+    See also:
+    - http://blog.honeybadger.io/understanding-the-rails-jquery-csrf-vulnerability-cve-2015-1840/
+  affected_package: jquery-ujs
+  patched_versions:
+  - ">= 1.0.4"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2015-1840
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://groups.google.com/forum/#!topic/ruby-security-ann/XIZPbobuwaY
+- id: snykio:rubygems:jquery-ujs:2015-06-15
+  title: Cross-site Request Forgery (CSRF)
+  description: |
+    [`jquery-ujs`][1] is a Ruby on Rails unobtrusive scripting adapter for
+    jQuery.
+
+    Affected versions allow a CSRF attack with a maliciously crafted anchor
+    element. In the scenario where an attacker might be able to control the
+    href attribute of an anchor tag or the action attribute of a form tag
+    that will trigger a POST action, the attacker can set the href or action
+    to \" [https://attacker.com\"][2] (note the leading space). This will be
+    passed to JQuery, and be treated as a same origin request, potentially
+    send the user\'s CSRF token to the attacker domain.
+
+
+
+    [1]: https://github.com/rails/jquery-ujs
+    [2]: https://attacker.com&quot;
+    \n[`jquery-ujs`][1] is a Ruby on Rails unobtrusive scripting adapter for
+    jQuery.
+
+    Affected versions allow a CSRF attack with a maliciously crafted anchor
+    element. In the scenario where an attacker might be able to control the
+    href attribute of an anchor tag or the action attribute of a form tag
+    that will trigger a POST action, the attacker can set the href or action
+    to \" [https://attacker.com\"][2] (note the leading space). This will be
+    passed to JQuery, and be treated as a same origin request, potentially
+    send the user\'s CSRF token to the attacker domain.
+
+
+
+    [1]: https://github.com/rails/jquery-ujs
+    [2]: https://attacker.com&quot;
+    \n[`jquery-ujs`][1] is a Ruby on Rails unobtrusive scripting adapter for
+    jQuery.
+
+    Affected versions allow a CSRF attack with a maliciously crafted anchor
+    element. In the scenario where an attacker might be able to control the
+    href attribute of an anchor tag or the action attribute of a form tag
+    that will trigger a POST action, the attacker can set the href or action
+    to \" [https://attacker.com\"][2] (note the leading space). This will be
+    passed to JQuery, and be treated as a same origin request, potentially
+    send the user\'s CSRF token to the attacker domain.
+
+
+
+    [1]: https://github.com/rails/jquery-ujs
+    [2]: https://attacker.com&quot;
+  affected_package: jquery-ujs
+  vulnerable_versions:
+  - "< 1.0.4"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2015-1840
+  cwe:
+  - CWE-352
+  credit:
+  - Ben Toews
+  references:
+  - http://rubysec.com/advisories/CVE-2015-1840
+  - https://groups.google.com/forum/#!topic/ruby-security-ann/XIZPbobuwaY
+  - http://blog.honeybadger.io/understanding-the-rails-jquery-csrf-vulnerability-cve-2015-1840/
+  source_url: https://snyk.io/vuln/SNYK-RUBY-JQUERYUJS-20224

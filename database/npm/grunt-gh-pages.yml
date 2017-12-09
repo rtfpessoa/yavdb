@@ -1,0 +1,54 @@
+---
+- id: nodesecurity:npm:grunt-gh-pages:2016-03-16
+  title: Authentication credentails logged in clear text
+  description: |-
+    Versions of `grunt-gh-pages` prior to 1.0.0 are affected by a vulnerability which may cause unencrypted github credentials to be written to a log file in certain circumstances.
+
+    In the `grunt-gh-pages` deployment scenario where authentication is performed by injecting a github token directly into the auth portion of the URL, `grunt-gh-pages` will write the token to a log file, unencrypted.
+  affected_package: grunt-gh-pages
+  vulnerable_versions:
+  - "<=0.9.1"
+  patched_versions:
+  - ">=1.0.0"
+  severity: medium
+  package_manager: npm
+  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N
+  credit:
+  - Stephan Bönnemann
+  references:
+  - 'https://github.com/tschaub/grunt-gh-pages/pull/41)
+
+'
+  source_url: https://nodesecurity.io/advisories/85
+- id: snykio:npm:grunt-gh-pages:2016-03-16
+  title: Credentials saved as clear-text in log
+  description: |
+    [`grunt-gh-pages`][1] writes the repository url to log without redacting
+    the github authentication token. The token can be compromised if the
+    logs become publicly available.
+
+
+
+    [1]: https://www.npmjs.com/package/grunt-gh-pages
+    \n[`grunt-gh-pages`][1] writes the repository url to log without redacting
+    the github authentication token. The token can be compromised if the
+    logs become publicly available.
+
+
+
+    [1]: https://www.npmjs.com/package/grunt-gh-pages
+  affected_package: grunt-gh-pages
+  vulnerable_versions:
+  - "<=0.9.1"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2016-10526
+  cwe:
+  - CWE-319
+  credit:
+  - Stephan Bönnemann
+  references:
+  - https://github.com/tschaub/grunt-gh-pages/pull/41
+  - https://github.com/tschaub/grunt-gh-pages/commit/590f69767203d8c379fe18cded93bd5ad6cb53cb
+  source_url: https://snyk.io/vuln/npm:grunt-gh-pages:20160316

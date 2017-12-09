@@ -1,0 +1,22 @@
+---
+- id: ossindex:nuget:Twilio:2016-10-17
+  title: XML External Entity (XXE)
+  description: |-
+    TwiMLResult provides an additional (unused by the library)
+    constructor that accepts a string value and will use
+    `XDocument.Parse()` to turn it into an XML Document.
+
+    Older versions of .Net allow DOCTYPE defined ENTITYs by default.
+    Careless use of this class (passing in unsanitized user data) is
+    vulnerable to an XXE Attack.
+  affected_package: Twilio
+  vulnerable_versions:
+  - "<5.0.0-rc6"
+  package_manager: nuget
+  credit:
+  - OSSIndex
+  references:
+  - https://github.com/twilio/twilio-csharp/commit/406faac9a69b556414d575151145750d96dc4a78
+  - https://github.com/twilio/twilio-csharp/issues/283
+  - https://www.owasp.org/index.php/XML_External_Entity_(XXE)_Processing
+  source_url: https://ossindex.net/resource/package/8396460655/vulnerabilities

@@ -1,0 +1,642 @@
+---
+- id: ossindex:rubygems:doorkeeper:2017-01-23
+  title: "[CVE-2016-6582] The Doorkeeper gem before 4.2.0 for Ruby might allow remote
+    attackers to conduct..."
+  description: The Doorkeeper gem before 4.2.0 for Ruby might allow remote attackers
+    to conduct replay attacks or revoke arbitrary tokens by leveraging failure to
+    implement the OAuth 2.0 Token Revocation specification.
+  affected_package: doorkeeper
+  vulnerable_versions:
+  - 4.1.0
+  package_manager: rubygems
+  cve:
+  - CVE-2016-6582
+  credit:
+  - OSSIndex
+  references:
+  - http://packetstormsecurity.com/files/138430/Doorkeeper-4.1.0-Token-Revocation.html
+  - http://seclists.org/fulldisclosure/2016/Aug/105
+  - http://www.securityfocus.com/archive/1/archive/1/539268/100/0/threaded
+  - http://www.securityfocus.com/bid/92551
+  - https://github.com/doorkeeper-gem/doorkeeper/issues/875
+  - https://github.com/doorkeeper-gem/doorkeeper/releases/tag/v4.2.0
+  source_url: https://ossindex.net/resource/package/8404788488/vulnerabilities
+- id: ossindex:rubygems:doorkeeper:2014-12-31
+  title: "[CVE-2014-8144]  Cross-Site Request Forgery (CSRF)"
+  description: Cross-site request forgery (CSRF) vulnerability in doorkeeper before
+    1.4.1 allows remote attackers to hijack the authentication of unspecified victims
+    for requests that read a user OAuth authorization code via unknown vectors.
+  affected_package: doorkeeper
+  vulnerable_versions:
+  - 1.4.0
+  package_manager: rubygems
+  cve:
+  - CVE-2014-8144
+  credit:
+  - OSSIndex
+  references:
+  - http://seclists.org/oss-sec/2014/q4/1076
+  - http://xforce.iss.net/xforce/xfdb/99342
+  - https://exchange.xforce.ibmcloud.com/vulnerabilities/99342
+  - https://github.com/doorkeeper-gem/doorkeeper/blob/master/CHANGELOG.md
+  source_url: https://ossindex.net/resource/package/8404788488/vulnerabilities
+- id: rubyadvisory:rubygems:doorkeeper:2018-07-11
+  title: Doorkeeper gem does not revoke token for public clients
+  description: |
+    Any OAuth application that uses public/non-confidential authentication when
+    interacting with Doorkeeper is unable to revoke its tokens when calling the
+    revocation endpoint.
+
+    A bug in the token revocation API would cause it to attempt to authenticate
+    the public OAuth client as if it was a confidential app. Because of this, the
+    token is never revoked.
+
+    The impact of this is the access or refresh token is not revoked, leaking
+    access to protected resources for the remainder of that token's lifetime.
+
+    If Doorkeeper is used to facilitate public OAuth apps and leverage token
+    revocation functionality, upgrade to the patched versions immediately.
+
+    Credit to Roberto Ostinelli for discovery, Justin Bull for the fixes.
+
+    DWF has assigned CVE-2018-1000211.
+  affected_package: doorkeeper
+  unaffected_versions:
+  - "< 4.2.0"
+  patched_versions:
+  - ">= 4.4.0"
+  - ">= 5.0.0.rc2"
+  package_manager: rubygems
+  cve:
+  - CVE-2018-1000211
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  - https://github.com/doorkeeper-gem/doorkeeper/issues/891
+  - https://github.com/doorkeeper-gem/doorkeeper/pull/1119
+  - https://github.com/doorkeeper-gem/doorkeeper/pull/1120
+  source_url: https://blog.justinbull.ca/cve-2018-1000211-public-apps-cant-revoke-tokens-in-doorkeeper/
+- id: rubyadvisory:rubygems:doorkeeper:2015-02-10
+  title: |
+    Doorkeeper Gem for Ruby stores sensitive information
+    in production logs
+  description: |
+    Doorkeeper Gem for Ruby contains a flaw in lib/doorkeeper/engine.rb.
+    The issue is due to the program storing sensitive information in
+    production logs. This may allow a local attacker to gain access to
+    sensitive information.
+  affected_package: doorkeeper
+  patched_versions:
+  - "~> 1.4.2"
+  - ">= 2.1.2"
+  package_manager: rubygems
+  cve:
+  - CVE-
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: http://www.osvdb.org/show/osvdb/118830
+- id: rubyadvisory:rubygems:doorkeeper:2014-12-18
+  title: |
+    Cross-site request forgery (CSRF) vulnerability in doorkeeper 1.4.0
+    and earlier.
+  description: |
+    Cross-site request forgery (CSRF) vulnerability in doorkeeper 1.4.0
+    and earlier allows remote attackers to hijack the user's OAuth
+    autorization code. This vulnerability has been assigned the CVE
+    identifier CVE-2014-8144.
+
+    Doorkeeper's endpoints didn't have CSRF protection. Any HTML document
+    on the Internet can then read a user's authorization code with
+    arbitrary scope from any Doorkeeper-compatible Rails app you are
+    logged in.
+  affected_package: doorkeeper
+  patched_versions:
+  - "~> 1.4.1"
+  - ">= 2.0.0"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2014-8144
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://groups.google.com/forum/#!topic/ruby-security-ann/5_VqJtNc8jw
+- id: rubyadvisory:rubygems:doorkeeper:2018-02-21
+  title: Doorkeeper gem has stored XSS on authorization consent view
+  description: |
+    Stored XSS on the OAuth Client's name will cause users being prompted for
+    consent via the "implicit" grant type to execute the XSS payload.
+
+    The XSS attack could gain access to the user's active session, resulting in
+    account compromise.
+
+    Any user is susceptible if they click the authorization link for the
+    malicious OAuth client. Because of how the links work, a user cannot tell if
+    a link is malicious or not without first visiting the page with the XSS
+    payload.
+
+    If 3rd parties are allowed to create OAuth clients in the app using
+    Doorkeeper, upgrade to the patched versions immediately.
+
+    Additionally there is stored XSS in the native_redirect_uri form element.
+
+    DWF has assigned CVE-2018-1000088.
+  affected_package: doorkeeper
+  unaffected_versions:
+  - "< 2.1.0"
+  patched_versions:
+  - ">= 4.2.6"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2018-1000088
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  - https://github.com/doorkeeper-gem/doorkeeper/issues/969
+  - https://github.com/doorkeeper-gem/doorkeeper/issues/970
+  source_url: https://blog.justinbull.ca/cve-2018-1000088-stored-xss-in-doorkeeper/
+- id: rubyadvisory:rubygems:doorkeeper:2016-08-18
+  title: Doorkeeper gem does not revoke tokens & uses wrong auth/auth method
+  description: |
+    Doorkeeper failed to implement OAuth 2.0 Token Revocation (RFC 7009) in the
+    following ways:
+
+    1. Public clients making valid, unauthenticated calls to revoke a token
+       would not have their token revoked
+    2. Requests were not properly authenticating the *client credentials* but
+       were, instead, looking at the access token in a second location
+    3. Because of 2, the requests were also not authorizing confidential
+       clients' ability to revoke a given token. It should only revoke tokens
+       that belong to it.
+
+    The security implication is: OAuth 2.0 clients who "log out" a user expect
+    to have the corresponding access & refresh tokens revoked, preventing an
+    attacker who may have already hijacked the session from continuing to
+    impersonate the victim. Because of the bug described above, this is not the
+    case. As far as OWASP is concerned, this counts as broken authentication
+    design.
+
+    MITRE has assigned CVE-2016-6582 due to the security issues raised. An
+    attacker, thanks to 1, can replay a hijacked session after a victim logs
+    out/revokes their token. Additionally, thanks to 2 & 3, an attacker via a
+    compromised confidential client could "grief" other clients by revoking
+    their tokens (albeit this is an exceptionally narrow attack with little
+    value).
+  affected_package: doorkeeper
+  unaffected_versions:
+  - "< 1.2.0"
+  patched_versions:
+  - ">= 4.2.0"
+  package_manager: rubygems
+  cve:
+  - CVE-2016-6582
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  - https://github.com/doorkeeper-gem/doorkeeper/commit/fb938051777a3c9cb071e96fc66458f8f615bd53
+  source_url: http://www.openwall.com/lists/oss-security/2016/08/19/2
+- id: snykio:rubygems:doorkeeper:2018-07-16
+  title: Insufficient Token Expiration
+  description: |
+    [doorkeeper][1] is an OAuth 2 provider for Rails and Grape.
+
+    Affected versions of this package are vulnerable to Insufficient Token
+    Expiration. All OAuth applications using `public` or `non-confidential`
+    authentication when interacting with Doorkeeper would attempt to
+    authenticate the public OAuth client as if it were a `confidential` app.
+    This would cause the token to not be revoked from the endpoint, and the
+    token could be used for the remainder of that token\'s lifetime.
+
+
+
+    [1]: https://rubygems.org/gems/doorkeeper
+    \n[doorkeeper][1] is an OAuth 2 provider for Rails and Grape.
+
+    Affected versions of this package are vulnerable to Insufficient Token
+    Expiration. All OAuth applications using `public` or `non-confidential`
+    authentication when interacting with Doorkeeper would attempt to
+    authenticate the public OAuth client as if it were a `confidential` app.
+    This would cause the token to not be revoked from the endpoint, and the
+    token could be used for the remainder of that token\'s lifetime.
+
+
+
+    [1]: https://rubygems.org/gems/doorkeeper
+    \n[doorkeeper][1] is an OAuth 2 provider for Rails and Grape.
+
+    Affected versions of this package are vulnerable to Insufficient Token
+    Expiration. All OAuth applications using `public` or `non-confidential`
+    authentication when interacting with Doorkeeper would attempt to
+    authenticate the public OAuth client as if it were a `confidential` app.
+    This would cause the token to not be revoked from the endpoint, and the
+    token could be used for the remainder of that token\'s lifetime.
+
+
+
+    [1]: https://rubygems.org/gems/doorkeeper
+  affected_package: doorkeeper
+  vulnerable_versions:
+  - ">=4.2.0"
+  - "<4.4.0 || =5.0.0.rc1"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2018-1000211
+  cwe:
+  - CWE-613
+  credit:
+  - Roberto Ostinelli
+  references:
+  - https://blog.justinbull.ca/cve-2018-1000211-public-apps-cant-revoke-tokens-in-doorkeeper/
+  source_url: https://snyk.io/vuln/SNYK-RUBY-DOORKEEPER-22044
+- id: snykio:rubygems:doorkeeper:2017-05-25
+  title: Cross-site Scripting (XSS)
+  description: |
+    [`doorkeeper`][1] is an OAuth 2 provider for Rails and Grape.
+
+    Affected versions of the package are vulnerable to Cross-site Scripting
+    (XSS) via the `OAuth Client's` name. The attacker could gain access to
+    the user\'s active session, resulting in account compromise.
+
+
+
+    [1]: https://rubygems.org/gems/doorkeeper
+    \n[`doorkeeper`][1] is an OAuth 2 provider for Rails and Grape.
+
+    Affected versions of the package are vulnerable to Cross-site Scripting
+    (XSS) via the `OAuth Client's` name. The attacker could gain access to
+    the user\'s active session, resulting in account compromise.
+
+
+
+    [1]: https://rubygems.org/gems/doorkeeper
+    \n[`doorkeeper`][1] is an OAuth 2 provider for Rails and Grape.
+
+    Affected versions of the package are vulnerable to Cross-site Scripting
+    (XSS) via the `OAuth Client's` name. The attacker could gain access to
+    the user\'s active session, resulting in account compromise.
+
+
+
+    [1]: https://rubygems.org/gems/doorkeeper
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    You can read more about `Cross-site Scripting (XSS)` on our [blog][1].
+
+
+
+    [1]: https://snyk.io/blog/xss-attacks-the-next-wave/
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    You can read more about `Cross-site Scripting (XSS)` on our [blog][1].
+
+
+
+    [1]: https://snyk.io/blog/xss-attacks-the-next-wave/
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    You can read more about `Cross-site Scripting (XSS)` on our [blog][1].
+
+
+
+    [1]: https://snyk.io/blog/xss-attacks-the-next-wave/
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    You can read more about `Cross-site Scripting (XSS)` on our [blog][1].
+
+
+
+    [1]: https://snyk.io/blog/xss-attacks-the-next-wave/
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    You can read more about `Cross-site Scripting (XSS)` on our [blog][1].
+
+
+
+    [1]: https://snyk.io/blog/xss-attacks-the-next-wave/
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    You can read more about `Cross-site Scripting (XSS)` on our [blog][1].
+
+
+
+    [1]: https://snyk.io/blog/xss-attacks-the-next-wave/
+  affected_package: doorkeeper
+  vulnerable_versions:
+  - "<4.2.6"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2018-1000088
+  cwe:
+  - CWE-79
+  credit:
+  - Unknown
+  references:
+  - https://github.com/doorkeeper-gem/doorkeeper/pull/970
+  - https://github.com/rubysec/ruby-advisory-db/pull/328/commits/b4621c705ba387a09db2f8591249f60f162b3b62
+  - https://github.com/doorkeeper-gem/doorkeeper/commit/39916a613b7dcc738aa38f7a17e1de9757bd0754
+  source_url: https://snyk.io/vuln/SNYK-RUBY-DOORKEEPER-20484
+- id: snykio:rubygems:doorkeeper:2016-08-17
+  title: Incorrect Authentication Implementation
+  description: |
+    [`doorkeeper`][1] is an Oauth 2.0 provider for Rails and Grape.
+
+    Affected versions incorrectly implement Oauth 2.0 Token Revocation (RFC
+    7009). Specifically, public clients making an unauthenticated calls to
+    revoke a token would not have their tokens revoked. In addition, a
+    compromised confidential client can be used to revoke tokens of other
+    users.
+
+
+
+    [1]: https://rubygems.org/gems/doorkeeper
+    \n[`doorkeeper`][1] is an Oauth 2.0 provider for Rails and Grape.
+
+    Affected versions incorrectly implement Oauth 2.0 Token Revocation (RFC
+    7009). Specifically, public clients making an unauthenticated calls to
+    revoke a token would not have their tokens revoked. In addition, a
+    compromised confidential client can be used to revoke tokens of other
+    users.
+
+
+
+    [1]: https://rubygems.org/gems/doorkeeper
+    \n[`doorkeeper`][1] is an Oauth 2.0 provider for Rails and Grape.
+
+    Affected versions incorrectly implement Oauth 2.0 Token Revocation (RFC
+    7009). Specifically, public clients making an unauthenticated calls to
+    revoke a token would not have their tokens revoked. In addition, a
+    compromised confidential client can be used to revoke tokens of other
+    users.
+
+
+
+    [1]: https://rubygems.org/gems/doorkeeper
+  affected_package: doorkeeper
+  vulnerable_versions:
+  - "< 4.2.0"
+  - ">= 1.2.0"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2016-6582
+  cwe:
+  - CWE-284
+  credit:
+  - Justin Bull
+  references:
+  - http://rubysec.com/advisories/CVE-2016-6582
+  - http://www.openwall.com/lists/oss-security/2016/08/19/2
+  source_url: https://snyk.io/vuln/SNYK-RUBY-DOORKEEPER-20272
+- id: snykio:rubygems:doorkeeper:2015-02-09
+  title: Sensitive Information Exposure
+  description: |
+    [`doorkeeper`][1] is an Oauth 2.0 provider for Rails and Grape.
+
+    Affected version store sensitive information in production logs.
+
+
+
+    [1]: https://rubygems.org/gems/doorkeeper
+    \n[`doorkeeper`][1] is an Oauth 2.0 provider for Rails and Grape.
+
+    Affected version store sensitive information in production logs.
+
+
+
+    [1]: https://rubygems.org/gems/doorkeeper
+    \n[`doorkeeper`][1] is an Oauth 2.0 provider for Rails and Grape.
+
+    Affected version store sensitive information in production logs.
+
+
+
+    [1]: https://rubygems.org/gems/doorkeeper
+  affected_package: doorkeeper
+  vulnerable_versions:
+  - "< 2.1.2"
+  - ">= 1.5 || < 1.4.2"
+  severity: low
+  package_manager: rubygems
+  cwe:
+  - CWE-200
+  credit:
+  - Unknown
+  references:
+  - http://rubysec.com/advisories/OSVDB-118830
+  - http://www.osvdb.org/show/osvdb/118830
+  source_url: https://snyk.io/vuln/SNYK-RUBY-DOORKEEPER-20206
+- id: snykio:rubygems:doorkeeper:2014-12-17
+  title: Cross-site request forgery (CSRF)
+  description: |
+    [`doorkeeper`][1] is an Oauth 2.0 provider for Rails and Grape.
+
+    Affected versions contain a Cross-site request forgery (CSRF)
+    vulnerability that allows remote attackers to hijack the user\'s OAuth
+    autorization code. Without CSRF protection on its endpoints, Doorkeeper
+    exposes a user\'s authorization code with arbitrary scope.
+
+
+
+    [1]: https://rubygems.org/gems/doorkeeper
+    \n[`doorkeeper`][1] is an Oauth 2.0 provider for Rails and Grape.
+
+    Affected versions contain a Cross-site request forgery (CSRF)
+    vulnerability that allows remote attackers to hijack the user\'s OAuth
+    autorization code. Without CSRF protection on its endpoints, Doorkeeper
+    exposes a user\'s authorization code with arbitrary scope.
+
+
+
+    [1]: https://rubygems.org/gems/doorkeeper
+    \n[`doorkeeper`][1] is an Oauth 2.0 provider for Rails and Grape.
+
+    Affected versions contain a Cross-site request forgery (CSRF)
+    vulnerability that allows remote attackers to hijack the user\'s OAuth
+    autorization code. Without CSRF protection on its endpoints, Doorkeeper
+    exposes a user\'s authorization code with arbitrary scope.
+
+
+
+    [1]: https://rubygems.org/gems/doorkeeper
+  affected_package: doorkeeper
+  vulnerable_versions:
+  - "< 2.0.0"
+  - ">= 1.5 || < 1.4.1"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2014-8144
+  cwe:
+  - CWE-352
+  credit:
+  - Sergey Belov
+  - Phill Baker
+  references:
+  - http://rubysec.com/advisories/CVE-2014-8144
+  - https://groups.google.com/forum/#!topic/ruby-security-ann/5_VqJtNc8jw
+  source_url: https://snyk.io/vuln/SNYK-RUBY-DOORKEEPER-20203

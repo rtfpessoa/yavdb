@@ -1,0 +1,80 @@
+---
+- id: nodesecurity:npm:aedes:2018-08-08
+  title: Improper Authorization
+  description: Versions of `aedes` before 0.35.1 does not respect its own authorization
+    rules when a client sets a `Last Will`.
+  affected_package: aedes
+  vulnerable_versions:
+  - "<=0.35.0"
+  patched_versions:
+  - ">=0.35.1"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2018-3778
+  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:C/C:N/I:L/A:N
+  credit:
+  - Matteo Collina
+  references:
+  - |-
+    https://github.com/mcollina/aedes/issues/211)
+    https://github.com/mcollina/aedes/issues/212)
+  source_url: https://nodesecurity.io/advisories/682
+- id: snykio:npm:aedes:2018-08-07
+  title: Improper Authorization
+  description: |
+    [aedes][1] is a Barebone MQTT server that can run on any stream server.
+
+    Affected versions of this package are vulnerable to Improper
+    Authorization. A user can connect and subscribe to \"will\" from a
+    client. From another client, a user may connect with a last will message
+    with topic \"will\". Then by sending message to \"test\", the connection
+    will break (because of authorization failure). Breaking the connection
+    will trigger the LWT, and thus sends a message to `will`, which can be
+    seen in the other client.
+
+
+
+    [1]: https://www.npmjs.com/package/aedes
+    \n[aedes][1] is a Barebone MQTT server that can run on any stream server.
+
+    Affected versions of this package are vulnerable to Improper
+    Authorization. A user can connect and subscribe to \"will\" from a
+    client. From another client, a user may connect with a last will message
+    with topic \"will\". Then by sending message to \"test\", the connection
+    will break (because of authorization failure). Breaking the connection
+    will trigger the LWT, and thus sends a message to `will`, which can be
+    seen in the other client.
+
+
+
+    [1]: https://www.npmjs.com/package/aedes
+    \n[aedes][1] is a Barebone MQTT server that can run on any stream server.
+
+    Affected versions of this package are vulnerable to Improper
+    Authorization. A user can connect and subscribe to \"will\" from a
+    client. From another client, a user may connect with a last will message
+    with topic \"will\". Then by sending message to \"test\", the connection
+    will break (because of authorization failure). Breaking the connection
+    will trigger the LWT, and thus sends a message to `will`, which can be
+    seen in the other client.
+
+
+
+    [1]: https://www.npmjs.com/package/aedes
+  affected_package: aedes
+  vulnerable_versions:
+  - "<0.35.1"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2018-3778
+  cwe:
+  - CWE-285
+  credit:
+  - mhverbakel
+  references:
+  - https://github.com/mcollina/aedes/issues/211
+  - https://github.com/nodejs/security-wg/commit/0c683cacced8b152589f86870ea658df08740bab
+  - https://github.com/mcollina/aedes/releases/tag/v0.35.1
+  source_url: https://snyk.io/vuln/npm:aedes:20180807

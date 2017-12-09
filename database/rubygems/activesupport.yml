@@ -1,0 +1,1611 @@
+---
+- id: rubyadvisory:rubygems:activesupport:2013-01-28
+  title: Ruby on Rails JSON Parser Crafted Payload YAML Subset Decoding Remote Code
+    Execution
+  description: |
+    Ruby on Rails contains a flaw in the JSON parser. Rails supports multiple
+    parsing backends, one of which involves transforming JSON into YAML via the
+    YAML parser. With a specially crafted payload, an attacker can subvert the
+    backend into decoding a subset of YAML. This may allow a remote attacker to
+    bypass restrictions, allowing them to bypass authentication systems, inject
+    arbitrary SQL, inject and execute arbitrary code, or perform a DoS attack on
+    a Rails application.
+  affected_package: activesupport
+  patched_versions:
+  - "~> 2.3.16"
+  - ">= 3.0.20"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2013-0333
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: http://osvdb.org/show/osvdb/89594
+- id: rubyadvisory:rubygems:activesupport:2012-03-01
+  title: Ruby on Rails SafeBuffer Object [] Direct Manipulation XSS
+  description: |
+    Ruby on Rails contains a flaw that allows a remote cross-site scripting (XSS)
+    attack. This flaw exists because athe application does not validate direct
+    manipulations of SafeBuffer objects via '[]' and other methods. This may
+    allow a user to create a specially crafted request that would execute
+    arbitrary script code in a user's browser within the trust relationship
+    between their browser and the server.
+  affected_package: activesupport
+  unaffected_versions:
+  - "< 3.0.0"
+  patched_versions:
+  - "~> 3.0.12"
+  - "~> 3.1.4"
+  - ">= 3.2.2"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2012-1098
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: http://osvdb.org/79726
+- id: rubyadvisory:rubygems:activesupport:2012-08-09
+  title: Ruby on Rails HTML Escaping Code XSS
+  description: |
+    Ruby on Rails contains a flaw that allows a remote cross-site scripting (XSS)
+    attack. This flaw exists because the HTML escaping code functionality does
+    not properly escape a single quote character. This may allow a user to create
+    a specially crafted request that would execute arbitrary script code in a
+    user's browser within the trust relationship between their browser and the
+    server.
+  affected_package: activesupport
+  patched_versions:
+  - "~> 3.0.17"
+  - "~> 3.1.8"
+  - ">= 3.2.8"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2012-3464
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: http://www.osvdb.org/show/osvdb/84516
+- id: rubyadvisory:rubygems:activesupport:2015-06-16
+  title: 'Possible Denial of Service attack in Active Support
+
+'
+  description: "Specially crafted XML documents can cause applications to raise a
+    \n`SystemStackError` and potentially cause a denial of service attack.  This \nonly
+    impacts applications using REXML or JDOM as their XML processor.  Other \nXML
+    processors that Rails supports are not impacted. \n\nAll users running an affected
+    release should either upgrade or use one of the work arounds immediately.\n\nWorkarounds
+    \n----------- \nUse an XML parser that is not impacted by this problem, such as
+    Nokogiri or \nLibXML.  You can change the processor like this: \n\n  ActiveSupport::XmlMini.backend
+    = 'Nokogiri' \n\nIf you cannot change XML parsers, then adjust \n`RUBY_THREAD_MACHINE_STACK_SIZE`.
+    \n"
+  affected_package: activesupport
+  patched_versions:
+  - ">= 4.2.2"
+  - "~> 4.1.11"
+  - "~> 3.2.22"
+  package_manager: rubygems
+  cve:
+  - CVE-2015-3227
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://groups.google.com/forum/#!topic/rubyonrails-security/bahr2JLnxvk
+- id: rubyadvisory:rubygems:activesupport:2013-03-19
+  title: XML Parsing Vulnerability affecting JRuby users
+  description: |
+    The ActiveSupport XML parsing functionality supports multiple
+    pluggable backends. One backend supported for JRuby users is
+    ActiveSupport::XmlMini_JDOM which makes use of the
+    javax.xml.parsers.DocumentBuilder class. In some JVM configurations
+    the default settings of that class can allow an attacker to construct
+    XML which, when parsed, will contain the contents of arbitrary URLs
+    including files from the application server. They may also allow for
+    various denial of service attacks. Action Pack
+  affected_package: activesupport
+  unaffected_versions:
+  - "~> 2.3.0"
+  patched_versions:
+  - "~> 3.1.12"
+  - ">= 3.2.13"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2013-1856
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: http://www.osvdb.org/show/osvdb/91451
+- id: rubyadvisory:rubygems:activesupport:2015-06-16
+  title: 'XSS Vulnerability in ActiveSupport::JSON.encode
+
+'
+  description: "When a `Hash` containing user-controlled data is encode as JSON (either
+    through \n`Hash#to_json` or `ActiveSupport::JSON.encode`), Rails does not perform
+    adequate \nescaping that matches the guarantee implied by the `escape_html_entities_in_json`
+    \noption (which is enabled by default). If this resulting JSON string is subsequently
+    \ninserted directly into an HTML page, the page will be vulnerable to XSS attacks.
+    \n\nFor example, the following code snippet is vulnerable to this attack: \n\n
+    \   <%= javascript_tag \"var data = #{user_supplied_data.to_json};\" %> \n\nSimilarly,
+    the following is also vulnerable: \n\n    <script> \n      var data = <%= ActiveSupport::JSON.encode(user_supplied_data).html_safe
+    %>; \n    </script> \n\nAll applications that renders JSON-encoded strings that
+    contains user-controlled \ndata in their views should either upgrade to one of
+    the FIXED versions or use \nthe suggested workaround immediately. \n\nWorkarounds
+    \n----------- \nTo work around this problem add an initializer with the following
+    code: \n\n  module ActiveSupport \n    module JSON \n      module Encoding \n
+    \       private \n        class EscapedString \n          def to_s \n            self
+    \n          end \n        end \n      end \n    end \n  end \n"
+  affected_package: activesupport
+  unaffected_versions:
+  - "< 4.1.0"
+  patched_versions:
+  - ">= 4.2.2"
+  - "~> 4.1.11"
+  package_manager: rubygems
+  cve:
+  - CVE-2015-3226
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://groups.google.com/forum/#!topic/ruby-security-ann/7VlB_pck3hU
+- id: snykio:rubygems:activesupport:2015-06-15
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [`activesupport`][1] is toolkit of support libraries and Ruby core
+    extensions extracted from the Rails framework
+
+    Rails does not perform adequate escaping when a `Hash` containing
+    user-controlled data is encoded as JSON
+
+    When a `Hash` containing user-controlled data is encoded as JSON (either
+    through `Hash#to_json` or `ActiveSupport::JSON.encode`), Rails does not
+    perform adequate escaping that matches the guarantee implied by the
+    `escape_html_entities_in_json` option (which is enabled by default). If
+    this resulting JSON string is subsequently inserted directly into an
+    HTML page, the page will be vulnerable to XSS attacks.
+
+    For example, the following code snippet is vulnerable to this attack:
+
+        <%= javascript_tag "var data = #{user_supplied_data.to_json};" %>
+
+    Similarly, the following is also vulnerable:
+
+        <script>
+          var data = <%= ActiveSupport::JSON.encode(user_supplied_data).html_safe %>;
+        </script>
+
+    All applications that renders JSON-encoded strings that contains
+    user-controlled data in their views should either upgrade to one of the
+    FIXED versions or use the suggested workaround immediately.
+
+
+
+    [1]: https://rubygems.org/gems/activesupport
+    \n[`activesupport`][1] is toolkit of support libraries and Ruby core
+    extensions extracted from the Rails framework
+
+    Rails does not perform adequate escaping when a `Hash` containing
+    user-controlled data is encoded as JSON
+
+    When a `Hash` containing user-controlled data is encoded as JSON (either
+    through `Hash#to_json` or `ActiveSupport::JSON.encode`), Rails does not
+    perform adequate escaping that matches the guarantee implied by the
+    `escape_html_entities_in_json` option (which is enabled by default). If
+    this resulting JSON string is subsequently inserted directly into an
+    HTML page, the page will be vulnerable to XSS attacks.
+
+    For example, the following code snippet is vulnerable to this attack:
+
+        <%= javascript_tag "var data = #{user_supplied_data.to_json};" %>
+
+    Similarly, the following is also vulnerable:
+
+        <script>
+          var data = <%= ActiveSupport::JSON.encode(user_supplied_data).html_safe %>;
+        </script>
+
+    All applications that renders JSON-encoded strings that contains
+    user-controlled data in their views should either upgrade to one of the
+    FIXED versions or use the suggested workaround immediately.
+
+
+
+    [1]: https://rubygems.org/gems/activesupport
+    \n[`activesupport`][1] is toolkit of support libraries and Ruby core
+    extensions extracted from the Rails framework
+
+    Rails does not perform adequate escaping when a `Hash` containing
+    user-controlled data is encoded as JSON
+
+    When a `Hash` containing user-controlled data is encoded as JSON (either
+    through `Hash#to_json` or `ActiveSupport::JSON.encode`), Rails does not
+    perform adequate escaping that matches the guarantee implied by the
+    `escape_html_entities_in_json` option (which is enabled by default). If
+    this resulting JSON string is subsequently inserted directly into an
+    HTML page, the page will be vulnerable to XSS attacks.
+
+    For example, the following code snippet is vulnerable to this attack:
+
+        <%= javascript_tag "var data = #{user_supplied_data.to_json};" %>
+
+    Similarly, the following is also vulnerable:
+
+        <script>
+          var data = <%= ActiveSupport::JSON.encode(user_supplied_data).html_safe %>;
+        </script>
+
+    All applications that renders JSON-encoded strings that contains
+    user-controlled data in their views should either upgrade to one of the
+    FIXED versions or use the suggested workaround immediately.
+
+
+
+    [1]: https://rubygems.org/gems/activesupport
+    \n[`activesupport`][1] is toolkit of support libraries and Ruby core
+    extensions extracted from the Rails framework
+
+    Rails does not perform adequate escaping when a `Hash` containing
+    user-controlled data is encoded as JSON
+
+    When a `Hash` containing user-controlled data is encoded as JSON (either
+    through `Hash#to_json` or `ActiveSupport::JSON.encode`), Rails does not
+    perform adequate escaping that matches the guarantee implied by the
+    `escape_html_entities_in_json` option (which is enabled by default). If
+    this resulting JSON string is subsequently inserted directly into an
+    HTML page, the page will be vulnerable to XSS attacks.
+
+    For example, the following code snippet is vulnerable to this attack:
+
+        <%= javascript_tag "var data = #{user_supplied_data.to_json};" %>
+
+    Similarly, the following is also vulnerable:
+
+        <script>
+          var data = <%= ActiveSupport::JSON.encode(user_supplied_data).html_safe %>;
+        </script>
+
+    All applications that renders JSON-encoded strings that contains
+    user-controlled data in their views should either upgrade to one of the
+    FIXED versions or use the suggested workaround immediately.
+
+
+
+    [1]: https://rubygems.org/gems/activesupport
+    \n[`activesupport`][1] is toolkit of support libraries and Ruby core
+    extensions extracted from the Rails framework
+
+    Rails does not perform adequate escaping when a `Hash` containing
+    user-controlled data is encoded as JSON
+
+    When a `Hash` containing user-controlled data is encoded as JSON (either
+    through `Hash#to_json` or `ActiveSupport::JSON.encode`), Rails does not
+    perform adequate escaping that matches the guarantee implied by the
+    `escape_html_entities_in_json` option (which is enabled by default). If
+    this resulting JSON string is subsequently inserted directly into an
+    HTML page, the page will be vulnerable to XSS attacks.
+
+    For example, the following code snippet is vulnerable to this attack:
+
+        <%= javascript_tag "var data = #{user_supplied_data.to_json};" %>
+
+    Similarly, the following is also vulnerable:
+
+        <script>
+          var data = <%= ActiveSupport::JSON.encode(user_supplied_data).html_safe %>;
+        </script>
+
+    All applications that renders JSON-encoded strings that contains
+    user-controlled data in their views should either upgrade to one of the
+    FIXED versions or use the suggested workaround immediately.
+
+
+
+    [1]: https://rubygems.org/gems/activesupport
+    \n[`activesupport`][1] is toolkit of support libraries and Ruby core
+    extensions extracted from the Rails framework
+
+    Rails does not perform adequate escaping when a `Hash` containing
+    user-controlled data is encoded as JSON
+
+    When a `Hash` containing user-controlled data is encoded as JSON (either
+    through `Hash#to_json` or `ActiveSupport::JSON.encode`), Rails does not
+    perform adequate escaping that matches the guarantee implied by the
+    `escape_html_entities_in_json` option (which is enabled by default). If
+    this resulting JSON string is subsequently inserted directly into an
+    HTML page, the page will be vulnerable to XSS attacks.
+
+    For example, the following code snippet is vulnerable to this attack:
+
+        <%= javascript_tag "var data = #{user_supplied_data.to_json};" %>
+
+    Similarly, the following is also vulnerable:
+
+        <script>
+          var data = <%= ActiveSupport::JSON.encode(user_supplied_data).html_safe %>;
+        </script>
+
+    All applications that renders JSON-encoded strings that contains
+    user-controlled data in their views should either upgrade to one of the
+    FIXED versions or use the suggested workaround immediately.
+
+
+
+    [1]: https://rubygems.org/gems/activesupport
+    \n[`activesupport`][1] is toolkit of support libraries and Ruby core
+    extensions extracted from the Rails framework
+
+    Rails does not perform adequate escaping when a `Hash` containing
+    user-controlled data is encoded as JSON
+
+    When a `Hash` containing user-controlled data is encoded as JSON (either
+    through `Hash#to_json` or `ActiveSupport::JSON.encode`), Rails does not
+    perform adequate escaping that matches the guarantee implied by the
+    `escape_html_entities_in_json` option (which is enabled by default). If
+    this resulting JSON string is subsequently inserted directly into an
+    HTML page, the page will be vulnerable to XSS attacks.
+
+    For example, the following code snippet is vulnerable to this attack:
+
+        <%= javascript_tag "var data = #{user_supplied_data.to_json};" %>
+
+    Similarly, the following is also vulnerable:
+
+        <script>
+          var data = <%= ActiveSupport::JSON.encode(user_supplied_data).html_safe %>;
+        </script>
+
+    All applications that renders JSON-encoded strings that contains
+    user-controlled data in their views should either upgrade to one of the
+    FIXED versions or use the suggested workaround immediately.
+
+
+
+    [1]: https://rubygems.org/gems/activesupport
+    \n[`activesupport`][1] is toolkit of support libraries and Ruby core
+    extensions extracted from the Rails framework
+
+    Rails does not perform adequate escaping when a `Hash` containing
+    user-controlled data is encoded as JSON
+
+    When a `Hash` containing user-controlled data is encoded as JSON (either
+    through `Hash#to_json` or `ActiveSupport::JSON.encode`), Rails does not
+    perform adequate escaping that matches the guarantee implied by the
+    `escape_html_entities_in_json` option (which is enabled by default). If
+    this resulting JSON string is subsequently inserted directly into an
+    HTML page, the page will be vulnerable to XSS attacks.
+
+    For example, the following code snippet is vulnerable to this attack:
+
+        <%= javascript_tag "var data = #{user_supplied_data.to_json};" %>
+
+    Similarly, the following is also vulnerable:
+
+        <script>
+          var data = <%= ActiveSupport::JSON.encode(user_supplied_data).html_safe %>;
+        </script>
+
+    All applications that renders JSON-encoded strings that contains
+    user-controlled data in their views should either upgrade to one of the
+    FIXED versions or use the suggested workaround immediately.
+
+
+
+    [1]: https://rubygems.org/gems/activesupport
+    \n[`activesupport`][1] is toolkit of support libraries and Ruby core
+    extensions extracted from the Rails framework
+
+    Rails does not perform adequate escaping when a `Hash` containing
+    user-controlled data is encoded as JSON
+
+    When a `Hash` containing user-controlled data is encoded as JSON (either
+    through `Hash#to_json` or `ActiveSupport::JSON.encode`), Rails does not
+    perform adequate escaping that matches the guarantee implied by the
+    `escape_html_entities_in_json` option (which is enabled by default). If
+    this resulting JSON string is subsequently inserted directly into an
+    HTML page, the page will be vulnerable to XSS attacks.
+
+    For example, the following code snippet is vulnerable to this attack:
+
+        <%= javascript_tag "var data = #{user_supplied_data.to_json};" %>
+
+    Similarly, the following is also vulnerable:
+
+        <script>
+          var data = <%= ActiveSupport::JSON.encode(user_supplied_data).html_safe %>;
+        </script>
+
+    All applications that renders JSON-encoded strings that contains
+    user-controlled data in their views should either upgrade to one of the
+    FIXED versions or use the suggested workaround immediately.
+
+
+
+    [1]: https://rubygems.org/gems/activesupport
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+  affected_package: activesupport
+  vulnerable_versions:
+  - "< 4.2.2"
+  - ">= 4.2 || < 4.1.11"
+  - ">= 4.1.0"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2015-3226
+  cwe:
+  - CWE-79
+  credit:
+  - Francois Chagnon
+  references:
+  - http://rubysec.com/advisories/CVE-2015-3226
+  - https://groups.google.com/forum/#!topic/ruby-security-ann/7VlB_pck3hU
+  source_url: https://snyk.io/vuln/SNYK-RUBY-ACTIVESUPPORT-20228
+- id: snykio:rubygems:activesupport:2015-06-15
+  title: Denial of Service (DoS)
+  description: |+
+    [`activesupport`][1] is toolkit of support libraries and Ruby core
+    extensions extracted from the Rails framework.
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS). Specially crafted XML documents can cause applications to raise a
+    `SystemStackError`. This only impacts applications using REXML or JDOM
+    as their XML processor. Other XML processors that Rails supports are not
+    impacted.
+
+
+
+    [1]: https://rubygems.org/gems/activesupport
+    \n[`activesupport`][1] is toolkit of support libraries and Ruby core
+    extensions extracted from the Rails framework.
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS). Specially crafted XML documents can cause applications to raise a
+    `SystemStackError`. This only impacts applications using REXML or JDOM
+    as their XML processor. Other XML processors that Rails supports are not
+    impacted.
+
+
+
+    [1]: https://rubygems.org/gems/activesupport
+    \n[`activesupport`][1] is toolkit of support libraries and Ruby core
+    extensions extracted from the Rails framework.
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS). Specially crafted XML documents can cause applications to raise a
+    `SystemStackError`. This only impacts applications using REXML or JDOM
+    as their XML processor. Other XML processors that Rails supports are not
+    impacted.
+
+
+
+    [1]: https://rubygems.org/gems/activesupport
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+  affected_package: activesupport
+  vulnerable_versions:
+  - "< 4.2.2"
+  - ">= 4.2 || < 4.1.11"
+  - ">= 3.3 || < 3.2.22"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2015-3227
+  cwe:
+  - CWE-400
+  credit:
+  - Tomek Rabczak
+  references:
+  - https://rubysec.com/advisories/activesupport-CVE-2015-3227
+  - https://nvd.nist.gov/vuln/detail/CVE-2015-3227
+  source_url: https://snyk.io/vuln/SNYK-RUBY-ACTIVESUPPORT-20229
+- id: snykio:rubygems:activesupport:2013-03-18
+  title: Sensitive Information Exposure
+  description: |
+    [`activesupport`][1] is toolkit of support libraries and Ruby core
+    extensions extracted from the Rails framework.
+
+    Affected versions of this package are vulnerable to Sensitive
+    Information Exposure. Under certain configurations, the ActiveSupport
+    XML parsing can allow an attacker to construct XML which, when parsed,
+    will contain the contents of arbitrary URLs including files from the
+    application server. The ActiveSupport XML parsing functionality supports
+    multiple pluggable backends. One backend supported for JRuby users is
+    `ActiveSupport::XmlMini_JDOM` which makes use of the
+    `javax.xml.parsers.DocumentBuilder` class. In some JVM configurations
+    the default settings of that class can allow an attacker to construct
+    XML which, when parsed, will contain the contents of arbitrary URLs
+    including files from the application server.
+
+
+
+    [1]: https://rubygems.org/gems/activesupport
+    \n[`activesupport`][1] is toolkit of support libraries and Ruby core
+    extensions extracted from the Rails framework.
+
+    Affected versions of this package are vulnerable to Sensitive
+    Information Exposure. Under certain configurations, the ActiveSupport
+    XML parsing can allow an attacker to construct XML which, when parsed,
+    will contain the contents of arbitrary URLs including files from the
+    application server. The ActiveSupport XML parsing functionality supports
+    multiple pluggable backends. One backend supported for JRuby users is
+    `ActiveSupport::XmlMini_JDOM` which makes use of the
+    `javax.xml.parsers.DocumentBuilder` class. In some JVM configurations
+    the default settings of that class can allow an attacker to construct
+    XML which, when parsed, will contain the contents of arbitrary URLs
+    including files from the application server.
+
+
+
+    [1]: https://rubygems.org/gems/activesupport
+    \n[`activesupport`][1] is toolkit of support libraries and Ruby core
+    extensions extracted from the Rails framework.
+
+    Affected versions of this package are vulnerable to Sensitive
+    Information Exposure. Under certain configurations, the ActiveSupport
+    XML parsing can allow an attacker to construct XML which, when parsed,
+    will contain the contents of arbitrary URLs including files from the
+    application server. The ActiveSupport XML parsing functionality supports
+    multiple pluggable backends. One backend supported for JRuby users is
+    `ActiveSupport::XmlMini_JDOM` which makes use of the
+    `javax.xml.parsers.DocumentBuilder` class. In some JVM configurations
+    the default settings of that class can allow an attacker to construct
+    XML which, when parsed, will contain the contents of arbitrary URLs
+    including files from the application server.
+
+
+
+    [1]: https://rubygems.org/gems/activesupport
+  affected_package: activesupport
+  vulnerable_versions:
+  - "< 3.2.13"
+  - ">= 3.2 || < 3.1.12"
+  - ">= 2.4 || < 2.3.0"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2013-1856
+  cwe:
+  - CWE-200
+  credit:
+  - Ben Murphy
+  references:
+  - http://rubysec.com/advisories/activesupport-OSVDB-91451
+  - https://groups.google.com/d/msg/rubyonrails-security/KZwsQbYsOiI/5kUV7dSCJGwJ
+  source_url: https://snyk.io/vuln/SNYK-RUBY-ACTIVESUPPORT-20089
+- id: snykio:rubygems:activesupport:2013-03-18
+  title: Denial of Service (DoS)
+  description: |+
+    [`activesupport`][1] is toolkit of support libraries and Ruby core
+    extensions extracted from the Rails framework
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (Dos) attacks. The ActiveSupport XML parsing functionality supports
+    multiple pluggable backends. One backend supported for JRuby users is
+    `ActiveSupport::XmlMini_JDOM` which makes use of the
+    `javax.xml.parsers.DocumentBuilder` class. In some JVM configurations
+    the default settings of that class can allow an attacker to construct
+    XML which may allow for various denial of service attacks.
+
+
+
+    [1]: https://rubygems.org/gems/activesupport
+    \n[`activesupport`][1] is toolkit of support libraries and Ruby core
+    extensions extracted from the Rails framework
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (Dos) attacks. The ActiveSupport XML parsing functionality supports
+    multiple pluggable backends. One backend supported for JRuby users is
+    `ActiveSupport::XmlMini_JDOM` which makes use of the
+    `javax.xml.parsers.DocumentBuilder` class. In some JVM configurations
+    the default settings of that class can allow an attacker to construct
+    XML which may allow for various denial of service attacks.
+
+
+
+    [1]: https://rubygems.org/gems/activesupport
+    \n[`activesupport`][1] is toolkit of support libraries and Ruby core
+    extensions extracted from the Rails framework
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (Dos) attacks. The ActiveSupport XML parsing functionality supports
+    multiple pluggable backends. One backend supported for JRuby users is
+    `ActiveSupport::XmlMini_JDOM` which makes use of the
+    `javax.xml.parsers.DocumentBuilder` class. In some JVM configurations
+    the default settings of that class can allow an attacker to construct
+    XML which may allow for various denial of service attacks.
+
+
+
+    [1]: https://rubygems.org/gems/activesupport
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+  affected_package: activesupport
+  vulnerable_versions:
+  - "< 3.2.13"
+  - ">= 3.2 || < 3.1.12"
+  - ">= 2.4 || < 2.3.0"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2013-1856
+  cwe:
+  - CWE-400
+  credit:
+  - Unknown
+  references:
+  - https://rubysec.com/advisories/activesupport-OSVDB-91451
+  - https://groups.google.com/d/msg/rubyonrails-security/KZwsQbYsOiI/5kUV7dSCJGwJ
+  source_url: https://snyk.io/vuln/SNYK-RUBY-ACTIVESUPPORT-20294
+- id: snykio:rubygems:activesupport:2013-01-27
+  title: Arbitrary Code Injection
+  description: |+
+    [`activesupport`][1] is toolkit of support libraries and Ruby core
+    extensions extracted from the Rails framework
+
+    Ruby on Rails contains a flaw in the JSON parser which may allow a
+    remote attacker to bypass restrictions, allowing them to bypass
+    authentication systems, inject arbitrary SQL, inject and execute
+    arbitrary code, or perform a DoS attack on a Rails application.
+
+
+
+    [1]: https://rubygems.org/gems/activesupport
+    \n[`activesupport`][1] is toolkit of support libraries and Ruby core
+    extensions extracted from the Rails framework
+
+    Ruby on Rails contains a flaw in the JSON parser which may allow a
+    remote attacker to bypass restrictions, allowing them to bypass
+    authentication systems, inject arbitrary SQL, inject and execute
+    arbitrary code, or perform a DoS attack on a Rails application.
+
+
+
+    [1]: https://rubygems.org/gems/activesupport
+    \n[`activesupport`][1] is toolkit of support libraries and Ruby core
+    extensions extracted from the Rails framework
+
+    Ruby on Rails contains a flaw in the JSON parser which may allow a
+    remote attacker to bypass restrictions, allowing them to bypass
+    authentication systems, inject arbitrary SQL, inject and execute
+    arbitrary code, or perform a DoS attack on a Rails application.
+
+
+
+    [1]: https://rubygems.org/gems/activesupport
+    \nRails supports multiple parsing backends, one of which involves
+    transforming JSON into YAML via the YAML parser. With a specially
+    crafted payload, an attacker can subvert the backend into decoding a
+    subset of YAML. This may allow a remote attacker to bypass restrictions,
+    allowing them to bypass authentication systems, inject arbitrary SQL,
+    inject and execute arbitrary code, or perform a DoS attack on a Rails
+    application.
+
+    \nRails supports multiple parsing backends, one of which involves
+    transforming JSON into YAML via the YAML parser. With a specially
+    crafted payload, an attacker can subvert the backend into decoding a
+    subset of YAML. This may allow a remote attacker to bypass restrictions,
+    allowing them to bypass authentication systems, inject arbitrary SQL,
+    inject and execute arbitrary code, or perform a DoS attack on a Rails
+    application.
+
+  affected_package: activesupport
+  vulnerable_versions:
+  - "< 3.0.20"
+  - ">= 2.4 || < 2.3.16"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2013-0333
+  cwe:
+  - CWE-94
+  credit:
+  - Lawrence Pit
+  references:
+  - http://rubysec.com/advisories/OSVDB-89594
+  - https://groups.google.com/d/msg/rubyonrails-security/1h2DR63ViGo/GOUVafeaF1IJ
+  source_url: https://snyk.io/vuln/SNYK-RUBY-ACTIVESUPPORT-20054
+- id: snykio:rubygems:activesupport:2012-08-08
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [`activesupport`][1] is toolkit of support libraries and Ruby core
+    extensions extracted from the Rails framework.
+
+    Affected versions of this package are vulnerable to Cross-site
+    Scripting. The HTML escaping code functionality does not properly escape
+    a single quote character. This may allow a user to create a specially
+    crafted request that would execute arbitrary script code in a user\'s
+    browser within the trust relationship between their browser and the
+    server.
+
+
+
+    [1]: https://rubygems.org/gems/activesupport
+    \n[`activesupport`][1] is toolkit of support libraries and Ruby core
+    extensions extracted from the Rails framework.
+
+    Affected versions of this package are vulnerable to Cross-site
+    Scripting. The HTML escaping code functionality does not properly escape
+    a single quote character. This may allow a user to create a specially
+    crafted request that would execute arbitrary script code in a user\'s
+    browser within the trust relationship between their browser and the
+    server.
+
+
+
+    [1]: https://rubygems.org/gems/activesupport
+    \n[`activesupport`][1] is toolkit of support libraries and Ruby core
+    extensions extracted from the Rails framework.
+
+    Affected versions of this package are vulnerable to Cross-site
+    Scripting. The HTML escaping code functionality does not properly escape
+    a single quote character. This may allow a user to create a specially
+    crafted request that would execute arbitrary script code in a user\'s
+    browser within the trust relationship between their browser and the
+    server.
+
+
+
+    [1]: https://rubygems.org/gems/activesupport
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+  affected_package: activesupport
+  vulnerable_versions:
+  - "< 3.2.8"
+  - ">= 3.2 || < 3.1.8"
+  - ">= 3.1 || < 3.0.17"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2012-3464
+  cwe:
+  - CWE-79
+  credit:
+  - Unknown
+  references:
+  - https://rubysec.com/advisories/activesupport-OSVDB-84516
+  - https://nvd.nist.gov/vuln/detail/CVE-2012-3464
+  source_url: https://snyk.io/vuln/SNYK-RUBY-ACTIVESUPPORT-20036
+- id: snykio:rubygems:activesupport:2012-02-29
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [`activesupport`][1] is toolkit of support libraries and Ruby core
+    extensions extracted from the Rails frameworkץ
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). The application does not validate direct manipulations of
+    SafeBuffer objects via \'\[\]\' and other methods. This may allow a user
+    to create a specially crafted request that would execute arbitrary
+    script code in a user\'s browser within the trust relationship between
+    their browser and the server.
+
+
+
+    [1]: https://rubygems.org/gems/activesupport
+    \n[`activesupport`][1] is toolkit of support libraries and Ruby core
+    extensions extracted from the Rails frameworkץ
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). The application does not validate direct manipulations of
+    SafeBuffer objects via \'\[\]\' and other methods. This may allow a user
+    to create a specially crafted request that would execute arbitrary
+    script code in a user\'s browser within the trust relationship between
+    their browser and the server.
+
+
+
+    [1]: https://rubygems.org/gems/activesupport
+    \n[`activesupport`][1] is toolkit of support libraries and Ruby core
+    extensions extracted from the Rails frameworkץ
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). The application does not validate direct manipulations of
+    SafeBuffer objects via \'\[\]\' and other methods. This may allow a user
+    to create a specially crafted request that would execute arbitrary
+    script code in a user\'s browser within the trust relationship between
+    their browser and the server.
+
+
+
+    [1]: https://rubygems.org/gems/activesupport
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+  affected_package: activesupport
+  vulnerable_versions:
+  - "< 3.2.2"
+  - ">= 3.2 || < 3.1.4"
+  - ">= 3.1 || < 3.0.12"
+  - ">= 3.0.0"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2012-1098
+  cwe:
+  - CWE-79
+  credit:
+  - Akira Matsuda
+  references:
+  - http://rubysec.com/advisories/activesupport-OSVDB-79726
+  - https://groups.google.com/forum/#!topic/rubyonrails-security/7dKPHj0E6RM
+  source_url: https://snyk.io/vuln/SNYK-RUBY-ACTIVESUPPORT-20025

@@ -1,0 +1,727 @@
+---
+- id: snykio:maven:org.apache.nifi:nifi-security-utils:2017-10-02
+  title: Deserialization of Untrusted Data
+  description: "[Apache NiFi][1] is a system to process and distribute data.\n\nAffected
+    versions of this package are vulnerable to Deserialization of\nUntrusted Data.\n\nAny
+    authenticated user (valid client certificate but without ACL\npermissions) could
+    upload a template which contained malicious code and\ncaused a denial of service
+    via Java deserialization attack. The fix to\nproperly handle Java deserialization
+    was applied on the Apache NiFi\n1.4.0 release. Users running a prior 1.x release
+    should upgrade to the\nappropriate release.\n\n\\##Details Serialization is a
+    process of converting an object into a\nsequence of bytes which can be persisted
+    to a disk or database or can be\nsent through streams. The reverse process of
+    creating object from\nsequence of bytes is called deserialization. Serialization
+    is commonly\nused for communication (sharing objects between multiple hosts) and\npersistence
+    (store the object state in a file or a database). It is an\nintegral part of popular
+    protocols like *Remote Method Invocation\n(RMI)*, *Java Management Extension (JMX)*,
+    *Java Messaging System\n(JMS)*, *Action Message Format (AMF)*, *Java Server Faces
+    (JSF)\nViewState*, etc.\n\n*Deserialization of untrusted data* ([CWE-502][2]),
+    is when the\napplication deserializes untrusted data without sufficiently verifying\nthat
+    the resulting data will be valid, letting the attacker to control\nthe state or
+    the flow of the execution.\n\nJava deserialization issues have been known for
+    years. However, interest\nin the issue intensified greatly in 2015, when classes
+    that could be\nabused to achieve remote code execution were found in a [popular
+    library\n(Apache Commons Collection)][3]. These classes were used in zero-days\naffecting
+    IBM WebSphere, Oracle WebLogic and many other products.\n\nAn attacker just needs
+    to identify a piece of software that has both a\nvulnerable class on its path,
+    and performs deserialization on untrusted\ndata. Then all they need to do is send
+    the payload into the\ndeserializer, getting the command executed.\n\n> Developers
+    put too much trust in Java Object Serialization. Some even\n> de-serialize objects
+    pre-authentication. When deserializing an Object\n> in Java you typically cast
+    it to an expected type, and therefore\n> Java\\'s strict type system will ensure
+    you only get valid object\n> trees. Unfortunately, by the time the type checking
+    happens, platform\n> code has already created and executed significant logic.
+    So, before\n> the final type is checked a lot of code is executed from the\n>
+    readObject() methods of various objects, all of which is out of the\n> developer\\'s
+    control. By combining the readObject() methods of various\n> classes which are
+    available on the classpath of the vulnerable\n> application an attacker can execute
+    functions (including calling\n> Runtime.exec() to execute local OS commands).\n>
+    \n> * Apache Blog\n\n\\##Remediation Upgrade `Apache NiFi` to 1.4.0 version or
+    higher.\n\n\n\n[1]: https://nifi.apache.org/\n[2]: https://cwe.mitre.org/data/definitions/502.html\n[3]:
+    https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078\n\\n[Apache NiFi][1] is
+    a system to process and distribute data.\n\nAffected versions of this package
+    are vulnerable to Deserialization of\nUntrusted Data.\n\nAny authenticated user
+    (valid client certificate but without ACL\npermissions) could upload a template
+    which contained malicious code and\ncaused a denial of service via Java deserialization
+    attack. The fix to\nproperly handle Java deserialization was applied on the Apache
+    NiFi\n1.4.0 release. Users running a prior 1.x release should upgrade to the\nappropriate
+    release.\n\n\\##Details Serialization is a process of converting an object into
+    a\nsequence of bytes which can be persisted to a disk or database or can be\nsent
+    through streams. The reverse process of creating object from\nsequence of bytes
+    is called deserialization. Serialization is commonly\nused for communication (sharing
+    objects between multiple hosts) and\npersistence (store the object state in a
+    file or a database). It is an\nintegral part of popular protocols like *Remote
+    Method Invocation\n(RMI)*, *Java Management Extension (JMX)*, *Java Messaging
+    System\n(JMS)*, *Action Message Format (AMF)*, *Java Server Faces (JSF)\nViewState*,
+    etc.\n\n*Deserialization of untrusted data* ([CWE-502][2]), is when the\napplication
+    deserializes untrusted data without sufficiently verifying\nthat the resulting
+    data will be valid, letting the attacker to control\nthe state or the flow of
+    the execution.\n\nJava deserialization issues have been known for years. However,
+    interest\nin the issue intensified greatly in 2015, when classes that could be\nabused
+    to achieve remote code execution were found in a [popular library\n(Apache Commons
+    Collection)][3]. These classes were used in zero-days\naffecting IBM WebSphere,
+    Oracle WebLogic and many other products.\n\nAn attacker just needs to identify
+    a piece of software that has both a\nvulnerable class on its path, and performs
+    deserialization on untrusted\ndata. Then all they need to do is send the payload
+    into the\ndeserializer, getting the command executed.\n\n> Developers put too
+    much trust in Java Object Serialization. Some even\n> de-serialize objects pre-authentication.
+    When deserializing an Object\n> in Java you typically cast it to an expected type,
+    and therefore\n> Java\\'s strict type system will ensure you only get valid object\n>
+    trees. Unfortunately, by the time the type checking happens, platform\n> code
+    has already created and executed significant logic. So, before\n> the final type
+    is checked a lot of code is executed from the\n> readObject() methods of various
+    objects, all of which is out of the\n> developer\\'s control. By combining the
+    readObject() methods of various\n> classes which are available on the classpath
+    of the vulnerable\n> application an attacker can execute functions (including
+    calling\n> Runtime.exec() to execute local OS commands).\n> \n> * Apache Blog\n\n\\##Remediation
+    Upgrade `Apache NiFi` to 1.4.0 version or higher.\n\n\n\n[1]: https://nifi.apache.org/\n[2]:
+    https://cwe.mitre.org/data/definitions/502.html\n[3]: https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078\n\\n[Apache
+    NiFi][1] is a system to process and distribute data.\n\nAffected versions of this
+    package are vulnerable to Deserialization of\nUntrusted Data.\n\nAny authenticated
+    user (valid client certificate but without ACL\npermissions) could upload a template
+    which contained malicious code and\ncaused a denial of service via Java deserialization
+    attack. The fix to\nproperly handle Java deserialization was applied on the Apache
+    NiFi\n1.4.0 release. Users running a prior 1.x release should upgrade to the\nappropriate
+    release.\n\n\\##Details Serialization is a process of converting an object into
+    a\nsequence of bytes which can be persisted to a disk or database or can be\nsent
+    through streams. The reverse process of creating object from\nsequence of bytes
+    is called deserialization. Serialization is commonly\nused for communication (sharing
+    objects between multiple hosts) and\npersistence (store the object state in a
+    file or a database). It is an\nintegral part of popular protocols like *Remote
+    Method Invocation\n(RMI)*, *Java Management Extension (JMX)*, *Java Messaging
+    System\n(JMS)*, *Action Message Format (AMF)*, *Java Server Faces (JSF)\nViewState*,
+    etc.\n\n*Deserialization of untrusted data* ([CWE-502][2]), is when the\napplication
+    deserializes untrusted data without sufficiently verifying\nthat the resulting
+    data will be valid, letting the attacker to control\nthe state or the flow of
+    the execution.\n\nJava deserialization issues have been known for years. However,
+    interest\nin the issue intensified greatly in 2015, when classes that could be\nabused
+    to achieve remote code execution were found in a [popular library\n(Apache Commons
+    Collection)][3]. These classes were used in zero-days\naffecting IBM WebSphere,
+    Oracle WebLogic and many other products.\n\nAn attacker just needs to identify
+    a piece of software that has both a\nvulnerable class on its path, and performs
+    deserialization on untrusted\ndata. Then all they need to do is send the payload
+    into the\ndeserializer, getting the command executed.\n\n> Developers put too
+    much trust in Java Object Serialization. Some even\n> de-serialize objects pre-authentication.
+    When deserializing an Object\n> in Java you typically cast it to an expected type,
+    and therefore\n> Java\\'s strict type system will ensure you only get valid object\n>
+    trees. Unfortunately, by the time the type checking happens, platform\n> code
+    has already created and executed significant logic. So, before\n> the final type
+    is checked a lot of code is executed from the\n> readObject() methods of various
+    objects, all of which is out of the\n> developer\\'s control. By combining the
+    readObject() methods of various\n> classes which are available on the classpath
+    of the vulnerable\n> application an attacker can execute functions (including
+    calling\n> Runtime.exec() to execute local OS commands).\n> \n> * Apache Blog\n\n\\##Remediation
+    Upgrade `Apache NiFi` to 1.4.0 version or higher.\n\n\n\n[1]: https://nifi.apache.org/\n[2]:
+    https://cwe.mitre.org/data/definitions/502.html\n[3]: https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078\n\\n[Apache
+    NiFi][1] is a system to process and distribute data.\n\nAffected versions of this
+    package are vulnerable to Deserialization of\nUntrusted Data.\n\nAny authenticated
+    user (valid client certificate but without ACL\npermissions) could upload a template
+    which contained malicious code and\ncaused a denial of service via Java deserialization
+    attack. The fix to\nproperly handle Java deserialization was applied on the Apache
+    NiFi\n1.4.0 release. Users running a prior 1.x release should upgrade to the\nappropriate
+    release.\n\n\\##Details Serialization is a process of converting an object into
+    a\nsequence of bytes which can be persisted to a disk or database or can be\nsent
+    through streams. The reverse process of creating object from\nsequence of bytes
+    is called deserialization. Serialization is commonly\nused for communication (sharing
+    objects between multiple hosts) and\npersistence (store the object state in a
+    file or a database). It is an\nintegral part of popular protocols like *Remote
+    Method Invocation\n(RMI)*, *Java Management Extension (JMX)*, *Java Messaging
+    System\n(JMS)*, *Action Message Format (AMF)*, *Java Server Faces (JSF)\nViewState*,
+    etc.\n\n*Deserialization of untrusted data* ([CWE-502][2]), is when the\napplication
+    deserializes untrusted data without sufficiently verifying\nthat the resulting
+    data will be valid, letting the attacker to control\nthe state or the flow of
+    the execution.\n\nJava deserialization issues have been known for years. However,
+    interest\nin the issue intensified greatly in 2015, when classes that could be\nabused
+    to achieve remote code execution were found in a [popular library\n(Apache Commons
+    Collection)][3]. These classes were used in zero-days\naffecting IBM WebSphere,
+    Oracle WebLogic and many other products.\n\nAn attacker just needs to identify
+    a piece of software that has both a\nvulnerable class on its path, and performs
+    deserialization on untrusted\ndata. Then all they need to do is send the payload
+    into the\ndeserializer, getting the command executed.\n\n> Developers put too
+    much trust in Java Object Serialization. Some even\n> de-serialize objects pre-authentication.
+    When deserializing an Object\n> in Java you typically cast it to an expected type,
+    and therefore\n> Java\\'s strict type system will ensure you only get valid object\n>
+    trees. Unfortunately, by the time the type checking happens, platform\n> code
+    has already created and executed significant logic. So, before\n> the final type
+    is checked a lot of code is executed from the\n> readObject() methods of various
+    objects, all of which is out of the\n> developer\\'s control. By combining the
+    readObject() methods of various\n> classes which are available on the classpath
+    of the vulnerable\n> application an attacker can execute functions (including
+    calling\n> Runtime.exec() to execute local OS commands).\n> \n> * Apache Blog\n\n\\##Remediation
+    Upgrade `Apache NiFi` to 1.4.0 version or higher.\n\n\n\n[1]: https://nifi.apache.org/\n[2]:
+    https://cwe.mitre.org/data/definitions/502.html\n[3]: https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078\n\\n[Apache
+    NiFi][1] is a system to process and distribute data.\n\nAffected versions of this
+    package are vulnerable to Deserialization of\nUntrusted Data.\n\nAny authenticated
+    user (valid client certificate but without ACL\npermissions) could upload a template
+    which contained malicious code and\ncaused a denial of service via Java deserialization
+    attack. The fix to\nproperly handle Java deserialization was applied on the Apache
+    NiFi\n1.4.0 release. Users running a prior 1.x release should upgrade to the\nappropriate
+    release.\n\n\\##Details Serialization is a process of converting an object into
+    a\nsequence of bytes which can be persisted to a disk or database or can be\nsent
+    through streams. The reverse process of creating object from\nsequence of bytes
+    is called deserialization. Serialization is commonly\nused for communication (sharing
+    objects between multiple hosts) and\npersistence (store the object state in a
+    file or a database). It is an\nintegral part of popular protocols like *Remote
+    Method Invocation\n(RMI)*, *Java Management Extension (JMX)*, *Java Messaging
+    System\n(JMS)*, *Action Message Format (AMF)*, *Java Server Faces (JSF)\nViewState*,
+    etc.\n\n*Deserialization of untrusted data* ([CWE-502][2]), is when the\napplication
+    deserializes untrusted data without sufficiently verifying\nthat the resulting
+    data will be valid, letting the attacker to control\nthe state or the flow of
+    the execution.\n\nJava deserialization issues have been known for years. However,
+    interest\nin the issue intensified greatly in 2015, when classes that could be\nabused
+    to achieve remote code execution were found in a [popular library\n(Apache Commons
+    Collection)][3]. These classes were used in zero-days\naffecting IBM WebSphere,
+    Oracle WebLogic and many other products.\n\nAn attacker just needs to identify
+    a piece of software that has both a\nvulnerable class on its path, and performs
+    deserialization on untrusted\ndata. Then all they need to do is send the payload
+    into the\ndeserializer, getting the command executed.\n\n> Developers put too
+    much trust in Java Object Serialization. Some even\n> de-serialize objects pre-authentication.
+    When deserializing an Object\n> in Java you typically cast it to an expected type,
+    and therefore\n> Java\\'s strict type system will ensure you only get valid object\n>
+    trees. Unfortunately, by the time the type checking happens, platform\n> code
+    has already created and executed significant logic. So, before\n> the final type
+    is checked a lot of code is executed from the\n> readObject() methods of various
+    objects, all of which is out of the\n> developer\\'s control. By combining the
+    readObject() methods of various\n> classes which are available on the classpath
+    of the vulnerable\n> application an attacker can execute functions (including
+    calling\n> Runtime.exec() to execute local OS commands).\n> \n> * Apache Blog\n\n\\##Remediation
+    Upgrade `Apache NiFi` to 1.4.0 version or higher.\n\n\n\n[1]: https://nifi.apache.org/\n[2]:
+    https://cwe.mitre.org/data/definitions/502.html\n[3]: https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078\n\\n[Apache
+    NiFi][1] is a system to process and distribute data.\n\nAffected versions of this
+    package are vulnerable to Deserialization of\nUntrusted Data.\n\nAny authenticated
+    user (valid client certificate but without ACL\npermissions) could upload a template
+    which contained malicious code and\ncaused a denial of service via Java deserialization
+    attack. The fix to\nproperly handle Java deserialization was applied on the Apache
+    NiFi\n1.4.0 release. Users running a prior 1.x release should upgrade to the\nappropriate
+    release.\n\n\\##Details Serialization is a process of converting an object into
+    a\nsequence of bytes which can be persisted to a disk or database or can be\nsent
+    through streams. The reverse process of creating object from\nsequence of bytes
+    is called deserialization. Serialization is commonly\nused for communication (sharing
+    objects between multiple hosts) and\npersistence (store the object state in a
+    file or a database). It is an\nintegral part of popular protocols like *Remote
+    Method Invocation\n(RMI)*, *Java Management Extension (JMX)*, *Java Messaging
+    System\n(JMS)*, *Action Message Format (AMF)*, *Java Server Faces (JSF)\nViewState*,
+    etc.\n\n*Deserialization of untrusted data* ([CWE-502][2]), is when the\napplication
+    deserializes untrusted data without sufficiently verifying\nthat the resulting
+    data will be valid, letting the attacker to control\nthe state or the flow of
+    the execution.\n\nJava deserialization issues have been known for years. However,
+    interest\nin the issue intensified greatly in 2015, when classes that could be\nabused
+    to achieve remote code execution were found in a [popular library\n(Apache Commons
+    Collection)][3]. These classes were used in zero-days\naffecting IBM WebSphere,
+    Oracle WebLogic and many other products.\n\nAn attacker just needs to identify
+    a piece of software that has both a\nvulnerable class on its path, and performs
+    deserialization on untrusted\ndata. Then all they need to do is send the payload
+    into the\ndeserializer, getting the command executed.\n\n> Developers put too
+    much trust in Java Object Serialization. Some even\n> de-serialize objects pre-authentication.
+    When deserializing an Object\n> in Java you typically cast it to an expected type,
+    and therefore\n> Java\\'s strict type system will ensure you only get valid object\n>
+    trees. Unfortunately, by the time the type checking happens, platform\n> code
+    has already created and executed significant logic. So, before\n> the final type
+    is checked a lot of code is executed from the\n> readObject() methods of various
+    objects, all of which is out of the\n> developer\\'s control. By combining the
+    readObject() methods of various\n> classes which are available on the classpath
+    of the vulnerable\n> application an attacker can execute functions (including
+    calling\n> Runtime.exec() to execute local OS commands).\n> \n> * Apache Blog\n\n\\##Remediation
+    Upgrade `Apache NiFi` to 1.4.0 version or higher.\n\n\n\n[1]: https://nifi.apache.org/\n[2]:
+    https://cwe.mitre.org/data/definitions/502.html\n[3]: https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078\n\\n[Apache
+    NiFi][1] is a system to process and distribute data.\n\nAffected versions of this
+    package are vulnerable to Deserialization of\nUntrusted Data.\n\nAny authenticated
+    user (valid client certificate but without ACL\npermissions) could upload a template
+    which contained malicious code and\ncaused a denial of service via Java deserialization
+    attack. The fix to\nproperly handle Java deserialization was applied on the Apache
+    NiFi\n1.4.0 release. Users running a prior 1.x release should upgrade to the\nappropriate
+    release.\n\n\\##Details Serialization is a process of converting an object into
+    a\nsequence of bytes which can be persisted to a disk or database or can be\nsent
+    through streams. The reverse process of creating object from\nsequence of bytes
+    is called deserialization. Serialization is commonly\nused for communication (sharing
+    objects between multiple hosts) and\npersistence (store the object state in a
+    file or a database). It is an\nintegral part of popular protocols like *Remote
+    Method Invocation\n(RMI)*, *Java Management Extension (JMX)*, *Java Messaging
+    System\n(JMS)*, *Action Message Format (AMF)*, *Java Server Faces (JSF)\nViewState*,
+    etc.\n\n*Deserialization of untrusted data* ([CWE-502][2]), is when the\napplication
+    deserializes untrusted data without sufficiently verifying\nthat the resulting
+    data will be valid, letting the attacker to control\nthe state or the flow of
+    the execution.\n\nJava deserialization issues have been known for years. However,
+    interest\nin the issue intensified greatly in 2015, when classes that could be\nabused
+    to achieve remote code execution were found in a [popular library\n(Apache Commons
+    Collection)][3]. These classes were used in zero-days\naffecting IBM WebSphere,
+    Oracle WebLogic and many other products.\n\nAn attacker just needs to identify
+    a piece of software that has both a\nvulnerable class on its path, and performs
+    deserialization on untrusted\ndata. Then all they need to do is send the payload
+    into the\ndeserializer, getting the command executed.\n\n> Developers put too
+    much trust in Java Object Serialization. Some even\n> de-serialize objects pre-authentication.
+    When deserializing an Object\n> in Java you typically cast it to an expected type,
+    and therefore\n> Java\\'s strict type system will ensure you only get valid object\n>
+    trees. Unfortunately, by the time the type checking happens, platform\n> code
+    has already created and executed significant logic. So, before\n> the final type
+    is checked a lot of code is executed from the\n> readObject() methods of various
+    objects, all of which is out of the\n> developer\\'s control. By combining the
+    readObject() methods of various\n> classes which are available on the classpath
+    of the vulnerable\n> application an attacker can execute functions (including
+    calling\n> Runtime.exec() to execute local OS commands).\n> \n> * Apache Blog\n\n\\##Remediation
+    Upgrade `Apache NiFi` to 1.4.0 version or higher.\n\n\n\n[1]: https://nifi.apache.org/\n[2]:
+    https://cwe.mitre.org/data/definitions/502.html\n[3]: https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078\n\\n[Apache
+    NiFi][1] is a system to process and distribute data.\n\nAffected versions of this
+    package are vulnerable to Deserialization of\nUntrusted Data.\n\nAny authenticated
+    user (valid client certificate but without ACL\npermissions) could upload a template
+    which contained malicious code and\ncaused a denial of service via Java deserialization
+    attack. The fix to\nproperly handle Java deserialization was applied on the Apache
+    NiFi\n1.4.0 release. Users running a prior 1.x release should upgrade to the\nappropriate
+    release.\n\n\\##Details Serialization is a process of converting an object into
+    a\nsequence of bytes which can be persisted to a disk or database or can be\nsent
+    through streams. The reverse process of creating object from\nsequence of bytes
+    is called deserialization. Serialization is commonly\nused for communication (sharing
+    objects between multiple hosts) and\npersistence (store the object state in a
+    file or a database). It is an\nintegral part of popular protocols like *Remote
+    Method Invocation\n(RMI)*, *Java Management Extension (JMX)*, *Java Messaging
+    System\n(JMS)*, *Action Message Format (AMF)*, *Java Server Faces (JSF)\nViewState*,
+    etc.\n\n*Deserialization of untrusted data* ([CWE-502][2]), is when the\napplication
+    deserializes untrusted data without sufficiently verifying\nthat the resulting
+    data will be valid, letting the attacker to control\nthe state or the flow of
+    the execution.\n\nJava deserialization issues have been known for years. However,
+    interest\nin the issue intensified greatly in 2015, when classes that could be\nabused
+    to achieve remote code execution were found in a [popular library\n(Apache Commons
+    Collection)][3]. These classes were used in zero-days\naffecting IBM WebSphere,
+    Oracle WebLogic and many other products.\n\nAn attacker just needs to identify
+    a piece of software that has both a\nvulnerable class on its path, and performs
+    deserialization on untrusted\ndata. Then all they need to do is send the payload
+    into the\ndeserializer, getting the command executed.\n\n> Developers put too
+    much trust in Java Object Serialization. Some even\n> de-serialize objects pre-authentication.
+    When deserializing an Object\n> in Java you typically cast it to an expected type,
+    and therefore\n> Java\\'s strict type system will ensure you only get valid object\n>
+    trees. Unfortunately, by the time the type checking happens, platform\n> code
+    has already created and executed significant logic. So, before\n> the final type
+    is checked a lot of code is executed from the\n> readObject() methods of various
+    objects, all of which is out of the\n> developer\\'s control. By combining the
+    readObject() methods of various\n> classes which are available on the classpath
+    of the vulnerable\n> application an attacker can execute functions (including
+    calling\n> Runtime.exec() to execute local OS commands).\n> \n> * Apache Blog\n\n\\##Remediation
+    Upgrade `Apache NiFi` to 1.4.0 version or higher.\n\n\n\n[1]: https://nifi.apache.org/\n[2]:
+    https://cwe.mitre.org/data/definitions/502.html\n[3]: https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078\n\\n[Apache
+    NiFi][1] is a system to process and distribute data.\n\nAffected versions of this
+    package are vulnerable to Deserialization of\nUntrusted Data.\n\nAny authenticated
+    user (valid client certificate but without ACL\npermissions) could upload a template
+    which contained malicious code and\ncaused a denial of service via Java deserialization
+    attack. The fix to\nproperly handle Java deserialization was applied on the Apache
+    NiFi\n1.4.0 release. Users running a prior 1.x release should upgrade to the\nappropriate
+    release.\n\n\\##Details Serialization is a process of converting an object into
+    a\nsequence of bytes which can be persisted to a disk or database or can be\nsent
+    through streams. The reverse process of creating object from\nsequence of bytes
+    is called deserialization. Serialization is commonly\nused for communication (sharing
+    objects between multiple hosts) and\npersistence (store the object state in a
+    file or a database). It is an\nintegral part of popular protocols like *Remote
+    Method Invocation\n(RMI)*, *Java Management Extension (JMX)*, *Java Messaging
+    System\n(JMS)*, *Action Message Format (AMF)*, *Java Server Faces (JSF)\nViewState*,
+    etc.\n\n*Deserialization of untrusted data* ([CWE-502][2]), is when the\napplication
+    deserializes untrusted data without sufficiently verifying\nthat the resulting
+    data will be valid, letting the attacker to control\nthe state or the flow of
+    the execution.\n\nJava deserialization issues have been known for years. However,
+    interest\nin the issue intensified greatly in 2015, when classes that could be\nabused
+    to achieve remote code execution were found in a [popular library\n(Apache Commons
+    Collection)][3]. These classes were used in zero-days\naffecting IBM WebSphere,
+    Oracle WebLogic and many other products.\n\nAn attacker just needs to identify
+    a piece of software that has both a\nvulnerable class on its path, and performs
+    deserialization on untrusted\ndata. Then all they need to do is send the payload
+    into the\ndeserializer, getting the command executed.\n\n> Developers put too
+    much trust in Java Object Serialization. Some even\n> de-serialize objects pre-authentication.
+    When deserializing an Object\n> in Java you typically cast it to an expected type,
+    and therefore\n> Java\\'s strict type system will ensure you only get valid object\n>
+    trees. Unfortunately, by the time the type checking happens, platform\n> code
+    has already created and executed significant logic. So, before\n> the final type
+    is checked a lot of code is executed from the\n> readObject() methods of various
+    objects, all of which is out of the\n> developer\\'s control. By combining the
+    readObject() methods of various\n> classes which are available on the classpath
+    of the vulnerable\n> application an attacker can execute functions (including
+    calling\n> Runtime.exec() to execute local OS commands).\n> \n> * Apache Blog\n\n\\##Remediation
+    Upgrade `Apache NiFi` to 1.4.0 version or higher.\n\n\n\n[1]: https://nifi.apache.org/\n[2]:
+    https://cwe.mitre.org/data/definitions/502.html\n[3]: https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078\n\\n[Apache
+    NiFi][1] is a system to process and distribute data.\n\nAffected versions of this
+    package are vulnerable to Deserialization of\nUntrusted Data.\n\nAny authenticated
+    user (valid client certificate but without ACL\npermissions) could upload a template
+    which contained malicious code and\ncaused a denial of service via Java deserialization
+    attack. The fix to\nproperly handle Java deserialization was applied on the Apache
+    NiFi\n1.4.0 release. Users running a prior 1.x release should upgrade to the\nappropriate
+    release.\n\n\\##Details Serialization is a process of converting an object into
+    a\nsequence of bytes which can be persisted to a disk or database or can be\nsent
+    through streams. The reverse process of creating object from\nsequence of bytes
+    is called deserialization. Serialization is commonly\nused for communication (sharing
+    objects between multiple hosts) and\npersistence (store the object state in a
+    file or a database). It is an\nintegral part of popular protocols like *Remote
+    Method Invocation\n(RMI)*, *Java Management Extension (JMX)*, *Java Messaging
+    System\n(JMS)*, *Action Message Format (AMF)*, *Java Server Faces (JSF)\nViewState*,
+    etc.\n\n*Deserialization of untrusted data* ([CWE-502][2]), is when the\napplication
+    deserializes untrusted data without sufficiently verifying\nthat the resulting
+    data will be valid, letting the attacker to control\nthe state or the flow of
+    the execution.\n\nJava deserialization issues have been known for years. However,
+    interest\nin the issue intensified greatly in 2015, when classes that could be\nabused
+    to achieve remote code execution were found in a [popular library\n(Apache Commons
+    Collection)][3]. These classes were used in zero-days\naffecting IBM WebSphere,
+    Oracle WebLogic and many other products.\n\nAn attacker just needs to identify
+    a piece of software that has both a\nvulnerable class on its path, and performs
+    deserialization on untrusted\ndata. Then all they need to do is send the payload
+    into the\ndeserializer, getting the command executed.\n\n> Developers put too
+    much trust in Java Object Serialization. Some even\n> de-serialize objects pre-authentication.
+    When deserializing an Object\n> in Java you typically cast it to an expected type,
+    and therefore\n> Java\\'s strict type system will ensure you only get valid object\n>
+    trees. Unfortunately, by the time the type checking happens, platform\n> code
+    has already created and executed significant logic. So, before\n> the final type
+    is checked a lot of code is executed from the\n> readObject() methods of various
+    objects, all of which is out of the\n> developer\\'s control. By combining the
+    readObject() methods of various\n> classes which are available on the classpath
+    of the vulnerable\n> application an attacker can execute functions (including
+    calling\n> Runtime.exec() to execute local OS commands).\n> \n> * Apache Blog\n\n\\##Remediation
+    Upgrade `Apache NiFi` to 1.4.0 version or higher.\n\n\n\n[1]: https://nifi.apache.org/\n[2]:
+    https://cwe.mitre.org/data/definitions/502.html\n[3]: https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078\n"
+  affected_package: org.apache.nifi:nifi-security-utils
+  vulnerable_versions:
+  - "< 1.4.0"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2017-15703
+  cwe:
+  - CWE-611
+  credit:
+  - Andy LoPresto
+  references:
+  - https://nifi.apache.org/security.html#CVE-2017-15703
+  - https://github.com/apache/nifi/pull/2134/commits/91ff58d038d3afe6a6c1aa13226a2c3050612938
+  - https://issues.apache.org/jira/browse/NIFI-4357
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHENIFI-31623
+- id: snykio:maven:org.apache.nifi:nifi-security-utils:2017-10-01
+  title: XML External Entity (XXE) Injection
+  description: |+
+    [`org.apache.nifi:nifi-security-util`][1] is an easy to use, powerful,
+    and reliable system to process and distribute data.
+
+    Affected versions of the package are vulnerable to XML External Entity
+    (XXE) Injection. An authorized user could upload a template which
+    contained malicious code and accessed sensitive files via an XML
+    External Entity (XXE) attack. The fix to properly handle XML External
+    Entities was applied on the Apache NiFi 1.4.0 release. Users running a
+    prior 1.x release should upgrade to the appropriate release.
+
+
+
+    [1]: https://nifi.apache.org
+    \n[`org.apache.nifi:nifi-security-util`][1] is an easy to use, powerful,
+    and reliable system to process and distribute data.
+
+    Affected versions of the package are vulnerable to XML External Entity
+    (XXE) Injection. An authorized user could upload a template which
+    contained malicious code and accessed sensitive files via an XML
+    External Entity (XXE) attack. The fix to properly handle XML External
+    Entities was applied on the Apache NiFi 1.4.0 release. Users running a
+    prior 1.x release should upgrade to the appropriate release.
+
+
+
+    [1]: https://nifi.apache.org
+    \n[`org.apache.nifi:nifi-security-util`][1] is an easy to use, powerful,
+    and reliable system to process and distribute data.
+
+    Affected versions of the package are vulnerable to XML External Entity
+    (XXE) Injection. An authorized user could upload a template which
+    contained malicious code and accessed sensitive files via an XML
+    External Entity (XXE) attack. The fix to properly handle XML External
+    Entities was applied on the Apache NiFi 1.4.0 release. Users running a
+    prior 1.x release should upgrade to the appropriate release.
+
+
+
+    [1]: https://nifi.apache.org
+    \nXXE Injection is a type of attack against an application that parses XML
+    input. XML is a markup language that defines a set of rules for encoding
+    documents in a format that is both human-readable and machine-readable.
+    By default, many XML processors allow specification of an external
+    entity, a URI that is dereferenced and evaluated during XML processing.
+    When an XML document is being parsed, the parser can make a request and
+    include the content at the specified URI inside of the XML document.
+
+    Attacks can include disclosing local files, which may contain sensitive
+    data such as passwords or private user data, using file: schemes or
+    relative paths in the system identifier.
+
+    For example, below is a sample XML document, containing an XML element-
+    username.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+           <username>John</username>
+        </xml>
+
+    An external XML entity - `xxe`, is defined using a system identifier and
+    present within a DOCTYPE header. These entities can access local or
+    remote content. For example the below code contains an external XML
+    entity that would fetch the content of `/etc/passwd` and display it to
+    the user rendered by `username`.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+        <!DOCTYPE foo [
+           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
+           <username>&xxe;</username>
+        </xml>
+
+    Other XXE Injection attacks can access local resources that may not stop
+    returning data, possibly impacting application availability and leading
+    to Denial of Service.
+
+    \nXXE Injection is a type of attack against an application that parses XML
+    input. XML is a markup language that defines a set of rules for encoding
+    documents in a format that is both human-readable and machine-readable.
+    By default, many XML processors allow specification of an external
+    entity, a URI that is dereferenced and evaluated during XML processing.
+    When an XML document is being parsed, the parser can make a request and
+    include the content at the specified URI inside of the XML document.
+
+    Attacks can include disclosing local files, which may contain sensitive
+    data such as passwords or private user data, using file: schemes or
+    relative paths in the system identifier.
+
+    For example, below is a sample XML document, containing an XML element-
+    username.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+           <username>John</username>
+        </xml>
+
+    An external XML entity - `xxe`, is defined using a system identifier and
+    present within a DOCTYPE header. These entities can access local or
+    remote content. For example the below code contains an external XML
+    entity that would fetch the content of `/etc/passwd` and display it to
+    the user rendered by `username`.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+        <!DOCTYPE foo [
+           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
+           <username>&xxe;</username>
+        </xml>
+
+    Other XXE Injection attacks can access local resources that may not stop
+    returning data, possibly impacting application availability and leading
+    to Denial of Service.
+
+    \nXXE Injection is a type of attack against an application that parses XML
+    input. XML is a markup language that defines a set of rules for encoding
+    documents in a format that is both human-readable and machine-readable.
+    By default, many XML processors allow specification of an external
+    entity, a URI that is dereferenced and evaluated during XML processing.
+    When an XML document is being parsed, the parser can make a request and
+    include the content at the specified URI inside of the XML document.
+
+    Attacks can include disclosing local files, which may contain sensitive
+    data such as passwords or private user data, using file: schemes or
+    relative paths in the system identifier.
+
+    For example, below is a sample XML document, containing an XML element-
+    username.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+           <username>John</username>
+        </xml>
+
+    An external XML entity - `xxe`, is defined using a system identifier and
+    present within a DOCTYPE header. These entities can access local or
+    remote content. For example the below code contains an external XML
+    entity that would fetch the content of `/etc/passwd` and display it to
+    the user rendered by `username`.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+        <!DOCTYPE foo [
+           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
+           <username>&xxe;</username>
+        </xml>
+
+    Other XXE Injection attacks can access local resources that may not stop
+    returning data, possibly impacting application availability and leading
+    to Denial of Service.
+
+    \nXXE Injection is a type of attack against an application that parses XML
+    input. XML is a markup language that defines a set of rules for encoding
+    documents in a format that is both human-readable and machine-readable.
+    By default, many XML processors allow specification of an external
+    entity, a URI that is dereferenced and evaluated during XML processing.
+    When an XML document is being parsed, the parser can make a request and
+    include the content at the specified URI inside of the XML document.
+
+    Attacks can include disclosing local files, which may contain sensitive
+    data such as passwords or private user data, using file: schemes or
+    relative paths in the system identifier.
+
+    For example, below is a sample XML document, containing an XML element-
+    username.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+           <username>John</username>
+        </xml>
+
+    An external XML entity - `xxe`, is defined using a system identifier and
+    present within a DOCTYPE header. These entities can access local or
+    remote content. For example the below code contains an external XML
+    entity that would fetch the content of `/etc/passwd` and display it to
+    the user rendered by `username`.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+        <!DOCTYPE foo [
+           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
+           <username>&xxe;</username>
+        </xml>
+
+    Other XXE Injection attacks can access local resources that may not stop
+    returning data, possibly impacting application availability and leading
+    to Denial of Service.
+
+    \nXXE Injection is a type of attack against an application that parses XML
+    input. XML is a markup language that defines a set of rules for encoding
+    documents in a format that is both human-readable and machine-readable.
+    By default, many XML processors allow specification of an external
+    entity, a URI that is dereferenced and evaluated during XML processing.
+    When an XML document is being parsed, the parser can make a request and
+    include the content at the specified URI inside of the XML document.
+
+    Attacks can include disclosing local files, which may contain sensitive
+    data such as passwords or private user data, using file: schemes or
+    relative paths in the system identifier.
+
+    For example, below is a sample XML document, containing an XML element-
+    username.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+           <username>John</username>
+        </xml>
+
+    An external XML entity - `xxe`, is defined using a system identifier and
+    present within a DOCTYPE header. These entities can access local or
+    remote content. For example the below code contains an external XML
+    entity that would fetch the content of `/etc/passwd` and display it to
+    the user rendered by `username`.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+        <!DOCTYPE foo [
+           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
+           <username>&xxe;</username>
+        </xml>
+
+    Other XXE Injection attacks can access local resources that may not stop
+    returning data, possibly impacting application availability and leading
+    to Denial of Service.
+
+    \nXXE Injection is a type of attack against an application that parses XML
+    input. XML is a markup language that defines a set of rules for encoding
+    documents in a format that is both human-readable and machine-readable.
+    By default, many XML processors allow specification of an external
+    entity, a URI that is dereferenced and evaluated during XML processing.
+    When an XML document is being parsed, the parser can make a request and
+    include the content at the specified URI inside of the XML document.
+
+    Attacks can include disclosing local files, which may contain sensitive
+    data such as passwords or private user data, using file: schemes or
+    relative paths in the system identifier.
+
+    For example, below is a sample XML document, containing an XML element-
+    username.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+           <username>John</username>
+        </xml>
+
+    An external XML entity - `xxe`, is defined using a system identifier and
+    present within a DOCTYPE header. These entities can access local or
+    remote content. For example the below code contains an external XML
+    entity that would fetch the content of `/etc/passwd` and display it to
+    the user rendered by `username`.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+        <!DOCTYPE foo [
+           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
+           <username>&xxe;</username>
+        </xml>
+
+    Other XXE Injection attacks can access local resources that may not stop
+    returning data, possibly impacting application availability and leading
+    to Denial of Service.
+
+    \nXXE Injection is a type of attack against an application that parses XML
+    input. XML is a markup language that defines a set of rules for encoding
+    documents in a format that is both human-readable and machine-readable.
+    By default, many XML processors allow specification of an external
+    entity, a URI that is dereferenced and evaluated during XML processing.
+    When an XML document is being parsed, the parser can make a request and
+    include the content at the specified URI inside of the XML document.
+
+    Attacks can include disclosing local files, which may contain sensitive
+    data such as passwords or private user data, using file: schemes or
+    relative paths in the system identifier.
+
+    For example, below is a sample XML document, containing an XML element-
+    username.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+           <username>John</username>
+        </xml>
+
+    An external XML entity - `xxe`, is defined using a system identifier and
+    present within a DOCTYPE header. These entities can access local or
+    remote content. For example the below code contains an external XML
+    entity that would fetch the content of `/etc/passwd` and display it to
+    the user rendered by `username`.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+        <!DOCTYPE foo [
+           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
+           <username>&xxe;</username>
+        </xml>
+
+    Other XXE Injection attacks can access local resources that may not stop
+    returning data, possibly impacting application availability and leading
+    to Denial of Service.
+
+    \nXXE Injection is a type of attack against an application that parses XML
+    input. XML is a markup language that defines a set of rules for encoding
+    documents in a format that is both human-readable and machine-readable.
+    By default, many XML processors allow specification of an external
+    entity, a URI that is dereferenced and evaluated during XML processing.
+    When an XML document is being parsed, the parser can make a request and
+    include the content at the specified URI inside of the XML document.
+
+    Attacks can include disclosing local files, which may contain sensitive
+    data such as passwords or private user data, using file: schemes or
+    relative paths in the system identifier.
+
+    For example, below is a sample XML document, containing an XML element-
+    username.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+           <username>John</username>
+        </xml>
+
+    An external XML entity - `xxe`, is defined using a system identifier and
+    present within a DOCTYPE header. These entities can access local or
+    remote content. For example the below code contains an external XML
+    entity that would fetch the content of `/etc/passwd` and display it to
+    the user rendered by `username`.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+        <!DOCTYPE foo [
+           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
+           <username>&xxe;</username>
+        </xml>
+
+    Other XXE Injection attacks can access local resources that may not stop
+    returning data, possibly impacting application availability and leading
+    to Denial of Service.
+
+  affected_package: org.apache.nifi:nifi-security-utils
+  vulnerable_versions:
+  - "< 1.4.0"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2017-12623
+  cwe:
+  - CWE-611
+  credit:
+  - Paweł Gocyla
+  references:
+  - https://nvd.nist.gov/vuln/detail/CVE-2017-12623
+  - https://nifi.apache.org/security.html#CVE-2017-12623
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHENIFI-31562

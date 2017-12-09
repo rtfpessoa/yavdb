@@ -1,0 +1,150 @@
+---
+- id: rubyadvisory:rubygems:git-fastclone:2015-12-11
+  title: git-fastclone permits arbitrary shell command execution from .gitmodules
+  description: |
+    Git allows executing arbitrary shell commands using git-remote-ext via a
+    remote URLs. Normally git never requests URLs that the user doesn't
+    specifically request, so this is not a serious security concern. However,
+    submodules did allow the remote repository to specify what URL to clone
+    from.
+
+    If an attacker can instruct a user to run a recursive clone from a
+    repository they control, they can get a client to run an arbitrary shell
+    command. Alternately, if an attacker can MITM an unencrypted git clone,
+    they could exploit this. The ext command will be run if the repository is
+    recursively cloned or if submodules are updated. This attack works when
+    cloning both local and remote repositories.
+  affected_package: git-fastclone
+  patched_versions:
+  - ">= 1.0.1"
+  package_manager: rubygems
+  cve:
+  - CVE-2015-8968
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://hackerone.com/reports/104465
+- id: rubyadvisory:rubygems:git-fastclone:2015-12-15
+  title: git-fastclone Shell Metacharacter Injection Arbitrary Command Execution
+  description: |
+    git-fastclone before 1.0.5 passes user modifiable strings directly to a shell
+    command. An attacker can execute malicious commands by modifying the strings
+    that are passed as arguments to "cd " and "git clone " commands in the
+    library.
+  affected_package: git-fastclone
+  patched_versions:
+  - ">= 1.0.5"
+  package_manager: rubygems
+  cve:
+  - CVE-2015-8969
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://hackerone.com/reports/105190
+- id: snykio:rubygems:git-fastclone:2015-12-15
+  title: Arbitrary Command Execution
+  description: |+
+    [`git-fastclone`][1] is a git command that uses reference repositories
+    and threading to quickly and recursively clone repositories with many
+    nested submodules.
+
+
+
+    [1]: https://rubygems.org/gems/git-fastclone
+    \n[`git-fastclone`][1] is a git command that uses reference repositories
+    and threading to quickly and recursively clone repositories with many
+    nested submodules.
+
+
+
+    [1]: https://rubygems.org/gems/git-fastclone
+    \ngit-fastclone before 1.0.5 passes user modifiable strings directly to a
+    shell command. An attacker can execute malicious commands by modifying
+    the strings that are passed as arguments to `cd` and `git clone`
+    commands in the library.
+
+    \ngit-fastclone before 1.0.5 passes user modifiable strings directly to a
+    shell command. An attacker can execute malicious commands by modifying
+    the strings that are passed as arguments to `cd` and `git clone`
+    commands in the library.
+
+  affected_package: git-fastclone
+  vulnerable_versions:
+  - "<1.0.5"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2015-8969
+  cwe:
+  - CWE-94
+  credit:
+  - Blake Burkhart
+  references:
+  - https://hackerone.com/reports/105190
+  - https://github.com/square/git-fastclone/pull/5
+  - https://github.com/square/git-fastclone/commit/ac3dd9871ff1722b6b4f3c6c7a1250b81a08644f
+  - https://github.com/square/git-fastclone/commit/9c6a28e0a2c8accc7bf251a17cc180196f5075f4
+  source_url: https://snyk.io/vuln/SNYK-RUBY-GITFASTCLONE-20352
+- id: snykio:rubygems:git-fastclone:2015-12-11
+  title: Arbitrary Command Execution
+  description: |
+    [`git-fastclone`][1] is a git command that uses reference repositories
+    and threading to quickly and recursively clone repositories with many
+    nested submodules.
+
+    Affected version of this package are vulnerable to Arbitrary Command
+    Execution. `git-fastclone` used the `git-remote-ext` command, allowing a
+    user to specify remote URLs. An attacker could manipulate a user to run
+    a recursive clone from a repository they control, allowing the attacker
+    to run arbitrary commands. This attack works when cloning both local and
+    remote repositories.
+
+
+
+    [1]: https://rubygems.org/gems/git-fastclone
+    \n[`git-fastclone`][1] is a git command that uses reference repositories
+    and threading to quickly and recursively clone repositories with many
+    nested submodules.
+
+    Affected version of this package are vulnerable to Arbitrary Command
+    Execution. `git-fastclone` used the `git-remote-ext` command, allowing a
+    user to specify remote URLs. An attacker could manipulate a user to run
+    a recursive clone from a repository they control, allowing the attacker
+    to run arbitrary commands. This attack works when cloning both local and
+    remote repositories.
+
+
+
+    [1]: https://rubygems.org/gems/git-fastclone
+    \n[`git-fastclone`][1] is a git command that uses reference repositories
+    and threading to quickly and recursively clone repositories with many
+    nested submodules.
+
+    Affected version of this package are vulnerable to Arbitrary Command
+    Execution. `git-fastclone` used the `git-remote-ext` command, allowing a
+    user to specify remote URLs. An attacker could manipulate a user to run
+    a recursive clone from a repository they control, allowing the attacker
+    to run arbitrary commands. This attack works when cloning both local and
+    remote repositories.
+
+
+
+    [1]: https://rubygems.org/gems/git-fastclone
+  affected_package: git-fastclone
+  vulnerable_versions:
+  - "<1.0.1"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2015-8968
+  cwe:
+  - CWE-94
+  credit:
+  - Blake Burkhart
+  references:
+  - https://hackerone.com/reports/104465
+  - https://github.com/square/git-fastclone/pull/2
+  - https://github.com/square/git-fastclone/pull/2/commits/a8a33f187214185b885a10bcfe2527c74da84a8c
+  source_url: https://snyk.io/vuln/SNYK-RUBY-GITFASTCLONE-20351

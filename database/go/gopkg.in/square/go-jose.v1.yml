@@ -1,0 +1,87 @@
+---
+- id: snykio:go:gopkg.in/square/go-jose.v1:2017-02-16
+  title: Elliptic Curve Key Disclosure
+  description: |
+    Affected version of [`github.com/square/go-jose`][1] are vulnerable to
+    Elliptic Curve Key Disclosure. go-jose before 1.0.4 suffers from an
+    invalid curve attack for the ECDH-ES algorithm. When deriving a shared
+    key using ECDH-ES for an encrypted message, go-jose neglected to check
+    that the received public key on a message is on the same curve as the
+    static private key of the receiver, thus making it vulnerable to an
+    invalid curve attack.
+
+
+
+    [1]: https://github.com/square/go-jose
+    \nAffected version of [`github.com/square/go-jose`][1] are vulnerable to
+    Elliptic Curve Key Disclosure. go-jose before 1.0.4 suffers from an
+    invalid curve attack for the ECDH-ES algorithm. When deriving a shared
+    key using ECDH-ES for an encrypted message, go-jose neglected to check
+    that the received public key on a message is on the same curve as the
+    static private key of the receiver, thus making it vulnerable to an
+    invalid curve attack.
+
+
+
+    [1]: https://github.com/square/go-jose
+  affected_package: gopkg.in/square/go-jose.v1
+  vulnerable_versions:
+  - "<1.0.4"
+  severity: high
+  package_manager: go
+  cve:
+  - CVE-2016-9121
+  cwe:
+  - CWE-200
+  credit:
+  - Unknown
+  references:
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-9121
+  - https://github.com/square/go-jose/commit/c7581939a3656bb65e89d64da0a52364a33d2507
+  - https://hackerone.com/reports/164590
+  - http://www.openwall.com/lists/oss-security/2016/11/03/1
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GOPKGINSQUAREGOJOSEV1-50003
+- id: snykio:go:gopkg.in/square/go-jose.v1:2016-09-22
+  title: Signature Validation Bypass
+  description: |
+    Affected version of [`github.com/square/go-jose`][1] are vulnerable to
+    Signature Validation Bypass. go-jose before 1.0.4 suffers from multiple
+    signatures exploitation. The go-jose library supports messages with
+    multiple signatures. However, when validating a signed message the API
+    did not indicate which signature was valid, which could potentially lead
+    to confusion. For example, users of the library might mistakenly read
+    protected header values from an attached signature that was different
+    from the one originally validated.
+
+
+
+    [1]: https://github.com/square/go-jose
+    \nAffected version of [`github.com/square/go-jose`][1] are vulnerable to
+    Signature Validation Bypass. go-jose before 1.0.4 suffers from multiple
+    signatures exploitation. The go-jose library supports messages with
+    multiple signatures. However, when validating a signed message the API
+    did not indicate which signature was valid, which could potentially lead
+    to confusion. For example, users of the library might mistakenly read
+    protected header values from an attached signature that was different
+    from the one originally validated.
+
+
+
+    [1]: https://github.com/square/go-jose
+  affected_package: gopkg.in/square/go-jose.v1
+  vulnerable_versions:
+  - "<1.1.0"
+  severity: high
+  package_manager: go
+  cve:
+  - CVE-2016-9122
+  cwe:
+  - CWE-284
+  credit:
+  - Unknown
+  references:
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-9122
+  - https://github.com/square/go-jose/commit/2c5656adca9909843c4ff50acf1d2cf8f32da7e6
+  - http://www.openwall.com/lists/oss-security/2016/11/03/1
+  - https://hackerone.com/reports/169629
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GOPKGINSQUAREGOJOSEV1-50020

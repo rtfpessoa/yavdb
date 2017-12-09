@@ -1,0 +1,288 @@
+---
+- id: nodesecurity:npm:mustache:2015-12-14
+  title: Quoteless Attributes in Templates can lead to Content Injection
+  description: |-
+    Versions of `mustache` prior to 2.2.1 are affected by a cross-site scripting vulnerability when attributes in mustache templates are not quoted.
+
+
+
+    ### Example
+    Template:
+    ```<a href={{foo}}/>```
+
+    Input:
+    ```{ 'foo' : 'test.com onload=alert(1)'}```
+
+    Rendered result:
+    ```<a href=test.com onload=alert(1)/>```
+  affected_package: mustache
+  vulnerable_versions:
+  - "<2.2.1"
+  patched_versions:
+  - ">=2.2.1"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2015-8862
+  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N
+  credit:
+  - Matias P. Brutti
+  references:
+  - https://github.com/janl/mustache.js/commit/378bcca8a5cfe4058f294a3dbb78e8755e8e0da5)
+  source_url: https://nodesecurity.io/advisories/62
+- id: ossindex:npm:mustache:2017-01-23
+  title: '[CVE-2015-8862]  Improper Neutralization of Input During Web Page Generation
+    ("Cross-site Scripting")'
+  description: mustache package before 2.2.1 for Node.js allows remote attackers to
+    conduct cross-site scripting (XSS) attacks by leveraging a template with an attribute
+    that is not quoted.
+  affected_package: mustache
+  vulnerable_versions:
+  - "<2.2.1"
+  package_manager: npm
+  cve:
+  - CVE-2015-8862
+  credit:
+  - OSSIndex
+  references:
+  - http://www.openwall.com/lists/oss-security/2016/04/20/11
+  - http://www.securityfocus.com/bid/96436
+  - https://nodesecurity.io/advisories/62
+  - https://www.tenable.com/security/tns-2016-18
+  source_url: https://ossindex.net/resource/package/7014167881/vulnerabilities
+- id: ossindex:npm:mustache:2016-05-20
+  title: Cross-Site Scripting
+  description: An escaping problem within to_html function can lead to a XSS vulnerability.
+  affected_package: mustache
+  vulnerable_versions:
+  - "<0.3.1"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - https://cwe.mitre.org/data/definitions/79.html
+  - https://github.com/janl/mustache.js/issues/112
+  source_url: https://ossindex.net/resource/package/7014167881/vulnerabilities
+- id: snykio:npm:mustache:2015-12-07
+  title: Content Injection due to quoteless attributes
+  description: |+
+    When using attributes without quotes in a mustache template, an attacker
+    can manipulate the input to introduce additional attributes, potentially
+    executing code. This may lead to a Cross-site Scripting (XSS)
+    vulnerability, assuming an attacker can influence the value entered into
+    the template. If the mustache template is used to render user-generated
+    content, this vulnerability may escalate to a persistent XSS
+    vulnerability.
+
+    \nWhen using attributes without quotes in a mustache template, an attacker
+    can manipulate the input to introduce additional attributes, potentially
+    executing code. This may lead to a Cross-site Scripting (XSS)
+    vulnerability, assuming an attacker can influence the value entered into
+    the template. If the mustache template is used to render user-generated
+    content, this vulnerability may escalate to a persistent XSS
+    vulnerability.
+
+  affected_package: mustache
+  vulnerable_versions:
+  - "<2.2.1"
+  severity: medium
+  package_manager: npm
+  cwe:
+  - CWE-79
+  credit:
+  - Matias P. Brutti
+  references:
+  - https://github.com/janl/mustache.js/commit/378bcca8a5cfe4058f294a3dbb78e8755e8e0da5
+  source_url: https://snyk.io/vuln/npm:mustache:20151207
+- id: snykio:npm:mustache:2015-11-06
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [mustache][1] is an implementation of the mustache template system in
+    JavaScript.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS) attacks due to an escaping problem within the `to_html` function.
+
+
+
+    [1]: https://github.com/janl/mustache.js
+    \n[mustache][1] is an implementation of the mustache template system in
+    JavaScript.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS) attacks due to an escaping problem within the `to_html` function.
+
+
+
+    [1]: https://github.com/janl/mustache.js
+    \n[mustache][1] is an implementation of the mustache template system in
+    JavaScript.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS) attacks due to an escaping problem within the `to_html` function.
+
+
+
+    [1]: https://github.com/janl/mustache.js
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \n**Example:**
+
+        document.write(Mustache.to_html('<input value="{{val}}" />', {val:'maybe" onclick="alert(\'xss\');" nothing="'}));
+
+    \n**Example:**
+
+        document.write(Mustache.to_html('<input value="{{val}}" />', {val:'maybe" onclick="alert(\'xss\');" nothing="'}));
+
+    \n**Example:**
+
+        document.write(Mustache.to_html('<input value="{{val}}" />', {val:'maybe" onclick="alert(\'xss\');" nothing="'}));
+
+  affected_package: mustache
+  vulnerable_versions:
+  - "< 0.3.1"
+  severity: medium
+  package_manager: npm
+  cwe:
+  - CWE-79
+  references:
+  - https://github.com/janl/mustache.js/issues/112
+  source_url: https://snyk.io/vuln/npm:mustache:20110814

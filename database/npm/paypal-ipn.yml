@@ -1,0 +1,110 @@
+---
+- id: nodesecurity:npm:paypal-ipn:2014-12-03
+  title: Validation Bypass
+  description: "Versions 2.x.x and earlier of `paypal-ipn` are affected by a validation
+    bypass vulnerability. \n\npaypal-ipn uses the `test_ipn` parameter (which is set
+    by the PayPal IPN simulator) to determine if it should use the production PayPal
+    site or the sandbox.\n\nA motivated attacker could craft a request string using
+    the simulator to fool the application into entering the sandbox mode, potentially
+    allowing purchases without valid payment."
+  affected_package: paypal-ipn
+  vulnerable_versions:
+  - "<3.0.0"
+  patched_versions:
+  - ">=3.0.0"
+  severity: medium
+  package_manager: npm
+  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N
+  credit:
+  - Martin Angelov
+  references:
+  - https://github.com/andzdroid/paypal-ipn/issues/11)
+  source_url: https://nodesecurity.io/advisories/26
+- id: ossindex:npm:paypal-ipn:1970-01-01
+  title: Validation bypass
+  description: |-
+    When validating a request, it switches between PayPal's main site or the sandbox depending on the presence of the test_ipn parameter, which is set by PayPal's IPN simulator. As I understand, there is nothing stopping people from abusing this tool and sending fraudulent requests.
+
+    With a bit of time, an attacker could craft a request using the simulator that would fool any application which does not explicitly check for test_ipn in production. I see two solutions for this issue:
+
+    It is mentioned in bold in the docs, that developers should check for test_ipn.
+    This logic is made explicit - the verify function could take a parameter like { sandbox: true } and only then switch to the sandbox URL for validating requests.
+  affected_package: paypal-ipn
+  vulnerable_versions:
+  - "<3.0.0"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - https://github.com/andzdroid/paypal-ipn/issues/11
+  - https://nodesecurity.io/advisories/26
+  source_url: https://ossindex.net/resource/package/7014283351/vulnerabilities
+- id: snykio:npm:paypal-ipn:2014-12-03
+  title: Validation Bypass
+  description: |
+    paypal-ipn uses the `test_ipn` parameter (which is set by the PayPal IPN
+    simulator) to determine if it should use the production PayPal site or
+    the sandbox.
+
+    \"With a bit of time, an attacker could craft a request using the
+    simulator that would fool any application which does not explicitly
+    check for test\_ipn in production.\" \[1\]
+
+    *Source: [Node Security Project][1]*
+
+
+
+    [1]: https://nodesecurity.io/advisories/26
+    \npaypal-ipn uses the `test_ipn` parameter (which is set by the PayPal IPN
+    simulator) to determine if it should use the production PayPal site or
+    the sandbox.
+
+    \"With a bit of time, an attacker could craft a request using the
+    simulator that would fool any application which does not explicitly
+    check for test\_ipn in production.\" \[1\]
+
+    *Source: [Node Security Project][1]*
+
+
+
+    [1]: https://nodesecurity.io/advisories/26
+    \npaypal-ipn uses the `test_ipn` parameter (which is set by the PayPal IPN
+    simulator) to determine if it should use the production PayPal site or
+    the sandbox.
+
+    \"With a bit of time, an attacker could craft a request using the
+    simulator that would fool any application which does not explicitly
+    check for test\_ipn in production.\" \[1\]
+
+    *Source: [Node Security Project][1]*
+
+
+
+    [1]: https://nodesecurity.io/advisories/26
+    \npaypal-ipn uses the `test_ipn` parameter (which is set by the PayPal IPN
+    simulator) to determine if it should use the production PayPal site or
+    the sandbox.
+
+    \"With a bit of time, an attacker could craft a request using the
+    simulator that would fool any application which does not explicitly
+    check for test\_ipn in production.\" \[1\]
+
+    *Source: [Node Security Project][1]*
+
+
+
+    [1]: https://nodesecurity.io/advisories/26
+  affected_package: paypal-ipn
+  vulnerable_versions:
+  - "<3.0.0"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2014-10067
+  cwe:
+  - CWE-284
+  credit:
+  - Martin Angelov
+  references:
+  - https://github.com/andzdroid/paypal-ipn/issues/11
+  source_url: https://snyk.io/vuln/npm:paypal-ipn:20141203

@@ -1,0 +1,143 @@
+---
+- id: nodesecurity:npm:base64url:2018-05-16
+  title: Out-of-bounds Read
+  description: Versions of `base64url` before 3.0.0 are vulnerable to to out-of-bounds
+    reads as it allocates uninitialized Buffers when number is passed in input on
+    Node.js 4.x and below.
+  affected_package: base64url
+  vulnerable_versions:
+  - "<3.0.0"
+  patched_versions:
+  - ">=3.0.0"
+  severity: high
+  package_manager: npm
+  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:H
+  credit:
+  - Сковорода Никита Андреевич
+  references:
+  - |-
+    https://hackerone.com/reports/321687)
+    https://github.com/brianloveswords/base64url/pull/25")
+  source_url: https://nodesecurity.io/advisories/658
+- id: snykio:npm:base64url:2018-05-11
+  title: Uninitialized Memory Exposure
+  description: |+
+    [base64url][1] Converting to, and from, base64url.
+
+    Affected versions of this package are vulnerable to Uninitialized Memory
+    Exposure. An attacker could extract sensitive data from uninitialized
+    memory or may cause a Denial of Service (DoS) by passing in a large
+    number, in setups where typed user input can be passed (e.g. from JSON).
+
+
+
+    [1]: https://www.npmjs.com/package/base64url
+    \n[base64url][1] Converting to, and from, base64url.
+
+    Affected versions of this package are vulnerable to Uninitialized Memory
+    Exposure. An attacker could extract sensitive data from uninitialized
+    memory or may cause a Denial of Service (DoS) by passing in a large
+    number, in setups where typed user input can be passed (e.g. from JSON).
+
+
+
+    [1]: https://www.npmjs.com/package/base64url
+    \n[base64url][1] Converting to, and from, base64url.
+
+    Affected versions of this package are vulnerable to Uninitialized Memory
+    Exposure. An attacker could extract sensitive data from uninitialized
+    memory or may cause a Denial of Service (DoS) by passing in a large
+    number, in setups where typed user input can be passed (e.g. from JSON).
+
+
+
+    [1]: https://www.npmjs.com/package/base64url
+    \nThe Buffer class on Node.js is a mutable array of binary data, and can
+    be initialized with a string, array or number.
+
+        const buf1 = new Buffer([1,2,3]);
+        // creates a buffer containing [01, 02, 03]
+        const buf2 = new Buffer('test');
+        // creates a buffer containing ASCII bytes [74, 65, 73, 74]
+        const buf3 = new Buffer(10);
+        // creates a buffer of length 10
+
+    The first two variants simply create a binary representation of the
+    value it received. The last one, however, pre-allocates a buffer of the
+    specified size, making it a useful buffer, especially when reading data
+    from a stream. When using the number constructor of Buffer, it will
+    allocate the memory, but will not fill it with zeros. Instead, the
+    allocated buffer will hold whatever was in memory at the time. If the
+    buffer is not `zeroed` by using `buf.fill(0)`, it may leak sensitive
+    information like keys, source code, and system info.
+
+    \nThe Buffer class on Node.js is a mutable array of binary data, and can
+    be initialized with a string, array or number.
+
+        const buf1 = new Buffer([1,2,3]);
+        // creates a buffer containing [01, 02, 03]
+        const buf2 = new Buffer('test');
+        // creates a buffer containing ASCII bytes [74, 65, 73, 74]
+        const buf3 = new Buffer(10);
+        // creates a buffer of length 10
+
+    The first two variants simply create a binary representation of the
+    value it received. The last one, however, pre-allocates a buffer of the
+    specified size, making it a useful buffer, especially when reading data
+    from a stream. When using the number constructor of Buffer, it will
+    allocate the memory, but will not fill it with zeros. Instead, the
+    allocated buffer will hold whatever was in memory at the time. If the
+    buffer is not `zeroed` by using `buf.fill(0)`, it may leak sensitive
+    information like keys, source code, and system info.
+
+    \nThe Buffer class on Node.js is a mutable array of binary data, and can
+    be initialized with a string, array or number.
+
+        const buf1 = new Buffer([1,2,3]);
+        // creates a buffer containing [01, 02, 03]
+        const buf2 = new Buffer('test');
+        // creates a buffer containing ASCII bytes [74, 65, 73, 74]
+        const buf3 = new Buffer(10);
+        // creates a buffer of length 10
+
+    The first two variants simply create a binary representation of the
+    value it received. The last one, however, pre-allocates a buffer of the
+    specified size, making it a useful buffer, especially when reading data
+    from a stream. When using the number constructor of Buffer, it will
+    allocate the memory, but will not fill it with zeros. Instead, the
+    allocated buffer will hold whatever was in memory at the time. If the
+    buffer is not `zeroed` by using `buf.fill(0)`, it may leak sensitive
+    information like keys, source code, and system info.
+
+    \nThe Buffer class on Node.js is a mutable array of binary data, and can
+    be initialized with a string, array or number.
+
+        const buf1 = new Buffer([1,2,3]);
+        // creates a buffer containing [01, 02, 03]
+        const buf2 = new Buffer('test');
+        // creates a buffer containing ASCII bytes [74, 65, 73, 74]
+        const buf3 = new Buffer(10);
+        // creates a buffer of length 10
+
+    The first two variants simply create a binary representation of the
+    value it received. The last one, however, pre-allocates a buffer of the
+    specified size, making it a useful buffer, especially when reading data
+    from a stream. When using the number constructor of Buffer, it will
+    allocate the memory, but will not fill it with zeros. Instead, the
+    allocated buffer will hold whatever was in memory at the time. If the
+    buffer is not `zeroed` by using `buf.fill(0)`, it may leak sensitive
+    information like keys, source code, and system info.
+
+  affected_package: base64url
+  vulnerable_versions:
+  - "<3.0.0"
+  severity: high
+  package_manager: npm
+  cwe:
+  - CWE-201
+  credit:
+  - ChALkeR
+  references:
+  - https://hackerone.com/reports/321687
+  - https://github.com/brianloveswords/base64url/commit/4355cb294123e86171daa9389f7afe6d2b2b9dae
+  source_url: https://snyk.io/vuln/npm:base64url:20180511

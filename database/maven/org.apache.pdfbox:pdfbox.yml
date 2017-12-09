@@ -1,0 +1,380 @@
+---
+- id: ossindex:maven:org.apache.pdfbox:pdfbox:2016-06-01
+  title: "[CVE-2016-2175] Apache PDFBox before 1.8.12 and 2.x before 2.0.1 does not
+    properly initialize th..."
+  description: Apache PDFBox before 1.8.12 and 2.x before 2.0.1 does not properly
+    initialize the XML parsers, which allows context-dependent attackers to conduct
+    XML External Entity (XXE) attacks via a crafted PDF.
+  affected_package: org.apache.pdfbox:pdfbox
+  vulnerable_versions:
+  - "<1.8.12"
+  - ">=2.0.0 <2.0.1"
+  package_manager: maven
+  cve:
+  - CVE-2016-2175
+  credit:
+  - OSSIndex
+  references:
+  - http://mail-archives.us.apache.org/mod_mbox/www-announce/201605.mbox/%3C83a03bcf-f86b-4688-37b5-615c080291d8@apache.org%3E
+  - http://packetstormsecurity.com/files/137214/Apache-PDFBox-1.8.11-2.0.0-XML-Injection.html
+  - http://rhn.redhat.com/errata/RHSA-2017-0179.html
+  - http://rhn.redhat.com/errata/RHSA-2017-0248.html
+  - http://rhn.redhat.com/errata/RHSA-2017-0249.html
+  - http://rhn.redhat.com/errata/RHSA-2017-0272.html
+  - http://svn.apache.org/viewvc?view=revision&revision=1739564
+  - http://svn.apache.org/viewvc?view=revision&revision=1739565
+  - http://www.debian.org/security/2016/dsa-3606
+  - http://www.securityfocus.com/archive/1/archive/1/538503/100/0/threaded
+  - http://www.securityfocus.com/bid/90902
+  source_url: https://ossindex.net/resource/package/7015349983/vulnerabilities
+- id: snykio:maven:org.apache.pdfbox:pdfbox:2016-05-27
+  title: XML External Entity (XXE) Injection
+  description: |+
+    [`org.apache.pdfbox:pdfbox`][1] Apache PDFBox XML External Entity (XXE)
+    attack Apache PDFBox before 1.8.12 and 2.x before 2.0.1 does not
+    properly initialize the XML parsers, which allows context-dependent
+    attackers to conduct XML External Entity (XXE) attacks via a crafted
+    PDF.
+
+
+
+    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22pdfbox %22
+    \n[`org.apache.pdfbox:pdfbox`][1] Apache PDFBox XML External Entity (XXE)
+    attack Apache PDFBox before 1.8.12 and 2.x before 2.0.1 does not
+    properly initialize the XML parsers, which allows context-dependent
+    attackers to conduct XML External Entity (XXE) attacks via a crafted
+    PDF.
+
+
+
+    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22pdfbox %22
+    \nXXE Injection is a type of attack against an application that parses XML
+    input. XML is a markup language that defines a set of rules for encoding
+    documents in a format that is both human-readable and machine-readable.
+    By default, many XML processors allow specification of an external
+    entity, a URI that is dereferenced and evaluated during XML processing.
+    When an XML document is being parsed, the parser can make a request and
+    include the content at the specified URI inside of the XML document.
+
+    Attacks can include disclosing local files, which may contain sensitive
+    data such as passwords or private user data, using file: schemes or
+    relative paths in the system identifier.
+
+    For example, below is a sample XML document, containing an XML element-
+    username.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+           <username>John</username>
+        </xml>
+
+    An external XML entity - `xxe`, is defined using a system identifier and
+    present within a DOCTYPE header. These entities can access local or
+    remote content. For example the below code contains an external XML
+    entity that would fetch the content of `/etc/passwd` and display it to
+    the user rendered by `username`.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+        <!DOCTYPE foo [
+           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
+           <username>&xxe;</username>
+        </xml>
+
+    Other XXE Injection attacks can access local resources that may not stop
+    returning data, possibly impacting application availability and leading
+    to Denial of Service.
+
+    \nXXE Injection is a type of attack against an application that parses XML
+    input. XML is a markup language that defines a set of rules for encoding
+    documents in a format that is both human-readable and machine-readable.
+    By default, many XML processors allow specification of an external
+    entity, a URI that is dereferenced and evaluated during XML processing.
+    When an XML document is being parsed, the parser can make a request and
+    include the content at the specified URI inside of the XML document.
+
+    Attacks can include disclosing local files, which may contain sensitive
+    data such as passwords or private user data, using file: schemes or
+    relative paths in the system identifier.
+
+    For example, below is a sample XML document, containing an XML element-
+    username.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+           <username>John</username>
+        </xml>
+
+    An external XML entity - `xxe`, is defined using a system identifier and
+    present within a DOCTYPE header. These entities can access local or
+    remote content. For example the below code contains an external XML
+    entity that would fetch the content of `/etc/passwd` and display it to
+    the user rendered by `username`.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+        <!DOCTYPE foo [
+           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
+           <username>&xxe;</username>
+        </xml>
+
+    Other XXE Injection attacks can access local resources that may not stop
+    returning data, possibly impacting application availability and leading
+    to Denial of Service.
+
+    \nXXE Injection is a type of attack against an application that parses XML
+    input. XML is a markup language that defines a set of rules for encoding
+    documents in a format that is both human-readable and machine-readable.
+    By default, many XML processors allow specification of an external
+    entity, a URI that is dereferenced and evaluated during XML processing.
+    When an XML document is being parsed, the parser can make a request and
+    include the content at the specified URI inside of the XML document.
+
+    Attacks can include disclosing local files, which may contain sensitive
+    data such as passwords or private user data, using file: schemes or
+    relative paths in the system identifier.
+
+    For example, below is a sample XML document, containing an XML element-
+    username.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+           <username>John</username>
+        </xml>
+
+    An external XML entity - `xxe`, is defined using a system identifier and
+    present within a DOCTYPE header. These entities can access local or
+    remote content. For example the below code contains an external XML
+    entity that would fetch the content of `/etc/passwd` and display it to
+    the user rendered by `username`.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+        <!DOCTYPE foo [
+           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
+           <username>&xxe;</username>
+        </xml>
+
+    Other XXE Injection attacks can access local resources that may not stop
+    returning data, possibly impacting application availability and leading
+    to Denial of Service.
+
+    \nXXE Injection is a type of attack against an application that parses XML
+    input. XML is a markup language that defines a set of rules for encoding
+    documents in a format that is both human-readable and machine-readable.
+    By default, many XML processors allow specification of an external
+    entity, a URI that is dereferenced and evaluated during XML processing.
+    When an XML document is being parsed, the parser can make a request and
+    include the content at the specified URI inside of the XML document.
+
+    Attacks can include disclosing local files, which may contain sensitive
+    data such as passwords or private user data, using file: schemes or
+    relative paths in the system identifier.
+
+    For example, below is a sample XML document, containing an XML element-
+    username.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+           <username>John</username>
+        </xml>
+
+    An external XML entity - `xxe`, is defined using a system identifier and
+    present within a DOCTYPE header. These entities can access local or
+    remote content. For example the below code contains an external XML
+    entity that would fetch the content of `/etc/passwd` and display it to
+    the user rendered by `username`.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+        <!DOCTYPE foo [
+           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
+           <username>&xxe;</username>
+        </xml>
+
+    Other XXE Injection attacks can access local resources that may not stop
+    returning data, possibly impacting application availability and leading
+    to Denial of Service.
+
+    \nXXE Injection is a type of attack against an application that parses XML
+    input. XML is a markup language that defines a set of rules for encoding
+    documents in a format that is both human-readable and machine-readable.
+    By default, many XML processors allow specification of an external
+    entity, a URI that is dereferenced and evaluated during XML processing.
+    When an XML document is being parsed, the parser can make a request and
+    include the content at the specified URI inside of the XML document.
+
+    Attacks can include disclosing local files, which may contain sensitive
+    data such as passwords or private user data, using file: schemes or
+    relative paths in the system identifier.
+
+    For example, below is a sample XML document, containing an XML element-
+    username.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+           <username>John</username>
+        </xml>
+
+    An external XML entity - `xxe`, is defined using a system identifier and
+    present within a DOCTYPE header. These entities can access local or
+    remote content. For example the below code contains an external XML
+    entity that would fetch the content of `/etc/passwd` and display it to
+    the user rendered by `username`.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+        <!DOCTYPE foo [
+           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
+           <username>&xxe;</username>
+        </xml>
+
+    Other XXE Injection attacks can access local resources that may not stop
+    returning data, possibly impacting application availability and leading
+    to Denial of Service.
+
+    \nXXE Injection is a type of attack against an application that parses XML
+    input. XML is a markup language that defines a set of rules for encoding
+    documents in a format that is both human-readable and machine-readable.
+    By default, many XML processors allow specification of an external
+    entity, a URI that is dereferenced and evaluated during XML processing.
+    When an XML document is being parsed, the parser can make a request and
+    include the content at the specified URI inside of the XML document.
+
+    Attacks can include disclosing local files, which may contain sensitive
+    data such as passwords or private user data, using file: schemes or
+    relative paths in the system identifier.
+
+    For example, below is a sample XML document, containing an XML element-
+    username.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+           <username>John</username>
+        </xml>
+
+    An external XML entity - `xxe`, is defined using a system identifier and
+    present within a DOCTYPE header. These entities can access local or
+    remote content. For example the below code contains an external XML
+    entity that would fetch the content of `/etc/passwd` and display it to
+    the user rendered by `username`.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+        <!DOCTYPE foo [
+           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
+           <username>&xxe;</username>
+        </xml>
+
+    Other XXE Injection attacks can access local resources that may not stop
+    returning data, possibly impacting application availability and leading
+    to Denial of Service.
+
+    \nXXE Injection is a type of attack against an application that parses XML
+    input. XML is a markup language that defines a set of rules for encoding
+    documents in a format that is both human-readable and machine-readable.
+    By default, many XML processors allow specification of an external
+    entity, a URI that is dereferenced and evaluated during XML processing.
+    When an XML document is being parsed, the parser can make a request and
+    include the content at the specified URI inside of the XML document.
+
+    Attacks can include disclosing local files, which may contain sensitive
+    data such as passwords or private user data, using file: schemes or
+    relative paths in the system identifier.
+
+    For example, below is a sample XML document, containing an XML element-
+    username.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+           <username>John</username>
+        </xml>
+
+    An external XML entity - `xxe`, is defined using a system identifier and
+    present within a DOCTYPE header. These entities can access local or
+    remote content. For example the below code contains an external XML
+    entity that would fetch the content of `/etc/passwd` and display it to
+    the user rendered by `username`.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+        <!DOCTYPE foo [
+           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
+           <username>&xxe;</username>
+        </xml>
+
+    Other XXE Injection attacks can access local resources that may not stop
+    returning data, possibly impacting application availability and leading
+    to Denial of Service.
+
+    \nXXE Injection is a type of attack against an application that parses XML
+    input. XML is a markup language that defines a set of rules for encoding
+    documents in a format that is both human-readable and machine-readable.
+    By default, many XML processors allow specification of an external
+    entity, a URI that is dereferenced and evaluated during XML processing.
+    When an XML document is being parsed, the parser can make a request and
+    include the content at the specified URI inside of the XML document.
+
+    Attacks can include disclosing local files, which may contain sensitive
+    data such as passwords or private user data, using file: schemes or
+    relative paths in the system identifier.
+
+    For example, below is a sample XML document, containing an XML element-
+    username.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+           <username>John</username>
+        </xml>
+
+    An external XML entity - `xxe`, is defined using a system identifier and
+    present within a DOCTYPE header. These entities can access local or
+    remote content. For example the below code contains an external XML
+    entity that would fetch the content of `/etc/passwd` and display it to
+    the user rendered by `username`.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+        <!DOCTYPE foo [
+           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
+           <username>&xxe;</username>
+        </xml>
+
+    Other XXE Injection attacks can access local resources that may not stop
+    returning data, possibly impacting application availability and leading
+    to Denial of Service.
+
+  affected_package: org.apache.pdfbox:pdfbox
+  vulnerable_versions:
+  - ">= 1.8 <= 1.8.11"
+  - ">= 2.0 < 2.0.1"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2016-2175
+  cwe:
+  - CWE-611
+  credit:
+  - Unknown
+  references:
+  - https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2016-2175
+  - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-2175
+  - https://issues.apache.org/jira/browse/PDFBOX-2852
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEPDFBOX-30025
+- id: snykio:maven:org.apache.pdfbox:pdfbox:2016-05-06
+  title: Authentication Bypass
+  description: |
+    [`org.apache.pdfbox:pdfbox`][1] Affected versions of the package are
+    vulnerable to Authentication Bypass. The `ReadOnly` permissions are not
+    called in the `StandardSecurityHandler`, allowing all users to edit the
+    PDF file although the are not the owners.
+
+
+
+    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22pdfbox%22
+    \n[`org.apache.pdfbox:pdfbox`][1] Affected versions of the package are
+    vulnerable to Authentication Bypass. The `ReadOnly` permissions are not
+    called in the `StandardSecurityHandler`, allowing all users to edit the
+    PDF file although the are not the owners.
+
+
+
+    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22pdfbox%22
+  affected_package: org.apache.pdfbox:pdfbox
+  vulnerable_versions:
+  - "< 1.8.13"
+  - ">= 2 < 2.0.2"
+  severity: medium
+  package_manager: maven
+  cwe:
+  - CWE-592
+  credit:
+  - Joe Ye
+  references:
+  - https://issues.apache.org/jira/browse/PDFBOX-3341
+  - https://github.com/apache/pdfbox/commit/f0c0fb1af3c0419bdea2fe3d0ab1fe36a6d9dc2c
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEPDFBOX-30694

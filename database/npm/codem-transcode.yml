@@ -1,0 +1,116 @@
+---
+- id: nodesecurity:npm:codem-transcode:2013-07-07
+  title: Potential Command Injection
+  description: |-
+    When the ffprobe functionality is enabled on the server, HTTP POST requests can be made to /probe. These requests are passed to the ffprobe binary on the server. Through this HTTP endpoint it is possible to send a malformed source file name to ffprobe that results in arbitrary command execution.
+
+    ### Mitigating Factors:
+    The ffprobe functionality is not enabled by default. In addition, exploitation opportunities are limited in a standard configuration because the server binds to the local interface by default.
+  affected_package: codem-transcode
+  vulnerable_versions:
+  - "<0.5.0"
+  patched_versions:
+  - ">=0.5.0"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2013-7377
+  cvss_v3_vector: CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:N
+  credit:
+  - Neal Poole
+  references:
+  - ''
+  source_url: https://nodesecurity.io/advisories/2
+- id: ossindex:npm:codem-transcode:2016-05-21
+  title: Command injection
+  description: When the ffprobe functionality is enabled, POST requests to /probe
+    could be used as a vector for command execution.
+  affected_package: codem-transcode
+  vulnerable_versions:
+  - "<0.5.0"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-7377
+  - https://nodesecurity.io/advisories/2
+  - https://nodesecurity.io/advisories/codem-transcode_command_injection
+  source_url: https://ossindex.net/resource/package/7012202276/vulnerabilities
+- id: snykio:npm:codem-transcode:2013-07-07
+  title: Arbitrary Command Injection
+  description: |+
+    The `codem-transcode` package supports a feature (off by default) to
+    interact with a local `ffprobe`. When enabled, POST requests to `/probe`
+    trigger the execution of the local `ffprobe` binary, with the provided
+    parameters.
+
+    This execution is done using `exec`, allowing piped requests, and
+    therefore enabling remote command execution. Newer versions use
+    `execFile` instead, preventing such injection (though still giving
+    attackers to whatever functionality `ffprobe` supports, and any
+    weaknesses in it).
+
+    Note that, by default, the package only listens for such requests from
+    the local network interface, greatly reducing the likelihood of
+    exploitation.
+
+    \nThe `codem-transcode` package supports a feature (off by default) to
+    interact with a local `ffprobe`. When enabled, POST requests to `/probe`
+    trigger the execution of the local `ffprobe` binary, with the provided
+    parameters.
+
+    This execution is done using `exec`, allowing piped requests, and
+    therefore enabling remote command execution. Newer versions use
+    `execFile` instead, preventing such injection (though still giving
+    attackers to whatever functionality `ffprobe` supports, and any
+    weaknesses in it).
+
+    Note that, by default, the package only listens for such requests from
+    the local network interface, greatly reducing the likelihood of
+    exploitation.
+
+    \nThe `codem-transcode` package supports a feature (off by default) to
+    interact with a local `ffprobe`. When enabled, POST requests to `/probe`
+    trigger the execution of the local `ffprobe` binary, with the provided
+    parameters.
+
+    This execution is done using `exec`, allowing piped requests, and
+    therefore enabling remote command execution. Newer versions use
+    `execFile` instead, preventing such injection (though still giving
+    attackers to whatever functionality `ffprobe` supports, and any
+    weaknesses in it).
+
+    Note that, by default, the package only listens for such requests from
+    the local network interface, greatly reducing the likelihood of
+    exploitation.
+
+    \nThe `codem-transcode` package supports a feature (off by default) to
+    interact with a local `ffprobe`. When enabled, POST requests to `/probe`
+    trigger the execution of the local `ffprobe` binary, with the provided
+    parameters.
+
+    This execution is done using `exec`, allowing piped requests, and
+    therefore enabling remote command execution. Newer versions use
+    `execFile` instead, preventing such injection (though still giving
+    attackers to whatever functionality `ffprobe` supports, and any
+    weaknesses in it).
+
+    Note that, by default, the package only listens for such requests from
+    the local network interface, greatly reducing the likelihood of
+    exploitation.
+
+  affected_package: codem-transcode
+  vulnerable_versions:
+  - "<0.5.0"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2013-7377
+  cwe:
+  - CWE-77
+  credit:
+  - Neal Poole
+  references:
+  - https://github.com/madebyhiro/codem-transcode/commit/477aac9da7aab5d3f661ef4c0bf4accae5dff292
+  - https://dzone.com/articles/understanding-execfile-spawn-exec-and-fork-in-node
+  source_url: https://snyk.io/vuln/npm:codem-transcode:20130707

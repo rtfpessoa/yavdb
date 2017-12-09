@@ -1,0 +1,530 @@
+---
+- id: nodesecurity:npm:backbone:2016-05-23
+  title: Cross Site Scripting
+  description: "Affected versions of `backbone` are vulnerable to cross-site scripting
+    when users are allowed to supply input to the `Model#Escape` function, and the
+    output is then written to the DOM. \n\nThe vulnerability occurs as a result of
+    the regular expression used to encode metacharacters failing to take HTML Entities
+    such as `&#60;` into account."
+  affected_package: backbone
+  vulnerable_versions:
+  - "<= 0.3.3"
+  patched_versions:
+  - ">= 0.5.0"
+  severity: medium
+  package_manager: npm
+  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N
+  credit:
+  - Unknown
+  references:
+  - |-
+    https://github.com/jashkenas/backbone/commit/0cdc525961d3fa98e810ffae6bcc8e3838e36d93)
+    https://backbonejs.org/#changelog)
+  source_url: https://nodesecurity.io/advisories/108
+- id: ossindex:npm:backbone:2016-06-06
+  title: Cross Site Scripting
+  description: "> There exists a potential Cross Site Scripting vulnerability in the
+    `Model#Escape` function if a user is able to supply input.\n> \n> This is due
+    to the regex that's replacing things to miss the conversion of things such as
+    `&#60;` to `<.`\n> \n> -- [nodesecurity.io](https://nodesecurity.io/advisories/108)"
+  affected_package: backbone
+  vulnerable_versions:
+  - "<=0.3.3"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - https://cwe.mitre.org/data/definitions/79.html
+  - https://github.com/jashkenas/backbone/compare/0.3.3...0.5.0#diff-0d56d0d310de7ff18b3cef9c2f8f75dcL1008
+  - https://nodesecurity.io/advisories/108
+  source_url: https://ossindex.net/resource/package/7012103395/vulnerabilities
+- id: ossindex:npm:backbone:2016-11-10
+  title: "[Unconfirmed] Possible Cross Site Scripting (XSS)"
+  description: |-
+    Single quotes and forward slashes are not being escaped as per OWASP recommendations, resulting in the possibility of an XSS vulnerability.
+
+    Flagged as unconfirmed since there is no provided/known vulnerability.
+  affected_package: backbone
+  vulnerable_versions:
+  - "<0.5.0"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - https://cwe.mitre.org/data/definitions/79.html
+  - https://github.com/jashkenas/backbone/issues/262
+  - https://github.com/jashkenas/backbone/pull/349
+  - https://github.com/jashkenas/backbone/pull/349/commits/82c288c91e9c3781e3afeedf1aa30626e6f9a788
+  source_url: https://ossindex.net/resource/package/7012103395/vulnerabilities
+- id: ossindex:npm:backbone:2016-10-17
+  title: Cross Site Scripting (XSS) in Todos example
+  description: The supplied "Todos" example does not escape its data, making it possible
+    to inject and execute JavaScript code.
+  affected_package: backbone
+  vulnerable_versions:
+  - "<0.9.9"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - https://github.com/jashkenas/backbone/issues/1677
+  source_url: https://ossindex.net/resource/package/7012103395/vulnerabilities
+- id: ossindex:npm:backbone:2016-10-17
+  title: Cross Site Scripting (XSS)
+  description: The todo example code is vulnerable to a Cross Site Scripting attack.
+  affected_package: backbone
+  vulnerable_versions:
+  - "<0.9.9"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - https://cwe.mitre.org/data/definitions/79.html
+  - https://github.com/jashkenas/backbone/commit/71d0fe3dccffc01f7badba5af4b2cae1c5af1aa8
+  - https://github.com/jashkenas/backbone/issues/1540
+  source_url: https://ossindex.net/resource/package/7012103395/vulnerabilities
+- id: snykio:npm:backbone:2016-05-23
+  title: Cross-site Scripting (XSS)
+  description: |+
+    backbone is a module that adds in structure to a JavaScript heavy
+    application through key-value pairs and custom events connecting to your
+    RESTful API through JSON
+
+    `backbone` is the npm package for Backbone.js, which uses key-value
+    binding and custom events to connects existing API over a RESTful JSON
+    interface.
+
+    Backbone has a security control in its `Escape` function, which performs
+    HTML encoding. However, the regex is incomplete, notably not properly
+    handling cases such as HTML entities (e.g. not treating `&#60` as `<`).
+    HTML Entities are often overlooked by HTML Encoding security controls,
+    you can read more detail about a similar one in the [`Marked`
+    package][1]
+
+    This exposes a Cross-site Scripting (XSS) vulnerability if users can
+    influence the input provided.
+
+
+
+    [1]: https://snyk.io/blog/marked-xss-vulnerability/
+    \nbackbone is a module that adds in structure to a JavaScript heavy
+    application through key-value pairs and custom events connecting to your
+    RESTful API through JSON
+
+    `backbone` is the npm package for Backbone.js, which uses key-value
+    binding and custom events to connects existing API over a RESTful JSON
+    interface.
+
+    Backbone has a security control in its `Escape` function, which performs
+    HTML encoding. However, the regex is incomplete, notably not properly
+    handling cases such as HTML entities (e.g. not treating `&#60` as `<`).
+    HTML Entities are often overlooked by HTML Encoding security controls,
+    you can read more detail about a similar one in the [`Marked`
+    package][1]
+
+    This exposes a Cross-site Scripting (XSS) vulnerability if users can
+    influence the input provided.
+
+
+
+    [1]: https://snyk.io/blog/marked-xss-vulnerability/
+    \nbackbone is a module that adds in structure to a JavaScript heavy
+    application through key-value pairs and custom events connecting to your
+    RESTful API through JSON
+
+    `backbone` is the npm package for Backbone.js, which uses key-value
+    binding and custom events to connects existing API over a RESTful JSON
+    interface.
+
+    Backbone has a security control in its `Escape` function, which performs
+    HTML encoding. However, the regex is incomplete, notably not properly
+    handling cases such as HTML entities (e.g. not treating `&#60` as `<`).
+    HTML Entities are often overlooked by HTML Encoding security controls,
+    you can read more detail about a similar one in the [`Marked`
+    package][1]
+
+    This exposes a Cross-site Scripting (XSS) vulnerability if users can
+    influence the input provided.
+
+
+
+    [1]: https://snyk.io/blog/marked-xss-vulnerability/
+    \nbackbone is a module that adds in structure to a JavaScript heavy
+    application through key-value pairs and custom events connecting to your
+    RESTful API through JSON
+
+    `backbone` is the npm package for Backbone.js, which uses key-value
+    binding and custom events to connects existing API over a RESTful JSON
+    interface.
+
+    Backbone has a security control in its `Escape` function, which performs
+    HTML encoding. However, the regex is incomplete, notably not properly
+    handling cases such as HTML entities (e.g. not treating `&#60` as `<`).
+    HTML Entities are often overlooked by HTML Encoding security controls,
+    you can read more detail about a similar one in the [`Marked`
+    package][1]
+
+    This exposes a Cross-site Scripting (XSS) vulnerability if users can
+    influence the input provided.
+
+
+
+    [1]: https://snyk.io/blog/marked-xss-vulnerability/
+    \nbackbone is a module that adds in structure to a JavaScript heavy
+    application through key-value pairs and custom events connecting to your
+    RESTful API through JSON
+
+    `backbone` is the npm package for Backbone.js, which uses key-value
+    binding and custom events to connects existing API over a RESTful JSON
+    interface.
+
+    Backbone has a security control in its `Escape` function, which performs
+    HTML encoding. However, the regex is incomplete, notably not properly
+    handling cases such as HTML entities (e.g. not treating `&#60` as `<`).
+    HTML Entities are often overlooked by HTML Encoding security controls,
+    you can read more detail about a similar one in the [`Marked`
+    package][1]
+
+    This exposes a Cross-site Scripting (XSS) vulnerability if users can
+    influence the input provided.
+
+
+
+    [1]: https://snyk.io/blog/marked-xss-vulnerability/
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+  affected_package: backbone
+  vulnerable_versions:
+  - "<= 0.3.3"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2016-10537
+  cwe:
+  - CWE-79
+  credit:
+  - Unknown
+  source_url: https://snyk.io/vuln/npm:backbone:20160523
+- id: snykio:npm:backbone:2015-11-06
+  title: Cross-site Scripting (XSS)
+  description: |+
+    Potential XSS Exploit With User-Supplied Data in Model#escape
+
+    In applications that use the escape function, a specially-crafted
+    payload could execute arbitrary JavaScript in the context of the current
+    domain (\"XSS\").
+
+    This vulnerability has not been assigned CVE identifier.
+
+    \nPotential XSS Exploit With User-Supplied Data in Model#escape
+
+    In applications that use the escape function, a specially-crafted
+    payload could execute arbitrary JavaScript in the context of the current
+    domain (\"XSS\").
+
+    This vulnerability has not been assigned CVE identifier.
+
+    \nPotential XSS Exploit With User-Supplied Data in Model#escape
+
+    In applications that use the escape function, a specially-crafted
+    payload could execute arbitrary JavaScript in the context of the current
+    domain (\"XSS\").
+
+    This vulnerability has not been assigned CVE identifier.
+
+    \nPotential XSS Exploit With User-Supplied Data in Model#escape
+
+    In applications that use the escape function, a specially-crafted
+    payload could execute arbitrary JavaScript in the context of the current
+    domain (\"XSS\").
+
+    This vulnerability has not been assigned CVE identifier.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+  affected_package: backbone
+  vulnerable_versions:
+  - "<0.5.0"
+  severity: medium
+  package_manager: npm
+  cwe:
+  - CWE-79
+  references:
+  - http://backbonejs.org/#changelog
+  source_url: https://snyk.io/vuln/npm:backbone:20110701

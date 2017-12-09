@@ -1,0 +1,53 @@
+---
+- id: rubyadvisory:rubygems:bcrypt:2010-02-01
+  title: bcrypt-ruby Gem for Ruby incorrect encoding of non US-ASCII characters (JRuby
+    only)
+  description: |
+    bcrypt-ruby Gem for Ruby suffered from a bug related to character
+    encoding that substantially reduced the entropy of hashed passwords
+    containing non US-ASCII characters. An incorrect encoding step
+    transparently replaced such characters by '?' prior to hashing. In the
+    worst case of a password consisting solely of non-US-ASCII characters,
+    this would cause its hash to be equivalent to all other such passwords
+    of the same length. This issue only affects the JRuby implementation.
+  affected_package: bcrypt
+  patched_versions:
+  - ">= 2.1.4"
+  package_manager: rubygems
+  cve:
+  - CVE-
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: http://www.mindrot.org/files/jBCrypt/internat.adv
+- id: snykio:rubygems:bcrypt:2010-01-31
+  title: Use of Password Hash With Insufficient Computational Effort
+  description: |
+    [`bcrypt`][1] gem provides a simple wrapper for safely handling
+    passwords. Affected versions of this Gem are vulnerable to Use of
+    Password Hash With Insufficient Computational Effort attacks.
+
+
+
+    [1]: https://rubygems.org/gems/bcrypt
+    \n[`bcrypt`][1] gem provides a simple wrapper for safely handling
+    passwords. Affected versions of this Gem are vulnerable to Use of
+    Password Hash With Insufficient Computational Effort attacks.
+
+
+
+    [1]: https://rubygems.org/gems/bcrypt
+  affected_package: bcrypt
+  vulnerable_versions:
+  - "< 2.1.4"
+  severity: medium
+  package_manager: rubygems
+  cwe:
+  - CWE-916
+  credit:
+  - Unknown
+  references:
+  - http://rubysec.com/advisories/OSVDB-62067
+  - http://www.mindrot.org/files/jBCrypt/internat.adv
+  source_url: https://snyk.io/vuln/SNYK-RUBY-BCRYPT-20009

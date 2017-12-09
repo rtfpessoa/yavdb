@@ -1,0 +1,160 @@
+---
+- id: ossindex:npm:websocket-driver:2017-07-30
+  title: Denial of Service (DoS)
+  description: The package accepts overly large frame sizes and immediately allocates
+    the memory, allowing for memory-based denial of service attacks.
+  affected_package: websocket-driver
+  vulnerable_versions:
+  - "<0.3.1"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - https://github.com/faye/faye-websocket-node/issues/26
+  - https://github.com/faye/websocket-driver-node/commit/0b1f16a7ee13c8b3663439f572cbb083af0e12de
+  - https://github.com/faye/websocket-driver-node/pull/2
+  source_url: https://ossindex.net/resource/package/7014614104/vulnerabilities
+- id: snykio:npm:websocket-driver:2013-10-11
+  title: Denial of Service (DoS)
+  description: |+
+    [`websocket-driver`][1] is WebSocket protocol handler with pluggable
+    I/O.
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS) attacks. The `Buffer` length is immediately allocated after
+    reading the frame, up to a length that is no more that `MAX_LENGTH`,
+    which is 2^53 - 1 (the largest precisely representable JS integer), and
+    rejects larger frames with a 1009 error before creating the new Buffer.
+    But Node buffers have a max length of [1GB][2] (0x3fffffff). Parsing an
+    incoming frame with length between 1GB and `MAX_LENGTH`, the parser will
+    throw (and perhaps crash your whole server). Attackers can use this to
+    their advantage and cause a Denial of Service on the servers.
+
+
+
+    [1]: https://www.npmjs.com/package/websocket-driver
+    [2]: https://github.com/joyent/node/blob/master/src/smalloc.h#L40
+    \n[`websocket-driver`][1] is WebSocket protocol handler with pluggable
+    I/O.
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS) attacks. The `Buffer` length is immediately allocated after
+    reading the frame, up to a length that is no more that `MAX_LENGTH`,
+    which is 2^53 - 1 (the largest precisely representable JS integer), and
+    rejects larger frames with a 1009 error before creating the new Buffer.
+    But Node buffers have a max length of [1GB][2] (0x3fffffff). Parsing an
+    incoming frame with length between 1GB and `MAX_LENGTH`, the parser will
+    throw (and perhaps crash your whole server). Attackers can use this to
+    their advantage and cause a Denial of Service on the servers.
+
+
+
+    [1]: https://www.npmjs.com/package/websocket-driver
+    [2]: https://github.com/joyent/node/blob/master/src/smalloc.h#L40
+    \n[`websocket-driver`][1] is WebSocket protocol handler with pluggable
+    I/O.
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS) attacks. The `Buffer` length is immediately allocated after
+    reading the frame, up to a length that is no more that `MAX_LENGTH`,
+    which is 2^53 - 1 (the largest precisely representable JS integer), and
+    rejects larger frames with a 1009 error before creating the new Buffer.
+    But Node buffers have a max length of [1GB][2] (0x3fffffff). Parsing an
+    incoming frame with length between 1GB and `MAX_LENGTH`, the parser will
+    throw (and perhaps crash your whole server). Attackers can use this to
+    their advantage and cause a Denial of Service on the servers.
+
+
+
+    [1]: https://www.npmjs.com/package/websocket-driver
+    [2]: https://github.com/joyent/node/blob/master/src/smalloc.h#L40
+    \nThe Buffer class on Node.js is a mutable array of binary data, and can
+    be initialized with a string, array or number.
+
+        const buf1 = new Buffer([1,2,3]);
+        // creates a buffer containing [01, 02, 03]
+        const buf2 = new Buffer('test');
+        // creates a buffer containing ASCII bytes [74, 65, 73, 74]
+        const buf3 = new Buffer(10);
+        // creates a buffer of length 10
+
+    The first two variants simply create a binary representation of the
+    value it received. The last one, however, pre-allocates a buffer of the
+    specified size, making it a useful buffer, especially when reading data
+    from a stream. When using the number constructor of Buffer, it will
+    allocate the memory, but will not fill it with zeros. Instead, the
+    allocated buffer will hold whatever was in memory at the time. If the
+    buffer is not `zeroed` by using `buf.fill(0)`, it may leak sensitive
+    information like keys, source code, and system info.
+
+    \nThe Buffer class on Node.js is a mutable array of binary data, and can
+    be initialized with a string, array or number.
+
+        const buf1 = new Buffer([1,2,3]);
+        // creates a buffer containing [01, 02, 03]
+        const buf2 = new Buffer('test');
+        // creates a buffer containing ASCII bytes [74, 65, 73, 74]
+        const buf3 = new Buffer(10);
+        // creates a buffer of length 10
+
+    The first two variants simply create a binary representation of the
+    value it received. The last one, however, pre-allocates a buffer of the
+    specified size, making it a useful buffer, especially when reading data
+    from a stream. When using the number constructor of Buffer, it will
+    allocate the memory, but will not fill it with zeros. Instead, the
+    allocated buffer will hold whatever was in memory at the time. If the
+    buffer is not `zeroed` by using `buf.fill(0)`, it may leak sensitive
+    information like keys, source code, and system info.
+
+    \nThe Buffer class on Node.js is a mutable array of binary data, and can
+    be initialized with a string, array or number.
+
+        const buf1 = new Buffer([1,2,3]);
+        // creates a buffer containing [01, 02, 03]
+        const buf2 = new Buffer('test');
+        // creates a buffer containing ASCII bytes [74, 65, 73, 74]
+        const buf3 = new Buffer(10);
+        // creates a buffer of length 10
+
+    The first two variants simply create a binary representation of the
+    value it received. The last one, however, pre-allocates a buffer of the
+    specified size, making it a useful buffer, especially when reading data
+    from a stream. When using the number constructor of Buffer, it will
+    allocate the memory, but will not fill it with zeros. Instead, the
+    allocated buffer will hold whatever was in memory at the time. If the
+    buffer is not `zeroed` by using `buf.fill(0)`, it may leak sensitive
+    information like keys, source code, and system info.
+
+    \nThe Buffer class on Node.js is a mutable array of binary data, and can
+    be initialized with a string, array or number.
+
+        const buf1 = new Buffer([1,2,3]);
+        // creates a buffer containing [01, 02, 03]
+        const buf2 = new Buffer('test');
+        // creates a buffer containing ASCII bytes [74, 65, 73, 74]
+        const buf3 = new Buffer(10);
+        // creates a buffer of length 10
+
+    The first two variants simply create a binary representation of the
+    value it received. The last one, however, pre-allocates a buffer of the
+    specified size, making it a useful buffer, especially when reading data
+    from a stream. When using the number constructor of Buffer, it will
+    allocate the memory, but will not fill it with zeros. Instead, the
+    allocated buffer will hold whatever was in memory at the time. If the
+    buffer is not `zeroed` by using `buf.fill(0)`, it may leak sensitive
+    information like keys, source code, and system info.
+
+  affected_package: websocket-driver
+  vulnerable_versions:
+  - "<0.3.1"
+  severity: high
+  package_manager: npm
+  cwe:
+  - CWE-400
+  credit:
+  - David Glasser
+  references:
+  - https://github.com/faye/websocket-driver-node/pull/2
+  - https://github.com/faye/faye-websocket-node/issues/26
+  - https://github.com/faye/websocket-driver-node/pull/2/commits/f15b331a3459d30800a8b9781da5e2a7b3982160
+  source_url: https://snyk.io/vuln/npm:websocket-driver:20131012

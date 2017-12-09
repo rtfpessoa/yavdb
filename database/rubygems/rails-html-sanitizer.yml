@@ -1,0 +1,914 @@
+---
+- id: rubyadvisory:rubygems:rails-html-sanitizer:2016-01-25
+  title: Possible XSS vulnerability in rails-html-sanitizer
+  description: "There is a possible XSS vulnerability in the white list sanitizer
+    in the \nrails-html-sanitizer gem. This vulnerability has been assigned the CVE
+    \nidentifier CVE-2015-7580. \n\nVersions Affected:  All. \nNot affected:       None.
+    \nFixed Versions:     v1.0.3 \n\nImpact \n------ \nCarefully crafted strings can
+    cause user input to bypass the sanitization in \nthe white list sanitizer which
+    will can lead to an XSS attack. \n\nVulnerable code will look something like this:
+    \n\n  <%= sanitize user_input, tags: %w(em) %> \n\nAll users running an affected
+    release should either upgrade or use one of the \nworkarounds immediately. \n\nReleases
+    \n-------- \nThe FIXED releases are available at the normal locations. \n\nWorkarounds
+    \n----------- \nPutting the following monkey patch in an initializer can help
+    to mitigate the \nissue: \n\n``` \nclass Rails::Html::PermitScrubber \n  alias
+    :old_scrub :scrub \n  alias :old_skip_node? :skip_node? \n\n  def scrub(node)
+    \n    if node.cdata? \n      text = node.document.create_text_node node.text \n
+    \     node.replace text \n      return CONTINUE \n    end \n    old_scrub node
+    \n  end \n\n  def skip_node?(node); node.text?; end \nend \n``` \n\nPatches \n-------
+    \nTo aid users who aren't able to upgrade immediately we have provided patches
+    for \nthe two supported release series. They are in git-am format and consist
+    of a \nsingle changeset. \n\n* 1-0-whitelist_sanitizer_xss.patch - Patch for 1.0
+    series \n\nCredits \n------- \nThanks to Arnaud Germis, Nate Clark, and John Colvin
+    for reporting this issue.\n"
+  affected_package: rails-html-sanitizer
+  patched_versions:
+  - ">= 1.0.3"
+  package_manager: rubygems
+  cve:
+  - CVE-2015-7580
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://groups.google.com/forum/#!topic/rubyonrails-security/uh--W4TDwmI
+- id: rubyadvisory:rubygems:rails-html-sanitizer:2016-01-25
+  title: XSS vulnerability in rails-html-sanitizer
+  description: "There is a XSS vulnerability in `Rails::Html::FullSanitizer` used
+    by Action View's `strip_tags`. \nThis vulnerability has been assigned the CVE
+    identifier CVE-2015-7579. \n\nVersions Affected:  1.0.2 \nNot affected:       1.0.0,
+    1.0.1 \nFixed Versions:     1.0.3 \n\nImpact \n------ \nDue to the way that `Rails::Html::FullSanitizer`
+    is implemented, if an attacker \npasses an already escaped HTML entity to the
+    input of Action View's `strip_tags` \nthese entities will be unescaped what may
+    cause a XSS attack if used in combination \nwith `raw` or `html_safe`. \n\nFor
+    example: \n\n    strip_tags(\"&lt;script&gt;alert('XSS')&lt;/script&gt;\") \n\nWould
+    generate: \n\n    <script>alert('XSS')</script> \n\nAfter the fix it will generate:
+    \n\n    &lt;script&gt;alert('XSS')&lt;/script&gt; \n\nAll users running an affected
+    release should either upgrade or use one of the \nworkarounds immediately. \n\nReleases
+    \n-------- \nThe FIXED releases are available at the normal locations. \n\nWorkarounds
+    \n----------- \nIf you can't upgrade, please use the following monkey patch in
+    an initializer \nthat is loaded before your application: \n\n``` \n$ cat config/initializers/strip_tags_fix.rb
+    \nclass ActionView::Base \n  def strip_tags(html) \n    self.class.full_sanitizer.sanitize(html)
+    \n  end \nend \n``` \n\nPatches \n------- \nTo aid users who aren't able to upgrade
+    immediately we have provided patches \nfor the two supported release series. They
+    are in git-am format and consist \nof a single changeset. \n\n* Do-not-unescape-already-escaped-HTML-entities.patch
+    \n\nCredits \n------- \nThank you to Arthur Neves from GitHub and Spyros Livathinos
+    from Zendesk for \nreporting the problem and working with us to fix it. \n"
+  affected_package: rails-html-sanitizer
+  unaffected_versions:
+  - "~> 1.0.0"
+  - "~> 1.0.1"
+  patched_versions:
+  - ">= 1.0.3"
+  package_manager: rubygems
+  cve:
+  - CVE-2015-7579
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://groups.google.com/forum/#!topic/rubyonrails-security/OU9ugTZcbjc
+- id: rubyadvisory:rubygems:rails-html-sanitizer:2016-01-25
+  title: Possible XSS vulnerability in rails-html-sanitizer
+  description: "There is a possible XSS vulnerability in rails-html-sanitizer. This
+    \nvulnerability has been assigned the CVE identifier CVE-2015-7578. \n\nVersions
+    Affected:  All. \nNot affected:       None. \nFixed Versions:     1.0.3 \n\nImpact
+    \n------ \nThere is a possible XSS vulnerability in rails-html-sanitizer.  Certain
+    \nattributes are not removed from tags when they are sanitized, and these \nattributes
+    can lead to an XSS attack on target applications. \n\nAll users running an affected
+    release should either upgrade or use one of the \nworkarounds immediately. \n\nReleases
+    \n-------- \nThe FIXED releases are available at the normal locations. \n\nWorkarounds
+    \n----------- \nThere are no feasible workarounds for this issue. \n\nPatches
+    \n------- \nTo aid users who aren't able to upgrade immediately we have provided
+    patches for \nthe two supported release series. They are in git-am format and
+    consist of a \nsingle changeset. \n\n* 1-0-sanitize_data_attributes.patch - Patch
+    for 1.0 series \n\nCredits \n------- \nThanks to Ben Murphy and Marien for reporting
+    this.\n  \n"
+  affected_package: rails-html-sanitizer
+  patched_versions:
+  - ">= 1.0.3"
+  package_manager: rubygems
+  cve:
+  - CVE-2015-7578
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://groups.google.com/forum/#!topic/rubyonrails-security/uh--W4TDwmI
+- id: rubyadvisory:rubygems:rails-html-sanitizer:2018-03-22
+  title: XSS vulnerability in rails-html-sanitizer
+  description: |
+    There is a possible XSS vulnerability in rails-html-sanitizer.  The gem allows
+    non-whitelisted attributes to be present in sanitized output when input with
+    specially-crafted HTML fragments, and these attributes can lead to an XSS attack
+    on target applications.
+
+    This issue is similar to CVE-2018-8048 in Loofah.
+  affected_package: rails-html-sanitizer
+  patched_versions:
+  - ">= 1.0.4"
+  package_manager: rubygems
+  cve:
+  - CVE-2018-3741
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  - https://github.com/rails/rails-html-sanitizer/commit/f3ba1a839a35f2ba7f941c15e239a1cb379d56ae
+  source_url: https://groups.google.com/d/msg/rubyonrails-security/tP7W3kLc5u4/uDy2Br7xBgAJ
+- id: snykio:rubygems:rails-html-sanitizer:2018-03-22
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [rails-html-sanitizer][1]
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). The gem allows non-whitelisted attributes to be present in
+    sanitized output when input with specially-crafted HTML fragments, and
+    these attributes can lead to an XSS attack on target applications.
+
+    This issue is similar to [CVE-2018-8048][2] in Loofah.
+
+
+
+    [1]: https://github.com/rails/rails-html-sanitizer
+    [2]: https://snyk.io/vuln/SNYK-RUBY-LOOFAH-22023
+    \n[rails-html-sanitizer][1]
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). The gem allows non-whitelisted attributes to be present in
+    sanitized output when input with specially-crafted HTML fragments, and
+    these attributes can lead to an XSS attack on target applications.
+
+    This issue is similar to [CVE-2018-8048][2] in Loofah.
+
+
+
+    [1]: https://github.com/rails/rails-html-sanitizer
+    [2]: https://snyk.io/vuln/SNYK-RUBY-LOOFAH-22023
+    \n[rails-html-sanitizer][1]
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). The gem allows non-whitelisted attributes to be present in
+    sanitized output when input with specially-crafted HTML fragments, and
+    these attributes can lead to an XSS attack on target applications.
+
+    This issue is similar to [CVE-2018-8048][2] in Loofah.
+
+
+
+    [1]: https://github.com/rails/rails-html-sanitizer
+    [2]: https://snyk.io/vuln/SNYK-RUBY-LOOFAH-22023
+    \n[rails-html-sanitizer][1]
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). The gem allows non-whitelisted attributes to be present in
+    sanitized output when input with specially-crafted HTML fragments, and
+    these attributes can lead to an XSS attack on target applications.
+
+    This issue is similar to [CVE-2018-8048][2] in Loofah.
+
+
+
+    [1]: https://github.com/rails/rails-html-sanitizer
+    [2]: https://snyk.io/vuln/SNYK-RUBY-LOOFAH-22023
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+  affected_package: rails-html-sanitizer
+  vulnerable_versions:
+  - "<1.0.4"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2018-3741
+  cwe:
+  - CWE-79
+  credit:
+  - Kaarlo Haikonen
+  references:
+  - https://groups.google.com/d/msg/rubyonrails-security/tP7W3kLc5u4/uDy2Br7xBgAJ
+  - https://nvd.nist.gov/vuln/detail/CVE-2018-3741
+  source_url: https://snyk.io/vuln/SNYK-RUBY-RAILSHTMLSANITIZER-22025
+- id: snykio:rubygems:rails-html-sanitizer:2016-01-24
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [rails-html-sanitizer][1] is an HTML sanitization gem for Rails
+    applications.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS) in `Rails::Html::FullSanitizer` used by Action View\'s
+    `strip_tags`. Due to the way it is implemented, if an attacker passes an
+    already escaped HTML entity to the input of Action View\'s `strip_tags`
+    these entities will be unescaped, what may cause a Cross-site Scripting
+    attack if it used in combination with `raw` or `html_safe`.
+
+
+
+    [1]: https://rubygems.org/gems/rails-html-sanitizer
+    \n[rails-html-sanitizer][1] is an HTML sanitization gem for Rails
+    applications.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS) in `Rails::Html::FullSanitizer` used by Action View\'s
+    `strip_tags`. Due to the way it is implemented, if an attacker passes an
+    already escaped HTML entity to the input of Action View\'s `strip_tags`
+    these entities will be unescaped, what may cause a Cross-site Scripting
+    attack if it used in combination with `raw` or `html_safe`.
+
+
+
+    [1]: https://rubygems.org/gems/rails-html-sanitizer
+    \n[rails-html-sanitizer][1] is an HTML sanitization gem for Rails
+    applications.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS) in `Rails::Html::FullSanitizer` used by Action View\'s
+    `strip_tags`. Due to the way it is implemented, if an attacker passes an
+    already escaped HTML entity to the input of Action View\'s `strip_tags`
+    these entities will be unescaped, what may cause a Cross-site Scripting
+    attack if it used in combination with `raw` or `html_safe`.
+
+
+
+    [1]: https://rubygems.org/gems/rails-html-sanitizer
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+  affected_package: rails-html-sanitizer
+  vulnerable_versions:
+  - "< 1.0.3"
+  - ">= 1.0.2"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2015-7579
+  cwe:
+  - CWE-79
+  credit:
+  - Arthur Neves
+  - Spyros Livathinos
+  references:
+  - https://rubysec.com/advisories/rails-html-sanitizer-CVE-2015-7579
+  - https://groups.google.com/forum/#!topic/rubyonrails-security/OU9ugTZcbjc
+  - https://nvd.nist.gov/vuln/detail/CVE-2015-7579
+  source_url: https://snyk.io/vuln/SNYK-RUBY-RAILSHTMLSANITIZER-20254
+- id: snykio:rubygems:rails-html-sanitizer:2016-01-24
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [rails-html-sanitizer][1] is an HTML sanitization gem for Rails
+    applications.
+
+    Affected versions of the packages are vulnerable to Cross Site Scripting
+    (XSS) attack when certain attributes are not removed from tags when they
+    are sanitized.
+
+
+
+    [1]: https://rubygems.org/gems/rails-html-sanitizer
+    \n[rails-html-sanitizer][1] is an HTML sanitization gem for Rails
+    applications.
+
+    Affected versions of the packages are vulnerable to Cross Site Scripting
+    (XSS) attack when certain attributes are not removed from tags when they
+    are sanitized.
+
+
+
+    [1]: https://rubygems.org/gems/rails-html-sanitizer
+    \n[rails-html-sanitizer][1] is an HTML sanitization gem for Rails
+    applications.
+
+    Affected versions of the packages are vulnerable to Cross Site Scripting
+    (XSS) attack when certain attributes are not removed from tags when they
+    are sanitized.
+
+
+
+    [1]: https://rubygems.org/gems/rails-html-sanitizer
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+  affected_package: rails-html-sanitizer
+  vulnerable_versions:
+  - "< 1.0.3"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2015-7578
+  cwe:
+  - CWE-79
+  credit:
+  - Ben Murphy
+  - Marien
+  references:
+  - https://rubysec.com/advisories/rails-html-sanitizer-CVE-2015-7578
+  - https://groups.google.com/forum/#!topic/rubyonrails-security/uh--W4TDwmI
+  - https://nvd.nist.gov/vuln/detail/CVE-2015-7578
+  source_url: https://snyk.io/vuln/SNYK-RUBY-RAILSHTMLSANITIZER-20257
+- id: snykio:rubygems:rails-html-sanitizer:2016-01-24
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [rails-html-sanitizer][1] is an HTML sanitization gem for Rails
+    applications.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS) in the white list sanitizer in the `rails-html-sanitizer` gem.
+    Carefully crafted strings can cause user input to bypass the
+    sanitization in the white list sanitizer which will can lead to an XSS
+    attack.
+
+
+
+    [1]: https://rubygems.org/gems/rails-html-sanitizer
+    \n[rails-html-sanitizer][1] is an HTML sanitization gem for Rails
+    applications.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS) in the white list sanitizer in the `rails-html-sanitizer` gem.
+    Carefully crafted strings can cause user input to bypass the
+    sanitization in the white list sanitizer which will can lead to an XSS
+    attack.
+
+
+
+    [1]: https://rubygems.org/gems/rails-html-sanitizer
+    \n[rails-html-sanitizer][1] is an HTML sanitization gem for Rails
+    applications.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS) in the white list sanitizer in the `rails-html-sanitizer` gem.
+    Carefully crafted strings can cause user input to bypass the
+    sanitization in the white list sanitizer which will can lead to an XSS
+    attack.
+
+
+
+    [1]: https://rubygems.org/gems/rails-html-sanitizer
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+  affected_package: rails-html-sanitizer
+  vulnerable_versions:
+  - "< 1.0.3"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2015-7580
+  cwe:
+  - CWE-79
+  credit:
+  - Arnaud Germis
+  - Nate Clark
+  - John Colvin
+  references:
+  - https://rubysec.com/advisories/rails-html-sanitizer-CVE-2015-7580
+  - https://groups.google.com/forum/#!topic/rubyonrails-security/uh--W4TDwmI
+  source_url: https://snyk.io/vuln/SNYK-RUBY-RAILSHTMLSANITIZER-20261

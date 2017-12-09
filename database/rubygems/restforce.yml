@@ -1,0 +1,115 @@
+---
+- id: rubyadvisory:rubygems:restforce:2018-07-27
+  title: Insufficient URI encoding in restforce
+  description: |
+    A flaw in how restforce constructs URL's may allow an attacker to inject
+    additional parameters into Salesforce API requests.
+
+    Impact
+    ------
+    This flaw is only exploitable in applications that pass user input directly
+    to restforce's select, find, describe, update, upsert, and destroy methods.
+    Vulnerable code might look like:
+
+    ```ruby
+    client.select('SomeSalesForceObject', params[:some-id],
+       ...)
+    ```
+
+    In such an application, attackers could pass `0016000000MRatd/describe`
+    as a request parameter, causing the server to make a request to a different
+    endpoint than the server is designed to handle. Since the Salesforce REST
+    API supports overriding HTTP methods via a request parameter, an attacker
+    could also cause the client's `select()` method to modify data, by passing
+    `0016000000MRatd/?_HttpMethod=PATCH&other-query-params=...`.
+
+    Workarounds
+    ------
+    If possible, applications should track salesforce IDs internally, rather than
+    passing user-supplied IDs to salesforce. Such practice mitigates this
+    vulnerability, and in general is desirable for ensuring strong access control.
+  affected_package: restforce
+  patched_versions:
+  - ">= 3.0.0"
+  package_manager: rubygems
+  cve:
+  - CVE-2018-3777
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://github.com/restforce/restforce/pull/392
+- id: snykio:rubygems:restforce:2018-08-03
+  title: Arbitrary Code Injection
+  description: |
+    [https://rubygems.org/gems/restforce][1] is A lightweight ruby client
+    for the Salesforce REST API.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Injection. An attacker could inject additional parameters into
+    Salesforce API requests due to the way restforce constructs URL\'s.
+
+    **Note** This flaw is only exploitable in applications that pass user
+    input directly to restforce\'s select, find, describe, update, upsert,
+    and destroy methods.
+
+
+
+    [1]: https://rubygems.org/gems/restforce
+    \n[https://rubygems.org/gems/restforce][1] is A lightweight ruby client
+    for the Salesforce REST API.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Injection. An attacker could inject additional parameters into
+    Salesforce API requests due to the way restforce constructs URL\'s.
+
+    **Note** This flaw is only exploitable in applications that pass user
+    input directly to restforce\'s select, find, describe, update, upsert,
+    and destroy methods.
+
+
+
+    [1]: https://rubygems.org/gems/restforce
+    \n[https://rubygems.org/gems/restforce][1] is A lightweight ruby client
+    for the Salesforce REST API.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Injection. An attacker could inject additional parameters into
+    Salesforce API requests due to the way restforce constructs URL\'s.
+
+    **Note** This flaw is only exploitable in applications that pass user
+    input directly to restforce\'s select, find, describe, update, upsert,
+    and destroy methods.
+
+
+
+    [1]: https://rubygems.org/gems/restforce
+    \n[https://rubygems.org/gems/restforce][1] is A lightweight ruby client
+    for the Salesforce REST API.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Injection. An attacker could inject additional parameters into
+    Salesforce API requests due to the way restforce constructs URL\'s.
+
+    **Note** This flaw is only exploitable in applications that pass user
+    input directly to restforce\'s select, find, describe, update, upsert,
+    and destroy methods.
+
+
+
+    [1]: https://rubygems.org/gems/restforce
+  affected_package: restforce
+  vulnerable_versions:
+  - "<3.0.0"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2018-3777
+  cwe:
+  - CWE-94
+  credit:
+  - Unknown
+  references:
+  - https://github.com/restforce/restforce/pull/392
+  - https://github.com/restforce/restforce/commit/fd31f1cb09d8363a27e6786ba1754941a1980eed
+  source_url: https://snyk.io/vuln/SNYK-RUBY-RESTFORCE-22045

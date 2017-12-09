@@ -1,0 +1,1122 @@
+---
+- id: nodesecurity:npm:hapi:2017-04-05
+  title: Denial of Service via malformed accept-encoding header
+  description: Affected versions of `hapi` will crash or lock the event loop when
+    a malformed `accept-encoding` header is recieved.
+  affected_package: hapi
+  vulnerable_versions:
+  - ">= 15.0.0 <= 16.1.0"
+  patched_versions:
+  - ">= 16.1.1"
+  severity: medium
+  package_manager: npm
+  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L
+  credit:
+  - Georgios Andrianakis
+  references:
+  - https://github.com/hapijs/hapi/issues/3466)
+  source_url: https://nodesecurity.io/advisories/335
+- id: nodesecurity:npm:hapi:2015-12-28
+  title: Route level CORS config overrides connection level defaults
+  description: "Versions of `hapi` prior to 11.1.4 are affected by a vulnerability
+    that causes route-level CORS configuration to override connection-level or server-level
+    CORS defaults. This may result in a situation where CORS permissions are less
+    restrictive than intended.\n\n"
+  affected_package: hapi
+  vulnerable_versions:
+  - "<11.1.4"
+  patched_versions:
+  - ">=11.1.4"
+  severity: medium
+  package_manager: npm
+  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N
+  credit:
+  - Eran Hammer
+  references:
+  - https://github.com/hapijs/hapi/issues/2980)
+  source_url: https://nodesecurity.io/advisories/65
+- id: nodesecurity:npm:hapi:2015-12-23
+  title: Denial of service - Potential socket exhaustion
+  description: |+
+    Versions of `hapi` prior to 11.1.3 are affected by a denial of service vulnerability.
+
+    The vulnerability is triggered when certain input is passed into the If-Modified-Since or Last-Modified headers.
+
+    This causes an 'illegal access' exception to be raised, and instead of sending a HTTP 500 error back to the sender, hapi will continue to hold the socket open until timed out (default node timeout is 2 minutes).
+
+
+  affected_package: hapi
+  vulnerable_versions:
+  - "<11.1.3"
+  patched_versions:
+  - ">=11.1.3"
+  severity: high
+  package_manager: npm
+  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H
+  credit:
+  - Adam Baldwin
+  references:
+  - |-
+    https://github.com/hapijs/hapi/commit/aab2496e930dce5ee1ab28eecec94e0e45f03580)
+    https://github.com/jfhbrook/node-ecstatic/pull/179)
+    https://github.com/substack) for bringing this exception pattern to our attention via the [ecstatic advisory](https://nodesecurity.io/advisories/64) which lead to identifying this.
+  source_url: https://nodesecurity.io/advisories/63
+- id: nodesecurity:npm:hapi:2015-10-20
+  title: Incorrect handling of CORS preflight request headers
+  description: "Versions of `hapi` prior to 11.0.0 implement CORS incorrectly, allowing
+    for configurations that at best return inconsistent headers, and at worst allow
+    cross-origin activities that are expected to be forbidden. \n\nIf the connection
+    has CORS enabled but one route has it off, and the route is not GET, the OPTIONS
+    prefetch request will return the default CORS headers and then the actual request
+    will go through and return no CORS headers. This defeats the purpose of turning
+    CORS on the route."
+  affected_package: hapi
+  vulnerable_versions:
+  - "<11.0.0"
+  patched_versions:
+  - ">=11.0.0"
+  severity: medium
+  package_manager: npm
+  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N
+  credit:
+  - Eran Hammer
+  references:
+  - |-
+    https://github.com/hapijs/hapi/issues/2850)
+    https://github.com/hapijs/hapi/issues/2840)
+  source_url: https://nodesecurity.io/advisories/45
+- id: nodesecurity:npm:hapi:2014-07-08
+  title: Rosetta-Flash JSONP Vulnerability
+  description: |+
+    This description taken from the pull request provided by Patrick Kettner.
+
+
+
+    Versions 6.1.0 and earlier of hapi are vulnerable to a rosetta-flash attack, which can be used by attackers to send data across domains and break the browser same-origin-policy.
+
+
+  affected_package: hapi
+  vulnerable_versions:
+  - "< 6.1.0"
+  patched_versions:
+  - ">= 6.1.0"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2014-4671A
+  cvss_v3_vector: CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N
+  credit:
+  - Michele Spagnuolo
+  references:
+  - |-
+    https://github.com/spumko/hapi/pull/1766)
+
+    http://miki.it/blog/2014/7/8/abusing-jsonp-with-rosetta-flash/)
+
+    https://github.com/patrickkettner) for submitting a pull request to address this in hapi.
+  source_url: https://nodesecurity.io/advisories/12
+- id: nodesecurity:npm:hapi:2014-02-14
+  title: File Descriptor Leak Can Cause DoS Vulnerability
+  description: "Versions 2.0.x and 2.1.x of hapi are vulnerable to a denial of service
+    attack via a file descriptor leak. \n\nWhen triggered repeatedly, this leak will
+    cause the server to run out of file descriptors and the node process to die. The
+    effort required to take down a server depends on the process file descriptor limit.
+    No other side effects or exploits have been identified.\n"
+  affected_package: hapi
+  vulnerable_versions:
+  - 2.0.x || 2.1.x
+  patched_versions:
+  - ">= 2.2.x"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2014-3742
+  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H
+  credit:
+  - Jo Liss
+  references:
+  - https://github.com/spumko/hapi/issues/1427
+  source_url: https://nodesecurity.io/advisories/11
+- id: ossindex:npm:hapi:2014-05-16
+  title: "[CVE-2014-3742]  Resource Management Errors"
+  description: The hapi server framework 2.0.x and 2.1.x before 2.2.0 for Node.js
+    allows remote attackers to cause a denial of service (file descriptor consumption
+    and process crash) via unspecified vectors.
+  affected_package: hapi
+  vulnerable_versions:
+  - 2.0.0
+  - 2.0.0-x | 2.1.0-x
+  - 2.1.1
+  - 2.1.2
+  package_manager: npm
+  cve:
+  - CVE-2014-3742
+  credit:
+  - OSSIndex
+  references:
+  - http://www.openwall.com/lists/oss-security/2014/05/13/1
+  - http://www.openwall.com/lists/oss-security/2014/05/15/2
+  - https://github.com/spumko/hapi/issues/1427
+  - https://nodesecurity.io/advisories/hapi_File_descriptor_leak_DoS_vulnerability
+  source_url: https://ossindex.net/resource/package/7013826322/vulnerabilities
+- id: ossindex:npm:hapi:2017-02-12
+  title: Possible Cross Site Scripting (XSS) in validation response
+  description: The validation response text is not being escaped, allowing for a possible
+    cross site scripting vulnerability.
+  affected_package: hapi
+  vulnerable_versions:
+  - "<8.2.0"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - https://cwe.mitre.org/data/definitions/79.html
+  - https://github.com/hapijs/hapi/commit/5ccfd61ee8c6a140fbce147c2f028acd6bbf901a
+  - https://github.com/hapijs/hapi/issues/2370
+  source_url: https://ossindex.net/resource/package/7013826322/vulnerabilities
+- id: ossindex:npm:hapi:2017-04-07
+  title: Denial of Service (DoS)
+  description: "> When hapi encounters a malformed accept-encoding header an uncaught
+    exception is thrown. This may cause hapi to crash or to hang the client connection
+    until the timeout period is reached.\n> \n> --[nodesecurity.io](https://nodesecurity.io/advisories/335)"
+  affected_package: hapi
+  vulnerable_versions:
+  - ">=15.0.0 <16.1.1"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - https://cwe.mitre.org/data/definitions/400.html
+  - https://github.com/hapijs/hapi/commit/770cc7bad15122f796d938738b7c05b66d2f4b7f
+  - https://github.com/hapijs/hapi/issues/3466
+  - https://nodesecurity.io/advisories/335
+  source_url: https://ossindex.net/resource/package/7013826322/vulnerabilities
+- id: ossindex:npm:hapi:1970-01-01
+  title: rosetta-flash vulnerability
+  description: |-
+    someone created a alphanum only swf converter, which means that they can in theory use it as a callback at a JSONP endpoint, and as a result, send data across domains.
+
+    Prepending callbacks with an empty inline comment breaks the flash parser, and prevents the issue. This is how google, facebook, github, et al are handeling it.
+
+    CVE-2014-4671A
+  affected_package: hapi
+  vulnerable_versions:
+  - "< 6.1.0"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - https://github.com/hapijs/hapi/pull/1766
+  - https://nodesecurity.io/advisories/12
+  source_url: https://ossindex.net/resource/package/7013826322/vulnerabilities
+- id: snykio:npm:hapi:2017-03-30
+  title: Denial of Service (DoS)
+  description: |+
+    [`hapi`][1] is an HTTP Server framework. Affected versions of the
+    package are vulnerable to Denial of Service (DoS). A client can send a
+    malformed `accept-encoding` header to the server, invoking an uncaught
+    exception and may cause the server to crash or hang for long periods of
+    time.
+
+
+
+    [1]: https://www.npmjs.com/package/hapi
+    \n[`hapi`][1] is an HTTP Server framework. Affected versions of the
+    package are vulnerable to Denial of Service (DoS). A client can send a
+    malformed `accept-encoding` header to the server, invoking an uncaught
+    exception and may cause the server to crash or hang for long periods of
+    time.
+
+
+
+    [1]: https://www.npmjs.com/package/hapi
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+  affected_package: hapi
+  vulnerable_versions:
+  - "<16.1.1 >=15.0.0"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2017-16013
+  cwe:
+  - CWE-400
+  credit:
+  - Georgios Andrianakis
+  references:
+  - https://github.com/hapijs/hapi/issues/3466
+  - https://github.com/hapijs/hapi/commit/770cc7bad15122f796d938738b7c05b66d2f4b7f
+  source_url: https://snyk.io/vuln/npm:hapi:20170331
+- id: snykio:npm:hapi:2013-03-19
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [`hapi`][1] is an HTTP Server framework. Affected versions of the
+    package are vulnerable to Cross-site Scripting (XSS). They do not handle
+    invalid payloads, allowing attackers craft malicious links or create a
+    third party web page to inject code into the browser. The fix was
+    introduced in version 0.16.0 by parsing the payload and verifying its
+    validity.
+
+
+
+    [1]: https://www.npmjs.com/package/hapi
+    \n[`hapi`][1] is an HTTP Server framework. Affected versions of the
+    package are vulnerable to Cross-site Scripting (XSS). They do not handle
+    invalid payloads, allowing attackers craft malicious links or create a
+    third party web page to inject code into the browser. The fix was
+    introduced in version 0.16.0 by parsing the payload and verifying its
+    validity.
+
+
+
+    [1]: https://www.npmjs.com/package/hapi
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+  affected_package: hapi
+  vulnerable_versions:
+  - "<0.16.0"
+  severity: medium
+  package_manager: npm
+  cwe:
+  - CWE-79
+  credit:
+  - Wyatt Preul
+  references:
+  - https://github.com/hapijs/hapi/pull/700
+  - https://github.com/hapijs/hapi/commit/41eadf911fb4d9ca765891474e7d0edefd883402
+  source_url: https://snyk.io/vuln/npm:hapi:20130320
+- id: snykio:npm:hapi:2015-12-28
+  title: Potentially loose security restrictions
+  description: |+
+    Security restrictions (e.g. origin) get overridden by less restrictive
+    defaults (i.e. all origins) in cases when server level, connection level
+    or route level CORS configurations are combined.
+
+    \nSecurity restrictions (e.g. origin) get overridden by less restrictive
+    defaults (i.e. all origins) in cases when server level, connection level
+    or route level CORS configurations are combined.
+
+  affected_package: hapi
+  vulnerable_versions:
+  - "<11.1.4"
+  severity: low
+  package_manager: npm
+  cve:
+  - CVE-2015-9243
+  cwe:
+  - CWE-358
+  credit:
+  - Eran Hammer
+  references:
+  - https://github.com/hapijs/hapi/issues/2980
+  - https://github.com/hapijs/hapi/commit/270e9a768b2fbb84ab832869d2de606c865f0e85
+  source_url: https://snyk.io/vuln/npm:hapi:20151228
+- id: snykio:npm:hapi:2015-12-23
+  title: Denial of Service through invalid If-Modified-Since/Last-Modified headers
+  description: |+
+    Sending a purposefully crafted invalid date in the `If-Modified-Since`
+    or `Last-Modified` header will cause the `Hapi` server to err but keep
+    the socket open (the socket will time out after 2 minutes by default).
+    This allows an attacker to quickly exhaust the sockets on the server,
+    making it unavailable (a `Denial of Service` attack).
+
+    The vulnerability is caused by the combination of two bugs. First, the
+    underlying V8 engine throws an exception when processing the specially
+    crafted date, instead of stating the date is invalid as it should.
+    Second, the `Hapi` server does not handle the exception well, leading to
+    the socket remaining open.
+
+    Upgrading `Hapi` will address the second issue and thus fix the
+    vulnerability.
+
+    \nSending a purposefully crafted invalid date in the `If-Modified-Since`
+    or `Last-Modified` header will cause the `Hapi` server to err but keep
+    the socket open (the socket will time out after 2 minutes by default).
+    This allows an attacker to quickly exhaust the sockets on the server,
+    making it unavailable (a `Denial of Service` attack).
+
+    The vulnerability is caused by the combination of two bugs. First, the
+    underlying V8 engine throws an exception when processing the specially
+    crafted date, instead of stating the date is invalid as it should.
+    Second, the `Hapi` server does not handle the exception well, leading to
+    the socket remaining open.
+
+    Upgrading `Hapi` will address the second issue and thus fix the
+    vulnerability.
+
+    \nSending a purposefully crafted invalid date in the `If-Modified-Since`
+    or `Last-Modified` header will cause the `Hapi` server to err but keep
+    the socket open (the socket will time out after 2 minutes by default).
+    This allows an attacker to quickly exhaust the sockets on the server,
+    making it unavailable (a `Denial of Service` attack).
+
+    The vulnerability is caused by the combination of two bugs. First, the
+    underlying V8 engine throws an exception when processing the specially
+    crafted date, instead of stating the date is invalid as it should.
+    Second, the `Hapi` server does not handle the exception well, leading to
+    the socket remaining open.
+
+    Upgrading `Hapi` will address the second issue and thus fix the
+    vulnerability.
+
+    \nSending a purposefully crafted invalid date in the `If-Modified-Since`
+    or `Last-Modified` header will cause the `Hapi` server to err but keep
+    the socket open (the socket will time out after 2 minutes by default).
+    This allows an attacker to quickly exhaust the sockets on the server,
+    making it unavailable (a `Denial of Service` attack).
+
+    The vulnerability is caused by the combination of two bugs. First, the
+    underlying V8 engine throws an exception when processing the specially
+    crafted date, instead of stating the date is invalid as it should.
+    Second, the `Hapi` server does not handle the exception well, leading to
+    the socket remaining open.
+
+    Upgrading `Hapi` will address the second issue and thus fix the
+    vulnerability.
+
+  affected_package: hapi
+  vulnerable_versions:
+  - "<11.1.3"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2015-9241
+  cwe:
+  - CWE-400
+  credit:
+  - Adam Baldwin
+  references:
+  - https://github.com/hapijs/hapi/commit/aab2496e930dce5ee1ab28eecec94e0e45f03580
+  - https://bugs.chromium.org/p/v8/issues/detail?id=4640
+  source_url: https://snyk.io/vuln/npm:hapi:20151223
+- id: snykio:npm:hapi:2015-10-20
+  title: CORS Bypass
+  description: |+
+    Hapi v11.0.0 and below have an incorrect implementation of the CORS
+    protocol, and allow for configurations that, at best, return
+    inconsistent headers and, at worst, cross-origin activities that are
+    expected to be forbidden.
+
+    \nHapi v11.0.0 and below have an incorrect implementation of the CORS
+    protocol, and allow for configurations that, at best, return
+    inconsistent headers and, at worst, cross-origin activities that are
+    expected to be forbidden.
+
+    \nIf the connection has CORS enabled but one route has it off, and the
+    route is not GET, the OPTIONS prefetch request will return the default
+    CORS headers and then the actual request will go through and return no
+    CORS headers. This defeats the purpose of turning CORS on the route.
+
+    \nIf the connection has CORS enabled but one route has it off, and the
+    route is not GET, the OPTIONS prefetch request will return the default
+    CORS headers and then the actual request will go through and return no
+    CORS headers. This defeats the purpose of turning CORS on the route.
+
+  affected_package: hapi
+  vulnerable_versions:
+  - "<11.0.0"
+  severity: low
+  package_manager: npm
+  cve:
+  - CVE-2015-9236
+  cwe:
+  - CWE-284
+  credit:
+  - Eran Hammer
+  references:
+  - https://github.com/hapijs/hapi/issues/2850
+  - https://github.com/hapijs/hapi/issues/2840
+  source_url: https://snyk.io/vuln/npm:hapi:20151020
+- id: snykio:npm:hapi:2014-07-08
+  title: Denial of Service (DoS)
+  description: |+
+    [hapi][1] is a simple to use configuration-centric framework with
+    built-in support for input validation, caching, authentication, and
+    other essential facilities for building web and services applications.
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS) attacks. Due to a file descriptor leak, when triggered repeatedly,
+    it may cause the server to run out of file descriptors and the node
+    process to die.
+
+    **Note:** This vulnerability allows an attacker to take down a
+    hapi-based server running versions 2.0.x and 2.1.x. This does NOT affect
+    hapi 1.x deployments.
+
+
+
+    [1]: https://www.npmjs.com/package/hapi
+    \n[hapi][1] is a simple to use configuration-centric framework with
+    built-in support for input validation, caching, authentication, and
+    other essential facilities for building web and services applications.
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS) attacks. Due to a file descriptor leak, when triggered repeatedly,
+    it may cause the server to run out of file descriptors and the node
+    process to die.
+
+    **Note:** This vulnerability allows an attacker to take down a
+    hapi-based server running versions 2.0.x and 2.1.x. This does NOT affect
+    hapi 1.x deployments.
+
+
+
+    [1]: https://www.npmjs.com/package/hapi
+    \n[hapi][1] is a simple to use configuration-centric framework with
+    built-in support for input validation, caching, authentication, and
+    other essential facilities for building web and services applications.
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS) attacks. Due to a file descriptor leak, when triggered repeatedly,
+    it may cause the server to run out of file descriptors and the node
+    process to die.
+
+    **Note:** This vulnerability allows an attacker to take down a
+    hapi-based server running versions 2.0.x and 2.1.x. This does NOT affect
+    hapi 1.x deployments.
+
+
+
+    [1]: https://www.npmjs.com/package/hapi
+    \n[hapi][1] is a simple to use configuration-centric framework with
+    built-in support for input validation, caching, authentication, and
+    other essential facilities for building web and services applications.
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS) attacks. Due to a file descriptor leak, when triggered repeatedly,
+    it may cause the server to run out of file descriptors and the node
+    process to die.
+
+    **Note:** This vulnerability allows an attacker to take down a
+    hapi-based server running versions 2.0.x and 2.1.x. This does NOT affect
+    hapi 1.x deployments.
+
+
+
+    [1]: https://www.npmjs.com/package/hapi
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+  affected_package: hapi
+  vulnerable_versions:
+  - 2.0.0 || 2.1.0
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2014-3742
+  cwe:
+  - CWE-400
+  credit:
+  - Jo Liss
+  references:
+  - https://github.com/spumko/hapi/issues/1427
+  source_url: https://snyk.io/vuln/npm:hapi:20140708
+- id: snykio:npm:hapi:2014-07-08
+  title: Rosetta-flash jsonp vulnerability
+  description: |
+    *This description taken from the pull request provided by [Patrick
+    Kettner][1].*
+
+    tl:dr - someone created a alphanum only swf converter, which means that
+    they can in theory use it as a callback at a JSONP endpoint, and as a
+    result, send data across domains.
+
+    Prepending callbacks with an empty inline comment breaks the flash
+    parser, and prevents the issue. This is a fairly common solution
+    currently being implemented by Google, Facebook, and GitHub.
+
+    *Source: [Node Security Project][2]*
+
+
+
+    [1]: https://github.com/patrickkettner
+    [2]: https://nodesecurity.io/advisories/12
+    \n*This description taken from the pull request provided by [Patrick
+    Kettner][1].*
+
+    tl:dr - someone created a alphanum only swf converter, which means that
+    they can in theory use it as a callback at a JSONP endpoint, and as a
+    result, send data across domains.
+
+    Prepending callbacks with an empty inline comment breaks the flash
+    parser, and prevents the issue. This is a fairly common solution
+    currently being implemented by Google, Facebook, and GitHub.
+
+    *Source: [Node Security Project][2]*
+
+
+
+    [1]: https://github.com/patrickkettner
+    [2]: https://nodesecurity.io/advisories/12
+    \n*This description taken from the pull request provided by [Patrick
+    Kettner][1].*
+
+    tl:dr - someone created a alphanum only swf converter, which means that
+    they can in theory use it as a callback at a JSONP endpoint, and as a
+    result, send data across domains.
+
+    Prepending callbacks with an empty inline comment breaks the flash
+    parser, and prevents the issue. This is a fairly common solution
+    currently being implemented by Google, Facebook, and GitHub.
+
+    *Source: [Node Security Project][2]*
+
+
+
+    [1]: https://github.com/patrickkettner
+    [2]: https://nodesecurity.io/advisories/12
+    \n*This description taken from the pull request provided by [Patrick
+    Kettner][1].*
+
+    tl:dr - someone created a alphanum only swf converter, which means that
+    they can in theory use it as a callback at a JSONP endpoint, and as a
+    result, send data across domains.
+
+    Prepending callbacks with an empty inline comment breaks the flash
+    parser, and prevents the issue. This is a fairly common solution
+    currently being implemented by Google, Facebook, and GitHub.
+
+    *Source: [Node Security Project][2]*
+
+
+
+    [1]: https://github.com/patrickkettner
+    [2]: https://nodesecurity.io/advisories/12
+    \n*This description taken from the pull request provided by [Patrick
+    Kettner][1].*
+
+    tl:dr - someone created a alphanum only swf converter, which means that
+    they can in theory use it as a callback at a JSONP endpoint, and as a
+    result, send data across domains.
+
+    Prepending callbacks with an empty inline comment breaks the flash
+    parser, and prevents the issue. This is a fairly common solution
+    currently being implemented by Google, Facebook, and GitHub.
+
+    *Source: [Node Security Project][2]*
+
+
+
+    [1]: https://github.com/patrickkettner
+    [2]: https://nodesecurity.io/advisories/12
+    \n[Background from the vulnerabilty finder][1]
+
+
+
+    [1]: http://miki.it/blog/2014/7/8/abusing-jsonp-with-rosetta-flash/
+    \n[Background from the vulnerabilty finder][1]
+
+
+
+    [1]: http://miki.it/blog/2014/7/8/abusing-jsonp-with-rosetta-flash/
+  affected_package: hapi
+  vulnerable_versions:
+  - "< 6.1.0"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2014-4671
+  cwe:
+  - CWE-942
+  credit:
+  - Michele Spagnuolo
+  references:
+  - https://github.com/spumko/hapi/pull/1766
+  source_url: https://snyk.io/vuln/npm:hapi:20140708-1
