@@ -19,7 +19,7 @@ module YAVDB
 
     DEBUG = ENV['debug'].freeze
 
-    YAVDB_DB_URL    = 'git@github.com:rtfpessoa/yavdb.git'
+    YAVDB_DB_URL    = 'https://github.com/rtfpessoa/yavdb.git'
     YAVDB_DB_BRANCH = 'database'
 
     DEFAULT_GENERATE_DATABASE_PATH = File.expand_path(File.join(Dir.pwd, ['database'])).freeze
