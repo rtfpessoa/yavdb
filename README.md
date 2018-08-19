@@ -25,10 +25,6 @@ The sources for this database include
 ## Installation
 
 ```sh
-bundle exec rake install
-```
-
-```sh
 gem install yavdb --pre
 ```
 
