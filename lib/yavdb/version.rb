@@ -16,6 +16,6 @@
 
 module YAVDB
 
-  VERSION = '0.1.0-alpha.2'
+  VERSION = '0.1.1'
 
 end
