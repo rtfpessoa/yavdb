@@ -32,8 +32,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'simplecov'
 
   # Linters
-  spec.add_development_dependency 'rubocop', ['~> 0.58']
-  spec.add_development_dependency 'rubocop-rspec', ['~> 1.27']
+  spec.add_development_dependency 'rubocop', ['~> 0.59']
+  spec.add_development_dependency 'rubocop-rspec', ['~> 1.29']
 
   # Runtime
   spec.add_runtime_dependency 'json', ['~> 2.1']

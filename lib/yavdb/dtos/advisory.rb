@@ -16,32 +16,30 @@
 
 module YAVDB
   # TODO: Enable `Style/StructInheritance` - check `attr_reader:` or `initialize` method
-  class Advisory <
-
-    Struct.new(
-      :id, # [String]
-      :title, # [String]
-      :description, # [String]
-      :affected_package, # [String]
-      :vulnerable_versions, # [Array<String>] (Optional)
-      :unaffected_versions, # [Array<String>] (Optional)
-      :patched_versions, # [Array<String>] (Optional)
-      :severity, # [String] (Optional)
-      :package_manager, # [String]
-      :cve, # [Array<String>] (Optional)
-      :cwe, # [Array<String>] (Optional)
-      :osvdb, # [String] (Optional)
-      :cvss_v2_vector, # [String] (Optional)
-      :cvss_v2_score, # [String] (Optional)
-      :cvss_v3_vector, # [String] (Optional)
-      :cvss_v3_score, # [String] (Optional)
-      :disclosed_date, # [Date]
-      :created_date, # [Date]
-      :last_modified_date, # [Date]
-      :credit, # [Array<String>]
-      :references, # [Array<String>]
-      :source_url # [String]
-    )
+  class Advisory < Struct.new(
+    :id, # [String]
+    :title, # [String]
+    :description, # [String]
+    :affected_package, # [String]
+    :vulnerable_versions, # [Array<String>] (Optional)
+    :unaffected_versions, # [Array<String>] (Optional)
+    :patched_versions, # [Array<String>] (Optional)
+    :severity, # [String] (Optional)
+    :package_manager, # [String]
+    :cve, # [Array<String>] (Optional)
+    :cwe, # [Array<String>] (Optional)
+    :osvdb, # [String] (Optional)
+    :cvss_v2_vector, # [String] (Optional)
+    :cvss_v2_score, # [String] (Optional)
+    :cvss_v3_vector, # [String] (Optional)
+    :cvss_v3_score, # [String] (Optional)
+    :disclosed_date, # [Date]
+    :created_date, # [Date]
+    :last_modified_date, # [Date]
+    :credit, # [Array<String>]
+    :references, # [Array<String>]
+    :source_url # [String]
+  )
 
     def self.load(path)
       data = YAML.load_file(path)
