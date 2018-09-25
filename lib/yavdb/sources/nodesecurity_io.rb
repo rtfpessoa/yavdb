@@ -44,7 +44,7 @@ module YAVDB
             advisories = []
 
             loop do
-              nodesecurity    = YAVDB::Utils::HTTP.get_page_contents("#{API_URL}?offset=#{offset}", true, 'nodesecurity.io/advisories')
+              nodesecurity    = YAVDB::Utils::HTTP.get_page_contents("#{API_URL}?offset=#{offset}", false, 'nodesecurity.io/advisories')
               advisories_json = JSON.parse(nodesecurity.join)
 
               advisories_json['count'].positive? ? advisories = advisories.concat(advisories_json['results']) : break

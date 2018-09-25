@@ -30,7 +30,7 @@ module YAVDB
         BASE_VULN_URL = "#{BASE_URL}/vuln"
         INFO_SEP      = '#=#'
 
-        PACKAGE_MANAGERS_RSS_FEED = ['composer', 'golang', 'maven', 'npm', 'nuget', 'pip', 'rubygems'].freeze
+        PACKAGE_MANAGERS = ['composer', 'golang', 'maven', 'npm', 'nuget', 'pip', 'rubygems'].freeze
 
         PACKAGE_MANAGER_ALIAS = Hash[
           'composer' => 'packagist',
@@ -55,13 +55,13 @@ module YAVDB
           private
 
           def fetch_advisory_urls
-            PACKAGE_MANAGERS_RSS_FEED.map do |pm|
+            PACKAGE_MANAGERS.map do |pm|
               fetch_advisory_recursive("#{BASE_VULN_URL}?type=#{pm}")
             end.flatten
           end
 
           def fetch_advisory_recursive(page_url)
-            snykio = get_page_html(page_url, true, 'snyk.io/feed')
+            snykio = get_page_html(page_url, false, 'snyk.io/feed')
 
             page_vuln_urls = snykio
                                .css('table tbody tr td span a')
