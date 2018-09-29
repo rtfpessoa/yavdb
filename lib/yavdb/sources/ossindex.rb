@@ -45,7 +45,7 @@ module YAVDB
             packages = []
 
             while next_url
-              ossindex      = YAVDB::Utils::HTTP.get_page_contents(next_url, false, 'ossindex/advisories')
+              ossindex      = YAVDB::Utils::HTTP.get_page_contents(next_url, true, 'ossindex/advisories')
               ossindex_json = JSON.parse(ossindex.join)
               page_packages = ossindex_json['packages']
 

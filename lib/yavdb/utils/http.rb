@@ -39,13 +39,24 @@ module YAVDB
         def do_request(url)
           puts "Fetching #{url}"
 
-          url      = URI.parse(url)
-          response = Net::HTTP.get_response(url)
-          case response
-            when Net::HTTPNotFound then
-              raise ArgumentError, 'page not found'
-            else
-              response.body.lines
+          url = URI.parse(url)
+          retries ||= 3
+
+          begin
+            response = Net::HTTP.get_response(url)
+            case response
+              when Net::HTTPNotFound then
+                raise ArgumentError, 'page not found'
+              else
+                response.body.lines
+            end
+          rescue StandardError => exception
+            raise exception if retries.zero?
+
+            puts "Going to retry #{url}"
+            retries -= 1
+            sleep(5)
+            retry
           end
         end
 
