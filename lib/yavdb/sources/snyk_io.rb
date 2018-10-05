@@ -102,8 +102,10 @@ module YAVDB
             vulnerable_versions = advisory_page.css('.custom-affected-versions').text.strip
             vulnerable_versions = if vulnerable_versions.empty? || vulnerable_versions == 'ALL'
                                     ['*']
-                                  else
+                                  elsif ['maven', 'nuget', 'pypi'].include?(package_manager)
                                     [vulnerable_versions]
+                                  else
+                                    [vulnerable_versions.gsub(',', ' && ')]
                                   end
 
             sidebar_data = parse_side_bar(advisory_page)
