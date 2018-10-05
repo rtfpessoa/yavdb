@@ -4,45 +4,52 @@ jobs:
   build-lint-test:
     working_directory: ~/yavdb
     docker:
-      - image: circleci/ruby:2.3.7
+    - image: circleci/ruby:2.3.7
     steps:
-      - checkout
+    - checkout
 
-      - name: Install Bundler Version
-        type: shell
-        command: gem install bundler -v 1.16
+    - name: Install Bundler Version
+      type: shell
+      command: gem install bundler -v 1.16
 
-      - name: Restore cache
-        type: cache-restore
-        key: yavdb-{{ checksum "Gemfile.lock" }}
+    - name: Restore gem cache
+      type: cache-restore
+      keys:
+      - gem-yavdb-{{ checksum "Gemfile.lock" }}
+      - gem-yavdb
 
-      - name: Bundle Install
-        type: shell
-        command: bundle install --path /tmp/vendor/bundle
+    - name: Restore yavdb cache
+      type: cache-restore
+      keys:
+      - crawler-yavdb-cache-1
+      - crawler-yavdb-cache
 
-      - name: Save bundler cache
-        type: cache-save
-        key: yavdb-{{ checksum "Gemfile.lock" }}
-        paths:
-          - /tmp/vendor/bundle
-          - ~/.yavdb/cache
+    - name: Bundle Install
+      type: shell
+      command: bundle install --path /tmp/vendor/bundle
 
-      - name: Save yavdb cache
-        type: cache-save
-        key: yavdb-cache-1
-        paths:
-          - ~/.yavdb/cache
+    - name: Save bundler cache
+      type: cache-save
+      key: gem-yavdb-{{ checksum "Gemfile.lock" }}
+      paths:
+      - /tmp/vendor/bundle
 
-      - name: Rubocop
-        type: shell
-        command: bundle exec rubocop
+    - name: Rubocop
+      type: shell
+      command: bundle exec rubocop
 
-      - name: Tests
-        type: shell
-        command: bundle exec rake
+    - name: Tests
+      type: shell
+      command: bundle exec rake
+
+    - name: Save yavdb cache
+      type: cache-save
+      key: crawler-yavdb-cache-1
+      paths:
+      - ~/.yavdb/cache
 
 workflows:
   version: 2
   test-and-publish:
     jobs:
-      - build-lint-test
+    - build-lint-test
