@@ -760,6 +760,37 @@
   - https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2013-0239
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHECXF-30017
 - id: victims:maven:org.apache.cxf:cxf-rt-ws-security:date
+  title: 'jbossws-cxf, apache-cxf: Bypass of security constraints on WS endpoints
+    when using WSS4JInInterceptor'
+  description: 'If web services are deployed using Apache CXF with the WSS4JInInterceptor  enabled
+    to apply WS-Security processing, HTTP GET requests to these services  will always
+    be granted access, without applying authentication checks. The  URIMappingInterceptor
+    is a legacy mechanism for allowing REST-like access  (via GET requests) to simple
+    SOAP services. A remote attacker could use this  flaw to access the REST-like
+    interface of a simple SOAP service using GET  requests that bypass the security
+    constraints applied by WSS4JInInterceptor.  This flaw is only exploitable if WSS4JInInterceptor
+    is used to apply  WS-Security processing. Services that use WS-SecurityPolicy
+    to apply security  are not affected.
+
+'
+  affected_package: org.apache.cxf:cxf-rt-ws-security
+  vulnerable_versions:
+  - "<=2.5.7"
+  - '2.5'
+  - "<=2.6.4"
+  - '2.6'
+  - "<=2.7.0"
+  - '2.7'
+  severity: medium
+  package_manager: maven
+  cve:
+  - 2012-5633
+  credit:
+  - Victims CVE Database
+  references:
+  - https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2012-5633
+  source_url: https://github.com/victims/victims-cve-db/blob/master/database/java/2012/5633.yaml
+- id: victims:maven:org.apache.cxf:cxf-rt-ws-security:date
   title: 'jbossws-cxf, apache-cxf: UsernameTokenPolicyValidator and UsernameTokenInterceptor
     allow empty passwords to authenticate'
   description: 'It was found that the Apache CXF UsernameTokenPolicyValidator and  UsernameTokenInterceptor
@@ -809,34 +840,3 @@
   - http://cxf.apache.org/security-advisories.data/CVE-2014-3623.txt.asc
   - https://bugzilla.redhat.com/CVE-2014-3623
   source_url: https://github.com/victims/victims-cve-db/blob/master/database/java/2014/3623.yaml
-- id: victims:maven:org.apache.cxf:cxf-rt-ws-security:date
-  title: 'jbossws-cxf, apache-cxf: Bypass of security constraints on WS endpoints
-    when using WSS4JInInterceptor'
-  description: 'If web services are deployed using Apache CXF with the WSS4JInInterceptor  enabled
-    to apply WS-Security processing, HTTP GET requests to these services  will always
-    be granted access, without applying authentication checks. The  URIMappingInterceptor
-    is a legacy mechanism for allowing REST-like access  (via GET requests) to simple
-    SOAP services. A remote attacker could use this  flaw to access the REST-like
-    interface of a simple SOAP service using GET  requests that bypass the security
-    constraints applied by WSS4JInInterceptor.  This flaw is only exploitable if WSS4JInInterceptor
-    is used to apply  WS-Security processing. Services that use WS-SecurityPolicy
-    to apply security  are not affected.
-
-'
-  affected_package: org.apache.cxf:cxf-rt-ws-security
-  vulnerable_versions:
-  - "<=2.5.7"
-  - '2.5'
-  - "<=2.6.4"
-  - '2.6'
-  - "<=2.7.0"
-  - '2.7'
-  severity: medium
-  package_manager: maven
-  cve:
-  - 2012-5633
-  credit:
-  - Victims CVE Database
-  references:
-  - https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2012-5633
-  source_url: https://github.com/victims/victims-cve-db/blob/master/database/java/2012/5633.yaml

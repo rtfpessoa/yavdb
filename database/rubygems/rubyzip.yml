@@ -63,9 +63,13 @@
         ++2018-04-15 22:04:29 .....           19           19  good.txt
         ++2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
 
+    **NOTE** This vulnerability is due to a partial fix in
+    [CVE-2017-5946][2]
+
 
 
     [1]: https://rubygems.org/gems/rubyzip
+    [2]: https://app.snyk.io/vuln/SNYK-RUBY-RUBYZIP-20336
     \n[rubyzip][1] is a ruby module for reading and writing zip files.
 
     Affected versions of the package are vulnerable to Arbitrary File Write
@@ -88,9 +92,13 @@
         ++2018-04-15 22:04:29 .....           19           19  good.txt
         ++2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
 
+    **NOTE** This vulnerability is due to a partial fix in
+    [CVE-2017-5946][2]
+
 
 
     [1]: https://rubygems.org/gems/rubyzip
+    [2]: https://app.snyk.io/vuln/SNYK-RUBY-RUBYZIP-20336
     \n[rubyzip][1] is a ruby module for reading and writing zip files.
 
     Affected versions of the package are vulnerable to Arbitrary File Write
@@ -113,9 +121,13 @@
         ++2018-04-15 22:04:29 .....           19           19  good.txt
         ++2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
 
+    **NOTE** This vulnerability is due to a partial fix in
+    [CVE-2017-5946][2]
+
 
 
     [1]: https://rubygems.org/gems/rubyzip
+    [2]: https://app.snyk.io/vuln/SNYK-RUBY-RUBYZIP-20336
     \n[rubyzip][1] is a ruby module for reading and writing zip files.
 
     Affected versions of the package are vulnerable to Arbitrary File Write
@@ -138,9 +150,13 @@
         ++2018-04-15 22:04:29 .....           19           19  good.txt
         ++2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
 
+    **NOTE** This vulnerability is due to a partial fix in
+    [CVE-2017-5946][2]
+
 
 
     [1]: https://rubygems.org/gems/rubyzip
+    [2]: https://app.snyk.io/vuln/SNYK-RUBY-RUBYZIP-20336
     \n[rubyzip][1] is a ruby module for reading and writing zip files.
 
     Affected versions of the package are vulnerable to Arbitrary File Write
@@ -163,9 +179,13 @@
         ++2018-04-15 22:04:29 .....           19           19  good.txt
         ++2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
 
+    **NOTE** This vulnerability is due to a partial fix in
+    [CVE-2017-5946][2]
+
 
 
     [1]: https://rubygems.org/gems/rubyzip
+    [2]: https://app.snyk.io/vuln/SNYK-RUBY-RUBYZIP-20336
     \n[rubyzip][1] is a ruby module for reading and writing zip files.
 
     Affected versions of the package are vulnerable to Arbitrary File Write
@@ -188,12 +208,45 @@
         ++2018-04-15 22:04:29 .....           19           19  good.txt
         ++2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
 
+    **NOTE** This vulnerability is due to a partial fix in
+    [CVE-2017-5946][2]
+
 
 
     [1]: https://rubygems.org/gems/rubyzip
+    [2]: https://app.snyk.io/vuln/SNYK-RUBY-RUBYZIP-20336
+    \n[rubyzip][1] is a ruby module for reading and writing zip files.
+
+    Affected versions of the package are vulnerable to Arbitrary File Write
+    via Archive Extraction (AKA \"Zip Slip\").
+
+    It can be exploited using a specially crafted zip archive, that holds
+    path traversal filenames. When exploited, a filename in a malicious
+    archive is concatenated to the target extraction directory, which
+    results in the final path ending up outside of the target folder. For
+    instance, a zip may hold a file with a `../../file.exe` location and
+    thus break out of the target folder. If an executable or a configuration
+    file is overwritten with a file containing malicious code, the problem
+    can turn into an arbitrary code execution issue quite easily.
+
+    The following is an example of a zip archive with one benign file and
+    one malicious file. Extracting the malicous file will result in
+    traversing out of the target folder, ending up in `/root/.ssh/`
+    overwriting the `authorized_keys` file:
+
+        ++2018-04-15 22:04:29 .....           19           19  good.txt
+        ++2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
+
+    **NOTE** This vulnerability is due to a partial fix in
+    [CVE-2017-5946][2]
+
+
+
+    [1]: https://rubygems.org/gems/rubyzip
+    [2]: https://app.snyk.io/vuln/SNYK-RUBY-RUBYZIP-20336
   affected_package: rubyzip
   vulnerable_versions:
-  - ">=0.0.0"
+  - "<1.2.2"
   severity: high
   package_manager: rubygems
   cve:
@@ -203,6 +256,7 @@
   credit:
   - Unknown
   references:
+  - https://github.com/rubyzip/rubyzip/commit/d07b13a6cf0a413e010c48879aebd9576bfb5f68
   - https://github.com/rubyzip/rubyzip/issues/369
   source_url: https://snyk.io/vuln/SNYK-RUBY-RUBYZIP-22039
 - id: snykio:rubygems:rubyzip:2017-02-03

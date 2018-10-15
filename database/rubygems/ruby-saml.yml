@@ -1,4 +1,48 @@
 ---
+- id: rubyadvisory:rubygems:ruby-saml:2015-02-03
+  title: Ruby-Saml Gem is vulnerable to arbitrary code execution
+  description: |
+    ruby-saml contains a flaw that is triggered as the URI value of a SAML response is
+    not properly sanitized through a prepared statement. This may allow a remote
+    attacker to execute arbitrary shell commands on the host machine.
+  affected_package: ruby-saml
+  patched_versions:
+  - ">= 0.8.2"
+  package_manager: rubygems
+  cve:
+  - CVE-
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: http://www.osvdb.org/show/osvdb/117903
+- id: rubyadvisory:rubygems:ruby-saml:2018-02-27
+  title: Authentication bypass via incorrect XML canonicalization and DOM traversal
+  description: |
+    ruby-saml prior to version 1.7.0 is vulnerable to an authentication bypass via incorrect
+    XML canonicalization and DOM traversal. Specifically, there are inconsistencies in
+    handling of comments within XML nodes, resulting in incorrect parsing of the inner text
+    of XML nodes such that any inner text after the comment is lost prior to
+    cryptographically signing the SAML message. Text after the comment therefore has no
+    impact on the signature on the SAML message.
+
+    A remote attacker can modify SAML content for a SAML service provider without
+    invalidating the cryptographic signature, which may allow attackers to bypass
+    primary authentication for the affected SAML service provider.
+  affected_package: ruby-saml
+  patched_versions:
+  - ">= 1.7.0"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2017-11428
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  - https://duo.com/blog/duo-finds-saml-vulnerabilities-affecting-multiple-implementations
+  - https://www.kb.cert.org/vuls/id/475445
+  source_url: https://github.com/onelogin/ruby-saml/commit/048a544730930f86e46804387a6b6fad50d8176f
 - id: rubyadvisory:rubygems:ruby-saml:2015-06-30
   title: Ruby-Saml Gem is vulnerable to entity expansion attacks
   description: 'ruby-saml before 1.0.0 is vulnerable to entity expansion attacks.
@@ -38,23 +82,6 @@
   references:
   - https://github.com/rubysec/ruby-advisory-db
   source_url: https://github.com/onelogin/ruby-saml/commit/a571f52171e6bfd87db59822d1d9e8c38fb3b995
-- id: rubyadvisory:rubygems:ruby-saml:2015-02-03
-  title: Ruby-Saml Gem is vulnerable to arbitrary code execution
-  description: |
-    ruby-saml contains a flaw that is triggered as the URI value of a SAML response is
-    not properly sanitized through a prepared statement. This may allow a remote
-    attacker to execute arbitrary shell commands on the host machine.
-  affected_package: ruby-saml
-  patched_versions:
-  - ">= 0.8.2"
-  package_manager: rubygems
-  cve:
-  - CVE-
-  credit:
-  - Rubysec
-  references:
-  - https://github.com/rubysec/ruby-advisory-db
-  source_url: http://www.osvdb.org/show/osvdb/117903
 - id: rubyadvisory:rubygems:ruby-saml:2015-04-29
   title: Ruby-Saml Gem is vulnerable to XPath Injection
   description: "ruby-saml before 1.0.0 is vulnerable to XPath injection on xml_security.rb.
@@ -72,33 +99,6 @@
   references:
   - https://github.com/rubysec/ruby-advisory-db
   source_url: https://github.com/onelogin/ruby-saml/pull/225
-- id: rubyadvisory:rubygems:ruby-saml:2018-02-27
-  title: Authentication bypass via incorrect XML canonicalization and DOM traversal
-  description: |
-    ruby-saml prior to version 1.7.0 is vulnerable to an authentication bypass via incorrect
-    XML canonicalization and DOM traversal. Specifically, there are inconsistencies in
-    handling of comments within XML nodes, resulting in incorrect parsing of the inner text
-    of XML nodes such that any inner text after the comment is lost prior to
-    cryptographically signing the SAML message. Text after the comment therefore has no
-    impact on the signature on the SAML message.
-
-    A remote attacker can modify SAML content for a SAML service provider without
-    invalidating the cryptographic signature, which may allow attackers to bypass
-    primary authentication for the affected SAML service provider.
-  affected_package: ruby-saml
-  patched_versions:
-  - ">= 1.7.0"
-  severity: medium
-  package_manager: rubygems
-  cve:
-  - CVE-2017-11428
-  credit:
-  - Rubysec
-  references:
-  - https://github.com/rubysec/ruby-advisory-db
-  - https://duo.com/blog/duo-finds-saml-vulnerabilities-affecting-multiple-implementations
-  - https://www.kb.cert.org/vuls/id/475445
-  source_url: https://github.com/onelogin/ruby-saml/commit/048a544730930f86e46804387a6b6fad50d8176f
 - id: snykio:rubygems:ruby-saml:2018-02-27
   title: Authentication Bypass
   description: |+
