@@ -1,27 +1,372 @@
 ---
+- id: rubyadvisory:rubygems:nokogiri:2014-04-30
+  title: |
+    Nokogiri Gem for JRuby XML Document Root Element Handling Memory Consumption
+    Remote DoS
+  description: |
+    Nokogiri Gem for JRuby contains a flaw that is triggered when handling a root
+    element in an XML document. This may allow a remote attacker to cause a
+    consumption of memory resources.
+  affected_package: nokogiri
+  patched_versions:
+  - ">= 1.6.3"
+  package_manager: rubygems
+  cve:
+  - CVE-
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://github.com/sparklemotion/nokogiri/pull/1087
 - id: rubyadvisory:rubygems:nokogiri:2018-01-29
   title: Nokogiri gem, via libxml, is affected by DoS vulnerabilities
   description: |
     The version of libxml2 packaged with Nokogiri contains a
     vulnerability. Nokogiri has mitigated these issue by upgrading to
-    libxml 2.9.6.
+    libxml 2.9.5.
 
-    It was discovered that libxml2 incorrecty handled certain files. An attacker
-    could use this issue with specially constructed XML data to cause libxml2 to
-    consume resources, leading to a denial of service.
+    Wei Lei discovered that libxml2 incorrecty handled certain parameter
+    entities. An attacker could use this issue with specially constructed XML
+    data to cause libxml2 to consume resources, leading to a denial of service.
   affected_package: nokogiri
   patched_versions:
-  - ">= 1.8.2"
+  - ">= 1.8.1"
   package_manager: rubygems
   cve:
-  - CVE-2017-15412
+  - CVE-2017-16932
   credit:
   - Rubysec
   references:
   - https://github.com/rubysec/ruby-advisory-db
-  - https://usn.ubuntu.com/usn/usn-3513-1/
-  - https://people.canonical.com/~ubuntu-security/cve/2017/CVE-2017-15412.html
+  - https://usn.ubuntu.com/usn/usn-3504-1/
+  - https://people.canonical.com/~ubuntu-security/cve/2017/CVE-2017-16932.html
   source_url: https://github.com/sparklemotion/nokogiri/issues/1714
+- id: rubyadvisory:rubygems:nokogiri:2017-03-11
+  title: Nokogiri gem contains several vulnerabilities in libxml2 and libxslt
+  description: |
+    Nokogiri version 1.7.1 has been released, pulling in several upstream
+    patches to the vendored libxml2 to address the following CVEs:
+
+    CVE-2016-4658
+    CVSS v3 Base Score: 9.8 (Critical)
+    libxml2 in Apple iOS before 10, OS X before 10.12, tvOS before 10, and
+    watchOS before 3 allows remote attackers to execute arbitrary code or cause
+    a denial of service (memory corruption) via a crafted XML document.
+
+    CVE-2016-5131
+    CVSS v3 Base Score: 8.8 (HIGH)
+    Use-after-free vulnerability in libxml2 through 2.9.4, as used in Google
+    Chrome before 52.0.2743.82, allows remote attackers to cause a denial of
+    service or possibly have unspecified other impact via vectors related to
+    the XPointer range-to function.
+  affected_package: nokogiri
+  patched_versions:
+  - ">= 1.7.1"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2016-4658
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  - https://github.com/sparklemotion/nokogiri/issues/1615
+  source_url: https://github.com/sparklemotion/nokogiri/issues/1615
+- id: rubyadvisory:rubygems:nokogiri:2016-01-19
+  title: 'Nokogiri gem contains a heap-based buffer overflow vulnerability in libxml2
+
+'
+  description: |
+    Nokogiri version 1.6.7.2 has been released, pulling in several upstream
+    patches to the vendored libxml2 to address the following CVE:
+
+    CVE-2015-7499
+    CVSS v2 Base Score: 5.0 (MEDIUM)
+
+    Heap-based buffer overflow in the xmlGROW function in parser.c
+    in libxml2 before 2.9.3 allows context-dependent attackers to
+    obtain sensitive process memory information via unspecified
+    vectors.
+
+    libxml2 could be made to crash if it opened a specially crafted
+    file. It was discovered that libxml2 incorrectly handled certain
+    malformed documents. If a user or automated system were tricked
+    into opening a specially crafted document, an attacker could
+    possibly cause libxml2 to crash, resulting in a denial of service.
+  affected_package: nokogiri
+  unaffected_versions:
+  - "< 1.6.0"
+  patched_versions:
+  - ">= 1.6.7.2"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2015-7499
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  - https://github.com/sparklemotion/nokogiri/commit/9eb540e7c905924a42757bf0a34c2c00707d536c
+  source_url: https://groups.google.com/forum/#!topic/ruby-security-ann/Dy7YiKb_pMM
+- id: rubyadvisory:rubygems:nokogiri:2013-12-14
+  title: Nokogiri Gem for Ruby External Entity (XXE) Expansion Remote DoS
+  description: Nokogiri gem for Ruby contains an flaw that is triggered during the
+    parsing of XML data. The issue is due to an incorrectly configured XML parser
+    accepting XML external entities from an untrusted source. By sending specially
+    crafted XML data, a remote attacker can cause an infinite loop and crash the program.
+  affected_package: nokogiri
+  patched_versions:
+  - "~> 1.5.11"
+  - ">= 1.6.1"
+  package_manager: rubygems
+  cve:
+  - CVE-2013-6461
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: http://www.osvdb.org/show/osvdb/101458
+- id: rubyadvisory:rubygems:nokogiri:2018-10-04
+  title: Nokogiri gem, via libxml2, is affected by multiple vulnerabilities
+  description: |
+    Nokogiri 1.8.5 has been released.
+
+    This is a security and bugfix release. It addresses two CVEs in upstream
+    libxml2 rated as "medium" by Red Hat, for which details are below.
+
+    If you're using your distro's system libraries, rather than Nokogiri's
+    vendored libraries, there's no security need to upgrade at this time,
+    though you may want to check with your distro whether they've patched this
+    (Canonical has patched Ubuntu packages). Note that these patches are not
+    yet (as of 2018-10-04) in an upstream release of libxml2.
+
+    Full details about the security update are available in Github Issue #1785.
+    [#1785]: https://github.com/sparklemotion/nokogiri/issues/1785
+
+    -----
+
+    [MRI] Pulled in upstream patches from libxml2 that address CVE-2018-14404
+    and CVE-2018-14567. Full details are available in #1785. Note that these
+    patches are not yet (as of 2018-10-04) in an upstream release of libxml2.
+
+    -----
+
+    CVE-2018-14404
+
+    Permalink:
+
+    https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-14404.html
+
+    Description:
+
+    A NULL pointer dereference vulnerability exists in the
+    xpath.c:xmlXPathCompOpEval() function of libxml2 through 2.9.8 when
+    parsing an invalid XPath expression in the XPATH_OP_AND or XPATH_OP_OR
+    case. Applications processing untrusted XSL format inputs with the use of
+    the libxml2 library may be vulnerable to a denial of service attack due
+    to a crash of the application
+
+    Canonical rates this vulnerability as "Priority: Medium"
+
+    -----
+
+    CVE-2018-14567
+
+    Permalink:
+
+    https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-14567.html
+
+    Description:
+
+    infinite loop in LZMA decompression
+
+    Canonical rates this vulnerability as "Priority: Medium"
+  affected_package: nokogiri
+  patched_versions:
+  - ">= 1.8.5"
+  package_manager: rubygems
+  cve:
+  - CVE-2018-14404
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  - https://groups.google.com/forum/#!msg/ruby-security-ann/uVrmO2HjqQw/Fw3ocLI0BQAJ
+  - https://gitlab.gnome.org/GNOME/libxml2/commit/a436374994c47b12d5de1b8b1d191a098fa23594
+  - https://gitlab.gnome.org/GNOME/libxml2/commit/2240fbf5912054af025fb6e01e26375100275e74
+  source_url: https://github.com/sparklemotion/nokogiri/issues/1785
+- id: rubyadvisory:rubygems:nokogiri:2012-06-08
+  title: Nokogiri Gem for Ruby External Entity (XXE) Expansion Internal Network Response
+    Remote Disclosure
+  description: libxml2 contains a flaw that may lead to unauthorized disclosure of
+    potentially sensitive information. The issue is triggered when handling the expansion
+    of XML external entities (XXE), which can be used to trigger URL's on an internal
+    network and allow a remote attacker to gain access to their responses.
+  affected_package: nokogiri
+  patched_versions:
+  - ">= 1.5.4"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2012-6685
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: http://www.osvdb.org/show/osvdb/90946
+- id: rubyadvisory:rubygems:nokogiri:2016-06-07
+  title: Denial of service or RCE from libxml2 and libxslt
+  description: "Nokogiri is affected by series of vulnerabilities in libxml2 and libxslt,\nwhich
+    are libraries Nokogiri depends on. It was discovered that libxml2 and\nlibxslt
+    incorrectly handled certain malformed documents, which can allow\nmalicious users
+    to cause issues ranging from denial of service to remote code\nexecution attacks.\n\nFor
+    more information, the Ubuntu Security Notice is a good start: \nhttp://www.ubuntu.com/usn/usn-2994-1/\n"
+  affected_package: nokogiri
+  unaffected_versions:
+  - "< 1.6.0"
+  patched_versions:
+  - ">= 1.6.8"
+  package_manager: rubygems
+  cve:
+  - CVE-2015-8806
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  - https://github.com/sparklemotion/nokogiri/issues/1473
+  - https://github.com/sparklemotion/nokogiri/commit/03d402212707bd5dfa0a21b7de5e91a7f9d90028
+  - https://mail.gnome.org/archives/xml/2016-May/msg00023.html
+  - http://www.ubuntu.com/usn/usn-2994-1/
+  source_url: https://github.com/sparklemotion/nokogiri/issues/1473
+- id: rubyadvisory:rubygems:nokogiri:2017-09-19
+  title: Nokogiri gem, via libxml, is affected by DoS and RCE vulnerabilities
+  description: |
+    The version of libxml2 packaged with Nokogiri contains several
+    vulnerabilities. Nokogiri has mitigated these issues by upgrading to
+    libxml 2.9.5.
+
+    It was discovered that a type confusion error existed in libxml2. An
+    attacker could use this to specially construct XML data that
+    could cause a denial of service or possibly execute arbitrary
+    code. (CVE-2017-0663)
+
+    It was discovered that libxml2 did not properly validate parsed entity
+    references. An attacker could use this to specially construct XML
+    data that could expose sensitive information. (CVE-2017-7375)
+
+    It was discovered that a buffer overflow existed in libxml2 when
+    handling HTTP redirects. An attacker could use this to specially
+    construct XML data that could cause a denial of service or possibly
+    execute arbitrary code. (CVE-2017-7376)
+
+    Marcel Böhme and Van-Thuan Pham discovered a buffer overflow in
+    libxml2 when handling elements. An attacker could use this to specially
+    construct XML data that could cause a denial of service or possibly
+    execute arbitrary code. (CVE-2017-9047)
+
+    Marcel Böhme and Van-Thuan Pham discovered a buffer overread
+    in libxml2 when handling elements. An attacker could use this
+    to specially construct XML data that could cause a denial of
+    service. (CVE-2017-9048)
+
+    Marcel Böhme and Van-Thuan Pham discovered multiple buffer overreads
+    in libxml2 when handling parameter-entity references. An attacker
+    could use these to specially construct XML data that could cause a
+    denial of service. (CVE-2017-9049, CVE-2017-9050)
+  affected_package: nokogiri
+  patched_versions:
+  - ">= 1.8.1"
+  package_manager: rubygems
+  cve:
+  - CVE-2017-9050
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  - https://usn.ubuntu.com/usn/usn-3424-1/
+  - https://people.canonical.com/~ubuntu-security/cve/2017/CVE-2017-0663.html
+  - https://people.canonical.com/~ubuntu-security/cve/2017/CVE-2017-7375.html
+  - https://people.canonical.com/~ubuntu-security/cve/2017/CVE-2017-7376.html
+  - https://people.canonical.com/~ubuntu-security/cve/2017/CVE-2017-9047.html
+  - https://people.canonical.com/~ubuntu-security/cve/2017/CVE-2017-9048.html
+  - https://people.canonical.com/~ubuntu-security/cve/2017/CVE-2017-9049.html
+  - https://people.canonical.com/~ubuntu-security/cve/2017/CVE-2017-9050.html
+  source_url: https://github.com/sparklemotion/nokogiri/issues/1673
+- id: rubyadvisory:rubygems:nokogiri:2015-04-14
+  title: Nokogiri gem contains several vulnerabilities in libxml2 and libxslt
+  description: |
+    Several vulnerabilities were discovered in the libxml2 and libxslt libraries
+    that the Nokogiri gem depends on.
+
+    CVE-2015-1819
+    A denial of service flaw was found in the way libxml2 parsed XML
+    documents. This flaw could cause an application that uses libxml2 to use an
+    excessive amount of memory.
+
+    CVE-2015-7941
+    libxml2 does not properly stop parsing invalid input, which allows
+    context-dependent attackers to cause a denial of service (out-of-bounds read
+    and libxml2 crash) via crafted specially XML data.
+
+    CVE-2015-7942
+    The xmlParseConditionalSections function in parser.c in libxml2
+    does not properly skip intermediary entities when it stops parsing invalid
+    input, which allows context-dependent attackers to cause a denial of service
+    (out-of-bounds read and crash) via crafted XML data.
+
+    CVE-2015-7995
+    The xsltStylePreCompute function in preproc.c in libxslt 1.1.28 does not
+    check whether the parent node is an element, which allows attackers to cause
+    a denial of service using a specially crafted XML document.
+
+    CVE-2015-8035
+    The xz_decomp function in xzlib.c in libxml2 2.9.1 does not
+    properly detect compression errors, which allows context-dependent attackers
+    to cause a denial of service (process hang) via crafted XML data.
+
+    Another vulnerability was discoverd in libxml2 that could cause parsing
+    of unclosed comments to result in "conditional jump or move depends on
+    uninitialized value(s)" and unsafe memory access. This issue does not have a
+    CVE assigned yet. See related URLs for details. Patched in v1.6.7.rc4.
+  affected_package: nokogiri
+  patched_versions:
+  - "~> 1.6.6.4"
+  - ">= 1.6.7.rc4"
+  package_manager: rubygems
+  cve:
+  - CVE-2015-1819
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  - https://github.com/sparklemotion/nokogiri/pull/1376
+  - https://github.com/sparklemotion/nokogiri/commit/8f3de6d88d0da11fb62a45daa61b85ce71b4af59
+  source_url: https://github.com/sparklemotion/nokogiri/issues/1374
+- id: rubyadvisory:rubygems:nokogiri:2017-05-09
+  title: Nokogiri gem contains two upstream vulnerabilities in libxslt 1.1.29
+  description: "nokogiri version 1.7.2 has been released.\n\nThis is a security update
+    based on 1.7.1, addressing two upstream\nlibxslt 1.1.29 vulnerabilities classified
+    as \"Medium\" by Canonical \nand given a CVSS3 score of \"6.5 Medium\" and \"8.8
+    High\" by RedHat.\n\nThese patches only apply when using Nokogiri's vendored libxslt\npackage.
+    If you're using your distro's system libraries, there's no\nneed to upgrade from
+    1.7.0.1 or 1.7.1 at this time.\n\nFull details are available at the github issue
+    linked to in the\nchangelog below.\n\n-----\n\n# 1.7.2 / 2017-05-09\n\n## Security
+    Notes\n\n[MRI] Upstream libxslt patches are applied to the vendored libxslt\n1.1.29
+    which address CVE-2017-5029 and CVE-2016-4738.\n\nFor more information:\n\n* https://github.com/sparklemotion/nokogiri/issues/1634\n*
+    http://people.canonical.com/~ubuntu-security/cve/2017/CVE-2017-5029.html\n* http://people.canonical.com/~ubuntu-security/cve/2016/CVE-2016-4738.html\n"
+  affected_package: nokogiri
+  patched_versions:
+  - ">= 1.7.2"
+  package_manager: rubygems
+  cve:
+  - CVE-2017-5029
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  - http://people.canonical.com/~ubuntu-security/cve/2017/CVE-2017-5029.html
+  - http://people.canonical.com/~ubuntu-security/cve/2016/CVE-2016-4738.html
+  source_url: https://github.com/sparklemotion/nokogiri/issues/1634
 - id: rubyadvisory:rubygems:nokogiri:2015-12-15
   title: Nokogiri gem contains several vulnerabilities in libxml2
   description: |
@@ -104,244 +449,29 @@
   - https://github.com/sparklemotion/nokogiri/pull/1378
   - https://github.com/sparklemotion/nokogiri/commit/4205af1a2a546f79d1b48df2ad8b27299c0099c5
   source_url: https://groups.google.com/forum/#!topic/ruby-security-ann/aSbgDiwb24s
-- id: rubyadvisory:rubygems:nokogiri:2016-01-19
-  title: 'Nokogiri gem contains a heap-based buffer overflow vulnerability in libxml2
-
-'
+- id: rubyadvisory:rubygems:nokogiri:2018-01-29
+  title: Nokogiri gem, via libxml, is affected by DoS vulnerabilities
   description: |
-    Nokogiri version 1.6.7.2 has been released, pulling in several upstream
-    patches to the vendored libxml2 to address the following CVE:
+    The version of libxml2 packaged with Nokogiri contains a
+    vulnerability. Nokogiri has mitigated these issue by upgrading to
+    libxml 2.9.6.
 
-    CVE-2015-7499
-    CVSS v2 Base Score: 5.0 (MEDIUM)
-
-    Heap-based buffer overflow in the xmlGROW function in parser.c
-    in libxml2 before 2.9.3 allows context-dependent attackers to
-    obtain sensitive process memory information via unspecified
-    vectors.
-
-    libxml2 could be made to crash if it opened a specially crafted
-    file. It was discovered that libxml2 incorrectly handled certain
-    malformed documents. If a user or automated system were tricked
-    into opening a specially crafted document, an attacker could
-    possibly cause libxml2 to crash, resulting in a denial of service.
+    It was discovered that libxml2 incorrecty handled certain files. An attacker
+    could use this issue with specially constructed XML data to cause libxml2 to
+    consume resources, leading to a denial of service.
   affected_package: nokogiri
-  unaffected_versions:
-  - "< 1.6.0"
   patched_versions:
-  - ">= 1.6.7.2"
-  severity: medium
+  - ">= 1.8.2"
   package_manager: rubygems
   cve:
-  - CVE-2015-7499
+  - CVE-2017-15412
   credit:
   - Rubysec
   references:
   - https://github.com/rubysec/ruby-advisory-db
-  - https://github.com/sparklemotion/nokogiri/commit/9eb540e7c905924a42757bf0a34c2c00707d536c
-  source_url: https://groups.google.com/forum/#!topic/ruby-security-ann/Dy7YiKb_pMM
-- id: rubyadvisory:rubygems:nokogiri:2013-12-14
-  title: 'Nokogiri Gem for JRuby Crafted XML Document Handling Infinite Loop Remote
-    DoS
-
-'
-  description: |
-    Nokogiri Gem for JRuby contains a flaw that may allow a remote denial of
-    service. The issue is triggered when handling a specially crafted XML
-    document, which can result in an infinite loop. This may allow a
-    context-dependent attacker to crash the server.
-  affected_package: nokogiri
-  patched_versions:
-  - "~> 1.5.11"
-  - ">= 1.6.1"
-  severity: medium
-  package_manager: rubygems
-  cve:
-  - CVE-2013-6460
-  credit:
-  - Rubysec
-  references:
-  - https://github.com/rubysec/ruby-advisory-db
-  source_url: http://osvdb.org/show/osvdb/101179
-- id: rubyadvisory:rubygems:nokogiri:2013-12-14
-  title: Nokogiri Gem for Ruby External Entity (XXE) Expansion Remote DoS
-  description: Nokogiri gem for Ruby contains an flaw that is triggered during the
-    parsing of XML data. The issue is due to an incorrectly configured XML parser
-    accepting XML external entities from an untrusted source. By sending specially
-    crafted XML data, a remote attacker can cause an infinite loop and crash the program.
-  affected_package: nokogiri
-  patched_versions:
-  - "~> 1.5.11"
-  - ">= 1.6.1"
-  package_manager: rubygems
-  cve:
-  - CVE-2013-6461
-  credit:
-  - Rubysec
-  references:
-  - https://github.com/rubysec/ruby-advisory-db
-  source_url: http://www.osvdb.org/show/osvdb/101458
-- id: rubyadvisory:rubygems:nokogiri:2014-04-30
-  title: |
-    Nokogiri Gem for JRuby XML Document Root Element Handling Memory Consumption
-    Remote DoS
-  description: |
-    Nokogiri Gem for JRuby contains a flaw that is triggered when handling a root
-    element in an XML document. This may allow a remote attacker to cause a
-    consumption of memory resources.
-  affected_package: nokogiri
-  patched_versions:
-  - ">= 1.6.3"
-  package_manager: rubygems
-  cve:
-  - CVE-
-  credit:
-  - Rubysec
-  references:
-  - https://github.com/rubysec/ruby-advisory-db
-  source_url: https://github.com/sparklemotion/nokogiri/pull/1087
-- id: rubyadvisory:rubygems:nokogiri:2012-06-08
-  title: Nokogiri Gem for Ruby External Entity (XXE) Expansion Internal Network Response
-    Remote Disclosure
-  description: libxml2 contains a flaw that may lead to unauthorized disclosure of
-    potentially sensitive information. The issue is triggered when handling the expansion
-    of XML external entities (XXE), which can be used to trigger URL's on an internal
-    network and allow a remote attacker to gain access to their responses.
-  affected_package: nokogiri
-  patched_versions:
-  - ">= 1.5.4"
-  severity: medium
-  package_manager: rubygems
-  cve:
-  - CVE-2012-6685
-  credit:
-  - Rubysec
-  references:
-  - https://github.com/rubysec/ruby-advisory-db
-  source_url: http://www.osvdb.org/show/osvdb/90946
-- id: rubyadvisory:rubygems:nokogiri:2018-10-04
-  title: Nokogiri gem, via libxml2, is affected by multiple vulnerabilities
-  description: |
-    Nokogiri 1.8.5 has been released.
-
-    This is a security and bugfix release. It addresses two CVEs in upstream
-    libxml2 rated as "medium" by Red Hat, for which details are below.
-
-    If you're using your distro's system libraries, rather than Nokogiri's
-    vendored libraries, there's no security need to upgrade at this time,
-    though you may want to check with your distro whether they've patched this
-    (Canonical has patched Ubuntu packages). Note that these patches are not
-    yet (as of 2018-10-04) in an upstream release of libxml2.
-
-    Full details about the security update are available in Github Issue #1785.
-    [#1785]: https://github.com/sparklemotion/nokogiri/issues/1785
-
-    -----
-
-    [MRI] Pulled in upstream patches from libxml2 that address CVE-2018-14404
-    and CVE-2018-14567. Full details are available in #1785. Note that these
-    patches are not yet (as of 2018-10-04) in an upstream release of libxml2.
-
-    -----
-
-    CVE-2018-14404
-
-    Permalink:
-
-    https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-14404.html
-
-    Description:
-
-    A NULL pointer dereference vulnerability exists in the
-    xpath.c:xmlXPathCompOpEval() function of libxml2 through 2.9.8 when
-    parsing an invalid XPath expression in the XPATH_OP_AND or XPATH_OP_OR
-    case. Applications processing untrusted XSL format inputs with the use of
-    the libxml2 library may be vulnerable to a denial of service attack due
-    to a crash of the application
-
-    Canonical rates this vulnerability as "Priority: Medium"
-
-    -----
-
-    CVE-2018-14567
-
-    Permalink:
-
-    https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-14567.html
-
-    Description:
-
-    infinite loop in LZMA decompression
-
-    Canonical rates this vulnerability as "Priority: Medium"
-  affected_package: nokogiri
-  patched_versions:
-  - ">= 1.8.5"
-  package_manager: rubygems
-  cve:
-  - CVE-2018-14404
-  credit:
-  - Rubysec
-  references:
-  - https://github.com/rubysec/ruby-advisory-db
-  - https://groups.google.com/forum/#!msg/ruby-security-ann/uVrmO2HjqQw/Fw3ocLI0BQAJ
-  - https://gitlab.gnome.org/GNOME/libxml2/commit/a436374994c47b12d5de1b8b1d191a098fa23594
-  - https://gitlab.gnome.org/GNOME/libxml2/commit/2240fbf5912054af025fb6e01e26375100275e74
-  source_url: https://github.com/sparklemotion/nokogiri/issues/1785
-- id: rubyadvisory:rubygems:nokogiri:2017-09-19
-  title: Nokogiri gem, via libxml, is affected by DoS and RCE vulnerabilities
-  description: |
-    The version of libxml2 packaged with Nokogiri contains several
-    vulnerabilities. Nokogiri has mitigated these issues by upgrading to
-    libxml 2.9.5.
-
-    It was discovered that a type confusion error existed in libxml2. An
-    attacker could use this to specially construct XML data that
-    could cause a denial of service or possibly execute arbitrary
-    code. (CVE-2017-0663)
-
-    It was discovered that libxml2 did not properly validate parsed entity
-    references. An attacker could use this to specially construct XML
-    data that could expose sensitive information. (CVE-2017-7375)
-
-    It was discovered that a buffer overflow existed in libxml2 when
-    handling HTTP redirects. An attacker could use this to specially
-    construct XML data that could cause a denial of service or possibly
-    execute arbitrary code. (CVE-2017-7376)
-
-    Marcel Böhme and Van-Thuan Pham discovered a buffer overflow in
-    libxml2 when handling elements. An attacker could use this to specially
-    construct XML data that could cause a denial of service or possibly
-    execute arbitrary code. (CVE-2017-9047)
-
-    Marcel Böhme and Van-Thuan Pham discovered a buffer overread
-    in libxml2 when handling elements. An attacker could use this
-    to specially construct XML data that could cause a denial of
-    service. (CVE-2017-9048)
-
-    Marcel Böhme and Van-Thuan Pham discovered multiple buffer overreads
-    in libxml2 when handling parameter-entity references. An attacker
-    could use these to specially construct XML data that could cause a
-    denial of service. (CVE-2017-9049, CVE-2017-9050)
-  affected_package: nokogiri
-  patched_versions:
-  - ">= 1.8.1"
-  package_manager: rubygems
-  cve:
-  - CVE-2017-9050
-  credit:
-  - Rubysec
-  references:
-  - https://github.com/rubysec/ruby-advisory-db
-  - https://usn.ubuntu.com/usn/usn-3424-1/
-  - https://people.canonical.com/~ubuntu-security/cve/2017/CVE-2017-0663.html
-  - https://people.canonical.com/~ubuntu-security/cve/2017/CVE-2017-7375.html
-  - https://people.canonical.com/~ubuntu-security/cve/2017/CVE-2017-7376.html
-  - https://people.canonical.com/~ubuntu-security/cve/2017/CVE-2017-9047.html
-  - https://people.canonical.com/~ubuntu-security/cve/2017/CVE-2017-9048.html
-  - https://people.canonical.com/~ubuntu-security/cve/2017/CVE-2017-9049.html
-  - https://people.canonical.com/~ubuntu-security/cve/2017/CVE-2017-9050.html
-  source_url: https://github.com/sparklemotion/nokogiri/issues/1673
+  - https://usn.ubuntu.com/usn/usn-3513-1/
+  - https://people.canonical.com/~ubuntu-security/cve/2017/CVE-2017-15412.html
+  source_url: https://github.com/sparklemotion/nokogiri/issues/1714
 - id: rubyadvisory:rubygems:nokogiri:2018-03-29
   title: Revert libxml2 behavior in Nokogiri gem that could cause XSS
   description: |
@@ -377,159 +507,29 @@
   - https://github.com/GNOME/libxml2/commit/960f0e2
   - https://bugzilla.gnome.org/show_bug.cgi?id=769760
   source_url: https://github.com/sparklemotion/nokogiri/pull/1746
-- id: rubyadvisory:rubygems:nokogiri:2017-03-11
-  title: Nokogiri gem contains several vulnerabilities in libxml2 and libxslt
+- id: rubyadvisory:rubygems:nokogiri:2013-12-14
+  title: 'Nokogiri Gem for JRuby Crafted XML Document Handling Infinite Loop Remote
+    DoS
+
+'
   description: |
-    Nokogiri version 1.7.1 has been released, pulling in several upstream
-    patches to the vendored libxml2 to address the following CVEs:
-
-    CVE-2016-4658
-    CVSS v3 Base Score: 9.8 (Critical)
-    libxml2 in Apple iOS before 10, OS X before 10.12, tvOS before 10, and
-    watchOS before 3 allows remote attackers to execute arbitrary code or cause
-    a denial of service (memory corruption) via a crafted XML document.
-
-    CVE-2016-5131
-    CVSS v3 Base Score: 8.8 (HIGH)
-    Use-after-free vulnerability in libxml2 through 2.9.4, as used in Google
-    Chrome before 52.0.2743.82, allows remote attackers to cause a denial of
-    service or possibly have unspecified other impact via vectors related to
-    the XPointer range-to function.
+    Nokogiri Gem for JRuby contains a flaw that may allow a remote denial of
+    service. The issue is triggered when handling a specially crafted XML
+    document, which can result in an infinite loop. This may allow a
+    context-dependent attacker to crash the server.
   affected_package: nokogiri
   patched_versions:
-  - ">= 1.7.1"
-  severity: high
+  - "~> 1.5.11"
+  - ">= 1.6.1"
+  severity: medium
   package_manager: rubygems
   cve:
-  - CVE-2016-4658
+  - CVE-2013-6460
   credit:
   - Rubysec
   references:
   - https://github.com/rubysec/ruby-advisory-db
-  - https://github.com/sparklemotion/nokogiri/issues/1615
-  source_url: https://github.com/sparklemotion/nokogiri/issues/1615
-- id: rubyadvisory:rubygems:nokogiri:2017-05-09
-  title: Nokogiri gem contains two upstream vulnerabilities in libxslt 1.1.29
-  description: "nokogiri version 1.7.2 has been released.\n\nThis is a security update
-    based on 1.7.1, addressing two upstream\nlibxslt 1.1.29 vulnerabilities classified
-    as \"Medium\" by Canonical \nand given a CVSS3 score of \"6.5 Medium\" and \"8.8
-    High\" by RedHat.\n\nThese patches only apply when using Nokogiri's vendored libxslt\npackage.
-    If you're using your distro's system libraries, there's no\nneed to upgrade from
-    1.7.0.1 or 1.7.1 at this time.\n\nFull details are available at the github issue
-    linked to in the\nchangelog below.\n\n-----\n\n# 1.7.2 / 2017-05-09\n\n## Security
-    Notes\n\n[MRI] Upstream libxslt patches are applied to the vendored libxslt\n1.1.29
-    which address CVE-2017-5029 and CVE-2016-4738.\n\nFor more information:\n\n* https://github.com/sparklemotion/nokogiri/issues/1634\n*
-    http://people.canonical.com/~ubuntu-security/cve/2017/CVE-2017-5029.html\n* http://people.canonical.com/~ubuntu-security/cve/2016/CVE-2016-4738.html\n"
-  affected_package: nokogiri
-  patched_versions:
-  - ">= 1.7.2"
-  package_manager: rubygems
-  cve:
-  - CVE-2017-5029
-  credit:
-  - Rubysec
-  references:
-  - https://github.com/rubysec/ruby-advisory-db
-  - http://people.canonical.com/~ubuntu-security/cve/2017/CVE-2017-5029.html
-  - http://people.canonical.com/~ubuntu-security/cve/2016/CVE-2016-4738.html
-  source_url: https://github.com/sparklemotion/nokogiri/issues/1634
-- id: rubyadvisory:rubygems:nokogiri:2016-06-07
-  title: Denial of service or RCE from libxml2 and libxslt
-  description: "Nokogiri is affected by series of vulnerabilities in libxml2 and libxslt,\nwhich
-    are libraries Nokogiri depends on. It was discovered that libxml2 and\nlibxslt
-    incorrectly handled certain malformed documents, which can allow\nmalicious users
-    to cause issues ranging from denial of service to remote code\nexecution attacks.\n\nFor
-    more information, the Ubuntu Security Notice is a good start: \nhttp://www.ubuntu.com/usn/usn-2994-1/\n"
-  affected_package: nokogiri
-  unaffected_versions:
-  - "< 1.6.0"
-  patched_versions:
-  - ">= 1.6.8"
-  package_manager: rubygems
-  cve:
-  - CVE-2015-8806
-  credit:
-  - Rubysec
-  references:
-  - https://github.com/rubysec/ruby-advisory-db
-  - https://github.com/sparklemotion/nokogiri/issues/1473
-  - https://github.com/sparklemotion/nokogiri/commit/03d402212707bd5dfa0a21b7de5e91a7f9d90028
-  - https://mail.gnome.org/archives/xml/2016-May/msg00023.html
-  - http://www.ubuntu.com/usn/usn-2994-1/
-  source_url: https://github.com/sparklemotion/nokogiri/issues/1473
-- id: rubyadvisory:rubygems:nokogiri:2018-01-29
-  title: Nokogiri gem, via libxml, is affected by DoS vulnerabilities
-  description: |
-    The version of libxml2 packaged with Nokogiri contains a
-    vulnerability. Nokogiri has mitigated these issue by upgrading to
-    libxml 2.9.5.
-
-    Wei Lei discovered that libxml2 incorrecty handled certain parameter
-    entities. An attacker could use this issue with specially constructed XML
-    data to cause libxml2 to consume resources, leading to a denial of service.
-  affected_package: nokogiri
-  patched_versions:
-  - ">= 1.8.1"
-  package_manager: rubygems
-  cve:
-  - CVE-2017-16932
-  credit:
-  - Rubysec
-  references:
-  - https://github.com/rubysec/ruby-advisory-db
-  - https://usn.ubuntu.com/usn/usn-3504-1/
-  - https://people.canonical.com/~ubuntu-security/cve/2017/CVE-2017-16932.html
-  source_url: https://github.com/sparklemotion/nokogiri/issues/1714
-- id: rubyadvisory:rubygems:nokogiri:2015-04-14
-  title: Nokogiri gem contains several vulnerabilities in libxml2 and libxslt
-  description: |
-    Several vulnerabilities were discovered in the libxml2 and libxslt libraries
-    that the Nokogiri gem depends on.
-
-    CVE-2015-1819
-    A denial of service flaw was found in the way libxml2 parsed XML
-    documents. This flaw could cause an application that uses libxml2 to use an
-    excessive amount of memory.
-
-    CVE-2015-7941
-    libxml2 does not properly stop parsing invalid input, which allows
-    context-dependent attackers to cause a denial of service (out-of-bounds read
-    and libxml2 crash) via crafted specially XML data.
-
-    CVE-2015-7942
-    The xmlParseConditionalSections function in parser.c in libxml2
-    does not properly skip intermediary entities when it stops parsing invalid
-    input, which allows context-dependent attackers to cause a denial of service
-    (out-of-bounds read and crash) via crafted XML data.
-
-    CVE-2015-7995
-    The xsltStylePreCompute function in preproc.c in libxslt 1.1.28 does not
-    check whether the parent node is an element, which allows attackers to cause
-    a denial of service using a specially crafted XML document.
-
-    CVE-2015-8035
-    The xz_decomp function in xzlib.c in libxml2 2.9.1 does not
-    properly detect compression errors, which allows context-dependent attackers
-    to cause a denial of service (process hang) via crafted XML data.
-
-    Another vulnerability was discoverd in libxml2 that could cause parsing
-    of unclosed comments to result in "conditional jump or move depends on
-    uninitialized value(s)" and unsafe memory access. This issue does not have a
-    CVE assigned yet. See related URLs for details. Patched in v1.6.7.rc4.
-  affected_package: nokogiri
-  patched_versions:
-  - "~> 1.6.6.4"
-  - ">= 1.6.7.rc4"
-  package_manager: rubygems
-  cve:
-  - CVE-2015-1819
-  credit:
-  - Rubysec
-  references:
-  - https://github.com/rubysec/ruby-advisory-db
-  - https://github.com/sparklemotion/nokogiri/pull/1376
-  - https://github.com/sparklemotion/nokogiri/commit/8f3de6d88d0da11fb62a45daa61b85ce71b4af59
-  source_url: https://github.com/sparklemotion/nokogiri/issues/1374
+  source_url: http://osvdb.org/show/osvdb/101179
 - id: snykio:rubygems:nokogiri:2018-10-05
   title: Denial of Service (DoS)
   description: |

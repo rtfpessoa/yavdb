@@ -1,52 +1,12 @@
 ---
-- id: rubyadvisory:rubygems:spree:2013-02-21
-  title: |
-    Spree promotions_controller.rb calculator_type Parameter Arbitrary Ruby
-    Object Instantiation Command Execution
-  description: |
-    Spree contains a flaw that is triggered when handling input passed via the
-    'calculator_type' parameter to promotions_controller.rb. This may allow a
-    remote authenticated attacker to instantiate arbitrary Ruby objects and
-    potentially execute arbitrary commands.
-  affected_package: spree
-  patched_versions:
-  - ">= 2.0.0"
-  severity: medium
-  package_manager: rubygems
-  cve:
-  - CVE-2013-1656
-  credit:
-  - Rubysec
-  references:
-  - https://github.com/rubysec/ruby-advisory-db
-  source_url: https://spreecommerce.com/blog/multiple-security-vulnerabilities-fixed
-- id: rubyadvisory:rubygems:spree:2008-08-12
-  title: |
-    Spree Hardcoded config.action_controller_session Hash Value Cryptographic
-    Protection Weakness
-  description: |
-    Spree contains a hardcoded flaw related to the
-    config.action_controller_session hash value. This may allow an attacker to
-    more easily bypass cryptographic protection.
-  affected_package: spree
-  patched_versions:
-  - ">= 0.3.0"
-  severity: medium
-  package_manager: rubygems
-  cve:
-  - CVE-2008-7311
-  credit:
-  - Rubysec
-  references:
-  - https://github.com/rubysec/ruby-advisory-db
-  source_url: https://spreecommerce.com/blog/security-vulernability-session-cookie-store
 - id: rubyadvisory:rubygems:spree:2012-07-02
-  title: 'Potential XSS vulnerability related to the analytics dashboard
+  title: 'Product Scopes could allow for unauthenticated remote command execution
 
 '
   description: |
-    Spree has a flaw in its analytics dashboard where keywords are not escaped,
-    leading to potential XSS.
+    Product Scopes could allow for unauthenticated remote command execution.
+    This was corrected by removing conditions_any scope and use ARel query
+    building instead.
   affected_package: spree
   patched_versions:
   - "~> 0.11.4"
@@ -61,42 +21,25 @@
   references:
   - https://github.com/rubysec/ruby-advisory-db
   source_url: https://spreecommerce.com/blog/security-issue-all-versions
-- id: rubyadvisory:rubygems:spree:2011-10-05
-  title: |
-    Spree Search ProductScope Class search[send][] Parameter Arbitrary Command
-    Execution
+- id: rubyadvisory:rubygems:spree:2008-09-22
+  title: 'Spree Hash Restriction Weakness URL Parsing Order State Value Manipulation
+
+'
   description: |
-    The ProductScope class fails to properly sanitize user-supplied input via the
-    'search[send][]' parameter resulting in arbitrary command execution. With a
-    specially crafted request, a remote attacker can potentially cause arbitrary
-    command execution.
+    Spree contains a hash restriction weakness that occurs when parsing a
+    modified URL. This may allow an attacker to manipulate order state values.
   affected_package: spree
   patched_versions:
-  - ">= 0.60.2"
+  - ">= 0.3.0"
+  severity: medium
   package_manager: rubygems
   cve:
-  - CVE-
+  - CVE-2008-7310
   credit:
   - Rubysec
   references:
   - https://github.com/rubysec/ruby-advisory-db
-  source_url: https://spreecommerce.com/blog/remote-command-product-group
-- id: rubyadvisory:rubygems:spree:2011-04-19
-  title: Spree Content Controller Unspecified Arbitrary File Disclosure
-  description: |
-    Spree Gem for Ruby would allow a user to request a specially crafted URL and
-    expose arbitrary files on the server
-  affected_package: spree
-  patched_versions:
-  - ">= 0.50.1"
-  package_manager: rubygems
-  cve:
-  - CVE-
-  credit:
-  - Rubysec
-  references:
-  - https://github.com/rubysec/ruby-advisory-db
-  source_url: https://spreecommerce.com/blog/security-fixes
+  source_url: https://spreecommerce.com/blog/security-vulnerability-mass-assignment
 - id: rubyadvisory:rubygems:spree:2013-02-21
   title: |
     Spree payment_methods_controller.rb payment_method Parameter Arbitrary Ruby
@@ -113,6 +56,30 @@
   package_manager: rubygems
   cve:
   - CVE-2013-1656
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://spreecommerce.com/blog/multiple-security-vulnerabilities-fixed
+- id: rubyadvisory:rubygems:spree:2013-02-21
+  title: |
+    Spree app/models/spree/user.rb Mass Role Assignment Remote Privilege
+    Escalation
+  description: |
+    Spree contains a flaw that leads to unauthorized privileges being gained. The
+    issue is triggered as certain input related to mass role assignment in
+    app/models/spree/user.rb is not properly verified before being used to update
+    a user. This may allow a remote attacker to assign arbitrary roles and gain
+    elevated administrative privileges.
+  affected_package: spree
+  patched_versions:
+  - "~> 1.1.6"
+  - "~> 1.2.0"
+  - ">= 1.3.0"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2013-2506
   credit:
   - Rubysec
   references:
@@ -140,25 +107,89 @@
   references:
   - https://github.com/rubysec/ruby-advisory-db
   source_url: https://spreecommerce.com/blog/security-updates-2015-7-20
-- id: rubyadvisory:rubygems:spree:2008-09-22
-  title: 'Spree Hash Restriction Weakness URL Parsing Order State Value Manipulation
+- id: rubyadvisory:rubygems:spree:2013-02-21
+  title: |
+    Spree promotions_controller.rb calculator_type Parameter Arbitrary Ruby
+    Object Instantiation Command Execution
+  description: |
+    Spree contains a flaw that is triggered when handling input passed via the
+    'calculator_type' parameter to promotions_controller.rb. This may allow a
+    remote authenticated attacker to instantiate arbitrary Ruby objects and
+    potentially execute arbitrary commands.
+  affected_package: spree
+  patched_versions:
+  - ">= 2.0.0"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2013-1656
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://spreecommerce.com/blog/multiple-security-vulnerabilities-fixed
+- id: rubyadvisory:rubygems:spree:2012-07-02
+  title: 'Potential XSS vulnerability related to the analytics dashboard
 
 '
   description: |
-    Spree contains a hash restriction weakness that occurs when parsing a
-    modified URL. This may allow an attacker to manipulate order state values.
+    Spree has a flaw in its analytics dashboard where keywords are not escaped,
+    leading to potential XSS.
+  affected_package: spree
+  patched_versions:
+  - "~> 0.11.4"
+  - "~> 0.70.6"
+  - "~> 1.0.5"
+  - ">= 1.1.2"
+  package_manager: rubygems
+  cve:
+  - CVE-
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://spreecommerce.com/blog/security-issue-all-versions
+- id: rubyadvisory:rubygems:spree:2008-08-12
+  title: |
+    Spree Hardcoded config.action_controller_session Hash Value Cryptographic
+    Protection Weakness
+  description: |
+    Spree contains a hardcoded flaw related to the
+    config.action_controller_session hash value. This may allow an attacker to
+    more easily bypass cryptographic protection.
   affected_package: spree
   patched_versions:
   - ">= 0.3.0"
   severity: medium
   package_manager: rubygems
   cve:
-  - CVE-2008-7310
+  - CVE-2008-7311
   credit:
   - Rubysec
   references:
   - https://github.com/rubysec/ruby-advisory-db
-  source_url: https://spreecommerce.com/blog/security-vulnerability-mass-assignment
+  source_url: https://spreecommerce.com/blog/security-vulernability-session-cookie-store
+- id: rubyadvisory:rubygems:spree:2013-02-21
+  title: |
+    Spree promotion_actions_controller.rb promotion_action Parameter Arbitrary
+    Ruby Object Instantiation Command Execution
+  description: |
+    Spree contains a flaw that is triggered when handling input passed via the
+    'promotion_action' parameter to promotion_actions_controller.rb. This may
+    allow a remote authenticated attacker to instantiate arbitrary Ruby objects
+    and potentially execute arbitrary commands.
+  affected_package: spree
+  patched_versions:
+  - ">= 2.0.0"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2013-1656
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://spreecommerce.com/blog/multiple-security-vulnerabilities-fixed
 - id: rubyadvisory:rubygems:spree:2015-07-28
   title: |
     Spree RABL templates rendering allows Arbitrary Code Execution and File
@@ -228,65 +259,14 @@
   references:
   - https://github.com/rubysec/ruby-advisory-db
   source_url: https://spreecommerce.com/blog/security-updates-2015-3-3
-- id: rubyadvisory:rubygems:spree:2013-02-21
-  title: |
-    Spree promotion_actions_controller.rb promotion_action Parameter Arbitrary
-    Ruby Object Instantiation Command Execution
+- id: rubyadvisory:rubygems:spree:2011-04-19
+  title: Spree Content Controller Unspecified Arbitrary File Disclosure
   description: |
-    Spree contains a flaw that is triggered when handling input passed via the
-    'promotion_action' parameter to promotion_actions_controller.rb. This may
-    allow a remote authenticated attacker to instantiate arbitrary Ruby objects
-    and potentially execute arbitrary commands.
+    Spree Gem for Ruby would allow a user to request a specially crafted URL and
+    expose arbitrary files on the server
   affected_package: spree
   patched_versions:
-  - ">= 2.0.0"
-  severity: medium
-  package_manager: rubygems
-  cve:
-  - CVE-2013-1656
-  credit:
-  - Rubysec
-  references:
-  - https://github.com/rubysec/ruby-advisory-db
-  source_url: https://spreecommerce.com/blog/multiple-security-vulnerabilities-fixed
-- id: rubyadvisory:rubygems:spree:2013-02-21
-  title: |
-    Spree app/models/spree/user.rb Mass Role Assignment Remote Privilege
-    Escalation
-  description: |
-    Spree contains a flaw that leads to unauthorized privileges being gained. The
-    issue is triggered as certain input related to mass role assignment in
-    app/models/spree/user.rb is not properly verified before being used to update
-    a user. This may allow a remote attacker to assign arbitrary roles and gain
-    elevated administrative privileges.
-  affected_package: spree
-  patched_versions:
-  - "~> 1.1.6"
-  - "~> 1.2.0"
-  - ">= 1.3.0"
-  severity: medium
-  package_manager: rubygems
-  cve:
-  - CVE-2013-2506
-  credit:
-  - Rubysec
-  references:
-  - https://github.com/rubysec/ruby-advisory-db
-  source_url: https://spreecommerce.com/blog/multiple-security-vulnerabilities-fixed
-- id: rubyadvisory:rubygems:spree:2012-07-02
-  title: 'Product Scopes could allow for unauthenticated remote command execution
-
-'
-  description: |
-    Product Scopes could allow for unauthenticated remote command execution.
-    This was corrected by removing conditions_any scope and use ARel query
-    building instead.
-  affected_package: spree
-  patched_versions:
-  - "~> 0.11.4"
-  - "~> 0.70.6"
-  - "~> 1.0.5"
-  - ">= 1.1.2"
+  - ">= 0.50.1"
   package_manager: rubygems
   cve:
   - CVE-
@@ -294,7 +274,27 @@
   - Rubysec
   references:
   - https://github.com/rubysec/ruby-advisory-db
-  source_url: https://spreecommerce.com/blog/security-issue-all-versions
+  source_url: https://spreecommerce.com/blog/security-fixes
+- id: rubyadvisory:rubygems:spree:2011-10-05
+  title: |
+    Spree Search ProductScope Class search[send][] Parameter Arbitrary Command
+    Execution
+  description: |
+    The ProductScope class fails to properly sanitize user-supplied input via the
+    'search[send][]' parameter resulting in arbitrary command execution. With a
+    specially crafted request, a remote attacker can potentially cause arbitrary
+    command execution.
+  affected_package: spree
+  patched_versions:
+  - ">= 0.60.2"
+  package_manager: rubygems
+  cve:
+  - CVE-
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://spreecommerce.com/blog/remote-command-product-group
 - id: rubyadvisory:rubygems:spree:2013-02-21
   title: |
     Spree promotion_rules_controller.rb promotion_rule Parameter Arbitrary Ruby

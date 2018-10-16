@@ -1,84 +1,30 @@
 ---
-- id: rubyadvisory:rubygems:activesupport:2012-08-09
-  title: Ruby on Rails HTML Escaping Code XSS
+- id: rubyadvisory:rubygems:activesupport:2013-03-19
+  title: XML Parsing Vulnerability affecting JRuby users
   description: |
-    Ruby on Rails contains a flaw that allows a remote cross-site scripting (XSS)
-    attack. This flaw exists because the HTML escaping code functionality does
-    not properly escape a single quote character. This may allow a user to create
-    a specially crafted request that would execute arbitrary script code in a
-    user's browser within the trust relationship between their browser and the
-    server.
+    The ActiveSupport XML parsing functionality supports multiple
+    pluggable backends. One backend supported for JRuby users is
+    ActiveSupport::XmlMini_JDOM which makes use of the
+    javax.xml.parsers.DocumentBuilder class. In some JVM configurations
+    the default settings of that class can allow an attacker to construct
+    XML which, when parsed, will contain the contents of arbitrary URLs
+    including files from the application server. They may also allow for
+    various denial of service attacks. Action Pack
   affected_package: activesupport
+  unaffected_versions:
+  - "~> 2.3.0"
   patched_versions:
-  - "~> 3.0.17"
-  - "~> 3.1.8"
-  - ">= 3.2.8"
-  severity: medium
-  package_manager: rubygems
-  cve:
-  - CVE-2012-3464
-  credit:
-  - Rubysec
-  references:
-  - https://github.com/rubysec/ruby-advisory-db
-  source_url: http://www.osvdb.org/show/osvdb/84516
-- id: rubyadvisory:rubygems:activesupport:2013-01-28
-  title: Ruby on Rails JSON Parser Crafted Payload YAML Subset Decoding Remote Code
-    Execution
-  description: |
-    Ruby on Rails contains a flaw in the JSON parser. Rails supports multiple
-    parsing backends, one of which involves transforming JSON into YAML via the
-    YAML parser. With a specially crafted payload, an attacker can subvert the
-    backend into decoding a subset of YAML. This may allow a remote attacker to
-    bypass restrictions, allowing them to bypass authentication systems, inject
-    arbitrary SQL, inject and execute arbitrary code, or perform a DoS attack on
-    a Rails application.
-  affected_package: activesupport
-  patched_versions:
-  - "~> 2.3.16"
-  - ">= 3.0.20"
+  - "~> 3.1.12"
+  - ">= 3.2.13"
   severity: high
   package_manager: rubygems
   cve:
-  - CVE-2013-0333
+  - CVE-2013-1856
   credit:
   - Rubysec
   references:
   - https://github.com/rubysec/ruby-advisory-db
-  source_url: http://osvdb.org/show/osvdb/89594
-- id: rubyadvisory:rubygems:activesupport:2015-06-16
-  title: 'XSS Vulnerability in ActiveSupport::JSON.encode
-
-'
-  description: "When a `Hash` containing user-controlled data is encode as JSON (either
-    through \n`Hash#to_json` or `ActiveSupport::JSON.encode`), Rails does not perform
-    adequate \nescaping that matches the guarantee implied by the `escape_html_entities_in_json`
-    \noption (which is enabled by default). If this resulting JSON string is subsequently
-    \ninserted directly into an HTML page, the page will be vulnerable to XSS attacks.
-    \n\nFor example, the following code snippet is vulnerable to this attack: \n\n
-    \   <%= javascript_tag \"var data = #{user_supplied_data.to_json};\" %> \n\nSimilarly,
-    the following is also vulnerable: \n\n    <script> \n      var data = <%= ActiveSupport::JSON.encode(user_supplied_data).html_safe
-    %>; \n    </script> \n\nAll applications that renders JSON-encoded strings that
-    contains user-controlled \ndata in their views should either upgrade to one of
-    the FIXED versions or use \nthe suggested workaround immediately. \n\nWorkarounds
-    \n----------- \nTo work around this problem add an initializer with the following
-    code: \n\n  module ActiveSupport \n    module JSON \n      module Encoding \n
-    \       private \n        class EscapedString \n          def to_s \n            self
-    \n          end \n        end \n      end \n    end \n  end \n"
-  affected_package: activesupport
-  unaffected_versions:
-  - "< 4.1.0"
-  patched_versions:
-  - ">= 4.2.2"
-  - "~> 4.1.11"
-  package_manager: rubygems
-  cve:
-  - CVE-2015-3226
-  credit:
-  - Rubysec
-  references:
-  - https://github.com/rubysec/ruby-advisory-db
-  source_url: https://groups.google.com/forum/#!topic/ruby-security-ann/7VlB_pck3hU
+  source_url: http://www.osvdb.org/show/osvdb/91451
 - id: rubyadvisory:rubygems:activesupport:2012-03-01
   title: Ruby on Rails SafeBuffer Object [] Direct Manipulation XSS
   description: |
@@ -130,32 +76,86 @@
   references:
   - https://github.com/rubysec/ruby-advisory-db
   source_url: https://groups.google.com/forum/#!topic/rubyonrails-security/bahr2JLnxvk
-- id: rubyadvisory:rubygems:activesupport:2013-03-19
-  title: XML Parsing Vulnerability affecting JRuby users
-  description: |
-    The ActiveSupport XML parsing functionality supports multiple
-    pluggable backends. One backend supported for JRuby users is
-    ActiveSupport::XmlMini_JDOM which makes use of the
-    javax.xml.parsers.DocumentBuilder class. In some JVM configurations
-    the default settings of that class can allow an attacker to construct
-    XML which, when parsed, will contain the contents of arbitrary URLs
-    including files from the application server. They may also allow for
-    various denial of service attacks. Action Pack
+- id: rubyadvisory:rubygems:activesupport:2015-06-16
+  title: 'XSS Vulnerability in ActiveSupport::JSON.encode
+
+'
+  description: "When a `Hash` containing user-controlled data is encode as JSON (either
+    through \n`Hash#to_json` or `ActiveSupport::JSON.encode`), Rails does not perform
+    adequate \nescaping that matches the guarantee implied by the `escape_html_entities_in_json`
+    \noption (which is enabled by default). If this resulting JSON string is subsequently
+    \ninserted directly into an HTML page, the page will be vulnerable to XSS attacks.
+    \n\nFor example, the following code snippet is vulnerable to this attack: \n\n
+    \   <%= javascript_tag \"var data = #{user_supplied_data.to_json};\" %> \n\nSimilarly,
+    the following is also vulnerable: \n\n    <script> \n      var data = <%= ActiveSupport::JSON.encode(user_supplied_data).html_safe
+    %>; \n    </script> \n\nAll applications that renders JSON-encoded strings that
+    contains user-controlled \ndata in their views should either upgrade to one of
+    the FIXED versions or use \nthe suggested workaround immediately. \n\nWorkarounds
+    \n----------- \nTo work around this problem add an initializer with the following
+    code: \n\n  module ActiveSupport \n    module JSON \n      module Encoding \n
+    \       private \n        class EscapedString \n          def to_s \n            self
+    \n          end \n        end \n      end \n    end \n  end \n"
   affected_package: activesupport
   unaffected_versions:
-  - "~> 2.3.0"
+  - "< 4.1.0"
   patched_versions:
-  - "~> 3.1.12"
-  - ">= 3.2.13"
-  severity: high
+  - ">= 4.2.2"
+  - "~> 4.1.11"
   package_manager: rubygems
   cve:
-  - CVE-2013-1856
+  - CVE-2015-3226
   credit:
   - Rubysec
   references:
   - https://github.com/rubysec/ruby-advisory-db
-  source_url: http://www.osvdb.org/show/osvdb/91451
+  source_url: https://groups.google.com/forum/#!topic/ruby-security-ann/7VlB_pck3hU
+- id: rubyadvisory:rubygems:activesupport:2013-01-28
+  title: Ruby on Rails JSON Parser Crafted Payload YAML Subset Decoding Remote Code
+    Execution
+  description: |
+    Ruby on Rails contains a flaw in the JSON parser. Rails supports multiple
+    parsing backends, one of which involves transforming JSON into YAML via the
+    YAML parser. With a specially crafted payload, an attacker can subvert the
+    backend into decoding a subset of YAML. This may allow a remote attacker to
+    bypass restrictions, allowing them to bypass authentication systems, inject
+    arbitrary SQL, inject and execute arbitrary code, or perform a DoS attack on
+    a Rails application.
+  affected_package: activesupport
+  patched_versions:
+  - "~> 2.3.16"
+  - ">= 3.0.20"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2013-0333
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: http://osvdb.org/show/osvdb/89594
+- id: rubyadvisory:rubygems:activesupport:2012-08-09
+  title: Ruby on Rails HTML Escaping Code XSS
+  description: |
+    Ruby on Rails contains a flaw that allows a remote cross-site scripting (XSS)
+    attack. This flaw exists because the HTML escaping code functionality does
+    not properly escape a single quote character. This may allow a user to create
+    a specially crafted request that would execute arbitrary script code in a
+    user's browser within the trust relationship between their browser and the
+    server.
+  affected_package: activesupport
+  patched_versions:
+  - "~> 3.0.17"
+  - "~> 3.1.8"
+  - ">= 3.2.8"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2012-3464
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: http://www.osvdb.org/show/osvdb/84516
 - id: snykio:rubygems:activesupport:2015-06-15
   title: Cross-site Scripting (XSS)
   description: |+
