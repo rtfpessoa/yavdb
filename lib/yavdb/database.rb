@@ -66,6 +66,7 @@ module YAVDB
 
             File.open(package_path, 'wb') do |file|
               package_vulns_yml_str = vunerabilities_by_p
+                                        .sort_by(&:id)
                                         .map(&:to_map)
                                         .to_yaml(
                                           :Indent        => 4,
