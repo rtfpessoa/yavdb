@@ -40,6 +40,42 @@
   - https://exchange.xforce.ibmcloud.com/vulnerabilities/99342
   - https://github.com/doorkeeper-gem/doorkeeper/blob/master/CHANGELOG.md
   source_url: https://ossindex.net/resource/package/8404788488/vulnerabilities
+- id: rubyadvisory:rubygems:doorkeeper:2018-02-21
+  title: Doorkeeper gem has stored XSS on authorization consent view
+  description: |
+    Stored XSS on the OAuth Client's name will cause users being prompted for
+    consent via the "implicit" grant type to execute the XSS payload.
+
+    The XSS attack could gain access to the user's active session, resulting in
+    account compromise.
+
+    Any user is susceptible if they click the authorization link for the
+    malicious OAuth client. Because of how the links work, a user cannot tell if
+    a link is malicious or not without first visiting the page with the XSS
+    payload.
+
+    If 3rd parties are allowed to create OAuth clients in the app using
+    Doorkeeper, upgrade to the patched versions immediately.
+
+    Additionally there is stored XSS in the native_redirect_uri form element.
+
+    DWF has assigned CVE-2018-1000088.
+  affected_package: doorkeeper
+  unaffected_versions:
+  - "< 2.1.0"
+  patched_versions:
+  - ">= 4.2.6"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2018-1000088
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  - https://github.com/doorkeeper-gem/doorkeeper/issues/969
+  - https://github.com/doorkeeper-gem/doorkeeper/issues/970
+  source_url: https://blog.justinbull.ca/cve-2018-1000088-stored-xss-in-doorkeeper/
 - id: rubyadvisory:rubygems:doorkeeper:2018-07-11
   title: Doorkeeper gem does not revoke token for public clients
   description: |
@@ -77,6 +113,47 @@
   - https://github.com/doorkeeper-gem/doorkeeper/pull/1119
   - https://github.com/doorkeeper-gem/doorkeeper/pull/1120
   source_url: https://blog.justinbull.ca/cve-2018-1000211-public-apps-cant-revoke-tokens-in-doorkeeper/
+- id: rubyadvisory:rubygems:doorkeeper:2016-08-18
+  title: Doorkeeper gem does not revoke tokens & uses wrong auth/auth method
+  description: |
+    Doorkeeper failed to implement OAuth 2.0 Token Revocation (RFC 7009) in the
+    following ways:
+
+    1. Public clients making valid, unauthenticated calls to revoke a token
+       would not have their token revoked
+    2. Requests were not properly authenticating the *client credentials* but
+       were, instead, looking at the access token in a second location
+    3. Because of 2, the requests were also not authorizing confidential
+       clients' ability to revoke a given token. It should only revoke tokens
+       that belong to it.
+
+    The security implication is: OAuth 2.0 clients who "log out" a user expect
+    to have the corresponding access & refresh tokens revoked, preventing an
+    attacker who may have already hijacked the session from continuing to
+    impersonate the victim. Because of the bug described above, this is not the
+    case. As far as OWASP is concerned, this counts as broken authentication
+    design.
+
+    MITRE has assigned CVE-2016-6582 due to the security issues raised. An
+    attacker, thanks to 1, can replay a hijacked session after a victim logs
+    out/revokes their token. Additionally, thanks to 2 & 3, an attacker via a
+    compromised confidential client could "grief" other clients by revoking
+    their tokens (albeit this is an exceptionally narrow attack with little
+    value).
+  affected_package: doorkeeper
+  unaffected_versions:
+  - "< 1.2.0"
+  patched_versions:
+  - ">= 4.2.0"
+  package_manager: rubygems
+  cve:
+  - CVE-2016-6582
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  - https://github.com/doorkeeper-gem/doorkeeper/commit/fb938051777a3c9cb071e96fc66458f8f615bd53
+  source_url: http://www.openwall.com/lists/oss-security/2016/08/19/2
 - id: rubyadvisory:rubygems:doorkeeper:2014-12-18
   title: |
     Cross-site request forgery (CSRF) vulnerability in doorkeeper 1.4.0
@@ -125,83 +202,6 @@
   references:
   - https://github.com/rubysec/ruby-advisory-db
   source_url: http://www.osvdb.org/show/osvdb/118830
-- id: rubyadvisory:rubygems:doorkeeper:2018-02-21
-  title: Doorkeeper gem has stored XSS on authorization consent view
-  description: |
-    Stored XSS on the OAuth Client's name will cause users being prompted for
-    consent via the "implicit" grant type to execute the XSS payload.
-
-    The XSS attack could gain access to the user's active session, resulting in
-    account compromise.
-
-    Any user is susceptible if they click the authorization link for the
-    malicious OAuth client. Because of how the links work, a user cannot tell if
-    a link is malicious or not without first visiting the page with the XSS
-    payload.
-
-    If 3rd parties are allowed to create OAuth clients in the app using
-    Doorkeeper, upgrade to the patched versions immediately.
-
-    Additionally there is stored XSS in the native_redirect_uri form element.
-
-    DWF has assigned CVE-2018-1000088.
-  affected_package: doorkeeper
-  unaffected_versions:
-  - "< 2.1.0"
-  patched_versions:
-  - ">= 4.2.6"
-  severity: high
-  package_manager: rubygems
-  cve:
-  - CVE-2018-1000088
-  credit:
-  - Rubysec
-  references:
-  - https://github.com/rubysec/ruby-advisory-db
-  - https://github.com/doorkeeper-gem/doorkeeper/issues/969
-  - https://github.com/doorkeeper-gem/doorkeeper/issues/970
-  source_url: https://blog.justinbull.ca/cve-2018-1000088-stored-xss-in-doorkeeper/
-- id: rubyadvisory:rubygems:doorkeeper:2016-08-18
-  title: Doorkeeper gem does not revoke tokens & uses wrong auth/auth method
-  description: |
-    Doorkeeper failed to implement OAuth 2.0 Token Revocation (RFC 7009) in the
-    following ways:
-
-    1. Public clients making valid, unauthenticated calls to revoke a token
-       would not have their token revoked
-    2. Requests were not properly authenticating the *client credentials* but
-       were, instead, looking at the access token in a second location
-    3. Because of 2, the requests were also not authorizing confidential
-       clients' ability to revoke a given token. It should only revoke tokens
-       that belong to it.
-
-    The security implication is: OAuth 2.0 clients who "log out" a user expect
-    to have the corresponding access & refresh tokens revoked, preventing an
-    attacker who may have already hijacked the session from continuing to
-    impersonate the victim. Because of the bug described above, this is not the
-    case. As far as OWASP is concerned, this counts as broken authentication
-    design.
-
-    MITRE has assigned CVE-2016-6582 due to the security issues raised. An
-    attacker, thanks to 1, can replay a hijacked session after a victim logs
-    out/revokes their token. Additionally, thanks to 2 & 3, an attacker via a
-    compromised confidential client could "grief" other clients by revoking
-    their tokens (albeit this is an exceptionally narrow attack with little
-    value).
-  affected_package: doorkeeper
-  unaffected_versions:
-  - "< 1.2.0"
-  patched_versions:
-  - ">= 4.2.0"
-  package_manager: rubygems
-  cve:
-  - CVE-2016-6582
-  credit:
-  - Rubysec
-  references:
-  - https://github.com/rubysec/ruby-advisory-db
-  - https://github.com/doorkeeper-gem/doorkeeper/commit/fb938051777a3c9cb071e96fc66458f8f615bd53
-  source_url: http://www.openwall.com/lists/oss-security/2016/08/19/2
 - id: snykio:rubygems:doorkeeper:2018-07-16
   title: Insufficient Token Expiration
   description: |
