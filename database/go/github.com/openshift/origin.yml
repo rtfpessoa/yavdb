@@ -1,154 +1,42 @@
 ---
-- id: snykio:go:github.com/openshift/origin:2016-07-13
+- id: snykio:go:github.com/openshift/origin:2015-07-30
   title: Information Exposure
   description: |
     Affected version of [`github.com/openshift/origin`][1] are vulnerable to
-    Information Exposure. The API server in Kubernetes, as used in Red Hat
-    OpenShift Enterprise 3.2, in a multi tenant environment allows remote
-    authenticated users with knowledge of other project names to obtain
-    sensitive project and user information via vectors related to the
-    watch-cache list.
+    Information Exposure. openshift-node in OpenShift Origin 1.1.6 and
+    earlier improperly stores router credentials as envvars in the pod when
+    the --credentials option is used, which allows local users to obtain
+    sensitive private key information by reading the systemd journal.
 
 
 
     [1]: https://github.com/openshift/origin
     \nAffected version of [`github.com/openshift/origin`][1] are vulnerable to
-    Information Exposure. The API server in Kubernetes, as used in Red Hat
-    OpenShift Enterprise 3.2, in a multi tenant environment allows remote
-    authenticated users with knowledge of other project names to obtain
-    sensitive project and user information via vectors related to the
-    watch-cache list.
+    Information Exposure. openshift-node in OpenShift Origin 1.1.6 and
+    earlier improperly stores router credentials as envvars in the pod when
+    the --credentials option is used, which allows local users to obtain
+    sensitive private key information by reading the systemd journal.
 
 
 
     [1]: https://github.com/openshift/origin
   affected_package: github.com/openshift/origin
   vulnerable_versions:
-  - "<1.2.0 || =1.3.0-alpha.0"
-  severity: medium
+  - "<1.5.0-alpha.3"
+  severity: low
   package_manager: go
   cve:
-  - CVE-2016-5392
+  - CVE-2015-8945
   cwe:
-  - CWE-200
+  - CWE-255
   credit:
   - Unknown
   references:
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-5392
-  - https://access.redhat.com/errata/RHSA-2016:1427
-  - https://bugzilla.redhat.com/show_bug.cgi?id=1356195
-  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMOPENSHIFTORIGIN-50016
-- id: snykio:go:github.com/openshift/origin:2016-03-17
-  title: Information Exposure
-  description: |
-    Affected version of [`github.com/openshift/origin`][1] are vulnerable to
-    Information Exposure. HAproxy in Red Hat OpenShift Enterprise 3.2 and
-    OpenShift Origin allows local users to obtain the internal IP address of
-    a pod by reading the `OPENSHIFT_[namespace]_SERVERID` cookie.
-
-
-
-    [1]: https://github.com/openshift/origin
-    \nAffected version of [`github.com/openshift/origin`][1] are vulnerable to
-    Information Exposure. HAproxy in Red Hat OpenShift Enterprise 3.2 and
-    OpenShift Origin allows local users to obtain the internal IP address of
-    a pod by reading the `OPENSHIFT_[namespace]_SERVERID` cookie.
-
-
-
-    [1]: https://github.com/openshift/origin
-  affected_package: github.com/openshift/origin
-  vulnerable_versions:
-  - "<1.2.0-rc1"
-  severity: medium
-  package_manager: go
-  cve:
-  - CVE-2016-3711
-  cwe:
-  - CWE-200
-  credit:
-  - Unknown
-  references:
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-3711
-  - https://github.com/openshift/origin/commit/2d4cec7abefee8af1bfefa886541b370618d817c
-  - https://access.redhat.com/errata/RHSA-2016:1064
-  - https://github.com/openshift/origin/pull/8334
-  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMOPENSHIFTORIGIN-50038
-- id: snykio:go:github.com/openshift/origin:2016-03-09
-  title: Arbitrary Command Execution
-  description: |
-    Affected version of [`github.com/openshift/origin`][1] are vulnerable to
-    Arbitrary Command Execution. Red Hat OpenShift Enterprise 3.2 and
-    OpenShift Origin allow remote authenticated users to execute commands
-    with root privileges by changing the root password in an sti builder
-    image.
-
-
-
-    [1]: https://github.com/openshift/origin
-    \nAffected version of [`github.com/openshift/origin`][1] are vulnerable to
-    Arbitrary Command Execution. Red Hat OpenShift Enterprise 3.2 and
-    OpenShift Origin allow remote authenticated users to execute commands
-    with root privileges by changing the root password in an sti builder
-    image.
-
-
-
-    [1]: https://github.com/openshift/origin
-  affected_package: github.com/openshift/origin
-  vulnerable_versions:
-  - "<1.1.4"
-  severity: high
-  package_manager: go
-  cve:
-  - CVE-2016-2160
-  cwe:
-  - CWE-264
-  credit:
-  - Unknown
-  references:
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-2160
-  - https://github.com/openshift/origin/commit/2d0350c84150d88be4d1ac181694366832a55709
-  - https://access.redhat.com/errata/RHSA-2016:1064
-  - https://bugzilla.redhat.com/show_bug.cgi?id=1316127
-  - https://github.com/openshift/origin/pull/7864
-  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMOPENSHIFTORIGIN-50002
-- id: snykio:go:github.com/openshift/origin:2016-02-03
-  title: Privilege Elevation
-  description: |
-    Affected version of [`github.com/openshift/origin`][1] are vulnerable to
-    Privilege Elevation. The API server in Kubernetes might allow remote
-    attackers to gain privileges by editing a build configuration to use a
-    restricted strategy.
-
-
-
-    [1]: https://github.com/openshift/origin
-    \nAffected version of [`github.com/openshift/origin`][1] are vulnerable to
-    Privilege Elevation. The API server in Kubernetes might allow remote
-    attackers to gain privileges by editing a build configuration to use a
-    restricted strategy.
-
-
-
-    [1]: https://github.com/openshift/origin
-  affected_package: github.com/openshift/origin
-  vulnerable_versions:
-  - "*"
-  severity: high
-  package_manager: go
-  cve:
-  - CVE-2016-1906
-  cwe:
-  - CWE-264
-  credit:
-  - Unknown
-  references:
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-1906
-  - https://github.com/openshift/origin/commit/d95ec085f03ecf10e8c424a4f0340ddb38891406
-  - https://access.redhat.com/errata/RHSA-2016:0070
-  - https://github.com/openshift/origin/issues/6556
-  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMOPENSHIFTORIGIN-50000
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-8945
+  - https://github.com/openshift/origin/commit/f762dc6f052a36b0dc2b72e23aa7895aac6a84f1
+  - http://www.openwall.com/lists/oss-security/2016/07/13/10
+  - https://github.com/openshift/origin/issues/3951
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMOPENSHIFTORIGIN-50042
 - id: snykio:go:github.com/openshift/origin:2015-08-25
   title: Denial of Service (DoS)
   description: |+
@@ -368,41 +256,153 @@
   - https://bugzilla.redhat.com/show_bug.cgi?id=1259867
   - https://github.com/openshift/origin/issues/4374
   source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMOPENSHIFTORIGIN-50033
-- id: snykio:go:github.com/openshift/origin:2015-07-30
-  title: Information Exposure
+- id: snykio:go:github.com/openshift/origin:2016-02-03
+  title: Privilege Elevation
   description: |
     Affected version of [`github.com/openshift/origin`][1] are vulnerable to
-    Information Exposure. openshift-node in OpenShift Origin 1.1.6 and
-    earlier improperly stores router credentials as envvars in the pod when
-    the --credentials option is used, which allows local users to obtain
-    sensitive private key information by reading the systemd journal.
+    Privilege Elevation. The API server in Kubernetes might allow remote
+    attackers to gain privileges by editing a build configuration to use a
+    restricted strategy.
 
 
 
     [1]: https://github.com/openshift/origin
     \nAffected version of [`github.com/openshift/origin`][1] are vulnerable to
-    Information Exposure. openshift-node in OpenShift Origin 1.1.6 and
-    earlier improperly stores router credentials as envvars in the pod when
-    the --credentials option is used, which allows local users to obtain
-    sensitive private key information by reading the systemd journal.
+    Privilege Elevation. The API server in Kubernetes might allow remote
+    attackers to gain privileges by editing a build configuration to use a
+    restricted strategy.
 
 
 
     [1]: https://github.com/openshift/origin
   affected_package: github.com/openshift/origin
   vulnerable_versions:
-  - "<1.5.0-alpha.3"
-  severity: low
+  - "*"
+  severity: high
   package_manager: go
   cve:
-  - CVE-2015-8945
+  - CVE-2016-1906
   cwe:
-  - CWE-255
+  - CWE-264
   credit:
   - Unknown
   references:
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-8945
-  - https://github.com/openshift/origin/commit/f762dc6f052a36b0dc2b72e23aa7895aac6a84f1
-  - http://www.openwall.com/lists/oss-security/2016/07/13/10
-  - https://github.com/openshift/origin/issues/3951
-  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMOPENSHIFTORIGIN-50042
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-1906
+  - https://github.com/openshift/origin/commit/d95ec085f03ecf10e8c424a4f0340ddb38891406
+  - https://access.redhat.com/errata/RHSA-2016:0070
+  - https://github.com/openshift/origin/issues/6556
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMOPENSHIFTORIGIN-50000
+- id: snykio:go:github.com/openshift/origin:2016-03-09
+  title: Arbitrary Command Execution
+  description: |
+    Affected version of [`github.com/openshift/origin`][1] are vulnerable to
+    Arbitrary Command Execution. Red Hat OpenShift Enterprise 3.2 and
+    OpenShift Origin allow remote authenticated users to execute commands
+    with root privileges by changing the root password in an sti builder
+    image.
+
+
+
+    [1]: https://github.com/openshift/origin
+    \nAffected version of [`github.com/openshift/origin`][1] are vulnerable to
+    Arbitrary Command Execution. Red Hat OpenShift Enterprise 3.2 and
+    OpenShift Origin allow remote authenticated users to execute commands
+    with root privileges by changing the root password in an sti builder
+    image.
+
+
+
+    [1]: https://github.com/openshift/origin
+  affected_package: github.com/openshift/origin
+  vulnerable_versions:
+  - "<1.1.4"
+  severity: high
+  package_manager: go
+  cve:
+  - CVE-2016-2160
+  cwe:
+  - CWE-264
+  credit:
+  - Unknown
+  references:
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-2160
+  - https://github.com/openshift/origin/commit/2d0350c84150d88be4d1ac181694366832a55709
+  - https://access.redhat.com/errata/RHSA-2016:1064
+  - https://bugzilla.redhat.com/show_bug.cgi?id=1316127
+  - https://github.com/openshift/origin/pull/7864
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMOPENSHIFTORIGIN-50002
+- id: snykio:go:github.com/openshift/origin:2016-03-17
+  title: Information Exposure
+  description: |
+    Affected version of [`github.com/openshift/origin`][1] are vulnerable to
+    Information Exposure. HAproxy in Red Hat OpenShift Enterprise 3.2 and
+    OpenShift Origin allows local users to obtain the internal IP address of
+    a pod by reading the `OPENSHIFT_[namespace]_SERVERID` cookie.
+
+
+
+    [1]: https://github.com/openshift/origin
+    \nAffected version of [`github.com/openshift/origin`][1] are vulnerable to
+    Information Exposure. HAproxy in Red Hat OpenShift Enterprise 3.2 and
+    OpenShift Origin allows local users to obtain the internal IP address of
+    a pod by reading the `OPENSHIFT_[namespace]_SERVERID` cookie.
+
+
+
+    [1]: https://github.com/openshift/origin
+  affected_package: github.com/openshift/origin
+  vulnerable_versions:
+  - "<1.2.0-rc1"
+  severity: medium
+  package_manager: go
+  cve:
+  - CVE-2016-3711
+  cwe:
+  - CWE-200
+  credit:
+  - Unknown
+  references:
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-3711
+  - https://github.com/openshift/origin/commit/2d4cec7abefee8af1bfefa886541b370618d817c
+  - https://access.redhat.com/errata/RHSA-2016:1064
+  - https://github.com/openshift/origin/pull/8334
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMOPENSHIFTORIGIN-50038
+- id: snykio:go:github.com/openshift/origin:2016-07-13
+  title: Information Exposure
+  description: |
+    Affected version of [`github.com/openshift/origin`][1] are vulnerable to
+    Information Exposure. The API server in Kubernetes, as used in Red Hat
+    OpenShift Enterprise 3.2, in a multi tenant environment allows remote
+    authenticated users with knowledge of other project names to obtain
+    sensitive project and user information via vectors related to the
+    watch-cache list.
+
+
+
+    [1]: https://github.com/openshift/origin
+    \nAffected version of [`github.com/openshift/origin`][1] are vulnerable to
+    Information Exposure. The API server in Kubernetes, as used in Red Hat
+    OpenShift Enterprise 3.2, in a multi tenant environment allows remote
+    authenticated users with knowledge of other project names to obtain
+    sensitive project and user information via vectors related to the
+    watch-cache list.
+
+
+
+    [1]: https://github.com/openshift/origin
+  affected_package: github.com/openshift/origin
+  vulnerable_versions:
+  - "<1.2.0 || =1.3.0-alpha.0"
+  severity: medium
+  package_manager: go
+  cve:
+  - CVE-2016-5392
+  cwe:
+  - CWE-200
+  credit:
+  - Unknown
+  references:
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-5392
+  - https://access.redhat.com/errata/RHSA-2016:1427
+  - https://bugzilla.redhat.com/show_bug.cgi?id=1356195
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMOPENSHIFTORIGIN-50016

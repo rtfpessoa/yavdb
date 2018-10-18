@@ -37,6 +37,27 @@
   - http://www.securityfocus.com/bid/57577
   - https://github.com/Snorby/snorby/issues/261
   source_url: https://ossindex.net/resource/package/8404784243/vulnerabilities
+- id: rubyadvisory:rubygems:devise:2013-01-28
+  title: Devise Database Type Conversion Crafted Request Parsing Security Bypass
+  description: |
+    Devise contains a flaw that is triggered during when a type conversion error
+    occurs during the parsing of a malformed request. With a specially crafted
+    request, a remote attacker can bypass security restrictions.
+  affected_package: devise
+  patched_versions:
+  - "~> 1.5.4"
+  - "~> 2.0.5"
+  - "~> 2.1.3"
+  - ">= 2.2.3"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2013-0233
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: http://osvdb.org/show/osvdb/89642
 - id: rubyadvisory:rubygems:devise:2013-08-02
   title: CSRF token fixation attacks in Devise
   description: |
@@ -76,27 +97,106 @@
   references:
   - https://github.com/rubysec/ruby-advisory-db
   source_url: http://blog.plataformatec.com.br/2016/01/improve-remember-me-cookie-expiration-in-devise/
-- id: rubyadvisory:rubygems:devise:2013-01-28
-  title: Devise Database Type Conversion Crafted Request Parsing Security Bypass
+- id: snykio:rubygems:devise:2013-01-27
+  title: Security Bypass
   description: |
-    Devise contains a flaw that is triggered during when a type conversion error
-    occurs during the parsing of a malformed request. With a specially crafted
-    request, a remote attacker can bypass security restrictions.
+    [`devise`][1] is an authentication framework for Rails with Warden.
+
+    Affected versions allow an attacker to craft a malformed request in
+    order to bypass security restrictions, potentially gaining control of
+    other accounts. The vulnerability lies in a problematic type conversion
+    of database queries against certain databases.
+
+
+
+    [1]: https://rubygems.org/gems/devise
+    \n[`devise`][1] is an authentication framework for Rails with Warden.
+
+    Affected versions allow an attacker to craft a malformed request in
+    order to bypass security restrictions, potentially gaining control of
+    other accounts. The vulnerability lies in a problematic type conversion
+    of database queries against certain databases.
+
+
+
+    [1]: https://rubygems.org/gems/devise
+    \n[`devise`][1] is an authentication framework for Rails with Warden.
+
+    Affected versions allow an attacker to craft a malformed request in
+    order to bypass security restrictions, potentially gaining control of
+    other accounts. The vulnerability lies in a problematic type conversion
+    of database queries against certain databases.
+
+
+
+    [1]: https://rubygems.org/gems/devise
   affected_package: devise
-  patched_versions:
-  - "~> 1.5.4"
-  - "~> 2.0.5"
-  - "~> 2.1.3"
-  - ">= 2.2.3"
+  vulnerable_versions:
+  - "< 2.2.3 &&  >= 2.2 || < 2.1.3 &&  >= 2.1 || < 2.0.5 &&  >= 1.6 || < 1.5.4"
   severity: high
   package_manager: rubygems
   cve:
   - CVE-2013-0233
+  cwe:
+  - CWE-284
   credit:
-  - Rubysec
+  - joernchen
   references:
-  - https://github.com/rubysec/ruby-advisory-db
-  source_url: http://osvdb.org/show/osvdb/89642
+  - http://rubysec.com/advisories/CVE-2013-0233
+  - http://blog.plataformatec.com.br/2013/01/security-announcement-devise-v2-2-3-v2-1-3-v2-0-5-and-v1-5-3-released/
+  source_url: https://snyk.io/vuln/SNYK-RUBY-DEVISE-20055
+- id: snykio:rubygems:devise:2013-08-01
+  title: CSRF Token Fixation
+  description: |
+    [`devise`][1] is an authentication framework for Rails with Warden.
+
+    Affected versions contain a flaw that allows a remote, user-assisted
+    attacker to conduct a CSRF token fixation attack. This issue is
+    triggered as previous CSRF tokens are not properly invalidated when a
+    new token is created. If an attacker has knowledge of said token, a
+    specially crafted request can be made to it, allowing the attacker to
+    conduct CSRF attacks.
+
+
+
+    [1]: https://rubygems.org/gems/devise
+    \n[`devise`][1] is an authentication framework for Rails with Warden.
+
+    Affected versions contain a flaw that allows a remote, user-assisted
+    attacker to conduct a CSRF token fixation attack. This issue is
+    triggered as previous CSRF tokens are not properly invalidated when a
+    new token is created. If an attacker has knowledge of said token, a
+    specially crafted request can be made to it, allowing the attacker to
+    conduct CSRF attacks.
+
+
+
+    [1]: https://rubygems.org/gems/devise
+    \n[`devise`][1] is an authentication framework for Rails with Warden.
+
+    Affected versions contain a flaw that allows a remote, user-assisted
+    attacker to conduct a CSRF token fixation attack. This issue is
+    triggered as previous CSRF tokens are not properly invalidated when a
+    new token is created. If an attacker has knowledge of said token, a
+    specially crafted request can be made to it, allowing the attacker to
+    conduct CSRF attacks.
+
+
+
+    [1]: https://rubygems.org/gems/devise
+  affected_package: devise
+  vulnerable_versions:
+  - "< 3.0.1 &&  >= 2.3 || < 2.2.5"
+  severity: medium
+  package_manager: rubygems
+  cwe:
+  - CWE-352
+  credit:
+  - Egor Homakov
+  references:
+  - http://rubysec.com/advisories/OSVDB-114435
+  - http://blog.plataformatec.com.br/2013/08/csrf-token-fixation-attacks-in-devise/
+  source_url: https://snyk.io/vuln/SNYK-RUBY-DEVISE-20103
 - id: snykio:rubygems:devise:2016-01-17
   title: Non Unique Authentication Cookie Values
   description: |
@@ -151,103 +251,3 @@
   - http://rubysec.com/advisories/devise-CVE-2015-8314
   - http://blog.plataformatec.com.br/2016/01/improve-remember-me-cookie-expiration-in-devise/
   source_url: https://snyk.io/vuln/SNYK-RUBY-DEVISE-20252
-- id: snykio:rubygems:devise:2013-08-01
-  title: CSRF Token Fixation
-  description: |
-    [`devise`][1] is an authentication framework for Rails with Warden.
-
-    Affected versions contain a flaw that allows a remote, user-assisted
-    attacker to conduct a CSRF token fixation attack. This issue is
-    triggered as previous CSRF tokens are not properly invalidated when a
-    new token is created. If an attacker has knowledge of said token, a
-    specially crafted request can be made to it, allowing the attacker to
-    conduct CSRF attacks.
-
-
-
-    [1]: https://rubygems.org/gems/devise
-    \n[`devise`][1] is an authentication framework for Rails with Warden.
-
-    Affected versions contain a flaw that allows a remote, user-assisted
-    attacker to conduct a CSRF token fixation attack. This issue is
-    triggered as previous CSRF tokens are not properly invalidated when a
-    new token is created. If an attacker has knowledge of said token, a
-    specially crafted request can be made to it, allowing the attacker to
-    conduct CSRF attacks.
-
-
-
-    [1]: https://rubygems.org/gems/devise
-    \n[`devise`][1] is an authentication framework for Rails with Warden.
-
-    Affected versions contain a flaw that allows a remote, user-assisted
-    attacker to conduct a CSRF token fixation attack. This issue is
-    triggered as previous CSRF tokens are not properly invalidated when a
-    new token is created. If an attacker has knowledge of said token, a
-    specially crafted request can be made to it, allowing the attacker to
-    conduct CSRF attacks.
-
-
-
-    [1]: https://rubygems.org/gems/devise
-  affected_package: devise
-  vulnerable_versions:
-  - "< 3.0.1 &&  >= 2.3 || < 2.2.5"
-  severity: medium
-  package_manager: rubygems
-  cwe:
-  - CWE-352
-  credit:
-  - Egor Homakov
-  references:
-  - http://rubysec.com/advisories/OSVDB-114435
-  - http://blog.plataformatec.com.br/2013/08/csrf-token-fixation-attacks-in-devise/
-  source_url: https://snyk.io/vuln/SNYK-RUBY-DEVISE-20103
-- id: snykio:rubygems:devise:2013-01-27
-  title: Security Bypass
-  description: |
-    [`devise`][1] is an authentication framework for Rails with Warden.
-
-    Affected versions allow an attacker to craft a malformed request in
-    order to bypass security restrictions, potentially gaining control of
-    other accounts. The vulnerability lies in a problematic type conversion
-    of database queries against certain databases.
-
-
-
-    [1]: https://rubygems.org/gems/devise
-    \n[`devise`][1] is an authentication framework for Rails with Warden.
-
-    Affected versions allow an attacker to craft a malformed request in
-    order to bypass security restrictions, potentially gaining control of
-    other accounts. The vulnerability lies in a problematic type conversion
-    of database queries against certain databases.
-
-
-
-    [1]: https://rubygems.org/gems/devise
-    \n[`devise`][1] is an authentication framework for Rails with Warden.
-
-    Affected versions allow an attacker to craft a malformed request in
-    order to bypass security restrictions, potentially gaining control of
-    other accounts. The vulnerability lies in a problematic type conversion
-    of database queries against certain databases.
-
-
-
-    [1]: https://rubygems.org/gems/devise
-  affected_package: devise
-  vulnerable_versions:
-  - "< 2.2.3 &&  >= 2.2 || < 2.1.3 &&  >= 2.1 || < 2.0.5 &&  >= 1.6 || < 1.5.4"
-  severity: high
-  package_manager: rubygems
-  cve:
-  - CVE-2013-0233
-  cwe:
-  - CWE-284
-  credit:
-  - joernchen
-  references:
-  - http://rubysec.com/advisories/CVE-2013-0233
-  - http://blog.plataformatec.com.br/2013/01/security-announcement-devise-v2-2-3-v2-1-3-v2-0-5-and-v1-5-3-released/
-  source_url: https://snyk.io/vuln/SNYK-RUBY-DEVISE-20055

@@ -1,46 +1,26 @@
 ---
-- id: nodesecurity:npm:marked:2017-09-21
-  title: Regular Expression Denial of Service
-  description: "Affected versions of `marked` are vulnerable to a regular expression
-    denial of service. \n\nThe amplification in this vulnerability is significant,
-    with 1,000 characters resulting in the event loop being blocked for around 6 seconds."
+- id: nodesecurity:npm:marked:2014-01-31
+  title: Multiple Content Injection Vulnerabilities
+  description: |-
+    Versions 0.3.0 and earlier of `marked` are affected by two cross-site scripting vulnerabilities, even when `sanitize: true` is set.
+
+    The attack vectors for this vulnerability are GFM Codeblocks and JavaScript URLs.
   affected_package: marked
   vulnerable_versions:
-  - "<0.3.9"
+  - "<=0.3.0"
   patched_versions:
-  - ">=0.3.9"
-  severity: high
-  package_manager: npm
-  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H
-  credit:
-  - Cristian-Alexandru Staicu
-  references:
-  - https://github.com/chjj/marked/issues/937)
-  source_url: https://nodesecurity.io/advisories/531
-- id: nodesecurity:npm:marked:2016-04-18
-  title: Sanitization bypass using HTML Entities
-  description: "Affected versions of `marked` are susceptible to a cross-site scripting
-    vulnerability in link components when `sanitize:true` is configured. \n\n## Proof
-    of Concept\n\nThis flaw exists because link URIs containing HTML entities get
-    processed in an abnormal manner. Any HTML Entities get parsed on a best-effort
-    basis and included in the resulting link, while if that parsing fails that character
-    is omitted.\n\nFor example:\n\nA link URI such as\n```\njavascript&#x58document;alert&#40;1&#41;\n```\nRenders
-    a valid link that when clicked will execute `alert(1)`."
-  affected_package: marked
-  vulnerable_versions:
-  - "<=0.3.5"
-  patched_versions:
-  - ">=0.3.6"
+  - ">=0.3.1"
   severity: medium
   package_manager: npm
-  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N
+  cve:
+  - CVE-2014-1850
+  - CVE-2014-3743
+  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N
   credit:
-  - Matt Austin
+  - Adam Baldwin
   references:
-  - |-
-    https://github.com/chjj/marked/pull/592)
-    https://github.com/chjj/marked/pull/592/commits/2cff85979be8e7a026a9aca35542c470cf5da523)
-  source_url: https://nodesecurity.io/advisories/101
+  - ''
+  source_url: https://nodesecurity.io/advisories/22
 - id: nodesecurity:npm:marked:2015-01-22
   title: Regular Expression Denial of Service
   description: 'Versions 0.3.3 and earlier of `marked` are affected by a regular expression
@@ -86,99 +66,48 @@
   references:
   - https://github.com/chjj/marked/issues/492)
   source_url: https://nodesecurity.io/advisories/24
-- id: nodesecurity:npm:marked:2014-01-31
-  title: Multiple Content Injection Vulnerabilities
-  description: |-
-    Versions 0.3.0 and earlier of `marked` are affected by two cross-site scripting vulnerabilities, even when `sanitize: true` is set.
-
-    The attack vectors for this vulnerability are GFM Codeblocks and JavaScript URLs.
+- id: nodesecurity:npm:marked:2016-04-18
+  title: Sanitization bypass using HTML Entities
+  description: "Affected versions of `marked` are susceptible to a cross-site scripting
+    vulnerability in link components when `sanitize:true` is configured. \n\n## Proof
+    of Concept\n\nThis flaw exists because link URIs containing HTML entities get
+    processed in an abnormal manner. Any HTML Entities get parsed on a best-effort
+    basis and included in the resulting link, while if that parsing fails that character
+    is omitted.\n\nFor example:\n\nA link URI such as\n```\njavascript&#x58document;alert&#40;1&#41;\n```\nRenders
+    a valid link that when clicked will execute `alert(1)`."
   affected_package: marked
   vulnerable_versions:
-  - "<=0.3.0"
+  - "<=0.3.5"
   patched_versions:
-  - ">=0.3.1"
+  - ">=0.3.6"
   severity: medium
   package_manager: npm
-  cve:
-  - CVE-2014-1850
-  - CVE-2014-3743
-  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N
+  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N
   credit:
-  - Adam Baldwin
+  - Matt Austin
   references:
-  - ''
-  source_url: https://nodesecurity.io/advisories/22
-- id: ossindex:npm:marked:2015-01-27
-  title: "[CVE-2015-1370] Incomplete blacklist vulnerability in marked 0.3.2 and earlier
-    for Node.js allow..."
-  description: Incomplete blacklist vulnerability in marked 0.3.2 and earlier for
-    Node.js allows remote attackers to conduct cross-site scripting (XSS) attacks
-    via a vbscript tag in a link.
+  - |-
+    https://github.com/chjj/marked/pull/592)
+    https://github.com/chjj/marked/pull/592/commits/2cff85979be8e7a026a9aca35542c470cf5da523)
+  source_url: https://nodesecurity.io/advisories/101
+- id: nodesecurity:npm:marked:2017-09-21
+  title: Regular Expression Denial of Service
+  description: "Affected versions of `marked` are vulnerable to a regular expression
+    denial of service. \n\nThe amplification in this vulnerability is significant,
+    with 1,000 characters resulting in the event loop being blocked for around 6 seconds."
   affected_package: marked
   vulnerable_versions:
-  - "<=0.3.2"
+  - "<0.3.9"
+  patched_versions:
+  - ">=0.3.9"
+  severity: high
   package_manager: npm
-  cve:
-  - CVE-2015-1370
+  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H
   credit:
-  - OSSIndex
+  - Cristian-Alexandru Staicu
   references:
-  - http://www.openwall.com/lists/oss-security/2015/01/23/2
-  - https://github.com/chjj/marked/issues/492
-  - https://github.com/evilpacket/marked/commit/3c191144939107c45a7fa11ab6cb88be6694a1ba
-  - https://nodesecurity.io/advisories/marked_vbscript_injection
-  source_url: https://ossindex.net/resource/package/7014106540/vulnerabilities
-- id: ossindex:npm:marked:2017-01-23
-  title: "[CVE-2015-8854]  Resource Management Errors"
-  description: The marked package before 0.3.4 for Node.js allows attackers to cause
-    a denial of service (CPU consumption) via unspecified vectors that trigger a "catastrophic
-    backtracking issue for the em inline rule," aka a "regular expression denial of
-    service (ReDoS)."
-  affected_package: marked
-  vulnerable_versions:
-  - "<=0.3.3"
-  package_manager: npm
-  cve:
-  - CVE-2015-8854
-  credit:
-  - OSSIndex
-  references:
-  - http://www.openwall.com/lists/oss-security/2016/04/20/11
-  - https://nodesecurity.io/advisories/23
-  source_url: https://ossindex.net/resource/package/7014106540/vulnerabilities
-- id: ossindex:npm:marked:2016-07-22
-  title: "[Duplicate] XSS (Cross Site Scripting)"
-  description: "> With the sanitize option on it is possible to create a link with
-    a javascript: protocol with the following: [URL](javascript:document;alert(1)).\n>
-    \n> -- [github.com](https://github.com/chjj/marked/pull/592)"
-  affected_package: marked
-  vulnerable_versions:
-  - "<0.3.6"
-  package_manager: npm
-  credit:
-  - OSSIndex
-  references:
-  - https://cwe.mitre.org/data/definitions/79.html
-  - https://github.com/chjj/marked/pull/592
-  - https://github.com/chjj/marked/pull/592/commits/2cff85979be8e7a026a9aca35542c470cf5da523
-  - https://nodesecurity.io/advisories/101
-  source_url: https://ossindex.net/resource/package/7014106540/vulnerabilities
-- id: ossindex:npm:marked:2017-02-11
-  title: Cross Site Scripting (XSS) in data links
-  description: Allowing `data:` links opens this package up to an XSS attack.
-  affected_package: marked
-  vulnerable_versions:
-  - "<=0.3.6"
-  package_manager: npm
-  credit:
-  - OSSIndex
-  references:
-  - https://cwe.mitre.org/data/definitions/79.html
-  - https://github.com/chjj/marked/commit/8f9d0b72f5606ed32057049f387161dd41c36ade
-  - https://github.com/chjj/marked/commit/cd2f6f5b7091154c5526e79b5f3bfb4d15995a51
-  - https://github.com/chjj/marked/issues/844
-  - https://github.com/chjj/marked/issues/848
-  source_url: https://ossindex.net/resource/package/7014106540/vulnerabilities
+  - https://github.com/chjj/marked/issues/937)
+  source_url: https://nodesecurity.io/advisories/531
 - id: ossindex:npm:marked:1970-01-01
   title: Multiple Content Injection
   description: "> Even if [the sanitize] option is set, marked is vulnerable to content
@@ -214,19 +143,224 @@
   - https://nodesecurity.io/advisories/23
   - https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS
   source_url: https://ossindex.net/resource/package/7014106540/vulnerabilities
-- id: snykio:npm:marked:2018-02-27
-  title: Regular Expression Denial of Service (ReDoS)
-  description: "[`marked`][1] is a markdown parser built for speed\n\nAffected versions
-    of this package are vulnerable to Regular Expression\nDenial of Service (ReDoS)
-    attacks. This can cause an impact of about 10\nseconds matching time for data
-    150 characters long.\n\n\n\n[1]: https://www.npmjs.com/package/marked\n\\n[`marked`][1]
-    is a markdown parser built for speed\n\nAffected versions of this package are
-    vulnerable to Regular Expression\nDenial of Service (ReDoS) attacks. This can
-    cause an impact of about 10\nseconds matching time for data 150 characters long.\n\n\n\n[1]:
-    https://www.npmjs.com/package/marked\n\\n[`marked`][1] is a markdown parser built
-    for speed\n\nAffected versions of this package are vulnerable to Regular Expression\nDenial
-    of Service (ReDoS) attacks. This can cause an impact of about 10\nseconds matching
-    time for data 150 characters long.\n\n\n\n[1]: https://www.npmjs.com/package/marked\n\\nDenial
+- id: ossindex:npm:marked:2015-01-27
+  title: "[CVE-2015-1370] Incomplete blacklist vulnerability in marked 0.3.2 and earlier
+    for Node.js allow..."
+  description: Incomplete blacklist vulnerability in marked 0.3.2 and earlier for
+    Node.js allows remote attackers to conduct cross-site scripting (XSS) attacks
+    via a vbscript tag in a link.
+  affected_package: marked
+  vulnerable_versions:
+  - "<=0.3.2"
+  package_manager: npm
+  cve:
+  - CVE-2015-1370
+  credit:
+  - OSSIndex
+  references:
+  - http://www.openwall.com/lists/oss-security/2015/01/23/2
+  - https://github.com/chjj/marked/issues/492
+  - https://github.com/evilpacket/marked/commit/3c191144939107c45a7fa11ab6cb88be6694a1ba
+  - https://nodesecurity.io/advisories/marked_vbscript_injection
+  source_url: https://ossindex.net/resource/package/7014106540/vulnerabilities
+- id: ossindex:npm:marked:2016-07-22
+  title: "[Duplicate] XSS (Cross Site Scripting)"
+  description: "> With the sanitize option on it is possible to create a link with
+    a javascript: protocol with the following: [URL](javascript:document;alert(1)).\n>
+    \n> -- [github.com](https://github.com/chjj/marked/pull/592)"
+  affected_package: marked
+  vulnerable_versions:
+  - "<0.3.6"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - https://cwe.mitre.org/data/definitions/79.html
+  - https://github.com/chjj/marked/pull/592
+  - https://github.com/chjj/marked/pull/592/commits/2cff85979be8e7a026a9aca35542c470cf5da523
+  - https://nodesecurity.io/advisories/101
+  source_url: https://ossindex.net/resource/package/7014106540/vulnerabilities
+- id: ossindex:npm:marked:2017-01-23
+  title: "[CVE-2015-8854]  Resource Management Errors"
+  description: The marked package before 0.3.4 for Node.js allows attackers to cause
+    a denial of service (CPU consumption) via unspecified vectors that trigger a "catastrophic
+    backtracking issue for the em inline rule," aka a "regular expression denial of
+    service (ReDoS)."
+  affected_package: marked
+  vulnerable_versions:
+  - "<=0.3.3"
+  package_manager: npm
+  cve:
+  - CVE-2015-8854
+  credit:
+  - OSSIndex
+  references:
+  - http://www.openwall.com/lists/oss-security/2016/04/20/11
+  - https://nodesecurity.io/advisories/23
+  source_url: https://ossindex.net/resource/package/7014106540/vulnerabilities
+- id: ossindex:npm:marked:2017-02-11
+  title: Cross Site Scripting (XSS) in data links
+  description: Allowing `data:` links opens this package up to an XSS attack.
+  affected_package: marked
+  vulnerable_versions:
+  - "<=0.3.6"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - https://cwe.mitre.org/data/definitions/79.html
+  - https://github.com/chjj/marked/commit/8f9d0b72f5606ed32057049f387161dd41c36ade
+  - https://github.com/chjj/marked/commit/cd2f6f5b7091154c5526e79b5f3bfb4d15995a51
+  - https://github.com/chjj/marked/issues/844
+  - https://github.com/chjj/marked/issues/848
+  source_url: https://ossindex.net/resource/package/7014106540/vulnerabilities
+- id: snykio:npm:marked:2014-01-30
+  title: VBScript Content Injection
+  description: |
+    Marked 0.3.2 and earlier is vulnerable to content injection even when
+    `sanitize: true` is enabled.
+
+    `[xss link](vbscript:alert(1))`
+
+    will get a link
+
+    `<a href="vbscript:alert(1)">xss link</a>`
+
+    This script does not work in IE 11 edge mode, but works in IE 10
+    compatibility view.
+
+    *Source: [Node Security Project][1]*
+
+
+
+    [1]: https://nodesecurity.io/advisories/24
+    \nMarked 0.3.2 and earlier is vulnerable to content injection even when
+    `sanitize: true` is enabled.
+
+    `[xss link](vbscript:alert(1))`
+
+    will get a link
+
+    `<a href="vbscript:alert(1)">xss link</a>`
+
+    This script does not work in IE 11 edge mode, but works in IE 10
+    compatibility view.
+
+    *Source: [Node Security Project][1]*
+
+
+
+    [1]: https://nodesecurity.io/advisories/24
+    \nMarked 0.3.2 and earlier is vulnerable to content injection even when
+    `sanitize: true` is enabled.
+
+    `[xss link](vbscript:alert(1))`
+
+    will get a link
+
+    `<a href="vbscript:alert(1)">xss link</a>`
+
+    This script does not work in IE 11 edge mode, but works in IE 10
+    compatibility view.
+
+    *Source: [Node Security Project][1]*
+
+
+
+    [1]: https://nodesecurity.io/advisories/24
+    \nMarked 0.3.2 and earlier is vulnerable to content injection even when
+    `sanitize: true` is enabled.
+
+    `[xss link](vbscript:alert(1))`
+
+    will get a link
+
+    `<a href="vbscript:alert(1)">xss link</a>`
+
+    This script does not work in IE 11 edge mode, but works in IE 10
+    compatibility view.
+
+    *Source: [Node Security Project][1]*
+
+
+
+    [1]: https://nodesecurity.io/advisories/24
+    \nMarked 0.3.2 and earlier is vulnerable to content injection even when
+    `sanitize: true` is enabled.
+
+    `[xss link](vbscript:alert(1))`
+
+    will get a link
+
+    `<a href="vbscript:alert(1)">xss link</a>`
+
+    This script does not work in IE 11 edge mode, but works in IE 10
+    compatibility view.
+
+    *Source: [Node Security Project][1]*
+
+
+
+    [1]: https://nodesecurity.io/advisories/24
+    \nMarked 0.3.2 and earlier is vulnerable to content injection even when
+    `sanitize: true` is enabled.
+
+    `[xss link](vbscript:alert(1))`
+
+    will get a link
+
+    `<a href="vbscript:alert(1)">xss link</a>`
+
+    This script does not work in IE 11 edge mode, but works in IE 10
+    compatibility view.
+
+    *Source: [Node Security Project][1]*
+
+
+
+    [1]: https://nodesecurity.io/advisories/24
+    \nMarked 0.3.2 and earlier is vulnerable to content injection even when
+    `sanitize: true` is enabled.
+
+    `[xss link](vbscript:alert(1))`
+
+    will get a link
+
+    `<a href="vbscript:alert(1)">xss link</a>`
+
+    This script does not work in IE 11 edge mode, but works in IE 10
+    compatibility view.
+
+    *Source: [Node Security Project][1]*
+
+
+
+    [1]: https://nodesecurity.io/advisories/24
+  affected_package: marked
+  vulnerable_versions:
+  - "<=0.3.2"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2015-1370
+  cwe:
+  - CWE-74
+  credit:
+  - Xiao Long
+  references:
+  - https://github.com/chjj/marked/issues/492
+  source_url: https://snyk.io/vuln/npm:marked:20140131-2
+- id: snykio:npm:marked:2014-01-30
+  title: Regular Expression Denial of Service (DoS)
+  description: "[marked][1] is a markdown parser and compiler. Built for speed.\n\nAffected
+    versions of this package are vulnerable to Regular Expressions\nDenial of Service
+    (ReDoS) when certain types of input are passed in to\nbe parsed.\n\n\n\n[1]: https://github.com/markedjs/marked\n\\n[marked][1]
+    is a markdown parser and compiler. Built for speed.\n\nAffected versions of this
+    package are vulnerable to Regular Expressions\nDenial of Service (ReDoS) when
+    certain types of input are passed in to\nbe parsed.\n\n\n\n[1]: https://github.com/markedjs/marked\n\\n[marked][1]
+    is a markdown parser and compiler. Built for speed.\n\nAffected versions of this
+    package are vulnerable to Regular Expressions\nDenial of Service (ReDoS) when
+    certain types of input are passed in to\nbe parsed.\n\n\n\n[1]: https://github.com/markedjs/marked\n\\nDenial
     of Service (DoS) describes a family of attacks, all aimed at\nmaking a system
     inaccessible to its original and legitimate users. There\nare many types of DoS
     attacks, ranging from trying to clog the network\npipes to the system by generating
@@ -1075,18 +1209,608 @@
     consume CPU, resulting in a Denial\nof Service.\n\n\n\n[1]: https://regex101.com/debugger\n"
   affected_package: marked
   vulnerable_versions:
-  - "<0.3.17"
+  - "<=0.3.3"
   severity: high
   package_manager: npm
   cwe:
-  - CWE-400
+  - CWE-730
   - CWE-185
   credit:
-  - Jamie Davis
+  - Barış Soner Uşaklı
   references:
-  - https://github.com/markedjs/marked/pull/1083
-  - https://github.com/markedjs/marked/pull/1083
-  source_url: https://snyk.io/vuln/npm:marked:20180225
+  - https://github.com/chjj/marked/issues/497
+  source_url: https://snyk.io/vuln/npm:marked:20140131-1
+- id: snykio:npm:marked:2014-01-30
+  title: Multiple Content Injection Vulnerabilities
+  description: |
+    Marked comes with an option to sanitize user output to help protect
+    against content injection attacks.
+
+    sanitize: true
+
+    Even if this option is set, marked is vulnerable to content injection in
+    multiple locations if untrusted user input is allowed to be provided
+    into marked and that output is passed to the browser.
+
+    Injection is possible in two locations
+
+    * gfm codeblocks (language)
+    * javascript url\'s
+
+    *Source: [Node Security Project][1]*
+
+
+
+    [1]: https://nodesecurity.io/advisories/22
+    \nMarked comes with an option to sanitize user output to help protect
+    against content injection attacks.
+
+    sanitize: true
+
+    Even if this option is set, marked is vulnerable to content injection in
+    multiple locations if untrusted user input is allowed to be provided
+    into marked and that output is passed to the browser.
+
+    Injection is possible in two locations
+
+    * gfm codeblocks (language)
+    * javascript url\'s
+
+    *Source: [Node Security Project][1]*
+
+
+
+    [1]: https://nodesecurity.io/advisories/22
+    \nMarked comes with an option to sanitize user output to help protect
+    against content injection attacks.
+
+    sanitize: true
+
+    Even if this option is set, marked is vulnerable to content injection in
+    multiple locations if untrusted user input is allowed to be provided
+    into marked and that output is passed to the browser.
+
+    Injection is possible in two locations
+
+    * gfm codeblocks (language)
+    * javascript url\'s
+
+    *Source: [Node Security Project][1]*
+
+
+
+    [1]: https://nodesecurity.io/advisories/22
+    \nMarked comes with an option to sanitize user output to help protect
+    against content injection attacks.
+
+    sanitize: true
+
+    Even if this option is set, marked is vulnerable to content injection in
+    multiple locations if untrusted user input is allowed to be provided
+    into marked and that output is passed to the browser.
+
+    Injection is possible in two locations
+
+    * gfm codeblocks (language)
+    * javascript url\'s
+
+    *Source: [Node Security Project][1]*
+
+
+
+    [1]: https://nodesecurity.io/advisories/22
+    \nMarked comes with an option to sanitize user output to help protect
+    against content injection attacks.
+
+    sanitize: true
+
+    Even if this option is set, marked is vulnerable to content injection in
+    multiple locations if untrusted user input is allowed to be provided
+    into marked and that output is passed to the browser.
+
+    Injection is possible in two locations
+
+    * gfm codeblocks (language)
+    * javascript url\'s
+
+    *Source: [Node Security Project][1]*
+
+
+
+    [1]: https://nodesecurity.io/advisories/22
+    \nMarked comes with an option to sanitize user output to help protect
+    against content injection attacks.
+
+    sanitize: true
+
+    Even if this option is set, marked is vulnerable to content injection in
+    multiple locations if untrusted user input is allowed to be provided
+    into marked and that output is passed to the browser.
+
+    Injection is possible in two locations
+
+    * gfm codeblocks (language)
+    * javascript url\'s
+
+    *Source: [Node Security Project][1]*
+
+
+
+    [1]: https://nodesecurity.io/advisories/22
+    \nMarked comes with an option to sanitize user output to help protect
+    against content injection attacks.
+
+    sanitize: true
+
+    Even if this option is set, marked is vulnerable to content injection in
+    multiple locations if untrusted user input is allowed to be provided
+    into marked and that output is passed to the browser.
+
+    Injection is possible in two locations
+
+    * gfm codeblocks (language)
+    * javascript url\'s
+
+    *Source: [Node Security Project][1]*
+
+
+
+    [1]: https://nodesecurity.io/advisories/22
+  affected_package: marked
+  vulnerable_versions:
+  - "<=0.3.0"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2014-3743
+  - CVE-2014-1850
+  cwe:
+  - CWE-74
+  credit:
+  - Adam Baldwin
+  source_url: https://snyk.io/vuln/npm:marked:20140131
+- id: snykio:npm:marked:2015-05-20
+  title: Content & Code Injection (XSS)
+  description: |+
+    [`marked`][1] is a markdown parser and compiler used for rendering
+    markdown content to html.
+
+    It is vulnerable to content injection attack allowing the attacker to
+    bypass its output sanitization (`sanitize: true`) protection. Using the
+    [HTML Coded Character Set][2], attackers can inject `javascript:` code
+    snippets into the output. For example, the following input
+    `javascript&#x58document;alert(1)` will result in `alert(1)` being
+    executed when the user clicks on the link.
+
+
+
+    [1]: https://www.npmjs.com/package/marked
+    [2]: https://www.w3.org/MarkUp/html-spec/html-spec_13.html#SEC13
+    \n[`marked`][1] is a markdown parser and compiler used for rendering
+    markdown content to html.
+
+    It is vulnerable to content injection attack allowing the attacker to
+    bypass its output sanitization (`sanitize: true`) protection. Using the
+    [HTML Coded Character Set][2], attackers can inject `javascript:` code
+    snippets into the output. For example, the following input
+    `javascript&#x58document;alert(1)` will result in `alert(1)` being
+    executed when the user clicks on the link.
+
+
+
+    [1]: https://www.npmjs.com/package/marked
+    [2]: https://www.w3.org/MarkUp/html-spec/html-spec_13.html#SEC13
+    \n[`marked`][1] is a markdown parser and compiler used for rendering
+    markdown content to html.
+
+    It is vulnerable to content injection attack allowing the attacker to
+    bypass its output sanitization (`sanitize: true`) protection. Using the
+    [HTML Coded Character Set][2], attackers can inject `javascript:` code
+    snippets into the output. For example, the following input
+    `javascript&#x58document;alert(1)` will result in `alert(1)` being
+    executed when the user clicks on the link.
+
+
+
+    [1]: https://www.npmjs.com/package/marked
+    [2]: https://www.w3.org/MarkUp/html-spec/html-spec_13.html#SEC13
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+  affected_package: marked
+  vulnerable_versions:
+  - "<0.3.6"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2016-10531
+  cwe:
+  - CWE-79
+  credit:
+  - Matt Austin
+  references:
+  - https://github.com/chjj/marked/pull/592
+  - https://github.com/chjj/marked/pull/592/commits/2cff85979be8e7a026a9aca35542c470cf5da523
+  source_url: https://snyk.io/vuln/npm:marked:20150520
+- id: snykio:npm:marked:2017-01-12
+  title: Cross-site Scripting (XSS) via Data URIs
+  description: |+
+    [`marked`][1] is a markdown parser and compiler used for rendering
+    markdown content to html.
+
+    Affected versions of the package are vulnerable to Cross-site Scripting
+    (XSS). Data URIs enable embedding small files in line in HTML documents,
+    provided in the URL itself. Attackers can craft malicious web pages
+    containing either HTML or script code that utilizes the data URI scheme,
+    allowing them to bypass access controls or steal sensitive information.
+
+    An example of data URI used to deliver javascript code. The data holds
+    `<script>alert('XSS')</script>` tag in base64 encoded format.
+
+        [xss link](data:text/html;base64,PHNjcmlwdD5hbGVydCgnWFNTJyk8L3NjcmlwdD4K)
+
+
+
+    [1]: https://www.npmjs.com/package/marked
+    \n[`marked`][1] is a markdown parser and compiler used for rendering
+    markdown content to html.
+
+    Affected versions of the package are vulnerable to Cross-site Scripting
+    (XSS). Data URIs enable embedding small files in line in HTML documents,
+    provided in the URL itself. Attackers can craft malicious web pages
+    containing either HTML or script code that utilizes the data URI scheme,
+    allowing them to bypass access controls or steal sensitive information.
+
+    An example of data URI used to deliver javascript code. The data holds
+    `<script>alert('XSS')</script>` tag in base64 encoded format.
+
+        [xss link](data:text/html;base64,PHNjcmlwdD5hbGVydCgnWFNTJyk8L3NjcmlwdD4K)
+
+
+
+    [1]: https://www.npmjs.com/package/marked
+    \n[`marked`][1] is a markdown parser and compiler used for rendering
+    markdown content to html.
+
+    Affected versions of the package are vulnerable to Cross-site Scripting
+    (XSS). Data URIs enable embedding small files in line in HTML documents,
+    provided in the URL itself. Attackers can craft malicious web pages
+    containing either HTML or script code that utilizes the data URI scheme,
+    allowing them to bypass access controls or steal sensitive information.
+
+    An example of data URI used to deliver javascript code. The data holds
+    `<script>alert('XSS')</script>` tag in base64 encoded format.
+
+        [xss link](data:text/html;base64,PHNjcmlwdD5hbGVydCgnWFNTJyk8L3NjcmlwdD4K)
+
+
+
+    [1]: https://www.npmjs.com/package/marked
+    \n[`marked`][1] is a markdown parser and compiler used for rendering
+    markdown content to html.
+
+    Affected versions of the package are vulnerable to Cross-site Scripting
+    (XSS). Data URIs enable embedding small files in line in HTML documents,
+    provided in the URL itself. Attackers can craft malicious web pages
+    containing either HTML or script code that utilizes the data URI scheme,
+    allowing them to bypass access controls or steal sensitive information.
+
+    An example of data URI used to deliver javascript code. The data holds
+    `<script>alert('XSS')</script>` tag in base64 encoded format.
+
+        [xss link](data:text/html;base64,PHNjcmlwdD5hbGVydCgnWFNTJyk8L3NjcmlwdD4K)
+
+
+
+    [1]: https://www.npmjs.com/package/marked
+    \n[`marked`][1] is a markdown parser and compiler used for rendering
+    markdown content to html.
+
+    Affected versions of the package are vulnerable to Cross-site Scripting
+    (XSS). Data URIs enable embedding small files in line in HTML documents,
+    provided in the URL itself. Attackers can craft malicious web pages
+    containing either HTML or script code that utilizes the data URI scheme,
+    allowing them to bypass access controls or steal sensitive information.
+
+    An example of data URI used to deliver javascript code. The data holds
+    `<script>alert('XSS')</script>` tag in base64 encoded format.
+
+        [xss link](data:text/html;base64,PHNjcmlwdD5hbGVydCgnWFNTJyk8L3NjcmlwdD4K)
+
+
+
+    [1]: https://www.npmjs.com/package/marked
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+  affected_package: marked
+  vulnerable_versions:
+  - "<0.3.7"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2017-1000427
+  cwe:
+  - CWE-79
+  credit:
+  - Snyk Security Research Team
+  references:
+  - https://github.com/chjj/marked/commit/cd2f6f5b7091154c5526e79b5f3bfb4d15995a51
+  source_url: https://snyk.io/vuln/npm:marked:20170112
 - id: snykio:npm:marked:2017-08-15
   title: Cross-site Scripting (XSS)
   description: "[`marked`][1] is a markdown parser and compiler used for rendering\nmarkdown
@@ -2279,595 +3003,19 @@
   - https://github.com/chjj/marked/issues/937
   - https://github.com/chjj/marked/pull/958
   source_url: https://snyk.io/vuln/npm:marked:20170907
-- id: snykio:npm:marked:2017-01-12
-  title: Cross-site Scripting (XSS) via Data URIs
-  description: |+
-    [`marked`][1] is a markdown parser and compiler used for rendering
-    markdown content to html.
-
-    Affected versions of the package are vulnerable to Cross-site Scripting
-    (XSS). Data URIs enable embedding small files in line in HTML documents,
-    provided in the URL itself. Attackers can craft malicious web pages
-    containing either HTML or script code that utilizes the data URI scheme,
-    allowing them to bypass access controls or steal sensitive information.
-
-    An example of data URI used to deliver javascript code. The data holds
-    `<script>alert('XSS')</script>` tag in base64 encoded format.
-
-        [xss link](data:text/html;base64,PHNjcmlwdD5hbGVydCgnWFNTJyk8L3NjcmlwdD4K)
-
-
-
-    [1]: https://www.npmjs.com/package/marked
-    \n[`marked`][1] is a markdown parser and compiler used for rendering
-    markdown content to html.
-
-    Affected versions of the package are vulnerable to Cross-site Scripting
-    (XSS). Data URIs enable embedding small files in line in HTML documents,
-    provided in the URL itself. Attackers can craft malicious web pages
-    containing either HTML or script code that utilizes the data URI scheme,
-    allowing them to bypass access controls or steal sensitive information.
-
-    An example of data URI used to deliver javascript code. The data holds
-    `<script>alert('XSS')</script>` tag in base64 encoded format.
-
-        [xss link](data:text/html;base64,PHNjcmlwdD5hbGVydCgnWFNTJyk8L3NjcmlwdD4K)
-
-
-
-    [1]: https://www.npmjs.com/package/marked
-    \n[`marked`][1] is a markdown parser and compiler used for rendering
-    markdown content to html.
-
-    Affected versions of the package are vulnerable to Cross-site Scripting
-    (XSS). Data URIs enable embedding small files in line in HTML documents,
-    provided in the URL itself. Attackers can craft malicious web pages
-    containing either HTML or script code that utilizes the data URI scheme,
-    allowing them to bypass access controls or steal sensitive information.
-
-    An example of data URI used to deliver javascript code. The data holds
-    `<script>alert('XSS')</script>` tag in base64 encoded format.
-
-        [xss link](data:text/html;base64,PHNjcmlwdD5hbGVydCgnWFNTJyk8L3NjcmlwdD4K)
-
-
-
-    [1]: https://www.npmjs.com/package/marked
-    \n[`marked`][1] is a markdown parser and compiler used for rendering
-    markdown content to html.
-
-    Affected versions of the package are vulnerable to Cross-site Scripting
-    (XSS). Data URIs enable embedding small files in line in HTML documents,
-    provided in the URL itself. Attackers can craft malicious web pages
-    containing either HTML or script code that utilizes the data URI scheme,
-    allowing them to bypass access controls or steal sensitive information.
-
-    An example of data URI used to deliver javascript code. The data holds
-    `<script>alert('XSS')</script>` tag in base64 encoded format.
-
-        [xss link](data:text/html;base64,PHNjcmlwdD5hbGVydCgnWFNTJyk8L3NjcmlwdD4K)
-
-
-
-    [1]: https://www.npmjs.com/package/marked
-    \n[`marked`][1] is a markdown parser and compiler used for rendering
-    markdown content to html.
-
-    Affected versions of the package are vulnerable to Cross-site Scripting
-    (XSS). Data URIs enable embedding small files in line in HTML documents,
-    provided in the URL itself. Attackers can craft malicious web pages
-    containing either HTML or script code that utilizes the data URI scheme,
-    allowing them to bypass access controls or steal sensitive information.
-
-    An example of data URI used to deliver javascript code. The data holds
-    `<script>alert('XSS')</script>` tag in base64 encoded format.
-
-        [xss link](data:text/html;base64,PHNjcmlwdD5hbGVydCgnWFNTJyk8L3NjcmlwdD4K)
-
-
-
-    [1]: https://www.npmjs.com/package/marked
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-  affected_package: marked
-  vulnerable_versions:
-  - "<0.3.7"
-  severity: high
-  package_manager: npm
-  cve:
-  - CVE-2017-1000427
-  cwe:
-  - CWE-79
-  credit:
-  - Snyk Security Research Team
-  references:
-  - https://github.com/chjj/marked/commit/cd2f6f5b7091154c5526e79b5f3bfb4d15995a51
-  source_url: https://snyk.io/vuln/npm:marked:20170112
-- id: snykio:npm:marked:2015-05-20
-  title: Content & Code Injection (XSS)
-  description: |+
-    [`marked`][1] is a markdown parser and compiler used for rendering
-    markdown content to html.
-
-    It is vulnerable to content injection attack allowing the attacker to
-    bypass its output sanitization (`sanitize: true`) protection. Using the
-    [HTML Coded Character Set][2], attackers can inject `javascript:` code
-    snippets into the output. For example, the following input
-    `javascript&#x58document;alert(1)` will result in `alert(1)` being
-    executed when the user clicks on the link.
-
-
-
-    [1]: https://www.npmjs.com/package/marked
-    [2]: https://www.w3.org/MarkUp/html-spec/html-spec_13.html#SEC13
-    \n[`marked`][1] is a markdown parser and compiler used for rendering
-    markdown content to html.
-
-    It is vulnerable to content injection attack allowing the attacker to
-    bypass its output sanitization (`sanitize: true`) protection. Using the
-    [HTML Coded Character Set][2], attackers can inject `javascript:` code
-    snippets into the output. For example, the following input
-    `javascript&#x58document;alert(1)` will result in `alert(1)` being
-    executed when the user clicks on the link.
-
-
-
-    [1]: https://www.npmjs.com/package/marked
-    [2]: https://www.w3.org/MarkUp/html-spec/html-spec_13.html#SEC13
-    \n[`marked`][1] is a markdown parser and compiler used for rendering
-    markdown content to html.
-
-    It is vulnerable to content injection attack allowing the attacker to
-    bypass its output sanitization (`sanitize: true`) protection. Using the
-    [HTML Coded Character Set][2], attackers can inject `javascript:` code
-    snippets into the output. For example, the following input
-    `javascript&#x58document;alert(1)` will result in `alert(1)` being
-    executed when the user clicks on the link.
-
-
-
-    [1]: https://www.npmjs.com/package/marked
-    [2]: https://www.w3.org/MarkUp/html-spec/html-spec_13.html#SEC13
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-  affected_package: marked
-  vulnerable_versions:
-  - "<0.3.6"
-  severity: high
-  package_manager: npm
-  cve:
-  - CVE-2016-10531
-  cwe:
-  - CWE-79
-  credit:
-  - Matt Austin
-  references:
-  - https://github.com/chjj/marked/pull/592
-  - https://github.com/chjj/marked/pull/592/commits/2cff85979be8e7a026a9aca35542c470cf5da523
-  source_url: https://snyk.io/vuln/npm:marked:20150520
-- id: snykio:npm:marked:2014-01-30
-  title: VBScript Content Injection
-  description: |
-    Marked 0.3.2 and earlier is vulnerable to content injection even when
-    `sanitize: true` is enabled.
-
-    `[xss link](vbscript:alert(1))`
-
-    will get a link
-
-    `<a href="vbscript:alert(1)">xss link</a>`
-
-    This script does not work in IE 11 edge mode, but works in IE 10
-    compatibility view.
-
-    *Source: [Node Security Project][1]*
-
-
-
-    [1]: https://nodesecurity.io/advisories/24
-    \nMarked 0.3.2 and earlier is vulnerable to content injection even when
-    `sanitize: true` is enabled.
-
-    `[xss link](vbscript:alert(1))`
-
-    will get a link
-
-    `<a href="vbscript:alert(1)">xss link</a>`
-
-    This script does not work in IE 11 edge mode, but works in IE 10
-    compatibility view.
-
-    *Source: [Node Security Project][1]*
-
-
-
-    [1]: https://nodesecurity.io/advisories/24
-    \nMarked 0.3.2 and earlier is vulnerable to content injection even when
-    `sanitize: true` is enabled.
-
-    `[xss link](vbscript:alert(1))`
-
-    will get a link
-
-    `<a href="vbscript:alert(1)">xss link</a>`
-
-    This script does not work in IE 11 edge mode, but works in IE 10
-    compatibility view.
-
-    *Source: [Node Security Project][1]*
-
-
-
-    [1]: https://nodesecurity.io/advisories/24
-    \nMarked 0.3.2 and earlier is vulnerable to content injection even when
-    `sanitize: true` is enabled.
-
-    `[xss link](vbscript:alert(1))`
-
-    will get a link
-
-    `<a href="vbscript:alert(1)">xss link</a>`
-
-    This script does not work in IE 11 edge mode, but works in IE 10
-    compatibility view.
-
-    *Source: [Node Security Project][1]*
-
-
-
-    [1]: https://nodesecurity.io/advisories/24
-    \nMarked 0.3.2 and earlier is vulnerable to content injection even when
-    `sanitize: true` is enabled.
-
-    `[xss link](vbscript:alert(1))`
-
-    will get a link
-
-    `<a href="vbscript:alert(1)">xss link</a>`
-
-    This script does not work in IE 11 edge mode, but works in IE 10
-    compatibility view.
-
-    *Source: [Node Security Project][1]*
-
-
-
-    [1]: https://nodesecurity.io/advisories/24
-    \nMarked 0.3.2 and earlier is vulnerable to content injection even when
-    `sanitize: true` is enabled.
-
-    `[xss link](vbscript:alert(1))`
-
-    will get a link
-
-    `<a href="vbscript:alert(1)">xss link</a>`
-
-    This script does not work in IE 11 edge mode, but works in IE 10
-    compatibility view.
-
-    *Source: [Node Security Project][1]*
-
-
-
-    [1]: https://nodesecurity.io/advisories/24
-    \nMarked 0.3.2 and earlier is vulnerable to content injection even when
-    `sanitize: true` is enabled.
-
-    `[xss link](vbscript:alert(1))`
-
-    will get a link
-
-    `<a href="vbscript:alert(1)">xss link</a>`
-
-    This script does not work in IE 11 edge mode, but works in IE 10
-    compatibility view.
-
-    *Source: [Node Security Project][1]*
-
-
-
-    [1]: https://nodesecurity.io/advisories/24
-  affected_package: marked
-  vulnerable_versions:
-  - "<=0.3.2"
-  severity: medium
-  package_manager: npm
-  cve:
-  - CVE-2015-1370
-  cwe:
-  - CWE-74
-  credit:
-  - Xiao Long
-  references:
-  - https://github.com/chjj/marked/issues/492
-  source_url: https://snyk.io/vuln/npm:marked:20140131-2
-- id: snykio:npm:marked:2014-01-30
-  title: Regular Expression Denial of Service (DoS)
-  description: "[marked][1] is a markdown parser and compiler. Built for speed.\n\nAffected
-    versions of this package are vulnerable to Regular Expressions\nDenial of Service
-    (ReDoS) when certain types of input are passed in to\nbe parsed.\n\n\n\n[1]: https://github.com/markedjs/marked\n\\n[marked][1]
-    is a markdown parser and compiler. Built for speed.\n\nAffected versions of this
-    package are vulnerable to Regular Expressions\nDenial of Service (ReDoS) when
-    certain types of input are passed in to\nbe parsed.\n\n\n\n[1]: https://github.com/markedjs/marked\n\\n[marked][1]
-    is a markdown parser and compiler. Built for speed.\n\nAffected versions of this
-    package are vulnerable to Regular Expressions\nDenial of Service (ReDoS) when
-    certain types of input are passed in to\nbe parsed.\n\n\n\n[1]: https://github.com/markedjs/marked\n\\nDenial
+- id: snykio:npm:marked:2018-02-27
+  title: Regular Expression Denial of Service (ReDoS)
+  description: "[`marked`][1] is a markdown parser built for speed\n\nAffected versions
+    of this package are vulnerable to Regular Expression\nDenial of Service (ReDoS)
+    attacks. This can cause an impact of about 10\nseconds matching time for data
+    150 characters long.\n\n\n\n[1]: https://www.npmjs.com/package/marked\n\\n[`marked`][1]
+    is a markdown parser built for speed\n\nAffected versions of this package are
+    vulnerable to Regular Expression\nDenial of Service (ReDoS) attacks. This can
+    cause an impact of about 10\nseconds matching time for data 150 characters long.\n\n\n\n[1]:
+    https://www.npmjs.com/package/marked\n\\n[`marked`][1] is a markdown parser built
+    for speed\n\nAffected versions of this package are vulnerable to Regular Expression\nDenial
+    of Service (ReDoS) attacks. This can cause an impact of about 10\nseconds matching
+    time for data 150 characters long.\n\n\n\n[1]: https://www.npmjs.com/package/marked\n\\nDenial
     of Service (DoS) describes a family of attacks, all aimed at\nmaking a system
     inaccessible to its original and legitimate users. There\nare many types of DoS
     attacks, ranging from trying to clog the network\npipes to the system by generating
@@ -3716,163 +3864,15 @@
     consume CPU, resulting in a Denial\nof Service.\n\n\n\n[1]: https://regex101.com/debugger\n"
   affected_package: marked
   vulnerable_versions:
-  - "<=0.3.3"
+  - "<0.3.17"
   severity: high
   package_manager: npm
   cwe:
-  - CWE-730
+  - CWE-400
   - CWE-185
   credit:
-  - Barış Soner Uşaklı
+  - Jamie Davis
   references:
-  - https://github.com/chjj/marked/issues/497
-  source_url: https://snyk.io/vuln/npm:marked:20140131-1
-- id: snykio:npm:marked:2014-01-30
-  title: Multiple Content Injection Vulnerabilities
-  description: |
-    Marked comes with an option to sanitize user output to help protect
-    against content injection attacks.
-
-    sanitize: true
-
-    Even if this option is set, marked is vulnerable to content injection in
-    multiple locations if untrusted user input is allowed to be provided
-    into marked and that output is passed to the browser.
-
-    Injection is possible in two locations
-
-    * gfm codeblocks (language)
-    * javascript url\'s
-
-    *Source: [Node Security Project][1]*
-
-
-
-    [1]: https://nodesecurity.io/advisories/22
-    \nMarked comes with an option to sanitize user output to help protect
-    against content injection attacks.
-
-    sanitize: true
-
-    Even if this option is set, marked is vulnerable to content injection in
-    multiple locations if untrusted user input is allowed to be provided
-    into marked and that output is passed to the browser.
-
-    Injection is possible in two locations
-
-    * gfm codeblocks (language)
-    * javascript url\'s
-
-    *Source: [Node Security Project][1]*
-
-
-
-    [1]: https://nodesecurity.io/advisories/22
-    \nMarked comes with an option to sanitize user output to help protect
-    against content injection attacks.
-
-    sanitize: true
-
-    Even if this option is set, marked is vulnerable to content injection in
-    multiple locations if untrusted user input is allowed to be provided
-    into marked and that output is passed to the browser.
-
-    Injection is possible in two locations
-
-    * gfm codeblocks (language)
-    * javascript url\'s
-
-    *Source: [Node Security Project][1]*
-
-
-
-    [1]: https://nodesecurity.io/advisories/22
-    \nMarked comes with an option to sanitize user output to help protect
-    against content injection attacks.
-
-    sanitize: true
-
-    Even if this option is set, marked is vulnerable to content injection in
-    multiple locations if untrusted user input is allowed to be provided
-    into marked and that output is passed to the browser.
-
-    Injection is possible in two locations
-
-    * gfm codeblocks (language)
-    * javascript url\'s
-
-    *Source: [Node Security Project][1]*
-
-
-
-    [1]: https://nodesecurity.io/advisories/22
-    \nMarked comes with an option to sanitize user output to help protect
-    against content injection attacks.
-
-    sanitize: true
-
-    Even if this option is set, marked is vulnerable to content injection in
-    multiple locations if untrusted user input is allowed to be provided
-    into marked and that output is passed to the browser.
-
-    Injection is possible in two locations
-
-    * gfm codeblocks (language)
-    * javascript url\'s
-
-    *Source: [Node Security Project][1]*
-
-
-
-    [1]: https://nodesecurity.io/advisories/22
-    \nMarked comes with an option to sanitize user output to help protect
-    against content injection attacks.
-
-    sanitize: true
-
-    Even if this option is set, marked is vulnerable to content injection in
-    multiple locations if untrusted user input is allowed to be provided
-    into marked and that output is passed to the browser.
-
-    Injection is possible in two locations
-
-    * gfm codeblocks (language)
-    * javascript url\'s
-
-    *Source: [Node Security Project][1]*
-
-
-
-    [1]: https://nodesecurity.io/advisories/22
-    \nMarked comes with an option to sanitize user output to help protect
-    against content injection attacks.
-
-    sanitize: true
-
-    Even if this option is set, marked is vulnerable to content injection in
-    multiple locations if untrusted user input is allowed to be provided
-    into marked and that output is passed to the browser.
-
-    Injection is possible in two locations
-
-    * gfm codeblocks (language)
-    * javascript url\'s
-
-    *Source: [Node Security Project][1]*
-
-
-
-    [1]: https://nodesecurity.io/advisories/22
-  affected_package: marked
-  vulnerable_versions:
-  - "<=0.3.0"
-  severity: medium
-  package_manager: npm
-  cve:
-  - CVE-2014-3743
-  - CVE-2014-1850
-  cwe:
-  - CWE-74
-  credit:
-  - Adam Baldwin
-  source_url: https://snyk.io/vuln/npm:marked:20140131
+  - https://github.com/markedjs/marked/pull/1083
+  - https://github.com/markedjs/marked/pull/1083
+  source_url: https://snyk.io/vuln/npm:marked:20180225

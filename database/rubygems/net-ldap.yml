@@ -37,6 +37,44 @@
   - https://github.com/ruby-ldap/ruby-net-ldap/pull/279
   - https://github.com/ruby-ldap/ruby-net-ldap/commit/e4c46a223a19feda78393a793711353aa1febdcd
   source_url: https://github.com/ruby-ldap/ruby-net-ldap/issues/258
+- id: snykio:rubygems:net-ldap:2014-02-12
+  title: Information Exposure
+  description: |
+    [`net-ldap`][1] implements client access for the Lightweight Directory
+    Access Protocol (LDAP), an IETF standard protocol for accessing
+    distributed directory services. Affected versions of this gem generate
+    SSHA passwords with a weak salt value that is between 0 and 999. This
+    may allow a local attacker to more easily gain access to password
+    information.
+
+
+
+    [1]: https://rubygems.org/gems/net-ldap
+    \n[`net-ldap`][1] implements client access for the Lightweight Directory
+    Access Protocol (LDAP), an IETF standard protocol for accessing
+    distributed directory services. Affected versions of this gem generate
+    SSHA passwords with a weak salt value that is between 0 and 999. This
+    may allow a local attacker to more easily gain access to password
+    information.
+
+
+
+    [1]: https://rubygems.org/gems/net-ldap
+  affected_package: net-ldap
+  vulnerable_versions:
+  - "< 0.6.0"
+  severity: low
+  package_manager: rubygems
+  cve:
+  - CVE-2014-0083
+  cwe:
+  - CWE-200
+  credit:
+  - Unknown
+  references:
+  - http://rubysec.com/advisories/OSVDB-106108
+  - http://osvdb.org/show/osvdb/106108
+  source_url: https://snyk.io/vuln/SNYK-RUBY-NETLDAP-20146
 - id: snykio:rubygems:net-ldap:2016-06-14
   title: Man-in-the-Middle (MitM)
   description: |
@@ -92,41 +130,3 @@
   - https://github.com/ruby-ldap/ruby-net-ldap/issues/258
   - https://github.com/ruby-ldap/ruby-net-ldap/pull/279
   source_url: https://snyk.io/vuln/SNYK-RUBY-NETLDAP-22008
-- id: snykio:rubygems:net-ldap:2014-02-12
-  title: Information Exposure
-  description: |
-    [`net-ldap`][1] implements client access for the Lightweight Directory
-    Access Protocol (LDAP), an IETF standard protocol for accessing
-    distributed directory services. Affected versions of this gem generate
-    SSHA passwords with a weak salt value that is between 0 and 999. This
-    may allow a local attacker to more easily gain access to password
-    information.
-
-
-
-    [1]: https://rubygems.org/gems/net-ldap
-    \n[`net-ldap`][1] implements client access for the Lightweight Directory
-    Access Protocol (LDAP), an IETF standard protocol for accessing
-    distributed directory services. Affected versions of this gem generate
-    SSHA passwords with a weak salt value that is between 0 and 999. This
-    may allow a local attacker to more easily gain access to password
-    information.
-
-
-
-    [1]: https://rubygems.org/gems/net-ldap
-  affected_package: net-ldap
-  vulnerable_versions:
-  - "< 0.6.0"
-  severity: low
-  package_manager: rubygems
-  cve:
-  - CVE-2014-0083
-  cwe:
-  - CWE-200
-  credit:
-  - Unknown
-  references:
-  - http://rubysec.com/advisories/OSVDB-106108
-  - http://osvdb.org/show/osvdb/106108
-  source_url: https://snyk.io/vuln/SNYK-RUBY-NETLDAP-20146

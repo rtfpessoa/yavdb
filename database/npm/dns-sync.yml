@@ -1,23 +1,4 @@
 ---
-- id: nodesecurity:npm:dns-sync:2017-09-08
-  title: Command Injection
-  description: "Affected versions of `dns-sync` have an arbitrary command execution
-    vulnerability in the `resolve()` method. \n"
-  affected_package: dns-sync
-  vulnerable_versions:
-  - "<0.1.1"
-  patched_versions:
-  - ">=0.1.1"
-  severity: high
-  package_manager: npm
-  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H
-  credit:
-  - Cristian-Alexandru Staicu
-  references:
-  - |-
-    https://github.com/skoranga/node-dns-sync/issues/1)
-    https://github.com/skoranga/node-dns-sync/commit/d9abaae384b198db1095735ad9c1c73d7b890a0d)
-  source_url: https://nodesecurity.io/advisories/523
 - id: nodesecurity:npm:dns-sync:2017-04-11
   title: Command Injection
   description: |+
@@ -47,6 +28,42 @@
     https://github.com/skoranga/node-dns-sync/issues/1))
     https://github.com/skoranga/node-dns-sync/commit/d9abaae384b198db1095735ad9c1c73d7b890a0d))))
   source_url: https://nodesecurity.io/advisories/153
+- id: nodesecurity:npm:dns-sync:2017-09-08
+  title: Command Injection
+  description: "Affected versions of `dns-sync` have an arbitrary command execution
+    vulnerability in the `resolve()` method. \n"
+  affected_package: dns-sync
+  vulnerable_versions:
+  - "<0.1.1"
+  patched_versions:
+  - ">=0.1.1"
+  severity: high
+  package_manager: npm
+  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H
+  credit:
+  - Cristian-Alexandru Staicu
+  references:
+  - |-
+    https://github.com/skoranga/node-dns-sync/issues/1)
+    https://github.com/skoranga/node-dns-sync/commit/d9abaae384b198db1095735ad9c1c73d7b890a0d)
+  source_url: https://nodesecurity.io/advisories/523
+- id: ossindex:npm:dns-sync:1970-01-01
+  title: "[Duplicate] Command Injection"
+  description: |-
+    See https://ossindex.net/resource/cve/366572
+
+    Arbitrary command execution, triggered by a DNS lookup on malformed hostnames.
+  affected_package: dns-sync
+  vulnerable_versions:
+  - "<0.1.1"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - https://github.com/skoranga/node-dns-sync/commit/d9abaae384b198db1095735ad9c1c73d7b890a0d
+  - https://github.com/skoranga/node-dns-sync/issues/1
+  - https://nodesecurity.io/advisories/6
+  source_url: https://ossindex.net/resource/package/7013477511/vulnerabilities
 - id: ossindex:npm:dns-sync:2015-02-28
   title: "[CVE-2014-9682]  Improper Neutralization of Special Elements used in a Command
     (Command Injection)"
@@ -66,23 +83,86 @@
   - https://github.com/skoranga/node-dns-sync/commit/d9abaae384b198db1095735ad9c1c73d7b890a0d
   - https://github.com/skoranga/node-dns-sync/issues/1
   source_url: https://ossindex.net/resource/package/7013477511/vulnerabilities
-- id: ossindex:npm:dns-sync:1970-01-01
-  title: "[Duplicate] Command Injection"
-  description: |-
-    See https://ossindex.net/resource/cve/366572
+- id: snykio:npm:dns-sync:2014-11-11
+  title: Arbitrary Command Injection
+  description: |+
+    The dns-sync library for node.js allows resolving hostnames in a
+    synchronous fashion. All versions of dns-sync prior to the release 0.1.1
+    were vulnerable to arbitrary command execution via maliciously formed
+    hostnames.
 
-    Arbitrary command execution, triggered by a DNS lookup on malformed hostnames.
+    *Source: [Node Security Project][1]*
+
+
+
+    [1]: https://nodesecurity.io/advisories/6
+    \nThe dns-sync library for node.js allows resolving hostnames in a
+    synchronous fashion. All versions of dns-sync prior to the release 0.1.1
+    were vulnerable to arbitrary command execution via maliciously formed
+    hostnames.
+
+    *Source: [Node Security Project][1]*
+
+
+
+    [1]: https://nodesecurity.io/advisories/6
+    \nThe dns-sync library for node.js allows resolving hostnames in a
+    synchronous fashion. All versions of dns-sync prior to the release 0.1.1
+    were vulnerable to arbitrary command execution via maliciously formed
+    hostnames.
+
+    *Source: [Node Security Project][1]*
+
+
+
+    [1]: https://nodesecurity.io/advisories/6
+    \nFor example:
+
+        var dnsSync = require('dns-sync');
+        console.log(dnsSync.resolve('$(id > /tmp/foo)'));
+
+    This is caused by the hostname being passed through a shell as part of a
+    command execution.
+
+    \nFor example:
+
+        var dnsSync = require('dns-sync');
+        console.log(dnsSync.resolve('$(id > /tmp/foo)'));
+
+    This is caused by the hostname being passed through a shell as part of a
+    command execution.
+
+    \nFor example:
+
+        var dnsSync = require('dns-sync');
+        console.log(dnsSync.resolve('$(id > /tmp/foo)'));
+
+    This is caused by the hostname being passed through a shell as part of a
+    command execution.
+
+    \nFor example:
+
+        var dnsSync = require('dns-sync');
+        console.log(dnsSync.resolve('$(id > /tmp/foo)'));
+
+    This is caused by the hostname being passed through a shell as part of a
+    command execution.
+
   affected_package: dns-sync
   vulnerable_versions:
   - "<0.1.1"
+  severity: medium
   package_manager: npm
+  cve:
+  - CVE-2014-9682
+  cwe:
+  - CWE-77
   credit:
-  - OSSIndex
+  - Steve Kemp
   references:
-  - https://github.com/skoranga/node-dns-sync/commit/d9abaae384b198db1095735ad9c1c73d7b890a0d
   - https://github.com/skoranga/node-dns-sync/issues/1
-  - https://nodesecurity.io/advisories/6
-  source_url: https://ossindex.net/resource/package/7013477511/vulnerabilities
+  - https://github.com/skoranga/node-dns-sync/commit/d9abaae384b198db1095735ad9c1c73d7b890a0d
+  source_url: https://snyk.io/vuln/npm:dns-sync:20141111
 - id: snykio:npm:dns-sync:2017-09-08
   title: Regular Expression Denial of Service (ReDoS)
   description: "[`dns-sync`][1] is a dns resolver implemented in node.js\n\nAffected
@@ -953,83 +1033,3 @@
   references:
   - https://github.com/skoranga/node-dns-sync/issues/5
   source_url: https://snyk.io/vuln/npm:dns-sync:20170909
-- id: snykio:npm:dns-sync:2014-11-11
-  title: Arbitrary Command Injection
-  description: |+
-    The dns-sync library for node.js allows resolving hostnames in a
-    synchronous fashion. All versions of dns-sync prior to the release 0.1.1
-    were vulnerable to arbitrary command execution via maliciously formed
-    hostnames.
-
-    *Source: [Node Security Project][1]*
-
-
-
-    [1]: https://nodesecurity.io/advisories/6
-    \nThe dns-sync library for node.js allows resolving hostnames in a
-    synchronous fashion. All versions of dns-sync prior to the release 0.1.1
-    were vulnerable to arbitrary command execution via maliciously formed
-    hostnames.
-
-    *Source: [Node Security Project][1]*
-
-
-
-    [1]: https://nodesecurity.io/advisories/6
-    \nThe dns-sync library for node.js allows resolving hostnames in a
-    synchronous fashion. All versions of dns-sync prior to the release 0.1.1
-    were vulnerable to arbitrary command execution via maliciously formed
-    hostnames.
-
-    *Source: [Node Security Project][1]*
-
-
-
-    [1]: https://nodesecurity.io/advisories/6
-    \nFor example:
-
-        var dnsSync = require('dns-sync');
-        console.log(dnsSync.resolve('$(id > /tmp/foo)'));
-
-    This is caused by the hostname being passed through a shell as part of a
-    command execution.
-
-    \nFor example:
-
-        var dnsSync = require('dns-sync');
-        console.log(dnsSync.resolve('$(id > /tmp/foo)'));
-
-    This is caused by the hostname being passed through a shell as part of a
-    command execution.
-
-    \nFor example:
-
-        var dnsSync = require('dns-sync');
-        console.log(dnsSync.resolve('$(id > /tmp/foo)'));
-
-    This is caused by the hostname being passed through a shell as part of a
-    command execution.
-
-    \nFor example:
-
-        var dnsSync = require('dns-sync');
-        console.log(dnsSync.resolve('$(id > /tmp/foo)'));
-
-    This is caused by the hostname being passed through a shell as part of a
-    command execution.
-
-  affected_package: dns-sync
-  vulnerable_versions:
-  - "<0.1.1"
-  severity: medium
-  package_manager: npm
-  cve:
-  - CVE-2014-9682
-  cwe:
-  - CWE-77
-  credit:
-  - Steve Kemp
-  references:
-  - https://github.com/skoranga/node-dns-sync/issues/1
-  - https://github.com/skoranga/node-dns-sync/commit/d9abaae384b198db1095735ad9c1c73d7b890a0d
-  source_url: https://snyk.io/vuln/npm:dns-sync:20141111

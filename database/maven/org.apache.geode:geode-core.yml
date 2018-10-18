@@ -1,58 +1,351 @@
 ---
-- id: snykio:maven:org.apache.geode:geode-core:2018-06-13
-  title: Arbitrary Code Execution
+- id: snykio:maven:org.apache.geode:geode-core:2016-12-05
+  title: Authentication Bypass
   description: |
-    [org.apache.geode:geode-core][1] is a data management platform that
-    provides real-time, consistent access to data-intensive applications
-    throughout widely distributed cloud architectures.
-
-    Affected versions of this package are vulnerable to Arbitrary Code
-    Execution. When a Geode server is configured with a security manager, a
-    user with `DATA:WRITE` privileges is allowed to deploy code by invoking
-    an internal Geode function.
+    Affected versions of [`org.apache.geode:geode-core`][1] are vulnerable
+    to Authentication Bypass due to insufficient privilege restriction. A
+    malicious user can write a function to change the `securityManager`,
+    giving them access to the system.
 
 
 
-    [1]: https://github.com/apache/geode
-    \n[org.apache.geode:geode-core][1] is a data management platform that
-    provides real-time, consistent access to data-intensive applications
-    throughout widely distributed cloud architectures.
-
-    Affected versions of this package are vulnerable to Arbitrary Code
-    Execution. When a Geode server is configured with a security manager, a
-    user with `DATA:WRITE` privileges is allowed to deploy code by invoking
-    an internal Geode function.
+    [1]: https://geode.apache.org
+    \nAffected versions of [`org.apache.geode:geode-core`][1] are vulnerable
+    to Authentication Bypass due to insufficient privilege restriction. A
+    malicious user can write a function to change the `securityManager`,
+    giving them access to the system.
 
 
 
-    [1]: https://github.com/apache/geode
-    \n[org.apache.geode:geode-core][1] is a data management platform that
-    provides real-time, consistent access to data-intensive applications
-    throughout widely distributed cloud architectures.
-
-    Affected versions of this package are vulnerable to Arbitrary Code
-    Execution. When a Geode server is configured with a security manager, a
-    user with `DATA:WRITE` privileges is allowed to deploy code by invoking
-    an internal Geode function.
-
-
-
-    [1]: https://github.com/apache/geode
+    [1]: https://geode.apache.org
   affected_package: org.apache.geode:geode-core
   vulnerable_versions:
-  - ">= 1.0.0 < 1.5.0"
-  severity: high
+  - "< 1.1.0"
+  severity: medium
   package_manager: maven
-  cve:
-  - CVE-2017-15695
   cwe:
-  - CWE-94
+  - CWE-592
   credit:
   - Unknown
   references:
-  - https://lists.apache.org/thread.html/dc8875c0b924885a884eba6d5bd7dc3f123411b2d33cffd00e351c99@%3Cuser.geode.apache.org%3E
-  - https://issues.apache.org/jira/browse/GEODE-3974
-  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEGEODE-32373
+  - https://issues.apache.org/jira/browse/GEODE-2146
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEGEODE-30616
+- id: snykio:maven:org.apache.geode:geode-core:2016-12-27
+  title: Information Exposure
+  description: |
+    Affected versions of [`org.apache.geode:geode-core`][1] are vulnerable
+    to Information Exposure. When a cluster is operating in secure mode, a
+    user with read privileges for specific data regions can use the gfsh
+    command line utility to execute queries. In Apache Geode before 1.2.1,
+    the query results may contain data from another user\'s concurrently
+    executing gfsh query, potentially revealing data that the user is not
+    authorized to view.
+
+
+
+    [1]: https://geode.apache.org
+    \nAffected versions of [`org.apache.geode:geode-core`][1] are vulnerable
+    to Information Exposure. When a cluster is operating in secure mode, a
+    user with read privileges for specific data regions can use the gfsh
+    command line utility to execute queries. In Apache Geode before 1.2.1,
+    the query results may contain data from another user\'s concurrently
+    executing gfsh query, potentially revealing data that the user is not
+    authorized to view.
+
+
+
+    [1]: https://geode.apache.org
+  affected_package: org.apache.geode:geode-core
+  vulnerable_versions:
+  - "< 1.2.1"
+  severity: low
+  package_manager: maven
+  cve:
+  - CVE-2017-9794
+  cwe:
+  - CWE-300
+  credit:
+  - Jared Stewart
+  references:
+  - http://mail-archives.apache.org/mod_mbox/geode-user/201709.mbox/%3CCAEwge-FqzrT+deCkNkM-EQZuKfg-XuqY4cGjFiqxoKBVduY1Zw@mail.gmail.com%3E
+  - https://issues.apache.org/jira/browse/GEODE-3217
+  - https://cwiki.apache.org/confluence/display/GEODE/Release+Notes
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEGEODE-30642
+- id: snykio:maven:org.apache.geode:geode-core:2017-07-17
+  title: Information Exposure
+  description: |
+    Affected versions of [`org.apache.geode:geode-core`][1] are vulnerable
+    to Information Exposure. When an Apache Geode cluster before v1.2.1 is
+    operating in secure mode, an unauthenticated client can enter multi-user
+    authentication mode and send metadata messages. These metadata
+    operations could leak information about application data types. In
+    addition, an attacker could perform a denial of service attack on the
+    cluster.
+
+
+
+    [1]: https://geode.apache.org
+    \nAffected versions of [`org.apache.geode:geode-core`][1] are vulnerable
+    to Information Exposure. When an Apache Geode cluster before v1.2.1 is
+    operating in secure mode, an unauthenticated client can enter multi-user
+    authentication mode and send metadata messages. These metadata
+    operations could leak information about application data types. In
+    addition, an attacker could perform a denial of service attack on the
+    cluster.
+
+
+
+    [1]: https://geode.apache.org
+  affected_package: org.apache.geode:geode-core
+  vulnerable_versions:
+  - "< 1.2.1"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2017-9797
+  cwe:
+  - CWE-300
+  credit:
+  - Dan Smith
+  references:
+  - http://mail-archives.apache.org/mod_mbox/geode-user/201709.mbox/%3CCAEwge-Hrbb7JS8Nygrh7geyFvW4bMZ3AdCmPOzMfvbniipz0bA@mail.gmail.com%3E
+  - https://issues.apache.org/jira/browse/GEODE-3249
+  - https://cwiki.apache.org/confluence/display/GEODE/Release+Notes
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEGEODE-30643
+- id: snykio:maven:org.apache.geode:geode-core:2017-07-19
+  title: Arbitrary OQL Query Execution
+  description: |
+    [`org.apache.geode:geode-core`][1] is a data management platform that
+    provides real-time, consistent access to data-intensive applications
+    throughout widely distributed cloud architectures.
+
+    When an Apache Geode cluster before v1.3.0 is operating in secure mode,
+    a user with read access to specific regions within a Geode cluster may
+    execute OQL queries containing a region name as a bind parameter that
+    allow read access to objects within unauthorized regions.
+
+    A malicious user with read access to specific regions within a Geode
+    cluster may execute OQL queries containing a region name as a bind
+    parameter that allow read access to objects within unauthorized regions.
+
+
+
+    [1]: https://geode.apache.org
+    \n[`org.apache.geode:geode-core`][1] is a data management platform that
+    provides real-time, consistent access to data-intensive applications
+    throughout widely distributed cloud architectures.
+
+    When an Apache Geode cluster before v1.3.0 is operating in secure mode,
+    a user with read access to specific regions within a Geode cluster may
+    execute OQL queries containing a region name as a bind parameter that
+    allow read access to objects within unauthorized regions.
+
+    A malicious user with read access to specific regions within a Geode
+    cluster may execute OQL queries containing a region name as a bind
+    parameter that allow read access to objects within unauthorized regions.
+
+
+
+    [1]: https://geode.apache.org
+    \n[`org.apache.geode:geode-core`][1] is a data management platform that
+    provides real-time, consistent access to data-intensive applications
+    throughout widely distributed cloud architectures.
+
+    When an Apache Geode cluster before v1.3.0 is operating in secure mode,
+    a user with read access to specific regions within a Geode cluster may
+    execute OQL queries containing a region name as a bind parameter that
+    allow read access to objects within unauthorized regions.
+
+    A malicious user with read access to specific regions within a Geode
+    cluster may execute OQL queries containing a region name as a bind
+    parameter that allow read access to objects within unauthorized regions.
+
+
+
+    [1]: https://geode.apache.org
+    \n[`org.apache.geode:geode-core`][1] is a data management platform that
+    provides real-time, consistent access to data-intensive applications
+    throughout widely distributed cloud architectures.
+
+    When an Apache Geode cluster before v1.3.0 is operating in secure mode,
+    a user with read access to specific regions within a Geode cluster may
+    execute OQL queries containing a region name as a bind parameter that
+    allow read access to objects within unauthorized regions.
+
+    A malicious user with read access to specific regions within a Geode
+    cluster may execute OQL queries containing a region name as a bind
+    parameter that allow read access to objects within unauthorized regions.
+
+
+
+    [1]: https://geode.apache.org
+  affected_package: org.apache.geode:geode-core
+  vulnerable_versions:
+  - "< 1.3.0"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2017-9796
+  cwe:
+  - CWE-269
+  credit:
+  - Dan Smith
+  references:
+  - https://lists.apache.org/thread.html/e580d22195b6b61ff9cf866ac6dd6fe16e790ff0e14a3b1a22cd20b1@%3Cuser.geode.apache.org%3E
+  - https://issues.apache.org/jira/browse/GEODE-3248
+  - https://cwiki.apache.org/confluence/display/GEODE/Release+Notes#ReleaseNotes-SecurityVulnerabilities
+  - https://github.com/apache/geode/pull/837
+  - https://github.com/apache/geode/commit/02b9646618e074f80b3d5fed0e5b512a34b5897a
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEGEODE-32034
+- id: snykio:maven:org.apache.geode:geode-core:2017-07-19
+  title: Arbitrary Code Execution
+  description: |
+    [`org.apache.geode:geode-core`][1] is a data management platform that
+    provides real-time, consistent access to data-intensive applications
+    throughout widely distributed cloud architectures.
+
+    When an Apache Geode cluster before v1.3.0 is operating in secure mode,
+    a user with read access to specific regions within a Geode cluster may
+    execute OQL queries that allow read and write access to objects within
+    unauthorized regions. In addition a user could invoke methods that allow
+    remote code execution.
+
+    A malicious user with read access to specific regions within a Geode
+    cluster may execute OQL queries that allow read and write access to
+    objects within unauthorized regions. In addition a user could invoke
+    methods that allow remote code execution.
+
+
+
+    [1]: https://geode.apache.org
+    \n[`org.apache.geode:geode-core`][1] is a data management platform that
+    provides real-time, consistent access to data-intensive applications
+    throughout widely distributed cloud architectures.
+
+    When an Apache Geode cluster before v1.3.0 is operating in secure mode,
+    a user with read access to specific regions within a Geode cluster may
+    execute OQL queries that allow read and write access to objects within
+    unauthorized regions. In addition a user could invoke methods that allow
+    remote code execution.
+
+    A malicious user with read access to specific regions within a Geode
+    cluster may execute OQL queries that allow read and write access to
+    objects within unauthorized regions. In addition a user could invoke
+    methods that allow remote code execution.
+
+
+
+    [1]: https://geode.apache.org
+    \n[`org.apache.geode:geode-core`][1] is a data management platform that
+    provides real-time, consistent access to data-intensive applications
+    throughout widely distributed cloud architectures.
+
+    When an Apache Geode cluster before v1.3.0 is operating in secure mode,
+    a user with read access to specific regions within a Geode cluster may
+    execute OQL queries that allow read and write access to objects within
+    unauthorized regions. In addition a user could invoke methods that allow
+    remote code execution.
+
+    A malicious user with read access to specific regions within a Geode
+    cluster may execute OQL queries that allow read and write access to
+    objects within unauthorized regions. In addition a user could invoke
+    methods that allow remote code execution.
+
+
+
+    [1]: https://geode.apache.org
+    \n[`org.apache.geode:geode-core`][1] is a data management platform that
+    provides real-time, consistent access to data-intensive applications
+    throughout widely distributed cloud architectures.
+
+    When an Apache Geode cluster before v1.3.0 is operating in secure mode,
+    a user with read access to specific regions within a Geode cluster may
+    execute OQL queries that allow read and write access to objects within
+    unauthorized regions. In addition a user could invoke methods that allow
+    remote code execution.
+
+    A malicious user with read access to specific regions within a Geode
+    cluster may execute OQL queries that allow read and write access to
+    objects within unauthorized regions. In addition a user could invoke
+    methods that allow remote code execution.
+
+
+
+    [1]: https://geode.apache.org
+  affected_package: org.apache.geode:geode-core
+  vulnerable_versions:
+  - "< 1.3.0"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2017-9795
+  cwe:
+  - CWE-269
+  credit:
+  - Dan Smith
+  references:
+  - https://lists.apache.org/thread.html/0fc5ea3c1ea06fe7058a0ab56d593914b05f728a6c93c5a6755956c7@%3Cuser.geode.apache.org%3E
+  - https://issues.apache.org/jira/browse/GEODE-3247
+  - https://cwiki.apache.org/confluence/display/GEODE/Release+Notes#ReleaseNotes-SecurityVulnerabilities
+  - https://github.com/apache/geode/pull/837
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEGEODE-32029
+- id: snykio:maven:org.apache.geode:geode-core:2018-01-11
+  title: Information Exposure
+  description: |
+    [`org.apache.geode:geode-core`][1] is a data management platform that
+    provides real-time, consistent access to data-intensive applications
+    throughout widely distributed cloud architectures.
+
+    When an Apache Geode cluster before v1.3.0 is operating in secure mode
+    and an authenticated user connects to a Geode cluster using the gfsh
+    tool with HTTP, the user is able to obtain status information and
+    control cluster members even without CLUSTER:MANAGE privileges.
+
+
+
+    [1]: https://geode.apache.org
+    \n[`org.apache.geode:geode-core`][1] is a data management platform that
+    provides real-time, consistent access to data-intensive applications
+    throughout widely distributed cloud architectures.
+
+    When an Apache Geode cluster before v1.3.0 is operating in secure mode
+    and an authenticated user connects to a Geode cluster using the gfsh
+    tool with HTTP, the user is able to obtain status information and
+    control cluster members even without CLUSTER:MANAGE privileges.
+
+
+
+    [1]: https://geode.apache.org
+    \n[`org.apache.geode:geode-core`][1] is a data management platform that
+    provides real-time, consistent access to data-intensive applications
+    throughout widely distributed cloud architectures.
+
+    When an Apache Geode cluster before v1.3.0 is operating in secure mode
+    and an authenticated user connects to a Geode cluster using the gfsh
+    tool with HTTP, the user is able to obtain status information and
+    control cluster members even without CLUSTER:MANAGE privileges.
+
+
+
+    [1]: https://geode.apache.org
+  affected_package: org.apache.geode:geode-core
+  vulnerable_versions:
+  - "< 1.3.0"
+  severity: low
+  package_manager: maven
+  cve:
+  - CVE-2017-12622
+  cwe:
+  - CWE-200
+  credit:
+  - Patrick Rhomberg
+  references:
+  - https://lists.apache.org/thread.html/560578479dabbdc93d0ee8746b7c857549202ef82f43aa22496aa589@%3Cuser.geode.apache.org%3E
+  - https://issues.apache.org/jira/browse/GEODE-3685
+  - https://cwiki.apache.org/confluence/display/GEODE/Release+Notes#ReleaseNotes-SecurityVulnerabilities
+  - https://github.com/apache/geode/pull/838
+  - https://github.com/apache/geode/commit/db4a493efc09600bf0a9778d5274c09b23b16644
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEGEODE-32033
 - id: snykio:maven:org.apache.geode:geode-core:2018-02-01
   title: Authentication Bypass
   description: |
@@ -102,6 +395,63 @@
   - https://github.com/apache/geode/pull/1378
   - https://github.com/apache/geode/commit/80ad2d70435fb255a8a2d08c8866fbb30a7bedd3
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEGEODE-31640
+- id: snykio:maven:org.apache.geode:geode-core:2018-02-22
+  title: Authentication Bypass
+  description: |
+    [org.apache.geode:geode-core][1] is a data management platform that
+    provides real-time, consistent access to data-intensive applications
+    throughout widely distributed cloud architectures.
+
+    Affected versions of this package are vulnerable to Authentication
+    Bypass. The Geode configuration service does not properly authorize
+    configuration requests. This allows an unprivileged user who gains
+    access to the Geode locator to extract configuration data and previously
+    deployed application code.
+
+
+
+    [1]: https://github.com/apache/geode
+    \n[org.apache.geode:geode-core][1] is a data management platform that
+    provides real-time, consistent access to data-intensive applications
+    throughout widely distributed cloud architectures.
+
+    Affected versions of this package are vulnerable to Authentication
+    Bypass. The Geode configuration service does not properly authorize
+    configuration requests. This allows an unprivileged user who gains
+    access to the Geode locator to extract configuration data and previously
+    deployed application code.
+
+
+
+    [1]: https://github.com/apache/geode
+    \n[org.apache.geode:geode-core][1] is a data management platform that
+    provides real-time, consistent access to data-intensive applications
+    throughout widely distributed cloud architectures.
+
+    Affected versions of this package are vulnerable to Authentication
+    Bypass. The Geode configuration service does not properly authorize
+    configuration requests. This allows an unprivileged user who gains
+    access to the Geode locator to extract configuration data and previously
+    deployed application code.
+
+
+
+    [1]: https://github.com/apache/geode
+  affected_package: org.apache.geode:geode-core
+  vulnerable_versions:
+  - ">= 1.0.0 <= 1.4.0"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2017-15696
+  cwe:
+  - CWE-287
+  credit:
+  - Unknown
+  references:
+  - https://nvd.nist.gov/vuln/detail/CVE-2017-15696
+  - https://lists.apache.org/thread.html/28989e6ed0d3c29e46a489ae508302a50407a40691d5dc968f78cd3f@%3Cdev.geode.apache.org%3E
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEGEODE-32112
 - id: snykio:maven:org.apache.geode:geode-core:2018-02-27
   title: Deserialization of Untrusted Data
   description: "[org.apache.geode:geode-core][1] is a data management platform that\nprovides
@@ -799,18 +1149,17 @@
   - https://issues.apache.org/jira/browse/GEODE-3923
   - https://cwiki.apache.org/confluence/display/GEODE/Release+Notes#ReleaseNotes-SecurityVulnerabilities
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEGEODE-32113
-- id: snykio:maven:org.apache.geode:geode-core:2018-02-22
-  title: Authentication Bypass
+- id: snykio:maven:org.apache.geode:geode-core:2018-06-13
+  title: Arbitrary Code Execution
   description: |
     [org.apache.geode:geode-core][1] is a data management platform that
     provides real-time, consistent access to data-intensive applications
     throughout widely distributed cloud architectures.
 
-    Affected versions of this package are vulnerable to Authentication
-    Bypass. The Geode configuration service does not properly authorize
-    configuration requests. This allows an unprivileged user who gains
-    access to the Geode locator to extract configuration data and previously
-    deployed application code.
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution. When a Geode server is configured with a security manager, a
+    user with `DATA:WRITE` privileges is allowed to deploy code by invoking
+    an internal Geode function.
 
 
 
@@ -819,11 +1168,10 @@
     provides real-time, consistent access to data-intensive applications
     throughout widely distributed cloud architectures.
 
-    Affected versions of this package are vulnerable to Authentication
-    Bypass. The Geode configuration service does not properly authorize
-    configuration requests. This allows an unprivileged user who gains
-    access to the Geode locator to extract configuration data and previously
-    deployed application code.
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution. When a Geode server is configured with a security manager, a
+    user with `DATA:WRITE` privileges is allowed to deploy code by invoking
+    an internal Geode function.
 
 
 
@@ -832,374 +1180,26 @@
     provides real-time, consistent access to data-intensive applications
     throughout widely distributed cloud architectures.
 
-    Affected versions of this package are vulnerable to Authentication
-    Bypass. The Geode configuration service does not properly authorize
-    configuration requests. This allows an unprivileged user who gains
-    access to the Geode locator to extract configuration data and previously
-    deployed application code.
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution. When a Geode server is configured with a security manager, a
+    user with `DATA:WRITE` privileges is allowed to deploy code by invoking
+    an internal Geode function.
 
 
 
     [1]: https://github.com/apache/geode
   affected_package: org.apache.geode:geode-core
   vulnerable_versions:
-  - ">= 1.0.0 <= 1.4.0"
-  severity: medium
+  - ">= 1.0.0 < 1.5.0"
+  severity: high
   package_manager: maven
   cve:
-  - CVE-2017-15696
+  - CVE-2017-15695
   cwe:
-  - CWE-287
+  - CWE-94
   credit:
   - Unknown
   references:
-  - https://nvd.nist.gov/vuln/detail/CVE-2017-15696
-  - https://lists.apache.org/thread.html/28989e6ed0d3c29e46a489ae508302a50407a40691d5dc968f78cd3f@%3Cdev.geode.apache.org%3E
-  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEGEODE-32112
-- id: snykio:maven:org.apache.geode:geode-core:2017-07-19
-  title: Arbitrary OQL Query Execution
-  description: |
-    [`org.apache.geode:geode-core`][1] is a data management platform that
-    provides real-time, consistent access to data-intensive applications
-    throughout widely distributed cloud architectures.
-
-    When an Apache Geode cluster before v1.3.0 is operating in secure mode,
-    a user with read access to specific regions within a Geode cluster may
-    execute OQL queries containing a region name as a bind parameter that
-    allow read access to objects within unauthorized regions.
-
-    A malicious user with read access to specific regions within a Geode
-    cluster may execute OQL queries containing a region name as a bind
-    parameter that allow read access to objects within unauthorized regions.
-
-
-
-    [1]: https://geode.apache.org
-    \n[`org.apache.geode:geode-core`][1] is a data management platform that
-    provides real-time, consistent access to data-intensive applications
-    throughout widely distributed cloud architectures.
-
-    When an Apache Geode cluster before v1.3.0 is operating in secure mode,
-    a user with read access to specific regions within a Geode cluster may
-    execute OQL queries containing a region name as a bind parameter that
-    allow read access to objects within unauthorized regions.
-
-    A malicious user with read access to specific regions within a Geode
-    cluster may execute OQL queries containing a region name as a bind
-    parameter that allow read access to objects within unauthorized regions.
-
-
-
-    [1]: https://geode.apache.org
-    \n[`org.apache.geode:geode-core`][1] is a data management platform that
-    provides real-time, consistent access to data-intensive applications
-    throughout widely distributed cloud architectures.
-
-    When an Apache Geode cluster before v1.3.0 is operating in secure mode,
-    a user with read access to specific regions within a Geode cluster may
-    execute OQL queries containing a region name as a bind parameter that
-    allow read access to objects within unauthorized regions.
-
-    A malicious user with read access to specific regions within a Geode
-    cluster may execute OQL queries containing a region name as a bind
-    parameter that allow read access to objects within unauthorized regions.
-
-
-
-    [1]: https://geode.apache.org
-    \n[`org.apache.geode:geode-core`][1] is a data management platform that
-    provides real-time, consistent access to data-intensive applications
-    throughout widely distributed cloud architectures.
-
-    When an Apache Geode cluster before v1.3.0 is operating in secure mode,
-    a user with read access to specific regions within a Geode cluster may
-    execute OQL queries containing a region name as a bind parameter that
-    allow read access to objects within unauthorized regions.
-
-    A malicious user with read access to specific regions within a Geode
-    cluster may execute OQL queries containing a region name as a bind
-    parameter that allow read access to objects within unauthorized regions.
-
-
-
-    [1]: https://geode.apache.org
-  affected_package: org.apache.geode:geode-core
-  vulnerable_versions:
-  - "< 1.3.0"
-  severity: medium
-  package_manager: maven
-  cve:
-  - CVE-2017-9796
-  cwe:
-  - CWE-269
-  credit:
-  - Dan Smith
-  references:
-  - https://lists.apache.org/thread.html/e580d22195b6b61ff9cf866ac6dd6fe16e790ff0e14a3b1a22cd20b1@%3Cuser.geode.apache.org%3E
-  - https://issues.apache.org/jira/browse/GEODE-3248
-  - https://cwiki.apache.org/confluence/display/GEODE/Release+Notes#ReleaseNotes-SecurityVulnerabilities
-  - https://github.com/apache/geode/pull/837
-  - https://github.com/apache/geode/commit/02b9646618e074f80b3d5fed0e5b512a34b5897a
-  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEGEODE-32034
-- id: snykio:maven:org.apache.geode:geode-core:2018-01-11
-  title: Information Exposure
-  description: |
-    [`org.apache.geode:geode-core`][1] is a data management platform that
-    provides real-time, consistent access to data-intensive applications
-    throughout widely distributed cloud architectures.
-
-    When an Apache Geode cluster before v1.3.0 is operating in secure mode
-    and an authenticated user connects to a Geode cluster using the gfsh
-    tool with HTTP, the user is able to obtain status information and
-    control cluster members even without CLUSTER:MANAGE privileges.
-
-
-
-    [1]: https://geode.apache.org
-    \n[`org.apache.geode:geode-core`][1] is a data management platform that
-    provides real-time, consistent access to data-intensive applications
-    throughout widely distributed cloud architectures.
-
-    When an Apache Geode cluster before v1.3.0 is operating in secure mode
-    and an authenticated user connects to a Geode cluster using the gfsh
-    tool with HTTP, the user is able to obtain status information and
-    control cluster members even without CLUSTER:MANAGE privileges.
-
-
-
-    [1]: https://geode.apache.org
-    \n[`org.apache.geode:geode-core`][1] is a data management platform that
-    provides real-time, consistent access to data-intensive applications
-    throughout widely distributed cloud architectures.
-
-    When an Apache Geode cluster before v1.3.0 is operating in secure mode
-    and an authenticated user connects to a Geode cluster using the gfsh
-    tool with HTTP, the user is able to obtain status information and
-    control cluster members even without CLUSTER:MANAGE privileges.
-
-
-
-    [1]: https://geode.apache.org
-  affected_package: org.apache.geode:geode-core
-  vulnerable_versions:
-  - "< 1.3.0"
-  severity: low
-  package_manager: maven
-  cve:
-  - CVE-2017-12622
-  cwe:
-  - CWE-200
-  credit:
-  - Patrick Rhomberg
-  references:
-  - https://lists.apache.org/thread.html/560578479dabbdc93d0ee8746b7c857549202ef82f43aa22496aa589@%3Cuser.geode.apache.org%3E
-  - https://issues.apache.org/jira/browse/GEODE-3685
-  - https://cwiki.apache.org/confluence/display/GEODE/Release+Notes#ReleaseNotes-SecurityVulnerabilities
-  - https://github.com/apache/geode/pull/838
-  - https://github.com/apache/geode/commit/db4a493efc09600bf0a9778d5274c09b23b16644
-  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEGEODE-32033
-- id: snykio:maven:org.apache.geode:geode-core:2017-07-19
-  title: Arbitrary Code Execution
-  description: |
-    [`org.apache.geode:geode-core`][1] is a data management platform that
-    provides real-time, consistent access to data-intensive applications
-    throughout widely distributed cloud architectures.
-
-    When an Apache Geode cluster before v1.3.0 is operating in secure mode,
-    a user with read access to specific regions within a Geode cluster may
-    execute OQL queries that allow read and write access to objects within
-    unauthorized regions. In addition a user could invoke methods that allow
-    remote code execution.
-
-    A malicious user with read access to specific regions within a Geode
-    cluster may execute OQL queries that allow read and write access to
-    objects within unauthorized regions. In addition a user could invoke
-    methods that allow remote code execution.
-
-
-
-    [1]: https://geode.apache.org
-    \n[`org.apache.geode:geode-core`][1] is a data management platform that
-    provides real-time, consistent access to data-intensive applications
-    throughout widely distributed cloud architectures.
-
-    When an Apache Geode cluster before v1.3.0 is operating in secure mode,
-    a user with read access to specific regions within a Geode cluster may
-    execute OQL queries that allow read and write access to objects within
-    unauthorized regions. In addition a user could invoke methods that allow
-    remote code execution.
-
-    A malicious user with read access to specific regions within a Geode
-    cluster may execute OQL queries that allow read and write access to
-    objects within unauthorized regions. In addition a user could invoke
-    methods that allow remote code execution.
-
-
-
-    [1]: https://geode.apache.org
-    \n[`org.apache.geode:geode-core`][1] is a data management platform that
-    provides real-time, consistent access to data-intensive applications
-    throughout widely distributed cloud architectures.
-
-    When an Apache Geode cluster before v1.3.0 is operating in secure mode,
-    a user with read access to specific regions within a Geode cluster may
-    execute OQL queries that allow read and write access to objects within
-    unauthorized regions. In addition a user could invoke methods that allow
-    remote code execution.
-
-    A malicious user with read access to specific regions within a Geode
-    cluster may execute OQL queries that allow read and write access to
-    objects within unauthorized regions. In addition a user could invoke
-    methods that allow remote code execution.
-
-
-
-    [1]: https://geode.apache.org
-    \n[`org.apache.geode:geode-core`][1] is a data management platform that
-    provides real-time, consistent access to data-intensive applications
-    throughout widely distributed cloud architectures.
-
-    When an Apache Geode cluster before v1.3.0 is operating in secure mode,
-    a user with read access to specific regions within a Geode cluster may
-    execute OQL queries that allow read and write access to objects within
-    unauthorized regions. In addition a user could invoke methods that allow
-    remote code execution.
-
-    A malicious user with read access to specific regions within a Geode
-    cluster may execute OQL queries that allow read and write access to
-    objects within unauthorized regions. In addition a user could invoke
-    methods that allow remote code execution.
-
-
-
-    [1]: https://geode.apache.org
-  affected_package: org.apache.geode:geode-core
-  vulnerable_versions:
-  - "< 1.3.0"
-  severity: medium
-  package_manager: maven
-  cve:
-  - CVE-2017-9795
-  cwe:
-  - CWE-269
-  credit:
-  - Dan Smith
-  references:
-  - https://lists.apache.org/thread.html/0fc5ea3c1ea06fe7058a0ab56d593914b05f728a6c93c5a6755956c7@%3Cuser.geode.apache.org%3E
-  - https://issues.apache.org/jira/browse/GEODE-3247
-  - https://cwiki.apache.org/confluence/display/GEODE/Release+Notes#ReleaseNotes-SecurityVulnerabilities
-  - https://github.com/apache/geode/pull/837
-  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEGEODE-32029
-- id: snykio:maven:org.apache.geode:geode-core:2017-07-17
-  title: Information Exposure
-  description: |
-    Affected versions of [`org.apache.geode:geode-core`][1] are vulnerable
-    to Information Exposure. When an Apache Geode cluster before v1.2.1 is
-    operating in secure mode, an unauthenticated client can enter multi-user
-    authentication mode and send metadata messages. These metadata
-    operations could leak information about application data types. In
-    addition, an attacker could perform a denial of service attack on the
-    cluster.
-
-
-
-    [1]: https://geode.apache.org
-    \nAffected versions of [`org.apache.geode:geode-core`][1] are vulnerable
-    to Information Exposure. When an Apache Geode cluster before v1.2.1 is
-    operating in secure mode, an unauthenticated client can enter multi-user
-    authentication mode and send metadata messages. These metadata
-    operations could leak information about application data types. In
-    addition, an attacker could perform a denial of service attack on the
-    cluster.
-
-
-
-    [1]: https://geode.apache.org
-  affected_package: org.apache.geode:geode-core
-  vulnerable_versions:
-  - "< 1.2.1"
-  severity: medium
-  package_manager: maven
-  cve:
-  - CVE-2017-9797
-  cwe:
-  - CWE-300
-  credit:
-  - Dan Smith
-  references:
-  - http://mail-archives.apache.org/mod_mbox/geode-user/201709.mbox/%3CCAEwge-Hrbb7JS8Nygrh7geyFvW4bMZ3AdCmPOzMfvbniipz0bA@mail.gmail.com%3E
-  - https://issues.apache.org/jira/browse/GEODE-3249
-  - https://cwiki.apache.org/confluence/display/GEODE/Release+Notes
-  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEGEODE-30643
-- id: snykio:maven:org.apache.geode:geode-core:2016-12-27
-  title: Information Exposure
-  description: |
-    Affected versions of [`org.apache.geode:geode-core`][1] are vulnerable
-    to Information Exposure. When a cluster is operating in secure mode, a
-    user with read privileges for specific data regions can use the gfsh
-    command line utility to execute queries. In Apache Geode before 1.2.1,
-    the query results may contain data from another user\'s concurrently
-    executing gfsh query, potentially revealing data that the user is not
-    authorized to view.
-
-
-
-    [1]: https://geode.apache.org
-    \nAffected versions of [`org.apache.geode:geode-core`][1] are vulnerable
-    to Information Exposure. When a cluster is operating in secure mode, a
-    user with read privileges for specific data regions can use the gfsh
-    command line utility to execute queries. In Apache Geode before 1.2.1,
-    the query results may contain data from another user\'s concurrently
-    executing gfsh query, potentially revealing data that the user is not
-    authorized to view.
-
-
-
-    [1]: https://geode.apache.org
-  affected_package: org.apache.geode:geode-core
-  vulnerable_versions:
-  - "< 1.2.1"
-  severity: low
-  package_manager: maven
-  cve:
-  - CVE-2017-9794
-  cwe:
-  - CWE-300
-  credit:
-  - Jared Stewart
-  references:
-  - http://mail-archives.apache.org/mod_mbox/geode-user/201709.mbox/%3CCAEwge-FqzrT+deCkNkM-EQZuKfg-XuqY4cGjFiqxoKBVduY1Zw@mail.gmail.com%3E
-  - https://issues.apache.org/jira/browse/GEODE-3217
-  - https://cwiki.apache.org/confluence/display/GEODE/Release+Notes
-  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEGEODE-30642
-- id: snykio:maven:org.apache.geode:geode-core:2016-12-05
-  title: Authentication Bypass
-  description: |
-    Affected versions of [`org.apache.geode:geode-core`][1] are vulnerable
-    to Authentication Bypass due to insufficient privilege restriction. A
-    malicious user can write a function to change the `securityManager`,
-    giving them access to the system.
-
-
-
-    [1]: https://geode.apache.org
-    \nAffected versions of [`org.apache.geode:geode-core`][1] are vulnerable
-    to Authentication Bypass due to insufficient privilege restriction. A
-    malicious user can write a function to change the `securityManager`,
-    giving them access to the system.
-
-
-
-    [1]: https://geode.apache.org
-  affected_package: org.apache.geode:geode-core
-  vulnerable_versions:
-  - "< 1.1.0"
-  severity: medium
-  package_manager: maven
-  cwe:
-  - CWE-592
-  credit:
-  - Unknown
-  references:
-  - https://issues.apache.org/jira/browse/GEODE-2146
-  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEGEODE-30616
+  - https://lists.apache.org/thread.html/dc8875c0b924885a884eba6d5bd7dc3f123411b2d33cffd00e351c99@%3Cuser.geode.apache.org%3E
+  - https://issues.apache.org/jira/browse/GEODE-3974
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEGEODE-32373

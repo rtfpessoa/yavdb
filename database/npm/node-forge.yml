@@ -1,4 +1,156 @@
 ---
+- id: snykio:npm:node-forge:2015-06-25
+  title: Timing Attack
+  description: |
+    [`node-forge`][1] is a JavaScript implementation of network transports,
+    cryptography, ciphers, PKI, message digests, and various utilities.
+    Affected versions of the package are vulnerable to a Timing Attack due
+    to unsafe HMAC comparison. The HMAC algorithm produces a keyed message
+    by pairing a hash function with a cryptographic key. Both the key and a
+    message serve as input to this algorithm, while it outputs a
+    fixed-length digest output which can be sent with the message. Anyone
+    who knows the key can repeat the algorithm and compare their calculated
+    HMAC with one they have received, to verify a message originated from
+    someone with knowledge of the key and has not been tampered with.
+
+    The problem begins when trying to compare two HMACs. This is the part of
+    code that handles the comparison:
+
+        if(byteArrayA.length != byteArrayB.length) { return false; }
+        for(int i = 0; i < byteArrayA.length; i++) {
+          if(byteArrayA[i] != byteArrayB[i]) { return false; }
+        }
+        return true;
+
+    The issue is that the more bytes match in the two arrays, the more
+    comparisons are formed and the longer it\'ll take to return a result.
+    This may allow attackers to brute force their way into the servers.
+
+
+
+    [1]: https://www.npmjs.com/package/node-forge
+    \n[`node-forge`][1] is a JavaScript implementation of network transports,
+    cryptography, ciphers, PKI, message digests, and various utilities.
+    Affected versions of the package are vulnerable to a Timing Attack due
+    to unsafe HMAC comparison. The HMAC algorithm produces a keyed message
+    by pairing a hash function with a cryptographic key. Both the key and a
+    message serve as input to this algorithm, while it outputs a
+    fixed-length digest output which can be sent with the message. Anyone
+    who knows the key can repeat the algorithm and compare their calculated
+    HMAC with one they have received, to verify a message originated from
+    someone with knowledge of the key and has not been tampered with.
+
+    The problem begins when trying to compare two HMACs. This is the part of
+    code that handles the comparison:
+
+        if(byteArrayA.length != byteArrayB.length) { return false; }
+        for(int i = 0; i < byteArrayA.length; i++) {
+          if(byteArrayA[i] != byteArrayB[i]) { return false; }
+        }
+        return true;
+
+    The issue is that the more bytes match in the two arrays, the more
+    comparisons are formed and the longer it\'ll take to return a result.
+    This may allow attackers to brute force their way into the servers.
+
+
+
+    [1]: https://www.npmjs.com/package/node-forge
+    \n[`node-forge`][1] is a JavaScript implementation of network transports,
+    cryptography, ciphers, PKI, message digests, and various utilities.
+    Affected versions of the package are vulnerable to a Timing Attack due
+    to unsafe HMAC comparison. The HMAC algorithm produces a keyed message
+    by pairing a hash function with a cryptographic key. Both the key and a
+    message serve as input to this algorithm, while it outputs a
+    fixed-length digest output which can be sent with the message. Anyone
+    who knows the key can repeat the algorithm and compare their calculated
+    HMAC with one they have received, to verify a message originated from
+    someone with knowledge of the key and has not been tampered with.
+
+    The problem begins when trying to compare two HMACs. This is the part of
+    code that handles the comparison:
+
+        if(byteArrayA.length != byteArrayB.length) { return false; }
+        for(int i = 0; i < byteArrayA.length; i++) {
+          if(byteArrayA[i] != byteArrayB[i]) { return false; }
+        }
+        return true;
+
+    The issue is that the more bytes match in the two arrays, the more
+    comparisons are formed and the longer it\'ll take to return a result.
+    This may allow attackers to brute force their way into the servers.
+
+
+
+    [1]: https://www.npmjs.com/package/node-forge
+    \n[`node-forge`][1] is a JavaScript implementation of network transports,
+    cryptography, ciphers, PKI, message digests, and various utilities.
+    Affected versions of the package are vulnerable to a Timing Attack due
+    to unsafe HMAC comparison. The HMAC algorithm produces a keyed message
+    by pairing a hash function with a cryptographic key. Both the key and a
+    message serve as input to this algorithm, while it outputs a
+    fixed-length digest output which can be sent with the message. Anyone
+    who knows the key can repeat the algorithm and compare their calculated
+    HMAC with one they have received, to verify a message originated from
+    someone with knowledge of the key and has not been tampered with.
+
+    The problem begins when trying to compare two HMACs. This is the part of
+    code that handles the comparison:
+
+        if(byteArrayA.length != byteArrayB.length) { return false; }
+        for(int i = 0; i < byteArrayA.length; i++) {
+          if(byteArrayA[i] != byteArrayB[i]) { return false; }
+        }
+        return true;
+
+    The issue is that the more bytes match in the two arrays, the more
+    comparisons are formed and the longer it\'ll take to return a result.
+    This may allow attackers to brute force their way into the servers.
+
+
+
+    [1]: https://www.npmjs.com/package/node-forge
+    \n[`node-forge`][1] is a JavaScript implementation of network transports,
+    cryptography, ciphers, PKI, message digests, and various utilities.
+    Affected versions of the package are vulnerable to a Timing Attack due
+    to unsafe HMAC comparison. The HMAC algorithm produces a keyed message
+    by pairing a hash function with a cryptographic key. Both the key and a
+    message serve as input to this algorithm, while it outputs a
+    fixed-length digest output which can be sent with the message. Anyone
+    who knows the key can repeat the algorithm and compare their calculated
+    HMAC with one they have received, to verify a message originated from
+    someone with knowledge of the key and has not been tampered with.
+
+    The problem begins when trying to compare two HMACs. This is the part of
+    code that handles the comparison:
+
+        if(byteArrayA.length != byteArrayB.length) { return false; }
+        for(int i = 0; i < byteArrayA.length; i++) {
+          if(byteArrayA[i] != byteArrayB[i]) { return false; }
+        }
+        return true;
+
+    The issue is that the more bytes match in the two arrays, the more
+    comparisons are formed and the longer it\'ll take to return a result.
+    This may allow attackers to brute force their way into the servers.
+
+
+
+    [1]: https://www.npmjs.com/package/node-forge
+  affected_package: node-forge
+  vulnerable_versions:
+  - "<0.6.33"
+  severity: medium
+  package_manager: npm
+  cwe:
+  - CWE-208
+  credit:
+  - Dave Longley
+  references:
+  - https://github.com/digitalbazaar/forge/commit/17c6aaf2fa3bb0fc8756c561c541dd8e8127e1dd
+  - https://www.nccgroup.trust/us/about-us/newsroom-and-events/blog/2011/february/double-hmac-verification/
+  - https://rdist.root.org/2010/07/19/exploiting-remote-timing-attacks/
+  source_url: https://snyk.io/vuln/npm:node-forge:20150626
 - id: snykio:npm:node-forge:2018-02-26
   title: Regular Expression Denial of Service (ReDoS)
   description: "[`node-forge`][1] is a native implementation of TLS (and various other\ncryptographic
@@ -874,155 +1026,3 @@
   - https://github.com/digitalbazaar/forge/pull/570
   - https://github.com/digitalbazaar/forge/commit/8a2fd33f0cc3a57b15885fb9f976fc677896dd7a
   source_url: https://snyk.io/vuln/npm:node-forge:20180226
-- id: snykio:npm:node-forge:2015-06-25
-  title: Timing Attack
-  description: |
-    [`node-forge`][1] is a JavaScript implementation of network transports,
-    cryptography, ciphers, PKI, message digests, and various utilities.
-    Affected versions of the package are vulnerable to a Timing Attack due
-    to unsafe HMAC comparison. The HMAC algorithm produces a keyed message
-    by pairing a hash function with a cryptographic key. Both the key and a
-    message serve as input to this algorithm, while it outputs a
-    fixed-length digest output which can be sent with the message. Anyone
-    who knows the key can repeat the algorithm and compare their calculated
-    HMAC with one they have received, to verify a message originated from
-    someone with knowledge of the key and has not been tampered with.
-
-    The problem begins when trying to compare two HMACs. This is the part of
-    code that handles the comparison:
-
-        if(byteArrayA.length != byteArrayB.length) { return false; }
-        for(int i = 0; i < byteArrayA.length; i++) {
-          if(byteArrayA[i] != byteArrayB[i]) { return false; }
-        }
-        return true;
-
-    The issue is that the more bytes match in the two arrays, the more
-    comparisons are formed and the longer it\'ll take to return a result.
-    This may allow attackers to brute force their way into the servers.
-
-
-
-    [1]: https://www.npmjs.com/package/node-forge
-    \n[`node-forge`][1] is a JavaScript implementation of network transports,
-    cryptography, ciphers, PKI, message digests, and various utilities.
-    Affected versions of the package are vulnerable to a Timing Attack due
-    to unsafe HMAC comparison. The HMAC algorithm produces a keyed message
-    by pairing a hash function with a cryptographic key. Both the key and a
-    message serve as input to this algorithm, while it outputs a
-    fixed-length digest output which can be sent with the message. Anyone
-    who knows the key can repeat the algorithm and compare their calculated
-    HMAC with one they have received, to verify a message originated from
-    someone with knowledge of the key and has not been tampered with.
-
-    The problem begins when trying to compare two HMACs. This is the part of
-    code that handles the comparison:
-
-        if(byteArrayA.length != byteArrayB.length) { return false; }
-        for(int i = 0; i < byteArrayA.length; i++) {
-          if(byteArrayA[i] != byteArrayB[i]) { return false; }
-        }
-        return true;
-
-    The issue is that the more bytes match in the two arrays, the more
-    comparisons are formed and the longer it\'ll take to return a result.
-    This may allow attackers to brute force their way into the servers.
-
-
-
-    [1]: https://www.npmjs.com/package/node-forge
-    \n[`node-forge`][1] is a JavaScript implementation of network transports,
-    cryptography, ciphers, PKI, message digests, and various utilities.
-    Affected versions of the package are vulnerable to a Timing Attack due
-    to unsafe HMAC comparison. The HMAC algorithm produces a keyed message
-    by pairing a hash function with a cryptographic key. Both the key and a
-    message serve as input to this algorithm, while it outputs a
-    fixed-length digest output which can be sent with the message. Anyone
-    who knows the key can repeat the algorithm and compare their calculated
-    HMAC with one they have received, to verify a message originated from
-    someone with knowledge of the key and has not been tampered with.
-
-    The problem begins when trying to compare two HMACs. This is the part of
-    code that handles the comparison:
-
-        if(byteArrayA.length != byteArrayB.length) { return false; }
-        for(int i = 0; i < byteArrayA.length; i++) {
-          if(byteArrayA[i] != byteArrayB[i]) { return false; }
-        }
-        return true;
-
-    The issue is that the more bytes match in the two arrays, the more
-    comparisons are formed and the longer it\'ll take to return a result.
-    This may allow attackers to brute force their way into the servers.
-
-
-
-    [1]: https://www.npmjs.com/package/node-forge
-    \n[`node-forge`][1] is a JavaScript implementation of network transports,
-    cryptography, ciphers, PKI, message digests, and various utilities.
-    Affected versions of the package are vulnerable to a Timing Attack due
-    to unsafe HMAC comparison. The HMAC algorithm produces a keyed message
-    by pairing a hash function with a cryptographic key. Both the key and a
-    message serve as input to this algorithm, while it outputs a
-    fixed-length digest output which can be sent with the message. Anyone
-    who knows the key can repeat the algorithm and compare their calculated
-    HMAC with one they have received, to verify a message originated from
-    someone with knowledge of the key and has not been tampered with.
-
-    The problem begins when trying to compare two HMACs. This is the part of
-    code that handles the comparison:
-
-        if(byteArrayA.length != byteArrayB.length) { return false; }
-        for(int i = 0; i < byteArrayA.length; i++) {
-          if(byteArrayA[i] != byteArrayB[i]) { return false; }
-        }
-        return true;
-
-    The issue is that the more bytes match in the two arrays, the more
-    comparisons are formed and the longer it\'ll take to return a result.
-    This may allow attackers to brute force their way into the servers.
-
-
-
-    [1]: https://www.npmjs.com/package/node-forge
-    \n[`node-forge`][1] is a JavaScript implementation of network transports,
-    cryptography, ciphers, PKI, message digests, and various utilities.
-    Affected versions of the package are vulnerable to a Timing Attack due
-    to unsafe HMAC comparison. The HMAC algorithm produces a keyed message
-    by pairing a hash function with a cryptographic key. Both the key and a
-    message serve as input to this algorithm, while it outputs a
-    fixed-length digest output which can be sent with the message. Anyone
-    who knows the key can repeat the algorithm and compare their calculated
-    HMAC with one they have received, to verify a message originated from
-    someone with knowledge of the key and has not been tampered with.
-
-    The problem begins when trying to compare two HMACs. This is the part of
-    code that handles the comparison:
-
-        if(byteArrayA.length != byteArrayB.length) { return false; }
-        for(int i = 0; i < byteArrayA.length; i++) {
-          if(byteArrayA[i] != byteArrayB[i]) { return false; }
-        }
-        return true;
-
-    The issue is that the more bytes match in the two arrays, the more
-    comparisons are formed and the longer it\'ll take to return a result.
-    This may allow attackers to brute force their way into the servers.
-
-
-
-    [1]: https://www.npmjs.com/package/node-forge
-  affected_package: node-forge
-  vulnerable_versions:
-  - "<0.6.33"
-  severity: medium
-  package_manager: npm
-  cwe:
-  - CWE-208
-  credit:
-  - Dave Longley
-  references:
-  - https://github.com/digitalbazaar/forge/commit/17c6aaf2fa3bb0fc8756c561c541dd8e8127e1dd
-  - https://www.nccgroup.trust/us/about-us/newsroom-and-events/blog/2011/february/double-hmac-verification/
-  - https://rdist.root.org/2010/07/19/exploiting-remote-timing-attacks/
-  source_url: https://snyk.io/vuln/npm:node-forge:20150626

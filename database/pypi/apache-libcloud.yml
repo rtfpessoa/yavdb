@@ -1,28 +1,26 @@
 ---
-- id: ossindex:pypi:apache-libcloud:2014-01-07
-  title: "[CVE-2013-6480]  Information Exposure"
-  description: Libcloud 0.12.3 through 0.13.2 does not set the scrub_data parameter
-    for the destroy DigitalOcean API, which allows local users to obtain sensitive
-    information by leveraging a new VM.
+- id: ossindex:pypi:apache-libcloud:2011-09-12
+  title: "[CVE-2010-4340]  Permissions, Privileges, and Access Controls"
+  description: libcloud before 0.4.1 does not verify SSL certificates for HTTPS connections,
+    which allows remote attackers to spoof certificates and bypass intended access
+    restrictions via a man-in-the-middle (MITM) attack.
   affected_package: apache-libcloud
   vulnerable_versions:
-  - 0.12.3
-  - 0.12.4
-  - 0.13.0
-  - 0.13.1
-  - 0.13.2
+  - 0.2.0
+  - 0.3.0
+  - 0.3.1
+  - 0.4.0
   package_manager: pypi
   cve:
-  - CVE-2013-6480
+  - CVE-2010-4340
   credit:
   - OSSIndex
   references:
-  - http://libcloud.apache.org/security.html
-  - http://lists.opensuse.org/opensuse-updates/2014-02/msg00015.html
-  - http://www.securityfocus.com/archive/1/archive/1/530624/100/0/threaded
-  - http://www.securityfocus.com/bid/64617
-  - https://digitalocean.com/blog_posts/transparency-regarding-data-security
-  - https://github.com/fog/fog/issues/2525
+  - http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=598463
+  - http://mail-archives.apache.org/mod_mbox/incubator-libcloud/201009.mbox/%3C5860913.463891285776633273.JavaMail.jira@thor%3E
+  - http://mail-archives.apache.org/mod_mbox/incubator-libcloud/201011.mbox/browser
+  - http://wiki.apache.org/incubator/LibcloudSSL
+  - https://issues.apache.org/jira/browse/LIBCLOUD-55
   source_url: https://ossindex.net/resource/package/8400762643/vulnerabilities
 - id: ossindex:pypi:apache-libcloud:2012-11-04
   title: "[CVE-2012-3446]  Improper Input Validation"
@@ -57,28 +55,30 @@
   - http://www.cs.utexas.edu/~shmat/shmat_ccs12.pdf
   - https://svn.apache.org/repos/asf/libcloud/trunk/CHANGES
   source_url: https://ossindex.net/resource/package/8400762643/vulnerabilities
-- id: ossindex:pypi:apache-libcloud:2011-09-12
-  title: "[CVE-2010-4340]  Permissions, Privileges, and Access Controls"
-  description: libcloud before 0.4.1 does not verify SSL certificates for HTTPS connections,
-    which allows remote attackers to spoof certificates and bypass intended access
-    restrictions via a man-in-the-middle (MITM) attack.
+- id: ossindex:pypi:apache-libcloud:2014-01-07
+  title: "[CVE-2013-6480]  Information Exposure"
+  description: Libcloud 0.12.3 through 0.13.2 does not set the scrub_data parameter
+    for the destroy DigitalOcean API, which allows local users to obtain sensitive
+    information by leveraging a new VM.
   affected_package: apache-libcloud
   vulnerable_versions:
-  - 0.2.0
-  - 0.3.0
-  - 0.3.1
-  - 0.4.0
+  - 0.12.3
+  - 0.12.4
+  - 0.13.0
+  - 0.13.1
+  - 0.13.2
   package_manager: pypi
   cve:
-  - CVE-2010-4340
+  - CVE-2013-6480
   credit:
   - OSSIndex
   references:
-  - http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=598463
-  - http://mail-archives.apache.org/mod_mbox/incubator-libcloud/201009.mbox/%3C5860913.463891285776633273.JavaMail.jira@thor%3E
-  - http://mail-archives.apache.org/mod_mbox/incubator-libcloud/201011.mbox/browser
-  - http://wiki.apache.org/incubator/LibcloudSSL
-  - https://issues.apache.org/jira/browse/LIBCLOUD-55
+  - http://libcloud.apache.org/security.html
+  - http://lists.opensuse.org/opensuse-updates/2014-02/msg00015.html
+  - http://www.securityfocus.com/archive/1/archive/1/530624/100/0/threaded
+  - http://www.securityfocus.com/bid/64617
+  - https://digitalocean.com/blog_posts/transparency-regarding-data-security
+  - https://github.com/fog/fog/issues/2525
   source_url: https://ossindex.net/resource/package/8400762643/vulnerabilities
 - id: snykio:pypi:apache-libcloud:2017-04-13
   title: Information Exposure
@@ -242,40 +242,6 @@
   - http://libcloud.apache.org/security.html
   source_url: https://snyk.io/vuln/SNYK-PYTHON-APACHELIBCLOUD-40001
 - id: victims:pypi:apache-libcloud:date
-  title: SSL MITM vulnerability
-  affected_package: apache-libcloud
-  vulnerable_versions:
-  - "<=0.4.1"
-  patched_versions:
-  - ">=0.4.2"
-  severity: high
-  package_manager: pypi
-  cve:
-  - 2010-4340
-  credit:
-  - Victims CVE Database
-  references:
-  - http://libcloud.apache.org/security.html
-  source_url: https://github.com/victims/victims-cve-db/blob/master/database/python/2010/4340.yaml
-- id: victims:pypi:apache-libcloud:date
-  title: Possible SSL MITM due to invalid regular expression used to validate the
-    target server hostname
-  affected_package: apache-libcloud
-  vulnerable_versions:
-  - ">=0.4.2"
-  - "<=0.11.0"
-  patched_versions:
-  - ">=0.11.1"
-  severity: high
-  package_manager: pypi
-  cve:
-  - 2012-3446
-  credit:
-  - Victims CVE Database
-  references:
-  - http://libcloud.apache.org/security.html
-  source_url: https://github.com/victims/victims-cve-db/blob/master/database/python/2012/3446.yaml
-- id: victims:pypi:apache-libcloud:date
   title: Libcloud doesn't send scrub_data query parameter when destroying a DigitalOcean
     node
   affected_package: apache-libcloud
@@ -295,3 +261,37 @@
   - http://libcloud.apache.org/security.html
   - https://github.com/fog/fog/issues/2525
   source_url: https://github.com/victims/victims-cve-db/blob/master/database/python/2013/6480.yaml
+- id: victims:pypi:apache-libcloud:date
+  title: Possible SSL MITM due to invalid regular expression used to validate the
+    target server hostname
+  affected_package: apache-libcloud
+  vulnerable_versions:
+  - ">=0.4.2"
+  - "<=0.11.0"
+  patched_versions:
+  - ">=0.11.1"
+  severity: high
+  package_manager: pypi
+  cve:
+  - 2012-3446
+  credit:
+  - Victims CVE Database
+  references:
+  - http://libcloud.apache.org/security.html
+  source_url: https://github.com/victims/victims-cve-db/blob/master/database/python/2012/3446.yaml
+- id: victims:pypi:apache-libcloud:date
+  title: SSL MITM vulnerability
+  affected_package: apache-libcloud
+  vulnerable_versions:
+  - "<=0.4.1"
+  patched_versions:
+  - ">=0.4.2"
+  severity: high
+  package_manager: pypi
+  cve:
+  - 2010-4340
+  credit:
+  - Victims CVE Database
+  references:
+  - http://libcloud.apache.org/security.html
+  source_url: https://github.com/victims/victims-cve-db/blob/master/database/python/2010/4340.yaml

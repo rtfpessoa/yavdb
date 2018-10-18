@@ -34,26 +34,6 @@
   - https://exchange.xforce.ibmcloud.com/vulnerabilities/97754
   - https://issues.apache.org/jira/browse/WSS-511
   source_url: https://ossindex.net/resource/package/7015336902/vulnerabilities
-- id: ossindex:maven:org.apache.ws.security:wss4j:2017-07-31
-  title: Use of a Broken or Risky Cryptographic Algorithm
-  description: "> Apache WSS4J 1.6.5 contained a countermeasure for Bleichenbacher's
-    attack on XML Encryption, where the PKCS#1 v1.5 Key Transport Algorithm is used
-    to encrypt symmetric keys as part of WS-Security. In particular, the fix avoided
-    leaking information on whether decryption failed when decrypting the encrypted
-    key or decrypting the message data.\n> \n> However, it is still possible to craft
-    a message such that an attacker can tell where the decryption failure took place,
-    and hence WSS4J is vulnerable to the original attack. \n> \n> -- [redhat.com](https://bugzilla.redhat.com/show_bug.cgi?id=1191446)"
-  affected_package: org.apache.ws.security:wss4j
-  vulnerable_versions:
-  - "<2.0.2"
-  package_manager: maven
-  credit:
-  - OSSIndex
-  references:
-  - https://bugzilla.redhat.com/show_bug.cgi?id=1191446
-  - https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2011-2487
-  - https://cwe.mitre.org/data/definitions/327.html
-  source_url: https://ossindex.net/resource/package/7015336902/vulnerabilities
 - id: ossindex:maven:org.apache.ws.security:wss4j:2015-02-12
   title: "[CVE-2015-0227]  Permissions, Privileges, and Access Controls"
   description: Apache WSS4J before 1.6.17 and 2.x before 2.0.2 allows remote attackers
@@ -82,79 +62,60 @@
   - http://xforce.iss.net/xforce/xfdb/100837
   - https://exchange.xforce.ibmcloud.com/vulnerabilities/100837
   source_url: https://ossindex.net/resource/package/7015336902/vulnerabilities
-- id: snykio:maven:org.apache.ws.security:wss4j:2016-12-25
-  title: Improper Authentication
+- id: ossindex:maven:org.apache.ws.security:wss4j:2017-07-31
+  title: Use of a Broken or Risky Cryptographic Algorithm
+  description: "> Apache WSS4J 1.6.5 contained a countermeasure for Bleichenbacher's
+    attack on XML Encryption, where the PKCS#1 v1.5 Key Transport Algorithm is used
+    to encrypt symmetric keys as part of WS-Security. In particular, the fix avoided
+    leaking information on whether decryption failed when decrypting the encrypted
+    key or decrypting the message data.\n> \n> However, it is still possible to craft
+    a message such that an attacker can tell where the decryption failure took place,
+    and hence WSS4J is vulnerable to the original attack. \n> \n> -- [redhat.com](https://bugzilla.redhat.com/show_bug.cgi?id=1191446)"
+  affected_package: org.apache.ws.security:wss4j
+  vulnerable_versions:
+  - "<2.0.2"
+  package_manager: maven
+  credit:
+  - OSSIndex
+  references:
+  - https://bugzilla.redhat.com/show_bug.cgi?id=1191446
+  - https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2011-2487
+  - https://cwe.mitre.org/data/definitions/327.html
+  source_url: https://ossindex.net/resource/package/7015336902/vulnerabilities
+- id: snykio:maven:org.apache.ws.security:wss4j:2015-02-13
+  title: Access Restriction Bypass
   description: |
     [`org.apache.ws.security:wss4j`][1] Apache WSS4J before 1.6.17 and 2.x
-    before 2.0.2, as used in Apache CXF 2.7.x before 2.7.13 and 3.0.x before
-    3.0.2, when using TransportBinding, does not properly enforce the SAML
-    SubjectConfirmation method security semantics, which allows remote
-    attackers to conduct spoofing attacks via unspecified vectors.
+    before 2.0.2 allows remote attackers to bypass the
+    requireSignedEncryptedDataElements configuration via a vectors related
+    to \"wrapping attacks.\"
 
 
 
     [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22wss4j%22
     \n[`org.apache.ws.security:wss4j`][1] Apache WSS4J before 1.6.17 and 2.x
-    before 2.0.2, as used in Apache CXF 2.7.x before 2.7.13 and 3.0.x before
-    3.0.2, when using TransportBinding, does not properly enforce the SAML
-    SubjectConfirmation method security semantics, which allows remote
-    attackers to conduct spoofing attacks via unspecified vectors.
+    before 2.0.2 allows remote attackers to bypass the
+    requireSignedEncryptedDataElements configuration via a vectors related
+    to \"wrapping attacks.\"
 
 
 
     [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22wss4j%22
   affected_package: org.apache.ws.security:wss4j
   vulnerable_versions:
-  - "<= 1.6.16"
+  - "< 1.6.17"
+  - ">= 2 < 2.0.2"
   severity: medium
   package_manager: maven
   cve:
-  - CVE-2014-3623
+  - CVE-2015-0227
   cwe:
-  - CWE-287
+  - CWE-264
   credit:
-  - Dario Amiri
+  - Unknown
   references:
-  - http://cxf.apache.org/security-advisories.data/CVE-2014-3623.txt.asc
-  - https://bugzilla.redhat.com/CVE-2014-3623
-  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEWSSECURITY-30069
-- id: snykio:maven:org.apache.ws.security:wss4j:2015-10-16
-  title: Use of a Risky Cryptographic Algorithm
-  description: |
-    [`org.apache.ws.security:wss4j`][1] Affected versions of the package use
-    a Risky Cryptographic Algorithm. The `PKCS#1 v1.5 Key Transport`
-    Algorithm is used to encrypt symmetric keys as part of WS-Security.
-    WSS4J can leak information about where a particular decryption operation
-    fails.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22wss4j%22
-    \n[`org.apache.ws.security:wss4j`][1] Affected versions of the package use
-    a Risky Cryptographic Algorithm. The `PKCS#1 v1.5 Key Transport`
-    Algorithm is used to encrypt symmetric keys as part of WS-Security.
-    WSS4J can leak information about where a particular decryption operation
-    fails.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22wss4j%22
-  affected_package: org.apache.ws.security:wss4j
-  vulnerable_versions:
-  - "<= 1.6.4"
-  severity: high
-  package_manager: maven
-  cve:
-  - CVE-2011-2487
-  cwe:
-  - CWE-327
-  credit:
-  - Tibor Jager
-  - Sebastian Schinzel
-  - Juraj Somorovsky
-  references:
-  - http://cxf.apache.org/note-on-cve-2011-2487.html
-  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEWSSECURITY-31025
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-0227
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEWSSECURITY-31027
 - id: snykio:maven:org.apache.ws.security:wss4j:2015-04-17
   title: Use of a Risky Cryptographic Algorithm
   description: |
@@ -192,40 +153,79 @@
   references:
   - https://ws.apache.org/wss4j/advisories/CVE-2015-0226.txt.asc
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEWSSECURITY-31026
-- id: snykio:maven:org.apache.ws.security:wss4j:2015-02-13
-  title: Access Restriction Bypass
+- id: snykio:maven:org.apache.ws.security:wss4j:2015-10-16
+  title: Use of a Risky Cryptographic Algorithm
   description: |
-    [`org.apache.ws.security:wss4j`][1] Apache WSS4J before 1.6.17 and 2.x
-    before 2.0.2 allows remote attackers to bypass the
-    requireSignedEncryptedDataElements configuration via a vectors related
-    to \"wrapping attacks.\"
+    [`org.apache.ws.security:wss4j`][1] Affected versions of the package use
+    a Risky Cryptographic Algorithm. The `PKCS#1 v1.5 Key Transport`
+    Algorithm is used to encrypt symmetric keys as part of WS-Security.
+    WSS4J can leak information about where a particular decryption operation
+    fails.
 
 
 
     [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22wss4j%22
-    \n[`org.apache.ws.security:wss4j`][1] Apache WSS4J before 1.6.17 and 2.x
-    before 2.0.2 allows remote attackers to bypass the
-    requireSignedEncryptedDataElements configuration via a vectors related
-    to \"wrapping attacks.\"
+    \n[`org.apache.ws.security:wss4j`][1] Affected versions of the package use
+    a Risky Cryptographic Algorithm. The `PKCS#1 v1.5 Key Transport`
+    Algorithm is used to encrypt symmetric keys as part of WS-Security.
+    WSS4J can leak information about where a particular decryption operation
+    fails.
 
 
 
     [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22wss4j%22
   affected_package: org.apache.ws.security:wss4j
   vulnerable_versions:
-  - "< 1.6.17"
-  - ">= 2 < 2.0.2"
+  - "<= 1.6.4"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2011-2487
+  cwe:
+  - CWE-327
+  credit:
+  - Tibor Jager
+  - Sebastian Schinzel
+  - Juraj Somorovsky
+  references:
+  - http://cxf.apache.org/note-on-cve-2011-2487.html
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEWSSECURITY-31025
+- id: snykio:maven:org.apache.ws.security:wss4j:2016-12-25
+  title: Improper Authentication
+  description: |
+    [`org.apache.ws.security:wss4j`][1] Apache WSS4J before 1.6.17 and 2.x
+    before 2.0.2, as used in Apache CXF 2.7.x before 2.7.13 and 3.0.x before
+    3.0.2, when using TransportBinding, does not properly enforce the SAML
+    SubjectConfirmation method security semantics, which allows remote
+    attackers to conduct spoofing attacks via unspecified vectors.
+
+
+
+    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22wss4j%22
+    \n[`org.apache.ws.security:wss4j`][1] Apache WSS4J before 1.6.17 and 2.x
+    before 2.0.2, as used in Apache CXF 2.7.x before 2.7.13 and 3.0.x before
+    3.0.2, when using TransportBinding, does not properly enforce the SAML
+    SubjectConfirmation method security semantics, which allows remote
+    attackers to conduct spoofing attacks via unspecified vectors.
+
+
+
+    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22wss4j%22
+  affected_package: org.apache.ws.security:wss4j
+  vulnerable_versions:
+  - "<= 1.6.16"
   severity: medium
   package_manager: maven
   cve:
-  - CVE-2015-0227
+  - CVE-2014-3623
   cwe:
-  - CWE-264
+  - CWE-287
   credit:
-  - Unknown
+  - Dario Amiri
   references:
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-0227
-  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEWSSECURITY-31027
+  - http://cxf.apache.org/security-advisories.data/CVE-2014-3623.txt.asc
+  - https://bugzilla.redhat.com/CVE-2014-3623
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEWSSECURITY-30069
 - id: victims:maven:org.apache.ws.security:wss4j:date
   title: Improper security semantics enforcement of SAML SubjectConfirmation methods
   affected_package: org.apache.ws.security:wss4j

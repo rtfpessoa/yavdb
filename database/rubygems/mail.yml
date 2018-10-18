@@ -1,4 +1,65 @@
 ---
+- id: rubyadvisory:rubygems:mail:2011-01-25
+  title: "Mail Gem for Ruby lib/mail/network/delivery_methods/sendmail.rb Email From:
+    Address Arbitrary Shell Command Injection \n"
+  description: |
+    Mail Gem for Ruby contains a flaw related to the failure to properly sanitise
+    input passed from an email from address in the 'deliver()' function in
+    'lib/mail/network/delivery_methods/sendmail.rb' before being used as a
+    command line argument. This may allow a remote attacker to inject arbitrary
+    shell commands.
+  affected_package: mail
+  patched_versions:
+  - ">= 2.2.15"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2011-0739
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: http://www.osvdb.org/show/osvdb/70667
+- id: rubyadvisory:rubygems:mail:2012-03-14
+  title: Mail Gem for Ruby File Delivery Method to Parameter Traversal Arbitrary File
+    Manipulation
+  description: 'Mail Gem for Ruby contains a flaw that allows a remote attacker to
+    traverse outside of a restricted path. The issue is due to the program not properly
+    sanitizing user input, specifically directory traversal style attacks (e.g., ../../)
+    supplied via the ''to'' parameter within the delivery method. This directory traversal
+    attack would allow the attacker to modify arbitrary files.
+
+'
+  affected_package: mail
+  patched_versions:
+  - ">= 2.4.4"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2012-2139
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: http://www.osvdb.org/show/osvdb/81631
+- id: rubyadvisory:rubygems:mail:2012-03-14
+  title: Mail Gem for Ruby Multiple Delivery Method Remote Shell Command Execution
+  description: |
+    Mail Gem for Ruby contains a flaw that occurs within the sendmail and exim
+    delivery methods, which may allow an attacker to execute arbitrary shell
+    commands..
+  affected_package: mail
+  patched_versions:
+  - ">= 2.4.4"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2012-2140
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: http://www.osvdb.org/show/osvdb/81632
 - id: rubyadvisory:rubygems:mail:2015-12-09
   title: SMTP command injection
   description: |
@@ -27,67 +88,59 @@
   - http://www.mbsd.jp/Whitepaper/smtpi.pdf
   - https://github.com/mikel/mail/pull/1097
   source_url: https://hackerone.com/reports/137631
-- id: rubyadvisory:rubygems:mail:2012-03-14
-  title: Mail Gem for Ruby File Delivery Method to Parameter Traversal Arbitrary File
-    Manipulation
-  description: 'Mail Gem for Ruby contains a flaw that allows a remote attacker to
-    traverse outside of a restricted path. The issue is due to the program not properly
-    sanitizing user input, specifically directory traversal style attacks (e.g., ../../)
-    supplied via the ''to'' parameter within the delivery method. This directory traversal
-    attack would allow the attacker to modify arbitrary files.
+- id: snykio:rubygems:mail:2011-01-24
+  title: Arbitrary Shell Command Injection
+  description: |
+    [`mail`][1] is a Ruby Mail handler gem.
 
-'
+    Affected versions of this gem do not properly sanitise input passed from
+    an email from address in the `deliver()` function in
+    `lib/mail/network/delivery_methods/sendmail.rb` before being used as a
+    command line argument. This may allow a remote attacker to inject
+    arbitrary shell commands.
+
+
+
+    [1]: https://rubygems.org/gems/mail
+    \n[`mail`][1] is a Ruby Mail handler gem.
+
+    Affected versions of this gem do not properly sanitise input passed from
+    an email from address in the `deliver()` function in
+    `lib/mail/network/delivery_methods/sendmail.rb` before being used as a
+    command line argument. This may allow a remote attacker to inject
+    arbitrary shell commands.
+
+
+
+    [1]: https://rubygems.org/gems/mail
+    \n[`mail`][1] is a Ruby Mail handler gem.
+
+    Affected versions of this gem do not properly sanitise input passed from
+    an email from address in the `deliver()` function in
+    `lib/mail/network/delivery_methods/sendmail.rb` before being used as a
+    command line argument. This may allow a remote attacker to inject
+    arbitrary shell commands.
+
+
+
+    [1]: https://rubygems.org/gems/mail
   affected_package: mail
-  patched_versions:
-  - ">= 2.4.4"
+  vulnerable_versions:
+  - "< 2.2.15"
   severity: medium
   package_manager: rubygems
   cve:
-  - CVE-2012-2139
-  credit:
-  - Rubysec
-  references:
-  - https://github.com/rubysec/ruby-advisory-db
-  source_url: http://www.osvdb.org/show/osvdb/81631
-- id: rubyadvisory:rubygems:mail:2011-01-25
-  title: "Mail Gem for Ruby lib/mail/network/delivery_methods/sendmail.rb Email From:
-    Address Arbitrary Shell Command Injection \n"
-  description: |
-    Mail Gem for Ruby contains a flaw related to the failure to properly sanitise
-    input passed from an email from address in the 'deliver()' function in
-    'lib/mail/network/delivery_methods/sendmail.rb' before being used as a
-    command line argument. This may allow a remote attacker to inject arbitrary
-    shell commands.
-  affected_package: mail
-  patched_versions:
-  - ">= 2.2.15"
-  severity: high
-  package_manager: rubygems
-  cve:
   - CVE-2011-0739
+  cwe:
+  - CWE-77
   credit:
-  - Rubysec
+  - Andy Lindeman
+  - Steven Lorek
   references:
-  - https://github.com/rubysec/ruby-advisory-db
-  source_url: http://www.osvdb.org/show/osvdb/70667
-- id: rubyadvisory:rubygems:mail:2012-03-14
-  title: Mail Gem for Ruby Multiple Delivery Method Remote Shell Command Execution
-  description: |
-    Mail Gem for Ruby contains a flaw that occurs within the sendmail and exim
-    delivery methods, which may allow an attacker to execute arbitrary shell
-    commands..
-  affected_package: mail
-  patched_versions:
-  - ">= 2.4.4"
-  severity: high
-  package_manager: rubygems
-  cve:
-  - CVE-2012-2140
-  credit:
-  - Rubysec
-  references:
-  - https://github.com/rubysec/ruby-advisory-db
-  source_url: http://www.osvdb.org/show/osvdb/81632
+  - http://rubysec.com/advisories/CVE-2011-0739/
+  - https://raw.githubusercontent.com/mikel/mail/master/patches/20110126_sendmail.patch
+  - https://groups.google.com/forum/#!topic/mail-ruby/6Tu9BXBkeN0
+  source_url: https://snyk.io/vuln/SNYK-RUBY-MAIL-20013
 - id: snykio:rubygems:mail:2012-03-13
   title: Directory Traversal
   description: |
@@ -785,56 +838,3 @@
   - http://www.osvdb.org/show/osvdb/81632
   - http://www.openwall.com/lists/oss-security/2012/04/25/8
   source_url: https://snyk.io/vuln/SNYK-RUBY-MAIL-20027
-- id: snykio:rubygems:mail:2011-01-24
-  title: Arbitrary Shell Command Injection
-  description: |
-    [`mail`][1] is a Ruby Mail handler gem.
-
-    Affected versions of this gem do not properly sanitise input passed from
-    an email from address in the `deliver()` function in
-    `lib/mail/network/delivery_methods/sendmail.rb` before being used as a
-    command line argument. This may allow a remote attacker to inject
-    arbitrary shell commands.
-
-
-
-    [1]: https://rubygems.org/gems/mail
-    \n[`mail`][1] is a Ruby Mail handler gem.
-
-    Affected versions of this gem do not properly sanitise input passed from
-    an email from address in the `deliver()` function in
-    `lib/mail/network/delivery_methods/sendmail.rb` before being used as a
-    command line argument. This may allow a remote attacker to inject
-    arbitrary shell commands.
-
-
-
-    [1]: https://rubygems.org/gems/mail
-    \n[`mail`][1] is a Ruby Mail handler gem.
-
-    Affected versions of this gem do not properly sanitise input passed from
-    an email from address in the `deliver()` function in
-    `lib/mail/network/delivery_methods/sendmail.rb` before being used as a
-    command line argument. This may allow a remote attacker to inject
-    arbitrary shell commands.
-
-
-
-    [1]: https://rubygems.org/gems/mail
-  affected_package: mail
-  vulnerable_versions:
-  - "< 2.2.15"
-  severity: medium
-  package_manager: rubygems
-  cve:
-  - CVE-2011-0739
-  cwe:
-  - CWE-77
-  credit:
-  - Andy Lindeman
-  - Steven Lorek
-  references:
-  - http://rubysec.com/advisories/CVE-2011-0739/
-  - https://raw.githubusercontent.com/mikel/mail/master/patches/20110126_sendmail.patch
-  - https://groups.google.com/forum/#!topic/mail-ruby/6Tu9BXBkeN0
-  source_url: https://snyk.io/vuln/SNYK-RUBY-MAIL-20013

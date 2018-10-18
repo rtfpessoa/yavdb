@@ -1,23 +1,4 @@
 ---
-- id: nodesecurity:npm:moment:2017-11-27
-  title: Regular Expression Denial of Service
-  description: Affected versions of `moment` are vulnerable to a low severity regular
-    expression denial of service when parsing dates as strings.
-  affected_package: moment
-  vulnerable_versions:
-  - "<2.19.3"
-  patched_versions:
-  - ">=2.19.3"
-  severity: high
-  package_manager: npm
-  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H
-  credit:
-  - Cristian-Alexandru Staicu
-  references:
-  - |-
-    https://github.com/moment/moment/issues/4163)
-    https://github.com/moment/moment/pull/4326)
-  source_url: https://nodesecurity.io/advisories/532
 - id: nodesecurity:npm:moment:2016-01-26
   title: Regular Expression Denial of Service
   description: |-
@@ -84,6 +65,25 @@
   references:
   - ''
   source_url: https://nodesecurity.io/advisories/55
+- id: nodesecurity:npm:moment:2017-11-27
+  title: Regular Expression Denial of Service
+  description: Affected versions of `moment` are vulnerable to a low severity regular
+    expression denial of service when parsing dates as strings.
+  affected_package: moment
+  vulnerable_versions:
+  - "<2.19.3"
+  patched_versions:
+  - ">=2.19.3"
+  severity: high
+  package_manager: npm
+  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H
+  credit:
+  - Cristian-Alexandru Staicu
+  references:
+  - |-
+    https://github.com/moment/moment/issues/4163)
+    https://github.com/moment/moment/pull/4326)
+  source_url: https://nodesecurity.io/advisories/532
 - id: ossindex:npm:moment:2016-11-01
   title: Regular Expression Denial of Service (ReDoS)
   description: "> Via the Node Security Project: https://nodesecurity.io/advisories/55\n>
@@ -120,23 +120,26 @@
   - http://www.securityfocus.com/bid/95849
   - https://nodesecurity.io/advisories/55
   source_url: https://ossindex.net/resource/package/7014146991/vulnerabilities
-- id: snykio:npm:moment:2017-09-05
+- id: snykio:npm:moment:2016-01-26
   title: Regular Expression Denial of Service (ReDoS)
   description: "[`moment`][1] is a lightweight JavaScript date library for parsing,\nvalidating,
-    manipulating, and formatting dates.\n\nAffected versions of this package are vulnerable
-    to Regular expression\nDenial of Service (ReDoS) attacks. It used a regular expression\n(`/[0-9]*['a-z\\u00A0-\\u05FF\\u0700-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF]+|[\\u0600-\\u06FF\\/]+(\\s*?[\\u0600-\\u06FF]+){1,2}/i`)\nin
-    order to parse dates specified as strings. This can cause a very low\nimpact of
-    about 2 seconds matching time for data 50k characters long.\n\n\n\n[1]: https://www.npmjs.com/package/moment\n\\n[`moment`][1]
+    manipulating, and formatting dates.\n\nAn attacker can provide a long value to
+    the `duration` function, which\nnearly matches the pattern being matched. This
+    will cause the regular\nexpression matching to take a long time, all the while
+    occupying the\nevent loop and preventing it from processing other requests and
+    making\nthe server unavailable (a Denial of Service attack).\n\n\n\n[1]: https://www.npmjs.com/package/moment\n\\n[`moment`][1]
     is a lightweight JavaScript date library for parsing,\nvalidating, manipulating,
-    and formatting dates.\n\nAffected versions of this package are vulnerable to Regular
-    expression\nDenial of Service (ReDoS) attacks. It used a regular expression\n(`/[0-9]*['a-z\\u00A0-\\u05FF\\u0700-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF]+|[\\u0600-\\u06FF\\/]+(\\s*?[\\u0600-\\u06FF]+){1,2}/i`)\nin
-    order to parse dates specified as strings. This can cause a very low\nimpact of
-    about 2 seconds matching time for data 50k characters long.\n\n\n\n[1]: https://www.npmjs.com/package/moment\n\\n[`moment`][1]
+    and formatting dates.\n\nAn attacker can provide a long value to the `duration`
+    function, which\nnearly matches the pattern being matched. This will cause the
+    regular\nexpression matching to take a long time, all the while occupying the\nevent
+    loop and preventing it from processing other requests and making\nthe server unavailable
+    (a Denial of Service attack).\n\n\n\n[1]: https://www.npmjs.com/package/moment\n\\n[`moment`][1]
     is a lightweight JavaScript date library for parsing,\nvalidating, manipulating,
-    and formatting dates.\n\nAffected versions of this package are vulnerable to Regular
-    expression\nDenial of Service (ReDoS) attacks. It used a regular expression\n(`/[0-9]*['a-z\\u00A0-\\u05FF\\u0700-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF]+|[\\u0600-\\u06FF\\/]+(\\s*?[\\u0600-\\u06FF]+){1,2}/i`)\nin
-    order to parse dates specified as strings. This can cause a very low\nimpact of
-    about 2 seconds matching time for data 50k characters long.\n\n\n\n[1]: https://www.npmjs.com/package/moment\n\\nDenial
+    and formatting dates.\n\nAn attacker can provide a long value to the `duration`
+    function, which\nnearly matches the pattern being matched. This will cause the
+    regular\nexpression matching to take a long time, all the while occupying the\nevent
+    loop and preventing it from processing other requests and making\nthe server unavailable
+    (a Denial of Service attack).\n\n\n\n[1]: https://www.npmjs.com/package/moment\n\\nDenial
     of Service (DoS) describes a family of attacks, all aimed at\nmaking a system
     inaccessible to its original and legitimate users. There\nare many types of DoS
     attacks, ranging from trying to clog the network\npipes to the system by generating
@@ -985,18 +988,18 @@
     consume CPU, resulting in a Denial\nof Service.\n\n\n\n[1]: https://regex101.com/debugger\n"
   affected_package: moment
   vulnerable_versions:
-  - "<2.19.3"
+  - "<=2.11.1"
   severity: low
   package_manager: npm
-  cve:
-  - CVE-2017-18214
   cwe:
   - CWE-400
   credit:
-  - CristianAlexandru Staicu
+  - Adam Baldwin
   references:
-  - https://github.com/moment/moment/issues/4163
-  source_url: https://snyk.io/vuln/npm:moment:20170905
+  - https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS
+  - https://github.com/moment/moment/commit/52a807b961ead925be11ff5e632c8f7325a9ce36
+  - https://github.com/moment/moment/issues/2936
+  source_url: https://snyk.io/vuln/npm:moment:20160126
 - id: snykio:npm:moment:2016-10-18
   title: Regular Expression Denial of Service (ReDoS)
   description: "[`moment`][1] is a lightweight JavaScript date library for parsing,\nvalidating,
@@ -1894,26 +1897,23 @@
   - https://gist.github.com/grnd/50192ce22681848a7de812d95241b7fc
   - https://github.com/moment/moment/commit/663f33e333212b3800b63592cd8e237ac8fabdb9
   source_url: https://snyk.io/vuln/npm:moment:20161019
-- id: snykio:npm:moment:2016-01-26
+- id: snykio:npm:moment:2017-09-05
   title: Regular Expression Denial of Service (ReDoS)
   description: "[`moment`][1] is a lightweight JavaScript date library for parsing,\nvalidating,
-    manipulating, and formatting dates.\n\nAn attacker can provide a long value to
-    the `duration` function, which\nnearly matches the pattern being matched. This
-    will cause the regular\nexpression matching to take a long time, all the while
-    occupying the\nevent loop and preventing it from processing other requests and
-    making\nthe server unavailable (a Denial of Service attack).\n\n\n\n[1]: https://www.npmjs.com/package/moment\n\\n[`moment`][1]
+    manipulating, and formatting dates.\n\nAffected versions of this package are vulnerable
+    to Regular expression\nDenial of Service (ReDoS) attacks. It used a regular expression\n(`/[0-9]*['a-z\\u00A0-\\u05FF\\u0700-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF]+|[\\u0600-\\u06FF\\/]+(\\s*?[\\u0600-\\u06FF]+){1,2}/i`)\nin
+    order to parse dates specified as strings. This can cause a very low\nimpact of
+    about 2 seconds matching time for data 50k characters long.\n\n\n\n[1]: https://www.npmjs.com/package/moment\n\\n[`moment`][1]
     is a lightweight JavaScript date library for parsing,\nvalidating, manipulating,
-    and formatting dates.\n\nAn attacker can provide a long value to the `duration`
-    function, which\nnearly matches the pattern being matched. This will cause the
-    regular\nexpression matching to take a long time, all the while occupying the\nevent
-    loop and preventing it from processing other requests and making\nthe server unavailable
-    (a Denial of Service attack).\n\n\n\n[1]: https://www.npmjs.com/package/moment\n\\n[`moment`][1]
+    and formatting dates.\n\nAffected versions of this package are vulnerable to Regular
+    expression\nDenial of Service (ReDoS) attacks. It used a regular expression\n(`/[0-9]*['a-z\\u00A0-\\u05FF\\u0700-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF]+|[\\u0600-\\u06FF\\/]+(\\s*?[\\u0600-\\u06FF]+){1,2}/i`)\nin
+    order to parse dates specified as strings. This can cause a very low\nimpact of
+    about 2 seconds matching time for data 50k characters long.\n\n\n\n[1]: https://www.npmjs.com/package/moment\n\\n[`moment`][1]
     is a lightweight JavaScript date library for parsing,\nvalidating, manipulating,
-    and formatting dates.\n\nAn attacker can provide a long value to the `duration`
-    function, which\nnearly matches the pattern being matched. This will cause the
-    regular\nexpression matching to take a long time, all the while occupying the\nevent
-    loop and preventing it from processing other requests and making\nthe server unavailable
-    (a Denial of Service attack).\n\n\n\n[1]: https://www.npmjs.com/package/moment\n\\nDenial
+    and formatting dates.\n\nAffected versions of this package are vulnerable to Regular
+    expression\nDenial of Service (ReDoS) attacks. It used a regular expression\n(`/[0-9]*['a-z\\u00A0-\\u05FF\\u0700-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF]+|[\\u0600-\\u06FF\\/]+(\\s*?[\\u0600-\\u06FF]+){1,2}/i`)\nin
+    order to parse dates specified as strings. This can cause a very low\nimpact of
+    about 2 seconds matching time for data 50k characters long.\n\n\n\n[1]: https://www.npmjs.com/package/moment\n\\nDenial
     of Service (DoS) describes a family of attacks, all aimed at\nmaking a system
     inaccessible to its original and legitimate users. There\nare many types of DoS
     attacks, ranging from trying to clog the network\npipes to the system by generating
@@ -2762,15 +2762,15 @@
     consume CPU, resulting in a Denial\nof Service.\n\n\n\n[1]: https://regex101.com/debugger\n"
   affected_package: moment
   vulnerable_versions:
-  - "<=2.11.1"
+  - "<2.19.3"
   severity: low
   package_manager: npm
+  cve:
+  - CVE-2017-18214
   cwe:
   - CWE-400
   credit:
-  - Adam Baldwin
+  - CristianAlexandru Staicu
   references:
-  - https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS
-  - https://github.com/moment/moment/commit/52a807b961ead925be11ff5e632c8f7325a9ce36
-  - https://github.com/moment/moment/issues/2936
-  source_url: https://snyk.io/vuln/npm:moment:20160126
+  - https://github.com/moment/moment/issues/4163
+  source_url: https://snyk.io/vuln/npm:moment:20170905

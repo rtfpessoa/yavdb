@@ -1,13 +1,13 @@
 ---
-- id: snykio:pypi:airflow:2017-04-07
+- id: snykio:pypi:airflow:2016-06-10
   title: Arbitrary Code Execution
   description: |
     [`airflow`][1] is a Programmatically author, schedule and monitor data
     pipelines.
 
     Affected versions of this package are vulnerable to Arbitrary Code
-    Execution attacks due to not preventing the `chart_data` endpoints from
-    using user-input and executing them.
+    Execution attacks due to a flaw in the code that evaluates a variable
+    improperly, allowing an attacker to hijack the interpreter.
 
 
 
@@ -16,8 +16,8 @@
     pipelines.
 
     Affected versions of this package are vulnerable to Arbitrary Code
-    Execution attacks due to not preventing the `chart_data` endpoints from
-    using user-input and executing them.
+    Execution attacks due to a flaw in the code that evaluates a variable
+    improperly, allowing an attacker to hijack the interpreter.
 
 
 
@@ -26,15 +26,112 @@
     pipelines.
 
     Affected versions of this package are vulnerable to Arbitrary Code
-    Execution attacks due to not preventing the `chart_data` endpoints from
-    using user-input and executing them.
+    Execution attacks due to a flaw in the code that evaluates a variable
+    improperly, allowing an attacker to hijack the interpreter.
 
 
 
     [1]: https://pypi.python.org/pypi/airflow
   affected_package: airflow
   vulnerable_versions:
-  - ">= 1.8.0"
+  - "< 1.8"
+  severity: medium
+  package_manager: pypi
+  cwe:
+  - CWE-94
+  credit:
+  - Maxime Beauchemin
+  references:
+  - https://issues.apache.org/jira/browse/AIRFLOW-231
+  - https://github.com/apache/incubator-airflow/pull/1584
+  - https://github.com/apache/incubator-airflow/commit/7d29698b639d9e2060465aa778efb842986df706
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-AIRFLOW-40467
+- id: snykio:pypi:airflow:2017-02-04
+  title: Cross-site Request Forgery (CSRF)
+  description: |
+    [`airflow`][1] is a Programmatically author, schedule and monitor data
+    pipelines.
+
+    Affected versions of this package are vulnerable to Cross-site Request
+    Forgery (CSRF) attacks because the `paused` and `query` endpoints are
+    state-changing.
+
+
+
+    [1]: https://pypi.python.org/pypi/airflow
+    \n[`airflow`][1] is a Programmatically author, schedule and monitor data
+    pipelines.
+
+    Affected versions of this package are vulnerable to Cross-site Request
+    Forgery (CSRF) attacks because the `paused` and `query` endpoints are
+    state-changing.
+
+
+
+    [1]: https://pypi.python.org/pypi/airflow
+    \n[`airflow`][1] is a Programmatically author, schedule and monitor data
+    pipelines.
+
+    Affected versions of this package are vulnerable to Cross-site Request
+    Forgery (CSRF) attacks because the `paused` and `query` endpoints are
+    state-changing.
+
+
+
+    [1]: https://pypi.python.org/pypi/airflow
+  affected_package: airflow
+  vulnerable_versions:
+  - "< 1.9"
+  severity: medium
+  package_manager: pypi
+  cwe:
+  - CWE-352
+  credit:
+  - Alex Guziel
+  references:
+  - https://issues.apache.org/jira/browse/AIRFLOW-836
+  - https://github.com/apache/incubator-airflow/pull/2054
+  - https://github.com/apache/incubator-airflow/commit/673026c740411cc6447aede8c6a816460fe03a59
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-AIRFLOW-40615
+- id: snykio:pypi:airflow:2017-03-03
+  title: Arbitrary Code Execution
+  description: |
+    [`airflow`][1] is a Programmatically author, schedule and monitor data
+    pipelines.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution. User input is sent unchecked to the the python `eval`
+    function which directly executes the parameters. Any user who can create
+    or edit charts may execute arbitrary code on the server.
+
+
+
+    [1]: https://pypi.python.org/pypi/airflow
+    \n[`airflow`][1] is a Programmatically author, schedule and monitor data
+    pipelines.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution. User input is sent unchecked to the the python `eval`
+    function which directly executes the parameters. Any user who can create
+    or edit charts may execute arbitrary code on the server.
+
+
+
+    [1]: https://pypi.python.org/pypi/airflow
+    \n[`airflow`][1] is a Programmatically author, schedule and monitor data
+    pipelines.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution. User input is sent unchecked to the the python `eval`
+    function which directly executes the parameters. Any user who can create
+    or edit charts may execute arbitrary code on the server.
+
+
+
+    [1]: https://pypi.python.org/pypi/airflow
+  affected_package: airflow
+  vulnerable_versions:
+  - "< 1.8.0"
   severity: high
   package_manager: pypi
   cwe:
@@ -42,10 +139,59 @@
   credit:
   - Unknown
   references:
-  - https://issues.apache.org/jira/browse/AIRFLOW-1007
-  - https://github.com/apache/incubator-airflow/pull/2184
-  - https://github.com/apache/incubator-airflow/commit/04cacdd0a7526927137b452f38c3e894a5d2ce4a
-  source_url: https://snyk.io/vuln/SNYK-PYTHON-AIRFLOW-40624
+  - https://issues.apache.org/jira/browse/AIRFLOW-933
+  - https://github.com/apache/incubator-airflow/pull/2117
+  - https://github.com/apache/incubator-airflow/commit/88d9b0dc96e7528c87326c8070ee276e8565545f
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-AIRFLOW-40616
+- id: snykio:pypi:airflow:2017-03-08
+  title: Arbitrary Code Execution
+  description: |
+    [`airflow`][1] is a Programmatically author, schedule and monitor data
+    pipelines.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution. Anyone able to modify the application\'s underlying database,
+    or a computer where certain DAG tasks are executed, may execute
+    arbitrary code on the Airflow host.
+
+
+
+    [1]: https://pypi.python.org/pypi/airflow
+    \n[`airflow`][1] is a Programmatically author, schedule and monitor data
+    pipelines.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution. Anyone able to modify the application\'s underlying database,
+    or a computer where certain DAG tasks are executed, may execute
+    arbitrary code on the Airflow host.
+
+
+
+    [1]: https://pypi.python.org/pypi/airflow
+    \n[`airflow`][1] is a Programmatically author, schedule and monitor data
+    pipelines.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution. Anyone able to modify the application\'s underlying database,
+    or a computer where certain DAG tasks are executed, may execute
+    arbitrary code on the Airflow host.
+
+
+
+    [1]: https://pypi.python.org/pypi/airflow
+  affected_package: airflow
+  vulnerable_versions:
+  - "<= 1.8.1"
+  severity: medium
+  package_manager: pypi
+  cwe:
+  - CWE-94
+  credit:
+  - Rui Wang
+  references:
+  - https://issues.apache.org/jira/browse/AIRFLOW-855
+  - https://github.com/apache/incubator-airflow/pull/2132
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-AIRFLOW-40619
 - id: snykio:pypi:airflow:2017-03-28
   title: Cross-site Scripting (XSS)
   description: |+
@@ -233,16 +379,15 @@
   - https://github.com/apache/incubator-airflow/pull/2193
   - https://github.com/apache/incubator-airflow/commit/fe9ebe3ccf5fec4c491343659aa0c52e4125f66b
   source_url: https://snyk.io/vuln/SNYK-PYTHON-AIRFLOW-40620
-- id: snykio:pypi:airflow:2017-03-08
+- id: snykio:pypi:airflow:2017-04-07
   title: Arbitrary Code Execution
   description: |
     [`airflow`][1] is a Programmatically author, schedule and monitor data
     pipelines.
 
     Affected versions of this package are vulnerable to Arbitrary Code
-    Execution. Anyone able to modify the application\'s underlying database,
-    or a computer where certain DAG tasks are executed, may execute
-    arbitrary code on the Airflow host.
+    Execution attacks due to not preventing the `chart_data` endpoints from
+    using user-input and executing them.
 
 
 
@@ -251,9 +396,8 @@
     pipelines.
 
     Affected versions of this package are vulnerable to Arbitrary Code
-    Execution. Anyone able to modify the application\'s underlying database,
-    or a computer where certain DAG tasks are executed, may execute
-    arbitrary code on the Airflow host.
+    Execution attacks due to not preventing the `chart_data` endpoints from
+    using user-input and executing them.
 
 
 
@@ -262,65 +406,15 @@
     pipelines.
 
     Affected versions of this package are vulnerable to Arbitrary Code
-    Execution. Anyone able to modify the application\'s underlying database,
-    or a computer where certain DAG tasks are executed, may execute
-    arbitrary code on the Airflow host.
+    Execution attacks due to not preventing the `chart_data` endpoints from
+    using user-input and executing them.
 
 
 
     [1]: https://pypi.python.org/pypi/airflow
   affected_package: airflow
   vulnerable_versions:
-  - "<= 1.8.1"
-  severity: medium
-  package_manager: pypi
-  cwe:
-  - CWE-94
-  credit:
-  - Rui Wang
-  references:
-  - https://issues.apache.org/jira/browse/AIRFLOW-855
-  - https://github.com/apache/incubator-airflow/pull/2132
-  source_url: https://snyk.io/vuln/SNYK-PYTHON-AIRFLOW-40619
-- id: snykio:pypi:airflow:2017-03-03
-  title: Arbitrary Code Execution
-  description: |
-    [`airflow`][1] is a Programmatically author, schedule and monitor data
-    pipelines.
-
-    Affected versions of this package are vulnerable to Arbitrary Code
-    Execution. User input is sent unchecked to the the python `eval`
-    function which directly executes the parameters. Any user who can create
-    or edit charts may execute arbitrary code on the server.
-
-
-
-    [1]: https://pypi.python.org/pypi/airflow
-    \n[`airflow`][1] is a Programmatically author, schedule and monitor data
-    pipelines.
-
-    Affected versions of this package are vulnerable to Arbitrary Code
-    Execution. User input is sent unchecked to the the python `eval`
-    function which directly executes the parameters. Any user who can create
-    or edit charts may execute arbitrary code on the server.
-
-
-
-    [1]: https://pypi.python.org/pypi/airflow
-    \n[`airflow`][1] is a Programmatically author, schedule and monitor data
-    pipelines.
-
-    Affected versions of this package are vulnerable to Arbitrary Code
-    Execution. User input is sent unchecked to the the python `eval`
-    function which directly executes the parameters. Any user who can create
-    or edit charts may execute arbitrary code on the server.
-
-
-
-    [1]: https://pypi.python.org/pypi/airflow
-  affected_package: airflow
-  vulnerable_versions:
-  - "< 1.8.0"
+  - ">= 1.8.0"
   severity: high
   package_manager: pypi
   cwe:
@@ -328,101 +422,7 @@
   credit:
   - Unknown
   references:
-  - https://issues.apache.org/jira/browse/AIRFLOW-933
-  - https://github.com/apache/incubator-airflow/pull/2117
-  - https://github.com/apache/incubator-airflow/commit/88d9b0dc96e7528c87326c8070ee276e8565545f
-  source_url: https://snyk.io/vuln/SNYK-PYTHON-AIRFLOW-40616
-- id: snykio:pypi:airflow:2017-02-04
-  title: Cross-site Request Forgery (CSRF)
-  description: |
-    [`airflow`][1] is a Programmatically author, schedule and monitor data
-    pipelines.
-
-    Affected versions of this package are vulnerable to Cross-site Request
-    Forgery (CSRF) attacks because the `paused` and `query` endpoints are
-    state-changing.
-
-
-
-    [1]: https://pypi.python.org/pypi/airflow
-    \n[`airflow`][1] is a Programmatically author, schedule and monitor data
-    pipelines.
-
-    Affected versions of this package are vulnerable to Cross-site Request
-    Forgery (CSRF) attacks because the `paused` and `query` endpoints are
-    state-changing.
-
-
-
-    [1]: https://pypi.python.org/pypi/airflow
-    \n[`airflow`][1] is a Programmatically author, schedule and monitor data
-    pipelines.
-
-    Affected versions of this package are vulnerable to Cross-site Request
-    Forgery (CSRF) attacks because the `paused` and `query` endpoints are
-    state-changing.
-
-
-
-    [1]: https://pypi.python.org/pypi/airflow
-  affected_package: airflow
-  vulnerable_versions:
-  - "< 1.9"
-  severity: medium
-  package_manager: pypi
-  cwe:
-  - CWE-352
-  credit:
-  - Alex Guziel
-  references:
-  - https://issues.apache.org/jira/browse/AIRFLOW-836
-  - https://github.com/apache/incubator-airflow/pull/2054
-  - https://github.com/apache/incubator-airflow/commit/673026c740411cc6447aede8c6a816460fe03a59
-  source_url: https://snyk.io/vuln/SNYK-PYTHON-AIRFLOW-40615
-- id: snykio:pypi:airflow:2016-06-10
-  title: Arbitrary Code Execution
-  description: |
-    [`airflow`][1] is a Programmatically author, schedule and monitor data
-    pipelines.
-
-    Affected versions of this package are vulnerable to Arbitrary Code
-    Execution attacks due to a flaw in the code that evaluates a variable
-    improperly, allowing an attacker to hijack the interpreter.
-
-
-
-    [1]: https://pypi.python.org/pypi/airflow
-    \n[`airflow`][1] is a Programmatically author, schedule and monitor data
-    pipelines.
-
-    Affected versions of this package are vulnerable to Arbitrary Code
-    Execution attacks due to a flaw in the code that evaluates a variable
-    improperly, allowing an attacker to hijack the interpreter.
-
-
-
-    [1]: https://pypi.python.org/pypi/airflow
-    \n[`airflow`][1] is a Programmatically author, schedule and monitor data
-    pipelines.
-
-    Affected versions of this package are vulnerable to Arbitrary Code
-    Execution attacks due to a flaw in the code that evaluates a variable
-    improperly, allowing an attacker to hijack the interpreter.
-
-
-
-    [1]: https://pypi.python.org/pypi/airflow
-  affected_package: airflow
-  vulnerable_versions:
-  - "< 1.8"
-  severity: medium
-  package_manager: pypi
-  cwe:
-  - CWE-94
-  credit:
-  - Maxime Beauchemin
-  references:
-  - https://issues.apache.org/jira/browse/AIRFLOW-231
-  - https://github.com/apache/incubator-airflow/pull/1584
-  - https://github.com/apache/incubator-airflow/commit/7d29698b639d9e2060465aa778efb842986df706
-  source_url: https://snyk.io/vuln/SNYK-PYTHON-AIRFLOW-40467
+  - https://issues.apache.org/jira/browse/AIRFLOW-1007
+  - https://github.com/apache/incubator-airflow/pull/2184
+  - https://github.com/apache/incubator-airflow/commit/04cacdd0a7526927137b452f38c3e894a5d2ce4a
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-AIRFLOW-40624

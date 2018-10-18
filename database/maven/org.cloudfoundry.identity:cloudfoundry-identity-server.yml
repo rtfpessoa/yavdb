@@ -1,360 +1,203 @@
 ---
-- id: snykio:maven:org.cloudfoundry.identity:cloudfoundry-identity-server:2017-05-02
-  title: Blind SQL Injection
+- id: snykio:maven:org.cloudfoundry.identity:cloudfoundry-identity-server:2016-07-04
+  title: SQL Injection
   description: |
     [`org.cloudfoundry.identity:cloudfoundry-identity-server`][1] Affected
-    versions of this package are vulnerable to Blind SQL Injection attacks
-    via the User Account and Authentication (UAA).
+    versions of the package are vulnerable to SQL Injection.
 
 
 
     [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22cloudfoundry-identity-server%22
     \n[`org.cloudfoundry.identity:cloudfoundry-identity-server`][1] Affected
-    versions of this package are vulnerable to Blind SQL Injection attacks
-    via the User Account and Authentication (UAA).
+    versions of the package are vulnerable to SQL Injection.
 
 
 
     [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22cloudfoundry-identity-server%22
   affected_package: org.cloudfoundry.identity:cloudfoundry-identity-server
   vulnerable_versions:
-  - ">= 3 <= 3.9.1"
-  severity: medium
+  - ">= 3.0.0 < 3.3.0.2"
+  - ">= 3.4 < 3.4.1"
+  severity: high
   package_manager: maven
   cve:
-  - CVE-2017-4974
+  - CVE-2016-4468
   cwe:
   - CWE-89
   credit:
-  - Unknown
+  - Graham Viski
   references:
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2017-4974
-  - https://www.cloudfoundry.org/CVE-2017-4974
-  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGCLOUDFOUNDRYIDENTITY-31445
-- id: snykio:maven:org.cloudfoundry.identity:cloudfoundry-identity-server:2017-03-31
-  title: Denial of Service (DoS)
+  - http://pivotal.io/security/cve-2016-4468
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGCLOUDFOUNDRYIDENTITY-31068
+- id: snykio:maven:org.cloudfoundry.identity:cloudfoundry-identity-server:2016-09-27
+  title: Cross-site Scripting (XSS)
   description: |+
-    [`org.cloudfoundry.identity:cloudfoundry-identity-server`][1] An issue
-    was discovered in Cloud Foundry release v247 through v252, UAA
-    stand-alone release v3.9.0 through v3.11.0, and UAA Bosh Release v21
-    through v26. There is a potential to subject the UAA OAuth clients to a
-    denial of service attack.
+    [`org.cloudfoundry.identity:cloudfoundry-identity-server`][1] Affected
+    versions of the package are vulnerable to Cross-site Scripting (XSS).
 
 
 
     [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22cloudfoundry-identity-server%22
-    \n[`org.cloudfoundry.identity:cloudfoundry-identity-server`][1] An issue
-    was discovered in Cloud Foundry release v247 through v252, UAA
-    stand-alone release v3.9.0 through v3.11.0, and UAA Bosh Release v21
-    through v26. There is a potential to subject the UAA OAuth clients to a
-    denial of service attack.
+    \n[`org.cloudfoundry.identity:cloudfoundry-identity-server`][1] Affected
+    versions of the package are vulnerable to Cross-site Scripting (XSS).
 
 
 
     [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22cloudfoundry-identity-server%22
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
 
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
 
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
+    There are a few types of XSS:
 
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
 
-    Two common types of DoS vulnerabilities:
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
 
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
 
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+    There are a few types of XSS:
 
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
 
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
 
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
 
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
+    There are a few types of XSS:
 
-    Two common types of DoS vulnerabilities:
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
 
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
 
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
 
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
+    There are a few types of XSS:
 
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
 
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
 
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
 
-    Two common types of DoS vulnerabilities:
+    There are a few types of XSS:
 
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
 
   affected_package: org.cloudfoundry.identity:cloudfoundry-identity-server
   vulnerable_versions:
-  - ">= 3.9 < 3.11.0"
+  - ">= 3 < 3.2.1"
   severity: medium
   package_manager: maven
   cve:
-  - CVE-2017-4960
+  - CVE-2016-0781
   cwe:
-  - CWE-400
-  credit:
-  - Unknown
-  references:
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2017-4960
-  - https://www.cloudfoundry.org/cve-2017-4960/
-  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGCLOUDFOUNDRYIDENTITY-31436
-- id: snykio:maven:org.cloudfoundry.identity:cloudfoundry-identity-server:2017-04-21
-  title: Blind SQL Injection
-  description: |
-    [`org.cloudfoundry.identity:cloudfoundry-identity-server`][1] Affected
-    versions of this package are vulnerable to Blind SQL Injection attacks
-    via the User Account and Authentication (UAA). The `client_id` string
-    was not properly validated.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22cloudfoundry-identity-server%22
-    \n[`org.cloudfoundry.identity:cloudfoundry-identity-server`][1] Affected
-    versions of this package are vulnerable to Blind SQL Injection attacks
-    via the User Account and Authentication (UAA). The `client_id` string
-    was not properly validated.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22cloudfoundry-identity-server%22
-  affected_package: org.cloudfoundry.identity:cloudfoundry-identity-server
-  vulnerable_versions:
-  - ">= 3. <= 3.9.1"
-  severity: high
-  package_manager: maven
-  cve:
-  - CVE-2017-4972
-  cwe:
-  - CWE-89
-  credit:
-  - Unknown
-  references:
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2017-4972
-  - https://www.cloudfoundry.org/CVE-2017-4972
-  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGCLOUDFOUNDRYIDENTITY-31419
-- id: snykio:maven:org.cloudfoundry.identity:cloudfoundry-identity-server:2017-04-22
-  title: Privilege Escalation
-  description: |
-    [`org.cloudfoundry.identity:cloudfoundry-identity-server`][1] Affected
-    versions of this package are vulnerable to Privilege Escalations via the
-    User Account and Authentication (UAA). Any user could pass a malicious
-    token to a group endpoint, causing an elevation of privileges.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22cloudfoundry-identity-server%22
-    \n[`org.cloudfoundry.identity:cloudfoundry-identity-server`][1] Affected
-    versions of this package are vulnerable to Privilege Escalations via the
-    User Account and Authentication (UAA). Any user could pass a malicious
-    token to a group endpoint, causing an elevation of privileges.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22cloudfoundry-identity-server%22
-  affected_package: org.cloudfoundry.identity:cloudfoundry-identity-server
-  vulnerable_versions:
-  - ">= 3 <= 3.9.1"
-  severity: high
-  package_manager: maven
-  cve:
-  - CVE-2017-4973
-  cwe:
-  - CWE-265
-  credit:
-  - Unknown
-  references:
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2017-4973
-  - https://www.cloudfoundry.org/CVE-2017-4973
-  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGCLOUDFOUNDRYIDENTITY-31417
-- id: snykio:maven:org.cloudfoundry.identity:cloudfoundry-identity-server:2017-03-31
-  title: Session Fixation
-  description: |
-    [`org.cloudfoundry.identity:cloudfoundry-identity-server`][1] Affected
-    versions of this package are vulnerable to session fixation attacks via
-    the User Account and Authentication (UAA). When UAA is configured to
-    authenticate against external SAML or OpenID Connect based identity
-    providers.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22cloudfoundry-identity-server%22
-    \n[`org.cloudfoundry.identity:cloudfoundry-identity-server`][1] Affected
-    versions of this package are vulnerable to session fixation attacks via
-    the User Account and Authentication (UAA). When UAA is configured to
-    authenticate against external SAML or OpenID Connect based identity
-    providers.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22cloudfoundry-identity-server%22
-  affected_package: org.cloudfoundry.identity:cloudfoundry-identity-server
-  vulnerable_versions:
-  - ">= 3 <= 3.9.1"
-  severity: low
-  package_manager: maven
-  cve:
-  - CVE-2017-4963
-  cwe:
-  - CWE-384
+  - CWE-79
   credit:
   - GE Digital Security Team
   references:
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2017-4963
-  - https://www.cloudfoundry.org/cve-2017-4963/
-  - https://pivotal.io/security/cve-2017-4963
-  - https://github.com/cloudfoundry/uaa/releases/tag/2.7.4.13
-  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGCLOUDFOUNDRYIDENTITY-31412
+  - https://pivotal.io/security/cve-2016-0781
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGCLOUDFOUNDRYIDENTITY-31066
 - id: snykio:maven:org.cloudfoundry.identity:cloudfoundry-identity-server:2016-09-28
   title: Privilege Escalation
   description: |
@@ -578,202 +421,359 @@
   - http://www.securityfocus.com/bid/93241
   - https://pivotal.io/security/cve-2016-6651
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGCLOUDFOUNDRYIDENTITY-31073
-- id: snykio:maven:org.cloudfoundry.identity:cloudfoundry-identity-server:2016-09-27
-  title: Cross-site Scripting (XSS)
+- id: snykio:maven:org.cloudfoundry.identity:cloudfoundry-identity-server:2017-03-31
+  title: Denial of Service (DoS)
   description: |+
-    [`org.cloudfoundry.identity:cloudfoundry-identity-server`][1] Affected
-    versions of the package are vulnerable to Cross-site Scripting (XSS).
+    [`org.cloudfoundry.identity:cloudfoundry-identity-server`][1] An issue
+    was discovered in Cloud Foundry release v247 through v252, UAA
+    stand-alone release v3.9.0 through v3.11.0, and UAA Bosh Release v21
+    through v26. There is a potential to subject the UAA OAuth clients to a
+    denial of service attack.
 
 
 
     [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22cloudfoundry-identity-server%22
-    \n[`org.cloudfoundry.identity:cloudfoundry-identity-server`][1] Affected
-    versions of the package are vulnerable to Cross-site Scripting (XSS).
+    \n[`org.cloudfoundry.identity:cloudfoundry-identity-server`][1] An issue
+    was discovered in Cloud Foundry release v247 through v252, UAA
+    stand-alone release v3.9.0 through v3.11.0, and UAA Bosh Release v21
+    through v26. There is a potential to subject the UAA OAuth clients to a
+    denial of service attack.
 
 
 
     [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22cloudfoundry-identity-server%22
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
 
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
 
-    There are a few types of XSS:
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
 
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
 
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
+    Two common types of DoS vulnerabilities:
 
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
 
-    There are a few types of XSS:
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
 
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
 
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
 
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
 
-    There are a few types of XSS:
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
 
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
+    Two common types of DoS vulnerabilities:
 
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
 
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
 
-    There are a few types of XSS:
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
 
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
 
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
 
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
 
-    There are a few types of XSS:
+    Two common types of DoS vulnerabilities:
 
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
 
   affected_package: org.cloudfoundry.identity:cloudfoundry-identity-server
   vulnerable_versions:
-  - ">= 3 < 3.2.1"
+  - ">= 3.9 < 3.11.0"
   severity: medium
   package_manager: maven
   cve:
-  - CVE-2016-0781
+  - CVE-2017-4960
   cwe:
-  - CWE-79
+  - CWE-400
   credit:
-  - GE Digital Security Team
+  - Unknown
   references:
-  - https://pivotal.io/security/cve-2016-0781
-  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGCLOUDFOUNDRYIDENTITY-31066
-- id: snykio:maven:org.cloudfoundry.identity:cloudfoundry-identity-server:2016-07-04
-  title: SQL Injection
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2017-4960
+  - https://www.cloudfoundry.org/cve-2017-4960/
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGCLOUDFOUNDRYIDENTITY-31436
+- id: snykio:maven:org.cloudfoundry.identity:cloudfoundry-identity-server:2017-03-31
+  title: Session Fixation
   description: |
     [`org.cloudfoundry.identity:cloudfoundry-identity-server`][1] Affected
-    versions of the package are vulnerable to SQL Injection.
+    versions of this package are vulnerable to session fixation attacks via
+    the User Account and Authentication (UAA). When UAA is configured to
+    authenticate against external SAML or OpenID Connect based identity
+    providers.
 
 
 
     [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22cloudfoundry-identity-server%22
     \n[`org.cloudfoundry.identity:cloudfoundry-identity-server`][1] Affected
-    versions of the package are vulnerable to SQL Injection.
+    versions of this package are vulnerable to session fixation attacks via
+    the User Account and Authentication (UAA). When UAA is configured to
+    authenticate against external SAML or OpenID Connect based identity
+    providers.
 
 
 
     [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22cloudfoundry-identity-server%22
   affected_package: org.cloudfoundry.identity:cloudfoundry-identity-server
   vulnerable_versions:
-  - ">= 3.0.0 < 3.3.0.2"
-  - ">= 3.4 < 3.4.1"
+  - ">= 3 <= 3.9.1"
+  severity: low
+  package_manager: maven
+  cve:
+  - CVE-2017-4963
+  cwe:
+  - CWE-384
+  credit:
+  - GE Digital Security Team
+  references:
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2017-4963
+  - https://www.cloudfoundry.org/cve-2017-4963/
+  - https://pivotal.io/security/cve-2017-4963
+  - https://github.com/cloudfoundry/uaa/releases/tag/2.7.4.13
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGCLOUDFOUNDRYIDENTITY-31412
+- id: snykio:maven:org.cloudfoundry.identity:cloudfoundry-identity-server:2017-04-21
+  title: Blind SQL Injection
+  description: |
+    [`org.cloudfoundry.identity:cloudfoundry-identity-server`][1] Affected
+    versions of this package are vulnerable to Blind SQL Injection attacks
+    via the User Account and Authentication (UAA). The `client_id` string
+    was not properly validated.
+
+
+
+    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22cloudfoundry-identity-server%22
+    \n[`org.cloudfoundry.identity:cloudfoundry-identity-server`][1] Affected
+    versions of this package are vulnerable to Blind SQL Injection attacks
+    via the User Account and Authentication (UAA). The `client_id` string
+    was not properly validated.
+
+
+
+    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22cloudfoundry-identity-server%22
+  affected_package: org.cloudfoundry.identity:cloudfoundry-identity-server
+  vulnerable_versions:
+  - ">= 3. <= 3.9.1"
   severity: high
   package_manager: maven
   cve:
-  - CVE-2016-4468
+  - CVE-2017-4972
   cwe:
   - CWE-89
   credit:
-  - Graham Viski
+  - Unknown
   references:
-  - http://pivotal.io/security/cve-2016-4468
-  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGCLOUDFOUNDRYIDENTITY-31068
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2017-4972
+  - https://www.cloudfoundry.org/CVE-2017-4972
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGCLOUDFOUNDRYIDENTITY-31419
+- id: snykio:maven:org.cloudfoundry.identity:cloudfoundry-identity-server:2017-04-22
+  title: Privilege Escalation
+  description: |
+    [`org.cloudfoundry.identity:cloudfoundry-identity-server`][1] Affected
+    versions of this package are vulnerable to Privilege Escalations via the
+    User Account and Authentication (UAA). Any user could pass a malicious
+    token to a group endpoint, causing an elevation of privileges.
+
+
+
+    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22cloudfoundry-identity-server%22
+    \n[`org.cloudfoundry.identity:cloudfoundry-identity-server`][1] Affected
+    versions of this package are vulnerable to Privilege Escalations via the
+    User Account and Authentication (UAA). Any user could pass a malicious
+    token to a group endpoint, causing an elevation of privileges.
+
+
+
+    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22cloudfoundry-identity-server%22
+  affected_package: org.cloudfoundry.identity:cloudfoundry-identity-server
+  vulnerable_versions:
+  - ">= 3 <= 3.9.1"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2017-4973
+  cwe:
+  - CWE-265
+  credit:
+  - Unknown
+  references:
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2017-4973
+  - https://www.cloudfoundry.org/CVE-2017-4973
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGCLOUDFOUNDRYIDENTITY-31417
+- id: snykio:maven:org.cloudfoundry.identity:cloudfoundry-identity-server:2017-05-02
+  title: Blind SQL Injection
+  description: |
+    [`org.cloudfoundry.identity:cloudfoundry-identity-server`][1] Affected
+    versions of this package are vulnerable to Blind SQL Injection attacks
+    via the User Account and Authentication (UAA).
+
+
+
+    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22cloudfoundry-identity-server%22
+    \n[`org.cloudfoundry.identity:cloudfoundry-identity-server`][1] Affected
+    versions of this package are vulnerable to Blind SQL Injection attacks
+    via the User Account and Authentication (UAA).
+
+
+
+    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22cloudfoundry-identity-server%22
+  affected_package: org.cloudfoundry.identity:cloudfoundry-identity-server
+  vulnerable_versions:
+  - ">= 3 <= 3.9.1"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2017-4974
+  cwe:
+  - CWE-89
+  credit:
+  - Unknown
+  references:
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2017-4974
+  - https://www.cloudfoundry.org/CVE-2017-4974
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGCLOUDFOUNDRYIDENTITY-31445

@@ -13,6 +13,22 @@
   - https://github.com/angular/angular.js/commit/6476af83cd0418c84e034a955b12a842794385c4
   - https://github.com/angular/angular.js/issues/11352
   source_url: https://ossindex.net/resource/package/7104497868/vulnerabilities
+- id: ossindex:maven:org.webjars.bower:angular-1.1.6:2016-04-29
+  title: Cross Site Scripting (XSS) in ng-srcset
+  description: |-
+    There is a security issue with ng-srcset; URIs aren't sanitized.
+
+    The behavior is correct for ng-src but not for ng-srcset. The problem is with src/ng/compile.js that it ignores srcset.
+  affected_package: org.webjars.bower:angular-1.1.6
+  vulnerable_versions:
+  - "<1.3.0-rc.3"
+  package_manager: maven
+  credit:
+  - OSSIndex
+  references:
+  - https://cwe.mitre.org/data/definitions/79.html
+  - https://github.com/angular/angular.js/pull/8975
+  source_url: https://ossindex.net/resource/package/7104497868/vulnerabilities
 - id: ossindex:maven:org.webjars.bower:angular-1.1.6:2016-07-28
   title: "[Duplicate] Code injection"
   description: |-
@@ -42,25 +58,6 @@
   references:
   - https://github.com/angular/angular.js/commit/b39e1d47b9a1b39a9fe34c847a81f589fba522f8
   source_url: https://ossindex.net/resource/package/7104497868/vulnerabilities
-- id: ossindex:maven:org.webjars.bower:angular-1.1.6:2016-12-30
-  title: Cross Site Scripting (XSS) in server rendered templates
-  description: "> When rendering Angular templates with a server-side templating engine
-    like ERB or Haml it is easy to introduce XSS vulnerabilities. These vulnerabilities
-    are enabled by AngularJS evaluating user-provided strings containing interpolation
-    symbols (default symbols are {{ and }}).\n> \n> -- [github.com](https://github.com/angular/angular.js/issues/5601)\n"
-  affected_package: org.webjars.bower:angular-1.1.6
-  vulnerable_versions:
-  - "<1.3.0-beta.10"
-  package_manager: maven
-  credit:
-  - OSSIndex
-  references:
-  - https://cwe.mitre.org/data/definitions/79.html
-  - https://github.com/angular/angular.js/commit/e3f78c17d3b5d3a714402d7314094aabe7f6512a
-  - https://github.com/angular/angular.js/issues/5601
-  - https://github.com/angular/angular.js/issues/7496
-  - https://github.com/angular/angular.js/pull/7517
-  source_url: https://ossindex.net/resource/package/7104497868/vulnerabilities
 - id: ossindex:maven:org.webjars.bower:angular-1.1.6:2016-07-28
   title: Arbitrary Code Execution
   description: SVG animations tags are not being sanitized properly, resulting in
@@ -76,55 +73,6 @@
   - https://github.com/angular/angular.js/commit/67688d5ca00f6de4c7fe6084e2fa762a00d25610
   - https://github.com/angular/angular.js/pull/11290
   - https://srcclr.com/security/arbitrary-code-execution-through-svg/javascript/s-2253
-  source_url: https://ossindex.net/resource/package/7104497868/vulnerabilities
-- id: ossindex:maven:org.webjars.bower:angular-1.1.6:2016-12-30
-  title: Cross Site Scripting (XSS) when loaded from an extension
-  description: "> Extension URIs (`resource://...`) bypass Content-Security-Policy
-    in Chrome and Firefox and can always be loaded. Now if a site already has a XSS
-    bug, and uses CSP to protect itself, but the user has an extension installed that
-    uses Angular, an attacke[r] can load Angular from the extension, and Angular's
-    auto-bootstrapping can be used to bypass the victim site's CSP protection.\n>
-    \n> -- [github.com](https://github.com/angular/angular.js/pull/15346)"
-  affected_package: org.webjars.bower:angular-1.1.6
-  vulnerable_versions:
-  - ">=1.5.0 <1.5.9"
-  package_manager: maven
-  credit:
-  - OSSIndex
-  references:
-  - https://cwe.mitre.org/data/definitions/79.html
-  - https://github.com/angular/angular.js/commit/0ff10e1b56c6b7c4ac465e35c96a5886e294bac5
-  - https://github.com/angular/angular.js/issues/15346
-  - https://github.com/angular/angular.js/pull/15346
-  source_url: https://ossindex.net/resource/package/7104497868/vulnerabilities
-- id: ossindex:maven:org.webjars.bower:angular-1.1.6:2016-12-30
-  title: Cross Site Scripting (XSS) through use elements referencing external SVG
-  description: "> The use element can reference external svg's (same origin) and can
-    include\nxlink javascript urls or foreign object that can execute xss.\n> \n>
-    -- [github.com](https://github.com/angular/angular.js/pull/13453)"
-  affected_package: org.webjars.bower:angular-1.1.6
-  vulnerable_versions:
-  - "<1.5.0"
-  package_manager: maven
-  credit:
-  - OSSIndex
-  references:
-  - https://cwe.mitre.org/data/definitions/79.html
-  - https://github.com/angular/angular.js/issues/13453
-  source_url: https://ossindex.net/resource/package/7104497868/vulnerabilities
-- id: ossindex:maven:org.webjars.bower:angular-1.1.6:2016-11-13
-  title: Cross Site Scripting (XSS)
-  description: The linky filter is vulnerable to XSS due to its usage of the unsafeHTML
-    filter.
-  affected_package: org.webjars.bower:angular-1.1.6
-  vulnerable_versions:
-  - "<0.9.1"
-  package_manager: maven
-  credit:
-  - OSSIndex
-  references:
-  - https://cwe.mitre.org/data/definitions/79.html
-  - https://github.com/angular/angular.js/issues/34
   source_url: https://ossindex.net/resource/package/7104497868/vulnerabilities
 - id: ossindex:maven:org.webjars.bower:angular-1.1.6:2016-07-28
   title: UI Redress Attack Through Improper Sanitization Of SVG Elements
@@ -225,19 +173,71 @@
   references:
   - https://code.google.com/p/mustache-security/wiki/AngularJS
   source_url: https://ossindex.net/resource/package/7104497868/vulnerabilities
-- id: ossindex:maven:org.webjars.bower:angular-1.1.6:2016-04-29
-  title: Cross Site Scripting (XSS) in ng-srcset
-  description: |-
-    There is a security issue with ng-srcset; URIs aren't sanitized.
-
-    The behavior is correct for ng-src but not for ng-srcset. The problem is with src/ng/compile.js that it ignores srcset.
+- id: ossindex:maven:org.webjars.bower:angular-1.1.6:2016-11-13
+  title: Cross Site Scripting (XSS)
+  description: The linky filter is vulnerable to XSS due to its usage of the unsafeHTML
+    filter.
   affected_package: org.webjars.bower:angular-1.1.6
   vulnerable_versions:
-  - "<1.3.0-rc.3"
+  - "<0.9.1"
   package_manager: maven
   credit:
   - OSSIndex
   references:
   - https://cwe.mitre.org/data/definitions/79.html
-  - https://github.com/angular/angular.js/pull/8975
+  - https://github.com/angular/angular.js/issues/34
+  source_url: https://ossindex.net/resource/package/7104497868/vulnerabilities
+- id: ossindex:maven:org.webjars.bower:angular-1.1.6:2016-12-30
+  title: Cross Site Scripting (XSS) in server rendered templates
+  description: "> When rendering Angular templates with a server-side templating engine
+    like ERB or Haml it is easy to introduce XSS vulnerabilities. These vulnerabilities
+    are enabled by AngularJS evaluating user-provided strings containing interpolation
+    symbols (default symbols are {{ and }}).\n> \n> -- [github.com](https://github.com/angular/angular.js/issues/5601)\n"
+  affected_package: org.webjars.bower:angular-1.1.6
+  vulnerable_versions:
+  - "<1.3.0-beta.10"
+  package_manager: maven
+  credit:
+  - OSSIndex
+  references:
+  - https://cwe.mitre.org/data/definitions/79.html
+  - https://github.com/angular/angular.js/commit/e3f78c17d3b5d3a714402d7314094aabe7f6512a
+  - https://github.com/angular/angular.js/issues/5601
+  - https://github.com/angular/angular.js/issues/7496
+  - https://github.com/angular/angular.js/pull/7517
+  source_url: https://ossindex.net/resource/package/7104497868/vulnerabilities
+- id: ossindex:maven:org.webjars.bower:angular-1.1.6:2016-12-30
+  title: Cross Site Scripting (XSS) when loaded from an extension
+  description: "> Extension URIs (`resource://...`) bypass Content-Security-Policy
+    in Chrome and Firefox and can always be loaded. Now if a site already has a XSS
+    bug, and uses CSP to protect itself, but the user has an extension installed that
+    uses Angular, an attacke[r] can load Angular from the extension, and Angular's
+    auto-bootstrapping can be used to bypass the victim site's CSP protection.\n>
+    \n> -- [github.com](https://github.com/angular/angular.js/pull/15346)"
+  affected_package: org.webjars.bower:angular-1.1.6
+  vulnerable_versions:
+  - ">=1.5.0 <1.5.9"
+  package_manager: maven
+  credit:
+  - OSSIndex
+  references:
+  - https://cwe.mitre.org/data/definitions/79.html
+  - https://github.com/angular/angular.js/commit/0ff10e1b56c6b7c4ac465e35c96a5886e294bac5
+  - https://github.com/angular/angular.js/issues/15346
+  - https://github.com/angular/angular.js/pull/15346
+  source_url: https://ossindex.net/resource/package/7104497868/vulnerabilities
+- id: ossindex:maven:org.webjars.bower:angular-1.1.6:2016-12-30
+  title: Cross Site Scripting (XSS) through use elements referencing external SVG
+  description: "> The use element can reference external svg's (same origin) and can
+    include\nxlink javascript urls or foreign object that can execute xss.\n> \n>
+    -- [github.com](https://github.com/angular/angular.js/pull/13453)"
+  affected_package: org.webjars.bower:angular-1.1.6
+  vulnerable_versions:
+  - "<1.5.0"
+  package_manager: maven
+  credit:
+  - OSSIndex
+  references:
+  - https://cwe.mitre.org/data/definitions/79.html
+  - https://github.com/angular/angular.js/issues/13453
   source_url: https://ossindex.net/resource/package/7104497868/vulnerabilities

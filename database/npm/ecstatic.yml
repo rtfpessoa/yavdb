@@ -1,4 +1,25 @@
 ---
+- id: nodesecurity:npm:ecstatic:2015-12-23
+  title: Denial of Service - Illegal access crash from if-modified-since header
+  description: |
+    Versions of `ecstatic` prior to 1.4.0 are affected by a denial of service vulnerability when certain input strings are sent via the `Last-Modified` or `If-Modified-Since` headers.
+
+    Parsing certain inputs with `new Date()` or `Date.parse()` cases v8 to crash. As ecstatic passes the value of the affected headers into one of these functions, sending certain inputs via one of the headers will cause the server to crash.
+  affected_package: ecstatic
+  vulnerable_versions:
+  - "<1.4.0"
+  patched_versions:
+  - ">=1.4.0"
+  severity: high
+  package_manager: npm
+  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H
+  credit:
+  - James Halliday
+  references:
+  - |-
+    https://github.com/jfhbrook/node-ecstatic/pull/179
+    https://bugs.chromium.org/p/v8/issues/detail?id=4640
+  source_url: https://nodesecurity.io/advisories/64
 - id: nodesecurity:npm:ecstatic:2017-12-13
   title: Denial of Service
   description: |-
@@ -29,39 +50,6 @@
     https://github.com/jfhbrook/node-ecstatic/commit/71ce93988ead4b561a8592168c72143907189f01#diff-b2b5a88fb51675f1aa1065c093dce1ee)
     https://www.checkmarx.com/advisories/denial-of-service-dos-vulnerability-in-ecstatic-npm-package/
   source_url: https://nodesecurity.io/advisories/553
-- id: nodesecurity:npm:ecstatic:2015-12-23
-  title: Denial of Service - Illegal access crash from if-modified-since header
-  description: |
-    Versions of `ecstatic` prior to 1.4.0 are affected by a denial of service vulnerability when certain input strings are sent via the `Last-Modified` or `If-Modified-Since` headers.
-
-    Parsing certain inputs with `new Date()` or `Date.parse()` cases v8 to crash. As ecstatic passes the value of the affected headers into one of these functions, sending certain inputs via one of the headers will cause the server to crash.
-  affected_package: ecstatic
-  vulnerable_versions:
-  - "<1.4.0"
-  patched_versions:
-  - ">=1.4.0"
-  severity: high
-  package_manager: npm
-  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H
-  credit:
-  - James Halliday
-  references:
-  - |-
-    https://github.com/jfhbrook/node-ecstatic/pull/179
-    https://bugs.chromium.org/p/v8/issues/detail?id=4640
-  source_url: https://nodesecurity.io/advisories/64
-- id: ossindex:npm:ecstatic:2016-10-05
-  title: fixes the xss issues
-  description: Cross Site Scripting attacks were possible due to an unguarded `req.headers.host`.
-  affected_package: ecstatic
-  vulnerable_versions:
-  - "<0.0.4"
-  package_manager: npm
-  credit:
-  - OSSIndex
-  references:
-  - https://github.com/jesusabdullah/node-ecstatic/issues/13
-  source_url: https://ossindex.net/resource/package/7013511415/vulnerabilities
 - id: ossindex:npm:ecstatic:2016-09-18
   title: Cross Site Scripting (XSS)
   description: The new directory listing code from nodejitsu's static server has some
@@ -112,6 +100,270 @@
   - https://github.com/jesusabdullah/node-ecstatic/issues/142
   - https://github.com/jfhbrook/node-ecstatic/pull/151
   source_url: https://ossindex.net/resource/package/7013511415/vulnerabilities
+- id: ossindex:npm:ecstatic:2016-10-05
+  title: fixes the xss issues
+  description: Cross Site Scripting attacks were possible due to an unguarded `req.headers.host`.
+  affected_package: ecstatic
+  vulnerable_versions:
+  - "<0.0.4"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - https://github.com/jesusabdullah/node-ecstatic/issues/13
+  source_url: https://ossindex.net/resource/package/7013511415/vulnerabilities
+- id: snykio:npm:ecstatic:2015-12-23
+  title: Denial of Service (DoS)
+  description: |+
+    Sending a purposefully crafted invalid date in the `If-Modified-Since`
+    header will cause the `Ecstatic` server to crash, enabling an easily
+    exploited `Denial of Service` attack.
+
+    The vulnerability is caused by the combination of two bugs. First, the
+    underlying V8 engine throws an exception when processing the specially
+    crafted date, instead of stating the date is invalid as it should.
+    Second, the ecstatic server does not handle the exception, triggering
+    the crash.
+
+    Upgrading `Ecstatic` will address the second issue and thus fix the
+    vulnerability.
+
+    \nSending a purposefully crafted invalid date in the `If-Modified-Since`
+    header will cause the `Ecstatic` server to crash, enabling an easily
+    exploited `Denial of Service` attack.
+
+    The vulnerability is caused by the combination of two bugs. First, the
+    underlying V8 engine throws an exception when processing the specially
+    crafted date, instead of stating the date is invalid as it should.
+    Second, the ecstatic server does not handle the exception, triggering
+    the crash.
+
+    Upgrading `Ecstatic` will address the second issue and thus fix the
+    vulnerability.
+
+    \nSending a purposefully crafted invalid date in the `If-Modified-Since`
+    header will cause the `Ecstatic` server to crash, enabling an easily
+    exploited `Denial of Service` attack.
+
+    The vulnerability is caused by the combination of two bugs. First, the
+    underlying V8 engine throws an exception when processing the specially
+    crafted date, instead of stating the date is invalid as it should.
+    Second, the ecstatic server does not handle the exception, triggering
+    the crash.
+
+    Upgrading `Ecstatic` will address the second issue and thus fix the
+    vulnerability.
+
+    \nSending a purposefully crafted invalid date in the `If-Modified-Since`
+    header will cause the `Ecstatic` server to crash, enabling an easily
+    exploited `Denial of Service` attack.
+
+    The vulnerability is caused by the combination of two bugs. First, the
+    underlying V8 engine throws an exception when processing the specially
+    crafted date, instead of stating the date is invalid as it should.
+    Second, the ecstatic server does not handle the exception, triggering
+    the crash.
+
+    Upgrading `Ecstatic` will address the second issue and thus fix the
+    vulnerability.
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+  affected_package: ecstatic
+  vulnerable_versions:
+  - "<1.4.0"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2015-9242
+  cwe:
+  - CWE-248
+  credit:
+  - James Halliday
+  references:
+  - https://github.com/jfhbrook/node-ecstatic/pull/179
+  - https://bugs.chromium.org/p/v8/issues/detail?id=4640
+  source_url: https://snyk.io/vuln/npm:ecstatic:20151223
 - id: snykio:npm:ecstatic:2016-08-08
   title: Denial of Service (DoS)
   description: |+
@@ -581,255 +833,3 @@
   - https://github.com/jfhbrook/node-ecstatic/issues/16
   - https://github.com/jfhbrook/node-ecstatic/commit/71ce93988ead4b561a8592168c72143907189f01#diff-b2b5a88fb51675f1aa1065c093dce1ee
   source_url: https://snyk.io/vuln/npm:ecstatic:20160809
-- id: snykio:npm:ecstatic:2015-12-23
-  title: Denial of Service (DoS)
-  description: |+
-    Sending a purposefully crafted invalid date in the `If-Modified-Since`
-    header will cause the `Ecstatic` server to crash, enabling an easily
-    exploited `Denial of Service` attack.
-
-    The vulnerability is caused by the combination of two bugs. First, the
-    underlying V8 engine throws an exception when processing the specially
-    crafted date, instead of stating the date is invalid as it should.
-    Second, the ecstatic server does not handle the exception, triggering
-    the crash.
-
-    Upgrading `Ecstatic` will address the second issue and thus fix the
-    vulnerability.
-
-    \nSending a purposefully crafted invalid date in the `If-Modified-Since`
-    header will cause the `Ecstatic` server to crash, enabling an easily
-    exploited `Denial of Service` attack.
-
-    The vulnerability is caused by the combination of two bugs. First, the
-    underlying V8 engine throws an exception when processing the specially
-    crafted date, instead of stating the date is invalid as it should.
-    Second, the ecstatic server does not handle the exception, triggering
-    the crash.
-
-    Upgrading `Ecstatic` will address the second issue and thus fix the
-    vulnerability.
-
-    \nSending a purposefully crafted invalid date in the `If-Modified-Since`
-    header will cause the `Ecstatic` server to crash, enabling an easily
-    exploited `Denial of Service` attack.
-
-    The vulnerability is caused by the combination of two bugs. First, the
-    underlying V8 engine throws an exception when processing the specially
-    crafted date, instead of stating the date is invalid as it should.
-    Second, the ecstatic server does not handle the exception, triggering
-    the crash.
-
-    Upgrading `Ecstatic` will address the second issue and thus fix the
-    vulnerability.
-
-    \nSending a purposefully crafted invalid date in the `If-Modified-Since`
-    header will cause the `Ecstatic` server to crash, enabling an easily
-    exploited `Denial of Service` attack.
-
-    The vulnerability is caused by the combination of two bugs. First, the
-    underlying V8 engine throws an exception when processing the specially
-    crafted date, instead of stating the date is invalid as it should.
-    Second, the ecstatic server does not handle the exception, triggering
-    the crash.
-
-    Upgrading `Ecstatic` will address the second issue and thus fix the
-    vulnerability.
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-  affected_package: ecstatic
-  vulnerable_versions:
-  - "<1.4.0"
-  severity: high
-  package_manager: npm
-  cve:
-  - CVE-2015-9242
-  cwe:
-  - CWE-248
-  credit:
-  - James Halliday
-  references:
-  - https://github.com/jfhbrook/node-ecstatic/pull/179
-  - https://bugs.chromium.org/p/v8/issues/detail?id=4640
-  source_url: https://snyk.io/vuln/npm:ecstatic:20151223

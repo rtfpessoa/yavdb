@@ -1,4 +1,46 @@
 ---
+- id: snykio:pypi:twisted:2014-09-17
+  title: Access Restriction Bypass
+  description: |
+    [`Twisted`][1] is an asynchronous networking framework written in Python
+    Affected versions of this package are vulnerable to Access Restriction
+    Bypass. When specifying the trustRoot (CA store) for the HTTP client,
+    Twisted did not respect the user\'s specification, and always used the
+    default of the platform trust. This means that users attempting to use
+    this feature to implement certificate pinning, or otherwise restrict the
+    trust CAs would still have accepted any certificate signed by a CA.
+
+
+
+    [1]: https://pypi.python.org/pypi/Twisted
+    \n[`Twisted`][1] is an asynchronous networking framework written in Python
+    Affected versions of this package are vulnerable to Access Restriction
+    Bypass. When specifying the trustRoot (CA store) for the HTTP client,
+    Twisted did not respect the user\'s specification, and always used the
+    default of the platform trust. This means that users attempting to use
+    this feature to implement certificate pinning, or otherwise restrict the
+    trust CAs would still have accepted any certificate signed by a CA.
+
+
+
+    [1]: https://pypi.python.org/pypi/Twisted
+  affected_package: twisted
+  vulnerable_versions:
+  - "< 14.0.1"
+  severity: low
+  package_manager: pypi
+  cve:
+  - CVE-2014-7143
+  cwe:
+  - CWE-284
+  credit:
+  - Alex Gaynor
+  - David Reid
+  references:
+  - https://bugzilla.redhat.com/CVE-2014-7143
+  - https://github.com/twisted/twisted/commit/3b5942252f5f3e45862a0e12b266ab29e243cc33
+  - http://www.openwall.com/lists/oss-security/2014/09/17/4
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-TWISTED-40039
 - id: snykio:pypi:twisted:2016-07-17
   title: Open Redirect
   description: |
@@ -64,45 +106,3 @@
   - https://twistedmatrix.com/trac/ticket/8623
   - https://github.com/twisted/twisted/pull/482
   source_url: https://snyk.io/vuln/SNYK-PYTHON-TWISTED-40368
-- id: snykio:pypi:twisted:2014-09-17
-  title: Access Restriction Bypass
-  description: |
-    [`Twisted`][1] is an asynchronous networking framework written in Python
-    Affected versions of this package are vulnerable to Access Restriction
-    Bypass. When specifying the trustRoot (CA store) for the HTTP client,
-    Twisted did not respect the user\'s specification, and always used the
-    default of the platform trust. This means that users attempting to use
-    this feature to implement certificate pinning, or otherwise restrict the
-    trust CAs would still have accepted any certificate signed by a CA.
-
-
-
-    [1]: https://pypi.python.org/pypi/Twisted
-    \n[`Twisted`][1] is an asynchronous networking framework written in Python
-    Affected versions of this package are vulnerable to Access Restriction
-    Bypass. When specifying the trustRoot (CA store) for the HTTP client,
-    Twisted did not respect the user\'s specification, and always used the
-    default of the platform trust. This means that users attempting to use
-    this feature to implement certificate pinning, or otherwise restrict the
-    trust CAs would still have accepted any certificate signed by a CA.
-
-
-
-    [1]: https://pypi.python.org/pypi/Twisted
-  affected_package: twisted
-  vulnerable_versions:
-  - "< 14.0.1"
-  severity: low
-  package_manager: pypi
-  cve:
-  - CVE-2014-7143
-  cwe:
-  - CWE-284
-  credit:
-  - Alex Gaynor
-  - David Reid
-  references:
-  - https://bugzilla.redhat.com/CVE-2014-7143
-  - https://github.com/twisted/twisted/commit/3b5942252f5f3e45862a0e12b266ab29e243cc33
-  - http://www.openwall.com/lists/oss-security/2014/09/17/4
-  source_url: https://snyk.io/vuln/SNYK-PYTHON-TWISTED-40039

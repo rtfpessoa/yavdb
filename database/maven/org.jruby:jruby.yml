@@ -1,27 +1,4 @@
 ---
-- id: ossindex:maven:org.jruby:jruby:2012-11-28
-  title: "[CVE-2012-5370]  Cryptographic Issues"
-  description: JRuby computes hash values without properly restricting the ability
-    to trigger hash collisions predictably, which allows context-dependent attackers
-    to cause a denial of service (CPU consumption) via crafted input to an application
-    that maintains a hash table, as demonstrated by a universal multicollision attack
-    against the MurmurHash2 algorithm, a different vulnerability than CVE-2011-4838.
-  affected_package: org.jruby:jruby
-  vulnerable_versions:
-  - "*"
-  package_manager: maven
-  cve:
-  - CVE-2012-5370
-  credit:
-  - OSSIndex
-  references:
-  - http://2012.appsec-forum.ch/conferences/#c17
-  - http://asfws12.files.wordpress.com/2012/11/asfws2012-jean_philippe_aumasson-martin_bosslet-hash_flooding_dos_reloaded.pdf
-  - http://rhn.redhat.com/errata/RHSA-2013-0533.html
-  - http://www.ocert.org/advisories/ocert-2012-001.html
-  - https://bugzilla.redhat.com/show_bug.cgi?id=880671
-  - https://www.131002.net/data/talks/appsec12_slides.pdf
-  source_url: https://ossindex.net/resource/package/7015268762/vulnerabilities
 - id: ossindex:maven:org.jruby:jruby:2011-12-30
   title: "[CVE-2011-4838]  Improper Input Validation"
   description: JRuby before 1.6.5.1 computes hash values without restricting the ability
@@ -127,6 +104,202 @@
   - https://bugs.gentoo.org/show_bug.cgi?id=317435
   - https://bugzilla.redhat.com/show_bug.cgi?id=750306
   source_url: https://ossindex.net/resource/package/7015268762/vulnerabilities
+- id: ossindex:maven:org.jruby:jruby:2012-11-28
+  title: "[CVE-2012-5370]  Cryptographic Issues"
+  description: JRuby computes hash values without properly restricting the ability
+    to trigger hash collisions predictably, which allows context-dependent attackers
+    to cause a denial of service (CPU consumption) via crafted input to an application
+    that maintains a hash table, as demonstrated by a universal multicollision attack
+    against the MurmurHash2 algorithm, a different vulnerability than CVE-2011-4838.
+  affected_package: org.jruby:jruby
+  vulnerable_versions:
+  - "*"
+  package_manager: maven
+  cve:
+  - CVE-2012-5370
+  credit:
+  - OSSIndex
+  references:
+  - http://2012.appsec-forum.ch/conferences/#c17
+  - http://asfws12.files.wordpress.com/2012/11/asfws2012-jean_philippe_aumasson-martin_bosslet-hash_flooding_dos_reloaded.pdf
+  - http://rhn.redhat.com/errata/RHSA-2013-0533.html
+  - http://www.ocert.org/advisories/ocert-2012-001.html
+  - https://bugzilla.redhat.com/show_bug.cgi?id=880671
+  - https://www.131002.net/data/talks/appsec12_slides.pdf
+  source_url: https://ossindex.net/resource/package/7015268762/vulnerabilities
+- id: snykio:maven:org.jruby:jruby:2015-02-26
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [`org.jruby:jruby`][1] The regular expression engine in JRuby before
+    1.4.1, when $KCODE is set to \'u\', does not properly handle characters
+    immediately after a UTF-8 character, which allows remote attackers to
+    conduct cross-site scripting (XSS) attacks via a crafted string.
+
+
+
+    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22jruby%22
+    \n[`org.jruby:jruby`][1] The regular expression engine in JRuby before
+    1.4.1, when $KCODE is set to \'u\', does not properly handle characters
+    immediately after a UTF-8 character, which allows remote attackers to
+    conduct cross-site scripting (XSS) attacks via a crafted string.
+
+
+
+    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22jruby%22
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+  affected_package: org.jruby:jruby
+  vulnerable_versions:
+  - "< 1.4.1"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2010-1330
+  cwe:
+  - CWE-79
+  credit:
+  - Unknown
+  references:
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2010-1330
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGJRUBY-31215
 - id: snykio:maven:org.jruby:jruby:2016-12-25
   title: Arbitrary Code Injection
   description: |
@@ -559,193 +732,6 @@
   - http://www.openwall.com/lists/oss-security/2013/03/18/4
   - http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2013-1856
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGJRUBY-30134
-- id: snykio:maven:org.jruby:jruby:2015-02-26
-  title: Cross-site Scripting (XSS)
-  description: |+
-    [`org.jruby:jruby`][1] The regular expression engine in JRuby before
-    1.4.1, when $KCODE is set to \'u\', does not properly handle characters
-    immediately after a UTF-8 character, which allows remote attackers to
-    conduct cross-site scripting (XSS) attacks via a crafted string.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22jruby%22
-    \n[`org.jruby:jruby`][1] The regular expression engine in JRuby before
-    1.4.1, when $KCODE is set to \'u\', does not properly handle characters
-    immediately after a UTF-8 character, which allows remote attackers to
-    conduct cross-site scripting (XSS) attacks via a crafted string.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22jruby%22
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-  affected_package: org.jruby:jruby
-  vulnerable_versions:
-  - "< 1.4.1"
-  severity: medium
-  package_manager: maven
-  cve:
-  - CVE-2010-1330
-  cwe:
-  - CWE-79
-  credit:
-  - Unknown
-  references:
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2010-1330
-  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGJRUBY-31215
-- id: victims:maven:org.jruby:jruby:date
-  title: 'rubygem-json: Denial of Service and SQL Injection'
-  affected_package: org.jruby:jruby
-  vulnerable_versions:
-  - "==1.7.2"
-  severity: high
-  package_manager: maven
-  cve:
-  - 2013-0269
-  credit:
-  - Victims CVE Database
-  references:
-  - https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2013-0269
-  source_url: https://github.com/victims/victims-cve-db/blob/master/database/java/2013/0269.yaml
 - id: victims:maven:org.jruby:jruby:date
   title: 'JRuby: File access with XML External Entities'
   description: 'There is a vulnerability in the JDOM backend to ActiveSupport''s XML
@@ -785,6 +771,20 @@
   credit:
   - Victims CVE Database
   source_url: https://github.com/victims/victims-cve-db/blob/master/database/java/2013/1821.yaml
+- id: victims:maven:org.jruby:jruby:date
+  title: 'rubygem-json: Denial of Service and SQL Injection'
+  affected_package: org.jruby:jruby
+  vulnerable_versions:
+  - "==1.7.2"
+  severity: high
+  package_manager: maven
+  cve:
+  - 2013-0269
+  credit:
+  - Victims CVE Database
+  references:
+  - https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2013-0269
+  source_url: https://github.com/victims/victims-cve-db/blob/master/database/java/2013/0269.yaml
 - id: victims:maven:org.jruby:jruby:date
   title: 'HawtJNI: predictable temporary file name leading to local arbitrary code
     execution'

@@ -20,19 +20,6 @@
   references:
   - ''
   source_url: https://nodesecurity.io/advisories/8
-- id: ossindex:npm:express:2017-07-30
-  title: Infinite Loop Caused By Undefined Status Code
-  description: An infinite error loop is caused when res.send(status) is undefined.
-  affected_package: express
-  vulnerable_versions:
-  - "<3.2.5"
-  package_manager: npm
-  credit:
-  - OSSIndex
-  references:
-  - https://github.com/expressjs/express/commit/28b8a3b5f72829fecdaea5f0d585654470337a9a
-  - https://github.com/expressjs/express/issues/1623
-  source_url: https://ossindex.net/resource/package/7013563171/vulnerabilities
 - id: ossindex:npm:express:1970-01-01
   title: Denial of Service
   description: Sparse arrays with extremely high indexes in query string could cause
@@ -215,6 +202,19 @@
   references:
   - http://expressjs.com/advanced/security-updates.html#4.8.0-2
   source_url: https://ossindex.net/resource/package/7013563171/vulnerabilities
+- id: ossindex:npm:express:1970-01-01
+  title: cross-site scripting (XSS)
+  description: The 404 response of an unsupported method override attempt was susceptible
+    to cross-site scripting attacks.
+  affected_package: express
+  vulnerable_versions:
+  - "<3.3.0"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - http://expressjs.com/advanced/security-updates.html#3.3.0
+  source_url: https://ossindex.net/resource/package/7013563171/vulnerabilities
 - id: ossindex:npm:express:2016-05-16
   title: Cross-site scripting (XSS)
   description: "> Vulnerable versions of express do not specify a charset field in
@@ -234,6 +234,67 @@
   - https://cwe.mitre.org/data/definitions/79.html
   - https://nodesecurity.io/advisories/8
   - https://nodesecurity.io/advisories/express-no-charset-in-content-type-header
+  source_url: https://ossindex.net/resource/package/7013563171/vulnerabilities
+- id: ossindex:npm:express:2016-05-16
+  title: Cross-Site Scripting (XSS - UTF-7 vulnerability)
+  description: Express was not specifying a charset field in the content-type header
+    while displaying 400 level response messages. Old (or otherwise susceptible) browsers
+    could auto-detect the charset as UTF-7 allowing an attacker to perform a cross-site
+    scripting attack.
+  affected_package: express
+  vulnerable_versions:
+  - ">=4 <4.5"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - http://nedbatchelder.com/blog/200704/xss_with_utf7.html
+  - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6393
+  - https://cwe.mitre.org/data/definitions/79.html
+  - https://nodesecurity.io/advisories/8
+  source_url: https://ossindex.net/resource/package/7013563171/vulnerabilities
+- id: ossindex:npm:express:2016-10-17
+  title: Cross Site Scripting (XSS) in 404
+  description: Query text to a non-existent page is printed unescaped in the 404 response
+    page, allowing for cross site scripting attacks.
+  affected_package: express
+  vulnerable_versions:
+  - "<=2.5.9"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - https://cwe.mitre.org/data/definitions/79.html
+  - https://github.com/strongloop/express/issues/1084
+  source_url: https://ossindex.net/resource/package/7013563171/vulnerabilities
+- id: ossindex:npm:express:2016-11-30
+  title: Escape URLs in text/plain res.redirect response
+  description: The res.redirect URL was not being escaped, allowing some browsers
+    (primarily old versions of IE) when attempt to sniff the Content-Type to evaluate
+    it as HTML, which causes a cross-site scripting vulnerability.
+  affected_package: express
+  vulnerable_versions:
+  - "<3.0.4"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - https://github.com/expressjs/express/commit/5cf29a3d2906e8f2218ab1febbef392bb4925b14
+  - https://github.com/strongloop/express/issues/1425
+  source_url: https://ossindex.net/resource/package/7013563171/vulnerabilities
+- id: ossindex:npm:express:2016-11-30
+  title: Cross Site Scripting (XSS) in JSONP callbacks
+  description: JSONP callbacks allow unsafe characters that may lead to Cross Site
+    Scripting (XSS)
+  affected_package: express
+  vulnerable_versions:
+  - "<1.0.3"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - https://cwe.mitre.org/data/definitions/79.html
+  - https://github.com/strongloop/express/issues/502
   source_url: https://ossindex.net/resource/package/7013563171/vulnerabilities
 - id: ossindex:npm:express:2017-01-30
   title: HTTP Splitting Attack
@@ -268,79 +329,18 @@
   - https://github.com/expressjs/express/commit/5cf29a3d2906e8f2218ab1febbef392bb4925b14
   - https://github.com/expressjs/express/issues/1425
   source_url: https://ossindex.net/resource/package/7013563171/vulnerabilities
-- id: ossindex:npm:express:2016-05-16
-  title: Cross-Site Scripting (XSS - UTF-7 vulnerability)
-  description: Express was not specifying a charset field in the content-type header
-    while displaying 400 level response messages. Old (or otherwise susceptible) browsers
-    could auto-detect the charset as UTF-7 allowing an attacker to perform a cross-site
-    scripting attack.
+- id: ossindex:npm:express:2017-07-30
+  title: Infinite Loop Caused By Undefined Status Code
+  description: An infinite error loop is caused when res.send(status) is undefined.
   affected_package: express
   vulnerable_versions:
-  - ">=4 <4.5"
+  - "<3.2.5"
   package_manager: npm
   credit:
   - OSSIndex
   references:
-  - http://nedbatchelder.com/blog/200704/xss_with_utf7.html
-  - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6393
-  - https://cwe.mitre.org/data/definitions/79.html
-  - https://nodesecurity.io/advisories/8
-  source_url: https://ossindex.net/resource/package/7013563171/vulnerabilities
-- id: ossindex:npm:express:2016-11-30
-  title: Escape URLs in text/plain res.redirect response
-  description: The res.redirect URL was not being escaped, allowing some browsers
-    (primarily old versions of IE) when attempt to sniff the Content-Type to evaluate
-    it as HTML, which causes a cross-site scripting vulnerability.
-  affected_package: express
-  vulnerable_versions:
-  - "<3.0.4"
-  package_manager: npm
-  credit:
-  - OSSIndex
-  references:
-  - https://github.com/expressjs/express/commit/5cf29a3d2906e8f2218ab1febbef392bb4925b14
-  - https://github.com/strongloop/express/issues/1425
-  source_url: https://ossindex.net/resource/package/7013563171/vulnerabilities
-- id: ossindex:npm:express:2016-10-17
-  title: Cross Site Scripting (XSS) in 404
-  description: Query text to a non-existent page is printed unescaped in the 404 response
-    page, allowing for cross site scripting attacks.
-  affected_package: express
-  vulnerable_versions:
-  - "<=2.5.9"
-  package_manager: npm
-  credit:
-  - OSSIndex
-  references:
-  - https://cwe.mitre.org/data/definitions/79.html
-  - https://github.com/strongloop/express/issues/1084
-  source_url: https://ossindex.net/resource/package/7013563171/vulnerabilities
-- id: ossindex:npm:express:2016-11-30
-  title: Cross Site Scripting (XSS) in JSONP callbacks
-  description: JSONP callbacks allow unsafe characters that may lead to Cross Site
-    Scripting (XSS)
-  affected_package: express
-  vulnerable_versions:
-  - "<1.0.3"
-  package_manager: npm
-  credit:
-  - OSSIndex
-  references:
-  - https://cwe.mitre.org/data/definitions/79.html
-  - https://github.com/strongloop/express/issues/502
-  source_url: https://ossindex.net/resource/package/7013563171/vulnerabilities
-- id: ossindex:npm:express:1970-01-01
-  title: cross-site scripting (XSS)
-  description: The 404 response of an unsupported method override attempt was susceptible
-    to cross-site scripting attacks.
-  affected_package: express
-  vulnerable_versions:
-  - "<3.3.0"
-  package_manager: npm
-  credit:
-  - OSSIndex
-  references:
-  - http://expressjs.com/advanced/security-updates.html#3.3.0
+  - https://github.com/expressjs/express/commit/28b8a3b5f72829fecdaea5f0d585654470337a9a
+  - https://github.com/expressjs/express/issues/1623
   source_url: https://ossindex.net/resource/package/7013563171/vulnerabilities
 - id: snykio:npm:express:2014-09-12
   title: Cross-site Scripting (XSS)

@@ -1,4 +1,28 @@
 ---
+- id: nodesecurity:npm:npm:2016-04-18
+  title: npm Token Leak
+  description: "Affected versions of the `npm` package include the bearer token of
+    the logged in user in every request made by the CLI, even if the request is not
+    directed towards the user's active registry. \n\nAn attacker could create an HTTP
+    server to collect tokens, and by various means including but not limited to install
+    scripts, cause the npm CLI to make a request to that server, which would compromise
+    the user's token.\n\nThis compromised token could be used to do anything that
+    the user could do, including publishing new packages.\n\n"
+  affected_package: npm
+  vulnerable_versions:
+  - "<= 2.15.0 || >= 3.0.0 <= 3.8.2"
+  patched_versions:
+  - ">= 2.15.1 <= 3.0.0 || >= 3.8.3"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2016-3956
+  cvss_v3_vector: CVSS:3.0/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:N
+  credit:
+  - Mitar, Will White & the team at Mapbox, Max Motovilov, and James Taylor
+  references:
+  - http://blog.npmjs.org/post/142036323955/fixing-a-bearer-token-vulnerability)
+  source_url: https://nodesecurity.io/advisories/98
 - id: nodesecurity:npm:npm:2017-03-23
   title: Predictable temp filenames allow overwrite of arbitrary files
   description: 'Affected versions of `npm` use predictable temporary file names during
@@ -25,30 +49,6 @@
     https://github.com/npm/npm/issues/3635)
     http://www.openwall.com/lists/oss-security/2013/07/10/17)
   source_url: https://nodesecurity.io/advisories/152
-- id: nodesecurity:npm:npm:2016-04-18
-  title: npm Token Leak
-  description: "Affected versions of the `npm` package include the bearer token of
-    the logged in user in every request made by the CLI, even if the request is not
-    directed towards the user's active registry. \n\nAn attacker could create an HTTP
-    server to collect tokens, and by various means including but not limited to install
-    scripts, cause the npm CLI to make a request to that server, which would compromise
-    the user's token.\n\nThis compromised token could be used to do anything that
-    the user could do, including publishing new packages.\n\n"
-  affected_package: npm
-  vulnerable_versions:
-  - "<= 2.15.0 || >= 3.0.0 <= 3.8.2"
-  patched_versions:
-  - ">= 2.15.1 <= 3.0.0 || >= 3.8.3"
-  severity: high
-  package_manager: npm
-  cve:
-  - CVE-2016-3956
-  cvss_v3_vector: CVSS:3.0/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:N
-  credit:
-  - Mitar, Will White & the team at Mapbox, Max Motovilov, and James Taylor
-  references:
-  - http://blog.npmjs.org/post/142036323955/fixing-a-bearer-token-vulnerability)
-  source_url: https://nodesecurity.io/advisories/98
 - id: ossindex:npm:npm:2014-04-22
   title: '[CVE-2013-4116]  Improper Link Resolution Before File Access ("Link Following")'
   description: lib/npm.js in Node Packaged Modules (npm) before 1.3.3 allows local
@@ -72,28 +72,6 @@
   - https://exchange.xforce.ibmcloud.com/vulnerabilities/87141
   - https://github.com/npm/npm/commit/f4d31693
   - https://github.com/npm/npm/issues/3635
-  source_url: https://ossindex.net/resource/package/7014236987/vulnerabilities
-- id: ossindex:npm:npm:2016-07-02
-  title: "[CVE-2016-3956]  Information Exposure"
-  description: The CLI in npm before 2.15.1 and 3.x before 3.8.3, as used in Node.js
-    0.10 before 0.10.44, 0.12 before 0.12.13, 4 before 4.4.2, and 5 before 5.10.0,
-    includes bearer tokens with arbitrary requests, which allows remote HTTP servers
-    to obtain sensitive information by reading Authorization headers.
-  affected_package: npm
-  vulnerable_versions:
-  - "<=2.15.0 | >=3.0.0 <=3.8.2"
-  package_manager: npm
-  cve:
-  - CVE-2016-3956
-  credit:
-  - OSSIndex
-  references:
-  - http://blog.npmjs.org/post/142036323955/fixing-a-bearer-token-vulnerability
-  - http://www-01.ibm.com/support/docview.wss?uid=swg21980827
-  - https://github.com/npm/npm/commit/f67ecad59e99a03e5aad8e93cd1a086ae087cb29
-  - https://github.com/npm/npm/commit/fea8cc92cee02c720b58f95f14d315507ccad401
-  - https://github.com/npm/npm/issues/8380
-  - https://nodejs.org/en/blog/vulnerability/npm-tokens-leak-march-2016/
   source_url: https://ossindex.net/resource/package/7014236987/vulnerabilities
 - id: ossindex:npm:npm:2016-05-17
   title: npm security update (token leak)
@@ -128,54 +106,28 @@
   - https://nodejs.org/en/blog/vulnerability/npm-tokens-leak-march-2016/#2
   - https://nodesecurity.io/advisories/98#2
   source_url: https://ossindex.net/resource/package/7014236987/vulnerabilities
-- id: snykio:npm:npm:2018-02-22
-  title: Access Restriction Bypass
-  description: |
-    [npm][1] is a JavaScript package manager.
-
-    Affected versions of this package are vulnerable to Access Restriction
-    Bypass. It might allow local users to bypass intended filesystem access
-    restrictions due to ownerships of `/etc` and `/usr` directories are
-    being changed unexpectedly, related to a \"correctMkdir\" issue.
-
-
-
-    [1]: https://github.com/npm/npm
-    \n[npm][1] is a JavaScript package manager.
-
-    Affected versions of this package are vulnerable to Access Restriction
-    Bypass. It might allow local users to bypass intended filesystem access
-    restrictions due to ownerships of `/etc` and `/usr` directories are
-    being changed unexpectedly, related to a \"correctMkdir\" issue.
-
-
-
-    [1]: https://github.com/npm/npm
-    \n[npm][1] is a JavaScript package manager.
-
-    Affected versions of this package are vulnerable to Access Restriction
-    Bypass. It might allow local users to bypass intended filesystem access
-    restrictions due to ownerships of `/etc` and `/usr` directories are
-    being changed unexpectedly, related to a \"correctMkdir\" issue.
-
-
-
-    [1]: https://github.com/npm/npm
+- id: ossindex:npm:npm:2016-07-02
+  title: "[CVE-2016-3956]  Information Exposure"
+  description: The CLI in npm before 2.15.1 and 3.x before 3.8.3, as used in Node.js
+    0.10 before 0.10.44, 0.12 before 0.12.13, 4 before 4.4.2, and 5 before 5.10.0,
+    includes bearer tokens with arbitrary requests, which allows remote HTTP servers
+    to obtain sensitive information by reading Authorization headers.
   affected_package: npm
   vulnerable_versions:
-  - "<5.7.1"
-  severity: medium
+  - "<=2.15.0 | >=3.0.0 <=3.8.2"
   package_manager: npm
   cve:
-  - CVE-2018-7408
-  cwe:
-  - CWE-284
+  - CVE-2016-3956
   credit:
-  - Unknown
+  - OSSIndex
   references:
-  - https://github.com/npm/npm/commit/74e149da6efe6ed89477faa81fef08eee7999ad0
-  - https://github.com/npm/npm/issues/19883
-  source_url: https://snyk.io/vuln/npm:npm:20180222
+  - http://blog.npmjs.org/post/142036323955/fixing-a-bearer-token-vulnerability
+  - http://www-01.ibm.com/support/docview.wss?uid=swg21980827
+  - https://github.com/npm/npm/commit/f67ecad59e99a03e5aad8e93cd1a086ae087cb29
+  - https://github.com/npm/npm/commit/fea8cc92cee02c720b58f95f14d315507ccad401
+  - https://github.com/npm/npm/issues/8380
+  - https://nodejs.org/en/blog/vulnerability/npm-tokens-leak-march-2016/
+  source_url: https://ossindex.net/resource/package/7014236987/vulnerabilities
 - id: snykio:npm:npm:2013-07-07
   title: Symlink attack due to predictable tmp folder names
   description: |
@@ -325,3 +277,51 @@
   - https://github.com/npm/npm/issues/8380
   - https://github.com/npm/npm/commit/fea8cc92cee02c720b58f95f14d315507ccad401
   source_url: https://snyk.io/vuln/npm:npm:20160418
+- id: snykio:npm:npm:2018-02-22
+  title: Access Restriction Bypass
+  description: |
+    [npm][1] is a JavaScript package manager.
+
+    Affected versions of this package are vulnerable to Access Restriction
+    Bypass. It might allow local users to bypass intended filesystem access
+    restrictions due to ownerships of `/etc` and `/usr` directories are
+    being changed unexpectedly, related to a \"correctMkdir\" issue.
+
+
+
+    [1]: https://github.com/npm/npm
+    \n[npm][1] is a JavaScript package manager.
+
+    Affected versions of this package are vulnerable to Access Restriction
+    Bypass. It might allow local users to bypass intended filesystem access
+    restrictions due to ownerships of `/etc` and `/usr` directories are
+    being changed unexpectedly, related to a \"correctMkdir\" issue.
+
+
+
+    [1]: https://github.com/npm/npm
+    \n[npm][1] is a JavaScript package manager.
+
+    Affected versions of this package are vulnerable to Access Restriction
+    Bypass. It might allow local users to bypass intended filesystem access
+    restrictions due to ownerships of `/etc` and `/usr` directories are
+    being changed unexpectedly, related to a \"correctMkdir\" issue.
+
+
+
+    [1]: https://github.com/npm/npm
+  affected_package: npm
+  vulnerable_versions:
+  - "<5.7.1"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2018-7408
+  cwe:
+  - CWE-284
+  credit:
+  - Unknown
+  references:
+  - https://github.com/npm/npm/commit/74e149da6efe6ed89477faa81fef08eee7999ad0
+  - https://github.com/npm/npm/issues/19883
+  source_url: https://snyk.io/vuln/npm:npm:20180222

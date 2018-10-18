@@ -1,17 +1,4 @@
 ---
-- id: ossindex:pypi:setuptools:2017-04-14
-  title: Path Traversal in package_data
-  description: This package allows the inclusion of arbitrary files from outside the
-    package root to be included in the install, which might include sensitive files.
-  affected_package: setuptools
-  vulnerable_versions:
-  - ">=0"
-  package_manager: pypi
-  credit:
-  - OSSIndex
-  references:
-  - https://github.com/pypa/setuptools/issues/227
-  source_url: https://ossindex.net/resource/package/8401294465/vulnerabilities
 - id: ossindex:pypi:setuptools:2013-08-06
   title: "[CVE-2013-1633]  Improper Input Validation"
   description: easy_install in setuptools before 0.7 uses HTTP to retrieve packages
@@ -39,6 +26,19 @@
   references:
   - http://www.reddit.com/r/Python/comments/17rfh7/warning_dont_use_pip_in_an_untrusted_network_a/
   - https://pypi.python.org/pypi/setuptools/0.9.8#changes
+  source_url: https://ossindex.net/resource/package/8401294465/vulnerabilities
+- id: ossindex:pypi:setuptools:2017-04-14
+  title: Path Traversal in package_data
+  description: This package allows the inclusion of arbitrary files from outside the
+    package root to be included in the install, which might include sensitive files.
+  affected_package: setuptools
+  vulnerable_versions:
+  - ">=0"
+  package_manager: pypi
+  credit:
+  - OSSIndex
+  references:
+  - https://github.com/pypa/setuptools/issues/227
   source_url: https://ossindex.net/resource/package/8401294465/vulnerabilities
 - id: snykio:pypi:setuptools:2013-06-03
   title: Directory Traversal
@@ -710,6 +710,45 @@
   - https://github.com/pypa/setuptools/blob/master/CHANGES.rst#13
   - https://github.com/pypa/setuptools/commit/38fcb3e366ee7a21ff5f0f550fe190b1326fc04b
   source_url: https://snyk.io/vuln/SNYK-PYTHON-SETUPTOOLS-40728
+- id: snykio:pypi:setuptools:2016-02-24
+  title: Arbitrary Code Execution
+  description: |
+    [`setuptools`][1] is a Easily download, build, install, upgrade, and
+    uninstall Python packages easy\_install in setuptools before 0.7 uses
+    HTTP to retrieve packages from the PyPI repository, and does not perform
+    integrity checks on package contents, which allows man-in-the-middle
+    attackers to execute arbitrary code via a crafted response to the
+    default use of the product.
+
+
+
+    [1]: https://pypi.python.org/pypi/setuptools
+    \n[`setuptools`][1] is a Easily download, build, install, upgrade, and
+    uninstall Python packages easy\_install in setuptools before 0.7 uses
+    HTTP to retrieve packages from the PyPI repository, and does not perform
+    integrity checks on package contents, which allows man-in-the-middle
+    attackers to execute arbitrary code via a crafted response to the
+    default use of the product.
+
+
+
+    [1]: https://pypi.python.org/pypi/setuptools
+  affected_package: setuptools
+  vulnerable_versions:
+  - "< 0.7"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2013-1633
+  cwe:
+  - CWE-20
+  credit:
+  - Unknown
+  references:
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2013-1633
+  - http://www.reddit.com/r/Python/comments/17rfh7/warning_dont_use_pip_in_an_untrusted_network_a
+  - https://pypi.python.org/pypi/setuptools/0.9.8#changes
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-SETUPTOOLS-40178
 - id: snykio:pypi:setuptools:2017-11-05
   title: Denial of Service (DoS)
   description: |+
@@ -942,42 +981,3 @@
   - https://github.com/pypa/setuptools/blob/master/CHANGES.rst#095
   - https://github.com/pypa/setuptools/commit/7ddd872c63a9465340eadae59868d85ac1d43e67
   source_url: https://snyk.io/vuln/SNYK-PYTHON-SETUPTOOLS-40727
-- id: snykio:pypi:setuptools:2016-02-24
-  title: Arbitrary Code Execution
-  description: |
-    [`setuptools`][1] is a Easily download, build, install, upgrade, and
-    uninstall Python packages easy\_install in setuptools before 0.7 uses
-    HTTP to retrieve packages from the PyPI repository, and does not perform
-    integrity checks on package contents, which allows man-in-the-middle
-    attackers to execute arbitrary code via a crafted response to the
-    default use of the product.
-
-
-
-    [1]: https://pypi.python.org/pypi/setuptools
-    \n[`setuptools`][1] is a Easily download, build, install, upgrade, and
-    uninstall Python packages easy\_install in setuptools before 0.7 uses
-    HTTP to retrieve packages from the PyPI repository, and does not perform
-    integrity checks on package contents, which allows man-in-the-middle
-    attackers to execute arbitrary code via a crafted response to the
-    default use of the product.
-
-
-
-    [1]: https://pypi.python.org/pypi/setuptools
-  affected_package: setuptools
-  vulnerable_versions:
-  - "< 0.7"
-  severity: medium
-  package_manager: pypi
-  cve:
-  - CVE-2013-1633
-  cwe:
-  - CWE-20
-  credit:
-  - Unknown
-  references:
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2013-1633
-  - http://www.reddit.com/r/Python/comments/17rfh7/warning_dont_use_pip_in_an_untrusted_network_a
-  - https://pypi.python.org/pypi/setuptools/0.9.8#changes
-  source_url: https://snyk.io/vuln/SNYK-PYTHON-SETUPTOOLS-40178

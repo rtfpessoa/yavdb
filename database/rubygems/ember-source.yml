@@ -1,18 +1,94 @@
 ---
-- id: ossindex:rubygems:ember-source:2016-08-11
-  title: "[Duplicate] XSS Vulnerability in Ember.js with User-Supplied JSON"
+- id: ossindex:rubygems:ember-source:1970-01-01
+  title: Potential XSS Exploit With User-Supplied Data When Binding Primitive Values
   description: |-
-    See https://ossindex.net/resource/vulnerability/8399958615
+    Potential XSS Exploit With User-Supplied Data When Binding Primitive Values
 
-    It is possible for an attacker to create a specially-crafted payload that causes a non-sanitized string to be treated as a SafeString, and thus bypass Ember's normal escaping behavior. This could allow an attacker to execute arbitrary JavaScript in the context of the current domain ("XSS").
+    This vulnerability has been assigned the CVE identifier CVE-2014-0013.
+
+    In general, Ember.js escapes or strips any user-supplied content before
+    inserting it in strings that will be sent to innerHTML.  However, we have
+    identified a vulnerability that could lead to unescaped content being inserted
+    into the innerHTML string without being sanitized.
+
+    When a primitive value is used as the Handlebars context, that value is not
+    properly escaped.  An example of this would be using the `{{each}}` helper to
+    iterate over an array of user-supplied strings and using `{{this}}` inside the
+    block to display each string.
+
+    In applications that contain templates whose context is a primitive value and
+    use the `{{this}}` keyword to display that value, a specially-crafted payload
+    could execute arbitrary JavaScript in the context of the current domain
+    ("XSS").
+
+    Versions Affected: ALL versions
+    Not affected: NONE
+    Fixed Versions: 1.0.1, 1.1.3, 1.2.1, 1.3.1, 1.4.0-beta.2
   affected_package: ember-source
   vulnerable_versions:
-  - ">= 2.0.0 < 2.0.3"
+  - "<1.3.1"
   package_manager: rubygems
   credit:
   - OSSIndex
   references:
-  - https://groups.google.com/forum/#!topic/ember-security/OfyQkoSuppY
+  - https://groups.google.com/forum/#!topic/ember-security/2kpXXCxISS4
+  source_url: https://ossindex.net/resource/package/8404795120/vulnerabilities
+- id: ossindex:rubygems:ember-source:1970-01-01
+  title: Potential XSS Exploit When Binding `tagName` to User-Supplied Data
+  description: |
+    Potential XSS Exploit When Binding `tagName` to User-Supplied Data
+
+    This vulnerability has been assigned the CVE identifier CVE-2013-4170.
+
+    In general, Ember.js escapes or strips any user-supplied content
+    before inserting it in strings that will be sent to innerHTML.
+    However, the `tagName` property of an `Ember.View` was inserted into
+    such a string without being sanitized. This means that if an
+    application assigns a view's `tagName` to user-supplied data, a
+    specially-crafted payload could execute arbitrary JavaScript in the
+    context of the current domain ("XSS").
+
+    Versions Affected: ALL versions
+    Not affected: NONE
+    Fixed Versions: 1.0.0 RC6.1, 1.0.0 RC5.1, 1.0.0 RC4.1, 1.0.0 RC3.1,
+    1.0.0 RC2.1, 1.0.0 RC1.1
+  affected_package: ember-source
+  vulnerable_versions:
+  - "<1.0.0-rc61"
+  package_manager: rubygems
+  credit:
+  - OSSIndex
+  references:
+  - https://groups.google.com/forum/#!topic/ember-security/dokLVwwxAdM
+  source_url: https://ossindex.net/resource/package/8404795120/vulnerabilities
+- id: ossindex:rubygems:ember-source:2014-02-27
+  title: '[CVE-2014-0046]  Improper Neutralization of Input During Web Page Generation
+    ("Cross-site Scripting")'
+  description: Cross-site scripting (XSS) vulnerability in the link-to helper in Ember.js
+    1.2.x before 1.2.2, 1.3.x before 1.3.2, and 1.4.x before 1.4.0-beta.6, when used
+    in non-block form, allows remote attackers to inject arbitrary web script or HTML
+    via the title attribute.
+  affected_package: ember-source
+  vulnerable_versions:
+  - 1.2.1
+  - 1.3.0
+  - 1.3.1
+  - 1.4.0
+  - 1.2.0
+  package_manager: rubygems
+  cve:
+  - CVE-2014-0046
+  credit:
+  - OSSIndex
+  references:
+  - http://emberjs.com/blog/2014/02/07/ember-security-releases.html
+  - http://secunia.com/advisories/56965
+  - http://www.openwall.com/lists/oss-security/2014/02/14/6
+  - http://www.securityfocus.com/bid/65579
+  - http://xforce.iss.net/xforce/xfdb/91242
+  - https://exchange.xforce.ibmcloud.com/vulnerabilities/91242
+  - https://groups.google.com/forum/#!topic/ember-security/1h6FRgr8lXQ
+  - https://groups.google.com/forum/#%21topic/ember-security/1h6FRgr8lXQ
   source_url: https://ossindex.net/resource/package/8404795120/vulnerabilities
 - id: ossindex:rubygems:ember-source:2016-08-03
   title: XSS Vulnerability in Ember.js with User-Supplied JSON
@@ -30,6 +106,21 @@
   - ">= 2.0.0 < 2.0.3"
   - ">= 2.1.0 < 2.1.2"
   - ">= 2.2.0 < 2.2.1"
+  package_manager: rubygems
+  credit:
+  - OSSIndex
+  references:
+  - https://groups.google.com/forum/#!topic/ember-security/OfyQkoSuppY
+  source_url: https://ossindex.net/resource/package/8404795120/vulnerabilities
+- id: ossindex:rubygems:ember-source:2016-08-11
+  title: "[Duplicate] XSS Vulnerability in Ember.js with User-Supplied JSON"
+  description: |-
+    See https://ossindex.net/resource/vulnerability/8399958615
+
+    It is possible for an attacker to create a specially-crafted payload that causes a non-sanitized string to be treated as a SafeString, and thus bypass Ember's normal escaping behavior. This could allow an attacker to execute arbitrary JavaScript in the context of the current domain ("XSS").
+  affected_package: ember-source
+  vulnerable_versions:
+  - ">= 2.0.0 < 2.0.3"
   package_manager: rubygems
   credit:
   - OSSIndex
@@ -126,68 +217,6 @@
   - https://github.com/wycats/handlebars.js/commit/83b8e846a3569bd366cf0b6bdc1e4604d1a2077e
   - https://github.com/wycats/handlebars.js/pull/1083
   source_url: https://ossindex.net/resource/package/8404795120/vulnerabilities
-- id: ossindex:rubygems:ember-source:1970-01-01
-  title: Potential XSS Exploit With User-Supplied Data When Binding Primitive Values
-  description: |-
-    Potential XSS Exploit With User-Supplied Data When Binding Primitive Values
-
-    This vulnerability has been assigned the CVE identifier CVE-2014-0013.
-
-    In general, Ember.js escapes or strips any user-supplied content before
-    inserting it in strings that will be sent to innerHTML.  However, we have
-    identified a vulnerability that could lead to unescaped content being inserted
-    into the innerHTML string without being sanitized.
-
-    When a primitive value is used as the Handlebars context, that value is not
-    properly escaped.  An example of this would be using the `{{each}}` helper to
-    iterate over an array of user-supplied strings and using `{{this}}` inside the
-    block to display each string.
-
-    In applications that contain templates whose context is a primitive value and
-    use the `{{this}}` keyword to display that value, a specially-crafted payload
-    could execute arbitrary JavaScript in the context of the current domain
-    ("XSS").
-
-    Versions Affected: ALL versions
-    Not affected: NONE
-    Fixed Versions: 1.0.1, 1.1.3, 1.2.1, 1.3.1, 1.4.0-beta.2
-  affected_package: ember-source
-  vulnerable_versions:
-  - "<1.3.1"
-  package_manager: rubygems
-  credit:
-  - OSSIndex
-  references:
-  - https://groups.google.com/forum/#!topic/ember-security/2kpXXCxISS4
-  source_url: https://ossindex.net/resource/package/8404795120/vulnerabilities
-- id: ossindex:rubygems:ember-source:1970-01-01
-  title: Potential XSS Exploit When Binding `tagName` to User-Supplied Data
-  description: |
-    Potential XSS Exploit When Binding `tagName` to User-Supplied Data
-
-    This vulnerability has been assigned the CVE identifier CVE-2013-4170.
-
-    In general, Ember.js escapes or strips any user-supplied content
-    before inserting it in strings that will be sent to innerHTML.
-    However, the `tagName` property of an `Ember.View` was inserted into
-    such a string without being sanitized. This means that if an
-    application assigns a view's `tagName` to user-supplied data, a
-    specially-crafted payload could execute arbitrary JavaScript in the
-    context of the current domain ("XSS").
-
-    Versions Affected: ALL versions
-    Not affected: NONE
-    Fixed Versions: 1.0.0 RC6.1, 1.0.0 RC5.1, 1.0.0 RC4.1, 1.0.0 RC3.1,
-    1.0.0 RC2.1, 1.0.0 RC1.1
-  affected_package: ember-source
-  vulnerable_versions:
-  - "<1.0.0-rc61"
-  package_manager: rubygems
-  credit:
-  - OSSIndex
-  references:
-  - https://groups.google.com/forum/#!topic/ember-security/dokLVwwxAdM
-  source_url: https://ossindex.net/resource/package/8404795120/vulnerabilities
 - id: ossindex:rubygems:ember-source:2017-04-13
   title: '[CVE-2015-7565]  Improper Neutralization of Input During Web Page Generation
     ("Cross-site Scripting")'
@@ -237,139 +266,6 @@
   - https://groups.google.com/forum/#!topic/ember-security/OfyQkoSuppY
   - https://groups.google.com/forum/#%21topic/ember-security/OfyQkoSuppY
   source_url: https://ossindex.net/resource/package/8404795120/vulnerabilities
-- id: ossindex:rubygems:ember-source:2014-02-27
-  title: '[CVE-2014-0046]  Improper Neutralization of Input During Web Page Generation
-    ("Cross-site Scripting")'
-  description: Cross-site scripting (XSS) vulnerability in the link-to helper in Ember.js
-    1.2.x before 1.2.2, 1.3.x before 1.3.2, and 1.4.x before 1.4.0-beta.6, when used
-    in non-block form, allows remote attackers to inject arbitrary web script or HTML
-    via the title attribute.
-  affected_package: ember-source
-  vulnerable_versions:
-  - 1.2.1
-  - 1.3.0
-  - 1.3.1
-  - 1.4.0
-  - 1.2.0
-  package_manager: rubygems
-  cve:
-  - CVE-2014-0046
-  credit:
-  - OSSIndex
-  references:
-  - http://emberjs.com/blog/2014/02/07/ember-security-releases.html
-  - http://secunia.com/advisories/56965
-  - http://www.openwall.com/lists/oss-security/2014/02/14/6
-  - http://www.securityfocus.com/bid/65579
-  - http://xforce.iss.net/xforce/xfdb/91242
-  - https://exchange.xforce.ibmcloud.com/vulnerabilities/91242
-  - https://groups.google.com/forum/#!topic/ember-security/1h6FRgr8lXQ
-  - https://groups.google.com/forum/#%21topic/ember-security/1h6FRgr8lXQ
-  source_url: https://ossindex.net/resource/package/8404795120/vulnerabilities
-- id: rubyadvisory:rubygems:ember-source:2016-01-14
-  title: Ember.js XSS Vulnerability with User-Supplied JSON
-  description: |
-    By default, Ember will escape any values in Handlebars templates that
-    use double curlies (`{{value}}`). Developers can specifically opt out of
-    this escaping behavior by passing an instance of `SafeString` rather
-    than a raw string, which tells Ember that it should not escape the
-    string because the developer has taken responsibility for escapement.
-
-    It is possible for an attacker to create a specially-crafted payload
-    that causes a non-sanitized string to be treated as a `SafeString`, and
-    thus bypass Ember's normal escaping behavior. This could allow an
-    attacker to execute arbitrary JavaScript in the context of the current
-    domain ("XSS").
-
-    All users running an affected release should either upgrade or use of
-    the workarounds immediately.
-  affected_package: ember-source
-  unaffected_versions:
-  - "< 1.8.0"
-  patched_versions:
-  - "~> 1.11.4"
-  - "~> 1.12.2"
-  - "~> 1.13.12"
-  - "~> 2.0.3"
-  - "~> 2.1.2"
-  - ">= 2.2.1"
-  package_manager: rubygems
-  cve:
-  - CVE-2015-7565
-  credit:
-  - Rubysec
-  references:
-  - https://github.com/rubysec/ruby-advisory-db
-  source_url: https://groups.google.com/forum/#!topic/ember-security/OfyQkoSuppY
-- id: rubyadvisory:rubygems:ember-source:2015-04-14
-  title: Ember.js XSS Vulnerability With {{view "select"}} Options
-  description: |
-    In general, Ember.js escapes or strips any user-supplied content before
-    inserting it in strings that will be sent to innerHTML.  However, a
-    change made to the implementation of the select view means that any
-    user-supplied data bound to an option's label will not be escaped
-    correctly.
-
-    In applications that use Ember's select view and pass user-supplied
-    content to the label, a specially-crafted payload could execute
-    arbitrary JavaScript in the context of the current domain ("XSS").
-
-    All users running an affected release and binding user-supplied data to
-    the select options should either upgrade or use one of the workarounds
-    immediately.
-  affected_package: ember-source
-  unaffected_versions:
-  - "< 1.10.0"
-  patched_versions:
-  - "~> 1.10.1"
-  - "~> 1.11.2"
-  - ">= 1.12.0"
-  package_manager: rubygems
-  cve:
-  - CVE-2015-1866
-  credit:
-  - Rubysec
-  references:
-  - https://github.com/rubysec/ruby-advisory-db
-  source_url: https://groups.google.com/forum/#!topic/ember-security/nbntfs2EbRU
-- id: rubyadvisory:rubygems:ember-source:2014-01-14
-  title: |
-    Ember.js Potential XSS Exploit With User-Supplied Data When Binding
-    Primitive Values
-  description: |
-    In general, Ember.js escapes or strips any user-supplied content before
-    inserting it in strings that will be sent to innerHTML.  However, we have
-    identified a vulnerability that could lead to unescaped content being inserted
-    into the innerHTML string without being sanitized.
-
-    When a primitive value is used as the Handlebars context, that value is not
-    properly escaped.  An example of this would be using the `{{each}}` helper to
-    iterate over an array of user-supplied strings and using `{{this}}` inside the
-    block to display each string.
-
-    In applications that contain templates whose context is a primitive value and
-    use the `{{this}}` keyword to display that value, a specially-crafted payload
-    could execute arbitrary JavaScript in the context of the current domain
-    ("XSS").
-
-    This vulnerability affects applications that contain templates whose context is
-    set to a user-supplied primitive value (such as a string or number) and also
-    contain the `{{this}}` special Handlebars variable to display the value.
-  affected_package: ember-source
-  patched_versions:
-  - "~> 1.0.1"
-  - "~> 1.1.3"
-  - "~> 1.2.1"
-  - "~> 1.3.1"
-  - ">= 1.4.0.beta.2"
-  package_manager: rubygems
-  cve:
-  - CVE-2014-0013
-  credit:
-  - Rubysec
-  references:
-  - https://github.com/rubysec/ruby-advisory-db
-  source_url: https://groups.google.com/forum/#!topic/ember-security/2kpXXCxISS4
 - id: rubyadvisory:rubygems:ember-source:2013-07-25
   title: 'Ember.js Potential XSS Exploit When Binding `tagName` to User-Supplied Data
 
@@ -436,6 +332,44 @@
   references:
   - https://github.com/rubysec/ruby-advisory-db
   source_url: https://groups.google.com/forum/#!topic/ember-security/PSE4RzTi6l4
+- id: rubyadvisory:rubygems:ember-source:2014-01-14
+  title: |
+    Ember.js Potential XSS Exploit With User-Supplied Data When Binding
+    Primitive Values
+  description: |
+    In general, Ember.js escapes or strips any user-supplied content before
+    inserting it in strings that will be sent to innerHTML.  However, we have
+    identified a vulnerability that could lead to unescaped content being inserted
+    into the innerHTML string without being sanitized.
+
+    When a primitive value is used as the Handlebars context, that value is not
+    properly escaped.  An example of this would be using the `{{each}}` helper to
+    iterate over an array of user-supplied strings and using `{{this}}` inside the
+    block to display each string.
+
+    In applications that contain templates whose context is a primitive value and
+    use the `{{this}}` keyword to display that value, a specially-crafted payload
+    could execute arbitrary JavaScript in the context of the current domain
+    ("XSS").
+
+    This vulnerability affects applications that contain templates whose context is
+    set to a user-supplied primitive value (such as a string or number) and also
+    contain the `{{this}}` special Handlebars variable to display the value.
+  affected_package: ember-source
+  patched_versions:
+  - "~> 1.0.1"
+  - "~> 1.1.3"
+  - "~> 1.2.1"
+  - "~> 1.3.1"
+  - ">= 1.4.0.beta.2"
+  package_manager: rubygems
+  cve:
+  - CVE-2014-0013
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://groups.google.com/forum/#!topic/ember-security/2kpXXCxISS4
 - id: rubyadvisory:rubygems:ember-source:2014-02-07
   title: Ember.js XSS Vulnerability With {{link-to}} Helper in Non-block Form
   description: |
@@ -467,460 +401,90 @@
   references:
   - https://github.com/rubysec/ruby-advisory-db
   source_url: https://groups.google.com/forum/#!topic/ember-security/1h6FRgr8lXQ
-- id: snykio:rubygems:ember-source:2016-01-13
-  title: Cross-site Scripting (XSS)
-  description: |+
-    [`ember`][1] is an Ember.js source code wrapper for use with Ruby libs.
+- id: rubyadvisory:rubygems:ember-source:2015-04-14
+  title: Ember.js XSS Vulnerability With {{view "select"}} Options
+  description: |
+    In general, Ember.js escapes or strips any user-supplied content before
+    inserting it in strings that will be sent to innerHTML.  However, a
+    change made to the implementation of the select view means that any
+    user-supplied data bound to an option's label will not be escaped
+    correctly.
 
-    Affected versions of this gem allow an attacker to execute a Cross-site
-    Scripting (XSS) attack. By default, Ember will escape any values in
-    Handlebars templates that use double curlies (`{{value}}`). Developers
-    can specifically opt out of this escaping behavior by passing an
-    instance of `SafeString` rather than a raw string, which tells Ember
-    that it should not escape the string because the developer has taken
-    responsibility for escapement.
+    In applications that use Ember's select view and pass user-supplied
+    content to the label, a specially-crafted payload could execute
+    arbitrary JavaScript in the context of the current domain ("XSS").
 
-    It is possible for an attacker to create a specially-crafted payload
-    that causes a non-sanitized string to be treated as a `SafeString`, and
-    thus bypass Ember\'s normal escaping behavior.
-
-
-
-    [1]: https://rubygems.org/gems/ember-source
-    \n[`ember`][1] is an Ember.js source code wrapper for use with Ruby libs.
-
-    Affected versions of this gem allow an attacker to execute a Cross-site
-    Scripting (XSS) attack. By default, Ember will escape any values in
-    Handlebars templates that use double curlies (`{{value}}`). Developers
-    can specifically opt out of this escaping behavior by passing an
-    instance of `SafeString` rather than a raw string, which tells Ember
-    that it should not escape the string because the developer has taken
-    responsibility for escapement.
-
-    It is possible for an attacker to create a specially-crafted payload
-    that causes a non-sanitized string to be treated as a `SafeString`, and
-    thus bypass Ember\'s normal escaping behavior.
-
-
-
-    [1]: https://rubygems.org/gems/ember-source
-    \n[`ember`][1] is an Ember.js source code wrapper for use with Ruby libs.
-
-    Affected versions of this gem allow an attacker to execute a Cross-site
-    Scripting (XSS) attack. By default, Ember will escape any values in
-    Handlebars templates that use double curlies (`{{value}}`). Developers
-    can specifically opt out of this escaping behavior by passing an
-    instance of `SafeString` rather than a raw string, which tells Ember
-    that it should not escape the string because the developer has taken
-    responsibility for escapement.
-
-    It is possible for an attacker to create a specially-crafted payload
-    that causes a non-sanitized string to be treated as a `SafeString`, and
-    thus bypass Ember\'s normal escaping behavior.
-
-
-
-    [1]: https://rubygems.org/gems/ember-source
-    \n[`ember`][1] is an Ember.js source code wrapper for use with Ruby libs.
-
-    Affected versions of this gem allow an attacker to execute a Cross-site
-    Scripting (XSS) attack. By default, Ember will escape any values in
-    Handlebars templates that use double curlies (`{{value}}`). Developers
-    can specifically opt out of this escaping behavior by passing an
-    instance of `SafeString` rather than a raw string, which tells Ember
-    that it should not escape the string because the developer has taken
-    responsibility for escapement.
-
-    It is possible for an attacker to create a specially-crafted payload
-    that causes a non-sanitized string to be treated as a `SafeString`, and
-    thus bypass Ember\'s normal escaping behavior.
-
-
-
-    [1]: https://rubygems.org/gems/ember-source
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
+    All users running an affected release and binding user-supplied data to
+    the select options should either upgrade or use one of the workarounds
+    immediately.
   affected_package: ember-source
-  vulnerable_versions:
-  - "< 2.2.1 &&  >= 2.2 || < 2.1.2 &&  >= 2.1 || < 2.0.3 &&  >= 1.14 || < 1.13.12
-    &&  >= 1.13 || < 1.12.2 &&  >= 1.12 || < 1.11.4 &&  >= 1.8.0"
-  severity: medium
-  package_manager: rubygems
-  cve:
-  - CVE-2015-7565
-  cwe:
-  - CWE-79
-  credit:
-  - Tom Dale
-  references:
-  - http://rubysec.com/advisories/CVE-2015-7565
-  - https://groups.google.com/forum/#!topic/ember-security/OfyQkoSuppY
-  source_url: https://snyk.io/vuln/SNYK-RUBY-EMBERSOURCE-20251
-- id: snykio:rubygems:ember-source:2015-04-13
-  title: Cross-site Scripting (XSS)
-  description: |+
-    [`ember`][1] is an Ember.js source code wrapper for use with Ruby libs.
-
-    Affected versions of this gem allow an attacker to execute a Cross-site
-    Scripting (XSS) attack. In general, Ember.js escapes or strips any
-    user-supplied content before inserting it in strings that will be sent
-    to `innerHTML`. However, a change made to the implementation of the
-    select view means that any user-supplied data bound to an option\'s
-    label will not be escaped correctly.
-
-
-
-    [1]: https://rubygems.org/gems/ember-source
-    \n[`ember`][1] is an Ember.js source code wrapper for use with Ruby libs.
-
-    Affected versions of this gem allow an attacker to execute a Cross-site
-    Scripting (XSS) attack. In general, Ember.js escapes or strips any
-    user-supplied content before inserting it in strings that will be sent
-    to `innerHTML`. However, a change made to the implementation of the
-    select view means that any user-supplied data bound to an option\'s
-    label will not be escaped correctly.
-
-
-
-    [1]: https://rubygems.org/gems/ember-source
-    \n[`ember`][1] is an Ember.js source code wrapper for use with Ruby libs.
-
-    Affected versions of this gem allow an attacker to execute a Cross-site
-    Scripting (XSS) attack. In general, Ember.js escapes or strips any
-    user-supplied content before inserting it in strings that will be sent
-    to `innerHTML`. However, a change made to the implementation of the
-    select view means that any user-supplied data bound to an option\'s
-    label will not be escaped correctly.
-
-
-
-    [1]: https://rubygems.org/gems/ember-source
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-  affected_package: ember-source
-  vulnerable_versions:
-  - "< 1.11.2 &&  >= 1.11 || < 1.10.1 &&  >= 1.10.0"
-  severity: medium
+  unaffected_versions:
+  - "< 1.10.0"
+  patched_versions:
+  - "~> 1.10.1"
+  - "~> 1.11.2"
+  - ">= 1.12.0"
   package_manager: rubygems
   cve:
   - CVE-2015-1866
-  cwe:
-  - CWE-79
   credit:
-  - Matthew Beale
+  - Rubysec
   references:
-  - http://rubysec.com/advisories/CVE-2015-1866
-  - https://groups.google.com/forum/#!topic/ember-security/nbntfs2EbRU
-  source_url: https://snyk.io/vuln/SNYK-RUBY-EMBERSOURCE-20213
-- id: snykio:rubygems:ember-source:2014-02-06
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://groups.google.com/forum/#!topic/ember-security/nbntfs2EbRU
+- id: rubyadvisory:rubygems:ember-source:2016-01-14
+  title: Ember.js XSS Vulnerability with User-Supplied JSON
+  description: |
+    By default, Ember will escape any values in Handlebars templates that
+    use double curlies (`{{value}}`). Developers can specifically opt out of
+    this escaping behavior by passing an instance of `SafeString` rather
+    than a raw string, which tells Ember that it should not escape the
+    string because the developer has taken responsibility for escapement.
+
+    It is possible for an attacker to create a specially-crafted payload
+    that causes a non-sanitized string to be treated as a `SafeString`, and
+    thus bypass Ember's normal escaping behavior. This could allow an
+    attacker to execute arbitrary JavaScript in the context of the current
+    domain ("XSS").
+
+    All users running an affected release should either upgrade or use of
+    the workarounds immediately.
+  affected_package: ember-source
+  unaffected_versions:
+  - "< 1.8.0"
+  patched_versions:
+  - "~> 1.11.4"
+  - "~> 1.12.2"
+  - "~> 1.13.12"
+  - "~> 2.0.3"
+  - "~> 2.1.2"
+  - ">= 2.2.1"
+  package_manager: rubygems
+  cve:
+  - CVE-2015-7565
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://groups.google.com/forum/#!topic/ember-security/OfyQkoSuppY
+- id: snykio:rubygems:ember-source:2013-07-24
   title: Cross-site Scripting (XSS)
   description: |+
     [`ember`][1] is an Ember.js source code wrapper for use with Ruby libs.
 
     Affected versions of this gem allow an attacker to execute a Cross-site
-    Scripting (XSS) attack. In general, Ember.js escapes or strips any
-    user-supplied content before inserting it in strings that will be sent
-    to `innerHTML`. However, a change made to the implementation of the
-    `{{link-to}}` helper means that any user-supplied data bound to the
-    `{{link-to}}` helper\'s title attribute will not be escaped correctly.
+    Scripting (XSS) attack.
 
-    In applications that use the `{{link-to}}` helper in non-block form and
-    bind the title attribute to user-supplied content, a specially-crafted
-    payload could execute arbitrary JavaScript in the context of the current
-    domain (\"XSS\").
+    In general, Ember.js escapes or strips any user-supplied content before
+    inserting it in strings that will be sent to `innerHTML`. However, the
+    `tagName` property of an `Ember.View` was inserted into such a string
+    without being sanitized. This means that if an application assigns a
+    view\'s `tagName` to user-supplied data, a specially-crafted payload
+    could execute arbitrary JavaScript in the context of the current domain
+    (\"XSS\").
 
-
-
-    [1]: https://rubygems.org/gems/ember-source
-    \n[`ember`][1] is an Ember.js source code wrapper for use with Ruby libs.
-
-    Affected versions of this gem allow an attacker to execute a Cross-site
-    Scripting (XSS) attack. In general, Ember.js escapes or strips any
-    user-supplied content before inserting it in strings that will be sent
-    to `innerHTML`. However, a change made to the implementation of the
-    `{{link-to}}` helper means that any user-supplied data bound to the
-    `{{link-to}}` helper\'s title attribute will not be escaped correctly.
-
-    In applications that use the `{{link-to}}` helper in non-block form and
-    bind the title attribute to user-supplied content, a specially-crafted
-    payload could execute arbitrary JavaScript in the context of the current
-    domain (\"XSS\").
+    This vulnerability only affects applications that assign or bind
+    user-provided content to `tagName`.
 
 
 
@@ -928,16 +492,18 @@
     \n[`ember`][1] is an Ember.js source code wrapper for use with Ruby libs.
 
     Affected versions of this gem allow an attacker to execute a Cross-site
-    Scripting (XSS) attack. In general, Ember.js escapes or strips any
-    user-supplied content before inserting it in strings that will be sent
-    to `innerHTML`. However, a change made to the implementation of the
-    `{{link-to}}` helper means that any user-supplied data bound to the
-    `{{link-to}}` helper\'s title attribute will not be escaped correctly.
+    Scripting (XSS) attack.
 
-    In applications that use the `{{link-to}}` helper in non-block form and
-    bind the title attribute to user-supplied content, a specially-crafted
-    payload could execute arbitrary JavaScript in the context of the current
-    domain (\"XSS\").
+    In general, Ember.js escapes or strips any user-supplied content before
+    inserting it in strings that will be sent to `innerHTML`. However, the
+    `tagName` property of an `Ember.View` was inserted into such a string
+    without being sanitized. This means that if an application assigns a
+    view\'s `tagName` to user-supplied data, a specially-crafted payload
+    could execute arbitrary JavaScript in the context of the current domain
+    (\"XSS\").
+
+    This vulnerability only affects applications that assign or bind
+    user-provided content to `tagName`.
 
 
 
@@ -945,16 +511,56 @@
     \n[`ember`][1] is an Ember.js source code wrapper for use with Ruby libs.
 
     Affected versions of this gem allow an attacker to execute a Cross-site
-    Scripting (XSS) attack. In general, Ember.js escapes or strips any
-    user-supplied content before inserting it in strings that will be sent
-    to `innerHTML`. However, a change made to the implementation of the
-    `{{link-to}}` helper means that any user-supplied data bound to the
-    `{{link-to}}` helper\'s title attribute will not be escaped correctly.
+    Scripting (XSS) attack.
 
-    In applications that use the `{{link-to}}` helper in non-block form and
-    bind the title attribute to user-supplied content, a specially-crafted
-    payload could execute arbitrary JavaScript in the context of the current
-    domain (\"XSS\").
+    In general, Ember.js escapes or strips any user-supplied content before
+    inserting it in strings that will be sent to `innerHTML`. However, the
+    `tagName` property of an `Ember.View` was inserted into such a string
+    without being sanitized. This means that if an application assigns a
+    view\'s `tagName` to user-supplied data, a specially-crafted payload
+    could execute arbitrary JavaScript in the context of the current domain
+    (\"XSS\").
+
+    This vulnerability only affects applications that assign or bind
+    user-provided content to `tagName`.
+
+
+
+    [1]: https://rubygems.org/gems/ember-source
+    \n[`ember`][1] is an Ember.js source code wrapper for use with Ruby libs.
+
+    Affected versions of this gem allow an attacker to execute a Cross-site
+    Scripting (XSS) attack.
+
+    In general, Ember.js escapes or strips any user-supplied content before
+    inserting it in strings that will be sent to `innerHTML`. However, the
+    `tagName` property of an `Ember.View` was inserted into such a string
+    without being sanitized. This means that if an application assigns a
+    view\'s `tagName` to user-supplied data, a specially-crafted payload
+    could execute arbitrary JavaScript in the context of the current domain
+    (\"XSS\").
+
+    This vulnerability only affects applications that assign or bind
+    user-provided content to `tagName`.
+
+
+
+    [1]: https://rubygems.org/gems/ember-source
+    \n[`ember`][1] is an Ember.js source code wrapper for use with Ruby libs.
+
+    Affected versions of this gem allow an attacker to execute a Cross-site
+    Scripting (XSS) attack.
+
+    In general, Ember.js escapes or strips any user-supplied content before
+    inserting it in strings that will be sent to `innerHTML`. However, the
+    `tagName` property of an `Ember.View` was inserted into such a string
+    without being sanitized. This means that if an application assigns a
+    view\'s `tagName` to user-supplied data, a specially-crafted payload
+    could execute arbitrary JavaScript in the context of the current domain
+    (\"XSS\").
+
+    This vulnerability only affects applications that assign or bind
+    user-provided content to `tagName`.
 
 
 
@@ -1101,19 +707,19 @@
 
   affected_package: ember-source
   vulnerable_versions:
-  - "< 1.3.2 &&  >= 1.3 || < 1.2.2 &&  >= 1.2.0"
+  - "< 1.0.0.rc1.1"
   severity: medium
   package_manager: rubygems
   cve:
-  - CVE-2014-0046
+  - CVE-2013-4170
   cwe:
   - CWE-79
   credit:
   - Tom Dale
   references:
-  - http://rubysec.com/advisories/CVE-2014-0046
-  - https://groups.google.com/forum/#!topic/ember-security/1h6FRgr8lXQ
-  source_url: https://snyk.io/vuln/SNYK-RUBY-EMBERSOURCE-20145
+  - http://rubysec.com/advisories/CVE-2013-4170/
+  - https://groups.google.com/forum/#!topic/ember-security/dokLVwwxAdM
+  source_url: https://snyk.io/vuln/SNYK-RUBY-EMBERSOURCE-20102
 - id: snykio:rubygems:ember-source:2014-01-13
   title: Cross-site Scripting (XSS)
   description: |+
@@ -1762,24 +1368,22 @@
   - http://rubysec.com/advisories/CVE-2014-0013
   - https://groups.google.com/forum/#!topic/ember-security/2kpXXCxISS4
   source_url: https://snyk.io/vuln/SNYK-RUBY-EMBERSOURCE-20139
-- id: snykio:rubygems:ember-source:2013-07-24
+- id: snykio:rubygems:ember-source:2014-02-06
   title: Cross-site Scripting (XSS)
   description: |+
     [`ember`][1] is an Ember.js source code wrapper for use with Ruby libs.
 
     Affected versions of this gem allow an attacker to execute a Cross-site
-    Scripting (XSS) attack.
+    Scripting (XSS) attack. In general, Ember.js escapes or strips any
+    user-supplied content before inserting it in strings that will be sent
+    to `innerHTML`. However, a change made to the implementation of the
+    `{{link-to}}` helper means that any user-supplied data bound to the
+    `{{link-to}}` helper\'s title attribute will not be escaped correctly.
 
-    In general, Ember.js escapes or strips any user-supplied content before
-    inserting it in strings that will be sent to `innerHTML`. However, the
-    `tagName` property of an `Ember.View` was inserted into such a string
-    without being sanitized. This means that if an application assigns a
-    view\'s `tagName` to user-supplied data, a specially-crafted payload
-    could execute arbitrary JavaScript in the context of the current domain
-    (\"XSS\").
-
-    This vulnerability only affects applications that assign or bind
-    user-provided content to `tagName`.
+    In applications that use the `{{link-to}}` helper in non-block form and
+    bind the title attribute to user-supplied content, a specially-crafted
+    payload could execute arbitrary JavaScript in the context of the current
+    domain (\"XSS\").
 
 
 
@@ -1787,18 +1391,16 @@
     \n[`ember`][1] is an Ember.js source code wrapper for use with Ruby libs.
 
     Affected versions of this gem allow an attacker to execute a Cross-site
-    Scripting (XSS) attack.
+    Scripting (XSS) attack. In general, Ember.js escapes or strips any
+    user-supplied content before inserting it in strings that will be sent
+    to `innerHTML`. However, a change made to the implementation of the
+    `{{link-to}}` helper means that any user-supplied data bound to the
+    `{{link-to}}` helper\'s title attribute will not be escaped correctly.
 
-    In general, Ember.js escapes or strips any user-supplied content before
-    inserting it in strings that will be sent to `innerHTML`. However, the
-    `tagName` property of an `Ember.View` was inserted into such a string
-    without being sanitized. This means that if an application assigns a
-    view\'s `tagName` to user-supplied data, a specially-crafted payload
-    could execute arbitrary JavaScript in the context of the current domain
-    (\"XSS\").
-
-    This vulnerability only affects applications that assign or bind
-    user-provided content to `tagName`.
+    In applications that use the `{{link-to}}` helper in non-block form and
+    bind the title attribute to user-supplied content, a specially-crafted
+    payload could execute arbitrary JavaScript in the context of the current
+    domain (\"XSS\").
 
 
 
@@ -1806,18 +1408,16 @@
     \n[`ember`][1] is an Ember.js source code wrapper for use with Ruby libs.
 
     Affected versions of this gem allow an attacker to execute a Cross-site
-    Scripting (XSS) attack.
+    Scripting (XSS) attack. In general, Ember.js escapes or strips any
+    user-supplied content before inserting it in strings that will be sent
+    to `innerHTML`. However, a change made to the implementation of the
+    `{{link-to}}` helper means that any user-supplied data bound to the
+    `{{link-to}}` helper\'s title attribute will not be escaped correctly.
 
-    In general, Ember.js escapes or strips any user-supplied content before
-    inserting it in strings that will be sent to `innerHTML`. However, the
-    `tagName` property of an `Ember.View` was inserted into such a string
-    without being sanitized. This means that if an application assigns a
-    view\'s `tagName` to user-supplied data, a specially-crafted payload
-    could execute arbitrary JavaScript in the context of the current domain
-    (\"XSS\").
-
-    This vulnerability only affects applications that assign or bind
-    user-provided content to `tagName`.
+    In applications that use the `{{link-to}}` helper in non-block form and
+    bind the title attribute to user-supplied content, a specially-crafted
+    payload could execute arbitrary JavaScript in the context of the current
+    domain (\"XSS\").
 
 
 
@@ -1825,37 +1425,16 @@
     \n[`ember`][1] is an Ember.js source code wrapper for use with Ruby libs.
 
     Affected versions of this gem allow an attacker to execute a Cross-site
-    Scripting (XSS) attack.
+    Scripting (XSS) attack. In general, Ember.js escapes or strips any
+    user-supplied content before inserting it in strings that will be sent
+    to `innerHTML`. However, a change made to the implementation of the
+    `{{link-to}}` helper means that any user-supplied data bound to the
+    `{{link-to}}` helper\'s title attribute will not be escaped correctly.
 
-    In general, Ember.js escapes or strips any user-supplied content before
-    inserting it in strings that will be sent to `innerHTML`. However, the
-    `tagName` property of an `Ember.View` was inserted into such a string
-    without being sanitized. This means that if an application assigns a
-    view\'s `tagName` to user-supplied data, a specially-crafted payload
-    could execute arbitrary JavaScript in the context of the current domain
-    (\"XSS\").
-
-    This vulnerability only affects applications that assign or bind
-    user-provided content to `tagName`.
-
-
-
-    [1]: https://rubygems.org/gems/ember-source
-    \n[`ember`][1] is an Ember.js source code wrapper for use with Ruby libs.
-
-    Affected versions of this gem allow an attacker to execute a Cross-site
-    Scripting (XSS) attack.
-
-    In general, Ember.js escapes or strips any user-supplied content before
-    inserting it in strings that will be sent to `innerHTML`. However, the
-    `tagName` property of an `Ember.View` was inserted into such a string
-    without being sanitized. This means that if an application assigns a
-    view\'s `tagName` to user-supplied data, a specially-crafted payload
-    could execute arbitrary JavaScript in the context of the current domain
-    (\"XSS\").
-
-    This vulnerability only affects applications that assign or bind
-    user-provided content to `tagName`.
+    In applications that use the `{{link-to}}` helper in non-block form and
+    bind the title attribute to user-supplied content, a specially-crafted
+    payload could execute arbitrary JavaScript in the context of the current
+    domain (\"XSS\").
 
 
 
@@ -2002,16 +1581,437 @@
 
   affected_package: ember-source
   vulnerable_versions:
-  - "< 1.0.0.rc1.1"
+  - "< 1.3.2 &&  >= 1.3 || < 1.2.2 &&  >= 1.2.0"
   severity: medium
   package_manager: rubygems
   cve:
-  - CVE-2013-4170
+  - CVE-2014-0046
   cwe:
   - CWE-79
   credit:
   - Tom Dale
   references:
-  - http://rubysec.com/advisories/CVE-2013-4170/
-  - https://groups.google.com/forum/#!topic/ember-security/dokLVwwxAdM
-  source_url: https://snyk.io/vuln/SNYK-RUBY-EMBERSOURCE-20102
+  - http://rubysec.com/advisories/CVE-2014-0046
+  - https://groups.google.com/forum/#!topic/ember-security/1h6FRgr8lXQ
+  source_url: https://snyk.io/vuln/SNYK-RUBY-EMBERSOURCE-20145
+- id: snykio:rubygems:ember-source:2015-04-13
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [`ember`][1] is an Ember.js source code wrapper for use with Ruby libs.
+
+    Affected versions of this gem allow an attacker to execute a Cross-site
+    Scripting (XSS) attack. In general, Ember.js escapes or strips any
+    user-supplied content before inserting it in strings that will be sent
+    to `innerHTML`. However, a change made to the implementation of the
+    select view means that any user-supplied data bound to an option\'s
+    label will not be escaped correctly.
+
+
+
+    [1]: https://rubygems.org/gems/ember-source
+    \n[`ember`][1] is an Ember.js source code wrapper for use with Ruby libs.
+
+    Affected versions of this gem allow an attacker to execute a Cross-site
+    Scripting (XSS) attack. In general, Ember.js escapes or strips any
+    user-supplied content before inserting it in strings that will be sent
+    to `innerHTML`. However, a change made to the implementation of the
+    select view means that any user-supplied data bound to an option\'s
+    label will not be escaped correctly.
+
+
+
+    [1]: https://rubygems.org/gems/ember-source
+    \n[`ember`][1] is an Ember.js source code wrapper for use with Ruby libs.
+
+    Affected versions of this gem allow an attacker to execute a Cross-site
+    Scripting (XSS) attack. In general, Ember.js escapes or strips any
+    user-supplied content before inserting it in strings that will be sent
+    to `innerHTML`. However, a change made to the implementation of the
+    select view means that any user-supplied data bound to an option\'s
+    label will not be escaped correctly.
+
+
+
+    [1]: https://rubygems.org/gems/ember-source
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+  affected_package: ember-source
+  vulnerable_versions:
+  - "< 1.11.2 &&  >= 1.11 || < 1.10.1 &&  >= 1.10.0"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2015-1866
+  cwe:
+  - CWE-79
+  credit:
+  - Matthew Beale
+  references:
+  - http://rubysec.com/advisories/CVE-2015-1866
+  - https://groups.google.com/forum/#!topic/ember-security/nbntfs2EbRU
+  source_url: https://snyk.io/vuln/SNYK-RUBY-EMBERSOURCE-20213
+- id: snykio:rubygems:ember-source:2016-01-13
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [`ember`][1] is an Ember.js source code wrapper for use with Ruby libs.
+
+    Affected versions of this gem allow an attacker to execute a Cross-site
+    Scripting (XSS) attack. By default, Ember will escape any values in
+    Handlebars templates that use double curlies (`{{value}}`). Developers
+    can specifically opt out of this escaping behavior by passing an
+    instance of `SafeString` rather than a raw string, which tells Ember
+    that it should not escape the string because the developer has taken
+    responsibility for escapement.
+
+    It is possible for an attacker to create a specially-crafted payload
+    that causes a non-sanitized string to be treated as a `SafeString`, and
+    thus bypass Ember\'s normal escaping behavior.
+
+
+
+    [1]: https://rubygems.org/gems/ember-source
+    \n[`ember`][1] is an Ember.js source code wrapper for use with Ruby libs.
+
+    Affected versions of this gem allow an attacker to execute a Cross-site
+    Scripting (XSS) attack. By default, Ember will escape any values in
+    Handlebars templates that use double curlies (`{{value}}`). Developers
+    can specifically opt out of this escaping behavior by passing an
+    instance of `SafeString` rather than a raw string, which tells Ember
+    that it should not escape the string because the developer has taken
+    responsibility for escapement.
+
+    It is possible for an attacker to create a specially-crafted payload
+    that causes a non-sanitized string to be treated as a `SafeString`, and
+    thus bypass Ember\'s normal escaping behavior.
+
+
+
+    [1]: https://rubygems.org/gems/ember-source
+    \n[`ember`][1] is an Ember.js source code wrapper for use with Ruby libs.
+
+    Affected versions of this gem allow an attacker to execute a Cross-site
+    Scripting (XSS) attack. By default, Ember will escape any values in
+    Handlebars templates that use double curlies (`{{value}}`). Developers
+    can specifically opt out of this escaping behavior by passing an
+    instance of `SafeString` rather than a raw string, which tells Ember
+    that it should not escape the string because the developer has taken
+    responsibility for escapement.
+
+    It is possible for an attacker to create a specially-crafted payload
+    that causes a non-sanitized string to be treated as a `SafeString`, and
+    thus bypass Ember\'s normal escaping behavior.
+
+
+
+    [1]: https://rubygems.org/gems/ember-source
+    \n[`ember`][1] is an Ember.js source code wrapper for use with Ruby libs.
+
+    Affected versions of this gem allow an attacker to execute a Cross-site
+    Scripting (XSS) attack. By default, Ember will escape any values in
+    Handlebars templates that use double curlies (`{{value}}`). Developers
+    can specifically opt out of this escaping behavior by passing an
+    instance of `SafeString` rather than a raw string, which tells Ember
+    that it should not escape the string because the developer has taken
+    responsibility for escapement.
+
+    It is possible for an attacker to create a specially-crafted payload
+    that causes a non-sanitized string to be treated as a `SafeString`, and
+    thus bypass Ember\'s normal escaping behavior.
+
+
+
+    [1]: https://rubygems.org/gems/ember-source
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+  affected_package: ember-source
+  vulnerable_versions:
+  - "< 2.2.1 &&  >= 2.2 || < 2.1.2 &&  >= 2.1 || < 2.0.3 &&  >= 1.14 || < 1.13.12
+    &&  >= 1.13 || < 1.12.2 &&  >= 1.12 || < 1.11.4 &&  >= 1.8.0"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2015-7565
+  cwe:
+  - CWE-79
+  credit:
+  - Tom Dale
+  references:
+  - http://rubysec.com/advisories/CVE-2015-7565
+  - https://groups.google.com/forum/#!topic/ember-security/OfyQkoSuppY
+  source_url: https://snyk.io/vuln/SNYK-RUBY-EMBERSOURCE-20251

@@ -1,33 +1,4 @@
 ---
-- id: rubyadvisory:rubygems:sprockets:2018-06-19
-  title: Path Traversal in Sprockets
-  description: |
-    Specially crafted requests can be used to access files that exist on
-    the filesystem that is outside an application's root directory, when the
-    Sprockets server is used in production.
-
-    All users running an affected release should either upgrade or use one of the work arounds immediately.
-
-    Workaround:
-    In Rails applications, work around this issue, set `config.assets.compile = false` and
-    `config.public_file_server.enabled = true` in an initializer and precompile the assets.
-
-     This work around will not be possible in all hosting environments and upgrading is advised.
-  affected_package: sprockets
-  patched_versions:
-  - ">= 2.12.5"
-  - "< 3.0.0"
-  - ">= 3.7.2"
-  - "< 4.0.0"
-  - ">= 4.0.0.beta8"
-  package_manager: rubygems
-  cve:
-  - CVE-2018-3760
-  credit:
-  - Rubysec
-  references:
-  - https://github.com/rubysec/ruby-advisory-db
-  source_url: https://groups.google.com/forum/#!topic/ruby-security-ann/2S9Pwz2i16k
 - id: rubyadvisory:rubygems:sprockets:2014-10-30
   title: Arbitrary file existence disclosure in Sprockets
   description: |
@@ -59,6 +30,100 @@
   references:
   - https://github.com/rubysec/ruby-advisory-db
   source_url: https://groups.google.com/forum/#!topic/rubyonrails-security/doAVp0YaTqY
+- id: rubyadvisory:rubygems:sprockets:2018-06-19
+  title: Path Traversal in Sprockets
+  description: |
+    Specially crafted requests can be used to access files that exist on
+    the filesystem that is outside an application's root directory, when the
+    Sprockets server is used in production.
+
+    All users running an affected release should either upgrade or use one of the work arounds immediately.
+
+    Workaround:
+    In Rails applications, work around this issue, set `config.assets.compile = false` and
+    `config.public_file_server.enabled = true` in an initializer and precompile the assets.
+
+     This work around will not be possible in all hosting environments and upgrading is advised.
+  affected_package: sprockets
+  patched_versions:
+  - ">= 2.12.5"
+  - "< 3.0.0"
+  - ">= 3.7.2"
+  - "< 4.0.0"
+  - ">= 4.0.0.beta8"
+  package_manager: rubygems
+  cve:
+  - CVE-2018-3760
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://groups.google.com/forum/#!topic/ruby-security-ann/2S9Pwz2i16k
+- id: snykio:rubygems:sprockets:2014-10-29
+  title: Arbitrary File Existence Exposure
+  description: |
+    [`sprockets`][1] is a Rack-based asset packaging system that
+    concatenates and serves JavaScript, CoffeeScript, CSS, LESS, Sass, and
+    SCSS.
+
+    Affected versions of this gem are vulnerable to Arbitrary File Existance
+    Disclosure via specially crafted requests that can be used to determine
+    whether a file exists on the filesystem that is outside an
+    application\'s root directory. The files will not be served, but
+    attackers can determine whether or not the file exists.
+
+
+
+    [1]: https://rubygems.org/gems/sprockets
+    \n[`sprockets`][1] is a Rack-based asset packaging system that
+    concatenates and serves JavaScript, CoffeeScript, CSS, LESS, Sass, and
+    SCSS.
+
+    Affected versions of this gem are vulnerable to Arbitrary File Existance
+    Disclosure via specially crafted requests that can be used to determine
+    whether a file exists on the filesystem that is outside an
+    application\'s root directory. The files will not be served, but
+    attackers can determine whether or not the file exists.
+
+
+
+    [1]: https://rubygems.org/gems/sprockets
+    \n[`sprockets`][1] is a Rack-based asset packaging system that
+    concatenates and serves JavaScript, CoffeeScript, CSS, LESS, Sass, and
+    SCSS.
+
+    Affected versions of this gem are vulnerable to Arbitrary File Existance
+    Disclosure via specially crafted requests that can be used to determine
+    whether a file exists on the filesystem that is outside an
+    application\'s root directory. The files will not be served, but
+    attackers can determine whether or not the file exists.
+
+
+
+    [1]: https://rubygems.org/gems/sprockets
+  affected_package: sprockets
+  vulnerable_versions:
+  - "< 3.0.0.beta.3 &&  >= 2.13 || < 2.12.3 &&  >= 2.12 || < 2.11.3 &&  >= 2.11 ||
+    < 2.10.2 &&  >= 2.10 || < 2.9.4 &&  >= 2.9 || < 2.8.3 &&  >= 2.8 || < 2.7.1 &&
+    \ >= 2.6 || < 2.5.1 &&  >= 2.5 || < 2.4.6 &&  >= 2.4 || < 2.3.3 &&  >= 2.3 ||
+    < 2.2.3 &&  >= 2.2 || < 2.1.4 &&  >= 2.1 || < 2.0.5"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2014-7819
+  cwe:
+  - CWE-200
+  credit:
+  - Eaden McKee
+  - Dennis Hackethal
+  - Christian Hansen
+  - Juan C. Müller
+  - Mike McClurg
+  - Alex Ianus
+  references:
+  - http://rubysec.com/advisories/sprockets-CVE-2014-7819
+  - https://groups.google.com/forum/#!topic/rubyonrails-security/doAVp0YaTqY
+  source_url: https://snyk.io/vuln/SNYK-RUBY-SPROCKETS-20199
 - id: snykio:rubygems:sprockets:2018-06-19
   title: Directory Traversal
   description: |
@@ -685,68 +750,3 @@
   references:
   - https://groups.google.com/forum/#!topic/ruby-security-ann/2S9Pwz2i16k
   source_url: https://snyk.io/vuln/SNYK-RUBY-SPROCKETS-22032
-- id: snykio:rubygems:sprockets:2014-10-29
-  title: Arbitrary File Existence Exposure
-  description: |
-    [`sprockets`][1] is a Rack-based asset packaging system that
-    concatenates and serves JavaScript, CoffeeScript, CSS, LESS, Sass, and
-    SCSS.
-
-    Affected versions of this gem are vulnerable to Arbitrary File Existance
-    Disclosure via specially crafted requests that can be used to determine
-    whether a file exists on the filesystem that is outside an
-    application\'s root directory. The files will not be served, but
-    attackers can determine whether or not the file exists.
-
-
-
-    [1]: https://rubygems.org/gems/sprockets
-    \n[`sprockets`][1] is a Rack-based asset packaging system that
-    concatenates and serves JavaScript, CoffeeScript, CSS, LESS, Sass, and
-    SCSS.
-
-    Affected versions of this gem are vulnerable to Arbitrary File Existance
-    Disclosure via specially crafted requests that can be used to determine
-    whether a file exists on the filesystem that is outside an
-    application\'s root directory. The files will not be served, but
-    attackers can determine whether or not the file exists.
-
-
-
-    [1]: https://rubygems.org/gems/sprockets
-    \n[`sprockets`][1] is a Rack-based asset packaging system that
-    concatenates and serves JavaScript, CoffeeScript, CSS, LESS, Sass, and
-    SCSS.
-
-    Affected versions of this gem are vulnerable to Arbitrary File Existance
-    Disclosure via specially crafted requests that can be used to determine
-    whether a file exists on the filesystem that is outside an
-    application\'s root directory. The files will not be served, but
-    attackers can determine whether or not the file exists.
-
-
-
-    [1]: https://rubygems.org/gems/sprockets
-  affected_package: sprockets
-  vulnerable_versions:
-  - "< 3.0.0.beta.3 &&  >= 2.13 || < 2.12.3 &&  >= 2.12 || < 2.11.3 &&  >= 2.11 ||
-    < 2.10.2 &&  >= 2.10 || < 2.9.4 &&  >= 2.9 || < 2.8.3 &&  >= 2.8 || < 2.7.1 &&
-    \ >= 2.6 || < 2.5.1 &&  >= 2.5 || < 2.4.6 &&  >= 2.4 || < 2.3.3 &&  >= 2.3 ||
-    < 2.2.3 &&  >= 2.2 || < 2.1.4 &&  >= 2.1 || < 2.0.5"
-  severity: medium
-  package_manager: rubygems
-  cve:
-  - CVE-2014-7819
-  cwe:
-  - CWE-200
-  credit:
-  - Eaden McKee
-  - Dennis Hackethal
-  - Christian Hansen
-  - Juan C. Müller
-  - Mike McClurg
-  - Alex Ianus
-  references:
-  - http://rubysec.com/advisories/sprockets-CVE-2014-7819
-  - https://groups.google.com/forum/#!topic/rubyonrails-security/doAVp0YaTqY
-  source_url: https://snyk.io/vuln/SNYK-RUBY-SPROCKETS-20199

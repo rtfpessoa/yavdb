@@ -1,4 +1,25 @@
 ---
+- id: nodesecurity:npm:uglify-js:2015-08-24
+  title: Incorrect Handling of Non-Boolean Comparisons During Minification
+  description: "Versions of `uglify-js` prior to 2.4.24 are affected by a vulnerability
+    which may cause crafted JavaScript to have altered functionality after minification.\n\n"
+  affected_package: uglify-js
+  vulnerable_versions:
+  - "<= 2.4.23"
+  patched_versions:
+  - ">= 2.4.24"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2015-8857
+  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:C/C:L/I:L/A:L
+  credit:
+  - Tom MacWright
+  references:
+  - |-
+    https://zyan.scripts.mit.edu[Backdooring JS - Yan Zhu(@bcrypt)]/blog/backdooring-js/)
+    https://github.com/mishoo/UglifyJS2/issues/751)
+  source_url: https://nodesecurity.io/advisories/39
 - id: nodesecurity:npm:uglify-js:2015-10-24
   title: Regular Expression Denial of Service
   description: "Versions of `uglify-js` prior to 2.6.0 are affected by a regular expression
@@ -24,27 +45,40 @@
   references:
   - ''
   source_url: https://nodesecurity.io/advisories/48
-- id: nodesecurity:npm:uglify-js:2015-08-24
-  title: Incorrect Handling of Non-Boolean Comparisons During Minification
-  description: "Versions of `uglify-js` prior to 2.4.24 are affected by a vulnerability
-    which may cause crafted JavaScript to have altered functionality after minification.\n\n"
+- id: ossindex:npm:uglify-js:2016-05-20
+  title: Minification can change the behaviour of code
+  description: Specially crafted Javascript files, when minified, have a behaviour
+    change that could allow malicious code to be hidden within secure code.
   affected_package: uglify-js
   vulnerable_versions:
-  - "<= 2.4.23"
-  patched_versions:
-  - ">= 2.4.24"
-  severity: high
+  - "<=2.4.23"
   package_manager: npm
-  cve:
-  - CVE-2015-8857
-  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:C/C:L/I:L/A:L
   credit:
-  - Tom MacWright
+  - OSSIndex
   references:
-  - |-
-    https://zyan.scripts.mit.edu[Backdooring JS - Yan Zhu(@bcrypt)]/blog/backdooring-js/)
-    https://github.com/mishoo/UglifyJS2/issues/751)
-  source_url: https://nodesecurity.io/advisories/39
+  - https://cwe.mitre.org/data/definitions/95.html
+  - https://github.com/mishoo/UglifyJS2/issues/751
+  - https://github.com/tmcw/mdast-uglify-bug
+  - https://nodesecurity.io/advisories/39
+  - https://nodesecurity.io/advisories/uglifyjs_incorrectly_handles_non-boolean_comparisons
+  - https://zyan.scripts.mit.edu/blog/backdooring-js/
+  source_url: https://ossindex.net/resource/package/7014570804/vulnerabilities
+- id: ossindex:npm:uglify-js:2016-05-21
+  title: Regular Expression Denial of Service
+  description: Some types of input can result in a Regular Expression Denial of Service
+    (ReDoS)
+  affected_package: uglify-js
+  vulnerable_versions:
+  - "<2.6.0"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - http://www.github.com/mishoo/UglifyJS2/857
+  - https://cwe.mitre.org/data/definitions/400.html
+  - https://nodesecurity.io/advisories/48
+  - https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS
+  source_url: https://ossindex.net/resource/package/7014570804/vulnerabilities
 - id: ossindex:npm:uglify-js:2017-01-23
   title: "[CVE-2015-8857] The uglify-js package before 2.4.24 for Node.js does not
     properly account for no..."
@@ -83,40 +117,437 @@
   - http://www.securityfocus.com/bid/96409
   - https://nodesecurity.io/advisories/48
   source_url: https://ossindex.net/resource/package/7014570804/vulnerabilities
-- id: ossindex:npm:uglify-js:2016-05-20
-  title: Minification can change the behaviour of code
-  description: Specially crafted Javascript files, when minified, have a behaviour
-    change that could allow malicious code to be hidden within secure code.
+- id: snykio:npm:uglify-js:2015-08-24
+  title: Improper minification of non-boolean comparisons
+  description: "[`uglify-js`][1] is a JavaScript parser, minifier, compressor and\nbeautifier
+    toolkit.\n\n[Tom MacWright][2] discovered that UglifyJS versions 2.4.23 and earlier\nare
+    affected by a vulnerability which allows a specially crafted\nJavascript file
+    to have altered functionality after minification. This\nbug was [demonstrated][3]
+    by [Yan][4] to allow potentially malicious\ncode to be hidden within secure code,
+    activated by minification.\n\n### Details   {#details}\n\nIn Boolean algebra,
+    DeMorgan\\'s laws describe the relationships between\nconjunctions (`&&`), disjunctions
+    (`||`) and negations (`!`). In\nJavascript form, they state that:\n\n     !(a
+    && b) === (!a) || (!b)\n     !(a || b) === (!a) && (!b)\n\nThe law does not hold
+    true when one of the values is not a boolean\nhowever.\n\nVulnerable versions
+    of UglifyJS do not account for this restriction, and\nerroneously apply the laws
+    to a statement if it can be reduced in length\nby it.\n\nConsider this authentication
+    function:\n\n    function isTokenValid(user) {\n        var timeLeft =\n            !!config
+    && // config object exists\n            !!user.token && // user object has a token\n
+    \           !user.token.invalidated && // token is not explicitly invalidated\n
+    \           !config.uninitialized && // config is initialized\n            !config.ignoreTimestamps
+    && // don't ignore timestamps\n            getTimeLeft(user.token.expiry); //
+    > 0 if expiration is in the future\n    \n        // The token must not be expired\n
+    \       return timeLeft > 0;\n    }\n    \n    function getTimeLeft(expiry) {\n
+    \     return expiry - getSystemTime();\n    }\n\nWhen minified with a vulnerable
+    version of UglifyJS, it will produce the\nfollowing insecure output, where a token
+    will never expire:\n\n( Formatted for readability )\n\n    function isTokenValid(user)
+    {\n        var timeLeft = !(                       // negation\n            !config
+    \                            // config object does not exist\n            || !user.token
+    \                     // user object does not have a token\n            || user.token.invalidated
+    \          // token is explicitly invalidated\n            || config.uninitialized
+    \            // config isn't initialized\n            || config.ignoreTimestamps
+    \         // ignore timestamps\n            || !getTimeLeft(user.token.expiry)
+    \ // > 0 if expiration is in the future\n        );\n        return timeLeft >
+    0\n    }\n    \n    function getTimeLeft(expiry) {\n        return expiry - getSystemTime()\n
+    \   }\n\n\n\n[1]: http://npmjs.com/package/uglify-js\n[2]: https://github.com/mishoo/UglifyJS2/issues/751\n[3]:
+    https://zyan.scripts.mit.edu/blog/backdooring-js/\n[4]: https://twitter.com/bcrypt\n\\n[`uglify-js`][1]
+    is a JavaScript parser, minifier, compressor and\nbeautifier toolkit.\n\n[Tom
+    MacWright][2] discovered that UglifyJS versions 2.4.23 and earlier\nare affected
+    by a vulnerability which allows a specially crafted\nJavascript file to have altered
+    functionality after minification. This\nbug was [demonstrated][3] by [Yan][4]
+    to allow potentially malicious\ncode to be hidden within secure code, activated
+    by minification.\n\n### Details   {#details}\n\nIn Boolean algebra, DeMorgan\\'s
+    laws describe the relationships between\nconjunctions (`&&`), disjunctions (`||`)
+    and negations (`!`). In\nJavascript form, they state that:\n\n     !(a && b) ===
+    (!a) || (!b)\n     !(a || b) === (!a) && (!b)\n\nThe law does not hold true when
+    one of the values is not a boolean\nhowever.\n\nVulnerable versions of UglifyJS
+    do not account for this restriction, and\nerroneously apply the laws to a statement
+    if it can be reduced in length\nby it.\n\nConsider this authentication function:\n\n
+    \   function isTokenValid(user) {\n        var timeLeft =\n            !!config
+    && // config object exists\n            !!user.token && // user object has a token\n
+    \           !user.token.invalidated && // token is not explicitly invalidated\n
+    \           !config.uninitialized && // config is initialized\n            !config.ignoreTimestamps
+    && // don't ignore timestamps\n            getTimeLeft(user.token.expiry); //
+    > 0 if expiration is in the future\n    \n        // The token must not be expired\n
+    \       return timeLeft > 0;\n    }\n    \n    function getTimeLeft(expiry) {\n
+    \     return expiry - getSystemTime();\n    }\n\nWhen minified with a vulnerable
+    version of UglifyJS, it will produce the\nfollowing insecure output, where a token
+    will never expire:\n\n( Formatted for readability )\n\n    function isTokenValid(user)
+    {\n        var timeLeft = !(                       // negation\n            !config
+    \                            // config object does not exist\n            || !user.token
+    \                     // user object does not have a token\n            || user.token.invalidated
+    \          // token is explicitly invalidated\n            || config.uninitialized
+    \            // config isn't initialized\n            || config.ignoreTimestamps
+    \         // ignore timestamps\n            || !getTimeLeft(user.token.expiry)
+    \ // > 0 if expiration is in the future\n        );\n        return timeLeft >
+    0\n    }\n    \n    function getTimeLeft(expiry) {\n        return expiry - getSystemTime()\n
+    \   }\n\n\n\n[1]: http://npmjs.com/package/uglify-js\n[2]: https://github.com/mishoo/UglifyJS2/issues/751\n[3]:
+    https://zyan.scripts.mit.edu/blog/backdooring-js/\n[4]: https://twitter.com/bcrypt\n\\n[`uglify-js`][1]
+    is a JavaScript parser, minifier, compressor and\nbeautifier toolkit.\n\n[Tom
+    MacWright][2] discovered that UglifyJS versions 2.4.23 and earlier\nare affected
+    by a vulnerability which allows a specially crafted\nJavascript file to have altered
+    functionality after minification. This\nbug was [demonstrated][3] by [Yan][4]
+    to allow potentially malicious\ncode to be hidden within secure code, activated
+    by minification.\n\n### Details   {#details}\n\nIn Boolean algebra, DeMorgan\\'s
+    laws describe the relationships between\nconjunctions (`&&`), disjunctions (`||`)
+    and negations (`!`). In\nJavascript form, they state that:\n\n     !(a && b) ===
+    (!a) || (!b)\n     !(a || b) === (!a) && (!b)\n\nThe law does not hold true when
+    one of the values is not a boolean\nhowever.\n\nVulnerable versions of UglifyJS
+    do not account for this restriction, and\nerroneously apply the laws to a statement
+    if it can be reduced in length\nby it.\n\nConsider this authentication function:\n\n
+    \   function isTokenValid(user) {\n        var timeLeft =\n            !!config
+    && // config object exists\n            !!user.token && // user object has a token\n
+    \           !user.token.invalidated && // token is not explicitly invalidated\n
+    \           !config.uninitialized && // config is initialized\n            !config.ignoreTimestamps
+    && // don't ignore timestamps\n            getTimeLeft(user.token.expiry); //
+    > 0 if expiration is in the future\n    \n        // The token must not be expired\n
+    \       return timeLeft > 0;\n    }\n    \n    function getTimeLeft(expiry) {\n
+    \     return expiry - getSystemTime();\n    }\n\nWhen minified with a vulnerable
+    version of UglifyJS, it will produce the\nfollowing insecure output, where a token
+    will never expire:\n\n( Formatted for readability )\n\n    function isTokenValid(user)
+    {\n        var timeLeft = !(                       // negation\n            !config
+    \                            // config object does not exist\n            || !user.token
+    \                     // user object does not have a token\n            || user.token.invalidated
+    \          // token is explicitly invalidated\n            || config.uninitialized
+    \            // config isn't initialized\n            || config.ignoreTimestamps
+    \         // ignore timestamps\n            || !getTimeLeft(user.token.expiry)
+    \ // > 0 if expiration is in the future\n        );\n        return timeLeft >
+    0\n    }\n    \n    function getTimeLeft(expiry) {\n        return expiry - getSystemTime()\n
+    \   }\n\n\n\n[1]: http://npmjs.com/package/uglify-js\n[2]: https://github.com/mishoo/UglifyJS2/issues/751\n[3]:
+    https://zyan.scripts.mit.edu/blog/backdooring-js/\n[4]: https://twitter.com/bcrypt\n\\n[`uglify-js`][1]
+    is a JavaScript parser, minifier, compressor and\nbeautifier toolkit.\n\n[Tom
+    MacWright][2] discovered that UglifyJS versions 2.4.23 and earlier\nare affected
+    by a vulnerability which allows a specially crafted\nJavascript file to have altered
+    functionality after minification. This\nbug was [demonstrated][3] by [Yan][4]
+    to allow potentially malicious\ncode to be hidden within secure code, activated
+    by minification.\n\n### Details   {#details}\n\nIn Boolean algebra, DeMorgan\\'s
+    laws describe the relationships between\nconjunctions (`&&`), disjunctions (`||`)
+    and negations (`!`). In\nJavascript form, they state that:\n\n     !(a && b) ===
+    (!a) || (!b)\n     !(a || b) === (!a) && (!b)\n\nThe law does not hold true when
+    one of the values is not a boolean\nhowever.\n\nVulnerable versions of UglifyJS
+    do not account for this restriction, and\nerroneously apply the laws to a statement
+    if it can be reduced in length\nby it.\n\nConsider this authentication function:\n\n
+    \   function isTokenValid(user) {\n        var timeLeft =\n            !!config
+    && // config object exists\n            !!user.token && // user object has a token\n
+    \           !user.token.invalidated && // token is not explicitly invalidated\n
+    \           !config.uninitialized && // config is initialized\n            !config.ignoreTimestamps
+    && // don't ignore timestamps\n            getTimeLeft(user.token.expiry); //
+    > 0 if expiration is in the future\n    \n        // The token must not be expired\n
+    \       return timeLeft > 0;\n    }\n    \n    function getTimeLeft(expiry) {\n
+    \     return expiry - getSystemTime();\n    }\n\nWhen minified with a vulnerable
+    version of UglifyJS, it will produce the\nfollowing insecure output, where a token
+    will never expire:\n\n( Formatted for readability )\n\n    function isTokenValid(user)
+    {\n        var timeLeft = !(                       // negation\n            !config
+    \                            // config object does not exist\n            || !user.token
+    \                     // user object does not have a token\n            || user.token.invalidated
+    \          // token is explicitly invalidated\n            || config.uninitialized
+    \            // config isn't initialized\n            || config.ignoreTimestamps
+    \         // ignore timestamps\n            || !getTimeLeft(user.token.expiry)
+    \ // > 0 if expiration is in the future\n        );\n        return timeLeft >
+    0\n    }\n    \n    function getTimeLeft(expiry) {\n        return expiry - getSystemTime()\n
+    \   }\n\n\n\n[1]: http://npmjs.com/package/uglify-js\n[2]: https://github.com/mishoo/UglifyJS2/issues/751\n[3]:
+    https://zyan.scripts.mit.edu/blog/backdooring-js/\n[4]: https://twitter.com/bcrypt\n\\n[`uglify-js`][1]
+    is a JavaScript parser, minifier, compressor and\nbeautifier toolkit.\n\n[Tom
+    MacWright][2] discovered that UglifyJS versions 2.4.23 and earlier\nare affected
+    by a vulnerability which allows a specially crafted\nJavascript file to have altered
+    functionality after minification. This\nbug was [demonstrated][3] by [Yan][4]
+    to allow potentially malicious\ncode to be hidden within secure code, activated
+    by minification.\n\n### Details   {#details}\n\nIn Boolean algebra, DeMorgan\\'s
+    laws describe the relationships between\nconjunctions (`&&`), disjunctions (`||`)
+    and negations (`!`). In\nJavascript form, they state that:\n\n     !(a && b) ===
+    (!a) || (!b)\n     !(a || b) === (!a) && (!b)\n\nThe law does not hold true when
+    one of the values is not a boolean\nhowever.\n\nVulnerable versions of UglifyJS
+    do not account for this restriction, and\nerroneously apply the laws to a statement
+    if it can be reduced in length\nby it.\n\nConsider this authentication function:\n\n
+    \   function isTokenValid(user) {\n        var timeLeft =\n            !!config
+    && // config object exists\n            !!user.token && // user object has a token\n
+    \           !user.token.invalidated && // token is not explicitly invalidated\n
+    \           !config.uninitialized && // config is initialized\n            !config.ignoreTimestamps
+    && // don't ignore timestamps\n            getTimeLeft(user.token.expiry); //
+    > 0 if expiration is in the future\n    \n        // The token must not be expired\n
+    \       return timeLeft > 0;\n    }\n    \n    function getTimeLeft(expiry) {\n
+    \     return expiry - getSystemTime();\n    }\n\nWhen minified with a vulnerable
+    version of UglifyJS, it will produce the\nfollowing insecure output, where a token
+    will never expire:\n\n( Formatted for readability )\n\n    function isTokenValid(user)
+    {\n        var timeLeft = !(                       // negation\n            !config
+    \                            // config object does not exist\n            || !user.token
+    \                     // user object does not have a token\n            || user.token.invalidated
+    \          // token is explicitly invalidated\n            || config.uninitialized
+    \            // config isn't initialized\n            || config.ignoreTimestamps
+    \         // ignore timestamps\n            || !getTimeLeft(user.token.expiry)
+    \ // > 0 if expiration is in the future\n        );\n        return timeLeft >
+    0\n    }\n    \n    function getTimeLeft(expiry) {\n        return expiry - getSystemTime()\n
+    \   }\n\n\n\n[1]: http://npmjs.com/package/uglify-js\n[2]: https://github.com/mishoo/UglifyJS2/issues/751\n[3]:
+    https://zyan.scripts.mit.edu/blog/backdooring-js/\n[4]: https://twitter.com/bcrypt\n\\n[`uglify-js`][1]
+    is a JavaScript parser, minifier, compressor and\nbeautifier toolkit.\n\n[Tom
+    MacWright][2] discovered that UglifyJS versions 2.4.23 and earlier\nare affected
+    by a vulnerability which allows a specially crafted\nJavascript file to have altered
+    functionality after minification. This\nbug was [demonstrated][3] by [Yan][4]
+    to allow potentially malicious\ncode to be hidden within secure code, activated
+    by minification.\n\n### Details   {#details}\n\nIn Boolean algebra, DeMorgan\\'s
+    laws describe the relationships between\nconjunctions (`&&`), disjunctions (`||`)
+    and negations (`!`). In\nJavascript form, they state that:\n\n     !(a && b) ===
+    (!a) || (!b)\n     !(a || b) === (!a) && (!b)\n\nThe law does not hold true when
+    one of the values is not a boolean\nhowever.\n\nVulnerable versions of UglifyJS
+    do not account for this restriction, and\nerroneously apply the laws to a statement
+    if it can be reduced in length\nby it.\n\nConsider this authentication function:\n\n
+    \   function isTokenValid(user) {\n        var timeLeft =\n            !!config
+    && // config object exists\n            !!user.token && // user object has a token\n
+    \           !user.token.invalidated && // token is not explicitly invalidated\n
+    \           !config.uninitialized && // config is initialized\n            !config.ignoreTimestamps
+    && // don't ignore timestamps\n            getTimeLeft(user.token.expiry); //
+    > 0 if expiration is in the future\n    \n        // The token must not be expired\n
+    \       return timeLeft > 0;\n    }\n    \n    function getTimeLeft(expiry) {\n
+    \     return expiry - getSystemTime();\n    }\n\nWhen minified with a vulnerable
+    version of UglifyJS, it will produce the\nfollowing insecure output, where a token
+    will never expire:\n\n( Formatted for readability )\n\n    function isTokenValid(user)
+    {\n        var timeLeft = !(                       // negation\n            !config
+    \                            // config object does not exist\n            || !user.token
+    \                     // user object does not have a token\n            || user.token.invalidated
+    \          // token is explicitly invalidated\n            || config.uninitialized
+    \            // config isn't initialized\n            || config.ignoreTimestamps
+    \         // ignore timestamps\n            || !getTimeLeft(user.token.expiry)
+    \ // > 0 if expiration is in the future\n        );\n        return timeLeft >
+    0\n    }\n    \n    function getTimeLeft(expiry) {\n        return expiry - getSystemTime()\n
+    \   }\n\n\n\n[1]: http://npmjs.com/package/uglify-js\n[2]: https://github.com/mishoo/UglifyJS2/issues/751\n[3]:
+    https://zyan.scripts.mit.edu/blog/backdooring-js/\n[4]: https://twitter.com/bcrypt\n\\n[`uglify-js`][1]
+    is a JavaScript parser, minifier, compressor and\nbeautifier toolkit.\n\n[Tom
+    MacWright][2] discovered that UglifyJS versions 2.4.23 and earlier\nare affected
+    by a vulnerability which allows a specially crafted\nJavascript file to have altered
+    functionality after minification. This\nbug was [demonstrated][3] by [Yan][4]
+    to allow potentially malicious\ncode to be hidden within secure code, activated
+    by minification.\n\n### Details   {#details}\n\nIn Boolean algebra, DeMorgan\\'s
+    laws describe the relationships between\nconjunctions (`&&`), disjunctions (`||`)
+    and negations (`!`). In\nJavascript form, they state that:\n\n     !(a && b) ===
+    (!a) || (!b)\n     !(a || b) === (!a) && (!b)\n\nThe law does not hold true when
+    one of the values is not a boolean\nhowever.\n\nVulnerable versions of UglifyJS
+    do not account for this restriction, and\nerroneously apply the laws to a statement
+    if it can be reduced in length\nby it.\n\nConsider this authentication function:\n\n
+    \   function isTokenValid(user) {\n        var timeLeft =\n            !!config
+    && // config object exists\n            !!user.token && // user object has a token\n
+    \           !user.token.invalidated && // token is not explicitly invalidated\n
+    \           !config.uninitialized && // config is initialized\n            !config.ignoreTimestamps
+    && // don't ignore timestamps\n            getTimeLeft(user.token.expiry); //
+    > 0 if expiration is in the future\n    \n        // The token must not be expired\n
+    \       return timeLeft > 0;\n    }\n    \n    function getTimeLeft(expiry) {\n
+    \     return expiry - getSystemTime();\n    }\n\nWhen minified with a vulnerable
+    version of UglifyJS, it will produce the\nfollowing insecure output, where a token
+    will never expire:\n\n( Formatted for readability )\n\n    function isTokenValid(user)
+    {\n        var timeLeft = !(                       // negation\n            !config
+    \                            // config object does not exist\n            || !user.token
+    \                     // user object does not have a token\n            || user.token.invalidated
+    \          // token is explicitly invalidated\n            || config.uninitialized
+    \            // config isn't initialized\n            || config.ignoreTimestamps
+    \         // ignore timestamps\n            || !getTimeLeft(user.token.expiry)
+    \ // > 0 if expiration is in the future\n        );\n        return timeLeft >
+    0\n    }\n    \n    function getTimeLeft(expiry) {\n        return expiry - getSystemTime()\n
+    \   }\n\n\n\n[1]: http://npmjs.com/package/uglify-js\n[2]: https://github.com/mishoo/UglifyJS2/issues/751\n[3]:
+    https://zyan.scripts.mit.edu/blog/backdooring-js/\n[4]: https://twitter.com/bcrypt\n\\n[`uglify-js`][1]
+    is a JavaScript parser, minifier, compressor and\nbeautifier toolkit.\n\n[Tom
+    MacWright][2] discovered that UglifyJS versions 2.4.23 and earlier\nare affected
+    by a vulnerability which allows a specially crafted\nJavascript file to have altered
+    functionality after minification. This\nbug was [demonstrated][3] by [Yan][4]
+    to allow potentially malicious\ncode to be hidden within secure code, activated
+    by minification.\n\n### Details   {#details}\n\nIn Boolean algebra, DeMorgan\\'s
+    laws describe the relationships between\nconjunctions (`&&`), disjunctions (`||`)
+    and negations (`!`). In\nJavascript form, they state that:\n\n     !(a && b) ===
+    (!a) || (!b)\n     !(a || b) === (!a) && (!b)\n\nThe law does not hold true when
+    one of the values is not a boolean\nhowever.\n\nVulnerable versions of UglifyJS
+    do not account for this restriction, and\nerroneously apply the laws to a statement
+    if it can be reduced in length\nby it.\n\nConsider this authentication function:\n\n
+    \   function isTokenValid(user) {\n        var timeLeft =\n            !!config
+    && // config object exists\n            !!user.token && // user object has a token\n
+    \           !user.token.invalidated && // token is not explicitly invalidated\n
+    \           !config.uninitialized && // config is initialized\n            !config.ignoreTimestamps
+    && // don't ignore timestamps\n            getTimeLeft(user.token.expiry); //
+    > 0 if expiration is in the future\n    \n        // The token must not be expired\n
+    \       return timeLeft > 0;\n    }\n    \n    function getTimeLeft(expiry) {\n
+    \     return expiry - getSystemTime();\n    }\n\nWhen minified with a vulnerable
+    version of UglifyJS, it will produce the\nfollowing insecure output, where a token
+    will never expire:\n\n( Formatted for readability )\n\n    function isTokenValid(user)
+    {\n        var timeLeft = !(                       // negation\n            !config
+    \                            // config object does not exist\n            || !user.token
+    \                     // user object does not have a token\n            || user.token.invalidated
+    \          // token is explicitly invalidated\n            || config.uninitialized
+    \            // config isn't initialized\n            || config.ignoreTimestamps
+    \         // ignore timestamps\n            || !getTimeLeft(user.token.expiry)
+    \ // > 0 if expiration is in the future\n        );\n        return timeLeft >
+    0\n    }\n    \n    function getTimeLeft(expiry) {\n        return expiry - getSystemTime()\n
+    \   }\n\n\n\n[1]: http://npmjs.com/package/uglify-js\n[2]: https://github.com/mishoo/UglifyJS2/issues/751\n[3]:
+    https://zyan.scripts.mit.edu/blog/backdooring-js/\n[4]: https://twitter.com/bcrypt\n\\n[`uglify-js`][1]
+    is a JavaScript parser, minifier, compressor and\nbeautifier toolkit.\n\n[Tom
+    MacWright][2] discovered that UglifyJS versions 2.4.23 and earlier\nare affected
+    by a vulnerability which allows a specially crafted\nJavascript file to have altered
+    functionality after minification. This\nbug was [demonstrated][3] by [Yan][4]
+    to allow potentially malicious\ncode to be hidden within secure code, activated
+    by minification.\n\n### Details   {#details}\n\nIn Boolean algebra, DeMorgan\\'s
+    laws describe the relationships between\nconjunctions (`&&`), disjunctions (`||`)
+    and negations (`!`). In\nJavascript form, they state that:\n\n     !(a && b) ===
+    (!a) || (!b)\n     !(a || b) === (!a) && (!b)\n\nThe law does not hold true when
+    one of the values is not a boolean\nhowever.\n\nVulnerable versions of UglifyJS
+    do not account for this restriction, and\nerroneously apply the laws to a statement
+    if it can be reduced in length\nby it.\n\nConsider this authentication function:\n\n
+    \   function isTokenValid(user) {\n        var timeLeft =\n            !!config
+    && // config object exists\n            !!user.token && // user object has a token\n
+    \           !user.token.invalidated && // token is not explicitly invalidated\n
+    \           !config.uninitialized && // config is initialized\n            !config.ignoreTimestamps
+    && // don't ignore timestamps\n            getTimeLeft(user.token.expiry); //
+    > 0 if expiration is in the future\n    \n        // The token must not be expired\n
+    \       return timeLeft > 0;\n    }\n    \n    function getTimeLeft(expiry) {\n
+    \     return expiry - getSystemTime();\n    }\n\nWhen minified with a vulnerable
+    version of UglifyJS, it will produce the\nfollowing insecure output, where a token
+    will never expire:\n\n( Formatted for readability )\n\n    function isTokenValid(user)
+    {\n        var timeLeft = !(                       // negation\n            !config
+    \                            // config object does not exist\n            || !user.token
+    \                     // user object does not have a token\n            || user.token.invalidated
+    \          // token is explicitly invalidated\n            || config.uninitialized
+    \            // config isn't initialized\n            || config.ignoreTimestamps
+    \         // ignore timestamps\n            || !getTimeLeft(user.token.expiry)
+    \ // > 0 if expiration is in the future\n        );\n        return timeLeft >
+    0\n    }\n    \n    function getTimeLeft(expiry) {\n        return expiry - getSystemTime()\n
+    \   }\n\n\n\n[1]: http://npmjs.com/package/uglify-js\n[2]: https://github.com/mishoo/UglifyJS2/issues/751\n[3]:
+    https://zyan.scripts.mit.edu/blog/backdooring-js/\n[4]: https://twitter.com/bcrypt\n\\n[`uglify-js`][1]
+    is a JavaScript parser, minifier, compressor and\nbeautifier toolkit.\n\n[Tom
+    MacWright][2] discovered that UglifyJS versions 2.4.23 and earlier\nare affected
+    by a vulnerability which allows a specially crafted\nJavascript file to have altered
+    functionality after minification. This\nbug was [demonstrated][3] by [Yan][4]
+    to allow potentially malicious\ncode to be hidden within secure code, activated
+    by minification.\n\n### Details   {#details}\n\nIn Boolean algebra, DeMorgan\\'s
+    laws describe the relationships between\nconjunctions (`&&`), disjunctions (`||`)
+    and negations (`!`). In\nJavascript form, they state that:\n\n     !(a && b) ===
+    (!a) || (!b)\n     !(a || b) === (!a) && (!b)\n\nThe law does not hold true when
+    one of the values is not a boolean\nhowever.\n\nVulnerable versions of UglifyJS
+    do not account for this restriction, and\nerroneously apply the laws to a statement
+    if it can be reduced in length\nby it.\n\nConsider this authentication function:\n\n
+    \   function isTokenValid(user) {\n        var timeLeft =\n            !!config
+    && // config object exists\n            !!user.token && // user object has a token\n
+    \           !user.token.invalidated && // token is not explicitly invalidated\n
+    \           !config.uninitialized && // config is initialized\n            !config.ignoreTimestamps
+    && // don't ignore timestamps\n            getTimeLeft(user.token.expiry); //
+    > 0 if expiration is in the future\n    \n        // The token must not be expired\n
+    \       return timeLeft > 0;\n    }\n    \n    function getTimeLeft(expiry) {\n
+    \     return expiry - getSystemTime();\n    }\n\nWhen minified with a vulnerable
+    version of UglifyJS, it will produce the\nfollowing insecure output, where a token
+    will never expire:\n\n( Formatted for readability )\n\n    function isTokenValid(user)
+    {\n        var timeLeft = !(                       // negation\n            !config
+    \                            // config object does not exist\n            || !user.token
+    \                     // user object does not have a token\n            || user.token.invalidated
+    \          // token is explicitly invalidated\n            || config.uninitialized
+    \            // config isn't initialized\n            || config.ignoreTimestamps
+    \         // ignore timestamps\n            || !getTimeLeft(user.token.expiry)
+    \ // > 0 if expiration is in the future\n        );\n        return timeLeft >
+    0\n    }\n    \n    function getTimeLeft(expiry) {\n        return expiry - getSystemTime()\n
+    \   }\n\n\n\n[1]: http://npmjs.com/package/uglify-js\n[2]: https://github.com/mishoo/UglifyJS2/issues/751\n[3]:
+    https://zyan.scripts.mit.edu/blog/backdooring-js/\n[4]: https://twitter.com/bcrypt\n\\n[`uglify-js`][1]
+    is a JavaScript parser, minifier, compressor and\nbeautifier toolkit.\n\n[Tom
+    MacWright][2] discovered that UglifyJS versions 2.4.23 and earlier\nare affected
+    by a vulnerability which allows a specially crafted\nJavascript file to have altered
+    functionality after minification. This\nbug was [demonstrated][3] by [Yan][4]
+    to allow potentially malicious\ncode to be hidden within secure code, activated
+    by minification.\n\n### Details   {#details}\n\nIn Boolean algebra, DeMorgan\\'s
+    laws describe the relationships between\nconjunctions (`&&`), disjunctions (`||`)
+    and negations (`!`). In\nJavascript form, they state that:\n\n     !(a && b) ===
+    (!a) || (!b)\n     !(a || b) === (!a) && (!b)\n\nThe law does not hold true when
+    one of the values is not a boolean\nhowever.\n\nVulnerable versions of UglifyJS
+    do not account for this restriction, and\nerroneously apply the laws to a statement
+    if it can be reduced in length\nby it.\n\nConsider this authentication function:\n\n
+    \   function isTokenValid(user) {\n        var timeLeft =\n            !!config
+    && // config object exists\n            !!user.token && // user object has a token\n
+    \           !user.token.invalidated && // token is not explicitly invalidated\n
+    \           !config.uninitialized && // config is initialized\n            !config.ignoreTimestamps
+    && // don't ignore timestamps\n            getTimeLeft(user.token.expiry); //
+    > 0 if expiration is in the future\n    \n        // The token must not be expired\n
+    \       return timeLeft > 0;\n    }\n    \n    function getTimeLeft(expiry) {\n
+    \     return expiry - getSystemTime();\n    }\n\nWhen minified with a vulnerable
+    version of UglifyJS, it will produce the\nfollowing insecure output, where a token
+    will never expire:\n\n( Formatted for readability )\n\n    function isTokenValid(user)
+    {\n        var timeLeft = !(                       // negation\n            !config
+    \                            // config object does not exist\n            || !user.token
+    \                     // user object does not have a token\n            || user.token.invalidated
+    \          // token is explicitly invalidated\n            || config.uninitialized
+    \            // config isn't initialized\n            || config.ignoreTimestamps
+    \         // ignore timestamps\n            || !getTimeLeft(user.token.expiry)
+    \ // > 0 if expiration is in the future\n        );\n        return timeLeft >
+    0\n    }\n    \n    function getTimeLeft(expiry) {\n        return expiry - getSystemTime()\n
+    \   }\n\n\n\n[1]: http://npmjs.com/package/uglify-js\n[2]: https://github.com/mishoo/UglifyJS2/issues/751\n[3]:
+    https://zyan.scripts.mit.edu/blog/backdooring-js/\n[4]: https://twitter.com/bcrypt\n\\n[`uglify-js`][1]
+    is a JavaScript parser, minifier, compressor and\nbeautifier toolkit.\n\n[Tom
+    MacWright][2] discovered that UglifyJS versions 2.4.23 and earlier\nare affected
+    by a vulnerability which allows a specially crafted\nJavascript file to have altered
+    functionality after minification. This\nbug was [demonstrated][3] by [Yan][4]
+    to allow potentially malicious\ncode to be hidden within secure code, activated
+    by minification.\n\n### Details   {#details}\n\nIn Boolean algebra, DeMorgan\\'s
+    laws describe the relationships between\nconjunctions (`&&`), disjunctions (`||`)
+    and negations (`!`). In\nJavascript form, they state that:\n\n     !(a && b) ===
+    (!a) || (!b)\n     !(a || b) === (!a) && (!b)\n\nThe law does not hold true when
+    one of the values is not a boolean\nhowever.\n\nVulnerable versions of UglifyJS
+    do not account for this restriction, and\nerroneously apply the laws to a statement
+    if it can be reduced in length\nby it.\n\nConsider this authentication function:\n\n
+    \   function isTokenValid(user) {\n        var timeLeft =\n            !!config
+    && // config object exists\n            !!user.token && // user object has a token\n
+    \           !user.token.invalidated && // token is not explicitly invalidated\n
+    \           !config.uninitialized && // config is initialized\n            !config.ignoreTimestamps
+    && // don't ignore timestamps\n            getTimeLeft(user.token.expiry); //
+    > 0 if expiration is in the future\n    \n        // The token must not be expired\n
+    \       return timeLeft > 0;\n    }\n    \n    function getTimeLeft(expiry) {\n
+    \     return expiry - getSystemTime();\n    }\n\nWhen minified with a vulnerable
+    version of UglifyJS, it will produce the\nfollowing insecure output, where a token
+    will never expire:\n\n( Formatted for readability )\n\n    function isTokenValid(user)
+    {\n        var timeLeft = !(                       // negation\n            !config
+    \                            // config object does not exist\n            || !user.token
+    \                     // user object does not have a token\n            || user.token.invalidated
+    \          // token is explicitly invalidated\n            || config.uninitialized
+    \            // config isn't initialized\n            || config.ignoreTimestamps
+    \         // ignore timestamps\n            || !getTimeLeft(user.token.expiry)
+    \ // > 0 if expiration is in the future\n        );\n        return timeLeft >
+    0\n    }\n    \n    function getTimeLeft(expiry) {\n        return expiry - getSystemTime()\n
+    \   }\n\n\n\n[1]: http://npmjs.com/package/uglify-js\n[2]: https://github.com/mishoo/UglifyJS2/issues/751\n[3]:
+    https://zyan.scripts.mit.edu/blog/backdooring-js/\n[4]: https://twitter.com/bcrypt\n\\n[`uglify-js`][1]
+    is a JavaScript parser, minifier, compressor and\nbeautifier toolkit.\n\n[Tom
+    MacWright][2] discovered that UglifyJS versions 2.4.23 and earlier\nare affected
+    by a vulnerability which allows a specially crafted\nJavascript file to have altered
+    functionality after minification. This\nbug was [demonstrated][3] by [Yan][4]
+    to allow potentially malicious\ncode to be hidden within secure code, activated
+    by minification.\n\n### Details   {#details}\n\nIn Boolean algebra, DeMorgan\\'s
+    laws describe the relationships between\nconjunctions (`&&`), disjunctions (`||`)
+    and negations (`!`). In\nJavascript form, they state that:\n\n     !(a && b) ===
+    (!a) || (!b)\n     !(a || b) === (!a) && (!b)\n\nThe law does not hold true when
+    one of the values is not a boolean\nhowever.\n\nVulnerable versions of UglifyJS
+    do not account for this restriction, and\nerroneously apply the laws to a statement
+    if it can be reduced in length\nby it.\n\nConsider this authentication function:\n\n
+    \   function isTokenValid(user) {\n        var timeLeft =\n            !!config
+    && // config object exists\n            !!user.token && // user object has a token\n
+    \           !user.token.invalidated && // token is not explicitly invalidated\n
+    \           !config.uninitialized && // config is initialized\n            !config.ignoreTimestamps
+    && // don't ignore timestamps\n            getTimeLeft(user.token.expiry); //
+    > 0 if expiration is in the future\n    \n        // The token must not be expired\n
+    \       return timeLeft > 0;\n    }\n    \n    function getTimeLeft(expiry) {\n
+    \     return expiry - getSystemTime();\n    }\n\nWhen minified with a vulnerable
+    version of UglifyJS, it will produce the\nfollowing insecure output, where a token
+    will never expire:\n\n( Formatted for readability )\n\n    function isTokenValid(user)
+    {\n        var timeLeft = !(                       // negation\n            !config
+    \                            // config object does not exist\n            || !user.token
+    \                     // user object does not have a token\n            || user.token.invalidated
+    \          // token is explicitly invalidated\n            || config.uninitialized
+    \            // config isn't initialized\n            || config.ignoreTimestamps
+    \         // ignore timestamps\n            || !getTimeLeft(user.token.expiry)
+    \ // > 0 if expiration is in the future\n        );\n        return timeLeft >
+    0\n    }\n    \n    function getTimeLeft(expiry) {\n        return expiry - getSystemTime()\n
+    \   }\n\n\n\n[1]: http://npmjs.com/package/uglify-js\n[2]: https://github.com/mishoo/UglifyJS2/issues/751\n[3]:
+    https://zyan.scripts.mit.edu/blog/backdooring-js/\n[4]: https://twitter.com/bcrypt\n"
   affected_package: uglify-js
   vulnerable_versions:
-  - "<=2.4.23"
+  - "<= 2.4.23"
+  severity: high
   package_manager: npm
+  cwe:
+  - CWE-95
   credit:
-  - OSSIndex
+  - Tom MacWright
   references:
-  - https://cwe.mitre.org/data/definitions/95.html
-  - https://github.com/mishoo/UglifyJS2/issues/751
-  - https://github.com/tmcw/mdast-uglify-bug
-  - https://nodesecurity.io/advisories/39
-  - https://nodesecurity.io/advisories/uglifyjs_incorrectly_handles_non-boolean_comparisons
   - https://zyan.scripts.mit.edu/blog/backdooring-js/
-  source_url: https://ossindex.net/resource/package/7014570804/vulnerabilities
-- id: ossindex:npm:uglify-js:2016-05-21
-  title: Regular Expression Denial of Service
-  description: Some types of input can result in a Regular Expression Denial of Service
-    (ReDoS)
-  affected_package: uglify-js
-  vulnerable_versions:
-  - "<2.6.0"
-  package_manager: npm
-  credit:
-  - OSSIndex
-  references:
-  - http://www.github.com/mishoo/UglifyJS2/857
-  - https://cwe.mitre.org/data/definitions/400.html
-  - https://nodesecurity.io/advisories/48
-  - https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS
-  source_url: https://ossindex.net/resource/package/7014570804/vulnerabilities
+  - https://github.com/mishoo/UglifyJS2/issues/751
+  source_url: https://snyk.io/vuln/npm:uglify-js:20150824
 - id: snykio:npm:uglify-js:2015-10-24
   title: Regular Expression Denial of Service (DoS)
   description: "The `parse()` function in the [`uglify-js`][1] package prior to version\n2.6.0
@@ -1081,434 +1512,3 @@
   references:
   - https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS
   source_url: https://snyk.io/vuln/npm:uglify-js:20151024
-- id: snykio:npm:uglify-js:2015-08-24
-  title: Improper minification of non-boolean comparisons
-  description: "[`uglify-js`][1] is a JavaScript parser, minifier, compressor and\nbeautifier
-    toolkit.\n\n[Tom MacWright][2] discovered that UglifyJS versions 2.4.23 and earlier\nare
-    affected by a vulnerability which allows a specially crafted\nJavascript file
-    to have altered functionality after minification. This\nbug was [demonstrated][3]
-    by [Yan][4] to allow potentially malicious\ncode to be hidden within secure code,
-    activated by minification.\n\n### Details   {#details}\n\nIn Boolean algebra,
-    DeMorgan\\'s laws describe the relationships between\nconjunctions (`&&`), disjunctions
-    (`||`) and negations (`!`). In\nJavascript form, they state that:\n\n     !(a
-    && b) === (!a) || (!b)\n     !(a || b) === (!a) && (!b)\n\nThe law does not hold
-    true when one of the values is not a boolean\nhowever.\n\nVulnerable versions
-    of UglifyJS do not account for this restriction, and\nerroneously apply the laws
-    to a statement if it can be reduced in length\nby it.\n\nConsider this authentication
-    function:\n\n    function isTokenValid(user) {\n        var timeLeft =\n            !!config
-    && // config object exists\n            !!user.token && // user object has a token\n
-    \           !user.token.invalidated && // token is not explicitly invalidated\n
-    \           !config.uninitialized && // config is initialized\n            !config.ignoreTimestamps
-    && // don't ignore timestamps\n            getTimeLeft(user.token.expiry); //
-    > 0 if expiration is in the future\n    \n        // The token must not be expired\n
-    \       return timeLeft > 0;\n    }\n    \n    function getTimeLeft(expiry) {\n
-    \     return expiry - getSystemTime();\n    }\n\nWhen minified with a vulnerable
-    version of UglifyJS, it will produce the\nfollowing insecure output, where a token
-    will never expire:\n\n( Formatted for readability )\n\n    function isTokenValid(user)
-    {\n        var timeLeft = !(                       // negation\n            !config
-    \                            // config object does not exist\n            || !user.token
-    \                     // user object does not have a token\n            || user.token.invalidated
-    \          // token is explicitly invalidated\n            || config.uninitialized
-    \            // config isn't initialized\n            || config.ignoreTimestamps
-    \         // ignore timestamps\n            || !getTimeLeft(user.token.expiry)
-    \ // > 0 if expiration is in the future\n        );\n        return timeLeft >
-    0\n    }\n    \n    function getTimeLeft(expiry) {\n        return expiry - getSystemTime()\n
-    \   }\n\n\n\n[1]: http://npmjs.com/package/uglify-js\n[2]: https://github.com/mishoo/UglifyJS2/issues/751\n[3]:
-    https://zyan.scripts.mit.edu/blog/backdooring-js/\n[4]: https://twitter.com/bcrypt\n\\n[`uglify-js`][1]
-    is a JavaScript parser, minifier, compressor and\nbeautifier toolkit.\n\n[Tom
-    MacWright][2] discovered that UglifyJS versions 2.4.23 and earlier\nare affected
-    by a vulnerability which allows a specially crafted\nJavascript file to have altered
-    functionality after minification. This\nbug was [demonstrated][3] by [Yan][4]
-    to allow potentially malicious\ncode to be hidden within secure code, activated
-    by minification.\n\n### Details   {#details}\n\nIn Boolean algebra, DeMorgan\\'s
-    laws describe the relationships between\nconjunctions (`&&`), disjunctions (`||`)
-    and negations (`!`). In\nJavascript form, they state that:\n\n     !(a && b) ===
-    (!a) || (!b)\n     !(a || b) === (!a) && (!b)\n\nThe law does not hold true when
-    one of the values is not a boolean\nhowever.\n\nVulnerable versions of UglifyJS
-    do not account for this restriction, and\nerroneously apply the laws to a statement
-    if it can be reduced in length\nby it.\n\nConsider this authentication function:\n\n
-    \   function isTokenValid(user) {\n        var timeLeft =\n            !!config
-    && // config object exists\n            !!user.token && // user object has a token\n
-    \           !user.token.invalidated && // token is not explicitly invalidated\n
-    \           !config.uninitialized && // config is initialized\n            !config.ignoreTimestamps
-    && // don't ignore timestamps\n            getTimeLeft(user.token.expiry); //
-    > 0 if expiration is in the future\n    \n        // The token must not be expired\n
-    \       return timeLeft > 0;\n    }\n    \n    function getTimeLeft(expiry) {\n
-    \     return expiry - getSystemTime();\n    }\n\nWhen minified with a vulnerable
-    version of UglifyJS, it will produce the\nfollowing insecure output, where a token
-    will never expire:\n\n( Formatted for readability )\n\n    function isTokenValid(user)
-    {\n        var timeLeft = !(                       // negation\n            !config
-    \                            // config object does not exist\n            || !user.token
-    \                     // user object does not have a token\n            || user.token.invalidated
-    \          // token is explicitly invalidated\n            || config.uninitialized
-    \            // config isn't initialized\n            || config.ignoreTimestamps
-    \         // ignore timestamps\n            || !getTimeLeft(user.token.expiry)
-    \ // > 0 if expiration is in the future\n        );\n        return timeLeft >
-    0\n    }\n    \n    function getTimeLeft(expiry) {\n        return expiry - getSystemTime()\n
-    \   }\n\n\n\n[1]: http://npmjs.com/package/uglify-js\n[2]: https://github.com/mishoo/UglifyJS2/issues/751\n[3]:
-    https://zyan.scripts.mit.edu/blog/backdooring-js/\n[4]: https://twitter.com/bcrypt\n\\n[`uglify-js`][1]
-    is a JavaScript parser, minifier, compressor and\nbeautifier toolkit.\n\n[Tom
-    MacWright][2] discovered that UglifyJS versions 2.4.23 and earlier\nare affected
-    by a vulnerability which allows a specially crafted\nJavascript file to have altered
-    functionality after minification. This\nbug was [demonstrated][3] by [Yan][4]
-    to allow potentially malicious\ncode to be hidden within secure code, activated
-    by minification.\n\n### Details   {#details}\n\nIn Boolean algebra, DeMorgan\\'s
-    laws describe the relationships between\nconjunctions (`&&`), disjunctions (`||`)
-    and negations (`!`). In\nJavascript form, they state that:\n\n     !(a && b) ===
-    (!a) || (!b)\n     !(a || b) === (!a) && (!b)\n\nThe law does not hold true when
-    one of the values is not a boolean\nhowever.\n\nVulnerable versions of UglifyJS
-    do not account for this restriction, and\nerroneously apply the laws to a statement
-    if it can be reduced in length\nby it.\n\nConsider this authentication function:\n\n
-    \   function isTokenValid(user) {\n        var timeLeft =\n            !!config
-    && // config object exists\n            !!user.token && // user object has a token\n
-    \           !user.token.invalidated && // token is not explicitly invalidated\n
-    \           !config.uninitialized && // config is initialized\n            !config.ignoreTimestamps
-    && // don't ignore timestamps\n            getTimeLeft(user.token.expiry); //
-    > 0 if expiration is in the future\n    \n        // The token must not be expired\n
-    \       return timeLeft > 0;\n    }\n    \n    function getTimeLeft(expiry) {\n
-    \     return expiry - getSystemTime();\n    }\n\nWhen minified with a vulnerable
-    version of UglifyJS, it will produce the\nfollowing insecure output, where a token
-    will never expire:\n\n( Formatted for readability )\n\n    function isTokenValid(user)
-    {\n        var timeLeft = !(                       // negation\n            !config
-    \                            // config object does not exist\n            || !user.token
-    \                     // user object does not have a token\n            || user.token.invalidated
-    \          // token is explicitly invalidated\n            || config.uninitialized
-    \            // config isn't initialized\n            || config.ignoreTimestamps
-    \         // ignore timestamps\n            || !getTimeLeft(user.token.expiry)
-    \ // > 0 if expiration is in the future\n        );\n        return timeLeft >
-    0\n    }\n    \n    function getTimeLeft(expiry) {\n        return expiry - getSystemTime()\n
-    \   }\n\n\n\n[1]: http://npmjs.com/package/uglify-js\n[2]: https://github.com/mishoo/UglifyJS2/issues/751\n[3]:
-    https://zyan.scripts.mit.edu/blog/backdooring-js/\n[4]: https://twitter.com/bcrypt\n\\n[`uglify-js`][1]
-    is a JavaScript parser, minifier, compressor and\nbeautifier toolkit.\n\n[Tom
-    MacWright][2] discovered that UglifyJS versions 2.4.23 and earlier\nare affected
-    by a vulnerability which allows a specially crafted\nJavascript file to have altered
-    functionality after minification. This\nbug was [demonstrated][3] by [Yan][4]
-    to allow potentially malicious\ncode to be hidden within secure code, activated
-    by minification.\n\n### Details   {#details}\n\nIn Boolean algebra, DeMorgan\\'s
-    laws describe the relationships between\nconjunctions (`&&`), disjunctions (`||`)
-    and negations (`!`). In\nJavascript form, they state that:\n\n     !(a && b) ===
-    (!a) || (!b)\n     !(a || b) === (!a) && (!b)\n\nThe law does not hold true when
-    one of the values is not a boolean\nhowever.\n\nVulnerable versions of UglifyJS
-    do not account for this restriction, and\nerroneously apply the laws to a statement
-    if it can be reduced in length\nby it.\n\nConsider this authentication function:\n\n
-    \   function isTokenValid(user) {\n        var timeLeft =\n            !!config
-    && // config object exists\n            !!user.token && // user object has a token\n
-    \           !user.token.invalidated && // token is not explicitly invalidated\n
-    \           !config.uninitialized && // config is initialized\n            !config.ignoreTimestamps
-    && // don't ignore timestamps\n            getTimeLeft(user.token.expiry); //
-    > 0 if expiration is in the future\n    \n        // The token must not be expired\n
-    \       return timeLeft > 0;\n    }\n    \n    function getTimeLeft(expiry) {\n
-    \     return expiry - getSystemTime();\n    }\n\nWhen minified with a vulnerable
-    version of UglifyJS, it will produce the\nfollowing insecure output, where a token
-    will never expire:\n\n( Formatted for readability )\n\n    function isTokenValid(user)
-    {\n        var timeLeft = !(                       // negation\n            !config
-    \                            // config object does not exist\n            || !user.token
-    \                     // user object does not have a token\n            || user.token.invalidated
-    \          // token is explicitly invalidated\n            || config.uninitialized
-    \            // config isn't initialized\n            || config.ignoreTimestamps
-    \         // ignore timestamps\n            || !getTimeLeft(user.token.expiry)
-    \ // > 0 if expiration is in the future\n        );\n        return timeLeft >
-    0\n    }\n    \n    function getTimeLeft(expiry) {\n        return expiry - getSystemTime()\n
-    \   }\n\n\n\n[1]: http://npmjs.com/package/uglify-js\n[2]: https://github.com/mishoo/UglifyJS2/issues/751\n[3]:
-    https://zyan.scripts.mit.edu/blog/backdooring-js/\n[4]: https://twitter.com/bcrypt\n\\n[`uglify-js`][1]
-    is a JavaScript parser, minifier, compressor and\nbeautifier toolkit.\n\n[Tom
-    MacWright][2] discovered that UglifyJS versions 2.4.23 and earlier\nare affected
-    by a vulnerability which allows a specially crafted\nJavascript file to have altered
-    functionality after minification. This\nbug was [demonstrated][3] by [Yan][4]
-    to allow potentially malicious\ncode to be hidden within secure code, activated
-    by minification.\n\n### Details   {#details}\n\nIn Boolean algebra, DeMorgan\\'s
-    laws describe the relationships between\nconjunctions (`&&`), disjunctions (`||`)
-    and negations (`!`). In\nJavascript form, they state that:\n\n     !(a && b) ===
-    (!a) || (!b)\n     !(a || b) === (!a) && (!b)\n\nThe law does not hold true when
-    one of the values is not a boolean\nhowever.\n\nVulnerable versions of UglifyJS
-    do not account for this restriction, and\nerroneously apply the laws to a statement
-    if it can be reduced in length\nby it.\n\nConsider this authentication function:\n\n
-    \   function isTokenValid(user) {\n        var timeLeft =\n            !!config
-    && // config object exists\n            !!user.token && // user object has a token\n
-    \           !user.token.invalidated && // token is not explicitly invalidated\n
-    \           !config.uninitialized && // config is initialized\n            !config.ignoreTimestamps
-    && // don't ignore timestamps\n            getTimeLeft(user.token.expiry); //
-    > 0 if expiration is in the future\n    \n        // The token must not be expired\n
-    \       return timeLeft > 0;\n    }\n    \n    function getTimeLeft(expiry) {\n
-    \     return expiry - getSystemTime();\n    }\n\nWhen minified with a vulnerable
-    version of UglifyJS, it will produce the\nfollowing insecure output, where a token
-    will never expire:\n\n( Formatted for readability )\n\n    function isTokenValid(user)
-    {\n        var timeLeft = !(                       // negation\n            !config
-    \                            // config object does not exist\n            || !user.token
-    \                     // user object does not have a token\n            || user.token.invalidated
-    \          // token is explicitly invalidated\n            || config.uninitialized
-    \            // config isn't initialized\n            || config.ignoreTimestamps
-    \         // ignore timestamps\n            || !getTimeLeft(user.token.expiry)
-    \ // > 0 if expiration is in the future\n        );\n        return timeLeft >
-    0\n    }\n    \n    function getTimeLeft(expiry) {\n        return expiry - getSystemTime()\n
-    \   }\n\n\n\n[1]: http://npmjs.com/package/uglify-js\n[2]: https://github.com/mishoo/UglifyJS2/issues/751\n[3]:
-    https://zyan.scripts.mit.edu/blog/backdooring-js/\n[4]: https://twitter.com/bcrypt\n\\n[`uglify-js`][1]
-    is a JavaScript parser, minifier, compressor and\nbeautifier toolkit.\n\n[Tom
-    MacWright][2] discovered that UglifyJS versions 2.4.23 and earlier\nare affected
-    by a vulnerability which allows a specially crafted\nJavascript file to have altered
-    functionality after minification. This\nbug was [demonstrated][3] by [Yan][4]
-    to allow potentially malicious\ncode to be hidden within secure code, activated
-    by minification.\n\n### Details   {#details}\n\nIn Boolean algebra, DeMorgan\\'s
-    laws describe the relationships between\nconjunctions (`&&`), disjunctions (`||`)
-    and negations (`!`). In\nJavascript form, they state that:\n\n     !(a && b) ===
-    (!a) || (!b)\n     !(a || b) === (!a) && (!b)\n\nThe law does not hold true when
-    one of the values is not a boolean\nhowever.\n\nVulnerable versions of UglifyJS
-    do not account for this restriction, and\nerroneously apply the laws to a statement
-    if it can be reduced in length\nby it.\n\nConsider this authentication function:\n\n
-    \   function isTokenValid(user) {\n        var timeLeft =\n            !!config
-    && // config object exists\n            !!user.token && // user object has a token\n
-    \           !user.token.invalidated && // token is not explicitly invalidated\n
-    \           !config.uninitialized && // config is initialized\n            !config.ignoreTimestamps
-    && // don't ignore timestamps\n            getTimeLeft(user.token.expiry); //
-    > 0 if expiration is in the future\n    \n        // The token must not be expired\n
-    \       return timeLeft > 0;\n    }\n    \n    function getTimeLeft(expiry) {\n
-    \     return expiry - getSystemTime();\n    }\n\nWhen minified with a vulnerable
-    version of UglifyJS, it will produce the\nfollowing insecure output, where a token
-    will never expire:\n\n( Formatted for readability )\n\n    function isTokenValid(user)
-    {\n        var timeLeft = !(                       // negation\n            !config
-    \                            // config object does not exist\n            || !user.token
-    \                     // user object does not have a token\n            || user.token.invalidated
-    \          // token is explicitly invalidated\n            || config.uninitialized
-    \            // config isn't initialized\n            || config.ignoreTimestamps
-    \         // ignore timestamps\n            || !getTimeLeft(user.token.expiry)
-    \ // > 0 if expiration is in the future\n        );\n        return timeLeft >
-    0\n    }\n    \n    function getTimeLeft(expiry) {\n        return expiry - getSystemTime()\n
-    \   }\n\n\n\n[1]: http://npmjs.com/package/uglify-js\n[2]: https://github.com/mishoo/UglifyJS2/issues/751\n[3]:
-    https://zyan.scripts.mit.edu/blog/backdooring-js/\n[4]: https://twitter.com/bcrypt\n\\n[`uglify-js`][1]
-    is a JavaScript parser, minifier, compressor and\nbeautifier toolkit.\n\n[Tom
-    MacWright][2] discovered that UglifyJS versions 2.4.23 and earlier\nare affected
-    by a vulnerability which allows a specially crafted\nJavascript file to have altered
-    functionality after minification. This\nbug was [demonstrated][3] by [Yan][4]
-    to allow potentially malicious\ncode to be hidden within secure code, activated
-    by minification.\n\n### Details   {#details}\n\nIn Boolean algebra, DeMorgan\\'s
-    laws describe the relationships between\nconjunctions (`&&`), disjunctions (`||`)
-    and negations (`!`). In\nJavascript form, they state that:\n\n     !(a && b) ===
-    (!a) || (!b)\n     !(a || b) === (!a) && (!b)\n\nThe law does not hold true when
-    one of the values is not a boolean\nhowever.\n\nVulnerable versions of UglifyJS
-    do not account for this restriction, and\nerroneously apply the laws to a statement
-    if it can be reduced in length\nby it.\n\nConsider this authentication function:\n\n
-    \   function isTokenValid(user) {\n        var timeLeft =\n            !!config
-    && // config object exists\n            !!user.token && // user object has a token\n
-    \           !user.token.invalidated && // token is not explicitly invalidated\n
-    \           !config.uninitialized && // config is initialized\n            !config.ignoreTimestamps
-    && // don't ignore timestamps\n            getTimeLeft(user.token.expiry); //
-    > 0 if expiration is in the future\n    \n        // The token must not be expired\n
-    \       return timeLeft > 0;\n    }\n    \n    function getTimeLeft(expiry) {\n
-    \     return expiry - getSystemTime();\n    }\n\nWhen minified with a vulnerable
-    version of UglifyJS, it will produce the\nfollowing insecure output, where a token
-    will never expire:\n\n( Formatted for readability )\n\n    function isTokenValid(user)
-    {\n        var timeLeft = !(                       // negation\n            !config
-    \                            // config object does not exist\n            || !user.token
-    \                     // user object does not have a token\n            || user.token.invalidated
-    \          // token is explicitly invalidated\n            || config.uninitialized
-    \            // config isn't initialized\n            || config.ignoreTimestamps
-    \         // ignore timestamps\n            || !getTimeLeft(user.token.expiry)
-    \ // > 0 if expiration is in the future\n        );\n        return timeLeft >
-    0\n    }\n    \n    function getTimeLeft(expiry) {\n        return expiry - getSystemTime()\n
-    \   }\n\n\n\n[1]: http://npmjs.com/package/uglify-js\n[2]: https://github.com/mishoo/UglifyJS2/issues/751\n[3]:
-    https://zyan.scripts.mit.edu/blog/backdooring-js/\n[4]: https://twitter.com/bcrypt\n\\n[`uglify-js`][1]
-    is a JavaScript parser, minifier, compressor and\nbeautifier toolkit.\n\n[Tom
-    MacWright][2] discovered that UglifyJS versions 2.4.23 and earlier\nare affected
-    by a vulnerability which allows a specially crafted\nJavascript file to have altered
-    functionality after minification. This\nbug was [demonstrated][3] by [Yan][4]
-    to allow potentially malicious\ncode to be hidden within secure code, activated
-    by minification.\n\n### Details   {#details}\n\nIn Boolean algebra, DeMorgan\\'s
-    laws describe the relationships between\nconjunctions (`&&`), disjunctions (`||`)
-    and negations (`!`). In\nJavascript form, they state that:\n\n     !(a && b) ===
-    (!a) || (!b)\n     !(a || b) === (!a) && (!b)\n\nThe law does not hold true when
-    one of the values is not a boolean\nhowever.\n\nVulnerable versions of UglifyJS
-    do not account for this restriction, and\nerroneously apply the laws to a statement
-    if it can be reduced in length\nby it.\n\nConsider this authentication function:\n\n
-    \   function isTokenValid(user) {\n        var timeLeft =\n            !!config
-    && // config object exists\n            !!user.token && // user object has a token\n
-    \           !user.token.invalidated && // token is not explicitly invalidated\n
-    \           !config.uninitialized && // config is initialized\n            !config.ignoreTimestamps
-    && // don't ignore timestamps\n            getTimeLeft(user.token.expiry); //
-    > 0 if expiration is in the future\n    \n        // The token must not be expired\n
-    \       return timeLeft > 0;\n    }\n    \n    function getTimeLeft(expiry) {\n
-    \     return expiry - getSystemTime();\n    }\n\nWhen minified with a vulnerable
-    version of UglifyJS, it will produce the\nfollowing insecure output, where a token
-    will never expire:\n\n( Formatted for readability )\n\n    function isTokenValid(user)
-    {\n        var timeLeft = !(                       // negation\n            !config
-    \                            // config object does not exist\n            || !user.token
-    \                     // user object does not have a token\n            || user.token.invalidated
-    \          // token is explicitly invalidated\n            || config.uninitialized
-    \            // config isn't initialized\n            || config.ignoreTimestamps
-    \         // ignore timestamps\n            || !getTimeLeft(user.token.expiry)
-    \ // > 0 if expiration is in the future\n        );\n        return timeLeft >
-    0\n    }\n    \n    function getTimeLeft(expiry) {\n        return expiry - getSystemTime()\n
-    \   }\n\n\n\n[1]: http://npmjs.com/package/uglify-js\n[2]: https://github.com/mishoo/UglifyJS2/issues/751\n[3]:
-    https://zyan.scripts.mit.edu/blog/backdooring-js/\n[4]: https://twitter.com/bcrypt\n\\n[`uglify-js`][1]
-    is a JavaScript parser, minifier, compressor and\nbeautifier toolkit.\n\n[Tom
-    MacWright][2] discovered that UglifyJS versions 2.4.23 and earlier\nare affected
-    by a vulnerability which allows a specially crafted\nJavascript file to have altered
-    functionality after minification. This\nbug was [demonstrated][3] by [Yan][4]
-    to allow potentially malicious\ncode to be hidden within secure code, activated
-    by minification.\n\n### Details   {#details}\n\nIn Boolean algebra, DeMorgan\\'s
-    laws describe the relationships between\nconjunctions (`&&`), disjunctions (`||`)
-    and negations (`!`). In\nJavascript form, they state that:\n\n     !(a && b) ===
-    (!a) || (!b)\n     !(a || b) === (!a) && (!b)\n\nThe law does not hold true when
-    one of the values is not a boolean\nhowever.\n\nVulnerable versions of UglifyJS
-    do not account for this restriction, and\nerroneously apply the laws to a statement
-    if it can be reduced in length\nby it.\n\nConsider this authentication function:\n\n
-    \   function isTokenValid(user) {\n        var timeLeft =\n            !!config
-    && // config object exists\n            !!user.token && // user object has a token\n
-    \           !user.token.invalidated && // token is not explicitly invalidated\n
-    \           !config.uninitialized && // config is initialized\n            !config.ignoreTimestamps
-    && // don't ignore timestamps\n            getTimeLeft(user.token.expiry); //
-    > 0 if expiration is in the future\n    \n        // The token must not be expired\n
-    \       return timeLeft > 0;\n    }\n    \n    function getTimeLeft(expiry) {\n
-    \     return expiry - getSystemTime();\n    }\n\nWhen minified with a vulnerable
-    version of UglifyJS, it will produce the\nfollowing insecure output, where a token
-    will never expire:\n\n( Formatted for readability )\n\n    function isTokenValid(user)
-    {\n        var timeLeft = !(                       // negation\n            !config
-    \                            // config object does not exist\n            || !user.token
-    \                     // user object does not have a token\n            || user.token.invalidated
-    \          // token is explicitly invalidated\n            || config.uninitialized
-    \            // config isn't initialized\n            || config.ignoreTimestamps
-    \         // ignore timestamps\n            || !getTimeLeft(user.token.expiry)
-    \ // > 0 if expiration is in the future\n        );\n        return timeLeft >
-    0\n    }\n    \n    function getTimeLeft(expiry) {\n        return expiry - getSystemTime()\n
-    \   }\n\n\n\n[1]: http://npmjs.com/package/uglify-js\n[2]: https://github.com/mishoo/UglifyJS2/issues/751\n[3]:
-    https://zyan.scripts.mit.edu/blog/backdooring-js/\n[4]: https://twitter.com/bcrypt\n\\n[`uglify-js`][1]
-    is a JavaScript parser, minifier, compressor and\nbeautifier toolkit.\n\n[Tom
-    MacWright][2] discovered that UglifyJS versions 2.4.23 and earlier\nare affected
-    by a vulnerability which allows a specially crafted\nJavascript file to have altered
-    functionality after minification. This\nbug was [demonstrated][3] by [Yan][4]
-    to allow potentially malicious\ncode to be hidden within secure code, activated
-    by minification.\n\n### Details   {#details}\n\nIn Boolean algebra, DeMorgan\\'s
-    laws describe the relationships between\nconjunctions (`&&`), disjunctions (`||`)
-    and negations (`!`). In\nJavascript form, they state that:\n\n     !(a && b) ===
-    (!a) || (!b)\n     !(a || b) === (!a) && (!b)\n\nThe law does not hold true when
-    one of the values is not a boolean\nhowever.\n\nVulnerable versions of UglifyJS
-    do not account for this restriction, and\nerroneously apply the laws to a statement
-    if it can be reduced in length\nby it.\n\nConsider this authentication function:\n\n
-    \   function isTokenValid(user) {\n        var timeLeft =\n            !!config
-    && // config object exists\n            !!user.token && // user object has a token\n
-    \           !user.token.invalidated && // token is not explicitly invalidated\n
-    \           !config.uninitialized && // config is initialized\n            !config.ignoreTimestamps
-    && // don't ignore timestamps\n            getTimeLeft(user.token.expiry); //
-    > 0 if expiration is in the future\n    \n        // The token must not be expired\n
-    \       return timeLeft > 0;\n    }\n    \n    function getTimeLeft(expiry) {\n
-    \     return expiry - getSystemTime();\n    }\n\nWhen minified with a vulnerable
-    version of UglifyJS, it will produce the\nfollowing insecure output, where a token
-    will never expire:\n\n( Formatted for readability )\n\n    function isTokenValid(user)
-    {\n        var timeLeft = !(                       // negation\n            !config
-    \                            // config object does not exist\n            || !user.token
-    \                     // user object does not have a token\n            || user.token.invalidated
-    \          // token is explicitly invalidated\n            || config.uninitialized
-    \            // config isn't initialized\n            || config.ignoreTimestamps
-    \         // ignore timestamps\n            || !getTimeLeft(user.token.expiry)
-    \ // > 0 if expiration is in the future\n        );\n        return timeLeft >
-    0\n    }\n    \n    function getTimeLeft(expiry) {\n        return expiry - getSystemTime()\n
-    \   }\n\n\n\n[1]: http://npmjs.com/package/uglify-js\n[2]: https://github.com/mishoo/UglifyJS2/issues/751\n[3]:
-    https://zyan.scripts.mit.edu/blog/backdooring-js/\n[4]: https://twitter.com/bcrypt\n\\n[`uglify-js`][1]
-    is a JavaScript parser, minifier, compressor and\nbeautifier toolkit.\n\n[Tom
-    MacWright][2] discovered that UglifyJS versions 2.4.23 and earlier\nare affected
-    by a vulnerability which allows a specially crafted\nJavascript file to have altered
-    functionality after minification. This\nbug was [demonstrated][3] by [Yan][4]
-    to allow potentially malicious\ncode to be hidden within secure code, activated
-    by minification.\n\n### Details   {#details}\n\nIn Boolean algebra, DeMorgan\\'s
-    laws describe the relationships between\nconjunctions (`&&`), disjunctions (`||`)
-    and negations (`!`). In\nJavascript form, they state that:\n\n     !(a && b) ===
-    (!a) || (!b)\n     !(a || b) === (!a) && (!b)\n\nThe law does not hold true when
-    one of the values is not a boolean\nhowever.\n\nVulnerable versions of UglifyJS
-    do not account for this restriction, and\nerroneously apply the laws to a statement
-    if it can be reduced in length\nby it.\n\nConsider this authentication function:\n\n
-    \   function isTokenValid(user) {\n        var timeLeft =\n            !!config
-    && // config object exists\n            !!user.token && // user object has a token\n
-    \           !user.token.invalidated && // token is not explicitly invalidated\n
-    \           !config.uninitialized && // config is initialized\n            !config.ignoreTimestamps
-    && // don't ignore timestamps\n            getTimeLeft(user.token.expiry); //
-    > 0 if expiration is in the future\n    \n        // The token must not be expired\n
-    \       return timeLeft > 0;\n    }\n    \n    function getTimeLeft(expiry) {\n
-    \     return expiry - getSystemTime();\n    }\n\nWhen minified with a vulnerable
-    version of UglifyJS, it will produce the\nfollowing insecure output, where a token
-    will never expire:\n\n( Formatted for readability )\n\n    function isTokenValid(user)
-    {\n        var timeLeft = !(                       // negation\n            !config
-    \                            // config object does not exist\n            || !user.token
-    \                     // user object does not have a token\n            || user.token.invalidated
-    \          // token is explicitly invalidated\n            || config.uninitialized
-    \            // config isn't initialized\n            || config.ignoreTimestamps
-    \         // ignore timestamps\n            || !getTimeLeft(user.token.expiry)
-    \ // > 0 if expiration is in the future\n        );\n        return timeLeft >
-    0\n    }\n    \n    function getTimeLeft(expiry) {\n        return expiry - getSystemTime()\n
-    \   }\n\n\n\n[1]: http://npmjs.com/package/uglify-js\n[2]: https://github.com/mishoo/UglifyJS2/issues/751\n[3]:
-    https://zyan.scripts.mit.edu/blog/backdooring-js/\n[4]: https://twitter.com/bcrypt\n\\n[`uglify-js`][1]
-    is a JavaScript parser, minifier, compressor and\nbeautifier toolkit.\n\n[Tom
-    MacWright][2] discovered that UglifyJS versions 2.4.23 and earlier\nare affected
-    by a vulnerability which allows a specially crafted\nJavascript file to have altered
-    functionality after minification. This\nbug was [demonstrated][3] by [Yan][4]
-    to allow potentially malicious\ncode to be hidden within secure code, activated
-    by minification.\n\n### Details   {#details}\n\nIn Boolean algebra, DeMorgan\\'s
-    laws describe the relationships between\nconjunctions (`&&`), disjunctions (`||`)
-    and negations (`!`). In\nJavascript form, they state that:\n\n     !(a && b) ===
-    (!a) || (!b)\n     !(a || b) === (!a) && (!b)\n\nThe law does not hold true when
-    one of the values is not a boolean\nhowever.\n\nVulnerable versions of UglifyJS
-    do not account for this restriction, and\nerroneously apply the laws to a statement
-    if it can be reduced in length\nby it.\n\nConsider this authentication function:\n\n
-    \   function isTokenValid(user) {\n        var timeLeft =\n            !!config
-    && // config object exists\n            !!user.token && // user object has a token\n
-    \           !user.token.invalidated && // token is not explicitly invalidated\n
-    \           !config.uninitialized && // config is initialized\n            !config.ignoreTimestamps
-    && // don't ignore timestamps\n            getTimeLeft(user.token.expiry); //
-    > 0 if expiration is in the future\n    \n        // The token must not be expired\n
-    \       return timeLeft > 0;\n    }\n    \n    function getTimeLeft(expiry) {\n
-    \     return expiry - getSystemTime();\n    }\n\nWhen minified with a vulnerable
-    version of UglifyJS, it will produce the\nfollowing insecure output, where a token
-    will never expire:\n\n( Formatted for readability )\n\n    function isTokenValid(user)
-    {\n        var timeLeft = !(                       // negation\n            !config
-    \                            // config object does not exist\n            || !user.token
-    \                     // user object does not have a token\n            || user.token.invalidated
-    \          // token is explicitly invalidated\n            || config.uninitialized
-    \            // config isn't initialized\n            || config.ignoreTimestamps
-    \         // ignore timestamps\n            || !getTimeLeft(user.token.expiry)
-    \ // > 0 if expiration is in the future\n        );\n        return timeLeft >
-    0\n    }\n    \n    function getTimeLeft(expiry) {\n        return expiry - getSystemTime()\n
-    \   }\n\n\n\n[1]: http://npmjs.com/package/uglify-js\n[2]: https://github.com/mishoo/UglifyJS2/issues/751\n[3]:
-    https://zyan.scripts.mit.edu/blog/backdooring-js/\n[4]: https://twitter.com/bcrypt\n\\n[`uglify-js`][1]
-    is a JavaScript parser, minifier, compressor and\nbeautifier toolkit.\n\n[Tom
-    MacWright][2] discovered that UglifyJS versions 2.4.23 and earlier\nare affected
-    by a vulnerability which allows a specially crafted\nJavascript file to have altered
-    functionality after minification. This\nbug was [demonstrated][3] by [Yan][4]
-    to allow potentially malicious\ncode to be hidden within secure code, activated
-    by minification.\n\n### Details   {#details}\n\nIn Boolean algebra, DeMorgan\\'s
-    laws describe the relationships between\nconjunctions (`&&`), disjunctions (`||`)
-    and negations (`!`). In\nJavascript form, they state that:\n\n     !(a && b) ===
-    (!a) || (!b)\n     !(a || b) === (!a) && (!b)\n\nThe law does not hold true when
-    one of the values is not a boolean\nhowever.\n\nVulnerable versions of UglifyJS
-    do not account for this restriction, and\nerroneously apply the laws to a statement
-    if it can be reduced in length\nby it.\n\nConsider this authentication function:\n\n
-    \   function isTokenValid(user) {\n        var timeLeft =\n            !!config
-    && // config object exists\n            !!user.token && // user object has a token\n
-    \           !user.token.invalidated && // token is not explicitly invalidated\n
-    \           !config.uninitialized && // config is initialized\n            !config.ignoreTimestamps
-    && // don't ignore timestamps\n            getTimeLeft(user.token.expiry); //
-    > 0 if expiration is in the future\n    \n        // The token must not be expired\n
-    \       return timeLeft > 0;\n    }\n    \n    function getTimeLeft(expiry) {\n
-    \     return expiry - getSystemTime();\n    }\n\nWhen minified with a vulnerable
-    version of UglifyJS, it will produce the\nfollowing insecure output, where a token
-    will never expire:\n\n( Formatted for readability )\n\n    function isTokenValid(user)
-    {\n        var timeLeft = !(                       // negation\n            !config
-    \                            // config object does not exist\n            || !user.token
-    \                     // user object does not have a token\n            || user.token.invalidated
-    \          // token is explicitly invalidated\n            || config.uninitialized
-    \            // config isn't initialized\n            || config.ignoreTimestamps
-    \         // ignore timestamps\n            || !getTimeLeft(user.token.expiry)
-    \ // > 0 if expiration is in the future\n        );\n        return timeLeft >
-    0\n    }\n    \n    function getTimeLeft(expiry) {\n        return expiry - getSystemTime()\n
-    \   }\n\n\n\n[1]: http://npmjs.com/package/uglify-js\n[2]: https://github.com/mishoo/UglifyJS2/issues/751\n[3]:
-    https://zyan.scripts.mit.edu/blog/backdooring-js/\n[4]: https://twitter.com/bcrypt\n"
-  affected_package: uglify-js
-  vulnerable_versions:
-  - "<= 2.4.23"
-  severity: high
-  package_manager: npm
-  cwe:
-  - CWE-95
-  credit:
-  - Tom MacWright
-  references:
-  - https://zyan.scripts.mit.edu/blog/backdooring-js/
-  - https://github.com/mishoo/UglifyJS2/issues/751
-  source_url: https://snyk.io/vuln/npm:uglify-js:20150824

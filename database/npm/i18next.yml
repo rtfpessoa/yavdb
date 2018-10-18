@@ -1,30 +1,4 @@
 ---
-- id: nodesecurity:npm:i18next:2017-03-15
-  title: Cross-Site Scripting
-  description: "Affected versions of `i18next` may fail to sanitize user input when
-    certain configuration options are used. When using the `.init` method, passing
-    interpolation options without passing an `escapeValue` will default to `undefined`
-    rather than the assumed `true`. \n\n## Proof of Concept\n\n```\nvar init = i18n.init({\n
-    \ interpolation: {\n    prefix: \"__\",\n    suffix: \"__\",\n    escapeValue:
-    true\n  }\n}, function(){\n  var test = i18n.t('__firstName__ __lastName__', {\n
-    \       firstName: 'Bob',\n        lastName: '[\"foo\",\"bar\"]',\n  });\n  console.log(test);\n});\n```\nWhen
-    `escapeValue` is explicitly passed, the result of `test` is: \n\n```\n&lt;script&gt;alert(1)&lt;&#x2F;script&gt;
-    Johnson\n```\n\nThis is supposed to be the default. However, if `escapeValue`
-    is not included, the result is the unescaped string: \n \n```\n<script>alert(1)</script>
-    Johnson\n```"
-  affected_package: i18next
-  vulnerable_versions:
-  - ">=2.0.0 <=3.4.3"
-  patched_versions:
-  - ">=3.4.4"
-  severity: medium
-  package_manager: npm
-  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N
-  credit:
-  - alexmchardy
-  references:
-  - https://github.com/i18next/i18next/pull/826)
-  source_url: https://nodesecurity.io/advisories/326
 - id: nodesecurity:npm:i18next:2017-03-14
   title: Cross-Site Scripting
   description: |-
@@ -55,6 +29,49 @@
   references:
   - https://github.com/i18next/i18next/pull/443)
   source_url: https://nodesecurity.io/advisories/325
+- id: nodesecurity:npm:i18next:2017-03-15
+  title: Cross-Site Scripting
+  description: "Affected versions of `i18next` may fail to sanitize user input when
+    certain configuration options are used. When using the `.init` method, passing
+    interpolation options without passing an `escapeValue` will default to `undefined`
+    rather than the assumed `true`. \n\n## Proof of Concept\n\n```\nvar init = i18n.init({\n
+    \ interpolation: {\n    prefix: \"__\",\n    suffix: \"__\",\n    escapeValue:
+    true\n  }\n}, function(){\n  var test = i18n.t('__firstName__ __lastName__', {\n
+    \       firstName: 'Bob',\n        lastName: '[\"foo\",\"bar\"]',\n  });\n  console.log(test);\n});\n```\nWhen
+    `escapeValue` is explicitly passed, the result of `test` is: \n\n```\n&lt;script&gt;alert(1)&lt;&#x2F;script&gt;
+    Johnson\n```\n\nThis is supposed to be the default. However, if `escapeValue`
+    is not included, the result is the unescaped string: \n \n```\n<script>alert(1)</script>
+    Johnson\n```"
+  affected_package: i18next
+  vulnerable_versions:
+  - ">=2.0.0 <=3.4.3"
+  patched_versions:
+  - ">=3.4.4"
+  severity: medium
+  package_manager: npm
+  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N
+  credit:
+  - alexmchardy
+  references:
+  - https://github.com/i18next/i18next/pull/826)
+  source_url: https://nodesecurity.io/advisories/326
+- id: ossindex:npm:i18next:2016-10-17
+  title: Cross Site Scripting (XSS)
+  description: Cross Site Scripting is possible due to a bug in the `interpolation
+    resolution code`.
+  affected_package: i18next
+  vulnerable_versions:
+  - "<1.10.3"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - https://cwe.mitre.org/data/definitions/79.html
+  - https://github.com/i18next/i18next/issues/443
+  - https://github.com/i18next/i18next/pull/443
+  - https://github.com/i18next/i18next/pull/443/commits/34e8e13a2b64708a0aed01092e4dbfd0e5013831
+  - https://nodesecurity.io/advisories/325
+  source_url: https://ossindex.net/resource/package/7013884133/vulnerabilities
 - id: ossindex:npm:i18next:2016-12-29
   title: Fix Interpolator.escapeValue defaulting to undefined in some cases
   description: "> [When passing] any `interpolation` options without including `escapeValue`,
@@ -73,201 +90,6 @@
   - https://github.com/i18next/i18next/pull/826/commits/d367309d4427c2d651b0f0b304504cf59c056cab
   - https://nodesecurity.io/advisories/326
   source_url: https://ossindex.net/resource/package/7013884133/vulnerabilities
-- id: ossindex:npm:i18next:2016-10-17
-  title: Cross Site Scripting (XSS)
-  description: Cross Site Scripting is possible due to a bug in the `interpolation
-    resolution code`.
-  affected_package: i18next
-  vulnerable_versions:
-  - "<1.10.3"
-  package_manager: npm
-  credit:
-  - OSSIndex
-  references:
-  - https://cwe.mitre.org/data/definitions/79.html
-  - https://github.com/i18next/i18next/issues/443
-  - https://github.com/i18next/i18next/pull/443
-  - https://github.com/i18next/i18next/pull/443/commits/34e8e13a2b64708a0aed01092e4dbfd0e5013831
-  - https://nodesecurity.io/advisories/325
-  source_url: https://ossindex.net/resource/package/7013884133/vulnerabilities
-- id: snykio:npm:i18next:2016-10-12
-  title: Cross-site Scripting (XSS)
-  description: |+
-    [`i18next`][1] is i18next internationalization framework. Affected
-    versions of the package are vulnerable to Cross-site Scripting (XSS) due
-    to not escaping variables as expected. When passing any `interpolation`
-    options without including `escapeValue`, the function `this.escapeValue`
-    will get set to `undefined` in `Interpolator`. Meaning values aren\'t
-    being escaped even though users expect them to be.
-
-
-
-    [1]: https://www.npmjs.com/package/i18next
-    \n[`i18next`][1] is i18next internationalization framework. Affected
-    versions of the package are vulnerable to Cross-site Scripting (XSS) due
-    to not escaping variables as expected. When passing any `interpolation`
-    options without including `escapeValue`, the function `this.escapeValue`
-    will get set to `undefined` in `Interpolator`. Meaning values aren\'t
-    being escaped even though users expect them to be.
-
-
-
-    [1]: https://www.npmjs.com/package/i18next
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-  affected_package: i18next
-  vulnerable_versions:
-  - "<3.4.4 >=2.0.0"
-  severity: medium
-  package_manager: npm
-  cve:
-  - CVE-2017-16010
-  cwe:
-  - CWE-79
-  credit:
-  - alexmchardy
-  references:
-  - https://github.com/i18next/i18next/pull/826
-  - https://github.com/i18next/i18next/pull/826/commits/d367309d4427c2d651b0f0b304504cf59c056cab
-  source_url: https://snyk.io/vuln/npm:i18next:20161013
 - id: snykio:npm:i18next:2015-10-17
   title: Cross-site Scripting (XSS)
   description: |+
@@ -448,3 +270,181 @@
   - https://github.com/i18next/i18next/pull/443
   - https://github.com/i18next/i18next/pull/443/commits/34e8e13a2b64708a0aed01092e4dbfd0e5013831
   source_url: https://snyk.io/vuln/npm:i18next:20151018
+- id: snykio:npm:i18next:2016-10-12
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [`i18next`][1] is i18next internationalization framework. Affected
+    versions of the package are vulnerable to Cross-site Scripting (XSS) due
+    to not escaping variables as expected. When passing any `interpolation`
+    options without including `escapeValue`, the function `this.escapeValue`
+    will get set to `undefined` in `Interpolator`. Meaning values aren\'t
+    being escaped even though users expect them to be.
+
+
+
+    [1]: https://www.npmjs.com/package/i18next
+    \n[`i18next`][1] is i18next internationalization framework. Affected
+    versions of the package are vulnerable to Cross-site Scripting (XSS) due
+    to not escaping variables as expected. When passing any `interpolation`
+    options without including `escapeValue`, the function `this.escapeValue`
+    will get set to `undefined` in `Interpolator`. Meaning values aren\'t
+    being escaped even though users expect them to be.
+
+
+
+    [1]: https://www.npmjs.com/package/i18next
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+  affected_package: i18next
+  vulnerable_versions:
+  - "<3.4.4 >=2.0.0"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2017-16010
+  cwe:
+  - CWE-79
+  credit:
+  - alexmchardy
+  references:
+  - https://github.com/i18next/i18next/pull/826
+  - https://github.com/i18next/i18next/pull/826/commits/d367309d4427c2d651b0f0b304504cf59c056cab
+  source_url: https://snyk.io/vuln/npm:i18next:20161013

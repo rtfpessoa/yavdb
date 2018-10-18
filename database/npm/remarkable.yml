@@ -1,22 +1,4 @@
 ---
-- id: nodesecurity:npm:remarkable:2017-03-09
-  title: XSS in Data URI
-  description: "Affected versions of `remarkable` are vulnerable to cross-site scripting.
-    Vulnerable versions of the package allow the use of `data:` URIs in links, and
-    can therefore execute javascript. \n\n\n## Proof of Concept\n\n```\n[link](data:text/html,<script>alert('0')</script>)\n```"
-  affected_package: remarkable
-  vulnerable_versions:
-  - "<=1.6.2"
-  patched_versions:
-  - ">=1.7.0"
-  severity: medium
-  package_manager: npm
-  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:L/A:N
-  credit:
-  - Sophie Alpert
-  references:
-  - https://github.com/jonschlinkert/remarkable/issues/227)
-  source_url: https://nodesecurity.io/advisories/319
 - id: nodesecurity:npm:remarkable:2014-11-13
   title: Content Injection
   description: "Versions 1.4.0 and earlier of `remarkable` are affected by a cross-site
@@ -37,23 +19,24 @@
   references:
   - https://github.com/jonschlinkert/remarkable/issues/97
   source_url: https://nodesecurity.io/advisories/30
-- id: ossindex:npm:remarkable:2016-10-05
-  title: Cross Site Scripting (XSS)
-  description: Cross Site Scripting is possible by creation of a link which uses the
-    `data:` URI
+- id: nodesecurity:npm:remarkable:2017-03-09
+  title: XSS in Data URI
+  description: "Affected versions of `remarkable` are vulnerable to cross-site scripting.
+    Vulnerable versions of the package allow the use of `data:` URIs in links, and
+    can therefore execute javascript. \n\n\n## Proof of Concept\n\n```\n[link](data:text/html,<script>alert('0')</script>)\n```"
   affected_package: remarkable
   vulnerable_versions:
   - "<=1.6.2"
+  patched_versions:
+  - ">=1.7.0"
+  severity: medium
   package_manager: npm
+  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:L/A:N
   credit:
-  - OSSIndex
+  - Sophie Alpert
   references:
-  - https://cwe.mitre.org/data/definitions/79.html
-  - https://github.com/jonschlinkert/remarkable/commit/49e24e8f2a431c095ddbb74ecb67cf1cf8f88c47
-  - https://github.com/jonschlinkert/remarkable/issues/227
-  - https://github.com/jonschlinkert/remarkable/pull/228
-  - https://nodesecurity.io/advisories/319
-  source_url: https://ossindex.net/resource/package/7014376319/vulnerabilities
+  - https://github.com/jonschlinkert/remarkable/issues/227)
+  source_url: https://nodesecurity.io/advisories/319
 - id: ossindex:npm:remarkable:2016-05-17
   title: Content Injection
   description: The bad protocol check can be bypassed with certain input, allowing
@@ -71,6 +54,158 @@
   - https://nodesecurity.io/advisories/remarkable_content_injection
   - https://www.owasp.org/index.php/Content_Spoofing
   source_url: https://ossindex.net/resource/package/7014376319/vulnerabilities
+- id: ossindex:npm:remarkable:2016-10-05
+  title: Cross Site Scripting (XSS)
+  description: Cross Site Scripting is possible by creation of a link which uses the
+    `data:` URI
+  affected_package: remarkable
+  vulnerable_versions:
+  - "<=1.6.2"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - https://cwe.mitre.org/data/definitions/79.html
+  - https://github.com/jonschlinkert/remarkable/commit/49e24e8f2a431c095ddbb74ecb67cf1cf8f88c47
+  - https://github.com/jonschlinkert/remarkable/issues/227
+  - https://github.com/jonschlinkert/remarkable/pull/228
+  - https://nodesecurity.io/advisories/319
+  source_url: https://ossindex.net/resource/package/7014376319/vulnerabilities
+- id: snykio:npm:remarkable:2014-11-13
+  title: Content Injection
+  description: |+
+    Certain input when passed into remarkable will bypass the bad prototcol
+    check that disallows the javascript: scheme allowing for javascript:
+    url\'s to be injected into the rendered content.
+
+    *Source: [Node Security Project][1]*
+
+
+
+    [1]: https://nodesecurity.io/advisories/30
+    \nCertain input when passed into remarkable will bypass the bad prototcol
+    check that disallows the javascript: scheme allowing for javascript:
+    url\'s to be injected into the rendered content.
+
+    *Source: [Node Security Project][1]*
+
+
+
+    [1]: https://nodesecurity.io/advisories/30
+    \nCertain input when passed into remarkable will bypass the bad prototcol
+    check that disallows the javascript: scheme allowing for javascript:
+    url\'s to be injected into the rendered content.
+
+    *Source: [Node Security Project][1]*
+
+
+
+    [1]: https://nodesecurity.io/advisories/30
+    \n**Example:**
+
+        [link](<javascript:alert(1)>)
+
+    This will be turned into `<a href="javascript:alert(1)">link</a>`
+
+    where as
+
+        [link](javascript:alert(1))
+
+    Would be rendered as `[link](javascript:alert(1))` because it\'s an
+    invalid scheme.
+
+    \n**Example:**
+
+        [link](<javascript:alert(1)>)
+
+    This will be turned into `<a href="javascript:alert(1)">link</a>`
+
+    where as
+
+        [link](javascript:alert(1))
+
+    Would be rendered as `[link](javascript:alert(1))` because it\'s an
+    invalid scheme.
+
+    \n**Example:**
+
+        [link](<javascript:alert(1)>)
+
+    This will be turned into `<a href="javascript:alert(1)">link</a>`
+
+    where as
+
+        [link](javascript:alert(1))
+
+    Would be rendered as `[link](javascript:alert(1))` because it\'s an
+    invalid scheme.
+
+    \n**Example:**
+
+        [link](<javascript:alert(1)>)
+
+    This will be turned into `<a href="javascript:alert(1)">link</a>`
+
+    where as
+
+        [link](javascript:alert(1))
+
+    Would be rendered as `[link](javascript:alert(1))` because it\'s an
+    invalid scheme.
+
+    \n**Example:**
+
+        [link](<javascript:alert(1)>)
+
+    This will be turned into `<a href="javascript:alert(1)">link</a>`
+
+    where as
+
+        [link](javascript:alert(1))
+
+    Would be rendered as `[link](javascript:alert(1))` because it\'s an
+    invalid scheme.
+
+    \n**Example:**
+
+        [link](<javascript:alert(1)>)
+
+    This will be turned into `<a href="javascript:alert(1)">link</a>`
+
+    where as
+
+        [link](javascript:alert(1))
+
+    Would be rendered as `[link](javascript:alert(1))` because it\'s an
+    invalid scheme.
+
+    \n**Example:**
+
+        [link](<javascript:alert(1)>)
+
+    This will be turned into `<a href="javascript:alert(1)">link</a>`
+
+    where as
+
+        [link](javascript:alert(1))
+
+    Would be rendered as `[link](javascript:alert(1))` because it\'s an
+    invalid scheme.
+
+  affected_package: remarkable
+  vulnerable_versions:
+  - "<1.4.1"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2014-10065
+  cwe:
+  - CWE-74
+  credit:
+  - Adam Baldwin
+  references:
+  - https://github.com/jonschlinkert/remarkable/issues/97
+  source_url: https://snyk.io/vuln/npm:remarkable:20141113
 - id: snykio:npm:remarkable:2016-08-19
   title: Cross-site Scripting (XSS)
   description: |
@@ -402,138 +537,3 @@
   - https://github.com/jonschlinkert/remarkable/issues/227
   - https://github.com/jonschlinkert/remarkable/commit/49e24e8f2a431c095ddbb74ecb67cf1cf8f88c47
   source_url: https://snyk.io/vuln/npm:remarkable:20160820
-- id: snykio:npm:remarkable:2014-11-13
-  title: Content Injection
-  description: |+
-    Certain input when passed into remarkable will bypass the bad prototcol
-    check that disallows the javascript: scheme allowing for javascript:
-    url\'s to be injected into the rendered content.
-
-    *Source: [Node Security Project][1]*
-
-
-
-    [1]: https://nodesecurity.io/advisories/30
-    \nCertain input when passed into remarkable will bypass the bad prototcol
-    check that disallows the javascript: scheme allowing for javascript:
-    url\'s to be injected into the rendered content.
-
-    *Source: [Node Security Project][1]*
-
-
-
-    [1]: https://nodesecurity.io/advisories/30
-    \nCertain input when passed into remarkable will bypass the bad prototcol
-    check that disallows the javascript: scheme allowing for javascript:
-    url\'s to be injected into the rendered content.
-
-    *Source: [Node Security Project][1]*
-
-
-
-    [1]: https://nodesecurity.io/advisories/30
-    \n**Example:**
-
-        [link](<javascript:alert(1)>)
-
-    This will be turned into `<a href="javascript:alert(1)">link</a>`
-
-    where as
-
-        [link](javascript:alert(1))
-
-    Would be rendered as `[link](javascript:alert(1))` because it\'s an
-    invalid scheme.
-
-    \n**Example:**
-
-        [link](<javascript:alert(1)>)
-
-    This will be turned into `<a href="javascript:alert(1)">link</a>`
-
-    where as
-
-        [link](javascript:alert(1))
-
-    Would be rendered as `[link](javascript:alert(1))` because it\'s an
-    invalid scheme.
-
-    \n**Example:**
-
-        [link](<javascript:alert(1)>)
-
-    This will be turned into `<a href="javascript:alert(1)">link</a>`
-
-    where as
-
-        [link](javascript:alert(1))
-
-    Would be rendered as `[link](javascript:alert(1))` because it\'s an
-    invalid scheme.
-
-    \n**Example:**
-
-        [link](<javascript:alert(1)>)
-
-    This will be turned into `<a href="javascript:alert(1)">link</a>`
-
-    where as
-
-        [link](javascript:alert(1))
-
-    Would be rendered as `[link](javascript:alert(1))` because it\'s an
-    invalid scheme.
-
-    \n**Example:**
-
-        [link](<javascript:alert(1)>)
-
-    This will be turned into `<a href="javascript:alert(1)">link</a>`
-
-    where as
-
-        [link](javascript:alert(1))
-
-    Would be rendered as `[link](javascript:alert(1))` because it\'s an
-    invalid scheme.
-
-    \n**Example:**
-
-        [link](<javascript:alert(1)>)
-
-    This will be turned into `<a href="javascript:alert(1)">link</a>`
-
-    where as
-
-        [link](javascript:alert(1))
-
-    Would be rendered as `[link](javascript:alert(1))` because it\'s an
-    invalid scheme.
-
-    \n**Example:**
-
-        [link](<javascript:alert(1)>)
-
-    This will be turned into `<a href="javascript:alert(1)">link</a>`
-
-    where as
-
-        [link](javascript:alert(1))
-
-    Would be rendered as `[link](javascript:alert(1))` because it\'s an
-    invalid scheme.
-
-  affected_package: remarkable
-  vulnerable_versions:
-  - "<1.4.1"
-  severity: medium
-  package_manager: npm
-  cve:
-  - CVE-2014-10065
-  cwe:
-  - CWE-74
-  credit:
-  - Adam Baldwin
-  references:
-  - https://github.com/jonschlinkert/remarkable/issues/97
-  source_url: https://snyk.io/vuln/npm:remarkable:20141113

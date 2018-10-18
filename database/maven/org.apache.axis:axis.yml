@@ -1,4 +1,23 @@
 ---
+- id: ossindex:maven:org.apache.axis:axis:2007-04-30
+  title: "[CVE-2007-2353]  Information Exposure"
+  description: Apache Axis 1.0 allows remote attackers to obtain sensitive information
+    by requesting a non-existent WSDL file, which reveals the installation path in
+    the resulting exception message.
+  affected_package: org.apache.axis:axis
+  vulnerable_versions:
+  - '1.0'
+  package_manager: maven
+  cve:
+  - CVE-2007-2353
+  credit:
+  - OSSIndex
+  references:
+  - http://attrition.org/pipermail/vim/2007-April/001562.html
+  - http://www.osvdb.org/34154
+  - http://www.securityfocus.com/bid/23687
+  - http://xforce.iss.net/xforce/xfdb/34167
+  source_url: https://ossindex.net/resource/package/7015387979/vulnerabilities
 - id: ossindex:maven:org.apache.axis:axis:2012-11-04
   title: "[CVE-2012-5784]  Improper Input Validation"
   description: Apache Axis 1.4 and earlier, as used in PayPal Payments Pro, PayPal
@@ -64,25 +83,87 @@
   - https://exchange.xforce.ibmcloud.com/vulnerabilities/95377
   - https://issues.apache.org/jira/browse/AXIS-2905
   source_url: https://ossindex.net/resource/package/7015387979/vulnerabilities
-- id: ossindex:maven:org.apache.axis:axis:2007-04-30
-  title: "[CVE-2007-2353]  Information Exposure"
-  description: Apache Axis 1.0 allows remote attackers to obtain sensitive information
-    by requesting a non-existent WSDL file, which reveals the installation path in
-    the resulting exception message.
+- id: snykio:maven:org.apache.axis:axis:2014-06-17
+  title: Improper Input Validation
+  description: |
+    [`org.apache.axis:axis`][1] Apache Axis 1.4 and earlier, as used in
+    PayPal Payments Pro, PayPal Mass Pay, PayPal Transactional Information
+    SOAP, the Java Message Service implementation in Apache ActiveMQ, and
+    other products, does not verify that the server hostname matches a
+    domain name in the subject\'s Common Name (CN) or subjectAltName field
+    of the X.509 certificate, which allows man-in-the-middle attackers to
+    spoof SSL servers via an arbitrary valid certificate.
+
+
+
+    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22axis%22
+    \n[`org.apache.axis:axis`][1] Apache Axis 1.4 and earlier, as used in
+    PayPal Payments Pro, PayPal Mass Pay, PayPal Transactional Information
+    SOAP, the Java Message Service implementation in Apache ActiveMQ, and
+    other products, does not verify that the server hostname matches a
+    domain name in the subject\'s Common Name (CN) or subjectAltName field
+    of the X.509 certificate, which allows man-in-the-middle attackers to
+    spoof SSL servers via an arbitrary valid certificate.
+
+
+
+    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22axis%22
   affected_package: org.apache.axis:axis
   vulnerable_versions:
-  - '1.0'
+  - ">= 1.4"
+  severity: medium
   package_manager: maven
   cve:
-  - CVE-2007-2353
+  - CVE-2012-5784
+  cwe:
+  - CWE-20
   credit:
-  - OSSIndex
+  - Unknown
   references:
-  - http://attrition.org/pipermail/vim/2007-April/001562.html
-  - http://www.osvdb.org/34154
-  - http://www.securityfocus.com/bid/23687
-  - http://xforce.iss.net/xforce/xfdb/34167
-  source_url: https://ossindex.net/resource/package/7015387979/vulnerabilities
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2012-5784
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEAXIS-30521
+- id: snykio:maven:org.apache.axis:axis:2014-08-13
+  title: Improper Validation of Certificate with Host Mismatch
+  description: |
+    [`org.apache.axis:axis`][1] The getCN function in Apache Axis 1.4 and
+    earlier does not properly verify that the server hostname matches a
+    domain name in the subject\'s Common Name (CN) or subjectAltName field
+    of the X.509 certificate, which allows man-in-the-middle attackers to
+    spoof SSL servers via a certificate with a subject that specifies a
+    common name in a field that is not the CN field. NOTE: this issue exists
+    because of an incomplete fix for CVE-2012-5784.
+
+
+
+    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22axis%22
+    \n[`org.apache.axis:axis`][1] The getCN function in Apache Axis 1.4 and
+    earlier does not properly verify that the server hostname matches a
+    domain name in the subject\'s Common Name (CN) or subjectAltName field
+    of the X.509 certificate, which allows man-in-the-middle attackers to
+    spoof SSL servers via a certificate with a subject that specifies a
+    common name in a field that is not the CN field. NOTE: this issue exists
+    because of an incomplete fix for CVE-2012-5784.
+
+
+
+    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22axis%22
+  affected_package: org.apache.axis:axis
+  vulnerable_versions:
+  - "<= 1.4"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2014-3596
+  cwe:
+  - CWE-297
+  credit:
+  - David Jorm
+  - Arun Neelicattu
+  references:
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-3596
+  - https://issues.apache.org/jira/browse/AXIS-2905
+  - https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2014-3596
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEAXIS-30001
 - id: snykio:maven:org.apache.axis:axis:2018-08-02
   title: Cross-site Scripting (XSS)
   description: |+
@@ -266,87 +347,6 @@
   - https://issues.apache.org/jira/browse/AXIS-2924
   - https://github.com/apache/axis1-java/blob/e7ce8a92bc02be54da102efb64c99aeee21a2106/axis-rt-core/pom.xml
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEAXIS-32456
-- id: snykio:maven:org.apache.axis:axis:2014-08-13
-  title: Improper Validation of Certificate with Host Mismatch
-  description: |
-    [`org.apache.axis:axis`][1] The getCN function in Apache Axis 1.4 and
-    earlier does not properly verify that the server hostname matches a
-    domain name in the subject\'s Common Name (CN) or subjectAltName field
-    of the X.509 certificate, which allows man-in-the-middle attackers to
-    spoof SSL servers via a certificate with a subject that specifies a
-    common name in a field that is not the CN field. NOTE: this issue exists
-    because of an incomplete fix for CVE-2012-5784.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22axis%22
-    \n[`org.apache.axis:axis`][1] The getCN function in Apache Axis 1.4 and
-    earlier does not properly verify that the server hostname matches a
-    domain name in the subject\'s Common Name (CN) or subjectAltName field
-    of the X.509 certificate, which allows man-in-the-middle attackers to
-    spoof SSL servers via a certificate with a subject that specifies a
-    common name in a field that is not the CN field. NOTE: this issue exists
-    because of an incomplete fix for CVE-2012-5784.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22axis%22
-  affected_package: org.apache.axis:axis
-  vulnerable_versions:
-  - "<= 1.4"
-  severity: medium
-  package_manager: maven
-  cve:
-  - CVE-2014-3596
-  cwe:
-  - CWE-297
-  credit:
-  - David Jorm
-  - Arun Neelicattu
-  references:
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-3596
-  - https://issues.apache.org/jira/browse/AXIS-2905
-  - https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2014-3596
-  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEAXIS-30001
-- id: snykio:maven:org.apache.axis:axis:2014-06-17
-  title: Improper Input Validation
-  description: |
-    [`org.apache.axis:axis`][1] Apache Axis 1.4 and earlier, as used in
-    PayPal Payments Pro, PayPal Mass Pay, PayPal Transactional Information
-    SOAP, the Java Message Service implementation in Apache ActiveMQ, and
-    other products, does not verify that the server hostname matches a
-    domain name in the subject\'s Common Name (CN) or subjectAltName field
-    of the X.509 certificate, which allows man-in-the-middle attackers to
-    spoof SSL servers via an arbitrary valid certificate.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22axis%22
-    \n[`org.apache.axis:axis`][1] Apache Axis 1.4 and earlier, as used in
-    PayPal Payments Pro, PayPal Mass Pay, PayPal Transactional Information
-    SOAP, the Java Message Service implementation in Apache ActiveMQ, and
-    other products, does not verify that the server hostname matches a
-    domain name in the subject\'s Common Name (CN) or subjectAltName field
-    of the X.509 certificate, which allows man-in-the-middle attackers to
-    spoof SSL servers via an arbitrary valid certificate.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22axis%22
-  affected_package: org.apache.axis:axis
-  vulnerable_versions:
-  - ">= 1.4"
-  severity: medium
-  package_manager: maven
-  cve:
-  - CVE-2012-5784
-  cwe:
-  - CWE-20
-  credit:
-  - Unknown
-  references:
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2012-5784
-  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEAXIS-30521
 - id: victims:maven:org.apache.axis:axis:date
   title: 'Apache Axis: Improper hostname verification in certificate verification'
   description: 'The getCN function in Apache Axis 1.4 and earlier does not properly

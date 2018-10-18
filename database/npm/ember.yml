@@ -1,18 +1,94 @@
 ---
-- id: ossindex:npm:ember:2016-08-11
-  title: "[Duplicate] XSS Vulnerability in Ember.js with User-Supplied JSON"
+- id: ossindex:npm:ember:1970-01-01
+  title: Potential XSS Exploit With User-Supplied Data When Binding Primitive Values
   description: |-
-    See https://ossindex.net/resource/vulnerability/8399958615
+    Potential XSS Exploit With User-Supplied Data When Binding Primitive Values
 
-    It is possible for an attacker to create a specially-crafted payload that causes a non-sanitized string to be treated as a SafeString, and thus bypass Ember's normal escaping behavior. This could allow an attacker to execute arbitrary JavaScript in the context of the current domain ("XSS").
+    This vulnerability has been assigned the CVE identifier CVE-2014-0013.
+
+    In general, Ember.js escapes or strips any user-supplied content before
+    inserting it in strings that will be sent to innerHTML.  However, we have
+    identified a vulnerability that could lead to unescaped content being inserted
+    into the innerHTML string without being sanitized.
+
+    When a primitive value is used as the Handlebars context, that value is not
+    properly escaped.  An example of this would be using the `{{each}}` helper to
+    iterate over an array of user-supplied strings and using `{{this}}` inside the
+    block to display each string.
+
+    In applications that contain templates whose context is a primitive value and
+    use the `{{this}}` keyword to display that value, a specially-crafted payload
+    could execute arbitrary JavaScript in the context of the current domain
+    ("XSS").
+
+    Versions Affected: ALL versions
+    Not affected: NONE
+    Fixed Versions: 1.0.1, 1.1.3, 1.2.1, 1.3.1, 1.4.0-beta.2
   affected_package: ember
   vulnerable_versions:
-  - ">= 2.0.0 < 2.0.3"
+  - "<1.3.1"
   package_manager: npm
   credit:
   - OSSIndex
   references:
-  - https://groups.google.com/forum/#!topic/ember-security/OfyQkoSuppY
+  - https://groups.google.com/forum/#!topic/ember-security/2kpXXCxISS4
+  source_url: https://ossindex.net/resource/package/7013522888/vulnerabilities
+- id: ossindex:npm:ember:1970-01-01
+  title: Potential XSS Exploit When Binding `tagName` to User-Supplied Data
+  description: |
+    Potential XSS Exploit When Binding `tagName` to User-Supplied Data
+
+    This vulnerability has been assigned the CVE identifier CVE-2013-4170.
+
+    In general, Ember.js escapes or strips any user-supplied content
+    before inserting it in strings that will be sent to innerHTML.
+    However, the `tagName` property of an `Ember.View` was inserted into
+    such a string without being sanitized. This means that if an
+    application assigns a view's `tagName` to user-supplied data, a
+    specially-crafted payload could execute arbitrary JavaScript in the
+    context of the current domain ("XSS").
+
+    Versions Affected: ALL versions
+    Not affected: NONE
+    Fixed Versions: 1.0.0 RC6.1, 1.0.0 RC5.1, 1.0.0 RC4.1, 1.0.0 RC3.1,
+    1.0.0 RC2.1, 1.0.0 RC1.1
+  affected_package: ember
+  vulnerable_versions:
+  - "<1.0.0-rc61"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - https://groups.google.com/forum/#!topic/ember-security/dokLVwwxAdM
+  source_url: https://ossindex.net/resource/package/7013522888/vulnerabilities
+- id: ossindex:npm:ember:2014-02-27
+  title: '[CVE-2014-0046]  Improper Neutralization of Input During Web Page Generation
+    ("Cross-site Scripting")'
+  description: Cross-site scripting (XSS) vulnerability in the link-to helper in Ember.js
+    1.2.x before 1.2.2, 1.3.x before 1.3.2, and 1.4.x before 1.4.0-beta.6, when used
+    in non-block form, allows remote attackers to inject arbitrary web script or HTML
+    via the title attribute.
+  affected_package: ember
+  vulnerable_versions:
+  - 1.2.0
+  - 1.2.1
+  - 1.3.0
+  - 1.3.1
+  - 1.4.0
+  package_manager: npm
+  cve:
+  - CVE-2014-0046
+  credit:
+  - OSSIndex
+  references:
+  - http://emberjs.com/blog/2014/02/07/ember-security-releases.html
+  - http://secunia.com/advisories/56965
+  - http://www.openwall.com/lists/oss-security/2014/02/14/6
+  - http://www.securityfocus.com/bid/65579
+  - http://xforce.iss.net/xforce/xfdb/91242
+  - https://exchange.xforce.ibmcloud.com/vulnerabilities/91242
+  - https://groups.google.com/forum/#!topic/ember-security/1h6FRgr8lXQ
+  - https://groups.google.com/forum/#%21topic/ember-security/1h6FRgr8lXQ
   source_url: https://ossindex.net/resource/package/7013522888/vulnerabilities
 - id: ossindex:npm:ember:2016-08-03
   title: XSS Vulnerability in Ember.js with User-Supplied JSON
@@ -30,6 +106,21 @@
   - ">= 2.0.0 < 2.0.3"
   - ">= 2.1.0 < 2.1.2"
   - ">= 2.2.0 < 2.2.1"
+  package_manager: npm
+  credit:
+  - OSSIndex
+  references:
+  - https://groups.google.com/forum/#!topic/ember-security/OfyQkoSuppY
+  source_url: https://ossindex.net/resource/package/7013522888/vulnerabilities
+- id: ossindex:npm:ember:2016-08-11
+  title: "[Duplicate] XSS Vulnerability in Ember.js with User-Supplied JSON"
+  description: |-
+    See https://ossindex.net/resource/vulnerability/8399958615
+
+    It is possible for an attacker to create a specially-crafted payload that causes a non-sanitized string to be treated as a SafeString, and thus bypass Ember's normal escaping behavior. This could allow an attacker to execute arbitrary JavaScript in the context of the current domain ("XSS").
+  affected_package: ember
+  vulnerable_versions:
+  - ">= 2.0.0 < 2.0.3"
   package_manager: npm
   credit:
   - OSSIndex
@@ -126,68 +217,6 @@
   - https://github.com/wycats/handlebars.js/commit/83b8e846a3569bd366cf0b6bdc1e4604d1a2077e
   - https://github.com/wycats/handlebars.js/pull/1083
   source_url: https://ossindex.net/resource/package/7013522888/vulnerabilities
-- id: ossindex:npm:ember:1970-01-01
-  title: Potential XSS Exploit With User-Supplied Data When Binding Primitive Values
-  description: |-
-    Potential XSS Exploit With User-Supplied Data When Binding Primitive Values
-
-    This vulnerability has been assigned the CVE identifier CVE-2014-0013.
-
-    In general, Ember.js escapes or strips any user-supplied content before
-    inserting it in strings that will be sent to innerHTML.  However, we have
-    identified a vulnerability that could lead to unescaped content being inserted
-    into the innerHTML string without being sanitized.
-
-    When a primitive value is used as the Handlebars context, that value is not
-    properly escaped.  An example of this would be using the `{{each}}` helper to
-    iterate over an array of user-supplied strings and using `{{this}}` inside the
-    block to display each string.
-
-    In applications that contain templates whose context is a primitive value and
-    use the `{{this}}` keyword to display that value, a specially-crafted payload
-    could execute arbitrary JavaScript in the context of the current domain
-    ("XSS").
-
-    Versions Affected: ALL versions
-    Not affected: NONE
-    Fixed Versions: 1.0.1, 1.1.3, 1.2.1, 1.3.1, 1.4.0-beta.2
-  affected_package: ember
-  vulnerable_versions:
-  - "<1.3.1"
-  package_manager: npm
-  credit:
-  - OSSIndex
-  references:
-  - https://groups.google.com/forum/#!topic/ember-security/2kpXXCxISS4
-  source_url: https://ossindex.net/resource/package/7013522888/vulnerabilities
-- id: ossindex:npm:ember:1970-01-01
-  title: Potential XSS Exploit When Binding `tagName` to User-Supplied Data
-  description: |
-    Potential XSS Exploit When Binding `tagName` to User-Supplied Data
-
-    This vulnerability has been assigned the CVE identifier CVE-2013-4170.
-
-    In general, Ember.js escapes or strips any user-supplied content
-    before inserting it in strings that will be sent to innerHTML.
-    However, the `tagName` property of an `Ember.View` was inserted into
-    such a string without being sanitized. This means that if an
-    application assigns a view's `tagName` to user-supplied data, a
-    specially-crafted payload could execute arbitrary JavaScript in the
-    context of the current domain ("XSS").
-
-    Versions Affected: ALL versions
-    Not affected: NONE
-    Fixed Versions: 1.0.0 RC6.1, 1.0.0 RC5.1, 1.0.0 RC4.1, 1.0.0 RC3.1,
-    1.0.0 RC2.1, 1.0.0 RC1.1
-  affected_package: ember
-  vulnerable_versions:
-  - "<1.0.0-rc61"
-  package_manager: npm
-  credit:
-  - OSSIndex
-  references:
-  - https://groups.google.com/forum/#!topic/ember-security/dokLVwwxAdM
-  source_url: https://ossindex.net/resource/package/7013522888/vulnerabilities
 - id: ossindex:npm:ember:2017-04-13
   title: '[CVE-2015-7565]  Improper Neutralization of Input During Web Page Generation
     ("Cross-site Scripting")'
@@ -236,35 +265,6 @@
   - http://emberjs.com/blog/2016/01/14/security-releases-ember-1-11-4-1-12-2-1-13-12-2-0-3-2-1-2-2-2-1.html
   - https://groups.google.com/forum/#!topic/ember-security/OfyQkoSuppY
   - https://groups.google.com/forum/#%21topic/ember-security/OfyQkoSuppY
-  source_url: https://ossindex.net/resource/package/7013522888/vulnerabilities
-- id: ossindex:npm:ember:2014-02-27
-  title: '[CVE-2014-0046]  Improper Neutralization of Input During Web Page Generation
-    ("Cross-site Scripting")'
-  description: Cross-site scripting (XSS) vulnerability in the link-to helper in Ember.js
-    1.2.x before 1.2.2, 1.3.x before 1.3.2, and 1.4.x before 1.4.0-beta.6, when used
-    in non-block form, allows remote attackers to inject arbitrary web script or HTML
-    via the title attribute.
-  affected_package: ember
-  vulnerable_versions:
-  - 1.2.0
-  - 1.2.1
-  - 1.3.0
-  - 1.3.1
-  - 1.4.0
-  package_manager: npm
-  cve:
-  - CVE-2014-0046
-  credit:
-  - OSSIndex
-  references:
-  - http://emberjs.com/blog/2014/02/07/ember-security-releases.html
-  - http://secunia.com/advisories/56965
-  - http://www.openwall.com/lists/oss-security/2014/02/14/6
-  - http://www.securityfocus.com/bid/65579
-  - http://xforce.iss.net/xforce/xfdb/91242
-  - https://exchange.xforce.ibmcloud.com/vulnerabilities/91242
-  - https://groups.google.com/forum/#!topic/ember-security/1h6FRgr8lXQ
-  - https://groups.google.com/forum/#%21topic/ember-security/1h6FRgr8lXQ
   source_url: https://ossindex.net/resource/package/7013522888/vulnerabilities
 - id: snykio:npm:ember:2015-11-06
   title: Potential Cross-site Scripting (XSS)
