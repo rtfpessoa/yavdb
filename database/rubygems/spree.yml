@@ -98,12 +98,13 @@
   - https://github.com/rubysec/ruby-advisory-db
   source_url: https://spreecommerce.com/blog/remote-command-product-group
 - id: rubyadvisory:rubygems:spree:2012-07-02
-  title: 'Potential XSS vulnerability related to the analytics dashboard
+  title: 'Product Scopes could allow for unauthenticated remote command execution
 
 '
   description: |
-    Spree has a flaw in its analytics dashboard where keywords are not escaped,
-    leading to potential XSS.
+    Product Scopes could allow for unauthenticated remote command execution.
+    This was corrected by removing conditions_any scope and use ARel query
+    building instead.
   affected_package: spree
   patched_versions:
   - "~> 0.11.4"
@@ -119,13 +120,12 @@
   - https://github.com/rubysec/ruby-advisory-db
   source_url: https://spreecommerce.com/blog/security-issue-all-versions
 - id: rubyadvisory:rubygems:spree:2012-07-02
-  title: 'Product Scopes could allow for unauthenticated remote command execution
+  title: 'Potential XSS vulnerability related to the analytics dashboard
 
 '
   description: |
-    Product Scopes could allow for unauthenticated remote command execution.
-    This was corrected by removing conditions_any scope and use ARel query
-    building instead.
+    Spree has a flaw in its analytics dashboard where keywords are not escaped,
+    leading to potential XSS.
   affected_package: spree
   patched_versions:
   - "~> 0.11.4"
@@ -184,20 +184,23 @@
   source_url: https://spreecommerce.com/blog/multiple-security-vulnerabilities-fixed
 - id: rubyadvisory:rubygems:spree:2013-02-21
   title: |
-    Spree promotions_controller.rb calculator_type Parameter Arbitrary Ruby
-    Object Instantiation Command Execution
+    Spree app/models/spree/user.rb Mass Role Assignment Remote Privilege
+    Escalation
   description: |
-    Spree contains a flaw that is triggered when handling input passed via the
-    'calculator_type' parameter to promotions_controller.rb. This may allow a
-    remote authenticated attacker to instantiate arbitrary Ruby objects and
-    potentially execute arbitrary commands.
+    Spree contains a flaw that leads to unauthorized privileges being gained. The
+    issue is triggered as certain input related to mass role assignment in
+    app/models/spree/user.rb is not properly verified before being used to update
+    a user. This may allow a remote attacker to assign arbitrary roles and gain
+    elevated administrative privileges.
   affected_package: spree
   patched_versions:
-  - ">= 2.0.0"
+  - "~> 1.1.6"
+  - "~> 1.2.0"
+  - ">= 1.3.0"
   severity: medium
   package_manager: rubygems
   cve:
-  - CVE-2013-1656
+  - CVE-2013-2506
   credit:
   - Rubysec
   references:
@@ -226,23 +229,20 @@
   source_url: https://spreecommerce.com/blog/multiple-security-vulnerabilities-fixed
 - id: rubyadvisory:rubygems:spree:2013-02-21
   title: |
-    Spree app/models/spree/user.rb Mass Role Assignment Remote Privilege
-    Escalation
+    Spree promotions_controller.rb calculator_type Parameter Arbitrary Ruby
+    Object Instantiation Command Execution
   description: |
-    Spree contains a flaw that leads to unauthorized privileges being gained. The
-    issue is triggered as certain input related to mass role assignment in
-    app/models/spree/user.rb is not properly verified before being used to update
-    a user. This may allow a remote attacker to assign arbitrary roles and gain
-    elevated administrative privileges.
+    Spree contains a flaw that is triggered when handling input passed via the
+    'calculator_type' parameter to promotions_controller.rb. This may allow a
+    remote authenticated attacker to instantiate arbitrary Ruby objects and
+    potentially execute arbitrary commands.
   affected_package: spree
   patched_versions:
-  - "~> 1.1.6"
-  - "~> 1.2.0"
-  - ">= 1.3.0"
+  - ">= 2.0.0"
   severity: medium
   package_manager: rubygems
   cve:
-  - CVE-2013-2506
+  - CVE-2013-1656
   credit:
   - Rubysec
   references:

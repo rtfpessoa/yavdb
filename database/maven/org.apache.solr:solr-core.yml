@@ -3771,117 +3771,43 @@
   - https://github.com/apache/lucene-solr/commit/e21d4937e0637c7b7949ac463f331da9a42c07f9
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHESOLR-32408
 - id: victims:maven:org.apache.solr:solr-core:date
-  title: 'Apache Solr: XML eXternal Entity (XXE) flaw in DocumentAnalysisRequestHandler'
-  description: '"It was found that the DocumentAnalysisRequestHandler class in Apache
-    Solr  would resolve external entities, permitting XXE attacks. A remote attacker  could
-    use this flaw to read files accessible to the user running the  application server,
-    and potentially perform other more advanced XXE  attacks."
+  title: Apache Solr ReplicationHandler path traversal attack
+  description: 'When using the Index Replication feature, Apache Solr nodes can pull
+    index files from a master/leader node using an HTTP API which accepts a file name.
+    However, Solr before 5.5.4 and 6.x before 6.4.1 did not validate the file name,
+    hence it was possible to craft a special request involving path traversal, leaving
+    any file readable to the Solr server process exposed. Solr servers protected and
+    restricted by firewall rules and/or authentication would not be at risk since
+    only trusted clients and users would gain direct HTTP access
 
 '
   affected_package: org.apache.solr:solr-core
   vulnerable_versions:
-  - "<=4.5.1"
+  - ">=1.4.0"
+  - '1.4'
+  - "<=5.5.3"
+  - '5.5'
+  - ">=6.0.0"
+  - '6.0'
+  - "<=6.4.0"
+  - '6.4'
   patched_versions:
-  - ">=3.6.3"
-  - '3'
-  - ">=4.6.0"
-  - '4'
-  - ">=5.0.0"
-  severity: medium
-  package_manager: maven
-  cve:
-  - 2013-6408
-  credit:
-  - Victims CVE Database
-  references:
-  - https://bugzilla.redhat.com/CVE-2013-6408
-  - https://issues.apache.org/jira/browse/SOLR-5520
-  source_url: https://github.com/victims/victims-cve-db/blob/master/database/java/2013/6408.yaml
-- id: victims:maven:org.apache.solr:solr-core:date
-  title: 'Apache Solr: directory traversal when loading XSL stylesheets and Velocity
-    templates'
-  description: '"It was found that the SolrResourceLoader class in Apache Solr allowed  loading
-    of resources via absolute paths, or relative paths which were not  sanitized for
-    directory traversal. Some Solr components expose REST  interfaces which load resources
-    (XSL stylesheets and Velocity templates) via  SolrResourceLoader, using paths
-    identified by REST parameters. A remote  attacker could use this flaw to load
-    arbitrary local files on the server via  SolrResourceLoader, potentially resulting
-    in information disclosure or  remote code execution."
-
-'
-  affected_package: org.apache.solr:solr-core
-  vulnerable_versions:
-  - "<=4.5.1"
-  patched_versions:
-  - ">=3.6.3"
-  - '3'
-  - ">=4.6.0"
-  - '4'
-  - ">=5.0.0"
-  severity: medium
-  package_manager: maven
-  cve:
-  - 2013-6397
-  credit:
-  - Victims CVE Database
-  references:
-  - https://bugzilla.redhat.com/CVE-2013-6397
-  source_url: https://github.com/victims/victims-cve-db/blob/master/database/java/2013/6397.yaml
-- id: victims:maven:org.apache.solr:solr-core:date
-  title: 'Apache Solr: XML eXternal Entity (XXE) flaw in XML and XSLT UpdateRequestHandler'
-  description: '"It was found that the XML and XSLT UpdateRequestHandler classes in
-    Apache  Solr would resolve external entities, permitting XXE attacks. A remote  attacker
-    could use this flaw to read files accessible to the user running  the application
-    server, and potentially perform other more advanced XXE  attacks."
-
-'
-  affected_package: org.apache.solr:solr-core
-  vulnerable_versions:
-  - "<=4.5.1"
-  patched_versions:
-  - ">=3.6.3"
-  - '3'
-  - ">=4.6.0"
-  - '4'
-  - ">=5.0.0"
-  severity: medium
-  package_manager: maven
-  cve:
-  - 2013-6407
-  credit:
-  - Victims CVE Database
-  references:
-  - https://bugzilla.redhat.com/CVE-2013-6407
-  - https://issues.apache.org/jira/browse/SOLR-5520
-  source_url: https://github.com/victims/victims-cve-db/blob/master/database/java/2013/6407.yaml
-- id: victims:maven:org.apache.solr:solr-core:date
-  title: Apache Solr config API add-listener command is vulnerable to Remote Code
-    Execution attacks
-  description: 'Remote code execution occurs in Apache Solr before 7.1 with Apache
-    Lucene before 7.1 by exploiting XXE in conjunction with use of a Config API add-listener
-    command to reach the RunExecutableListener class.
-
-'
-  affected_package: org.apache.solr:solr-core
-  vulnerable_versions:
-  - "<=7.0.1"
-  - ">=5.5.0"
-  patched_versions:
+  - "==5.5.4"
   - "==5.5.5"
-  - "==6.6.2"
-  - ">=7.0.2"
-  severity: high
+  - ">=6.4.1"
+  severity: medium
   package_manager: maven
   cve:
-  - 2017-12629
+  - 2017-3163
   credit:
   - Victims CVE Database
   references:
-  - https://nvd.nist.gov/vuln/detail/CVE-2017-12629
-  - http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-12629
-  - http://www.cvedetails.com/cve/CVE-2017-12629/
-  - http://lucene.472066.n3.nabble.com/Re-Several-critical-vulnerabilities-discovered-in-Apache-Solr-XXE-amp-RCE-tt4358355.html
-  source_url: https://github.com/victims/victims-cve-db/blob/master/database/java/2017/12629.yaml
+  - https://nvd.nist.gov/vuln/detail/CVE-2017-3163
+  - http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-3163
+  - http://www.cvedetails.com/cve/CVE-2017-3163
+  - https://issues.apache.org/jira/browse/SOLR-10031
+  - http://lucene.apache.org/solr/news.html#15-february-2017-security-cve-2017-3163
+  source_url: https://github.com/victims/victims-cve-db/blob/master/database/java/2017/3163.yaml
 - id: victims:maven:org.apache.solr:solr-core:date
   title: Security vulnerability in kerberos delegation token functionality
   description: 'Solr''s Kerberos plugin can be configured to use delegation tokens,
@@ -3951,40 +3877,114 @@
   - http://mail-archives.us.apache.org/mod_mbox/www-announce/201707.mbox/%3CCAOOKt53EgrybaD%2BiSn-nBbvFdse-szhg%3DhMoDZuvUvyMme-Z%3Dg%40mail.gmail.com%3E
   source_url: https://github.com/victims/victims-cve-db/blob/master/database/java/2017/7660.yaml
 - id: victims:maven:org.apache.solr:solr-core:date
-  title: Apache Solr ReplicationHandler path traversal attack
-  description: 'When using the Index Replication feature, Apache Solr nodes can pull
-    index files from a master/leader node using an HTTP API which accepts a file name.
-    However, Solr before 5.5.4 and 6.x before 6.4.1 did not validate the file name,
-    hence it was possible to craft a special request involving path traversal, leaving
-    any file readable to the Solr server process exposed. Solr servers protected and
-    restricted by firewall rules and/or authentication would not be at risk since
-    only trusted clients and users would gain direct HTTP access
+  title: Apache Solr config API add-listener command is vulnerable to Remote Code
+    Execution attacks
+  description: 'Remote code execution occurs in Apache Solr before 7.1 with Apache
+    Lucene before 7.1 by exploiting XXE in conjunction with use of a Config API add-listener
+    command to reach the RunExecutableListener class.
 
 '
   affected_package: org.apache.solr:solr-core
   vulnerable_versions:
-  - ">=1.4.0"
-  - '1.4'
-  - "<=5.5.3"
-  - '5.5'
-  - ">=6.0.0"
-  - '6.0'
-  - "<=6.4.0"
-  - '6.4'
+  - "<=7.0.1"
+  - ">=5.5.0"
   patched_versions:
-  - "==5.5.4"
   - "==5.5.5"
-  - ">=6.4.1"
-  severity: medium
+  - "==6.6.2"
+  - ">=7.0.2"
+  severity: high
   package_manager: maven
   cve:
-  - 2017-3163
+  - 2017-12629
   credit:
   - Victims CVE Database
   references:
-  - https://nvd.nist.gov/vuln/detail/CVE-2017-3163
-  - http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-3163
-  - http://www.cvedetails.com/cve/CVE-2017-3163
-  - https://issues.apache.org/jira/browse/SOLR-10031
-  - http://lucene.apache.org/solr/news.html#15-february-2017-security-cve-2017-3163
-  source_url: https://github.com/victims/victims-cve-db/blob/master/database/java/2017/3163.yaml
+  - https://nvd.nist.gov/vuln/detail/CVE-2017-12629
+  - http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-12629
+  - http://www.cvedetails.com/cve/CVE-2017-12629/
+  - http://lucene.472066.n3.nabble.com/Re-Several-critical-vulnerabilities-discovered-in-Apache-Solr-XXE-amp-RCE-tt4358355.html
+  source_url: https://github.com/victims/victims-cve-db/blob/master/database/java/2017/12629.yaml
+- id: victims:maven:org.apache.solr:solr-core:date
+  title: 'Apache Solr: directory traversal when loading XSL stylesheets and Velocity
+    templates'
+  description: '"It was found that the SolrResourceLoader class in Apache Solr allowed  loading
+    of resources via absolute paths, or relative paths which were not  sanitized for
+    directory traversal. Some Solr components expose REST  interfaces which load resources
+    (XSL stylesheets and Velocity templates) via  SolrResourceLoader, using paths
+    identified by REST parameters. A remote  attacker could use this flaw to load
+    arbitrary local files on the server via  SolrResourceLoader, potentially resulting
+    in information disclosure or  remote code execution."
+
+'
+  affected_package: org.apache.solr:solr-core
+  vulnerable_versions:
+  - "<=4.5.1"
+  patched_versions:
+  - ">=3.6.3"
+  - '3'
+  - ">=4.6.0"
+  - '4'
+  - ">=5.0.0"
+  severity: medium
+  package_manager: maven
+  cve:
+  - 2013-6397
+  credit:
+  - Victims CVE Database
+  references:
+  - https://bugzilla.redhat.com/CVE-2013-6397
+  source_url: https://github.com/victims/victims-cve-db/blob/master/database/java/2013/6397.yaml
+- id: victims:maven:org.apache.solr:solr-core:date
+  title: 'Apache Solr: XML eXternal Entity (XXE) flaw in XML and XSLT UpdateRequestHandler'
+  description: '"It was found that the XML and XSLT UpdateRequestHandler classes in
+    Apache  Solr would resolve external entities, permitting XXE attacks. A remote  attacker
+    could use this flaw to read files accessible to the user running  the application
+    server, and potentially perform other more advanced XXE  attacks."
+
+'
+  affected_package: org.apache.solr:solr-core
+  vulnerable_versions:
+  - "<=4.5.1"
+  patched_versions:
+  - ">=3.6.3"
+  - '3'
+  - ">=4.6.0"
+  - '4'
+  - ">=5.0.0"
+  severity: medium
+  package_manager: maven
+  cve:
+  - 2013-6407
+  credit:
+  - Victims CVE Database
+  references:
+  - https://bugzilla.redhat.com/CVE-2013-6407
+  - https://issues.apache.org/jira/browse/SOLR-5520
+  source_url: https://github.com/victims/victims-cve-db/blob/master/database/java/2013/6407.yaml
+- id: victims:maven:org.apache.solr:solr-core:date
+  title: 'Apache Solr: XML eXternal Entity (XXE) flaw in DocumentAnalysisRequestHandler'
+  description: '"It was found that the DocumentAnalysisRequestHandler class in Apache
+    Solr  would resolve external entities, permitting XXE attacks. A remote attacker  could
+    use this flaw to read files accessible to the user running the  application server,
+    and potentially perform other more advanced XXE  attacks."
+
+'
+  affected_package: org.apache.solr:solr-core
+  vulnerable_versions:
+  - "<=4.5.1"
+  patched_versions:
+  - ">=3.6.3"
+  - '3'
+  - ">=4.6.0"
+  - '4'
+  - ">=5.0.0"
+  severity: medium
+  package_manager: maven
+  cve:
+  - 2013-6408
+  credit:
+  - Victims CVE Database
+  references:
+  - https://bugzilla.redhat.com/CVE-2013-6408
+  - https://issues.apache.org/jira/browse/SOLR-5520
+  source_url: https://github.com/victims/victims-cve-db/blob/master/database/java/2013/6408.yaml

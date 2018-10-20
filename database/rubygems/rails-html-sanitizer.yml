@@ -1,6 +1,39 @@
 ---
 - id: rubyadvisory:rubygems:rails-html-sanitizer:2016-01-25
   title: Possible XSS vulnerability in rails-html-sanitizer
+  description: "There is a possible XSS vulnerability in the white list sanitizer
+    in the \nrails-html-sanitizer gem. This vulnerability has been assigned the CVE
+    \nidentifier CVE-2015-7580. \n\nVersions Affected:  All. \nNot affected:       None.
+    \nFixed Versions:     v1.0.3 \n\nImpact \n------ \nCarefully crafted strings can
+    cause user input to bypass the sanitization in \nthe white list sanitizer which
+    will can lead to an XSS attack. \n\nVulnerable code will look something like this:
+    \n\n  <%= sanitize user_input, tags: %w(em) %> \n\nAll users running an affected
+    release should either upgrade or use one of the \nworkarounds immediately. \n\nReleases
+    \n-------- \nThe FIXED releases are available at the normal locations. \n\nWorkarounds
+    \n----------- \nPutting the following monkey patch in an initializer can help
+    to mitigate the \nissue: \n\n``` \nclass Rails::Html::PermitScrubber \n  alias
+    :old_scrub :scrub \n  alias :old_skip_node? :skip_node? \n\n  def scrub(node)
+    \n    if node.cdata? \n      text = node.document.create_text_node node.text \n
+    \     node.replace text \n      return CONTINUE \n    end \n    old_scrub node
+    \n  end \n\n  def skip_node?(node); node.text?; end \nend \n``` \n\nPatches \n-------
+    \nTo aid users who aren't able to upgrade immediately we have provided patches
+    for \nthe two supported release series. They are in git-am format and consist
+    of a \nsingle changeset. \n\n* 1-0-whitelist_sanitizer_xss.patch - Patch for 1.0
+    series \n\nCredits \n------- \nThanks to Arnaud Germis, Nate Clark, and John Colvin
+    for reporting this issue.\n"
+  affected_package: rails-html-sanitizer
+  patched_versions:
+  - ">= 1.0.3"
+  package_manager: rubygems
+  cve:
+  - CVE-2015-7580
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://groups.google.com/forum/#!topic/rubyonrails-security/uh--W4TDwmI
+- id: rubyadvisory:rubygems:rails-html-sanitizer:2016-01-25
+  title: Possible XSS vulnerability in rails-html-sanitizer
   description: "There is a possible XSS vulnerability in rails-html-sanitizer. This
     \nvulnerability has been assigned the CVE identifier CVE-2015-7578. \n\nVersions
     Affected:  All. \nNot affected:       None. \nFixed Versions:     1.0.3 \n\nImpact
@@ -62,39 +95,6 @@
   references:
   - https://github.com/rubysec/ruby-advisory-db
   source_url: https://groups.google.com/forum/#!topic/rubyonrails-security/OU9ugTZcbjc
-- id: rubyadvisory:rubygems:rails-html-sanitizer:2016-01-25
-  title: Possible XSS vulnerability in rails-html-sanitizer
-  description: "There is a possible XSS vulnerability in the white list sanitizer
-    in the \nrails-html-sanitizer gem. This vulnerability has been assigned the CVE
-    \nidentifier CVE-2015-7580. \n\nVersions Affected:  All. \nNot affected:       None.
-    \nFixed Versions:     v1.0.3 \n\nImpact \n------ \nCarefully crafted strings can
-    cause user input to bypass the sanitization in \nthe white list sanitizer which
-    will can lead to an XSS attack. \n\nVulnerable code will look something like this:
-    \n\n  <%= sanitize user_input, tags: %w(em) %> \n\nAll users running an affected
-    release should either upgrade or use one of the \nworkarounds immediately. \n\nReleases
-    \n-------- \nThe FIXED releases are available at the normal locations. \n\nWorkarounds
-    \n----------- \nPutting the following monkey patch in an initializer can help
-    to mitigate the \nissue: \n\n``` \nclass Rails::Html::PermitScrubber \n  alias
-    :old_scrub :scrub \n  alias :old_skip_node? :skip_node? \n\n  def scrub(node)
-    \n    if node.cdata? \n      text = node.document.create_text_node node.text \n
-    \     node.replace text \n      return CONTINUE \n    end \n    old_scrub node
-    \n  end \n\n  def skip_node?(node); node.text?; end \nend \n``` \n\nPatches \n-------
-    \nTo aid users who aren't able to upgrade immediately we have provided patches
-    for \nthe two supported release series. They are in git-am format and consist
-    of a \nsingle changeset. \n\n* 1-0-whitelist_sanitizer_xss.patch - Patch for 1.0
-    series \n\nCredits \n------- \nThanks to Arnaud Germis, Nate Clark, and John Colvin
-    for reporting this issue.\n"
-  affected_package: rails-html-sanitizer
-  patched_versions:
-  - ">= 1.0.3"
-  package_manager: rubygems
-  cve:
-  - CVE-2015-7580
-  credit:
-  - Rubysec
-  references:
-  - https://github.com/rubysec/ruby-advisory-db
-  source_url: https://groups.google.com/forum/#!topic/rubyonrails-security/uh--W4TDwmI
 - id: rubyadvisory:rubygems:rails-html-sanitizer:2018-03-22
   title: XSS vulnerability in rails-html-sanitizer
   description: |

@@ -1,27 +1,23 @@
 ---
 - id: rubyadvisory:rubygems:fat_free_crm:2013-12-24
-  title: Fat Free CRM Gem for Ruby contains multiple cross-site request forgery (CSRF)
-    vulnerabilities
+  title: Fat Free CRM Gem for Ruby allows remote attackers to obtain sensitive informations
   description: |
-    Fat Free CRM contains a flaw as the application is missing the protect_from_forgery
-    statement, therefore HTTP requests to app/controllers/application_controller.rb
-    do not require multiple steps, explicit confirmation, or a unique token when
-    performing certain sensitive actions. By tricking a user into following a specially
-    crafted link, a context-dependent attacker can perform a Cross-Site Request Forgery
-    (CSRF / XSRF) attack causing the victim to perform unspecified actions.
+    Fat Free CRM contains a flaw that is triggered when the attacker sends a
+    direct request for XML data. This may allow a remote attacker to gain
+    access to potentially sensitive information.
   affected_package: fat_free_crm
   patched_versions:
   - ">= 0.13.0"
   - "~> 0.12.1"
-  severity: high
+  severity: medium
   package_manager: rubygems
   cve:
-  - CVE-2013-7223
+  - CVE-2013-7249
   credit:
   - Rubysec
   references:
   - https://github.com/rubysec/ruby-advisory-db
-  source_url: http://osvdb.org/show/osvdb/101446
+  source_url: http://osvdb.org/show/osvdb/101700
 - id: rubyadvisory:rubygems:fat_free_crm:2013-12-24
   title: Fat Free CRM Gem for Ruby allows remote attackers to inject or manipulate
     SQL queries
@@ -46,11 +42,12 @@
   - https://github.com/rubysec/ruby-advisory-db
   source_url: http://osvdb.org/show/osvdb/101448
 - id: rubyadvisory:rubygems:fat_free_crm:2013-12-24
-  title: Fat Free CRM Gem for Ruby allows remote attackers to obtain sensitive informations
+  title: Fat Free CRM Gem for Ruby lack of support for cycling the Rails session secret
   description: |
-    Fat Free CRM contains a flaw that is triggered when the attacker sends a
-    direct request for XML data. This may allow a remote attacker to gain
-    access to potentially sensitive information.
+    Fat Free CRM contains a flaw that is due to the application defining a static
+    security session token in config/initialiers/secret_token.rb. If a remote
+    attacker has explicit knowledge of this token, they can potentially execute
+    arbitrary code.
   affected_package: fat_free_crm
   patched_versions:
   - ">= 0.13.0"
@@ -58,12 +55,35 @@
   severity: medium
   package_manager: rubygems
   cve:
-  - CVE-2013-7249
+  - CVE-2013-7222
   credit:
   - Rubysec
   references:
   - https://github.com/rubysec/ruby-advisory-db
-  source_url: http://osvdb.org/show/osvdb/101700
+  source_url: http://osvdb.org/show/osvdb/101445
+- id: rubyadvisory:rubygems:fat_free_crm:2013-12-24
+  title: Fat Free CRM Gem for Ruby contains multiple cross-site request forgery (CSRF)
+    vulnerabilities
+  description: |
+    Fat Free CRM contains a flaw as the application is missing the protect_from_forgery
+    statement, therefore HTTP requests to app/controllers/application_controller.rb
+    do not require multiple steps, explicit confirmation, or a unique token when
+    performing certain sensitive actions. By tricking a user into following a specially
+    crafted link, a context-dependent attacker can perform a Cross-Site Request Forgery
+    (CSRF / XSRF) attack causing the victim to perform unspecified actions.
+  affected_package: fat_free_crm
+  patched_versions:
+  - ">= 0.13.0"
+  - "~> 0.12.1"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2013-7223
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: http://osvdb.org/show/osvdb/101446
 - id: rubyadvisory:rubygems:fat_free_crm:2013-12-24
   title: Fat Free CRM Gem for Ruby allows remote attackers to obtain sensitive informations
   description: |
@@ -84,26 +104,6 @@
   references:
   - https://github.com/rubysec/ruby-advisory-db
   source_url: http://osvdb.org/show/osvdb/101447
-- id: rubyadvisory:rubygems:fat_free_crm:2013-12-24
-  title: Fat Free CRM Gem for Ruby lack of support for cycling the Rails session secret
-  description: |
-    Fat Free CRM contains a flaw that is due to the application defining a static
-    security session token in config/initialiers/secret_token.rb. If a remote
-    attacker has explicit knowledge of this token, they can potentially execute
-    arbitrary code.
-  affected_package: fat_free_crm
-  patched_versions:
-  - ">= 0.13.0"
-  - "~> 0.12.1"
-  severity: medium
-  package_manager: rubygems
-  cve:
-  - CVE-2013-7222
-  credit:
-  - Rubysec
-  references:
-  - https://github.com/rubysec/ruby-advisory-db
-  source_url: http://osvdb.org/show/osvdb/101445
 - id: rubyadvisory:rubygems:fat_free_crm:2014-08-22
   title: Fat Free CRM Gem contains a javascript cross-site scripting (XSS) vulnerability
   description: |
