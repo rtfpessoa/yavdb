@@ -67,12 +67,12 @@ module YAVDB
                 advisory_hash['title'],
                 advisory_hash['description'],
                 language.name_parser[affected_package],
-                affected_package['version'],
-                affected_package['unaffected'],
-                affected_package['fixedin'],
+                split_versions(affected_package['version']),
+                split_versions(affected_package['unaffected']),
+                split_versions(affected_package['fixedin']),
                 severity(advisory_hash['cvss_v2']),
                 language.package_manager,
-                [advisory_hash['cve']],
+                [advisory_hash['cve']].map { |cve| "CVE-#{cve}" },
                 nil, #:cwe
                 nil, #:osvdb
                 nil, #:cvss_v2_vector
@@ -87,6 +87,10 @@ module YAVDB
                 url
               )
             end.flatten
+          end
+
+          def split_versions(versions)
+            versions&.map { |version| version.split(',') }&.flatten
           end
 
           def severity(cvss_score)

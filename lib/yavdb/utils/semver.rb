@@ -69,7 +69,7 @@ module YAVDB
         def split_versions(version)
           version
             .strip
-            .split(',')
+            .split(/,|\|\|/)
         end
 
       end

@@ -62,9 +62,9 @@ module YAVDB
               advisory_hash['title'],
               advisory_hash['description'],
               advisory_hash['gem'],
-              vulnerable_versions,
-              advisory_hash['unaffected_versions'],
-              advisory_hash['patched_versions'],
+              clean_version(vulnerable_versions),
+              clean_version(advisory_hash['unaffected_versions']),
+              clean_version(advisory_hash['patched_versions']),
               severity,
               PACKAGE_MANAGER,
               cve,
@@ -81,6 +81,10 @@ module YAVDB
               references,
               advisory_hash['url']
             )
+          end
+
+          def clean_version(versions)
+            versions&.map { |version| version.gsub(',', ' ') }
           end
 
           def references(advisory_hash)
