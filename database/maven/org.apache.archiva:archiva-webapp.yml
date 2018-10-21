@@ -1,5 +1,5 @@
 ---
-- id: ossindex:maven:org.apache.archiva:archiva-webapp:2016-07-28
+- id: ossindex:maven:org.apache.archiva:archiva-webapp:CVE-2016-4469
   title: "[CVE-2016-4469]  Cross-Site Request Forgery (CSRF)"
   description: Multiple cross-site request forgery (CSRF) vulnerabilities in Apache
     Archiva 1.3.9 and earlier allow remote attackers to hijack the authentication
@@ -16,6 +16,9 @@
   package_manager: maven
   cve:
   - CVE-2016-4469
+  disclosed_date: 2016-07-28
+  created_date: 2016-07-28
+  last_modified_date: 2017-06-02
   credit:
   - OSSIndex
   references:
@@ -26,7 +29,7 @@
   - http://www.securitytracker.com/id/1036475
   - https://www.exploit-db.com/exploits/40109/
   source_url: https://ossindex.net/resource/package/7015388977/vulnerabilities
-- id: ossindex:maven:org.apache.archiva:archiva-webapp:2016-07-28
+- id: ossindex:maven:org.apache.archiva:archiva-webapp:CVE-2016-5005
   title: '[CVE-2016-5005]  Improper Neutralization of Input During Web Page Generation
     ("Cross-site Scripting")'
   description: Cross-site scripting (XSS) vulnerability in Apache Archiva 1.3.9 and
@@ -38,6 +41,9 @@
   package_manager: maven
   cve:
   - CVE-2016-5005
+  disclosed_date: 2016-07-28
+  created_date: 2016-07-28
+  last_modified_date: 2017-06-02
   credit:
   - OSSIndex
   references:
@@ -47,7 +53,44 @@
   - http://www.securityfocus.com/bid/91707
   - http://www.securitytracker.com/id/1036475
   source_url: https://ossindex.net/resource/package/7015388977/vulnerabilities
-- id: snykio:maven:org.apache.archiva:archiva-webapp:2016-07-13
+- id: snykio:maven:org.apache.archiva:archiva-webapp:CVE-2016-4469
+  title: Cross-site Request Forgery (CSRF)
+  description: |
+    [`org.apache.archiva:archiva-webapp`][1] Multiple cross-site request
+    forgery (CSRF) vulnerabilities in Apache Archiva 1.3.9 and earlier allow
+    remote attackers to hijack the authentication of administrators for
+    requests that (1) add new repository proxy connectors via the token
+    parameter to admin/addProxyConnector\_commit.action, (2) new
+    repositories via the token parameter to
+    admin/addRepository\_commit.action, (3) edit existing repositories via
+    the token parameter to admin/editRepository\_commit.action, (4) add
+    legacy artifact paths via the token parameter to
+    admin/addLegacyArtifactPath\_commit.action, (5) change the
+    organizational appearance via the token parameter to
+    admin/saveAppearance.action, or (6) upload new artifacts via the token
+    parameter to upload\_submit.action.
+
+
+
+    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22archiva-webapp%22
+  affected_package: org.apache.archiva:archiva-webapp
+  vulnerable_versions:
+  - "<= 1.3.9"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2016-4469
+  cwe:
+  - CWE-352
+  disclosed_date: 2016-07-13
+  created_date: 2016-07-13
+  last_modified_date: 2016-07-13
+  credit:
+  - Unknown
+  references:
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-4469
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEARCHIVA-30517
+- id: snykio:maven:org.apache.archiva:archiva-webapp:CVE-2016-5005
   title: Cross-site Scripting (XSS)
   description: |+
     [`org.apache.archiva:archiva-webapp`][1] Cross-site Scripting (XSS)
@@ -59,127 +102,6 @@
 
 
     [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22archiva-webapp%22
-    \n[`org.apache.archiva:archiva-webapp`][1] Cross-site Scripting (XSS)
-    vulnerability in Apache Archiva 1.3.9 and earlier allows remote
-    authenticated administrators to inject arbitrary web script or HTML via
-    the connector.sourceRepoId parameter to
-    admin/addProxyConnector\_commit.action.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22archiva-webapp%22
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
     \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
     user’s browser to execute malicious JavaScript code in the context of a
     victim’s domain. Such scripts can steal the user’s session cookies for
@@ -217,59 +139,11 @@
   - CVE-2016-5005
   cwe:
   - CWE-79
+  disclosed_date: 2016-07-13
+  created_date: 2016-07-13
+  last_modified_date: 2016-07-13
   credit:
   - Unknown
   references:
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-5005
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEARCHIVA-30518
-- id: snykio:maven:org.apache.archiva:archiva-webapp:2016-07-13
-  title: Cross-site Request Forgery (CSRF)
-  description: |
-    [`org.apache.archiva:archiva-webapp`][1] Multiple cross-site request
-    forgery (CSRF) vulnerabilities in Apache Archiva 1.3.9 and earlier allow
-    remote attackers to hijack the authentication of administrators for
-    requests that (1) add new repository proxy connectors via the token
-    parameter to admin/addProxyConnector\_commit.action, (2) new
-    repositories via the token parameter to
-    admin/addRepository\_commit.action, (3) edit existing repositories via
-    the token parameter to admin/editRepository\_commit.action, (4) add
-    legacy artifact paths via the token parameter to
-    admin/addLegacyArtifactPath\_commit.action, (5) change the
-    organizational appearance via the token parameter to
-    admin/saveAppearance.action, or (6) upload new artifacts via the token
-    parameter to upload\_submit.action.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22archiva-webapp%22
-    \n[`org.apache.archiva:archiva-webapp`][1] Multiple cross-site request
-    forgery (CSRF) vulnerabilities in Apache Archiva 1.3.9 and earlier allow
-    remote attackers to hijack the authentication of administrators for
-    requests that (1) add new repository proxy connectors via the token
-    parameter to admin/addProxyConnector\_commit.action, (2) new
-    repositories via the token parameter to
-    admin/addRepository\_commit.action, (3) edit existing repositories via
-    the token parameter to admin/editRepository\_commit.action, (4) add
-    legacy artifact paths via the token parameter to
-    admin/addLegacyArtifactPath\_commit.action, (5) change the
-    organizational appearance via the token parameter to
-    admin/saveAppearance.action, or (6) upload new artifacts via the token
-    parameter to upload\_submit.action.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22archiva-webapp%22
-  affected_package: org.apache.archiva:archiva-webapp
-  vulnerable_versions:
-  - "<= 1.3.9"
-  severity: medium
-  package_manager: maven
-  cve:
-  - CVE-2016-4469
-  cwe:
-  - CWE-352
-  credit:
-  - Unknown
-  references:
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-4469
-  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEARCHIVA-30517

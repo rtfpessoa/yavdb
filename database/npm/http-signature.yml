@@ -1,32 +1,4 @@
 ---
-- id: nodesecurity:npm:http-signature:2017-03-08
-  title: Header Forgery
-  description: "Affected versions of `http-signature` contain a vulnerability which
-    can allow an attacker in a privileged network position to modify header names
-    and change the meaning of the request, without requiring an updated signature.
-    \n\nThis problem occurs because vulnerable versions of `http-signature` sign the
-    contents of headers, but not the header names.\n\n## Proof of Concept\n\nConsider
-    this to be the initial, untampered request:\n```\nPOST /pay HTTP/1.1\nHost: example.com\nDate:
-    Thu, 05 Jan 2012 21:31:40 GMT\nX-Payment-Source: src@money.com\nX-Payment-Destination:
-    dst@money.com\nAuthorization: Signature keyId=\"Test\",algorithm=\"rsa-sha256\",headers=\"x-payment-source
-    x-payment-destination\" MDyO5tSvin5...\n```\n\nAnd the request is intercepted
-    and tampered as follows:\n```\nX-Payment-Source: dst@money.com // Emails switched\nX-Payment-Destination:
-    src@money.com\nAuthorization: Signature keyId=\"Test\",algorithm=\"rsa-sha256\",headers=\"x-payment-destination
-    x-payment-source\" MDyO5tSvin5...\n```\n\nIn the resulting responses, both requests
-    would pass signature verification without issue.\n```\nsrc@money.com\\n\ndst@money.com\\n\n```\n"
-  affected_package: http-signature
-  vulnerable_versions:
-  - "<=0.9.11"
-  patched_versions:
-  - ">=0.10.0"
-  severity: medium
-  package_manager: npm
-  cvss_v3_vector: CVSS:3.0/AV:A/AC:L/PR:N/UI:N/S:C/C:N/I:L/A:N
-  credit:
-  - Dave Longley
-  references:
-  - https://github.com/joyent/node-http-signature/issues/10)
-  source_url: https://nodesecurity.io/advisories/318
 - id: ossindex:npm:http-signature:2017-07-29
   title: Header Forgery
   description: "> In versions <=0.9.11, http-signature signs only the header values,
@@ -36,129 +8,19 @@
   vulnerable_versions:
   - "<=0.9.11"
   package_manager: npm
+  disclosed_date: 2017-07-29
+  created_date: 2017-07-29
+  last_modified_date: 2017-07-30
   credit:
   - OSSIndex
   references:
   - https://github.com/joyent/node-http-signature/issues/10
   - https://nodesecurity.io/advisories/318
   source_url: https://ossindex.net/resource/package/7013863569/vulnerabilities
-- id: snykio:npm:http-signature:2013-04-17
-  title: Unsigned Request Headers
-  description: |
-    [`http-signature`][1] is a Reference implementation of Joyent\'s HTTP
-    Signature scheme. Affected versions of the package are vulnerable to
-    header forgery, due to the header names not being signed. An attacker
-    could switch the header list order and header value order ending up wit
-    the same signature for two separate requests.
-
-
-
-    [1]: https://www.npmjs.com/package/http-signature
-    \n[`http-signature`][1] is a Reference implementation of Joyent\'s HTTP
-    Signature scheme. Affected versions of the package are vulnerable to
-    header forgery, due to the header names not being signed. An attacker
-    could switch the header list order and header value order ending up wit
-    the same signature for two separate requests.
-
-
-
-    [1]: https://www.npmjs.com/package/http-signature
-  affected_package: http-signature
-  vulnerable_versions:
-  - "<0.10.0 >=0.9.0"
-  severity: medium
-  package_manager: npm
-  cve:
-  - CVE-2017-16005
-  cwe:
-  - CWE-74
-  credit:
-  - Dave Longley
-  references:
-  - https://github.com/joyent/node-http-signature/issues/10
-  - https://github.com/joyent/node-http-signature/pull/11
-  - https://github.com/joyent/node-http-signature/commit/658961f638e4418678e70c5794f7f5b03ff43830
-  source_url: https://snyk.io/vuln/npm:http-signature:20130418
-- id: snykio:npm:http-signature:2015-01-21
+- id: snykio:npm:http-signature:20150122
   title: Timing Attack
   description: |
     [`http-signature`][1] is a reference implementation of Joyent\'s HTTP
-    Signature scheme.
-
-    Affected versions of the package are vulnerable to Timing Attacks due to
-    time-variable comparison of signatures.
-
-    The library implemented a character to character comparison, similar to
-    the built-in string comparison mechanism, `===`, and not a time constant
-    string comparison. As a result, the comparison will fail faster when the
-    first characters in the signature are incorrect. An attacker can use
-    this difference to perform a timing attack, essentially allowing them to
-    guess the signature one character at a time.
-
-    You can read more about timing attacks in Node.js on the [Snyk blog][2].
-
-
-
-    [1]: https://www.npmjs.com/package/http-signature
-    [2]: https://snyk.io/blog/node-js-timing-attack-ccc-ctf/
-    \n[`http-signature`][1] is a reference implementation of Joyent\'s HTTP
-    Signature scheme.
-
-    Affected versions of the package are vulnerable to Timing Attacks due to
-    time-variable comparison of signatures.
-
-    The library implemented a character to character comparison, similar to
-    the built-in string comparison mechanism, `===`, and not a time constant
-    string comparison. As a result, the comparison will fail faster when the
-    first characters in the signature are incorrect. An attacker can use
-    this difference to perform a timing attack, essentially allowing them to
-    guess the signature one character at a time.
-
-    You can read more about timing attacks in Node.js on the [Snyk blog][2].
-
-
-
-    [1]: https://www.npmjs.com/package/http-signature
-    [2]: https://snyk.io/blog/node-js-timing-attack-ccc-ctf/
-    \n[`http-signature`][1] is a reference implementation of Joyent\'s HTTP
-    Signature scheme.
-
-    Affected versions of the package are vulnerable to Timing Attacks due to
-    time-variable comparison of signatures.
-
-    The library implemented a character to character comparison, similar to
-    the built-in string comparison mechanism, `===`, and not a time constant
-    string comparison. As a result, the comparison will fail faster when the
-    first characters in the signature are incorrect. An attacker can use
-    this difference to perform a timing attack, essentially allowing them to
-    guess the signature one character at a time.
-
-    You can read more about timing attacks in Node.js on the [Snyk blog][2].
-
-
-
-    [1]: https://www.npmjs.com/package/http-signature
-    [2]: https://snyk.io/blog/node-js-timing-attack-ccc-ctf/
-    \n[`http-signature`][1] is a reference implementation of Joyent\'s HTTP
-    Signature scheme.
-
-    Affected versions of the package are vulnerable to Timing Attacks due to
-    time-variable comparison of signatures.
-
-    The library implemented a character to character comparison, similar to
-    the built-in string comparison mechanism, `===`, and not a time constant
-    string comparison. As a result, the comparison will fail faster when the
-    first characters in the signature are incorrect. An attacker can use
-    this difference to perform a timing attack, essentially allowing them to
-    guess the signature one character at a time.
-
-    You can read more about timing attacks in Node.js on the [Snyk blog][2].
-
-
-
-    [1]: https://www.npmjs.com/package/http-signature
-    [2]: https://snyk.io/blog/node-js-timing-attack-ccc-ctf/
-    \n[`http-signature`][1] is a reference implementation of Joyent\'s HTTP
     Signature scheme.
 
     Affected versions of the package are vulnerable to Timing Attacks due to
@@ -184,9 +46,43 @@
   package_manager: npm
   cwe:
   - CWE-310
+  disclosed_date: 2015-01-21
+  created_date: 2017-06-28
+  last_modified_date: 2017-06-28
   credit:
   - Alok Menghrajani
   references:
   - https://github.com/joyent/node-http-signature/pull/36
   - https://github.com/joyent/node-http-signature/commit/78ab1da232f31f695f5c362d863593a143aa8b56
   source_url: https://snyk.io/vuln/npm:http-signature:20150122
+- id: snykio:npm:http-signature:CVE-2017-16005
+  title: Unsigned Request Headers
+  description: |
+    [`http-signature`][1] is a Reference implementation of Joyent\'s HTTP
+    Signature scheme. Affected versions of the package are vulnerable to
+    header forgery, due to the header names not being signed. An attacker
+    could switch the header list order and header value order ending up wit
+    the same signature for two separate requests.
+
+
+
+    [1]: https://www.npmjs.com/package/http-signature
+  affected_package: http-signature
+  vulnerable_versions:
+  - "<0.10.0 >=0.9.0"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2017-16005
+  cwe:
+  - CWE-74
+  disclosed_date: 2013-04-17
+  created_date: 2017-02-13
+  last_modified_date: 2017-02-13
+  credit:
+  - Dave Longley
+  references:
+  - https://github.com/joyent/node-http-signature/issues/10
+  - https://github.com/joyent/node-http-signature/pull/11
+  - https://github.com/joyent/node-http-signature/commit/658961f638e4418678e70c5794f7f5b03ff43830
+  source_url: https://snyk.io/vuln/npm:http-signature:20130418

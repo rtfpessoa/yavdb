@@ -1,32 +1,4 @@
 ---
-- id: nodesecurity:npm:nunjucks:2016-10-17
-  title: XSS in autoescape mode
-  description: |-
-    Affected versions of `nunjucks` do not properly escape specially structured user input in template vars when in auto-escape mode, resulting in a cross-site scripting vulnerability.
-
-    ## Proof of Concept
-
-    By using an array for the keys in a template var, escaping is bypassed.
-    ```javascript
-    name[]=<script>alert(1)</script>
-    ```
-
-    A full PoC is available in the references section.
-  affected_package: nunjucks
-  vulnerable_versions:
-  - "<=2.4.2"
-  patched_versions:
-  - ">=2.4.3"
-  severity: medium
-  package_manager: npm
-  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:L/A:L
-  credit:
-  - Matt Austin
-  references:
-  - |-
-    https://github.com/matt-/nunjucks_test)
-    https://github.com/mozilla/nunjucks/issues/835)
-  source_url: https://nodesecurity.io/advisories/147
 - id: ossindex:npm:nunjucks:2017-07-29
   title: XSS in autoescape mode
   description: "> Versions 2.4.2 and lower have a cross site scripting (XSS) vulnerability
@@ -38,38 +10,18 @@
   vulnerable_versions:
   - "<=2.4.2"
   package_manager: npm
+  disclosed_date: 2017-07-29
+  created_date: 2017-07-29
+  last_modified_date: 2017-07-30
   credit:
   - OSSIndex
   references:
   - https://github.com/matt-/nunjucks_test
   - https://nodesecurity.io/advisories/147
   source_url: https://ossindex.net/resource/package/7014245221/vulnerabilities
-- id: snykio:npm:nunjucks:2016-09-06
+- id: snykio:npm:nunjucks:CVE-2016-10547
   title: Content & Code Injection (XSS)
   description: "`nunjucks` is a powerful templating engine.\n\nLike many templating
-    engines, it automatically HTML encodes any `string`\nvalue included in the template
-    using the `{{ some-variable }}` notation.\nThese variables are often user-generated,
-    but the HTML Encoding protects\nthe application from Cross-site Scripting (XSS)
-    attacks.\n\nHowever, if the variable passed in is an array, no HTML encoding is\napplied,
-    exposing an easy path to XSS. The risk of exploit is especially\nhigh given the
-    fact `express`, `koa` and many other Node.js servers\nallow users to force a query
-    parameter to be an array using the\n`param[]=value` notation.\n\n\\n`nunjucks`
-    is a powerful templating engine.\n\nLike many templating engines, it automatically
-    HTML encodes any `string`\nvalue included in the template using the `{{ some-variable
-    }}` notation.\nThese variables are often user-generated, but the HTML Encoding
-    protects\nthe application from Cross-site Scripting (XSS) attacks.\n\nHowever,
-    if the variable passed in is an array, no HTML encoding is\napplied, exposing
-    an easy path to XSS. The risk of exploit is especially\nhigh given the fact `express`,
-    `koa` and many other Node.js servers\nallow users to force a query parameter to
-    be an array using the\n`param[]=value` notation.\n\n\\n`nunjucks` is a powerful
-    templating engine.\n\nLike many templating engines, it automatically HTML encodes
-    any `string`\nvalue included in the template using the `{{ some-variable }}` notation.\nThese
-    variables are often user-generated, but the HTML Encoding protects\nthe application
-    from Cross-site Scripting (XSS) attacks.\n\nHowever, if the variable passed in
-    is an array, no HTML encoding is\napplied, exposing an easy path to XSS. The risk
-    of exploit is especially\nhigh given the fact `express`, `koa` and many other
-    Node.js servers\nallow users to force a query parameter to be an array using the\n`param[]=value`
-    notation.\n\n\\n`nunjucks` is a powerful templating engine.\n\nLike many templating
     engines, it automatically HTML encodes any `string`\nvalue included in the template
     using the `{{ some-variable }}` notation.\nThese variables are often user-generated,
     but the HTML Encoding protects\nthe application from Cross-site Scripting (XSS)
@@ -93,162 +45,10 @@
     Attack URL:\n> `http://127.0.0.1:3000/?name[]=<script>alert(1)</script>matt`\n\nA
     more complete proof of concept (POC) can be found here:\n[https://github.com/matt-/nunjucks\\_test][3]\n\n\n\n[1]:
     https://github.com/mozilla/nunjucks/issues/835\n[2]: https://github.com/matt-\n[3]:
-    https://github.com/matt-/nunjucks_test\n\\nThe [issue][1] opened by [Matt Austin][2]
-    explains the vulnerability\nvery well:\n\n> The following string works as expected:\n>
-    \n>     var res = nunjucks.renderString('Hello {{ username }}', { username: '<s>Matt</s>'
-    });\n>     console.log(res); //Hello &lt;s&gt;Matt&lt;/s&gt;\n\n> If however the
-    variable passed to the template is an array autoescape\n> does nothing:\n> \n>
-    \    var res = nunjucks.renderString('Hello {{ username }}', { username: ['<s>Matt</s>']
-    });\n>     console.log(res); // Hello <s>Matt</s>\n> \n> ... In express / Koa
-    / (anything else using qs or body-parser) is is\n> trivial to coerce query params
-    types. See the following simple example\n> in express:\n> \n>     var app = express();\n>
-    \    var env = nunjucks.configure('views', {\n>         autoescape: true,\n>         express:
-    app\n>     });\n>     app.get('/', function(req, res) {     \n>         // This
-    should be fine autoescape is on...\n>         res.send(nunjucks.renderString('Hello
-    {{ username }}', { username: req.query.name }));\n>         //res.render('index.html',
-    { username: req.query.name });\n>     });\n\n> Attack URL:\n> `http://127.0.0.1:3000/?name[]=<script>alert(1)</script>matt`\n\nA
-    more complete proof of concept (POC) can be found here:\n[https://github.com/matt-/nunjucks\\_test][3]\n\n\n\n[1]:
-    https://github.com/mozilla/nunjucks/issues/835\n[2]: https://github.com/matt-\n[3]:
-    https://github.com/matt-/nunjucks_test\n\\nThe [issue][1] opened by [Matt Austin][2]
-    explains the vulnerability\nvery well:\n\n> The following string works as expected:\n>
-    \n>     var res = nunjucks.renderString('Hello {{ username }}', { username: '<s>Matt</s>'
-    });\n>     console.log(res); //Hello &lt;s&gt;Matt&lt;/s&gt;\n\n> If however the
-    variable passed to the template is an array autoescape\n> does nothing:\n> \n>
-    \    var res = nunjucks.renderString('Hello {{ username }}', { username: ['<s>Matt</s>']
-    });\n>     console.log(res); // Hello <s>Matt</s>\n> \n> ... In express / Koa
-    / (anything else using qs or body-parser) is is\n> trivial to coerce query params
-    types. See the following simple example\n> in express:\n> \n>     var app = express();\n>
-    \    var env = nunjucks.configure('views', {\n>         autoescape: true,\n>         express:
-    app\n>     });\n>     app.get('/', function(req, res) {     \n>         // This
-    should be fine autoescape is on...\n>         res.send(nunjucks.renderString('Hello
-    {{ username }}', { username: req.query.name }));\n>         //res.render('index.html',
-    { username: req.query.name });\n>     });\n\n> Attack URL:\n> `http://127.0.0.1:3000/?name[]=<script>alert(1)</script>matt`\n\nA
-    more complete proof of concept (POC) can be found here:\n[https://github.com/matt-/nunjucks\\_test][3]\n\n\n\n[1]:
-    https://github.com/mozilla/nunjucks/issues/835\n[2]: https://github.com/matt-\n[3]:
-    https://github.com/matt-/nunjucks_test\n\\nThe [issue][1] opened by [Matt Austin][2]
-    explains the vulnerability\nvery well:\n\n> The following string works as expected:\n>
-    \n>     var res = nunjucks.renderString('Hello {{ username }}', { username: '<s>Matt</s>'
-    });\n>     console.log(res); //Hello &lt;s&gt;Matt&lt;/s&gt;\n\n> If however the
-    variable passed to the template is an array autoescape\n> does nothing:\n> \n>
-    \    var res = nunjucks.renderString('Hello {{ username }}', { username: ['<s>Matt</s>']
-    });\n>     console.log(res); // Hello <s>Matt</s>\n> \n> ... In express / Koa
-    / (anything else using qs or body-parser) is is\n> trivial to coerce query params
-    types. See the following simple example\n> in express:\n> \n>     var app = express();\n>
-    \    var env = nunjucks.configure('views', {\n>         autoescape: true,\n>         express:
-    app\n>     });\n>     app.get('/', function(req, res) {     \n>         // This
-    should be fine autoescape is on...\n>         res.send(nunjucks.renderString('Hello
-    {{ username }}', { username: req.query.name }));\n>         //res.render('index.html',
-    { username: req.query.name });\n>     });\n\n> Attack URL:\n> `http://127.0.0.1:3000/?name[]=<script>alert(1)</script>matt`\n\nA
-    more complete proof of concept (POC) can be found here:\n[https://github.com/matt-/nunjucks\\_test][3]\n\n\n\n[1]:
-    https://github.com/mozilla/nunjucks/issues/835\n[2]: https://github.com/matt-\n[3]:
-    https://github.com/matt-/nunjucks_test\n\\nThe [issue][1] opened by [Matt Austin][2]
-    explains the vulnerability\nvery well:\n\n> The following string works as expected:\n>
-    \n>     var res = nunjucks.renderString('Hello {{ username }}', { username: '<s>Matt</s>'
-    });\n>     console.log(res); //Hello &lt;s&gt;Matt&lt;/s&gt;\n\n> If however the
-    variable passed to the template is an array autoescape\n> does nothing:\n> \n>
-    \    var res = nunjucks.renderString('Hello {{ username }}', { username: ['<s>Matt</s>']
-    });\n>     console.log(res); // Hello <s>Matt</s>\n> \n> ... In express / Koa
-    / (anything else using qs or body-parser) is is\n> trivial to coerce query params
-    types. See the following simple example\n> in express:\n> \n>     var app = express();\n>
-    \    var env = nunjucks.configure('views', {\n>         autoescape: true,\n>         express:
-    app\n>     });\n>     app.get('/', function(req, res) {     \n>         // This
-    should be fine autoescape is on...\n>         res.send(nunjucks.renderString('Hello
-    {{ username }}', { username: req.query.name }));\n>         //res.render('index.html',
-    { username: req.query.name });\n>     });\n\n> Attack URL:\n> `http://127.0.0.1:3000/?name[]=<script>alert(1)</script>matt`\n\nA
-    more complete proof of concept (POC) can be found here:\n[https://github.com/matt-/nunjucks\\_test][3]\n\n\n\n[1]:
-    https://github.com/mozilla/nunjucks/issues/835\n[2]: https://github.com/matt-\n[3]:
-    https://github.com/matt-/nunjucks_test\n\\nThe [issue][1] opened by [Matt Austin][2]
-    explains the vulnerability\nvery well:\n\n> The following string works as expected:\n>
-    \n>     var res = nunjucks.renderString('Hello {{ username }}', { username: '<s>Matt</s>'
-    });\n>     console.log(res); //Hello &lt;s&gt;Matt&lt;/s&gt;\n\n> If however the
-    variable passed to the template is an array autoescape\n> does nothing:\n> \n>
-    \    var res = nunjucks.renderString('Hello {{ username }}', { username: ['<s>Matt</s>']
-    });\n>     console.log(res); // Hello <s>Matt</s>\n> \n> ... In express / Koa
-    / (anything else using qs or body-parser) is is\n> trivial to coerce query params
-    types. See the following simple example\n> in express:\n> \n>     var app = express();\n>
-    \    var env = nunjucks.configure('views', {\n>         autoescape: true,\n>         express:
-    app\n>     });\n>     app.get('/', function(req, res) {     \n>         // This
-    should be fine autoescape is on...\n>         res.send(nunjucks.renderString('Hello
-    {{ username }}', { username: req.query.name }));\n>         //res.render('index.html',
-    { username: req.query.name });\n>     });\n\n> Attack URL:\n> `http://127.0.0.1:3000/?name[]=<script>alert(1)</script>matt`\n\nA
-    more complete proof of concept (POC) can be found here:\n[https://github.com/matt-/nunjucks\\_test][3]\n\n\n\n[1]:
-    https://github.com/mozilla/nunjucks/issues/835\n[2]: https://github.com/matt-\n[3]:
     https://github.com/matt-/nunjucks_test\n\\nCross-Site Scripting (XSS) attacks
     occur when an attacker tricks a\nuser’s browser to execute malicious JavaScript
     code in the context of a\nvictim’s domain. Such scripts can steal the user’s session
     cookies for\nthe domain, scrape or modify its content, and perform or modify actions\non
-    the user’s behalf, actions typically blocked by the browser’s Same\nOrigin Policy.\n\nThese
-    attacks are possible by escaping the context of the web\napplication and injecting
-    malicious scripts in an otherwise trusted\nwebsite. These scripts can introduce
-    additional attributes (say, a\n\\\"new\\\" option in a dropdown list or a new
-    link to a malicious site) and\ncan potentially execute code on the clients side,
-    unbeknown to the\nvictim. This occurs when characters like `<` `>` `\"` `'` are
-    not escaped\nproperly.\n\nThere are a few types of XSS:\n\n* **Persistent XSS**
-    is an attack in which the malicious code persists\n  into the web app’s database.\n*
-    **Reflected XSS** is an which the website echoes back a portion of the\n  request.
-    The attacker needs to trick the user into clicking a\n  malicious link (for instance
-    through a phishing email or malicious JS\n  on another page), which triggers the
-    XSS attack.\n* **DOM-based XSS** is an that occurs purely in the browser when\n
-    \ client-side JavaScript echoes back a portion of the URL onto the page.\n  DOM-Based
-    XSS is notoriously hard to detect, as the server never gets\n  a chance to see
-    the attack taking place.\n\n\\nCross-Site Scripting (XSS) attacks occur when an
-    attacker tricks a\nuser’s browser to execute malicious JavaScript code in the
-    context of a\nvictim’s domain. Such scripts can steal the user’s session cookies
-    for\nthe domain, scrape or modify its content, and perform or modify actions\non
-    the user’s behalf, actions typically blocked by the browser’s Same\nOrigin Policy.\n\nThese
-    attacks are possible by escaping the context of the web\napplication and injecting
-    malicious scripts in an otherwise trusted\nwebsite. These scripts can introduce
-    additional attributes (say, a\n\\\"new\\\" option in a dropdown list or a new
-    link to a malicious site) and\ncan potentially execute code on the clients side,
-    unbeknown to the\nvictim. This occurs when characters like `<` `>` `\"` `'` are
-    not escaped\nproperly.\n\nThere are a few types of XSS:\n\n* **Persistent XSS**
-    is an attack in which the malicious code persists\n  into the web app’s database.\n*
-    **Reflected XSS** is an which the website echoes back a portion of the\n  request.
-    The attacker needs to trick the user into clicking a\n  malicious link (for instance
-    through a phishing email or malicious JS\n  on another page), which triggers the
-    XSS attack.\n* **DOM-based XSS** is an that occurs purely in the browser when\n
-    \ client-side JavaScript echoes back a portion of the URL onto the page.\n  DOM-Based
-    XSS is notoriously hard to detect, as the server never gets\n  a chance to see
-    the attack taking place.\n\n\\nCross-Site Scripting (XSS) attacks occur when an
-    attacker tricks a\nuser’s browser to execute malicious JavaScript code in the
-    context of a\nvictim’s domain. Such scripts can steal the user’s session cookies
-    for\nthe domain, scrape or modify its content, and perform or modify actions\non
-    the user’s behalf, actions typically blocked by the browser’s Same\nOrigin Policy.\n\nThese
-    attacks are possible by escaping the context of the web\napplication and injecting
-    malicious scripts in an otherwise trusted\nwebsite. These scripts can introduce
-    additional attributes (say, a\n\\\"new\\\" option in a dropdown list or a new
-    link to a malicious site) and\ncan potentially execute code on the clients side,
-    unbeknown to the\nvictim. This occurs when characters like `<` `>` `\"` `'` are
-    not escaped\nproperly.\n\nThere are a few types of XSS:\n\n* **Persistent XSS**
-    is an attack in which the malicious code persists\n  into the web app’s database.\n*
-    **Reflected XSS** is an which the website echoes back a portion of the\n  request.
-    The attacker needs to trick the user into clicking a\n  malicious link (for instance
-    through a phishing email or malicious JS\n  on another page), which triggers the
-    XSS attack.\n* **DOM-based XSS** is an that occurs purely in the browser when\n
-    \ client-side JavaScript echoes back a portion of the URL onto the page.\n  DOM-Based
-    XSS is notoriously hard to detect, as the server never gets\n  a chance to see
-    the attack taking place.\n\n\\nCross-Site Scripting (XSS) attacks occur when an
-    attacker tricks a\nuser’s browser to execute malicious JavaScript code in the
-    context of a\nvictim’s domain. Such scripts can steal the user’s session cookies
-    for\nthe domain, scrape or modify its content, and perform or modify actions\non
-    the user’s behalf, actions typically blocked by the browser’s Same\nOrigin Policy.\n\nThese
-    attacks are possible by escaping the context of the web\napplication and injecting
-    malicious scripts in an otherwise trusted\nwebsite. These scripts can introduce
-    additional attributes (say, a\n\\\"new\\\" option in a dropdown list or a new
-    link to a malicious site) and\ncan potentially execute code on the clients side,
-    unbeknown to the\nvictim. This occurs when characters like `<` `>` `\"` `'` are
-    not escaped\nproperly.\n\nThere are a few types of XSS:\n\n* **Persistent XSS**
-    is an attack in which the malicious code persists\n  into the web app’s database.\n*
-    **Reflected XSS** is an which the website echoes back a portion of the\n  request.
-    The attacker needs to trick the user into clicking a\n  malicious link (for instance
-    through a phishing email or malicious JS\n  on another page), which triggers the
-    XSS attack.\n* **DOM-based XSS** is an that occurs purely in the browser when\n
-    \ client-side JavaScript echoes back a portion of the URL onto the page.\n  DOM-Based
-    XSS is notoriously hard to detect, as the server never gets\n  a chance to see
-    the attack taking place.\n\n\\nCross-Site Scripting (XSS) attacks occur when an
-    attacker tricks a\nuser’s browser to execute malicious JavaScript code in the
-    context of a\nvictim’s domain. Such scripts can steal the user’s session cookies
-    for\nthe domain, scrape or modify its content, and perform or modify actions\non
     the user’s behalf, actions typically blocked by the browser’s Same\nOrigin Policy.\n\nThese
     attacks are possible by escaping the context of the web\napplication and injecting
     malicious scripts in an otherwise trusted\nwebsite. These scripts can introduce
@@ -273,6 +73,9 @@
   - CVE-2016-10547
   cwe:
   - CWE-79
+  disclosed_date: 2016-09-06
+  created_date: 2016-09-09
+  last_modified_date: 2016-09-09
   credit:
   - Matt Austin
   references:

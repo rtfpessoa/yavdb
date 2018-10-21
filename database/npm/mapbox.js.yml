@@ -1,42 +1,4 @@
 ---
-- id: nodesecurity:npm:mapbox.js:2015-10-24
-  title: Content Injection via TileJSON attribute
-  description: |
-    Versions 1.x prior to 1.6.5 and 2.x prior to 2.1.7 of `mapbox.js` are vulnerable to a cross-site-scripting attack in certain uncommon usage scenarios.
-
-    If `L.mapbox.map` or `L.mapbox.tileLayer` are used to load untrusted TileJSON content from a non-Mapbox URL, it is possible for a malicious user with control over the TileJSON content to inject script content into the "attribution" value of the TileJSON which will be executed in the context of the page using Mapbox.js.
-  affected_package: mapbox.js
-  vulnerable_versions:
-  - "<1.6.5 || < 2.1.7 > 2.0.0"
-  patched_versions:
-  - ">=1.6.5 <2.0.0 || >= 2.1.7"
-  severity: medium
-  package_manager: npm
-  cvss_v3_vector: CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:N
-  credit:
-  - John Firebaugh, Juan Broullón Sampedro
-  references:
-  - https://hackerone.com/reports/54327)
-  source_url: https://nodesecurity.io/advisories/49
-- id: nodesecurity:npm:mapbox.js:2016-01-12
-  title: Content Injection via TileJSON Name
-  description: |
-    Versions 1.x prior to 1.6.6 and 2.x prior to 2.2.4 of `mapbox.js` are vulnerable to a cross-site-scripting attack in certain uncommon usage scenarios.
-
-    If `L.mapbox.map` or `L.mapbox.shareControl` are used in a manner that gives users control of the TileJSON content, it is possible to inject script content into the name value of the TileJSON. After clicking on the share control, the malicious code will execute in the context of the page using Mapbox.js.
-  affected_package: mapbox.js
-  vulnerable_versions:
-  - "<1.6.6 || < 2.2.4 > 2.0.0"
-  patched_versions:
-  - ">=1.6.6 <2.0.0 || >= 2.2.4"
-  severity: medium
-  package_manager: npm
-  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:H/UI:N/S:U/C:N/I:H/A:N
-  credit:
-  - Alexandra Ulsh, Abdullah Ahmet Erdem
-  references:
-  - https://hackerone.com/reports/99245)
-  source_url: https://nodesecurity.io/advisories/74
 - id: ossindex:npm:mapbox.js:2017-01-25
   title: Content Injection via TileJSON attribute
   description: "> Mapbox.js versions 1.x prior to 1.6.5 and 2.x prior to 2.1.7 are
@@ -47,37 +9,22 @@
   - "<1.6.5"
   - "< 2.1.7 > 2.0.0"
   package_manager: npm
+  disclosed_date: 2017-01-25
+  created_date: 2017-01-25
+  last_modified_date: 2017-02-12
   credit:
   - OSSIndex
   references:
   - https://hackerone.com/reports/54327a
   - https://nodesecurity.io/advisories/49
   source_url: https://ossindex.net/resource/package/7014103613/vulnerabilities
-- id: snykio:npm:mapbox.js:2015-10-24
+- id: snykio:npm:mapbox.js:CVE-2017-1000042
   title: Content Injection via TileJSON attribute
   description: |+
     Mapbox.js is vulnerable to script content injection when `L.mapbox.map`
     or `L.mapbox.tileLayer` is used to load untrusted TileJSON content from
     a non-Mapbox URL.
 
-    \nMapbox.js is vulnerable to script content injection when `L.mapbox.map`
-    or `L.mapbox.tileLayer` is used to load untrusted TileJSON content from
-    a non-Mapbox URL.
-
-    \nSuch usage is uncommon. The following usage scenarios are **not
-    vulnerable**\: \[1\]
-
-    * only trusted TileJSON content is loaded
-    * TileJSON content comes only from mapbox.com URLs
-    * a Mapbox map ID is supplied, rather than a TileJSON URL
-
-    \nSuch usage is uncommon. The following usage scenarios are **not
-    vulnerable**\: \[1\]
-
-    * only trusted TileJSON content is loaded
-    * TileJSON content comes only from mapbox.com URLs
-    * a Mapbox map ID is supplied, rather than a TileJSON URL
-
     \nSuch usage is uncommon. The following usage scenarios are **not
     vulnerable**\: \[1\]
 
@@ -87,41 +34,29 @@
 
   affected_package: mapbox.js
   vulnerable_versions:
-  - "<1.6.5 || < 2.1.7 > 2.0.0"
+  - "<1.6.5"
+  - "< 2.1.7 > 2.0.0"
   severity: low
   package_manager: npm
   cve:
   - CVE-2017-1000042
   cwe:
   - CWE-74
+  disclosed_date: 2015-10-24
+  created_date: 2015-11-06
+  last_modified_date: 2015-11-06
   credit:
   - Juan Broullón
   references:
   - https://hackerone.com/reports/54327a
   - https://github.com/mapbox/mapbox.js/commit/538d229ab6767bb4c3f3969c417f9884189c1512
   source_url: https://snyk.io/vuln/npm:mapbox.js:20151024
-- id: snykio:npm:mapbox.js:2016-01-12
+- id: snykio:npm:mapbox.js:CVE-2017-1000043
   title: Content Injection via TileJSON Name
   description: |+
     Mapbox.js is vulnerable to script content injection when `L.mapbox.map`
     and `L.mapbox.shareControl` is used to load untrusted TileJSON content
     from a non-Mapbox URL.
-
-    \nMapbox.js is vulnerable to script content injection when `L.mapbox.map`
-    and `L.mapbox.shareControl` is used to load untrusted TileJSON content
-    from a non-Mapbox URL.
-
-    \nSuch usage is uncommon. The following usage scenarios are **not
-    vulnerable**\: \[1\]
-
-    * the map does not use a share control (L.mapbox.sharecontrol)
-    * only trusted TileJSON content is loaded
-
-    \nSuch usage is uncommon. The following usage scenarios are **not
-    vulnerable**\: \[1\]
-
-    * the map does not use a share control (L.mapbox.sharecontrol)
-    * only trusted TileJSON content is loaded
 
     \nSuch usage is uncommon. The following usage scenarios are **not
     vulnerable**\: \[1\]
@@ -131,13 +66,17 @@
 
   affected_package: mapbox.js
   vulnerable_versions:
-  - "<1.6.6 || < 2.2.4 > 2.0.0"
+  - "<1.6.6"
+  - "< 2.2.4 > 2.0.0"
   severity: low
   package_manager: npm
   cve:
   - CVE-2017-1000043
   cwe:
   - CWE-74
+  disclosed_date: 2016-01-12
+  created_date: 2016-01-14
+  last_modified_date: 2016-01-14
   credit:
   - Abdullah (enderun07)
   references:

@@ -1,5 +1,5 @@
 ---
-- id: ossindex:maven:io.undertow:undertow-core:2014-12-01
+- id: ossindex:maven:io.undertow:undertow-core:CVE-2014-7816
   title: '[CVE-2014-7816]  Improper Limitation of a Pathname to a Restricted Directory
     ("Path Traversal")'
   description: Directory traversal vulnerability in JBoss Undertow 1.0.x before 1.0.17,
@@ -14,6 +14,9 @@
   package_manager: maven
   cve:
   - CVE-2014-7816
+  disclosed_date: 2014-12-01
+  created_date: 2014-12-01
+  last_modified_date: 2017-04-18
   credit:
   - OSSIndex
   references:
@@ -23,7 +26,7 @@
   - https://issues.jboss.org/browse/UNDERTOW-338
   - https://issues.jboss.org/browse/WFLY-4020
   source_url: https://ossindex.net/resource/package/7085151455/vulnerabilities
-- id: snykio:maven:io.undertow:undertow-core:2014-10-27
+- id: snykio:maven:io.undertow:undertow-core:CVE-2014-7816
   title: Directory Traversal
   description: |
     [`io.undertow:undertow-core`][1] Directory traversal vulnerability in
@@ -34,542 +37,6 @@
 
 
     [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22undertow-core%22
-    \n[`io.undertow:undertow-core`][1] Directory traversal vulnerability in
-    JBoss Undertow 1.0.x before 1.0.17, 1.1.x before 1.1.0.CR5, and 1.2.x
-    before 1.2.0.Beta3, when running on Windows, allows remote attackers to
-    read arbitrary files via a `../` (dot dot) in a resource URI.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22undertow-core%22
-    \nA Directory Traversal attack (also known as path traversal) aims to
-    access files and directories that are stored outside the intended
-    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
-    its variations, or by using absolute file paths, it may be possible to
-    access arbitrary files and directories stored on file system, including
-    application source code, configuration, and other critical system files.
-
-    Directory Traversal vulnerabilities can be generally divided into two
-    types:
-
-    * **Information Disclosure**\: Allows the attacker to gain information
-      about the folder structure or read the contents of sensitive files on
-      the system.
-
-    `st` is a module for serving static files on web pages, and contains a
-    [vulnerability of this type][1]. In our example, we will serve files
-    from the `public` route.
-
-    If an attacker requests the following URL from our server, it will in
-    turn leak the sensitive private key of the root user.
-
-        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
-
-    **Note** `%2e` is the URL encoded version of `.` (dot).
-
-    * **Writing arbitrary files**\: Allows the attacker to create or replace
-      existing files. This type of vulnerability is also known as
-      `Zip-Slip`.
-
-    One way to achieve this is by using a malicious `zip` archive that holds
-    path traversal filenames. When each filename in the zip archive gets
-    concatenated to the target extraction folder, without validation, the
-    final path ends up outside of the target folder. If an executable or a
-    configuration file is overwritten with a file containing malicious code,
-    the problem can turn into an arbitrary code execution issue quite
-    easily.
-
-    The following is an example of a `zip` archive with one benign file and
-    one malicious file. Extracting the malicious file will result in
-    traversing out of the target folder, ending up in `/root/.ssh/`
-    overwriting the `authorized_keys` file:
-
-        2018-04-15 22:04:29 .....           19           19  good.txt
-        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
-
-
-
-    [1]: https://snyk.io/vuln/npm:st:20140206
-    \nA Directory Traversal attack (also known as path traversal) aims to
-    access files and directories that are stored outside the intended
-    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
-    its variations, or by using absolute file paths, it may be possible to
-    access arbitrary files and directories stored on file system, including
-    application source code, configuration, and other critical system files.
-
-    Directory Traversal vulnerabilities can be generally divided into two
-    types:
-
-    * **Information Disclosure**\: Allows the attacker to gain information
-      about the folder structure or read the contents of sensitive files on
-      the system.
-
-    `st` is a module for serving static files on web pages, and contains a
-    [vulnerability of this type][1]. In our example, we will serve files
-    from the `public` route.
-
-    If an attacker requests the following URL from our server, it will in
-    turn leak the sensitive private key of the root user.
-
-        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
-
-    **Note** `%2e` is the URL encoded version of `.` (dot).
-
-    * **Writing arbitrary files**\: Allows the attacker to create or replace
-      existing files. This type of vulnerability is also known as
-      `Zip-Slip`.
-
-    One way to achieve this is by using a malicious `zip` archive that holds
-    path traversal filenames. When each filename in the zip archive gets
-    concatenated to the target extraction folder, without validation, the
-    final path ends up outside of the target folder. If an executable or a
-    configuration file is overwritten with a file containing malicious code,
-    the problem can turn into an arbitrary code execution issue quite
-    easily.
-
-    The following is an example of a `zip` archive with one benign file and
-    one malicious file. Extracting the malicious file will result in
-    traversing out of the target folder, ending up in `/root/.ssh/`
-    overwriting the `authorized_keys` file:
-
-        2018-04-15 22:04:29 .....           19           19  good.txt
-        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
-
-
-
-    [1]: https://snyk.io/vuln/npm:st:20140206
-    \nA Directory Traversal attack (also known as path traversal) aims to
-    access files and directories that are stored outside the intended
-    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
-    its variations, or by using absolute file paths, it may be possible to
-    access arbitrary files and directories stored on file system, including
-    application source code, configuration, and other critical system files.
-
-    Directory Traversal vulnerabilities can be generally divided into two
-    types:
-
-    * **Information Disclosure**\: Allows the attacker to gain information
-      about the folder structure or read the contents of sensitive files on
-      the system.
-
-    `st` is a module for serving static files on web pages, and contains a
-    [vulnerability of this type][1]. In our example, we will serve files
-    from the `public` route.
-
-    If an attacker requests the following URL from our server, it will in
-    turn leak the sensitive private key of the root user.
-
-        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
-
-    **Note** `%2e` is the URL encoded version of `.` (dot).
-
-    * **Writing arbitrary files**\: Allows the attacker to create or replace
-      existing files. This type of vulnerability is also known as
-      `Zip-Slip`.
-
-    One way to achieve this is by using a malicious `zip` archive that holds
-    path traversal filenames. When each filename in the zip archive gets
-    concatenated to the target extraction folder, without validation, the
-    final path ends up outside of the target folder. If an executable or a
-    configuration file is overwritten with a file containing malicious code,
-    the problem can turn into an arbitrary code execution issue quite
-    easily.
-
-    The following is an example of a `zip` archive with one benign file and
-    one malicious file. Extracting the malicious file will result in
-    traversing out of the target folder, ending up in `/root/.ssh/`
-    overwriting the `authorized_keys` file:
-
-        2018-04-15 22:04:29 .....           19           19  good.txt
-        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
-
-
-
-    [1]: https://snyk.io/vuln/npm:st:20140206
-    \nA Directory Traversal attack (also known as path traversal) aims to
-    access files and directories that are stored outside the intended
-    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
-    its variations, or by using absolute file paths, it may be possible to
-    access arbitrary files and directories stored on file system, including
-    application source code, configuration, and other critical system files.
-
-    Directory Traversal vulnerabilities can be generally divided into two
-    types:
-
-    * **Information Disclosure**\: Allows the attacker to gain information
-      about the folder structure or read the contents of sensitive files on
-      the system.
-
-    `st` is a module for serving static files on web pages, and contains a
-    [vulnerability of this type][1]. In our example, we will serve files
-    from the `public` route.
-
-    If an attacker requests the following URL from our server, it will in
-    turn leak the sensitive private key of the root user.
-
-        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
-
-    **Note** `%2e` is the URL encoded version of `.` (dot).
-
-    * **Writing arbitrary files**\: Allows the attacker to create or replace
-      existing files. This type of vulnerability is also known as
-      `Zip-Slip`.
-
-    One way to achieve this is by using a malicious `zip` archive that holds
-    path traversal filenames. When each filename in the zip archive gets
-    concatenated to the target extraction folder, without validation, the
-    final path ends up outside of the target folder. If an executable or a
-    configuration file is overwritten with a file containing malicious code,
-    the problem can turn into an arbitrary code execution issue quite
-    easily.
-
-    The following is an example of a `zip` archive with one benign file and
-    one malicious file. Extracting the malicious file will result in
-    traversing out of the target folder, ending up in `/root/.ssh/`
-    overwriting the `authorized_keys` file:
-
-        2018-04-15 22:04:29 .....           19           19  good.txt
-        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
-
-
-
-    [1]: https://snyk.io/vuln/npm:st:20140206
-    \nA Directory Traversal attack (also known as path traversal) aims to
-    access files and directories that are stored outside the intended
-    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
-    its variations, or by using absolute file paths, it may be possible to
-    access arbitrary files and directories stored on file system, including
-    application source code, configuration, and other critical system files.
-
-    Directory Traversal vulnerabilities can be generally divided into two
-    types:
-
-    * **Information Disclosure**\: Allows the attacker to gain information
-      about the folder structure or read the contents of sensitive files on
-      the system.
-
-    `st` is a module for serving static files on web pages, and contains a
-    [vulnerability of this type][1]. In our example, we will serve files
-    from the `public` route.
-
-    If an attacker requests the following URL from our server, it will in
-    turn leak the sensitive private key of the root user.
-
-        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
-
-    **Note** `%2e` is the URL encoded version of `.` (dot).
-
-    * **Writing arbitrary files**\: Allows the attacker to create or replace
-      existing files. This type of vulnerability is also known as
-      `Zip-Slip`.
-
-    One way to achieve this is by using a malicious `zip` archive that holds
-    path traversal filenames. When each filename in the zip archive gets
-    concatenated to the target extraction folder, without validation, the
-    final path ends up outside of the target folder. If an executable or a
-    configuration file is overwritten with a file containing malicious code,
-    the problem can turn into an arbitrary code execution issue quite
-    easily.
-
-    The following is an example of a `zip` archive with one benign file and
-    one malicious file. Extracting the malicious file will result in
-    traversing out of the target folder, ending up in `/root/.ssh/`
-    overwriting the `authorized_keys` file:
-
-        2018-04-15 22:04:29 .....           19           19  good.txt
-        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
-
-
-
-    [1]: https://snyk.io/vuln/npm:st:20140206
-    \nA Directory Traversal attack (also known as path traversal) aims to
-    access files and directories that are stored outside the intended
-    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
-    its variations, or by using absolute file paths, it may be possible to
-    access arbitrary files and directories stored on file system, including
-    application source code, configuration, and other critical system files.
-
-    Directory Traversal vulnerabilities can be generally divided into two
-    types:
-
-    * **Information Disclosure**\: Allows the attacker to gain information
-      about the folder structure or read the contents of sensitive files on
-      the system.
-
-    `st` is a module for serving static files on web pages, and contains a
-    [vulnerability of this type][1]. In our example, we will serve files
-    from the `public` route.
-
-    If an attacker requests the following URL from our server, it will in
-    turn leak the sensitive private key of the root user.
-
-        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
-
-    **Note** `%2e` is the URL encoded version of `.` (dot).
-
-    * **Writing arbitrary files**\: Allows the attacker to create or replace
-      existing files. This type of vulnerability is also known as
-      `Zip-Slip`.
-
-    One way to achieve this is by using a malicious `zip` archive that holds
-    path traversal filenames. When each filename in the zip archive gets
-    concatenated to the target extraction folder, without validation, the
-    final path ends up outside of the target folder. If an executable or a
-    configuration file is overwritten with a file containing malicious code,
-    the problem can turn into an arbitrary code execution issue quite
-    easily.
-
-    The following is an example of a `zip` archive with one benign file and
-    one malicious file. Extracting the malicious file will result in
-    traversing out of the target folder, ending up in `/root/.ssh/`
-    overwriting the `authorized_keys` file:
-
-        2018-04-15 22:04:29 .....           19           19  good.txt
-        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
-
-
-
-    [1]: https://snyk.io/vuln/npm:st:20140206
-    \nA Directory Traversal attack (also known as path traversal) aims to
-    access files and directories that are stored outside the intended
-    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
-    its variations, or by using absolute file paths, it may be possible to
-    access arbitrary files and directories stored on file system, including
-    application source code, configuration, and other critical system files.
-
-    Directory Traversal vulnerabilities can be generally divided into two
-    types:
-
-    * **Information Disclosure**\: Allows the attacker to gain information
-      about the folder structure or read the contents of sensitive files on
-      the system.
-
-    `st` is a module for serving static files on web pages, and contains a
-    [vulnerability of this type][1]. In our example, we will serve files
-    from the `public` route.
-
-    If an attacker requests the following URL from our server, it will in
-    turn leak the sensitive private key of the root user.
-
-        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
-
-    **Note** `%2e` is the URL encoded version of `.` (dot).
-
-    * **Writing arbitrary files**\: Allows the attacker to create or replace
-      existing files. This type of vulnerability is also known as
-      `Zip-Slip`.
-
-    One way to achieve this is by using a malicious `zip` archive that holds
-    path traversal filenames. When each filename in the zip archive gets
-    concatenated to the target extraction folder, without validation, the
-    final path ends up outside of the target folder. If an executable or a
-    configuration file is overwritten with a file containing malicious code,
-    the problem can turn into an arbitrary code execution issue quite
-    easily.
-
-    The following is an example of a `zip` archive with one benign file and
-    one malicious file. Extracting the malicious file will result in
-    traversing out of the target folder, ending up in `/root/.ssh/`
-    overwriting the `authorized_keys` file:
-
-        2018-04-15 22:04:29 .....           19           19  good.txt
-        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
-
-
-
-    [1]: https://snyk.io/vuln/npm:st:20140206
-    \nA Directory Traversal attack (also known as path traversal) aims to
-    access files and directories that are stored outside the intended
-    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
-    its variations, or by using absolute file paths, it may be possible to
-    access arbitrary files and directories stored on file system, including
-    application source code, configuration, and other critical system files.
-
-    Directory Traversal vulnerabilities can be generally divided into two
-    types:
-
-    * **Information Disclosure**\: Allows the attacker to gain information
-      about the folder structure or read the contents of sensitive files on
-      the system.
-
-    `st` is a module for serving static files on web pages, and contains a
-    [vulnerability of this type][1]. In our example, we will serve files
-    from the `public` route.
-
-    If an attacker requests the following URL from our server, it will in
-    turn leak the sensitive private key of the root user.
-
-        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
-
-    **Note** `%2e` is the URL encoded version of `.` (dot).
-
-    * **Writing arbitrary files**\: Allows the attacker to create or replace
-      existing files. This type of vulnerability is also known as
-      `Zip-Slip`.
-
-    One way to achieve this is by using a malicious `zip` archive that holds
-    path traversal filenames. When each filename in the zip archive gets
-    concatenated to the target extraction folder, without validation, the
-    final path ends up outside of the target folder. If an executable or a
-    configuration file is overwritten with a file containing malicious code,
-    the problem can turn into an arbitrary code execution issue quite
-    easily.
-
-    The following is an example of a `zip` archive with one benign file and
-    one malicious file. Extracting the malicious file will result in
-    traversing out of the target folder, ending up in `/root/.ssh/`
-    overwriting the `authorized_keys` file:
-
-        2018-04-15 22:04:29 .....           19           19  good.txt
-        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
-
-
-
-    [1]: https://snyk.io/vuln/npm:st:20140206
-    \nA Directory Traversal attack (also known as path traversal) aims to
-    access files and directories that are stored outside the intended
-    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
-    its variations, or by using absolute file paths, it may be possible to
-    access arbitrary files and directories stored on file system, including
-    application source code, configuration, and other critical system files.
-
-    Directory Traversal vulnerabilities can be generally divided into two
-    types:
-
-    * **Information Disclosure**\: Allows the attacker to gain information
-      about the folder structure or read the contents of sensitive files on
-      the system.
-
-    `st` is a module for serving static files on web pages, and contains a
-    [vulnerability of this type][1]. In our example, we will serve files
-    from the `public` route.
-
-    If an attacker requests the following URL from our server, it will in
-    turn leak the sensitive private key of the root user.
-
-        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
-
-    **Note** `%2e` is the URL encoded version of `.` (dot).
-
-    * **Writing arbitrary files**\: Allows the attacker to create or replace
-      existing files. This type of vulnerability is also known as
-      `Zip-Slip`.
-
-    One way to achieve this is by using a malicious `zip` archive that holds
-    path traversal filenames. When each filename in the zip archive gets
-    concatenated to the target extraction folder, without validation, the
-    final path ends up outside of the target folder. If an executable or a
-    configuration file is overwritten with a file containing malicious code,
-    the problem can turn into an arbitrary code execution issue quite
-    easily.
-
-    The following is an example of a `zip` archive with one benign file and
-    one malicious file. Extracting the malicious file will result in
-    traversing out of the target folder, ending up in `/root/.ssh/`
-    overwriting the `authorized_keys` file:
-
-        2018-04-15 22:04:29 .....           19           19  good.txt
-        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
-
-
-
-    [1]: https://snyk.io/vuln/npm:st:20140206
-    \nA Directory Traversal attack (also known as path traversal) aims to
-    access files and directories that are stored outside the intended
-    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
-    its variations, or by using absolute file paths, it may be possible to
-    access arbitrary files and directories stored on file system, including
-    application source code, configuration, and other critical system files.
-
-    Directory Traversal vulnerabilities can be generally divided into two
-    types:
-
-    * **Information Disclosure**\: Allows the attacker to gain information
-      about the folder structure or read the contents of sensitive files on
-      the system.
-
-    `st` is a module for serving static files on web pages, and contains a
-    [vulnerability of this type][1]. In our example, we will serve files
-    from the `public` route.
-
-    If an attacker requests the following URL from our server, it will in
-    turn leak the sensitive private key of the root user.
-
-        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
-
-    **Note** `%2e` is the URL encoded version of `.` (dot).
-
-    * **Writing arbitrary files**\: Allows the attacker to create or replace
-      existing files. This type of vulnerability is also known as
-      `Zip-Slip`.
-
-    One way to achieve this is by using a malicious `zip` archive that holds
-    path traversal filenames. When each filename in the zip archive gets
-    concatenated to the target extraction folder, without validation, the
-    final path ends up outside of the target folder. If an executable or a
-    configuration file is overwritten with a file containing malicious code,
-    the problem can turn into an arbitrary code execution issue quite
-    easily.
-
-    The following is an example of a `zip` archive with one benign file and
-    one malicious file. Extracting the malicious file will result in
-    traversing out of the target folder, ending up in `/root/.ssh/`
-    overwriting the `authorized_keys` file:
-
-        2018-04-15 22:04:29 .....           19           19  good.txt
-        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
-
-
-
-    [1]: https://snyk.io/vuln/npm:st:20140206
-    \nA Directory Traversal attack (also known as path traversal) aims to
-    access files and directories that are stored outside the intended
-    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
-    its variations, or by using absolute file paths, it may be possible to
-    access arbitrary files and directories stored on file system, including
-    application source code, configuration, and other critical system files.
-
-    Directory Traversal vulnerabilities can be generally divided into two
-    types:
-
-    * **Information Disclosure**\: Allows the attacker to gain information
-      about the folder structure or read the contents of sensitive files on
-      the system.
-
-    `st` is a module for serving static files on web pages, and contains a
-    [vulnerability of this type][1]. In our example, we will serve files
-    from the `public` route.
-
-    If an attacker requests the following URL from our server, it will in
-    turn leak the sensitive private key of the root user.
-
-        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
-
-    **Note** `%2e` is the URL encoded version of `.` (dot).
-
-    * **Writing arbitrary files**\: Allows the attacker to create or replace
-      existing files. This type of vulnerability is also known as
-      `Zip-Slip`.
-
-    One way to achieve this is by using a malicious `zip` archive that holds
-    path traversal filenames. When each filename in the zip archive gets
-    concatenated to the target extraction folder, without validation, the
-    final path ends up outside of the target folder. If an executable or a
-    configuration file is overwritten with a file containing malicious code,
-    the problem can turn into an arbitrary code execution issue quite
-    easily.
-
-    The following is an example of a `zip` archive with one benign file and
-    one malicious file. Extracting the malicious file will result in
-    traversing out of the target folder, ending up in `/root/.ssh/`
-    overwriting the `authorized_keys` file:
-
-        2018-04-15 22:04:29 .....           19           19  good.txt
-        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
-
-
-
-    [1]: https://snyk.io/vuln/npm:st:20140206
     \nA Directory Traversal attack (also known as path traversal) aims to
     access files and directories that are stored outside the intended
     folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
@@ -629,36 +96,19 @@
   - CVE-2014-7816
   cwe:
   - CWE-22
+  disclosed_date: 2014-10-27
+  created_date: 2014-10-27
+  last_modified_date: 2014-10-27
   credit:
   - Unknown
   references:
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-7816
   - https://bugzilla.redhat.com/CVE-2014-7816
   source_url: https://snyk.io/vuln/SNYK-JAVA-IOUNDERTOW-30101
-- id: snykio:maven:io.undertow:undertow-core:2016-09-08
+- id: snykio:maven:io.undertow:undertow-core:CVE-2016-4993
   title: CRLF Injection
   description: |
     [io.undertow:undertow-core][1] is a Java web server based on
-    non-blocking IO.
-
-    Affected versions of this package are vulnerable to CRLF Injection. A
-    Malicious user could inject arbitrary HTTP headers and conduct HTTP
-    response splitting attacks via unspecified vectors.
-
-
-
-    [1]: https://github.com/undertow-io/undertow
-    \n[io.undertow:undertow-core][1] is a Java web server based on
-    non-blocking IO.
-
-    Affected versions of this package are vulnerable to CRLF Injection. A
-    Malicious user could inject arbitrary HTTP headers and conduct HTTP
-    response splitting attacks via unspecified vectors.
-
-
-
-    [1]: https://github.com/undertow-io/undertow
-    \n[io.undertow:undertow-core][1] is a Java web server based on
     non-blocking IO.
 
     Affected versions of this package are vulnerable to CRLF Injection. A
@@ -678,12 +128,15 @@
   - CVE-2016-4993
   cwe:
   - CWE-93
+  disclosed_date: 2016-09-08
+  created_date: 2016-09-08
+  last_modified_date: 2016-09-08
   credit:
   - Unknown
   references:
   - https://access.redhat.com/security/cve/CVE-2016-4993
   source_url: https://snyk.io/vuln/SNYK-JAVA-IOUNDERTOW-30102
-- id: snykio:maven:io.undertow:undertow-core:2016-09-15
+- id: snykio:maven:io.undertow:undertow-core:CVE-2016-7046
   title: Denial of Service (DoS)
   description: |+
     [`io.undertow:undertow-core`][1] Red Hat JBoss Enterprise Application
@@ -694,170 +147,6 @@
 
 
     [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22undertow-core%22
-    \n[`io.undertow:undertow-core`][1] Red Hat JBoss Enterprise Application
-    Platform (EAP) 7, when operating as a reverse-proxy with default buffer
-    sizes, allows remote attackers to cause a denial of service (CPU and
-    disk consumption) via a long URL.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22undertow-core%22
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
     \nDenial of Service (DoS) describes a family of attacks, all aimed at
     making a system inaccessible to its intended and legitimate users.
 
@@ -895,128 +184,54 @@
   - CVE-2016-7046
   cwe:
   - CWE-399
+  disclosed_date: 2016-09-15
+  created_date: 2016-09-15
+  last_modified_date: 2016-09-15
   credit:
   - Unknown
   references:
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-7046
   - https://access.redhat.com/security/cve/CVE-2016-7046
   source_url: https://snyk.io/vuln/SNYK-JAVA-IOUNDERTOW-30103
-- id: snykio:maven:io.undertow:undertow-core:2018-01-03
-  title: HTTP Request Smuggling
+- id: snykio:maven:io.undertow:undertow-core:CVE-2017-12196
+  title: Man-in-the-Middle (MitM)
   description: |
     [io.undertow:undertow-core][1] is a Java web server based on
     non-blocking IO.
 
-    Affected versions of this package are vulnerable to HTTP Request
-    Smuggling. The code that parsed the HTTP request line allowed invalid
-    characters in the query string and path parameters. By manipulating the
-    HTTP response the attacker could poison a web-cache, perform an XSS
-    attack, or obtain sensitive information from requests other than their
-    own.
-
-    This is due to an incomplete fix for [CVE-2017-2666][2].
+    Affected versions of this package are vulnerable to Man-in-the-Middle
+    (MitM) attacks. When using a `Digest` authentication, the server does
+    not ensure that value of the `URI` attribute in the \"Authorization\"
+    header matches URI in HTTP request line. An attacker can use this attack
+    vector in order to access desired content on a server.
 
 
 
     [1]: https://github.com/undertow-io/undertow
-    [2]: https://snyk.io/vuln/SNYK-JAVA-IOUNDERTOW-31632
-    \n[io.undertow:undertow-core][1] is a Java web server based on
-    non-blocking IO.
-
-    Affected versions of this package are vulnerable to HTTP Request
-    Smuggling. The code that parsed the HTTP request line allowed invalid
-    characters in the query string and path parameters. By manipulating the
-    HTTP response the attacker could poison a web-cache, perform an XSS
-    attack, or obtain sensitive information from requests other than their
-    own.
-
-    This is due to an incomplete fix for [CVE-2017-2666][2].
-
-
-
-    [1]: https://github.com/undertow-io/undertow
-    [2]: https://snyk.io/vuln/SNYK-JAVA-IOUNDERTOW-31632
-    \n[io.undertow:undertow-core][1] is a Java web server based on
-    non-blocking IO.
-
-    Affected versions of this package are vulnerable to HTTP Request
-    Smuggling. The code that parsed the HTTP request line allowed invalid
-    characters in the query string and path parameters. By manipulating the
-    HTTP response the attacker could poison a web-cache, perform an XSS
-    attack, or obtain sensitive information from requests other than their
-    own.
-
-    This is due to an incomplete fix for [CVE-2017-2666][2].
-
-
-
-    [1]: https://github.com/undertow-io/undertow
-    [2]: https://snyk.io/vuln/SNYK-JAVA-IOUNDERTOW-31632
-    \n[io.undertow:undertow-core][1] is a Java web server based on
-    non-blocking IO.
-
-    Affected versions of this package are vulnerable to HTTP Request
-    Smuggling. The code that parsed the HTTP request line allowed invalid
-    characters in the query string and path parameters. By manipulating the
-    HTTP response the attacker could poison a web-cache, perform an XSS
-    attack, or obtain sensitive information from requests other than their
-    own.
-
-    This is due to an incomplete fix for [CVE-2017-2666][2].
-
-
-
-    [1]: https://github.com/undertow-io/undertow
-    [2]: https://snyk.io/vuln/SNYK-JAVA-IOUNDERTOW-31632
   affected_package: io.undertow:undertow-core
   vulnerable_versions:
-  - ">= 1.4.0 < 1.4.17.Final"
-  - ">= 1.3.0 < 1.3.31.Final"
-  - ">= 2.0.0-a < 2.0.0.Alpha2"
+  - "< 1.4.18.SP1"
+  - ">= 1.4.20 < 1.4.24.Final"
+  - ">= 2 < 2.0.2.Final"
   severity: medium
   package_manager: maven
   cve:
-  - CVE-2017-12165
-  - CVE-2017-7559
+  - CVE-2017-12196
   cwe:
-  - CWE-200
+  - CWE-287
+  disclosed_date: 2018-03-12
+  created_date: 2018-04-01
+  last_modified_date: 2018-04-01
   credit:
-  - Stuart Douglas
+  - Jan Stourac
   references:
-  - https://nvd.nist.gov/vuln/detail/CVE-2017-7559
-  - https://bugzilla.redhat.com/show_bug.cgi?id=1481665
-  - https://issues.jboss.org/browse/UNDERTOW-1251
-  source_url: https://snyk.io/vuln/SNYK-JAVA-IOUNDERTOW-32070
-- id: snykio:maven:io.undertow:undertow-core:2018-01-03
+  - https://bugzilla.redhat.com/show_bug.cgi?id=1503055
+  - https://issues.jboss.org/browse/UNDERTOW-1190
+  source_url: https://snyk.io/vuln/SNYK-JAVA-IOUNDERTOW-32142
+- id: snykio:maven:io.undertow:undertow-core:CVE-2017-2666
   title: HTTP Request Smuggling
   description: |
     [io.undertow:undertow-core][1] is a Java web server based on
-    non-blocking IO.
-
-    Affected versions of this package are vulnerable to HTTP Request
-    Smuggling. The code that parsed the HTTP request line allowed invalid
-    characters in the query string and path parameters. By manipulating the
-    HTTP response the attacker could poison a web-cache, perform an XSS
-    attack, or obtain sensitive information from requests other than their
-    own.
-
-
-
-    [1]: https://github.com/undertow-io/undertow
-    \n[io.undertow:undertow-core][1] is a Java web server based on
-    non-blocking IO.
-
-    Affected versions of this package are vulnerable to HTTP Request
-    Smuggling. The code that parsed the HTTP request line allowed invalid
-    characters in the query string and path parameters. By manipulating the
-    HTTP response the attacker could poison a web-cache, perform an XSS
-    attack, or obtain sensitive information from requests other than their
-    own.
-
-
-
-    [1]: https://github.com/undertow-io/undertow
-    \n[io.undertow:undertow-core][1] is a Java web server based on
     non-blocking IO.
 
     Affected versions of this package are vulnerable to HTTP Request
@@ -1040,13 +255,114 @@
   - CVE-2017-2666
   cwe:
   - CWE-200
+  disclosed_date: 2018-01-03
+  created_date: 2018-02-12
+  last_modified_date: 2018-02-12
   credit:
   - Stuart Douglas
   references:
   - https://access.redhat.com/security/cve/cve-2017-2666
   - https://bugzilla.redhat.com/show_bug.cgi?id=1436163
   source_url: https://snyk.io/vuln/SNYK-JAVA-IOUNDERTOW-31632
-- id: snykio:maven:io.undertow:undertow-core:2018-01-24
+- id: snykio:maven:io.undertow:undertow-core:CVE-2017-2670
+  title: Denial of Service (DoS)
+  description: |+
+    [io.undertow:undertow-core][1] is a Java web server based on
+    non-blocking IO.
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS) attacks. Due to non-clean `TCP` close, the `Websocket` server gets
+    into infinite loop on every IO thread.
+
+
+
+    [1]: https://github.com/undertow-io/undertow
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+  affected_package: io.undertow:undertow-core
+  vulnerable_versions:
+  - "< 2.0.0.Beta1"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2017-2670
+  cwe:
+  - CWE-400
+  disclosed_date: 2018-07-27
+  created_date: 2018-07-29
+  last_modified_date: 2018-07-29
+  credit:
+  - Ryan Moak
+  references:
+  - https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2017-2670
+  - https://github.com/undertow-io/undertow/commit/9bfe9fbbb595d51157b61693f072895f7dbadd1d
+  source_url: https://snyk.io/vuln/SNYK-JAVA-IOUNDERTOW-32442
+- id: snykio:maven:io.undertow:undertow-core:CVE-2017-7559
+  title: HTTP Request Smuggling
+  description: |
+    [io.undertow:undertow-core][1] is a Java web server based on
+    non-blocking IO.
+
+    Affected versions of this package are vulnerable to HTTP Request
+    Smuggling. The code that parsed the HTTP request line allowed invalid
+    characters in the query string and path parameters. By manipulating the
+    HTTP response the attacker could poison a web-cache, perform an XSS
+    attack, or obtain sensitive information from requests other than their
+    own.
+
+    This is due to an incomplete fix for [CVE-2017-2666][2].
+
+
+
+    [1]: https://github.com/undertow-io/undertow
+    [2]: https://snyk.io/vuln/SNYK-JAVA-IOUNDERTOW-31632
+  affected_package: io.undertow:undertow-core
+  vulnerable_versions:
+  - ">= 1.4.0 < 1.4.17.Final"
+  - ">= 1.3.0 < 1.3.31.Final"
+  - ">= 2.0.0-a < 2.0.0.Alpha2"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2017-7559
+  - CVE-2017-12165
+  cwe:
+  - CWE-200
+  disclosed_date: 2018-01-03
+  created_date: 2018-02-12
+  last_modified_date: 2018-02-12
+  credit:
+  - Stuart Douglas
+  references:
+  - https://nvd.nist.gov/vuln/detail/CVE-2017-7559
+  - https://bugzilla.redhat.com/show_bug.cgi?id=1481665
+  - https://issues.jboss.org/browse/UNDERTOW-1251
+  source_url: https://snyk.io/vuln/SNYK-JAVA-IOUNDERTOW-32070
+- id: snykio:maven:io.undertow:undertow-core:CVE-2018-1048
   title: Directory Traversal
   description: |
     [io.undertow:undertow-core][1] is a Java web server based on
@@ -1060,556 +376,6 @@
 
 
     [1]: http://undertow.io/
-    \n[io.undertow:undertow-core][1] is a Java web server based on
-    non-blocking IO.
-
-    Affected versions of this package are vulnerable to Directory Traversal.
-    It does not use the ALLOW\_ENCODED\_SLASH option, allowing the slash
-    characters encoded in the url. This may lead to path traversal and
-    information disclosure of arbitrary local files.
-
-
-
-    [1]: http://undertow.io/
-    \n[io.undertow:undertow-core][1] is a Java web server based on
-    non-blocking IO.
-
-    Affected versions of this package are vulnerable to Directory Traversal.
-    It does not use the ALLOW\_ENCODED\_SLASH option, allowing the slash
-    characters encoded in the url. This may lead to path traversal and
-    information disclosure of arbitrary local files.
-
-
-
-    [1]: http://undertow.io/
-    \nA Directory Traversal attack (also known as path traversal) aims to
-    access files and directories that are stored outside the intended
-    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
-    its variations, or by using absolute file paths, it may be possible to
-    access arbitrary files and directories stored on file system, including
-    application source code, configuration, and other critical system files.
-
-    Directory Traversal vulnerabilities can be generally divided into two
-    types:
-
-    * **Information Disclosure**\: Allows the attacker to gain information
-      about the folder structure or read the contents of sensitive files on
-      the system.
-
-    `st` is a module for serving static files on web pages, and contains a
-    [vulnerability of this type][1]. In our example, we will serve files
-    from the `public` route.
-
-    If an attacker requests the following URL from our server, it will in
-    turn leak the sensitive private key of the root user.
-
-        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
-
-    **Note** `%2e` is the URL encoded version of `.` (dot).
-
-    * **Writing arbitrary files**\: Allows the attacker to create or replace
-      existing files. This type of vulnerability is also known as
-      `Zip-Slip`.
-
-    One way to achieve this is by using a malicious `zip` archive that holds
-    path traversal filenames. When each filename in the zip archive gets
-    concatenated to the target extraction folder, without validation, the
-    final path ends up outside of the target folder. If an executable or a
-    configuration file is overwritten with a file containing malicious code,
-    the problem can turn into an arbitrary code execution issue quite
-    easily.
-
-    The following is an example of a `zip` archive with one benign file and
-    one malicious file. Extracting the malicious file will result in
-    traversing out of the target folder, ending up in `/root/.ssh/`
-    overwriting the `authorized_keys` file:
-
-        2018-04-15 22:04:29 .....           19           19  good.txt
-        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
-
-
-
-    [1]: https://snyk.io/vuln/npm:st:20140206
-    \nA Directory Traversal attack (also known as path traversal) aims to
-    access files and directories that are stored outside the intended
-    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
-    its variations, or by using absolute file paths, it may be possible to
-    access arbitrary files and directories stored on file system, including
-    application source code, configuration, and other critical system files.
-
-    Directory Traversal vulnerabilities can be generally divided into two
-    types:
-
-    * **Information Disclosure**\: Allows the attacker to gain information
-      about the folder structure or read the contents of sensitive files on
-      the system.
-
-    `st` is a module for serving static files on web pages, and contains a
-    [vulnerability of this type][1]. In our example, we will serve files
-    from the `public` route.
-
-    If an attacker requests the following URL from our server, it will in
-    turn leak the sensitive private key of the root user.
-
-        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
-
-    **Note** `%2e` is the URL encoded version of `.` (dot).
-
-    * **Writing arbitrary files**\: Allows the attacker to create or replace
-      existing files. This type of vulnerability is also known as
-      `Zip-Slip`.
-
-    One way to achieve this is by using a malicious `zip` archive that holds
-    path traversal filenames. When each filename in the zip archive gets
-    concatenated to the target extraction folder, without validation, the
-    final path ends up outside of the target folder. If an executable or a
-    configuration file is overwritten with a file containing malicious code,
-    the problem can turn into an arbitrary code execution issue quite
-    easily.
-
-    The following is an example of a `zip` archive with one benign file and
-    one malicious file. Extracting the malicious file will result in
-    traversing out of the target folder, ending up in `/root/.ssh/`
-    overwriting the `authorized_keys` file:
-
-        2018-04-15 22:04:29 .....           19           19  good.txt
-        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
-
-
-
-    [1]: https://snyk.io/vuln/npm:st:20140206
-    \nA Directory Traversal attack (also known as path traversal) aims to
-    access files and directories that are stored outside the intended
-    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
-    its variations, or by using absolute file paths, it may be possible to
-    access arbitrary files and directories stored on file system, including
-    application source code, configuration, and other critical system files.
-
-    Directory Traversal vulnerabilities can be generally divided into two
-    types:
-
-    * **Information Disclosure**\: Allows the attacker to gain information
-      about the folder structure or read the contents of sensitive files on
-      the system.
-
-    `st` is a module for serving static files on web pages, and contains a
-    [vulnerability of this type][1]. In our example, we will serve files
-    from the `public` route.
-
-    If an attacker requests the following URL from our server, it will in
-    turn leak the sensitive private key of the root user.
-
-        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
-
-    **Note** `%2e` is the URL encoded version of `.` (dot).
-
-    * **Writing arbitrary files**\: Allows the attacker to create or replace
-      existing files. This type of vulnerability is also known as
-      `Zip-Slip`.
-
-    One way to achieve this is by using a malicious `zip` archive that holds
-    path traversal filenames. When each filename in the zip archive gets
-    concatenated to the target extraction folder, without validation, the
-    final path ends up outside of the target folder. If an executable or a
-    configuration file is overwritten with a file containing malicious code,
-    the problem can turn into an arbitrary code execution issue quite
-    easily.
-
-    The following is an example of a `zip` archive with one benign file and
-    one malicious file. Extracting the malicious file will result in
-    traversing out of the target folder, ending up in `/root/.ssh/`
-    overwriting the `authorized_keys` file:
-
-        2018-04-15 22:04:29 .....           19           19  good.txt
-        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
-
-
-
-    [1]: https://snyk.io/vuln/npm:st:20140206
-    \nA Directory Traversal attack (also known as path traversal) aims to
-    access files and directories that are stored outside the intended
-    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
-    its variations, or by using absolute file paths, it may be possible to
-    access arbitrary files and directories stored on file system, including
-    application source code, configuration, and other critical system files.
-
-    Directory Traversal vulnerabilities can be generally divided into two
-    types:
-
-    * **Information Disclosure**\: Allows the attacker to gain information
-      about the folder structure or read the contents of sensitive files on
-      the system.
-
-    `st` is a module for serving static files on web pages, and contains a
-    [vulnerability of this type][1]. In our example, we will serve files
-    from the `public` route.
-
-    If an attacker requests the following URL from our server, it will in
-    turn leak the sensitive private key of the root user.
-
-        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
-
-    **Note** `%2e` is the URL encoded version of `.` (dot).
-
-    * **Writing arbitrary files**\: Allows the attacker to create or replace
-      existing files. This type of vulnerability is also known as
-      `Zip-Slip`.
-
-    One way to achieve this is by using a malicious `zip` archive that holds
-    path traversal filenames. When each filename in the zip archive gets
-    concatenated to the target extraction folder, without validation, the
-    final path ends up outside of the target folder. If an executable or a
-    configuration file is overwritten with a file containing malicious code,
-    the problem can turn into an arbitrary code execution issue quite
-    easily.
-
-    The following is an example of a `zip` archive with one benign file and
-    one malicious file. Extracting the malicious file will result in
-    traversing out of the target folder, ending up in `/root/.ssh/`
-    overwriting the `authorized_keys` file:
-
-        2018-04-15 22:04:29 .....           19           19  good.txt
-        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
-
-
-
-    [1]: https://snyk.io/vuln/npm:st:20140206
-    \nA Directory Traversal attack (also known as path traversal) aims to
-    access files and directories that are stored outside the intended
-    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
-    its variations, or by using absolute file paths, it may be possible to
-    access arbitrary files and directories stored on file system, including
-    application source code, configuration, and other critical system files.
-
-    Directory Traversal vulnerabilities can be generally divided into two
-    types:
-
-    * **Information Disclosure**\: Allows the attacker to gain information
-      about the folder structure or read the contents of sensitive files on
-      the system.
-
-    `st` is a module for serving static files on web pages, and contains a
-    [vulnerability of this type][1]. In our example, we will serve files
-    from the `public` route.
-
-    If an attacker requests the following URL from our server, it will in
-    turn leak the sensitive private key of the root user.
-
-        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
-
-    **Note** `%2e` is the URL encoded version of `.` (dot).
-
-    * **Writing arbitrary files**\: Allows the attacker to create or replace
-      existing files. This type of vulnerability is also known as
-      `Zip-Slip`.
-
-    One way to achieve this is by using a malicious `zip` archive that holds
-    path traversal filenames. When each filename in the zip archive gets
-    concatenated to the target extraction folder, without validation, the
-    final path ends up outside of the target folder. If an executable or a
-    configuration file is overwritten with a file containing malicious code,
-    the problem can turn into an arbitrary code execution issue quite
-    easily.
-
-    The following is an example of a `zip` archive with one benign file and
-    one malicious file. Extracting the malicious file will result in
-    traversing out of the target folder, ending up in `/root/.ssh/`
-    overwriting the `authorized_keys` file:
-
-        2018-04-15 22:04:29 .....           19           19  good.txt
-        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
-
-
-
-    [1]: https://snyk.io/vuln/npm:st:20140206
-    \nA Directory Traversal attack (also known as path traversal) aims to
-    access files and directories that are stored outside the intended
-    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
-    its variations, or by using absolute file paths, it may be possible to
-    access arbitrary files and directories stored on file system, including
-    application source code, configuration, and other critical system files.
-
-    Directory Traversal vulnerabilities can be generally divided into two
-    types:
-
-    * **Information Disclosure**\: Allows the attacker to gain information
-      about the folder structure or read the contents of sensitive files on
-      the system.
-
-    `st` is a module for serving static files on web pages, and contains a
-    [vulnerability of this type][1]. In our example, we will serve files
-    from the `public` route.
-
-    If an attacker requests the following URL from our server, it will in
-    turn leak the sensitive private key of the root user.
-
-        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
-
-    **Note** `%2e` is the URL encoded version of `.` (dot).
-
-    * **Writing arbitrary files**\: Allows the attacker to create or replace
-      existing files. This type of vulnerability is also known as
-      `Zip-Slip`.
-
-    One way to achieve this is by using a malicious `zip` archive that holds
-    path traversal filenames. When each filename in the zip archive gets
-    concatenated to the target extraction folder, without validation, the
-    final path ends up outside of the target folder. If an executable or a
-    configuration file is overwritten with a file containing malicious code,
-    the problem can turn into an arbitrary code execution issue quite
-    easily.
-
-    The following is an example of a `zip` archive with one benign file and
-    one malicious file. Extracting the malicious file will result in
-    traversing out of the target folder, ending up in `/root/.ssh/`
-    overwriting the `authorized_keys` file:
-
-        2018-04-15 22:04:29 .....           19           19  good.txt
-        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
-
-
-
-    [1]: https://snyk.io/vuln/npm:st:20140206
-    \nA Directory Traversal attack (also known as path traversal) aims to
-    access files and directories that are stored outside the intended
-    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
-    its variations, or by using absolute file paths, it may be possible to
-    access arbitrary files and directories stored on file system, including
-    application source code, configuration, and other critical system files.
-
-    Directory Traversal vulnerabilities can be generally divided into two
-    types:
-
-    * **Information Disclosure**\: Allows the attacker to gain information
-      about the folder structure or read the contents of sensitive files on
-      the system.
-
-    `st` is a module for serving static files on web pages, and contains a
-    [vulnerability of this type][1]. In our example, we will serve files
-    from the `public` route.
-
-    If an attacker requests the following URL from our server, it will in
-    turn leak the sensitive private key of the root user.
-
-        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
-
-    **Note** `%2e` is the URL encoded version of `.` (dot).
-
-    * **Writing arbitrary files**\: Allows the attacker to create or replace
-      existing files. This type of vulnerability is also known as
-      `Zip-Slip`.
-
-    One way to achieve this is by using a malicious `zip` archive that holds
-    path traversal filenames. When each filename in the zip archive gets
-    concatenated to the target extraction folder, without validation, the
-    final path ends up outside of the target folder. If an executable or a
-    configuration file is overwritten with a file containing malicious code,
-    the problem can turn into an arbitrary code execution issue quite
-    easily.
-
-    The following is an example of a `zip` archive with one benign file and
-    one malicious file. Extracting the malicious file will result in
-    traversing out of the target folder, ending up in `/root/.ssh/`
-    overwriting the `authorized_keys` file:
-
-        2018-04-15 22:04:29 .....           19           19  good.txt
-        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
-
-
-
-    [1]: https://snyk.io/vuln/npm:st:20140206
-    \nA Directory Traversal attack (also known as path traversal) aims to
-    access files and directories that are stored outside the intended
-    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
-    its variations, or by using absolute file paths, it may be possible to
-    access arbitrary files and directories stored on file system, including
-    application source code, configuration, and other critical system files.
-
-    Directory Traversal vulnerabilities can be generally divided into two
-    types:
-
-    * **Information Disclosure**\: Allows the attacker to gain information
-      about the folder structure or read the contents of sensitive files on
-      the system.
-
-    `st` is a module for serving static files on web pages, and contains a
-    [vulnerability of this type][1]. In our example, we will serve files
-    from the `public` route.
-
-    If an attacker requests the following URL from our server, it will in
-    turn leak the sensitive private key of the root user.
-
-        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
-
-    **Note** `%2e` is the URL encoded version of `.` (dot).
-
-    * **Writing arbitrary files**\: Allows the attacker to create or replace
-      existing files. This type of vulnerability is also known as
-      `Zip-Slip`.
-
-    One way to achieve this is by using a malicious `zip` archive that holds
-    path traversal filenames. When each filename in the zip archive gets
-    concatenated to the target extraction folder, without validation, the
-    final path ends up outside of the target folder. If an executable or a
-    configuration file is overwritten with a file containing malicious code,
-    the problem can turn into an arbitrary code execution issue quite
-    easily.
-
-    The following is an example of a `zip` archive with one benign file and
-    one malicious file. Extracting the malicious file will result in
-    traversing out of the target folder, ending up in `/root/.ssh/`
-    overwriting the `authorized_keys` file:
-
-        2018-04-15 22:04:29 .....           19           19  good.txt
-        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
-
-
-
-    [1]: https://snyk.io/vuln/npm:st:20140206
-    \nA Directory Traversal attack (also known as path traversal) aims to
-    access files and directories that are stored outside the intended
-    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
-    its variations, or by using absolute file paths, it may be possible to
-    access arbitrary files and directories stored on file system, including
-    application source code, configuration, and other critical system files.
-
-    Directory Traversal vulnerabilities can be generally divided into two
-    types:
-
-    * **Information Disclosure**\: Allows the attacker to gain information
-      about the folder structure or read the contents of sensitive files on
-      the system.
-
-    `st` is a module for serving static files on web pages, and contains a
-    [vulnerability of this type][1]. In our example, we will serve files
-    from the `public` route.
-
-    If an attacker requests the following URL from our server, it will in
-    turn leak the sensitive private key of the root user.
-
-        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
-
-    **Note** `%2e` is the URL encoded version of `.` (dot).
-
-    * **Writing arbitrary files**\: Allows the attacker to create or replace
-      existing files. This type of vulnerability is also known as
-      `Zip-Slip`.
-
-    One way to achieve this is by using a malicious `zip` archive that holds
-    path traversal filenames. When each filename in the zip archive gets
-    concatenated to the target extraction folder, without validation, the
-    final path ends up outside of the target folder. If an executable or a
-    configuration file is overwritten with a file containing malicious code,
-    the problem can turn into an arbitrary code execution issue quite
-    easily.
-
-    The following is an example of a `zip` archive with one benign file and
-    one malicious file. Extracting the malicious file will result in
-    traversing out of the target folder, ending up in `/root/.ssh/`
-    overwriting the `authorized_keys` file:
-
-        2018-04-15 22:04:29 .....           19           19  good.txt
-        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
-
-
-
-    [1]: https://snyk.io/vuln/npm:st:20140206
-    \nA Directory Traversal attack (also known as path traversal) aims to
-    access files and directories that are stored outside the intended
-    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
-    its variations, or by using absolute file paths, it may be possible to
-    access arbitrary files and directories stored on file system, including
-    application source code, configuration, and other critical system files.
-
-    Directory Traversal vulnerabilities can be generally divided into two
-    types:
-
-    * **Information Disclosure**\: Allows the attacker to gain information
-      about the folder structure or read the contents of sensitive files on
-      the system.
-
-    `st` is a module for serving static files on web pages, and contains a
-    [vulnerability of this type][1]. In our example, we will serve files
-    from the `public` route.
-
-    If an attacker requests the following URL from our server, it will in
-    turn leak the sensitive private key of the root user.
-
-        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
-
-    **Note** `%2e` is the URL encoded version of `.` (dot).
-
-    * **Writing arbitrary files**\: Allows the attacker to create or replace
-      existing files. This type of vulnerability is also known as
-      `Zip-Slip`.
-
-    One way to achieve this is by using a malicious `zip` archive that holds
-    path traversal filenames. When each filename in the zip archive gets
-    concatenated to the target extraction folder, without validation, the
-    final path ends up outside of the target folder. If an executable or a
-    configuration file is overwritten with a file containing malicious code,
-    the problem can turn into an arbitrary code execution issue quite
-    easily.
-
-    The following is an example of a `zip` archive with one benign file and
-    one malicious file. Extracting the malicious file will result in
-    traversing out of the target folder, ending up in `/root/.ssh/`
-    overwriting the `authorized_keys` file:
-
-        2018-04-15 22:04:29 .....           19           19  good.txt
-        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
-
-
-
-    [1]: https://snyk.io/vuln/npm:st:20140206
-    \nA Directory Traversal attack (also known as path traversal) aims to
-    access files and directories that are stored outside the intended
-    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
-    its variations, or by using absolute file paths, it may be possible to
-    access arbitrary files and directories stored on file system, including
-    application source code, configuration, and other critical system files.
-
-    Directory Traversal vulnerabilities can be generally divided into two
-    types:
-
-    * **Information Disclosure**\: Allows the attacker to gain information
-      about the folder structure or read the contents of sensitive files on
-      the system.
-
-    `st` is a module for serving static files on web pages, and contains a
-    [vulnerability of this type][1]. In our example, we will serve files
-    from the `public` route.
-
-    If an attacker requests the following URL from our server, it will in
-    turn leak the sensitive private key of the root user.
-
-        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
-
-    **Note** `%2e` is the URL encoded version of `.` (dot).
-
-    * **Writing arbitrary files**\: Allows the attacker to create or replace
-      existing files. This type of vulnerability is also known as
-      `Zip-Slip`.
-
-    One way to achieve this is by using a malicious `zip` archive that holds
-    path traversal filenames. When each filename in the zip archive gets
-    concatenated to the target extraction folder, without validation, the
-    final path ends up outside of the target folder. If an executable or a
-    configuration file is overwritten with a file containing malicious code,
-    the problem can turn into an arbitrary code execution issue quite
-    easily.
-
-    The following is an example of a `zip` archive with one benign file and
-    one malicious file. Extracting the malicious file will result in
-    traversing out of the target folder, ending up in `/root/.ssh/`
-    overwriting the `authorized_keys` file:
-
-        2018-04-15 22:04:29 .....           19           19  good.txt
-        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
-
-
-
-    [1]: https://snyk.io/vuln/npm:st:20140206
     \nA Directory Traversal attack (also known as path traversal) aims to
     access files and directories that are stored outside the intended
     folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
@@ -1667,166 +433,19 @@
   - CVE-2018-1048
   cwe:
   - CWE-22
+  disclosed_date: 2018-01-24
+  created_date: 2018-02-12
+  last_modified_date: 2018-02-12
   credit:
   - Unknown
   references:
   - https://nvd.nist.gov/vuln/detail/CVE-2018-1048
   - https://bugzilla.redhat.com/show_bug.cgi?id=1534343
   source_url: https://snyk.io/vuln/SNYK-JAVA-IOUNDERTOW-32074
-- id: snykio:maven:io.undertow:undertow-core:2018-03-12
-  title: Man-in-the-Middle (MitM)
-  description: |
-    [io.undertow:undertow-core][1] is a Java web server based on
-    non-blocking IO.
-
-    Affected versions of this package are vulnerable to Man-in-the-Middle
-    (MitM) attacks. When using a `Digest` authentication, the server does
-    not ensure that value of the `URI` attribute in the \"Authorization\"
-    header matches URI in HTTP request line. An attacker can use this attack
-    vector in order to access desired content on a server.
-
-
-
-    [1]: https://github.com/undertow-io/undertow
-    \n[io.undertow:undertow-core][1] is a Java web server based on
-    non-blocking IO.
-
-    Affected versions of this package are vulnerable to Man-in-the-Middle
-    (MitM) attacks. When using a `Digest` authentication, the server does
-    not ensure that value of the `URI` attribute in the \"Authorization\"
-    header matches URI in HTTP request line. An attacker can use this attack
-    vector in order to access desired content on a server.
-
-
-
-    [1]: https://github.com/undertow-io/undertow
-    \n[io.undertow:undertow-core][1] is a Java web server based on
-    non-blocking IO.
-
-    Affected versions of this package are vulnerable to Man-in-the-Middle
-    (MitM) attacks. When using a `Digest` authentication, the server does
-    not ensure that value of the `URI` attribute in the \"Authorization\"
-    header matches URI in HTTP request line. An attacker can use this attack
-    vector in order to access desired content on a server.
-
-
-
-    [1]: https://github.com/undertow-io/undertow
-  affected_package: io.undertow:undertow-core
-  vulnerable_versions:
-  - "< 1.4.18.SP1"
-  - ">= 1.4.20 < 1.4.24.Final"
-  - ">= 2 < 2.0.2.Final"
-  severity: medium
-  package_manager: maven
-  cve:
-  - CVE-2017-12196
-  cwe:
-  - CWE-287
-  credit:
-  - Jan Stourac
-  references:
-  - https://bugzilla.redhat.com/show_bug.cgi?id=1503055
-  - https://issues.jboss.org/browse/UNDERTOW-1190
-  source_url: https://snyk.io/vuln/SNYK-JAVA-IOUNDERTOW-32142
-- id: snykio:maven:io.undertow:undertow-core:2018-04-24
-  title: File Handler Leak
-  description: |
-    [io.undertow:undertow-core][1] is a High performance non-blocking
-    webserver.
-
-    Affected versions of this package are vulnerable to File Handler Leak
-    via the `URLResource.getLastModified()` method. It closes the file
-    descriptors only when they are finalized which can cause file
-    descriptors to exhaust.
-
-
-
-    [1]: https://github.com/undertow-io/undertow
-    \n[io.undertow:undertow-core][1] is a High performance non-blocking
-    webserver.
-
-    Affected versions of this package are vulnerable to File Handler Leak
-    via the `URLResource.getLastModified()` method. It closes the file
-    descriptors only when they are finalized which can cause file
-    descriptors to exhaust.
-
-
-
-    [1]: https://github.com/undertow-io/undertow
-    \n[io.undertow:undertow-core][1] is a High performance non-blocking
-    webserver.
-
-    Affected versions of this package are vulnerable to File Handler Leak
-    via the `URLResource.getLastModified()` method. It closes the file
-    descriptors only when they are finalized which can cause file
-    descriptors to exhaust.
-
-
-
-    [1]: https://github.com/undertow-io/undertow
-  affected_package: io.undertow:undertow-core
-  vulnerable_versions:
-  - "< 2.0.5"
-  severity: medium
-  package_manager: maven
-  cve:
-  - CVE-2018-1114
-  cwe:
-  - CWE-200
-  credit:
-  - Unknown
-  references:
-  - https://github.com/undertow-io/undertow/commit/882d5884f2614944a0c2ae69bafd9d13bfc5b64a
-  - https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2018-1114
-  - https://issues.jboss.org/browse/UNDERTOW-1338
-  source_url: https://snyk.io/vuln/SNYK-JAVA-IOUNDERTOW-72304
-- id: snykio:maven:io.undertow:undertow-core:2018-05-21
+- id: snykio:maven:io.undertow:undertow-core:CVE-2018-1067
   title: CRLF Injection
   description: |
     [io.undertow:undertow-core][1] is a Java web server based on
-    non-blocking IO.
-
-    Affected versions of this package are vulnerable to CRLF Injection due
-    to insufficient sanitization and validation of user input before the
-    input is used as part of an HTTP header value.
-
-    **Note**\: this issue exists because of an incomplete fix for
-    [CVE-2016-4993][2]
-
-
-
-    [1]: https://github.com/undertow-io/undertow
-    [2]: https://snyk.io/vuln/SNYK-JAVA-IOUNDERTOW-30102
-    \n[io.undertow:undertow-core][1] is a Java web server based on
-    non-blocking IO.
-
-    Affected versions of this package are vulnerable to CRLF Injection due
-    to insufficient sanitization and validation of user input before the
-    input is used as part of an HTTP header value.
-
-    **Note**\: this issue exists because of an incomplete fix for
-    [CVE-2016-4993][2]
-
-
-
-    [1]: https://github.com/undertow-io/undertow
-    [2]: https://snyk.io/vuln/SNYK-JAVA-IOUNDERTOW-30102
-    \n[io.undertow:undertow-core][1] is a Java web server based on
-    non-blocking IO.
-
-    Affected versions of this package are vulnerable to CRLF Injection due
-    to insufficient sanitization and validation of user input before the
-    input is used as part of an HTTP header value.
-
-    **Note**\: this issue exists because of an incomplete fix for
-    [CVE-2016-4993][2]
-
-
-
-    [1]: https://github.com/undertow-io/undertow
-    [2]: https://snyk.io/vuln/SNYK-JAVA-IOUNDERTOW-30102
-    \n[io.undertow:undertow-core][1] is a Java web server based on
     non-blocking IO.
 
     Affected versions of this package are vulnerable to CRLF Injection due
@@ -1850,6 +469,9 @@
   - CVE-2018-1067
   cwe:
   - CWE-93
+  disclosed_date: 2018-05-21
+  created_date: 2018-05-22
+  last_modified_date: 2018-05-22
   credit:
   - Unknown
   references:
@@ -1857,273 +479,40 @@
   - https://github.com/undertow-io/undertow/commit/f404cb68448c188f4d51b085b7fe4ac32bde26e0
   - https://github.com/undertow-io/undertow/commit/85d4478e598105fe94ac152d3e11e388374e8b86
   source_url: https://snyk.io/vuln/SNYK-JAVA-IOUNDERTOW-32300
-- id: snykio:maven:io.undertow:undertow-core:2018-07-27
-  title: Denial of Service (DoS)
-  description: |+
-    [io.undertow:undertow-core][1] is a Java web server based on
-    non-blocking IO.
+- id: snykio:maven:io.undertow:undertow-core:CVE-2018-1114
+  title: File Handler Leak
+  description: |
+    [io.undertow:undertow-core][1] is a High performance non-blocking
+    webserver.
 
-    Affected versions of this package are vulnerable to Denial of Service
-    (DoS) attacks. Due to non-clean `TCP` close, the `Websocket` server gets
-    into infinite loop on every IO thread.
-
-
-
-    [1]: https://github.com/undertow-io/undertow
-    \n[io.undertow:undertow-core][1] is a Java web server based on
-    non-blocking IO.
-
-    Affected versions of this package are vulnerable to Denial of Service
-    (DoS) attacks. Due to non-clean `TCP` close, the `Websocket` server gets
-    into infinite loop on every IO thread.
+    Affected versions of this package are vulnerable to File Handler Leak
+    via the `URLResource.getLastModified()` method. It closes the file
+    descriptors only when they are finalized which can cause file
+    descriptors to exhaust.
 
 
 
     [1]: https://github.com/undertow-io/undertow
-    \n[io.undertow:undertow-core][1] is a Java web server based on
-    non-blocking IO.
-
-    Affected versions of this package are vulnerable to Denial of Service
-    (DoS) attacks. Due to non-clean `TCP` close, the `Websocket` server gets
-    into infinite loop on every IO thread.
-
-
-
-    [1]: https://github.com/undertow-io/undertow
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
   affected_package: io.undertow:undertow-core
   vulnerable_versions:
-  - "< 2.0.0.Beta1"
+  - "< 2.0.5"
   severity: medium
   package_manager: maven
   cve:
-  - CVE-2017-2670
+  - CVE-2018-1114
   cwe:
-  - CWE-400
+  - CWE-200
+  disclosed_date: 2018-04-24
+  created_date: 2018-09-11
+  last_modified_date: 2018-09-11
   credit:
-  - Ryan Moak
+  - Unknown
   references:
-  - https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2017-2670
-  - https://github.com/undertow-io/undertow/commit/9bfe9fbbb595d51157b61693f072895f7dbadd1d
-  source_url: https://snyk.io/vuln/SNYK-JAVA-IOUNDERTOW-32442
-- id: victims:maven:io.undertow:undertow-core:date
-  title: 'undertow: HTTP header injection / response splitting'
-  affected_package: io.undertow:undertow-core
-  vulnerable_versions:
-  - "<=2.0.0"
-  - '2'
-  - "<=1.3.4"
-  - '1'
-  severity: medium
-  package_manager: maven
-  cve:
-  - 2016-4993
-  credit:
-  - Victims CVE Database
-  references:
-  - https://access.redhat.com/security/cve/CVE-2016-4993
-  source_url: https://github.com/victims/victims-cve-db/blob/master/database/java/2016/4993.yaml
-- id: victims:maven:io.undertow:undertow-core:date
-  title: Long URL proxy request lead to java.nio.BufferOverflowException and DoS
-  affected_package: io.undertow:undertow-core
-  vulnerable_versions:
-  - "<=2.0.0.Alpha1"
-  - '2'
-  - "<=1.4.3.Final"
-  - '1.4'
-  - "<=1.3.25.Final"
-  - '1.3'
-  severity: high
-  package_manager: maven
-  cve:
-  - 2016-7046
-  credit:
-  - Victims CVE Database
-  references:
-  - https://access.redhat.com/security/cve/CVE-2016-7046
-  source_url: https://github.com/victims/victims-cve-db/blob/master/database/java/2016/7046.yaml
-- id: victims:maven:io.undertow:undertow-core:date
+  - https://github.com/undertow-io/undertow/commit/882d5884f2614944a0c2ae69bafd9d13bfc5b64a
+  - https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2018-1114
+  - https://issues.jboss.org/browse/UNDERTOW-1338
+  source_url: https://snyk.io/vuln/SNYK-JAVA-IOUNDERTOW-72304
+- id: victims:maven:io.undertow:undertow-core:2014-7816
   title: Information disclosure via directory traversal
   affected_package: io.undertow:undertow-core
   vulnerable_versions:
@@ -2143,9 +532,48 @@
   severity: medium
   package_manager: maven
   cve:
-  - 2014-7816
+  - CVE-2014-7816
+  cvss_v2_score: 5.0
   credit:
   - Victims CVE Database
   references:
   - https://bugzilla.redhat.com/CVE-2014-7816
   source_url: https://github.com/victims/victims-cve-db/blob/master/database/java/2014/7816.yaml
+- id: victims:maven:io.undertow:undertow-core:2016-4993
+  title: 'undertow: HTTP header injection / response splitting'
+  affected_package: io.undertow:undertow-core
+  vulnerable_versions:
+  - "<=2.0.0"
+  - '2'
+  - "<=1.3.4"
+  - '1'
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2016-4993
+  cvss_v2_score: 5.8
+  credit:
+  - Victims CVE Database
+  references:
+  - https://access.redhat.com/security/cve/CVE-2016-4993
+  source_url: https://github.com/victims/victims-cve-db/blob/master/database/java/2016/4993.yaml
+- id: victims:maven:io.undertow:undertow-core:2016-7046
+  title: Long URL proxy request lead to java.nio.BufferOverflowException and DoS
+  affected_package: io.undertow:undertow-core
+  vulnerable_versions:
+  - "<=2.0.0.Alpha1"
+  - '2'
+  - "<=1.4.3.Final"
+  - '1.4'
+  - "<=1.3.25.Final"
+  - '1.3'
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2016-7046
+  cvss_v2_score: 7.8
+  credit:
+  - Victims CVE Database
+  references:
+  - https://access.redhat.com/security/cve/CVE-2016-7046
+  source_url: https://github.com/victims/victims-cve-db/blob/master/database/java/2016/7046.yaml

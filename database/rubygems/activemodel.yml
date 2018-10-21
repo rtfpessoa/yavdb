@@ -1,5 +1,5 @@
 ---
-- id: rubyadvisory:rubygems:activemodel:2016-01-25
+- id: rubyadvisory:rubygems:activemodel:CVE-2016-0753
   title: Possible Input Validation Circumvention in Active Model
   description: |
     There is a possible input validation circumvention vulnerability in Active
@@ -81,20 +81,23 @@
   - "<= 4.0.13"
   patched_versions:
   - ">= 5.0.0.beta1.1"
-  - "~> 4.2.5"
-  - ">= 4.2.5.1"
-  - "~> 4.1.14"
-  - ">= 4.1.14.1"
+  - "~> 4.2.5  >= 4.2.5.1"
+  - "~> 4.1.14  >= 4.1.14.1"
   severity: medium
   package_manager: rubygems
   cve:
   - CVE-2016-0753
+  cvss_v2_score: 5.0
+  cvss_v3_score: 5.3
+  disclosed_date: 2016-01-25
+  created_date: 2016-01-25
+  last_modified_date: 2016-01-25
   credit:
   - Rubysec
   references:
   - https://github.com/rubysec/ruby-advisory-db
   source_url: https://groups.google.com/forum/#!topic/rubyonrails-security/6jQVC1geukQ
-- id: snykio:rubygems:activemodel:2016-01-24
+- id: snykio:rubygems:activemodel:CVE-2016-0753
   title: Input Validation Bypass
   description: |+
     [`activemodel`][1] is a toolkit for building modeling framework like
@@ -104,175 +107,6 @@
 
 
     [1]: https://rubygems.org/gems/activemodel
-    \n[`activemodel`][1] is a toolkit for building modeling framework like
-    Active Record. Affected versions of this Gem are vulnerable to Input
-    Validation Bypass Attacks.
-
-
-
-    [1]: https://rubygems.org/gems/activemodel
-    \nCode that uses Active Model based models (including Active Record
-    models) and does not validate user input before passing it to the model
-    can be subject to an attack where specially crafted input will cause the
-    model to skip validations.
-
-    Vulnerable code will look something like this:
-
-        SomeModel.new(unverified_user_input)
-
-    Rails users using Strong Parameters are generally not impacted by this
-    issue as they are encouraged to whitelist parameters and must
-    specifically opt-out of input verification using the `permit!` method to
-    allow mass assignment. For example, a vulnerable Rails application will
-    have code that looks like this:
-
-        def create
-        params.permit! # allow all parameters
-        @user = User.new params[:users]
-        end
-
-    Active Model and Active Record objects are not equipped to handle
-    arbitrary user input. It is up to the application to verify input before
-    passing it to Active Model models. Rails users already have Strong
-    Parameters in place to handle white listing, but applications using
-    Active Model and Active Record outside of a Rails environment may be
-    impacted.
-
-    \nCode that uses Active Model based models (including Active Record
-    models) and does not validate user input before passing it to the model
-    can be subject to an attack where specially crafted input will cause the
-    model to skip validations.
-
-    Vulnerable code will look something like this:
-
-        SomeModel.new(unverified_user_input)
-
-    Rails users using Strong Parameters are generally not impacted by this
-    issue as they are encouraged to whitelist parameters and must
-    specifically opt-out of input verification using the `permit!` method to
-    allow mass assignment. For example, a vulnerable Rails application will
-    have code that looks like this:
-
-        def create
-        params.permit! # allow all parameters
-        @user = User.new params[:users]
-        end
-
-    Active Model and Active Record objects are not equipped to handle
-    arbitrary user input. It is up to the application to verify input before
-    passing it to Active Model models. Rails users already have Strong
-    Parameters in place to handle white listing, but applications using
-    Active Model and Active Record outside of a Rails environment may be
-    impacted.
-
-    \nCode that uses Active Model based models (including Active Record
-    models) and does not validate user input before passing it to the model
-    can be subject to an attack where specially crafted input will cause the
-    model to skip validations.
-
-    Vulnerable code will look something like this:
-
-        SomeModel.new(unverified_user_input)
-
-    Rails users using Strong Parameters are generally not impacted by this
-    issue as they are encouraged to whitelist parameters and must
-    specifically opt-out of input verification using the `permit!` method to
-    allow mass assignment. For example, a vulnerable Rails application will
-    have code that looks like this:
-
-        def create
-        params.permit! # allow all parameters
-        @user = User.new params[:users]
-        end
-
-    Active Model and Active Record objects are not equipped to handle
-    arbitrary user input. It is up to the application to verify input before
-    passing it to Active Model models. Rails users already have Strong
-    Parameters in place to handle white listing, but applications using
-    Active Model and Active Record outside of a Rails environment may be
-    impacted.
-
-    \nCode that uses Active Model based models (including Active Record
-    models) and does not validate user input before passing it to the model
-    can be subject to an attack where specially crafted input will cause the
-    model to skip validations.
-
-    Vulnerable code will look something like this:
-
-        SomeModel.new(unverified_user_input)
-
-    Rails users using Strong Parameters are generally not impacted by this
-    issue as they are encouraged to whitelist parameters and must
-    specifically opt-out of input verification using the `permit!` method to
-    allow mass assignment. For example, a vulnerable Rails application will
-    have code that looks like this:
-
-        def create
-        params.permit! # allow all parameters
-        @user = User.new params[:users]
-        end
-
-    Active Model and Active Record objects are not equipped to handle
-    arbitrary user input. It is up to the application to verify input before
-    passing it to Active Model models. Rails users already have Strong
-    Parameters in place to handle white listing, but applications using
-    Active Model and Active Record outside of a Rails environment may be
-    impacted.
-
-    \nCode that uses Active Model based models (including Active Record
-    models) and does not validate user input before passing it to the model
-    can be subject to an attack where specially crafted input will cause the
-    model to skip validations.
-
-    Vulnerable code will look something like this:
-
-        SomeModel.new(unverified_user_input)
-
-    Rails users using Strong Parameters are generally not impacted by this
-    issue as they are encouraged to whitelist parameters and must
-    specifically opt-out of input verification using the `permit!` method to
-    allow mass assignment. For example, a vulnerable Rails application will
-    have code that looks like this:
-
-        def create
-        params.permit! # allow all parameters
-        @user = User.new params[:users]
-        end
-
-    Active Model and Active Record objects are not equipped to handle
-    arbitrary user input. It is up to the application to verify input before
-    passing it to Active Model models. Rails users already have Strong
-    Parameters in place to handle white listing, but applications using
-    Active Model and Active Record outside of a Rails environment may be
-    impacted.
-
-    \nCode that uses Active Model based models (including Active Record
-    models) and does not validate user input before passing it to the model
-    can be subject to an attack where specially crafted input will cause the
-    model to skip validations.
-
-    Vulnerable code will look something like this:
-
-        SomeModel.new(unverified_user_input)
-
-    Rails users using Strong Parameters are generally not impacted by this
-    issue as they are encouraged to whitelist parameters and must
-    specifically opt-out of input verification using the `permit!` method to
-    allow mass assignment. For example, a vulnerable Rails application will
-    have code that looks like this:
-
-        def create
-        params.permit! # allow all parameters
-        @user = User.new params[:users]
-        end
-
-    Active Model and Active Record objects are not equipped to handle
-    arbitrary user input. It is up to the application to verify input before
-    passing it to Active Model models. Rails users already have Strong
-    Parameters in place to handle white listing, but applications using
-    Active Model and Active Record outside of a Rails environment may be
-    impacted.
-
     \nCode that uses Active Model based models (including Active Record
     models) and does not validate user input before passing it to the model
     can be subject to an attack where specially crafted input will cause the
@@ -302,13 +136,18 @@
 
   affected_package: activemodel
   vulnerable_versions:
-  - "< 5.0.0.beta1.1 &&  >= 4.3 || < 4.2.5.1 &&  >= 4.2 || < 4.1.14.1 &&  > 4.0.13"
+  - "< 5.0.0.beta1.1  >= 4.3"
+  - "< 4.2.5.1  >= 4.2"
+  - "< 4.1.14.1  > 4.0.13"
   severity: medium
   package_manager: rubygems
   cve:
   - CVE-2016-0753
   cwe:
   - CWE-284
+  disclosed_date: 2016-01-24
+  created_date: 2016-01-24
+  last_modified_date: 2016-01-24
   credit:
   - John Backus
   references:

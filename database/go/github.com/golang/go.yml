@@ -1,16 +1,8 @@
 ---
-- id: snykio:go:github.com/golang/go:2012-09-25
+- id: snykio:go:github.com/golang/go:CVE-2014-7189
   title: Man-in-the-Middle (MitM)
   description: |
     Affected version of [`github.com/golang/go`][1] are vulnerable to
-    Man-in-the-Middle (MitM) attacks. crpyto/tls in Go 1.1 before 1.3.2,
-    when SessionTicketsDisabled is enabled, allows man-in-the-middle
-    attackers to spoof clients via unspecified vectors.
-
-
-
-    [1]: https://github.com/golang/go
-    \nAffected version of [`github.com/golang/go`][1] are vulnerable to
     Man-in-the-Middle (MitM) attacks. crpyto/tls in Go 1.1 before 1.3.2,
     when SessionTicketsDisabled is enabled, allows man-in-the-middle
     attackers to spoof clients via unspecified vectors.
@@ -27,6 +19,9 @@
   - CVE-2014-7189
   cwe:
   - CWE-264
+  disclosed_date: 2012-09-25
+  created_date: 2012-09-25
+  last_modified_date: 2012-09-25
   credit:
   - Unknown
   references:
@@ -35,19 +30,10 @@
   - http://www.openwall.com/lists/oss-security/2014/09/26/28
   - https://groups.google.com/forum/#%21msg/golang-nuts/eeOHNw_shwU/OHALUmroA5kJ
   source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMGOLANGGO-50011
-- id: snykio:go:github.com/golang/go:2015-12-07
+- id: snykio:go:github.com/golang/go:CVE-2015-8618
   title: Information Exposure
   description: |
     Affected version of [`github.com/golang/go`][1] are vulnerable to
-    Information Exposure. The Int.Exp Montgomery code in the math/big
-    library in Go 1.5.x before 1.5.3 mishandles carry propagation and
-    produces incorrect output, which makes it easier for attackers to obtain
-    private RSA keys via unspecified vectors.
-
-
-
-    [1]: https://github.com/golang/go
-    \nAffected version of [`github.com/golang/go`][1] are vulnerable to
     Information Exposure. The Int.Exp Montgomery code in the math/big
     library in Go 1.5.x before 1.5.3 mishandles carry propagation and
     produces incorrect output, which makes it easier for attackers to obtain
@@ -65,6 +51,9 @@
   - CVE-2015-8618
   cwe:
   - CWE-200
+  disclosed_date: 2015-12-07
+  created_date: 2015-12-07
+  last_modified_date: 2015-12-07
   credit:
   - Unknown
   references:
@@ -76,7 +65,7 @@
   - http://www.openwall.com/lists/oss-security/2015/12/22/9
   - http://www.openwall.com/lists/oss-security/2016/01/13/7
   source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMGOLANGGO-50014
-- id: snykio:go:github.com/golang/go:2016-03-25
+- id: snykio:go:github.com/golang/go:CVE-2016-3958
   title: DLL Preloading
   description: |
     Affected version of [`github.com/golang/go`][1] are vulnerable to DLL
@@ -88,24 +77,19 @@
 
 
     [1]: https://github.com/golang/go
-    \nAffected version of [`github.com/golang/go`][1] are vulnerable to DLL
-    Preloading attacks. On Windows, Go loads system DLLs by name with
-    LoadLibrary, making it vulnerable to DLL preloading attacks. Notably, if
-    a user launched a Go executable from their Downloads folder and
-    malicious DLLs were in their Downloads folder.
-
-
-
-    [1]: https://github.com/golang/go
   affected_package: github.com/golang/go
   vulnerable_versions:
-  - "<1.5.4 || >=1.6 <1.6.1"
+  - "<1.5.4"
+  - ">=1.6 <1.6.1"
   severity: high
   package_manager: go
   cve:
   - CVE-2016-3958
   cwe:
   - CWE-264
+  disclosed_date: 2016-03-25
+  created_date: 2016-03-25
+  last_modified_date: 2016-03-25
   credit:
   - Unknown
   references:
@@ -115,7 +99,7 @@
   - https://github.com/golang/go/issues/14959
   - https://groups.google.com/forum/#%21topic/golang-announce/9eqIHqaWvck
   source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMGOLANGGO-50022
-- id: snykio:go:github.com/golang/go:2016-04-06
+- id: snykio:go:github.com/golang/go:CVE-2016-3959
   title: Denial of Service (DoS)
   description: |+
     Affected version of [`github.com/golang/go`][1] are vulnerable to Denial
@@ -128,172 +112,6 @@
 
 
     [1]: https://github.com/golang/go
-    \nAffected version of [`github.com/golang/go`][1] are vulnerable to Denial
-    Of Service (DoS). The Verify function in crypto/dsa/dsa.go in Go before
-    1.5.4 and 1.6.x before 1.6.1 does not properly check parameters passed
-    to the big integer library, which might allow remote attackers to cause
-    a denial of service (infinite loop) via a crafted public key to a
-    program that uses HTTPS client certificates or SSH server libraries.
-
-
-
-    [1]: https://github.com/golang/go
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
     \nDenial of Service (DoS) describes a family of attacks, all aimed at
     making a system inaccessible to its intended and legitimate users.
 
@@ -322,13 +140,17 @@
 
   affected_package: github.com/golang/go
   vulnerable_versions:
-  - "<1.5.4 || >=1.6 <1.6.1"
+  - "<1.5.4"
+  - ">=1.6 <1.6.1"
   severity: medium
   package_manager: go
   cve:
   - CVE-2016-3959
   cwe:
   - CWE-20
+  disclosed_date: 2016-04-06
+  created_date: 2016-04-06
+  last_modified_date: 2016-04-06
   credit:
   - Unknown
   references:
@@ -337,22 +159,10 @@
   - http://www.openwall.com/lists/oss-security/2016/04/05/2
   - https://groups.google.com/forum/#%21topic/golang-announce/9eqIHqaWvck
   source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMGOLANGGO-50023
-- id: snykio:go:github.com/golang/go:2016-07-18
+- id: snykio:go:github.com/golang/go:CVE-2016-5386
   title: HTTP Request Redirection
   description: |
     Affected version of [`github.com/golang/go`][1] are vulnerable to HTTP
-    Request Redirection. The net/http package in Go through 1.6 does not
-    attempt to address RFC 3875 section 4.1.18 namespace conflicts and
-    therefore does not protect CGI applications from the presence of
-    untrusted client data in the HTTP\_PROXY environment variable, which
-    might allow remote attackers to redirect a CGI application\'s outbound
-    HTTP traffic to an arbitrary proxy server via a crafted Proxy header in
-    an HTTP request, aka an \"httpoxy\" issue.
-
-
-
-    [1]: https://github.com/golang/go
-    \nAffected version of [`github.com/golang/go`][1] are vulnerable to HTTP
     Request Redirection. The net/http package in Go through 1.6 does not
     attempt to address RFC 3875 section 4.1.18 namespace conflicts and
     therefore does not protect CGI applications from the presence of
@@ -373,6 +183,9 @@
   - CVE-2016-5386
   cwe:
   - CWE-284
+  disclosed_date: 2016-07-18
+  created_date: 2016-07-18
+  last_modified_date: 2016-07-18
   credit:
   - Scott Geary
   references:
@@ -381,7 +194,7 @@
   - http://rhn.redhat.com/errata/RHSA-2016-1538.html
   - https://httpoxy.org/
   source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMGOLANGGO-50028
-- id: snykio:go:github.com/golang/go:2017-04-20
+- id: snykio:go:github.com/golang/go:CVE-2017-8932
   title: Elliptic Curve Key Disclosure
   description: |
     Affected version of [`github.com/golang/go`][1] are vulnerable to
@@ -397,28 +210,19 @@
 
 
     [1]: https://github.com/golang/go
-    \nAffected version of [`github.com/golang/go`][1] are vulnerable to
-    Elliptic Curve Key Disclosure. A bug in the standard library ScalarMult
-    implementation of curve P-256 for amd64 architectures in Go before 1.7.6
-    and 1.8.x before 1.8.2 causes incorrect results to be generated for
-    specific input points. An adaptive attack can be mounted to
-    progressively extract the scalar input to ScalarMult by submitting
-    crafted points and observing failures to the derive correct output. This
-    leads to a full key recovery attack against static ECDH, as used in
-    popular JWT libraries.
-
-
-
-    [1]: https://github.com/golang/go
   affected_package: github.com/golang/go
   vulnerable_versions:
-  - "<1.7.5 || >=1.8 <1.8.2"
+  - "<1.7.5"
+  - ">=1.8 <1.8.2"
   severity: medium
   package_manager: go
   cve:
   - CVE-2017-8932
   cwe:
   - CWE-200
+  disclosed_date: 2017-04-20
+  created_date: 2017-04-20
+  last_modified_date: 2017-04-20
   credit:
   - Unknown
   references:

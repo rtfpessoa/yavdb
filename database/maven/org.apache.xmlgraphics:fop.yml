@@ -1,5 +1,5 @@
 ---
-- id: snykio:maven:org.apache.xmlgraphics:fop:2017-04-19
+- id: snykio:maven:org.apache.xmlgraphics:fop:CVE-2017-5661
   title: XML External Entity (XXE) Injection
   description: |+
     [`org.apache.xmlgraphics:fop`][1] In Apache FOP before 2.2, files lying
@@ -15,264 +15,6 @@
 
 
     [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22fop%22
-    \n[`org.apache.xmlgraphics:fop`][1] In Apache FOP before 2.2, files lying
-    on the filesystem of the server which uses FOP can be revealed to
-    arbitrary users who send maliciously formed SVG files. The file types
-    that can be shown depend on the user context in which the exploitable
-    application is running. If the user is root a full compromise of the
-    server - including confidential or sensitive files - would be possible.
-    XXE can also be used to attack the availability of the server via denial
-    of service as the references within a xml document can trivially trigger
-    an amplification attack.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22fop%22
-    \nXXE Injection is a type of attack against an application that parses XML
-    input. XML is a markup language that defines a set of rules for encoding
-    documents in a format that is both human-readable and machine-readable.
-    By default, many XML processors allow specification of an external
-    entity, a URI that is dereferenced and evaluated during XML processing.
-    When an XML document is being parsed, the parser can make a request and
-    include the content at the specified URI inside of the XML document.
-
-    Attacks can include disclosing local files, which may contain sensitive
-    data such as passwords or private user data, using file: schemes or
-    relative paths in the system identifier.
-
-    For example, below is a sample XML document, containing an XML element-
-    username.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-           <username>John</username>
-        </xml>
-
-    An external XML entity - `xxe`, is defined using a system identifier and
-    present within a DOCTYPE header. These entities can access local or
-    remote content. For example the below code contains an external XML
-    entity that would fetch the content of `/etc/passwd` and display it to
-    the user rendered by `username`.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-        <!DOCTYPE foo [
-           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
-           <username>&xxe;</username>
-        </xml>
-
-    Other XXE Injection attacks can access local resources that may not stop
-    returning data, possibly impacting application availability and leading
-    to Denial of Service.
-
-    \nXXE Injection is a type of attack against an application that parses XML
-    input. XML is a markup language that defines a set of rules for encoding
-    documents in a format that is both human-readable and machine-readable.
-    By default, many XML processors allow specification of an external
-    entity, a URI that is dereferenced and evaluated during XML processing.
-    When an XML document is being parsed, the parser can make a request and
-    include the content at the specified URI inside of the XML document.
-
-    Attacks can include disclosing local files, which may contain sensitive
-    data such as passwords or private user data, using file: schemes or
-    relative paths in the system identifier.
-
-    For example, below is a sample XML document, containing an XML element-
-    username.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-           <username>John</username>
-        </xml>
-
-    An external XML entity - `xxe`, is defined using a system identifier and
-    present within a DOCTYPE header. These entities can access local or
-    remote content. For example the below code contains an external XML
-    entity that would fetch the content of `/etc/passwd` and display it to
-    the user rendered by `username`.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-        <!DOCTYPE foo [
-           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
-           <username>&xxe;</username>
-        </xml>
-
-    Other XXE Injection attacks can access local resources that may not stop
-    returning data, possibly impacting application availability and leading
-    to Denial of Service.
-
-    \nXXE Injection is a type of attack against an application that parses XML
-    input. XML is a markup language that defines a set of rules for encoding
-    documents in a format that is both human-readable and machine-readable.
-    By default, many XML processors allow specification of an external
-    entity, a URI that is dereferenced and evaluated during XML processing.
-    When an XML document is being parsed, the parser can make a request and
-    include the content at the specified URI inside of the XML document.
-
-    Attacks can include disclosing local files, which may contain sensitive
-    data such as passwords or private user data, using file: schemes or
-    relative paths in the system identifier.
-
-    For example, below is a sample XML document, containing an XML element-
-    username.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-           <username>John</username>
-        </xml>
-
-    An external XML entity - `xxe`, is defined using a system identifier and
-    present within a DOCTYPE header. These entities can access local or
-    remote content. For example the below code contains an external XML
-    entity that would fetch the content of `/etc/passwd` and display it to
-    the user rendered by `username`.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-        <!DOCTYPE foo [
-           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
-           <username>&xxe;</username>
-        </xml>
-
-    Other XXE Injection attacks can access local resources that may not stop
-    returning data, possibly impacting application availability and leading
-    to Denial of Service.
-
-    \nXXE Injection is a type of attack against an application that parses XML
-    input. XML is a markup language that defines a set of rules for encoding
-    documents in a format that is both human-readable and machine-readable.
-    By default, many XML processors allow specification of an external
-    entity, a URI that is dereferenced and evaluated during XML processing.
-    When an XML document is being parsed, the parser can make a request and
-    include the content at the specified URI inside of the XML document.
-
-    Attacks can include disclosing local files, which may contain sensitive
-    data such as passwords or private user data, using file: schemes or
-    relative paths in the system identifier.
-
-    For example, below is a sample XML document, containing an XML element-
-    username.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-           <username>John</username>
-        </xml>
-
-    An external XML entity - `xxe`, is defined using a system identifier and
-    present within a DOCTYPE header. These entities can access local or
-    remote content. For example the below code contains an external XML
-    entity that would fetch the content of `/etc/passwd` and display it to
-    the user rendered by `username`.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-        <!DOCTYPE foo [
-           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
-           <username>&xxe;</username>
-        </xml>
-
-    Other XXE Injection attacks can access local resources that may not stop
-    returning data, possibly impacting application availability and leading
-    to Denial of Service.
-
-    \nXXE Injection is a type of attack against an application that parses XML
-    input. XML is a markup language that defines a set of rules for encoding
-    documents in a format that is both human-readable and machine-readable.
-    By default, many XML processors allow specification of an external
-    entity, a URI that is dereferenced and evaluated during XML processing.
-    When an XML document is being parsed, the parser can make a request and
-    include the content at the specified URI inside of the XML document.
-
-    Attacks can include disclosing local files, which may contain sensitive
-    data such as passwords or private user data, using file: schemes or
-    relative paths in the system identifier.
-
-    For example, below is a sample XML document, containing an XML element-
-    username.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-           <username>John</username>
-        </xml>
-
-    An external XML entity - `xxe`, is defined using a system identifier and
-    present within a DOCTYPE header. These entities can access local or
-    remote content. For example the below code contains an external XML
-    entity that would fetch the content of `/etc/passwd` and display it to
-    the user rendered by `username`.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-        <!DOCTYPE foo [
-           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
-           <username>&xxe;</username>
-        </xml>
-
-    Other XXE Injection attacks can access local resources that may not stop
-    returning data, possibly impacting application availability and leading
-    to Denial of Service.
-
-    \nXXE Injection is a type of attack against an application that parses XML
-    input. XML is a markup language that defines a set of rules for encoding
-    documents in a format that is both human-readable and machine-readable.
-    By default, many XML processors allow specification of an external
-    entity, a URI that is dereferenced and evaluated during XML processing.
-    When an XML document is being parsed, the parser can make a request and
-    include the content at the specified URI inside of the XML document.
-
-    Attacks can include disclosing local files, which may contain sensitive
-    data such as passwords or private user data, using file: schemes or
-    relative paths in the system identifier.
-
-    For example, below is a sample XML document, containing an XML element-
-    username.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-           <username>John</username>
-        </xml>
-
-    An external XML entity - `xxe`, is defined using a system identifier and
-    present within a DOCTYPE header. These entities can access local or
-    remote content. For example the below code contains an external XML
-    entity that would fetch the content of `/etc/passwd` and display it to
-    the user rendered by `username`.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-        <!DOCTYPE foo [
-           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
-           <username>&xxe;</username>
-        </xml>
-
-    Other XXE Injection attacks can access local resources that may not stop
-    returning data, possibly impacting application availability and leading
-    to Denial of Service.
-
-    \nXXE Injection is a type of attack against an application that parses XML
-    input. XML is a markup language that defines a set of rules for encoding
-    documents in a format that is both human-readable and machine-readable.
-    By default, many XML processors allow specification of an external
-    entity, a URI that is dereferenced and evaluated during XML processing.
-    When an XML document is being parsed, the parser can make a request and
-    include the content at the specified URI inside of the XML document.
-
-    Attacks can include disclosing local files, which may contain sensitive
-    data such as passwords or private user data, using file: schemes or
-    relative paths in the system identifier.
-
-    For example, below is a sample XML document, containing an XML element-
-    username.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-           <username>John</username>
-        </xml>
-
-    An external XML entity - `xxe`, is defined using a system identifier and
-    present within a DOCTYPE header. These entities can access local or
-    remote content. For example the below code contains an external XML
-    entity that would fetch the content of `/etc/passwd` and display it to
-    the user rendered by `username`.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-        <!DOCTYPE foo [
-           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
-           <username>&xxe;</username>
-        </xml>
-
-    Other XXE Injection attacks can access local resources that may not stop
-    returning data, possibly impacting application availability and leading
-    to Denial of Service.
-
     \nXXE Injection is a type of attack against an application that parses XML
     input. XML is a markup language that defines a set of rules for encoding
     documents in a format that is both human-readable and machine-readable.
@@ -317,13 +59,16 @@
   - CVE-2017-5661
   cwe:
   - CWE-611
+  disclosed_date: 2017-04-19
+  created_date: 2017-05-21
+  last_modified_date: 2017-05-21
   credit:
   - Unknown
   references:
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2017-5661
   - https://xmlgraphics.apache.org/security.html
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEXMLGRAPHICS-31389
-- id: victims:maven:org.apache.xmlgraphics:fop:date
+- id: victims:maven:org.apache.xmlgraphics:fop:2017-5661
   title: Denial of Service with XXE in Apache FOP
   description: 'In Apache FOP before 2.2, files lying on the filesystem of the server
     which uses FOP can be revealed to arbitrary users who send maliciously formed
@@ -343,7 +88,8 @@
   severity: medium
   package_manager: maven
   cve:
-  - 2017-5661
+  - CVE-2017-5661
+  cvss_v2_score: 6.0
   credit:
   - Victims CVE Database
   references:

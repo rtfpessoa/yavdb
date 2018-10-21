@@ -1,45 +1,8 @@
 ---
-- id: nodesecurity:npm:jws:2016-07-26
-  title: Forgeable Public/Private Tokens
-  description: "Affected versions of the `jws` package allow users to select what
-    algorithm the server will use to verify a provided JWT. A malicious actor can
-    use this behaviour to arbitrarily modify the contents of a JWT while still passing
-    verification. For the common use case of the JWT as a bearer token, the end result
-    is a complete authentication bypass with minimal effort.\n\n"
-  affected_package: jws
-  vulnerable_versions:
-  - "<3.0.0"
-  patched_versions:
-  - ">=3.0.0"
-  severity: high
-  package_manager: npm
-  cve:
-  - CVE-2016-1000223
-  cvss_v3_vector: CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:N
-  credit:
-  - Brian Brennan and Tim McLean
-  references:
-  - |-
-    https://auth0.com/blog/2015/03/31/critical-vulnerabilities-in-json-web-token-libraries/)
-    https://github.com/brianloveswords/node-jws/commit/585d0e1e97b6747c10cf5b7689ccc5618a89b299#diff-4ac32a78649ca5bdd8e0ba38b7006a1e)
-  source_url: https://nodesecurity.io/advisories/88
-- id: snykio:npm:jws:2016-07-26
+- id: snykio:npm:jws:20160726
   title: Forgeable Public/Private Tokens
   description: |
     [`jws`][1] is an implementation of JSON Web Signatures. Affected
-    versions of this package are vulnerable to an Authentication Bypass
-    attack, due to the \"algorithm\" not being enforced in `jws.verify()`.
-    Attackers are given the opportunity to choose the algorithm sent to the
-    server and generate signatures with arbitrary contents. The server
-    expects an asymmetric key (RSA) but is sent a symmetric key (HMAC-SHA)
-    with RSA\'s public key, so instead of going through a key validation
-    process, the server will think the public key is actually an HMAC
-    private key.
-
-
-
-    [1]: https://www.npmjs.com/package/jws
-    \n[`jws`][1] is an implementation of JSON Web Signatures. Affected
     versions of this package are vulnerable to an Authentication Bypass
     attack, due to the \"algorithm\" not being enforced in `jws.verify()`.
     Attackers are given the opportunity to choose the algorithm sent to the
@@ -59,6 +22,9 @@
   package_manager: npm
   cwe:
   - CWE-310
+  disclosed_date: 2016-07-26
+  created_date: 2016-07-26
+  last_modified_date: 2016-07-26
   credit:
   - Brian Brennan and Tim McLean
   references:

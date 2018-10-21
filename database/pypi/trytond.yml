@@ -1,18 +1,8 @@
 ---
-- id: snykio:pypi:trytond:2012-03-03
+- id: snykio:pypi:trytond:CVE-2012-0215
   title: Privilege Escalation
   description: |
     [`trytond`][1] is a Tryton server model/modelstorage.py in the Tryton
-    application framework (trytond) before 2.4.0 for Python does not
-    properly restrict access to the Many2Many field in the relation model,
-    which allows remote authenticated users to modify the privileges of
-    arbitrary users via a (1) create, (2) write, (3) delete, or (4) copy rpc
-    call.
-
-
-
-    [1]: https://pypi.python.org/pypi/trytond
-    \n[`trytond`][1] is a Tryton server model/modelstorage.py in the Tryton
     application framework (trytond) before 2.4.0 for Python does not
     properly restrict access to the Many2Many field in the relation model,
     which allows remote authenticated users to modify the privileges of
@@ -31,24 +21,19 @@
   - CVE-2012-0215
   cwe:
   - CWE-264
+  disclosed_date: 2012-03-03
+  created_date: 2012-03-03
+  last_modified_date: 2012-03-03
   credit:
   - Unknown
   references:
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2012-0215
   - https://bugs.tryton.org/issue2476
   source_url: https://snyk.io/vuln/SNYK-PYTHON-TRYTOND-40090
-- id: snykio:pypi:trytond:2016-04-14
+- id: snykio:pypi:trytond:CVE-2015-0861
   title: Privilege Escalation
   description: |
     [`trytond`][1] is a Tryton server model/modelstorage.py in trytond 3.2.x
-    before 3.2.10, 3.4.x before 3.4.8, 3.6.x before 3.6.5, and 3.8.x before
-    3.8.1 allows remote authenticated users to bypass intended access
-    restrictions and write to arbitrary fields via a sequence of records.
-
-
-
-    [1]: https://pypi.python.org/pypi/trytond
-    \n[`trytond`][1] is a Tryton server model/modelstorage.py in trytond 3.2.x
     before 3.2.10, 3.4.x before 3.4.8, 3.6.x before 3.6.5, and 3.8.x before
     3.8.1 allows remote authenticated users to bypass intended access
     restrictions and write to arbitrary fields via a sequence of records.
@@ -68,13 +53,45 @@
   - CVE-2015-0861
   cwe:
   - CWE-264
+  disclosed_date: 2016-04-14
+  created_date: 2016-04-14
+  last_modified_date: 2016-04-14
   credit:
   - Cédric Krier
   references:
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-0861
   - http://www.tryton.org/posts/security-release-for-issue5167.html
   source_url: https://snyk.io/vuln/SNYK-PYTHON-TRYTOND-40308
-- id: snykio:pypi:trytond:2016-09-05
+- id: snykio:pypi:trytond:CVE-2016-1241
+  title: Information Exposure
+  description: |
+    [`trytond`][1] is a Tryton server Tryton 3.x before 3.2.17, 3.4.x before
+    3.4.14, 3.6.x before 3.6.12, 3.8.x before 3.8.8, and 4.x before 4.0.4
+    allow remote authenticated users to discover user password hashes via
+    unspecified vectors.
+
+
+
+    [1]: https://pypi.python.org/pypi/trytond
+  affected_package: trytond
+  vulnerable_versions:
+  - ">= 4.0.0 <= 4.0.3"
+  severity: low
+  package_manager: pypi
+  cve:
+  - CVE-2016-1241
+  cwe:
+  - CWE-200
+  disclosed_date: 2016-09-05
+  created_date: 2016-09-05
+  last_modified_date: 2016-09-05
+  credit:
+  - Cédric Krier
+  references:
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-1241
+  - http://www.tryton.org/posts/security-release-for-issue5795-and-issue5808.html
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-TRYTOND-40375
+- id: snykio:pypi:trytond:CVE-2016-1242
   title: Directory Traversal
   description: |
     [`trytond`][1] is a Tryton server.
@@ -87,554 +104,6 @@
 
 
     [1]: https://pypi.python.org/pypi/trytond
-    \n[`trytond`][1] is a Tryton server.
-
-    file\_open in Tryton before 3.2.17, 3.4.x before 3.4.14, 3.6.x before
-    3.6.12, 3.8.x before 3.8.8, and 4.x before 4.0.4 allow remote
-    authenticated users with certain permissions to read arbitrary files via
-    the name parameter or unspecified other vectors.
-
-
-
-    [1]: https://pypi.python.org/pypi/trytond
-    \n[`trytond`][1] is a Tryton server.
-
-    file\_open in Tryton before 3.2.17, 3.4.x before 3.4.14, 3.6.x before
-    3.6.12, 3.8.x before 3.8.8, and 4.x before 4.0.4 allow remote
-    authenticated users with certain permissions to read arbitrary files via
-    the name parameter or unspecified other vectors.
-
-
-
-    [1]: https://pypi.python.org/pypi/trytond
-    \nA Directory Traversal attack (also known as path traversal) aims to
-    access files and directories that are stored outside the intended
-    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
-    its variations, or by using absolute file paths, it may be possible to
-    access arbitrary files and directories stored on file system, including
-    application source code, configuration, and other critical system files.
-
-    Directory Traversal vulnerabilities can be generally divided into two
-    types:
-
-    * **Information Disclosure**\: Allows the attacker to gain information
-      about the folder structure or read the contents of sensitive files on
-      the system.
-
-    `st` is a module for serving static files on web pages, and contains a
-    [vulnerability of this type][1]. In our example, we will serve files
-    from the `public` route.
-
-    If an attacker requests the following URL from our server, it will in
-    turn leak the sensitive private key of the root user.
-
-        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
-
-    **Note** `%2e` is the URL encoded version of `.` (dot).
-
-    * **Writing arbitrary files**\: Allows the attacker to create or replace
-      existing files. This type of vulnerability is also known as
-      `Zip-Slip`.
-
-    One way to achieve this is by using a malicious `zip` archive that holds
-    path traversal filenames. When each filename in the zip archive gets
-    concatenated to the target extraction folder, without validation, the
-    final path ends up outside of the target folder. If an executable or a
-    configuration file is overwritten with a file containing malicious code,
-    the problem can turn into an arbitrary code execution issue quite
-    easily.
-
-    The following is an example of a `zip` archive with one benign file and
-    one malicious file. Extracting the malicious file will result in
-    traversing out of the target folder, ending up in `/root/.ssh/`
-    overwriting the `authorized_keys` file:
-
-        2018-04-15 22:04:29 .....           19           19  good.txt
-        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
-
-
-
-    [1]: https://snyk.io/vuln/npm:st:20140206
-    \nA Directory Traversal attack (also known as path traversal) aims to
-    access files and directories that are stored outside the intended
-    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
-    its variations, or by using absolute file paths, it may be possible to
-    access arbitrary files and directories stored on file system, including
-    application source code, configuration, and other critical system files.
-
-    Directory Traversal vulnerabilities can be generally divided into two
-    types:
-
-    * **Information Disclosure**\: Allows the attacker to gain information
-      about the folder structure or read the contents of sensitive files on
-      the system.
-
-    `st` is a module for serving static files on web pages, and contains a
-    [vulnerability of this type][1]. In our example, we will serve files
-    from the `public` route.
-
-    If an attacker requests the following URL from our server, it will in
-    turn leak the sensitive private key of the root user.
-
-        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
-
-    **Note** `%2e` is the URL encoded version of `.` (dot).
-
-    * **Writing arbitrary files**\: Allows the attacker to create or replace
-      existing files. This type of vulnerability is also known as
-      `Zip-Slip`.
-
-    One way to achieve this is by using a malicious `zip` archive that holds
-    path traversal filenames. When each filename in the zip archive gets
-    concatenated to the target extraction folder, without validation, the
-    final path ends up outside of the target folder. If an executable or a
-    configuration file is overwritten with a file containing malicious code,
-    the problem can turn into an arbitrary code execution issue quite
-    easily.
-
-    The following is an example of a `zip` archive with one benign file and
-    one malicious file. Extracting the malicious file will result in
-    traversing out of the target folder, ending up in `/root/.ssh/`
-    overwriting the `authorized_keys` file:
-
-        2018-04-15 22:04:29 .....           19           19  good.txt
-        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
-
-
-
-    [1]: https://snyk.io/vuln/npm:st:20140206
-    \nA Directory Traversal attack (also known as path traversal) aims to
-    access files and directories that are stored outside the intended
-    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
-    its variations, or by using absolute file paths, it may be possible to
-    access arbitrary files and directories stored on file system, including
-    application source code, configuration, and other critical system files.
-
-    Directory Traversal vulnerabilities can be generally divided into two
-    types:
-
-    * **Information Disclosure**\: Allows the attacker to gain information
-      about the folder structure or read the contents of sensitive files on
-      the system.
-
-    `st` is a module for serving static files on web pages, and contains a
-    [vulnerability of this type][1]. In our example, we will serve files
-    from the `public` route.
-
-    If an attacker requests the following URL from our server, it will in
-    turn leak the sensitive private key of the root user.
-
-        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
-
-    **Note** `%2e` is the URL encoded version of `.` (dot).
-
-    * **Writing arbitrary files**\: Allows the attacker to create or replace
-      existing files. This type of vulnerability is also known as
-      `Zip-Slip`.
-
-    One way to achieve this is by using a malicious `zip` archive that holds
-    path traversal filenames. When each filename in the zip archive gets
-    concatenated to the target extraction folder, without validation, the
-    final path ends up outside of the target folder. If an executable or a
-    configuration file is overwritten with a file containing malicious code,
-    the problem can turn into an arbitrary code execution issue quite
-    easily.
-
-    The following is an example of a `zip` archive with one benign file and
-    one malicious file. Extracting the malicious file will result in
-    traversing out of the target folder, ending up in `/root/.ssh/`
-    overwriting the `authorized_keys` file:
-
-        2018-04-15 22:04:29 .....           19           19  good.txt
-        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
-
-
-
-    [1]: https://snyk.io/vuln/npm:st:20140206
-    \nA Directory Traversal attack (also known as path traversal) aims to
-    access files and directories that are stored outside the intended
-    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
-    its variations, or by using absolute file paths, it may be possible to
-    access arbitrary files and directories stored on file system, including
-    application source code, configuration, and other critical system files.
-
-    Directory Traversal vulnerabilities can be generally divided into two
-    types:
-
-    * **Information Disclosure**\: Allows the attacker to gain information
-      about the folder structure or read the contents of sensitive files on
-      the system.
-
-    `st` is a module for serving static files on web pages, and contains a
-    [vulnerability of this type][1]. In our example, we will serve files
-    from the `public` route.
-
-    If an attacker requests the following URL from our server, it will in
-    turn leak the sensitive private key of the root user.
-
-        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
-
-    **Note** `%2e` is the URL encoded version of `.` (dot).
-
-    * **Writing arbitrary files**\: Allows the attacker to create or replace
-      existing files. This type of vulnerability is also known as
-      `Zip-Slip`.
-
-    One way to achieve this is by using a malicious `zip` archive that holds
-    path traversal filenames. When each filename in the zip archive gets
-    concatenated to the target extraction folder, without validation, the
-    final path ends up outside of the target folder. If an executable or a
-    configuration file is overwritten with a file containing malicious code,
-    the problem can turn into an arbitrary code execution issue quite
-    easily.
-
-    The following is an example of a `zip` archive with one benign file and
-    one malicious file. Extracting the malicious file will result in
-    traversing out of the target folder, ending up in `/root/.ssh/`
-    overwriting the `authorized_keys` file:
-
-        2018-04-15 22:04:29 .....           19           19  good.txt
-        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
-
-
-
-    [1]: https://snyk.io/vuln/npm:st:20140206
-    \nA Directory Traversal attack (also known as path traversal) aims to
-    access files and directories that are stored outside the intended
-    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
-    its variations, or by using absolute file paths, it may be possible to
-    access arbitrary files and directories stored on file system, including
-    application source code, configuration, and other critical system files.
-
-    Directory Traversal vulnerabilities can be generally divided into two
-    types:
-
-    * **Information Disclosure**\: Allows the attacker to gain information
-      about the folder structure or read the contents of sensitive files on
-      the system.
-
-    `st` is a module for serving static files on web pages, and contains a
-    [vulnerability of this type][1]. In our example, we will serve files
-    from the `public` route.
-
-    If an attacker requests the following URL from our server, it will in
-    turn leak the sensitive private key of the root user.
-
-        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
-
-    **Note** `%2e` is the URL encoded version of `.` (dot).
-
-    * **Writing arbitrary files**\: Allows the attacker to create or replace
-      existing files. This type of vulnerability is also known as
-      `Zip-Slip`.
-
-    One way to achieve this is by using a malicious `zip` archive that holds
-    path traversal filenames. When each filename in the zip archive gets
-    concatenated to the target extraction folder, without validation, the
-    final path ends up outside of the target folder. If an executable or a
-    configuration file is overwritten with a file containing malicious code,
-    the problem can turn into an arbitrary code execution issue quite
-    easily.
-
-    The following is an example of a `zip` archive with one benign file and
-    one malicious file. Extracting the malicious file will result in
-    traversing out of the target folder, ending up in `/root/.ssh/`
-    overwriting the `authorized_keys` file:
-
-        2018-04-15 22:04:29 .....           19           19  good.txt
-        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
-
-
-
-    [1]: https://snyk.io/vuln/npm:st:20140206
-    \nA Directory Traversal attack (also known as path traversal) aims to
-    access files and directories that are stored outside the intended
-    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
-    its variations, or by using absolute file paths, it may be possible to
-    access arbitrary files and directories stored on file system, including
-    application source code, configuration, and other critical system files.
-
-    Directory Traversal vulnerabilities can be generally divided into two
-    types:
-
-    * **Information Disclosure**\: Allows the attacker to gain information
-      about the folder structure or read the contents of sensitive files on
-      the system.
-
-    `st` is a module for serving static files on web pages, and contains a
-    [vulnerability of this type][1]. In our example, we will serve files
-    from the `public` route.
-
-    If an attacker requests the following URL from our server, it will in
-    turn leak the sensitive private key of the root user.
-
-        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
-
-    **Note** `%2e` is the URL encoded version of `.` (dot).
-
-    * **Writing arbitrary files**\: Allows the attacker to create or replace
-      existing files. This type of vulnerability is also known as
-      `Zip-Slip`.
-
-    One way to achieve this is by using a malicious `zip` archive that holds
-    path traversal filenames. When each filename in the zip archive gets
-    concatenated to the target extraction folder, without validation, the
-    final path ends up outside of the target folder. If an executable or a
-    configuration file is overwritten with a file containing malicious code,
-    the problem can turn into an arbitrary code execution issue quite
-    easily.
-
-    The following is an example of a `zip` archive with one benign file and
-    one malicious file. Extracting the malicious file will result in
-    traversing out of the target folder, ending up in `/root/.ssh/`
-    overwriting the `authorized_keys` file:
-
-        2018-04-15 22:04:29 .....           19           19  good.txt
-        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
-
-
-
-    [1]: https://snyk.io/vuln/npm:st:20140206
-    \nA Directory Traversal attack (also known as path traversal) aims to
-    access files and directories that are stored outside the intended
-    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
-    its variations, or by using absolute file paths, it may be possible to
-    access arbitrary files and directories stored on file system, including
-    application source code, configuration, and other critical system files.
-
-    Directory Traversal vulnerabilities can be generally divided into two
-    types:
-
-    * **Information Disclosure**\: Allows the attacker to gain information
-      about the folder structure or read the contents of sensitive files on
-      the system.
-
-    `st` is a module for serving static files on web pages, and contains a
-    [vulnerability of this type][1]. In our example, we will serve files
-    from the `public` route.
-
-    If an attacker requests the following URL from our server, it will in
-    turn leak the sensitive private key of the root user.
-
-        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
-
-    **Note** `%2e` is the URL encoded version of `.` (dot).
-
-    * **Writing arbitrary files**\: Allows the attacker to create or replace
-      existing files. This type of vulnerability is also known as
-      `Zip-Slip`.
-
-    One way to achieve this is by using a malicious `zip` archive that holds
-    path traversal filenames. When each filename in the zip archive gets
-    concatenated to the target extraction folder, without validation, the
-    final path ends up outside of the target folder. If an executable or a
-    configuration file is overwritten with a file containing malicious code,
-    the problem can turn into an arbitrary code execution issue quite
-    easily.
-
-    The following is an example of a `zip` archive with one benign file and
-    one malicious file. Extracting the malicious file will result in
-    traversing out of the target folder, ending up in `/root/.ssh/`
-    overwriting the `authorized_keys` file:
-
-        2018-04-15 22:04:29 .....           19           19  good.txt
-        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
-
-
-
-    [1]: https://snyk.io/vuln/npm:st:20140206
-    \nA Directory Traversal attack (also known as path traversal) aims to
-    access files and directories that are stored outside the intended
-    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
-    its variations, or by using absolute file paths, it may be possible to
-    access arbitrary files and directories stored on file system, including
-    application source code, configuration, and other critical system files.
-
-    Directory Traversal vulnerabilities can be generally divided into two
-    types:
-
-    * **Information Disclosure**\: Allows the attacker to gain information
-      about the folder structure or read the contents of sensitive files on
-      the system.
-
-    `st` is a module for serving static files on web pages, and contains a
-    [vulnerability of this type][1]. In our example, we will serve files
-    from the `public` route.
-
-    If an attacker requests the following URL from our server, it will in
-    turn leak the sensitive private key of the root user.
-
-        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
-
-    **Note** `%2e` is the URL encoded version of `.` (dot).
-
-    * **Writing arbitrary files**\: Allows the attacker to create or replace
-      existing files. This type of vulnerability is also known as
-      `Zip-Slip`.
-
-    One way to achieve this is by using a malicious `zip` archive that holds
-    path traversal filenames. When each filename in the zip archive gets
-    concatenated to the target extraction folder, without validation, the
-    final path ends up outside of the target folder. If an executable or a
-    configuration file is overwritten with a file containing malicious code,
-    the problem can turn into an arbitrary code execution issue quite
-    easily.
-
-    The following is an example of a `zip` archive with one benign file and
-    one malicious file. Extracting the malicious file will result in
-    traversing out of the target folder, ending up in `/root/.ssh/`
-    overwriting the `authorized_keys` file:
-
-        2018-04-15 22:04:29 .....           19           19  good.txt
-        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
-
-
-
-    [1]: https://snyk.io/vuln/npm:st:20140206
-    \nA Directory Traversal attack (also known as path traversal) aims to
-    access files and directories that are stored outside the intended
-    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
-    its variations, or by using absolute file paths, it may be possible to
-    access arbitrary files and directories stored on file system, including
-    application source code, configuration, and other critical system files.
-
-    Directory Traversal vulnerabilities can be generally divided into two
-    types:
-
-    * **Information Disclosure**\: Allows the attacker to gain information
-      about the folder structure or read the contents of sensitive files on
-      the system.
-
-    `st` is a module for serving static files on web pages, and contains a
-    [vulnerability of this type][1]. In our example, we will serve files
-    from the `public` route.
-
-    If an attacker requests the following URL from our server, it will in
-    turn leak the sensitive private key of the root user.
-
-        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
-
-    **Note** `%2e` is the URL encoded version of `.` (dot).
-
-    * **Writing arbitrary files**\: Allows the attacker to create or replace
-      existing files. This type of vulnerability is also known as
-      `Zip-Slip`.
-
-    One way to achieve this is by using a malicious `zip` archive that holds
-    path traversal filenames. When each filename in the zip archive gets
-    concatenated to the target extraction folder, without validation, the
-    final path ends up outside of the target folder. If an executable or a
-    configuration file is overwritten with a file containing malicious code,
-    the problem can turn into an arbitrary code execution issue quite
-    easily.
-
-    The following is an example of a `zip` archive with one benign file and
-    one malicious file. Extracting the malicious file will result in
-    traversing out of the target folder, ending up in `/root/.ssh/`
-    overwriting the `authorized_keys` file:
-
-        2018-04-15 22:04:29 .....           19           19  good.txt
-        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
-
-
-
-    [1]: https://snyk.io/vuln/npm:st:20140206
-    \nA Directory Traversal attack (also known as path traversal) aims to
-    access files and directories that are stored outside the intended
-    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
-    its variations, or by using absolute file paths, it may be possible to
-    access arbitrary files and directories stored on file system, including
-    application source code, configuration, and other critical system files.
-
-    Directory Traversal vulnerabilities can be generally divided into two
-    types:
-
-    * **Information Disclosure**\: Allows the attacker to gain information
-      about the folder structure or read the contents of sensitive files on
-      the system.
-
-    `st` is a module for serving static files on web pages, and contains a
-    [vulnerability of this type][1]. In our example, we will serve files
-    from the `public` route.
-
-    If an attacker requests the following URL from our server, it will in
-    turn leak the sensitive private key of the root user.
-
-        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
-
-    **Note** `%2e` is the URL encoded version of `.` (dot).
-
-    * **Writing arbitrary files**\: Allows the attacker to create or replace
-      existing files. This type of vulnerability is also known as
-      `Zip-Slip`.
-
-    One way to achieve this is by using a malicious `zip` archive that holds
-    path traversal filenames. When each filename in the zip archive gets
-    concatenated to the target extraction folder, without validation, the
-    final path ends up outside of the target folder. If an executable or a
-    configuration file is overwritten with a file containing malicious code,
-    the problem can turn into an arbitrary code execution issue quite
-    easily.
-
-    The following is an example of a `zip` archive with one benign file and
-    one malicious file. Extracting the malicious file will result in
-    traversing out of the target folder, ending up in `/root/.ssh/`
-    overwriting the `authorized_keys` file:
-
-        2018-04-15 22:04:29 .....           19           19  good.txt
-        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
-
-
-
-    [1]: https://snyk.io/vuln/npm:st:20140206
-    \nA Directory Traversal attack (also known as path traversal) aims to
-    access files and directories that are stored outside the intended
-    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
-    its variations, or by using absolute file paths, it may be possible to
-    access arbitrary files and directories stored on file system, including
-    application source code, configuration, and other critical system files.
-
-    Directory Traversal vulnerabilities can be generally divided into two
-    types:
-
-    * **Information Disclosure**\: Allows the attacker to gain information
-      about the folder structure or read the contents of sensitive files on
-      the system.
-
-    `st` is a module for serving static files on web pages, and contains a
-    [vulnerability of this type][1]. In our example, we will serve files
-    from the `public` route.
-
-    If an attacker requests the following URL from our server, it will in
-    turn leak the sensitive private key of the root user.
-
-        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
-
-    **Note** `%2e` is the URL encoded version of `.` (dot).
-
-    * **Writing arbitrary files**\: Allows the attacker to create or replace
-      existing files. This type of vulnerability is also known as
-      `Zip-Slip`.
-
-    One way to achieve this is by using a malicious `zip` archive that holds
-    path traversal filenames. When each filename in the zip archive gets
-    concatenated to the target extraction folder, without validation, the
-    final path ends up outside of the target folder. If an executable or a
-    configuration file is overwritten with a file containing malicious code,
-    the problem can turn into an arbitrary code execution issue quite
-    easily.
-
-    The following is an example of a `zip` archive with one benign file and
-    one malicious file. Extracting the malicious file will result in
-    traversing out of the target folder, ending up in `/root/.ssh/`
-    overwriting the `authorized_keys` file:
-
-        2018-04-15 22:04:29 .....           19           19  good.txt
-        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
-
-
-
-    [1]: https://snyk.io/vuln/npm:st:20140206
     \nA Directory Traversal attack (also known as path traversal) aims to
     access files and directories that are stored outside the intended
     folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
@@ -696,74 +165,19 @@
   - CVE-2016-1242
   cwe:
   - CWE-200
+  disclosed_date: 2016-09-05
+  created_date: 2016-09-05
+  last_modified_date: 2016-09-05
   credit:
   - Cédric Krier
   references:
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-1242
   - http://www.tryton.org/posts/security-release-for-issue5795-and-issue5808.html
   source_url: https://snyk.io/vuln/SNYK-PYTHON-TRYTOND-40376
-- id: snykio:pypi:trytond:2016-09-05
-  title: Information Exposure
-  description: |
-    [`trytond`][1] is a Tryton server Tryton 3.x before 3.2.17, 3.4.x before
-    3.4.14, 3.6.x before 3.6.12, 3.8.x before 3.8.8, and 4.x before 4.0.4
-    allow remote authenticated users to discover user password hashes via
-    unspecified vectors.
-
-
-
-    [1]: https://pypi.python.org/pypi/trytond
-    \n[`trytond`][1] is a Tryton server Tryton 3.x before 3.2.17, 3.4.x before
-    3.4.14, 3.6.x before 3.6.12, 3.8.x before 3.8.8, and 4.x before 4.0.4
-    allow remote authenticated users to discover user password hashes via
-    unspecified vectors.
-
-
-
-    [1]: https://pypi.python.org/pypi/trytond
-  affected_package: trytond
-  vulnerable_versions:
-  - ">= 4.0.0 <= 4.0.3"
-  severity: low
-  package_manager: pypi
-  cve:
-  - CVE-2016-1241
-  cwe:
-  - CWE-200
-  credit:
-  - Cédric Krier
-  references:
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-1241
-  - http://www.tryton.org/posts/security-release-for-issue5795-and-issue5808.html
-  source_url: https://snyk.io/vuln/SNYK-PYTHON-TRYTOND-40375
-- id: snykio:pypi:trytond:2017-04-06
+- id: snykio:pypi:trytond:CVE-2017-0360
   title: Arbitrary File Read
   description: |
     [`trytond`][1] is a Tryton server file\_open in Tryton 3.x and 4.x
-    through 4.2.2 allows remote authenticated users with certain permissions
-    to read arbitrary files via a \"same root name but with a suffix\"
-    attack.
-
-    **NOTE:** This vulnerability exists because of an incomplete fix for
-    [CVE-2016-1242][2].
-
-
-
-    [1]: https://pypi.python.org/pypi/trytond
-    [2]: https://snyk.io/vulnSNYK-PYTHON-TRYTOND-40376
-    \n[`trytond`][1] is a Tryton server file\_open in Tryton 3.x and 4.x
-    through 4.2.2 allows remote authenticated users with certain permissions
-    to read arbitrary files via a \"same root name but with a suffix\"
-    attack.
-
-    **NOTE:** This vulnerability exists because of an incomplete fix for
-    [CVE-2016-1242][2].
-
-
-
-    [1]: https://pypi.python.org/pypi/trytond
-    [2]: https://snyk.io/vulnSNYK-PYTHON-TRYTOND-40376
-    \n[`trytond`][1] is a Tryton server file\_open in Tryton 3.x and 4.x
     through 4.2.2 allows remote authenticated users with certain permissions
     to read arbitrary files via a \"same root name but with a suffix\"
     attack.
@@ -784,6 +198,9 @@
   - CVE-2017-0360
   cwe:
   - CWE-284
+  disclosed_date: 2017-04-06
+  created_date: 2017-04-06
+  last_modified_date: 2017-04-06
   credit:
   - Unknown
   references:

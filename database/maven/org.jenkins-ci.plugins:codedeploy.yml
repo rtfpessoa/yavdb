@@ -1,38 +1,42 @@
 ---
-- id: snykio:maven:org.jenkins-ci.plugins:codedeploy:2018-06-25
-  title: Credentials Disclosure
+- id: snykio:maven:org.jenkins-ci.plugins:codedeploy:CVE-2018-1000402
+  title: Information Exposure
   description: |
     [org.jenkins-ci.plugins:codedeploy][1] provides a post-build step for
     the Jenkins project.
 
-    Affected versions of this package are vulnerable to Credentials
-    Disclosure via the `AWSCodeDeployPublisher.java` method. It stored the
-    AWS Secret Key in its configuration unencrypted in job\'s `config.xml`
-    files and its global configuration file on the Jenkins master. This key
-    could be viewed by users with Extended Read permission, or access to the
-    master file system. While masked from view using a password form field,
-    the AWS Secret Key was transferred in plain text to users when accessing
-    the job configuration form.
+    Affected versions of this package are vulnerable to Information Exposure
+    via the `AWSCodeDeployPublisher.jave` method. It could persist
+    environment variables from the last run of any project with the
+    post-build step configured in the job’s `config.xml` file. In some
+    cases, this allowed users with file system access or Extended Read
+    permission to obtain those potentially sensitive environment variables
+    by accessing the project’s `config.xml`.
 
 
 
     [1]: https://github.com/awslabs/aws-codedeploy-plugin
-    \n[org.jenkins-ci.plugins:codedeploy][1] provides a post-build step for
-    the Jenkins project.
-
-    Affected versions of this package are vulnerable to Credentials
-    Disclosure via the `AWSCodeDeployPublisher.java` method. It stored the
-    AWS Secret Key in its configuration unencrypted in job\'s `config.xml`
-    files and its global configuration file on the Jenkins master. This key
-    could be viewed by users with Extended Read permission, or access to the
-    master file system. While masked from view using a password form field,
-    the AWS Secret Key was transferred in plain text to users when accessing
-    the job configuration form.
-
-
-
-    [1]: https://github.com/awslabs/aws-codedeploy-plugin
-    \n[org.jenkins-ci.plugins:codedeploy][1] provides a post-build step for
+  affected_package: org.jenkins-ci.plugins:codedeploy
+  vulnerable_versions:
+  - "< 1.20"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2018-1000402
+  cwe:
+  - CWE-200
+  disclosed_date: 2018-06-25
+  created_date: 2018-07-19
+  last_modified_date: 2018-07-19
+  credit:
+  - Oleg Nenashev
+  references:
+  - https://jenkins.io/security/advisory/2018-06-25/#SECURITY-825
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGJENKINSCIPLUGINS-32425
+- id: snykio:maven:org.jenkins-ci.plugins:codedeploy:CVE-2018-1000403
+  title: Credentials Disclosure
+  description: |
+    [org.jenkins-ci.plugins:codedeploy][1] provides a post-build step for
     the Jenkins project.
 
     Affected versions of this package are vulnerable to Credentials
@@ -56,67 +60,11 @@
   - CVE-2018-1000403
   cwe:
   - CWE-255
+  disclosed_date: 2018-06-25
+  created_date: 2018-07-19
+  last_modified_date: 2018-07-19
   credit:
   - Viktor Gazdag
   references:
   - https://jenkins.io/security/advisory/2018-06-25/#SECURITY-833
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGJENKINSCIPLUGINS-32426
-- id: snykio:maven:org.jenkins-ci.plugins:codedeploy:2018-06-25
-  title: Information Exposure
-  description: |
-    [org.jenkins-ci.plugins:codedeploy][1] provides a post-build step for
-    the Jenkins project.
-
-    Affected versions of this package are vulnerable to Information Exposure
-    via the `AWSCodeDeployPublisher.jave` method. It could persist
-    environment variables from the last run of any project with the
-    post-build step configured in the job’s `config.xml` file. In some
-    cases, this allowed users with file system access or Extended Read
-    permission to obtain those potentially sensitive environment variables
-    by accessing the project’s `config.xml`.
-
-
-
-    [1]: https://github.com/awslabs/aws-codedeploy-plugin
-    \n[org.jenkins-ci.plugins:codedeploy][1] provides a post-build step for
-    the Jenkins project.
-
-    Affected versions of this package are vulnerable to Information Exposure
-    via the `AWSCodeDeployPublisher.jave` method. It could persist
-    environment variables from the last run of any project with the
-    post-build step configured in the job’s `config.xml` file. In some
-    cases, this allowed users with file system access or Extended Read
-    permission to obtain those potentially sensitive environment variables
-    by accessing the project’s `config.xml`.
-
-
-
-    [1]: https://github.com/awslabs/aws-codedeploy-plugin
-    \n[org.jenkins-ci.plugins:codedeploy][1] provides a post-build step for
-    the Jenkins project.
-
-    Affected versions of this package are vulnerable to Information Exposure
-    via the `AWSCodeDeployPublisher.jave` method. It could persist
-    environment variables from the last run of any project with the
-    post-build step configured in the job’s `config.xml` file. In some
-    cases, this allowed users with file system access or Extended Read
-    permission to obtain those potentially sensitive environment variables
-    by accessing the project’s `config.xml`.
-
-
-
-    [1]: https://github.com/awslabs/aws-codedeploy-plugin
-  affected_package: org.jenkins-ci.plugins:codedeploy
-  vulnerable_versions:
-  - "< 1.20"
-  severity: medium
-  package_manager: maven
-  cve:
-  - CVE-2018-1000402
-  cwe:
-  - CWE-200
-  credit:
-  - Oleg Nenashev
-  references:
-  - https://jenkins.io/security/advisory/2018-06-25/#SECURITY-825
-  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGJENKINSCIPLUGINS-32425

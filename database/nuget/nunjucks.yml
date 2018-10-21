@@ -1,30 +1,7 @@
 ---
-- id: snykio:nuget:nunjucks:2016-09-09
+- id: snykio:nuget:nunjucks:60201
   title: Content & Code Injection (XSS)
   description: "`nunjucks` is a powerful templating engine.\n\nLike many templating
-    engines, it automatically HTML encodes any `string`\nvalue included in the template
-    using the `{{ some-variable }}` notation.\nThese variables are often user-generated,
-    but the HTML Encoding protects\nthe application from Cross-site Scripting (XSS)
-    attacks.\n\nHowever, if the variable passed in is an array, no HTML encoding is\napplied,
-    exposing an easy path to XSS. The risk of exploit is especially\nhigh given the
-    fact `express`, `koa` and many other Node.js servers\nallow users to force a query
-    parameter to be an array using the\n`param[]=value` notation.\n\n\\n`nunjucks`
-    is a powerful templating engine.\n\nLike many templating engines, it automatically
-    HTML encodes any `string`\nvalue included in the template using the `{{ some-variable
-    }}` notation.\nThese variables are often user-generated, but the HTML Encoding
-    protects\nthe application from Cross-site Scripting (XSS) attacks.\n\nHowever,
-    if the variable passed in is an array, no HTML encoding is\napplied, exposing
-    an easy path to XSS. The risk of exploit is especially\nhigh given the fact `express`,
-    `koa` and many other Node.js servers\nallow users to force a query parameter to
-    be an array using the\n`param[]=value` notation.\n\n\\n`nunjucks` is a powerful
-    templating engine.\n\nLike many templating engines, it automatically HTML encodes
-    any `string`\nvalue included in the template using the `{{ some-variable }}` notation.\nThese
-    variables are often user-generated, but the HTML Encoding protects\nthe application
-    from Cross-site Scripting (XSS) attacks.\n\nHowever, if the variable passed in
-    is an array, no HTML encoding is\napplied, exposing an easy path to XSS. The risk
-    of exploit is especially\nhigh given the fact `express`, `koa` and many other
-    Node.js servers\nallow users to force a query parameter to be an array using the\n`param[]=value`
-    notation.\n\n\\n`nunjucks` is a powerful templating engine.\n\nLike many templating
     engines, it automatically HTML encodes any `string`\nvalue included in the template
     using the `{{ some-variable }}` notation.\nThese variables are often user-generated,
     but the HTML Encoding protects\nthe application from Cross-site Scripting (XSS)
@@ -48,86 +25,6 @@
     Attack URL:\n> `http://127.0.0.1:3000/?name[]=<script>alert(1)</script>matt`\n\nA
     more complete proof of concept (POC) can be found here:\n[https://github.com/matt-/nunjucks\\_test][3]\n\n\n\n[1]:
     https://github.com/mozilla/nunjucks/issues/835\n[2]: https://github.com/matt-\n[3]:
-    https://github.com/matt-/nunjucks_test\n\\nThe [issue][1] opened by [Matt Austin][2]
-    explains the vulnerability\nvery well:\n\n> The following string works as expected:\n>
-    \n>     var res = nunjucks.renderString('Hello {{ username }}', { username: '<s>Matt</s>'
-    });\n>     console.log(res); //Hello &lt;s&gt;Matt&lt;/s&gt;\n\n> If however the
-    variable passed to the template is an array autoescape\n> does nothing:\n> \n>
-    \    var res = nunjucks.renderString('Hello {{ username }}', { username: ['<s>Matt</s>']
-    });\n>     console.log(res); // Hello <s>Matt</s>\n> \n> ... In express / Koa
-    / (anything else using qs or body-parser) is is\n> trivial to coerce query params
-    types. See the following simple example\n> in express:\n> \n>     var app = express();\n>
-    \    var env = nunjucks.configure('views', {\n>         autoescape: true,\n>         express:
-    app\n>     });\n>     app.get('/', function(req, res) {     \n>         // This
-    should be fine autoescape is on...\n>         res.send(nunjucks.renderString('Hello
-    {{ username }}', { username: req.query.name }));\n>         //res.render('index.html',
-    { username: req.query.name });\n>     });\n\n> Attack URL:\n> `http://127.0.0.1:3000/?name[]=<script>alert(1)</script>matt`\n\nA
-    more complete proof of concept (POC) can be found here:\n[https://github.com/matt-/nunjucks\\_test][3]\n\n\n\n[1]:
-    https://github.com/mozilla/nunjucks/issues/835\n[2]: https://github.com/matt-\n[3]:
-    https://github.com/matt-/nunjucks_test\n\\nThe [issue][1] opened by [Matt Austin][2]
-    explains the vulnerability\nvery well:\n\n> The following string works as expected:\n>
-    \n>     var res = nunjucks.renderString('Hello {{ username }}', { username: '<s>Matt</s>'
-    });\n>     console.log(res); //Hello &lt;s&gt;Matt&lt;/s&gt;\n\n> If however the
-    variable passed to the template is an array autoescape\n> does nothing:\n> \n>
-    \    var res = nunjucks.renderString('Hello {{ username }}', { username: ['<s>Matt</s>']
-    });\n>     console.log(res); // Hello <s>Matt</s>\n> \n> ... In express / Koa
-    / (anything else using qs or body-parser) is is\n> trivial to coerce query params
-    types. See the following simple example\n> in express:\n> \n>     var app = express();\n>
-    \    var env = nunjucks.configure('views', {\n>         autoescape: true,\n>         express:
-    app\n>     });\n>     app.get('/', function(req, res) {     \n>         // This
-    should be fine autoescape is on...\n>         res.send(nunjucks.renderString('Hello
-    {{ username }}', { username: req.query.name }));\n>         //res.render('index.html',
-    { username: req.query.name });\n>     });\n\n> Attack URL:\n> `http://127.0.0.1:3000/?name[]=<script>alert(1)</script>matt`\n\nA
-    more complete proof of concept (POC) can be found here:\n[https://github.com/matt-/nunjucks\\_test][3]\n\n\n\n[1]:
-    https://github.com/mozilla/nunjucks/issues/835\n[2]: https://github.com/matt-\n[3]:
-    https://github.com/matt-/nunjucks_test\n\\nThe [issue][1] opened by [Matt Austin][2]
-    explains the vulnerability\nvery well:\n\n> The following string works as expected:\n>
-    \n>     var res = nunjucks.renderString('Hello {{ username }}', { username: '<s>Matt</s>'
-    });\n>     console.log(res); //Hello &lt;s&gt;Matt&lt;/s&gt;\n\n> If however the
-    variable passed to the template is an array autoescape\n> does nothing:\n> \n>
-    \    var res = nunjucks.renderString('Hello {{ username }}', { username: ['<s>Matt</s>']
-    });\n>     console.log(res); // Hello <s>Matt</s>\n> \n> ... In express / Koa
-    / (anything else using qs or body-parser) is is\n> trivial to coerce query params
-    types. See the following simple example\n> in express:\n> \n>     var app = express();\n>
-    \    var env = nunjucks.configure('views', {\n>         autoescape: true,\n>         express:
-    app\n>     });\n>     app.get('/', function(req, res) {     \n>         // This
-    should be fine autoescape is on...\n>         res.send(nunjucks.renderString('Hello
-    {{ username }}', { username: req.query.name }));\n>         //res.render('index.html',
-    { username: req.query.name });\n>     });\n\n> Attack URL:\n> `http://127.0.0.1:3000/?name[]=<script>alert(1)</script>matt`\n\nA
-    more complete proof of concept (POC) can be found here:\n[https://github.com/matt-/nunjucks\\_test][3]\n\n\n\n[1]:
-    https://github.com/mozilla/nunjucks/issues/835\n[2]: https://github.com/matt-\n[3]:
-    https://github.com/matt-/nunjucks_test\n\\nThe [issue][1] opened by [Matt Austin][2]
-    explains the vulnerability\nvery well:\n\n> The following string works as expected:\n>
-    \n>     var res = nunjucks.renderString('Hello {{ username }}', { username: '<s>Matt</s>'
-    });\n>     console.log(res); //Hello &lt;s&gt;Matt&lt;/s&gt;\n\n> If however the
-    variable passed to the template is an array autoescape\n> does nothing:\n> \n>
-    \    var res = nunjucks.renderString('Hello {{ username }}', { username: ['<s>Matt</s>']
-    });\n>     console.log(res); // Hello <s>Matt</s>\n> \n> ... In express / Koa
-    / (anything else using qs or body-parser) is is\n> trivial to coerce query params
-    types. See the following simple example\n> in express:\n> \n>     var app = express();\n>
-    \    var env = nunjucks.configure('views', {\n>         autoescape: true,\n>         express:
-    app\n>     });\n>     app.get('/', function(req, res) {     \n>         // This
-    should be fine autoescape is on...\n>         res.send(nunjucks.renderString('Hello
-    {{ username }}', { username: req.query.name }));\n>         //res.render('index.html',
-    { username: req.query.name });\n>     });\n\n> Attack URL:\n> `http://127.0.0.1:3000/?name[]=<script>alert(1)</script>matt`\n\nA
-    more complete proof of concept (POC) can be found here:\n[https://github.com/matt-/nunjucks\\_test][3]\n\n\n\n[1]:
-    https://github.com/mozilla/nunjucks/issues/835\n[2]: https://github.com/matt-\n[3]:
-    https://github.com/matt-/nunjucks_test\n\\nThe [issue][1] opened by [Matt Austin][2]
-    explains the vulnerability\nvery well:\n\n> The following string works as expected:\n>
-    \n>     var res = nunjucks.renderString('Hello {{ username }}', { username: '<s>Matt</s>'
-    });\n>     console.log(res); //Hello &lt;s&gt;Matt&lt;/s&gt;\n\n> If however the
-    variable passed to the template is an array autoescape\n> does nothing:\n> \n>
-    \    var res = nunjucks.renderString('Hello {{ username }}', { username: ['<s>Matt</s>']
-    });\n>     console.log(res); // Hello <s>Matt</s>\n> \n> ... In express / Koa
-    / (anything else using qs or body-parser) is is\n> trivial to coerce query params
-    types. See the following simple example\n> in express:\n> \n>     var app = express();\n>
-    \    var env = nunjucks.configure('views', {\n>         autoescape: true,\n>         express:
-    app\n>     });\n>     app.get('/', function(req, res) {     \n>         // This
-    should be fine autoescape is on...\n>         res.send(nunjucks.renderString('Hello
-    {{ username }}', { username: req.query.name }));\n>         //res.render('index.html',
-    { username: req.query.name });\n>     });\n\n> Attack URL:\n> `http://127.0.0.1:3000/?name[]=<script>alert(1)</script>matt`\n\nA
-    more complete proof of concept (POC) can be found here:\n[https://github.com/matt-/nunjucks\\_test][3]\n\n\n\n[1]:
-    https://github.com/mozilla/nunjucks/issues/835\n[2]: https://github.com/matt-\n[3]:
     https://github.com/matt-/nunjucks_test\n"
   affected_package: nunjucks
   vulnerable_versions:
@@ -136,6 +33,9 @@
   package_manager: nuget
   cwe:
   - CWE-79
+  disclosed_date: 2016-09-09
+  created_date: 2016-09-09
+  last_modified_date: 2016-09-09
   credit:
   - Matt Austin
   references:
@@ -143,32 +43,9 @@
   - https://github.com/mozilla/nunjucks/pull/836
   - https://github.com/matt-/nunjucks_test
   source_url: https://snyk.io/vuln/SNYK-DOTNET-NUNJUCKS-60201
-- id: snykio:nuget:nunjucks:2016-09-09
+- id: snykio:nuget:nunjucks:60224
   title: Content & Code Injection (XSS)
   description: "`nunjucks` is a powerful templating engine.\n\nLike many templating
-    engines, it automatically HTML encodes any `string`\nvalue included in the template
-    using the `{{ some-variable }}` notation.\nThese variables are often user-generated,
-    but the HTML Encoding protects\nthe application from Cross-site Scripting (XSS)
-    attacks.\n\nHowever, if the variable passed in is an array, no HTML encoding is\napplied,
-    exposing an easy path to XSS. The risk of exploit is especially\nhigh given the
-    fact `express`, `koa` and many other Node.js servers\nallow users to force a query
-    parameter to be an array using the\n`param[]=value` notation.\n\n\\n`nunjucks`
-    is a powerful templating engine.\n\nLike many templating engines, it automatically
-    HTML encodes any `string`\nvalue included in the template using the `{{ some-variable
-    }}` notation.\nThese variables are often user-generated, but the HTML Encoding
-    protects\nthe application from Cross-site Scripting (XSS) attacks.\n\nHowever,
-    if the variable passed in is an array, no HTML encoding is\napplied, exposing
-    an easy path to XSS. The risk of exploit is especially\nhigh given the fact `express`,
-    `koa` and many other Node.js servers\nallow users to force a query parameter to
-    be an array using the\n`param[]=value` notation.\n\n\\n`nunjucks` is a powerful
-    templating engine.\n\nLike many templating engines, it automatically HTML encodes
-    any `string`\nvalue included in the template using the `{{ some-variable }}` notation.\nThese
-    variables are often user-generated, but the HTML Encoding protects\nthe application
-    from Cross-site Scripting (XSS) attacks.\n\nHowever, if the variable passed in
-    is an array, no HTML encoding is\napplied, exposing an easy path to XSS. The risk
-    of exploit is especially\nhigh given the fact `express`, `koa` and many other
-    Node.js servers\nallow users to force a query parameter to be an array using the\n`param[]=value`
-    notation.\n\n\\n`nunjucks` is a powerful templating engine.\n\nLike many templating
     engines, it automatically HTML encodes any `string`\nvalue included in the template
     using the `{{ some-variable }}` notation.\nThese variables are often user-generated,
     but the HTML Encoding protects\nthe application from Cross-site Scripting (XSS)
@@ -192,86 +69,6 @@
     Attack URL:\n> `http://127.0.0.1:3000/?name[]=<script>alert(1)</script>matt`\n\nA
     more complete proof of concept (POC) can be found here:\n[https://github.com/matt-/nunjucks\\_test][3]\n\n\n\n[1]:
     https://github.com/mozilla/nunjucks/issues/835\n[2]: https://github.com/matt-\n[3]:
-    https://github.com/matt-/nunjucks_test\n\\nThe [issue][1] opened by [Matt Austin][2]
-    explains the vulnerability\nvery well:\n\n> The following string works as expected:\n>
-    \n>     var res = nunjucks.renderString('Hello {{ username }}', { username: '<s>Matt</s>'
-    });\n>     console.log(res); //Hello &lt;s&gt;Matt&lt;/s&gt;\n\n> If however the
-    variable passed to the template is an array autoescape\n> does nothing:\n> \n>
-    \    var res = nunjucks.renderString('Hello {{ username }}', { username: ['<s>Matt</s>']
-    });\n>     console.log(res); // Hello <s>Matt</s>\n> \n> ... In express / Koa
-    / (anything else using qs or body-parser) is is\n> trivial to coerce query params
-    types. See the following simple example\n> in express:\n> \n>     var app = express();\n>
-    \    var env = nunjucks.configure('views', {\n>         autoescape: true,\n>         express:
-    app\n>     });\n>     app.get('/', function(req, res) {     \n>         // This
-    should be fine autoescape is on...\n>         res.send(nunjucks.renderString('Hello
-    {{ username }}', { username: req.query.name }));\n>         //res.render('index.html',
-    { username: req.query.name });\n>     });\n\n> Attack URL:\n> `http://127.0.0.1:3000/?name[]=<script>alert(1)</script>matt`\n\nA
-    more complete proof of concept (POC) can be found here:\n[https://github.com/matt-/nunjucks\\_test][3]\n\n\n\n[1]:
-    https://github.com/mozilla/nunjucks/issues/835\n[2]: https://github.com/matt-\n[3]:
-    https://github.com/matt-/nunjucks_test\n\\nThe [issue][1] opened by [Matt Austin][2]
-    explains the vulnerability\nvery well:\n\n> The following string works as expected:\n>
-    \n>     var res = nunjucks.renderString('Hello {{ username }}', { username: '<s>Matt</s>'
-    });\n>     console.log(res); //Hello &lt;s&gt;Matt&lt;/s&gt;\n\n> If however the
-    variable passed to the template is an array autoescape\n> does nothing:\n> \n>
-    \    var res = nunjucks.renderString('Hello {{ username }}', { username: ['<s>Matt</s>']
-    });\n>     console.log(res); // Hello <s>Matt</s>\n> \n> ... In express / Koa
-    / (anything else using qs or body-parser) is is\n> trivial to coerce query params
-    types. See the following simple example\n> in express:\n> \n>     var app = express();\n>
-    \    var env = nunjucks.configure('views', {\n>         autoescape: true,\n>         express:
-    app\n>     });\n>     app.get('/', function(req, res) {     \n>         // This
-    should be fine autoescape is on...\n>         res.send(nunjucks.renderString('Hello
-    {{ username }}', { username: req.query.name }));\n>         //res.render('index.html',
-    { username: req.query.name });\n>     });\n\n> Attack URL:\n> `http://127.0.0.1:3000/?name[]=<script>alert(1)</script>matt`\n\nA
-    more complete proof of concept (POC) can be found here:\n[https://github.com/matt-/nunjucks\\_test][3]\n\n\n\n[1]:
-    https://github.com/mozilla/nunjucks/issues/835\n[2]: https://github.com/matt-\n[3]:
-    https://github.com/matt-/nunjucks_test\n\\nThe [issue][1] opened by [Matt Austin][2]
-    explains the vulnerability\nvery well:\n\n> The following string works as expected:\n>
-    \n>     var res = nunjucks.renderString('Hello {{ username }}', { username: '<s>Matt</s>'
-    });\n>     console.log(res); //Hello &lt;s&gt;Matt&lt;/s&gt;\n\n> If however the
-    variable passed to the template is an array autoescape\n> does nothing:\n> \n>
-    \    var res = nunjucks.renderString('Hello {{ username }}', { username: ['<s>Matt</s>']
-    });\n>     console.log(res); // Hello <s>Matt</s>\n> \n> ... In express / Koa
-    / (anything else using qs or body-parser) is is\n> trivial to coerce query params
-    types. See the following simple example\n> in express:\n> \n>     var app = express();\n>
-    \    var env = nunjucks.configure('views', {\n>         autoescape: true,\n>         express:
-    app\n>     });\n>     app.get('/', function(req, res) {     \n>         // This
-    should be fine autoescape is on...\n>         res.send(nunjucks.renderString('Hello
-    {{ username }}', { username: req.query.name }));\n>         //res.render('index.html',
-    { username: req.query.name });\n>     });\n\n> Attack URL:\n> `http://127.0.0.1:3000/?name[]=<script>alert(1)</script>matt`\n\nA
-    more complete proof of concept (POC) can be found here:\n[https://github.com/matt-/nunjucks\\_test][3]\n\n\n\n[1]:
-    https://github.com/mozilla/nunjucks/issues/835\n[2]: https://github.com/matt-\n[3]:
-    https://github.com/matt-/nunjucks_test\n\\nThe [issue][1] opened by [Matt Austin][2]
-    explains the vulnerability\nvery well:\n\n> The following string works as expected:\n>
-    \n>     var res = nunjucks.renderString('Hello {{ username }}', { username: '<s>Matt</s>'
-    });\n>     console.log(res); //Hello &lt;s&gt;Matt&lt;/s&gt;\n\n> If however the
-    variable passed to the template is an array autoescape\n> does nothing:\n> \n>
-    \    var res = nunjucks.renderString('Hello {{ username }}', { username: ['<s>Matt</s>']
-    });\n>     console.log(res); // Hello <s>Matt</s>\n> \n> ... In express / Koa
-    / (anything else using qs or body-parser) is is\n> trivial to coerce query params
-    types. See the following simple example\n> in express:\n> \n>     var app = express();\n>
-    \    var env = nunjucks.configure('views', {\n>         autoescape: true,\n>         express:
-    app\n>     });\n>     app.get('/', function(req, res) {     \n>         // This
-    should be fine autoescape is on...\n>         res.send(nunjucks.renderString('Hello
-    {{ username }}', { username: req.query.name }));\n>         //res.render('index.html',
-    { username: req.query.name });\n>     });\n\n> Attack URL:\n> `http://127.0.0.1:3000/?name[]=<script>alert(1)</script>matt`\n\nA
-    more complete proof of concept (POC) can be found here:\n[https://github.com/matt-/nunjucks\\_test][3]\n\n\n\n[1]:
-    https://github.com/mozilla/nunjucks/issues/835\n[2]: https://github.com/matt-\n[3]:
-    https://github.com/matt-/nunjucks_test\n\\nThe [issue][1] opened by [Matt Austin][2]
-    explains the vulnerability\nvery well:\n\n> The following string works as expected:\n>
-    \n>     var res = nunjucks.renderString('Hello {{ username }}', { username: '<s>Matt</s>'
-    });\n>     console.log(res); //Hello &lt;s&gt;Matt&lt;/s&gt;\n\n> If however the
-    variable passed to the template is an array autoescape\n> does nothing:\n> \n>
-    \    var res = nunjucks.renderString('Hello {{ username }}', { username: ['<s>Matt</s>']
-    });\n>     console.log(res); // Hello <s>Matt</s>\n> \n> ... In express / Koa
-    / (anything else using qs or body-parser) is is\n> trivial to coerce query params
-    types. See the following simple example\n> in express:\n> \n>     var app = express();\n>
-    \    var env = nunjucks.configure('views', {\n>         autoescape: true,\n>         express:
-    app\n>     });\n>     app.get('/', function(req, res) {     \n>         // This
-    should be fine autoescape is on...\n>         res.send(nunjucks.renderString('Hello
-    {{ username }}', { username: req.query.name }));\n>         //res.render('index.html',
-    { username: req.query.name });\n>     });\n\n> Attack URL:\n> `http://127.0.0.1:3000/?name[]=<script>alert(1)</script>matt`\n\nA
-    more complete proof of concept (POC) can be found here:\n[https://github.com/matt-/nunjucks\\_test][3]\n\n\n\n[1]:
-    https://github.com/mozilla/nunjucks/issues/835\n[2]: https://github.com/matt-\n[3]:
     https://github.com/matt-/nunjucks_test\n"
   affected_package: nunjucks
   vulnerable_versions:
@@ -280,6 +77,9 @@
   package_manager: nuget
   cwe:
   - CWE-79
+  disclosed_date: 2016-09-09
+  created_date: 2016-09-09
+  last_modified_date: 2016-09-09
   credit:
   - Matt Austin
   references:

@@ -1,5 +1,25 @@
 ---
-- id: ossindex:maven:commons-fileupload:commons-fileupload:2013-03-15
+- id: ossindex:maven:commons-fileupload:commons-fileupload:2017-03-10
+  title: Arbitrary file upload via deserialization
+  description: "> The DiskFileItem class in Apache Commons FileUpload, as used in
+    Red Hat JBoss BRMS 5.3.1; JBoss Portal 4.3 CP07, 5.2.2, and 6.0.0; and Red Hat
+    JBoss Web Server 1.0.2 allows remote attackers to write to arbitrary files via
+    a NULL byte in a file name in a serialized instance.\n> \n> -- [redhat.com](https://access.redhat.com/security/cve/CVE-2013-2186)"
+  affected_package: commons-fileupload:commons-fileupload
+  vulnerable_versions:
+  - ">=1.0 <=1.3"
+  package_manager: maven
+  disclosed_date: 2017-03-10
+  created_date: 2017-03-10
+  last_modified_date: 2017-03-23
+  credit:
+  - OSSIndex
+  references:
+  - https://access.redhat.com/security/cve/CVE-2013-2186
+  - https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2013-2186
+  - https://github.com/victims/victims-cve-db/blob/master/database/java/2013/2186.yaml
+  source_url: https://ossindex.net/resource/package/7015420058/vulnerabilities
+- id: ossindex:maven:commons-fileupload:commons-fileupload:CVE-2013-0248
   title: "[CVE-2013-0248]  Permissions, Privileges, and Access Controls"
   description: The default configuration of javax.servlet.context.tempdir in Apache
     Commons FileUpload 1.0 through 1.2.2 uses the /tmp directory for uploaded files,
@@ -16,6 +36,9 @@
   package_manager: maven
   cve:
   - CVE-2013-0248
+  disclosed_date: 2013-03-15
+  created_date: 2013-03-15
+  last_modified_date: 2017-03-10
   credit:
   - OSSIndex
   references:
@@ -25,7 +48,7 @@
   - http://www.osvdb.org/90906
   - http://www.securityfocus.com/bid/58326
   source_url: https://ossindex.net/resource/package/7015420058/vulnerabilities
-- id: ossindex:maven:commons-fileupload:commons-fileupload:2014-04-01
+- id: ossindex:maven:commons-fileupload:commons-fileupload:CVE-2014-0050
   title: "[CVE-2014-0050]  Permissions, Privileges, and Access Controls"
   description: MultipartStream.java in Apache Commons FileUpload before 1.3.1, as
     used in Apache Tomcat, JBoss Web, and other products, allows remote attackers
@@ -43,6 +66,9 @@
   package_manager: maven
   cve:
   - CVE-2014-0050
+  disclosed_date: 2014-04-01
+  created_date: 2014-04-01
+  last_modified_date: 2017-03-10
   credit:
   - OSSIndex
   references:
@@ -119,7 +145,31 @@
   - https://h20566.www2.hpe.com/portal/site/hpsc/public/kb/docDisplay?docId=emr_na-c05376917
   - https://h20566.www2.hpe.com/portal/site/hpsc/public/kb/docDisplay?docId=emr_na-c05390722
   source_url: https://ossindex.net/resource/package/7015420058/vulnerabilities
-- id: ossindex:maven:commons-fileupload:commons-fileupload:2016-07-04
+- id: ossindex:maven:commons-fileupload:commons-fileupload:CVE-2016-1000031
+  title: "[CVE-2016-1000031]  Improper Access Control"
+  description: Apache Commons FileUpload before 1.3.3 DiskFileItem File Manipulation
+    Remote Code Execution
+  affected_package: commons-fileupload:commons-fileupload
+  vulnerable_versions:
+  - "<1.3.3"
+  package_manager: maven
+  cve:
+  - CVE-2016-1000031
+  disclosed_date: 2016-10-25
+  created_date: 2016-10-25
+  last_modified_date: 2018-01-07
+  credit:
+  - OSSIndex
+  references:
+  - http://www.securityfocus.com/bid/93604
+  - http://www.tenable.com/security/research/tra-2016-12
+  - http://www.zerodayinitiative.com/advisories/ZDI-16-570/
+  - https://issues.apache.org/jira/browse/FILEUPLOAD-279
+  - https://www.tenable.com/security/research/tra-2016-12
+  - https://www.tenable.com/security/research/tra-2016-23
+  - https://www.tenable.com/security/research/tra-2016-30
+  source_url: https://ossindex.net/resource/package/7015420058/vulnerabilities
+- id: ossindex:maven:commons-fileupload:commons-fileupload:CVE-2016-3092
   title: "[CVE-2016-3092]  Improper Input Validation"
   description: The MultipartStream class in Apache Commons Fileupload before 1.3.2,
     as used in Apache Tomcat 7.x before 7.0.70, 8.x before 8.0.36, 8.5.x before 8.5.3,
@@ -132,6 +182,9 @@
   package_manager: maven
   cve:
   - CVE-2016-3092
+  disclosed_date: 2016-07-04
+  created_date: 2016-07-04
+  last_modified_date: 2017-04-10
   credit:
   - OSSIndex
   references:
@@ -176,45 +229,80 @@
   - https://h20566.www2.hpe.com/portal/site/hpsc/public/kb/docDisplay?docId=emr_na-c05324759
   - https://security.gentoo.org/glsa/201705-09
   source_url: https://ossindex.net/resource/package/7015420058/vulnerabilities
-- id: ossindex:maven:commons-fileupload:commons-fileupload:2016-10-25
-  title: "[CVE-2016-1000031]  Improper Access Control"
-  description: Apache Commons FileUpload before 1.3.3 DiskFileItem File Manipulation
-    Remote Code Execution
+- id: snykio:maven:commons-fileupload:commons-fileupload:31540
+  title: Information Disclosure
+  description: |
+    [`commons-fileupload:commons-fileupload`][1] provides a simple yet
+    flexible means of adding support for multipart file upload functionality
+    to servlets and web applications.
+
+    Affected versions of the package are vulnerable to Information
+    Disclosure because the `InputStream` is not closed on exception.
+
+
+
+    [1]: https://commons.apache.org/proper/commons-fileupload/
   affected_package: commons-fileupload:commons-fileupload
   vulnerable_versions:
-  - "<1.3.3"
+  - "< 1.3.2"
+  severity: medium
+  package_manager: maven
+  cwe:
+  - CWE-200
+  disclosed_date: 2014-02-17
+  created_date: 2017-02-17
+  last_modified_date: 2017-02-17
+  credit:
+  - Unknown
+  references:
+  - https://github.com/apache/commons-fileupload/blob/master/src/changes/changes.xml#L56
+  - https://github.com/apache/commons-fileupload/commit/5b4881d7f75f439326f54fa554a9ca7de6d60814
+  source_url: https://snyk.io/vuln/SNYK-JAVA-COMMONSFILEUPLOAD-31540
+- id: snykio:maven:commons-fileupload:commons-fileupload:CVE-2013-0248
+  title: Time of Check Time of Use (TOCTOU)
+  description: |+
+    Affected versions of [`commons-fileupload:commons-fileupload`][1] are
+    vulnerable to Time of Check Time of Use (TOCTOU) attacks if the attacker
+    has write access to the /tmp directory.
+
+
+
+    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22commons-fileupload%22
+    \nCommons FileUpload provides file upload capability for Servlets and web
+    applications. During the upload process, FileUpload may (depending on
+    configuration) save the uploaded file temporarily on disk. By default
+    this will be in the system wide tmp directory. Because the temporary
+    files have predictable file names and are stored in a publicly writeable
+    location they are vulnerable to a TOCTOU attack.
+
+    A successful attack requires that the attacker has write access to the
+    tmp directory. The attack can be prevented by setting the repository to
+    a non-publicly writeable location. The documentation for FileUpload does
+    not highlight the potential security implications of not setting a
+    repository, nor do the provided examples set a repository. This may have
+    caused users to use FileUpload in an insecure manner.
+
+  affected_package: commons-fileupload:commons-fileupload
+  vulnerable_versions:
+  - "< 1.3"
+  severity: medium
   package_manager: maven
   cve:
-  - CVE-2016-1000031
+  - CVE-2013-0248
+  cwe:
+  - CWE-264
+  disclosed_date: 2015-05-06
+  created_date: 2015-05-06
+  last_modified_date: 2015-05-06
   credit:
-  - OSSIndex
+  - Karl Dyszynski
+  - Hugo Vazquez Carames
   references:
-  - http://www.securityfocus.com/bid/93604
-  - http://www.tenable.com/security/research/tra-2016-12
-  - http://www.zerodayinitiative.com/advisories/ZDI-16-570/
-  - https://issues.apache.org/jira/browse/FILEUPLOAD-279
-  - https://www.tenable.com/security/research/tra-2016-12
-  - https://www.tenable.com/security/research/tra-2016-23
-  - https://www.tenable.com/security/research/tra-2016-30
-  source_url: https://ossindex.net/resource/package/7015420058/vulnerabilities
-- id: ossindex:maven:commons-fileupload:commons-fileupload:2017-03-10
-  title: Arbitrary file upload via deserialization
-  description: "> The DiskFileItem class in Apache Commons FileUpload, as used in
-    Red Hat JBoss BRMS 5.3.1; JBoss Portal 4.3 CP07, 5.2.2, and 6.0.0; and Red Hat
-    JBoss Web Server 1.0.2 allows remote attackers to write to arbitrary files via
-    a NULL byte in a file name in a serialized instance.\n> \n> -- [redhat.com](https://access.redhat.com/security/cve/CVE-2013-2186)"
-  affected_package: commons-fileupload:commons-fileupload
-  vulnerable_versions:
-  - ">=1.0 <=1.3"
-  package_manager: maven
-  credit:
-  - OSSIndex
-  references:
-  - https://access.redhat.com/security/cve/CVE-2013-2186
-  - https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2013-2186
-  - https://github.com/victims/victims-cve-db/blob/master/database/java/2013/2186.yaml
-  source_url: https://ossindex.net/resource/package/7015420058/vulnerabilities
-- id: snykio:maven:commons-fileupload:commons-fileupload:2013-06-16
+  - https://github.com/apache/commons-fileupload/blob/b1498c9877d751f8bc4635a6f252ebdfcba28518/src/changes/changes.xml#L114
+  - https://bugzilla.redhat.com/CVE-2013-0248
+  - http://mail-archives.apache.org/mod_mbox/commons-user/201303.mbox/%3C51371C31.8020805@apache.org%3E
+  source_url: https://snyk.io/vuln/SNYK-JAVA-COMMONSFILEUPLOAD-30079
+- id: snykio:maven:commons-fileupload:commons-fileupload:CVE-2013-2186
   title: Arbitrary File Write
   description: |+
     [`commons-fileupload:commons-fileupload`][1] Affected versions of this
@@ -223,17 +311,6 @@
 
 
     [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22commons-fileupload%22
-    \n[`commons-fileupload:commons-fileupload`][1] Affected versions of this
-    package are vulnerable to Arbitrary File Write.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22commons-fileupload%22
-    \nThe DiskFileItem class in Apache Commons FileUpload, as used in Red Hat
-    JBoss BRMS 5.3.1; JBoss Portal 4.3 CP07, 5.2.2, and 6.0.0; and Red Hat
-    JBoss Web Server 1.0.2 allows remote attackers to write to arbitrary
-    files via a NULL byte in a file name in a serialized instance.
-
     \nThe DiskFileItem class in Apache Commons FileUpload, as used in Red Hat
     JBoss BRMS 5.3.1; JBoss Portal 4.3 CP07, 5.2.2, and 6.0.0; and Red Hat
     JBoss Web Server 1.0.2 allows remote attackers to write to arbitrary
@@ -248,13 +325,16 @@
   - CVE-2013-2186
   cwe:
   - CWE-20
+  disclosed_date: 2013-06-16
+  created_date: 2013-06-16
+  last_modified_date: 2013-06-16
   credit:
   - Unknown
   references:
   - https://access.redhat.com/security/cve/CVE-2013-2186
   - https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2013-2186
   source_url: https://snyk.io/vuln/SNYK-JAVA-COMMONSFILEUPLOAD-30080
-- id: snykio:maven:commons-fileupload:commons-fileupload:2014-02-11
+- id: snykio:maven:commons-fileupload:commons-fileupload:CVE-2014-0050
   title: Denial of Service (DoS)
   description: |+
     [`commons-fileupload:commons-fileupload`][1] Affected versions of this
@@ -266,171 +346,6 @@
 
 
     [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22commons-fileupload%22
-    \n[`commons-fileupload:commons-fileupload`][1] Affected versions of this
-    package are vulnerable to Denial of Service (DoS) attacks. An attacker
-    may send a specially crafted `Content-Type` header that bypasses a
-    loop\'s intended exit conditions, causing an infinite loop and high CPU
-    consumption.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22commons-fileupload%22
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
     \nDenial of Service (DoS) describes a family of attacks, all aimed at
     making a system inaccessible to its intended and legitimate users.
 
@@ -466,6 +381,9 @@
   - CVE-2014-0050
   cwe:
   - CWE-264
+  disclosed_date: 2014-02-11
+  created_date: 2014-02-11
+  last_modified_date: 2014-02-11
   credit:
   - Mark Thomas
   references:
@@ -476,380 +394,7 @@
   - http://mail-archives.apache.org/mod_mbox/www-announce/201402.mbox/%3C52F373FC.9030907@apache.org%3E
   - http://struts.apache.org/docs/s2-020.html
   source_url: https://snyk.io/vuln/SNYK-JAVA-COMMONSFILEUPLOAD-30081
-- id: snykio:maven:commons-fileupload:commons-fileupload:2014-02-17
-  title: Information Disclosure
-  description: |
-    [`commons-fileupload:commons-fileupload`][1] provides a simple yet
-    flexible means of adding support for multipart file upload functionality
-    to servlets and web applications.
-
-    Affected versions of the package are vulnerable to Information
-    Disclosure because the `InputStream` is not closed on exception.
-
-
-
-    [1]: https://commons.apache.org/proper/commons-fileupload/
-    \n[`commons-fileupload:commons-fileupload`][1] provides a simple yet
-    flexible means of adding support for multipart file upload functionality
-    to servlets and web applications.
-
-    Affected versions of the package are vulnerable to Information
-    Disclosure because the `InputStream` is not closed on exception.
-
-
-
-    [1]: https://commons.apache.org/proper/commons-fileupload/
-    \n[`commons-fileupload:commons-fileupload`][1] provides a simple yet
-    flexible means of adding support for multipart file upload functionality
-    to servlets and web applications.
-
-    Affected versions of the package are vulnerable to Information
-    Disclosure because the `InputStream` is not closed on exception.
-
-
-
-    [1]: https://commons.apache.org/proper/commons-fileupload/
-  affected_package: commons-fileupload:commons-fileupload
-  vulnerable_versions:
-  - "< 1.3.2"
-  severity: medium
-  package_manager: maven
-  cwe:
-  - CWE-200
-  credit:
-  - Unknown
-  references:
-  - https://github.com/apache/commons-fileupload/blob/master/src/changes/changes.xml#L56
-  - https://github.com/apache/commons-fileupload/commit/5b4881d7f75f439326f54fa554a9ca7de6d60814
-  source_url: https://snyk.io/vuln/SNYK-JAVA-COMMONSFILEUPLOAD-31540
-- id: snykio:maven:commons-fileupload:commons-fileupload:2015-05-06
-  title: Time of Check Time of Use (TOCTOU)
-  description: |+
-    Affected versions of [`commons-fileupload:commons-fileupload`][1] are
-    vulnerable to Time of Check Time of Use (TOCTOU) attacks if the attacker
-    has write access to the /tmp directory.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22commons-fileupload%22
-    \nAffected versions of [`commons-fileupload:commons-fileupload`][1] are
-    vulnerable to Time of Check Time of Use (TOCTOU) attacks if the attacker
-    has write access to the /tmp directory.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22commons-fileupload%22
-    \nCommons FileUpload provides file upload capability for Servlets and web
-    applications. During the upload process, FileUpload may (depending on
-    configuration) save the uploaded file temporarily on disk. By default
-    this will be in the system wide tmp directory. Because the temporary
-    files have predictable file names and are stored in a publicly writeable
-    location they are vulnerable to a TOCTOU attack.
-
-    A successful attack requires that the attacker has write access to the
-    tmp directory. The attack can be prevented by setting the repository to
-    a non-publicly writeable location. The documentation for FileUpload does
-    not highlight the potential security implications of not setting a
-    repository, nor do the provided examples set a repository. This may have
-    caused users to use FileUpload in an insecure manner.
-
-    \nCommons FileUpload provides file upload capability for Servlets and web
-    applications. During the upload process, FileUpload may (depending on
-    configuration) save the uploaded file temporarily on disk. By default
-    this will be in the system wide tmp directory. Because the temporary
-    files have predictable file names and are stored in a publicly writeable
-    location they are vulnerable to a TOCTOU attack.
-
-    A successful attack requires that the attacker has write access to the
-    tmp directory. The attack can be prevented by setting the repository to
-    a non-publicly writeable location. The documentation for FileUpload does
-    not highlight the potential security implications of not setting a
-    repository, nor do the provided examples set a repository. This may have
-    caused users to use FileUpload in an insecure manner.
-
-    \nCommons FileUpload provides file upload capability for Servlets and web
-    applications. During the upload process, FileUpload may (depending on
-    configuration) save the uploaded file temporarily on disk. By default
-    this will be in the system wide tmp directory. Because the temporary
-    files have predictable file names and are stored in a publicly writeable
-    location they are vulnerable to a TOCTOU attack.
-
-    A successful attack requires that the attacker has write access to the
-    tmp directory. The attack can be prevented by setting the repository to
-    a non-publicly writeable location. The documentation for FileUpload does
-    not highlight the potential security implications of not setting a
-    repository, nor do the provided examples set a repository. This may have
-    caused users to use FileUpload in an insecure manner.
-
-  affected_package: commons-fileupload:commons-fileupload
-  vulnerable_versions:
-  - "< 1.3"
-  severity: medium
-  package_manager: maven
-  cve:
-  - CVE-2013-0248
-  cwe:
-  - CWE-264
-  credit:
-  - Karl Dyszynski
-  - Hugo Vazquez Carames
-  references:
-  - https://github.com/apache/commons-fileupload/blob/b1498c9877d751f8bc4635a6f252ebdfcba28518/src/changes/changes.xml#L114
-  - https://bugzilla.redhat.com/CVE-2013-0248
-  - http://mail-archives.apache.org/mod_mbox/commons-user/201303.mbox/%3C51371C31.8020805@apache.org%3E
-  source_url: https://snyk.io/vuln/SNYK-JAVA-COMMONSFILEUPLOAD-30079
-- id: snykio:maven:commons-fileupload:commons-fileupload:2016-06-22
-  title: Denial of Service (DoS)
-  description: |+
-    [`commons-fileupload:commons-fileupload`][1] provides a simple yet
-    flexible means of adding support for multipart file upload functionality
-    to servlets and web applications.
-
-    Affected versions of this package are vulnerable to Denial of Service
-    (DoS) attacks. An attacker can upload a file with a long boundry string
-    in the HTTP header, causing high CPU consumption. The `MultipartStream`
-    class contains a flaw that allows remote attackers to cause a Denial of
-    service (CPU consumption) attacks. This happens by setting the length of
-    the multipart boundary to be just below the size of the buffer (4096
-    bytes) used to read the uploaded file. Typically, the boundary is tens
-    of bytes long, which caused this case to take much longer than usual.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22commons-fileupload%22
-    \n[`commons-fileupload:commons-fileupload`][1] provides a simple yet
-    flexible means of adding support for multipart file upload functionality
-    to servlets and web applications.
-
-    Affected versions of this package are vulnerable to Denial of Service
-    (DoS) attacks. An attacker can upload a file with a long boundry string
-    in the HTTP header, causing high CPU consumption. The `MultipartStream`
-    class contains a flaw that allows remote attackers to cause a Denial of
-    service (CPU consumption) attacks. This happens by setting the length of
-    the multipart boundary to be just below the size of the buffer (4096
-    bytes) used to read the uploaded file. Typically, the boundary is tens
-    of bytes long, which caused this case to take much longer than usual.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22commons-fileupload%22
-    \n[`commons-fileupload:commons-fileupload`][1] provides a simple yet
-    flexible means of adding support for multipart file upload functionality
-    to servlets and web applications.
-
-    Affected versions of this package are vulnerable to Denial of Service
-    (DoS) attacks. An attacker can upload a file with a long boundry string
-    in the HTTP header, causing high CPU consumption. The `MultipartStream`
-    class contains a flaw that allows remote attackers to cause a Denial of
-    service (CPU consumption) attacks. This happens by setting the length of
-    the multipart boundary to be just below the size of the buffer (4096
-    bytes) used to read the uploaded file. Typically, the boundary is tens
-    of bytes long, which caused this case to take much longer than usual.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22commons-fileupload%22
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-  affected_package: commons-fileupload:commons-fileupload
-  vulnerable_versions:
-  - ">= 1.3 < 1.3.2"
-  severity: high
-  package_manager: maven
-  cve:
-  - CVE-2016-3092
-  cwe:
-  - CWE-20
-  credit:
-  - Unknown
-  references:
-  - https://github.com/apache/commons-fileupload/blob/b1498c9877d751f8bc4635a6f252ebdfcba28518/src/changes/changes.xml#L84
-  - https://bugzilla.redhat.com/show_bug.cgi?id=1349475
-  - http://mail-archives.us.apache.org/mod_mbox/www-announce/201606.mbox/%3C6223ece6-2b41-ef4f-22f9-d3481e492832@apache.org%3E
-  - http://svn.apache.org/viewvc/commons/proper/fileupload/trunk/RELEASE-NOTES.txt?r1=1745717&r2=1749637&diff_format=h
-  - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-3092
-  source_url: https://snyk.io/vuln/SNYK-JAVA-COMMONSFILEUPLOAD-30082
-- id: snykio:maven:commons-fileupload:commons-fileupload:2016-10-26
+- id: snykio:maven:commons-fileupload:commons-fileupload:CVE-2016-1000031
   title: Arbitrary Code Execution
   description: "[`commons-fileupload:commons-fileupload`][1] The Apache Commons\nFileUpload
     library contains a Java Object that, upon deserialization,\ncan be manipulated
@@ -885,251 +430,6 @@
     can execute functions (including calling\n> Runtime.exec() to execute local OS
     commands).\n> \n> * Apache Blog\n\n\n\n[1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22commons-fileupload%22\n[2]:
     https://github.com/frohoff/ysoserial\n[3]: https://cwe.mitre.org/data/definitions/502.html\n[4]:
-    https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078\n\\n[`commons-fileupload:commons-fileupload`][1]
-    The Apache Commons\nFileUpload library contains a Java Object that, upon deserialization,\ncan
-    be manipulated to write or copy files in arbitrary locations. If\nintegrated with
-    [`ysoserial`][2], it is possible to upload and execute\nbinaries in a single deserialization
-    call.\n\n# Details   {#details}\n\nSerialization is a process of converting an
-    object into a sequence of\nbytes which can be persisted to a disk or database
-    or can be sent\nthrough streams. The reverse process of creating object from sequence
-    of\nbytes is called deserialization. Serialization is commonly used for\ncommunication
-    (sharing objects between multiple hosts) and persistence\n(store the object state
-    in a file or a database). It is an integral part\nof popular protocols like *Remote
-    Method Invocation (RMI)*, *Java\nManagement Extension (JMX)*, *Java Messaging
-    System (JMS)*, *Action\nMessage Format (AMF)*, *Java Server Faces (JSF) ViewState*,
-    etc.\n\n*Deserialization of untrusted data* ([CWE-502][3]), is when the\napplication
-    deserializes untrusted data without sufficiently verifying\nthat the resulting
-    data will be valid, letting the attacker to control\nthe state or the flow of
-    the execution.\n\nJava deserialization issues have been known for years. However,
-    interest\nin the issue intensified greatly in 2015, when classes that could be\nabused
-    to achieve remote code execution were found in a [popular library\n(Apache Commons
-    Collection)][4]. These classes were used in zero-days\naffecting IBM WebSphere,
-    Oracle WebLogic and many other products.\n\nAn attacker just needs to identify
-    a piece of software that has both a\nvulnerable class on its path, and performs
-    deserialization on untrusted\ndata. Then all they need to do is send the payload
-    into the\ndeserializer, getting the command executed.\n\n> Developers put too
-    much trust in Java Object Serialization. Some even\n> de-serialize objects pre-authentication.
-    When deserializing an Object\n> in Java you typically cast it to an expected type,
-    and therefore\n> Java\\'s strict type system will ensure you only get valid object\n>
-    trees. Unfortunately, by the time the type checking happens, platform\n> code
-    has already created and executed significant logic. So, before\n> the final type
-    is checked a lot of code is executed from the\n> readObject() methods of various
-    objects, all of which is out of the\n> developer\\'s control. By combining the
-    readObject() methods of various\n> classes which are available on the classpath
-    of the vulnerable\n> application an attacker can execute functions (including
-    calling\n> Runtime.exec() to execute local OS commands).\n> \n> * Apache Blog\n\n\n\n[1]:
-    http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22commons-fileupload%22\n[2]:
-    https://github.com/frohoff/ysoserial\n[3]: https://cwe.mitre.org/data/definitions/502.html\n[4]:
-    https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078\n\\n[`commons-fileupload:commons-fileupload`][1]
-    The Apache Commons\nFileUpload library contains a Java Object that, upon deserialization,\ncan
-    be manipulated to write or copy files in arbitrary locations. If\nintegrated with
-    [`ysoserial`][2], it is possible to upload and execute\nbinaries in a single deserialization
-    call.\n\n# Details   {#details}\n\nSerialization is a process of converting an
-    object into a sequence of\nbytes which can be persisted to a disk or database
-    or can be sent\nthrough streams. The reverse process of creating object from sequence
-    of\nbytes is called deserialization. Serialization is commonly used for\ncommunication
-    (sharing objects between multiple hosts) and persistence\n(store the object state
-    in a file or a database). It is an integral part\nof popular protocols like *Remote
-    Method Invocation (RMI)*, *Java\nManagement Extension (JMX)*, *Java Messaging
-    System (JMS)*, *Action\nMessage Format (AMF)*, *Java Server Faces (JSF) ViewState*,
-    etc.\n\n*Deserialization of untrusted data* ([CWE-502][3]), is when the\napplication
-    deserializes untrusted data without sufficiently verifying\nthat the resulting
-    data will be valid, letting the attacker to control\nthe state or the flow of
-    the execution.\n\nJava deserialization issues have been known for years. However,
-    interest\nin the issue intensified greatly in 2015, when classes that could be\nabused
-    to achieve remote code execution were found in a [popular library\n(Apache Commons
-    Collection)][4]. These classes were used in zero-days\naffecting IBM WebSphere,
-    Oracle WebLogic and many other products.\n\nAn attacker just needs to identify
-    a piece of software that has both a\nvulnerable class on its path, and performs
-    deserialization on untrusted\ndata. Then all they need to do is send the payload
-    into the\ndeserializer, getting the command executed.\n\n> Developers put too
-    much trust in Java Object Serialization. Some even\n> de-serialize objects pre-authentication.
-    When deserializing an Object\n> in Java you typically cast it to an expected type,
-    and therefore\n> Java\\'s strict type system will ensure you only get valid object\n>
-    trees. Unfortunately, by the time the type checking happens, platform\n> code
-    has already created and executed significant logic. So, before\n> the final type
-    is checked a lot of code is executed from the\n> readObject() methods of various
-    objects, all of which is out of the\n> developer\\'s control. By combining the
-    readObject() methods of various\n> classes which are available on the classpath
-    of the vulnerable\n> application an attacker can execute functions (including
-    calling\n> Runtime.exec() to execute local OS commands).\n> \n> * Apache Blog\n\n\n\n[1]:
-    http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22commons-fileupload%22\n[2]:
-    https://github.com/frohoff/ysoserial\n[3]: https://cwe.mitre.org/data/definitions/502.html\n[4]:
-    https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078\n\\n[`commons-fileupload:commons-fileupload`][1]
-    The Apache Commons\nFileUpload library contains a Java Object that, upon deserialization,\ncan
-    be manipulated to write or copy files in arbitrary locations. If\nintegrated with
-    [`ysoserial`][2], it is possible to upload and execute\nbinaries in a single deserialization
-    call.\n\n# Details   {#details}\n\nSerialization is a process of converting an
-    object into a sequence of\nbytes which can be persisted to a disk or database
-    or can be sent\nthrough streams. The reverse process of creating object from sequence
-    of\nbytes is called deserialization. Serialization is commonly used for\ncommunication
-    (sharing objects between multiple hosts) and persistence\n(store the object state
-    in a file or a database). It is an integral part\nof popular protocols like *Remote
-    Method Invocation (RMI)*, *Java\nManagement Extension (JMX)*, *Java Messaging
-    System (JMS)*, *Action\nMessage Format (AMF)*, *Java Server Faces (JSF) ViewState*,
-    etc.\n\n*Deserialization of untrusted data* ([CWE-502][3]), is when the\napplication
-    deserializes untrusted data without sufficiently verifying\nthat the resulting
-    data will be valid, letting the attacker to control\nthe state or the flow of
-    the execution.\n\nJava deserialization issues have been known for years. However,
-    interest\nin the issue intensified greatly in 2015, when classes that could be\nabused
-    to achieve remote code execution were found in a [popular library\n(Apache Commons
-    Collection)][4]. These classes were used in zero-days\naffecting IBM WebSphere,
-    Oracle WebLogic and many other products.\n\nAn attacker just needs to identify
-    a piece of software that has both a\nvulnerable class on its path, and performs
-    deserialization on untrusted\ndata. Then all they need to do is send the payload
-    into the\ndeserializer, getting the command executed.\n\n> Developers put too
-    much trust in Java Object Serialization. Some even\n> de-serialize objects pre-authentication.
-    When deserializing an Object\n> in Java you typically cast it to an expected type,
-    and therefore\n> Java\\'s strict type system will ensure you only get valid object\n>
-    trees. Unfortunately, by the time the type checking happens, platform\n> code
-    has already created and executed significant logic. So, before\n> the final type
-    is checked a lot of code is executed from the\n> readObject() methods of various
-    objects, all of which is out of the\n> developer\\'s control. By combining the
-    readObject() methods of various\n> classes which are available on the classpath
-    of the vulnerable\n> application an attacker can execute functions (including
-    calling\n> Runtime.exec() to execute local OS commands).\n> \n> * Apache Blog\n\n\n\n[1]:
-    http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22commons-fileupload%22\n[2]:
-    https://github.com/frohoff/ysoserial\n[3]: https://cwe.mitre.org/data/definitions/502.html\n[4]:
-    https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078\n\\n[`commons-fileupload:commons-fileupload`][1]
-    The Apache Commons\nFileUpload library contains a Java Object that, upon deserialization,\ncan
-    be manipulated to write or copy files in arbitrary locations. If\nintegrated with
-    [`ysoserial`][2], it is possible to upload and execute\nbinaries in a single deserialization
-    call.\n\n# Details   {#details}\n\nSerialization is a process of converting an
-    object into a sequence of\nbytes which can be persisted to a disk or database
-    or can be sent\nthrough streams. The reverse process of creating object from sequence
-    of\nbytes is called deserialization. Serialization is commonly used for\ncommunication
-    (sharing objects between multiple hosts) and persistence\n(store the object state
-    in a file or a database). It is an integral part\nof popular protocols like *Remote
-    Method Invocation (RMI)*, *Java\nManagement Extension (JMX)*, *Java Messaging
-    System (JMS)*, *Action\nMessage Format (AMF)*, *Java Server Faces (JSF) ViewState*,
-    etc.\n\n*Deserialization of untrusted data* ([CWE-502][3]), is when the\napplication
-    deserializes untrusted data without sufficiently verifying\nthat the resulting
-    data will be valid, letting the attacker to control\nthe state or the flow of
-    the execution.\n\nJava deserialization issues have been known for years. However,
-    interest\nin the issue intensified greatly in 2015, when classes that could be\nabused
-    to achieve remote code execution were found in a [popular library\n(Apache Commons
-    Collection)][4]. These classes were used in zero-days\naffecting IBM WebSphere,
-    Oracle WebLogic and many other products.\n\nAn attacker just needs to identify
-    a piece of software that has both a\nvulnerable class on its path, and performs
-    deserialization on untrusted\ndata. Then all they need to do is send the payload
-    into the\ndeserializer, getting the command executed.\n\n> Developers put too
-    much trust in Java Object Serialization. Some even\n> de-serialize objects pre-authentication.
-    When deserializing an Object\n> in Java you typically cast it to an expected type,
-    and therefore\n> Java\\'s strict type system will ensure you only get valid object\n>
-    trees. Unfortunately, by the time the type checking happens, platform\n> code
-    has already created and executed significant logic. So, before\n> the final type
-    is checked a lot of code is executed from the\n> readObject() methods of various
-    objects, all of which is out of the\n> developer\\'s control. By combining the
-    readObject() methods of various\n> classes which are available on the classpath
-    of the vulnerable\n> application an attacker can execute functions (including
-    calling\n> Runtime.exec() to execute local OS commands).\n> \n> * Apache Blog\n\n\n\n[1]:
-    http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22commons-fileupload%22\n[2]:
-    https://github.com/frohoff/ysoserial\n[3]: https://cwe.mitre.org/data/definitions/502.html\n[4]:
-    https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078\n\\n[`commons-fileupload:commons-fileupload`][1]
-    The Apache Commons\nFileUpload library contains a Java Object that, upon deserialization,\ncan
-    be manipulated to write or copy files in arbitrary locations. If\nintegrated with
-    [`ysoserial`][2], it is possible to upload and execute\nbinaries in a single deserialization
-    call.\n\n# Details   {#details}\n\nSerialization is a process of converting an
-    object into a sequence of\nbytes which can be persisted to a disk or database
-    or can be sent\nthrough streams. The reverse process of creating object from sequence
-    of\nbytes is called deserialization. Serialization is commonly used for\ncommunication
-    (sharing objects between multiple hosts) and persistence\n(store the object state
-    in a file or a database). It is an integral part\nof popular protocols like *Remote
-    Method Invocation (RMI)*, *Java\nManagement Extension (JMX)*, *Java Messaging
-    System (JMS)*, *Action\nMessage Format (AMF)*, *Java Server Faces (JSF) ViewState*,
-    etc.\n\n*Deserialization of untrusted data* ([CWE-502][3]), is when the\napplication
-    deserializes untrusted data without sufficiently verifying\nthat the resulting
-    data will be valid, letting the attacker to control\nthe state or the flow of
-    the execution.\n\nJava deserialization issues have been known for years. However,
-    interest\nin the issue intensified greatly in 2015, when classes that could be\nabused
-    to achieve remote code execution were found in a [popular library\n(Apache Commons
-    Collection)][4]. These classes were used in zero-days\naffecting IBM WebSphere,
-    Oracle WebLogic and many other products.\n\nAn attacker just needs to identify
-    a piece of software that has both a\nvulnerable class on its path, and performs
-    deserialization on untrusted\ndata. Then all they need to do is send the payload
-    into the\ndeserializer, getting the command executed.\n\n> Developers put too
-    much trust in Java Object Serialization. Some even\n> de-serialize objects pre-authentication.
-    When deserializing an Object\n> in Java you typically cast it to an expected type,
-    and therefore\n> Java\\'s strict type system will ensure you only get valid object\n>
-    trees. Unfortunately, by the time the type checking happens, platform\n> code
-    has already created and executed significant logic. So, before\n> the final type
-    is checked a lot of code is executed from the\n> readObject() methods of various
-    objects, all of which is out of the\n> developer\\'s control. By combining the
-    readObject() methods of various\n> classes which are available on the classpath
-    of the vulnerable\n> application an attacker can execute functions (including
-    calling\n> Runtime.exec() to execute local OS commands).\n> \n> * Apache Blog\n\n\n\n[1]:
-    http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22commons-fileupload%22\n[2]:
-    https://github.com/frohoff/ysoserial\n[3]: https://cwe.mitre.org/data/definitions/502.html\n[4]:
-    https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078\n\\n[`commons-fileupload:commons-fileupload`][1]
-    The Apache Commons\nFileUpload library contains a Java Object that, upon deserialization,\ncan
-    be manipulated to write or copy files in arbitrary locations. If\nintegrated with
-    [`ysoserial`][2], it is possible to upload and execute\nbinaries in a single deserialization
-    call.\n\n# Details   {#details}\n\nSerialization is a process of converting an
-    object into a sequence of\nbytes which can be persisted to a disk or database
-    or can be sent\nthrough streams. The reverse process of creating object from sequence
-    of\nbytes is called deserialization. Serialization is commonly used for\ncommunication
-    (sharing objects between multiple hosts) and persistence\n(store the object state
-    in a file or a database). It is an integral part\nof popular protocols like *Remote
-    Method Invocation (RMI)*, *Java\nManagement Extension (JMX)*, *Java Messaging
-    System (JMS)*, *Action\nMessage Format (AMF)*, *Java Server Faces (JSF) ViewState*,
-    etc.\n\n*Deserialization of untrusted data* ([CWE-502][3]), is when the\napplication
-    deserializes untrusted data without sufficiently verifying\nthat the resulting
-    data will be valid, letting the attacker to control\nthe state or the flow of
-    the execution.\n\nJava deserialization issues have been known for years. However,
-    interest\nin the issue intensified greatly in 2015, when classes that could be\nabused
-    to achieve remote code execution were found in a [popular library\n(Apache Commons
-    Collection)][4]. These classes were used in zero-days\naffecting IBM WebSphere,
-    Oracle WebLogic and many other products.\n\nAn attacker just needs to identify
-    a piece of software that has both a\nvulnerable class on its path, and performs
-    deserialization on untrusted\ndata. Then all they need to do is send the payload
-    into the\ndeserializer, getting the command executed.\n\n> Developers put too
-    much trust in Java Object Serialization. Some even\n> de-serialize objects pre-authentication.
-    When deserializing an Object\n> in Java you typically cast it to an expected type,
-    and therefore\n> Java\\'s strict type system will ensure you only get valid object\n>
-    trees. Unfortunately, by the time the type checking happens, platform\n> code
-    has already created and executed significant logic. So, before\n> the final type
-    is checked a lot of code is executed from the\n> readObject() methods of various
-    objects, all of which is out of the\n> developer\\'s control. By combining the
-    readObject() methods of various\n> classes which are available on the classpath
-    of the vulnerable\n> application an attacker can execute functions (including
-    calling\n> Runtime.exec() to execute local OS commands).\n> \n> * Apache Blog\n\n\n\n[1]:
-    http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22commons-fileupload%22\n[2]:
-    https://github.com/frohoff/ysoserial\n[3]: https://cwe.mitre.org/data/definitions/502.html\n[4]:
-    https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078\n\\n[`commons-fileupload:commons-fileupload`][1]
-    The Apache Commons\nFileUpload library contains a Java Object that, upon deserialization,\ncan
-    be manipulated to write or copy files in arbitrary locations. If\nintegrated with
-    [`ysoserial`][2], it is possible to upload and execute\nbinaries in a single deserialization
-    call.\n\n# Details   {#details}\n\nSerialization is a process of converting an
-    object into a sequence of\nbytes which can be persisted to a disk or database
-    or can be sent\nthrough streams. The reverse process of creating object from sequence
-    of\nbytes is called deserialization. Serialization is commonly used for\ncommunication
-    (sharing objects between multiple hosts) and persistence\n(store the object state
-    in a file or a database). It is an integral part\nof popular protocols like *Remote
-    Method Invocation (RMI)*, *Java\nManagement Extension (JMX)*, *Java Messaging
-    System (JMS)*, *Action\nMessage Format (AMF)*, *Java Server Faces (JSF) ViewState*,
-    etc.\n\n*Deserialization of untrusted data* ([CWE-502][3]), is when the\napplication
-    deserializes untrusted data without sufficiently verifying\nthat the resulting
-    data will be valid, letting the attacker to control\nthe state or the flow of
-    the execution.\n\nJava deserialization issues have been known for years. However,
-    interest\nin the issue intensified greatly in 2015, when classes that could be\nabused
-    to achieve remote code execution were found in a [popular library\n(Apache Commons
-    Collection)][4]. These classes were used in zero-days\naffecting IBM WebSphere,
-    Oracle WebLogic and many other products.\n\nAn attacker just needs to identify
-    a piece of software that has both a\nvulnerable class on its path, and performs
-    deserialization on untrusted\ndata. Then all they need to do is send the payload
-    into the\ndeserializer, getting the command executed.\n\n> Developers put too
-    much trust in Java Object Serialization. Some even\n> de-serialize objects pre-authentication.
-    When deserializing an Object\n> in Java you typically cast it to an expected type,
-    and therefore\n> Java\\'s strict type system will ensure you only get valid object\n>
-    trees. Unfortunately, by the time the type checking happens, platform\n> code
-    has already created and executed significant logic. So, before\n> the final type
-    is checked a lot of code is executed from the\n> readObject() methods of various
-    objects, all of which is out of the\n> developer\\'s control. By combining the
-    readObject() methods of various\n> classes which are available on the classpath
-    of the vulnerable\n> application an attacker can execute functions (including
-    calling\n> Runtime.exec() to execute local OS commands).\n> \n> * Apache Blog\n\n\n\n[1]:
-    http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22commons-fileupload%22\n[2]:
-    https://github.com/frohoff/ysoserial\n[3]: https://cwe.mitre.org/data/definitions/502.html\n[4]:
     https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078\n"
   affected_package: commons-fileupload:commons-fileupload
   vulnerable_versions:
@@ -1140,6 +440,9 @@
   - CVE-2016-1000031
   cwe:
   - CWE-284
+  disclosed_date: 2016-10-26
+  created_date: 2016-10-26
+  last_modified_date: 2016-10-26
   credit:
   - Unknown
   references:
@@ -1148,7 +451,162 @@
   - https://github.com/apache/commons-fileupload/blob/master/src/changes/changes.xml#L65
   - https://github.com/apache/commons-fileupload/commit/388e824518697c2c8f9f83fd964621d9c2f8fc4c
   source_url: https://snyk.io/vuln/SNYK-JAVA-COMMONSFILEUPLOAD-30401
-- id: victims:maven:commons-fileupload:commons-fileupload:date
+- id: snykio:maven:commons-fileupload:commons-fileupload:CVE-2016-3092
+  title: Denial of Service (DoS)
+  description: |+
+    [`commons-fileupload:commons-fileupload`][1] provides a simple yet
+    flexible means of adding support for multipart file upload functionality
+    to servlets and web applications.
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS) attacks. An attacker can upload a file with a long boundry string
+    in the HTTP header, causing high CPU consumption. The `MultipartStream`
+    class contains a flaw that allows remote attackers to cause a Denial of
+    service (CPU consumption) attacks. This happens by setting the length of
+    the multipart boundary to be just below the size of the buffer (4096
+    bytes) used to read the uploaded file. Typically, the boundary is tens
+    of bytes long, which caused this case to take much longer than usual.
+
+
+
+    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22commons-fileupload%22
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+  affected_package: commons-fileupload:commons-fileupload
+  vulnerable_versions:
+  - ">= 1.3 < 1.3.2"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2016-3092
+  cwe:
+  - CWE-20
+  disclosed_date: 2016-06-22
+  created_date: 2016-06-22
+  last_modified_date: 2016-06-22
+  credit:
+  - Unknown
+  references:
+  - https://github.com/apache/commons-fileupload/blob/b1498c9877d751f8bc4635a6f252ebdfcba28518/src/changes/changes.xml#L84
+  - https://bugzilla.redhat.com/show_bug.cgi?id=1349475
+  - http://mail-archives.us.apache.org/mod_mbox/www-announce/201606.mbox/%3C6223ece6-2b41-ef4f-22f9-d3481e492832@apache.org%3E
+  - http://svn.apache.org/viewvc/commons/proper/fileupload/trunk/RELEASE-NOTES.txt?r1=1745717&r2=1749637&diff_format=h
+  - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-3092
+  source_url: https://snyk.io/vuln/SNYK-JAVA-COMMONSFILEUPLOAD-30082
+- id: victims:maven:commons-fileupload:commons-fileupload:2013-0248
+  title: 'Apache/Jakarta commons-fileupload: /tmp directory used by default for uploaded
+    files'
+  affected_package: commons-fileupload:commons-fileupload
+  vulnerable_versions:
+  - "<=1.2.2"
+  - '1'
+  patched_versions:
+  - ">=1.3"
+  - '1'
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2013-0248
+  credit:
+  - Victims CVE Database
+  references:
+  - https://bugzilla.redhat.com/CVE-2013-0248
+  - http://mail-archives.apache.org/mod_mbox/commons-user/201303.mbox/%3C51371C31.8020805@apache.org%3E
+  source_url: https://github.com/victims/victims-cve-db/blob/master/database/java/2013/0248.yaml
+- id: victims:maven:commons-fileupload:commons-fileupload:2013-2186
+  title: 'Apache commons-fileupload: Arbitrary file upload via deserialization'
+  affected_package: commons-fileupload:commons-fileupload
+  vulnerable_versions:
+  - "<=1.3"
+  - '1'
+  patched_versions:
+  - ">=1.3.1"
+  - '1'
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2013-2186
+  cvss_v2_score: 7.5
+  credit:
+  - Victims CVE Database
+  references:
+  - https://access.redhat.com/security/cve/CVE-2013-2186
+  - https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2013-2186
+  source_url: https://github.com/victims/victims-cve-db/blob/master/database/java/2013/2186.yaml
+- id: victims:maven:commons-fileupload:commons-fileupload:2014-0050
+  title: 'Apache Commons FileUpload: Denial of service'
+  description: 'MultipartStream.java in Apache Commons FileUpload before 1.3.1, as
+    used in Apache Tomcat, JBoss Web, and other products, allows remote attackers
+    to cause a denial of service (infinite loop and CPU consumption) via a crafted
+    Content-Type header that bypasses a loop''s intended exit conditions.
+
+'
+  affected_package: commons-fileupload:commons-fileupload
+  vulnerable_versions:
+  - "<=1.3"
+  patched_versions:
+  - ">=1.3.1"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2014-0050
+  cvss_v2_score: 5.0
+  credit:
+  - Victims CVE Database
+  references:
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-0050
+  - http://blog.spiderlabs.com/2014/02/cve-2014-0050-exploit-with-boundaries-loops-without-boundaries.html
+  - http://svn.apache.org/viewvc?view=revision&revision=1565143
+  - http://mail-archives.apache.org/mod_mbox/www-announce/201402.mbox/%3C52F373FC.9030907@apache.org%3E
+  - http://struts.apache.org/docs/s2-020.html
+  source_url: https://github.com/victims/victims-cve-db/blob/master/database/java/2014/0050.yaml
+- id: victims:maven:commons-fileupload:commons-fileupload:2016-1000031
+  title: Apache Commons FileUpload Deserialization Gadget
+  description: 'There exists a Java Object in the Apache Commons FileUpload library
+    that can be manipulated in such a way that when it is deserialized, it can write
+    or copy files to disk in arbitrary locations.
+
+'
+  affected_package: commons-fileupload:commons-fileupload
+  vulnerable_versions:
+  - "<=1.3.2"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2016-1000031
+  cvss_v2_score: 7.5
+  credit:
+  - Victims CVE Database
+  references:
+  - https://www.tenable.com/security/research/tra-2016-12
+  - https://issues.apache.org/jira/browse/FILEUPLOAD-279
+  - https://nvd.nist.gov/vuln/detail/CVE-2016-1000031
+  source_url: https://github.com/victims/victims-cve-db/blob/master/database/java/2016/1000031.yaml
+- id: victims:maven:commons-fileupload:commons-fileupload:2016-3092
   title: 'Apache Commons Fileupload: Denial of Service'
   description: 'A malicious client can send file upload requests that cause the HTTP
     server using the Apache Commons Fileupload library to become unresponsive, preventing
@@ -1168,7 +626,8 @@
   severity: medium
   package_manager: maven
   cve:
-  - 2016-3092
+  - CVE-2016-3092
+  cvss_v2_score: 4.3
   credit:
   - Victims CVE Database
   references:
@@ -1178,89 +637,3 @@
   - http://svn.apache.org/viewvc/commons/proper/fileupload/trunk/RELEASE-NOTES.txt?r1=1745717&r2=1749637&diff_format=h
   - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-3092
   source_url: https://github.com/victims/victims-cve-db/blob/master/database/java/2016/3092.yaml
-- id: victims:maven:commons-fileupload:commons-fileupload:date
-  title: Apache Commons FileUpload Deserialization Gadget
-  description: 'There exists a Java Object in the Apache Commons FileUpload library
-    that can be manipulated in such a way that when it is deserialized, it can write
-    or copy files to disk in arbitrary locations.
-
-'
-  affected_package: commons-fileupload:commons-fileupload
-  vulnerable_versions:
-  - "<=1.3.2"
-  severity: high
-  package_manager: maven
-  cve:
-  - 2016-1000031
-  credit:
-  - Victims CVE Database
-  references:
-  - https://www.tenable.com/security/research/tra-2016-12
-  - https://issues.apache.org/jira/browse/FILEUPLOAD-279
-  - https://nvd.nist.gov/vuln/detail/CVE-2016-1000031
-  source_url: https://github.com/victims/victims-cve-db/blob/master/database/java/2016/1000031.yaml
-- id: victims:maven:commons-fileupload:commons-fileupload:date
-  title: 'Apache Commons FileUpload: Denial of service'
-  description: 'MultipartStream.java in Apache Commons FileUpload before 1.3.1, as
-    used in Apache Tomcat, JBoss Web, and other products, allows remote attackers
-    to cause a denial of service (infinite loop and CPU consumption) via a crafted
-    Content-Type header that bypasses a loop''s intended exit conditions.
-
-'
-  affected_package: commons-fileupload:commons-fileupload
-  vulnerable_versions:
-  - "<=1.3"
-  patched_versions:
-  - ">=1.3.1"
-  severity: medium
-  package_manager: maven
-  cve:
-  - 2014-0050
-  credit:
-  - Victims CVE Database
-  references:
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-0050
-  - http://blog.spiderlabs.com/2014/02/cve-2014-0050-exploit-with-boundaries-loops-without-boundaries.html
-  - http://svn.apache.org/viewvc?view=revision&revision=1565143
-  - http://mail-archives.apache.org/mod_mbox/www-announce/201402.mbox/%3C52F373FC.9030907@apache.org%3E
-  - http://struts.apache.org/docs/s2-020.html
-  source_url: https://github.com/victims/victims-cve-db/blob/master/database/java/2014/0050.yaml
-- id: victims:maven:commons-fileupload:commons-fileupload:date
-  title: 'Apache commons-fileupload: Arbitrary file upload via deserialization'
-  affected_package: commons-fileupload:commons-fileupload
-  vulnerable_versions:
-  - "<=1.3"
-  - '1'
-  patched_versions:
-  - ">=1.3.1"
-  - '1'
-  severity: high
-  package_manager: maven
-  cve:
-  - 2013-2186
-  credit:
-  - Victims CVE Database
-  references:
-  - https://access.redhat.com/security/cve/CVE-2013-2186
-  - https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2013-2186
-  source_url: https://github.com/victims/victims-cve-db/blob/master/database/java/2013/2186.yaml
-- id: victims:maven:commons-fileupload:commons-fileupload:date
-  title: 'Apache/Jakarta commons-fileupload: /tmp directory used by default for uploaded
-    files'
-  affected_package: commons-fileupload:commons-fileupload
-  vulnerable_versions:
-  - "<=1.2.2"
-  - '1'
-  patched_versions:
-  - ">=1.3"
-  - '1'
-  severity: high
-  package_manager: maven
-  cve:
-  - 2013-0248
-  credit:
-  - Victims CVE Database
-  references:
-  - https://bugzilla.redhat.com/CVE-2013-0248
-  - http://mail-archives.apache.org/mod_mbox/commons-user/201303.mbox/%3C51371C31.8020805@apache.org%3E
-  source_url: https://github.com/victims/victims-cve-db/blob/master/database/java/2013/0248.yaml

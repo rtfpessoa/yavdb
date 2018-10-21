@@ -1,78 +1,4 @@
 ---
-- id: nodesecurity:npm:npm:2016-04-18
-  title: npm Token Leak
-  description: "Affected versions of the `npm` package include the bearer token of
-    the logged in user in every request made by the CLI, even if the request is not
-    directed towards the user's active registry. \n\nAn attacker could create an HTTP
-    server to collect tokens, and by various means including but not limited to install
-    scripts, cause the npm CLI to make a request to that server, which would compromise
-    the user's token.\n\nThis compromised token could be used to do anything that
-    the user could do, including publishing new packages.\n\n"
-  affected_package: npm
-  vulnerable_versions:
-  - "<= 2.15.0 || >= 3.0.0 <= 3.8.2"
-  patched_versions:
-  - ">= 2.15.1 <= 3.0.0 || >= 3.8.3"
-  severity: high
-  package_manager: npm
-  cve:
-  - CVE-2016-3956
-  cvss_v3_vector: CVSS:3.0/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:N
-  credit:
-  - Mitar, Will White & the team at Mapbox, Max Motovilov, and James Taylor
-  references:
-  - http://blog.npmjs.org/post/142036323955/fixing-a-bearer-token-vulnerability)
-  source_url: https://nodesecurity.io/advisories/98
-- id: nodesecurity:npm:npm:2017-03-23
-  title: Predictable temp filenames allow overwrite of arbitrary files
-  description: 'Affected versions of `npm` use predictable temporary file names during
-    archive unpacking. If an attacker can create a symbolic link at the location of
-    one of these temporary file names, the attacker can arbitrarily write to any file
-    that the user which owns the `npm` process has permission to write to, potentially
-    resulting in local privilege escalation.
-
-'
-  affected_package: npm
-  vulnerable_versions:
-  - "<1.3.3"
-  patched_versions:
-  - ">=1.3.3"
-  severity: low
-  package_manager: npm
-  cve:
-  - CVE-2013-4116
-  cvss_v3_vector: CVSS:3.0/AV:L/AC:L/PR:L/UI:R/S:C/C:N/I:L/A:N
-  credit:
-  - Jérémy Lal
-  references:
-  - |-
-    https://github.com/npm/npm/issues/3635)
-    http://www.openwall.com/lists/oss-security/2013/07/10/17)
-  source_url: https://nodesecurity.io/advisories/152
-- id: ossindex:npm:npm:2014-04-22
-  title: '[CVE-2013-4116]  Improper Link Resolution Before File Access ("Link Following")'
-  description: lib/npm.js in Node Packaged Modules (npm) before 1.3.3 allows local
-    users to overwrite arbitrary files via a symlink attack on temporary files with
-    predictable names that are created when unpacking archives.
-  affected_package: npm
-  vulnerable_versions:
-  - "<1.3.3"
-  package_manager: npm
-  cve:
-  - CVE-2013-4116
-  credit:
-  - OSSIndex
-  references:
-  - http://www.openwall.com/lists/oss-security/2013/07/10/17
-  - http://www.openwall.com/lists/oss-security/2013/07/11/9
-  - http://www.securityfocus.com/bid/61083
-  - http://xforce.iss.net/xforce/xfdb/87141
-  - https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=715325
-  - https://bugzilla.redhat.com/show_bug.cgi?id=983917
-  - https://exchange.xforce.ibmcloud.com/vulnerabilities/87141
-  - https://github.com/npm/npm/commit/f4d31693
-  - https://github.com/npm/npm/issues/3635
-  source_url: https://ossindex.net/resource/package/7014236987/vulnerabilities
 - id: ossindex:npm:npm:2016-05-17
   title: npm security update (token leak)
   description: This vulnerability could cause the unintentional leakage of bearer
@@ -82,6 +8,9 @@
   - "<= 2.15.0"
   - ">= 3.0.0 <= 3.8.2"
   package_manager: npm
+  disclosed_date: 2016-05-17
+  created_date: 2016-05-17
+  last_modified_date: 2017-03-04
   credit:
   - OSSIndex
   references:
@@ -98,6 +27,9 @@
   vulnerable_versions:
   - ">= 3.0.0 <= 3.8.2"
   package_manager: npm
+  disclosed_date: 2016-05-19
+  created_date: 2016-05-19
+  last_modified_date: 2017-03-04
   credit:
   - OSSIndex
   references:
@@ -106,7 +38,34 @@
   - https://nodejs.org/en/blog/vulnerability/npm-tokens-leak-march-2016/#2
   - https://nodesecurity.io/advisories/98#2
   source_url: https://ossindex.net/resource/package/7014236987/vulnerabilities
-- id: ossindex:npm:npm:2016-07-02
+- id: ossindex:npm:npm:CVE-2013-4116
+  title: '[CVE-2013-4116]  Improper Link Resolution Before File Access ("Link Following")'
+  description: lib/npm.js in Node Packaged Modules (npm) before 1.3.3 allows local
+    users to overwrite arbitrary files via a symlink attack on temporary files with
+    predictable names that are created when unpacking archives.
+  affected_package: npm
+  vulnerable_versions:
+  - "<1.3.3"
+  package_manager: npm
+  cve:
+  - CVE-2013-4116
+  disclosed_date: 2014-04-22
+  created_date: 2014-04-22
+  last_modified_date: 2017-07-30
+  credit:
+  - OSSIndex
+  references:
+  - http://www.openwall.com/lists/oss-security/2013/07/10/17
+  - http://www.openwall.com/lists/oss-security/2013/07/11/9
+  - http://www.securityfocus.com/bid/61083
+  - http://xforce.iss.net/xforce/xfdb/87141
+  - https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=715325
+  - https://bugzilla.redhat.com/show_bug.cgi?id=983917
+  - https://exchange.xforce.ibmcloud.com/vulnerabilities/87141
+  - https://github.com/npm/npm/commit/f4d31693
+  - https://github.com/npm/npm/issues/3635
+  source_url: https://ossindex.net/resource/package/7014236987/vulnerabilities
+- id: ossindex:npm:npm:CVE-2016-3956
   title: "[CVE-2016-3956]  Information Exposure"
   description: The CLI in npm before 2.15.1 and 3.x before 3.8.3, as used in Node.js
     0.10 before 0.10.44, 0.12 before 0.12.13, 4 before 4.4.2, and 5 before 5.10.0,
@@ -118,6 +77,9 @@
   package_manager: npm
   cve:
   - CVE-2016-3956
+  disclosed_date: 2016-07-02
+  created_date: 2016-07-02
+  last_modified_date: 2017-07-30
   credit:
   - OSSIndex
   references:
@@ -128,19 +90,61 @@
   - https://github.com/npm/npm/issues/8380
   - https://nodejs.org/en/blog/vulnerability/npm-tokens-leak-march-2016/
   source_url: https://ossindex.net/resource/package/7014236987/vulnerabilities
-- id: snykio:npm:npm:2013-07-07
+- id: snykio:npm:npm:20160418
+  title: npm Token Leak
+  description: |+
+    This vulnerability could cause the unintentional leakage of bearer
+    tokens. A design flaw in npm\'s registry allows an attacker to set up an
+    HTTP server that could collect authentication information, and then use
+    this authentication information to impersonate the users whose tokens
+    they collected. The attacker could do anything the compromised users
+    could do, including publishing new versions of packages.
+
+    \nThe primary npm registry has, since late 2014, used HTTP bearer tokens
+    to authenticate requests from the npm command-line interface. Due to a
+    design flaw in the CLI, these bearer tokens were sent with every request
+    made by logged-in users, regardless of the destination of the request.
+    (The bearers only should have been included for requests made against a
+    registry or registries used for the current install.)
+
+    This flaw allows an attacker to set up an HTTP server that could collect
+    authentication information. They could then use this information to
+    impersonate the users whose tokens they collected. This impersonation
+    would allow them to do anything the compromised users could do,
+    including publishing new versions of packages.
+
+    With the fixes npm have released, the CLI will only send bearer tokens
+    with requests made against a registry. npm’s CLI team believe that the
+    fix won’t break any existing registry setups. However, it’s possible the
+    change will be breaking in some cases, due to the large number of
+    registry software suites used.
+
+  affected_package: npm
+  vulnerable_versions:
+  - "<= 2.15.0"
+  - ">= 3.0.0 <= 3.8.2"
+  severity: medium
+  package_manager: npm
+  cwe:
+  - CWE-200
+  disclosed_date: 2016-04-18
+  created_date: 2016-04-20
+  last_modified_date: 2016-04-20
+  credit:
+  - Mitar
+  - Will White & the team at Mapbox
+  - Max Motovilov
+  - James Taylor
+  references:
+  - https://nodejs.org/en/blog/vulnerability/npm-tokens-leak-march-2016/
+  - http://blog.npmjs.org/post/142036323955/fixing-a-bearer-token-vulnerability
+  - https://github.com/npm/npm/issues/8380
+  - https://github.com/npm/npm/commit/fea8cc92cee02c720b58f95f14d315507ccad401
+  source_url: https://snyk.io/vuln/npm:npm:20160418
+- id: snykio:npm:npm:CVE-2013-4116
   title: Symlink attack due to predictable tmp folder names
   description: |
     [`npm`][1] is a package manager for JavaScript. Affected versions of the
-    package are vulnerable to Symlink attack due to predictable tmp folder
-    names, which were named `/tmp/npm-$PID`. An attacker waiting for a
-    process named `npm-` to load could then go to the folder and arbitrarily
-    change the files in the tmp folder.
-
-
-
-    [1]: https://www.npmjs.com/package/npm
-    \n[`npm`][1] is a package manager for JavaScript. Affected versions of the
     package are vulnerable to Symlink attack due to predictable tmp folder
     names, which were named `/tmp/npm-$PID`. An attacker waiting for a
     process named `npm-` to load could then go to the folder and arbitrarily
@@ -155,10 +159,13 @@
   severity: medium
   package_manager: npm
   cve:
-  - CVE-2017-16017
   - CVE-2013-4116
+  - CVE-2017-16017
   cwe:
   - CWE-377
+  disclosed_date: 2013-07-07
+  created_date: 2017-02-13
+  last_modified_date: 2017-02-13
   credit:
   - Daniel Kahn Gillmor
   references:
@@ -166,141 +173,10 @@
   - https://github.com/npm/npm/commit/f4d31693
   - http://www.openwall.com/lists/oss-security/2013/07/10/17
   source_url: https://snyk.io/vuln/npm:npm:20130708
-- id: snykio:npm:npm:2016-04-18
-  title: npm Token Leak
-  description: |+
-    This vulnerability could cause the unintentional leakage of bearer
-    tokens. A design flaw in npm\'s registry allows an attacker to set up an
-    HTTP server that could collect authentication information, and then use
-    this authentication information to impersonate the users whose tokens
-    they collected. The attacker could do anything the compromised users
-    could do, including publishing new versions of packages.
-
-    \nThis vulnerability could cause the unintentional leakage of bearer
-    tokens. A design flaw in npm\'s registry allows an attacker to set up an
-    HTTP server that could collect authentication information, and then use
-    this authentication information to impersonate the users whose tokens
-    they collected. The attacker could do anything the compromised users
-    could do, including publishing new versions of packages.
-
-    \nThe primary npm registry has, since late 2014, used HTTP bearer tokens
-    to authenticate requests from the npm command-line interface. Due to a
-    design flaw in the CLI, these bearer tokens were sent with every request
-    made by logged-in users, regardless of the destination of the request.
-    (The bearers only should have been included for requests made against a
-    registry or registries used for the current install.)
-
-    This flaw allows an attacker to set up an HTTP server that could collect
-    authentication information. They could then use this information to
-    impersonate the users whose tokens they collected. This impersonation
-    would allow them to do anything the compromised users could do,
-    including publishing new versions of packages.
-
-    With the fixes npm have released, the CLI will only send bearer tokens
-    with requests made against a registry. npm’s CLI team believe that the
-    fix won’t break any existing registry setups. However, it’s possible the
-    change will be breaking in some cases, due to the large number of
-    registry software suites used.
-
-    \nThe primary npm registry has, since late 2014, used HTTP bearer tokens
-    to authenticate requests from the npm command-line interface. Due to a
-    design flaw in the CLI, these bearer tokens were sent with every request
-    made by logged-in users, regardless of the destination of the request.
-    (The bearers only should have been included for requests made against a
-    registry or registries used for the current install.)
-
-    This flaw allows an attacker to set up an HTTP server that could collect
-    authentication information. They could then use this information to
-    impersonate the users whose tokens they collected. This impersonation
-    would allow them to do anything the compromised users could do,
-    including publishing new versions of packages.
-
-    With the fixes npm have released, the CLI will only send bearer tokens
-    with requests made against a registry. npm’s CLI team believe that the
-    fix won’t break any existing registry setups. However, it’s possible the
-    change will be breaking in some cases, due to the large number of
-    registry software suites used.
-
-    \nThe primary npm registry has, since late 2014, used HTTP bearer tokens
-    to authenticate requests from the npm command-line interface. Due to a
-    design flaw in the CLI, these bearer tokens were sent with every request
-    made by logged-in users, regardless of the destination of the request.
-    (The bearers only should have been included for requests made against a
-    registry or registries used for the current install.)
-
-    This flaw allows an attacker to set up an HTTP server that could collect
-    authentication information. They could then use this information to
-    impersonate the users whose tokens they collected. This impersonation
-    would allow them to do anything the compromised users could do,
-    including publishing new versions of packages.
-
-    With the fixes npm have released, the CLI will only send bearer tokens
-    with requests made against a registry. npm’s CLI team believe that the
-    fix won’t break any existing registry setups. However, it’s possible the
-    change will be breaking in some cases, due to the large number of
-    registry software suites used.
-
-    \nThe primary npm registry has, since late 2014, used HTTP bearer tokens
-    to authenticate requests from the npm command-line interface. Due to a
-    design flaw in the CLI, these bearer tokens were sent with every request
-    made by logged-in users, regardless of the destination of the request.
-    (The bearers only should have been included for requests made against a
-    registry or registries used for the current install.)
-
-    This flaw allows an attacker to set up an HTTP server that could collect
-    authentication information. They could then use this information to
-    impersonate the users whose tokens they collected. This impersonation
-    would allow them to do anything the compromised users could do,
-    including publishing new versions of packages.
-
-    With the fixes npm have released, the CLI will only send bearer tokens
-    with requests made against a registry. npm’s CLI team believe that the
-    fix won’t break any existing registry setups. However, it’s possible the
-    change will be breaking in some cases, due to the large number of
-    registry software suites used.
-
-  affected_package: npm
-  vulnerable_versions:
-  - "<= 2.15.0 || >= 3.0.0 <= 3.8.2"
-  severity: medium
-  package_manager: npm
-  cwe:
-  - CWE-200
-  credit:
-  - Mitar
-  - Will White & the team at Mapbox
-  - Max Motovilov
-  - James Taylor
-  references:
-  - https://nodejs.org/en/blog/vulnerability/npm-tokens-leak-march-2016/
-  - http://blog.npmjs.org/post/142036323955/fixing-a-bearer-token-vulnerability
-  - https://github.com/npm/npm/issues/8380
-  - https://github.com/npm/npm/commit/fea8cc92cee02c720b58f95f14d315507ccad401
-  source_url: https://snyk.io/vuln/npm:npm:20160418
-- id: snykio:npm:npm:2018-02-22
+- id: snykio:npm:npm:CVE-2018-7408
   title: Access Restriction Bypass
   description: |
     [npm][1] is a JavaScript package manager.
-
-    Affected versions of this package are vulnerable to Access Restriction
-    Bypass. It might allow local users to bypass intended filesystem access
-    restrictions due to ownerships of `/etc` and `/usr` directories are
-    being changed unexpectedly, related to a \"correctMkdir\" issue.
-
-
-
-    [1]: https://github.com/npm/npm
-    \n[npm][1] is a JavaScript package manager.
-
-    Affected versions of this package are vulnerable to Access Restriction
-    Bypass. It might allow local users to bypass intended filesystem access
-    restrictions due to ownerships of `/etc` and `/usr` directories are
-    being changed unexpectedly, related to a \"correctMkdir\" issue.
-
-
-
-    [1]: https://github.com/npm/npm
-    \n[npm][1] is a JavaScript package manager.
 
     Affected versions of this package are vulnerable to Access Restriction
     Bypass. It might allow local users to bypass intended filesystem access
@@ -319,6 +195,9 @@
   - CVE-2018-7408
   cwe:
   - CWE-284
+  disclosed_date: 2018-02-22
+  created_date: 2018-03-21
+  last_modified_date: 2018-03-21
   credit:
   - Unknown
   references:

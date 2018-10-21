@@ -1,5 +1,55 @@
 ---
-- id: ossindex:maven:net.bull.javamelody:javamelody-core:2013-09-30
+- id: ossindex:maven:net.bull.javamelody:javamelody-core:2017-06-08
+  title: Cross Site Scripting (XSS)
+  description: A cross site scripting vulnerability was identified in this package.
+  affected_package: net.bull.javamelody:javamelody-core
+  vulnerable_versions:
+  - "<1.53.0"
+  package_manager: maven
+  disclosed_date: 2017-06-08
+  created_date: 2017-06-08
+  last_modified_date: 2017-07-26
+  credit:
+  - OSSIndex
+  references:
+  - https://github.com/javamelody/javamelody/issues/438
+  source_url: https://ossindex.net/resource/package/7015405592/vulnerabilities
+- id: ossindex:maven:net.bull.javamelody:javamelody-core:2017-07-31
+  title: Cross Site Scripting (XSS) in graph page
+  description: "> In this context graphName is rendered inside a <script></script>
+    block, so we need to htmlEncode to avoid XSS vulnerabilities.\n> \n> -- [github.com](https://github.com/javamelody/javamelody/pull/555)"
+  affected_package: net.bull.javamelody:javamelody-core
+  vulnerable_versions:
+  - "<1.60.0"
+  package_manager: maven
+  disclosed_date: 2017-07-31
+  created_date: 2017-07-31
+  last_modified_date: 2017-07-31
+  credit:
+  - OSSIndex
+  references:
+  - https://github.com/javamelody/javamelody/commit/de7b648eebc3254fcb82fcda60de83a212271def
+  - https://github.com/javamelody/javamelody/pull/555
+  source_url: https://ossindex.net/resource/package/7015405592/vulnerabilities
+- id: ossindex:maven:net.bull.javamelody:javamelody-core:2017-08-01
+  title: Unvalidated xstream data
+  description: "> When using the collector server, minor security issue if XML transport
+    format with xstream is configured in the collector server parameters.\n> \n> --
+    [github.com](https://github.com/javamelody/javamelody/wiki/ReleaseNotes#1670)"
+  affected_package: net.bull.javamelody:javamelody-core
+  vulnerable_versions:
+  - "<1.66.0"
+  package_manager: maven
+  disclosed_date: 2017-08-01
+  created_date: 2017-08-01
+  last_modified_date: 2017-08-01
+  credit:
+  - OSSIndex
+  references:
+  - https://github.com/javamelody/javamelody/commit/dd8816863d8d943f819a3fa797c349236e7546d4
+  - https://github.com/javamelody/javamelody/issues/631
+  source_url: https://ossindex.net/resource/package/7015405592/vulnerabilities
+- id: ossindex:maven:net.bull.javamelody:javamelody-core:CVE-2013-4378
   title: '[CVE-2013-4378]  Improper Neutralization of Input During Web Page Generation
     ("Cross-site Scripting")'
   description: Cross-site scripting (XSS) vulnerability in HtmlSessionInformationsReport.java
@@ -52,6 +102,9 @@
   package_manager: maven
   cve:
   - CVE-2013-4378
+  disclosed_date: 2013-09-30
+  created_date: 2013-09-30
+  last_modified_date: 2017-04-19
   credit:
   - OSSIndex
   references:
@@ -62,62 +115,203 @@
   - https://code.google.com/p/javamelody/source/detail?r=3515
   - https://code.google.com/p/javamelody/wiki/ReleaseNotes
   source_url: https://ossindex.net/resource/package/7015405592/vulnerabilities
-- id: ossindex:maven:net.bull.javamelody:javamelody-core:2017-06-08
-  title: Cross Site Scripting (XSS)
-  description: A cross site scripting vulnerability was identified in this package.
+- id: snykio:maven:net.bull.javamelody:javamelody-core:30452
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [`net.bull.javamelody:javamelody-core`][1] monitors JavaEE applications.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS) attacks.
+
+
+
+    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22javamelody-core%22
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
   affected_package: net.bull.javamelody:javamelody-core
   vulnerable_versions:
-  - "<1.53.0"
+  - "< 1.53.0"
+  severity: medium
   package_manager: maven
+  cwe:
+  - CWE-79
+  disclosed_date: 2015-06-10
+  created_date: 2015-06-10
+  last_modified_date: 2015-06-10
   credit:
-  - OSSIndex
+  - Unknown
   references:
+  - https://github.com/javamelody/javamelody/wiki/ReleaseNotes#1530
   - https://github.com/javamelody/javamelody/issues/438
-  source_url: https://ossindex.net/resource/package/7015405592/vulnerabilities
-- id: ossindex:maven:net.bull.javamelody:javamelody-core:2017-07-31
-  title: Cross Site Scripting (XSS)
-  description: "A cross site scripting vulnerability has been identified in this package.\n\n>
-    Particulary, URL parameters such as SessionID are output to HTML unescaped, which
-    allows the injection of malicious javascript \n> \n> -- [github.com](https://github.com/javamelody/javamelody/issues/252)"
+  - https://github.com/javamelody/javamelody/commit/69b3ed26dde78e0c693fcdedfef0ef57b191e520
+  source_url: https://snyk.io/vuln/SNYK-JAVA-NETBULLJAVAMELODY-30452
+- id: snykio:maven:net.bull.javamelody:javamelody-core:30454
+  title: Improper Restriction of Excessive Authentication Attempts
+  description: |
+    [`net.bull.javamelody:javamelody-core`][1] monitors JavaEE applications.
+
+    Affected versions of this package are vulnerable to do not limit the
+    number of login attempts allowing attackers to use brute force
+    algorithms to login.
+
+
+
+    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22javamelody-core%22
   affected_package: net.bull.javamelody:javamelody-core
   vulnerable_versions:
-  - "<1.53.0"
+  - ">= 1.53.0 < 1.60.0"
+  severity: medium
   package_manager: maven
+  cwe:
+  - CWE-307
+  disclosed_date: 2015-06-10
+  created_date: 2015-06-10
+  last_modified_date: 2015-06-10
   credit:
-  - OSSIndex
+  - Unknown
   references:
-  - https://github.com/javamelody/javamelody/issues/252
-  source_url: https://ossindex.net/resource/package/7015405592/vulnerabilities
-- id: ossindex:maven:net.bull.javamelody:javamelody-core:2017-07-31
-  title: Cross Site Scripting (XSS) in graph page
-  description: "> In this context graphName is rendered inside a <script></script>
-    block, so we need to htmlEncode to avoid XSS vulnerabilities.\n> \n> -- [github.com](https://github.com/javamelody/javamelody/pull/555)"
+  - https://github.com/javamelody/javamelody/commit/028a85ed599a3648b9fa91d35792dbf219da8a70
+  source_url: https://snyk.io/vuln/SNYK-JAVA-NETBULLJAVAMELODY-30454
+- id: snykio:maven:net.bull.javamelody:javamelody-core:30455
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [`net.bull.javamelody:javamelody-core`][1] monitors JavaEE applications.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS) attacks. There was no escaping of &lt;script&gt; blocks, allowing
+    attackers to run arbitrary script in the `graphName` string.
+
+
+
+    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22javamelody-core%22
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
   affected_package: net.bull.javamelody:javamelody-core
   vulnerable_versions:
-  - "<1.60.0"
+  - ">= 1.36.0 < 1.60.0"
+  severity: medium
   package_manager: maven
+  cwe:
+  - CWE-79
+  disclosed_date: 2015-06-10
+  created_date: 2015-06-10
+  last_modified_date: 2015-06-10
   credit:
-  - OSSIndex
+  - Tim Helmstedt
   references:
-  - https://github.com/javamelody/javamelody/commit/de7b648eebc3254fcb82fcda60de83a212271def
-  - https://github.com/javamelody/javamelody/pull/555
-  source_url: https://ossindex.net/resource/package/7015405592/vulnerabilities
-- id: ossindex:maven:net.bull.javamelody:javamelody-core:2017-08-01
-  title: Unvalidated xstream data
-  description: "> When using the collector server, minor security issue if XML transport
-    format with xstream is configured in the collector server parameters.\n> \n> --
-    [github.com](https://github.com/javamelody/javamelody/wiki/ReleaseNotes#1670)"
+  - https://github.com/javamelody/javamelody/wiki/ReleaseNotes#1600
+  - https://github.com/javamelody/javamelody/issues/555
+  - https://github.com/javamelody/javamelody/commit/028a85ed599a3648b9fa91d35792dbf219da8a70
+  source_url: https://snyk.io/vuln/SNYK-JAVA-NETBULLJAVAMELODY-30455
+- id: snykio:maven:net.bull.javamelody:javamelody-core:30461
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [`net.bull.javamelody:javamelody-core`][1] monitors JavaEE applications.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS) attacks. Alert messages in `writeMessageIfNotNull` function were
+    not HTML encoded.
+
+
+
+    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22javamelody-core%22
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
   affected_package: net.bull.javamelody:javamelody-core
   vulnerable_versions:
-  - "<1.66.0"
+  - ">= 1.36.0 < 1.61.0"
+  severity: medium
   package_manager: maven
+  cwe:
+  - CWE-79
+  disclosed_date: 2015-06-10
+  created_date: 2015-06-10
+  last_modified_date: 2015-06-10
   credit:
-  - OSSIndex
+  - Dallas Kaman
   references:
-  - https://github.com/javamelody/javamelody/commit/dd8816863d8d943f819a3fa797c349236e7546d4
-  - https://github.com/javamelody/javamelody/issues/631
-  source_url: https://ossindex.net/resource/package/7015405592/vulnerabilities
-- id: snykio:maven:net.bull.javamelody:javamelody-core:2015-06-10
+  - https://github.com/javamelody/javamelody/wiki/ReleaseNotes#1610
+  - https://github.com/javamelody/javamelody/commit/e0497c1980acebd257d3da78dfde29ae9bdffdf6
+  source_url: https://snyk.io/vuln/SNYK-JAVA-NETBULLJAVAMELODY-30461
+- id: snykio:maven:net.bull.javamelody:javamelody-core:CVE-2013-4378
   title: Cross-site Scripting (XSS)
   description: |+
     [`net.bull.javamelody:javamelody-core`][1] monitors JavaEE applications.
@@ -130,138 +324,6 @@
 
 
     [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22javamelody-core%22
-    \n[`net.bull.javamelody:javamelody-core`][1] monitors JavaEE applications.
-
-    Cross-site Scripting (XSS) vulnerability in
-    HtmlSessionInformationsReport.java in JavaMelody 1.46 and earlier allows
-    remote attackers to inject arbitrary web script or HTML via a crafted
-    X-Forwarded-For header.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22javamelody-core%22
-    \n[`net.bull.javamelody:javamelody-core`][1] monitors JavaEE applications.
-
-    Cross-site Scripting (XSS) vulnerability in
-    HtmlSessionInformationsReport.java in JavaMelody 1.46 and earlier allows
-    remote attackers to inject arbitrary web script or HTML via a crafted
-    X-Forwarded-For header.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22javamelody-core%22
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
     \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
     user’s browser to execute malicious JavaScript code in the context of a
     victim’s domain. Such scripts can steal the user’s session cookies for
@@ -299,6 +361,9 @@
   - CVE-2013-4378
   cwe:
   - CWE-79
+  disclosed_date: 2015-06-10
+  created_date: 2015-06-10
+  last_modified_date: 2015-06-10
   credit:
   - Unknown
   references:
@@ -306,597 +371,7 @@
   - https://github.com/javamelody/javamelody/issues/346
   - https://github.com/javamelody/javamelody/commit/aacbc46151ff4ac1ca34ce0899c2a6113071c66e
   source_url: https://snyk.io/vuln/SNYK-JAVA-NETBULLJAVAMELODY-30451
-- id: snykio:maven:net.bull.javamelody:javamelody-core:2015-06-10
-  title: Cross-site Scripting (XSS)
-  description: |+
-    [`net.bull.javamelody:javamelody-core`][1] monitors JavaEE applications.
-
-    Affected versions of this package are vulnerable to Cross-site Scripting
-    (XSS) attacks.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22javamelody-core%22
-    \n[`net.bull.javamelody:javamelody-core`][1] monitors JavaEE applications.
-
-    Affected versions of this package are vulnerable to Cross-site Scripting
-    (XSS) attacks.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22javamelody-core%22
-    \n[`net.bull.javamelody:javamelody-core`][1] monitors JavaEE applications.
-
-    Affected versions of this package are vulnerable to Cross-site Scripting
-    (XSS) attacks.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22javamelody-core%22
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-  affected_package: net.bull.javamelody:javamelody-core
-  vulnerable_versions:
-  - "< 1.53.0"
-  severity: medium
-  package_manager: maven
-  cwe:
-  - CWE-79
-  credit:
-  - Unknown
-  references:
-  - https://github.com/javamelody/javamelody/wiki/ReleaseNotes#1530
-  - https://github.com/javamelody/javamelody/issues/438
-  - https://github.com/javamelody/javamelody/commit/69b3ed26dde78e0c693fcdedfef0ef57b191e520
-  source_url: https://snyk.io/vuln/SNYK-JAVA-NETBULLJAVAMELODY-30452
-- id: snykio:maven:net.bull.javamelody:javamelody-core:2015-06-10
-  title: Improper Restriction of Excessive Authentication Attempts
-  description: |
-    [`net.bull.javamelody:javamelody-core`][1] monitors JavaEE applications.
-
-    Affected versions of this package are vulnerable to do not limit the
-    number of login attempts allowing attackers to use brute force
-    algorithms to login.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22javamelody-core%22
-    \n[`net.bull.javamelody:javamelody-core`][1] monitors JavaEE applications.
-
-    Affected versions of this package are vulnerable to do not limit the
-    number of login attempts allowing attackers to use brute force
-    algorithms to login.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22javamelody-core%22
-    \n[`net.bull.javamelody:javamelody-core`][1] monitors JavaEE applications.
-
-    Affected versions of this package are vulnerable to do not limit the
-    number of login attempts allowing attackers to use brute force
-    algorithms to login.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22javamelody-core%22
-  affected_package: net.bull.javamelody:javamelody-core
-  vulnerable_versions:
-  - ">= 1.53.0 < 1.60.0"
-  severity: medium
-  package_manager: maven
-  cwe:
-  - CWE-307
-  credit:
-  - Unknown
-  references:
-  - https://github.com/javamelody/javamelody/commit/028a85ed599a3648b9fa91d35792dbf219da8a70
-  source_url: https://snyk.io/vuln/SNYK-JAVA-NETBULLJAVAMELODY-30454
-- id: snykio:maven:net.bull.javamelody:javamelody-core:2015-06-10
-  title: Cross-site Scripting (XSS)
-  description: |+
-    [`net.bull.javamelody:javamelody-core`][1] monitors JavaEE applications.
-
-    Affected versions of this package are vulnerable to Cross-site Scripting
-    (XSS) attacks. There was no escaping of &lt;script&gt; blocks, allowing
-    attackers to run arbitrary script in the `graphName` string.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22javamelody-core%22
-    \n[`net.bull.javamelody:javamelody-core`][1] monitors JavaEE applications.
-
-    Affected versions of this package are vulnerable to Cross-site Scripting
-    (XSS) attacks. There was no escaping of &lt;script&gt; blocks, allowing
-    attackers to run arbitrary script in the `graphName` string.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22javamelody-core%22
-    \n[`net.bull.javamelody:javamelody-core`][1] monitors JavaEE applications.
-
-    Affected versions of this package are vulnerable to Cross-site Scripting
-    (XSS) attacks. There was no escaping of &lt;script&gt; blocks, allowing
-    attackers to run arbitrary script in the `graphName` string.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22javamelody-core%22
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-  affected_package: net.bull.javamelody:javamelody-core
-  vulnerable_versions:
-  - ">= 1.36.0 < 1.60.0"
-  severity: medium
-  package_manager: maven
-  cwe:
-  - CWE-79
-  credit:
-  - Tim Helmstedt
-  references:
-  - https://github.com/javamelody/javamelody/wiki/ReleaseNotes#1600
-  - https://github.com/javamelody/javamelody/issues/555
-  - https://github.com/javamelody/javamelody/commit/028a85ed599a3648b9fa91d35792dbf219da8a70
-  source_url: https://snyk.io/vuln/SNYK-JAVA-NETBULLJAVAMELODY-30455
-- id: snykio:maven:net.bull.javamelody:javamelody-core:2015-06-10
-  title: Cross-site Scripting (XSS)
-  description: |+
-    [`net.bull.javamelody:javamelody-core`][1] monitors JavaEE applications.
-
-    Affected versions of this package are vulnerable to Cross-site Scripting
-    (XSS) attacks. Alert messages in `writeMessageIfNotNull` function were
-    not HTML encoded.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22javamelody-core%22
-    \n[`net.bull.javamelody:javamelody-core`][1] monitors JavaEE applications.
-
-    Affected versions of this package are vulnerable to Cross-site Scripting
-    (XSS) attacks. Alert messages in `writeMessageIfNotNull` function were
-    not HTML encoded.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22javamelody-core%22
-    \n[`net.bull.javamelody:javamelody-core`][1] monitors JavaEE applications.
-
-    Affected versions of this package are vulnerable to Cross-site Scripting
-    (XSS) attacks. Alert messages in `writeMessageIfNotNull` function were
-    not HTML encoded.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22javamelody-core%22
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-  affected_package: net.bull.javamelody:javamelody-core
-  vulnerable_versions:
-  - ">= 1.36.0 < 1.61.0"
-  severity: medium
-  package_manager: maven
-  cwe:
-  - CWE-79
-  credit:
-  - Dallas Kaman
-  references:
-  - https://github.com/javamelody/javamelody/wiki/ReleaseNotes#1610
-  - https://github.com/javamelody/javamelody/commit/e0497c1980acebd257d3da78dfde29ae9bdffdf6
-  source_url: https://snyk.io/vuln/SNYK-JAVA-NETBULLJAVAMELODY-30461
-- id: snykio:maven:net.bull.javamelody:javamelody-core:2015-06-10
+- id: snykio:maven:net.bull.javamelody:javamelody-core:CVE-2016-1000273
   title: Cross-site Scripting (XSS)
   description: |+
     [`net.bull.javamelody:javamelody-core`][1] monitors JavaEE applications.
@@ -908,136 +383,6 @@
 
 
     [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22javamelody-core%22
-    \n[`net.bull.javamelody:javamelody-core`][1] monitors JavaEE applications.
-
-    Affected versions of this package are vulnerable to Cross-site Scripting
-    (XSS) attacks. It allows remote attackers to inject arbitrary web script
-    or HTML via a crafted http parameters.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22javamelody-core%22
-    \n[`net.bull.javamelody:javamelody-core`][1] monitors JavaEE applications.
-
-    Affected versions of this package are vulnerable to Cross-site Scripting
-    (XSS) attacks. It allows remote attackers to inject arbitrary web script
-    or HTML via a crafted http parameters.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22javamelody-core%22
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
     \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
     user’s browser to execute malicious JavaScript code in the context of a
     victim’s domain. Such scripts can steal the user’s session cookies for
@@ -1075,6 +420,9 @@
   - CVE-2016-1000273
   cwe:
   - CWE-79
+  disclosed_date: 2015-06-10
+  created_date: 2015-06-10
+  last_modified_date: 2015-06-10
   credit:
   - Omar El Mandour
   references:
@@ -1082,7 +430,7 @@
   - https://github.com/javamelody/javamelody/commit/e0497c1980acebd257d3da78dfde29ae9bdffdf6
   - https://github.com/distributedweaknessfiling/DWF-Database-Artifacts/blob/master/DWF/2016/1000273/CVE-2016-1000273.json
   source_url: https://snyk.io/vuln/SNYK-JAVA-NETBULLJAVAMELODY-30462
-- id: snykio:maven:net.bull.javamelody:javamelody-core:2018-09-04
+- id: snykio:maven:net.bull.javamelody:javamelody-core:CVE-2018-15531
   title: XML External Entity (XXE) Injection
   description: |+
     [net.bull.javamelody:javamelody-core][1] is monitoring of JavaEE
@@ -1095,271 +443,6 @@
 
 
     [1]: https://github.com/javamelody/javamelody
-    \n[net.bull.javamelody:javamelody-core][1] is monitoring of JavaEE
-    applications.
-
-    Affected versions of this package are vulnerable to WML External Entity
-    (XXE) injection via the `parseSoapMethodName` method in the
-    `bull/javamelody/PayloadNameRequestWrapper.java` class.
-
-
-
-    [1]: https://github.com/javamelody/javamelody
-    \n[net.bull.javamelody:javamelody-core][1] is monitoring of JavaEE
-    applications.
-
-    Affected versions of this package are vulnerable to WML External Entity
-    (XXE) injection via the `parseSoapMethodName` method in the
-    `bull/javamelody/PayloadNameRequestWrapper.java` class.
-
-
-
-    [1]: https://github.com/javamelody/javamelody
-    \nXXE Injection is a type of attack against an application that parses XML
-    input. XML is a markup language that defines a set of rules for encoding
-    documents in a format that is both human-readable and machine-readable.
-    By default, many XML processors allow specification of an external
-    entity, a URI that is dereferenced and evaluated during XML processing.
-    When an XML document is being parsed, the parser can make a request and
-    include the content at the specified URI inside of the XML document.
-
-    Attacks can include disclosing local files, which may contain sensitive
-    data such as passwords or private user data, using file: schemes or
-    relative paths in the system identifier.
-
-    For example, below is a sample XML document, containing an XML element-
-    username.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-           <username>John</username>
-        </xml>
-
-    An external XML entity - `xxe`, is defined using a system identifier and
-    present within a DOCTYPE header. These entities can access local or
-    remote content. For example the below code contains an external XML
-    entity that would fetch the content of `/etc/passwd` and display it to
-    the user rendered by `username`.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-        <!DOCTYPE foo [
-           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
-           <username>&xxe;</username>
-        </xml>
-
-    Other XXE Injection attacks can access local resources that may not stop
-    returning data, possibly impacting application availability and leading
-    to Denial of Service.
-
-    \nXXE Injection is a type of attack against an application that parses XML
-    input. XML is a markup language that defines a set of rules for encoding
-    documents in a format that is both human-readable and machine-readable.
-    By default, many XML processors allow specification of an external
-    entity, a URI that is dereferenced and evaluated during XML processing.
-    When an XML document is being parsed, the parser can make a request and
-    include the content at the specified URI inside of the XML document.
-
-    Attacks can include disclosing local files, which may contain sensitive
-    data such as passwords or private user data, using file: schemes or
-    relative paths in the system identifier.
-
-    For example, below is a sample XML document, containing an XML element-
-    username.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-           <username>John</username>
-        </xml>
-
-    An external XML entity - `xxe`, is defined using a system identifier and
-    present within a DOCTYPE header. These entities can access local or
-    remote content. For example the below code contains an external XML
-    entity that would fetch the content of `/etc/passwd` and display it to
-    the user rendered by `username`.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-        <!DOCTYPE foo [
-           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
-           <username>&xxe;</username>
-        </xml>
-
-    Other XXE Injection attacks can access local resources that may not stop
-    returning data, possibly impacting application availability and leading
-    to Denial of Service.
-
-    \nXXE Injection is a type of attack against an application that parses XML
-    input. XML is a markup language that defines a set of rules for encoding
-    documents in a format that is both human-readable and machine-readable.
-    By default, many XML processors allow specification of an external
-    entity, a URI that is dereferenced and evaluated during XML processing.
-    When an XML document is being parsed, the parser can make a request and
-    include the content at the specified URI inside of the XML document.
-
-    Attacks can include disclosing local files, which may contain sensitive
-    data such as passwords or private user data, using file: schemes or
-    relative paths in the system identifier.
-
-    For example, below is a sample XML document, containing an XML element-
-    username.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-           <username>John</username>
-        </xml>
-
-    An external XML entity - `xxe`, is defined using a system identifier and
-    present within a DOCTYPE header. These entities can access local or
-    remote content. For example the below code contains an external XML
-    entity that would fetch the content of `/etc/passwd` and display it to
-    the user rendered by `username`.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-        <!DOCTYPE foo [
-           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
-           <username>&xxe;</username>
-        </xml>
-
-    Other XXE Injection attacks can access local resources that may not stop
-    returning data, possibly impacting application availability and leading
-    to Denial of Service.
-
-    \nXXE Injection is a type of attack against an application that parses XML
-    input. XML is a markup language that defines a set of rules for encoding
-    documents in a format that is both human-readable and machine-readable.
-    By default, many XML processors allow specification of an external
-    entity, a URI that is dereferenced and evaluated during XML processing.
-    When an XML document is being parsed, the parser can make a request and
-    include the content at the specified URI inside of the XML document.
-
-    Attacks can include disclosing local files, which may contain sensitive
-    data such as passwords or private user data, using file: schemes or
-    relative paths in the system identifier.
-
-    For example, below is a sample XML document, containing an XML element-
-    username.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-           <username>John</username>
-        </xml>
-
-    An external XML entity - `xxe`, is defined using a system identifier and
-    present within a DOCTYPE header. These entities can access local or
-    remote content. For example the below code contains an external XML
-    entity that would fetch the content of `/etc/passwd` and display it to
-    the user rendered by `username`.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-        <!DOCTYPE foo [
-           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
-           <username>&xxe;</username>
-        </xml>
-
-    Other XXE Injection attacks can access local resources that may not stop
-    returning data, possibly impacting application availability and leading
-    to Denial of Service.
-
-    \nXXE Injection is a type of attack against an application that parses XML
-    input. XML is a markup language that defines a set of rules for encoding
-    documents in a format that is both human-readable and machine-readable.
-    By default, many XML processors allow specification of an external
-    entity, a URI that is dereferenced and evaluated during XML processing.
-    When an XML document is being parsed, the parser can make a request and
-    include the content at the specified URI inside of the XML document.
-
-    Attacks can include disclosing local files, which may contain sensitive
-    data such as passwords or private user data, using file: schemes or
-    relative paths in the system identifier.
-
-    For example, below is a sample XML document, containing an XML element-
-    username.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-           <username>John</username>
-        </xml>
-
-    An external XML entity - `xxe`, is defined using a system identifier and
-    present within a DOCTYPE header. These entities can access local or
-    remote content. For example the below code contains an external XML
-    entity that would fetch the content of `/etc/passwd` and display it to
-    the user rendered by `username`.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-        <!DOCTYPE foo [
-           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
-           <username>&xxe;</username>
-        </xml>
-
-    Other XXE Injection attacks can access local resources that may not stop
-    returning data, possibly impacting application availability and leading
-    to Denial of Service.
-
-    \nXXE Injection is a type of attack against an application that parses XML
-    input. XML is a markup language that defines a set of rules for encoding
-    documents in a format that is both human-readable and machine-readable.
-    By default, many XML processors allow specification of an external
-    entity, a URI that is dereferenced and evaluated during XML processing.
-    When an XML document is being parsed, the parser can make a request and
-    include the content at the specified URI inside of the XML document.
-
-    Attacks can include disclosing local files, which may contain sensitive
-    data such as passwords or private user data, using file: schemes or
-    relative paths in the system identifier.
-
-    For example, below is a sample XML document, containing an XML element-
-    username.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-           <username>John</username>
-        </xml>
-
-    An external XML entity - `xxe`, is defined using a system identifier and
-    present within a DOCTYPE header. These entities can access local or
-    remote content. For example the below code contains an external XML
-    entity that would fetch the content of `/etc/passwd` and display it to
-    the user rendered by `username`.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-        <!DOCTYPE foo [
-           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
-           <username>&xxe;</username>
-        </xml>
-
-    Other XXE Injection attacks can access local resources that may not stop
-    returning data, possibly impacting application availability and leading
-    to Denial of Service.
-
-    \nXXE Injection is a type of attack against an application that parses XML
-    input. XML is a markup language that defines a set of rules for encoding
-    documents in a format that is both human-readable and machine-readable.
-    By default, many XML processors allow specification of an external
-    entity, a URI that is dereferenced and evaluated during XML processing.
-    When an XML document is being parsed, the parser can make a request and
-    include the content at the specified URI inside of the XML document.
-
-    Attacks can include disclosing local files, which may contain sensitive
-    data such as passwords or private user data, using file: schemes or
-    relative paths in the system identifier.
-
-    For example, below is a sample XML document, containing an XML element-
-    username.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-           <username>John</username>
-        </xml>
-
-    An external XML entity - `xxe`, is defined using a system identifier and
-    present within a DOCTYPE header. These entities can access local or
-    remote content. For example the below code contains an external XML
-    entity that would fetch the content of `/etc/passwd` and display it to
-    the user rendered by `username`.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-        <!DOCTYPE foo [
-           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
-           <username>&xxe;</username>
-        </xml>
-
-    Other XXE Injection attacks can access local resources that may not stop
-    returning data, possibly impacting application availability and leading
-    to Denial of Service.
-
     \nXXE Injection is a type of attack against an application that parses XML
     input. XML is a markup language that defines a set of rules for encoding
     documents in a format that is both human-readable and machine-readable.
@@ -1404,6 +487,9 @@
   - CVE-2018-15531
   cwe:
   - CWE-611
+  disclosed_date: 2018-09-04
+  created_date: 2018-10-02
+  last_modified_date: 2018-10-02
   credit:
   - Unknown
   references:

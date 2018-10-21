@@ -11,6 +11,9 @@
   - "=1.0.1.Final"
   - "<=1.0-final"
   package_manager: maven
+  disclosed_date: 2017-03-10
+  created_date: 2017-03-10
+  last_modified_date: 2017-04-16
   credit:
   - OSSIndex
   references:
@@ -19,7 +22,122 @@
   - https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2014-3655
   - https://github.com/victims/victims-cve-db/blob/master/database/java/2014/3655.yaml
   source_url: https://ossindex.net/resource/package/7095333157/vulnerabilities
-- id: snykio:maven:org.keycloak:keycloak-services:2015-10-19
+- id: snykio:maven:org.keycloak:keycloak-services:CVE-2014-3651
+  title: Denial of Service (DoS)
+  description: |+
+    [`org.keycloak:keycloak-services`][1] Affected versions of the package
+    are vulnerable to Denial of Service (DoS). It was discovered that by
+    requesting a large enough image size for a generated QR code in JBoss
+    KeyCloak, a remote attacker could cause uncontrolled resource
+    consumption leading to denial of service for legitimate users.
+
+
+
+    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22keycloak-services%22
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+  affected_package: org.keycloak:keycloak-services
+  vulnerable_versions:
+  - "< 1.0.3.Final"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2014-3651
+  cwe:
+  - CWE-400
+  disclosed_date: 2015-10-19
+  created_date: 2015-10-19
+  last_modified_date: 2015-10-19
+  credit:
+  - Florian Weimer
+  references:
+  - https://issues.jboss.org/browse/KEYCLOAK-699
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGKEYCLOAK-31229
+- id: snykio:maven:org.keycloak:keycloak-services:CVE-2014-3652
+  title: Open Redirect
+  description: |
+    [`org.keycloak:keycloak-services`][1] Affected versions of the package
+    are vulnerable to Open Redirect. It was identified that the login
+    redirect implementation provided by JBoss KeyCloak did not validate the
+    redirect URL. This flaw could be used by a remote attacker to conduct
+    phishing attacks by redirecting users to arbitary websites.
+
+
+
+    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22keycloak-services%22
+  affected_package: org.keycloak:keycloak-services
+  vulnerable_versions:
+  - ">= 1.0.1.Final < 1.0.3.Final"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2014-3652
+  cwe:
+  - CWE-601
+  disclosed_date: 2015-12-16
+  created_date: 2015-12-16
+  last_modified_date: 2015-12-16
+  credit:
+  - Florian Weimer
+  references:
+  - https://issues.jboss.org/browse/KEYCLOAK-700
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGKEYCLOAK-31230
+- id: snykio:maven:org.keycloak:keycloak-services:CVE-2014-3655
+  title: Cross-site Request Forgery (CSRF)
+  description: |
+    [`org.keycloak:keycloak-services`][1] It was discovered that JBoss
+    KeyCloak\'s soft token removal endpoint was vulnerable to Cross-site
+    Request Forgery (CSRF) attacks. A remote attacker could provide a
+    specially-crafted web page that, when visited by a user authenticated by
+    KeyCloak, could allow the attacker to remove a soft token registerd to
+    the user.
+
+
+
+    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22keycloak-services%22
+  affected_package: org.keycloak:keycloak-services
+  vulnerable_versions:
+  - ">= 1.0.1 <= 1.0.1.Final"
+  - "<= 1.0-final"
+  severity: low
+  package_manager: maven
+  cve:
+  - CVE-2014-3655
+  cwe:
+  - CWE-352
+  disclosed_date: 2016-12-25
+  created_date: 2016-12-25
+  last_modified_date: 2016-12-25
+  credit:
+  - Florian Weimer
+  references:
+  - https://bugzilla.redhat.com/CVE-2014-3655
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGKEYCLOAK-30138
+- id: snykio:maven:org.keycloak:keycloak-services:CVE-2014-3656
   title: Cross-site Scripting (XSS)
   description: |+
     [`org.keycloak:keycloak-services`][1] Affected versions of the package
@@ -33,129 +151,6 @@
 
 
     [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22keycloak-services%22
-    \n[`org.keycloak:keycloak-services`][1] Affected versions of the package
-    are vulnerable to Cross-site Scripting (XSS). If a JBoss Keycloak
-    application was configured to use `*` as a permitted web origin in the
-    Keycloak administrative console, crafted requests to the
-    login-status-iframe.html endpoint could inject arbitrary Javascript into
-    the generated HTML code via the \"origin\" query parameter, leading to a
-    cross-site scripting (XSS) vulnerability.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22keycloak-services%22
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
     \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
     user’s browser to execute malicious JavaScript code in the context of a
     victim’s domain. Such scripts can steal the user’s session cookies for
@@ -193,389 +188,18 @@
   - CVE-2014-3656
   cwe:
   - CWE-79
+  disclosed_date: 2015-10-19
+  created_date: 2015-10-19
+  last_modified_date: 2015-10-19
   credit:
   - Florian Weimer
   references:
   - https://issues.jboss.org/browse/KEYCLOAK-703
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGKEYCLOAK-31231
-- id: snykio:maven:org.keycloak:keycloak-services:2015-10-19
-  title: Denial of Service (DoS)
-  description: |+
-    [`org.keycloak:keycloak-services`][1] Affected versions of the package
-    are vulnerable to Denial of Service (DoS). It was discovered that by
-    requesting a large enough image size for a generated QR code in JBoss
-    KeyCloak, a remote attacker could cause uncontrolled resource
-    consumption leading to denial of service for legitimate users.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22keycloak-services%22
-    \n[`org.keycloak:keycloak-services`][1] Affected versions of the package
-    are vulnerable to Denial of Service (DoS). It was discovered that by
-    requesting a large enough image size for a generated QR code in JBoss
-    KeyCloak, a remote attacker could cause uncontrolled resource
-    consumption leading to denial of service for legitimate users.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22keycloak-services%22
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-  affected_package: org.keycloak:keycloak-services
-  vulnerable_versions:
-  - "< 1.0.3.Final"
-  severity: medium
-  package_manager: maven
-  cve:
-  - CVE-2014-3651
-  cwe:
-  - CWE-400
-  credit:
-  - Florian Weimer
-  references:
-  - https://issues.jboss.org/browse/KEYCLOAK-699
-  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGKEYCLOAK-31229
-- id: snykio:maven:org.keycloak:keycloak-services:2015-12-16
-  title: Open Redirect
-  description: |
-    [`org.keycloak:keycloak-services`][1] Affected versions of the package
-    are vulnerable to Open Redirect. It was identified that the login
-    redirect implementation provided by JBoss KeyCloak did not validate the
-    redirect URL. This flaw could be used by a remote attacker to conduct
-    phishing attacks by redirecting users to arbitary websites.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22keycloak-services%22
-    \n[`org.keycloak:keycloak-services`][1] Affected versions of the package
-    are vulnerable to Open Redirect. It was identified that the login
-    redirect implementation provided by JBoss KeyCloak did not validate the
-    redirect URL. This flaw could be used by a remote attacker to conduct
-    phishing attacks by redirecting users to arbitary websites.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22keycloak-services%22
-  affected_package: org.keycloak:keycloak-services
-  vulnerable_versions:
-  - ">= 1.0.1.Final < 1.0.3.Final"
-  severity: medium
-  package_manager: maven
-  cve:
-  - CVE-2014-3652
-  cwe:
-  - CWE-601
-  credit:
-  - Florian Weimer
-  references:
-  - https://issues.jboss.org/browse/KEYCLOAK-700
-  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGKEYCLOAK-31230
-- id: snykio:maven:org.keycloak:keycloak-services:2016-12-25
-  title: Cross-site Request Forgery (CSRF)
-  description: |
-    [`org.keycloak:keycloak-services`][1] It was discovered that JBoss
-    KeyCloak\'s soft token removal endpoint was vulnerable to Cross-site
-    Request Forgery (CSRF) attacks. A remote attacker could provide a
-    specially-crafted web page that, when visited by a user authenticated by
-    KeyCloak, could allow the attacker to remove a soft token registerd to
-    the user.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22keycloak-services%22
-    \n[`org.keycloak:keycloak-services`][1] It was discovered that JBoss
-    KeyCloak\'s soft token removal endpoint was vulnerable to Cross-site
-    Request Forgery (CSRF) attacks. A remote attacker could provide a
-    specially-crafted web page that, when visited by a user authenticated by
-    KeyCloak, could allow the attacker to remove a soft token registerd to
-    the user.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22keycloak-services%22
-  affected_package: org.keycloak:keycloak-services
-  vulnerable_versions:
-  - ">= 1.0.1 <= 1.0.1.Final"
-  - "<= 1.0-final"
-  severity: low
-  package_manager: maven
-  cve:
-  - CVE-2014-3655
-  cwe:
-  - CWE-352
-  credit:
-  - Florian Weimer
-  references:
-  - https://bugzilla.redhat.com/CVE-2014-3655
-  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGKEYCLOAK-30138
-- id: snykio:maven:org.keycloak:keycloak-services:2017-10-15
-  title: Privilege Escalation
-  description: |
-    [`org.keycloak:keycloak-services`][1] is an open Source Identity and
-    Access Management for modern Applications and Services.
-
-    Affected versions of the package are vulnerable to Privilege Escalation.
-    It was found that Keycloak oauth would permit an authenticated resource
-    to obtain an access/refresh token pair from the authentication server,
-    permitting indefinite usage in the case of permission revocation. An
-    attacker on an already compromised resource could use this flaw to grant
-    himself continued permissions and possibly conduct further attacks
-
-
-
-    [1]: https://keycloak.org
-    \n[`org.keycloak:keycloak-services`][1] is an open Source Identity and
-    Access Management for modern Applications and Services.
-
-    Affected versions of the package are vulnerable to Privilege Escalation.
-    It was found that Keycloak oauth would permit an authenticated resource
-    to obtain an access/refresh token pair from the authentication server,
-    permitting indefinite usage in the case of permission revocation. An
-    attacker on an already compromised resource could use this flaw to grant
-    himself continued permissions and possibly conduct further attacks
-
-
-
-    [1]: https://keycloak.org
-    \n[`org.keycloak:keycloak-services`][1] is an open Source Identity and
-    Access Management for modern Applications and Services.
-
-    Affected versions of the package are vulnerable to Privilege Escalation.
-    It was found that Keycloak oauth would permit an authenticated resource
-    to obtain an access/refresh token pair from the authentication server,
-    permitting indefinite usage in the case of permission revocation. An
-    attacker on an already compromised resource could use this flaw to grant
-    himself continued permissions and possibly conduct further attacks
-
-
-
-    [1]: https://keycloak.org
-  affected_package: org.keycloak:keycloak-services
-  vulnerable_versions:
-  - "< 3.3.0.Final"
-  severity: medium
-  package_manager: maven
-  cve:
-  - CVE-2017-12160
-  cwe:
-  - CWE-284
-  credit:
-  - Bart Toersche
-  references:
-  - https://nvd.nist.gov/vuln/detail/CVE-2017-12160
-  - https://github.com/keycloak/keycloak/pull/4576
-  - https://github.com/keycloak/keycloak/commit/fea4c54adc6a1fdafb725b89874c389d54b6d04a
-  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGKEYCLOAK-31564
-- id: snykio:maven:org.keycloak:keycloak-services:2017-10-17
+- id: snykio:maven:org.keycloak:keycloak-services:CVE-2014-3709
   title: Cross-site Request Forgery (CSRF)
   description: |
     [`org.keycloak:keycloak-services`][1] is an Open Source Identity and
-    Access Management for modern Applications and Services.
-
-    Affected versions of the package are vulnerable to Cross-site Request
-    Forgery (CSRF). The
-    org.keycloak.services.resources.SocialResource.callback method in JBoss
-    KeyCloak before 1.0.3.Final allows remote attackers to conduct
-    cross-site request forgery (CSRF) attacks by leveraging lack of CSRF
-    protection.
-
-
-
-    [1]: https://keycloak.org
-    \n[`org.keycloak:keycloak-services`][1] is an Open Source Identity and
-    Access Management for modern Applications and Services.
-
-    Affected versions of the package are vulnerable to Cross-site Request
-    Forgery (CSRF). The
-    org.keycloak.services.resources.SocialResource.callback method in JBoss
-    KeyCloak before 1.0.3.Final allows remote attackers to conduct
-    cross-site request forgery (CSRF) attacks by leveraging lack of CSRF
-    protection.
-
-
-
-    [1]: https://keycloak.org
-    \n[`org.keycloak:keycloak-services`][1] is an Open Source Identity and
     Access Management for modern Applications and Services.
 
     Affected versions of the package are vulnerable to Cross-site Request
@@ -597,6 +221,9 @@
   - CVE-2014-3709
   cwe:
   - CWE-352
+  disclosed_date: 2017-10-17
+  created_date: 2017-11-19
+  last_modified_date: 2017-11-19
   credit:
   - Florian Weimer
   references:
@@ -604,34 +231,10 @@
   - https://issues.jboss.org/browse/KEYCLOAK-765?_sscc=t
   - https://github.com/keycloak/keycloak/commit/bb132e1aa0b3b3a123883d0b8d0b788337df956d
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGKEYCLOAK-31586
-- id: snykio:maven:org.keycloak:keycloak-services:2017-10-18
+- id: snykio:maven:org.keycloak:keycloak-services:CVE-2017-12159
   title: Cross-site Request Forgery (CSRF)
   description: |
     [`org.keycloak:keycloak-services`][1] is an open Source Identity and
-    Access Management for modern Applications and Services.
-
-    Affected versions of the package are vulnerable to Cross-site Request
-    Forgery (CSRF). It was found that the cookie used for CSRF prevention in
-    Keycloak was not unique to each session. An attacker could use this flaw
-    to gain access to an authenticated user session, leading to possible
-    information disclosure or further attacks.
-
-
-
-    [1]: https://keycloak.org
-    \n[`org.keycloak:keycloak-services`][1] is an open Source Identity and
-    Access Management for modern Applications and Services.
-
-    Affected versions of the package are vulnerable to Cross-site Request
-    Forgery (CSRF). It was found that the cookie used for CSRF prevention in
-    Keycloak was not unique to each session. An attacker could use this flaw
-    to gain access to an authenticated user session, leading to possible
-    information disclosure or further attacks.
-
-
-
-    [1]: https://keycloak.org
-    \n[`org.keycloak:keycloak-services`][1] is an open Source Identity and
     Access Management for modern Applications and Services.
 
     Affected versions of the package are vulnerable to Cross-site Request
@@ -652,6 +255,9 @@
   - CVE-2017-12159
   cwe:
   - CWE-352
+  disclosed_date: 2017-10-18
+  created_date: 2017-11-05
+  last_modified_date: 2017-11-05
   credit:
   - Prapti Mittal
   references:
@@ -659,7 +265,42 @@
   - https://github.com/keycloak/keycloak/pull/4585
   - https://github.com/keycloak/keycloak/commit/9b75b603e3a5f5ba6deff13cbb45b070bf2d2239
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGKEYCLOAK-31565
-- id: victims:maven:org.keycloak:keycloak-services:date
+- id: snykio:maven:org.keycloak:keycloak-services:CVE-2017-12160
+  title: Privilege Escalation
+  description: |
+    [`org.keycloak:keycloak-services`][1] is an open Source Identity and
+    Access Management for modern Applications and Services.
+
+    Affected versions of the package are vulnerable to Privilege Escalation.
+    It was found that Keycloak oauth would permit an authenticated resource
+    to obtain an access/refresh token pair from the authentication server,
+    permitting indefinite usage in the case of permission revocation. An
+    attacker on an already compromised resource could use this flaw to grant
+    himself continued permissions and possibly conduct further attacks
+
+
+
+    [1]: https://keycloak.org
+  affected_package: org.keycloak:keycloak-services
+  vulnerable_versions:
+  - "< 3.3.0.Final"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2017-12160
+  cwe:
+  - CWE-284
+  disclosed_date: 2017-10-15
+  created_date: 2017-11-05
+  last_modified_date: 2017-11-05
+  credit:
+  - Bart Toersche
+  references:
+  - https://nvd.nist.gov/vuln/detail/CVE-2017-12160
+  - https://github.com/keycloak/keycloak/pull/4576
+  - https://github.com/keycloak/keycloak/commit/fea4c54adc6a1fdafb725b89874c389d54b6d04a
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGKEYCLOAK-31564
+- id: victims:maven:org.keycloak:keycloak-services:2014-3655
   title: 'JBoss KeyCloak: Soft Token deletion via CSRF'
   affected_package: org.keycloak:keycloak-services
   vulnerable_versions:
@@ -670,7 +311,8 @@
   severity: medium
   package_manager: maven
   cve:
-  - 2014-3655
+  - CVE-2014-3655
+  cvss_v2_score: 4.3
   credit:
   - Victims CVE Database
   references:

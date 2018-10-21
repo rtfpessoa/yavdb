@@ -1,25 +1,4 @@
 ---
-- id: ossindex:maven:org.drools:drools-core:2015-04-21
-  title: "[CVE-2014-8125] XML external entity (XXE) vulnerability in Drools and jBPM
-    before 6.2.0 allows r..."
-  description: XML external entity (XXE) vulnerability in Drools and jBPM before 6.2.0
-    allows remote attackers to read arbitrary files or possibly have other unspecified
-    impact via a crafted BPMN2 file.
-  affected_package: org.drools:drools-core
-  vulnerable_versions:
-  - 6.1.0
-  package_manager: maven
-  cve:
-  - CVE-2014-8125
-  credit:
-  - OSSIndex
-  references:
-  - http://rhn.redhat.com/errata/RHSA-2015-0850.html
-  - http://rhn.redhat.com/errata/RHSA-2015-0851.html
-  - https://bugzilla.redhat.com/show_bug.cgi?id=1169553
-  - https://github.com/droolsjbpm/drools/commit/c48464c3b246e6ef0d4cd0dbf67e83ccd532c6d3
-  - https://github.com/droolsjbpm/jbpm/commit/713e8073ecf45623cfc5c918c5cbf700203f46e5
-  source_url: https://ossindex.net/resource/package/7015307533/vulnerabilities
 - id: ossindex:maven:org.drools:drools-core:2017-03-10
   title: "[CVE-2010-3708] JBoss drools deserialization remote code execution"
   description: "> The serialization implementation in JBoss Drools in Red Hat JBoss
@@ -31,6 +10,9 @@
   vulnerable_versions:
   - "<=4.0.7"
   package_manager: maven
+  disclosed_date: 2017-03-10
+  created_date: 2017-03-10
+  last_modified_date: 2017-04-17
   credit:
   - OSSIndex
   references:
@@ -40,7 +22,60 @@
   - https://nvd.nist.gov/vuln/detail/CVE-2010-3708
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2010-3708
   source_url: https://ossindex.net/resource/package/7015307533/vulnerabilities
-- id: snykio:maven:org.drools:drools-core:2015-04-22
+- id: ossindex:maven:org.drools:drools-core:CVE-2014-8125
+  title: "[CVE-2014-8125] XML external entity (XXE) vulnerability in Drools and jBPM
+    before 6.2.0 allows r..."
+  description: XML external entity (XXE) vulnerability in Drools and jBPM before 6.2.0
+    allows remote attackers to read arbitrary files or possibly have other unspecified
+    impact via a crafted BPMN2 file.
+  affected_package: org.drools:drools-core
+  vulnerable_versions:
+  - 6.1.0
+  package_manager: maven
+  cve:
+  - CVE-2014-8125
+  disclosed_date: 2015-04-21
+  created_date: 2015-04-21
+  last_modified_date: 2017-03-10
+  credit:
+  - OSSIndex
+  references:
+  - http://rhn.redhat.com/errata/RHSA-2015-0850.html
+  - http://rhn.redhat.com/errata/RHSA-2015-0851.html
+  - https://bugzilla.redhat.com/show_bug.cgi?id=1169553
+  - https://github.com/droolsjbpm/drools/commit/c48464c3b246e6ef0d4cd0dbf67e83ccd532c6d3
+  - https://github.com/droolsjbpm/jbpm/commit/713e8073ecf45623cfc5c918c5cbf700203f46e5
+  source_url: https://ossindex.net/resource/package/7015307533/vulnerabilities
+- id: snykio:maven:org.drools:drools-core:CVE-2010-3708
+  title: Arbitrary Code Execution
+  description: |
+    [`org.drools:drools-core`][1] The serialization implementation in JBoss
+    Drools in Red Hat JBoss Enterprise Application Platform (aka JBoss EAP
+    or JBEAP) 4.3 before 4.3.0.CP09 and JBoss Enterprise SOA Platform 4.2
+    and 4.3 supports the embedding of class files, which allows remote
+    attackers to execute arbitrary code via a crafted static initializer.
+
+
+
+    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22drools-core%22
+  affected_package: org.drools:drools-core
+  vulnerable_versions:
+  - ">= 4.0.7"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2010-3708
+  cwe:
+  - CWE-20
+  disclosed_date: 2016-12-25
+  created_date: 2016-12-25
+  last_modified_date: 2016-12-25
+  credit:
+  - Unknown
+  references:
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2010-3708
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGDROOLS-30089
+- id: snykio:maven:org.drools:drools-core:CVE-2014-8125
   title: XML External Entity (XXE) Injection
   description: |+
     [`org.drools:drools-core`][1] XML external entity (XXE) vulnerability in
@@ -51,259 +86,6 @@
 
 
     [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22drools-core%22
-    \n[`org.drools:drools-core`][1] XML external entity (XXE) vulnerability in
-    Drools and jBPM before 6.2.0 allows remote attackers to read arbitrary
-    files or possibly have other unspecified impact via a crafted BPMN2
-    file.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22drools-core%22
-    \nXXE Injection is a type of attack against an application that parses XML
-    input. XML is a markup language that defines a set of rules for encoding
-    documents in a format that is both human-readable and machine-readable.
-    By default, many XML processors allow specification of an external
-    entity, a URI that is dereferenced and evaluated during XML processing.
-    When an XML document is being parsed, the parser can make a request and
-    include the content at the specified URI inside of the XML document.
-
-    Attacks can include disclosing local files, which may contain sensitive
-    data such as passwords or private user data, using file: schemes or
-    relative paths in the system identifier.
-
-    For example, below is a sample XML document, containing an XML element-
-    username.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-           <username>John</username>
-        </xml>
-
-    An external XML entity - `xxe`, is defined using a system identifier and
-    present within a DOCTYPE header. These entities can access local or
-    remote content. For example the below code contains an external XML
-    entity that would fetch the content of `/etc/passwd` and display it to
-    the user rendered by `username`.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-        <!DOCTYPE foo [
-           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
-           <username>&xxe;</username>
-        </xml>
-
-    Other XXE Injection attacks can access local resources that may not stop
-    returning data, possibly impacting application availability and leading
-    to Denial of Service.
-
-    \nXXE Injection is a type of attack against an application that parses XML
-    input. XML is a markup language that defines a set of rules for encoding
-    documents in a format that is both human-readable and machine-readable.
-    By default, many XML processors allow specification of an external
-    entity, a URI that is dereferenced and evaluated during XML processing.
-    When an XML document is being parsed, the parser can make a request and
-    include the content at the specified URI inside of the XML document.
-
-    Attacks can include disclosing local files, which may contain sensitive
-    data such as passwords or private user data, using file: schemes or
-    relative paths in the system identifier.
-
-    For example, below is a sample XML document, containing an XML element-
-    username.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-           <username>John</username>
-        </xml>
-
-    An external XML entity - `xxe`, is defined using a system identifier and
-    present within a DOCTYPE header. These entities can access local or
-    remote content. For example the below code contains an external XML
-    entity that would fetch the content of `/etc/passwd` and display it to
-    the user rendered by `username`.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-        <!DOCTYPE foo [
-           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
-           <username>&xxe;</username>
-        </xml>
-
-    Other XXE Injection attacks can access local resources that may not stop
-    returning data, possibly impacting application availability and leading
-    to Denial of Service.
-
-    \nXXE Injection is a type of attack against an application that parses XML
-    input. XML is a markup language that defines a set of rules for encoding
-    documents in a format that is both human-readable and machine-readable.
-    By default, many XML processors allow specification of an external
-    entity, a URI that is dereferenced and evaluated during XML processing.
-    When an XML document is being parsed, the parser can make a request and
-    include the content at the specified URI inside of the XML document.
-
-    Attacks can include disclosing local files, which may contain sensitive
-    data such as passwords or private user data, using file: schemes or
-    relative paths in the system identifier.
-
-    For example, below is a sample XML document, containing an XML element-
-    username.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-           <username>John</username>
-        </xml>
-
-    An external XML entity - `xxe`, is defined using a system identifier and
-    present within a DOCTYPE header. These entities can access local or
-    remote content. For example the below code contains an external XML
-    entity that would fetch the content of `/etc/passwd` and display it to
-    the user rendered by `username`.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-        <!DOCTYPE foo [
-           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
-           <username>&xxe;</username>
-        </xml>
-
-    Other XXE Injection attacks can access local resources that may not stop
-    returning data, possibly impacting application availability and leading
-    to Denial of Service.
-
-    \nXXE Injection is a type of attack against an application that parses XML
-    input. XML is a markup language that defines a set of rules for encoding
-    documents in a format that is both human-readable and machine-readable.
-    By default, many XML processors allow specification of an external
-    entity, a URI that is dereferenced and evaluated during XML processing.
-    When an XML document is being parsed, the parser can make a request and
-    include the content at the specified URI inside of the XML document.
-
-    Attacks can include disclosing local files, which may contain sensitive
-    data such as passwords or private user data, using file: schemes or
-    relative paths in the system identifier.
-
-    For example, below is a sample XML document, containing an XML element-
-    username.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-           <username>John</username>
-        </xml>
-
-    An external XML entity - `xxe`, is defined using a system identifier and
-    present within a DOCTYPE header. These entities can access local or
-    remote content. For example the below code contains an external XML
-    entity that would fetch the content of `/etc/passwd` and display it to
-    the user rendered by `username`.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-        <!DOCTYPE foo [
-           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
-           <username>&xxe;</username>
-        </xml>
-
-    Other XXE Injection attacks can access local resources that may not stop
-    returning data, possibly impacting application availability and leading
-    to Denial of Service.
-
-    \nXXE Injection is a type of attack against an application that parses XML
-    input. XML is a markup language that defines a set of rules for encoding
-    documents in a format that is both human-readable and machine-readable.
-    By default, many XML processors allow specification of an external
-    entity, a URI that is dereferenced and evaluated during XML processing.
-    When an XML document is being parsed, the parser can make a request and
-    include the content at the specified URI inside of the XML document.
-
-    Attacks can include disclosing local files, which may contain sensitive
-    data such as passwords or private user data, using file: schemes or
-    relative paths in the system identifier.
-
-    For example, below is a sample XML document, containing an XML element-
-    username.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-           <username>John</username>
-        </xml>
-
-    An external XML entity - `xxe`, is defined using a system identifier and
-    present within a DOCTYPE header. These entities can access local or
-    remote content. For example the below code contains an external XML
-    entity that would fetch the content of `/etc/passwd` and display it to
-    the user rendered by `username`.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-        <!DOCTYPE foo [
-           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
-           <username>&xxe;</username>
-        </xml>
-
-    Other XXE Injection attacks can access local resources that may not stop
-    returning data, possibly impacting application availability and leading
-    to Denial of Service.
-
-    \nXXE Injection is a type of attack against an application that parses XML
-    input. XML is a markup language that defines a set of rules for encoding
-    documents in a format that is both human-readable and machine-readable.
-    By default, many XML processors allow specification of an external
-    entity, a URI that is dereferenced and evaluated during XML processing.
-    When an XML document is being parsed, the parser can make a request and
-    include the content at the specified URI inside of the XML document.
-
-    Attacks can include disclosing local files, which may contain sensitive
-    data such as passwords or private user data, using file: schemes or
-    relative paths in the system identifier.
-
-    For example, below is a sample XML document, containing an XML element-
-    username.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-           <username>John</username>
-        </xml>
-
-    An external XML entity - `xxe`, is defined using a system identifier and
-    present within a DOCTYPE header. These entities can access local or
-    remote content. For example the below code contains an external XML
-    entity that would fetch the content of `/etc/passwd` and display it to
-    the user rendered by `username`.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-        <!DOCTYPE foo [
-           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
-           <username>&xxe;</username>
-        </xml>
-
-    Other XXE Injection attacks can access local resources that may not stop
-    returning data, possibly impacting application availability and leading
-    to Denial of Service.
-
-    \nXXE Injection is a type of attack against an application that parses XML
-    input. XML is a markup language that defines a set of rules for encoding
-    documents in a format that is both human-readable and machine-readable.
-    By default, many XML processors allow specification of an external
-    entity, a URI that is dereferenced and evaluated during XML processing.
-    When an XML document is being parsed, the parser can make a request and
-    include the content at the specified URI inside of the XML document.
-
-    Attacks can include disclosing local files, which may contain sensitive
-    data such as passwords or private user data, using file: schemes or
-    relative paths in the system identifier.
-
-    For example, below is a sample XML document, containing an XML element-
-    username.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-           <username>John</username>
-        </xml>
-
-    An external XML entity - `xxe`, is defined using a system identifier and
-    present within a DOCTYPE header. These entities can access local or
-    remote content. For example the below code contains an external XML
-    entity that would fetch the content of `/etc/passwd` and display it to
-    the user rendered by `username`.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-        <!DOCTYPE foo [
-           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
-           <username>&xxe;</username>
-        </xml>
-
-    Other XXE Injection attacks can access local resources that may not stop
-    returning data, possibly impacting application availability and leading
-    to Denial of Service.
-
     \nXXE Injection is a type of attack against an application that parses XML
     input. XML is a markup language that defines a set of rules for encoding
     documents in a format that is both human-readable and machine-readable.
@@ -348,47 +130,15 @@
   - CVE-2014-8125
   cwe:
   - CWE-611
+  disclosed_date: 2015-04-22
+  created_date: 2015-04-22
+  last_modified_date: 2015-04-22
   credit:
   - Unknown
   references:
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-8125
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGDROOLS-31091
-- id: snykio:maven:org.drools:drools-core:2016-12-25
-  title: Arbitrary Code Execution
-  description: |
-    [`org.drools:drools-core`][1] The serialization implementation in JBoss
-    Drools in Red Hat JBoss Enterprise Application Platform (aka JBoss EAP
-    or JBEAP) 4.3 before 4.3.0.CP09 and JBoss Enterprise SOA Platform 4.2
-    and 4.3 supports the embedding of class files, which allows remote
-    attackers to execute arbitrary code via a crafted static initializer.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22drools-core%22
-    \n[`org.drools:drools-core`][1] The serialization implementation in JBoss
-    Drools in Red Hat JBoss Enterprise Application Platform (aka JBoss EAP
-    or JBEAP) 4.3 before 4.3.0.CP09 and JBoss Enterprise SOA Platform 4.2
-    and 4.3 supports the embedding of class files, which allows remote
-    attackers to execute arbitrary code via a crafted static initializer.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22drools-core%22
-  affected_package: org.drools:drools-core
-  vulnerable_versions:
-  - ">= 4.0.7"
-  severity: high
-  package_manager: maven
-  cve:
-  - CVE-2010-3708
-  cwe:
-  - CWE-20
-  credit:
-  - Unknown
-  references:
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2010-3708
-  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGDROOLS-30089
-- id: victims:maven:org.drools:drools-core:date
+- id: victims:maven:org.drools:drools-core:2010-3708
   title: JBoss drools deserialization remote code execution
   description: 'The drools serialization format allows to embed class files. Upon  deserialization
     those are loaded by the VM that runs the drools engine. If  that (attacker-controlled)
@@ -401,7 +151,8 @@
   severity: high
   package_manager: maven
   cve:
-  - 2010-3708
+  - CVE-2010-3708
+  cvss_v2_score: 7.5
   credit:
   - Victims CVE Database
   source_url: https://github.com/victims/victims-cve-db/blob/master/database/java/2010/3708.yaml

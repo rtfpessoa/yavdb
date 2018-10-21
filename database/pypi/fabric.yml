@@ -1,16 +1,35 @@
 ---
-- id: snykio:pypi:fabric:2011-06-06
-  title: Overwritable Files
+- id: snykio:pypi:fabric:40623
+  title: Information Exposure
   description: |
     [`fabric`][1] is a Fabric is a simple, Pythonic tool for remote
-    execution and deployment. Fabric before 1.1.0 allows local users to
-    overwrite arbitrary files via a symlink attack on (1) a /tmp/fab.tar
-    file or (2) certain other files in the top level of /tmp/.
+    execution and deployment. Fabric is vulnerable to information
+    disclosure. When uploading templates using the `upload_template()`
+    function, if the intended destination is invalid, the file ends up
+    world-readable in the home folder.
 
 
 
     [1]: https://pypi.python.org/pypi/fabric
-    \n[`fabric`][1] is a Fabric is a simple, Pythonic tool for remote
+  affected_package: fabric
+  vulnerable_versions:
+  - ">= 0.9.0 <= 1.13.1"
+  severity: low
+  package_manager: pypi
+  cwe:
+  - CWE-200
+  disclosed_date: 2015-06-11
+  created_date: 2015-06-11
+  last_modified_date: 2015-06-11
+  credit:
+  - Andrei Sura
+  references:
+  - https://github.com/fabric/fabric/issues/1341
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-FABRIC-40623
+- id: snykio:pypi:fabric:CVE-2011-2185
+  title: Overwritable Files
+  description: |
+    [`fabric`][1] is a Fabric is a simple, Pythonic tool for remote
     execution and deployment. Fabric before 1.1.0 allows local users to
     overwrite arbitrary files via a symlink attack on (1) a /tmp/fab.tar
     file or (2) certain other files in the top level of /tmp/.
@@ -27,6 +46,9 @@
   - CVE-2011-2185
   cwe:
   - CWE-59
+  disclosed_date: 2011-06-06
+  created_date: 2011-06-06
+  last_modified_date: 2011-06-06
   credit:
   - Unknown
   references:
@@ -35,36 +57,3 @@
   - https://bugzilla.redhat.com/show_bug.cgi?id=710462
   - http://www.openwall.com/lists/oss-security/2011/06/06/12
   source_url: https://snyk.io/vuln/SNYK-PYTHON-FABRIC-40074
-- id: snykio:pypi:fabric:2015-06-11
-  title: Information Exposure
-  description: |
-    [`fabric`][1] is a Fabric is a simple, Pythonic tool for remote
-    execution and deployment. Fabric is vulnerable to information
-    disclosure. When uploading templates using the `upload_template()`
-    function, if the intended destination is invalid, the file ends up
-    world-readable in the home folder.
-
-
-
-    [1]: https://pypi.python.org/pypi/fabric
-    \n[`fabric`][1] is a Fabric is a simple, Pythonic tool for remote
-    execution and deployment. Fabric is vulnerable to information
-    disclosure. When uploading templates using the `upload_template()`
-    function, if the intended destination is invalid, the file ends up
-    world-readable in the home folder.
-
-
-
-    [1]: https://pypi.python.org/pypi/fabric
-  affected_package: fabric
-  vulnerable_versions:
-  - ">= 0.9.0 <= 1.13.1"
-  severity: low
-  package_manager: pypi
-  cwe:
-  - CWE-200
-  credit:
-  - Andrei Sura
-  references:
-  - https://github.com/fabric/fabric/issues/1341
-  source_url: https://snyk.io/vuln/SNYK-PYTHON-FABRIC-40623

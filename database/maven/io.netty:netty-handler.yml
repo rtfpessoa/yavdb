@@ -1,5 +1,5 @@
 ---
-- id: ossindex:maven:io.netty:netty-handler:2017-04-13
+- id: ossindex:maven:io.netty:netty-handler:CVE-2016-4970
   title: "[CVE-2016-4970] handler/ssl/OpenSslEngine.java in Netty 4.0.x before 4.0.37.Final
     and 4.1.x befo..."
   description: handler/ssl/OpenSslEngine.java in Netty 4.0.x before 4.0.37.Final and
@@ -12,6 +12,9 @@
   package_manager: maven
   cve:
   - CVE-2016-4970
+  disclosed_date: 2017-04-13
+  created_date: 2017-04-13
+  last_modified_date: 2017-06-02
   credit:
   - OSSIndex
   references:
@@ -25,7 +28,69 @@
   - https://github.com/netty/netty/pull/5364
   - https://wiki.opendaylight.org/view/Security_Advisories
   source_url: https://ossindex.net/resource/package/7075913906/vulnerabilities
-- id: snykio:maven:io.netty:netty-handler:2016-06-07
+- id: snykio:maven:io.netty:netty-handler:31515
+  title: Insecure Defaults
+  description: |
+    [`io.netty:netty`][1] is a NIO client server framework which enables
+    quick and easy development of network applications such as protocol
+    servers and clients.
+
+    Affected version of this package did not properly ensure that the
+    certificate is actually associated with that host.
+
+
+
+    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22netty%22
+  affected_package: io.netty:netty-handler
+  vulnerable_versions:
+  - "< 4.0.45.Final"
+  - ">= 4.1.0-beta1 < 4.1.9.Final"
+  severity: medium
+  package_manager: maven
+  cwe:
+  - CWE-297
+  - CWE-453
+  disclosed_date: 2017-02-16
+  created_date: 2017-09-20
+  last_modified_date: 2017-09-20
+  credit:
+  - Unknown
+  references:
+  - https://github.com/netty/netty/commit/d8e6fbb9c3656663f41797a15f38bb25fdcab834
+  source_url: https://snyk.io/vuln/SNYK-JAVA-IONETTY-31515
+- id: snykio:maven:io.netty:netty-handler:31518
+  title: Man-in-the-Middle (MitM)
+  description: |
+    [`io.netty:netty`][1] is a NIO client server framework which enables
+    quick and easy development of network applications such as protocol
+    servers and clients.
+
+    Affected versions of this package are vulnerable to Man-in-the-Middle
+    (MitM) attacks. The SSLv3 protocol uses nondeterministic CBC padding,
+    which makes it easier for Man-in-the-Middle (MitM) attackers to obtain
+    cleartext data via a padding-oracle attack. This is also known as the
+    POODLE vulnerability.
+
+
+
+    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22netty%22
+  affected_package: io.netty:netty-handler
+  vulnerable_versions:
+  - "< 3.9.6.Final"
+  severity: low
+  package_manager: maven
+  cwe:
+  - CWE-300
+  disclosed_date: 2017-02-16
+  created_date: 2017-09-20
+  last_modified_date: 2017-09-20
+  credit:
+  - Unknown
+  references:
+  - https://github.com/netty/netty/issues/3031
+  - https://github.com/netty/netty/commit/a1af35313cc8414109e7a411bb2401ae31046289
+  source_url: https://snyk.io/vuln/SNYK-JAVA-IONETTY-31518
+- id: snykio:maven:io.netty:netty-handler:CVE-2016-4970
   title: Denial of Service (DoS)
   description: |+
     [`io.netty:netty-handler`][1] Affected versions of this package are
@@ -38,182 +103,6 @@
 
 
     [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22netty-handler%22
-    \n[`io.netty:netty-handler`][1] Affected versions of this package are
-    vulnerable to infinite loop Denial of Service (DoS) attacks via a flaw
-    in Netty\'s OpenSslEngine handling of renegotiation.
-
-    **Note:** Netty is only vulnerable if renegotiation is enabled (It is a
-    default setting).
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22netty-handler%22
-    \n[`io.netty:netty-handler`][1] Affected versions of this package are
-    vulnerable to infinite loop Denial of Service (DoS) attacks via a flaw
-    in Netty\'s OpenSslEngine handling of renegotiation.
-
-    **Note:** Netty is only vulnerable if renegotiation is enabled (It is a
-    default setting).
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22netty-handler%22
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
     \nDenial of Service (DoS) describes a family of attacks, all aimed at
     making a system inaccessible to its intended and legitimate users.
 
@@ -250,6 +139,9 @@
   - CVE-2016-4970
   cwe:
   - CWE-835
+  disclosed_date: 2016-06-07
+  created_date: 2016-06-07
+  last_modified_date: 2016-06-07
   credit:
   - Unknown
   references:
@@ -260,105 +152,3 @@
   - http://netty.io/news/2016/06/07/4-1-1-Final.html
   - https://github.com/netty/netty/commit/9e2c400f89c5badc39919f811179d3d42ac5257c
   source_url: https://snyk.io/vuln/SNYK-JAVA-IONETTY-30433
-- id: snykio:maven:io.netty:netty-handler:2017-02-16
-  title: Insecure Defaults
-  description: |
-    [`io.netty:netty`][1] is a NIO client server framework which enables
-    quick and easy development of network applications such as protocol
-    servers and clients.
-
-    Affected version of this package did not properly ensure that the
-    certificate is actually associated with that host.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22netty%22
-    \n[`io.netty:netty`][1] is a NIO client server framework which enables
-    quick and easy development of network applications such as protocol
-    servers and clients.
-
-    Affected version of this package did not properly ensure that the
-    certificate is actually associated with that host.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22netty%22
-    \n[`io.netty:netty`][1] is a NIO client server framework which enables
-    quick and easy development of network applications such as protocol
-    servers and clients.
-
-    Affected version of this package did not properly ensure that the
-    certificate is actually associated with that host.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22netty%22
-  affected_package: io.netty:netty-handler
-  vulnerable_versions:
-  - "< 4.0.45.Final"
-  - ">= 4.1.0-beta1 < 4.1.9.Final"
-  severity: medium
-  package_manager: maven
-  cwe:
-  - CWE-297
-  - CWE-453
-  credit:
-  - Unknown
-  references:
-  - https://github.com/netty/netty/commit/d8e6fbb9c3656663f41797a15f38bb25fdcab834
-  source_url: https://snyk.io/vuln/SNYK-JAVA-IONETTY-31515
-- id: snykio:maven:io.netty:netty-handler:2017-02-16
-  title: Man-in-the-Middle (MitM)
-  description: |
-    [`io.netty:netty`][1] is a NIO client server framework which enables
-    quick and easy development of network applications such as protocol
-    servers and clients.
-
-    Affected versions of this package are vulnerable to Man-in-the-Middle
-    (MitM) attacks. The SSLv3 protocol uses nondeterministic CBC padding,
-    which makes it easier for Man-in-the-Middle (MitM) attackers to obtain
-    cleartext data via a padding-oracle attack. This is also known as the
-    POODLE vulnerability.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22netty%22
-    \n[`io.netty:netty`][1] is a NIO client server framework which enables
-    quick and easy development of network applications such as protocol
-    servers and clients.
-
-    Affected versions of this package are vulnerable to Man-in-the-Middle
-    (MitM) attacks. The SSLv3 protocol uses nondeterministic CBC padding,
-    which makes it easier for Man-in-the-Middle (MitM) attackers to obtain
-    cleartext data via a padding-oracle attack. This is also known as the
-    POODLE vulnerability.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22netty%22
-    \n[`io.netty:netty`][1] is a NIO client server framework which enables
-    quick and easy development of network applications such as protocol
-    servers and clients.
-
-    Affected versions of this package are vulnerable to Man-in-the-Middle
-    (MitM) attacks. The SSLv3 protocol uses nondeterministic CBC padding,
-    which makes it easier for Man-in-the-Middle (MitM) attackers to obtain
-    cleartext data via a padding-oracle attack. This is also known as the
-    POODLE vulnerability.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22netty%22
-  affected_package: io.netty:netty-handler
-  vulnerable_versions:
-  - "< 3.9.6.Final"
-  severity: low
-  package_manager: maven
-  cwe:
-  - CWE-300
-  credit:
-  - Unknown
-  references:
-  - https://github.com/netty/netty/issues/3031
-  - https://github.com/netty/netty/commit/a1af35313cc8414109e7a411bb2401ae31046289
-  source_url: https://snyk.io/vuln/SNYK-JAVA-IONETTY-31518

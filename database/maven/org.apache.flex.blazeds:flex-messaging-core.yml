@@ -1,21 +1,5 @@
 ---
 - id: ossindex:maven:org.apache.flex.blazeds:flex-messaging-core:2017-07-31
-  title: Remote Code Execution Vulnerability
-  description: "> Apache Flex BlazeDS is prone to remote code-execution vulnerability.
-    \n> \n> Successfully exploiting this issue allows attackers to execute arbitrary
-    code in the context of the affected application. Failed exploits will result in
-    denial-of-service conditions. \n> \n> -- [securityfocus.com](http://www.securityfocus.com/bid/97383)"
-  affected_package: org.apache.flex.blazeds:flex-messaging-core
-  vulnerable_versions:
-  - ">=4.0.0 <4.7.2"
-  - ">=4.6.0 <=4.6.0.23207"
-  package_manager: maven
-  credit:
-  - OSSIndex
-  references:
-  - http://www.securityfocus.com/bid/97383
-  source_url: https://ossindex.net/resource/package/7103354225/vulnerabilities
-- id: ossindex:maven:org.apache.flex.blazeds:flex-messaging-core:2017-07-31
   title: 'XML External Entity (XXE) '
   description: "> Adobe has been notified of an XML External Entity (XXE) vulnerability
     (CVE-2015-3269) in BlazeDS. To fix the vulnerability retrospectively in BlazeDS
@@ -28,13 +12,16 @@
   - ">= 4.6.2 <4.6.2.354169"
   - ">=4.7 < 4.7.0.354169"
   package_manager: maven
+  disclosed_date: 2017-07-31
+  created_date: 2017-07-31
+  last_modified_date: 2017-07-31
   credit:
   - OSSIndex
   references:
   - https://helpx.adobe.com/livecycle/kb/xxe-vulnerability-blazeDS.html
   - https://nvd.nist.gov/vuln/detail/CVE-2015-3269
   source_url: https://ossindex.net/resource/package/7103354225/vulnerabilities
-- id: snykio:maven:org.apache.flex.blazeds:flex-messaging-core:2015-08-19
+- id: snykio:maven:org.apache.flex.blazeds:flex-messaging-core:CVE-2015-3269
   title: XML External Entity (XXE) Injection
   description: |+
     [`org.apache.flex.blazeds:flex-messaging-core`][1] is an application
@@ -57,291 +44,6 @@
 
 
     [1]: https://github.com/apache/flex-blazeds
-    \n[`org.apache.flex.blazeds:flex-messaging-core`][1] is an application
-    development framework for easily building Flash-based applications for
-    mobile devices, web browsers, and desktops.
-
-    Affected versions of this package are vulnerable to XML External Entity
-    (XXE) Injection. A remote attacker could read arbitrary files via an AMF
-    message containing an XML external entity declaration in conjunction
-    with an entity reference. An AMF message (Action Message Format) is a
-    binary format used to serialize object graphs such as ActionScript
-    objects and XML. The `readBody` method is used to parse the body of the
-    AMF message,which in turn deserializes the message. Under certain
-    conditions, the body is sent to be parsed in the `readXml()` method as a
-    UTF string. The `xml` string is then used to build a Document, via the
-    `DocumentBuilder`, by using the `stringToDocument` method. The
-    `DocumentBuilder` allows external entities by default, resulting in the
-    possible XML External Entity (XXE) injection.
-
-
-
-    [1]: https://github.com/apache/flex-blazeds
-    \n[`org.apache.flex.blazeds:flex-messaging-core`][1] is an application
-    development framework for easily building Flash-based applications for
-    mobile devices, web browsers, and desktops.
-
-    Affected versions of this package are vulnerable to XML External Entity
-    (XXE) Injection. A remote attacker could read arbitrary files via an AMF
-    message containing an XML external entity declaration in conjunction
-    with an entity reference. An AMF message (Action Message Format) is a
-    binary format used to serialize object graphs such as ActionScript
-    objects and XML. The `readBody` method is used to parse the body of the
-    AMF message,which in turn deserializes the message. Under certain
-    conditions, the body is sent to be parsed in the `readXml()` method as a
-    UTF string. The `xml` string is then used to build a Document, via the
-    `DocumentBuilder`, by using the `stringToDocument` method. The
-    `DocumentBuilder` allows external entities by default, resulting in the
-    possible XML External Entity (XXE) injection.
-
-
-
-    [1]: https://github.com/apache/flex-blazeds
-    \nXXE Injection is a type of attack against an application that parses XML
-    input. XML is a markup language that defines a set of rules for encoding
-    documents in a format that is both human-readable and machine-readable.
-    By default, many XML processors allow specification of an external
-    entity, a URI that is dereferenced and evaluated during XML processing.
-    When an XML document is being parsed, the parser can make a request and
-    include the content at the specified URI inside of the XML document.
-
-    Attacks can include disclosing local files, which may contain sensitive
-    data such as passwords or private user data, using file: schemes or
-    relative paths in the system identifier.
-
-    For example, below is a sample XML document, containing an XML element-
-    username.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-           <username>John</username>
-        </xml>
-
-    An external XML entity - `xxe`, is defined using a system identifier and
-    present within a DOCTYPE header. These entities can access local or
-    remote content. For example the below code contains an external XML
-    entity that would fetch the content of `/etc/passwd` and display it to
-    the user rendered by `username`.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-        <!DOCTYPE foo [
-           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
-           <username>&xxe;</username>
-        </xml>
-
-    Other XXE Injection attacks can access local resources that may not stop
-    returning data, possibly impacting application availability and leading
-    to Denial of Service.
-
-    \nXXE Injection is a type of attack against an application that parses XML
-    input. XML is a markup language that defines a set of rules for encoding
-    documents in a format that is both human-readable and machine-readable.
-    By default, many XML processors allow specification of an external
-    entity, a URI that is dereferenced and evaluated during XML processing.
-    When an XML document is being parsed, the parser can make a request and
-    include the content at the specified URI inside of the XML document.
-
-    Attacks can include disclosing local files, which may contain sensitive
-    data such as passwords or private user data, using file: schemes or
-    relative paths in the system identifier.
-
-    For example, below is a sample XML document, containing an XML element-
-    username.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-           <username>John</username>
-        </xml>
-
-    An external XML entity - `xxe`, is defined using a system identifier and
-    present within a DOCTYPE header. These entities can access local or
-    remote content. For example the below code contains an external XML
-    entity that would fetch the content of `/etc/passwd` and display it to
-    the user rendered by `username`.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-        <!DOCTYPE foo [
-           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
-           <username>&xxe;</username>
-        </xml>
-
-    Other XXE Injection attacks can access local resources that may not stop
-    returning data, possibly impacting application availability and leading
-    to Denial of Service.
-
-    \nXXE Injection is a type of attack against an application that parses XML
-    input. XML is a markup language that defines a set of rules for encoding
-    documents in a format that is both human-readable and machine-readable.
-    By default, many XML processors allow specification of an external
-    entity, a URI that is dereferenced and evaluated during XML processing.
-    When an XML document is being parsed, the parser can make a request and
-    include the content at the specified URI inside of the XML document.
-
-    Attacks can include disclosing local files, which may contain sensitive
-    data such as passwords or private user data, using file: schemes or
-    relative paths in the system identifier.
-
-    For example, below is a sample XML document, containing an XML element-
-    username.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-           <username>John</username>
-        </xml>
-
-    An external XML entity - `xxe`, is defined using a system identifier and
-    present within a DOCTYPE header. These entities can access local or
-    remote content. For example the below code contains an external XML
-    entity that would fetch the content of `/etc/passwd` and display it to
-    the user rendered by `username`.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-        <!DOCTYPE foo [
-           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
-           <username>&xxe;</username>
-        </xml>
-
-    Other XXE Injection attacks can access local resources that may not stop
-    returning data, possibly impacting application availability and leading
-    to Denial of Service.
-
-    \nXXE Injection is a type of attack against an application that parses XML
-    input. XML is a markup language that defines a set of rules for encoding
-    documents in a format that is both human-readable and machine-readable.
-    By default, many XML processors allow specification of an external
-    entity, a URI that is dereferenced and evaluated during XML processing.
-    When an XML document is being parsed, the parser can make a request and
-    include the content at the specified URI inside of the XML document.
-
-    Attacks can include disclosing local files, which may contain sensitive
-    data such as passwords or private user data, using file: schemes or
-    relative paths in the system identifier.
-
-    For example, below is a sample XML document, containing an XML element-
-    username.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-           <username>John</username>
-        </xml>
-
-    An external XML entity - `xxe`, is defined using a system identifier and
-    present within a DOCTYPE header. These entities can access local or
-    remote content. For example the below code contains an external XML
-    entity that would fetch the content of `/etc/passwd` and display it to
-    the user rendered by `username`.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-        <!DOCTYPE foo [
-           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
-           <username>&xxe;</username>
-        </xml>
-
-    Other XXE Injection attacks can access local resources that may not stop
-    returning data, possibly impacting application availability and leading
-    to Denial of Service.
-
-    \nXXE Injection is a type of attack against an application that parses XML
-    input. XML is a markup language that defines a set of rules for encoding
-    documents in a format that is both human-readable and machine-readable.
-    By default, many XML processors allow specification of an external
-    entity, a URI that is dereferenced and evaluated during XML processing.
-    When an XML document is being parsed, the parser can make a request and
-    include the content at the specified URI inside of the XML document.
-
-    Attacks can include disclosing local files, which may contain sensitive
-    data such as passwords or private user data, using file: schemes or
-    relative paths in the system identifier.
-
-    For example, below is a sample XML document, containing an XML element-
-    username.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-           <username>John</username>
-        </xml>
-
-    An external XML entity - `xxe`, is defined using a system identifier and
-    present within a DOCTYPE header. These entities can access local or
-    remote content. For example the below code contains an external XML
-    entity that would fetch the content of `/etc/passwd` and display it to
-    the user rendered by `username`.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-        <!DOCTYPE foo [
-           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
-           <username>&xxe;</username>
-        </xml>
-
-    Other XXE Injection attacks can access local resources that may not stop
-    returning data, possibly impacting application availability and leading
-    to Denial of Service.
-
-    \nXXE Injection is a type of attack against an application that parses XML
-    input. XML is a markup language that defines a set of rules for encoding
-    documents in a format that is both human-readable and machine-readable.
-    By default, many XML processors allow specification of an external
-    entity, a URI that is dereferenced and evaluated during XML processing.
-    When an XML document is being parsed, the parser can make a request and
-    include the content at the specified URI inside of the XML document.
-
-    Attacks can include disclosing local files, which may contain sensitive
-    data such as passwords or private user data, using file: schemes or
-    relative paths in the system identifier.
-
-    For example, below is a sample XML document, containing an XML element-
-    username.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-           <username>John</username>
-        </xml>
-
-    An external XML entity - `xxe`, is defined using a system identifier and
-    present within a DOCTYPE header. These entities can access local or
-    remote content. For example the below code contains an external XML
-    entity that would fetch the content of `/etc/passwd` and display it to
-    the user rendered by `username`.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-        <!DOCTYPE foo [
-           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
-           <username>&xxe;</username>
-        </xml>
-
-    Other XXE Injection attacks can access local resources that may not stop
-    returning data, possibly impacting application availability and leading
-    to Denial of Service.
-
-    \nXXE Injection is a type of attack against an application that parses XML
-    input. XML is a markup language that defines a set of rules for encoding
-    documents in a format that is both human-readable and machine-readable.
-    By default, many XML processors allow specification of an external
-    entity, a URI that is dereferenced and evaluated during XML processing.
-    When an XML document is being parsed, the parser can make a request and
-    include the content at the specified URI inside of the XML document.
-
-    Attacks can include disclosing local files, which may contain sensitive
-    data such as passwords or private user data, using file: schemes or
-    relative paths in the system identifier.
-
-    For example, below is a sample XML document, containing an XML element-
-    username.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-           <username>John</username>
-        </xml>
-
-    An external XML entity - `xxe`, is defined using a system identifier and
-    present within a DOCTYPE header. These entities can access local or
-    remote content. For example the below code contains an external XML
-    entity that would fetch the content of `/etc/passwd` and display it to
-    the user rendered by `username`.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-        <!DOCTYPE foo [
-           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
-           <username>&xxe;</username>
-        </xml>
-
-    Other XXE Injection attacks can access local resources that may not stop
-    returning data, possibly impacting application availability and leading
-    to Denial of Service.
-
     \nXXE Injection is a type of attack against an application that parses XML
     input. XML is a markup language that defines a set of rules for encoding
     documents in a format that is both human-readable and machine-readable.
@@ -386,27 +88,19 @@
   - CVE-2015-3269
   cwe:
   - CWE-200
+  disclosed_date: 2015-08-19
+  created_date: 2015-08-19
+  last_modified_date: 2015-08-19
   credit:
   - Matthias Kaiser
   references:
   - http://codewhitesec.blogspot.co.il/2015/08/cve-2015-3269-apache-flex-blazeds-xxe.html
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-3269
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEFLEXBLAZEDS-30606
-- id: snykio:maven:org.apache.flex.blazeds:flex-messaging-core:2015-11-24
+- id: snykio:maven:org.apache.flex.blazeds:flex-messaging-core:CVE-2015-5255
   title: Improper Input Validation
   description: |
     [`org.apache.flex.blazeds:flex-messaging-core`][1] Adobe BlazeDS, as
-    used in ColdFusion 10 before Update 18 and 11 before Update 7 and
-    LiveCycle Data Services 3.0.x before 3.0.0.354175, 3.1.x before
-    3.1.0.354180, 4.5.x before 4.5.1.354177, 4.6.2.x before 4.6.2.354178,
-    and 4.7.x before 4.7.0.354178, allows remote attackers to send HTTP
-    traffic to intranet servers via a crafted XML document, related to a
-    Server-Side Request Forgery (SSRF) issue.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22flex-messaging-core%22
-    \n[`org.apache.flex.blazeds:flex-messaging-core`][1] Adobe BlazeDS, as
     used in ColdFusion 10 before Update 18 and 11 before Update 7 and
     LiveCycle Data Services 3.0.x before 3.0.0.354175, 3.1.x before
     3.1.0.354180, 4.5.x before 4.5.1.354177, 4.6.2.x before 4.6.2.354178,
@@ -426,24 +120,18 @@
   - CVE-2015-5255
   cwe:
   - CWE-20
+  disclosed_date: 2015-11-24
+  created_date: 2015-11-24
+  last_modified_date: 2015-11-24
   credit:
   - Unknown
   references:
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-5255
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEFLEXBLAZEDS-30607
-- id: snykio:maven:org.apache.flex.blazeds:flex-messaging-core:2017-04-06
+- id: snykio:maven:org.apache.flex.blazeds:flex-messaging-core:CVE-2017-5641
   title: Arbitrary Code Execution
   description: |
     [`org.apache.flex.blazeds:flex-messaging-core`][1] Affected versions of
-    this package are vulnerable to Arbitrary Code Execution. It uses AMF3
-    deserializers which allow instantiation of arbitrary classes via public
-    parameter-less constructors. An attacker may exploit this to send a
-    malicious AMF3 object to the system to execute arbitrary code.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22flex-messaging-core%22
-    \n[`org.apache.flex.blazeds:flex-messaging-core`][1] Affected versions of
     this package are vulnerable to Arbitrary Code Execution. It uses AMF3
     deserializers which allow instantiation of arbitrary classes via public
     parameter-less constructors. An attacker may exploit this to send a
@@ -461,6 +149,9 @@
   - CVE-2017-5641
   cwe:
   - CWE-94
+  disclosed_date: 2017-04-06
+  created_date: 2017-05-21
+  last_modified_date: 2017-05-21
   credit:
   - Unknown
   references:

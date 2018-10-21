@@ -1,126 +1,4 @@
 ---
-- id: nodesecurity:npm:swagger-ui:2016-07-20
-  title: XSS in Consumes/Produces Parameter
-  description: |
-    Affected versions of `swagger-ui` are vulnerable to cross-site scripting in both the `consumes` and `produces` parameters of the swagger JSON document for a given API.
-
-    Additionally, `swagger-ui` allows users to load arbitrary swagger JSON documents via the query string parameter `url`, allowing an attacker to exploit this attack against any user that the attacker can convince to visit a crafted link.
-
-    ## Proof of Concept
-
-    ```
-    http://<USER_HOSTNAME>/swagger-ui/index.html?url=http://<MALICIOUS_HOSTNAME>/malicious-swagger-file.json
-    ````
-  affected_package: swagger-ui
-  vulnerable_versions:
-  - 2.1.4
-  patched_versions:
-  - ">=2.1.5"
-  severity: high
-  package_manager: npm
-  cve:
-  - CVE-2016-1000226
-  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N
-  credit:
-  - Joe Vennix
-  references:
-  - |-
-    https://github.com/swagger-api/swagger-ui/issues/1866)
-    https://github.com/swagger-api/swagger-ui/pull/1867)
-  source_url: https://nodesecurity.io/advisories/123
-- id: nodesecurity:npm:swagger-ui:2016-07-21
-  title: XSS in key names
-  description: |
-    Affected versions of `swagger-ui` contain a cross-site scripting vulnerability in the key names of a specific nested object in the JSON document.
-
-
-    ## Proof of Concept
-    The vulnerable object structure is:
-    ```
-    {
-        "definitions": {
-            "arbitraryVal": {
-                "properties": {
-                    "<INJECTABLE_KEY_NAME>": "LoremIpsum"
-                    }
-                }
-            }
-    }
-    ```
-    Malicious JSON documents can be loaded in by providing a URL to them in the `url` query string parameter.
-  affected_package: swagger-ui
-  vulnerable_versions:
-  - "<=2.2.0"
-  patched_versions:
-  - ">=2.2.1"
-  severity: high
-  package_manager: npm
-  cve:
-  - CVE-2016-1000229
-  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N
-  credit:
-  - Joe Vennix
-  references:
-  - 'https://github.com/swagger-api/swagger-ui/issues/1865)
-
-'
-  source_url: https://nodesecurity.io/advisories/126
-- id: nodesecurity:npm:swagger-ui:2016-07-25
-  title: XSS via Content-type header
-  description: |-
-    Affected versions of `swagger-ui` are vulnerable to cross-site scripting. This vulnerability exists because `swagger-ui` automatically executes external Javascript that is loaded in via the `url` query string parameter when a `Content-Type: application/javascript` header is included.
-
-    An attacker can create a server that replies with a malicious script and the proper content-type, and then craft a `swagger-ui` URL that includes the location to their server/script in the `url` query string parameter. When viewed, such a link would execute the attacker's malicious script.
-  affected_package: swagger-ui
-  vulnerable_versions:
-  - 2.1.4
-  patched_versions:
-  - ">=2.1.5"
-  severity: high
-  package_manager: npm
-  cve:
-  - CVE-2016-1000233
-  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:L/UI:R/S:U/C:H/I:H/A:N
-  credit:
-  - Joe Vennix
-  references:
-  - https://github.com/swagger-api/swagger-ui/issues/1863)
-  source_url: https://nodesecurity.io/advisories/131
-- id: nodesecurity:npm:swagger-ui:2016-08-15
-  title: XSS in URL Query String Parameter
-  description: Affected versions of `swagger-ui` are vulnerable to cross-site scripting
-    via the `url` query string parameter.
-  affected_package: swagger-ui
-  vulnerable_versions:
-  - 2.1.0-M1 || 2.1.0-M2
-  patched_versions:
-  - ">=2.1.0"
-  severity: high
-  package_manager: npm
-  cve:
-  - CVE-2016-1000239
-  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N
-  credit:
-  - mehmetaydogdu
-  references:
-  - https://github.com/swagger-api/swagger-ui/issues/1262)
-  source_url: https://nodesecurity.io/advisories/137
-- id: ossindex:npm:swagger-ui:2016-07-22
-  title: Cross Site Scripting (XSS)
-  description: A malicious swagger JSON document can be loaded via the `url` parameter
-    in a query, taking advantage of an XSS vulnerability.
-  affected_package: swagger-ui
-  vulnerable_versions:
-  - 2.1.4
-  package_manager: npm
-  credit:
-  - OSSIndex
-  references:
-  - https://cwe.mitre.org/data/definitions/79.html
-  - https://github.com/swagger-api/swagger-ui/issues/1866
-  - https://github.com/swagger-api/swagger-ui/pull/1867
-  - https://nodesecurity.io/advisories/123
-  source_url: https://ossindex.net/resource/package/7014509999/vulnerabilities
 - id: ossindex:npm:swagger-ui:2016-07-22
   title: Cross Site Scripting (XSS)
   description: Property names are not escaped and allow XSS, by providing a schema
@@ -129,6 +7,9 @@
   vulnerable_versions:
   - "<=2.2.0"
   package_manager: npm
+  disclosed_date: 2016-07-22
+  created_date: 2016-07-22
+  last_modified_date: 2017-03-13
   credit:
   - OSSIndex
   references:
@@ -146,54 +27,14 @@
   vulnerable_versions:
   - 2.1.4
   package_manager: npm
+  disclosed_date: 2017-01-25
+  created_date: 2017-01-25
+  last_modified_date: 2017-03-13
   credit:
   - OSSIndex
   references:
   - https://github.com/swagger-api/swagger-ui/issues/1863
   - https://nodesecurity.io/advisories/131
-  source_url: https://ossindex.net/resource/package/7014509999/vulnerabilities
-- id: ossindex:npm:swagger-ui:2017-02-11
-  title: Cross Site Scripting (XSS) in url parameter
-  description: The `url` query parameter can be used for Cross Site Scripting where
-    showMessage and onFailure both injected strings straight into the DOM, without
-    escaping html entities.
-  affected_package: swagger-ui
-  vulnerable_versions:
-  - 2.1.0-M1
-  - 2.1.0-M2
-  package_manager: npm
-  credit:
-  - OSSIndex
-  references:
-  - https://github.com/swagger-api/swagger-ui/issues/1262
-  source_url: https://ossindex.net/resource/package/7014509999/vulnerabilities
-- id: ossindex:npm:swagger-ui:2017-02-11
-  title: "[Unconfirmed] Cross Site Scripting (XSS)"
-  description: HTML is not escaped when the API responds with `text/html`, allowing
-    for possible XSS attacks.
-  affected_package: swagger-ui
-  vulnerable_versions:
-  - "<=2.0.21"
-  package_manager: npm
-  credit:
-  - OSSIndex
-  references:
-  - https://github.com/wordnik/swagger-ui/issues/1154
-  source_url: https://ossindex.net/resource/package/7014509999/vulnerabilities
-- id: ossindex:npm:swagger-ui:2017-02-11
-  title: Fix self XSS in request url.
-  description: "> A user who has copy/pasted data from another or has been tricked
-    into pasting into the accessToken box could XSS him/herself.\n> \n> -- [github.com](https://github.com/swagger-api/swagger-ui/pull/541)"
-  affected_package: swagger-ui
-  vulnerable_versions:
-  - "<2.0.24"
-  package_manager: npm
-  credit:
-  - OSSIndex
-  references:
-  - https://cwe.mitre.org/data/definitions/79.html
-  - https://github.com/swagger-api/swagger-ui/commit/3a7b66d34565c104e85650439fbc17f89b294e10
-  - https://github.com/swagger-api/swagger-ui/issues/541
   source_url: https://ossindex.net/resource/package/7014509999/vulnerabilities
 - id: ossindex:npm:swagger-ui:2017-02-11
   title: Cross Site Scripting (XSS)
@@ -202,26 +43,15 @@
   vulnerable_versions:
   - ">2.1.0 <2.2.1"
   package_manager: npm
+  disclosed_date: 2017-02-11
+  created_date: 2017-02-11
+  last_modified_date: 2017-03-13
   credit:
   - OSSIndex
   references:
   - https://github.com/swagger-api/swagger-ui/commit/a906cffea4550eaa5369e4933a50753213cf09df
   - https://github.com/swagger-api/swagger-ui/issues/1617
   - https://github.com/swagger-api/swagger-ui/pull/2334
-  source_url: https://ossindex.net/resource/package/7014509999/vulnerabilities
-- id: ossindex:npm:swagger-ui:2017-02-12
-  title: Cross Site Scripting (XSS) in message bar
-  description: Unescaped HTML is rendered in the message bar, enabling possible cross
-    site scripting attacks.
-  affected_package: swagger-ui
-  vulnerable_versions:
-  - ">=2.1.1 <2.1.4"
-  package_manager: npm
-  credit:
-  - OSSIndex
-  references:
-  - https://github.com/swagger-api/swagger-ui/commit/1945404efef053af688d872da806eec092fac7f0
-  - https://github.com/swagger-api/swagger-ui/issues/1530
   source_url: https://ossindex.net/resource/package/7014509999/vulnerabilities
 - id: ossindex:npm:swagger-ui:2017-02-12
   title: Cross Site Scripting (XSS)
@@ -232,13 +62,16 @@
   vulnerable_versions:
   - "<2.2.1"
   package_manager: npm
+  disclosed_date: 2017-02-12
+  created_date: 2017-02-12
+  last_modified_date: 2017-03-13
   credit:
   - OSSIndex
   references:
   - https://github.com/swagger-api/swagger-ui/commit/a906cffea4550eaa5369e4933a50753213cf09df
   - https://github.com/swagger-api/swagger-ui/issues/1864
   source_url: https://ossindex.net/resource/package/7014509999/vulnerabilities
-- id: snykio:npm:swagger-ui:2016-07-20
+- id: snykio:npm:swagger-ui:20160720
   title: XSS in Consumes/Produces Parameter
   description: |+
     Swagger UI is a dependency-free collection of HTML, Javascript, and CSS
@@ -253,154 +86,6 @@
     without any HTML encoding, allowing an attacker to perform XSS by adding
     malicious scripts to their values.
 
-    \nSwagger UI is a dependency-free collection of HTML, Javascript, and CSS
-    assets that dynamically generate documentation from a Swagger-compliant
-    API.
-
-    A key part of this generation is the use of a JSON schema, which can be
-    read locally or by providing a `url` parameter to the Swagger server
-    (e.g. `http://swagger-server/swagger-ui/index.html?url=<schema-url>`).
-
-    The `produces` and `consumes` schema fields are written to the HTML
-    without any HTML encoding, allowing an attacker to perform XSS by adding
-    malicious scripts to their values.
-
-    \nSwagger UI is a dependency-free collection of HTML, Javascript, and CSS
-    assets that dynamically generate documentation from a Swagger-compliant
-    API.
-
-    A key part of this generation is the use of a JSON schema, which can be
-    read locally or by providing a `url` parameter to the Swagger server
-    (e.g. `http://swagger-server/swagger-ui/index.html?url=<schema-url>`).
-
-    The `produces` and `consumes` schema fields are written to the HTML
-    without any HTML encoding, allowing an attacker to perform XSS by adding
-    malicious scripts to their values.
-
-    \nSwagger UI is a dependency-free collection of HTML, Javascript, and CSS
-    assets that dynamically generate documentation from a Swagger-compliant
-    API.
-
-    A key part of this generation is the use of a JSON schema, which can be
-    read locally or by providing a `url` parameter to the Swagger server
-    (e.g. `http://swagger-server/swagger-ui/index.html?url=<schema-url>`).
-
-    The `produces` and `consumes` schema fields are written to the HTML
-    without any HTML encoding, allowing an attacker to perform XSS by adding
-    malicious scripts to their values.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
     \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
     user’s browser to execute malicious JavaScript code in the context of a
     victim’s domain. Such scripts can steal the user’s session cookies for
@@ -436,13 +121,16 @@
   package_manager: npm
   cwe:
   - CWE-79
+  disclosed_date: 2016-07-20
+  created_date: 2016-07-20
+  last_modified_date: 2016-07-20
   credit:
   - Joe Vennix
   references:
   - https://github.com/swagger-api/swagger-ui/issues/1866
   - https://github.com/swagger-api/swagger-ui/pull/1867
   source_url: https://snyk.io/vuln/npm:swagger-ui:20160720
-- id: snykio:npm:swagger-ui:2016-07-21
+- id: snykio:npm:swagger-ui:20160721
   title: XSS in key names
   description: |+
     Swagger UI is a dependency-free collection of HTML, Javascript, and CSS
@@ -456,154 +144,6 @@
     The schema supports property fields, which are in turn included in the
     generated HTML without any HTML encoding, allowing an attacker to
     perform XSS by adding malicious scripts to their values.
-
-    \nSwagger UI is a dependency-free collection of HTML, Javascript, and CSS
-    assets that dynamically generate documentation from a Swagger-compliant
-    API.
-
-    A key part of this generation is the use of a JSON schema, which can be
-    read locally or by providing a `url` parameter to the Swagger server
-    (e.g. `http://swagger-server/swagger-ui/index.html?url=<schema-url>`).
-
-    The schema supports property fields, which are in turn included in the
-    generated HTML without any HTML encoding, allowing an attacker to
-    perform XSS by adding malicious scripts to their values.
-
-    \nSwagger UI is a dependency-free collection of HTML, Javascript, and CSS
-    assets that dynamically generate documentation from a Swagger-compliant
-    API.
-
-    A key part of this generation is the use of a JSON schema, which can be
-    read locally or by providing a `url` parameter to the Swagger server
-    (e.g. `http://swagger-server/swagger-ui/index.html?url=<schema-url>`).
-
-    The schema supports property fields, which are in turn included in the
-    generated HTML without any HTML encoding, allowing an attacker to
-    perform XSS by adding malicious scripts to their values.
-
-    \nSwagger UI is a dependency-free collection of HTML, Javascript, and CSS
-    assets that dynamically generate documentation from a Swagger-compliant
-    API.
-
-    A key part of this generation is the use of a JSON schema, which can be
-    read locally or by providing a `url` parameter to the Swagger server
-    (e.g. `http://swagger-server/swagger-ui/index.html?url=<schema-url>`).
-
-    The schema supports property fields, which are in turn included in the
-    generated HTML without any HTML encoding, allowing an attacker to
-    perform XSS by adding malicious scripts to their values.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
 
     \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
     user’s browser to execute malicious JavaScript code in the context of a
@@ -640,13 +180,16 @@
   package_manager: npm
   cwe:
   - CWE-79
+  disclosed_date: 2016-07-21
+  created_date: 2016-07-21
+  last_modified_date: 2016-07-21
   credit:
   - Joe Vennix
   references:
   - https://github.com/swagger-api/swagger-ui/issues/1865
   - https://github.com/swagger-api/swagger-ui/releases/tag/v2.2.1
   source_url: https://snyk.io/vuln/npm:swagger-ui:20160721
-- id: snykio:npm:swagger-ui:2016-07-25
+- id: snykio:npm:swagger-ui:20160725
   title: XSS via Content-type header
   description: |+
     `swagger-ui` supports receiving headers (e.g. Content-Type) from the
@@ -654,124 +197,6 @@
     API using `curl`. Those headers are injected into the documentation
     as-is (not encoded), allowing a malicious API server to inject a script
     (XSS) into the swagger-ui front-end.
-
-    \n`swagger-ui` supports receiving headers (e.g. Content-Type) from the
-    Swagger-conforming API server, to be used when demonstrating use of the
-    API using `curl`. Those headers are injected into the documentation
-    as-is (not encoded), allowing a malicious API server to inject a script
-    (XSS) into the swagger-ui front-end.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
 
     \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
     user’s browser to execute malicious JavaScript code in the context of a
@@ -808,135 +233,21 @@
   package_manager: npm
   cwe:
   - CWE-79
+  disclosed_date: 2016-07-25
+  created_date: 2016-07-25
+  last_modified_date: 2016-07-25
   credit:
   - Joe Vennix
   references:
   - https://github.com/swagger-api/swagger-ui/issues/1863
   source_url: https://snyk.io/vuln/npm:swagger-ui:20160725
-- id: snykio:npm:swagger-ui:2016-08-15
+- id: snykio:npm:swagger-ui:20160815
   title: XSS in URL Query String Parameter
   description: |+
     Swagger is a standardized library for documenting API endpoints and
     their parameters. Versions 2.1.0-M1 and 2.1.0-M2 of the library contain
     a cross site scripting (XSS) vulnerability in the the `url` query string
     parameter.
-
-    \nSwagger is a standardized library for documenting API endpoints and
-    their parameters. Versions 2.1.0-M1 and 2.1.0-M2 of the library contain
-    a cross site scripting (XSS) vulnerability in the the `url` query string
-    parameter.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
 
     \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
     user’s browser to execute malicious JavaScript code in the context of a
@@ -968,17 +279,21 @@
 
   affected_package: swagger-ui
   vulnerable_versions:
-  - 2.1.0-M1 || 2.1.0-M2
+  - 2.1.0-M1
+  - 2.1.0-M2
   severity: high
   package_manager: npm
   cwe:
   - CWE-80
+  disclosed_date: 2016-08-15
+  created_date: 2016-08-15
+  last_modified_date: 2016-08-15
   credit:
   - mehmetaydogdu
   references:
   - https://github.com/swagger-api/swagger-ui/issues/1262
   source_url: https://snyk.io/vuln/npm:swagger-ui:20160815
-- id: snykio:npm:swagger-ui:2016-08-31
+- id: snykio:npm:swagger-ui:20160901
   title: Cross-site Scripting (XSS)
   description: |
     [`swagger-ui`][1] is a dependency-free collection of HTML, JavaScript,
@@ -991,191 +306,6 @@
 
 
     [1]: https://www.npmjs.com/package/swagger-ui
-    \n[`swagger-ui`][1] is a dependency-free collection of HTML, JavaScript,
-    and CSS assets that dynamically generate beautiful documentation from a
-    Swagger-compliant API.
-
-    Affected versions of the package are vulnerable to Cross-site Scripting
-    (XSS) due to not escaping html script tags.
-
-
-
-    [1]: https://www.npmjs.com/package/swagger-ui
-    \n[`swagger-ui`][1] is a dependency-free collection of HTML, JavaScript,
-    and CSS assets that dynamically generate beautiful documentation from a
-    Swagger-compliant API.
-
-    Affected versions of the package are vulnerable to Cross-site Scripting
-    (XSS) due to not escaping html script tags.
-
-
-
-    [1]: https://www.npmjs.com/package/swagger-ui
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    You can read more about `Cross-site Scripting (XSS)` on our [blog][1].
-
-
-
-    [1]: https://snyk.io/blog/marked-xss-vulnerability/
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    You can read more about `Cross-site Scripting (XSS)` on our [blog][1].
-
-
-
-    [1]: https://snyk.io/blog/marked-xss-vulnerability/
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    You can read more about `Cross-site Scripting (XSS)` on our [blog][1].
-
-
-
-    [1]: https://snyk.io/blog/marked-xss-vulnerability/
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    You can read more about `Cross-site Scripting (XSS)` on our [blog][1].
-
-
-
-    [1]: https://snyk.io/blog/marked-xss-vulnerability/
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    You can read more about `Cross-site Scripting (XSS)` on our [blog][1].
-
-
-
-    [1]: https://snyk.io/blog/marked-xss-vulnerability/
     \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
     user’s browser to execute malicious JavaScript code in the context of a
     victim’s domain. Such scripts can steal the user’s session cookies for
@@ -1216,13 +346,16 @@
   package_manager: npm
   cwe:
   - CWE-79
+  disclosed_date: 2016-08-31
+  created_date: 2017-03-13
+  last_modified_date: 2017-03-13
   credit:
   - bodnia
   references:
   - https://github.com/swagger-api/swagger-ui/pull/2374
   - https://github.com/swagger-api/swagger-ui/commit/f87eaaa81073a61e30ff0cedee4fd9cd2dd1fca9
   source_url: https://snyk.io/vuln/npm:swagger-ui:20160901
-- id: snykio:npm:swagger-ui:2017-10-30
+- id: snykio:npm:swagger-ui:20171031
   title: Cross-site Scripting (XSS)
   description: |
     [`swagger-ui`][1] is [![NPM
@@ -1235,191 +368,6 @@
 
     [1]: https://www.npmjs.com/package/swagger-ui
     [2]: http://badge.fury.io/js/swagger-ui
-    \n[`swagger-ui`][1] is [![NPM
-    version](https://badge.fury.io/js/swagger-ui.svg)][2].
-
-    Affected versions of the package are vulnerable to Cross-site Scripting
-    (XSS).
-
-
-
-    [1]: https://www.npmjs.com/package/swagger-ui
-    [2]: http://badge.fury.io/js/swagger-ui
-    \n[`swagger-ui`][1] is [![NPM
-    version](https://badge.fury.io/js/swagger-ui.svg)][2].
-
-    Affected versions of the package are vulnerable to Cross-site Scripting
-    (XSS).
-
-
-
-    [1]: https://www.npmjs.com/package/swagger-ui
-    [2]: http://badge.fury.io/js/swagger-ui
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    You can read more about `Cross-site Scripting (XSS)` on our [blog][1].
-
-
-
-    [1]: https://snyk.io/blog/xss-attacks-the-next-wave/
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    You can read more about `Cross-site Scripting (XSS)` on our [blog][1].
-
-
-
-    [1]: https://snyk.io/blog/xss-attacks-the-next-wave/
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    You can read more about `Cross-site Scripting (XSS)` on our [blog][1].
-
-
-
-    [1]: https://snyk.io/blog/xss-attacks-the-next-wave/
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    You can read more about `Cross-site Scripting (XSS)` on our [blog][1].
-
-
-
-    [1]: https://snyk.io/blog/xss-attacks-the-next-wave/
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-    You can read more about `Cross-site Scripting (XSS)` on our [blog][1].
-
-
-
-    [1]: https://snyk.io/blog/xss-attacks-the-next-wave/
     \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
     user’s browser to execute malicious JavaScript code in the context of a
     victim’s domain. Such scripts can steal the user’s session cookies for
@@ -1460,6 +408,9 @@
   package_manager: npm
   cwe:
   - CWE-79
+  disclosed_date: 2017-10-30
+  created_date: 2017-12-25
+  last_modified_date: 2017-12-25
   credit:
   - Unknown
   references:

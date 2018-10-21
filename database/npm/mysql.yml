@@ -1,53 +1,4 @@
 ---
-- id: nodesecurity:npm:mysql:2015-12-28
-  title: SQL Injection due to unescaped object keys
-  description: Versions of `mysql` prior to 2.0.0-alpha8 are affected by a SQL Injection
-    vulnerability in the `mysql.escape()` function, which does not properly escape
-    object keys.
-  affected_package: mysql
-  vulnerable_versions:
-  - "<=v2.0.0-alpha7"
-  patched_versions:
-  - ">=v2.0.0-alpha8"
-  severity: medium
-  package_manager: npm
-  cvss_v3_vector: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N
-  credit:
-  - Sébastian Dejonghe
-  references:
-  - https://github.com/felixge/node-mysql/issues/342)
-  source_url: https://nodesecurity.io/advisories/66
-- id: nodesecurity:npm:mysql:2018-04-25
-  title: Remote Memory Exposure
-  description: |
-    Versions of `mysql` before 2.14.0 are vulnerable to remove memory exposure.
-
-    Affected versions of `mysql` package allocate and send an uninitialized memory over the network when a number is provided as a password.
-
-    Only `mysql` running on Node.js versions below 6.0.0 is affected due to a throw added in newer node.js versions.
-
-    Proof of Concept:
-
-    ```
-    require('mysql').createConnection({
-      host: 'localhost',
-      user: 'user',
-      password : USERPROVIDEDINPUT,  // number
-      database : 'my_db'
-    }).connect();
-    ```
-  affected_package: mysql
-  vulnerable_versions:
-  - ">=2.0.0-alpha8 <=2.0.0-rc2 || >=2.0.0 <=2.13.0"
-  patched_versions:
-  - ">=2.14.0"
-  severity: medium
-  package_manager: npm
-  credit:
-  - Сковорода Никита Андреевич
-  references:
-  - https://github.com/mysqljs/mysql/commit/310c6a7d1b2e14b63b572dbfbfa10128f20c6d52)
-  source_url: https://nodesecurity.io/advisories/602
 - id: ossindex:npm:mysql:2017-01-30
   title: SQL injection is possible with mysql.escape function
   description: "> SQL injection is possible despite using mysql.escape.\n> ...\n>
@@ -57,6 +8,9 @@
   vulnerable_versions:
   - "<2.0.0-alpha7"
   package_manager: npm
+  disclosed_date: 2017-01-30
+  created_date: 2017-01-30
+  last_modified_date: 2017-07-26
   credit:
   - OSSIndex
   references:
@@ -72,24 +26,19 @@
   vulnerable_versions:
   - "<2.3.0"
   package_manager: npm
+  disclosed_date: 2017-07-30
+  created_date: 2017-07-30
+  last_modified_date: 2017-07-30
   credit:
   - OSSIndex
   references:
   - https://github.com/mysqljs/mysql/commit/f03bf567ba64008c09a773858338c01842ed76db
   - https://github.com/mysqljs/mysql/issues/816
   source_url: https://ossindex.net/resource/package/7014171118/vulnerabilities
-- id: snykio:npm:mysql:2014-05-13
+- id: snykio:npm:mysql:20140514
   title: Unauthorized SSL Connection due to lack of cert authentication
   description: |
     [`mysql`][1] is a node.js driver for mysql. Affected versions of this
-    package do not validate that the remote server has a trusted SSL
-    certificate or not, making it easier for attackers to gain access to the
-    MySQL Server.
-
-
-
-    [1]: https://www.npmjs.com/package/mysql
-    \n[`mysql`][1] is a node.js driver for mysql. Affected versions of this
     package do not validate that the remote server has a trusted SSL
     certificate or not, making it easier for attackers to gain access to the
     MySQL Server.
@@ -104,45 +53,16 @@
   package_manager: npm
   cwe:
   - CWE-285
+  disclosed_date: 2014-05-13
+  created_date: 2017-01-04
+  last_modified_date: 2017-01-04
   credit:
   - Douglas Wilson
   references:
   - https://github.com/mysqljs/mysql/issues/816
   - https://github.com/mysqljs/mysql/commit/f03bf567ba64008c09a773858338c01842ed76db
   source_url: https://snyk.io/vuln/npm:mysql:20140514
-- id: snykio:npm:mysql:2015-12-28
-  title: SQL Injection due to unescaped object keys
-  description: |
-    [`mysql`][1] is a node.js driver for mysql. Affected versions of this
-    package do not properly escape column identifiers with `mysql.escape()`
-    and can result in SQL injection vulnerability.
-
-
-
-    [1]: https://www.npmjs.com/package/mysql
-    \n[`mysql`][1] is a node.js driver for mysql. Affected versions of this
-    package do not properly escape column identifiers with `mysql.escape()`
-    and can result in SQL injection vulnerability.
-
-
-
-    [1]: https://www.npmjs.com/package/mysql
-  affected_package: mysql
-  vulnerable_versions:
-  - ">=2.0.0-alpha <2.0.0-alpha8"
-  severity: high
-  package_manager: npm
-  cve:
-  - CVE-2015-9244
-  cwe:
-  - CWE-89
-  credit:
-  - Sébastian Dejonghe
-  references:
-  - https://github.com/mysqljs/mysql/issues/342
-  - https://github.com/felixge/node-mysql/commit/bc8f3df0694fa876d7858f9d56cb9a9696ef38fa
-  source_url: https://snyk.io/vuln/npm:mysql:20151228
-- id: snykio:npm:mysql:2017-03-16
+- id: snykio:npm:mysql:20170317
   title: Uninitialized Memory Exposure
   description: |
     [`mysql`][1] is a node.js driver for mysql.
@@ -161,174 +81,6 @@
 
 
     [1]: https://www.npmjs.com/package/mysql
-    \n[`mysql`][1] is a node.js driver for mysql.
-
-    Affected versions of the package are vulnerable due to the unsafe use of
-    the `Buffer()` method. Uninitialized memory may be exposed when a value
-    of type `number` is provided to various methods in `mysql` which require
-    allocation of buffers and results in concatenation of uninitialized
-    memory to the buffer collection.
-
-    This vulnerability is unlikely to be exploited, but may be possible if a
-    server-side `mysql` accepts typed input for passwords from the client
-    even though the user doesn’t control the server-side code (i.e through
-    JSON format).
-
-
-
-    [1]: https://www.npmjs.com/package/mysql
-    \n[`mysql`][1] is a node.js driver for mysql.
-
-    Affected versions of the package are vulnerable due to the unsafe use of
-    the `Buffer()` method. Uninitialized memory may be exposed when a value
-    of type `number` is provided to various methods in `mysql` which require
-    allocation of buffers and results in concatenation of uninitialized
-    memory to the buffer collection.
-
-    This vulnerability is unlikely to be exploited, but may be possible if a
-    server-side `mysql` accepts typed input for passwords from the client
-    even though the user doesn’t control the server-side code (i.e through
-    JSON format).
-
-
-
-    [1]: https://www.npmjs.com/package/mysql
-    \n[`mysql`][1] is a node.js driver for mysql.
-
-    Affected versions of the package are vulnerable due to the unsafe use of
-    the `Buffer()` method. Uninitialized memory may be exposed when a value
-    of type `number` is provided to various methods in `mysql` which require
-    allocation of buffers and results in concatenation of uninitialized
-    memory to the buffer collection.
-
-    This vulnerability is unlikely to be exploited, but may be possible if a
-    server-side `mysql` accepts typed input for passwords from the client
-    even though the user doesn’t control the server-side code (i.e through
-    JSON format).
-
-
-
-    [1]: https://www.npmjs.com/package/mysql
-    \nConstructing a `Buffer` class with integer `N` creates a `Buffer` of
-    length `N` with raw (not \"zero-ed\") memory.
-
-    In the following example, the first call would allocate 100 bytes of
-    memory, while the second example will allocate the memory needed for the
-    string \"100\":
-
-        // uninitialized Buffer of length 100
-        x = new Buffer(100);
-        // initialized Buffer with value of '100'
-        x = new Buffer('100');
-
-    You can read more about the insecure `Buffer` behavior [on our blog][1].
-
-    Similar vulnerabilities were discovered in [request][2], [mongoose][3],
-    [ws][4] and [sequelize][5].
-
-
-
-    [1]: https://snyk.io/blog/exploiting-buffer/
-    [2]: https://snyk.io/vuln/npm:request:20160119
-    [3]: https://snyk.io/vuln/npm:mongoose:20160116
-    [4]: https://snyk.io/vuln/npm:ws:20160104
-    [5]: https://snyk.io/vuln/npm:sequelize:20160115
-    \nConstructing a `Buffer` class with integer `N` creates a `Buffer` of
-    length `N` with raw (not \"zero-ed\") memory.
-
-    In the following example, the first call would allocate 100 bytes of
-    memory, while the second example will allocate the memory needed for the
-    string \"100\":
-
-        // uninitialized Buffer of length 100
-        x = new Buffer(100);
-        // initialized Buffer with value of '100'
-        x = new Buffer('100');
-
-    You can read more about the insecure `Buffer` behavior [on our blog][1].
-
-    Similar vulnerabilities were discovered in [request][2], [mongoose][3],
-    [ws][4] and [sequelize][5].
-
-
-
-    [1]: https://snyk.io/blog/exploiting-buffer/
-    [2]: https://snyk.io/vuln/npm:request:20160119
-    [3]: https://snyk.io/vuln/npm:mongoose:20160116
-    [4]: https://snyk.io/vuln/npm:ws:20160104
-    [5]: https://snyk.io/vuln/npm:sequelize:20160115
-    \nConstructing a `Buffer` class with integer `N` creates a `Buffer` of
-    length `N` with raw (not \"zero-ed\") memory.
-
-    In the following example, the first call would allocate 100 bytes of
-    memory, while the second example will allocate the memory needed for the
-    string \"100\":
-
-        // uninitialized Buffer of length 100
-        x = new Buffer(100);
-        // initialized Buffer with value of '100'
-        x = new Buffer('100');
-
-    You can read more about the insecure `Buffer` behavior [on our blog][1].
-
-    Similar vulnerabilities were discovered in [request][2], [mongoose][3],
-    [ws][4] and [sequelize][5].
-
-
-
-    [1]: https://snyk.io/blog/exploiting-buffer/
-    [2]: https://snyk.io/vuln/npm:request:20160119
-    [3]: https://snyk.io/vuln/npm:mongoose:20160116
-    [4]: https://snyk.io/vuln/npm:ws:20160104
-    [5]: https://snyk.io/vuln/npm:sequelize:20160115
-    \nConstructing a `Buffer` class with integer `N` creates a `Buffer` of
-    length `N` with raw (not \"zero-ed\") memory.
-
-    In the following example, the first call would allocate 100 bytes of
-    memory, while the second example will allocate the memory needed for the
-    string \"100\":
-
-        // uninitialized Buffer of length 100
-        x = new Buffer(100);
-        // initialized Buffer with value of '100'
-        x = new Buffer('100');
-
-    You can read more about the insecure `Buffer` behavior [on our blog][1].
-
-    Similar vulnerabilities were discovered in [request][2], [mongoose][3],
-    [ws][4] and [sequelize][5].
-
-
-
-    [1]: https://snyk.io/blog/exploiting-buffer/
-    [2]: https://snyk.io/vuln/npm:request:20160119
-    [3]: https://snyk.io/vuln/npm:mongoose:20160116
-    [4]: https://snyk.io/vuln/npm:ws:20160104
-    [5]: https://snyk.io/vuln/npm:sequelize:20160115
-    \nConstructing a `Buffer` class with integer `N` creates a `Buffer` of
-    length `N` with raw (not \"zero-ed\") memory.
-
-    In the following example, the first call would allocate 100 bytes of
-    memory, while the second example will allocate the memory needed for the
-    string \"100\":
-
-        // uninitialized Buffer of length 100
-        x = new Buffer(100);
-        // initialized Buffer with value of '100'
-        x = new Buffer('100');
-
-    You can read more about the insecure `Buffer` behavior [on our blog][1].
-
-    Similar vulnerabilities were discovered in [request][2], [mongoose][3],
-    [ws][4] and [sequelize][5].
-
-
-
-    [1]: https://snyk.io/blog/exploiting-buffer/
-    [2]: https://snyk.io/vuln/npm:request:20160119
-    [3]: https://snyk.io/vuln/npm:mongoose:20160116
-    [4]: https://snyk.io/vuln/npm:ws:20160104
-    [5]: https://snyk.io/vuln/npm:sequelize:20160115
     \nConstructing a `Buffer` class with integer `N` creates a `Buffer` of
     length `N` with raw (not \"zero-ed\") memory.
 
@@ -360,8 +112,39 @@
   package_manager: npm
   cwe:
   - CWE-201
+  disclosed_date: 2017-03-16
+  created_date: 2017-08-08
+  last_modified_date: 2017-08-08
   credit:
   - ChALkeR
   references:
   - https://github.com/mysqljs/mysql/commit/310c6a7d1b2e14b63b572dbfbfa10128f20c6d52
   source_url: https://snyk.io/vuln/npm:mysql:20170317
+- id: snykio:npm:mysql:CVE-2015-9244
+  title: SQL Injection due to unescaped object keys
+  description: |
+    [`mysql`][1] is a node.js driver for mysql. Affected versions of this
+    package do not properly escape column identifiers with `mysql.escape()`
+    and can result in SQL injection vulnerability.
+
+
+
+    [1]: https://www.npmjs.com/package/mysql
+  affected_package: mysql
+  vulnerable_versions:
+  - ">=2.0.0-alpha <2.0.0-alpha8"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2015-9244
+  cwe:
+  - CWE-89
+  disclosed_date: 2015-12-28
+  created_date: 2016-01-05
+  last_modified_date: 2016-01-05
+  credit:
+  - Sébastian Dejonghe
+  references:
+  - https://github.com/mysqljs/mysql/issues/342
+  - https://github.com/felixge/node-mysql/commit/bc8f3df0694fa876d7858f9d56cb9a9696ef38fa
+  source_url: https://snyk.io/vuln/npm:mysql:20151228
