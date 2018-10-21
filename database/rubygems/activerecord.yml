@@ -91,6 +91,27 @@
   - https://github.com/rubysec/ruby-advisory-db
   source_url: http://osvdb.org/show/osvdb/89025
 - id: rubyadvisory:rubygems:activerecord:2013-02-11
+  title: Ruby on Rails Active Record attr_protected Method Bypass
+  description: |
+    Ruby on Rails contains a flaw in the attr_protected method of the
+    Active Record. The issue is triggered during the handling of a specially
+    crafted request, which may allow a remote attacker to bypass protection
+    mechanisms and alter values that would otherwise be protected.
+  affected_package: activerecord
+  patched_versions:
+  - "~> 2.3.17"
+  - "~> 3.1.11"
+  - ">= 3.2.12"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2013-0276
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: http://osvdb.org/show/osvdb/90072
+- id: rubyadvisory:rubygems:activerecord:2013-02-11
   title: "Ruby on Rails Active Record +serialize+ Helper YAML Attribute Handling Remote\nCode
     Execution \n"
   description: |
@@ -112,27 +133,6 @@
   references:
   - https://github.com/rubysec/ruby-advisory-db
   source_url: http://osvdb.org/show/osvdb/90073
-- id: rubyadvisory:rubygems:activerecord:2013-02-11
-  title: Ruby on Rails Active Record attr_protected Method Bypass
-  description: |
-    Ruby on Rails contains a flaw in the attr_protected method of the
-    Active Record. The issue is triggered during the handling of a specially
-    crafted request, which may allow a remote attacker to bypass protection
-    mechanisms and alter values that would otherwise be protected.
-  affected_package: activerecord
-  patched_versions:
-  - "~> 2.3.17"
-  - "~> 3.1.11"
-  - ">= 3.2.12"
-  severity: medium
-  package_manager: rubygems
-  cve:
-  - CVE-2013-0276
-  credit:
-  - Rubysec
-  references:
-  - https://github.com/rubysec/ruby-advisory-db
-  source_url: http://osvdb.org/show/osvdb/90072
 - id: rubyadvisory:rubygems:activerecord:2013-03-19
   title: Symbol DoS vulnerability in Active Record
   description: |
@@ -184,6 +184,27 @@
   description: |
     Ruby on Rails contains a flaw that may allow carrying out an SQL injection attack.
     The issue is due to the PostgreSQL adapter for Active Record not properly
+    sanitizing user-supplied input when quoting bitstring. This may allow a remote
+    attacker to inject or manipulate SQL queries in the back-end database,
+    allowing for the manipulation or disclosure of arbitrary data.
+  affected_package: activerecord
+  unaffected_versions:
+  - ">= 4.0.0"
+  patched_versions:
+  - "~> 3.2.19"
+  package_manager: rubygems
+  cve:
+  - CVE-2014-3482
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: http://osvdb.org/show/osvdb/108664
+- id: rubyadvisory:rubygems:activerecord:2014-07-02
+  title: SQL Injection Vulnerability in Active Record
+  description: |
+    Ruby on Rails contains a flaw that may allow carrying out an SQL injection attack.
+    The issue is due to the PostgreSQL adapter for Active Record not properly
     sanitizing user-supplied input when quoting ranges. This may allow a remote
     attacker to inject or manipulate SQL queries in the back-end database,
     allowing for the manipulation or disclosure of arbitrary data.
@@ -201,27 +222,6 @@
   references:
   - https://github.com/rubysec/ruby-advisory-db
   source_url: http://osvdb.org/show/osvdb/108665
-- id: rubyadvisory:rubygems:activerecord:2014-07-02
-  title: SQL Injection Vulnerability in Active Record
-  description: |
-    Ruby on Rails contains a flaw that may allow carrying out an SQL injection attack.
-    The issue is due to the PostgreSQL adapter for Active Record not properly
-    sanitizing user-supplied input when quoting bitstring. This may allow a remote
-    attacker to inject or manipulate SQL queries in the back-end database,
-    allowing for the manipulation or disclosure of arbitrary data.
-  affected_package: activerecord
-  unaffected_versions:
-  - ">= 4.0.0"
-  patched_versions:
-  - "~> 3.2.19"
-  package_manager: rubygems
-  cve:
-  - CVE-2014-3482
-  credit:
-  - Rubysec
-  references:
-  - https://github.com/rubysec/ruby-advisory-db
-  source_url: http://osvdb.org/show/osvdb/108664
 - id: rubyadvisory:rubygems:activerecord:2014-08-18
   title: Data Injection Vulnerability in Active Record
   description: The create_with functionality in Active Record was implemented incorrectly
