@@ -60,12 +60,18 @@ module YAVDB
       def save_to_file(database_path, vulns)
         vulns.map do |package_manager, vunerabilities_by_pm|
           vunerabilities_by_pm.map do |package, vunerabilities_by_p|
+            previous_vulnerabilities = search(database_path, package_manager, package)
+
             package_path           = package_path(database_path, package_manager, package)
             package_path_directory = File.dirname(package_path)
             FileUtils.mkdir_p(package_path_directory) unless File.exist?(package_path_directory)
 
+            uniq_vunerabilities_by_p = Hash[previous_vulnerabilities.concat(vunerabilities_by_p).map { |vuln| [vuln.id, vuln] }].values
+
+            next unless uniq_vunerabilities_by_p.any?
+
             File.open(package_path, 'wb') do |file|
-              package_vulns_yml_str = vunerabilities_by_p
+              package_vulns_yml_str = uniq_vunerabilities_by_p
                                         .sort_by(&:id)
                                         .map(&:to_map)
                                         .to_yaml(

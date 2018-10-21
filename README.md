@@ -12,8 +12,8 @@ developers identify and fix know vulnerabilities in their apps.
 The sources for this database include 
 [Rubysec](https://rubysec.com/),
 [snyk](https://snyk.io/),
-[OSSIndex](https://ossindex.net/),
-[NodeSecurity](https://nodesecurity.io/),
+[OSSIndex (deprecated)](https://ossindex.net/),
+[NodeSecurity (deprecated)](https://nodesecurity.io/),
 [Friends of PHP](https://github.com/FriendsOfPHP/security-advisories),
 [Magento Related Security Advisories](https://github.com/victims/victims-cve-db),
 [Victims CVE Database](https://github.com/victims/victims-cve-db)
@@ -25,10 +25,8 @@ The sources for this database include
 ## Installation
 
 ```sh
-gem install yavdb --pre
+gem install yavdb
 ```
-
-> Notice the `--pre` in the end
 
 ## TODO:
 
@@ -38,7 +36,6 @@ gem install yavdb --pre
     - [ ] [Rubysec](lib/yavdb/sources/ruby_advisory.rb)
     - [X] [snyk](lib/yavdb/sources/snyk_io.rb)
     - [ ] [OSSIndex](lib/yavdb/sources/ossindex.rb)
-    - [X] [NodeSecurity](lib/yavdb/sources/nodesecurity_io.rb)
     - [ ] [Friends of PHP and Magento Related Security Advisories](lib/yavdb/sources/friends_of_php.rb)
     - [ ] [Victims CVE Database](lib/yavdb/sources/victims.rb)
 * Others

@@ -59,8 +59,11 @@ module YAVDB
 
           def create(advisory_hash, language, url)
             advisory_hash['affected'].map do |affected_package|
+              vuln_id_stamp = advisory_hash['cve'] || 'date'
+              vuln_id       = "victims:#{language.package_manager}:#{language.name_parser[affected_package]}:#{vuln_id_stamp}"
+
               YAVDB::Advisory.new(
-                "victims:#{language.package_manager}:#{language.name_parser[affected_package]}:date",
+                vuln_id,
                 advisory_hash['title'],
                 advisory_hash['description'],
                 language.name_parser[affected_package],

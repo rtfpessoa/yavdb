@@ -54,8 +54,11 @@ module YAVDB
                                     ['*']
                                   end
 
+            vuln_id_stamp = (cve && cve[0]) || date
+            vuln_id       = "rubyadvisory:rubygems:#{advisory_hash['gem']}:#{vuln_id_stamp}"
+
             YAVDB::Advisory.new(
-              "rubyadvisory:rubygems:#{advisory_hash['gem']}:#{date}",
+              vuln_id,
               advisory_hash['title'],
               advisory_hash['description'],
               advisory_hash['gem'],

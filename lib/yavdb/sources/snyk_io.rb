@@ -119,8 +119,13 @@ module YAVDB
                                    published_date
                                  end
 
+            vuln_id_stamp = (sidebar_data[:cve] && sidebar_data[:cve][0]) ||
+                            sidebar_data[:id].split(%r{-|:}).last ||
+                            disclosed_date
+            vuln_id       = "snykio:#{package_manager}:#{affected_package}:#{vuln_id_stamp}"
+
             YAVDB::Advisory.new(
-              "snykio:#{package_manager}:#{affected_package}:#{disclosed_date}",
+              vuln_id,
               title,
               body_data[:description],
               affected_package,
@@ -157,7 +162,6 @@ module YAVDB
                 last_elem        = description_sections.last
                 new_body         = last_elem[:body].push(field)
                 last_elem[:body] = new_body
-                description_sections.push(last_elem)
               end
             end
 

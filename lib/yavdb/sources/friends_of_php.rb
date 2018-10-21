@@ -54,9 +54,15 @@ module YAVDB
             info['versions'].join(' ')
           end.flatten
 
+          cves = [advisory_hash['cve']].reject { |cve| cve == '~' }
+
           package_name = advisory_hash['reference'].gsub(%r{composer:\/\/(.*)}, '\1')
+
+          vuln_id_stamp = (cves && cves[0]) || date
+          vuln_id       = "friendsofphp:packagist:#{package_name}:#{vuln_id_stamp}"
+
           YAVDB::Advisory.new(
-            "friendsofphp:packagist:#{package_name}:#{date}",
+            vuln_id,
             advisory_hash['title'],
             nil, #:description
             package_name,
@@ -65,7 +71,7 @@ module YAVDB
             nil, #:patched_versions
             nil, #:severity
             PACKAGE_MANAGER,
-            [advisory_hash['cve']].reject { |cve| cve == '~' },
+            cves,
             nil, #:cwe
             nil, #:osvdb
             nil, #:cvss_v2_vector

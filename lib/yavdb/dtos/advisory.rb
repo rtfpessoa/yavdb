@@ -79,9 +79,9 @@ module YAVDB
     def to_map
       map = {}
       members.each do |m|
-        next unless self[m] && (
-        (self[m].is_a?(String) && !self[m].empty?) ||
-          (self[m].is_a?(Array) && self[m].any?))
+        next if !self[m] ||
+                (self[m].is_a?(String) && self[m].empty?) ||
+                (self[m].is_a?(Array) && self[m].none?)
 
         map[m.to_s] = self[m] if self[m]
       end

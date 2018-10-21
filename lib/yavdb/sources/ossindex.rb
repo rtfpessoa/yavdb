@@ -95,8 +95,11 @@ module YAVDB
                          .reject { |v| v == '-' }
             versions = ['*'] unless versions.any?
 
+            vuln_id_stamp = (cve && cve[0]) || published_date
+            vuln_id       = "ossindex:#{package_manager}:#{package_name}:#{vuln_id_stamp}"
+
             YAVDB::Advisory.new(
-              "ossindex:#{package_manager}:#{package_name}:#{published_date}",
+              vuln_id,
               advisory['title'],
               advisory['description'],
               package_name,
