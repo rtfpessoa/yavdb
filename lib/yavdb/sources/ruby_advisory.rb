@@ -84,7 +84,7 @@ module YAVDB
           end
 
           def clean_version(versions)
-            versions&.map { |version| version.gsub(',', ' ') }
+            versions&.map { |version| version.tr(',', ' ') }
           end
 
           def references(advisory_hash)

@@ -105,7 +105,7 @@ module YAVDB
                                   elsif ['maven', 'nuget', 'pypi'].include?(package_manager)
                                     [vulnerable_versions]
                                   else
-                                    [vulnerable_versions.gsub(',', ' ')]
+                                    [vulnerable_versions.tr(',', ' ')]
                                   end
 
             sidebar_data = parse_side_bar(advisory_page)
