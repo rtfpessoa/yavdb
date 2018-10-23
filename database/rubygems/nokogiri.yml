@@ -1390,6 +1390,89 @@
   - https://github.com/sparklemotion/nokogiri/issues/1634
   - https://github.com/sparklemotion/nokogiri/commit/0859c487c9f6933d96d998560d88147c841f7336
   source_url: https://snyk.io/vuln/SNYK-RUBY-NOKOGIRI-20368
+- id: snykio:rubygems:nokogiri:CVE-2017-9050
+  title: Use of vulnerable libxml2
+  description: |
+    [`nokogiri`][1] (鋸) is an HTML, XML, SAX, and Reader parser, with the
+    ability to search documents via XPath or CSS3 selectors.
+
+    Affected versions of the package are vulnerable to many vulnerabilities,
+    including Arbitrary Code Execution and Denial of Service (DoS), and
+    Sensitive Information Exposure. Nokogiri bundles the `libxml2` library,
+    which is vulnerable in versions below 2.9.5.
+
+    The CVEs assigned to the vulnerabilities are:
+
+    ### CVE-2017-0663   {#cve-2017-0663}
+
+    > It was discovered that a type confusion error existed in libxml2. An
+    > attacker could use this to specially construct XML data that could
+    > cause a denial of service or possibly execute arbitrary code.
+
+    ### CVE-2017-7375   {#cve-2017-7375}
+
+    > It was discovered that libxml2 did not properly validate parsed entity
+    > references. An attacker could use this to specially construct XML data
+    > that could expose sensitive information.
+
+    ### CVE-2017-7376   {#cve-2017-7376}
+
+    > It was discovered that a buffer overflow existed in libxml2 when
+    > handling HTTP redirects. An attacker could use this to specially
+    > construct XML data that could cause a denial of service or possibly
+    > execute arbitrary code.
+
+    ### CVE-2017-9047   {#cve-2017-9047}
+
+    > Marcel Böhme and Van-Thuan Pham discovered a buffer overflow in
+    > libxml2 when handling elements. An attacker could use this to
+    > specially construct XML data that could cause a denial of service or
+    > possibly execute arbitrary code.
+
+    ### CVE-2017-9048   {#cve-2017-9048}
+
+    > Marcel Böhme and Van-Thuan Pham discovered a buffer overread in
+    > libxml2 when handling elements. An attacker could use this to
+    > specially construct XML data that could cause a denial of service.
+
+    ### CVE-2017-9049, CVE-2017-9050   {#cve-2017-9049-cve-2017-9050}
+
+    > Marcel Böhme and Van-Thuan Pham discovered multiple buffer overreads
+    > in libxml2 when handling parameter-entity references. An attacker
+    > could use these to specially construct XML data that could cause a
+    > denial of service.
+
+
+
+    [1]: https://rubygems.org/gems/nokogiri
+  affected_package: nokogiri
+  vulnerable_versions:
+  - "<1.8.1"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2017-9050
+  - CVE-2017-9049
+  - CVE-2017-9048
+  - CVE-2017-9047
+  - CVE-2017-7376
+  - CVE-2017-7375
+  - CVE-2017-0663
+  cwe:
+  - CWE-200
+  - CWE-126
+  - CWE-89
+  - CWE-399
+  disclosed_date: 2017-09-18
+  created_date: 2017-09-21
+  last_modified_date: 2017-09-21
+  credit:
+  - Marcel Böhme
+  - VanThuan Pham
+  references:
+  - https://github.com/sparklemotion/nokogiri/issues/1673
+  - https://usn.ubuntu.com/usn/usn-3424-1/
+  source_url: https://snyk.io/vuln/SNYK-RUBY-NOKOGIRI-20432
 - id: snykio:rubygems:nokogiri:CVE-2018-14404
   title: Denial of Service (DoS)
   description: |

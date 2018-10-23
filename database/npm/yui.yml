@@ -589,6 +589,76 @@
   references:
   - http://yuilibrary.com/support/20121030-vulnerability/
   source_url: https://snyk.io/vuln/npm:yui:20121030
+- id: snykio:npm:yui:CVE-2012-5883
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [`yui`][1] is an open source JavaScript and CSS framework for building
+    richly interactive web applications. Affected versions of the package
+    are vulnerable to Cross-site Scripting (XSS) via `.swf` files, allowing
+    arbitrary code injection into the hosting server.
+
+    **Notes:**
+
+    * If your site loads YUI 2 from a CDN (yui.yahooapis.com,
+      ajax.googleapis.com, etc.) and not from your own domain, you are not
+      affected.
+    * YUI 3 is not affected by this issue.
+    * Whether or not your site uses the affected components, simply hosting
+      an affected file means you are vulnerable.
+
+    This vulnerability is similar to [CVE-2010-4207][2].
+
+
+
+    [1]: https://www.npmjs.com/package/yui
+    [2]: https://snyk.io/vuln/npm:yui:20101025
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+  affected_package: yui
+  vulnerable_versions:
+  - "<3.0.0 >=2.4.0"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2012-5883
+  - CVE-2012-5882
+  - CVE-2012-5881
+  cwe:
+  - CWE-79
+  disclosed_date: 2012-10-29
+  created_date: 2017-02-13
+  last_modified_date: 2017-02-13
+  credit:
+  - Unknwon
+  references:
+  - http://yuilibrary.com/support/20121030-vulnerability/
+  source_url: https://snyk.io/vuln/npm:yui:20121030
 - id: snykio:npm:yui:CVE-2013-4939
   title: Cross-site Scripting (XSS)
   description: |+
@@ -656,6 +726,73 @@
   - http://yuiblog.com/blog/2013/06/06/yui-3-10-3-released-to-fix-reintroduced-swf-vulnerability/
   - https://github.com/yui/yui3/commit/da0d3a401ebf5a9cfab30e9ca7621aaf73ace79c
   source_url: https://snyk.io/vuln/npm:yui:20130604
+- id: snykio:npm:yui:CVE-2013-4940
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [`yui`][1] is an open source JavaScript and CSS framework for building
+    richly interactive web applications.
+
+    Affected versions of the package are vulnerable to Cross-site Scripting
+    (XSS) via the `io.swf` file that was inadvertently reintroduced in
+    version 3.10.2. A carefully constructed URL accessing `io.swf` directly
+    could cause it to execute JavaScript and potentially expose cookies or
+    other sensitive information from the hosted site.
+
+    This vulnerability is similar to [CVE-2013-4941][2].
+
+
+
+    [1]: https://www.npmjs.com/package/yui
+    [2]: https://snyk.io/vuln/npm:yui:20130515
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+  affected_package: yui
+  vulnerable_versions:
+  - ">=3.0.0 <3.10.1"
+  - "=3.10.2"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2013-4940
+  - CVE-2013-4939
+  cwe:
+  - CWE-79
+  disclosed_date: 2013-06-03
+  created_date: 2017-02-13
+  last_modified_date: 2017-02-13
+  credit:
+  - Unknown
+  references:
+  - http://yuilibrary.com/support/20130515-vulnerability/
+  - http://yuiblog.com/blog/2013/06/06/yui-3-10-3-released-to-fix-reintroduced-swf-vulnerability/
+  - https://github.com/yui/yui3/commit/da0d3a401ebf5a9cfab30e9ca7621aaf73ace79c
+  source_url: https://snyk.io/vuln/npm:yui:20130604
 - id: snykio:npm:yui:CVE-2013-4941
   title: Cross-site Scripting (XSS)
   description: |+
@@ -711,6 +848,72 @@
   cve:
   - CVE-2013-4941
   - CVE-2013-4942
+  cwe:
+  - CWE-79
+  disclosed_date: 2013-05-14
+  created_date: 2017-02-13
+  last_modified_date: 2017-02-13
+  credit:
+  - Aleksandr Dobkin
+  references:
+  - http://yuilibrary.com/support/20130515-vulnerability/
+  - https://github.com/yui/yui3/commit/6a2da7d0df7f4b0d347cfbfb46e131d403658fc4
+  source_url: https://snyk.io/vuln/npm:yui:20130515
+- id: snykio:npm:yui:CVE-2013-4942
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [`yui`][1] is an open source JavaScript and CSS framework for building
+    richly interactive web applications.
+
+    Affected versions of the package are vulnerable to Cross-site Scripting
+    (XSS) in `.swf` files used in the IO Utility and Uploader components. A
+    carefully constructed URL accessing these `.swf` files directly could
+    cause them to execute JavaScript in the context of the hosted `.swf`
+    files and potentially expose cookies or other sensitive information from
+    the hosted site.
+
+    This vulnerability is similar to [CVE-2013-4940][2].
+
+
+
+    [1]: https://www.npmjs.com/package/yui
+    [2]: https://snyk.io/vuln/npm:yui:20130604
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+  affected_package: yui
+  vulnerable_versions:
+  - "<3.10.0 >=3.0.0"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2013-4942
+  - CVE-2013-4941
   cwe:
   - CWE-79
   disclosed_date: 2013-05-14
