@@ -16,3 +16,50 @@
   - https://nodesecurity.io/advisories/118
   - https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS
   source_url: https://ossindex.net/resource/package/7014132039/vulnerabilities
+- id: snykio:npm:minimatch:CVE-2016-10540
+  title: Regular Expression Denial of Service (DoS)
+  description: |
+    [`minimatch`][1] is a minimalistic matching library used for converting
+    glob expressions into JavaScript RegExp objects. Affected versions of
+    this package are vulnerable to Regular Expression Denial of Service
+    (ReDoS) attacks.
+
+    The Regular expression Denial of Service (ReDoS) is a type of Denial of
+    Service attack. Many Regular Expression implementations may reach edge
+    cases that causes them to work very slowly (exponentially related to
+    input size), allowing an attacker to exploit this and can cause the
+    program to enter these extreme situations by using a specially crafted
+    input and cause the service to excessively consume CPU, resulting in a
+    Denial of Service.
+
+    An attacker can provide a long value to the `minimatch` function, which
+    nearly matches the pattern being matched. This will cause the regular
+    expression matching to take a long time, all the while occupying the
+    event loop and preventing it from processing other requests and making
+    the server unavailable (a Denial of Service attack).
+
+    You can read more about `Regular Expression Denial of Service (ReDoS)`
+    on our [blog][2].
+
+
+
+    [1]: https://www.npmjs.com/package/minimatch
+    [2]: https://snyk.io/blog/redos-and-catastrophic-backtracking/
+  affected_package: minimatch
+  vulnerable_versions:
+  - "<=3.0.1"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2016-10540
+  cwe:
+  - CWE-400
+  disclosed_date: 2016-06-20
+  created_date: 2016-06-20
+  last_modified_date: 2016-06-20
+  credit:
+  - Nick Starke
+  references:
+  - https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS
+  - https://github.com/isaacs/minimatch/commit/6944abf9e0694bd22fd9dad293faa40c2bc8a955
+  source_url: https://snyk.io/vuln/npm:minimatch:20160620
