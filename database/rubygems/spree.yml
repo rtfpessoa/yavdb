@@ -1,30 +1,31 @@
 ---
 - id: rubyadvisory:rubygems:spree:CVE-
-  title: 'Product Scopes could allow for unauthenticated remote command execution
-
-'
+  title: Spree API Information Disclosure CSRF
   description: |
-    Product Scopes could allow for unauthenticated remote command execution.
-    This was corrected by removing conditions_any scope and use ARel query
-    building instead.
+    Spree contains a flaw in the API as HTTP requests do not require multiple
+    steps, explicit confirmation, or a unique token when performing certain
+    sensitive actions. By tricking a user into following a specially crafted
+    link, a context-dependent attacker can perform a Cross-Site Request Forgery
+    (CSRF / XSRF) attack causing the victim to disclose potentially sensitive
+    information to attackers.
   affected_package: spree
   patched_versions:
-  - "~> 0.11.4"
-  - "~> 0.70.6"
-  - "~> 1.0.5"
-  - ">= 1.1.2"
+  - "~> 2.2.10"
+  - "~> 2.3.8"
+  - "~> 2.4.5"
+  - ">= 3.0.0.rc4"
   package_manager: rubygems
   cve:
   - CVE-
-  osvdb: 125712
-  disclosed_date: 2012-07-02
-  created_date: 2012-07-02
-  last_modified_date: 2012-07-02
+  osvdb: 119205
+  disclosed_date: 2015-03-05
+  created_date: 2015-03-05
+  last_modified_date: 2015-03-05
   credit:
   - Rubysec
   references:
   - https://github.com/rubysec/ruby-advisory-db
-  source_url: https://spreecommerce.com/blog/security-issue-all-versions
+  source_url: https://spreecommerce.com/blog/security-updates-2015-3-3
 - id: rubyadvisory:rubygems:spree:CVE-2008-7310
   title: 'Spree Hash Restriction Weakness URL Parsing Order State Value Manipulation
 
@@ -104,13 +105,13 @@
   source_url: https://spreecommerce.com/blog/json-hijacking-vulnerability
 - id: rubyadvisory:rubygems:spree:CVE-2013-1656
   title: |
-    Spree promotion_actions_controller.rb promotion_action Parameter Arbitrary
-    Ruby Object Instantiation Command Execution
+    Spree payment_methods_controller.rb payment_method Parameter Arbitrary Ruby
+    Object Instantiation Command Execution
   description: |
     Spree contains a flaw that is triggered when handling input passed via the
-    'promotion_action' parameter to promotion_actions_controller.rb. This may
-    allow a remote authenticated attacker to instantiate arbitrary Ruby objects
-    and potentially execute arbitrary commands.
+    'payment_method' parameter to payment_methods_controller.rb. This may allow
+    a remote authenticated attacker to instantiate arbitrary Ruby objects and
+    potentially execute arbitrary commands.
   affected_package: spree
   patched_versions:
   - ">= 2.0.0"
@@ -118,7 +119,7 @@
   package_manager: rubygems
   cve:
   - CVE-2013-1656
-  osvdb: 91216
+  osvdb: 91217
   cvss_v2_score: 4.3
   disclosed_date: 2013-02-21
   created_date: 2013-02-21
