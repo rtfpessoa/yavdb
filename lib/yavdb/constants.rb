@@ -30,5 +30,7 @@ module YAVDB
 
     POSSIBLE_PACKAGE_MANAGERS = ['npm', 'rubygems', 'maven', 'nuget', 'packagist', 'pypi', 'go'].freeze
 
+    SEVERITIES = ['low', 'medium', 'high'].freeze
+
   end
 end

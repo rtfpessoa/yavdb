@@ -12,17 +12,21 @@ jobs:
       type: shell
       command: gem install bundler -v 1.16
 
+    - name: Prepare yavdb cache
+      type: shell
+      command: echo "$(date)" > /tmp/yavdb.cache.log
+
     - name: Restore gem cache
       type: cache-restore
       keys:
       - gem-yavdb-{{ checksum "Gemfile.lock" }}
-      - gem-yavdb
+      - gem-yavdb-
 
     - name: Restore yavdb cache
       type: cache-restore
       keys:
       - crawler-yavdb-cache-1
-      - crawler-yavdb-cache
+      - crawler-yavdb-cache-
 
     - name: Bundle Install
       type: shell
@@ -44,7 +48,7 @@ jobs:
 
     - name: Save yavdb cache
       type: cache-save
-      key: crawler-yavdb-cache-1
+      key: crawler-yavdb-cache-{{ checksum "/tmp/yavdb.cache.log" }}
       paths:
       - ~/.yavdb/cache
 

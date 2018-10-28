@@ -33,12 +33,12 @@ module YAVDB
         PACKAGE_MANAGER = 'packagist'.freeze
 
         def self.advisories
-          REPOSITORY_URLS.map do |url|
-            YAVDB::SourceTypes::GitRepo.search('*/*/*.yaml', url).map do |repo_path, file_paths|
+          REPOSITORY_URLS.map do |repository_url|
+            YAVDB::SourceTypes::GitRepo.search('*/*/*.yaml', repository_url).map do |repo_path, file_paths|
               Dir.chdir(repo_path) do
                 file_paths.map do |file_path|
                   advisory_hash = YAML.load_file(file_path)
-                  url           = "#{url}/blob/master/#{file_path}"
+                  url           = "#{repository_url}/blob/master/#{file_path}"
                   create(url, advisory_hash)
                 end
               end

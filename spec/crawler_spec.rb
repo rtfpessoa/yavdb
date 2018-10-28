@@ -15,6 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 require_relative 'spec_helper'
+require 'yavdb/constants'
 require 'yavdb/crawler'
 require 'yavdb/database'
 
@@ -35,6 +36,14 @@ RSpec.describe YAVDB do
 
         it "all #{package_manager} package vulnerabilities should have a title" do
           expect(all_vulnerabilities.all? { |vuln| !vuln.title.empty? }).to be true
+        end
+
+        it "all #{package_manager} package vulnerabilities should have a valid package manager" do
+          expect(all_vulnerabilities.all? { |vuln| YAVDB::Constants::POSSIBLE_PACKAGE_MANAGERS.include?(vuln.package_manager) }).to be true
+        end
+
+        it "all #{package_manager} package vulnerabilities severity should be valid" do
+          expect(all_vulnerabilities.all? { |vuln| vuln.severity.nil? || YAVDB::Constants::SEVERITIES.include?(vuln.severity) }).to be true
         end
 
         it "all #{package_manager} package vulnerabilities should have one type of version" do
