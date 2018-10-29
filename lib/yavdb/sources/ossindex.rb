@@ -93,6 +93,7 @@ module YAVDB
                          .map(&:strip)
                          .reject(&:empty?)
                          .reject { |v| v == '-' }
+                         .map { |version| version.gsub("''", '') }
             versions = ['*'] unless versions.any?
 
             vuln_id_stamp = (cve && cve[0]) || published_date
