@@ -79,11 +79,17 @@ module YAVDB
     def to_map
       map = {}
       members.each do |m|
-        next if !self[m] ||
-                (self[m].is_a?(String) && self[m].empty?) ||
-                (self[m].is_a?(Array) && self[m].none?)
-
-        map[m.to_s] = self[m] if self[m]
+        if !self[m] ||
+           (self[m].is_a?(String) && self[m].empty?) ||
+           (self[m].is_a?(Array) && self[m].none?)
+          next
+        elsif self[m].is_a?(Struct)
+          map[m.to_s] = self[m].to_map
+        elsif self[m].is_a?(Array)
+          map[m.to_s] = self[m].sorted
+        else
+          map[m.to_s] = self[m]
+        end
       end
       map
     end
