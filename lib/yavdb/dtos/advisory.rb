@@ -86,7 +86,7 @@ module YAVDB
         elsif self[m].is_a?(Struct)
           map[m.to_s] = self[m].to_map
         elsif self[m].is_a?(Array)
-          map[m.to_s] = self[m].sorted
+          map[m.to_s] = self[m].sort_by { |c| c.to_s.downcase }
         else
           map[m.to_s] = self[m]
         end
