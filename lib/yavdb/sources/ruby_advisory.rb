@@ -33,7 +33,7 @@ module YAVDB
             Dir.chdir(repo_path) do
               file_paths.map do |file_path|
                 advisory_hash = YAML.load_file(file_path)
-                create(advisory_hash)
+                create(file_path, advisory_hash)
               end
             end
           end.flatten
@@ -43,10 +43,11 @@ module YAVDB
 
           private
 
-          def create(advisory_hash)
+          def create(_file_path, advisory_hash)
             date                = Date.strptime(advisory_hash['date'].to_s, '%Y-%m-%d')
             severity            = severity(advisory_hash['cvss_v2'], advisory_hash['cvss_v3'])
-            cve                 = ["CVE-#{advisory_hash['cve']}"]
+            cve                 = advisory_hash['cve'] && "CVE-#{advisory_hash['cve']}"
+            osvdb               = advisory_hash['osvdb'] && "OSVDB-#{advisory_hash['osvdb']}"
             references          = references(advisory_hash)
             vulnerable_versions = if advisory_hash['unaffected_versions'] || advisory_hash['patched_versions']
                                     nil
@@ -54,7 +55,7 @@ module YAVDB
                                     ['*']
                                   end
 
-            vuln_id_stamp = (cve && cve[0]) || date
+            vuln_id_stamp = cve || osvdb || date
             vuln_id       = "rubyadvisory:rubygems:#{advisory_hash['gem']}:#{vuln_id_stamp}"
 
             YAVDB::Advisory.new(
