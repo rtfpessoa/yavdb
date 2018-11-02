@@ -1,0 +1,36 @@
+---
+- id: snykio:rubygems:mysql-binuuid-rails:CVE-2018-18476
+  title: SQL Injection
+  description: |
+    [mysql-binuuid-rails][1] is a Store UUIDs in binary MySQL database
+    columns.
+
+    Affected versions of this package are vulnerable to SQL Injection. It
+    used a data type that is derived from the base Binary type, except, it
+    did not convert the value to hex. Instead, it assumed the string value
+    provided is a valid hex string without conducting any checks on it.
+
+
+
+    [1]: https://rubygems.org/gems/mysql-binuuid-rails
+  affected_package: mysql-binuuid-rails
+  vulnerable_versions:
+  - "<1.1.1"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2018-18476
+  cwe:
+  - CWE-89
+  disclosed_date: 2018-10-19
+  created_date: 2018-10-31
+  last_modified_date: 2018-10-31
+  credit:
+  - Emmanuel Joubaud
+  - Geoff Evason
+  - Stan Pitucha
+  references:
+  - https://gist.github.com/viraptor/881276ea61e8d56bac6e28454c79f1e6
+  - https://github.com/nedap/mysql-binuuid-rails/commit/9ae920951b46ff0163b16c55d744e89acb1036d4
+  - https://github.com/nedap/mysql-binuuid-rails/pull/18
+  source_url: https://snyk.io/vuln/SNYK-RUBY-MYSQLBINUUIDRAILS-72549

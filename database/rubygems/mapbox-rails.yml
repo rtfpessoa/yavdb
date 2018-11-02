@@ -31,6 +31,67 @@
   references:
   - https://github.com/rubysec/ruby-advisory-db
   source_url: https://nodesecurity.io/advisories/49
+- id: rubyadvisory:rubygems:mapbox-rails:OSVDB-129854
+  title: mapbox-rails Content Injection via TileJSON attribute
+  description: |
+    Mapbox.js versions 1.x prior to 1.6.5 and 2.x prior to 2.1.7 are vulnerable
+    to a cross-site-scripting attack in certain uncommon usage scenarios.
+
+    If you use L.mapbox.map or L.mapbox.tileLayer to load untrusted TileJSON
+    content from a non-Mapbox URL, it is possible for a malicious user with
+    control over the TileJSON content to inject script content into the
+    "attribution" value of the TileJSON which will be executed in the context of
+    the page using Mapbox.js.
+
+    Such usage is uncommon. The following usage scenarios are not vulnerable:
+
+    * only trusted TileJSON content is loaded
+    * TileJSON content comes only from mapbox.com URLs
+    * a Mapbox map ID is supplied, rather than a TileJSON URL
+  affected_package: mapbox-rails
+  vulnerable_versions:
+  - "*"
+  package_manager: rubygems
+  osvdb: 129854
+  disclosed_date: 2015-10-24
+  created_date: 2015-10-24
+  last_modified_date: 2015-10-24
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://nodesecurity.io/advisories/49
+- id: rubyadvisory:rubygems:mapbox-rails:OSVDB-132871
+  title: mapbox-rails Content Injection via TileJSON Name
+  description: |
+    Mapbox.js versions 1.x prior to 1.6.6 and 2.x prior to 2.2.4 are vulnerable
+    to a cross-site-scripting attack in certain uncommon usage scenarios.
+
+    If you use L.mapbox.map and L.mapbox.shareControl it is possible for a
+    malicious user with control over the TileJSON content to inject script
+    content into the name value of the TileJSON. After clicking on the share
+    control, the malicious code will execute in the context of the page using
+    Mapbox.js.
+
+    Such usage is uncommon. L.mapbox.shareControl is not automatically added to
+    Mapbox.js maps and must be explicitly added. The following usage scenarios
+    are not vulnerable:
+
+    * the map does not use a share control (L.mapbox.sharecontrol)
+    * only trusted TileJSON content is loaded
+  affected_package: mapbox-rails
+  vulnerable_versions:
+  - "*"
+  package_manager: rubygems
+  osvdb: 132871
+  disclosed_date: 2016-01-12
+  created_date: 2016-01-12
+  last_modified_date: 2016-01-12
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://nodesecurity.io/advisories/74
 - id: snykio:rubygems:mapbox-rails:20241
   title: Content Injection via TileJSON attribute
   description: |+
@@ -67,8 +128,8 @@
   - Juan Broullón
   references:
   - http://rubysec.com/advisories/OSVDB-129854/
-  - https://hackerone.com/reports/54327
   - https://github.com/mapbox/mapbox.js/commit/538d229ab6767bb4c3f3969c417f9884189c1512
+  - https://hackerone.com/reports/54327
   source_url: https://snyk.io/vuln/SNYK-RUBY-MAPBOXRAILS-20241
 - id: snykio:rubygems:mapbox-rails:20250
   title: Content Injection via TileJSON Name
@@ -107,6 +168,6 @@
   - Abdullah (enderun07)
   references:
   - http://rubysec.com/advisories/OSVDB-132871/
-  - https://hackerone.com/reports/99245
   - https://github.com/mapbox/mapbox.js/pull/1102
+  - https://hackerone.com/reports/99245
   source_url: https://snyk.io/vuln/SNYK-RUBY-MAPBOXRAILS-20250
