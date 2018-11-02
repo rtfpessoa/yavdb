@@ -25,8 +25,8 @@ jobs:
     - name: Restore yavdb cache
       type: cache-restore
       keys:
-      - crawler-yavdb-cache-1-{{ checksum "/tmp/yavdb.cache.log" }}
-      - crawler-yavdb-cache-1-
+      - 1-crawler-yavdb-cache-{{ checksum "/tmp/yavdb.cache.log" }}
+      - 1-crawler-yavdb-cache-
 
     - name: Bundle Install
       type: shell
@@ -48,7 +48,7 @@ jobs:
 
     - name: Save yavdb cache
       type: cache-save
-      key: crawler-yavdb-cache-1-{{ checksum "/tmp/yavdb.cache.log" }}
+      key: 1-crawler-yavdb-cache-{{ checksum "/tmp/yavdb.cache.log" }}
       paths:
       - ~/.yavdb/cache
 

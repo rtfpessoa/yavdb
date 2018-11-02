@@ -68,7 +68,7 @@ module YAVDB
               clean_version(advisory_hash['patched_versions']),
               severity,
               PACKAGE_MANAGER,
-              cve,
+              cve && [cve],
               nil, #:cwe
               advisory_hash['osvdb'],
               nil, #:cvss_v2_vector
