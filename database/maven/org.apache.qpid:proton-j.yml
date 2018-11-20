@@ -1,0 +1,40 @@
+---
+- id: snykio:maven:org.apache.qpid:proton-j:CVE-2018-17187
+  title: Man-in-the-Middle (MitM)
+  description: |
+    [org.apache.qpid:proton-j][1] is a messaging library.
+
+    Affected versions of this package are vulnerable to Man-in-the-Middle
+    (MitM) attacks. it included an optional wrapper layer to perform TLS,
+    enabled by use of the `transport.ssl(...)` methods. Unless a
+    verification mode was explicitly configured, client and server modes
+    previously defaulted as documented to not verifying a peer certificate,
+    with options to configure this explicitly or select a certificate
+    verification mode with or without hostname verification being performed.
+    The latter hostname verifying mode was not previously implemented, with
+    attempts to use it resulting in an exception. This left only the option
+    to verify the certificate is trusted, leaving such a client vulnerable
+    to Man In The Middle (MITM) attack.
+
+
+
+    [1]: https://mvnrepository.com/artifact/org.apache.qpid/proton-j
+  affected_package: org.apache.qpid:proton-j
+  vulnerable_versions:
+  - "< 0.30.0"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2018-17187
+  cwe:
+  - CWE-300
+  disclosed_date: 2018-11-14
+  created_date: 2018-11-19
+  last_modified_date: 2018-11-19
+  credit:
+  - Peter Stockli
+  references:
+  - https://github.com/apache/qpid-proton-j/commit/0cb8ca03cec42120dcfc434561592d89a89a805e
+  - https://issues.apache.org/jira/browse/PROTON-1962
+  - https://mail-archives.apache.org/mod_mbox/qpid-users/201811.mbox/%3CCAFitrpQSV73Vz7rJYfLJK7gvEymZSCR5ooWUeU8j4jzRydk-eg%40mail.gmail.com%3E
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEQPID-72605
