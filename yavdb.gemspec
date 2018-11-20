@@ -36,6 +36,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rubocop-rspec', ['~> 1.29']
 
   # Runtime
+  spec.add_runtime_dependency 'execjs', ['~> 2.7.0']
   spec.add_runtime_dependency 'json', ['~> 2.1']
   spec.add_runtime_dependency 'kramdown', ['~> 1.17']
   spec.add_runtime_dependency 'oga', ['~> 2.15']

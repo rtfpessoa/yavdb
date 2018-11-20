@@ -47,6 +47,8 @@ module YAVDB
             case response
               when Net::HTTPNotFound then
                 raise ArgumentError, 'page not found'
+              when Net::HTTPTooManyRequests then
+                raise ArgumentError, 'too many requests'
               else
                 response.body.lines
             end
