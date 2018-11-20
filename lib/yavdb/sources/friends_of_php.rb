@@ -39,7 +39,7 @@ module YAVDB
                 file_paths.map do |file_path|
                   advisory_hash = YAML.load_file(file_path)
                   url           = "#{repository_url}/blob/master/#{file_path}"
-                  filename      = File.basename(file_path, '.yml')
+                  filename      = File.basename(file_path, '.yaml')
                   create(url, filename, advisory_hash)
                 end
               end
@@ -59,8 +59,7 @@ module YAVDB
 
           package_name = advisory_hash['reference'].gsub(%r{composer:\/\/(.*)}, '\1')
 
-          vuln_id_stamp = (cves && cves[0]) || filename
-          vuln_id       = "friendsofphp:packagist:#{package_name}:#{vuln_id_stamp}"
+          vuln_id = "friendsofphp:packagist:#{package_name}:#{filename}"
 
           YAVDB::Advisory.new(
             vuln_id,

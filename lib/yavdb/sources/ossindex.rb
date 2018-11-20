@@ -96,8 +96,7 @@ module YAVDB
                          .map { |version| version.gsub("''", '') }
             versions = ['*'] unless versions.any?
 
-            vuln_id_stamp = (cve && cve[0]) || published_date
-            vuln_id       = "ossindex:#{package_manager}:#{package_name}:#{vuln_id_stamp}"
+            vuln_id = "ossindex:#{package_manager}:#{package_name}:#{advisory['id']}"
 
             YAVDB::Advisory.new(
               vuln_id,
