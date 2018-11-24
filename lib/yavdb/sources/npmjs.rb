@@ -62,7 +62,7 @@ module YAVDB
 
           def create(package)
             published_date = Date.strptime(package['created'], '%s')
-            updated_date   = Date.strptime(package['updated'], '%s')
+            updated_date = Date.strptime(package['updated'], '%s')
 
             cves = package['cves'] || []
 
@@ -79,7 +79,7 @@ module YAVDB
               versions,
               nil, #:unaffected_versions
               nil, #:patched_versions
-              package['severity'],
+              parse_severity(package['severity']),
               'npm',
               cves,
               package['cwe'],
@@ -104,6 +104,21 @@ module YAVDB
 
           def get_page_url(page)
             "#{API_URL}/advisories?page=#{page}&perPage=300&order=-id"
+          end
+
+          def parse_severity(severity)
+            case severity
+              when 'low' then
+                'low'
+              when 'moderate' then
+                'medium'
+              when 'high' then
+                'high'
+              when 'critical' then
+                'high'
+              else
+                'high'
+            end
           end
 
         end

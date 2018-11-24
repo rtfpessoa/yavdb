@@ -67,7 +67,7 @@ RSpec.describe YAVDB::Sources::SnykIO::Client do
     end
 
     it 'should have correct properties for SNYK-JAVA-ORGJBPM-31602' do
-      vuln = advisories.select { |v| v.id == 'snykio:maven:org.jbpm:jbpm-designer-client:CVE-2016-5398' }.first
+      vuln = advisories.select { |v| v.id == 'snykio:maven:org.jbpm:jbpm-designer-client:31602' }.first
       expect(vuln).to have_attributes(:title => 'Cross-site Scripting (XSS)')
       expect(vuln).to have_attributes(:description => "Affected versions of [`org.jbpm:jbpm-designer-client`][1] are vulnerable\nto Cross-site Scripting (XSS).\n\n\n\n[1]: https://jbpm.org\n\\nCross-Site Scripting (XSS) attacks occur when an attacker tricks a\nuser’s browser to execute malicious JavaScript code in the context of a\nvictim’s domain. Such scripts can steal the user’s session cookies for\nthe domain, scrape or modify its content, and perform or modify actions\non the user’s behalf, actions typically blocked by the browser’s Same\nOrigin Policy.\n\nThese attacks are possible by escaping the context of the web\napplication and injecting malicious scripts in an otherwise trusted\nwebsite. These scripts can introduce additional attributes (say, a\n\\\"new\\\" option in a dropdown list or a new link to a malicious site) and\ncan potentially execute code on the clients side, unbeknown to the\nvictim. This occurs when characters like `<` `>` `\"` `'` are not escaped\nproperly.\n\nThere are a few types of XSS:\n\n* **Persistent XSS** is an attack in which the malicious code persists\n  into the web app’s database.\n* **Reflected XSS** is an which the website echoes back a portion of the\n  request. The attacker needs to trick the user into clicking a\n  malicious link (for instance through a phishing email or malicious JS\n  on another page), which triggers the XSS attack.\n* **DOM-based XSS** is an that occurs purely in the browser when\n  client-side JavaScript echoes back a portion of the URL onto the page.\n  DOM-Based XSS is notoriously hard to detect, as the server never gets\n  a chance to see the attack taking place.\n\n")
       expect(vuln).to have_attributes(:affected_package => 'org.jbpm:jbpm-designer-client')
@@ -103,7 +103,7 @@ RSpec.describe YAVDB::Sources::SnykIO::Client do
     end
 
     it 'should have correct properties for SNYK-PYTHON-SWAUTH-40766' do
-      vuln = advisories.select { |v| v.id == 'snykio:pypi:swauth:CVE-2017-16613' }.first
+      vuln = advisories.select { |v| v.id == 'snykio:pypi:swauth:40766' }.first
       expect(vuln).to have_attributes(:title => 'Access Restriction Bypass')
       expect(vuln).to have_attributes(:description => "[`swauth`][1] is An alternative authentication system for Swift.\n\nAffected versions of the package are vulnerable to Access Restriction\nBypass. An issue was discovered in middleware.py in OpenStack Swauth\nthrough 1.2.0 when used with OpenStack Swift through 2.15.1. The Swift\nobject store and proxy server are saving (unhashed) tokens retrieved\nfrom the Swauth middleware authentication mechanism to a log file as\npart of a GET URI. This allows attackers to bypass authentication by\ninserting a token into an X-Auth-Token header of a new request.\n\n\n\n[1]: http://pypi.python.org/pypi/swauth\n")
       expect(vuln).to have_attributes(:affected_package => 'swauth')
@@ -157,7 +157,7 @@ RSpec.describe YAVDB::Sources::SnykIO::Client do
     end
 
     it 'should have correct properties for SNYK-GOLANG-GITHUBCOMSNAPCORESNAPDDAEMON-50060' do
-      vuln = advisories.select { |v| v.id == 'snykio:go:github.com/snapcore/snapd/daemon:CVE-2017-14178' }.first
+      vuln = advisories.select { |v| v.id == 'snykio:go:github.com/snapcore/snapd/daemon:50060' }.first
       expect(vuln).to have_attributes(:title => 'Authentication Bypass')
       expect(vuln).to have_attributes(:description => "Affected versions of [`github.com/snapcore/snapd/daemon`][1] are\nvulnerable to Authentication Bypass. The `snap logs` command could be\nmade to call journalctl without match arguments and therefore allow\nunprivileged, unauthenticated users to bypass systemd-journald\\'s access\nrestrictions.\n\n\n\n[1]: https://github.com/snapcore/snapd\n")
       expect(vuln).to have_attributes(:affected_package => 'github.com/snapcore/snapd/daemon')
@@ -175,7 +175,7 @@ RSpec.describe YAVDB::Sources::SnykIO::Client do
     end
 
     it 'should have correct properties for SNYK-PHP-CONTAOLISTINGBUNDLE-70371' do
-      vuln = advisories.select { |v| v.id == 'snykio:packagist:contao/listing-bundle:CVE-2017-16558' }.first
+      vuln = advisories.select { |v| v.id == 'snykio:packagist:contao/listing-bundle:70371' }.first
       expect(vuln).to have_attributes(:title => 'SQL Injection')
       expect(vuln).to have_attributes(:description => "Affected versions of [`contao/listing-bundle`][1] are vulnerable to SQL\nInjection\n\nBoth the search filter in the back end and the \\\"listing\\\" module in the\nfront end are vulnerable. To exploit the vulnerability in the back end,\na back end user has to be logged in, whereas the front end vulnerability\ncan be exploited by anyone.\n\n\n\n[1]: https://packagist.org/packages/contao/listing-bundle\n")
       expect(vuln).to have_attributes(:affected_package => 'contao/listing-bundle')
