@@ -1,5 +1,71 @@
 ---
-- id: snykio:npm:jquery:CVE-2011-4969
+- id: npmjs:npm:jquery:328
+  title: Cross-Site Scripting (XSS)
+  description: Affected versions of `jquery` interpret `text/javascript` responses
+    from cross-origin ajax requests, and automatically execute the contents in `jQuery.globalEval`,
+    even when the ajax request doesn't contain the `dataType` option.
+  affected_package: jquery
+  vulnerable_versions:
+  - ">=1.12.4 <=2.2.4"
+  - ">=1.4.0 <=1.11.3"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2017-16012
+  cwe: CWE-725
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Egor Homakov
+  references: https://npmjs.com/advisories/328
+  source_url: https://npmjs.com/advisories/328
+- id: npmjs:npm:jquery:329
+  title: Cross-Site Scripting
+  description: |+
+    Affected versions of `jquery` are vulnerable to cross-site scripting. This occurs because the main `jquery` function uses a regular expression to differentiate between HTML and selectors, but does not properly anchor the regular expression. The result is that `jquery` may interpret HTML as selectors when given certain inputs, allowing for client side code execution.
+
+    ## Proof of Concept
+    ```
+    $("#log").html(
+        $("element[attribute='<img src=\"x\" onerror=\"alert(1)\" />']").html()
+    );
+    ```
+
+  affected_package: jquery
+  vulnerable_versions:
+  - ">=1.7.1 <=1.8.3"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2017-16011
+  cwe: CWE-79
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Richard Gibson
+  references: https://npmjs.com/advisories/329
+  source_url: https://npmjs.com/advisories/329
+- id: npmjs:npm:jquery:330
+  title: Denial of Service
+  description: Affected versions of `jquery` use a lowercasing logic on attribute
+    names. When given a boolean attribute with a name that contains uppercase characters,
+    `jquery` enters into an infinite recursion loop, exceeding the call stack limit,
+    and resulting in a denial of service condition.
+  affected_package: jquery
+  vulnerable_versions:
+  - ">=2.10 <=2.2.4"
+  severity: moderate
+  package_manager: npm
+  cve:
+  - CVE-2017-16027
+  cwe: CWE-121
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Michał Gołębiowski
+  references: https://npmjs.com/advisories/330
+  source_url: https://npmjs.com/advisories/330
+- id: snykio:npm:jquery:20110606
   title: Cross-site Scripting (XSS)
   description: |+
     [`jquery`][1] is JavaScript library for DOM operations. Affected
@@ -61,7 +127,7 @@
   - http://www.openwall.com/lists/oss-security/2013/01/31/3
   - https://bugs.jquery.com/ticket/9521
   source_url: https://snyk.io/vuln/npm:jquery:20110606
-- id: snykio:npm:jquery:CVE-2012-6708
+- id: snykio:npm:jquery:20120206
   title: Cross-site Scripting (XSS)
   description: |+
     [`jquery`][1] is JavaScript library for DOM operations.
@@ -129,7 +195,7 @@
   - https://bugs.jquery.com/ticket/11290
   - https://github.com/jquery/jquery/commit/05531fc4080ae24070930d15ae0cea7ae056457d
   source_url: https://snyk.io/vuln/npm:jquery:20120206
-- id: snykio:npm:jquery:CVE-2014-6071
+- id: snykio:npm:jquery:20140902
   title: Cross-site Scripting (XSS)
   description: |+
     [`jquery`][1] is JavaScript library for DOM operations. Affected
@@ -186,7 +252,7 @@
   - http://seclists.org/fulldisclosure/2014/Sep/10
   - https://bugzilla.redhat.com/show_bug.cgi?id=1136683
   source_url: https://snyk.io/vuln/npm:jquery:20140902
-- id: snykio:npm:jquery:CVE-2015-9251
+- id: snykio:npm:jquery:20150627
   title: Cross-site Scripting (XSS)
   description: |+
     [`jquery`][1] is JavaScript library for DOM operations.
@@ -248,7 +314,7 @@
   - https://github.com/jquery/jquery/pull/2588
   - https://github.com/jquery/jquery/pull/2588/commits/c254d308a7d3f1eac4d0b42837804cfffcba4bb2
   source_url: https://snyk.io/vuln/npm:jquery:20150627
-- id: snykio:npm:jquery:CVE-2016-10707
+- id: snykio:npm:jquery:20160529
   title: Denial of Service (DoS)
   description: |+
     [`jquery`][1] is JavaScript library for DOM operations. Affected
@@ -305,133 +371,3 @@
   - https://github.com/jquery/jquery/pull/3134
   - https://jsfiddle.net/shnann6y/2/
   source_url: https://snyk.io/vuln/npm:jquery:20160529
-- id: snykio:npm:jquery:CVE-2017-16011
-  title: Cross-site Scripting (XSS)
-  description: |+
-    [`jquery`][1] is JavaScript library for DOM operations.
-
-    Affected versions of the package are vulnerable to Cross-site Scripting
-    (XSS) attacks. The `jQuery(strInput)` function does not differentiate
-    selectors from HTML in a reliable fashion. In the vulnerable version,
-    jQuery determined whether the input was HTML or not by looking for the
-    \'&lt;\' character anywhere in the string, giving attackers more
-    flexibility when attempting to construct malicious payload.
-
-    In the fixed versions, jQuery only deems the input to be HTML if it
-    explicitly starts with \'&lt;\', limiting exploitability only to
-    attackers who can control the beginning of a string, which is far less
-    common.
-
-
-
-    [1]: https://www.npmjs.com/package/jquery
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-  affected_package: jquery
-  vulnerable_versions:
-  - "<1.9.0 >=1.7.1"
-  severity: medium
-  package_manager: npm
-  cve:
-  - CVE-2012-6708
-  - CVE-2017-16011
-  cwe:
-  - CWE-79
-  disclosed_date: 2012-06-19
-  created_date: 2016-10-20
-  last_modified_date: 2016-10-20
-  credit:
-  - Richard Gibson
-  references:
-  - http://jsfiddle.net/C8dgG/
-  - https://bugs.jquery.com/ticket/11290
-  - https://github.com/jquery/jquery/commit/05531fc4080ae24070930d15ae0cea7ae056457d
-  source_url: https://snyk.io/vuln/npm:jquery:20120206
-- id: snykio:npm:jquery:CVE-2017-16012
-  title: Cross-site Scripting (XSS)
-  description: |+
-    [`jquery`][1] is JavaScript library for DOM operations.
-
-    Affected versions of the package are vulnerable to Cross-site Scripting
-    (XSS) attacks when a cross-domain ajax request is performed without the
-    `dataType` option causing `text/javascript` responses to be executed.
-
-
-
-    [1]: https://www.npmjs.com/package/jquery
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-  affected_package: jquery
-  vulnerable_versions:
-  - "<1.12.0 >=1.4.0"
-  - "<3.0.0-beta1 >1.12.3"
-  severity: medium
-  package_manager: npm
-  cve:
-  - CVE-2015-9251
-  - CVE-2017-16012
-  cwe:
-  - CWE-79
-  disclosed_date: 2015-06-26
-  created_date: 2016-11-27
-  last_modified_date: 2016-11-27
-  credit:
-  - Egor Homakov
-  references:
-  - https://github.com/jquery/jquery/commit/f60729f3903d17917dc351f3ac87794de379b0cc
-  - https://github.com/jquery/jquery/issues/2432
-  - https://github.com/jquery/jquery/pull/2588
-  - https://github.com/jquery/jquery/pull/2588/commits/c254d308a7d3f1eac4d0b42837804cfffcba4bb2
-  source_url: https://snyk.io/vuln/npm:jquery:20150627

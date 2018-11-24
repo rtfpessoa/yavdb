@@ -1,5 +1,39 @@
 ---
-- id: snykio:npm:serverwg:CVE-2017-16101
+- id: npmjs:npm:serverwg:364
+  title: Directory Traversal
+  description: |-
+    `serverwg` is a simple http server.
+
+    `serverwg` is vulnerable to a directory traversal issue, giving an attacker access to the filesystem by placing "../" in the URL.
+
+    Example request:
+    ```
+    GET /../../../../../../../../../../etc/passwd HTTP/1.1
+    host:foo
+    ```
+    and response:
+    ```
+    HTTP/1.1 200 OK
+    Date: Wed, 17 May 2017 22:52:08 GMT
+    Connection: keep-alive
+
+    {contents of /etc/passwd}
+    ```
+  affected_package: serverwg
+  vulnerable_versions:
+  - "<=99.999.9999"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2017-16101
+  cwe: CWE-22
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Liang Gong
+  references: https://npmjs.com/advisories/364
+  source_url: https://npmjs.com/advisories/364
+- id: snykio:npm:serverwg:20170511
   title: Directory Traversal
   description: |
     [`serverwg`][1] is a server. Affected versions of the package are

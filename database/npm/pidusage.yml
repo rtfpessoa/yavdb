@@ -1,5 +1,26 @@
 ---
-- id: ossindex:npm:pidusage:2017-07-29
+- id: npmjs:npm:pidusage:356
+  title: Command Injection
+  description: "Affected versions of `pidusage` pass unsanitized input to `child_process.exec()`,
+    resulting in arbitrary code execution in the `ps` method.\n \nThis package is
+    vulnerable to this PoC on Darwin, SunOS, FreeBSD, and AIX.\n\nWindows and Linux
+    are not vulnerable. \n\n## Proof of Concept\n```\nvar pid = require('pidusage');\npid.stat('1
+    && /usr/local/bin/python');\n```"
+  affected_package: pidusage
+  vulnerable_versions:
+  - "<=1.1.4"
+  severity: critical
+  package_manager: npm
+  cve:
+  - CVE-2017-16034
+  cwe: CWE-94
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: micaksica
+  references: https://npmjs.com/advisories/356
+  source_url: https://npmjs.com/advisories/356
+- id: ossindex:npm:pidusage:8405000435
   title: Command Injection
   description: "> The pidusage module passes unsanitized input to child_process.exec,
     resulting in command injection in the ps method, as the pid is never cast to an
@@ -17,7 +38,7 @@
   references:
   - https://nodesecurity.io/advisories/356
   source_url: https://ossindex.net/resource/package/7014295539/vulnerabilities
-- id: snykio:npm:pidusage:CVE-2017-1000220
+- id: snykio:npm:pidusage:20170605
   title: Arbitrary Command Injection
   description: |
     [`pidusage`][1] is a package for Cross-platform process cpu % and memory

@@ -1,5 +1,102 @@
 ---
-- id: ossindex:npm:sanitize-html:2016-09-18
+- id: npmjs:npm:sanitize-html:135
+  title: Cross-Site Scripting
+  description: Affected versions of `sanitize-html` do not sanitize input recursively,
+    which may allow an attacker to execute arbitrary Javascript.
+  affected_package: sanitize-html
+  vulnerable_versions:
+  - "<=1.4.2"
+  severity: moderate
+  package_manager: npm
+  cve:
+  - CVE-2016-1000237
+  cwe: CWE-79
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Björn Kimminich
+  references: https://npmjs.com/advisories/135
+  source_url: https://npmjs.com/advisories/135
+- id: npmjs:npm:sanitize-html:154
+  title: Cross-Site Scripting
+  description: |-
+    Affected versions of `sanitize-html` are vulnerable to cross-site scripting when allowedTags includes at least one `nonTextTag`.
+
+    ## Proof of Concept
+
+    ```
+    var sanitizeHtml = require('sanitize-html');
+
+    var dirty = '!<textarea>&lt;/textarea&gt;<svg/onload=prompt`xs`&gt;</textarea>!';
+    var clean = sanitizeHtml(dirty, {
+        allowedTags: [ 'textarea' ]
+    });
+
+    console.log(clean);
+
+    // !<textarea></textarea><svg/onload=prompt`xs`></textarea>!
+    ```
+  affected_package: sanitize-html
+  vulnerable_versions:
+  - "<=1.11.1"
+  severity: moderate
+  package_manager: npm
+  cve:
+  - CVE-2017-16016
+  cwe: CWE-725
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Andrew Krasichkov
+  references: https://npmjs.com/advisories/154
+  source_url: https://npmjs.com/advisories/154
+- id: npmjs:npm:sanitize-html:155
+  title: Cross-Site Scripting
+  description: |-
+    Affected versions of `sanitize-html` are vulnerable to cross-site scripting.
+
+    ## Proof of Concept:
+
+    `<IMG SRC= onmouseover="alert('XSS');">`
+    produces the following:
+
+    `<img src="onmouseover="alert('XSS');"" />`
+    This is definitely invalid HTML, but would suggest that it's being interpreted incorrectly by the parser.
+  affected_package: sanitize-html
+  vulnerable_versions:
+  - "<=1.2.2"
+  severity: moderate
+  package_manager: npm
+  cve:
+  - CVE-2017-16017
+  cwe: CWE-725
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Jim O'Brien
+  references: https://npmjs.com/advisories/155
+  source_url: https://npmjs.com/advisories/155
+- id: ossindex:npm:sanitize-html:8400152731
+  title: Cross Site Scripting (XSS) using empty, undelimited attributes
+  description: Attributes with unescaped double quotes are not properly handled and
+    can be a vector of XSS attacks.
+  affected_package: sanitize-html
+  vulnerable_versions:
+  - "<=1.2.2"
+  package_manager: npm
+  disclosed_date: 2016-09-18
+  created_date: 2016-09-18
+  last_modified_date: 2017-04-16
+  credit:
+  - OSSIndex
+  references:
+  - https://cwe.mitre.org/data/definitions/79.html
+  - https://github.com/punkave/sanitize-html/blob/master/README.md#changelog
+  - https://github.com/punkave/sanitize-html/issues/19
+  - https://github.com/punkave/sanitize-html/pull/20
+  - https://nodesecurity.io/advisories/155
+  source_url: https://ossindex.net/resource/package/7014413855/vulnerabilities
+- id: ossindex:npm:sanitize-html:8400152732
   title: Cross Site Scripting (XSS) through nonTextTags
   description: Allowing at least one `nonTextTags` can result in an XSS vulnerability.
   affected_package: sanitize-html
@@ -17,7 +114,7 @@
   - https://github.com/punkave/sanitize-html/issues/100
   - https://nodesecurity.io/advisories/154
   source_url: https://ossindex.net/resource/package/7014413855/vulnerabilities
-- id: ossindex:npm:sanitize-html:2016-10-05
+- id: ossindex:npm:sanitize-html:8400171359
   title: Cross Site Scripting (XSS)
   description: With the `a` tag and `href` attribute allowed, it is possible to bypass
     the sanitizer.
@@ -35,6 +132,109 @@
   - https://github.com/punkave/sanitize-html/commit/889d4ec968e175f1905b2eb9d33f1fa89217cb02
   - https://github.com/punkave/sanitize-html/issues/1
   source_url: https://ossindex.net/resource/package/7014413855/vulnerabilities
+- id: ossindex:npm:sanitize-html:8400171360
+  title: Cross Site Scripting (XSS)
+  description: Comments in URI schemes can allow for sanitizer bypass.
+  affected_package: sanitize-html
+  vulnerable_versions:
+  - "<1.10.1"
+  package_manager: npm
+  disclosed_date: 2016-10-05
+  created_date: 2016-10-05
+  last_modified_date: 2017-02-20
+  credit:
+  - OSSIndex
+  references:
+  - https://cwe.mitre.org/data/definitions/79.html
+  - https://github.com/punkave/sanitize-html/issues/15
+  source_url: https://ossindex.net/resource/package/7014413855/vulnerabilities
+- id: ossindex:npm:sanitize-html:8400171362
+  title: Sanitization not applied recursively
+  description: "Sanitization is not applied recursively, leading to a vulnerability
+    to certain masking attacks.\n\nThe issue was later resolved in a different manner:\n\n>
+    This issue has been resolved better through the use of the decodeEntities: true
+    option of htmlparser2. Recursive invocation is no longer required to pass the
+    test suite.\n> \n> -- [github.com](https://github.com/punkave/sanitize-html/issues/29)"
+  affected_package: sanitize-html
+  vulnerable_versions:
+  - "<1.4.3"
+  package_manager: npm
+  disclosed_date: 2016-10-05
+  created_date: 2016-10-05
+  last_modified_date: 2017-07-26
+  credit:
+  - OSSIndex
+  references:
+  - https://github.com/punkave/sanitize-html/commit/762fbc7bba389f3f789cc291c1eb2b64f60f2caf
+  - https://github.com/punkave/sanitize-html/issues/29
+  source_url: https://ossindex.net/resource/package/7014413855/vulnerabilities
+- id: snykio:npm:sanitize-html:20140717
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [`sanitize-html`][1] is a library for scrubbing html input of malicious
+    values.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS) due to unescaped double quotes.
+
+    Entering the following:
+
+        <IMG SRC= onmouseover="alert('XSS');">
+
+    produces the following:
+
+        <img src="onmouseover="alert('XSS');"" />
+
+
+
+    [1]: https://www.npmjs.com/package/sanitize-html
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+  affected_package: sanitize-html
+  vulnerable_versions:
+  - "<1.2.3"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2017-16017
+  cwe:
+  - CWE-79
+  disclosed_date: 2014-07-17
+  created_date: 2017-04-16
+  last_modified_date: 2017-04-16
+  credit:
+  - Jim O'Brien
+  references:
+  - https://github.com/punkave/sanitize-html/blob/master/README.md#changelog
+  - https://github.com/punkave/sanitize-html/issues/19
+  - https://github.com/punkave/sanitize-html/pull/20
+  source_url: https://snyk.io/vuln/npm:sanitize-html:20140717
 - id: snykio:npm:sanitize-html:20141024
   title: Cross-site Scripting (XSS)
   description: |+
@@ -138,7 +338,7 @@
   - https://github.com/punkave/sanitize-html/commit/762fbc7bba389f3f789cc291c1eb2b64f60f2caf
   - https://github.com/punkave/sanitize-html/issues/29
   source_url: https://snyk.io/vuln/npm:sanitize-html:20160801
-- id: snykio:npm:sanitize-html:CVE-2017-16016
+- id: snykio:npm:sanitize-html:20161026
   title: Cross-site Scripting (XSS)
   description: "[`sanitize-html`][1] is a library for scrubbing html input of malicious\nvalues.\n\nAffected
     versions of this package are vulnerable to Cross-site Scripting\n(XSS) attacks.
@@ -184,70 +384,3 @@
   - https://github.com/punkave/sanitize-html/commit/5d205a1005ba0df80e21d8c64a15bb3accdb2403
   - https://github.com/punkave/sanitize-html/issues/100
   source_url: https://snyk.io/vuln/npm:sanitize-html:20161026
-- id: snykio:npm:sanitize-html:CVE-2017-16017
-  title: Cross-site Scripting (XSS)
-  description: |+
-    [`sanitize-html`][1] is a library for scrubbing html input of malicious
-    values.
-
-    Affected versions of this package are vulnerable to Cross-site Scripting
-    (XSS) due to unescaped double quotes.
-
-    Entering the following:
-
-        <IMG SRC= onmouseover="alert('XSS');">
-
-    produces the following:
-
-        <img src="onmouseover="alert('XSS');"" />
-
-
-
-    [1]: https://www.npmjs.com/package/sanitize-html
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-  affected_package: sanitize-html
-  vulnerable_versions:
-  - "<1.2.3"
-  severity: medium
-  package_manager: npm
-  cve:
-  - CVE-2017-16017
-  cwe:
-  - CWE-79
-  disclosed_date: 2014-07-17
-  created_date: 2017-04-16
-  last_modified_date: 2017-04-16
-  credit:
-  - Jim O'Brien
-  references:
-  - https://github.com/punkave/sanitize-html/blob/master/README.md#changelog
-  - https://github.com/punkave/sanitize-html/issues/19
-  - https://github.com/punkave/sanitize-html/pull/20
-  source_url: https://snyk.io/vuln/npm:sanitize-html:20140717

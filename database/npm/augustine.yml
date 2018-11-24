@@ -1,5 +1,27 @@
 ---
-- id: snykio:npm:augustine:CVE-2017-0930
+- id: npmjs:npm:augustine:559
+  title: Directory Traversal
+  description: |-
+    Affected versions of `augustine` resolve relative file paths, resulting in a directory traversal vulnerability. A malicious actor can use this vulnerability to access files outside of the intended directory root, which may result in the disclosure of private files on the vulnerable system.
+
+    ## Proof of Concept
+    ```
+    GET //etc/passwd HTTP/1.1
+    host:foo
+    ```
+  affected_package: augustine
+  vulnerable_versions:
+  - "<=99.999.99999"
+  severity: high
+  package_manager: npm
+  cwe: CWE-22
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Yasin Soliman (ysx)
+  references: https://npmjs.com/advisories/559
+  source_url: https://npmjs.com/advisories/559
+- id: snykio:npm:augustine:20180123
   title: Directory Traversal
   description: |
     [`augustine`][1] is a simple http server for serving static resources

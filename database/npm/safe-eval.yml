@@ -1,5 +1,26 @@
 ---
-- id: snykio:npm:safe-eval:CVE-2017-16088
+- id: npmjs:npm:safe-eval:337
+  title: Sandbox Breakout
+  description: "Affected versions of `safe-eval` are vulnerable to a sandbox escape.
+    By accessing object constructors, un-sanitized user input can access the entire
+    standard library and effectively break out of the sandbox. \n\n## Proof of Concept:\nThis
+    code accesses the process object and calls `.exit()`\n```\nvar safeEval = require('safe-eval');\nsafeEval(\"this.constructor.constructor('return
+    process')().exit()\");\n```"
+  affected_package: safe-eval
+  vulnerable_versions:
+  - "<0.4.0"
+  severity: critical
+  package_manager: npm
+  cve:
+  - CVE-2017-16088
+  cwe: CWE-265
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Alessandro Nadalin
+  references: https://npmjs.com/advisories/337
+  source_url: https://npmjs.com/advisories/337
+- id: snykio:npm:safe-eval:20170830
   title: Sandbox Escaping
   description: |+
     \[`safe-eval`\] is a version of `eval`, claiming to be safer.

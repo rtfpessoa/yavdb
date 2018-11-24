@@ -1,33 +1,27 @@
 ---
-- id: snykio:npm:superagent:20181108
-  title: Information Exposure
-  description: |
-    [superagent][1] is a small progressive client-side HTTP request library,
-    and Node.js module.
-
-    Affected versions of this package are vulnerable to Information Exposure
-    due to sending the contents of Authorization to third parties.
-
-
-
-    [1]: https://www.npmjs.com/package/superagent
+- id: npmjs:npm:superagent:479
+  title: Large gzip Denial of Service
+  description: "Affected versions of `superagent` do not check the post-decompression
+    size of ZIP compressed HTTP responses prior to decompressing. This results in
+    the package being vulnerable to a [ZIP bomb](https://en.wikipedia.org/wiki/Zip_bomb)
+    attack, where an extremely small ZIP file becomes many orders of magnitude larger
+    when decompressed. \n\nThis may result in unrestrained CPU/Memory/Disk consumption,
+    causing a denial of service condition."
   affected_package: superagent
   vulnerable_versions:
-  - "<3.8.1"
-  severity: medium
+  - "<3.7.0"
+  severity: low
   package_manager: npm
-  cwe:
-  - CWE-200
-  disclosed_date: 2018-11-08
-  created_date: 2018-07-31
-  last_modified_date: 2018-07-31
-  credit:
-  - pszabop
-  references:
-  - https://github.com/visionmedia/superagent/commit/087edaf15cac51f69ae6346c431f40627aff0ff4
-  - https://github.com/visionmedia/superagent/issues/1309
-  source_url: https://snyk.io/vuln/npm:superagent:20181108
-- id: snykio:npm:superagent:CVE-2017-16129
+  cve:
+  - CVE-2017-16129
+  cwe: CWE-409
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Dennis Appelt
+  references: https://npmjs.com/advisories/479
+  source_url: https://npmjs.com/advisories/479
+- id: snykio:npm:superagent:20170807
   title: Denial of Service (DoS)
   description: |+
     [`superagent`][1] is elegant &amp; feature rich browser / node HTTP with
@@ -85,3 +79,31 @@
   references:
   - https://github.com/visionmedia/superagent/issues/1259
   source_url: https://snyk.io/vuln/npm:superagent:20170807
+- id: snykio:npm:superagent:20181108
+  title: Information Exposure
+  description: |
+    [superagent][1] is a small progressive client-side HTTP request library,
+    and Node.js module.
+
+    Affected versions of this package are vulnerable to Information Exposure
+    due to sending the contents of Authorization to third parties.
+
+
+
+    [1]: https://www.npmjs.com/package/superagent
+  affected_package: superagent
+  vulnerable_versions:
+  - "<3.8.1"
+  severity: medium
+  package_manager: npm
+  cwe:
+  - CWE-200
+  disclosed_date: 2018-11-08
+  created_date: 2018-07-31
+  last_modified_date: 2018-07-31
+  credit:
+  - pszabop
+  references:
+  - https://github.com/visionmedia/superagent/commit/087edaf15cac51f69ae6346c431f40627aff0ff4
+  - https://github.com/visionmedia/superagent/issues/1309
+  source_url: https://snyk.io/vuln/npm:superagent:20181108

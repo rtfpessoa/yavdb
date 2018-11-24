@@ -1,5 +1,70 @@
 ---
-- id: snykio:maven:org.apache.nifi:nifi-web-security:CVE-2017-15703
+- id: snykio:maven:org.apache.nifi:nifi-web-security:31422
+  title: Unauthorized Data Access
+  description: |
+    [`org.apache.nifi:nifi-web-security`][1] Affected versions of this
+    package ate vulnerable to Unauthorized Data Access in a cluster
+    environment. An anonymous user request can be replicated to another
+    node. This node will contain the identity of the originating node rather
+    than the anonymous user\'s identity.
+
+
+
+    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22nifi-web-security%22
+  affected_package: org.apache.nifi:nifi-web-security
+  vulnerable_versions:
+  - ">= 0.7 < 0.7.2"
+  - ">= 1.1 < 1.1.2"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2017-5635
+  cwe:
+  - CWE-767
+  disclosed_date: 2017-03-10
+  created_date: 2017-05-21
+  last_modified_date: 2017-05-21
+  credit:
+  - Unknown
+  references:
+  - http://seclists.org/oss-sec/2017/q1/565
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2017-5635
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHENIFI-31422
+- id: snykio:maven:org.apache.nifi:nifi-web-security:31439
+  title: User Impersonation
+  description: |
+    [`org.apache.nifi:nifi-web-security`][1]
+
+    Affected versions of this package are vulnerable to User Impersonation.
+    An attacker could carefully craft a username to impersonate another user
+    and gain their permissions on a replicated request to another node, via
+    the the proxy chain serialization/deserialization functions as they are
+    vulnerable to an injection attack. This only occurs in a cluster
+    environment.
+
+
+
+    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22nifi-web-security%22
+  affected_package: org.apache.nifi:nifi-web-security
+  vulnerable_versions:
+  - ">= 0.7 < 0.7.2"
+  - ">= 1.1 < 1.1.2"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2017-5636
+  cwe:
+  - CWE-290
+  disclosed_date: 2017-03-10
+  created_date: 2017-05-21
+  last_modified_date: 2017-05-21
+  credit:
+  - Andy LoPresto
+  references:
+  - http://seclists.org/oss-sec/2017/q1/565
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2017-5636
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHENIFI-31439
+- id: snykio:maven:org.apache.nifi:nifi-web-security:31617
   title: Deserialization of Untrusted Data
   description: "[Apache NiFi][1] is a system to process and distribute data.\n\nAffected
     versions of this package are vulnerable to Deserialization of\nUntrusted Data.\n\nAny
@@ -57,68 +122,3 @@
   - https://issues.apache.org/jira/browse/NIFI-4357
   - https://nifi.apache.org/security.html#CVE-2017-15703
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHENIFI-31617
-- id: snykio:maven:org.apache.nifi:nifi-web-security:CVE-2017-5635
-  title: Unauthorized Data Access
-  description: |
-    [`org.apache.nifi:nifi-web-security`][1] Affected versions of this
-    package ate vulnerable to Unauthorized Data Access in a cluster
-    environment. An anonymous user request can be replicated to another
-    node. This node will contain the identity of the originating node rather
-    than the anonymous user\'s identity.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22nifi-web-security%22
-  affected_package: org.apache.nifi:nifi-web-security
-  vulnerable_versions:
-  - ">= 0.7 < 0.7.2"
-  - ">= 1.1 < 1.1.2"
-  severity: medium
-  package_manager: maven
-  cve:
-  - CVE-2017-5635
-  cwe:
-  - CWE-767
-  disclosed_date: 2017-03-10
-  created_date: 2017-05-21
-  last_modified_date: 2017-05-21
-  credit:
-  - Unknown
-  references:
-  - http://seclists.org/oss-sec/2017/q1/565
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2017-5635
-  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHENIFI-31422
-- id: snykio:maven:org.apache.nifi:nifi-web-security:CVE-2017-5636
-  title: User Impersonation
-  description: |
-    [`org.apache.nifi:nifi-web-security`][1]
-
-    Affected versions of this package are vulnerable to User Impersonation.
-    An attacker could carefully craft a username to impersonate another user
-    and gain their permissions on a replicated request to another node, via
-    the the proxy chain serialization/deserialization functions as they are
-    vulnerable to an injection attack. This only occurs in a cluster
-    environment.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22nifi-web-security%22
-  affected_package: org.apache.nifi:nifi-web-security
-  vulnerable_versions:
-  - ">= 0.7 < 0.7.2"
-  - ">= 1.1 < 1.1.2"
-  severity: medium
-  package_manager: maven
-  cve:
-  - CVE-2017-5636
-  cwe:
-  - CWE-290
-  disclosed_date: 2017-03-10
-  created_date: 2017-05-21
-  last_modified_date: 2017-05-21
-  credit:
-  - Andy LoPresto
-  references:
-  - http://seclists.org/oss-sec/2017/q1/565
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2017-5636
-  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHENIFI-31439

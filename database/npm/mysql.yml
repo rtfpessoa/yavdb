@@ -1,5 +1,56 @@
 ---
-- id: ossindex:npm:mysql:2017-01-30
+- id: npmjs:npm:mysql:602
+  title: Remote Memory Exposure
+  description: |
+    Versions of `mysql` before 2.14.0 are vulnerable to remove memory exposure.
+
+    Affected versions of `mysql` package allocate and send an uninitialized memory over the network when a number is provided as a password.
+
+    Only `mysql` running on Node.js versions below 6.0.0 is affected due to a throw added in newer node.js versions.
+
+    Proof of Concept:
+
+    ```
+    require('mysql').createConnection({
+      host: 'localhost',
+      user: 'user',
+      password : USERPROVIDEDINPUT,  // number
+      database : 'my_db'
+    }).connect();
+    ```
+  affected_package: mysql
+  vulnerable_versions:
+  - ">=2.0.0 <=2.13.0"
+  - ">=2.0.0-alpha8 <=2.0.0-rc2"
+  severity: moderate
+  package_manager: npm
+  cwe: CWE-20
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Сковорода Никита Андреевич
+  references: https://npmjs.com/advisories/602
+  source_url: https://npmjs.com/advisories/602
+- id: npmjs:npm:mysql:66
+  title: SQL Injection
+  description: Versions of `mysql` prior to 2.0.0-alpha8 are affected by a SQL Injection
+    vulnerability in the `mysql.escape()` function, which does not properly escape
+    object keys.
+  affected_package: mysql
+  vulnerable_versions:
+  - "<=v2.0.0-alpha7"
+  severity: moderate
+  package_manager: npm
+  cve:
+  - CVE-2015-9244
+  cwe: CWE-89
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Sébastian Dejonghe
+  references: https://npmjs.com/advisories/66
+  source_url: https://npmjs.com/advisories/66
+- id: ossindex:npm:mysql:8402382243
   title: SQL injection is possible with mysql.escape function
   description: "> SQL injection is possible despite using mysql.escape.\n> ...\n>
     SqlString.objectToValues is the problem, it doesn't properly escape the object
@@ -17,7 +68,7 @@
   - https://github.com/mysqljs/mysql/commit/bc8f3df0694fa876d7858f9d56cb9a9696ef38fa
   - https://github.com/mysqljs/mysql/issues/342
   source_url: https://ossindex.net/resource/package/7014171118/vulnerabilities
-- id: ossindex:npm:mysql:2017-07-30
+- id: ossindex:npm:mysql:8405001097
   title: Unverified Certificate
   description: "> When using SSL to connect to a MySQL server, the SSL procedure implemented
     does not actually check if the remote server has a trusted certificate or not.\n>
@@ -62,6 +113,34 @@
   - https://github.com/mysqljs/mysql/commit/f03bf567ba64008c09a773858338c01842ed76db
   - https://github.com/mysqljs/mysql/issues/816
   source_url: https://snyk.io/vuln/npm:mysql:20140514
+- id: snykio:npm:mysql:20151228
+  title: SQL Injection due to unescaped object keys
+  description: |
+    [`mysql`][1] is a node.js driver for mysql. Affected versions of this
+    package do not properly escape column identifiers with `mysql.escape()`
+    and can result in SQL injection vulnerability.
+
+
+
+    [1]: https://www.npmjs.com/package/mysql
+  affected_package: mysql
+  vulnerable_versions:
+  - ">=2.0.0-alpha <2.0.0-alpha8"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2015-9244
+  cwe:
+  - CWE-89
+  disclosed_date: 2015-12-28
+  created_date: 2016-01-05
+  last_modified_date: 2016-01-05
+  credit:
+  - Sébastian Dejonghe
+  references:
+  - https://github.com/felixge/node-mysql/commit/bc8f3df0694fa876d7858f9d56cb9a9696ef38fa
+  - https://github.com/mysqljs/mysql/issues/342
+  source_url: https://snyk.io/vuln/npm:mysql:20151228
 - id: snykio:npm:mysql:20170317
   title: Uninitialized Memory Exposure
   description: |
@@ -120,31 +199,3 @@
   references:
   - https://github.com/mysqljs/mysql/commit/310c6a7d1b2e14b63b572dbfbfa10128f20c6d52
   source_url: https://snyk.io/vuln/npm:mysql:20170317
-- id: snykio:npm:mysql:CVE-2015-9244
-  title: SQL Injection due to unescaped object keys
-  description: |
-    [`mysql`][1] is a node.js driver for mysql. Affected versions of this
-    package do not properly escape column identifiers with `mysql.escape()`
-    and can result in SQL injection vulnerability.
-
-
-
-    [1]: https://www.npmjs.com/package/mysql
-  affected_package: mysql
-  vulnerable_versions:
-  - ">=2.0.0-alpha <2.0.0-alpha8"
-  severity: high
-  package_manager: npm
-  cve:
-  - CVE-2015-9244
-  cwe:
-  - CWE-89
-  disclosed_date: 2015-12-28
-  created_date: 2016-01-05
-  last_modified_date: 2016-01-05
-  credit:
-  - Sébastian Dejonghe
-  references:
-  - https://github.com/felixge/node-mysql/commit/bc8f3df0694fa876d7858f9d56cb9a9696ef38fa
-  - https://github.com/mysqljs/mysql/issues/342
-  source_url: https://snyk.io/vuln/npm:mysql:20151228

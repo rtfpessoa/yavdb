@@ -1,5 +1,60 @@
 ---
-- id: ossindex:npm:keystone:2016-05-24
+- id: npmjs:npm:keystone:60
+  title: Authentication Weakness
+  description: Versions of `keystone` prior to 0.3.16 are affected by a partial authentication
+    bypass vulnerability. In the default sign in functionality, if an attacker provides
+    a full and correct password, yet only provides part of the associated email address,
+    authentication will be granted.
+  affected_package: keystone
+  vulnerable_versions:
+  - "<0.3.16"
+  severity: low
+  package_manager: npm
+  cve:
+  - CVE-2015-9240
+  cwe: CWE-287
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Greg Meyer
+  references: https://npmjs.com/advisories/60
+  source_url: https://npmjs.com/advisories/60
+- id: ossindex:npm:keystone:8399169587
+  title: Timing attack vulnerabilities
+  description: |-
+    Two timing attack vulnerabilities could occur when:
+
+    1. comparing password hashes
+    2. comparing CSRF token hashes
+  affected_package: keystone
+  vulnerable_versions:
+  - "<0.3.6"
+  package_manager: npm
+  disclosed_date: 2016-05-24
+  created_date: 2016-05-24
+  last_modified_date: 2016-05-24
+  credit:
+  - OSSIndex
+  references:
+  - https://github.com/keystonejs/keystone/pull/701
+  source_url: https://ossindex.net/resource/package/7014036893/vulnerabilities
+- id: ossindex:npm:keystone:8399169588
+  title: Possible click jacking attack
+  description: A click-jacking attack was successfully demonstrated on the Keystone
+    demo site.
+  affected_package: keystone
+  vulnerable_versions:
+  - "<0.3.6"
+  package_manager: npm
+  disclosed_date: 2016-05-24
+  created_date: 2016-05-24
+  last_modified_date: 2016-05-24
+  credit:
+  - OSSIndex
+  references:
+  - https://github.com/keystonejs/keystone/issues/1086
+  source_url: https://ossindex.net/resource/package/7014036893/vulnerabilities
+- id: ossindex:npm:keystone:8399169589
   title: Azure dependency has security vulnerability
   description: 'Currently included version of azure includes validator<3.22.1, which
     has security issue: https://portal.requiresafe.com/advisories/validator-isurl-denial-of-service'
@@ -15,7 +70,7 @@
   references:
   - https://github.com/keystonejs/keystone/issues/1575
   source_url: https://ossindex.net/resource/package/7014036893/vulnerabilities
-- id: ossindex:npm:keystone:2016-11-10
+- id: ossindex:npm:keystone:8401420896
   title: Open Redirect vulnerability
   description: "> The req.querystring.from parameter is not validated.  It will redirect
     the user to any url. It is vulnerable to an open redirect.\n> \n> -- [github.com](https://github.com/keystonejs/keystone/pull/242)"
@@ -33,90 +88,7 @@
   - https://github.com/keystonejs/keystone/issues/242
   - https://www.owasp.org/index.php/Top_10_2013-A10-Unvalidated_Redirects_and_Forwards
   source_url: https://ossindex.net/resource/package/7014036893/vulnerabilities
-- id: snykio:npm:keystone:20140316
-  title: Open Redirect
-  description: |
-    [`keystone`][1] is a Web Application Framework and Admin GUI / Content
-    Management System built on Express.js and Mongoose. Affected versions of
-    the package are vulnerable to Open redirection which occurs when a
-    vulnerable web page is redirected to an untrusted and malicious page
-    that may compromise the user. Open redirection attacks usually come with
-    a phishing attack because the modified vulnerable link is identical to
-    the original site, which increases the likelihood of success for the
-    phishing attack.
-
-
-
-    [1]: https://www.npmjs.com/package/keystone
-  affected_package: keystone
-  vulnerable_versions:
-  - "<0.3.6 >=0.2.7"
-  severity: medium
-  package_manager: npm
-  cwe:
-  - CWE-601
-  disclosed_date: 2014-03-15
-  created_date: 2017-03-21
-  last_modified_date: 2017-03-21
-  credit:
-  - Oliver Jenkins
-  references:
-  - https://github.com/keystonejs/keystone/commit/d06a688e36bfb95c88336659fee9be10416ce46b
-  - https://github.com/keystonejs/keystone/pull/242
-  source_url: https://snyk.io/vuln/npm:keystone:20140316
-- id: snykio:npm:keystone:20141129
-  title: Cross-site Request Forgery (CSRF)
-  description: |
-    [`keystone`][1] is a web Application Framework and Admin GUI / Content
-    Management System built on Express.js and Mongoose.
-
-    Affected versions of the package are vulnerable to Cross-site Request
-    Forgery (CSRF).
-
-
-
-    [1]: https://www.npmjs.com/package/keystone
-  affected_package: keystone
-  vulnerable_versions:
-  - "<0.2.34"
-  severity: medium
-  package_manager: npm
-  cwe:
-  - CWE-352
-  disclosed_date: 2014-11-28
-  created_date: 2017-12-25
-  last_modified_date: 2017-12-25
-  credit:
-  - Mickael van der Beek
-  references:
-  - https://github.com/keystonejs/keystone/blob/master/HISTORY.md#v0234--2014-11-29
-  source_url: https://snyk.io/vuln/npm:keystone:20141129
-- id: snykio:npm:keystone:CVE-2015-9240
-  title: Authentication Weakness
-  description: |+
-    Invalid email addresses can be mistakenly matched during sign-in. This
-    affects the `User` record to be fetched from the DB. Correct password
-    for that `User` is still required to authenticate.
-
-  affected_package: keystone
-  vulnerable_versions:
-  - "<0.3.16"
-  severity: medium
-  package_manager: npm
-  cve:
-  - CVE-2015-9240
-  cwe:
-  - CWE-287
-  disclosed_date: 2015-12-04
-  created_date: 2015-12-06
-  last_modified_date: 2015-12-06
-  credit:
-  - Greg Meyer
-  references:
-  - https://github.com/keystonejs/keystone/issues/1085
-  - https://www.npmjs.com/package/keystone
-  source_url: https://snyk.io/vuln/npm:keystone:20151204
-- id: snykio:npm:keystone:CVE-2017-15878
+- id: snykio:npm:keystone:1
   title: Cross-site Scripting (XSS)
   description: |+
     [`keystone`][1] is Web Application Framework and Admin GUI / Content
@@ -177,7 +149,7 @@
   - https://github.com/keystonejs/keystone/issues/4437
   - https://github.com/keystonejs/keystone/pull/4478
   source_url: https://snyk.io/vuln/npm:keystone:20170918-1
-- id: snykio:npm:keystone:CVE-2017-15879
+- id: snykio:npm:keystone:2
   title: CSV Injection
   description: |
     [`keystone`][1] is an web Application Framework and Admin GUI / Content
@@ -208,7 +180,90 @@
   - https://github.com/keystonejs/keystone/pull/4478
   - https://nvd.nist.gov/vuln/detail/CVE-2017-15878
   source_url: https://snyk.io/vuln/npm:keystone:20170918-2
-- id: snykio:npm:keystone:CVE-2017-15881
+- id: snykio:npm:keystone:20140316
+  title: Open Redirect
+  description: |
+    [`keystone`][1] is a Web Application Framework and Admin GUI / Content
+    Management System built on Express.js and Mongoose. Affected versions of
+    the package are vulnerable to Open redirection which occurs when a
+    vulnerable web page is redirected to an untrusted and malicious page
+    that may compromise the user. Open redirection attacks usually come with
+    a phishing attack because the modified vulnerable link is identical to
+    the original site, which increases the likelihood of success for the
+    phishing attack.
+
+
+
+    [1]: https://www.npmjs.com/package/keystone
+  affected_package: keystone
+  vulnerable_versions:
+  - "<0.3.6 >=0.2.7"
+  severity: medium
+  package_manager: npm
+  cwe:
+  - CWE-601
+  disclosed_date: 2014-03-15
+  created_date: 2017-03-21
+  last_modified_date: 2017-03-21
+  credit:
+  - Oliver Jenkins
+  references:
+  - https://github.com/keystonejs/keystone/commit/d06a688e36bfb95c88336659fee9be10416ce46b
+  - https://github.com/keystonejs/keystone/pull/242
+  source_url: https://snyk.io/vuln/npm:keystone:20140316
+- id: snykio:npm:keystone:20141129
+  title: Cross-site Request Forgery (CSRF)
+  description: |
+    [`keystone`][1] is a web Application Framework and Admin GUI / Content
+    Management System built on Express.js and Mongoose.
+
+    Affected versions of the package are vulnerable to Cross-site Request
+    Forgery (CSRF).
+
+
+
+    [1]: https://www.npmjs.com/package/keystone
+  affected_package: keystone
+  vulnerable_versions:
+  - "<0.2.34"
+  severity: medium
+  package_manager: npm
+  cwe:
+  - CWE-352
+  disclosed_date: 2014-11-28
+  created_date: 2017-12-25
+  last_modified_date: 2017-12-25
+  credit:
+  - Mickael van der Beek
+  references:
+  - https://github.com/keystonejs/keystone/blob/master/HISTORY.md#v0234--2014-11-29
+  source_url: https://snyk.io/vuln/npm:keystone:20141129
+- id: snykio:npm:keystone:20151204
+  title: Authentication Weakness
+  description: |+
+    Invalid email addresses can be mistakenly matched during sign-in. This
+    affects the `User` record to be fetched from the DB. Correct password
+    for that `User` is still required to authenticate.
+
+  affected_package: keystone
+  vulnerable_versions:
+  - "<0.3.16"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2015-9240
+  cwe:
+  - CWE-287
+  disclosed_date: 2015-12-04
+  created_date: 2015-12-06
+  last_modified_date: 2015-12-06
+  credit:
+  - Greg Meyer
+  references:
+  - https://github.com/keystonejs/keystone/issues/1085
+  - https://www.npmjs.com/package/keystone
+  source_url: https://snyk.io/vuln/npm:keystone:20151204
+- id: snykio:npm:keystone:20170918
   title: Cross-site Scripting (XSS)
   description: |+
     [`keystone`][1] is an web Application Framework and Admin GUI / Content

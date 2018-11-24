@@ -1,5 +1,30 @@
 ---
-- id: snykio:npm:restafary:CVE-2016-10528
+- id: npmjs:npm:restafary:89
+  title: Directory Traversal
+  description: |-
+    Affected versions of `restafary` are susceptible to a directory traversal vulnerability when a root path is specified in the configuration.
+
+
+    Proof of Concept
+
+    ```
+    curl -i -s -k  -X 'GET' -H 'Authorization: Basic YWRtaW46cGFzc3dvcmQ=' 'http://localhost:8000/api/v1/fs/..%2f..%2fetc/passwd'
+    ```
+  affected_package: restafary
+  vulnerable_versions:
+  - "<1.6.1"
+  severity: moderate
+  package_manager: npm
+  cve:
+  - CVE-2016-10528
+  cwe: CWE-22
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Craig Arendt
+  references: https://npmjs.com/advisories/89
+  source_url: https://npmjs.com/advisories/89
+- id: snykio:npm:restafary:20160328
   title: Directory Traversal
   description: |
     `restafary` versions prior to 1.6.1 did not properly prevent path

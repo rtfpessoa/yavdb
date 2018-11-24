@@ -1,5 +1,29 @@
 ---
-- id: snykio:npm:http_static_simple:CVE-2017-16134
+- id: npmjs:npm:http_static_simple:472
+  title: Directory Traversal
+  description: |-
+    Affected versions of `http_static_simple` resolve relative file paths, resulting in a directory traversal vulnerability. A malicious actor can use this vulnerability to access files outside of the intended directory root, which may result in the disclosure of private files on the vulnerable system.
+
+    Example request:
+    ```
+    GET /../../../../../../../../../../etc/passwd HTTP/1.1
+    host:foo
+    ```
+  affected_package: http_static_simple
+  vulnerable_versions:
+  - "<=99.999.9999"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2017-16134
+  cwe: CWE-22
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Liang Gong
+  references: https://npmjs.com/advisories/472
+  source_url: https://npmjs.com/advisories/472
+- id: snykio:npm:http_static_simple:20170612
   title: Directory Traversal
   description: |
     [`http_static_simple`][1] is a simple server for the weather.

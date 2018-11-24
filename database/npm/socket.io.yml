@@ -1,5 +1,25 @@
 ---
-- id: ossindex:npm:socket.io:2017-03-03
+- id: npmjs:npm:socket.io:321
+  title: Insecure randomness
+  description: Affected versions of `socket.io` depend on `Math.random()` to create
+    socket IDs, and therefore the IDs are predictable. With enough information on
+    prior IDs, an attacker may be able to guess the socket ID and gain access to socket.io
+    servers without authorization.
+  affected_package: socket.io
+  vulnerable_versions:
+  - "<=0.9.6"
+  severity: moderate
+  package_manager: npm
+  cve:
+  - CVE-2017-16031
+  cwe: CWE-330
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Martin Thomson
+  references: https://npmjs.com/advisories/321
+  source_url: https://npmjs.com/advisories/321
+- id: ossindex:npm:socket.io:8402517465
   title: Cross Site Scripting (XSS) in example chat app
   description: A Cross Site Scripting attack was possible in the example chat app
     due to the use of concatenation of user input to generate HTML.
@@ -15,7 +35,43 @@
   references:
   - https://github.com/socketio/socket.io/issues/1554
   source_url: https://ossindex.net/resource/package/7014464362/vulnerabilities
-- id: ossindex:npm:socket.io:2017-07-29
+- id: ossindex:npm:socket.io:8402517529
+  title: ID generation prediction vulnerability
+  description: The generation of new IDs for new sockets is vulnerable to prediction
+    attacks. Potentially, though highly unlikely, collisions are also possible.
+  affected_package: socket.io
+  vulnerable_versions:
+  - "< 0.9.7"
+  package_manager: npm
+  disclosed_date: 2017-03-03
+  created_date: 2017-03-03
+  last_modified_date: 2017-07-30
+  credit:
+  - OSSIndex
+  references:
+  - https://github.com/LearnBoost/socket.io/issues/857
+  - https://github.com/socketio/socket.io/commit/de1afe13172529801e1e091a471441e11ffd85a3
+  - https://github.com/socketio/socket.io/issues/856
+  source_url: https://ossindex.net/resource/package/7014464362/vulnerabilities
+- id: ossindex:npm:socket.io:8402517537
+  title: Cross Site Scripting (XSS)
+  description: A cross site scripting attack can be performed by sending messages
+    by using socket.io from the console.
+  affected_package: socket.io
+  vulnerable_versions:
+  - "<1.0.3"
+  package_manager: npm
+  disclosed_date: 2017-03-03
+  created_date: 2017-03-03
+  last_modified_date: 2017-03-25
+  credit:
+  - OSSIndex
+  references:
+  - https://cwe.mitre.org/data/definitions/79.html
+  - https://github.com/socketio/socket.io/commit/199a479ebc1408cc79b46938b0fffacea911a26e
+  - https://github.com/socketio/socket.io/issues/1545
+  source_url: https://ossindex.net/resource/package/7014464362/vulnerabilities
+- id: ossindex:npm:socket.io:8405000436
   title: Insecure randomness
   description: "> Because socket.io depends on Math.random() to create socket IDs,
     the IDs are predictable. An attacker is able to guess the socket ID and gain access
@@ -33,6 +89,38 @@
   - https://github.com/socketio/socket.io/issues/856
   - https://nodesecurity.io/advisories/321
   source_url: https://ossindex.net/resource/package/7014464362/vulnerabilities
+- id: snykio:npm:socket.io:20120323
+  title: Insecure Randomness
+  description: |
+    [`socket.io`][1] is a node.js realtime framework server. Affected
+    versions of the package are vulnerable to Insecure Randomness due to the
+    cryptographically insecure `Math.random` function which can produce
+    predictable values and should not be used in security-sensitive context.
+
+
+
+    [1]: https://www.npmjs.com/package/socket.io
+  affected_package: socket.io
+  vulnerable_versions:
+  - "<0.9.7"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2017-16031
+  cwe:
+  - CWE-330
+  disclosed_date: 2012-03-22
+  created_date: 2017-02-13
+  last_modified_date: 2017-02-13
+  credit:
+  - Martin Thomson
+  references:
+  - https://github.com/socketio/socket.io/blob/master/History.md#097--2012-07-24
+  - https://github.com/socketio/socket.io/commit/67b4eb9abdf111dfa9be4176d1709374a2b4ded8
+  - https://github.com/socketio/socket.io/issues/856
+  - https://github.com/socketio/socket.io/pull/857
+  - https://groups.google.com/forum/#!topic/socket_io/Peq-R_BTSx0/discussion
+  source_url: https://snyk.io/vuln/npm:socket.io:20120323
 - id: snykio:npm:socket.io:20120417
   title: Cross-site Scripting (XSS)
   description: |+
@@ -93,35 +181,3 @@
   - https://github.com/socketio/socket.io/commit/e98fc7bc865640e777c26dbb1040f33ff103aa78
   - https://github.com/socketio/socket.io/issues/925
   source_url: https://snyk.io/vuln/npm:socket.io:20120417
-- id: snykio:npm:socket.io:CVE-2017-16031
-  title: Insecure Randomness
-  description: |
-    [`socket.io`][1] is a node.js realtime framework server. Affected
-    versions of the package are vulnerable to Insecure Randomness due to the
-    cryptographically insecure `Math.random` function which can produce
-    predictable values and should not be used in security-sensitive context.
-
-
-
-    [1]: https://www.npmjs.com/package/socket.io
-  affected_package: socket.io
-  vulnerable_versions:
-  - "<0.9.7"
-  severity: medium
-  package_manager: npm
-  cve:
-  - CVE-2017-16031
-  cwe:
-  - CWE-330
-  disclosed_date: 2012-03-22
-  created_date: 2017-02-13
-  last_modified_date: 2017-02-13
-  credit:
-  - Martin Thomson
-  references:
-  - https://github.com/socketio/socket.io/blob/master/History.md#097--2012-07-24
-  - https://github.com/socketio/socket.io/commit/67b4eb9abdf111dfa9be4176d1709374a2b4ded8
-  - https://github.com/socketio/socket.io/issues/856
-  - https://github.com/socketio/socket.io/pull/857
-  - https://groups.google.com/forum/#!topic/socket_io/Peq-R_BTSx0/discussion
-  source_url: https://snyk.io/vuln/npm:socket.io:20120323

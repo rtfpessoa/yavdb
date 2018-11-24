@@ -1,5 +1,63 @@
 ---
-- id: ossindex:npm:i18next:2016-10-17
+- id: npmjs:npm:i18next:325
+  title: Cross-Site Scripting
+  description: |-
+    Affected versions of `i18next` allow untrusted user input to be injected into dictionary key names, resulting in a cross-site scripting vulnerability.
+
+    ## Proof of Concept
+    ```
+    var init = i18n.init({debug: true}, function(){
+      var test = i18n.t('__firstName__ __lastName__', {
+            escapeInterpolation: true,
+            firstName: '__lastNameHTML__',
+            lastName: '<script>',
+      });
+      console.log(test);
+    });
+    // equals "<script> &lt;script&gt;"
+    ```
+  affected_package: i18next
+  vulnerable_versions:
+  - "<=1.10.2"
+  severity: moderate
+  package_manager: npm
+  cve:
+  - CVE-2017-16008
+  cwe: CWE-725
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: KJ Tsanaktsidis
+  references: https://npmjs.com/advisories/325
+  source_url: https://npmjs.com/advisories/325
+- id: npmjs:npm:i18next:326
+  title: Cross-Site Scripting
+  description: "Affected versions of `i18next` may fail to sanitize user input when
+    certain configuration options are used. When using the `.init` method, passing
+    interpolation options without passing an `escapeValue` will default to `undefined`
+    rather than the assumed `true`. \n\n## Proof of Concept\n\n```\nvar init = i18n.init({\n
+    \ interpolation: {\n    prefix: \"__\",\n    suffix: \"__\",\n    escapeValue:
+    true\n  }\n}, function(){\n  var test = i18n.t('__firstName__ __lastName__', {\n
+    \       firstName: 'Bob',\n        lastName: '[\"foo\",\"bar\"]',\n  });\n  console.log(test);\n});\n```\nWhen
+    `escapeValue` is explicitly passed, the result of `test` is: \n\n```\n&lt;script&gt;alert(1)&lt;&#x2F;script&gt;
+    Johnson\n```\n\nThis is supposed to be the default. However, if `escapeValue`
+    is not included, the result is the unescaped string: \n \n```\n<script>alert(1)</script>
+    Johnson\n```"
+  affected_package: i18next
+  vulnerable_versions:
+  - ">=2.0.0 <=3.4.3"
+  severity: moderate
+  package_manager: npm
+  cve:
+  - CVE-2017-16010
+  cwe: CWE-725
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: alexmchardy
+  references: https://npmjs.com/advisories/326
+  source_url: https://npmjs.com/advisories/326
+- id: ossindex:npm:i18next:8400185064
   title: Cross Site Scripting (XSS)
   description: Cross Site Scripting is possible due to a bug in the `interpolation
     resolution code`.
@@ -19,7 +77,7 @@
   - https://github.com/i18next/i18next/pull/443/commits/34e8e13a2b64708a0aed01092e4dbfd0e5013831
   - https://nodesecurity.io/advisories/325
   source_url: https://ossindex.net/resource/package/7013884133/vulnerabilities
-- id: ossindex:npm:i18next:2016-12-29
+- id: ossindex:npm:i18next:8402281066
   title: Fix Interpolator.escapeValue defaulting to undefined in some cases
   description: "> [When passing] any `interpolation` options without including `escapeValue`,
     `this.escapeValue` will get set to `undefined` in `Interpolator`. The documentation
@@ -40,7 +98,7 @@
   - https://github.com/i18next/i18next/pull/826/commits/d367309d4427c2d651b0f0b304504cf59c056cab
   - https://nodesecurity.io/advisories/326
   source_url: https://ossindex.net/resource/package/7013884133/vulnerabilities
-- id: snykio:npm:i18next:CVE-2017-16008
+- id: snykio:npm:i18next:20151018
   title: Cross-site Scripting (XSS)
   description: |+
     [`i18next`][1] is i18next internationalization framework. Affected
@@ -100,7 +158,7 @@
   - https://github.com/i18next/i18next/pull/443
   - https://github.com/i18next/i18next/pull/443/commits/34e8e13a2b64708a0aed01092e4dbfd0e5013831
   source_url: https://snyk.io/vuln/npm:i18next:20151018
-- id: snykio:npm:i18next:CVE-2017-16010
+- id: snykio:npm:i18next:20161013
   title: Cross-site Scripting (XSS)
   description: |+
     [`i18next`][1] is i18next internationalization framework. Affected

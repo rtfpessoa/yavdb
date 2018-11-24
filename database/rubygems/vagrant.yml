@@ -1,5 +1,5 @@
 ---
-- id: ossindex:rubygems:vagrant:2016-06-24
+- id: ossindex:rubygems:vagrant:8399913325
   title: Insecure SSH default login
   description: |-
     When building Vagrant base boxes (manually or using tools like Veewee to automate), builders follow the vagrant base boxes specifications which defines the following:
@@ -26,4 +26,34 @@
   - OSSIndex
   references:
   - http://stackoverflow.com/questions/14715678/vagrant-insecure-by-default
+  source_url: https://ossindex.net/resource/package/8404983002/vulnerabilities
+- id: ossindex:rubygems:vagrant:8399913326
+  title: Insecure SSH Keys
+  description: |-
+    When building Vagrant base boxes (manually or using tools like Veewee to automate), builders follow the vagrant base boxes specifications which defines the following:
+
+    User root and vagrant use vagrant as password
+    Public key authentication (password-less) for the user vagrant.
+    Vagrant project provides an insecure key pair for SSH Public Key Authentication so that vagrant ssh works.
+
+    Because everyone has access to the private key, anyone can use the private key to login to your VMs (suppose they know your IP of the host machine, port is by default 2222 as forwarding rules in place.)
+
+    It is NOT secure OOTB. However, you can remove the trusted key from ~vagrant/.ssh/authorized_keys and add your own, change password for vagrant and root, then it's considered relatively safe.
+
+    ---
+
+    Since Vagrant 1.7.0 (PR #4707) Vagrant will replace the default insecure ssh keypair with randomly generated keypair on first vagrant up.
+
+    See in the CHANGELOG: the default insecure keypair is used, Vagrant will automatically replace it with a randomly generated keypair on first vagrant up. GH-2608
+  affected_package: vagrant
+  vulnerable_versions:
+  - "<1.7.0"
+  package_manager: rubygems
+  disclosed_date: 2016-06-24
+  created_date: 2016-06-24
+  last_modified_date: 2016-06-24
+  credit:
+  - OSSIndex
+  references:
+  - http://stackoverflow.com/questions/14715678/vagrant-insecure-by-default#2
   source_url: https://ossindex.net/resource/package/8404983002/vulnerabilities

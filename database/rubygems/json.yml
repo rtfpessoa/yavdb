@@ -1,28 +1,5 @@
 ---
-- id: rubyadvisory:rubygems:json:CVE-
-  title: json Gem for Ruby Data Handling Stack Buffer Overflow
-  description: |
-    json Gem for Ruby contains an overflow condition that is triggered as
-    user-supplied input is not properly validated when handling specially crafted
-    data. This may allow a remote attacker to cause a stack-based buffer
-    overflow, resulting in a denial of service or potentially allowing the
-    execution of arbitrary code.
-  affected_package: json
-  patched_versions:
-  - ">= 1.1.0"
-  package_manager: rubygems
-  cve:
-  - CVE-
-  osvdb: 101157
-  disclosed_date: 2007-05-21
-  created_date: 2007-05-21
-  last_modified_date: 2007-05-21
-  credit:
-  - Rubysec
-  references:
-  - https://github.com/rubysec/ruby-advisory-db
-  source_url: http://osvdb.org/show/osvdb/101157
-- id: rubyadvisory:rubygems:json:CVE-2013-0269
+- id: rubyadvisory:rubygems:json:OSVDB-101137
   title: json Gem for Ruby JSON::GenericObject Function Arbitrary Addition Creation
   description: |
     json Gem for Ruby contains a flaw in the JSON::GenericObject function. The
@@ -69,6 +46,35 @@
   references:
   - https://github.com/rubysec/ruby-advisory-db
   source_url: http://osvdb.org/show/osvdb/101157
+- id: rubyadvisory:rubygems:json:OSVDB-90074
+  title: Ruby on Rails JSON Gem Arbitrary Symbol Creation Remote DoS
+  description: |
+    Ruby on Rails contains a flaw that may allow a remote denial of service.
+    The issue is due to the JSON gem being tricked in to generating Ruby symbols
+    during the parsing of certain JSON documents. Since Ruby symbols are not
+    garbage collected, a remote attacker can crash a users system. This also may
+    allow the attacker to create arbitrary objects that may be used to bypass
+    certain security mechanisms and potentially allow SQL injection attacks to
+    be conducted.
+  affected_package: json
+  patched_versions:
+  - ">= 1.7.7"
+  - "~> 1.5.5"
+  - "~> 1.6.8"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2013-0269
+  osvdb: 90074
+  cvss_v2_score: 9.0
+  disclosed_date: 2013-02-11
+  created_date: 2013-02-11
+  last_modified_date: 2013-02-11
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: http://osvdb.org/show/osvdb/90074
 - id: snykio:rubygems:json:20000
   title: Denial of Service (DoS)
   description: |+
@@ -153,37 +159,7 @@
   - http://spreecommerce.com/blog/multiple-security-vulnerabilities-fixed
   - https://groups.google.com/forum/#!original/rubyonrails-security/4_YvCpLzL58/KBTICG7b4NgJ
   source_url: https://snyk.io/vuln/SNYK-RUBY-JSON-20056
-- id: snykio:rubygems:json:20209
-  title: Arbitrary Code Execution
-  description: |
-    The [`json`][1] gem is a JSON implementation as a Ruby extension in C.
-
-    Affected versions of this Gem contain an overflow condition. This is
-    triggered when user-supplied input is not properly validated while
-    handling specially crafted data. This can allow a remote attacker to
-    cause a stack-based buffer overflow, resulting in a [denial of
-    service][2], or potentially allowing the execution of arbitrary code.
-
-
-
-    [1]: https://rubygems.org/gems/json
-    [2]: https://snyk.io/vuln/SNYK-RUBY-JSON-20000
-  affected_package: json
-  vulnerable_versions:
-  - "< 1.1.0"
-  severity: high
-  package_manager: rubygems
-  cwe:
-  - CWE-94
-  disclosed_date: 2007-05-20
-  created_date: 2007-05-20
-  last_modified_date: 2007-05-20
-  credit:
-  - Unknown
-  references:
-  - http://rubysec.com/advisories/OSVDB-101157
-  source_url: https://snyk.io/vuln/SNYK-RUBY-JSON-20209
-- id: snykio:rubygems:json:CVE-2013-0269
+- id: snykio:rubygems:json:20060
   title: Denial of Service (DoS)
   description: |+
     The [`json`][1] gem is a JSON implementation as a Ruby extension in C.
@@ -250,3 +226,33 @@
   - https://gist.github.com/rsierra/4943505
   - https://www.ruby-lang.org/en/news/2013/02/22/json-dos-cve-2013-0269/
   source_url: https://snyk.io/vuln/SNYK-RUBY-JSON-20060
+- id: snykio:rubygems:json:20209
+  title: Arbitrary Code Execution
+  description: |
+    The [`json`][1] gem is a JSON implementation as a Ruby extension in C.
+
+    Affected versions of this Gem contain an overflow condition. This is
+    triggered when user-supplied input is not properly validated while
+    handling specially crafted data. This can allow a remote attacker to
+    cause a stack-based buffer overflow, resulting in a [denial of
+    service][2], or potentially allowing the execution of arbitrary code.
+
+
+
+    [1]: https://rubygems.org/gems/json
+    [2]: https://snyk.io/vuln/SNYK-RUBY-JSON-20000
+  affected_package: json
+  vulnerable_versions:
+  - "< 1.1.0"
+  severity: high
+  package_manager: rubygems
+  cwe:
+  - CWE-94
+  disclosed_date: 2007-05-20
+  created_date: 2007-05-20
+  last_modified_date: 2007-05-20
+  credit:
+  - Unknown
+  references:
+  - http://rubysec.com/advisories/OSVDB-101157
+  source_url: https://snyk.io/vuln/SNYK-RUBY-JSON-20209

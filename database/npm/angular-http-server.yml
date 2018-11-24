@@ -1,81 +1,39 @@
 ---
-- id: snykio:npm:angular-http-server:20180426
-  title: Directory Traversal
-  description: |
-    [angular-http-server][1] is an application server designed for Single
-    Page App (SPA) developers.
-
-    Affected versions of this package are vulnerable to Directory Traversal.
-    An attacker may read local files on the target server.
-
-
-
-    [1]: https://www.npmjs.com/package/angular-http-server
-    \nA Directory Traversal attack (also known as path traversal) aims to
-    access files and directories that are stored outside the intended
-    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
-    its variations, or by using absolute file paths, it may be possible to
-    access arbitrary files and directories stored on file system, including
-    application source code, configuration, and other critical system files.
-
-    Directory Traversal vulnerabilities can be generally divided into two
-    types:
-
-    * **Information Disclosure**\: Allows the attacker to gain information
-      about the folder structure or read the contents of sensitive files on
-      the system.
-
-    `st` is a module for serving static files on web pages, and contains a
-    [vulnerability of this type][1]. In our example, we will serve files
-    from the `public` route.
-
-    If an attacker requests the following URL from our server, it will in
-    turn leak the sensitive private key of the root user.
-
-        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
-
-    **Note** `%2e` is the URL encoded version of `.` (dot).
-
-    * **Writing arbitrary files**\: Allows the attacker to create or replace
-      existing files. This type of vulnerability is also known as
-      `Zip-Slip`.
-
-    One way to achieve this is by using a malicious `zip` archive that holds
-    path traversal filenames. When each filename in the zip archive gets
-    concatenated to the target extraction folder, without validation, the
-    final path ends up outside of the target folder. If an executable or a
-    configuration file is overwritten with a file containing malicious code,
-    the problem can turn into an arbitrary code execution issue quite
-    easily.
-
-    The following is an example of a `zip` archive with one benign file and
-    one malicious file. Extracting the malicious file will result in
-    traversing out of the target folder, ending up in `/root/.ssh/`
-    overwriting the `authorized_keys` file:
-
-        2018-04-15 22:04:29 .....           19           19  good.txt
-        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
-
-
-
-    [1]: https://snyk.io/vuln/npm:st:20140206
+- id: npmjs:npm:angular-http-server:589
+  title: Path Traversal
+  description: Versions of `angular-http-server` before 1.4.3 are vulnerable to path
+    traversal allowing a remote attacker to read files from the server that uses `angular-http-server`.
   affected_package: angular-http-server
   vulnerable_versions:
-  - "<1.4.4"
+  - "<1.4.3"
   severity: high
   package_manager: npm
-  cwe:
-  - CWE-22
-  disclosed_date: 2018-04-26
-  created_date: 2018-05-13
-  last_modified_date: 2018-05-13
-  credit:
-  - Tung Pun
-  references:
-  - https://github.com/simonh1000/angular-http-server/commit/8bafc9577161469f5dea01e0b98ea9c525d063e9
-  - https://hackerone.com/reports/330349
-  source_url: https://snyk.io/vuln/npm:angular-http-server:20180426
-- id: snykio:npm:angular-http-server:CVE-2018-3713
+  cve:
+  - CVE-2018-3713
+  cwe: CWE-25
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: _ bl4de
+  references: https://npmjs.com/advisories/589
+  source_url: https://npmjs.com/advisories/589
+- id: npmjs:npm:angular-http-server:656
+  title: Path Traversal
+  description: Versions of `angular-http-server` before 1.4.4 are vulnerable to path
+    traversal.
+  affected_package: angular-http-server
+  vulnerable_versions:
+  - "<=1.4.3"
+  severity: high
+  package_manager: npm
+  cwe: CWE-25
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: tungpung
+  references: https://npmjs.com/advisories/656
+  source_url: https://npmjs.com/advisories/656
+- id: snykio:npm:angular-http-server:20180302
   title: Directory Traversal
   description: |
     [angular-http-server][1] is an application server designed for Single
@@ -154,3 +112,79 @@
   references:
   - https://hackerone.com/reports/309120
   source_url: https://snyk.io/vuln/npm:angular-http-server:20180302
+- id: snykio:npm:angular-http-server:20180426
+  title: Directory Traversal
+  description: |
+    [angular-http-server][1] is an application server designed for Single
+    Page App (SPA) developers.
+
+    Affected versions of this package are vulnerable to Directory Traversal.
+    An attacker may read local files on the target server.
+
+
+
+    [1]: https://www.npmjs.com/package/angular-http-server
+    \nA Directory Traversal attack (also known as path traversal) aims to
+    access files and directories that are stored outside the intended
+    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
+    its variations, or by using absolute file paths, it may be possible to
+    access arbitrary files and directories stored on file system, including
+    application source code, configuration, and other critical system files.
+
+    Directory Traversal vulnerabilities can be generally divided into two
+    types:
+
+    * **Information Disclosure**\: Allows the attacker to gain information
+      about the folder structure or read the contents of sensitive files on
+      the system.
+
+    `st` is a module for serving static files on web pages, and contains a
+    [vulnerability of this type][1]. In our example, we will serve files
+    from the `public` route.
+
+    If an attacker requests the following URL from our server, it will in
+    turn leak the sensitive private key of the root user.
+
+        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
+
+    **Note** `%2e` is the URL encoded version of `.` (dot).
+
+    * **Writing arbitrary files**\: Allows the attacker to create or replace
+      existing files. This type of vulnerability is also known as
+      `Zip-Slip`.
+
+    One way to achieve this is by using a malicious `zip` archive that holds
+    path traversal filenames. When each filename in the zip archive gets
+    concatenated to the target extraction folder, without validation, the
+    final path ends up outside of the target folder. If an executable or a
+    configuration file is overwritten with a file containing malicious code,
+    the problem can turn into an arbitrary code execution issue quite
+    easily.
+
+    The following is an example of a `zip` archive with one benign file and
+    one malicious file. Extracting the malicious file will result in
+    traversing out of the target folder, ending up in `/root/.ssh/`
+    overwriting the `authorized_keys` file:
+
+        2018-04-15 22:04:29 .....           19           19  good.txt
+        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
+
+
+
+    [1]: https://snyk.io/vuln/npm:st:20140206
+  affected_package: angular-http-server
+  vulnerable_versions:
+  - "<1.4.4"
+  severity: high
+  package_manager: npm
+  cwe:
+  - CWE-22
+  disclosed_date: 2018-04-26
+  created_date: 2018-05-13
+  last_modified_date: 2018-05-13
+  credit:
+  - Tung Pun
+  references:
+  - https://github.com/simonh1000/angular-http-server/commit/8bafc9577161469f5dea01e0b98ea9c525d063e9
+  - https://hackerone.com/reports/330349
+  source_url: https://snyk.io/vuln/npm:angular-http-server:20180426

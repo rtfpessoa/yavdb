@@ -1,4 +1,52 @@
 ---
+- id: npmjs:npm:mqtt:140
+  title: Denial of Service
+  description: 'Affected versions of `mqtt` will cause the node process to crash when
+    receiving specially crafted MQTT packets, making the application vulnerable to
+    a denial of service condition.
+
+'
+  affected_package: mqtt
+  vulnerable_versions:
+  - "<=0.3.13"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2016-1000242
+  cwe: CWE-730
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Matteo Collina
+  references: https://npmjs.com/advisories/140
+  source_url: https://npmjs.com/advisories/140
+- id: npmjs:npm:mqtt:555
+  title: Denial of Service
+  description: "Affected versions of `mqtt` do not properly handle PUBLISH packets
+    returning from the server, leading to a Denial of Service condition.\n\nThe vulnerability
+    is completely mitigated if the only connected servers are trusted, guaranteed
+    not to be under the control of a malicious actor.\n\n## Proof of Concept\n\nThe
+    following is a demonstration of how to generate the malicious packet sequence,
+    but does not include information on handling the initial network connections and
+    MQTT overhead.\n```\nvar mqttp = require('mqtt-packet');\nvar packets = [];\nfor(var
+    i=0; i<=1000;i++){\n    packets.push(\n        mqttp.generate({\n            cmd:'publish',\n
+    \           topic:Buffer.from('hello'),\n            payload:Buffer.from('world'),\n
+    \           retain: false,\n            dup: false, \n            messageId: ++i,
+    \n            qos: 1\n        })\n    )\n}\n\n```"
+  affected_package: mqtt
+  vulnerable_versions:
+  - ">=2.0.0 <=2.14.0"
+  severity: moderate
+  package_manager: npm
+  cve:
+  - CVE-2017-10910
+  cwe: CWE-400
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: mcollina
+  references: https://npmjs.com/advisories/555
+  source_url: https://npmjs.com/advisories/555
 - id: snykio:npm:mqtt:20160817
   title: Denial of Service (DoS)
   description: |+
@@ -51,7 +99,7 @@
   references:
   - https://github.com/mqttjs/MQTT.js/blob/388a084d7803934b18b43c1146c817deaa1396b1/lib/parse.js#L230
   source_url: https://snyk.io/vuln/npm:mqtt:20160817
-- id: snykio:npm:mqtt:CVE-2017-10910
+- id: snykio:npm:mqtt:20171225
   title: Denial of Service (DoS)
   description: |+
     [`mqtt`][1] is a client library for the MQTT protocol, written in

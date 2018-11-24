@@ -1,5 +1,25 @@
 ---
-- id: ossindex:npm:js-yaml:CVE-2013-4660
+- id: npmjs:npm:js-yaml:16
+  title: Deserialization Code Execution
+  description: "Versions 2.0.4 and earlier of `js-yaml` are affected by a code execution
+    vulnerability in the YAML deserializer.\n\n## Proof of Concept\n```\nconst yaml
+    = require('js-yaml');\n\nconst x = `test: !!js/function >\nfunction f() { \nconsole.log(1);
+    \n}();`\n\nyaml.load(x);\n```"
+  affected_package: js-yaml
+  vulnerable_versions:
+  - "<  2.0.5"
+  severity: critical
+  package_manager: npm
+  cve:
+  - CVE-2013-4660
+  cwe: CWE-502
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Neal Poole
+  references: https://npmjs.com/advisories/16
+  source_url: https://npmjs.com/advisories/16
+- id: ossindex:npm:js-yaml:357790
   title: "[CVE-2013-4660]  Improper Input Validation"
   description: The JS-YAML module before 2.0.5 for Node.js parses input without properly
     considering the unsafe !!js/function tag, which allows remote attackers to execute
@@ -38,7 +58,7 @@
   - http://portal.nodesecurity.io/advisories/js-yaml
   - https://nealpoole.com/blog/2013/06/code-execution-via-yaml-in-js-yaml-nodejs-module/
   source_url: https://ossindex.net/resource/package/7014007971/vulnerabilities
-- id: snykio:npm:js-yaml:CVE-2013-4660
+- id: snykio:npm:js-yaml:20130623
   title: Code Execution due to Deserialization
   description: "The JS-YAML module for Node.js contained a code execution vulnerability\nprior
     to version 2.0.5. The maintainers of JS-YAML have patched this\nvulnerability

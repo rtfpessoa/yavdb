@@ -1,0 +1,23 @@
+---
+- id: npmjs:npm:@vivaxy/here:557
+  title: Directory Traversal
+  description: "The @vivaxy/here module is a small web server that serves files with
+    the process' working directory acting as the web root.\n\nIt is vulnerable to
+    a directory traversal attack. \n\nThis means that files on the local file system
+    which exist outside of the web root may be disclosed to an attacker. This might
+    include confidential files.\n\nMitigating Factors:\nIf the node process is run
+    as a user with very limited filesystem permissions, there is significantly less
+    risk of exposing confidential/private information.\n\n\nProof of Concept:\n```\ncurl
+    \"http://${SERVER_IP}:${SERVER_PORT}/..%2f..%2fetc/passwd\"\n```"
+  affected_package: "@vivaxy/here"
+  vulnerable_versions:
+  - "<=3.2.1"
+  severity: high
+  package_manager: npm
+  cwe: CWE-22
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Yasin Soliman
+  references: https://npmjs.com/advisories/557
+  source_url: https://npmjs.com/advisories/557

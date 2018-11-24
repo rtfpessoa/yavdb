@@ -1,5 +1,30 @@
 ---
-- id: ossindex:npm:sails:2017-07-29
+- id: npmjs:npm:sails:148
+  title: Broken CORS
+  description: "Affected versions of `sails` have an issue with the CORS configuration
+    where the value of the origin header is reflected as the value for the `Access-Control-Allow-Origin`
+    header. This may allow an attacker to make AJAX requests to vulnerable hosts through
+    cross-site scripting or a malicious HTML Document, effectively bypassing the Same
+    Origin Policy. \n\n## Mitigating Factors\n\nThis is only an issue when `allRoutes`
+    is set to `true` and `origin` is set to `*` or left commented out in the sails
+    CORS config file. \n\nThe problem can be compounded when the cors `credentials`
+    setting is not provided, because at that point authenticated cross domain requests
+    are possible."
+  affected_package: sails
+  vulnerable_versions:
+  - "<=0.12.7"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2016-10549
+  cwe: CWE-284
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Evan Johnson
+  references: https://npmjs.com/advisories/148
+  source_url: https://npmjs.com/advisories/148
+- id: ossindex:npm:sails:8405000450
   title: Broken CORS
   description: "> Version 0.12.6 and lower have an issue with the CORS configuration
     where the value of the origin header is reflected as the value for the Access-Control-Allow-Origin
@@ -125,7 +150,7 @@
   - https://github.com/balderdashy/sails
   - https://github.com/balderdashy/sails/commit/252b7b8c68d393acdde597c8b187945c629e4f6a
   source_url: https://snyk.io/vuln/npm:sails:20150604
-- id: snykio:npm:sails:CVE-2016-10549
+- id: snykio:npm:sails:20161013
   title: Broken CORS
   description: |
     [`sails`][1] is API-driven framework for building realtime apps, using

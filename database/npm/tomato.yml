@@ -1,5 +1,49 @@
 ---
-- id: ossindex:npm:tomato:CVE-2013-7379
+- id: npmjs:npm:tomato:38
+  title: API Admin Auth Weakness
+  description: |
+    Versions of `tomato` prior to 0.0.6 are affected by a somewhat complex authentication bypass vulnerability in the admin service when only a single access key is configured on the server. The vulnerability allows an attacker to guess the password for the admin service, no matter how complex that password is, in less than 200 requests.
+
+
+    ## Details
+    The tomato API has an admin service that is enabled by setting up an `access_key` in the config options. This `access_key` is intended to protect the API admin from unauthorized access.
+
+
+    Tomato verifies the `access_key` by checking to see if the server `access_key` incorporates the user provided value at any location. This allows an attacker to provide a single character as an `access_key`, and so long as the server key contains at least one instance of that character it will be considered a valid key.
+
+    ## Proof of Concept
+    This is the snippet of code that does the comparison to authorize requests.
+
+    ```
+    if (access_key && config.master.api.access_key.indexOf(access_key) !== -1) {
+    ```
+
+    For an access_key that is set to anything that includes the letter 'a' the following request would be authorized.
+
+    ```
+    $ curl -X POST "http://localhost:8081/api/exec" -H "Content-Type: application/json" -d @test -H "access-key: a"
+    {
+     "cmd": "ls",
+     "path": ".",
+     "stdout": "app.js\nconfig.js\nlog\nnode_modules\nserver.js\n",
+     "stderr": ""
+    }
+    ```
+  affected_package: tomato
+  vulnerable_versions:
+  - "<= 0.0.5"
+  severity: critical
+  package_manager: npm
+  cve:
+  - CVE-2013-7379
+  cwe: CWE-287
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Adam Baldwin
+  references: https://npmjs.com/advisories/38
+  source_url: https://npmjs.com/advisories/38
+- id: ossindex:npm:tomato:359652
   title: "[CVE-2013-7379]  Improper Authentication"
   description: The admin API in the tomato module before 0.0.6 for Node.js does not
     properly check the access key when it is set to a string, which allows remote
@@ -22,7 +66,7 @@
   - https://github.com/leizongmin/tomato/commit/9e427d524e04a905312a3294c85e939ed7d57b8c
   - https://nodesecurity.io/advisories/Tomato_API_Admin_Auth_Weakness
   source_url: https://ossindex.net/resource/package/7014548951/vulnerabilities
-- id: snykio:npm:tomato:CVE-2013-7379
+- id: snykio:npm:tomato:20130307
   title: API Admin Auth Weakness
   description: |+
     Tomato is a Node.js web framework.

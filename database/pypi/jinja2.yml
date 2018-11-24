@@ -1,5 +1,39 @@
 ---
-- id: snykio:pypi:jinja2:CVE-2014-0012
+- id: snykio:pypi:jinja2:40028
+  title: Insecure Defaults
+  description: |
+    [`Jinja2`][1] is a small but fast and easy to use stand-alone template
+    engine written in pure python.
+
+    Affected versions of this package are vulnerable to Insecure Defaults
+    attacks. The default configuration for bccache.FileSystemBytecodeCache
+    in Jinja2 before 2.7.2 does not properly create temporary files, which
+    allows local users to gain privileges via a crafted .cache file with a
+    name starting with `jinja2` in /tmp.
+
+
+
+    [1]: https://pypi.python.org/pypi/Jinja2
+  affected_package: jinja2
+  vulnerable_versions:
+  - "< 2.7.2"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2014-1402
+  cwe:
+  - CWE-264
+  disclosed_date: 2014-01-10
+  created_date: 2014-01-10
+  last_modified_date: 2014-01-10
+  credit:
+  - Unknown
+  references:
+  - http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=734747
+  - https://bugzilla.redhat.com/CVE-2014-1402
+  - https://github.com/mitsuhiko/jinja2/commit/acb672b6
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-JINJA2-40028
+- id: snykio:pypi:jinja2:40250
   title: Privilege Escalation
   description: |
     [`jinja2`][1] is a small but fast and easy to use stand-alone template
@@ -36,37 +70,3 @@
   - https://github.com/mitsuhiko/jinja2/pull/296
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-0012
   source_url: https://snyk.io/vuln/SNYK-PYTHON-JINJA2-40250
-- id: snykio:pypi:jinja2:CVE-2014-1402
-  title: Insecure Defaults
-  description: |
-    [`Jinja2`][1] is a small but fast and easy to use stand-alone template
-    engine written in pure python.
-
-    Affected versions of this package are vulnerable to Insecure Defaults
-    attacks. The default configuration for bccache.FileSystemBytecodeCache
-    in Jinja2 before 2.7.2 does not properly create temporary files, which
-    allows local users to gain privileges via a crafted .cache file with a
-    name starting with `jinja2` in /tmp.
-
-
-
-    [1]: https://pypi.python.org/pypi/Jinja2
-  affected_package: jinja2
-  vulnerable_versions:
-  - "< 2.7.2"
-  severity: medium
-  package_manager: pypi
-  cve:
-  - CVE-2014-1402
-  cwe:
-  - CWE-264
-  disclosed_date: 2014-01-10
-  created_date: 2014-01-10
-  last_modified_date: 2014-01-10
-  credit:
-  - Unknown
-  references:
-  - http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=734747
-  - https://bugzilla.redhat.com/CVE-2014-1402
-  - https://github.com/mitsuhiko/jinja2/commit/acb672b6
-  source_url: https://snyk.io/vuln/SNYK-PYTHON-JINJA2-40028

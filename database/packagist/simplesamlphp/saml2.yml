@@ -72,7 +72,7 @@
   references:
   - https://simplesamlphp.org/security/201803-01
   source_url: https://github.com/FriendsOfPHP/security-advisories/blob/master/simplesamlphp/saml2/CVE-2018-7711.yaml
-- id: snykio:packagist:simplesamlphp/saml2:CVE-2016-9814
+- id: snykio:packagist:simplesamlphp/saml2:70159
   title: Incorrect Signature Verification
   description: "Affected versions of [`simplesamlphp/saml2`][1] are vulnerable to\nIncorrect
     signature verification.\n\nThe validateSignature method in the SAML2\\\\Utils
@@ -118,7 +118,7 @@
   references:
   - https://simplesamlphp.org/security/201612-01
   source_url: https://snyk.io/vuln/SNYK-PHP-SIMPLESAMLPHPSAML2-70159
-- id: snykio:packagist:simplesamlphp/saml2:CVE-2018-6519
+- id: snykio:packagist:simplesamlphp/saml2:72011
   title: Denial of Service (DoS)
   description: |+
     [simplesamlphp/saml2][1] is a library from SimpleSAMLphp.
@@ -177,7 +177,7 @@
   - https://nvd.nist.gov/vuln/detail/CVE-2018-6519
   - https://simplesamlphp.org/security/201801-01
   source_url: https://snyk.io/vuln/SNYK-PHP-SIMPLESAMLPHPSAML2-72011
-- id: snykio:packagist:simplesamlphp/saml2:CVE-2018-7644
+- id: snykio:packagist:simplesamlphp/saml2:72101
   title: Signature Validation Bypass
   description: |
     [simplesamlphp/saml2][1] is a PHP library for SAML2 related
@@ -211,7 +211,7 @@
   references:
   - https://simplesamlphp.org/security/201802-01
   source_url: https://snyk.io/vuln/SNYK-PHP-SIMPLESAMLPHPSAML2-72101
-- id: snykio:packagist:simplesamlphp/saml2:CVE-2018-7711
+- id: snykio:packagist:simplesamlphp/saml2:72102
   title: Authentication Bypass
   description: |+
     [simplesamlphp/saml2][1] is an application written in native PHP that
@@ -263,3 +263,54 @@
   - https://github.com/simplesamlphp/saml2/commit/4f6af7f69f29df8555a18b9bb7b646906b45924d
   - https://simplesamlphp.org/security/201803-01
   source_url: https://snyk.io/vuln/SNYK-PHP-SIMPLESAMLPHPSAML2-72102
+- id: snykio:packagist:simplesamlphp/saml2:72118
+  title: Authentication Bypass
+  description: |+
+    [simplesamlphp/saml2][1] is an application written in native PHP that
+    deals with authentication.
+
+    Affected versions of this package are vulnerable to Authentication
+    Bypass. An incorrect check of return values in the signature validation
+    utilities allows an attacker to get invalid signatures accepted as valid
+    by forcing an error during validation.
+
+
+
+    [1]: https://github.com/simplesamlphp/saml2
+    \nSecurity Assertion Markup Language (SAML) is an XML-based markup
+    language for security assertions regarding authentication and
+    permissions, most commonly used for single sign-on (SSO) services.
+
+    Some XML DOM traversal and canonicalization APIs may be inconsistent in
+    handling of comments within XML nodes. Incorrect use of these APIs by
+    some SAML libraries results in incorrect parsing of the inner text of
+    XML nodes such that any inner text after the comment is lost prior to
+    cryptographically signing the SAML message. Text after the comment
+    therefore has no impact on the signature on the SAML message.
+
+    A remote attacker can modify SAML content for a SAML service provider
+    without invalidating the cryptographic signature, which may allow
+    attackers to bypass primary authentication for the affected SAML service
+    provider.
+
+  affected_package: simplesamlphp/saml2
+  vulnerable_versions:
+  - "<1.10.6"
+  - ">=1.11  <1.15.4"
+  - ">=2.0  <2.3.8"
+  - ">=3.0  <3.1.4"
+  severity: high
+  package_manager: packagist
+  cve:
+  - CVE-2018-7711
+  cwe:
+  - CWE-347
+  disclosed_date: 2018-03-01
+  created_date: 2018-04-08
+  last_modified_date: 2018-04-08
+  credit:
+  - Unknown
+  references:
+  - https://github.com/simplesamlphp/saml2/commit/4f6af7f69f29df8555a18b9bb7b646906b45924d
+  - https://simplesamlphp.org/security/201803-01
+  source_url: https://snyk.io/vuln/SNYK-PHP-SIMPLESAMLPHPSAML2-72118

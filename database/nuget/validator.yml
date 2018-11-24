@@ -66,6 +66,98 @@
   references:
   - https://github.com/chriso/validator.js/issues/181
   source_url: https://snyk.io/vuln/SNYK-DOTNET-VALIDATOR-60218
+- id: snykio:nuget:validator:60219
+  title: Multiple XSS Filter Bypasses
+  description: |+
+    The validator module for Node.js contains functionality meant to filter
+    potential XSS attacks (a filter called xss). Several ways to bypass the
+    filter were discovered. In general, because the function’s filtering is
+    blacklist-based it is likely that other bypasses will be discovered in
+    the future. Developers are encouraged not to use the xss filter function
+    in this package.
+
+    *Source: [Node Security Project][1]*
+
+    ### Details   {#details}
+
+    Various inputs that could bypass the filter were discovered:
+
+    Improper parsing of nested tags:
+
+        <s <onmouseover="alert(1)"> <;s onmouseover="alert(1)">This is a test</s>
+
+    Incomplete filtering of javascript: URIs:
+
+        <a href="javascriptJ a V a S c R iPt::alert(1)" "<s>">test</a>
+
+    UI Redressing:
+
+        <div style="z-index: 9999999; background-color: green; width: 100%; height: 100%">
+        <h1>You have won</h1>Please click the link and enter your login details:
+        <a href="http://example.com/">http://good.com</a>
+        </div>
+
+    Bypass via Nested Forbidden Strings:
+
+        <scrRedirecRedirect 302t 302ipt type="text/javascript">prompt(1);</scrRedirecRedirect 302t 302ipt>
+
+    Additional bypasses were discovered by Krzysztof Kotowicz in 2012 when
+    auditing CodeIgniter\'s XSS filtering function, which this code was
+    based off of.
+
+
+
+    [1]: https://nodesecurity.io/advisories/41
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+  affected_package: validator
+  vulnerable_versions:
+  - "< 1.1.1"
+  severity: medium
+  package_manager: nuget
+  cve:
+  - CVE-2013-7451
+  - CVE-2013-7452
+  - CVE-2013-7453
+  - CVE-2013-7454
+  cwe:
+  - CWE-79
+  disclosed_date: 2015-11-06
+  created_date: 2015-11-06
+  last_modified_date: 2015-11-06
+  credit:
+  - Krzysztof Kotowicz
+  - Neal Poole
+  references:
+  - http://blog.kotowicz.net/2012/07/codeigniter-210-xssclean-cross-site.html
+  - https://nealpoole.com/blog/2013/07/xss-filter-bypass-in-validator-nodejs-module/
+  source_url: https://snyk.io/vuln/SNYK-DOTNET-VALIDATOR-60219
 - id: snykio:nuget:validator:60220
   title: Cross-site Scripting (XSS)
   description: |+
@@ -120,187 +212,3 @@
   references:
   - https://github.com/chriso/validator.js/commit/570889bf1b3c963439871a0c15aa5801ef6322d7
   source_url: https://snyk.io/vuln/SNYK-DOTNET-VALIDATOR-60220
-- id: snykio:nuget:validator:CVE-2013-7451
-  title: Multiple XSS Filter Bypasses
-  description: |+
-    The validator module for Node.js contains functionality meant to filter
-    potential XSS attacks (a filter called xss). Several ways to bypass the
-    filter were discovered. In general, because the function’s filtering is
-    blacklist-based it is likely that other bypasses will be discovered in
-    the future. Developers are encouraged not to use the xss filter function
-    in this package.
-
-    *Source: [Node Security Project][1]*
-
-    ### Details   {#details}
-
-    Various inputs that could bypass the filter were discovered:
-
-    Improper parsing of nested tags:
-
-        <s <onmouseover="alert(1)"> <;s onmouseover="alert(1)">This is a test</s>
-
-    Incomplete filtering of javascript: URIs:
-
-        <a href="javascriptJ a V a S c R iPt::alert(1)" "<s>">test</a>
-
-    UI Redressing:
-
-        <div style="z-index: 9999999; background-color: green; width: 100%; height: 100%">
-        <h1>You have won</h1>Please click the link and enter your login details:
-        <a href="http://example.com/">http://good.com</a>
-        </div>
-
-    Bypass via Nested Forbidden Strings:
-
-        <scrRedirecRedirect 302t 302ipt type="text/javascript">prompt(1);</scrRedirecRedirect 302t 302ipt>
-
-    Additional bypasses were discovered by Krzysztof Kotowicz in 2012 when
-    auditing CodeIgniter\'s XSS filtering function, which this code was
-    based off of.
-
-
-
-    [1]: https://nodesecurity.io/advisories/41
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-  affected_package: validator
-  vulnerable_versions:
-  - "< 1.1.1"
-  severity: medium
-  package_manager: nuget
-  cve:
-  - CVE-2013-7451
-  - CVE-2013-7452
-  - CVE-2013-7453
-  - CVE-2013-7454
-  cwe:
-  - CWE-79
-  disclosed_date: 2015-11-06
-  created_date: 2015-11-06
-  last_modified_date: 2015-11-06
-  credit:
-  - Krzysztof Kotowicz
-  - Neal Poole
-  references:
-  - http://blog.kotowicz.net/2012/07/codeigniter-210-xssclean-cross-site.html
-  - https://nealpoole.com/blog/2013/07/xss-filter-bypass-in-validator-nodejs-module/
-  source_url: https://snyk.io/vuln/SNYK-DOTNET-VALIDATOR-60219
-- id: snykio:nuget:validator:CVE-2013-7454
-  title: Multiple XSS Filter Bypasses
-  description: |+
-    The validator module for Node.js contains functionality meant to filter
-    potential XSS attacks (a filter called xss). Several ways to bypass the
-    filter were discovered. In general, because the function’s filtering is
-    blacklist-based it is likely that other bypasses will be discovered in
-    the future. Developers are encouraged not to use the xss filter function
-    in this package.
-
-    *Source: [Node Security Project][1]*
-
-    ### Details   {#details}
-
-    Various inputs that could bypass the filter were discovered:
-
-    Improper parsing of nested tags:
-
-        <s <onmouseover="alert(1)"> <;s onmouseover="alert(1)">This is a test</s>
-
-    Incomplete filtering of javascript: URIs:
-
-        <a href="javascriptJ a V a S c R iPt::alert(1)" "<s>">test</a>
-
-    UI Redressing:
-
-        <div style="z-index: 9999999; background-color: green; width: 100%; height: 100%">
-        <h1>You have won</h1>Please click the link and enter your login details:
-        <a href="http://example.com/">http://good.com</a>
-        </div>
-
-    Bypass via Nested Forbidden Strings:
-
-        <scrRedirecRedirect 302t 302ipt type="text/javascript">prompt(1);</scrRedirecRedirect 302t 302ipt>
-
-    Additional bypasses were discovered by Krzysztof Kotowicz in 2012 when
-    auditing CodeIgniter\'s XSS filtering function, which this code was
-    based off of.
-
-
-
-    [1]: https://nodesecurity.io/advisories/41
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-  affected_package: validator
-  vulnerable_versions:
-  - "< 1.1.1"
-  severity: medium
-  package_manager: nuget
-  cve:
-  - CVE-2013-7451
-  - CVE-2013-7452
-  - CVE-2013-7453
-  - CVE-2013-7454
-  cwe:
-  - CWE-79
-  disclosed_date: 2015-11-06
-  created_date: 2015-11-06
-  last_modified_date: 2015-11-06
-  credit:
-  - Krzysztof Kotowicz
-  - Neal Poole
-  references:
-  - http://blog.kotowicz.net/2012/07/codeigniter-210-xssclean-cross-site.html
-  - https://nealpoole.com/blog/2013/07/xss-filter-bypass-in-validator-nodejs-module/
-  source_url: https://snyk.io/vuln/SNYK-DOTNET-VALIDATOR-60219

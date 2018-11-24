@@ -1,4 +1,25 @@
 ---
+- id: npmjs:npm:openwhisk:600
+  title: Remote Memory Exposure
+  description: "Versions of `openwhisk` before 3.3.1 are vulnerable to remote memory
+    exposure.\n\nWhen a number is passed to `api_key`, affected versions of `openwhisk`
+    allocate an uninitialized buffer and send that over network in Authorization header
+    (base64-encoded).\n\nProof of concept:\n\n```js\nvar openwhisk = require('openwhisk');\nvar
+    options = {\n  apihost: '127.0.0.1:1433', \n  api_key: USERSUPPLIEDINPUT // number\n};\nvar
+    ow = openwhisk(options);\now.actions.invoke({actionName: 'sample'}).then(result
+    => console.log(result))\n```"
+  affected_package: openwhisk
+  vulnerable_versions:
+  - "<3.3.1"
+  severity: moderate
+  package_manager: npm
+  cwe: CWE-20
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Сковорода Никита Андреевич
+  references: https://npmjs.com/advisories/600
+  source_url: https://npmjs.com/advisories/600
 - id: snykio:npm:openwhisk:20170302
   title: Uninitialized Memory Exposure
   description: |

@@ -1,4 +1,29 @@
 ---
+- id: npmjs:npm:redis-commander:562
+  title: Reflected Cross-Site Scripting
+  description: |-
+    Affected versions of `redis-commander` contain a cross-site scripting vulnerability in the `highlighterId` paramter of the clipboard.swf component on hosts serving Redis Commander.
+
+    Mitigating factors:
+    Flash must be installed / enabled for this to work. The below proof of concept was verified to work using Firefox 57.0 on Windows 10 by manually installing the [Flash NPAPI Windows plugin](https://get.adobe.com/flashplayer/otherversions/)
+
+    ## Proof of concept
+
+    ```
+    http://instance/jstree/_docs/syntax/clipboard.swf?highlighterId=\%22))}%20catch(e)%20{alert(document.domain);}//
+    ```
+  affected_package: redis-commander
+  vulnerable_versions:
+  - "<=99.999.99999"
+  severity: low
+  package_manager: npm
+  cwe: CWE-79
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Yasin Soliman (ysx)
+  references: https://npmjs.com/advisories/562
+  source_url: https://npmjs.com/advisories/562
 - id: snykio:npm:redis-commander:20180109
   title: Cross-site Scripting (XSS)
   description: |

@@ -1,0 +1,28 @@
+---
+- id: npmjs:npm:loopback-connector-mongodb:696
+  title: NoSQL Injection
+  description: |+
+    Versions of `loopback-connector-mongodb` before 3.6.0 are vulnerable to NoSQL injection.
+
+    MongoDB Connector for LoopBack fails to properly sanitize a filter passed to query the database by allowing the dangerous `$where` property to be passed to the MongoDB Driver. The Driver allows the special `$where` property in a filter to execute JavaScript (client can pass in a malicious script) on the database Driver. This is an [intended feature of MongoDB](https://docs.mongodb.com/manual/core/server-side-javascript/) unless disabled ([instructions here](https://docs.mongodb.com/manual/core/server-side-javascript/#disable-server-side-js)).
+
+    A proof of concept malicious query:
+
+    ```
+    GET /POST filter={"where": {"$where": "function(){sleep(5000); return this.title.contains('Hello');}"}}
+    ```
+
+    The above makes the database sleep for 5 seconds and then returns all “Posts” with the title containing the word `Hello`.
+
+  affected_package: loopback-connector-mongodb
+  vulnerable_versions:
+  - "<=3.5.0"
+  severity: high
+  package_manager: npm
+  cwe: CWE-943
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: NelsonBrandao
+  references: https://npmjs.com/advisories/696
+  source_url: https://npmjs.com/advisories/696

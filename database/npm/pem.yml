@@ -1,0 +1,22 @@
+---
+- id: npmjs:npm:pem:723
+  title: Sensitive data exposure
+  description: "Versions of `pem` before 1.13.2 expose sensitive data when the `readPkcs12`
+    is used. \n\nThe `readPkcs12` function reads the certificate and key data from
+    a pkcs12 file using the encryption password. As part of this process it creates
+    a globally readable file with a filename of 20 random 0-f characters in the temporary
+    directory containing the password which is then read by OpenSSL. The file containing
+    the password is never cleaned up after it is used giving access to the pkcs12
+    password to any other users with access to read files from the system.\n"
+  affected_package: pem
+  vulnerable_versions:
+  - "<=1.13.1"
+  severity: critical
+  package_manager: npm
+  cwe: CWE-200
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: The UK's National Cyber Security Centre (NCSC)
+  references: https://npmjs.com/advisories/723
+  source_url: https://npmjs.com/advisories/723

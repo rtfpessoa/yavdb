@@ -1,5 +1,5 @@
 ---
-- id: snykio:maven:org.cloudfoundry.identity:cloudfoundry-identity-uaa:CVE-2016-4468
+- id: snykio:maven:org.cloudfoundry.identity:cloudfoundry-identity-uaa:31074
   title: SQL Injection
   description: |
     [`org.cloudfoundry.identity:cloudfoundry-identity-uaa`][1] Affected
@@ -28,7 +28,70 @@
   references:
   - http://pivotal.io/security/cve-2016-4468
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGCLOUDFOUNDRYIDENTITY-31074
-- id: snykio:maven:org.cloudfoundry.identity:cloudfoundry-identity-uaa:CVE-2017-4960
+- id: snykio:maven:org.cloudfoundry.identity:cloudfoundry-identity-uaa:31411
+  title: Session Fixation
+  description: |
+    [`org.cloudfoundry.identity:cloudfoundry-identity-uaa`][1] Affected
+    versions of this package are vulnerable to session fixation attacks via
+    the User Account and Authentication (UAA). When UAA is configured to
+    authenticate against external SAML or OpenID Connect based identity
+    providers.
+
+
+
+    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22cloudfoundry-identity-uaa%22
+  affected_package: org.cloudfoundry.identity:cloudfoundry-identity-uaa
+  vulnerable_versions:
+  - "<= 2.7.4.9"
+  - ">= 3 <= 3.9.1"
+  severity: low
+  package_manager: maven
+  cve:
+  - CVE-2017-4963
+  cwe:
+  - CWE-384
+  disclosed_date: 2017-03-31
+  created_date: 2017-05-21
+  last_modified_date: 2017-05-21
+  credit:
+  - GE Digital Security Team
+  references:
+  - https://github.com/cloudfoundry/uaa/releases/tag/2.7.4.13
+  - https://pivotal.io/security/cve-2017-4963
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2017-4963
+  - https://www.cloudfoundry.org/cve-2017-4963/
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGCLOUDFOUNDRYIDENTITY-31411
+- id: snykio:maven:org.cloudfoundry.identity:cloudfoundry-identity-uaa:31415
+  title: Privilege Escalation
+  description: |
+    [`org.cloudfoundry.identity:cloudfoundry-identity-uaa`][1] Affected
+    versions of this package are vulnerable to Privilege Escalations via the
+    User Account and Authentication (UAA). Any user could pass a malicious
+    token to a group endpoint, causing an elevation of privileges.
+
+
+
+    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22cloudfoundry-identity-uaa%22
+  affected_package: org.cloudfoundry.identity:cloudfoundry-identity-uaa
+  vulnerable_versions:
+  - "<= 2.7.4.9"
+  - ">= 3 <= 3.9.1"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2017-4973
+  cwe:
+  - CWE-265
+  disclosed_date: 2017-04-22
+  created_date: 2017-05-21
+  last_modified_date: 2017-05-21
+  credit:
+  - Unknown
+  references:
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2017-4973
+  - https://www.cloudfoundry.org/CVE-2017-4973
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGCLOUDFOUNDRYIDENTITY-31415
+- id: snykio:maven:org.cloudfoundry.identity:cloudfoundry-identity-uaa:31437
   title: Denial of Service (DoS)
   description: |+
     [`org.cloudfoundry.identity:cloudfoundry-identity-uaa`][1] An issue was
@@ -84,70 +147,112 @@
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2017-4960
   - https://www.cloudfoundry.org/cve-2017-4960/
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGCLOUDFOUNDRYIDENTITY-31437
-- id: snykio:maven:org.cloudfoundry.identity:cloudfoundry-identity-uaa:CVE-2017-4963
-  title: Session Fixation
+- id: snykio:maven:org.cloudfoundry.identity:cloudfoundry-identity-uaa:31638
+  title: Information Exposure
   description: |
-    [`org.cloudfoundry.identity:cloudfoundry-identity-uaa`][1] Affected
-    versions of this package are vulnerable to session fixation attacks via
-    the User Account and Authentication (UAA). When UAA is configured to
-    authenticate against external SAML or OpenID Connect based identity
-    providers.
+    [org.cloudfoundry.identity:cloudfoundry-identity-uaa][1] is a multi
+    tenant identity management service, used in Cloud Foundry, but also
+    available as a stand alone OAuth2 server.
+
+    Affected versions of this package are vulnerable to Information
+    Exposure. The SessionID is logged in audit event logs. An attacker can
+    use the SessionID to impersonate a logged-in user.
 
 
 
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22cloudfoundry-identity-uaa%22
+    [1]: https://github.com/cloudfoundry/uaa
   affected_package: org.cloudfoundry.identity:cloudfoundry-identity-uaa
   vulnerable_versions:
-  - "<= 2.7.4.9"
-  - ">= 3 <= 3.9.1"
-  severity: low
+  - ">= 4.5.0 < 4.5.5"
+  - ">= 4.7.0 < 4.7.4"
+  - ">= 4.8.0 < 4.8.3"
+  severity: medium
   package_manager: maven
   cve:
-  - CVE-2017-4963
+  - CVE-2018-1192
   cwe:
-  - CWE-384
-  disclosed_date: 2017-03-31
-  created_date: 2017-05-21
-  last_modified_date: 2017-05-21
-  credit:
-  - GE Digital Security Team
-  references:
-  - https://github.com/cloudfoundry/uaa/releases/tag/2.7.4.13
-  - https://pivotal.io/security/cve-2017-4963
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2017-4963
-  - https://www.cloudfoundry.org/cve-2017-4963/
-  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGCLOUDFOUNDRYIDENTITY-31411
-- id: snykio:maven:org.cloudfoundry.identity:cloudfoundry-identity-uaa:CVE-2017-4973
-  title: Privilege Escalation
-  description: |
-    [`org.cloudfoundry.identity:cloudfoundry-identity-uaa`][1] Affected
-    versions of this package are vulnerable to Privilege Escalations via the
-    User Account and Authentication (UAA). Any user could pass a malicious
-    token to a group endpoint, causing an elevation of privileges.
-
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22cloudfoundry-identity-uaa%22
-  affected_package: org.cloudfoundry.identity:cloudfoundry-identity-uaa
-  vulnerable_versions:
-  - "<= 2.7.4.9"
-  - ">= 3 <= 3.9.1"
-  severity: high
-  package_manager: maven
-  cve:
-  - CVE-2017-4973
-  cwe:
-  - CWE-265
-  disclosed_date: 2017-04-22
-  created_date: 2017-05-21
-  last_modified_date: 2017-05-21
+  - CWE-200
+  disclosed_date: 2018-02-05
+  created_date: 2018-02-21
+  last_modified_date: 2018-02-21
   credit:
   - Unknown
   references:
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2017-4973
-  - https://www.cloudfoundry.org/CVE-2017-4973
-  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGCLOUDFOUNDRYIDENTITY-31415
-- id: snykio:maven:org.cloudfoundry.identity:cloudfoundry-identity-uaa:CVE-2017-4991
+  - https://github.com/cloudfoundry/uaa-release/releases
+  - https://nvd.nist.gov/vuln/detail/CVE-2018-1192
+  - https://www.cloudfoundry.org/blog/cve-2018-1192/
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGCLOUDFOUNDRYIDENTITY-31638
+- id: snykio:maven:org.cloudfoundry.identity:cloudfoundry-identity-uaa:32146
+  title: HTTP Headers Forwarding
+  description: |
+    [org.cloudfoundry.identity:cloudfoundry-identity-uaa][1] is a
+    CloudFoundry User Account and Authentication (UAA) Server.
+
+    Affected version of this package are vulnerable to HTTP Headers
+    Forwarding, which could result in account corruption.
+
+
+
+    [1]: https://github.com/cloudfoundry/uaa
+  affected_package: org.cloudfoundry.identity:cloudfoundry-identity-uaa
+  vulnerable_versions:
+  - ">= 3.0.0 < 3.6.12"
+  - ">= 3.10.0 < 3.19.0"
+  - ">= 3.7 < 3.9.14"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2017-4994
+  cwe:
+  - CWE-20
+  disclosed_date: 2018-02-05
+  created_date: 2018-04-01
+  last_modified_date: 2018-04-01
+  credit:
+  - Unknown
+  references:
+  - https://github.com/cloudfoundry/uaa/releases/tag/3.19.0
+  - https://github.com/cloudfoundry/uaa/releases/tag/3.6.12
+  - https://github.com/cloudfoundry/uaa/releases/tag/3.9.14
+  - https://nvd.nist.gov/vuln/detail/CVE-2017-4994
+  - https://www.cloudfoundry.org/cve-2017-4994/
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGCLOUDFOUNDRYIDENTITY-32146
+- id: snykio:maven:org.cloudfoundry.identity:cloudfoundry-identity-uaa:32147
+  title: Privilege Escalation
+  description: |
+    [org.cloudfoundry.identity:cloudfoundry-identity-uaa][1] is a
+    CloudFoundry User Account and Authentication (UAA) Server.
+
+    Affected versions of this package are vulnerable to Privilege
+    Escalation. Any user or client can access the invitations endpoint to
+    generate a code and perform a password reset for a different user in the
+    system.
+
+
+
+    [1]: https://github.com/cloudfoundry/uaa
+  affected_package: org.cloudfoundry.identity:cloudfoundry-identity-uaa
+  vulnerable_versions:
+  - ">= 2.0 < 2.7.4.17"
+  - ">= 3.6.0 < 3.6.11"
+  - ">= 3.9.0 < 3.9.13"
+  - ">= 4.0 < 4.2.0"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2017-4992
+  cwe:
+  - CWE-264
+  disclosed_date: 2018-02-05
+  created_date: 2018-04-01
+  last_modified_date: 2018-04-01
+  credit:
+  - Unknown
+  references:
+  - https://nvd.nist.gov/vuln/detail/CVE-2017-4992
+  - https://www.cloudfoundry.org/cve-2017-4992/
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGCLOUDFOUNDRYIDENTITY-32147
+- id: snykio:maven:org.cloudfoundry.identity:cloudfoundry-identity-uaa:32148
   title: Improper Privileges
   description: |
     [org.cloudfoundry.identity:cloudfoundry-identity-uaa][1] is a
@@ -185,77 +290,7 @@
   - https://nvd.nist.gov/vuln/detail/CVE-2017-4991
   - https://www.cloudfoundry.org/cve-2017-4991/
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGCLOUDFOUNDRYIDENTITY-32148
-- id: snykio:maven:org.cloudfoundry.identity:cloudfoundry-identity-uaa:CVE-2017-4992
-  title: Privilege Escalation
-  description: |
-    [org.cloudfoundry.identity:cloudfoundry-identity-uaa][1] is a
-    CloudFoundry User Account and Authentication (UAA) Server.
-
-    Affected versions of this package are vulnerable to Privilege
-    Escalation. Any user or client can access the invitations endpoint to
-    generate a code and perform a password reset for a different user in the
-    system.
-
-
-
-    [1]: https://github.com/cloudfoundry/uaa
-  affected_package: org.cloudfoundry.identity:cloudfoundry-identity-uaa
-  vulnerable_versions:
-  - ">= 2.0 < 2.7.4.17"
-  - ">= 3.6.0 < 3.6.11"
-  - ">= 3.9.0 < 3.9.13"
-  - ">= 4.0 < 4.2.0"
-  severity: high
-  package_manager: maven
-  cve:
-  - CVE-2017-4992
-  cwe:
-  - CWE-264
-  disclosed_date: 2018-02-05
-  created_date: 2018-04-01
-  last_modified_date: 2018-04-01
-  credit:
-  - Unknown
-  references:
-  - https://nvd.nist.gov/vuln/detail/CVE-2017-4992
-  - https://www.cloudfoundry.org/cve-2017-4992/
-  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGCLOUDFOUNDRYIDENTITY-32147
-- id: snykio:maven:org.cloudfoundry.identity:cloudfoundry-identity-uaa:CVE-2017-4994
-  title: HTTP Headers Forwarding
-  description: |
-    [org.cloudfoundry.identity:cloudfoundry-identity-uaa][1] is a
-    CloudFoundry User Account and Authentication (UAA) Server.
-
-    Affected version of this package are vulnerable to HTTP Headers
-    Forwarding, which could result in account corruption.
-
-
-
-    [1]: https://github.com/cloudfoundry/uaa
-  affected_package: org.cloudfoundry.identity:cloudfoundry-identity-uaa
-  vulnerable_versions:
-  - ">= 3.0.0 < 3.6.12"
-  - ">= 3.10.0 < 3.19.0"
-  - ">= 3.7 < 3.9.14"
-  severity: high
-  package_manager: maven
-  cve:
-  - CVE-2017-4994
-  cwe:
-  - CWE-20
-  disclosed_date: 2018-02-05
-  created_date: 2018-04-01
-  last_modified_date: 2018-04-01
-  credit:
-  - Unknown
-  references:
-  - https://github.com/cloudfoundry/uaa/releases/tag/3.19.0
-  - https://github.com/cloudfoundry/uaa/releases/tag/3.6.12
-  - https://github.com/cloudfoundry/uaa/releases/tag/3.9.14
-  - https://nvd.nist.gov/vuln/detail/CVE-2017-4994
-  - https://www.cloudfoundry.org/cve-2017-4994/
-  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGCLOUDFOUNDRYIDENTITY-32146
-- id: snykio:maven:org.cloudfoundry.identity:cloudfoundry-identity-uaa:CVE-2017-8032
+- id: snykio:maven:org.cloudfoundry.identity:cloudfoundry-identity-uaa:32149
   title: Privilege Escalation
   description: |
     [org.cloudfoundry.identity:cloudfoundry-identity-uaa][1] is a
@@ -289,7 +324,42 @@
   - https://nvd.nist.gov/vuln/detail/CVE-2017-8032
   - https://www.cloudfoundry.org/cve-2017-8032/
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGCLOUDFOUNDRYIDENTITY-32149
-- id: snykio:maven:org.cloudfoundry.identity:cloudfoundry-identity-uaa:CVE-2018-11041
+- id: snykio:maven:org.cloudfoundry.identity:cloudfoundry-identity-uaa:32287
+  title: Privilege Escalation
+  description: |
+    [org.cloudfoundry.identity:cloudfoundry-identity-uaa][1] is a multi
+    tenant identity management service, used in Cloud Foundry, but also
+    available as a stand alone OAuth2 server.
+
+    Affected versions of this package are vulnerable to Privilege Escalation
+    across identity zones for clients performing offline validation. A zone
+    administrator could configure their zone to issue tokens which
+    impersonate another zone, granting up to admin privileges in the
+    impersonated zone for clients performing offline token validation.
+
+
+
+    [1]: https://github.com/cloudfoundry/uaa
+  affected_package: org.cloudfoundry.identity:cloudfoundry-identity-uaa
+  vulnerable_versions:
+  - ">= 4.12.0 < 4.12.2"
+  - ">= 4.13.0 < 4.13.4"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2018-1262
+  cwe:
+  - CWE-265
+  disclosed_date: 2018-05-15
+  created_date: 2018-05-21
+  last_modified_date: 2018-05-21
+  credit:
+  - Unknown
+  references:
+  - https://nvd.nist.gov/vuln/detail/CVE-2018-1262
+  - https://www.cloudfoundry.org/blog/cve-2018-1262/
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGCLOUDFOUNDRYIDENTITY-32287
+- id: snykio:maven:org.cloudfoundry.identity:cloudfoundry-identity-uaa:32396
   title: Open Redirect
   description: |
     [org.cloudfoundry.identity:cloudfoundry-identity-uaa][1] is a multi
@@ -324,7 +394,7 @@
   references:
   - https://www.cloudfoundry.org/blog/cve-2018-11041/
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGCLOUDFOUNDRYIDENTITY-32396
-- id: snykio:maven:org.cloudfoundry.identity:cloudfoundry-identity-uaa:CVE-2018-11047
+- id: snykio:maven:org.cloudfoundry.identity:cloudfoundry-identity-uaa:32446
   title: Authentication Bypass
   description: |
     [org.cloudfoundry.identity:cloudfoundry-identity-uaa][1] is a multi
@@ -360,73 +430,3 @@
   references:
   - https://www.cloudfoundry.org/blog/cve-2018-11047/
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGCLOUDFOUNDRYIDENTITY-32446
-- id: snykio:maven:org.cloudfoundry.identity:cloudfoundry-identity-uaa:CVE-2018-1192
-  title: Information Exposure
-  description: |
-    [org.cloudfoundry.identity:cloudfoundry-identity-uaa][1] is a multi
-    tenant identity management service, used in Cloud Foundry, but also
-    available as a stand alone OAuth2 server.
-
-    Affected versions of this package are vulnerable to Information
-    Exposure. The SessionID is logged in audit event logs. An attacker can
-    use the SessionID to impersonate a logged-in user.
-
-
-
-    [1]: https://github.com/cloudfoundry/uaa
-  affected_package: org.cloudfoundry.identity:cloudfoundry-identity-uaa
-  vulnerable_versions:
-  - ">= 4.5.0 < 4.5.5"
-  - ">= 4.7.0 < 4.7.4"
-  - ">= 4.8.0 < 4.8.3"
-  severity: medium
-  package_manager: maven
-  cve:
-  - CVE-2018-1192
-  cwe:
-  - CWE-200
-  disclosed_date: 2018-02-05
-  created_date: 2018-02-21
-  last_modified_date: 2018-02-21
-  credit:
-  - Unknown
-  references:
-  - https://github.com/cloudfoundry/uaa-release/releases
-  - https://nvd.nist.gov/vuln/detail/CVE-2018-1192
-  - https://www.cloudfoundry.org/blog/cve-2018-1192/
-  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGCLOUDFOUNDRYIDENTITY-31638
-- id: snykio:maven:org.cloudfoundry.identity:cloudfoundry-identity-uaa:CVE-2018-1262
-  title: Privilege Escalation
-  description: |
-    [org.cloudfoundry.identity:cloudfoundry-identity-uaa][1] is a multi
-    tenant identity management service, used in Cloud Foundry, but also
-    available as a stand alone OAuth2 server.
-
-    Affected versions of this package are vulnerable to Privilege Escalation
-    across identity zones for clients performing offline validation. A zone
-    administrator could configure their zone to issue tokens which
-    impersonate another zone, granting up to admin privileges in the
-    impersonated zone for clients performing offline token validation.
-
-
-
-    [1]: https://github.com/cloudfoundry/uaa
-  affected_package: org.cloudfoundry.identity:cloudfoundry-identity-uaa
-  vulnerable_versions:
-  - ">= 4.12.0 < 4.12.2"
-  - ">= 4.13.0 < 4.13.4"
-  severity: high
-  package_manager: maven
-  cve:
-  - CVE-2018-1262
-  cwe:
-  - CWE-265
-  disclosed_date: 2018-05-15
-  created_date: 2018-05-21
-  last_modified_date: 2018-05-21
-  credit:
-  - Unknown
-  references:
-  - https://nvd.nist.gov/vuln/detail/CVE-2018-1262
-  - https://www.cloudfoundry.org/blog/cve-2018-1262/
-  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGCLOUDFOUNDRYIDENTITY-32287

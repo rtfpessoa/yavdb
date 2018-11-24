@@ -1,5 +1,57 @@
 ---
-- id: ossindex:npm:mobile-icon-resizer:2017-07-31
+- id: npmjs:npm:mobile-icon-resizer:317
+  title: Arbitrary Code Injection
+  description: |-
+    mobile-icon-resizer resizes large images for use as icons for iOS and Android.
+
+    mobile-icon-resizer has a code execution vulnerability in versions before 0.4.3.
+
+    mobile-icon-resizer takes an options object as an argument to define the resulting icons as such:
+    ```
+    var options = {
+      config: './config.js'
+    }
+    resize(options, function(err){});
+    ```
+    config.js would need to be a file on the filesystem and look something like:
+    ```
+    var config = {
+      iOS: {
+        "images": [
+         /* iOS image definitions are not vulnerable */
+        ]
+      },
+      android: {
+        "images" : [
+          {
+            "baseRatio" : "console.log('Executing script as baseRatio property')",
+            "folder" : "drawable-ldpi"
+          },
+          {
+            "ratio" : "console.log('Executing script as ratio property')",
+            "folder" : "drawable-mdpi"
+          },
+        /* other android image defintiions ... */
+        ]
+      }
+    };
+
+    exports = module.exports = config;
+    ```
+    The parameters `ratio` and `baseRatio` are passed directly to `eval()`, thus allowing dynamic javascript payloads to be executed.
+  affected_package: mobile-icon-resizer
+  vulnerable_versions:
+  - ">=0.2.0 <=0.4.2"
+  severity: critical
+  package_manager: npm
+  cwe: CWE-94
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Cristian-Alexandru Staicu
+  references: https://npmjs.com/advisories/317
+  source_url: https://npmjs.com/advisories/317
+- id: ossindex:npm:mobile-icon-resizer:8405001219
   title: Code execution
   description: Arbitrary code injection is possible when input is passed directly
     to an invocation of `eval`.

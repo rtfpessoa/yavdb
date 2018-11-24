@@ -1,5 +1,36 @@
 ---
-- id: ossindex:npm:express-restify-mongoose:2017-07-29
+- id: npmjs:npm:express-restify-mongoose:92
+  title: Private Data Disclosure
+  description: "Affected versions of `express-restify-mongoose` are susceptible to
+    an information leakage vulnerability which may allow an attacker to access fields
+    on a model even if those fields are marked as private.\n\n\n## Proof of Concept\n\nIf
+    you have a user model that you want to protect, such as the following User model:\n```\nconst
+    User = mongoose.model('User', new mongoose.Schema({\n    name: String,\n    password:
+    String,\n}));\n```\n\nYou would normally do something such as:\n```\nrestify.serve(router,
+    User, {\n    private: ['password'], // Set the password part of User as private,
+    so outside people can't read it\n})\n```\n\nThis would hide the password field
+    from people that send your application a `GET /User` and `GET /User/some-user-id`
+    request. \n\nA malicious user can go to your application and send a request for
+    `GET /User?distinct=password` and get all the passwords for all the users in the
+    database, despite the field being set to private. This could be used for other
+    private data, if the malicious user knew what was set as private for specific
+    routes."
+  affected_package: express-restify-mongoose
+  vulnerable_versions:
+  - "<= 2.4.2"
+  - ">= 3.0.0 <=3.0.1"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2016-10533
+  cwe: CWE-200
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Stefan Mirea
+  references: https://npmjs.com/advisories/92
+  source_url: https://npmjs.com/advisories/92
+- id: ossindex:npm:express-restify-mongoose:8405000460
   title: Private Data Disclosure
   description: "> express-restify-mongoose is a module to easily create a flexible
     REST interface for mongoose models.\n> \n> -- [nodesecurity.io](https://nodesecurity.io/advisories/92)"
@@ -16,7 +47,7 @@
   - https://github.com/florianholzapfel/express-restify-mongoose/issues/252
   - https://nodesecurity.io/advisories/92
   source_url: https://ossindex.net/resource/package/7013568361/vulnerabilities
-- id: snykio:npm:express-restify-mongoose:CVE-2016-10533
+- id: snykio:npm:express-restify-mongoose:20160419
   title: Private Data Disclosure
   description: |+
     `express-restify-mongoose` is a module to easily create a flexible REST

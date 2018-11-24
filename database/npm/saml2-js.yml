@@ -1,5 +1,30 @@
 ---
-- id: snykio:npm:saml2-js:CVE-2017-11429
+- id: npmjs:npm:saml2-js:567
+  title: Authentication bypass via incorrect XML canonicalization and DOM traversal
+  description: |-
+    Versions of `saml2-js` prior to 1.12.4 or 2.0.2 are vulnerable to authentication bypass.
+
+    The `saml2-js` library may incorrectly utilize the results of XML DOM traversal and canonicalization APIs in such a way that an attacker may be able to manipulate the SAML data without invalidating the cryptographic signature, allowing the attack to potentially bypass authentication to SAML service providers.
+
+    Security Assertion Markup Language (SAML) is an XML-based markup language for security assertions regarding authentication and permissions, most commonly used for single sign-on (SSO) services.
+
+    Some XML DOM traversal and canonicalization APIs may be inconsistent in handling of comments within XML nodes. Incorrect use of these APIs by some SAML libraries results in incorrect parsing of the inner text of XML nodes such that any inner text after the comment is lost prior to cryptographically signing the SAML message. Text after the comment therefore has no impact on the signature on the SAML message.
+
+    A remote attacker can modify SAML content for a SAML service provider without invalidating the cryptographic signature, which may allow attackers to bypass primary authentication for the affected SAML service provider
+  affected_package: saml2-js
+  vulnerable_versions:
+  - "<= 1.12.3"
+  - ">= 2.0.0 <=2.0.1"
+  severity: moderate
+  package_manager: npm
+  cwe: CWE-287
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Kelby Ludwig
+  references: https://npmjs.com/advisories/567
+  source_url: https://npmjs.com/advisories/567
+- id: snykio:npm:saml2-js:20180227
   title: Authentication Bypass
   description: |+
     [`saml2-js`][1] is a node module that abstracts away the complexities of

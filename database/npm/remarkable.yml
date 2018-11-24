@@ -1,5 +1,45 @@
 ---
-- id: ossindex:npm:remarkable:2016-05-17
+- id: npmjs:npm:remarkable:30
+  title: Content Injection
+  description: "Versions 1.4.0 and earlier of `remarkable` are affected by a cross-site
+    scripting vulnerability. This occurs because vulnerable versions of `remarkable`
+    did not properly whitelist link protocols, and consequently allowed `javascript:`
+    to be used. \n\n\n### Proof of Concept\n\nMarkdown Source:\n```\n[link](<javascript:alert(1)>)\n```\n\nRendered
+    HTML:\n```\n<a href=\"javascript:alert(1)\">link</a>\n```"
+  affected_package: remarkable
+  vulnerable_versions:
+  - "<1.4.1"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2014-10065
+  cwe: CWE-94
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Adam Baldwin
+  references: https://npmjs.com/advisories/30
+  source_url: https://npmjs.com/advisories/30
+- id: npmjs:npm:remarkable:319
+  title: XSS in Data URI
+  description: "Affected versions of `remarkable` are vulnerable to cross-site scripting.
+    Vulnerable versions of the package allow the use of `data:` URIs in links, and
+    can therefore execute javascript. \n\n\n## Proof of Concept\n\n```\n[link](data:text/html,<script>alert('0')</script>)\n```"
+  affected_package: remarkable
+  vulnerable_versions:
+  - "<=1.6.2"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2017-16006
+  cwe: CWE-79
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Sophie Alpert
+  references: https://npmjs.com/advisories/319
+  source_url: https://npmjs.com/advisories/319
+- id: ossindex:npm:remarkable:8269172948
   title: Content Injection
   description: The bad protocol check can be bypassed with certain input, allowing
     `javascript:` URLs.
@@ -19,7 +59,7 @@
   - https://nodesecurity.io/advisories/remarkable_content_injection
   - https://www.owasp.org/index.php/Content_Spoofing
   source_url: https://ossindex.net/resource/package/7014376319/vulnerabilities
-- id: ossindex:npm:remarkable:2016-10-05
+- id: ossindex:npm:remarkable:8400171452
   title: Cross Site Scripting (XSS)
   description: Cross Site Scripting is possible by creation of a link which uses the
     `data:` URI
@@ -39,7 +79,7 @@
   - https://github.com/jonschlinkert/remarkable/pull/228
   - https://nodesecurity.io/advisories/319
   source_url: https://ossindex.net/resource/package/7014376319/vulnerabilities
-- id: snykio:npm:remarkable:CVE-2014-10065
+- id: snykio:npm:remarkable:20141113
   title: Content Injection
   description: |+
     Certain input when passed into remarkable will bypass the bad prototcol
@@ -81,7 +121,7 @@
   references:
   - https://github.com/jonschlinkert/remarkable/issues/97
   source_url: https://snyk.io/vuln/npm:remarkable:20141113
-- id: snykio:npm:remarkable:CVE-2017-16006
+- id: snykio:npm:remarkable:20160820
   title: Cross-site Scripting (XSS)
   description: |
     [`remarkable`][1] is markdown parser.

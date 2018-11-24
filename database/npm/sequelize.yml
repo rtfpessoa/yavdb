@@ -1,5 +1,178 @@
 ---
-- id: ossindex:npm:sequelize:2016-07-22
+- id: npmjs:npm:sequelize:102
+  title: SQL Injection
+  description: |-
+    Affected versions of `sequelize` cast arrays to strings and fail to properly escape the resulting SQL statement, resulting in a SQL injection vulnerability.
+
+
+    ## Proof of Concept
+    In Postgres, SQLite, and Microsoft SQL Server there is an issue where arrays are treated as strings and improperly escaped.
+
+    Example Query:
+    ```
+    database.query('SELECT * FROM TestTable WHERE Name IN (:names)', {
+      replacements: {
+        names: directCopyOfUserInput
+      }
+    });
+    ```
+
+    If the user inputs the value of `:names` as:
+    ```
+    ["test", "'); DELETE TestTable WHERE Id = 1 --')"]
+    ```
+
+    The resulting SQL statement will be:
+    ```
+    SELECT Id FROM Table WHERE Name IN ('test', '\'); DELETE TestTable WHERE Id = 1 --')
+    ```
+    As the backslash has no special meaning in PostgreSQL, MSSQL, or SQLite, the statement will delete the record in TestTable with an Id of 1.
+  affected_package: sequelize
+  vulnerable_versions:
+  - "<=3.19.3"
+  severity: critical
+  package_manager: npm
+  cve:
+  - CVE-2016-10556
+  cwe: CWE-89
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Leibale Eidelman
+  references: https://npmjs.com/advisories/102
+  source_url: https://npmjs.com/advisories/102
+- id: npmjs:npm:sequelize:109
+  title: Potential SQL Injection
+  description: 'Affected versions of `sequelize` are vulnerable to SQL Injection when
+    user input is passed into `findOne` or into a statement such as `where: "user
+    input"`.
+
+'
+  affected_package: sequelize
+  vulnerable_versions:
+  - "<= 2.1.3"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2016-10553
+  cwe: CWE-89
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Anonymous
+  references: https://npmjs.com/advisories/109
+  source_url: https://npmjs.com/advisories/109
+- id: npmjs:npm:sequelize:112
+  title: SQL Injection
+  description: 'Affected versions of `sequelize` are vulnerable to SQL Injection in
+    locations where user input is passed into the `limit` or `order` parameters of
+    `sequelize` query calls, such as `findOne` or `findAll`.
+
+'
+  affected_package: sequelize
+  vulnerable_versions:
+  - "<= 3.16.0"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2016-10550
+  cwe: CWE-89
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Spencer Creasey
+  references: https://npmjs.com/advisories/112
+  source_url: https://npmjs.com/advisories/112
+- id: npmjs:npm:sequelize:113
+  title: SQL Injection
+  description: Affected versions of `sequelize` use MySQL's backslash-based escape
+    syntax when connecting to SQLite, despite the fact that SQLite uses PostgreSQL's
+    escape syntax, which can result in a SQL Injection vulnerability.
+  affected_package: sequelize
+  vulnerable_versions:
+  - "<= 1.7.0-alpha2"
+  severity: moderate
+  package_manager: npm
+  cve:
+  - CVE-2016-10554
+  cwe: CWE-89
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Anonymous
+  references: https://npmjs.com/advisories/113
+  source_url: https://npmjs.com/advisories/113
+- id: npmjs:npm:sequelize:122
+  title: SQL Injection via GeoJSON
+  description: Affected versions of `sequelize` are vulnerable to SQL Injection in
+    Models that have fields with the `GEOMETRY` DataType. This vulnerability occurs
+    because single quotes in document values are not escaped for GeoJSON documents
+    using `ST_GeomFromGeoJSON`, and MySQL GeoJSON documents using `GeomFromText`.
+  affected_package: sequelize
+  vulnerable_versions:
+  - "<3.23.6"
+  severity: critical
+  package_manager: npm
+  cve:
+  - CVE-2016-1000225
+  cwe: CWE-89
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Eric Schoffstall
+  references: https://npmjs.com/advisories/122
+  source_url: https://npmjs.com/advisories/122
+- id: npmjs:npm:sequelize:33
+  title: SQL Injection
+  description: |-
+    Versions 2.0.0-rc-7 and earlier of `sequelize` are affected by a SQL injection vulnerability when user input is passed into the order parameter.
+
+
+
+    ## Proof of Concept
+
+    ```javascript
+    Test.findAndCountAll({
+    where: { id :1 },
+    order : [['id', 'UNTRUSTED USER INPUT']]
+    })
+    ```
+  affected_package: sequelize
+  vulnerable_versions:
+  - "<=2.0.0-rc7"
+  severity: critical
+  package_manager: npm
+  cve:
+  - CVE-2015-1369
+  cwe: CWE-89
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Levan Basharuli
+  references: https://npmjs.com/advisories/33
+  source_url: https://npmjs.com/advisories/33
+- id: ossindex:npm:sequelize:367231
+  title: "[CVE-2015-1369]  Improper Neutralization of Special Elements used in an
+    SQL Command (SQL Injection)"
+  description: SQL injection vulnerability in Sequelize before 2.0.0-rc7 for Node.js
+    allows remote attackers to execute arbitrary SQL commands via the order parameter.
+  affected_package: sequelize
+  vulnerable_versions:
+  - "<=2.0.0-rc7"
+  package_manager: npm
+  cve:
+  - CVE-2015-1369
+  disclosed_date: 2015-01-27
+  created_date: 2015-01-27
+  last_modified_date: 2017-07-30
+  credit:
+  - OSSIndex
+  references:
+  - http://www.openwall.com/lists/oss-security/2015/01/23/2
+  - https://github.com/sequelize/sequelize/pull/2919
+  - https://nodesecurity.io/advisories/sequelize-sql-injection-order
+  source_url: https://ossindex.net/resource/package/7014430328/vulnerabilities
+- id: ossindex:npm:sequelize:8399946928
   title: SQL Injection
   description: 'An SQL injection can be caused by inserting GeoJSON documents with
     single quotes in an attribute. '
@@ -22,7 +195,7 @@
   - https://github.com/sequelize/sequelize/issues/6194
   - https://nodesecurity.io/advisories/122
   source_url: https://ossindex.net/resource/package/7014430328/vulnerabilities
-- id: ossindex:npm:sequelize:2017-01-25
+- id: ossindex:npm:sequelize:8402376917
   title: "[Duplicate] SQL Injection"
   description: "See https://ossindex.net/resource/cve/367231\n\n> SQL Injection is
     possible in an application using the npm module sequelize if untrusted user input
@@ -42,7 +215,7 @@
   - https://github.com/sequelize/sequelize/issues/2906
   - https://nodesecurity.io/advisories/33
   source_url: https://ossindex.net/resource/package/7014430328/vulnerabilities
-- id: ossindex:npm:sequelize:2017-02-11
+- id: ossindex:npm:sequelize:8402397890
   title: SQL injection with PostgreSQL
   description: Prior to PostgreSQL 9.1, back slashes were not escaped by default which
     results in a possible SQL Exception when using sequalize with older versions.
@@ -60,7 +233,43 @@
   - https://github.com/sequelize/sequelize/commit/76727a6dda7650730f49155c417dc78efecdf62e
   - https://github.com/sequelize/sequelize/issues/3545
   source_url: https://ossindex.net/resource/package/7014430328/vulnerabilities
-- id: ossindex:npm:sequelize:2017-07-29
+- id: ossindex:npm:sequelize:8402397925
+  title: SQL injection in 'IN' statement
+  description: "> Fix bug in SqlString.escape which caused the function to be recursively
+    called with the wrong parameters when passed an array of strings. This would cause
+    the incorrect escape algorithm to be used on the strings within the array when
+    the dialect was set to postgres, sqlite, or mssql.\n> \n> -- [github.com](https://github.com/sequelize/sequelize/commit/23952a2b020cc3571f090e67dae7feb084e1be71)"
+  affected_package: sequelize
+  vulnerable_versions:
+  - "<3.20.0"
+  package_manager: npm
+  disclosed_date: 2017-02-11
+  created_date: 2017-02-11
+  last_modified_date: 2017-07-30
+  credit:
+  - OSSIndex
+  references:
+  - https://github.com/sequelize/sequelize/commit/23952a2b020cc3571f090e67dae7feb084e1be71
+  - https://github.com/sequelize/sequelize/issues/5671
+  source_url: https://ossindex.net/resource/package/7014430328/vulnerabilities
+- id: ossindex:npm:sequelize:8405000447
+  title: Potential SQL Injection
+  description: "> A fix was pushed out that fixed potential SQL injection.\n> \n>
+    -- [nodesecurity.io](https://nodesecurity.io/advisories/109)"
+  affected_package: sequelize
+  vulnerable_versions:
+  - "<=2.1.3"
+  package_manager: npm
+  disclosed_date: 2017-07-29
+  created_date: 2017-07-29
+  last_modified_date: 2017-07-30
+  credit:
+  - OSSIndex
+  references:
+  - https://github.com/sequelize/sequelize/blob/master/changelog.md#300
+  - https://nodesecurity.io/advisories/109
+  source_url: https://ossindex.net/resource/package/7014430328/vulnerabilities
+- id: ossindex:npm:sequelize:8405000449
   title: SQL Injection
   description: "> If user input goes into the limit or order parameters, a malicious
     user can put in their own SQL statements.\n> \n> -- [nodesecurity.io](https://nodesecurity.io/advisories/112)"
@@ -77,27 +286,81 @@
   - https://github.com/sequelize/sequelize/pull/5167/commits/f282d85e60e3df5e57ecdb82adccb4eaef404f03
   - https://nodesecurity.io/advisories/112
   source_url: https://ossindex.net/resource/package/7014430328/vulnerabilities
-- id: ossindex:npm:sequelize:CVE-2015-1369
-  title: "[CVE-2015-1369]  Improper Neutralization of Special Elements used in an
-    SQL Command (SQL Injection)"
-  description: SQL injection vulnerability in Sequelize before 2.0.0-rc7 for Node.js
-    allows remote attackers to execute arbitrary SQL commands via the order parameter.
+- id: snykio:npm:sequelize:20130614
+  title: SQL Injection
+  description: |+
+    `sequelize` versions prior to 1.7.0-alpha3 are vulnerable to SQL
+    Injection attacks if untrusted user input is passed into the `order`
+    parameter.
+
+  affected_package: sequelize
+  vulnerable_versions:
+  - "<=1.7.0-alpha2 >=0.2.2"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2016-10554
+  cwe:
+  - CWE-89
+  disclosed_date: 2013-05-24
+  created_date: 2016-04-01
+  last_modified_date: 2016-04-01
+  credit:
+  - Unknown
+  references:
+  - https://github.com/sequelize/sequelize/commit/c876192aa6ce1f67e22b26a4d175b8478615f42d
+  source_url: https://snyk.io/vuln/npm:sequelize:20130614
+- id: snykio:npm:sequelize:20150118
+  title: SQL Injection in Order
+  description: |+
+    `sequelize` versions prior to 2.0.0-rc7 are vulnerable to SQL Injection
+    attacks if untrusted user input is passed into the `order` parameter.
+
   affected_package: sequelize
   vulnerable_versions:
   - "<=2.0.0-rc7"
+  severity: high
   package_manager: npm
   cve:
   - CVE-2015-1369
-  disclosed_date: 2015-01-27
-  created_date: 2015-01-27
-  last_modified_date: 2017-07-30
+  cwe:
+  - CWE-89
+  disclosed_date: 2015-01-18
+  created_date: 2015-01-18
+  last_modified_date: 2015-01-18
   credit:
-  - OSSIndex
+  - Levan Basharuli
   references:
-  - http://www.openwall.com/lists/oss-security/2015/01/23/2
-  - https://github.com/sequelize/sequelize/pull/2919
-  - https://nodesecurity.io/advisories/sequelize-sql-injection-order
-  source_url: https://ossindex.net/resource/package/7014430328/vulnerabilities
+  - https://github.com/sequelize/sequelize/issues/2906
+  source_url: https://snyk.io/vuln/npm:sequelize:20150118
+- id: snykio:npm:sequelize:20150517
+  title: SQL Injection
+  description: |+
+    Beginning with `sequelize` version 3.0.0, two security related changes
+    were introduced:
+
+    * `findOne` no longer takes a string / integer / binary argument to
+      represent a primaryKey. Use `findById` instead.
+    * `where: "raw query"` is no longer legal, you must now explicitly use
+      `where: ["raw query", [replacements]]`
+
+  affected_package: sequelize
+  vulnerable_versions:
+  - "<=2.1.3"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2016-10553
+  cwe:
+  - CWE-89
+  disclosed_date: 2015-05-17
+  created_date: 2016-04-01
+  last_modified_date: 2016-04-01
+  credit:
+  - Unknown
+  references:
+  - https://github.com/sequelize/sequelize/blob/master/changelog.md#300
+  source_url: https://snyk.io/vuln/npm:sequelize:20150517
 - id: snykio:npm:sequelize:20151019
   title: SQL Injection
   description: |
@@ -155,65 +418,7 @@
   - https://github.com/sequelize/sequelize/commit/d198d78182cbf1ea3ef1706740b35813a6aa0838
   - https://github.com/sequelize/sequelize/pull/5167
   source_url: https://snyk.io/vuln/npm:sequelize:20160106
-- id: snykio:npm:sequelize:20160718
-  title: SQL Injection via GeoJSON
-  description: |
-    `sequelize` versions prior to `3.23.6` are vulnerable to SQL injection
-    via [GeoJSON][1] documents that contain a value with a single quote.
-    GeoJSON is a format used for encoding a variety of geographic data
-    structures in a standard JSON document. The vulnerability exists within
-    GeoJSON documents using the function `ST_GeomFromGeoJSON` (for
-    postgresql/postgis) and the function `GeomFromText` (for mysql).
-
-    Note that `sequelize` users who do not use these specific functions are
-    not affected. For users who do use these functions, this vulnerability
-    has a high impact and is easily expoited, hence its high severity
-    classification.
-
-
-
-    [1]: http://geojson.org/
-  affected_package: sequelize
-  vulnerable_versions:
-  - "<3.23.6 >=3.4.0"
-  severity: high
-  package_manager: npm
-  cwe:
-  - CWE-89
-  disclosed_date: 2016-07-20
-  created_date: 2016-07-18
-  last_modified_date: 2016-07-18
-  credit:
-  - contra
-  references:
-  - http://docs.sequelizejs.com/en/latest/api/datatypes/#geometry
-  - http://geojson.org/
-  - https://github.com/sequelize/sequelize/issues/6194
-  source_url: https://snyk.io/vuln/npm:sequelize:20160718
-- id: snykio:npm:sequelize:CVE-2015-1369
-  title: SQL Injection in Order
-  description: |+
-    `sequelize` versions prior to 2.0.0-rc7 are vulnerable to SQL Injection
-    attacks if untrusted user input is passed into the `order` parameter.
-
-  affected_package: sequelize
-  vulnerable_versions:
-  - "<=2.0.0-rc7"
-  severity: high
-  package_manager: npm
-  cve:
-  - CVE-2015-1369
-  cwe:
-  - CWE-89
-  disclosed_date: 2015-01-18
-  created_date: 2015-01-18
-  last_modified_date: 2015-01-18
-  credit:
-  - Levan Basharuli
-  references:
-  - https://github.com/sequelize/sequelize/issues/2906
-  source_url: https://snyk.io/vuln/npm:sequelize:20150118
-- id: snykio:npm:sequelize:CVE-2016-10550
+- id: snykio:npm:sequelize:20160115
   title: Remote Memory Exposure
   description: "A potential memory disclosure vulnerability exists in sequelize versions\nprior
     to 3.17.2. A field of type `DataTypes.BLOB` can be used to expose\nsensitive information
@@ -250,59 +455,7 @@
   - https://github.com/sequelize/sequelize/blob/master/changelog.md#3172
   - https://github.com/sequelize/sequelize/commit/cbfaa4f0a135cfc55874c9bfc39ead2d85c417e9
   source_url: https://snyk.io/vuln/npm:sequelize:20160115
-- id: snykio:npm:sequelize:CVE-2016-10553
-  title: SQL Injection
-  description: |+
-    Beginning with `sequelize` version 3.0.0, two security related changes
-    were introduced:
-
-    * `findOne` no longer takes a string / integer / binary argument to
-      represent a primaryKey. Use `findById` instead.
-    * `where: "raw query"` is no longer legal, you must now explicitly use
-      `where: ["raw query", [replacements]]`
-
-  affected_package: sequelize
-  vulnerable_versions:
-  - "<=2.1.3"
-  severity: medium
-  package_manager: npm
-  cve:
-  - CVE-2016-10553
-  cwe:
-  - CWE-89
-  disclosed_date: 2015-05-17
-  created_date: 2016-04-01
-  last_modified_date: 2016-04-01
-  credit:
-  - Unknown
-  references:
-  - https://github.com/sequelize/sequelize/blob/master/changelog.md#300
-  source_url: https://snyk.io/vuln/npm:sequelize:20150517
-- id: snykio:npm:sequelize:CVE-2016-10554
-  title: SQL Injection
-  description: |+
-    `sequelize` versions prior to 1.7.0-alpha3 are vulnerable to SQL
-    Injection attacks if untrusted user input is passed into the `order`
-    parameter.
-
-  affected_package: sequelize
-  vulnerable_versions:
-  - "<=1.7.0-alpha2 >=0.2.2"
-  severity: medium
-  package_manager: npm
-  cve:
-  - CVE-2016-10554
-  cwe:
-  - CWE-89
-  disclosed_date: 2013-05-24
-  created_date: 2016-04-01
-  last_modified_date: 2016-04-01
-  credit:
-  - Unknown
-  references:
-  - https://github.com/sequelize/sequelize/commit/c876192aa6ce1f67e22b26a4d175b8478615f42d
-  source_url: https://snyk.io/vuln/npm:sequelize:20130614
-- id: snykio:npm:sequelize:CVE-2016-10556
+- id: snykio:npm:sequelize:20160329
   title: SQL Injection in IN statement
   description: |+
     `sequelize` versions prior to 3.20.0 improperly escape arrays of strings
@@ -324,3 +477,38 @@
   - https://github.com/sequelize/sequelize/commit/23952a2b020cc3571f090e67dae7feb084e1be71
   - https://github.com/sequelize/sequelize/issues/5671
   source_url: https://snyk.io/vuln/npm:sequelize:20160329
+- id: snykio:npm:sequelize:20160718
+  title: SQL Injection via GeoJSON
+  description: |
+    `sequelize` versions prior to `3.23.6` are vulnerable to SQL injection
+    via [GeoJSON][1] documents that contain a value with a single quote.
+    GeoJSON is a format used for encoding a variety of geographic data
+    structures in a standard JSON document. The vulnerability exists within
+    GeoJSON documents using the function `ST_GeomFromGeoJSON` (for
+    postgresql/postgis) and the function `GeomFromText` (for mysql).
+
+    Note that `sequelize` users who do not use these specific functions are
+    not affected. For users who do use these functions, this vulnerability
+    has a high impact and is easily expoited, hence its high severity
+    classification.
+
+
+
+    [1]: http://geojson.org/
+  affected_package: sequelize
+  vulnerable_versions:
+  - "<3.23.6 >=3.4.0"
+  severity: high
+  package_manager: npm
+  cwe:
+  - CWE-89
+  disclosed_date: 2016-07-20
+  created_date: 2016-07-18
+  last_modified_date: 2016-07-18
+  credit:
+  - contra
+  references:
+  - http://docs.sequelizejs.com/en/latest/api/datatypes/#geometry
+  - http://geojson.org/
+  - https://github.com/sequelize/sequelize/issues/6194
+  source_url: https://snyk.io/vuln/npm:sequelize:20160718

@@ -1,5 +1,5 @@
 ---
-- id: ossindex:nuget:SignalR:2016-06-24
+- id: ossindex:nuget:SignalR:8399913306
   title: Add CSRF protection for SignalR requests
   description: SignalR is theoretically vulnerable to CSRF for HTTP POSTS.
   affected_package: SignalR
@@ -13,4 +13,146 @@
   - OSSIndex
   references:
   - https://github.com/SignalR/SignalR/issues/1413
+  source_url: https://ossindex.net/resource/package/7099073088/vulnerabilities
+- id: ossindex:nuget:SignalR:8399913307
+  title: Group tokens are not verified against the current connection ID on reconnect
+  description: |-
+    Group tokens currently are only verified for integrity using the signature. However, they are not verified for validity against the connection ID being passed up. This means a group token from one connection could be reused with another connection, allowing conspiring attackers to join connections to groups they were never actually added to.
+
+    The official guidance is that applications that use groups for security purposes should validate group membership on reconnect via the OnRejoingingGroups virtual method, the framework could take a defense in depth measure here and include the connection ID in the groups token when generating it and then verifying it on reconnect to ensure the group token was actually issued to the connection ID doing the reconnect.
+  affected_package: SignalR
+  vulnerable_versions:
+  - "<1.1.0"
+  package_manager: nuget
+  disclosed_date: 2016-06-24
+  created_date: 2016-06-24
+  last_modified_date: 2017-03-31
+  credit:
+  - OSSIndex
+  references:
+  - https://github.com/SignalR/SignalR/issues/1506
+  source_url: https://ossindex.net/resource/package/7099073088/vulnerabilities
+- id: ossindex:nuget:SignalR:8399913308
+  title: Hub state and args are placed into a dictionary directly from user input
+    from the URL
+  description: Hub method args and state are taken from the URL as JSON and then deserialized
+    into a plain dictionary via JObject.Parse() which has the potential to result
+    in hash collisions.
+  affected_package: SignalR
+  vulnerable_versions:
+  - "<1.0"
+  package_manager: nuget
+  disclosed_date: 2016-06-24
+  created_date: 2016-06-24
+  last_modified_date: 2017-03-31
+  credit:
+  - OSSIndex
+  references:
+  - https://github.com/SignalR/SignalR/issues/1449
+  source_url: https://ossindex.net/resource/package/7099073088/vulnerabilities
+- id: ossindex:nuget:SignalR:8399913309
+  title: HubDispatcher allows duplicate hub names in connectionData
+  description: HubDispatcher should not allow duplicate hub names as currently it
+    happily adds each entry to a list and then enumerates over it doing work, e.g.
+    creating a new instance of that hub. It should remove duplicates before adding
+    to the list.
+  affected_package: SignalR
+  vulnerable_versions:
+  - "<1.0"
+  package_manager: nuget
+  disclosed_date: 2016-06-24
+  created_date: 2016-06-24
+  last_modified_date: 2017-03-31
+  credit:
+  - OSSIndex
+  references:
+  - https://github.com/SignalR/SignalR/issues/1448
+  source_url: https://ossindex.net/resource/package/7099073088/vulnerabilities
+- id: ossindex:nuget:SignalR:8399913311
+  title: ForeverFrame transport should validate frameId passed through the URL
+  description: The value of frameId in the querystring is reflected back into a script
+    block in HTML and thus should be validated. It should only allow an integer value.
+  affected_package: SignalR
+  vulnerable_versions:
+  - "<1.0"
+  package_manager: nuget
+  disclosed_date: 2016-06-24
+  created_date: 2016-06-24
+  last_modified_date: 2017-03-31
+  credit:
+  - OSSIndex
+  references:
+  - https://github.com/SignalR/SignalR/issues/1446
+  source_url: https://ossindex.net/resource/package/7099073088/vulnerabilities
+- id: ossindex:nuget:SignalR:8399913312
+  title: Route matching for the Owin hub dispatcher handler is too agressive
+  description: The HubDispatcherHandler matches any path that starts with the Hub
+    url prefix (~/signalr by default). It should be explicitly matching as it allows
+    arbitrary urls through to the HubDispatcher with the current code.
+  affected_package: SignalR
+  vulnerable_versions:
+  - "<1.0"
+  package_manager: nuget
+  disclosed_date: 2016-06-24
+  created_date: 2016-06-24
+  last_modified_date: 2017-03-31
+  credit:
+  - OSSIndex
+  references:
+  - https://github.com/SignalR/SignalR/issues/1445
+  source_url: https://ossindex.net/resource/package/7099073088/vulnerabilities
+- id: ossindex:nuget:SignalR:8399913313
+  title: JSONP callback method should be validated as valid JS identifier
+  description: The JSONP callback method should be validated to ensure it is actually
+    a JS method name (identifier). See http://stackoverflow.com/questions/2777021/do-i-need-to-sanitize-the-callback-parameter-from-a-jsonp-call
+  affected_package: SignalR
+  vulnerable_versions:
+  - "<1.0"
+  package_manager: nuget
+  disclosed_date: 2016-06-24
+  created_date: 2016-06-24
+  last_modified_date: 2017-03-31
+  credit:
+  - OSSIndex
+  references:
+  - https://github.com/SignalR/SignalR/issues/1444
+  source_url: https://ossindex.net/resource/package/7099073088/vulnerabilities
+- id: ossindex:nuget:SignalR:8399913314
+  title: Hub method discovery includes methods it shouldn't
+  description: 'ReflectionHelper.GetExportedHubMethods allows unintended methods to
+    be called. There are two issues: (a) it uses a blacklist approach instead of a
+    whitelist approach [which forgets about things like events], and (b) it does not
+    account for virtual overrides. Look at MVC'
+  affected_package: SignalR
+  vulnerable_versions:
+  - "<1.0"
+  package_manager: nuget
+  disclosed_date: 2016-06-24
+  created_date: 2016-06-24
+  last_modified_date: 2017-03-31
+  credit:
+  - OSSIndex
+  references:
+  - https://github.com/SignalR/SignalR/issues/1443
+  source_url: https://ossindex.net/resource/package/7099073088/vulnerabilities
+- id: ossindex:nuget:SignalR:8399913315
+  title: Prevent connections from subscribing to a group that's actually a valid connection
+    ID or Hub name
+  description: |-
+    If an application enables auto rejoining of groups, and an attacker obtains a valid connection ID, they can craft a request that gets them subscribed to that connection ID by passing it as a group name instead (as group names are not validated by default if auto rejoin groups is enabled). The same thing can be done to get subscribed to a valid hub name, regardless of whether the hub has authorization enabled or not.
+
+    To close this hole, we should prefix all group names and all hub names with a hard-coded value (e.g. "g-" and "h-") before they are used as signals. All API that exposes group/hubs names should not include the prefix, the prefix is only ever added when accepting a non-prefixed group/hub name, before passing it to the message bus.
+
+    This makes it impossible for a value to passed in via the groups querystring from a client on reconnect that will be turned into a valid connection ID or hub name as it will always be prefixed with a "g-" which cannot match a connection ID (which are GUIDs) or a hub name (which would start at "h-").
+  affected_package: SignalR
+  vulnerable_versions:
+  - "<1.0"
+  package_manager: nuget
+  disclosed_date: 2016-06-24
+  created_date: 2016-06-24
+  last_modified_date: 2017-03-31
+  credit:
+  - OSSIndex
+  references:
+  - https://github.com/SignalR/SignalR/issues/1320
   source_url: https://ossindex.net/resource/package/7099073088/vulnerabilities

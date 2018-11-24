@@ -1,5 +1,29 @@
 ---
-- id: snykio:rubygems:mysql-binuuid-rails:CVE-2018-18476
+- id: rubyadvisory:rubygems:mysql-binuuid-rails:CVE-2018-18476
+  title: mysql-binuuid-rails allows SQL Injection by removing default string escaping
+  description: |
+    mysql-binuuid-rails 1.1.0 and earlier allows SQL Injection because it removes
+    default string escaping for affected database columns. ActiveRecord does not
+    explicitly escape the Binary data type (Type::Binary::Data) for mysql.
+    mysql-binuuid-rails uses a data type that is derived from the base Binary
+    type, except, it doesn’t convert the value to hex. Instead, it assumes the
+    string value provided is a valid hex string and doesn’t do any checks on it.
+  affected_package: mysql-binuuid-rails
+  patched_versions:
+  - ">= 1.1.1"
+  package_manager: rubygems
+  cve:
+  - CVE-2018-18476
+  disclosed_date: 2018-10-19
+  created_date: 2018-10-19
+  last_modified_date: 2018-10-19
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/nedap/mysql-binuuid-rails/pull/18
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://gist.github.com/viraptor/881276ea61e8d56bac6e28454c79f1e6
+- id: snykio:rubygems:mysql-binuuid-rails:72549
   title: SQL Injection
   description: |
     [mysql-binuuid-rails][1] is a Store UUIDs in binary MySQL database

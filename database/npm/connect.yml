@@ -1,5 +1,36 @@
 ---
-- id: ossindex:npm:connect:1970-01-01
+- id: npmjs:npm:connect:3
+  title: methodOverride Middleware Reflected Cross-Site Scripting
+  description: |+
+    Connect is a stack of middleware that is executed in order in each request.
+
+    The "methodOverride" middleware allows the http post to override the method of the request with the value of the "_method" post key or with the header "x-http-method-override".
+
+    Because the user post input was not checked, req.method could contain any kind of value. Because the req.method did not match any common method VERB, connect answered with a 404 page containing the "Cannot `[method]` `[url]`" content. The method was not properly encoded for output in the browser.
+
+
+    ###Example:
+    ```
+    ~ curl "localhost:3000" -d "_method=<script src=http://nodesecurity.io/xss.js></script>"
+    Cannot <SCRIPT SRC=HTTP://NODESECURITY.IO/XSS.JS></SCRIPT> /
+    ```
+
+  affected_package: connect
+  vulnerable_versions:
+  - "<=2.8.0"
+  severity: low
+  package_manager: npm
+  cve:
+  - CVE-2013-7370
+  - CVE-2013-7371
+  cwe: CWE-79
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Sergio Arcos
+  references: https://npmjs.com/advisories/3
+  source_url: https://npmjs.com/advisories/3
+- id: ossindex:npm:connect:8266923740
   title: Cross-Site Scripting with connect.methodOverride()
   description: |-
     This middleware overwrite req.method with the req.body['_method'] value. When you don't catch the error it responds with a default error msg: "Cannot [METHOD] [URL]" (https://github.com/senchalabs/connect/blob/6db901f967036ccc3c892b4bcb5bcb59e0b0dca9/lib/proto.js#L155). Because this is not enough sanitized, you can force a Cross-Site Scripting in the response:
@@ -21,7 +52,7 @@
   - https://github.com/senchalabs/connect/issues/831
   - https://nodesecurity.io/advisories/3
   source_url: https://ossindex.net/resource/package/7012220816/vulnerabilities
-- id: ossindex:npm:connect:2017-03-03
+- id: ossindex:npm:connect:8402517478
   title: Cross Site Scripting (XSS)
   description: A cross site scripting attack is possible in 404 messages due to missing
     escaping.
@@ -38,6 +69,65 @@
   - https://cwe.mitre.org/data/definitions/79.html
   - https://github.com/senchalabs/connect/commit/c1daf27b2067b07fe3e9a66ce7f9121a0fa597b3
   - https://github.com/senchalabs/connect/issues/473
+  source_url: https://ossindex.net/resource/package/7012220816/vulnerabilities
+- id: ossindex:npm:connect:8402517487
+  title: Directory traversal vulnerability in staticProvider
+  description: "> staticProvider lets attacker to use relative paths in requests by
+    escaping the \"..\" with \"%2e%2e\". It checks for containing relative paths _before_
+    unescaping so it never gets caught.\n> \n> -- [github.com](https://github.com/senchalabs/connect/issues/198)"
+  affected_package: connect
+  vulnerable_versions:
+  - "<0.5.10"
+  package_manager: npm
+  disclosed_date: 2017-03-03
+  created_date: 2017-03-03
+  last_modified_date: 2017-03-04
+  credit:
+  - OSSIndex
+  references:
+  - https://cwe.mitre.org/data/definitions/22.html
+  - https://github.com/senchalabs/connect/commit/e59091052709411390343d2252fb17833649aeaf
+  - https://github.com/senchalabs/connect/issues/198
+  source_url: https://ossindex.net/resource/package/7012220816/vulnerabilities
+- id: ossindex:npm:connect:8402517535
+  title: Denial of Service (DoS)
+  description: "> When using the static middleware, if the URL contains a valid file
+    name and a trailing backslash the node server will crash with `Error: ENOENT,
+    no such file or directory`.\n> \n> -- [github.com](https://github.com/senchalabs/connect/issues/452)"
+  affected_package: connect
+  vulnerable_versions:
+  - "<0.8.6"
+  - ">0.8.6 <2.0.0"
+  package_manager: npm
+  disclosed_date: 2017-03-03
+  created_date: 2017-03-03
+  last_modified_date: 2017-03-25
+  credit:
+  - OSSIndex
+  references:
+  - https://github.com/senchalabs/connect/commit/2b0e8d69a14312fa2fd3449685be0c0896dfe53e
+  - https://github.com/senchalabs/connect/issues/452
+  source_url: https://ossindex.net/resource/package/7012220816/vulnerabilities
+- id: ossindex:npm:connect:8402517540
+  title: Path Traversal
+  description: 'A mishandling of adding `directory(''.'')` to `connect()` results
+    any path beginning with `.` to pass the malicious directory check, allowing access
+    to any file on the system.
+
+'
+  affected_package: connect
+  vulnerable_versions:
+  - "<2.9.2"
+  package_manager: npm
+  disclosed_date: 2017-03-03
+  created_date: 2017-03-03
+  last_modified_date: 2017-03-04
+  credit:
+  - OSSIndex
+  references:
+  - https://cwe.mitre.org/data/definitions/22.html
+  - https://github.com/senchalabs/connect/commit/c2afb242d4fa9843fed52cb27fc9d940cf9bc69c
+  - https://github.com/senchalabs/connect/issues/771
   source_url: https://ossindex.net/resource/package/7012220816/vulnerabilities
 - id: snykio:npm:connect:20120107
   title: Denial of Service (DoS)
@@ -93,7 +183,7 @@
   - https://github.com/senchalabs/connect/commit/2b0e8d69a14312fa2fd3449685be0c0896dfe53e
   - https://github.com/senchalabs/connect/issues/452
   source_url: https://snyk.io/vuln/npm:connect:20120107
-- id: snykio:npm:connect:CVE-2013-7370
+- id: snykio:npm:connect:20130701
   title: Cross-site Scripting (XSS)
   description: |+
     Connect is a stack of middleware that is executed in order in each

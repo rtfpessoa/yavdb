@@ -1,5 +1,30 @@
 ---
-- id: ossindex:npm:request:2017-02-07
+- id: npmjs:npm:request:309
+  title: Remote Memory Exposure
+  description: "Affected versions of `request` will disclose local system memory to
+    remote systems in certain circumstances. When a multipart request is made, and
+    the type of `body` is `number`, then a buffer of that size will be allocated and
+    sent to the remote server as the body.\n\n## Proof of Concept\n\n```\nvar request
+    = require('request');\nvar http = require('http');\n\nvar serveFunction = function
+    (req, res){\n\treq.on('data', function (data) {\n            console.log(data)\n
+    \       });\n\tres.end();\n};\nvar server = http.createServer(serveFunction);\nserver.listen(8000);\n\nrequest({\n\tmethod:
+    \"POST\",\n\turi: 'http://localhost:8000',\n\tmultipart: [{body:500}]\n},function(err,res,body){});\n```"
+  affected_package: request
+  vulnerable_versions:
+  - ">2.51.0 <=2.67.0"
+  - ">=2.2.6 <2.47.0"
+  severity: moderate
+  package_manager: npm
+  cve:
+  - CVE-2017-16026
+  cwe: CWE-201
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Feross Aboukhadijeh
+  references: https://npmjs.com/advisories/309
+  source_url: https://npmjs.com/advisories/309
+- id: ossindex:npm:request:8402393075
   title: Remote memory disclosure
   description: "> If the node process makes a request with a multipart attachment,
     and the type of the body option is a Number, then that many bytes of uninitialized
@@ -18,7 +43,7 @@
   - https://github.com/request/request/issues/2018
   - https://github.com/request/request/pull/2022
   source_url: https://ossindex.net/resource/package/7014379316/vulnerabilities
-- id: snykio:npm:request:CVE-2017-16026
+- id: snykio:npm:request:20160119
   title: Remote Memory Exposure
   description: "[`request`][1] is a simplified http request client. A potential remote\nmemory
     exposure vulnerability exists in `request`. If a `request` uses a\nmultipart attachment

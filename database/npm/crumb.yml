@@ -1,5 +1,47 @@
 ---
-- id: ossindex:npm:crumb:2016-05-20
+- id: npmjs:npm:crumb:4
+  title: CORS Token Disclosure
+  description: |-
+    When CORS is enabled on a hapi route handler, it is possible to set a crumb token for a different domain. An attacker would need to have an application consumer visit a site they control, request a route supporting CORS, and then retrieve the token. With this token, they could possibly make requests to non CORS routes as this user.
+
+    A configuration and scenario where this would occur is unlikely, as most configurations will set CORS globally (where crumb is not used), or not at all.
+  affected_package: crumb
+  vulnerable_versions:
+  - "<3.0.0"
+  severity: moderate
+  package_manager: npm
+  cve:
+  - CVE-2014-7193
+  cwe: CWE-284
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Marcus Stong
+  references: https://npmjs.com/advisories/4
+  source_url: https://npmjs.com/advisories/4
+- id: ossindex:npm:crumb:365285
+  title: "[CVE-2014-7193]  Improper Access Control"
+  description: The Crumb plugin before 3.0.0 for Node.js does not properly restrict
+    token access in situations where a hapi route handler has CORS enabled, which
+    allows remote attackers to obtain sensitive information, and potentially obtain
+    the ability to spoof requests to non-CORS routes, via a crafted web site that
+    is visited by an application consumer.
+  affected_package: crumb
+  vulnerable_versions:
+  - "<3.0.0"
+  package_manager: npm
+  cve:
+  - CVE-2014-7193
+  disclosed_date: 2014-12-25
+  created_date: 2014-12-25
+  last_modified_date: 2017-08-02
+  credit:
+  - OSSIndex
+  references:
+  - https://github.com/hapijs/crumb/commit/5e6d4f5c81677fe9e362837ffd4a02394303db3c
+  - https://nodesecurity.io/advisories/crumb_cors_token_disclosure
+  source_url: https://ossindex.net/resource/package/7013421300/vulnerabilities
+- id: ossindex:npm:crumb:8269407686
   title: Improper Access Control (Token Disclosure)
   description: The Crumb plugin before 3.0.0 for Node.js does not properly restrict
     token access in situations where a hapi route handler has CORS enabled, which
@@ -22,59 +64,7 @@
   - https://nodesecurity.io/advisories/crumb_cors_token_disclosure
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-7193
   source_url: https://ossindex.net/resource/package/7013421300/vulnerabilities
-- id: ossindex:npm:crumb:CVE-2014-7193
-  title: "[CVE-2014-7193]  Improper Access Control"
-  description: The Crumb plugin before 3.0.0 for Node.js does not properly restrict
-    token access in situations where a hapi route handler has CORS enabled, which
-    allows remote attackers to obtain sensitive information, and potentially obtain
-    the ability to spoof requests to non-CORS routes, via a crafted web site that
-    is visited by an application consumer.
-  affected_package: crumb
-  vulnerable_versions:
-  - "<3.0.0"
-  package_manager: npm
-  cve:
-  - CVE-2014-7193
-  disclosed_date: 2014-12-25
-  created_date: 2014-12-25
-  last_modified_date: 2017-08-02
-  credit:
-  - OSSIndex
-  references:
-  - https://github.com/hapijs/crumb/commit/5e6d4f5c81677fe9e362837ffd4a02394303db3c
-  - https://nodesecurity.io/advisories/crumb_cors_token_disclosure
-  source_url: https://ossindex.net/resource/package/7013421300/vulnerabilities
-- id: snykio:npm:crumb:20150213
-  title: Authentication Bypass
-  description: |
-    [`crumb`][1] is CSRF crumb generation and validation plugin.
-
-    Affected versions of the package are vulnerable to Authentication
-    Bypass. `crumb` does not validate the hostname while comparing a request
-    origin against the whitelist, but rather compare http protocol alone.
-    This opens a window for attackers to gain information by Man in the
-    Middle (MitM) attacks.
-
-
-
-    [1]: https://www.npmjs.com/package/crumb
-  affected_package: crumb
-  vulnerable_versions:
-  - "<4.0.2"
-  severity: medium
-  package_manager: npm
-  cwe:
-  - CWE-592
-  disclosed_date: 2015-02-12
-  created_date: 2017-06-21
-  last_modified_date: 2017-06-21
-  credit:
-  - Nicolas Jessel
-  references:
-  - https://github.com/hapijs/crumb/commit/95805d643fd79c7a4b7c1b06bb8b5a9c3e11863c
-  - https://github.com/hapijs/crumb/pull/46
-  source_url: https://snyk.io/vuln/npm:crumb:20150213
-- id: snykio:npm:crumb:CVE-2014-7193
+- id: snykio:npm:crumb:20140801
   title: CORS Token Disclosure
   description: |
     When CORS is enabled on a hapi route handler, it is possible to set a
@@ -109,3 +99,33 @@
   references:
   - https://github.com/spumko/crumb/commit/5e6d4f5c81677fe9e362837ffd4a02394303db3c
   source_url: https://snyk.io/vuln/npm:crumb:20140801
+- id: snykio:npm:crumb:20150213
+  title: Authentication Bypass
+  description: |
+    [`crumb`][1] is CSRF crumb generation and validation plugin.
+
+    Affected versions of the package are vulnerable to Authentication
+    Bypass. `crumb` does not validate the hostname while comparing a request
+    origin against the whitelist, but rather compare http protocol alone.
+    This opens a window for attackers to gain information by Man in the
+    Middle (MitM) attacks.
+
+
+
+    [1]: https://www.npmjs.com/package/crumb
+  affected_package: crumb
+  vulnerable_versions:
+  - "<4.0.2"
+  severity: medium
+  package_manager: npm
+  cwe:
+  - CWE-592
+  disclosed_date: 2015-02-12
+  created_date: 2017-06-21
+  last_modified_date: 2017-06-21
+  credit:
+  - Nicolas Jessel
+  references:
+  - https://github.com/hapijs/crumb/commit/95805d643fd79c7a4b7c1b06bb8b5a9c3e11863c
+  - https://github.com/hapijs/crumb/pull/46
+  source_url: https://snyk.io/vuln/npm:crumb:20150213

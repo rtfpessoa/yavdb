@@ -1,5 +1,26 @@
 ---
-- id: ossindex:npm:codem-transcode:2016-05-21
+- id: npmjs:npm:codem-transcode:2
+  title: Potential Command Injection
+  description: |-
+    When the ffprobe functionality is enabled on the server, HTTP POST requests can be made to /probe. These requests are passed to the ffprobe binary on the server. Through this HTTP endpoint it is possible to send a malformed source file name to ffprobe that results in arbitrary command execution.
+
+    ### Mitigating Factors:
+    The ffprobe functionality is not enabled by default. In addition, exploitation opportunities are limited in a standard configuration because the server binds to the local interface by default.
+  affected_package: codem-transcode
+  vulnerable_versions:
+  - "<0.5.0"
+  severity: critical
+  package_manager: npm
+  cve:
+  - CVE-2013-7377
+  cwe: CWE-77
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Neal Poole
+  references: https://npmjs.com/advisories/2
+  source_url: https://npmjs.com/advisories/2
+- id: ossindex:npm:codem-transcode:8267157179
   title: Command injection
   description: When the ffprobe functionality is enabled, POST requests to /probe
     could be used as a vector for command execution.
@@ -17,7 +38,7 @@
   - https://nodesecurity.io/advisories/2
   - https://nodesecurity.io/advisories/codem-transcode_command_injection
   source_url: https://ossindex.net/resource/package/7012202276/vulnerabilities
-- id: snykio:npm:codem-transcode:CVE-2013-7377
+- id: snykio:npm:codem-transcode:20130707
   title: Arbitrary Command Injection
   description: |+
     The `codem-transcode` package supports a feature (off by default) to

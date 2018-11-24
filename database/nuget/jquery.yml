@@ -1,4 +1,66 @@
 ---
+- id: snykio:nuget:jquery:60115
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [`jquery`][1] is JavaScript library for DOM operations. Affected
+    versions of the package are vulnerable to Cross-site Scripting (XSS).
+    The `location.hash()` function was used to select elements, but also
+    allows remote attackers to inject script into the page.
+
+    Related to a vulnerability in [jQuery-migrate][2] and in
+    [fullpage.js](npm:fullpage.js:20151207).
+
+
+
+    [1]: https://www.nuget.org/packages/jQuery
+    [2]: https://snyk.io/vuln/npm:jquery-migrate:20130419
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+  affected_package: jquery
+  vulnerable_versions:
+  - "< 1.6.3"
+  severity: medium
+  package_manager: nuget
+  cve:
+  - CVE-2011-4969
+  cwe:
+  - CWE-79
+  disclosed_date: 2011-06-05
+  created_date: 2016-10-20
+  last_modified_date: 2016-10-20
+  credit:
+  - Dave Methvin
+  references:
+  - http://blog.jquery.com/2011/09/01/jquery-1-6-3-released/
+  - http://www.openwall.com/lists/oss-security/2013/01/31/3
+  - https://bugs.jquery.com/ticket/9521
+  source_url: https://snyk.io/vuln/SNYK-DOTNET-JQUERY-60115
 - id: snykio:nuget:jquery:60116
   title: Cross-site Scripting (XSS)
   description: |+
@@ -64,6 +126,64 @@
   - https://bugs.jquery.com/ticket/11290
   - https://github.com/jquery/jquery/commit/05531fc4080ae24070930d15ae0cea7ae056457d
   source_url: https://snyk.io/vuln/SNYK-DOTNET-JQUERY-60116
+- id: snykio:nuget:jquery:60117
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [`jquery`][1] is JavaScript library for DOM operations.
+
+    Affected versions of the package are vulnerable to a DOM based
+    Cross-site Scripting (XSS) attack due to using the `text()` function
+    inside the `after()` function.
+
+
+
+    [1]: https://www.nuget.org/packages/jQuery
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+  affected_package: jquery
+  vulnerable_versions:
+  - ">= 1.4.2 < 1.6.2"
+  severity: medium
+  package_manager: nuget
+  cve:
+  - CVE-2014-6071
+  cwe:
+  - CWE-79
+  disclosed_date: 2014-09-01
+  created_date: 2016-10-20
+  last_modified_date: 2016-10-20
+  credit:
+  - Mauro Risonho de Paula Assumpção
+  references:
+  - http://seclists.org/fulldisclosure/2014/Sep/10
+  - https://bugzilla.redhat.com/show_bug.cgi?id=1136683
+  source_url: https://snyk.io/vuln/SNYK-DOTNET-JQUERY-60117
 - id: snykio:nuget:jquery:60118
   title: Cross-site Scripting (XSS)
   description: |+
@@ -179,123 +299,3 @@
   - https://github.com/jquery/jquery/pull/3134
   - https://jsfiddle.net/shnann6y/2/
   source_url: https://snyk.io/vuln/SNYK-DOTNET-JQUERY-60119
-- id: snykio:nuget:jquery:CVE-2011-4969
-  title: Cross-site Scripting (XSS)
-  description: |+
-    [`jquery`][1] is JavaScript library for DOM operations. Affected
-    versions of the package are vulnerable to Cross-site Scripting (XSS).
-    The `location.hash()` function was used to select elements, but also
-    allows remote attackers to inject script into the page.
-
-    Related to a vulnerability in [jQuery-migrate][2] and in
-    [fullpage.js](npm:fullpage.js:20151207).
-
-
-
-    [1]: https://www.nuget.org/packages/jQuery
-    [2]: https://snyk.io/vuln/npm:jquery-migrate:20130419
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-  affected_package: jquery
-  vulnerable_versions:
-  - "< 1.6.3"
-  severity: medium
-  package_manager: nuget
-  cve:
-  - CVE-2011-4969
-  cwe:
-  - CWE-79
-  disclosed_date: 2011-06-05
-  created_date: 2016-10-20
-  last_modified_date: 2016-10-20
-  credit:
-  - Dave Methvin
-  references:
-  - http://blog.jquery.com/2011/09/01/jquery-1-6-3-released/
-  - http://www.openwall.com/lists/oss-security/2013/01/31/3
-  - https://bugs.jquery.com/ticket/9521
-  source_url: https://snyk.io/vuln/SNYK-DOTNET-JQUERY-60115
-- id: snykio:nuget:jquery:CVE-2014-6071
-  title: Cross-site Scripting (XSS)
-  description: |+
-    [`jquery`][1] is JavaScript library for DOM operations.
-
-    Affected versions of the package are vulnerable to a DOM based
-    Cross-site Scripting (XSS) attack due to using the `text()` function
-    inside the `after()` function.
-
-
-
-    [1]: https://www.nuget.org/packages/jQuery
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-  affected_package: jquery
-  vulnerable_versions:
-  - ">= 1.4.2 < 1.6.2"
-  severity: medium
-  package_manager: nuget
-  cve:
-  - CVE-2014-6071
-  cwe:
-  - CWE-79
-  disclosed_date: 2014-09-01
-  created_date: 2016-10-20
-  last_modified_date: 2016-10-20
-  credit:
-  - Mauro Risonho de Paula Assumpção
-  references:
-  - http://seclists.org/fulldisclosure/2014/Sep/10
-  - https://bugzilla.redhat.com/show_bug.cgi?id=1136683
-  source_url: https://snyk.io/vuln/SNYK-DOTNET-JQUERY-60117

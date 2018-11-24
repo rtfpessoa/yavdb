@@ -1,5 +1,56 @@
 ---
-- id: ossindex:npm:st:1970-01-01
+- id: npmjs:npm:st:36
+  title: Directory Traversal
+  description: Versions of `st` prior to 0.2.5 are affected by a directory traversal
+    vulnerability. Vulnerable versions fail to properly handle URL encoded dots, which
+    caused `%2e` to be interpreted as `.` by the filesystem, resulting the potential
+    for an attacker to read sensitive files on the server.
+  affected_package: st
+  vulnerable_versions:
+  - "<0.2.5"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2014-3744
+  cwe: CWE-22
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Isaac Schlueter
+  references: https://npmjs.com/advisories/36
+  source_url: https://npmjs.com/advisories/36
+- id: npmjs:npm:st:547
+  title: Open Redirect
+  description: "st is a module for serving static files.\n\nAn attacker is able to
+    craft a request that results in an `HTTP 301` (redirect) to an entirely different
+    domain. \n\nA request for: `http://some.server.com//nodesecurity.org/%2e%2e` would
+    result in a 301 to `//nodesecurity.org/%2e%2e` which most browsers treat as a
+    proper redirect as `//` is translated into the current schema being used.\n\nMitigating
+    factor: \n\nIn order for this to work, `st` must be serving from the root of a
+    server (`/`) rather than the typical sub directory (`/static/`) and the redirect
+    URL will end with some form of URL encoded `..` (\"%2e%2e\", \"%2e.\", \".%2e\").
+    \n\nCode example (provided by Xin Gao): \n\n[example.js]\n\n```\nvar st = require('st')
+    \nvar http = require('http') \nhttp.createServer(st(process.cwd())).listen(1337)\n```\n\n```\n$
+    curl -v http://localhost:1337//cve.mitre.com/%2e%2e\n*   Trying ::1...\n* TCP_NODELAY
+    set\n* Connected to localhost (::1) port 1337 (#0)\n> GET //cve.mitre.com/%2e%2e
+    HTTP/1.1\n> Host: localhost:1337\n> User-Agent: curl/7.54.0\n> Accept: */*\n>\n<
+    HTTP/1.1 301 Moved Permanently\n< cache-control: public, max-age=600\n< last-modified:
+    Fri, 13 Oct 2017 22:56:33 GMT\n< etag: \"16777220-46488904-1507935393000\"\n<
+    location: //cve.mitre.com/%2e%2e/\n< Date: Fri, 13 Oct 2017 22:56:41 GMT\n< Connection:
+    keep-alive\n< Content-Length: 30\n<\n* Connection #0 to host localhost left intact\n```"
+  affected_package: st
+  vulnerable_versions:
+  - "<=1.2.1"
+  severity: moderate
+  package_manager: npm
+  cwe: CWE-601
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Xin Gao
+  references: https://npmjs.com/advisories/547
+  source_url: https://npmjs.com/advisories/547
+- id: ossindex:npm:st:8269062688
   title: Directory Traversal
   description: |-
     Versions prior to 0.2.5 did not properly prevent folder traversal. Literal dots in a path were resolved out, but url encoded dots were not. Thus, a request like /%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/etc/passwd would leak sensitive data from the server.
@@ -21,7 +72,7 @@
   - https://github.com/isaacs/st#security-status
   - https://nodesecurity.io/advisories/36
   source_url: https://ossindex.net/resource/package/7277498132/vulnerabilities
-- id: snykio:npm:st:CVE-2014-3744
+- id: snykio:npm:st:20140206
   title: Directory Traversal
   description: |
     Versions prior to 0.2.5 did not properly prevent path traversal. Literal
@@ -101,7 +152,7 @@
   - http://blog.npmjs.org/post/80277229932/newly-paranoid-maintainers
   - https://github.com/isaacs/st#security-status
   source_url: https://snyk.io/vuln/npm:st:20140206
-- id: snykio:npm:st:CVE-2017-16224
+- id: snykio:npm:st:20171013
   title: Open Redirect
   description: |
     [`st`][1] is a module for serving static files.

@@ -1,5 +1,29 @@
 ---
-- id: snykio:npm:fbr-client:CVE-2017-16217
+- id: npmjs:npm:fbr-client:449
+  title: Directory Traversal
+  description: |-
+    Affected versions of `fbr-client` resolve relative file paths, resulting in a directory traversal vulnerability. A malicious actor can use this vulnerability to access files outside of the intended directory root, which may result in the disclosure of private files on the vulnerable system.
+
+    Example request:
+    ```
+    GET /../../../../../../../../../../etc/passwd HTTP/1.1
+    host:foo
+    ```
+  affected_package: fbr-client
+  vulnerable_versions:
+  - "<=99.999.9999"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2017-16217
+  cwe: CWE-26
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Liang Gong
+  references: https://npmjs.com/advisories/449
+  source_url: https://npmjs.com/advisories/449
+- id: snykio:npm:fbr-client:20170510
   title: Directory Traversal
   description: |
     [`fbr-client`][1] is FileBufferReader is a JavaScript library reads file

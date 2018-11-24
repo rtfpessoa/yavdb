@@ -1,5 +1,32 @@
 ---
-- id: ossindex:npm:cli:2016-07-22
+- id: npmjs:npm:cli:95
+  title: Arbitrary File Write
+  description: |-
+    Affected versions of `cli` use predictable temporary file names. If an attacker can create a symbolic link at the location of one of these temporarly file names, the attacker can arbitrarily write to any file that the user which owns the `cli` process has permission to write to.
+
+
+    ## Proof of Concept
+
+    By creating Symbolic Links at the following locations, the target of the link can be written to.
+    ```
+    lock_file = '/tmp/' + cli.app + '.pid',
+    log_file = '/tmp/' + cli.app + '.log';
+    ```
+  affected_package: cli
+  vulnerable_versions:
+  - "<1.0.0"
+  severity: low
+  package_manager: npm
+  cve:
+  - CVE-2016-10538
+  cwe: CWE-22
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Steve Kemp
+  references: https://npmjs.com/advisories/95
+  source_url: https://npmjs.com/advisories/95
+- id: ossindex:npm:cli:8399946984
   title: Insecure temporary files (path traversal)
   description: The `node-cli` library makes insecure use of temporary files thus allowing
     the overwriting of files that the starting-user has permission to modify.
@@ -18,7 +45,7 @@
   - https://github.com/node-js-libs/cli/issues/81
   - https://nodesecurity.io/advisories/95
   source_url: https://ossindex.net/resource/package/7012190162/vulnerabilities
-- id: snykio:npm:cli:CVE-2016-10538
+- id: snykio:npm:cli:20160615
   title: Insecure use of /tmp folder
   description: |
     [`cli`][1] is an npm package used for rapidly building command line

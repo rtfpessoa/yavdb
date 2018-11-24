@@ -1,4 +1,126 @@
 ---
+- id: snykio:npm:ghost:1
+  title: Identity Spoofing
+  description: |
+    [`ghost`][1] is a blogging platform. Affected versions of the package
+    are vulnerable to Identity Spoofing, allowing an attacker to use the
+    name of any author and publish an article in their name.
+
+
+
+    [1]: https://www.npmjs.com/package/ghost
+  affected_package: ghost
+  vulnerable_versions:
+  - "<0.5.9"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2015-1410
+  cwe:
+  - CWE-285
+  disclosed_date: 2015-03-02
+  created_date: 2017-05-30
+  last_modified_date: 2017-05-30
+  credit:
+  - Matteo Beccaro
+  references:
+  - https://gist.github.com/ErisDS/6111e30e006ed34cf9f6
+  - https://voidsec.com/ghost-blogging-platform/
+  - https://voidsec.com/wp-content/uploads/2015/03/VoidSec-Ghost.pdf
+  source_url: https://snyk.io/vuln/npm:ghost:20150303-1
+- id: snykio:npm:ghost:2
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [`ghost`][1] is a blogging platform. Affected versions of the package
+    are vulnerable to Cross-site Scripting (XSS) attacks. An authenticated
+    user can embed code in the blog\'s images, like the user avatar, cover
+    image and blog image, with possible malicious intent to execute the code
+    on the client-side. Additionally, another Cross-site Scripting (XSS) has
+    been found in the Tag Manager. An authenticated user can create a new
+    post and tag it with a tag containing javascript code. An administrator
+    may want to delete this tag, triggering the javascript code. This will
+    result in the administrator token is stolen and his session hijacked.
+
+
+
+    [1]: https://www.npmjs.com/package/ghost
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+  affected_package: ghost
+  vulnerable_versions:
+  - "<0.5.9"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2015-1406
+  cwe:
+  - CWE-79
+  disclosed_date: 2015-03-02
+  created_date: 2017-05-30
+  last_modified_date: 2017-05-30
+  credit:
+  - Abdel Adim Oisif
+  references:
+  - https://dev.ghost.org/ghost-0-5-9/
+  - https://voidsec.com/ghost-blogging-platform/
+  - https://voidsec.com/wp-content/uploads/2015/03/VoidSec-Ghost.pdf
+  source_url: https://snyk.io/vuln/npm:ghost:20150303-2
+- id: snykio:npm:ghost:20150303
+  title: Information Disclosure
+  description: |
+    [`ghost`][1] is Just a blogging platform. Affected versions of the
+    package are vulnerable to Bearer token leakage, due to storing it in the
+    `localStorage` of the browser. If used alongside a Cross-site Scripting
+    (XSS) attack, a malicious user may hijack the user session.
+
+
+
+    [1]: https://www.npmjs.com/package/ghost
+  affected_package: ghost
+  vulnerable_versions:
+  - "<0.5.9"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2015-1411
+  cwe:
+  - CWE-200
+  disclosed_date: 2015-03-02
+  created_date: 2017-05-30
+  last_modified_date: 2017-05-30
+  credit:
+  - Matteo Beccaro
+  references:
+  - https://gist.github.com/ErisDS/6111e30e006ed34cf9f6
+  - https://voidsec.com/ghost-blogging-platform/
+  - https://voidsec.com/wp-content/uploads/2015/03/VoidSec-Ghost.pdf
+  source_url: https://snyk.io/vuln/npm:ghost:20150303
 - id: snykio:npm:ghost:20160823
   title: Open Redirect
   description: |
@@ -142,70 +264,68 @@
   - https://github.com/TryGhost/Ghost/issues/7832
   - https://github.com/TryGhost/Ghost/pull/7833
   source_url: https://snyk.io/vuln/npm:ghost:20170110
-- id: snykio:npm:ghost:CVE-2015-1406
-  title: Cross-site Scripting (XSS)
-  description: |+
+- id: snykio:npm:ghost:3
+  title: Authentication Bypass
+  description: |
     [`ghost`][1] is a blogging platform. Affected versions of the package
-    are vulnerable to Cross-site Scripting (XSS) attacks. An authenticated
-    user can embed code in the blog\'s images, like the user avatar, cover
-    image and blog image, with possible malicious intent to execute the code
-    on the client-side. Additionally, another Cross-site Scripting (XSS) has
-    been found in the Tag Manager. An authenticated user can create a new
-    post and tag it with a tag containing javascript code. An administrator
-    may want to delete this tag, triggering the javascript code. This will
-    result in the administrator token is stolen and his session hijacked.
+    are vulnerable to Authentication Bypass via Privilege Reduction. An
+    attacker can change the privileges of other users, and update their
+    email.
 
 
 
     [1]: https://www.npmjs.com/package/ghost
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
   affected_package: ghost
   vulnerable_versions:
   - "<0.5.9"
   severity: medium
   package_manager: npm
   cve:
-  - CVE-2015-1406
+  - CVE-2015-1408
   cwe:
-  - CWE-79
+  - CWE-285
   disclosed_date: 2015-03-02
   created_date: 2017-05-30
   last_modified_date: 2017-05-30
   credit:
-  - Abdel Adim Oisif
+  - Matteo Beccaro
   references:
   - https://dev.ghost.org/ghost-0-5-9/
   - https://voidsec.com/ghost-blogging-platform/
   - https://voidsec.com/wp-content/uploads/2015/03/VoidSec-Ghost.pdf
-  source_url: https://snyk.io/vuln/npm:ghost:20150303-2
-- id: snykio:npm:ghost:CVE-2015-1407
+  source_url: https://snyk.io/vuln/npm:ghost:20150303-3
+- id: snykio:npm:ghost:4
+  title: Authentication Bypass
+  description: |
+    [`ghost`][1] is a blogging platform. Affected versions of the package
+    are vulnerable to Authentication Bypass. An authenticated user can spoof
+    an `HTTP GET` request with any username to access any other users’
+    drafts. This is due to the user parameter not being validated upon the
+    request.
+
+
+
+    [1]: https://www.npmjs.com/package/ghost
+  affected_package: ghost
+  vulnerable_versions:
+  - "<0.5.9"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2015-1409
+  cwe:
+  - CWE-285
+  disclosed_date: 2015-03-02
+  created_date: 2017-05-30
+  last_modified_date: 2017-05-30
+  credit:
+  - Matteo Beccaro
+  references:
+  - https://dev.ghost.org/ghost-0-5-9/
+  - https://voidsec.com/ghost-blogging-platform/
+  - https://voidsec.com/wp-content/uploads/2015/03/VoidSec-Ghost.pdf
+  source_url: https://snyk.io/vuln/npm:ghost:20150303-4
+- id: snykio:npm:ghost:5
   title: Denial of Service (DoS)
   description: |+
     [`ghost`][1] is a blogging platform. Affected versions of the package
@@ -261,123 +381,3 @@
   - https://voidsec.com/ghost-blogging-platform/
   - https://voidsec.com/wp-content/uploads/2015/03/VoidSec-Ghost.pdf
   source_url: https://snyk.io/vuln/npm:ghost:20150303-5
-- id: snykio:npm:ghost:CVE-2015-1408
-  title: Authentication Bypass
-  description: |
-    [`ghost`][1] is a blogging platform. Affected versions of the package
-    are vulnerable to Authentication Bypass via Privilege Reduction. An
-    attacker can change the privileges of other users, and update their
-    email.
-
-
-
-    [1]: https://www.npmjs.com/package/ghost
-  affected_package: ghost
-  vulnerable_versions:
-  - "<0.5.9"
-  severity: medium
-  package_manager: npm
-  cve:
-  - CVE-2015-1408
-  cwe:
-  - CWE-285
-  disclosed_date: 2015-03-02
-  created_date: 2017-05-30
-  last_modified_date: 2017-05-30
-  credit:
-  - Matteo Beccaro
-  references:
-  - https://dev.ghost.org/ghost-0-5-9/
-  - https://voidsec.com/ghost-blogging-platform/
-  - https://voidsec.com/wp-content/uploads/2015/03/VoidSec-Ghost.pdf
-  source_url: https://snyk.io/vuln/npm:ghost:20150303-3
-- id: snykio:npm:ghost:CVE-2015-1409
-  title: Authentication Bypass
-  description: |
-    [`ghost`][1] is a blogging platform. Affected versions of the package
-    are vulnerable to Authentication Bypass. An authenticated user can spoof
-    an `HTTP GET` request with any username to access any other users’
-    drafts. This is due to the user parameter not being validated upon the
-    request.
-
-
-
-    [1]: https://www.npmjs.com/package/ghost
-  affected_package: ghost
-  vulnerable_versions:
-  - "<0.5.9"
-  severity: medium
-  package_manager: npm
-  cve:
-  - CVE-2015-1409
-  cwe:
-  - CWE-285
-  disclosed_date: 2015-03-02
-  created_date: 2017-05-30
-  last_modified_date: 2017-05-30
-  credit:
-  - Matteo Beccaro
-  references:
-  - https://dev.ghost.org/ghost-0-5-9/
-  - https://voidsec.com/ghost-blogging-platform/
-  - https://voidsec.com/wp-content/uploads/2015/03/VoidSec-Ghost.pdf
-  source_url: https://snyk.io/vuln/npm:ghost:20150303-4
-- id: snykio:npm:ghost:CVE-2015-1410
-  title: Identity Spoofing
-  description: |
-    [`ghost`][1] is a blogging platform. Affected versions of the package
-    are vulnerable to Identity Spoofing, allowing an attacker to use the
-    name of any author and publish an article in their name.
-
-
-
-    [1]: https://www.npmjs.com/package/ghost
-  affected_package: ghost
-  vulnerable_versions:
-  - "<0.5.9"
-  severity: medium
-  package_manager: npm
-  cve:
-  - CVE-2015-1410
-  cwe:
-  - CWE-285
-  disclosed_date: 2015-03-02
-  created_date: 2017-05-30
-  last_modified_date: 2017-05-30
-  credit:
-  - Matteo Beccaro
-  references:
-  - https://gist.github.com/ErisDS/6111e30e006ed34cf9f6
-  - https://voidsec.com/ghost-blogging-platform/
-  - https://voidsec.com/wp-content/uploads/2015/03/VoidSec-Ghost.pdf
-  source_url: https://snyk.io/vuln/npm:ghost:20150303-1
-- id: snykio:npm:ghost:CVE-2015-1411
-  title: Information Disclosure
-  description: |
-    [`ghost`][1] is Just a blogging platform. Affected versions of the
-    package are vulnerable to Bearer token leakage, due to storing it in the
-    `localStorage` of the browser. If used alongside a Cross-site Scripting
-    (XSS) attack, a malicious user may hijack the user session.
-
-
-
-    [1]: https://www.npmjs.com/package/ghost
-  affected_package: ghost
-  vulnerable_versions:
-  - "<0.5.9"
-  severity: medium
-  package_manager: npm
-  cve:
-  - CVE-2015-1411
-  cwe:
-  - CWE-200
-  disclosed_date: 2015-03-02
-  created_date: 2017-05-30
-  last_modified_date: 2017-05-30
-  credit:
-  - Matteo Beccaro
-  references:
-  - https://gist.github.com/ErisDS/6111e30e006ed34cf9f6
-  - https://voidsec.com/ghost-blogging-platform/
-  - https://voidsec.com/wp-content/uploads/2015/03/VoidSec-Ghost.pdf
-  source_url: https://snyk.io/vuln/npm:ghost:20150303

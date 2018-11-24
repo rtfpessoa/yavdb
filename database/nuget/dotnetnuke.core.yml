@@ -1,59 +1,35 @@
 ---
-- id: snykio:nuget:dotnetnuke.core:CVE-2015-1566
-  title: Cross-site Scripting (XSS)
-  description: |+
+- id: snykio:nuget:dotnetnuke.core:60256
+  title: Server-side Request Forgery (SSRF)
+  description: |
     [`dotnetnuke.core`][1] is an open source web application framework.
 
-    Affected versions of this package are vulnerable to Cross-site Scripting
-    (XSS).
+    Affected versions of this package are vulnerable to Server-Side Request
+    Forgery (SSRF) via the DnnImageHandler class. Attackers may be able to
+    access information about internal network resources.
 
 
 
     [1]: https://www.nuget.org/packages/dotnetnuke.core
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
   affected_package: dotnetnuke.core
   vulnerable_versions:
-  - "< 7.4.0"
-  severity: medium
+  - "< 9.2.0"
+  severity: high
   package_manager: nuget
   cve:
-  - CVE-2015-1566
+  - CVE-2017-0929
   cwe:
-  - CWE-79
-  disclosed_date: 2016-08-31
-  created_date: 2018-08-05
-  last_modified_date: 2018-08-05
+  - CWE-94
+  disclosed_date: 2018-07-19
+  created_date: 2018-07-19
+  last_modified_date: 2018-07-19
+  credit:
+  - Kurt Boberg
   references:
-  - https://nvd.nist.gov/vuln/detail/CVE-2015-1566
-  source_url: https://snyk.io/vuln/SNYK-DOTNET-DOTNETNUKECORE-60266
-- id: snykio:nuget:dotnetnuke.core:CVE-2015-2794
+  - https://github.com/dnnsoftware/Dnn.Platform/commit/d3953db85fee77bb5e6383747692c507ef8b94c3
+  - https://nvd.nist.gov/vuln/detail/CVE-2017-0929
+  source_url: https://snyk.io/vuln/SNYK-DOTNET-DOTNETNUKECORE-60256
+- id: snykio:nuget:dotnetnuke.core:60264
   title: Privilege Escalation
   description: |
     [`dotnetnuke.core`][1] is an open source web application framework.
@@ -81,7 +57,7 @@
   - http://www.dnnsoftware.com/community-blog/cid/155198/workaround-for-potential-security-issue
   - https://nvd.nist.gov/vuln/detail/CVE-2015-2794
   source_url: https://snyk.io/vuln/SNYK-DOTNET-DOTNETNUKECORE-60264
-- id: snykio:nuget:dotnetnuke.core:CVE-2016-7119
+- id: snykio:nuget:dotnetnuke.core:60265
   title: Cross-site Scripting (XSS)
   description: |+
     [`dotnetnuke.core`][1] is an open source web application framework.
@@ -137,33 +113,57 @@
   - https://nvd.nist.gov/vuln/detail/CVE-2016-7119
   - https://www.securityfocus.com/bid/92719
   source_url: https://snyk.io/vuln/SNYK-DOTNET-DOTNETNUKECORE-60265
-- id: snykio:nuget:dotnetnuke.core:CVE-2017-0929
-  title: Server-side Request Forgery (SSRF)
-  description: |
+- id: snykio:nuget:dotnetnuke.core:60266
+  title: Cross-site Scripting (XSS)
+  description: |+
     [`dotnetnuke.core`][1] is an open source web application framework.
 
-    Affected versions of this package are vulnerable to Server-Side Request
-    Forgery (SSRF) via the DnnImageHandler class. Attackers may be able to
-    access information about internal network resources.
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS).
 
 
 
     [1]: https://www.nuget.org/packages/dotnetnuke.core
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
   affected_package: dotnetnuke.core
   vulnerable_versions:
-  - "< 9.2.0"
-  severity: high
+  - "< 7.4.0"
+  severity: medium
   package_manager: nuget
   cve:
-  - CVE-2017-0929
+  - CVE-2015-1566
   cwe:
-  - CWE-94
-  disclosed_date: 2018-07-19
-  created_date: 2018-07-19
-  last_modified_date: 2018-07-19
-  credit:
-  - Kurt Boberg
+  - CWE-79
+  disclosed_date: 2016-08-31
+  created_date: 2018-08-05
+  last_modified_date: 2018-08-05
   references:
-  - https://github.com/dnnsoftware/Dnn.Platform/commit/d3953db85fee77bb5e6383747692c507ef8b94c3
-  - https://nvd.nist.gov/vuln/detail/CVE-2017-0929
-  source_url: https://snyk.io/vuln/SNYK-DOTNET-DOTNETNUKECORE-60256
+  - https://nvd.nist.gov/vuln/detail/CVE-2015-1566
+  source_url: https://snyk.io/vuln/SNYK-DOTNET-DOTNETNUKECORE-60266

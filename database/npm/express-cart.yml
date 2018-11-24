@@ -1,4 +1,91 @@
 ---
+- id: npmjs:npm:express-cart:676
+  title: Path Traversal
+  description: Versions of `express-cart` before 1.1.7 are vulnerable to Path Traversal.
+  affected_package: express-cart
+  vulnerable_versions:
+  - "<=1.1.5"
+  severity: high
+  package_manager: npm
+  cwe: CWE-22
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Patrick
+  references: https://npmjs.com/advisories/676
+  source_url: https://npmjs.com/advisories/676
+- id: npmjs:npm:express-cart:724
+  title: NoSQL injection
+  description: "Versions of `express-cart` before 1.1.8 are vulnerable to NoSQL injection.
+    \n\nThe vulnerability is caused by the lack of user input sanitization in the
+    login handlers. In both cases, the customer login and the admin login, parameters
+    from the JSON body are sent directly into the MongoDB query which allows to insert
+    operators. \n\nThese operators can be used to extract the value of the field blindly
+    in the same manner of a blind SQL injection. In this case, the `$regex` operator
+    is used to guess each character of the token from the start."
+  affected_package: express-cart
+  vulnerable_versions:
+  - "<=1.1.7"
+  severity: high
+  package_manager: npm
+  cwe: CWE-943
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Benoit Côté-Jodoin
+  references: https://npmjs.com/advisories/724
+  source_url: https://npmjs.com/advisories/724
+- id: npmjs:npm:express-cart:730
+  title: Privilege Escalation
+  description: Versions of `express-cart` before 1.1.6 are vulnerable to privilege
+    escalation. This vulnerability can be exploited so that normal users can escalate
+    their privilege and add new administrator users.
+  affected_package: express-cart
+  vulnerable_versions:
+  - "<=1.1.5"
+  severity: critical
+  package_manager: npm
+  cwe: CWE-284
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Patrick
+  references: https://npmjs.com/advisories/730
+  source_url: https://npmjs.com/advisories/730
+- id: snykio:npm:express-cart:20180606
+  title: Arbitrary Code Execution
+  description: |
+    [express-cart][1] is a fully functional shopping cart built in Node.js
+    (Express, MongoDB) with Stripe, PayPal and Authorize.net payments.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution. It allows a privileged users to upload files to the server,
+    and choose which path it\'ll be saved in. The path does not do through
+    validation, nor is the file type or size validated. This may allow an
+    attacker to upload malicious files that may execute code on the server,
+    send data back to the attacker or cause a denial of service.
+
+
+
+    [1]: https://www.npmjs.com/package/express-cart
+  affected_package: express-cart
+  vulnerable_versions:
+  - "<1.1.7"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2018-3758
+  cwe:
+  - CWE-94
+  disclosed_date: 2018-06-06
+  created_date: 2018-06-06
+  last_modified_date: 2018-06-06
+  credit:
+  - Patrick (patrickrbc)
+  references:
+  - https://github.com/mrvautin/expressCart/commit/65b18cfe426fa217aa6ada1d4162891883137893
+  - https://hackerone.com/reports/343726
+  source_url: https://snyk.io/vuln/npm:express-cart:20180606
 - id: snykio:npm:express-cart:20180712
   title: Privilege Escalation
   description: |
@@ -57,37 +144,3 @@
   - https://github.com/mrvautin/expressCart/commit/b2234ef4f28225bb42f74bf6cf33759048aba518
   - https://hackerone.com/reports/397445
   source_url: https://snyk.io/vuln/SNYK-JS-EXPRESSCART-72404
-- id: snykio:npm:express-cart:CVE-2018-3758
-  title: Arbitrary Code Execution
-  description: |
-    [express-cart][1] is a fully functional shopping cart built in Node.js
-    (Express, MongoDB) with Stripe, PayPal and Authorize.net payments.
-
-    Affected versions of this package are vulnerable to Arbitrary Code
-    Execution. It allows a privileged users to upload files to the server,
-    and choose which path it\'ll be saved in. The path does not do through
-    validation, nor is the file type or size validated. This may allow an
-    attacker to upload malicious files that may execute code on the server,
-    send data back to the attacker or cause a denial of service.
-
-
-
-    [1]: https://www.npmjs.com/package/express-cart
-  affected_package: express-cart
-  vulnerable_versions:
-  - "<1.1.7"
-  severity: high
-  package_manager: npm
-  cve:
-  - CVE-2018-3758
-  cwe:
-  - CWE-94
-  disclosed_date: 2018-06-06
-  created_date: 2018-06-06
-  last_modified_date: 2018-06-06
-  credit:
-  - Patrick (patrickrbc)
-  references:
-  - https://github.com/mrvautin/expressCart/commit/65b18cfe426fa217aa6ada1d4162891883137893
-  - https://hackerone.com/reports/343726
-  source_url: https://snyk.io/vuln/npm:express-cart:20180606

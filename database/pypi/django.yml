@@ -1,4 +1,668 @@
 ---
+- id: snykio:pypi:django:40025
+  title: Arbitrary Code Execution
+  description: |
+    [`Django`][1] is a high-level Python Web framework that encourages rapid
+    development and clean, pragmatic design.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution attacks. The `django.core.urlresolvers.reverse` function
+    allows remote attackers to import and execute arbitrary Python modules
+    by leveraging a view that constructs URLs using user input and a
+    \"dotted Python path.\"
+
+
+
+    [1]: https://pypi.python.org/pypi/Django
+  affected_package: django
+  vulnerable_versions:
+  - "< 1.4.11"
+  - ">= 1.5 < 1.5.6"
+  - ">= 1.6 < 1.6.3"
+  - ">= 1.7 < 1.7b2"
+  severity: high
+  package_manager: pypi
+  cve:
+  - CVE-2014-0472
+  cwe:
+  - CWE-94
+  disclosed_date: 2014-04-23
+  created_date: 2014-04-23
+  last_modified_date: 2014-04-23
+  credit:
+  - Benjamin Bach
+  references:
+  - https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2014-0472
+  - https://rhn.redhat.com/errata/RHSA-2014-0456.html
+  - https://www.djangoproject.com/weblog/2014/apr/21/security/
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40025
+- id: snykio:pypi:django:40026
+  title: Cross-site Request Forgery (CSRF)
+  description: |
+    [`Django`][1] is a high-level Python Web framework that encourages rapid
+    development and clean, pragmatic design.
+
+    Affected versions of this package are vulnerable to Cross-site Request
+    Forgery (CSRF) attacks. The caching framework reuses a cached CSRF token
+    for all anonymous users, which allows remote attackers to bypass CSRF
+    protections by reading the CSRF cookie for anonymous users.
+
+
+
+    [1]: https://pypi.python.org/pypi/Django
+  affected_package: django
+  vulnerable_versions:
+  - "< 1.4.11"
+  - ">= 1.5 < 1.5.6"
+  - ">= 1.6 < 1.6.3"
+  - ">= 1.7 < 1.7b2"
+  severity: high
+  package_manager: pypi
+  cve:
+  - CVE-2014-0473
+  cwe:
+  - CWE-264
+  disclosed_date: 2014-04-23
+  created_date: 2014-04-23
+  last_modified_date: 2014-04-23
+  credit:
+  - Paul McMillan
+  references:
+  - https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2014-0473
+  - https://rhn.redhat.com/errata/RHSA-2014-0456.html
+  - https://www.djangoproject.com/weblog/2014/apr/21/security/
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40026
+- id: snykio:pypi:django:40027
+  title: SQL Injection
+  description: |
+    [`Django`][1] is a high-level Python Web framework that encourages rapid
+    development and clean, pragmatic design.
+
+    Affected versions of this package are vulnerable to SQL Injection
+    attacks. The `FilePathField`, `GenericIPAddressField`, and
+    `IPAddressField` model field classes in Django do not properly perform
+    type conversion, which allows remote attackers to have unspecified
+    impact and vectors, related to \"MySQL typecasting.\"
+
+
+
+    [1]: https://pypi.python.org/pypi/Django
+  affected_package: django
+  vulnerable_versions:
+  - "< 1.4.11"
+  - ">= 1.5 < 1.5.6"
+  - ">= 1.6 < 1.6.3"
+  - ">= 1.7 < 1.7b2"
+  severity: high
+  package_manager: pypi
+  cve:
+  - CVE-2014-0474
+  cwe:
+  - CWE-399
+  disclosed_date: 2014-04-23
+  created_date: 2014-04-23
+  last_modified_date: 2014-04-23
+  credit:
+  - Michael Koziarski
+  references:
+  - https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2014-0474
+  - https://rhn.redhat.com/errata/RHSA-2014-0456.html
+  - https://www.djangoproject.com/weblog/2014/apr/21/security/
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40027
+- id: snykio:pypi:django:40053
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [`django`][1] is a high-level Python Web framework that encourages rapid
+    development and clean, pragmatic design.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS) attacks. It allows remote attackers to inject arbitrary web script
+    or HTML via a `csrfmiddlewaretoken` (aka `csrf_token`) cookie.
+
+
+
+    [1]: https://pypi.python.org/pypi/django
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+  affected_package: django
+  vulnerable_versions:
+  - ">= 1.2 < 1.2.2"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2010-3082
+  cwe:
+  - CWE-79
+  disclosed_date: 2010-09-09
+  created_date: 2010-09-09
+  last_modified_date: 2010-09-09
+  credit:
+  - Jeff Balogh
+  references:
+  - http://www.djangoproject.com/weblog/2010/sep/08/security-release/
+  - https://bugzilla.redhat.com/show_bug.cgi?id=632239
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2010-3082
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40053
+- id: snykio:pypi:django:40055
+  title: Information Exposure
+  description: |
+    [`django`][1] is a high-level Python Web framework that encourages rapid
+    development and clean, pragmatic design.
+
+    Affected versions of this package expose sensitive information due to
+    not properly restricting the use of a query string that performs certain
+    object filtering. An attacker may obtain sensitive information via a
+    series of requests containing regular expressions, as demonstrated by a
+    `created_by__password__regex` parameter.
+
+
+
+    [1]: https://pypi.python.org/pypi/django
+  affected_package: django
+  vulnerable_versions:
+  - "< 1.1.3"
+  - ">= 1.2 < 1.2.4"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2010-4534
+  cwe:
+  - CWE-264
+  disclosed_date: 2010-12-22
+  created_date: 2010-12-22
+  last_modified_date: 2010-12-22
+  credit:
+  - Adam Baldwin
+  references:
+  - http://www.djangoproject.com/weblog/2010/dec/22/security/
+  - http://www.openwall.com/lists/oss-security/2011/01/03/5
+  - https://bugzilla.redhat.com/show_bug.cgi?id=665373
+  - https://github.com/django/django/commit/732198ed5c
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2010-4534
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40055
+- id: snykio:pypi:django:40056
+  title: Denial of Service (DoS)
+  description: |+
+    [`django`][1] is a high-level Python Web framework that encourages rapid
+    development and clean, pragmatic design.
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS) attacks. The length of a string representing a base36 timestamp
+    was not validated, allowing remote attackers to cause a denial of
+    service (resource consumption) via a URL that specifies a large base36
+    integer.
+
+
+
+    [1]: https://pypi.python.org/pypi/django
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+  affected_package: django
+  vulnerable_versions:
+  - "< 1.1.3"
+  - ">= 1.2 < 1.2.4"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2010-4535
+  cwe:
+  - CWE-20
+  disclosed_date: 2010-12-22
+  created_date: 2010-12-22
+  last_modified_date: 2010-12-22
+  credit:
+  - Paul McMillan
+  references:
+  - http://www.djangoproject.com/weblog/2010/dec/22/security
+  - http://www.openwall.com/lists/oss-security/2011/01/03/5
+  - https://bugzilla.redhat.com/show_bug.cgi?id=665373
+  - https://github.com/django/django/commit/6819be1ea1
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2010-4535
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40056
+- id: snykio:pypi:django:40058
+  title: Cross-site Request Forgery (CSRF)
+  description: |
+    [`django`][1] is a high-level Python Web framework that encourages rapid
+    development and clean, pragmatic design.
+
+    Affected versions of this package are vulnerable to Cross-site Request
+    Forgery (CSRF) attacks. It didn\'t properly validate HTTP requests
+    containing an `X-Requested-With` header, which makes it easier for
+    remote attackers to bypass CSRF protection with forged AJAX requests
+    that leverage a \"combination of browser plugins and redirects\".
+
+
+
+    [1]: https://pypi.python.org/pypi/django
+  affected_package: django
+  vulnerable_versions:
+  - "< 1.1.4"
+  - ">= 1.2 < 1.2.5"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2011-0696
+  cwe:
+  - CWE-352
+  disclosed_date: 2011-02-08
+  created_date: 2011-02-08
+  last_modified_date: 2011-02-08
+  credit:
+  - Michael Koziarski
+  references:
+  - http://openwall.com/lists/oss-security/2011/02/09/6
+  - http://www.djangoproject.com/weblog/2011/feb/08/security/
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2011-0696
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40058
+- id: snykio:pypi:django:40059
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [`django`][1] is a high-level Python Web framework that encourages rapid
+    development and clean, pragmatic design.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS) attacks. A filename associated with a file upload was not escaped
+    before rendering.
+
+
+
+    [1]: https://pypi.python.org/pypi/django
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+  affected_package: django
+  vulnerable_versions:
+  - "< 1.1.4"
+  - ">= 1.2 < 1.2.5"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2011-0697
+  cwe:
+  - CWE-79
+  disclosed_date: 2011-02-08
+  created_date: 2011-02-08
+  last_modified_date: 2011-02-08
+  credit:
+  - e.generalov
+  references:
+  - http://openwall.com/lists/oss-security/2011/02/09/6
+  - http://www.djangoproject.com/weblog/2011/feb/08/security/
+  - https://bugzilla.redhat.com/show_bug.cgi?id=676359
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2011-0697
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40059
+- id: snykio:pypi:django:40060
+  title: Directory Traversal
+  description: |
+    [`django`][1] is a high-level Python Web framework that encourages rapid
+    development and clean, pragmatic design.
+
+    Affected versions of this package are vulnerable to Directory Traversal
+    on Windows. If a `/` (slash) is present in a session cookie, an attacker
+    may be able to read or execute files
+
+
+
+    [1]: https://pypi.python.org/pypi/django
+    \nA Directory Traversal attack (also known as path traversal) aims to
+    access files and directories that are stored outside the intended
+    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
+    its variations, or by using absolute file paths, it may be possible to
+    access arbitrary files and directories stored on file system, including
+    application source code, configuration, and other critical system files.
+
+    Directory Traversal vulnerabilities can be generally divided into two
+    types:
+
+    * **Information Disclosure**\: Allows the attacker to gain information
+      about the folder structure or read the contents of sensitive files on
+      the system.
+
+    `st` is a module for serving static files on web pages, and contains a
+    [vulnerability of this type][1]. In our example, we will serve files
+    from the `public` route.
+
+    If an attacker requests the following URL from our server, it will in
+    turn leak the sensitive private key of the root user.
+
+        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
+
+    **Note** `%2e` is the URL encoded version of `.` (dot).
+
+    * **Writing arbitrary files**\: Allows the attacker to create or replace
+      existing files. This type of vulnerability is also known as
+      `Zip-Slip`.
+
+    One way to achieve this is by using a malicious `zip` archive that holds
+    path traversal filenames. When each filename in the zip archive gets
+    concatenated to the target extraction folder, without validation, the
+    final path ends up outside of the target folder. If an executable or a
+    configuration file is overwritten with a file containing malicious code,
+    the problem can turn into an arbitrary code execution issue quite
+    easily.
+
+    The following is an example of a `zip` archive with one benign file and
+    one malicious file. Extracting the malicious file will result in
+    traversing out of the target folder, ending up in `/root/.ssh/`
+    overwriting the `authorized_keys` file:
+
+        2018-04-15 22:04:29 .....           19           19  good.txt
+        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
+
+
+
+    [1]: https://snyk.io/vuln/npm:st:20140206
+  affected_package: django
+  vulnerable_versions:
+  - "< 1.1.4"
+  - ">= 1.2 < 1.2.5"
+  severity: high
+  package_manager: pypi
+  cve:
+  - CVE-2011-0698
+  cwe:
+  - CWE-22
+  disclosed_date: 2011-02-08
+  created_date: 2011-02-08
+  last_modified_date: 2011-02-08
+  credit:
+  - Paul McMillan
+  references:
+  - http://openwall.com/lists/oss-security/2011/02/09/6
+  - http://www.djangoproject.com/weblog/2011/feb/08/security/
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2011-0698
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40060
+- id: snykio:pypi:django:40079
+  title: Session Manipulation
+  description: |
+    [`django`][1] is a high-level Python Web framework that encourages rapid
+    development and clean, pragmatic design.
+
+    Affected versions of this package are vulnerable to Session
+    Manipulation. It stored session data in the cache using the root
+    namespace for both session identifiers and application-data keys. This
+    allows remote attackers to modify a session by triggering use of a key
+    that is equal to that session\'s identifier.
+
+
+
+    [1]: https://pypi.python.org/pypi/django
+  affected_package: django
+  vulnerable_versions:
+  - "< 1.2.7"
+  - ">= 1.3 < 1.3.1"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2011-4136
+  cwe:
+  - CWE-20
+  disclosed_date: 2011-09-11
+  created_date: 2011-09-11
+  last_modified_date: 2011-09-11
+  credit:
+  - Paul McMillan
+  references:
+  - http://openwall.com/lists/oss-security/2011/09/11/1
+  - https://bugzilla.redhat.com/show_bug.cgi?id=737366
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2011-4136
+  - https://www.djangoproject.com/weblog/2011/sep/09/security-releases-issued/
+  - https://www.djangoproject.com/weblog/2011/sep/10/127/
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40079
+- id: snykio:pypi:django:40081
+  title: Denial of Service (DoS)
+  description: |+
+    [`django`][1] is a high-level Python Web framework that encourages rapid
+    development and clean, pragmatic design.
+
+    Affected versions of this package are vulnerable to Denial of Service
+    attacks. The `verify_exists` functionality in the `URLField`
+    implementation relies on Python libraries that attempt access to an
+    arbitrary URL with no timeout. This allows remote attackers to cause a
+    high resource consumption with a URL that can cause a timeout (a TCP
+    connection with no application data sent, or a large amount of
+    application data).
+
+
+
+    [1]: https://pypi.python.org/pypi/django
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+  affected_package: django
+  vulnerable_versions:
+  - "< 1.2.7"
+  - ">= 1.3 < 1.3.1"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2011-4137
+  cwe:
+  - CWE-399
+  disclosed_date: 2011-09-11
+  created_date: 2011-09-11
+  last_modified_date: 2011-09-11
+  credit:
+  - Paul McMillan
+  references:
+  - http://openwall.com/lists/oss-security/2011/09/11/1
+  - https://bugzilla.redhat.com/show_bug.cgi?id=737366
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2011-4137
+  - https://www.djangoproject.com/weblog/2011/sep/09/security-releases-issued/
+  - https://www.djangoproject.com/weblog/2011/sep/10/127/
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40081
+- id: snykio:pypi:django:40082
+  title: Arbitrary Request Generation
+  description: |
+    [`django`][1] is a high-level Python Web framework that encourages rapid
+    development and clean, pragmatic design.
+
+    Affected versions of this package are vulnerable due to lack of request
+    validation. The `verify_exists` functionality in the `URLField`
+    originally tests a URL\'s validity through a HEAD request, but then uses
+    a GET request for the new target URL in the case of a redirect. This may
+    allow remote attackers to trigger arbitrary GET requests with an
+    unintended source IP address via a crafted Location header.
+
+
+
+    [1]: https://pypi.python.org/pypi/django
+  affected_package: django
+  vulnerable_versions:
+  - "< 1.2.7"
+  - ">= 1.3 < 1.3.1"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2011-4138
+  cwe:
+  - CWE-20
+  disclosed_date: 2011-09-11
+  created_date: 2011-09-11
+  last_modified_date: 2011-09-11
+  credit:
+  - Paul McMillan
+  references:
+  - http://openwall.com/lists/oss-security/2011/09/11/1
+  - https://bugzilla.redhat.com/show_bug.cgi?id=737366
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2011-4138
+  - https://www.djangoproject.com/weblog/2011/sep/09/security-releases-issued/
+  - https://www.djangoproject.com/weblog/2011/sep/10/127/
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40082
+- id: snykio:pypi:django:40083
+  title: Cache Poisoning
+  description: |
+    [`django`][1] is a high-level Python Web framework that encourages rapid
+    development and clean, pragmatic design.
+
+    Affected versions of this package are vulnerable to Cache Poisoning. It
+    used a request\'s HTTP Host header to construct a full URL. An attacker
+    can submit a request with a Host header of his or her choice, receive a
+    response which constructs URLs using that Host header, and If that
+    response is cached, further requests will be served out of cache using
+    URLs containing the attacker\'s host of choice.
+
+
+
+    [1]: https://pypi.python.org/pypi/django
+  affected_package: django
+  vulnerable_versions:
+  - "< 1.2.7"
+  - ">= 1.3 < 1.3.1"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2011-4139
+  cwe:
+  - CWE-20
+  disclosed_date: 2011-09-11
+  created_date: 2011-09-11
+  last_modified_date: 2011-09-11
+  credit:
+  - Django Core Development Team
+  references:
+  - http://openwall.com/lists/oss-security/2011/09/11/1
+  - https://bugzilla.redhat.com/show_bug.cgi?id=737366
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2011-4139
+  - https://www.djangoproject.com/weblog/2011/sep/09/security-releases-issued/
+  - https://www.djangoproject.com/weblog/2011/sep/10/127/
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40083
+- id: snykio:pypi:django:40084
+  title: Cross-site Request Forgery (CSRF)
+  description: |
+    [`django`][1] is a high-level Python Web framework that encourages rapid
+    development and clean, pragmatic design.
+
+    Affected versions of this package are vulnerable to Cross-site Request
+    Forgery (CSRF). The CSRF protection mechanism does not properly handle
+    web-server configurations supporting arbitrary HTTP Host headers, which
+    allows remote attackers to trigger unauthenticated forged requests via
+    vectors involving a DNS CNAME record and a web page containing
+    JavaScript code.
+
+
+
+    [1]: https://pypi.python.org/pypi/django
+  affected_package: django
+  vulnerable_versions:
+  - "< 1.2.7"
+  - ">= 1.3 < 1.3.1"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2011-4140
+  cwe:
+  - CWE-352
+  disclosed_date: 2011-09-11
+  created_date: 2011-09-11
+  last_modified_date: 2011-09-11
+  credit:
+  - Mozilla
+  references:
+  - http://openwall.com/lists/oss-security/2011/09/11/1
+  - https://bugzilla.redhat.com/show_bug.cgi?id=737366
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2011-4140
+  - https://www.djangoproject.com/weblog/2011/sep/09/security-releases-issued/
+  - https://www.djangoproject.com/weblog/2011/sep/10/127/
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40084
 - id: snykio:pypi:django:40085
   title: Information Exposure
   description: |
@@ -35,6 +699,323 @@
   - https://www.djangoproject.com/weblog/2011/sep/09/security-releases-issued/
   - https://www.djangoproject.com/weblog/2011/sep/10/127/
   source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40085
+- id: snykio:pypi:django:40098
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [`django`][1] is a high-level Python Web framework that encourages rapid
+    development and clean, pragmatic design.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). The `HttpResponseRedirect` and `HttpResponsePermanentRedirect`
+    classes do not validate the scheme of a redirect target, allowing
+    attackers to use Data: URLs to conduct an attack.
+
+
+
+    [1]: https://pypi.python.org/pypi/django
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+  affected_package: django
+  vulnerable_versions:
+  - "< 1.3.2"
+  - ">= 1.4 < 1.4.1"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2012-3442
+  cwe:
+  - CWE-79
+  disclosed_date: 2012-06-30
+  created_date: 2012-06-30
+  last_modified_date: 2012-06-30
+  credit:
+  - Unknown
+  references:
+  - http://www.openwall.com/lists/oss-security/2012/07/31/2
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2012-3442
+  - https://www.djangoproject.com/weblog/2012/jul/30/security-releases-issued/
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40098
+- id: snykio:pypi:django:40099
+  title: Denial of Service (DoS)
+  description: |+
+    [`django`][1] is a high-level Python Web framework that encourages rapid
+    development and clean, pragmatic design.
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS) attacks. The `ImageField` class in the form system completely
+    decompresses image data during image validation, which allows remote
+    attackers to cause a denial of service (memory consumption) by uploading
+    a malicious image file.
+
+
+
+    [1]: https://pypi.python.org/pypi/django
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+  affected_package: django
+  vulnerable_versions:
+  - "< 1.3.2"
+  - ">= 1.4 < 1.4.1"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2012-3443
+  cwe:
+  - CWE-20
+  disclosed_date: 2012-06-30
+  created_date: 2012-06-30
+  last_modified_date: 2012-06-30
+  credit:
+  - Unknown
+  references:
+  - http://www.openwall.com/lists/oss-security/2012/07/31/2
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2012-3443
+  - https://www.djangoproject.com/weblog/2012/jul/30/security-releases-issued/
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40099
+- id: snykio:pypi:django:40100
+  title: Denial of Service (DoS)
+  description: |+
+    [`django`][1] is a high-level Python Web framework that encourages rapid
+    development and clean, pragmatic design.
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS) attacks. The `get_image_dimensions` function in the image-handling
+    functionality uses a constant chunk size in all attempts to determine
+    dimensions, which allows remote attackers to cause a high process or
+    thread consumption via a large TIFF image.
+
+
+
+    [1]: https://pypi.python.org/pypi/django
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+  affected_package: django
+  vulnerable_versions:
+  - "< 1.3.2"
+  - ">= 1.4 < 1.4.1"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2012-3444
+  cwe:
+  - CWE-119
+  disclosed_date: 2012-06-30
+  created_date: 2012-06-30
+  last_modified_date: 2012-06-30
+  credit:
+  - Jeroen Dekkers
+  references:
+  - http://www.openwall.com/lists/oss-security/2012/07/31/2
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2012-3444
+  - https://www.djangoproject.com/weblog/2012/jul/30/security-releases-issued/
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40100
+- id: snykio:pypi:django:40104
+  title: Host Header Poisoning
+  description: |
+    [`django`][1] is a high-level Python Web framework that encourages rapid
+    development and clean, pragmatic design.
+
+    Affected versions of this package are vulnerable to Host Header
+    Poisoning. The `django.http.HttpRequest.get_host` function incorrectly
+    handled username/password information in the header. This allows remote
+    attackers to generate and display arbitrary URLs via crafted username
+    and password Host header values.
+
+
+
+    [1]: https://pypi.python.org/pypi/django
+  affected_package: django
+  vulnerable_versions:
+  - "< 1.3.4"
+  - ">= 1.4 < 1.4.2"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2012-4520
+  cwe:
+  - CWE-20
+  disclosed_date: 2012-10-17
+  created_date: 2012-10-17
+  last_modified_date: 2012-10-17
+  credit:
+  - James Kettle
+  references:
+  - http://www.openwall.com/lists/oss-security/2012/10/30/4
+  - https://bugzilla.redhat.com/show_bug.cgi?id=865164
+  - https://github.com/django/django/commit/92d3430f12171f16f566c9050c40feefb830a4a3
+  - https://github.com/django/django/commit/9305c0e12d43c4df999c3301a1f0c742264a657e
+  - https://github.com/django/django/commit/b45c377f8f488955e0c7069cad3f3dd21910b071
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2012-4520
+  - https://www.djangoproject.com/weblog/2012/oct/17/security/
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40104
+- id: snykio:pypi:django:40172
+  title: Information Exposure
+  description: |
+    [`django`][1] is a high-level Python Web framework that encourages rapid
+    development and clean, pragmatic design.
+
+    Affected versions of this package are vulnerable to Information
+    Exposure. The administrative interface did not check permissions for the
+    history view, which allows remote authenticated administrators to obtain
+    sensitive object history information.
+
+
+
+    [1]: https://pypi.python.org/pypi/django
+  affected_package: django
+  vulnerable_versions:
+  - "< 1.3.6"
+  - ">= 1.4 < 1.4.4"
+  severity: low
+  package_manager: pypi
+  cve:
+  - CVE-2013-0305
+  cwe:
+  - CWE-200
+  disclosed_date: 2013-03-21
+  created_date: 2013-03-21
+  last_modified_date: 2013-03-21
+  credit:
+  - Orange Tsai
+  references:
+  - http://rhn.redhat.com/errata/RHSA-2013-0670.html
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2013-0305
+  - https://www.djangoproject.com/weblog/2013/feb/19/security/
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40172
+- id: snykio:pypi:django:40173
+  title: Denial of Service (DoS)
+  description: |+
+    [`django`][1] is a high-level Python Web framework that encourages rapid
+    development and clean, pragmatic design.
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS) attacks. The form library allows remote attackers to bypass
+    intended resource limits for formsets by modifying the `max_num`
+    parameter and cause high memory consumption, or trigger server errors.
+
+
+
+    [1]: https://pypi.python.org/pypi/django
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+  affected_package: django
+  vulnerable_versions:
+  - "< 1.3.6"
+  - ">= 1.4 < 1.4.4"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2013-0306
+  cwe:
+  - CWE-189
+  disclosed_date: 2013-03-21
+  created_date: 2013-03-21
+  last_modified_date: 2013-03-21
+  credit:
+  - Mozilla
+  references:
+  - http://rhn.redhat.com/errata/RHSA-2013-0670.html
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2013-0306
+  - https://www.djangoproject.com/weblog/2013/feb/19/security/
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40173
 - id: snykio:pypi:django:40174
   title: Denial of Service (DoS)
   description: |+
@@ -159,1072 +1140,7 @@
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2013-1665
   - https://www.djangoproject.com/weblog/2013/feb/19/security/
   source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40175
-- id: snykio:pypi:django:CVE-2007-5712
-  title: Denial of Service (DoS)
-  description: |+
-    [django][1] is a high-level Python Web framework that encourages rapid
-    development and clean, pragmatic design. Thanks for checking it out.
-
-    Affected versions of this package are vulnerable to Denial of Service.
-    An attacker may send a large amount of HTTP requests with large
-    Accept-Language headers, causing a high memory consumption in the
-    server.
-
-
-
-    [1]: https://pypi.org/project/Django/
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-  affected_package: django
-  vulnerable_versions:
-  - "< 0.91.1"
-  - ">= 0.95 < 0.95.1"
-  - ">= 0.96 < 0.96.1"
-  severity: low
-  package_manager: pypi
-  cve:
-  - CVE-2007-5712
-  cwe:
-  - CWE-399
-  disclosed_date: 2007-10-26
-  created_date: 2018-06-20
-  last_modified_date: 2018-06-20
-  credit:
-  - Unknown
-  references:
-  - https://nvd.nist.gov/vuln/detail/CVE-2007-5712
-  - https://www.djangoproject.com/weblog/2007/oct/26/security-fix/
-  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-42158
-- id: snykio:pypi:django:CVE-2009-3695
-  title: Regular Expression Denial of Service (ReDoS)
-  description: "[django][1] is a high-level Python Web framework that encourages rapid\ndevelopment
-    and clean, pragmatic design.\n\nAffected versions of this package are vulnerable
-    to Regular Expression\nDenial of Service (ReDoS) via a crafted email address or
-    URL that\ntriggers a large amount of backtracking in a regular expression.\n\n\n\n[1]:
-    https://pypi.python.org/pypi/django\n\\nDenial of Service (DoS) describes a family
-    of attacks, all aimed at\nmaking a system inaccessible to its original and legitimate
-    users. There\nare many types of DoS attacks, ranging from trying to clog the network\npipes
-    to the system by generating a large volume of traffic from many\nmachines (a Distributed
-    Denial of Service - DDoS - attack) to sending\ncrafted requests that cause a system
-    to crash or take a disproportional\namount of time to process.\n\nThe Regular
-    expression Denial of Service (ReDoS) is a type of Denial of\nService attack. Regular
-    expressions are incredibly powerful, but they\naren\\'t very intuitive and can
-    ultimately end up making it easy for\nattackers to take your site down.\n\nLet’s
-    take the following regular expression as an example:\n\n    regex = /A(B|C+)+D/\n\nThis
-    regular expression accomplishes the following:\n\n* `A` The string must start
-    with the letter \\'A\\'\n* `(B|C+)+` The string must then follow the letter A
-    with either the\n  letter \\'B\\' or some number of occurrences of the letter
-    \\'C\\' (the\n  `+` matches one or more times). The `+` at the end of this section\n
-    \ states that we can look for one or more matches of this section.\n* `D` Finally,
-    we ensure this section of the string ends with a \\'D\\'\n\nThe expression would
-    match inputs such as `ABBD`, `ABCCCCD`, `ABCBCCCD`\nand `ACCCCCD`\n\nIt most cases,
-    it doesn\\'t take very long for a regex engine to find a\nmatch:\n\n    $ time
-    node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCD\")'\n    0.04s user
-    0.01s system 95% cpu 0.052 total\n    \n    $ time node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCX\")'\n
-    \   1.79s user 0.02s system 99% cpu 1.812 total\n\nThe entire process of testing
-    it against a 30 characters long string\ntakes around ~52ms. But when given an
-    invalid string, it takes nearly\ntwo seconds to complete the test, over ten times
-    as long as it took to\ntest a valid string. The dramatic difference is due to
-    the way regular\nexpressions get evaluated.\n\nMost Regex engines will work very
-    similarly (with minor differences).\nThe engine will match the first possible
-    way to accept the current\ncharacter and proceed to the next one. If it then fails
-    to match the\nnext one, it will backtrack and see if there was another way to
-    digest\nthe previous character. If it goes too far down the rabbit hole only to\nfind
-    out the string doesn’t match in the end, and if many characters\nhave multiple
-    valid regex paths, the number of backtracking steps can\nbecome very large, resulting
-    in what is known as *catastrophic\nbacktracking*.\n\nLet\\'s look at how our expression
-    runs into this problem, using a\nshorter string: \\\"ACCCX\\\". While it seems
-    fairly straightforward, there\nare still four different ways that the engine could
-    match those three\nC\\'s:\n\n1.  CCC\n2.  CC+C\n3.  C+CC\n4.  C+C+C.\n\nThe engine
-    has to try each of those combinations to see if any of them\npotentially match
-    against the expression. When you combine that with the\nother steps the engine
-    must take, we can use [RegEx 101 debugger][1] to\nsee the engine has to take a
-    total of 38 steps before it can determine\nthe string doesn\\'t match.\n\nFrom
-    there, the number of steps the engine must use to validate a string\njust continues
-    to grow.\n\n| String | Number of C\\'s | Number of steps |\n|----------\n| ACCCX
-    | 3 | 38 |\n| ACCCCX | 4 | 71 |\n| ACCCCCX | 5 | 136 |\n| ACCCCCCCCCCCCCCX | 14
-    | 65,553 |\n\nBy the time the string includes 14 C\\'s, the engine has to take
-    over\n65,000 steps just to see if the string is valid. These extreme\nsituations
-    can cause them to work very slowly (exponentially related to\ninput size, as shown
-    above), allowing an attacker to exploit this and\ncan cause the service to excessively
-    consume CPU, resulting in a Denial\nof Service.\n\n\n\n[1]: https://regex101.com/debugger\n"
-  affected_package: django
-  vulnerable_versions:
-  - "< 1.0.4"
-  - ">= 1.1 < 1.1.1"
-  severity: medium
-  package_manager: pypi
-  cve:
-  - CVE-2009-3695
-  cwe:
-  - CWE-399
-  disclosed_date: 2018-03-11
-  created_date: 2018-07-04
-  last_modified_date: 2018-07-04
-  credit:
-  - Unknown
-  references:
-  - http://groups.google.com/group/django-users/browse_thread/thread/15df9e45118dfc51/
-  - http://www.djangoproject.com/weblog/2009/oct/09/security/
-  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-42162
-- id: snykio:pypi:django:CVE-2010-3082
-  title: Cross-site Scripting (XSS)
-  description: |+
-    [`django`][1] is a high-level Python Web framework that encourages rapid
-    development and clean, pragmatic design.
-
-    Affected versions of this package are vulnerable to Cross-site Scripting
-    (XSS) attacks. It allows remote attackers to inject arbitrary web script
-    or HTML via a `csrfmiddlewaretoken` (aka `csrf_token`) cookie.
-
-
-
-    [1]: https://pypi.python.org/pypi/django
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-  affected_package: django
-  vulnerable_versions:
-  - ">= 1.2 < 1.2.2"
-  severity: medium
-  package_manager: pypi
-  cve:
-  - CVE-2010-3082
-  cwe:
-  - CWE-79
-  disclosed_date: 2010-09-09
-  created_date: 2010-09-09
-  last_modified_date: 2010-09-09
-  credit:
-  - Jeff Balogh
-  references:
-  - http://www.djangoproject.com/weblog/2010/sep/08/security-release/
-  - https://bugzilla.redhat.com/show_bug.cgi?id=632239
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2010-3082
-  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40053
-- id: snykio:pypi:django:CVE-2010-4534
-  title: Information Exposure
-  description: |
-    [`django`][1] is a high-level Python Web framework that encourages rapid
-    development and clean, pragmatic design.
-
-    Affected versions of this package expose sensitive information due to
-    not properly restricting the use of a query string that performs certain
-    object filtering. An attacker may obtain sensitive information via a
-    series of requests containing regular expressions, as demonstrated by a
-    `created_by__password__regex` parameter.
-
-
-
-    [1]: https://pypi.python.org/pypi/django
-  affected_package: django
-  vulnerable_versions:
-  - "< 1.1.3"
-  - ">= 1.2 < 1.2.4"
-  severity: medium
-  package_manager: pypi
-  cve:
-  - CVE-2010-4534
-  cwe:
-  - CWE-264
-  disclosed_date: 2010-12-22
-  created_date: 2010-12-22
-  last_modified_date: 2010-12-22
-  credit:
-  - Adam Baldwin
-  references:
-  - http://www.djangoproject.com/weblog/2010/dec/22/security/
-  - http://www.openwall.com/lists/oss-security/2011/01/03/5
-  - https://bugzilla.redhat.com/show_bug.cgi?id=665373
-  - https://github.com/django/django/commit/732198ed5c
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2010-4534
-  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40055
-- id: snykio:pypi:django:CVE-2010-4535
-  title: Denial of Service (DoS)
-  description: |+
-    [`django`][1] is a high-level Python Web framework that encourages rapid
-    development and clean, pragmatic design.
-
-    Affected versions of this package are vulnerable to Denial of Service
-    (DoS) attacks. The length of a string representing a base36 timestamp
-    was not validated, allowing remote attackers to cause a denial of
-    service (resource consumption) via a URL that specifies a large base36
-    integer.
-
-
-
-    [1]: https://pypi.python.org/pypi/django
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-  affected_package: django
-  vulnerable_versions:
-  - "< 1.1.3"
-  - ">= 1.2 < 1.2.4"
-  severity: medium
-  package_manager: pypi
-  cve:
-  - CVE-2010-4535
-  cwe:
-  - CWE-20
-  disclosed_date: 2010-12-22
-  created_date: 2010-12-22
-  last_modified_date: 2010-12-22
-  credit:
-  - Paul McMillan
-  references:
-  - http://www.djangoproject.com/weblog/2010/dec/22/security
-  - http://www.openwall.com/lists/oss-security/2011/01/03/5
-  - https://bugzilla.redhat.com/show_bug.cgi?id=665373
-  - https://github.com/django/django/commit/6819be1ea1
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2010-4535
-  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40056
-- id: snykio:pypi:django:CVE-2011-0696
-  title: Cross-site Request Forgery (CSRF)
-  description: |
-    [`django`][1] is a high-level Python Web framework that encourages rapid
-    development and clean, pragmatic design.
-
-    Affected versions of this package are vulnerable to Cross-site Request
-    Forgery (CSRF) attacks. It didn\'t properly validate HTTP requests
-    containing an `X-Requested-With` header, which makes it easier for
-    remote attackers to bypass CSRF protection with forged AJAX requests
-    that leverage a \"combination of browser plugins and redirects\".
-
-
-
-    [1]: https://pypi.python.org/pypi/django
-  affected_package: django
-  vulnerable_versions:
-  - "< 1.1.4"
-  - ">= 1.2 < 1.2.5"
-  severity: medium
-  package_manager: pypi
-  cve:
-  - CVE-2011-0696
-  cwe:
-  - CWE-352
-  disclosed_date: 2011-02-08
-  created_date: 2011-02-08
-  last_modified_date: 2011-02-08
-  credit:
-  - Michael Koziarski
-  references:
-  - http://openwall.com/lists/oss-security/2011/02/09/6
-  - http://www.djangoproject.com/weblog/2011/feb/08/security/
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2011-0696
-  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40058
-- id: snykio:pypi:django:CVE-2011-0697
-  title: Cross-site Scripting (XSS)
-  description: |+
-    [`django`][1] is a high-level Python Web framework that encourages rapid
-    development and clean, pragmatic design.
-
-    Affected versions of this package are vulnerable to Cross-site Scripting
-    (XSS) attacks. A filename associated with a file upload was not escaped
-    before rendering.
-
-
-
-    [1]: https://pypi.python.org/pypi/django
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-  affected_package: django
-  vulnerable_versions:
-  - "< 1.1.4"
-  - ">= 1.2 < 1.2.5"
-  severity: medium
-  package_manager: pypi
-  cve:
-  - CVE-2011-0697
-  cwe:
-  - CWE-79
-  disclosed_date: 2011-02-08
-  created_date: 2011-02-08
-  last_modified_date: 2011-02-08
-  credit:
-  - e.generalov
-  references:
-  - http://openwall.com/lists/oss-security/2011/02/09/6
-  - http://www.djangoproject.com/weblog/2011/feb/08/security/
-  - https://bugzilla.redhat.com/show_bug.cgi?id=676359
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2011-0697
-  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40059
-- id: snykio:pypi:django:CVE-2011-0698
-  title: Directory Traversal
-  description: |
-    [`django`][1] is a high-level Python Web framework that encourages rapid
-    development and clean, pragmatic design.
-
-    Affected versions of this package are vulnerable to Directory Traversal
-    on Windows. If a `/` (slash) is present in a session cookie, an attacker
-    may be able to read or execute files
-
-
-
-    [1]: https://pypi.python.org/pypi/django
-    \nA Directory Traversal attack (also known as path traversal) aims to
-    access files and directories that are stored outside the intended
-    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
-    its variations, or by using absolute file paths, it may be possible to
-    access arbitrary files and directories stored on file system, including
-    application source code, configuration, and other critical system files.
-
-    Directory Traversal vulnerabilities can be generally divided into two
-    types:
-
-    * **Information Disclosure**\: Allows the attacker to gain information
-      about the folder structure or read the contents of sensitive files on
-      the system.
-
-    `st` is a module for serving static files on web pages, and contains a
-    [vulnerability of this type][1]. In our example, we will serve files
-    from the `public` route.
-
-    If an attacker requests the following URL from our server, it will in
-    turn leak the sensitive private key of the root user.
-
-        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
-
-    **Note** `%2e` is the URL encoded version of `.` (dot).
-
-    * **Writing arbitrary files**\: Allows the attacker to create or replace
-      existing files. This type of vulnerability is also known as
-      `Zip-Slip`.
-
-    One way to achieve this is by using a malicious `zip` archive that holds
-    path traversal filenames. When each filename in the zip archive gets
-    concatenated to the target extraction folder, without validation, the
-    final path ends up outside of the target folder. If an executable or a
-    configuration file is overwritten with a file containing malicious code,
-    the problem can turn into an arbitrary code execution issue quite
-    easily.
-
-    The following is an example of a `zip` archive with one benign file and
-    one malicious file. Extracting the malicious file will result in
-    traversing out of the target folder, ending up in `/root/.ssh/`
-    overwriting the `authorized_keys` file:
-
-        2018-04-15 22:04:29 .....           19           19  good.txt
-        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
-
-
-
-    [1]: https://snyk.io/vuln/npm:st:20140206
-  affected_package: django
-  vulnerable_versions:
-  - "< 1.1.4"
-  - ">= 1.2 < 1.2.5"
-  severity: high
-  package_manager: pypi
-  cve:
-  - CVE-2011-0698
-  cwe:
-  - CWE-22
-  disclosed_date: 2011-02-08
-  created_date: 2011-02-08
-  last_modified_date: 2011-02-08
-  credit:
-  - Paul McMillan
-  references:
-  - http://openwall.com/lists/oss-security/2011/02/09/6
-  - http://www.djangoproject.com/weblog/2011/feb/08/security/
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2011-0698
-  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40060
-- id: snykio:pypi:django:CVE-2011-4136
-  title: Session Manipulation
-  description: |
-    [`django`][1] is a high-level Python Web framework that encourages rapid
-    development and clean, pragmatic design.
-
-    Affected versions of this package are vulnerable to Session
-    Manipulation. It stored session data in the cache using the root
-    namespace for both session identifiers and application-data keys. This
-    allows remote attackers to modify a session by triggering use of a key
-    that is equal to that session\'s identifier.
-
-
-
-    [1]: https://pypi.python.org/pypi/django
-  affected_package: django
-  vulnerable_versions:
-  - "< 1.2.7"
-  - ">= 1.3 < 1.3.1"
-  severity: medium
-  package_manager: pypi
-  cve:
-  - CVE-2011-4136
-  cwe:
-  - CWE-20
-  disclosed_date: 2011-09-11
-  created_date: 2011-09-11
-  last_modified_date: 2011-09-11
-  credit:
-  - Paul McMillan
-  references:
-  - http://openwall.com/lists/oss-security/2011/09/11/1
-  - https://bugzilla.redhat.com/show_bug.cgi?id=737366
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2011-4136
-  - https://www.djangoproject.com/weblog/2011/sep/09/security-releases-issued/
-  - https://www.djangoproject.com/weblog/2011/sep/10/127/
-  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40079
-- id: snykio:pypi:django:CVE-2011-4137
-  title: Denial of Service (DoS)
-  description: |+
-    [`django`][1] is a high-level Python Web framework that encourages rapid
-    development and clean, pragmatic design.
-
-    Affected versions of this package are vulnerable to Denial of Service
-    attacks. The `verify_exists` functionality in the `URLField`
-    implementation relies on Python libraries that attempt access to an
-    arbitrary URL with no timeout. This allows remote attackers to cause a
-    high resource consumption with a URL that can cause a timeout (a TCP
-    connection with no application data sent, or a large amount of
-    application data).
-
-
-
-    [1]: https://pypi.python.org/pypi/django
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-  affected_package: django
-  vulnerable_versions:
-  - "< 1.2.7"
-  - ">= 1.3 < 1.3.1"
-  severity: medium
-  package_manager: pypi
-  cve:
-  - CVE-2011-4137
-  cwe:
-  - CWE-399
-  disclosed_date: 2011-09-11
-  created_date: 2011-09-11
-  last_modified_date: 2011-09-11
-  credit:
-  - Paul McMillan
-  references:
-  - http://openwall.com/lists/oss-security/2011/09/11/1
-  - https://bugzilla.redhat.com/show_bug.cgi?id=737366
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2011-4137
-  - https://www.djangoproject.com/weblog/2011/sep/09/security-releases-issued/
-  - https://www.djangoproject.com/weblog/2011/sep/10/127/
-  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40081
-- id: snykio:pypi:django:CVE-2011-4138
-  title: Arbitrary Request Generation
-  description: |
-    [`django`][1] is a high-level Python Web framework that encourages rapid
-    development and clean, pragmatic design.
-
-    Affected versions of this package are vulnerable due to lack of request
-    validation. The `verify_exists` functionality in the `URLField`
-    originally tests a URL\'s validity through a HEAD request, but then uses
-    a GET request for the new target URL in the case of a redirect. This may
-    allow remote attackers to trigger arbitrary GET requests with an
-    unintended source IP address via a crafted Location header.
-
-
-
-    [1]: https://pypi.python.org/pypi/django
-  affected_package: django
-  vulnerable_versions:
-  - "< 1.2.7"
-  - ">= 1.3 < 1.3.1"
-  severity: medium
-  package_manager: pypi
-  cve:
-  - CVE-2011-4138
-  cwe:
-  - CWE-20
-  disclosed_date: 2011-09-11
-  created_date: 2011-09-11
-  last_modified_date: 2011-09-11
-  credit:
-  - Paul McMillan
-  references:
-  - http://openwall.com/lists/oss-security/2011/09/11/1
-  - https://bugzilla.redhat.com/show_bug.cgi?id=737366
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2011-4138
-  - https://www.djangoproject.com/weblog/2011/sep/09/security-releases-issued/
-  - https://www.djangoproject.com/weblog/2011/sep/10/127/
-  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40082
-- id: snykio:pypi:django:CVE-2011-4139
-  title: Cache Poisoning
-  description: |
-    [`django`][1] is a high-level Python Web framework that encourages rapid
-    development and clean, pragmatic design.
-
-    Affected versions of this package are vulnerable to Cache Poisoning. It
-    used a request\'s HTTP Host header to construct a full URL. An attacker
-    can submit a request with a Host header of his or her choice, receive a
-    response which constructs URLs using that Host header, and If that
-    response is cached, further requests will be served out of cache using
-    URLs containing the attacker\'s host of choice.
-
-
-
-    [1]: https://pypi.python.org/pypi/django
-  affected_package: django
-  vulnerable_versions:
-  - "< 1.2.7"
-  - ">= 1.3 < 1.3.1"
-  severity: medium
-  package_manager: pypi
-  cve:
-  - CVE-2011-4139
-  cwe:
-  - CWE-20
-  disclosed_date: 2011-09-11
-  created_date: 2011-09-11
-  last_modified_date: 2011-09-11
-  credit:
-  - Django Core Development Team
-  references:
-  - http://openwall.com/lists/oss-security/2011/09/11/1
-  - https://bugzilla.redhat.com/show_bug.cgi?id=737366
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2011-4139
-  - https://www.djangoproject.com/weblog/2011/sep/09/security-releases-issued/
-  - https://www.djangoproject.com/weblog/2011/sep/10/127/
-  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40083
-- id: snykio:pypi:django:CVE-2011-4140
-  title: Cross-site Request Forgery (CSRF)
-  description: |
-    [`django`][1] is a high-level Python Web framework that encourages rapid
-    development and clean, pragmatic design.
-
-    Affected versions of this package are vulnerable to Cross-site Request
-    Forgery (CSRF). The CSRF protection mechanism does not properly handle
-    web-server configurations supporting arbitrary HTTP Host headers, which
-    allows remote attackers to trigger unauthenticated forged requests via
-    vectors involving a DNS CNAME record and a web page containing
-    JavaScript code.
-
-
-
-    [1]: https://pypi.python.org/pypi/django
-  affected_package: django
-  vulnerable_versions:
-  - "< 1.2.7"
-  - ">= 1.3 < 1.3.1"
-  severity: medium
-  package_manager: pypi
-  cve:
-  - CVE-2011-4140
-  cwe:
-  - CWE-352
-  disclosed_date: 2011-09-11
-  created_date: 2011-09-11
-  last_modified_date: 2011-09-11
-  credit:
-  - Mozilla
-  references:
-  - http://openwall.com/lists/oss-security/2011/09/11/1
-  - https://bugzilla.redhat.com/show_bug.cgi?id=737366
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2011-4140
-  - https://www.djangoproject.com/weblog/2011/sep/09/security-releases-issued/
-  - https://www.djangoproject.com/weblog/2011/sep/10/127/
-  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40084
-- id: snykio:pypi:django:CVE-2012-3442
-  title: Cross-site Scripting (XSS)
-  description: |+
-    [`django`][1] is a high-level Python Web framework that encourages rapid
-    development and clean, pragmatic design.
-
-    Affected versions of this package are vulnerable to Cross-site Scripting
-    (XSS). The `HttpResponseRedirect` and `HttpResponsePermanentRedirect`
-    classes do not validate the scheme of a redirect target, allowing
-    attackers to use Data: URLs to conduct an attack.
-
-
-
-    [1]: https://pypi.python.org/pypi/django
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
-  affected_package: django
-  vulnerable_versions:
-  - "< 1.3.2"
-  - ">= 1.4 < 1.4.1"
-  severity: medium
-  package_manager: pypi
-  cve:
-  - CVE-2012-3442
-  cwe:
-  - CWE-79
-  disclosed_date: 2012-06-30
-  created_date: 2012-06-30
-  last_modified_date: 2012-06-30
-  credit:
-  - Unknown
-  references:
-  - http://www.openwall.com/lists/oss-security/2012/07/31/2
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2012-3442
-  - https://www.djangoproject.com/weblog/2012/jul/30/security-releases-issued/
-  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40098
-- id: snykio:pypi:django:CVE-2012-3443
-  title: Denial of Service (DoS)
-  description: |+
-    [`django`][1] is a high-level Python Web framework that encourages rapid
-    development and clean, pragmatic design.
-
-    Affected versions of this package are vulnerable to Denial of Service
-    (DoS) attacks. The `ImageField` class in the form system completely
-    decompresses image data during image validation, which allows remote
-    attackers to cause a denial of service (memory consumption) by uploading
-    a malicious image file.
-
-
-
-    [1]: https://pypi.python.org/pypi/django
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-  affected_package: django
-  vulnerable_versions:
-  - "< 1.3.2"
-  - ">= 1.4 < 1.4.1"
-  severity: medium
-  package_manager: pypi
-  cve:
-  - CVE-2012-3443
-  cwe:
-  - CWE-20
-  disclosed_date: 2012-06-30
-  created_date: 2012-06-30
-  last_modified_date: 2012-06-30
-  credit:
-  - Unknown
-  references:
-  - http://www.openwall.com/lists/oss-security/2012/07/31/2
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2012-3443
-  - https://www.djangoproject.com/weblog/2012/jul/30/security-releases-issued/
-  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40099
-- id: snykio:pypi:django:CVE-2012-3444
-  title: Denial of Service (DoS)
-  description: |+
-    [`django`][1] is a high-level Python Web framework that encourages rapid
-    development and clean, pragmatic design.
-
-    Affected versions of this package are vulnerable to Denial of Service
-    (DoS) attacks. The `get_image_dimensions` function in the image-handling
-    functionality uses a constant chunk size in all attempts to determine
-    dimensions, which allows remote attackers to cause a high process or
-    thread consumption via a large TIFF image.
-
-
-
-    [1]: https://pypi.python.org/pypi/django
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-  affected_package: django
-  vulnerable_versions:
-  - "< 1.3.2"
-  - ">= 1.4 < 1.4.1"
-  severity: medium
-  package_manager: pypi
-  cve:
-  - CVE-2012-3444
-  cwe:
-  - CWE-119
-  disclosed_date: 2012-06-30
-  created_date: 2012-06-30
-  last_modified_date: 2012-06-30
-  credit:
-  - Jeroen Dekkers
-  references:
-  - http://www.openwall.com/lists/oss-security/2012/07/31/2
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2012-3444
-  - https://www.djangoproject.com/weblog/2012/jul/30/security-releases-issued/
-  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40100
-- id: snykio:pypi:django:CVE-2012-4520
-  title: Host Header Poisoning
-  description: |
-    [`django`][1] is a high-level Python Web framework that encourages rapid
-    development and clean, pragmatic design.
-
-    Affected versions of this package are vulnerable to Host Header
-    Poisoning. The `django.http.HttpRequest.get_host` function incorrectly
-    handled username/password information in the header. This allows remote
-    attackers to generate and display arbitrary URLs via crafted username
-    and password Host header values.
-
-
-
-    [1]: https://pypi.python.org/pypi/django
-  affected_package: django
-  vulnerable_versions:
-  - "< 1.3.4"
-  - ">= 1.4 < 1.4.2"
-  severity: medium
-  package_manager: pypi
-  cve:
-  - CVE-2012-4520
-  cwe:
-  - CWE-20
-  disclosed_date: 2012-10-17
-  created_date: 2012-10-17
-  last_modified_date: 2012-10-17
-  credit:
-  - James Kettle
-  references:
-  - http://www.openwall.com/lists/oss-security/2012/10/30/4
-  - https://bugzilla.redhat.com/show_bug.cgi?id=865164
-  - https://github.com/django/django/commit/92d3430f12171f16f566c9050c40feefb830a4a3
-  - https://github.com/django/django/commit/9305c0e12d43c4df999c3301a1f0c742264a657e
-  - https://github.com/django/django/commit/b45c377f8f488955e0c7069cad3f3dd21910b071
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2012-4520
-  - https://www.djangoproject.com/weblog/2012/oct/17/security/
-  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40104
-- id: snykio:pypi:django:CVE-2013-0305
-  title: Information Exposure
-  description: |
-    [`django`][1] is a high-level Python Web framework that encourages rapid
-    development and clean, pragmatic design.
-
-    Affected versions of this package are vulnerable to Information
-    Exposure. The administrative interface did not check permissions for the
-    history view, which allows remote authenticated administrators to obtain
-    sensitive object history information.
-
-
-
-    [1]: https://pypi.python.org/pypi/django
-  affected_package: django
-  vulnerable_versions:
-  - "< 1.3.6"
-  - ">= 1.4 < 1.4.4"
-  severity: low
-  package_manager: pypi
-  cve:
-  - CVE-2013-0305
-  cwe:
-  - CWE-200
-  disclosed_date: 2013-03-21
-  created_date: 2013-03-21
-  last_modified_date: 2013-03-21
-  credit:
-  - Orange Tsai
-  references:
-  - http://rhn.redhat.com/errata/RHSA-2013-0670.html
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2013-0305
-  - https://www.djangoproject.com/weblog/2013/feb/19/security/
-  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40172
-- id: snykio:pypi:django:CVE-2013-0306
-  title: Denial of Service (DoS)
-  description: |+
-    [`django`][1] is a high-level Python Web framework that encourages rapid
-    development and clean, pragmatic design.
-
-    Affected versions of this package are vulnerable to Denial of Service
-    (DoS) attacks. The form library allows remote attackers to bypass
-    intended resource limits for formsets by modifying the `max_num`
-    parameter and cause high memory consumption, or trigger server errors.
-
-
-
-    [1]: https://pypi.python.org/pypi/django
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-  affected_package: django
-  vulnerable_versions:
-  - "< 1.3.6"
-  - ">= 1.4 < 1.4.4"
-  severity: medium
-  package_manager: pypi
-  cve:
-  - CVE-2013-0306
-  cwe:
-  - CWE-189
-  disclosed_date: 2013-03-21
-  created_date: 2013-03-21
-  last_modified_date: 2013-03-21
-  credit:
-  - Mozilla
-  references:
-  - http://rhn.redhat.com/errata/RHSA-2013-0670.html
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2013-0306
-  - https://www.djangoproject.com/weblog/2013/feb/19/security/
-  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40173
-- id: snykio:pypi:django:CVE-2013-1443
-  title: Denial of Service (DoS)
-  description: |+
-    [`django`][1] is a high-level Python Web framework that encourages rapid
-    development and clean, pragmatic design.
-
-    Affected versions of this package are vulnerable to Denial of Service
-    (DoS) attacks. The authentication framework (`django.contrib.auth`)
-    hashes passwords with a function that does repeated rounds of
-    computation before finishing. If long password is entered, it may cause
-    high CPU consumption. An attacker may send many of these passwords to be
-    hashed and cause a denial of service.
-
-
-
-    [1]: https://pypi.python.org/pypi/django
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-  affected_package: django
-  vulnerable_versions:
-  - "< 1.4.8"
-  - ">= 1.5 < 1.5.4"
-  severity: medium
-  package_manager: pypi
-  cve:
-  - CVE-2013-1443
-  cwe:
-  - CWE-287
-  disclosed_date: 2013-09-15
-  created_date: 2013-09-15
-  last_modified_date: 2013-09-15
-  credit:
-  - Josh Wright
-  references:
-  - http://python.6.x6.nabble.com/Set-a-reasonable-upper-bound-on-password-length-td5032218.html
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2013-1443
-  - https://www.djangoproject.com/weblog/2013/sep/15/security/
-  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40220
-- id: snykio:pypi:django:CVE-2013-4249
+- id: snykio:pypi:django:40176
   title: Cross-site Scripting (XSS)
   description: |+
     [`django`][1] is a high-level Python Web framework that encourages rapid
@@ -1286,7 +1202,132 @@
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2013-4249
   - https://www.djangoproject.com/weblog/2013/aug/13/security-releases-issued
   source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40176
-- id: snykio:pypi:django:CVE-2013-4315
+- id: snykio:pypi:django:40177
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [`django`][1] is a high-level Python Web framework that encourages rapid
+    development and clean, pragmatic design.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS) attacks. The `is_safe_url` function treats a URL\'s scheme\'s like
+    `javascript: scheme` as safe even if it is not HTTP or HTTPS
+
+
+
+    [1]: https://pypi.python.org/pypi/django
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+  affected_package: django
+  vulnerable_versions:
+  - "< 1.4.6"
+  - ">= 1.5 < 1.5.2"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2013-6044
+  cwe:
+  - CWE-79
+  disclosed_date: 2013-08-13
+  created_date: 2013-08-13
+  last_modified_date: 2013-08-13
+  credit:
+  - Nick Bruun
+  references:
+  - http://seclists.org/oss-sec/2013/q3/369
+  - https://github.com/django/django/commit/1a274ccd6bc1afbdac80344c9b6e5810c1162b5f
+  - https://github.com/django/django/commit/ec67af0bd609c412b76eaa4cc89968a2a8e5ad6a
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2013-6044
+  - https://www.djangoproject.com/weblog/2013/aug/13/security-releases-issued
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40177
+- id: snykio:pypi:django:40220
+  title: Denial of Service (DoS)
+  description: |+
+    [`django`][1] is a high-level Python Web framework that encourages rapid
+    development and clean, pragmatic design.
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS) attacks. The authentication framework (`django.contrib.auth`)
+    hashes passwords with a function that does repeated rounds of
+    computation before finishing. If long password is entered, it may cause
+    high CPU consumption. An attacker may send many of these passwords to be
+    hashed and cause a denial of service.
+
+
+
+    [1]: https://pypi.python.org/pypi/django
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+  affected_package: django
+  vulnerable_versions:
+  - "< 1.4.8"
+  - ">= 1.5 < 1.5.4"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2013-1443
+  cwe:
+  - CWE-287
+  disclosed_date: 2013-09-15
+  created_date: 2013-09-15
+  last_modified_date: 2013-09-15
+  credit:
+  - Josh Wright
+  references:
+  - http://python.6.x6.nabble.com/Set-a-reasonable-upper-bound-on-password-length-td5032218.html
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2013-1443
+  - https://www.djangoproject.com/weblog/2013/sep/15/security/
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40220
+- id: snykio:pypi:django:40225
   title: Directory Traversal
   description: |
     [`django`][1] is a high-level Python Web framework that encourages rapid
@@ -1367,180 +1408,81 @@
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2013-4315
   - https://www.djangoproject.com/weblog/2013/sep/10/security-releases-issued/
   source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40225
-- id: snykio:pypi:django:CVE-2013-6044
-  title: Cross-site Scripting (XSS)
-  description: |+
+- id: snykio:pypi:django:40256
+  title: Cache Poisoning
+  description: |
     [`django`][1] is a high-level Python Web framework that encourages rapid
     development and clean, pragmatic design.
 
-    Affected versions of this package are vulnerable to Cross-site Scripting
-    (XSS) attacks. The `is_safe_url` function treats a URL\'s scheme\'s like
-    `javascript: scheme` as safe even if it is not HTTP or HTTPS
+    Affected versions of this package are vulnerable to Cache Poisoning. It
+    does not properly include the `Vary: Cookie` or `Cache-Control` header
+    in responses, which allows remote attackers to obtain sensitive
+    information or poison the cache via a request from certain browsers.
 
 
 
     [1]: https://pypi.python.org/pypi/django
-    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
-    user’s browser to execute malicious JavaScript code in the context of a
-    victim’s domain. Such scripts can steal the user’s session cookies for
-    the domain, scrape or modify its content, and perform or modify actions
-    on the user’s behalf, actions typically blocked by the browser’s Same
-    Origin Policy.
-
-    These attacks are possible by escaping the context of the web
-    application and injecting malicious scripts in an otherwise trusted
-    website. These scripts can introduce additional attributes (say, a
-    \"new\" option in a dropdown list or a new link to a malicious site) and
-    can potentially execute code on the clients side, unbeknown to the
-    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
-    properly.
-
-    There are a few types of XSS:
-
-    * **Persistent XSS** is an attack in which the malicious code persists
-      into the web app’s database.
-    * **Reflected XSS** is an which the website echoes back a portion of the
-      request. The attacker needs to trick the user into clicking a
-      malicious link (for instance through a phishing email or malicious JS
-      on another page), which triggers the XSS attack.
-    * **DOM-based XSS** is an that occurs purely in the browser when
-      client-side JavaScript echoes back a portion of the URL onto the page.
-      DOM-Based XSS is notoriously hard to detect, as the server never gets
-      a chance to see the attack taking place.
-
   affected_package: django
   vulnerable_versions:
-  - "< 1.4.6"
-  - ">= 1.5 < 1.5.2"
+  - "< 1.4.13"
+  - ">= 1.5 < 1.5.8"
+  - ">= 1.6 < 1.6.5"
   severity: medium
   package_manager: pypi
   cve:
-  - CVE-2013-6044
+  - CVE-2014-1418
   cwe:
-  - CWE-79
-  disclosed_date: 2013-08-13
-  created_date: 2013-08-13
-  last_modified_date: 2013-08-13
+  - CWE-444
+  disclosed_date: 2014-05-14
+  created_date: 2014-05-14
+  last_modified_date: 2014-05-14
   credit:
-  - Nick Bruun
+  - James Westby
+  - Michael Nelson
+  - Natalia Bidart
+  - Seth Arnold
   references:
-  - http://seclists.org/oss-sec/2013/q3/369
-  - https://github.com/django/django/commit/1a274ccd6bc1afbdac80344c9b6e5810c1162b5f
-  - https://github.com/django/django/commit/ec67af0bd609c412b76eaa4cc89968a2a8e5ad6a
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2013-6044
-  - https://www.djangoproject.com/weblog/2013/aug/13/security-releases-issued
-  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40177
-- id: snykio:pypi:django:CVE-2014-0472
-  title: Arbitrary Code Execution
+  - http://www.openwall.com/lists/oss-security/2014/05/14/10
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-1418
+  - https://www.djangoproject.com/weblog/2014/may/14/security-releases-issued/
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40256
+- id: snykio:pypi:django:40257
+  title: Open Redirect
   description: |
-    [`Django`][1] is a high-level Python Web framework that encourages rapid
+    [`django`][1] is a high-level Python Web framework that encourages rapid
     development and clean, pragmatic design.
 
-    Affected versions of this package are vulnerable to Arbitrary Code
-    Execution attacks. The `django.core.urlresolvers.reverse` function
-    allows remote attackers to import and execute arbitrary Python modules
-    by leveraging a view that constructs URLs using user input and a
-    \"dotted Python path.\"
+    Affected versions of this package are vulnerable to Open Redirecting.
+    The `http.is_safe_url()` function does not properly validate URLs, like
+    `http:\\\djangoproject.com.`, which This allows a user to be redirected
+    to an unsafe URL unexpectedly.
 
 
 
-    [1]: https://pypi.python.org/pypi/Django
+    [1]: https://pypi.python.org/pypi/django
   affected_package: django
   vulnerable_versions:
-  - "< 1.4.11"
-  - ">= 1.5 < 1.5.6"
-  - ">= 1.6 < 1.6.3"
-  - ">= 1.7 < 1.7b2"
-  severity: high
+  - "< 1.4.13"
+  - ">= 1.5 < 1.5.8"
+  - ">= 1.6 < 1.6.5"
+  severity: medium
   package_manager: pypi
   cve:
-  - CVE-2014-0472
+  - CVE-2014-3730
   cwe:
-  - CWE-94
-  disclosed_date: 2014-04-23
-  created_date: 2014-04-23
-  last_modified_date: 2014-04-23
+  - CWE-20
+  disclosed_date: 2014-05-14
+  created_date: 2014-05-14
+  last_modified_date: 2014-05-14
   credit:
-  - Benjamin Bach
+  - Gavin Wahl
+  - Peter Kuma
   references:
-  - https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2014-0472
-  - https://rhn.redhat.com/errata/RHSA-2014-0456.html
-  - https://www.djangoproject.com/weblog/2014/apr/21/security/
-  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40025
-- id: snykio:pypi:django:CVE-2014-0473
-  title: Cross-site Request Forgery (CSRF)
-  description: |
-    [`Django`][1] is a high-level Python Web framework that encourages rapid
-    development and clean, pragmatic design.
-
-    Affected versions of this package are vulnerable to Cross-site Request
-    Forgery (CSRF) attacks. The caching framework reuses a cached CSRF token
-    for all anonymous users, which allows remote attackers to bypass CSRF
-    protections by reading the CSRF cookie for anonymous users.
-
-
-
-    [1]: https://pypi.python.org/pypi/Django
-  affected_package: django
-  vulnerable_versions:
-  - "< 1.4.11"
-  - ">= 1.5 < 1.5.6"
-  - ">= 1.6 < 1.6.3"
-  - ">= 1.7 < 1.7b2"
-  severity: high
-  package_manager: pypi
-  cve:
-  - CVE-2014-0473
-  cwe:
-  - CWE-264
-  disclosed_date: 2014-04-23
-  created_date: 2014-04-23
-  last_modified_date: 2014-04-23
-  credit:
-  - Paul McMillan
-  references:
-  - https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2014-0473
-  - https://rhn.redhat.com/errata/RHSA-2014-0456.html
-  - https://www.djangoproject.com/weblog/2014/apr/21/security/
-  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40026
-- id: snykio:pypi:django:CVE-2014-0474
-  title: SQL Injection
-  description: |
-    [`Django`][1] is a high-level Python Web framework that encourages rapid
-    development and clean, pragmatic design.
-
-    Affected versions of this package are vulnerable to SQL Injection
-    attacks. The `FilePathField`, `GenericIPAddressField`, and
-    `IPAddressField` model field classes in Django do not properly perform
-    type conversion, which allows remote attackers to have unspecified
-    impact and vectors, related to \"MySQL typecasting.\"
-
-
-
-    [1]: https://pypi.python.org/pypi/Django
-  affected_package: django
-  vulnerable_versions:
-  - "< 1.4.11"
-  - ">= 1.5 < 1.5.6"
-  - ">= 1.6 < 1.6.3"
-  - ">= 1.7 < 1.7b2"
-  severity: high
-  package_manager: pypi
-  cve:
-  - CVE-2014-0474
-  cwe:
-  - CWE-399
-  disclosed_date: 2014-04-23
-  created_date: 2014-04-23
-  last_modified_date: 2014-04-23
-  credit:
-  - Michael Koziarski
-  references:
-  - https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2014-0474
-  - https://rhn.redhat.com/errata/RHSA-2014-0456.html
-  - https://www.djangoproject.com/weblog/2014/apr/21/security/
-  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40027
-- id: snykio:pypi:django:CVE-2014-0480
+  - http://www.openwall.com/lists/oss-security/2014/05/14/10
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-3730
+  - https://www.djangoproject.com/weblog/2014/may/14/security-releases-issued/
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40257
+- id: snykio:pypi:django:40258
   title: Malicious Link Generation
   description: |
     [`django`][1] is a high-level Python Web framework that encourages rapid
@@ -1576,7 +1518,7 @@
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-0480
   - https://www.djangoproject.com/weblog/2014/aug/20/security/
   source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40258
-- id: snykio:pypi:django:CVE-2014-0481
+- id: snykio:pypi:django:40259
   title: Denial of Service (DoS)
   description: |+
     [`django`][1] is a high-level Python Web framework that encourages rapid
@@ -1637,7 +1579,7 @@
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-0481
   - https://www.djangoproject.com/weblog/2014/aug/20/security/
   source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40259
-- id: snykio:pypi:django:CVE-2014-0482
+- id: snykio:pypi:django:40261
   title: Session Hijacking
   description: |
     [`django`][1] is a high-level Python Web framework that encourages rapid
@@ -1672,7 +1614,7 @@
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-0482
   - https://www.djangoproject.com/weblog/2014/aug/20/security/
   source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40261
-- id: snykio:pypi:django:CVE-2014-0483
+- id: snykio:pypi:django:40262
   title: Information Exposure
   description: |
     [`django`][1] is a high-level Python Web framework that encourages rapid
@@ -1708,81 +1650,7 @@
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-0483
   - https://www.djangoproject.com/weblog/2014/aug/20/security/
   source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40262
-- id: snykio:pypi:django:CVE-2014-1418
-  title: Cache Poisoning
-  description: |
-    [`django`][1] is a high-level Python Web framework that encourages rapid
-    development and clean, pragmatic design.
-
-    Affected versions of this package are vulnerable to Cache Poisoning. It
-    does not properly include the `Vary: Cookie` or `Cache-Control` header
-    in responses, which allows remote attackers to obtain sensitive
-    information or poison the cache via a request from certain browsers.
-
-
-
-    [1]: https://pypi.python.org/pypi/django
-  affected_package: django
-  vulnerable_versions:
-  - "< 1.4.13"
-  - ">= 1.5 < 1.5.8"
-  - ">= 1.6 < 1.6.5"
-  severity: medium
-  package_manager: pypi
-  cve:
-  - CVE-2014-1418
-  cwe:
-  - CWE-444
-  disclosed_date: 2014-05-14
-  created_date: 2014-05-14
-  last_modified_date: 2014-05-14
-  credit:
-  - James Westby
-  - Michael Nelson
-  - Natalia Bidart
-  - Seth Arnold
-  references:
-  - http://www.openwall.com/lists/oss-security/2014/05/14/10
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-1418
-  - https://www.djangoproject.com/weblog/2014/may/14/security-releases-issued/
-  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40256
-- id: snykio:pypi:django:CVE-2014-3730
-  title: Open Redirect
-  description: |
-    [`django`][1] is a high-level Python Web framework that encourages rapid
-    development and clean, pragmatic design.
-
-    Affected versions of this package are vulnerable to Open Redirecting.
-    The `http.is_safe_url()` function does not properly validate URLs, like
-    `http:\\\djangoproject.com.`, which This allows a user to be redirected
-    to an unsafe URL unexpectedly.
-
-
-
-    [1]: https://pypi.python.org/pypi/django
-  affected_package: django
-  vulnerable_versions:
-  - "< 1.4.13"
-  - ">= 1.5 < 1.5.8"
-  - ">= 1.6 < 1.6.5"
-  severity: medium
-  package_manager: pypi
-  cve:
-  - CVE-2014-3730
-  cwe:
-  - CWE-20
-  disclosed_date: 2014-05-14
-  created_date: 2014-05-14
-  last_modified_date: 2014-05-14
-  credit:
-  - Gavin Wahl
-  - Peter Kuma
-  references:
-  - http://www.openwall.com/lists/oss-security/2014/05/14/10
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-3730
-  - https://www.djangoproject.com/weblog/2014/may/14/security-releases-issued/
-  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40257
-- id: snykio:pypi:django:CVE-2015-0219
+- id: snykio:pypi:django:40302
   title: WSGI Header Spoofing
   description: |
     [`django`][1] is a high-level Python Web framework that encourages rapid
@@ -1817,7 +1685,7 @@
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-0219
   - https://www.djangoproject.com/weblog/2015/jan/13/security/
   source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40302
-- id: snykio:pypi:django:CVE-2015-0220
+- id: snykio:pypi:django:40303
   title: Cross-site Scripting (XSS)
   description: |+
     [`django`][1] is a high-level Python Web framework that encourages rapid
@@ -1879,7 +1747,7 @@
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-0220
   - https://www.djangoproject.com/weblog/2015/jan/13/security/
   source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40303
-- id: snykio:pypi:django:CVE-2015-0221
+- id: snykio:pypi:django:40304
   title: Denial of Service (DoS)
   description: |+
     [`django`][1] is a high-level Python Web framework that encourages rapid
@@ -1939,7 +1807,7 @@
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-0221
   - https://www.djangoproject.com/weblog/2015/jan/13/security/
   source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40304
-- id: snykio:pypi:django:CVE-2015-0222
+- id: snykio:pypi:django:40305
   title: Denial of Service (DoS)
   description: |+
     [`django`][1] is a high-level Python Web framework that encourages rapid
@@ -1999,7 +1867,7 @@
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-0222
   - https://www.djangoproject.com/weblog/2015/jan/13/security/
   source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40305
-- id: snykio:pypi:django:CVE-2015-2241
+- id: snykio:pypi:django:40315
   title: Cross-site Scripting (XSS)
   description: |+
     [`django`][1] is a high-level Python Web framework that encourages rapid
@@ -2060,7 +1928,7 @@
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-2241
   - https://www.djangoproject.com/weblog/2015/mar/09/security-releases/
   source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40315
-- id: snykio:pypi:django:CVE-2015-2316
+- id: snykio:pypi:django:40317
   title: Denial of Service (DoS)
   description: |+
     [`django`][1] is a high-level Python Web framework that encourages rapid
@@ -2122,7 +1990,7 @@
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-2316
   - https://www.djangoproject.com/weblog/2015/mar/18/security-releases/
   source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40317
-- id: snykio:pypi:django:CVE-2015-2317
+- id: snykio:pypi:django:40318
   title: Cross-site Scripting (XSS)
   description: |+
     [`django`][1] is a high-level Python Web framework that encourages rapid
@@ -2185,7 +2053,7 @@
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-2317
   - https://www.djangoproject.com/weblog/2015/mar/18/security-releases/
   source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40318
-- id: snykio:pypi:django:CVE-2015-3982
+- id: snykio:pypi:django:40325
   title: Session Hijacking
   description: |
     [`django`][1] is a high-level Python Web framework that encourages rapid
@@ -2217,7 +2085,7 @@
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-3982
   - https://www.djangoproject.com/weblog/2015/may/20/security-release/
   source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40325
-- id: snykio:pypi:django:CVE-2015-5143
+- id: snykio:pypi:django:40332
   title: Denial of Service (DoS)
   description: |+
     [`django`][1] is a high-level Python Web framework that encourages rapid
@@ -2280,7 +2148,7 @@
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-5143
   - https://www.djangoproject.com/weblog/2015/jul/08/security-releases/
   source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40332
-- id: snykio:pypi:django:CVE-2015-5144
+- id: snykio:pypi:django:40333
   title: HTTP Response Splitting
   description: |
     [`django`][1] is a high-level Python Web framework that encourages rapid
@@ -2317,7 +2185,7 @@
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-5144
   - https://www.djangoproject.com/weblog/2015/jul/08/security-releases/
   source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40333
-- id: snykio:pypi:django:CVE-2015-5145
+- id: snykio:pypi:django:40334
   title: Denial of Service (DoS)
   description: |+
     [`django`][1] is a high-level Python Web framework that encourages rapid
@@ -2376,7 +2244,7 @@
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-5145
   - https://www.djangoproject.com/weblog/2015/jul/08/security-releases/
   source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40334
-- id: snykio:pypi:django:CVE-2015-5963
+- id: snykio:pypi:django:40339
   title: Denial of Service (DoS)
   description: |+
     [`django`][1] is a high-level Python Web framework that encourages rapid
@@ -2438,7 +2306,7 @@
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-5963
   - https://www.djangoproject.com/weblog/2015/aug/18/security-releases/
   source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40339
-- id: snykio:pypi:django:CVE-2015-5964
+- id: snykio:pypi:django:40340
   title: Denial of Service (DoS)
   description: |+
     [`django`][1] is a high-level Python Web framework that encourages rapid
@@ -2500,7 +2368,7 @@
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-5964
   - https://www.djangoproject.com/weblog/2015/aug/18/security-releases/
   source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40340
-- id: snykio:pypi:django:CVE-2015-8213
+- id: snykio:pypi:django:40359
   title: Information Exposure
   description: |
     [`django`][1] is a high-level Python Web framework that encourages rapid
@@ -2536,7 +2404,7 @@
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-8213
   - https://www.djangoproject.com/weblog/2015/nov/24/security-releases-issued/
   source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40359
-- id: snykio:pypi:django:CVE-2016-2048
+- id: snykio:pypi:django:40380
   title: Access Restriction Bypass
   description: |
     [`django`][1] is a high-level Python Web framework that encourages rapid
@@ -2569,7 +2437,7 @@
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-2048
   - https://www.djangoproject.com/weblog/2016/feb/01/releases-192-and-189/
   source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40380
-- id: snykio:pypi:django:CVE-2016-2512
+- id: snykio:pypi:django:40382
   title: Cross-site Scripting (XSS)
   description: |+
     [`django`][1] is a high-level Python Web framework that encourages rapid
@@ -2637,7 +2505,7 @@
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-2512
   - https://www.djangoproject.com/weblog/2016/mar/01/security-releases
   source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40382
-- id: snykio:pypi:django:CVE-2016-2513
+- id: snykio:pypi:django:40383
   title: Timing Attack
   description: |
     [`django`][1] is a high-level Python Web framework that encourages rapid
@@ -2675,7 +2543,7 @@
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-2513
   - https://www.djangoproject.com/weblog/2016/mar/01/security-releases/
   source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40383
-- id: snykio:pypi:django:CVE-2016-6186
+- id: snykio:pypi:django:40403
   title: Cross-site Scripting (XSS)
   description: |+
     [`django`][1] is a high-level Python Web framework that encourages rapid
@@ -2743,7 +2611,7 @@
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-6186
   - https://www.djangoproject.com/weblog/2016/jul/18/security-releases/
   source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40403
-- id: snykio:pypi:django:CVE-2016-7401
+- id: snykio:pypi:django:40434
   title: Cross-site Request Forgery (CSRF)
   description: |
     [`django`][1] is a high-level Python Web framework that encourages rapid
@@ -2776,7 +2644,7 @@
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-7401
   - https://www.djangoproject.com/weblog/2016/sep/26/security-releases/
   source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40434
-- id: snykio:pypi:django:CVE-2016-9013
+- id: snykio:pypi:django:40439
   title: Use of hardcoded DB password
   description: |
     [`django`][1] is a high-level Python Web framework that encourages rapid
@@ -2812,7 +2680,7 @@
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-9013
   - https://www.djangoproject.com/weblog/2016/nov/01/security-releases/
   source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40439
-- id: snykio:pypi:django:CVE-2016-9014
+- id: snykio:pypi:django:40440
   title: DNS Rebinding
   description: |
     [`django`][1] is a high-level Python Web framework that encourages rapid
@@ -2851,7 +2719,77 @@
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-9014
   - https://www.djangoproject.com/weblog/2016/nov/01/security-releases/
   source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40440
-- id: snykio:pypi:django:CVE-2017-12794
+- id: snykio:pypi:django:40460
+  title: Open Redirect
+  description: |
+    [`django`][1] is a high-level Python Web framework that encourages rapid
+    development and clean, pragmatic design.
+
+    Affected versions of this package are vulnerable to Open Redirect. It
+    relies on user input in some cases to redirect the user to an \"on
+    success\" URL. The security check for these redirects (namely
+    `django.utils.http.is_safe_url()`) considered some numeric URLs \"safe\"
+    when they shouldn\'t be, aka an open redirect vulnerability. Also, if a
+    developer relies on `is_safe_url()` to provide safe redirect targets and
+    puts such a URL into a link, they could suffer from an XSS attack.
+
+
+
+    [1]: https://pypi.python.org/pypi/django
+  affected_package: django
+  vulnerable_versions:
+  - "< 1.8.18"
+  - ">= 1.10 < 1.10.7"
+  - ">= 1.9 < 1.9.13"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2017-7233
+  cwe:
+  - CWE-601
+  disclosed_date: 2017-04-05
+  created_date: 2017-04-05
+  last_modified_date: 2017-04-05
+  credit:
+  - Unknown
+  references:
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2017-7233
+  - https://www.djangoproject.com/weblog/2017/apr/04/security-releases/
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40460
+- id: snykio:pypi:django:40461
+  title: Open Redirect
+  description: |
+    [`django`][1] is a high-level Python Web framework that encourages rapid
+    development and clean, pragmatic design.
+
+    Affected versions of this package are vulnerable to Open Redirect. A
+    maliciously crafted URL to a Django site using the
+    `django.views.static.serve()` view could redirect to any other domain.
+
+
+
+    [1]: https://pypi.python.org/pypi/django
+  affected_package: django
+  vulnerable_versions:
+  - "< 1.8.18"
+  - ">= 1.10 < 1.10.7"
+  - ">= 1.9 < 1.9.13"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2017-7234
+  cwe:
+  - CWE-601
+  disclosed_date: 2017-04-05
+  created_date: 2017-04-05
+  last_modified_date: 2017-04-05
+  credit:
+  - Unknown
+  references:
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2017-7234
+  - https://www.djangoproject.com/weblog/2017/apr/04/security-releases/
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40461
+- id: snykio:pypi:django:40626
   title: Cross-site Scripting (XSS)
   description: |+
     [`django`][1] is a high-level Python Web framework that encourages rapid
@@ -2913,180 +2851,7 @@
   - https://nvd.nist.gov/vuln/detail/CVE-2017-12794
   - https://www.djangoproject.com/weblog/2017/sep/05/security-releases/
   source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40626
-- id: snykio:pypi:django:CVE-2017-7233
-  title: Open Redirect
-  description: |
-    [`django`][1] is a high-level Python Web framework that encourages rapid
-    development and clean, pragmatic design.
-
-    Affected versions of this package are vulnerable to Open Redirect. It
-    relies on user input in some cases to redirect the user to an \"on
-    success\" URL. The security check for these redirects (namely
-    `django.utils.http.is_safe_url()`) considered some numeric URLs \"safe\"
-    when they shouldn\'t be, aka an open redirect vulnerability. Also, if a
-    developer relies on `is_safe_url()` to provide safe redirect targets and
-    puts such a URL into a link, they could suffer from an XSS attack.
-
-
-
-    [1]: https://pypi.python.org/pypi/django
-  affected_package: django
-  vulnerable_versions:
-  - "< 1.8.18"
-  - ">= 1.10 < 1.10.7"
-  - ">= 1.9 < 1.9.13"
-  severity: medium
-  package_manager: pypi
-  cve:
-  - CVE-2017-7233
-  cwe:
-  - CWE-601
-  disclosed_date: 2017-04-05
-  created_date: 2017-04-05
-  last_modified_date: 2017-04-05
-  credit:
-  - Unknown
-  references:
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2017-7233
-  - https://www.djangoproject.com/weblog/2017/apr/04/security-releases/
-  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40460
-- id: snykio:pypi:django:CVE-2017-7234
-  title: Open Redirect
-  description: |
-    [`django`][1] is a high-level Python Web framework that encourages rapid
-    development and clean, pragmatic design.
-
-    Affected versions of this package are vulnerable to Open Redirect. A
-    maliciously crafted URL to a Django site using the
-    `django.views.static.serve()` view could redirect to any other domain.
-
-
-
-    [1]: https://pypi.python.org/pypi/django
-  affected_package: django
-  vulnerable_versions:
-  - "< 1.8.18"
-  - ">= 1.10 < 1.10.7"
-  - ">= 1.9 < 1.9.13"
-  severity: medium
-  package_manager: pypi
-  cve:
-  - CVE-2017-7234
-  cwe:
-  - CWE-601
-  disclosed_date: 2017-04-05
-  created_date: 2017-04-05
-  last_modified_date: 2017-04-05
-  credit:
-  - Unknown
-  references:
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2017-7234
-  - https://www.djangoproject.com/weblog/2017/apr/04/security-releases/
-  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40461
-- id: snykio:pypi:django:CVE-2018-14574
-  title: Open Redirect
-  description: |
-    [django][1] is a Web framework that encourages rapid development and
-    clean, pragmatic design.
-
-    Affected versions of this package are vulnerable to Open Redirect. If
-    the `django.middleware.common.CommonMiddleware` and the `APPEND_SLASH`
-    setting are both enabled, and if the project has a URL pattern that
-    accepts any path ending in a slash, a malicious user could send a
-    request to a crafted URL of that site that would lead to a redirect to
-    another site.
-
-
-
-    [1]: https://pypi.org/project/Django/
-  affected_package: django
-  vulnerable_versions:
-  - "< 1.11.15"
-  - ">= 2.0.0 < 2.0.8"
-  severity: medium
-  package_manager: pypi
-  cve:
-  - CVE-2018-14574
-  cwe:
-  - CWE-601
-  disclosed_date: 2018-08-01
-  created_date: 2018-08-02
-  last_modified_date: 2018-08-02
-  credit:
-  - Andreas Hug
-  references:
-  - https://bugzilla.redhat.com/show_bug.cgi?id=1609031
-  - https://github.com/django/django/commit/6fffc3c6d420e44f4029d5643f38d00a39b08525
-  - https://github.com/django/django/commit/a656a681272f8f3734b6eb38e9a88aa0d91806f1
-  - https://github.com/django/django/commit/c4e5ff7fdb5fce447675e90291fd33fddd052b3c
-  - https://www.djangoproject.com/weblog/2018/aug/01/security-releases/
-  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-42178
-- id: snykio:pypi:django:CVE-2018-16984
-  title: Information Exposure
-  description: |
-    [django][1] is a Python Web framework that encourages rapid development
-    and clean, pragmatic design.
-
-    Affected versions of this package are vulnerable to Information
-    Exposure. If an admin user had the change permission to the user model,
-    only part of the password hash would be displayed in the change form.
-    Admin users with the view permission to the user model were displayed
-    the entire hash.
-
-
-
-    [1]: https://pypi.org/project/Django/
-  affected_package: django
-  vulnerable_versions:
-  - ">= 2.1.0 < 2.1.2"
-  severity: medium
-  package_manager: pypi
-  cve:
-  - CVE-2018-16984
-  cwe:
-  - CWE-200
-  disclosed_date: 2018-09-26
-  created_date: 2018-11-05
-  last_modified_date: 2018-11-05
-  credit:
-  - Unknown
-  references:
-  - https://github.com/django/django/commit/f5335bc745d4f86d355b69549712885fd1634574
-  - https://github.com/django/django/pull/10449
-  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-72562
-- id: snykio:pypi:django:CVE-2018-6188
-  title: Information Exposure
-  description: |
-    [django][1] is a Python Web framework.
-
-    Affected versions of this package are vulnerable to Information
-    Exposure. Remote attackers may obtain potentially sensitive information
-    by leveraging data exposure from the `confirm_login_allowed()` method,
-    as demonstrated by discovering whether a user account is inactive.
-
-
-
-    [1]: https://github.com/django/django
-  affected_package: django
-  vulnerable_versions:
-  - ">= 1.11.8 < 1.11.10"
-  - ">= 2 < 2.0.2"
-  severity: medium
-  package_manager: pypi
-  cve:
-  - CVE-2018-6188
-  cwe:
-  - CWE-200
-  disclosed_date: 2018-02-01
-  created_date: 2018-02-12
-  last_modified_date: 2018-02-12
-  credit:
-  - Unknown
-  references:
-  - https://nvd.nist.gov/vuln/detail/CVE-2018-6188
-  - https://www.djangoproject.com/weblog/2018/feb/01/security-releases/
-  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-42054
-- id: snykio:pypi:django:CVE-2018-7536
+- id: snykio:pypi:django:40778
   title: Information Exposure
   description: "[django][1] is a Python Web framework.\n\nAffected versions of this
     package are vulnerable to Regular Expression\nDenial of Service (ReDoS) attacks.
@@ -3160,7 +2925,7 @@
   references:
   - https://www.djangoproject.com/weblog/2018/mar/06/security-releases/
   source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40778
-- id: snykio:pypi:django:CVE-2018-7537
+- id: snykio:pypi:django:40779
   title: Regular Expression Denial of Service (ReDoS)
   description: "[django][1] is a Python Web framework.\n\nAffected versions of this
     package are vulnerable to Regular Expression\nDenial of Service (ReDoS) attacks.
@@ -3236,3 +3001,238 @@
   references:
   - https://www.djangoproject.com/weblog/2018/mar/06/security-releases/
   source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-40779
+- id: snykio:pypi:django:42054
+  title: Information Exposure
+  description: |
+    [django][1] is a Python Web framework.
+
+    Affected versions of this package are vulnerable to Information
+    Exposure. Remote attackers may obtain potentially sensitive information
+    by leveraging data exposure from the `confirm_login_allowed()` method,
+    as demonstrated by discovering whether a user account is inactive.
+
+
+
+    [1]: https://github.com/django/django
+  affected_package: django
+  vulnerable_versions:
+  - ">= 1.11.8 < 1.11.10"
+  - ">= 2 < 2.0.2"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2018-6188
+  cwe:
+  - CWE-200
+  disclosed_date: 2018-02-01
+  created_date: 2018-02-12
+  last_modified_date: 2018-02-12
+  credit:
+  - Unknown
+  references:
+  - https://nvd.nist.gov/vuln/detail/CVE-2018-6188
+  - https://www.djangoproject.com/weblog/2018/feb/01/security-releases/
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-42054
+- id: snykio:pypi:django:42158
+  title: Denial of Service (DoS)
+  description: |+
+    [django][1] is a high-level Python Web framework that encourages rapid
+    development and clean, pragmatic design. Thanks for checking it out.
+
+    Affected versions of this package are vulnerable to Denial of Service.
+    An attacker may send a large amount of HTTP requests with large
+    Accept-Language headers, causing a high memory consumption in the
+    server.
+
+
+
+    [1]: https://pypi.org/project/Django/
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+  affected_package: django
+  vulnerable_versions:
+  - "< 0.91.1"
+  - ">= 0.95 < 0.95.1"
+  - ">= 0.96 < 0.96.1"
+  severity: low
+  package_manager: pypi
+  cve:
+  - CVE-2007-5712
+  cwe:
+  - CWE-399
+  disclosed_date: 2007-10-26
+  created_date: 2018-06-20
+  last_modified_date: 2018-06-20
+  credit:
+  - Unknown
+  references:
+  - https://nvd.nist.gov/vuln/detail/CVE-2007-5712
+  - https://www.djangoproject.com/weblog/2007/oct/26/security-fix/
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-42158
+- id: snykio:pypi:django:42162
+  title: Regular Expression Denial of Service (ReDoS)
+  description: "[django][1] is a high-level Python Web framework that encourages rapid\ndevelopment
+    and clean, pragmatic design.\n\nAffected versions of this package are vulnerable
+    to Regular Expression\nDenial of Service (ReDoS) via a crafted email address or
+    URL that\ntriggers a large amount of backtracking in a regular expression.\n\n\n\n[1]:
+    https://pypi.python.org/pypi/django\n\\nDenial of Service (DoS) describes a family
+    of attacks, all aimed at\nmaking a system inaccessible to its original and legitimate
+    users. There\nare many types of DoS attacks, ranging from trying to clog the network\npipes
+    to the system by generating a large volume of traffic from many\nmachines (a Distributed
+    Denial of Service - DDoS - attack) to sending\ncrafted requests that cause a system
+    to crash or take a disproportional\namount of time to process.\n\nThe Regular
+    expression Denial of Service (ReDoS) is a type of Denial of\nService attack. Regular
+    expressions are incredibly powerful, but they\naren\\'t very intuitive and can
+    ultimately end up making it easy for\nattackers to take your site down.\n\nLet’s
+    take the following regular expression as an example:\n\n    regex = /A(B|C+)+D/\n\nThis
+    regular expression accomplishes the following:\n\n* `A` The string must start
+    with the letter \\'A\\'\n* `(B|C+)+` The string must then follow the letter A
+    with either the\n  letter \\'B\\' or some number of occurrences of the letter
+    \\'C\\' (the\n  `+` matches one or more times). The `+` at the end of this section\n
+    \ states that we can look for one or more matches of this section.\n* `D` Finally,
+    we ensure this section of the string ends with a \\'D\\'\n\nThe expression would
+    match inputs such as `ABBD`, `ABCCCCD`, `ABCBCCCD`\nand `ACCCCCD`\n\nIt most cases,
+    it doesn\\'t take very long for a regex engine to find a\nmatch:\n\n    $ time
+    node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCD\")'\n    0.04s user
+    0.01s system 95% cpu 0.052 total\n    \n    $ time node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCX\")'\n
+    \   1.79s user 0.02s system 99% cpu 1.812 total\n\nThe entire process of testing
+    it against a 30 characters long string\ntakes around ~52ms. But when given an
+    invalid string, it takes nearly\ntwo seconds to complete the test, over ten times
+    as long as it took to\ntest a valid string. The dramatic difference is due to
+    the way regular\nexpressions get evaluated.\n\nMost Regex engines will work very
+    similarly (with minor differences).\nThe engine will match the first possible
+    way to accept the current\ncharacter and proceed to the next one. If it then fails
+    to match the\nnext one, it will backtrack and see if there was another way to
+    digest\nthe previous character. If it goes too far down the rabbit hole only to\nfind
+    out the string doesn’t match in the end, and if many characters\nhave multiple
+    valid regex paths, the number of backtracking steps can\nbecome very large, resulting
+    in what is known as *catastrophic\nbacktracking*.\n\nLet\\'s look at how our expression
+    runs into this problem, using a\nshorter string: \\\"ACCCX\\\". While it seems
+    fairly straightforward, there\nare still four different ways that the engine could
+    match those three\nC\\'s:\n\n1.  CCC\n2.  CC+C\n3.  C+CC\n4.  C+C+C.\n\nThe engine
+    has to try each of those combinations to see if any of them\npotentially match
+    against the expression. When you combine that with the\nother steps the engine
+    must take, we can use [RegEx 101 debugger][1] to\nsee the engine has to take a
+    total of 38 steps before it can determine\nthe string doesn\\'t match.\n\nFrom
+    there, the number of steps the engine must use to validate a string\njust continues
+    to grow.\n\n| String | Number of C\\'s | Number of steps |\n|----------\n| ACCCX
+    | 3 | 38 |\n| ACCCCX | 4 | 71 |\n| ACCCCCX | 5 | 136 |\n| ACCCCCCCCCCCCCCX | 14
+    | 65,553 |\n\nBy the time the string includes 14 C\\'s, the engine has to take
+    over\n65,000 steps just to see if the string is valid. These extreme\nsituations
+    can cause them to work very slowly (exponentially related to\ninput size, as shown
+    above), allowing an attacker to exploit this and\ncan cause the service to excessively
+    consume CPU, resulting in a Denial\nof Service.\n\n\n\n[1]: https://regex101.com/debugger\n"
+  affected_package: django
+  vulnerable_versions:
+  - "< 1.0.4"
+  - ">= 1.1 < 1.1.1"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2009-3695
+  cwe:
+  - CWE-399
+  disclosed_date: 2018-03-11
+  created_date: 2018-07-04
+  last_modified_date: 2018-07-04
+  credit:
+  - Unknown
+  references:
+  - http://groups.google.com/group/django-users/browse_thread/thread/15df9e45118dfc51/
+  - http://www.djangoproject.com/weblog/2009/oct/09/security/
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-42162
+- id: snykio:pypi:django:42178
+  title: Open Redirect
+  description: |
+    [django][1] is a Web framework that encourages rapid development and
+    clean, pragmatic design.
+
+    Affected versions of this package are vulnerable to Open Redirect. If
+    the `django.middleware.common.CommonMiddleware` and the `APPEND_SLASH`
+    setting are both enabled, and if the project has a URL pattern that
+    accepts any path ending in a slash, a malicious user could send a
+    request to a crafted URL of that site that would lead to a redirect to
+    another site.
+
+
+
+    [1]: https://pypi.org/project/Django/
+  affected_package: django
+  vulnerable_versions:
+  - "< 1.11.15"
+  - ">= 2.0.0 < 2.0.8"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2018-14574
+  cwe:
+  - CWE-601
+  disclosed_date: 2018-08-01
+  created_date: 2018-08-02
+  last_modified_date: 2018-08-02
+  credit:
+  - Andreas Hug
+  references:
+  - https://bugzilla.redhat.com/show_bug.cgi?id=1609031
+  - https://github.com/django/django/commit/6fffc3c6d420e44f4029d5643f38d00a39b08525
+  - https://github.com/django/django/commit/a656a681272f8f3734b6eb38e9a88aa0d91806f1
+  - https://github.com/django/django/commit/c4e5ff7fdb5fce447675e90291fd33fddd052b3c
+  - https://www.djangoproject.com/weblog/2018/aug/01/security-releases/
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-42178
+- id: snykio:pypi:django:72562
+  title: Information Exposure
+  description: |
+    [django][1] is a Python Web framework that encourages rapid development
+    and clean, pragmatic design.
+
+    Affected versions of this package are vulnerable to Information
+    Exposure. If an admin user had the change permission to the user model,
+    only part of the password hash would be displayed in the change form.
+    Admin users with the view permission to the user model were displayed
+    the entire hash.
+
+
+
+    [1]: https://pypi.org/project/Django/
+  affected_package: django
+  vulnerable_versions:
+  - ">= 2.1.0 < 2.1.2"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2018-16984
+  cwe:
+  - CWE-200
+  disclosed_date: 2018-09-26
+  created_date: 2018-11-05
+  last_modified_date: 2018-11-05
+  credit:
+  - Unknown
+  references:
+  - https://github.com/django/django/commit/f5335bc745d4f86d355b69549712885fd1634574
+  - https://github.com/django/django/pull/10449
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-72562
