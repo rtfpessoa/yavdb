@@ -1,0 +1,37 @@
+---
+- id: snykio:pypi:knowledge-repo:72646
+  title: Arbitrary Code Execution
+  description: |
+    [knowledge-repo][1] is focused on facilitating the sharing of knowledge
+    between data scientists and other technical roles using data formats and
+    tools that make sense in these professions.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution. `knowledge-repo` read their configuration from the repository
+    itself, by default from a python module called
+    `knowledge_repo_config.py`. A malicious user with appropriate
+    permissions could submit arbitrary code that will be executed at runtime
+    on users’ machines, potentially leading to unwanted data loss,
+    corruption or dissemination. With this change, only YAML configuration
+    files will be read from the repository, mitigating this security
+    vulnerability.
+
+
+
+    [1]: https://pypi.org/project/knowledge-repo/
+  affected_package: knowledge-repo
+  vulnerable_versions:
+  - "< 0.8.0"
+  severity: high
+  package_manager: pypi
+  cwe:
+  - CWE-94
+  disclosed_date: 2018-11-01
+  created_date: 2018-11-28
+  last_modified_date: 2018-11-28
+  credit:
+  - Unknown
+  references:
+  - https://github.com/airbnb/knowledge-repo/commit/5d6668206f0b3fa90c091e682b93867460501f11
+  - https://github.com/airbnb/knowledge-repo/pull/382
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-KNOWLEDGEREPO-72646
