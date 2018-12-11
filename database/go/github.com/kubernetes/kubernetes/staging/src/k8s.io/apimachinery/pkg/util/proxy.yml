@@ -1,0 +1,39 @@
+---
+- id: snykio:go:github.com/kubernetes/kubernetes/staging/src/k8s.io/apimachinery/pkg/util/proxy:72666
+  title: Privilege Escalation
+  description: |
+    [kubernetes][1] is a Production-Grade Container Scheduling and
+    Management.
+
+    Affected versions of this package are vulnerable to Privilege
+    Escalation. Incorrect handling of error responses to proxied upgrade
+    requests in the `kube-apiserver` allowed specially crafted requests to
+    establish a connection through the Kubernetes API server to backend
+    servers, then send arbitrary requests over the same connection directly
+    to the backend, authenticated with the Kubernetes API server\'s TLS
+    credentials used to establish the backend connection.
+
+
+
+    [1]: https://github.com/kubernetes/kubernetes
+  affected_package: github.com/kubernetes/kubernetes/staging/src/k8s.io/apimachinery/pkg/util/proxy
+  vulnerable_versions:
+  - "<1.10.11"
+  - ">=1.11.0 <1.11.5"
+  - ">=1.12.0 <1.12.3"
+  severity: high
+  package_manager: go
+  cve:
+  - CVE-2018-1002105
+  cwe:
+  - CWE-269
+  disclosed_date: 2018-12-05
+  created_date: 2018-12-10
+  last_modified_date: 2018-12-10
+  credit:
+  - Jordan Liggitt
+  references:
+  - https://github.com/kubernetes/kubernetes/commit/2257c1ecbe3c0cf71dd50b82752ae189c94ec905
+  - https://github.com/kubernetes/kubernetes/issues/71411
+  - https://groups.google.com/forum/#!topic/kubernetes-announce/GVllWCg6L88
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMKUBERNETESKUBERNETESSTAGINGSRCK8SIOAPIMACHINERYPKGUTILPROXY-72666
