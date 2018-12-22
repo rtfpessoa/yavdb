@@ -38,8 +38,13 @@ jobs:
           git config --global user.name "$GIT_NAME"
           git config --global user.email "$GIT_EMAIL"
           git add database
-          git commit -m "Update database $(date +"%d-%m-%Y")"
-          git push origin database
+          if ! git diff-index --quiet HEAD --
+          then
+            git commit -m "Update database $(date +"%d-%m-%Y")"
+            git push origin database
+          else
+            echo "No updates found."
+          fi
 
 workflows:
   version: 2
