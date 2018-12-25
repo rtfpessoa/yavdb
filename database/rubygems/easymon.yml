@@ -1,0 +1,61 @@
+---
+- id: snykio:rubygems:easymon:72729
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [easymon]() Enables your monitoring infrastructure to easily query the
+    status of your app server\'s health.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). When passing an invalid check name as parameter to the endpoint
+    where the easymon routes are mounted, a 406 response with a body that
+    contains the invalid check name unescaped is returned. A malicious
+    JavaScript can be injected into that invalid name and be executed in
+    Firefox.
+
+    Cross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+  affected_package: easymon
+  vulnerable_versions:
+  - "<1.4.1"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2018-1000855
+  cwe:
+  - CWE-79
+  disclosed_date: 2018-12-07
+  created_date: 2018-12-24
+  last_modified_date: 2018-12-24
+  credit:
+  - Unknown
+  references:
+  - https://github.com/basecamp/easymon/commit/a5deaf7359fc177fcf3fca725618b53619a30b7e
+  - https://github.com/basecamp/easymon/issues/26
+  - https://github.com/basecamp/easymon/pull/25
+  source_url: https://snyk.io/vuln/SNYK-RUBY-EASYMON-72729
