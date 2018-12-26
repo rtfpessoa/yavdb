@@ -1,0 +1,35 @@
+---
+- id: snykio:maven:com.github.penggle:kaptcha:72734
+  title: Insecure Randomness
+  description: |
+    [com.github.penggle:kaptcha][1] is a default output produces a google
+    captcha.
+
+    Affected versions of this package are vulnerable to Insecure Randomness.
+    `text/impl/DefaultTextCreator.java`,
+    `text/impl/ChineseTextProducer.java`, and
+    `text/impl/FiveLetterFirstNameTextCreator.java` in `kaptcha` use the
+    `Random` (rather than `SecureRandom`) function for generating CAPTCHA
+    values, which makes it easier for remote attackers to bypass intended
+    access restrictions via a brute-force approach.
+
+
+
+    [1]: https://github.com/penggle/kaptcha
+  affected_package: com.github.penggle:kaptcha
+  vulnerable_versions:
+  - ">= 0"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2018-18531
+  cwe:
+  - CWE-310
+  disclosed_date: 2018-10-19
+  created_date: 2018-12-25
+  last_modified_date: 2018-12-25
+  credit:
+  - FanjunMeng
+  references:
+  - https://github.com/penggle/kaptcha/issues/3
+  source_url: https://snyk.io/vuln/SNYK-JAVA-COMGITHUBPENGGLE-72734
