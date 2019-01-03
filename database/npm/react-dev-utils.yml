@@ -19,3 +19,41 @@
   credit: Lukas Reschke
   references: https://npmjs.com/advisories/695
   source_url: https://npmjs.com/advisories/695
+- id: snykio:npm:react-dev-utils:72875
+  title: Arbitrary Code Execution
+  description: |
+    [react-dev-utils][1] includes some utilities used by Create React App.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution. On Windows, developers are allowed to run a local webserver
+    for accepting various commands, including a command to launch an editor.
+    The input to that command was not properly sanitized, allowing an
+    attacker who can make a network request to the server (either via CSRF
+    or by direct request) to execute arbitrary commands on the targeted
+    system.
+
+
+
+    [1]: https://www.npmjs.com/package/react-dev-utils
+  affected_package: react-dev-utils
+  vulnerable_versions:
+  - ">=1.0.0 <1.0.4"
+  - ">=2.0.0 <2.0.2"
+  - ">=3.0.0 <3.1.2"
+  - ">=4.0.0 <4.2.2"
+  - ">=5.0.0 <5.0.2"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2018-6342
+  cwe:
+  - CWE-94
+  disclosed_date: 2018-08-22
+  created_date: 2019-01-02
+  last_modified_date: 2019-01-02
+  credit:
+  - Andrew Clark
+  references:
+  - https://github.com/facebook/create-react-app/pull/4866
+  - https://github.com/facebook/create-react-app/pull/4866/commits/4165185c3ad44ea80c6e35a8e4e4857a31327bdd
+  source_url: https://snyk.io/vuln/SNYK-JS-REACTDEVUTILS-72875
