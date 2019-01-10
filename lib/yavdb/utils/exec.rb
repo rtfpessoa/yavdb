@@ -26,7 +26,7 @@ module YAVDB
         puts "[Running] #{cmd}" if Constants::DEBUG
         output = `#{cmd}`
         {
-          :output   => output,
+          :output => output,
           :success? => $CHILD_STATUS.success?
         }
       end

@@ -34,11 +34,11 @@ module YAVDB
 
         PACKAGE_MANAGER_ALIAS = Hash[
           'composer' => 'packagist',
-          'go'       => 'go',
-          'maven'    => 'maven',
-          'npm'      => 'npm',
-          'nuget'    => 'nuget',
-          'pip'      => 'pypi',
+          'go' => 'go',
+          'maven' => 'maven',
+          'npm' => 'npm',
+          'nuget' => 'nuget',
+          'pip' => 'pypi',
           'rubygems' => 'rubygems'
         ].freeze
 

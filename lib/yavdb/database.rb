@@ -75,15 +75,15 @@ module YAVDB
                                         .sort_by(&:id)
                                         .map(&:to_map)
                                         .to_yaml(
-                                          :Indent        => 4,
-                                          :SortKeys      => true,
-                                          :UseHeader     => true,
-                                          :UseVersion    => true,
+                                          :Indent => 4,
+                                          :SortKeys => true,
+                                          :UseHeader => true,
+                                          :UseVersion => true,
                                           :ExplicitTypes => true,
-                                          :BestWidth     => 80,
-                                          :UseFold       => true,
-                                          :UseBlock      => true,
-                                          :Encoding      => :Utf8
+                                          :BestWidth => 80,
+                                          :UseFold => true,
+                                          :UseBlock => true,
+                                          :Encoding => :Utf8
                                         )
 
               file.puts(package_vulns_yml_str)
