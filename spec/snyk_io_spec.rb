@@ -108,7 +108,7 @@ RSpec.describe YAVDB::Sources::SnykIO::Client do
       expect(vuln).to have_attributes(:description => "[`swauth`][1] is An alternative authentication system for Swift.\n\nAffected versions of the package are vulnerable to Access Restriction\nBypass. An issue was discovered in middleware.py in OpenStack Swauth\nthrough 1.2.0 when used with OpenStack Swift through 2.15.1. The Swift\nobject store and proxy server are saving (unhashed) tokens retrieved\nfrom the Swauth middleware authentication mechanism to a log file as\npart of a GET URI. This allows attackers to bypass authentication by\ninserting a token into an X-Auth-Token header of a new request.\n\n\n\n[1]: http://pypi.python.org/pypi/swauth\n")
       expect(vuln).to have_attributes(:affected_package => 'swauth')
       expect(vuln).to have_attributes(:vulnerable_versions => ['[,1.3.0)'])
-      expect(vuln).to have_attributes(:severity => 'medium')
+      expect(vuln).to have_attributes(:severity => 'high')
       expect(vuln).to have_attributes(:package_manager => 'pypi')
       expect(vuln).to have_attributes(:cve => ['CVE-2017-16613'])
       expect(vuln).to have_attributes(:cwe => ['CWE-287'])

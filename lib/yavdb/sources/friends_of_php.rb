@@ -51,7 +51,7 @@ module YAVDB
           date = Date.parse('1970-01-01')
 
           versions = advisory_hash['branches'].map do |_, info|
-            date = Date.strptime(info['time'].to_s, '%Y-%m-%d %H:%M:%S %z') if info['time']
+            date = Date.strptime(info['time'].to_s, '%Y-%m-%d %H:%M:%S') if info['time']
             info['versions'].join(' ')
           end.flatten
 
