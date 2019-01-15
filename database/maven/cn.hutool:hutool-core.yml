@@ -1,32 +1,20 @@
 ---
 - id: snykio:maven:cn.hutool:hutool-core:72401
   title: Arbitrary File Write via Archive Extraction (Zip Slip)
-  description: |
-    [cn.hutool:hutool-core][1] is a set of tools for java.
-
-    Affected versions of the package are vulnerable to Arbitrary File Write
-    via Archive Extraction (AKA \"Zip Slip\").
-
-    It can be exploited using a specially crafted zip archive, that holds
-    path traversal filenames. When exploited, a filename in a malicious
-    archive is concatenated to the target extraction directory, which
-    results in the final path ending up outside of the target folder. For
-    instance, a zip may hold a file with a `../../file.exe` location and
-    thus break out of the target folder. If an executable or a configuration
-    file is overwritten with a file containing malicious code, the problem
-    can turn into an arbitrary code execution issue quite easily.
-
-    The following is an example of a zip archive with one benign file and
-    one malicious file. Extracting the malicous file will result in
-    traversing out of the target folder, ending up in `/root/.ssh/`
-    overwriting the `authorized_keys` file:
-
-        ++2018-04-15 22:04:29 .....           19           19  good.txt
-        ++2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
-
-
-
-    [1]: https://github.com/looly/hutool
+  description: "[cn.hutool:hutool-core][1] is a set of tools for java.\n\nAffected
+    versions of the package are vulnerable to Arbitrary File Write\nvia Archive Extraction
+    (AKA \\\"Zip Slip\\\").\n\nIt is exploited using a specially crafted zip archive,
+    that holds path\ntraversal filenames. When exploited, a filename in a malicious
+    archive\nis concatenated to the target extraction directory, which results in
+    the\nfinal path ending up outside of the target folder. For instance, a zip\nmay
+    hold a file with a \\\"../../file.exe\\\" location and thus break out of\nthe
+    target folder. If an executable or a configuration file is\noverwritten with a
+    file containing malicious code, the problem can turn\ninto an arbitrary code execution
+    issue quite easily.\n\nThe following is an example of a zip archive with one benign
+    file and\none malicious file. Extracting the malicous file will result in\ntraversing
+    out of the target folder, ending up in `/root/.ssh/`\noverwriting the `authorized_keys`
+    file:\n\n    \n    +2018-04-15 22:04:29 ..... 19 19 good.txt\n    \n    +2018-04-15
+    22:04:42 ..... 20 20 ../../../../../../root/.ssh/authorized_keys\n\n\n\n[1]: https://github.com/looly/hutool\n"
   affected_package: cn.hutool:hutool-core
   vulnerable_versions:
   - "< 4.1.12"

@@ -1,4 +1,44 @@
 ---
+- id: rubyadvisory:rubygems:activejob:CVE-2018-16476
+  title: Broken Access Control vulnerability in Active Job
+  description: |
+    There is a vulnerability in Active Job. This vulnerability has been
+    assigned the CVE identifier CVE-2018-16476.
+
+    Versions Affected: >= 4.2.0
+    Not affected: < 4.2.0
+    Fixed Versions: 4.2.11, 5.0.7.1, 5.1.6.1, 5.2.1.1
+
+    Impact
+    ------
+    Carefully crafted user input can cause Active Job to deserialize it using GlobalId
+    and allow an attacker to have access to information that they should not have.
+
+    Vulnerable code will look something like this:
+
+        MyJob.perform_later(user_input)
+
+    All users running an affected release should either upgrade or use one of the
+    workarounds immediately.
+  affected_package: activejob
+  unaffected_versions:
+  - "< 4.2.0"
+  patched_versions:
+  - ">= 5.2.1.1"
+  - "~> 4.2.11"
+  - "~> 5.0.7.1"
+  - "~> 5.1.6.1"
+  package_manager: rubygems
+  cve:
+  - CVE-2018-16476
+  disclosed_date: 2018-11-27
+  created_date: 2018-11-27
+  last_modified_date: 2018-11-27
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://groups.google.com/forum/#!topic/rubyonrails-security/FL4dSdzr2zw
 - id: snykio:rubygems:activejob:72640
   title: Access Restriction Bypass
   description: |

@@ -45,14 +45,16 @@
   source_url: https://ossindex.net/resource/package/7014379316/vulnerabilities
 - id: snykio:npm:request:20160119
   title: Remote Memory Exposure
-  description: "[`request`][1] is a simplified http request client. A potential remote\nmemory
-    exposure vulnerability exists in `request`. If a `request` uses a\nmultipart attachment
-    and the *body type* option is `number` with value\nX, then X bytes of uninitialized
-    memory will be sent in the body of the\nrequest.\n\nNote that while the impact
-    of this vulnerability is high (memory\nexposure), exploiting it is likely difficult,
-    as the attacker needs to\nsomehow control the body type of the request. One potential
-    exploit\nscenario is when a request is composed based on JSON input, including\nthe
-    body type, allowing a malicious JSON to trigger the memory leak.\n\n\n\n[1]: https://www.npmjs.com/package/request\n\\nConstructing
+  description: "[request][1] is a simplified http request client.\n\nAffected versions
+    of this package are vulnerable to Remote Memory\nExposure. A potential remote
+    memory exposure vulnerability exists in\n`request`. If a `request` uses a multipart
+    attachment and the *body\ntype* option is `number` with value X, then X bytes
+    of uninitialized\nmemory will be sent in the body of the request.\n\nNote that
+    while the impact of this vulnerability is high (memory\nexposure), exploiting
+    it is likely difficult, as the attacker needs to\nsomehow control the body type
+    of the request. One potential exploit\nscenario is when a request is composed
+    based on JSON input, including\nthe body type, allowing a malicious JSON to trigger
+    the memory leak.\n\n\n\n[1]: https://www.npmjs.com/package/request\n\\nConstructing
     a `Buffer` class with integer `N` creates a `Buffer` of\nlength `N` with non zero-ed
     out memory. **Example:**\n\n    var x = new Buffer(100); // uninitialized Buffer
     of length 100\n    // vs\n    var x = new Buffer('100'); // initialized Buffer
@@ -70,7 +72,7 @@
     \   })\n\n"
   affected_package: request
   vulnerable_versions:
-  - "<2.68.0 >2.2.5"
+  - ">2.2.5 <2.68.0"
   severity: medium
   package_manager: npm
   cve:
@@ -86,4 +88,5 @@
   - https://github.com/ChALkeR/notes/blob/master/Buffer-knows-everything.md
   - https://github.com/ChALkeR/notes/blob/master/Lets-fix-Buffer-API.md#previous-materials
   - https://github.com/request/request/pull/2018
+  - https://github.com/request/request/pull/2018/commits/3d31d4526fa4d4e4f59b89cabe194fb671063cdb
   source_url: https://snyk.io/vuln/npm:request:20160119

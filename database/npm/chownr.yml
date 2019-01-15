@@ -2,25 +2,37 @@
 - id: snykio:npm:chownr:20180731
   title: Time of Check Time of Use (TOCTOU)
   description: |
-    Affected versions of [chownr][1] are vulnerable to Time of Check Time of
-    Use (TOCTOU). It does not dereference symbolic links and changes the
-    owner of the link.
+    [chownr][1] is a package that takes the same arguments as `fs.chown()`
+
+    Affected versions of this package are vulnerable to Time of Check Time
+    of Use (TOCTOU). Affected versions of this package are vulnerable toTime
+    of Check Time of Use (TOCTOU) attacks.
+
+    It does not dereference symbolic links and changes the owner of the
+    link, which can trick it into descending into unintended trees if a
+    non-symlink is replaced by a symlink at a critical moment:
+
+              fs.lstat(pathChild, function(er, stats) {
+                if (er)
+                  return cb(er)
+                if (!stats.isSymbolicLink())
+                  chownr(pathChild, uid, gid, then)
 
 
 
-    [1]: https://www.npmjs.com/package/chownr
+    [1]: https://github.com/isaacs/chownr
   affected_package: chownr
   vulnerable_versions:
-  - "*"
+  - "<1.1.0"
   severity: medium
   package_manager: npm
   cwe:
   - CWE-264
   disclosed_date: 2018-07-31
-  created_date: 2018-07-31
-  last_modified_date: 2018-07-31
+  created_date: 2019-01-11
+  last_modified_date: 2019-01-11
   credit:
-  - pravi
+  - Jeff Epler
   references:
   - https://github.com/isaacs/chownr/issues/14
   source_url: https://snyk.io/vuln/npm:chownr:20180731

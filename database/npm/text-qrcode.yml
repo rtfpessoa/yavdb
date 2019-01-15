@@ -18,3 +18,33 @@
   credit: The GitHub Security Team
   references: https://npmjs.com/advisories/738
   source_url: https://npmjs.com/advisories/738
+- id: snykio:npm:text-qrcode:73501
+  title: Malicious Package
+  description: |
+    [text-qrcode][1] is a QR Code Generator.
+
+    Affected versions of this package are vulnerable to Malicious Package.
+    It contains a malicious code that overwrites the randomBytes method for
+    the crypto module with a function that generates weak entropy. Instead
+    of generating 32 bytes, the infected randomBytes will generate 3 bytes
+    of entropy and hash them, resulting in a 32 byte value being returned,
+    but one that is easily guessable.
+
+
+
+    [1]: https://www.npmjs.com/package/text-qrcode
+  affected_package: text-qrcode
+  vulnerable_versions:
+  - "*"
+  severity: high
+  package_manager: npm
+  cwe:
+  - CWE-506
+  disclosed_date: 2018-11-29
+  created_date: 2019-01-10
+  last_modified_date: 2019-01-10
+  credit:
+  - Unknown
+  references:
+  - https://www.npmjs.com/advisories/738
+  source_url: https://snyk.io/vuln/SNYK-JS-TEXTQRCODE-73501
