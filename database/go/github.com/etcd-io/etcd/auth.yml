@@ -1,0 +1,35 @@
+---
+- id: snykio:go:github.com/etcd-io/etcd/auth:73512
+  title: Improper Authentication
+  description: |+
+    `github.com/etcd-io/etcd/auth` is a None
+
+    Affected versions of this package are vulnerable to Improper
+    Authentication. If an etcd client server TLS certificate contains a
+    Common Name (CN) which matches a valid RBAC username, a remote attacker
+    may authenticate as that user with any valid (trusted) client
+    certificate in a REST API request to the gRPC-gateway.
+
+    **Note:** This is possible only when role-based access control (RBAC) is
+    used and client-cert-auth is enabled.
+
+  affected_package: github.com/etcd-io/etcd/auth
+  vulnerable_versions:
+  - ">=3.2.0 <3.2.26"
+  - ">=3.3.0 <3.3.11"
+  severity: medium
+  package_manager: go
+  cve:
+  - CVE-2018-16886
+  cwe:
+  - CWE-285
+  disclosed_date: 2019-01-03
+  created_date: 2019-01-16
+  last_modified_date: 2019-01-16
+  credit:
+  - Matt Wheeler
+  references:
+  - https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2018-16886
+  - https://github.com/etcd-io/etcd/blob/1eee465a43720d713bb69f7b7f5e120135fdb1ac/CHANGELOG-3.2.md#security-authentication
+  - https://github.com/etcd-io/etcd/blob/1eee465a43720d713bb69f7b7f5e120135fdb1ac/CHANGELOG-3.3.md#security-authentication
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMETCDIOETCDAUTH-73512
