@@ -19,3 +19,37 @@
   credit: Kevin Ring
   references: https://npmjs.com/advisories/768
   source_url: https://npmjs.com/advisories/768
+- id: snykio:npm:terriajs-server:73556
+  title: Server-Side Request Forgery (SSRF)
+  description: |
+    [terriajs-server][1] is a basic NodeJS Express server that serves up a
+    (not included) static TerriaJS-based site (such as National Map) with a
+    few additional useful services.
+
+    Affected versions of this package are vulnerable to Server-Side Request
+    Forgery (SSRF). Once an attacker has access to a server whitelisted by
+    the terriajs-server proxy, or the attacker is able to modify the DNS
+    records of a domain whitelisted by the terriajs-server proxy, the
+    terriajs-server proxy can be used to access any HTTP resources
+    accessible to the server, including private data in the hosting
+    environment.
+
+
+
+    [1]: https://www.npmjs.com/package/terriajs-server
+  affected_package: terriajs-server
+  vulnerable_versions:
+  - "<2.7.4"
+  severity: medium
+  package_manager: npm
+  cwe:
+  - CWE-918
+  disclosed_date: 2018-08-30
+  created_date: 2019-01-20
+  last_modified_date: 2019-01-20
+  credit:
+  - Kevin Ring
+  references:
+  - https://github.com/TerriaJS/terriajs-server/commit/3cbc48475f50a53962f605491d0e60648a29bdf0
+  - https://medium.com/terria/security-vulnerability-in-terriajs-server-82c8bf4da0a5
+  source_url: https://snyk.io/vuln/SNYK-JS-TERRIAJSSERVER-73556
