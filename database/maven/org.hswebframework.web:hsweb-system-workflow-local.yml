@@ -1,0 +1,59 @@
+---
+- id: snykio:maven:org.hswebframework.web:hsweb-system-workflow-local:73564
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [org.hswebframework.web:hsweb-system-workflow-local][1] is a basic
+    project for quickly setting up an enterprise back-end management system.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS) due to the absence of type parameter checking.
+
+
+
+    [1]: https://github.com/hs-web/hsweb-framework
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+  affected_package: org.hswebframework.web:hsweb-system-workflow-local
+  vulnerable_versions:
+  - "< 3.0.5"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2018-20594
+  cwe:
+  - CWE-79
+  disclosed_date: 2018-12-30
+  created_date: 2018-12-30
+  last_modified_date: 2018-12-30
+  credit:
+  - Unknown
+  references:
+  - https://github.com/hs-web/hsweb-framework/commit/b72a2275ed21240296c6539bae1049c56abb542f
+  - https://github.com/hs-web/hsweb-framework/issues/107
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGHSWEBFRAMEWORKWEB-73564
