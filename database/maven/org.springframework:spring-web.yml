@@ -745,6 +745,90 @@
   - https://github.com/spring-projects/spring-framework/commit/423aa28ed584b4ff6e5bad218c09beef5e91951e
   - https://pivotal.io/security/cve-2018-15756
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGSPRINGFRAMEWORK-72470
+- id: snykio:maven:org.springframework:spring-web:73573
+  title: Directory Traversal
+  description: |
+    [org.springframework:spring-web][1] is a provides a comprehensive
+    programming and configuration model for modern Java-based enterprise
+    applications - on any kind of deployment platform.
+
+    Affected versions of this package are vulnerable to Directory Traversal.
+    It allows remote attackers to read arbitrary files via a crafted URL.
+
+
+
+    [1]: https://github.com/spring-projects/spring-framework
+    \nA Directory Traversal attack (also known as path traversal) aims to
+    access files and directories that are stored outside the intended
+    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
+    its variations, or by using absolute file paths, it may be possible to
+    access arbitrary files and directories stored on file system, including
+    application source code, configuration, and other critical system files.
+
+    Directory Traversal vulnerabilities can be generally divided into two
+    types:
+
+    * **Information Disclosure**\: Allows the attacker to gain information
+      about the folder structure or read the contents of sensitive files on
+      the system.
+
+    `st` is a module for serving static files on web pages, and contains a
+    [vulnerability of this type][1]. In our example, we will serve files
+    from the `public` route.
+
+    If an attacker requests the following URL from our server, it will in
+    turn leak the sensitive private key of the root user.
+
+        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
+
+    **Note** `%2e` is the URL encoded version of `.` (dot).
+
+    * **Writing arbitrary files**\: Allows the attacker to create or replace
+      existing files. This type of vulnerability is also known as
+      `Zip-Slip`.
+
+    One way to achieve this is by using a malicious `zip` archive that holds
+    path traversal filenames. When each filename in the zip archive gets
+    concatenated to the target extraction folder, without validation, the
+    final path ends up outside of the target folder. If an executable or a
+    configuration file is overwritten with a file containing malicious code,
+    the problem can turn into an arbitrary code execution issue quite
+    easily.
+
+    The following is an example of a `zip` archive with one benign file and
+    one malicious file. Extracting the malicious file will result in
+    traversing out of the target folder, ending up in `/root/.ssh/`
+    overwriting the `authorized_keys` file:
+
+        2018-04-15 22:04:29 .....           19           19  good.txt
+        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
+
+
+
+    [1]: https://snyk.io/vuln/npm:st:20140206
+  affected_package: org.springframework:spring-web
+  vulnerable_versions:
+  - ">= 3.0.0 < 3.2.9"
+  - ">= 4.0.0 < 4.0.5"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2014-3578
+  cwe:
+  - CWE-22
+  disclosed_date: 2014-09-05
+  created_date: 2014-09-05
+  last_modified_date: 2014-09-05
+  credit:
+  - Takeshi Terada
+  references:
+  - http://jvndb.jvn.jp/en/contents/2014/JVNDB-2014-000054.html
+  - https://bugzilla.redhat.com/show_bug.cgi?id=1131882
+  - https://github.com/spring-projects/spring-framework/commit/e3e71ba92a8b82dadf474eda76cd2741f65a77a8
+  - https://jira.spring.io/browse/SPR-12354
+  - https://pivotal.io/security/cve-2014-3578
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-3578
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGSPRINGFRAMEWORK-73573
 - id: victims:maven:org.springframework:spring-web:2013-6429
   title: XML External Entity (XXE) injection in Spring Framework
   affected_package: org.springframework:spring-web

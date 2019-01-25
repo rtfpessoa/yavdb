@@ -120,3 +120,191 @@
   references:
   - https://lists.apache.org/thread.html/2c72480c76619c5e7793f0d213c34082f0598eaa4d212172f068940f@%3Cdev.airflow.apache.org%3E
   source_url: https://snyk.io/vuln/SNYK-PYTHON-APACHEAIRFLOW-42180
+- id: snykio:pypi:apache-airflow:73586
+  title: Arbitrary Code Execution
+  description: |
+    [apache-airflow][1] is a platform to programmatically author, schedule,
+    and monitor workflows.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution due to not preventing the `chart_data` endpoints from using
+    user-input and executing them.
+
+
+
+    [1]: https://pypi.org/project/apache-airflow/
+  affected_package: apache-airflow
+  vulnerable_versions:
+  - "< 1.9.0"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2017-15720
+  cwe:
+  - CWE-94
+  disclosed_date: 2017-04-07
+  created_date: 2017-04-07
+  last_modified_date: 2017-04-07
+  credit:
+  - Unknown
+  references:
+  - https://github.com/apache/incubator-airflow/commit/04cacdd0a7526927137b452f38c3e894a5d2ce4a
+  - https://github.com/apache/incubator-airflow/pull/2184
+  - https://issues.apache.org/jira/browse/AIRFLOW-1007
+  - https://lists.apache.org/thread.html/ade4d54ebf614f68dc81a08891755e60ea58ba88e0209233eeea5f57@%3Cdev.airflow.apache.org%3E
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-APACHEAIRFLOW-73586
+- id: snykio:pypi:apache-airflow:73591
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [apache-airflow][1] is a platform to programmatically author, schedule,
+    and monitor workflows.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). due to not sanitizing user-inputted HTML passed to Markup. This
+    allows a malicious user to execute arbitrary code.
+
+
+
+    [1]: https://pypi.org/project/apache-airflow/
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+  affected_package: apache-airflow
+  vulnerable_versions:
+  - ">= 1.6.0 < 1.9.0"
+  severity: medium
+  package_manager: pypi
+  cwe:
+  - CWE-79
+  disclosed_date: 2017-03-28
+  created_date: 2017-03-28
+  last_modified_date: 2017-03-28
+  credit:
+  - Alex Guziel
+  references:
+  - https://github.com/apache/incubator-airflow/commit/fe9ebe3ccf5fec4c491343659aa0c52e4125f66b
+  - https://github.com/apache/incubator-airflow/pull/2193
+  - https://issues.apache.org/jira/browse/AIRFLOW-1047
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-APACHEAIRFLOW-73591
+- id: snykio:pypi:apache-airflow:73592
+  title: Cross-site Request Forgery (CSRF)
+  description: |
+    [apache-airflow][1] is a platform to programmatically author, schedule,
+    and monitor workflows.
+
+    Affected versions of this package are vulnerable to Cross-site Request
+    Forgery (CSRF). because the `paused` and `query` endpoints are
+    state-changing.
+
+
+
+    [1]: https://pypi.org/project/apache-airflow/
+  affected_package: apache-airflow
+  vulnerable_versions:
+  - "< 1.9.0"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2017-17835
+  cwe:
+  - CWE-352
+  disclosed_date: 2017-02-04
+  created_date: 2017-02-04
+  last_modified_date: 2017-02-04
+  credit:
+  - Alex Guziel
+  references:
+  - https://github.com/apache/incubator-airflow/commit/673026c740411cc6447aede8c6a816460fe03a59
+  - https://github.com/apache/incubator-airflow/pull/2054
+  - https://issues.apache.org/jira/browse/AIRFLOW-836
+  - https://lists.apache.org/thread.html/ade4d54ebf614f68dc81a08891755e60ea58ba88e0209233eeea5f57@%3Cdev.airflow.apache.org%3E
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-APACHEAIRFLOW-73592
+- id: snykio:pypi:apache-airflow:73596
+  title: Information Exposure
+  description: |
+    [apache-airflow][1] is a platform to programmatically author, schedule,
+    and monitor workflows.
+
+    Affected versions of this package are vulnerable to Information
+    Exposure. An experimental Airflow feature displayed authenticated
+    cookies, as well as passwords to databases used by Airflow. An attacker
+    who had limited access to airflow, could get all credentials from the
+    system.
+
+
+
+    [1]: https://pypi.org/project/apache-airflow/
+  affected_package: apache-airflow
+  vulnerable_versions:
+  - ">= 1.8.2 < 1.9.0"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2017-17836
+  cwe:
+  - CWE-200
+  disclosed_date: 2019-01-23
+  created_date: 2019-01-23
+  last_modified_date: 2019-01-23
+  credit:
+  - Unknown
+  references:
+  - https://lists.apache.org/thread.html/ade4d54ebf614f68dc81a08891755e60ea58ba88e0209233eeea5f57@%3Cdev.airflow.apache.org%3E
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-APACHEAIRFLOW-73596
+- id: snykio:pypi:apache-airflow:73597
+  title: Improper Certificate Validation
+  description: |
+    [apache-airflow][1] is a platform to programmatically author, schedule,
+    and monitor workflows.
+
+    Affected versions of this package are vulnerable to Improper Certificate
+    Validation. The LDAP auth backend
+    (airflow.contrib.auth.backends.ldap\_auth) was misconfigured and
+    contained improper checking of exceptions which disabled server
+    certificate checking.
+
+
+
+    [1]: https://pypi.org/project/apache-airflow/
+  affected_package: apache-airflow
+  vulnerable_versions:
+  - "< 1.10.1"
+  severity: high
+  package_manager: pypi
+  cve:
+  - CVE-2018-20245
+  cwe:
+  - CWE-295
+  disclosed_date: 2018-11-22
+  created_date: 2019-01-23
+  last_modified_date: 2019-01-23
+  credit:
+  - Stijn van Drongelen
+  references:
+  - https://lists.apache.org/thread.html/b549c7573b342a6e457e5a3225c33054244343927bbfb2a4cdc4cf73@%3Cdev.airflow.apache.org%3E
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-APACHEAIRFLOW-73597
