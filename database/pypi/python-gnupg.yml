@@ -243,3 +243,45 @@
   - http://seclists.org/oss-sec/2014/q1/335
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-1929
   source_url: https://snyk.io/vuln/SNYK-PYTHON-PYTHONGNUPG-40272
+- id: snykio:pypi:python-gnupg:73633
+  title: Improper Input Validation
+  description: |
+    [python-gnupg][1] is a command-line program which provides support for
+    programmatic access via spawning a separate process to run it and then
+    communicating with that process from your program.
+
+    Affected versions of this package are vulnerable to Improper Input
+    Validation. An attacker can inject data through the passphrase property
+    of the `gnupg.GPG.encrypt()` and `gnupg.GPG.decrypt()` methods when
+    symmetric encryption is used.
+
+    The supplied passphrase is not validated for newlines, and the library
+    passes `--passphrase-fd=0` to the gpg executable, which expects the
+    passphrase on the first line of stdin, and the ciphertext to be
+    decrypted or plaintext to be encrypted on subsequent lines.
+
+    By supplying a passphrase containing a newline an attacker can
+    control/modify the ciphertext/plaintext being decrypted/encrypted.
+
+
+
+    [1]: http://packages.python.org/python-gnupg/index.html
+  affected_package: python-gnupg
+  vulnerable_versions:
+  - "< 0.4.4"
+  severity: high
+  package_manager: pypi
+  cve:
+  - CVE-2019-6690
+  cwe:
+  - CWE-20
+  disclosed_date: 2019-01-24
+  created_date: 2019-01-30
+  last_modified_date: 2019-01-30
+  credit:
+  - Alexander Kjall and Stig Palmquis
+  references:
+  - https://blog.hackeriet.no/cve-2019-6690-python-gnupg-vulnerability/
+  - https://bugzilla.redhat.com/show_bug.cgi?id=1670364
+  - https://github.com/stigtsp/CVE-2019-6690-python-gnupg-vulnerability
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-PYTHONGNUPG-73633
