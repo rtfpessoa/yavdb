@@ -1,0 +1,48 @@
+---
+- id: snykio:pypi:colander:73636
+  title: Denial of Service (DoS)
+  description: "[colander][1] is a An extensible package which can be used to:\nDeserialize
+    and validate a data structure composed of strings, mappings,\nand lists. Serialize
+    an arbitrary data structure to a data structure\ncomposed of strings, mappings,
+    and lists.\n\nAffected versions of this package are vulnerable to Denial of Service\n(DoS).
+    The URL validator allows an attacker to potentially cause an\ninfinite loop thereby
+    causing a Denial of Service via an unclosed\nparenthesis.\n\nPoC by Przemek:\n\n
+    \   from colander import MappingSchema, SchemaNode, Str, url\n    \n    \n    class
+    MySchema(MappingSchema):\n        url = SchemaNode(Str(encoding='utf-8'), validator=url)\n
+    \   \n    print MySchema().deserialize({\"url\": \"http://www.mysite.com/tttttttttttttttttttttt.jpg\"})
+    \ # it works\n    print MySchema().deserialize({\"url\": \"http://www.mysite.com/(tttttttttttttttttttttt).jpg\"})
+    \ # it works\n    print MySchema().deserialize({\"url\": \"http://www.mysite.com/(ttttttttttt.jpg\"})
+    \ # it works\n    print MySchema().deserialize({\"url\": \"http://www.mysite.com/(tttttttttttttttttttttt.jpg\"})
+    \ # infinite loop\n\n\n\n[1]: https://docs.pylonsproject.org/projects/colander/en/latest/\n\\nDenial
+    of Service (DoS) describes a family of attacks, all aimed at\nmaking a system
+    inaccessible to its intended and legitimate users.\n\nUnlike other vulnerabilities,
+    DoS attacks usually do not aim at\nbreaching security. Rather, they are focused
+    on making websites and\nservices unavailable to genuine users resulting in downtime.\n\nOne
+    popular Denial of Service vulnerability is DDoS (a Distributed\nDenial of Service),
+    an attack that attempts to clog network pipes to the\nsystem by generating a large
+    volume of traffic from many machines.\n\nWhen it comes to open source libraries,
+    DoS vulnerabilities allow\nattackers to trigger such a crash or crippling of the
+    service by using a\nflaw either in the application code or from the use of open
+    source\nlibraries.\n\nTwo common types of DoS vulnerabilities:\n\n* High CPU/Memory
+    Consumption- An attacker sending crafted requests that\n  could cause the system
+    to take a disproportionate amount of time to\n  process. For example,\n  [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).\n\n*
+    Crash - An attacker sending crafted requests that could cause the\n  system to
+    crash. For Example, [npm `ws` package](npm:ws:20171108)\n\n"
+  affected_package: colander
+  vulnerable_versions:
+  - "< 1.7.0"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2017-18361
+  cwe:
+  - CWE-400
+  disclosed_date: 2019-02-01
+  created_date: 2019-02-01
+  last_modified_date: 2019-02-01
+  credit:
+  - Przemek
+  references:
+  - https://github.com/Pylons/colander/issues/290
+  - https://github.com/Pylons/colander/pull/323
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-COLANDER-73636
