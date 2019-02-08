@@ -36,6 +36,44 @@
   credit: asgerf
   references: https://npmjs.com/advisories/778
   source_url: https://npmjs.com/advisories/778
+- id: snykio:npm:defaults-deep:173661
+  title: Prototype Pollution
+  description: |
+    [defaults-deep][1] is a like extend but recursively copies only the
+    missing properties/values to the target object.
+
+    Affected versions of this package are vulnerable to Prototype Pollution.
+    Provided certain input `defaults-deep` can add or modify properties of
+    the `Object` prototype. These properties will be present on all objects.
+
+    \##PoC
+
+        var defaultsDeep = require('defaults-deep');
+        var payload = JSON.parse('{"constructor": {"prototype": {"isAdmin": true}}}');
+        defaultsDeep({}, payload);
+        console.log({}.isAdmin); // true
+
+
+
+    [1]: https://github.com/jonschlinkert/defaults-deep
+  affected_package: defaults-deep
+  vulnerable_versions:
+  - "*"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2018-16486
+  cwe:
+  - CWE-400
+  disclosed_date: 2018-09-28
+  created_date: 2018-09-28
+  last_modified_date: 2018-09-28
+  credit:
+  - asgerf
+  references:
+  - https://hackerone.com/reports/380878
+  - https://www.npmjs.com/advisories/778
+  source_url: https://snyk.io/vuln/SNYK-JS-DEFAULTSDEEP-173661
 - id: snykio:npm:defaults-deep:20180215
   title: Prototype Pollution
   description: |
