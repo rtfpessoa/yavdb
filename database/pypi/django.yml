@@ -1,4 +1,42 @@
 ---
+- id: snykio:pypi:django:173679
+  title: Uncontrolled Memory Consumption
+  description: |
+    [django][1] is a high-level Python Web framework that encourages rapid
+    development and clean, pragmatic design. Thanks for checking it out.
+
+    Affected versions of this package are vulnerable to Uncontrolled Memory
+    Consumption. If django.utils.numberformat.format() that is used by
+    contrib.admin as well as the the floatformat, filesizeformat, and
+    intcomma templates filters - received a Decimal with a large number of
+    digits or a large exponent, it could lead to significant memory usage
+    due to a call to \'\{:f}\'.format().
+
+
+
+    [1]: https://pypi.org/project/Django/
+  affected_package: django
+  vulnerable_versions:
+  - ">= 1.11.0 < 1.11.19"
+  - ">= 2.0.0 < 2.0.11"
+  - ">= 2.1.0 < 2.1.6"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2019-6975
+  cwe:
+  - CWE-789
+  disclosed_date: 2019-02-11
+  created_date: 2019-02-11
+  last_modified_date: 2019-02-11
+  credit:
+  - Carlton Gibson
+  references:
+  - https://github.com/django/django/commit/40cd19055773705301c3428ed5e08a036d2091f3
+  - https://groups.google.com/forum/#!topic/django-announce/WTwEAprR0IQ
+  - https://www.djangoproject.com/weblog/2019/feb/11/security-releases/
+  - https://www.openwall.com/lists/oss-security/2019/02/11/1
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-173679
 - id: snykio:pypi:django:40025
   title: Arbitrary Code Execution
   description: |
