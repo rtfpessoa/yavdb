@@ -20,3 +20,40 @@
   credit: The UK's National Cyber Security Centre (NCSC)
   references: https://npmjs.com/advisories/723
   source_url: https://npmjs.com/advisories/723
+- id: snykio:npm:pem:173687
+  title: Information Exposure
+  description: |
+    [pem][1] is a package to create private keys and certificates with
+    node.js.
+
+    Affected versions of this package are vulnerable to Information
+    Exposure. The package exposes sensitive data when the `readPkcs12` is
+    used.
+
+    The `readPkcs12` function reads the certificate and key data from a
+    pkcs12 file using the encryption password. As part of this process it
+    creates a globally readable file with a filename of 20 random 0-f
+    characters in the temporary directory containing the password which is
+    then read by OpenSSL. The file containing the password is never cleaned
+    up after it is used giving access to the pkcs12 password to any other
+    users with access to read files from the system.
+
+
+
+    [1]: https://github.com/Dexus/pem#readme
+  affected_package: pem
+  vulnerable_versions:
+  - "<1.13.2"
+  severity: high
+  package_manager: npm
+  cwe:
+  - CWE-200
+  disclosed_date: 2018-11-06
+  created_date: 2019-02-13
+  last_modified_date: 2019-02-13
+  credit:
+  - The UK's National Cyber Security Centre (NCSC)
+  references:
+  - https://github.com/Dexus/pem/commit/bed1190e4a08692ac903ae6043489f1f76bc67eb
+  - https://www.npmjs.com/advisories/723
+  source_url: https://snyk.io/vuln/SNYK-JS-PEM-173687

@@ -19,3 +19,36 @@
   credit: Jiantao Li
   references: https://npmjs.com/advisories/726
   source_url: https://npmjs.com/advisories/726
+- id: snykio:npm:browserify-hmr:173684
+  title: Access Restriction Bypass
+  description: |
+    [browserify-hmr][1] is an implementation of Webpack\'s Hot Module
+    Replacement API as a plugin for Browserify.
+
+    Affected versions of this package are vulnerable to Access Restriction
+    Bypass. The origin of requests was not checked by the `WebSocket`
+    server, which is used for HMR (Hot Module Replacement). Anyone could
+    receive the `HMR` message sent by the `WebSocket` server via a
+    `ws://127.0.0.1:3123/` connection from any origin.
+
+
+
+    [1]: https://www.npmjs.com/package/browserify-hmr
+  affected_package: browserify-hmr
+  vulnerable_versions:
+  - "*"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2018-14730
+  cwe:
+  - CWE-284
+  disclosed_date: 2018-09-21
+  created_date: 2019-02-13
+  last_modified_date: 2019-02-13
+  credit:
+  - chromium1337
+  references:
+  - https://blog.cal1.cn/post/Sniffing%20Codes%20in%20Hot%20Module%20Reloading%20Messages
+  - https://github.com/AgentME/browserify-hmr/issues/41
+  source_url: https://snyk.io/vuln/SNYK-JS-BROWSERIFYHMR-173684
