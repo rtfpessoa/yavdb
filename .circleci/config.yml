@@ -8,10 +8,6 @@ jobs:
     steps:
     - checkout
 
-    - name: Install Bundler Version
-      type: shell
-      command: gem install bundler -v 1.16
-
     - name: Prepare yavdb cache
       type: shell
       command: echo "$(date)" > /tmp/yavdb.cache.log
@@ -19,22 +15,23 @@ jobs:
     - name: Restore gem cache
       type: cache-restore
       keys:
-      - 2-gem-yavdb-{{ checksum "Gemfile.lock" }}
-      - 2-gem-yavdb-
+      - gem-cache-1-{{ checksum "Gemfile.lock" }}
 
     - name: Restore yavdb cache
       type: cache-restore
       keys:
-      - 1-crawler-yavdb-cache-{{ checksum "/tmp/yavdb.cache.log" }}
-      - 1-crawler-yavdb-cache-
+      - 2-crawler-yavdb-cache-{{ checksum "/tmp/yavdb.cache.log" }}
+      - 2-crawler-yavdb-cache
 
     - name: Bundle Install
       type: shell
-      command: bundle install --path /tmp/vendor/bundle
+      command: |
+        sudo gem update --system
+        bundle install --path /tmp/vendor/bundle
 
     - name: Save bundler cache
       type: cache-save
-      key: 2-gem-yavdb-{{ checksum "Gemfile.lock" }}
+      key: gem-cache-1-{{ checksum "Gemfile.lock" }}
       paths:
       - /tmp/vendor/bundle
 
@@ -48,7 +45,7 @@ jobs:
 
     - name: Save yavdb cache
       type: cache-save
-      key: 1-crawler-yavdb-cache-{{ checksum "/tmp/yavdb.cache.log" }}
+      key: 2-crawler-yavdb-cache-{{ checksum "/tmp/yavdb.cache.log" }}
       paths:
       - ~/.yavdb/cache
 

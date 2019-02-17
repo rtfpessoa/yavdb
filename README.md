@@ -12,10 +12,10 @@ developers identify and fix know vulnerabilities in their apps.
 The sources for this database include 
 [Rubysec](https://rubysec.com/),
 [snyk](https://snyk.io/),
-[OSSIndex (deprecated)](https://ossindex.net/),
 [Friends of PHP](https://github.com/FriendsOfPHP/security-advisories),
 [Magento Related Security Advisories](https://github.com/victims/victims-cve-db),
-[Victims CVE Database](https://github.com/victims/victims-cve-db)
+[Victims CVE Database](https://github.com/victims/victims-cve-db),
+[RustSec](https://github.com/RustSec/advisory-db)
 
 ## Prerequisites
 

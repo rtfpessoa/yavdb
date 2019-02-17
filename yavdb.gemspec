@@ -42,4 +42,5 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'semantic_interval', ['~> 0.1']
   spec.add_runtime_dependency 'therubyracer', ['~> 0.12']
   spec.add_runtime_dependency 'thor', ['~> 0.20']
+  spec.add_runtime_dependency 'toml-rb', ['~> 1.1']
 end
