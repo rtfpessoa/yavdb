@@ -1,0 +1,25 @@
+---
+- id: rustsec:cargo:sodiumoxide:RUSTSEC-2017-0001
+  title: scalarmult() vulnerable to degenerate public keys
+  description: |
+    The `scalarmult()` function included in previous versions of this crate
+    accepted all-zero public keys, for which the resulting Diffie-Hellman shared
+    secret will always be zero regardless of the private key used.
+
+    This issue was fixed by checking for this class of keys and rejecting them
+    if they are used.
+  affected_package: sodiumoxide
+  patched_versions:
+  - ">= 0.0.14"
+  severity: high
+  package_manager: cargo
+  cve:
+  - CVE-2017-1000168
+  disclosed_date: 2017-01-26
+  created_date: 2017-01-26
+  last_modified_date: 2017-01-26
+  credit:
+  - RustSec
+  references:
+  - https://github.com/dnaq/sodiumoxide/issues/154
+  source_url: https://github.com/RustSec/advisory-db/blob/master/crates/sodiumoxide/RUSTSEC-2017-0001.toml

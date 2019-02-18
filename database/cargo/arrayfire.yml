@@ -1,0 +1,29 @@
+---
+- id: rustsec:cargo:arrayfire:RUSTSEC-2018-0011
+  title: Enum repr causing potential memory corruption
+  description: |
+    The attribute repr() added to enums to be compatible with C-FFI caused
+    memory corruption on MSVC toolchain.
+
+    arrayfire crates <= version 3.5.0 do not have this issue when used with
+    Rust versions 1.27 or earlier. The issue only started to appear since
+    Rust version 1.28.
+
+    The issue seems to be interlinked with which version of Rust is being used.
+
+    The issue was fixed in crate 3.6.0.
+  affected_package: arrayfire
+  unaffected_versions:
+  - "<= 3.5.0"
+  patched_versions:
+  - ">= 3.6.0"
+  severity: high
+  package_manager: cargo
+  disclosed_date: 2018-12-18
+  created_date: 2018-12-18
+  last_modified_date: 2018-12-18
+  credit:
+  - RustSec
+  references:
+  - https://github.com/arrayfire/arrayfire-rust/pull/177
+  source_url: https://github.com/RustSec/advisory-db/blob/master/crates/arrayfire/RUSTSEC-2018-0011.toml

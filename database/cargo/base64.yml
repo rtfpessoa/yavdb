@@ -1,0 +1,29 @@
+---
+- id: rustsec:cargo:base64:RUSTSEC-2017-0004
+  title: Integer overflow leads to heap-based buffer overflow in encode_config_buf
+  description: |
+    Affected versions of this crate suffered from an integer overflow bug when
+    calculating the size of a buffer to use when encoding base64 using the
+    `encode_config_buf` and `encode_config` functions.  If the input string
+    was large, this would cause a buffer to be allocated that was too small.
+    Since this function writes to the buffer using unsafe code, it would
+    allow an attacker to write beyond the buffer, causing memory corruption
+    and possibly the execution of arbitrary code.
+
+    This flaw was corrected by using checked arithmetic to calculate
+    the size of the buffer.
+  affected_package: base64
+  patched_versions:
+  - ">= 0.5.2"
+  severity: high
+  package_manager: cargo
+  cve:
+  - CVE-2017-1000430
+  disclosed_date: 2017-05-03
+  created_date: 2017-05-03
+  last_modified_date: 2017-05-03
+  credit:
+  - RustSec
+  references:
+  - https://github.com/alicemaz/rust-base64/commit/24ead980daf11ba563e4fb2516187a56a71ad319
+  source_url: https://github.com/RustSec/advisory-db/blob/master/crates/base64/RUSTSEC-2017-0004.toml

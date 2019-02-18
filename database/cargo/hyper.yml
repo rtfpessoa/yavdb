@@ -1,0 +1,49 @@
+---
+- id: rustsec:cargo:hyper:RUSTSEC-2016-0002
+  title: HTTPS MitM vulnerability due to lack of hostname verification
+  description: |
+    When used on Windows platforms, all versions of Hyper prior to 0.9.4 did not
+    perform hostname verification when making HTTPS requests.
+
+    This allows an attacker to perform MitM attacks by preventing any valid
+    CA-issued certificate, even if there's a hostname mismatch.
+
+    The problem was addressed by leveraging rust-openssl's built-in support for
+    hostname verification.
+  affected_package: hyper
+  patched_versions:
+  - ">= 0.9.4"
+  severity: high
+  package_manager: cargo
+  disclosed_date: 2016-05-09
+  created_date: 2016-05-09
+  last_modified_date: 2016-05-09
+  credit:
+  - RustSec
+  references:
+  - https://github.com/hyperium/hyper/blob/master/CHANGELOG.md#v094-2016-05-09
+  source_url: https://github.com/RustSec/advisory-db/blob/master/crates/hyper/RUSTSEC-2016-0002.toml
+- id: rustsec:cargo:hyper:RUSTSEC-2017-0002
+  title: headers containing newline characters can split messages
+  description: "Serializing of headers to the socket did not filter the values for
+    newline bytes (\r or \n),\nwhich allowed for header values to split a request
+    or response. People would not likely include\nnewlines in the headers in their
+    own applications, so the way for most people to exploit this\nis if an application
+    constructs headers based on unsanitized user input.\n\nThis issue was fixed by
+    replacing all newline characters with a space during serialization of\na header
+    value.\n"
+  affected_package: hyper
+  patched_versions:
+  - "< 0.10.0"
+  - ">= 0.10.2"
+  - ">= 0.9.18"
+  severity: high
+  package_manager: cargo
+  disclosed_date: 2017-01-23
+  created_date: 2017-01-23
+  last_modified_date: 2017-01-23
+  credit:
+  - RustSec
+  references:
+  - https://github.com/hyperium/hyper/wiki/Security-001
+  source_url: https://github.com/RustSec/advisory-db/blob/master/crates/hyper/RUSTSEC-2017-0002.toml

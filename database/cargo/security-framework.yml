@@ -1,0 +1,23 @@
+---
+- id: rustsec:cargo:security-framework:RUSTSEC-2017-0003
+  title: Hostname verification skipped when custom root certs used
+  description: |
+    If custom root certificates were registered with a `ClientBuilder`, the
+    hostname of the target server would not be validated against its presented leaf
+    certificate.
+
+    This issue was fixed by properly configuring the trust evaluation logic to
+    perform that check.
+  affected_package: security-framework
+  patched_versions:
+  - ">= 0.1.12"
+  severity: high
+  package_manager: cargo
+  disclosed_date: 2017-03-15
+  created_date: 2017-03-15
+  last_modified_date: 2017-03-15
+  credit:
+  - RustSec
+  references:
+  - https://github.com/sfackler/rust-security-framework/pull/27
+  source_url: https://github.com/RustSec/advisory-db/blob/master/crates/security-framework/RUSTSEC-2017-0003.toml

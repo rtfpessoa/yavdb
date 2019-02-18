@@ -1,0 +1,49 @@
+---
+- id: rustsec:cargo:openssl:RUSTSEC-2016-0001
+  title: SSL/TLS MitM vulnerability due to insecure defaults
+  description: |
+    All versions of rust-openssl prior to 0.9.0 contained numerous insecure defaults
+    including off-by-default certificate verification and no API to perform hostname
+    verification.
+
+    Unless configured correctly by a developer, these defaults could allow an attacker
+    to perform man-in-the-middle attacks.
+
+    The problem was addressed in newer versions by enabling certificate verification
+    by default and exposing APIs to perform hostname verification. Use the
+    `SslConnector` and `SslAcceptor` types to take advantage of these new features
+    (as opposed to the lower-level `SslContext` type).
+  affected_package: openssl
+  patched_versions:
+  - ">= 0.9.0"
+  severity: high
+  package_manager: cargo
+  disclosed_date: 2016-11-05
+  created_date: 2016-11-05
+  last_modified_date: 2016-11-05
+  credit:
+  - RustSec
+  references:
+  - https://github.com/sfackler/rust-openssl/releases/tag/v0.9.0
+  source_url: https://github.com/RustSec/advisory-db/blob/master/crates/openssl/RUSTSEC-2016-0001.toml
+- id: rustsec:cargo:openssl:RUSTSEC-2018-0010
+  title: Use after free in CMS Signing
+  description: 'Affected versions of the OpenSSL crate used structures after they''d
+    been freed.
+
+'
+  affected_package: openssl
+  unaffected_versions:
+  - "< 0.10.8"
+  patched_versions:
+  - ">= 0.10.9"
+  severity: high
+  package_manager: cargo
+  disclosed_date: 2018-06-01
+  created_date: 2018-06-01
+  last_modified_date: 2018-06-01
+  credit:
+  - RustSec
+  references:
+  - https://github.com/sfackler/rust-openssl/pull/942
+  source_url: https://github.com/RustSec/advisory-db/blob/master/crates/openssl/RUSTSEC-2018-0010.toml

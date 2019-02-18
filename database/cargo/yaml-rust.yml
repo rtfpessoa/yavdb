@@ -1,0 +1,24 @@
+---
+- id: rustsec:cargo:yaml-rust:RUSTSEC-2018-0006
+  title: Uncontrolled recursion leads to abort in deserialization
+  description: |
+    Affected versions of this crate did not prevent deep recursion while
+    deserializing data structures.
+
+    This allows an attacker to make a YAML file with deeply nested structures
+    that causes an abort while deserializing it.
+
+    The flaw was corrected by checking the recursion depth.
+  affected_package: yaml-rust
+  patched_versions:
+  - ">= 0.4.1"
+  severity: high
+  package_manager: cargo
+  disclosed_date: 2018-09-17
+  created_date: 2018-09-17
+  last_modified_date: 2018-09-17
+  credit:
+  - RustSec
+  references:
+  - https://github.com/chyh1990/yaml-rust/pull/109
+  source_url: https://github.com/RustSec/advisory-db/blob/master/crates/yaml-rust/RUSTSEC-2018-0006.toml

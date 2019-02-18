@@ -1,0 +1,33 @@
+---
+- id: rustsec:cargo:smallvec:RUSTSEC-2018-0003
+  title: Possible double free during unwinding in SmallVec::insert_many
+  description: |
+    If an iterator passed to `SmallVec::insert_many` panicked in `Iterator::next`,
+    destructors were run during unwinding while the vector was in an inconsistent
+    state, possibly causing a double free (a destructor running on two copies of
+    the same value).
+
+    This is fixed in smallvec 0.6.3 by ensuring that the vector's length is not
+    updated to include moved items until they have been removed from their
+    original positions.  Items may now be leaked if `Iterator::next` panics, but
+    they will not be dropped more than once.
+
+    Thank you to @Vurich for reporting this bug.
+  affected_package: smallvec
+  unaffected_versions:
+  - "< 0.3.2"
+  patched_versions:
+  - ">= 0.6.3"
+  - "^0.3.4"
+  - "^0.4.5"
+  - "^0.5.1"
+  severity: high
+  package_manager: cargo
+  disclosed_date: 2018-07-19
+  created_date: 2018-07-19
+  last_modified_date: 2018-07-19
+  credit:
+  - RustSec
+  references:
+  - https://github.com/servo/rust-smallvec/issues/96
+  source_url: https://github.com/RustSec/advisory-db/blob/master/crates/smallvec/RUSTSEC-2018-0003.toml

@@ -1,0 +1,28 @@
+---
+- id: rustsec:cargo:trust-dns-proto:RUSTSEC-2018-0007
+  title: Stack overflow when parsing malicious DNS packet
+  description: |
+    There's a stack overflow leading to a crash when Trust-DNS's parses a
+    malicious DNS packet.
+
+    Affected versions of this crate did not properly handle parsing of DNS message
+    compression (RFC1035 section 4.1.4). The parser could be tricked into infinite
+    loop when a compression offset pointed back to the same domain name to be
+    parsed.
+
+    This allows an attacker to craft a malicious DNS packet which when consumed
+    with Trust-DNS could cause stack overflow and crash the affected software.
+
+    The flaw was corrected by trust-dns-proto 0.4.3 and upcoming 0.5.0 release.
+  affected_package: trust-dns-proto
+  patched_versions:
+  - ">= 0.4.3"
+  - ">= 0.5.0-alpha.3"
+  severity: high
+  package_manager: cargo
+  disclosed_date: 2018-10-09
+  created_date: 2018-10-09
+  last_modified_date: 2018-10-09
+  credit:
+  - RustSec
+  source_url: https://github.com/RustSec/advisory-db/blob/master/crates/trust-dns-proto/RUSTSEC-2018-0007.toml

@@ -1,0 +1,27 @@
+---
+- id: rustsec:cargo:crossbeam:RUSTSEC-2018-0009
+  title: MsQueue and SegQueue suffer from double-free
+  description: |
+    Even if an element is popped from a queue, crossbeam would run its
+    destructor inside the epoch-based garbage collector. This is a source
+    of double frees.
+
+    The flaw was corrected by wrapping elements inside queues in a
+    `ManuallyDrop`.
+
+    Thanks to @c0gent for reporting the issue.
+  affected_package: crossbeam
+  unaffected_versions:
+  - "< 0.4.0"
+  patched_versions:
+  - ">= 0.4.1"
+  severity: high
+  package_manager: cargo
+  disclosed_date: 2018-12-09
+  created_date: 2018-12-09
+  last_modified_date: 2018-12-09
+  credit:
+  - RustSec
+  references:
+  - https://github.com/crossbeam-rs/crossbeam-epoch/issues/82
+  source_url: https://github.com/RustSec/advisory-db/blob/master/crates/crossbeam/RUSTSEC-2018-0009.toml
