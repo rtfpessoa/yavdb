@@ -1,0 +1,35 @@
+---
+- id: snykio:maven:hudson.plugins.octopusdeploy:octopusdeploy:173717
+  title: Cross-Site Request Forgery (CSRF)
+  description: |
+    [hudson.plugins.octopusdeploy:octopusdeploy][1] helps connecting
+    OctopusDeploy to the Jenkins workflow. Integration with OctopusDeploy is
+    achieved via the REST API, not the Octo.exe tool.
+
+    Affected versions of this package are vulnerable to Cross-Site Request
+    Forgery (CSRF). A missing permission check in a form validation method
+    in OctopusDeploy Plugin allows users with Overall/Read permission to
+    initiate a connection test, sending an `HTTP HEAD` request to an
+    attacker-specified URL, returning HTTP response code if successful, or
+    exception error message otherwise.
+
+
+
+    [1]: https://mvnrepository.com/artifact/hudson.plugins.octopusdeploy/octopusdeploy
+  affected_package: hudson.plugins.octopusdeploy:octopusdeploy
+  vulnerable_versions:
+  - "< 1.9.0"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2019-1003027
+  cwe:
+  - CWE-352
+  disclosed_date: 2019-02-21
+  created_date: 2019-02-21
+  last_modified_date: 2019-02-21
+  credit:
+  - Thomas de Grenier de Latour
+  references:
+  - https://jenkins.io/security/advisory/2019-02-19/#SECURITY-817
+  source_url: https://snyk.io/vuln/SNYK-JAVA-HUDSONPLUGINSOCTOPUSDEPLOY-173717
