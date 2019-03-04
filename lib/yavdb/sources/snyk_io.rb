@@ -70,7 +70,7 @@ module YAVDB
 
             next_urls = if page_vuln_urls.any?
                           next_url = snykio.css('a.pagination__next')
-                          if next_url
+                          if next_url&.first
                             fetch_advisory_recursive(next_url.first.get('href'))
                           else
                             []
