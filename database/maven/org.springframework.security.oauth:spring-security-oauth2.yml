@@ -1,4 +1,58 @@
 ---
+- id: snykio:maven:org.springframework.security.oauth:spring-security-oauth2:173755
+  title: Credentials Disclosure
+  description: |
+    [org.springframework.security.oauth:spring-security-oauth2][1] is a
+    package that provides support for using Spring Security with OAuth (1a)
+    and OAuth2.
+
+    Affected versions of this package are vulnerable to Credentials
+    Disclosure due to the package being susceptible to an open redirector
+    attack that can leak an authorization code. A malicious user or attacker
+    can craft a request to the authorization endpoint using the
+    authorization code grant type, and specify a manipulated redirection URI
+    via the `redirect_uri` parameter. This can cause the authorization
+    server to redirect the resource owner user-agent to a URI under the
+    control of the attacker with the leaked authorization code.
+
+    This vulnerability exposes applications that meet all of the following
+    requirements:
+
+    * Act in the role of an Authorization Server (e.g.
+      `@EnableAuthorizationServer`)
+    * Uses the `DefaultRedirectResolver` in the `AuthorizationEndpoint`.
+
+    This vulnerability does not expose applications that:
+
+    * Act in the role of an Authorization Server and uses a different
+      `RedirectResolver` implementation other than `DefaultRedirectResolver`
+    * Act in the role of a Resource Server only (e.g.
+      `@EnableResourceServer`)
+    * Act in the role of a Client only (e.g. `@EnableOAuthClient`).
+
+
+
+    [1]: https://github.com/spring-projects/spring-security-oauth
+  affected_package: org.springframework.security.oauth:spring-security-oauth2
+  vulnerable_versions:
+  - ">= 2.0.0 < 2.0.17"
+  - ">= 2.1.0 < 2.1.4"
+  - ">= 2.2.0 < 2.2.4"
+  - ">= 2.3.0 < 2.3.5"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2019-3778
+  cwe:
+  - CWE-255
+  disclosed_date: 2019-03-07
+  created_date: 2019-03-08
+  last_modified_date: 2019-03-08
+  credit:
+  - Dirk Koehler
+  references:
+  - https://pivotal.io/security/cve-2019-3778
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGSPRINGFRAMEWORKSECURITYOAUTH-173755
 - id: snykio:maven:org.springframework.security.oauth:spring-security-oauth2:31345
   title: Arbitrary Code Execution
   description: |
