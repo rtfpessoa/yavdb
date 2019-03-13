@@ -153,6 +153,40 @@
   - https://android.googlesource.com/platform/external/bouncycastle/+/b3bddea0f33c0459293c6419569ad151b4a7b44b
   - https://android.googlesource.com/platform/libcore/+/efd369d996fd38c50a50ea0de8f20507253cb6de
   source_url: https://ossindex.net/resource/package/7073535454/vulnerabilities
+- id: snykio:maven:org.bouncycastle:bcprov-jdk15on:173771
+  title: Information Exposure
+  description: |
+    [org.bouncycastle:bcprov-jdk15on][1] is a Java implementation of
+    cryptographic algorithms.
+
+    Affected versions of this package are vulnerable to Information
+    Exposure. The primary engine class used for AES was `AESFastEngine`. Due
+    to the highly table driven approach used in the algorithm it turns out
+    that if the data channel on the CPU can be monitored the lookup table
+    accesses are sufficient to leak information on the AES key being used.
+    There was also a leak in `AESEngine` although it was substantially less.
+
+
+
+    [1]: https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk15on
+  affected_package: org.bouncycastle:bcprov-jdk15on
+  vulnerable_versions:
+  - "< 1.56"
+  severity: low
+  package_manager: maven
+  cve:
+  - CVE-2016-1000339
+  cwe:
+  - CWE-200
+  disclosed_date: 2018-06-04
+  created_date: 2019-03-12
+  last_modified_date: 2019-03-12
+  credit:
+  - Unknown
+  references:
+  - https://github.com/bcgit/bc-java/commit/413b42f4d770456508585c830cfcde95f9b0e93b#diff-54656f860db94b867ba7542430cd2ef0
+  - https://github.com/bcgit/bc-java/commit/8a73f08931450c17c749af067b6a8185abdfd2c0#diff-494fb066bed02aeb76b6c005632943f2
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGBOUNCYCASTLE-173771
 - id: snykio:maven:org.bouncycastle:bcprov-jdk15on:31047
   title: Cryptographic Issues
   description: |
