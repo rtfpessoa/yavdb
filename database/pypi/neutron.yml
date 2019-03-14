@@ -1,0 +1,41 @@
+---
+- id: snykio:pypi:neutron:173777
+  title: Insecure Defaults
+  description: |
+    [neutron][1] is an OpenStack project to provide “network connectivity as
+    a service” between interface devices (e.g., vNICs) managed by other
+    OpenStack services (e.g., nova). It implements the Neutron API.
+
+    Affected versions of this package have a Insecure Defaults. Setting a
+    destination port in a security group rule along with a protocol that
+    doesn\'t support that option (for example, VRRP), may allow an
+    authenticated user to block further application of security group rules
+    for instances from any project/tenant on the compute hosts to which
+    it\'s applied.
+
+    *Note: Only deployments using the iptables security group driver are
+    affected.*
+
+
+
+    [1]: https://pypi.org/project/neutron/
+  affected_package: neutron
+  vulnerable_versions:
+  - "< 1.10.8"
+  - "< 11.0.7"
+  - ">= 12.0.0 < 12.0.6"
+  - ">= 13.0.0 < 13.0.3"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2019-9735
+  cwe:
+  - CWE-355
+  disclosed_date: 2019-03-13
+  created_date: 2019-03-13
+  last_modified_date: 2019-03-13
+  credit:
+  - Unknown
+  references:
+  - https://launchpad.net/bugs/1818385
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-NEUTRON-173777
