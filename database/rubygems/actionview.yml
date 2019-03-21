@@ -197,6 +197,149 @@
   references:
   - https://github.com/rubysec/ruby-advisory-db
   source_url: https://groups.google.com/forum/#!topic/rubyonrails-security/I-VWr034ouk
+- id: rubyadvisory:rubygems:actionview:CVE-2019-5418
+  title: File Content Disclosure in Action View
+  description: |
+    There is a possible file content disclosure vulnerability in Action View. This
+    vulnerability has been assigned the CVE identifier CVE-2019-5418.
+
+    Versions Affected:  All.
+    Not affected:       None.
+    Fixed Versions:     6.0.0.beta3, 5.2.2.1, 5.1.6.2, 5.0.7.2, 4.2.11.1
+
+    Impact
+    ------
+    There is a possible file content disclosure vulnerability in Action View.
+    Specially crafted accept headers in combination with calls to `render file:`
+    can cause arbitrary files on the target server to be rendered, disclosing the
+    file contents.
+
+    The impact is limited to calls to `render` which render file contents without
+    a specified accept format.  Impacted code in a controller looks something like
+    this:
+
+    ```
+    class UserController < ApplicationController
+      def index
+        render file: "#{Rails.root}/some/file"
+      end
+    end
+    ```
+
+    Rendering templates as opposed to files is not impacted by this vulnerability.
+
+    All users running an affected release should either upgrade or use one of the
+    workarounds immediately.
+
+    Releases
+    --------
+    The 6.0.0.beta3, 5.2.2.1, 5.1.6.2, 5.0.7.2, and 4.2.11.1 releases are
+    available at the normal locations.
+
+    Workarounds
+    -----------
+    This vulnerability can be mitigated by specifying a format for file rendering,
+    like this:
+
+    ```
+    class UserController < ApplicationController
+      def index
+        render file: "#{Rails.root}/some/file", formats: [:html]
+      end
+    end
+    ```
+
+    In summary, impacted calls to `render` look like this:
+
+    ```
+    render file: "#{Rails.root}/some/file"
+    ```
+
+    The vulnerability can be mitigated by changing to this:
+
+    ```
+    render file: "#{Rails.root}/some/file", formats: [:html]
+    ```
+
+    Other calls to `render` are not impacted.
+
+    Alternatively, the following monkey patch can be applied in an initializer:
+
+    ```
+    $ cat config/initializers/formats_filter.rb
+    # frozen_string_literal: true
+
+    ActionDispatch::Request.prepend(Module.new do
+      def formats
+        super().select do |format|
+          format.symbol || format.ref == "*/*"
+        end
+      end
+    end)
+    ```
+
+    Credits
+    -------
+    Thanks to John Hawthorn <john@hawthorn.email> of GitHub
+  affected_package: actionview
+  patched_versions:
+  - ">= 6.0.0.beta3"
+  - "~> 4.2.11  >= 4.2.11.1"
+  - "~> 5.0.7  >= 5.0.7.2"
+  - "~> 5.1.6  >= 5.1.6.2"
+  - "~> 5.2.2  >= 5.2.2.1"
+  package_manager: rubygems
+  cve:
+  - CVE-2019-5418
+  disclosed_date: 2019-03-13
+  created_date: 2019-03-13
+  last_modified_date: 2019-03-13
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://groups.google.com/forum/#!topic/rubyonrails-security/pFRKI96Sm8Q
+- id: rubyadvisory:rubygems:actionview:CVE-2019-5419
+  title: Denial of Service Vulnerability in Action View
+  description: "There is a potential denial of service vulnerability in actionview.\nThis
+    vulnerability has been assigned the CVE identifier CVE-2019-5419.\n\nImpact\n------\nSpecially
+    crafted accept headers can cause the Action View template location\ncode to consume
+    100% CPU, causing the server unable to process requests.  This\nimpacts all Rails
+    applications that render views.\n\nAll users running an affected release should
+    either upgrade or use one of the\nworkarounds immediately.\n\nWorkarounds\n-----------\nThis
+    vulnerability can be mitigated by wrapping `render` calls with\n`respond_to` blocks.
+    \ For example, the following example is vulnerable:\n\n```\nclass UserController
+    < ApplicationController\n  def index\n    render \"index\"\n  end\nend\n```\n\nBut
+    the following code is not vulnerable:\n\n```\nclass UserController < ApplicationController\n
+    \ def index\n    respond_to |format|\n      format.html { render \"index\" }\n
+    \   end\n  end\nend\n```\n\nImplicit rendering is impacted, so this code is vulnerable:\n\n```\nclass
+    UserController < ApplicationController\n  def index\n  end\nend\n```\n\nBut can
+    be changed this this:\n\n```\nclass UserController < ApplicationController\n  def
+    index\n    respond_to |format|\n      format.html { render \"index\" }\n    end\n
+    \ end\nend\n```\n\nAlternatively to specifying the format, the following monkey
+    patch can be\napplied in an initializer:\n\n```\n$ cat config/initializers/formats_filter.rb\n#
+    frozen_string_literal: true\n\nActionDispatch::Request.prepend(Module.new do\n
+    \ def formats\n    super().select do |format|\n      format.symbol || format.ref
+    == \"*/*\"\n    end\n  end\nend)\n```\n\nCredits \n------- \nThanks to John Hawthorn
+    <john@hawthorn.email> of GitHub \n"
+  affected_package: actionview
+  patched_versions:
+  - ">= 6.0.0.beta3"
+  - "~> 4.2.11  >= 4.2.11.1"
+  - "~> 5.0.7  >= 5.0.7.2"
+  - "~> 5.1.6  >= 5.1.6.2"
+  - "~> 5.2.2  >= 5.2.2.1"
+  package_manager: rubygems
+  cve:
+  - CVE-2019-5419
+  disclosed_date: 2019-03-13
+  created_date: 2019-03-13
+  last_modified_date: 2019-03-13
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://groups.google.com/forum/#!topic/rubyonrails-security/GN7w9fFAQeI
 - id: snykio:rubygems:actionview:173783
   title: Denial of Service (DoS)
   description: |+
@@ -311,10 +454,10 @@
     logic particular to your application here\n    end\n\n\n\n[1]: https://rubygems.org/gems/actionview\n"
   affected_package: actionview
   vulnerable_versions:
-  - "< 3.2.22.1"
-  - "< 4.1.14.1  >= 3.2.23"
-  - "< 4.2.5.1  >= 4.2"
-  - "< 5.0.0.beta1.1  >= 4.3"
+  - "<3.2.22.1"
+  - ">=3.2.23  <4.1.14.1"
+  - ">=4.2.0  <4.2.5.1"
+  - ">=4.3.0  <5.0.0"
   severity: high
   package_manager: rubygems
   cve:
@@ -351,8 +494,8 @@
     logic particular to your application here\n    end\n\n"
   affected_package: actionview
   vulnerable_versions:
-  - "< 3.2.22.2"
-  - "< 4.1.14.2  >= 3.2.23"
+  - "<3.2.22.2"
+  - ">=3.2.23  <4.1.14.2"
   severity: medium
   package_manager: rubygems
   cve:
@@ -404,9 +547,9 @@
     the attack taking place.\n\n"
   affected_package: actionview
   vulnerable_versions:
-  - "< 3.2.22.3  >= 3.0.0"
-  - "< 4.2.7.1  >= 3.2.23"
-  - "< 5.0.0.1  >= 5.0.0.0"
+  - ">=3.0.0  <3.2.22.3"
+  - ">=3.2.23  <4.2.7.1"
+  - ">=5.0.0.0  <5.0.0.1"
   severity: medium
   package_manager: rubygems
   cve:

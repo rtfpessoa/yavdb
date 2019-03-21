@@ -1,4 +1,56 @@
 ---
+- id: rubyadvisory:rubygems:railties:CVE-2019-5420
+  title: Possible Remote Code Execution Exploit in Rails Development Mode
+  description: |
+    There is a possible a possible remote code executing exploit in Rails when in
+    development mode. This vulnerability has been assigned the CVE identifier
+    CVE-2019-5420.
+
+    Versions Affected:  6.0.0.X, 5.2.X.
+    Not affected:       < 5.2.0
+    Fixed Versions:     6.0.0.beta3, 5.2.2.1
+
+    Impact
+    ------
+    With some knowledge of a target application it is possible for an attacker to
+    guess the automatically generated development mode secret token.  This secret
+    token can be used in combination with other Rails internals to escalate to a
+    remote code execution exploit.
+
+    All users running an affected release should either upgrade or use one of the
+    workarounds immediately.
+
+    Releases
+    --------
+    The 6.0.0.beta3 and 5.2.2.1 releases are available at the normal locations.
+
+    Workarounds
+    -----------
+    This issue can be mitigated by specifying a secret key in development mode.
+    In "config/environments/development.rb" add this:
+
+      config.secret_key_base = SecureRandom.hex(64)
+
+    Credits
+    -------
+    Thanks to ooooooo_q
+  affected_package: railties
+  unaffected_versions:
+  - "< 5.2.0"
+  patched_versions:
+  - ">= 6.0.0.beta3"
+  - "~> 5.2.2  >= 5.2.2.1"
+  package_manager: rubygems
+  cve:
+  - CVE-2019-5420
+  disclosed_date: 2019-03-13
+  created_date: 2019-03-13
+  last_modified_date: 2019-03-13
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://groups.google.com/forum/#!topic/rubyonrails-security/IsQKvDqZdKw
 - id: snykio:rubygems:railties:173785
   title: Remote Code Execution
   description: |
@@ -48,7 +100,7 @@
     [2]: https://snyk.io/blog/node-js-timing-attack-ccc-ctf/
   affected_package: railties
   vulnerable_versions:
-  - "<5.0.0.beta1"
+  - "<5.0.0"
   severity: medium
   package_manager: rubygems
   cwe:

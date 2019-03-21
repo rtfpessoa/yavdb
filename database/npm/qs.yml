@@ -141,13 +141,13 @@
   source_url: https://snyk.io/vuln/npm:qs:20140806-1
 - id: snykio:npm:qs:20140806
   title: Denial of Service (Memory Exhaustion)
-  description: |
-    [`qs`][1] is a querystring parser that supports nesting and arrays, with
-    a depth limit.
+  description: |+
+    [qs][1] is a querystring parser that supports nesting and arrays, with a
+    depth limit.
 
     Affected versions of this package are vulnerable to Denial of Service
-    (Dos) attacks. During parsing, the `qs` module may create a sparse area
-    (an array where no elements are filled), and grow that array to the
+    (Memory Exhaustion). During parsing, the `qs` module may create a sparse
+    area (an array where no elements are filled), and grow that array to the
     necessary size based on the indices used on it. An attacker can specify
     a high index value in a query string, thus making the server allocate a
     respectively big array. Truly large values can cause the server to run
@@ -157,6 +157,32 @@
 
 
     [1]: https://www.npmjs.com/package/qs
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
   affected_package: qs
   vulnerable_versions:
   - "<1.0.0"
@@ -172,6 +198,7 @@
   credit:
   - Dustin Shiver
   references:
+  - https://github.com/tj/node-querystring/pull/114/commits/43a604b7847e56bba49d0ce3e222fe89569354d8
   - https://github.com/visionmedia/node-querystring/issues/104
   - https://nvd.nist.gov/vuln/detail/CVE-2014-7191
   source_url: https://snyk.io/vuln/npm:qs:20140806
