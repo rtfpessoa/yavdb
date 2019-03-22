@@ -1,0 +1,37 @@
+---
+- id: snykio:maven:org.apache.karaf.kar:org.apache.karaf.kar.core:173992
+  title: Arbitrary File Write via Archive Extraction (Zip Slip)
+  description: "[org.apache.karaf.kar:org.apache.karaf.kar.core][1] provides core\nimplementation
+    of the KAR management service.\n\nAffected versions of this package are vulnerable
+    to Arbitrary File Write\nvia Archive Extraction (Zip Slip). This can be exploited
+    when the Karaf\nprocess user doesn\\'t have limited permission on the filesystem.\n\n\n\n[1]:
+    https://mvnrepository.com/artifact/org.apache.karaf.kar/org.apache.karaf.kar.core\n\\nIt
+    is exploited using a specially crafted zip archive, that holds path\ntraversal
+    filenames. When exploited, a filename in a malicious archive\nis concatenated
+    to the target extraction directory, which results in the\nfinal path ending up
+    outside of the target folder. For instance, a zip\nmay hold a file with a \\\"../../file.exe\\\"
+    location and thus break out of\nthe target folder. If an executable or a configuration
+    file is\noverwritten with a file containing malicious code, the problem can turn\ninto
+    an arbitrary code execution issue quite easily.\n\nThe following is an example
+    of a zip archive with one benign file and\none malicious file. Extracting the
+    malicous file will result in\ntraversing out of the target folder, ending up in
+    `/root/.ssh/`\noverwriting the `authorized_keys` file:\n\n    \n    +2018-04-15
+    22:04:29 ..... 19 19 good.txt\n    \n    +2018-04-15 22:04:42 ..... 20 20 ../../../../../../root/.ssh/authorized_keys\n\n"
+  affected_package: org.apache.karaf.kar:org.apache.karaf.kar.core
+  vulnerable_versions:
+  - "< 4.2.3"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2019-0191
+  cwe:
+  - CWE-29
+  disclosed_date: 2019-03-20
+  created_date: 2019-03-21
+  last_modified_date: 2019-03-21
+  credit:
+  - Colm O hEigeartaigh
+  references:
+  - https://lists.apache.org/thread.html/6856aa7ed7dd805eaf65d0e5e95027dda3b2307aacd1ab4a838c5cd1@%3Cuser.karaf.apache.org%3E
+  - https://snyk.io/research/zip-slip-vulnerability
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEKARAFKAR-173992
