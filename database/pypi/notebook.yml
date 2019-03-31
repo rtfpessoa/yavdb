@@ -32,6 +32,69 @@
   - https://github.com/jupyter/notebook/commit/bfaa61385729ed4fb453863053f9a79141f01119
   - https://github.com/jupyter/notebook/compare/f3f00df...05aa4b2
   source_url: https://snyk.io/vuln/SNYK-PYTHON-NOTEBOOK-173774
+- id: snykio:pypi:notebook:174029
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [notebook][1] is a web application that allows you to create and share
+    documents that contain live code, equations, visualizations, and
+    explanatory text.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). It allows crafted links to the login page, which will redirect to
+    a malicious site after successful login. Servers running on a base\_url
+    prefix are not affected.
+
+
+
+    [1]: https://pypi.org/project/notebook/
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+  affected_package: notebook
+  vulnerable_versions:
+  - "< 5.7.7"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2019-10255
+  cwe:
+  - CWE-79
+  disclosed_date: 2019-03-28
+  created_date: 2019-03-28
+  last_modified_date: 2019-03-28
+  credit:
+  - Min RK
+  references:
+  - https://blog.jupyter.org/open-redirect-vulnerability-in-jupyter-jupyterhub-adf43583f1e4
+  - https://github.com/jupyter/notebook/commit/08c4c898182edbe97aadef1815cce50448f975cb
+  - https://github.com/jupyter/notebook/commit/70fe9f0ddb3023162ece21fbb77d5564306b913b
+  - https://github.com/jupyter/notebook/commit/d65328d4841892b412aef9015165db1eb029a8ed
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-NOTEBOOK-174029
 - id: snykio:pypi:notebook:40406
   title: Arbitrary Code Execution
   description: |

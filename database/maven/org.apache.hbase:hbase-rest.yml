@@ -1,0 +1,39 @@
+---
+- id: snykio:maven:org.apache.hbase:hbase-rest:174028
+  title: Privilege Escalation
+  description: |
+    [org.apache.hbase:hbase-rest][1] is an open-source, distributed,
+    versioned, non-relational database.
+
+    Affected versions of this package are vulnerable to Privilege
+    Escalation. Authorization was incorrectly applied to users of the HBase
+    REST server. Requests sent to the HBase REST server were executed with
+    the permissions of the REST server itself, not with the permissions of
+    the end-user.
+
+    This issue is only relevant when HBase is configured with Kerberos
+    authentication, HBase authorization is enabled, and the REST server is
+    configured with `SPNEGO` authentication.
+
+
+
+    [1]: http://hbase.apache.org/
+  affected_package: org.apache.hbase:hbase-rest
+  vulnerable_versions:
+  - ">= 2.0.0 < 2.0.5"
+  - ">= 2.1.0 < 2.1.4"
+  severity: low
+  package_manager: maven
+  cve:
+  - CVE-2019-0212
+  cwe:
+  - CWE-264
+  disclosed_date: 2019-03-28
+  created_date: 2019-03-28
+  last_modified_date: 2019-03-28
+  credit:
+  - Gaurav Kanade
+  references:
+  - http://www.openwall.com/lists/oss-security/2019/03/27/3
+  - https://lists.apache.org/thread.html/66535e15007cda8f9308eec10e12ffe349e0b8b55e56ec6ee02b71d2@%3Cdev.hbase.apache.org%3E
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEHBASE-174028
