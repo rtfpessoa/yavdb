@@ -1,0 +1,35 @@
+---
+- id: snykio:maven:org.jenkins-ci.plugins:fortify-on-demand-uploader:174038
+  title: Server-side Request Forgery (SSRF)
+  description: |
+    [org.jenkins-ci.plugins:fortify-on-demand-uploader][1] is a plugin for
+    the Fortify on Demand service. An API key from the FoD service is
+    necessary for this plugin to communicate with FoD.
+
+    Affected versions of this package are vulnerable to Server-side Request
+    Forgery (SSRF). An attacker with Overall/Read permission could initiate
+    a connection to an attacker-specified server. The form validation
+    methods now require `POST` requests and perform a permission check.
+
+
+
+    [1]: https://github.com/jenkinsci/fortify-on-demand-uploader-plugin
+  affected_package: org.jenkins-ci.plugins:fortify-on-demand-uploader
+  vulnerable_versions:
+  - "< 3.0.11"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2019-1003046
+  - CVE-2019-1003047
+  cwe:
+  - CWE-918
+  disclosed_date: 2019-03-28
+  created_date: 2019-03-28
+  last_modified_date: 2019-03-28
+  credit:
+  - Viktor Gazdag
+  references:
+  - https://github.com/jenkinsci/fortify-on-demand-uploader-plugin/commit/e555f8d62ef793ce221f471d7172cad847fb9252
+  - https://jenkins.io/security/advisory/2019-03-25/#SECURITY-992
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGJENKINSCIPLUGINS-174038

@@ -21,6 +21,45 @@
   credit: Сковорода Никита Андреевич
   references: https://npmjs.com/advisories/663
   source_url: https://npmjs.com/advisories/663
+- id: snykio:npm:open:174041
+  title: Arbitrary Code Injection
+  description: |
+    [open][1] is a cross platform package that opens stuff like URLs, files,
+    executables.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Injection when unsanitized user input is passed in.
+
+    The package does come with the following warning in the readme:
+
+        The same care should be taken when calling open as if you were calling child_process.exec directly. If it is an executable it will run in a new shell.
+
+    The package `open` is replacing the `opn` package, which is now
+    deprecated. The older versions of `open` are vulnerable.
+
+    **Note: Upgrading `open` to the last version will prevent this
+    vulnerability but is also likely to have unwanted effects since it now
+    has a very different API.**
+
+
+
+    [1]: https://www.npmjs.com/package/open
+  affected_package: open
+  vulnerable_versions:
+  - "<6.0.0"
+  severity: high
+  package_manager: npm
+  cwe:
+  - CWE-94
+  disclosed_date: 2018-05-16
+  created_date: 2019-03-31
+  last_modified_date: 2019-03-31
+  credit:
+  - ChaLKer
+  references:
+  - https://hackerone.com/reports/319473
+  - https://www.npmjs.com/advisories/663
+  source_url: https://snyk.io/vuln/SNYK-JS-OPEN-174041
 - id: snykio:npm:open:20180512
   title: Arbitrary Command Injection
   description: |
