@@ -1,0 +1,63 @@
+---
+- id: snykio:go:github.com/prometheus/prometheus/web/ui:174127
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [github.com/prometheus/prometheus/web/ui][1] is a systems and service
+    monitoring system
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). An attacker could exploit this by convincing an authenticated
+    user to visit a crafted URL on a Prometheus server, allowing for the
+    execution and persistent storage of arbitrary scripts.
+
+
+
+    [1]: https://github.com/gouthamve/prometheus
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+  affected_package: github.com/prometheus/prometheus/web/ui
+  vulnerable_versions:
+  - "<2.7.1"
+  severity: medium
+  package_manager: go
+  cve:
+  - CVE-2019-3826
+  cwe:
+  - CWE-79
+  disclosed_date: 2019-03-26
+  created_date: 2019-04-04
+  last_modified_date: 2019-04-04
+  credit:
+  - Goutham Veeramachaneni
+  references:
+  - https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2019-3826
+  - https://github.com/prometheus/prometheus/commit/62e591f9
+  - https://github.com/prometheus/prometheus/pull/5163
+  - https://github.com/prometheus/prometheus/pull/5163/commits/ea254eea5e3c9a12d6f37a25921b7259ff1c4280
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMPROMETHEUSPROMETHEUSWEBUI-174127

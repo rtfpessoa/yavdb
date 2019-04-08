@@ -129,6 +129,93 @@
   references:
   - https://www.npmjs.com/advisories/788
   source_url: https://snyk.io/vuln/SNYK-JS-JSYAML-173999
+- id: snykio:npm:js-yaml:174117
+  title: Denial of Service (DoS)
+  description: |+
+    [js-yaml][1] is a human-friendly data serialization language.
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS). It\'s possible to abuse aliases to create an exponential tree of
+    nodes consisting of collections that each have multiple references. When
+    such a tree is used as the key of a mapping it is then converted to a JS
+    object, which is then parsed by `JSON.stringify()`, which causes the
+    process to run out of memory creating the string.
+
+
+
+    [1]: https://www.npmjs.com/package/js-yaml
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+  affected_package: js-yaml
+  vulnerable_versions:
+  - "<1.5.0"
+  severity: medium
+  package_manager: npm
+  cwe:
+  - CWE-400
+  disclosed_date: 2019-04-04
+  created_date: 2019-04-05
+  last_modified_date: 2019-04-05
+  credit:
+  - eemeli
+  references:
+  - https://github.com/eemeli/yaml/commit/d42b492c4eb4d976881230444d0eb039bf81cee0
+  - https://github.com/eemeli/yaml/pull/104
+  source_url: https://snyk.io/vuln/SNYK-JS-JSYAML-174117
+- id: snykio:npm:js-yaml:174129
+  title: Arbitrary Code Execution
+  description: |
+    [js-yaml][1] is a human-friendly data serialization language.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution. When object with an executable `toString()` property used as
+    a map key, it will execute that function. This happens only for
+    `load()`, which should not be used with untrusted data anyway.
+    `safeLoad()` is not affected because it can\'t parse functions.
+
+
+
+    [1]: https://www.npmjs.com/package/js-yaml
+  affected_package: js-yaml
+  vulnerable_versions:
+  - "<3.13.1"
+  severity: high
+  package_manager: npm
+  cwe:
+  - CWE-94
+  disclosed_date: 2019-04-05
+  created_date: 2019-04-07
+  last_modified_date: 2019-04-07
+  credit:
+  - rlidwka
+  references:
+  - https://github.com/nodeca/js-yaml/pull/480
+  - https://github.com/nodeca/js-yaml/pull/480/commits/e18afbf1edcafb7add2c4c7b22abc8d6ebc2fa61
+  source_url: https://snyk.io/vuln/SNYK-JS-JSYAML-174129
 - id: snykio:npm:js-yaml:20130623
   title: Code Execution due to Deserialization
   description: "The JS-YAML module for Node.js contained a code execution vulnerability\nprior
