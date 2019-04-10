@@ -66,3 +66,69 @@
   - https://github.com/airsonic/airsonic/commit/1a88f46c18066f61e11c6a95dccd3801ec4aec55
   - https://github.com/airsonic/airsonic/releases/tag/v10.2.1
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAIRSONICPLAYER-174112
+- id: snykio:maven:org.airsonic.player:airsonic-main:174135
+  title: Information Exposure
+  description: |
+    [org.airsonic.player:airsonic-main][1] is a media server that can be
+    used to stream multiple players simultaneously.
+
+    Affected versions of this package are vulnerable to Information
+    Exposure. The code uses default remember-me mechanism based on MD5, with
+    a fixed key of airsonic in `GlobalSecurityConfig.java`. An attacker able
+    to capture cookies might be able to trivially brute-force offline the
+    passwords of associated users.
+
+
+
+    [1]: https://github.com/airsonic/airsonic
+  affected_package: org.airsonic.player:airsonic-main
+  vulnerable_versions:
+  - ">= 10.1.0"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2019-10907
+  cwe:
+  - CWE-200
+  disclosed_date: 2019-04-07
+  created_date: 2019-04-09
+  last_modified_date: 2019-04-09
+  credit:
+  - Unknown
+  references:
+  - https://github.com/airsonic/airsonic/commit/3e07ea52885f88d3fbec444dfd592f27bfb65647
+  - https://github.com/airsonic/airsonic/pull/951
+  - https://github.com/airsonic/airsonic/pull/951/commits/268dc6e13dd1d84f309db3a4bd7d0d864c4b5bf1
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAIRSONICPLAYER-174135
+- id: snykio:maven:org.airsonic.player:airsonic-main:174142
+  title: Insecure Randomness
+  description: |
+    [org.airsonic.player:airsonic-main][1] is a media server that can be
+    used to stream multiple players simultaneously.
+
+    Affected versions of this package are vulnerable to Insecure Randomness
+    which can lead to privilege escalation attacks. `RecoverController.java`
+    generates passwords via the `org.apache.commons.lang.RandomStringUtils`
+    class, which uses the `java.util.Random` PRNG function. This function
+    uses a 48-bit seed that is susceptible to brute force attacks.
+
+
+
+    [1]: https://github.com/airsonic/airsonic
+  affected_package: org.airsonic.player:airsonic-main
+  vulnerable_versions:
+  - "< 10.2.1"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2019-10908
+  cwe:
+  - CWE-330
+  disclosed_date: 2019-04-07
+  created_date: 2019-04-09
+  last_modified_date: 2019-04-09
+  credit:
+  - Unknown
+  references:
+  - https://github.com/airsonic/airsonic/commit/61c842923a6d60d4aedd126445a8437b53b752c8
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAIRSONICPLAYER-174142
