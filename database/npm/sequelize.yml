@@ -286,6 +286,50 @@
   - https://github.com/sequelize/sequelize/pull/5167/commits/f282d85e60e3df5e57ecdb82adccb4eaef404f03
   - https://nodesecurity.io/advisories/112
   source_url: https://ossindex.net/resource/package/7014430328/vulnerabilities
+- id: snykio:npm:sequelize:174147
+  title: Hash Injection
+  description: |
+    [sequelize][1] is a promise-based Node.js ORM for Postgres, MySQL,
+    MariaDB, SQLite and Microsoft SQL Server.
+
+    Affected versions of this package are vulnerable to Hash Injection.
+    Using specially crafted requests an attacker can bypass `secret_token`
+    protections on websites using sequalize.
+
+    For example:
+
+        db.Token.findOne({
+              where: {
+                token: req.query.token
+              }
+        );
+
+    Node.js and other platforms allow nested parameters, i.e. `token[$gt]=1`
+    will be transformed into `token = {"$gt":1}`. When such a hash is passed
+    into `sequalize` it will consider it a query (greater than 1) and find
+    the first token in the DB, bypassing security of this endpoint.
+
+
+
+    [1]: http://docs.sequelizejs.com/
+  affected_package: sequelize
+  vulnerable_versions:
+  - "<4.12.0"
+  severity: high
+  package_manager: npm
+  cwe:
+  - CWE-77
+  disclosed_date: 2017-03-01
+  created_date: 2019-04-07
+  last_modified_date: 2019-04-07
+  credit:
+  - Egor Homakov
+  references:
+  - https://blog.websecurify.com/2014/08/hacking-nodejs-and-mongodb.html
+  - https://github.com/sequelize/sequelize/issues/7310
+  - https://github.com/sequelize/sequelize/issues/8417
+  - https://github.com/sequelize/sequelize/pull/8240/files
+  source_url: https://snyk.io/vuln/SNYK-JS-SEQUELIZE-174147
 - id: snykio:npm:sequelize:20130614
   title: SQL Injection
   description: |+
