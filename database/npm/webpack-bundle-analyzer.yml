@@ -1,35 +1,19 @@
 ---
-- id: npmjs:npm:vuex-router-sync:814
-  title: Cross-Site Scripting
-  description: All versions of `vuex-router-sync` are vulnerable to Cross-Site Scripting.
-    Server-side rendered HTML has unescaped URL parameters, allowing attackers to
-    inject malicious JavaScript on the rendered page.
-  affected_package: vuex-router-sync
-  vulnerable_versions:
-  - ">=0.0.0"
-  severity: high
-  package_manager: npm
-  cwe: CWE-79
-  disclosed_date: 1970-01-01
-  created_date: 1970-01-01
-  last_modified_date: 1970-01-01
-  credit: grinnery
-  references: https://npmjs.com/advisories/814
-  source_url: https://npmjs.com/advisories/814
-- id: snykio:npm:vuex-router-sync:174134
+- id: snykio:npm:webpack-bundle-analyzer:174190
   title: Cross-site Scripting (XSS)
   description: |+
-    [vuex-router-sync][1] is a package used to effortlessly keep
-    `vue-router` and `vuex` store in sync.
+    [webpack-bundle-analyzer][1] is a package that can be used to create
+    visual size of webpack output files with an interactive zoomable
+    treemap.
 
     Affected versions of this package are vulnerable to Cross-site Scripting
-    (XSS) due to improperly handling query parameters in the url. This means
-    that server-rendered `HTML` will have unescaped route parameters in it,
-    allowing to break the page or inject JS code into it.
+    (XSS) due to the usage of the `JSON.stringify` method which accepts
+    server-rendered HTML and returns it as part of the
+    `chartData()`,`enableWebSocket()` or `defaultSizes()` function.
 
 
 
-    [1]: https://www.npmjs.com/package/vuex-router-sync
+    [1]: https://webpack.js.org/
     \nA cross-site scripting attack occurs when the attacker tricks a
     legitimate web-based application or site to accept a request as
     originating from a trusted source.
@@ -102,18 +86,19 @@
     * Read the documentation for any of the libraries referenced in your
       code to understand which elements allow for embedded HTML.
 
-  affected_package: vuex-router-sync
+  affected_package: webpack-bundle-analyzer
   vulnerable_versions:
-  - "*"
-  severity: high
+  - "<3.3.2"
+  severity: medium
   package_manager: npm
   cwe:
   - CWE-79
-  disclosed_date: 2019-04-05
-  created_date: 2019-04-08
-  last_modified_date: 2019-04-08
+  disclosed_date: 2019-04-11
+  created_date: 2019-04-15
+  last_modified_date: 2019-04-15
   credit:
-  - grinnery
+  - th0r
   references:
-  - https://github.com/vuejs/vuex-router-sync/issues/89#issuecomment-480203766
-  source_url: https://snyk.io/vuln/SNYK-JS-VUEXROUTERSYNC-174134
+  - https://github.com/webpack-contrib/webpack-bundle-analyzer/pull/262
+  - https://github.com/webpack-contrib/webpack-bundle-analyzer/pull/264
+  source_url: https://snyk.io/vuln/SNYK-JS-WEBPACKBUNDLEANALYZER-174190

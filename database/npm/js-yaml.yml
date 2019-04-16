@@ -36,6 +36,27 @@
   credit: Shawn Rasheed, Jens DIetrich
   references: https://npmjs.com/advisories/788
   source_url: https://npmjs.com/advisories/788
+- id: npmjs:npm:js-yaml:813
+  title: Code Injection
+  description: "Versions of `js-yaml` prior to 3.13.1 are vulnerable to Code Injection.
+    The `load()` function may execute arbitrary code injected through a malicious
+    YAML file. Objects that have `toString` as key, JavaScript code as value and are
+    used as explicit mapping keys allow attackers to execute the supplied code through
+    the `load()` function. The `safeLoad()` function is unaffected.\n\nAn example
+    payload is \n`{ toString: !<tag:yaml.org,2002:js/function> 'function (){return
+    Date.now()}' } : 1` \nwhich returns the object \n{\n  \"1553107949161\": 1\n}"
+  affected_package: js-yaml
+  vulnerable_versions:
+  - "<3.13.1"
+  severity: high
+  package_manager: npm
+  cwe: CWE-94
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Alex Kocharin
+  references: https://npmjs.com/advisories/813
+  source_url: https://npmjs.com/advisories/813
 - id: ossindex:npm:js-yaml:357790
   title: "[CVE-2013-4660]  Improper Input Validation"
   description: The JS-YAML module before 2.0.5 for Node.js parses input without properly
