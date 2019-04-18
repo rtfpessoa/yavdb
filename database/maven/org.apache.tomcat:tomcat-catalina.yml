@@ -12223,6 +12223,48 @@
   - http://tomcat.apache.org/security-9.html
   - https://bugzilla.redhat.com/show_bug.cgi?id=1693325
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHETOMCAT-174103
+- id: snykio:maven:org.apache.tomcat:tomcat-catalina:174342
+  title: Remote Code Execution
+  description: |
+    [org.apache.tomcat:tomcat-catalina][1] is a Tomcat Servlet Engine Core
+    Classes and Standard implementations.
+
+    Affected versions of this package are vulnerable to Remote Code
+    Execution due to a bug in the way the underlying Java Runtime
+    Environment (JRE) passes command line arguments to windows systems when
+    the option `enableCmdLineArguments` is enabled.
+
+    The CGI Servlet in Apache Tomcat when enabled, will pass user input to
+    the underlying operating system for command line parsing. However, this
+    process is not consistent and may allow the injection of additional
+    arguments. This misconfiguration could be abused by attackers to execute
+    code on an application\'s underlying operating system.
+
+
+
+    [1]: https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-catalina
+  affected_package: org.apache.tomcat:tomcat-catalina
+  vulnerable_versions:
+  - ">= 7.0.0 < 7.0.94"
+  - ">= 8.5.0 < 8.5.40"
+  - ">= 9.0.0.M1 < 9.0.19"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2019-0232
+  cwe:
+  - CWE-94
+  disclosed_date: 2019-04-15
+  created_date: 2019-04-17
+  last_modified_date: 2019-04-17
+  credit:
+  - Unknown
+  references:
+  - https://codewhitesec.blogspot.com/2016/02/java-and-command-line-injections-in-windows.html
+  - https://tomcat.apache.org/security-7.html#Fixed_in_Apache_Tomcat_7.0.94
+  - https://tomcat.apache.org/security-8.html#Fixed_in_Apache_Tomcat_8.5.40
+  - https://tomcat.apache.org/security-9.html#Fixed_in_Apache_Tomcat_9.0.19
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHETOMCAT-174342
 - id: snykio:maven:org.apache.tomcat:tomcat-catalina:30065
   title: Denial of Service (DoS)
   description: |+

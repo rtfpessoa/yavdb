@@ -1,0 +1,36 @@
+---
+- id: snykio:maven:org.apache.mina:mina-core:174326
+  title: Information Exposure
+  description: |
+    [org.apache.mina:mina-core][1] is a network application framework which
+    helps users develop high performance and high scalability network
+    applications easily.
+
+    Affected versions of this package are vulnerable to Information
+    Exposure. Handling of the `close_notify` SSL/TLS message does not lead
+    to a connection closure, leading the server to retain the socket opened
+    and to have the client potentially receive clear-text messages which
+    were supposed to be encrypted.
+
+
+
+    [1]: http://mina.apache.org/
+  affected_package: org.apache.mina:mina-core
+  vulnerable_versions:
+  - "< 2.0.21"
+  - ">= 2.1.0 < 2.1.1"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2019-0231
+  cwe:
+  - CWE-319
+  disclosed_date: 2019-04-14
+  created_date: 2019-04-17
+  last_modified_date: 2019-04-17
+  credit:
+  - Marian Rehak
+  references:
+  - https://bugzilla.redhat.com/show_bug.cgi?id=1700016
+  - https://github.com/apache/mina/commit/294b8ce638df6e237e819537b333e02853bb612c
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEMINA-174326
