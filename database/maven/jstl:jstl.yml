@@ -37,14 +37,18 @@
 - id: snykio:maven:jstl:jstl:30453
   title: XML External Entity (XXE) Injection
   description: |+
-    [`jstl:jstl`][1] It was found that the Java Standard Tag Library (JSTL)
-    allowed the processing of untrusted XML documents to utilize external
-    entity references, which could access resources on the host system and,
-    potentially, allowing arbitrary code execution.
+    [jstl:jstl][1] is a collection of useful JSP tags which encapsulates the
+    core functionality common to many JSP applications.
+
+    Affected versions of this package are vulnerable to XML External Entity
+    (XXE) Injection. Java Standard Tag Library (JSTL) before 1.2 allows
+    remote attackers to execute arbitrary code or conduct external XML
+    entity (XXE) attacks via a crafted XSLT extension in a (1) `<x:parse>`
+    or (2) `<x:transform>` JSTL XML tag.
 
 
 
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22jstl%22
+    [1]: https://mvnrepository.com/artifact/jstl/jstl
     \nXXE Injection is a type of attack against an application that parses XML
     input. XML is a markup language that defines a set of rules for encoding
     documents in a format that is both human-readable and machine-readable.
@@ -82,7 +86,7 @@
 
   affected_package: jstl:jstl
   vulnerable_versions:
-  - "<= 1.2"
+  - ">= 0"
   severity: high
   package_manager: maven
   cve:

@@ -1,0 +1,38 @@
+---
+- id: snykio:maven:org.jenkins-ci.plugins:gitlab-plugin:174458
+  title: Cross-site Request Forgery (CSRF)
+  description: |
+    [org.jenkins-ci.plugins:gitlab-plugin][1] allows GitLab to trigger
+    builds in Jenkins when code is committed or merge requests are opened /
+    updated. It can also send build status back to GitLab.
+
+    Affected versions of this package are vulnerable to Cross-site Request
+    Forgery (CSRF) due to lack of permission checks on the form validation.
+    A malicious user with Overall/Read access could connect to an
+    attacker-specified URL using attacker-specified credentials IDs obtained
+    through another method, capturing credentials stored in Jenkins.
+    Additionally, this form validation method did not require POST requests.
+    This validation process now requires POST requests and
+    Overall/Administer permissions.
+
+
+
+    [1]: https://github.com/jenkinsci/gitlab-plugin
+  affected_package: org.jenkins-ci.plugins:gitlab-plugin
+  vulnerable_versions:
+  - "< 1.5.12"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2019-10300
+  - CVE-2019-10301
+  cwe:
+  - CWE-352
+  disclosed_date: 2019-04-18
+  created_date: 2019-04-18
+  last_modified_date: 2019-04-18
+  credit:
+  - Peter Adkins of Cisco Umbrella
+  references:
+  - https://jenkins.io/security/advisory/2019-04-17/#SECURITY-1357
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGJENKINSCIPLUGINS-174458

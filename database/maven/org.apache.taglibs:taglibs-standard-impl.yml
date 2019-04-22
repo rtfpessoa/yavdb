@@ -36,15 +36,54 @@
   source_url: https://ossindex.net/resource/package/7091778205/vulnerabilities
 - id: snykio:maven:org.apache.taglibs:taglibs-standard-impl:30064
   title: XXE and RCE via XSL extensions in JSTL XML tags
-  description: |
-    [`org.apache.taglibs:taglibs-standard-impl`][1] Apache Standard Taglibs
-    before 1.2.3 allows remote attackers to execute arbitrary code or
-    conduct external XML entity (XXE) attacks via a crafted XSLT extension
-    in a (1) &lt;x:parse&gt; or (2) &lt;x:transform&gt; JSTL XML tag.
+  description: |+
+    [org.apache.taglibs:taglibs-standard-impl][1] is a open source package
+    for JSP(tm) Tag Libraries.
+
+    Affected versions of this package are vulnerable to XXE and RCE via XSL
+    extensions in JSTL XML tags. Apache Standard Taglibs before 1.2.3 allows
+    remote attackers to execute arbitrary code or conduct external XML
+    entity (XXE) attacks via a crafted XSLT extension in a `<x:parse>` or
+    `<x:transform>` JSTL XML tag.
 
 
 
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22taglibs-standard-spec%22
+    [1]: https://tomcat.apache.org/taglibs/
+    \nXXE Injection is a type of attack against an application that parses XML
+    input. XML is a markup language that defines a set of rules for encoding
+    documents in a format that is both human-readable and machine-readable.
+    By default, many XML processors allow specification of an external
+    entity, a URI that is dereferenced and evaluated during XML processing.
+    When an XML document is being parsed, the parser can make a request and
+    include the content at the specified URI inside of the XML document.
+
+    Attacks can include disclosing local files, which may contain sensitive
+    data such as passwords or private user data, using file: schemes or
+    relative paths in the system identifier.
+
+    For example, below is a sample XML document, containing an XML element-
+    username.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+           <username>John</username>
+        </xml>
+
+    An external XML entity - `xxe`, is defined using a system identifier and
+    present within a DOCTYPE header. These entities can access local or
+    remote content. For example the below code contains an external XML
+    entity that would fetch the content of `/etc/passwd` and display it to
+    the user rendered by `username`.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+        <!DOCTYPE foo [
+           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
+           <username>&xxe;</username>
+        </xml>
+
+    Other XXE Injection attacks can access local resources that may not stop
+    returning data, possibly impacting application availability and leading
+    to Denial of Service.
+
   affected_package: org.apache.taglibs:taglibs-standard-impl
   vulnerable_versions:
   - "< 1.2.3"

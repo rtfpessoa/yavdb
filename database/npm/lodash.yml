@@ -42,22 +42,46 @@
   source_url: https://npmjs.com/advisories/782
 - id: snykio:npm:lodash:20180130
   title: Prototype Pollution
-  description: |
-    [lodash][1] is a modern JavaScript utility library delivering
-    modularity, performance, &amp; extras.
-
-    Affected versions of this package are vulnerable to Prototype Pollution.
-    The utilities function allow modification of the `Object` prototype. If
-    an attacker can control part of the structure passed to this function,
-    they could add or modify an existing property.
-
-
-
-    [1]: https://www.npmjs.com/package/lodash
+  description: "[lodash][1] is a modern JavaScript utility library delivering\nmodularity,
+    performance, &amp; extras.\n\nAffected versions of this package are vulnerable
+    to Prototype Pollution.\nThe utilities function allow modification of the `Object`
+    prototype. If\nan attacker can control part of the structure passed to this function,\nthey
+    could add or modify an existing property.\n\n\n\n[1]: https://www.npmjs.com/package/lodash\n\\nPrototype
+    Pollution is a vulnerability affecting JavaScript. Prototype\nPollution refers
+    to the ability to inject properties into existing\nJavaScript language construct
+    prototypes, such as objects. JavaScript\nallows all Object attributes to be altered,
+    including their magical\nattributes such as `_proto_`, `constructor` and `prototype`.
+    An attacker\nmanipulates these attributes to overwrite, or pollute, a JavaScript\napplication
+    object prototype of the base object by injecting other\nvalues. Properties on
+    the `Object.prototype` are then inherited by all\nthe JavaScript objects through
+    the prototype chain. When that happens,\nthis leads to either denial of service
+    by triggering JavaScript\nexceptions, or it tampers with the application source
+    code to force the\ncode path that the attacker injects, thereby leading to remote
+    code\nexecution.\n\nThere are two main ways in which the pollution of prototypes
+    occurs:\n\n* Unsafe `Object` recursive merge\n\n* Property definition by path\n\n###
+    Unsafe Object recursive merge   {#unsafe-object-recursive-merge}\n\nThe logic
+    of a vulnerable recursive merge function follows the following\nhigh-level model:\n\n
+    \   merge (target, source)\n    \n    foreach property of source\n    \n    if
+    property exists and is an object on both the target and the source\n    \n    merge(target[property],
+    source[property])\n    \n    else\n    \n    target[property] = source[property]\n\n\n\nWhen
+    the source object contains a property named `_proto_` defined with\n`Object.defineProperty()`
+    , the condition that checks if the property\nexists and is an object on both the
+    target and the source passes and the\nmerge recurses with the target, being the
+    prototype of `Object` and the\nsource of `Object` as defined by the attacker.
+    Properties are then\ncopied on the `Object` prototype.\n\nClone operations are
+    a special sub-class of unsafe recursive merges,\nwhich occur when a recursive
+    merge is conducted on an empty object:\n`merge({},source)`.\n\n`lodash` and `Hoek`
+    are examples of libraries susceptible to recursive\nmerge attacks.\n\n### Property
+    definition by path   {#property-definition-by-path}\n\nThere are a few JavaScript
+    libraries that use an API to define property\nvalues on an object based on a given
+    path. The function that is\ngenerally affected contains this signature: `theFunction(object,
+    path,\nvalue)`\n\nIf the attacker can control the value of “path”, they can set
+    this value\nto `_proto_.myValue`. `myValue` is then assigned to the prototype
+    of the\nclass of the object.\n\n"
   affected_package: lodash
   vulnerable_versions:
   - "<4.17.5"
-  severity: low
+  severity: medium
   package_manager: npm
   cve:
   - CVE-2018-3721
@@ -74,21 +98,46 @@
   source_url: https://snyk.io/vuln/npm:lodash:20180130
 - id: snykio:npm:lodash:73638
   title: Prototype Pollution
-  description: |
-    [lodash][1] is a modern JavaScript utility library delivering
-    modularity, performance, &amp; extras.
-
-    Affected versions of this package are vulnerable to Prototype Pollution.
-    The functions `merge`, `mergeWith`, and `defaultsDeep` could be tricked
-    into adding or modifying properties of `Object.prototype`.
-
-
-
-    [1]: https://www.npmjs.com/package/lodash
+  description: "[lodash][1] is a modern JavaScript utility library delivering\nmodularity,
+    performance, &amp; extras.\n\nAffected versions of this package are vulnerable
+    to Prototype Pollution.\nThe functions `merge`, `mergeWith`, and `defaultsDeep`
+    could be tricked\ninto adding or modifying properties of `Object.prototype`. This
+    is due\nto an incomplete fix to `CVE-2018-3721`.\n\n\n\n[1]: https://www.npmjs.com/package/lodash\n\\nPrototype
+    Pollution is a vulnerability affecting JavaScript. Prototype\nPollution refers
+    to the ability to inject properties into existing\nJavaScript language construct
+    prototypes, such as objects. JavaScript\nallows all Object attributes to be altered,
+    including their magical\nattributes such as `_proto_`, `constructor` and `prototype`.
+    An attacker\nmanipulates these attributes to overwrite, or pollute, a JavaScript\napplication
+    object prototype of the base object by injecting other\nvalues. Properties on
+    the `Object.prototype` are then inherited by all\nthe JavaScript objects through
+    the prototype chain. When that happens,\nthis leads to either denial of service
+    by triggering JavaScript\nexceptions, or it tampers with the application source
+    code to force the\ncode path that the attacker injects, thereby leading to remote
+    code\nexecution.\n\nThere are two main ways in which the pollution of prototypes
+    occurs:\n\n* Unsafe `Object` recursive merge\n\n* Property definition by path\n\n###
+    Unsafe Object recursive merge   {#unsafe-object-recursive-merge}\n\nThe logic
+    of a vulnerable recursive merge function follows the following\nhigh-level model:\n\n
+    \   merge (target, source)\n    \n    foreach property of source\n    \n    if
+    property exists and is an object on both the target and the source\n    \n    merge(target[property],
+    source[property])\n    \n    else\n    \n    target[property] = source[property]\n\n\n\nWhen
+    the source object contains a property named `_proto_` defined with\n`Object.defineProperty()`
+    , the condition that checks if the property\nexists and is an object on both the
+    target and the source passes and the\nmerge recurses with the target, being the
+    prototype of `Object` and the\nsource of `Object` as defined by the attacker.
+    Properties are then\ncopied on the `Object` prototype.\n\nClone operations are
+    a special sub-class of unsafe recursive merges,\nwhich occur when a recursive
+    merge is conducted on an empty object:\n`merge({},source)`.\n\n`lodash` and `Hoek`
+    are examples of libraries susceptible to recursive\nmerge attacks.\n\n### Property
+    definition by path   {#property-definition-by-path}\n\nThere are a few JavaScript
+    libraries that use an API to define property\nvalues on an object based on a given
+    path. The function that is\ngenerally affected contains this signature: `theFunction(object,
+    path,\nvalue)`\n\nIf the attacker can control the value of “path”, they can set
+    this value\nto `_proto_.myValue`. `myValue` is then assigned to the prototype
+    of the\nclass of the object.\n\n"
   affected_package: lodash
   vulnerable_versions:
   - "<4.17.11"
-  severity: low
+  severity: high
   package_manager: npm
   cve:
   - CVE-2018-16487
@@ -100,6 +149,7 @@
   credit:
   - asgerf
   references:
+  - https://github.com/lodash/lodash/commit/90e6199a161b6445b01454517b40ef65ebecd2ad
   - https://hackerone.com/reports/380873
   source_url: https://snyk.io/vuln/SNYK-JS-LODASH-73638
 - id: snykio:npm:lodash:73639
@@ -163,8 +213,8 @@
   cwe:
   - CWE-185
   disclosed_date: 2017-09-05
-  created_date: 2019-02-03
-  last_modified_date: 2019-02-03
+  created_date: 2019-04-05
+  last_modified_date: 2019-04-05
   credit:
   - cristianstaicu
   references:
