@@ -1,4 +1,23 @@
 ---
+- id: npmjs:npm:jwt-simple:831
+  title: SIgnature Verification Bypass
+  description: Versions of `jwt-simple` prior to 0.5.3 are vulnerable to Signature
+    Verification Bypass. If no algorithm is specified in the `decode()` function,
+    the packages uses the algorithm in the JWT to decode tokens. This allows an attacker
+    to create a HS256 (symmetric algorithm) JWT with the server's public key as secret,
+    and the package will verify it as HS256 instead of RS256 (asymmetric algorithm).
+  affected_package: jwt-simple
+  vulnerable_versions:
+  - "<0.5.3"
+  severity: high
+  package_manager: npm
+  cwe: CWE-358
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Daniel Gunawan
+  references: https://npmjs.com/advisories/831
+  source_url: https://npmjs.com/advisories/831
 - id: npmjs:npm:jwt-simple:87
   title: Forgeable Public/Private Tokens
   description: 'Affected versions of the `jwt-simple` package allow users to select
