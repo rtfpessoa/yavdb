@@ -30,6 +30,41 @@
   references:
   - https://cert.enea.pl/advisories/cert-190101.html
   source_url: https://snyk.io/vuln/SNYK-PHP-LIBRENMSLIBRENMS-174024
+- id: snykio:packagist:librenms/librenms:174522
+  title: Command Injection
+  description: |
+    [librenms/librenms][1] is a fully featured network monitoring system
+    that provides a wealth of features and device support.
+
+    Affected versions of this package are vulnerable to Command Injection.
+    Attackers can execute arbitrary OS commands by making a request to the
+    `html/pages/addhost.inc.php` using the `$_POST['community']` parameter
+    during creation of a new device, and then making a request to
+    `/ajax_output.php?id=capture&format=text&type=snmpwalk&hostname=localhost`
+    web page that will trigger `html/includes/output/capture.inc.php`
+    command mishandling, resulting in executing of OS commands.
+
+
+
+    [1]: https://packagist.org/packages/librenms/librenms
+  affected_package: librenms/librenms
+  vulnerable_versions:
+  - ">=1.46"
+  severity: high
+  package_manager: packagist
+  cve:
+  - CVE-2018-20434
+  cwe:
+  - CWE-77
+  disclosed_date: 2019-04-25
+  created_date: 2019-04-25
+  last_modified_date: 2019-04-25
+  credit:
+  - Askar
+  references:
+  - https://gist.github.com/mhaskar/516df57aafd8c6e3a1d70765075d372d
+  - https://shells.systems/librenms-v1-46-remote-code-execution-cve-2018-20434/
+  source_url: https://snyk.io/vuln/SNYK-PHP-LIBRENMSLIBRENMS-174522
 - id: snykio:packagist:librenms/librenms:72473
   title: Cross-site Scripting (XSS)
   description: |+

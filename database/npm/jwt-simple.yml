@@ -64,6 +64,37 @@
   - https://github.com/hokaccha/node-jwt-simple/pull/16
   - https://nodesecurity.io/advisories/87
   source_url: https://ossindex.net/resource/package/7014027098/vulnerabilities
+- id: snykio:npm:jwt-simple:174523
+  title: Signature Verification Bypass
+  description: |
+    [jwt-simple][1] is a JWT(JSON Web Token) encode and decode module.
+
+    Affected versions of this package are vulnerable to Signature
+    Verification Bypass. If no algorithm is specified in the `decode()`
+    function, the packages uses the algorithm in the JWT to decode tokens.
+    This allows an attacker to create a HS256 (symmetric algorithm) JWT with
+    the server\'s public key as secret, and the package will verify it as
+    HS256 instead of RS256 (asymmetric algorithm).
+
+
+
+    [1]: https://www.npmjs.com/package/jwt-simple
+  affected_package: jwt-simple
+  vulnerable_versions:
+  - "<0.5.3"
+  severity: medium
+  package_manager: npm
+  cwe:
+  - CWE-358
+  disclosed_date: 2019-04-24
+  created_date: 2019-04-25
+  last_modified_date: 2019-04-25
+  credit:
+  - Daniel Gunawan
+  references:
+  - https://github.com/hokaccha/node-jwt-simple/commit/ead36e1d687645da9c3be8befdaaef622ea33106
+  - https://www.npmjs.com/advisories/831
+  source_url: https://snyk.io/vuln/SNYK-JS-JWTSIMPLE-174523
 - id: snykio:npm:jwt-simple:20160804
   title: Forgeable public/private tokens
   description: |

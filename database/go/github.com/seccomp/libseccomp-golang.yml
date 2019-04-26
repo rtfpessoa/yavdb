@@ -1,0 +1,32 @@
+---
+- id: snykio:go:github.com/seccomp/libseccomp-golang:174520
+  title: Access Control Bypass
+  description: |+
+    `github.com/seccomp/libseccomp-golang` is a None
+
+    Affected versions of this package are vulnerable to Access Control
+    Bypass. Earlier versions of libseccomp-golang incorrectly generates BPFs
+    using `OR` boolean logic instead of AND. Due to this flaw, a process
+    running under a restrictive `seccomp` filter that specified multiple
+    `syscall` arguments could bypass intended access restrictions by
+    specifying a single matching argument. Multiple `syscall` argument rules
+    should be matched with `AND` logic.
+
+  affected_package: github.com/seccomp/libseccomp-golang
+  vulnerable_versions:
+  - "*"
+  severity: medium
+  package_manager: go
+  cve:
+  - CVE-2017-18367
+  cwe:
+  - CWE-284
+  disclosed_date: 2019-04-25
+  created_date: 2019-04-25
+  last_modified_date: 2019-04-25
+  credit:
+  - An Xiao
+  references:
+  - https://github.com/seccomp/libseccomp-golang/commit/06e7a29f36a34b8cf419aeb87b979ee508e58f9e
+  - https://github.com/seccomp/libseccomp-golang/issues/22
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMSECCOMPLIBSECCOMPGOLANG-174520

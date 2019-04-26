@@ -17,3 +17,39 @@
   - https://github.com/kelektiv/node.bcrypt.js/commit/71b67202e2305e7d8f618e599a894188c18d6a7f
   - https://github.com/ncb000gt/node.bcrypt.js/issues/13
   source_url: https://ossindex.net/resource/package/7012115486/vulnerabilities
+- id: snykio:npm:bcrypt:174521
+  title: Timing Attack
+  description: "[bcrypt][1] is a A library to help you hash passwords.\n\nAffected
+    versions of this package are vulnerable to Timing Attack. The\n`CompareStrings`
+    function is not timing safe. Comparisons with a\ndifferent length of string have
+    very different execution times. Even\nwith the same length of string, comparisons
+    of matching strings run\nfaster than comparisons of different strings. This is
+    due to the use of\na comparison statement (`if`) when evaluating strings, which
+    results in\ndifferent outcomes dependent on the evaluation.\n\n    NAN_INLINE
+    bool CompareStrings(const char* s1, const char* s2) {\n        bool eq = true;\n
+    \       int s1_len = strlen(s1);\n        int s2_len = strlen(s2);\n    \n        //
+    UNSAFE: This executes different instructions for a different length of string\n
+    \       if (s1_len != s2_len) {\n            eq = false;\n        }\n    \n        const
+    int max_len = (s2_len < s1_len) ? s1_len : s2_len;\n    \n        for (int i =
+    0; i < max_len; ++i) {\n          // UNSAFE: s1 and s2 are only referenced if
+    the index is valid (different instructions executed for different length of string)\n
+    \         if (s1_len >= i && s2_len >= i && s1[i] != s2[i]) {\n            //
+    UNSAFE: This instruction is only executed if the bytes are different\n            eq
+    = false;\n          }\n        }\n    \n        return eq;\n    }\n\n\n\n[1]:
+    https://www.npmjs.com/package/bcrypt\n"
+  affected_package: bcrypt
+  vulnerable_versions:
+  - "*"
+  severity: low
+  package_manager: npm
+  cwe:
+  - CWE-208
+  disclosed_date: 2019-04-24
+  created_date: 2019-04-25
+  last_modified_date: 2019-04-25
+  credit:
+  - Andrew Carter
+  references:
+  - https://gist.github.com/AndrewCarterUK/7b730e2ce16c7546b33120e1688c901a
+  - https://github.com/kelektiv/node.bcrypt.js/issues/720
+  source_url: https://snyk.io/vuln/SNYK-JS-BCRYPT-174521
