@@ -19,6 +19,37 @@
   credit: Peter Sorowka
   references: https://npmjs.com/advisories/75
   source_url: https://npmjs.com/advisories/75
+- id: snykio:npm:mqtt-packet:174531
+  title: Buffer Over-read
+  description: |
+    [mqtt-packet][1] is an Encoder and Decoder for MQTT.
+
+    Affected versions of this package are vulnerable to Buffer Over-read. An
+    attacker could trigger an out of range read on a buffer which throws a
+    `RangeError`. `MQTT` Brokers using this module could be forced to crash
+    by sending a specifically malformed `MQTT` Subscribe packet.
+
+
+
+    [1]: https://www.npmjs.com/package/mqtt-packet
+  affected_package: mqtt-packet
+  vulnerable_versions:
+  - "<3.5.1"
+  - ">=4.0.0 <4.1.3"
+  - ">=5.0.0 <5.6.1"
+  - ">=6.0.0 <6.1.2"
+  severity: high
+  package_manager: npm
+  cwe:
+  - CWE-126
+  disclosed_date: 2019-04-28
+  created_date: 2019-04-28
+  last_modified_date: 2019-04-28
+  credit:
+  - Alexander Kaiser
+  references:
+  - https://hackerone.com/reports/541354
+  source_url: https://snyk.io/vuln/SNYK-JS-MQTTPACKET-174531
 - id: snykio:npm:mqtt-packet:20160115
   title: Denial of Service (DoS)
   description: |+
