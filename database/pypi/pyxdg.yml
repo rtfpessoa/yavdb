@@ -25,6 +25,39 @@
   - http://xforce.iss.net/xforce/xfdb/90618
   - https://exchange.xforce.ibmcloud.com/vulnerabilities/90618
   source_url: https://ossindex.net/resource/package/8401249338/vulnerabilities
+- id: snykio:pypi:pyxdg:174562
+  title: Arbitrary Command Execution
+  description: |
+    [pyxdg][1] contains implementations of freedesktop.org standards in
+    python.
+
+    Affected versions of this package are vulnerable to Arbitrary Command
+    Execution. via the `xdg.Menu.parse()` function. When it is possible to
+    craft an evil `menu` file with a `Category` node containing Python
+    injected code and to update `xdg_config_dirs` with its location folder,
+    the evil menu can be parsed and an attacker could exploit the
+    vulnerability. This is due to a lack of sanitization in `xdg/Menu.py`.
+    When the evil `.menu` file is parsed, the injected code is executed
+    because of an unsanitized `eval()`.
+
+
+
+    [1]: https://pypi.org/project/pyxdg/
+  affected_package: pyxdg
+  vulnerable_versions:
+  - "< 0.26"
+  severity: high
+  package_manager: pypi
+  cwe:
+  - CWE-94
+  disclosed_date: 2019-02-02
+  created_date: 2019-05-01
+  last_modified_date: 2019-05-01
+  credit:
+  - Alexandre D'Hondt
+  references:
+  - https://github.com/freedesktop/pyxdg/blob/rel-0.25/xdg/Menu.py
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-PYXDG-174562
 - id: snykio:pypi:pyxdg:40263
   title: Arbitrary File Overwrite
   description: |
