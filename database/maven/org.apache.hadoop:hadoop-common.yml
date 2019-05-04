@@ -318,6 +318,45 @@
   - http://www.securityfocus.com/bid/98795
   - https://mail-archives.apache.org/mod_mbox/hadoop-user/201706.mbox/%3C4A2FDA56-491B-4C2A-915F-C9D4A4BDB92A%40apache.org%3E
   source_url: https://ossindex.net/resource/package/7015476491/vulnerabilities
+- id: snykio:maven:org.apache.hadoop:hadoop-common:174573
+  title: Arbitrary File Write via Archive Extraction (Zip Slip)
+  description: "[org.apache.hadoop:hadoop-common][1] is a framework that allows for
+    the\ndistributed processing of large data sets across clusters of computers\nusing
+    simple programming models.\n\nAffected versions of this package are vulnerable
+    to Arbitrary File Write\nvia Archive Extraction (Zip Slip).\n\n\n\n[1]: https://hadoop.apache.org/\n\\nIt
+    is exploited using a specially crafted zip archive, that holds path\ntraversal
+    filenames. When exploited, a filename in a malicious archive\nis concatenated
+    to the target extraction directory, which results in the\nfinal path ending up
+    outside of the target folder. For instance, a zip\nmay hold a file with a \\\"../../file.exe\\\"
+    location and thus break out of\nthe target folder. If an executable or a configuration
+    file is\noverwritten with a file containing malicious code, the problem can turn\ninto
+    an arbitrary code execution issue quite easily.\n\nThe following is an example
+    of a zip archive with one benign file and\none malicious file. Extracting the
+    malicous file will result in\ntraversing out of the target folder, ending up in
+    `/root/.ssh/`\noverwriting the `authorized_keys` file:\n\n    \n    +2018-04-15
+    22:04:29 ..... 19 19 good.txt\n    \n    +2018-04-15 22:04:42 ..... 20 20 ../../../../../../root/.ssh/authorized_keys\n\n"
+  affected_package: org.apache.hadoop:hadoop-common
+  vulnerable_versions:
+  - ">= 2.7.0 < 2.7.7"
+  - ">= 2.8.0 < 2.8.5"
+  - ">= 2.9.0 < 2.9.2"
+  - ">= 3.0.0 < 3.0.3"
+  - ">= 3.1.0 < 3.1.1"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2018-8009
+  cwe:
+  - CWE-29
+  disclosed_date: 2018-11-14
+  created_date: 2019-05-02
+  last_modified_date: 2019-05-02
+  credit:
+  - Snyk Security Research Team
+  references:
+  - https://hadoop.apache.org/cve_list.html#cve-2018-8009-http-cve-mitre-org-cgi-bin-cvename-cgi-name-cve-2018-8009-zip-slip-impact-on-apache-hadoop
+  - https://snyk.io/research/zip-slip-vulnerability
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEHADOOP-174573
 - id: snykio:maven:org.apache.hadoop:hadoop-common:30626
   title: Improper Authentication
   description: |

@@ -1,0 +1,74 @@
+---
+- id: snykio:packagist:phpbb:174577
+  title: Denial of Service (DoS)
+  description: |+
+    [phpbb][1] is a popular open-source bulletin board written in PHP.
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS). The `Fulltext` native search component used within phpBB can be
+    leveraged to cause long execution times, resulting in a Denial of
+    Service attacks.
+
+    Improper input validation in the Native Fulltext Search component of
+    phpBB 3.2.5 and earlier allows an unauthenticated remote user to trigger
+    a denial of service attack via the keywords URL parameter of
+    `search.php`.
+
+    Successful exploitation generates a slow SQL query which causes the
+    database engine used by phpBB to consume all available CPU resources.
+    Depending upon the database engine, users will also be completely unable
+    to create or modify posts due to locks on the search index tables. The
+    slowness of the query depends on the size of the `search_wordlist` and
+    `search_wordmatch` tables.
+
+
+
+    [1]: http://www.phpbb.com
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+  affected_package: phpbb
+  vulnerable_versions:
+  - "<3.2.6"
+  severity: high
+  package_manager: packagist
+  cve:
+  - CVE-2019-9826
+  cwe:
+  - CWE-400
+  disclosed_date: 2019-05-02
+  created_date: 2019-05-02
+  last_modified_date: 2019-05-02
+  credit:
+  - Unknown
+  references:
+  - https://github.com/phpbb/phpbb/commit/2353ad11f2afe213e407842a9a9e1533c0de57b0
+  - https://github.com/phpbb/phpbb/commit/56060caa4c44620929b6e17fe4622343750ad302
+  - https://github.com/phpbb/phpbb/commit/8a73eb5f0ff912454e6479539f972081e54baa1c
+  - https://github.com/phpbb/phpbb/commit/da9910850a168f73c6b8dd8407a01f47d27ca1d8
+  - https://github.com/phpbb/phpbb/commit/fd195fba210c8625e968ef5553e61864747c8d44
+  - https://www.phpbb.com/community/viewtopic.php?f=14&t=2509941
+  source_url: https://snyk.io/vuln/SNYK-PHP-PHPBB-174577
