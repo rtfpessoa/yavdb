@@ -1,0 +1,35 @@
+---
+- id: snykio:maven:ro.pippo:pippo-core:174587
+  title: Deserialization of Untrusted Data
+  description: |
+    [ro.pippo:pippo-core][1] is a Micro Java Web Framework.
+
+    Affected versions of this package are vulnerable to Deserialization of
+    Untrusted Data. The function
+    `SerializationSessionDataTranscoder.decode()` calls
+    `ObjectInputStream.readObject()` to deserialize a `SessionData` object
+    without checking the object types.
+
+
+
+    [1]: https://github.com/pippo-java/pippo
+  affected_package: ro.pippo:pippo-core
+  vulnerable_versions:
+  - ">= 0.9 < 1.12.0"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2018-18240
+  - CVE-2018-18628
+  cwe:
+  - CWE-352
+  disclosed_date: 2018-09-30
+  created_date: 2018-11-06
+  last_modified_date: 2018-11-06
+  credit:
+  - idealzh
+  references:
+  - https://github.com/pippo-java/pippo/commit/a82347d9d3358e98c89b48579d4285d807a57cc0
+  - https://github.com/pippo-java/pippo/commit/c6b26551a82d2dd32097fcb17c13c3b830916296
+  - https://github.com/pippo-java/pippo/issues/458
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ROPIPPO-174587
