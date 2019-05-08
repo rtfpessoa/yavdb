@@ -1,0 +1,36 @@
+---
+- id: snykio:maven:io.ratpack:ratpack-session:174598
+  title: Insecure Randomness
+  description: |
+    [io.ratpack:ratpack-session][1] is a that allows supports for HTTP
+    sessions within Ratpack applications.
+
+    Affected versions of this package are vulnerable to Insecure Randomness.
+    Session IDs are generated using a weak PRNG within the
+    `ThreadLocalRandom` class. An attacker could abuse this vulnerability to
+    determine a small window for the server start time and obtain a session
+    ID value. This vulnerability could be abused to theoretically determine
+    the sequence of session IDs.
+
+
+
+    [1]: https://ratpack.io
+  affected_package: io.ratpack:ratpack-session
+  vulnerable_versions:
+  - "< 1.6.1"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2019-11808
+  cwe:
+  - CWE-331
+  disclosed_date: 2019-05-07
+  created_date: 2019-05-07
+  last_modified_date: 2019-05-07
+  credit:
+  - Unknown
+  references:
+  - https://github.com/ratpack/ratpack/commit/f2b63eb82dd71194319fd3945f5edf29b8f3a42d
+  - https://github.com/ratpack/ratpack/issues/1448
+  - https://github.com/ratpack/ratpack/releases/tag/v1.6.1
+  source_url: https://snyk.io/vuln/SNYK-JAVA-IORATPACK-174598
