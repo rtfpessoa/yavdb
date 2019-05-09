@@ -296,6 +296,228 @@
   references:
   - https://typo3.org/security/advisory/typo3-core-sa-2019-004/
   source_url: https://github.com/FriendsOfPHP/security-advisories/blob/master/typo3/cms-core/2019-01-22-8.yaml
+- id: snykio:packagist:typo3/cms-core:174604
+  title: Cross-Site Scripting (XSS)
+  description: |+
+    [typo3/cms-core][1] is a free open source enterprise content management
+    system.
+
+    Affected versions of this package are vulnerable to Cross-Site Scripting
+    (XSS) when making use of the ternary conditional operator in templates
+    like the following.
+
+
+
+    [1]: https://packagist.org/packages/typo3/cms-core
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
+  affected_package: typo3/cms-core
+  vulnerable_versions:
+  - ">=8.0.0  <8.7.25"
+  - ">=9.0.0  <9.5.6"
+  severity: medium
+  package_manager: packagist
+  cwe:
+  - CWE-79
+  disclosed_date: 2019-05-07
+  created_date: 2019-05-08
+  last_modified_date: 2019-05-08
+  credit:
+  - Bill Dagou
+  references:
+  - https://typo3.org/security/advisory/typo3-core-sa-2019-013/
+  source_url: https://snyk.io/vuln/SNYK-PHP-TYPO3CMSCORE-174604
+- id: snykio:packagist:typo3/cms-core:174605
+  title: Information Disclosure
+  description: |
+    [typo3/cms-core][1] is a free open source enterprise content management
+    system.
+
+    Affected versions of this package are vulnerable to Information
+    Disclosure via user authentication. Login failures have been logged on
+    the default stream with log level `warning` including plain-text user
+    credentials.
+
+
+
+    [1]: https://packagist.org/packages/typo3/cms-core
+  affected_package: typo3/cms-core
+  vulnerable_versions:
+  - ">=9.0.0  <9.5.6"
+  severity: medium
+  package_manager: packagist
+  cwe:
+  - CWE-200
+  disclosed_date: 2019-05-07
+  created_date: 2019-05-08
+  last_modified_date: 2019-05-08
+  credit:
+  - Helmut Hummel
+  references:
+  - https://typo3.org/security/advisory/typo3-core-sa-2019-010/
+  source_url: https://snyk.io/vuln/SNYK-PHP-TYPO3CMSCORE-174605
+- id: snykio:packagist:typo3/cms-core:174607
+  title: Information Disclosure
+  description: |
+    [typo3/cms-core][1] is a free open source enterprise content management
+    system.
+
+    Affected versions of this package are vulnerable to Information
+    Disclosure via the page tree. Backend users not having read access to
+    specific pages still could see them in the page tree which actually
+    should be disallowed.
+
+
+
+    [1]: https://packagist.org/packages/typo3/cms-core
+  affected_package: typo3/cms-core
+  vulnerable_versions:
+  - ">=9.0.0  <9.5.6"
+  severity: medium
+  package_manager: packagist
+  cwe:
+  - CWE-200
+  disclosed_date: 2019-05-07
+  created_date: 2019-05-08
+  last_modified_date: 2019-05-08
+  credit:
+  - Unknown
+  references:
+  - https://typo3.org/security/advisory/typo3-core-sa-2019-009/
+  source_url: https://snyk.io/vuln/SNYK-PHP-TYPO3CMSCORE-174607
+- id: snykio:packagist:typo3/cms-core:174609
+  title: Improper Access Control
+  description: |
+    [typo3/cms-core][1] is a free open source enterprise content management
+    system.
+
+    Affected versions of this package are vulnerable to Improper Access
+    Control. When users change their password existing sessions for that
+    particular user account are not revoked. A valid backend or frontend
+    user account is required in order to make use of this vulnerability.
+
+
+
+    [1]: https://packagist.org/packages/typo3/cms-core
+  affected_package: typo3/cms-core
+  vulnerable_versions:
+  - ">=8.0.0  <8.7.25"
+  - ">=9.0.0  <9.5.6"
+  severity: medium
+  package_manager: packagist
+  cwe:
+  - CWE-284
+  disclosed_date: 2019-05-07
+  created_date: 2019-05-08
+  last_modified_date: 2019-05-08
+  credit:
+  - Unknown
+  references:
+  - https://typo3.org/security/advisory/typo3-core-sa-2019-011/
+  source_url: https://snyk.io/vuln/SNYK-PHP-TYPO3CMSCORE-174609
+- id: snykio:packagist:typo3/cms-core:174611
+  title: Arbitrary Code Execution
+  description: |
+    [typo3/cms-core][1] is a free open source enterprise content management
+    system.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution. via the image processing. Whenever `ImageMagick` is invoked
+    in order to convert data the mime-type of the source is identified for
+    invoking according coders when reading data. In case an attacker manages
+    to upload an image file containing PostScript code it will be executed
+    on the server system when generating according visual previews or
+    thumbnails.
+
+
+
+    [1]: https://packagist.org/packages/typo3/cms-core
+  affected_package: typo3/cms-core
+  vulnerable_versions:
+  - ">=8.0.0  <8.7.25"
+  - ">=9.0.0  <9.5.6"
+  severity: high
+  package_manager: packagist
+  cwe:
+  - CWE-94
+  disclosed_date: 2019-05-07
+  created_date: 2019-05-08
+  last_modified_date: 2019-05-08
+  credit:
+  - Lauritz Holtmann
+  references:
+  - https://typo3.org/security/advisory/typo3-core-sa-2019-012/
+  source_url: https://snyk.io/vuln/SNYK-PHP-TYPO3CMSCORE-174611
 - id: snykio:packagist:typo3/cms-core:72231
   title: Authentication Bypass
   description: |
