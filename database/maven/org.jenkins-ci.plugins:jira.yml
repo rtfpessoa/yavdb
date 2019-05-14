@@ -1,0 +1,49 @@
+---
+- id: snykio:maven:org.jenkins-ci.plugins:jira:174631
+  title: Improper Authorisation
+  description: |+
+    [org.jenkins-ci.plugins:jira][1] is a Jenkins plugin that has an
+    optional feature to update JIRA issues with a back pointer to Jenkins
+    build pages. This allows the submitter and watchers to quickly find out
+    which build they need to pick up to get the fix.
+
+    Affected versions of this package are vulnerable to Improper
+    Authorisation. The code allows attackers with Overall/Read access to
+    have Jenkins connect to an attacker-specified URL using
+    attacker-specified credentials IDs obtained through another method,
+    capturing credentials stored in Jenkins.The fixes add additional checks
+    to make sure that the appropriate level of authorisation is required to
+    perform administrator level tasks.
+
+
+
+    [1]: https://github.com/jenkinsci/jira-plugin
+    \nAssuming a user with a given identity, authorization is the process of
+    determining whether that user can access a given resource, based on the
+    user\'s privileges and any permissions or other access-control
+    specifications that apply to the resource.
+
+    When access control checks are not applied consistently - or not at all
+    - users are able to access data or perform actions that they should not
+    be allowed to perform. This can lead to a wide range of problems,
+    including information exposures, denial of service, and arbitrary code
+    execution.
+
+  affected_package: org.jenkins-ci.plugins:jira
+  vulnerable_versions:
+  - "< 3.0.1"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2018-1000412
+  cwe:
+  - CWE-255
+  disclosed_date: 2019-02-01
+  created_date: 2019-05-10
+  last_modified_date: 2019-05-10
+  credit:
+  - Wadeck Follonier
+  references:
+  - https://github.com/jenkinsci/jira-plugin/commit/612a6ef06dbd5a63bea0b128142c726e96195eda
+  - https://jenkins.io/security/advisory/2018-09-25/#SECURITY-1029
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGJENKINSCIPLUGINS-174631
