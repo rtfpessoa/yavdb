@@ -18,3 +18,40 @@
   credit: Customer Security and Trust Team of Microsoft Corp.
   references: https://npmjs.com/advisories/773
   source_url: https://npmjs.com/advisories/773
+- id: snykio:npm:pi_video_recording:174696
+  title: Remote Code Execution (RCE)
+  description: |
+    [pi\_video\_recording][1] is a Raspbian with raspivid module for NPM.
+
+    Affected versions of this package are vulnerable to Remote Code
+    Execution (RCE). Due to insufficient input validation, the server used
+    by raspberry-pi video recording &amp; live executes arbitrary code
+    through the `/api/record/start` endpoint.
+
+    ### POC   {#poc}
+
+        curl -POST -H "Content-Type: application/json" -d '{"filename": " || touch /tmp/worked;"}
+
+    Sending the above HTTP request to a
+    `http://localhost:5000/api/record/start` creates a new file within the
+    `/tmp/` directory of the target server.
+
+
+
+    [1]: https://github.com/leboncoin/pi-video-recording
+  affected_package: pi_video_recording
+  vulnerable_versions:
+  - "*"
+  severity: high
+  package_manager: npm
+  cwe:
+  - CWE-94
+  disclosed_date: 2019-01-25
+  created_date: 2019-05-14
+  last_modified_date: 2019-05-14
+  credit:
+  - Customer Security and Trust Team of Microsoft Corp.
+  references:
+  - https://github.com/leboncoin/pi-video-recording/blob/master/pi_video_recording.js#L49
+  - https://www.npmjs.com/advisories/773
+  source_url: https://snyk.io/vuln/SNYK-JS-PIVIDEORECORDING-174696
