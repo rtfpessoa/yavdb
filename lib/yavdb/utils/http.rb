@@ -52,8 +52,8 @@ module YAVDB
               else
                 response.body.lines
             end
-          rescue StandardError => exception
-            raise exception if retries.zero?
+          rescue StandardError => e
+            raise e if retries.zero?
 
             puts "Going to retry #{url}"
             retries -= 1

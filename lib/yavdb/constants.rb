@@ -17,7 +17,7 @@
 module YAVDB
   module Constants
 
-    DEBUG = ENV['debug'].freeze
+    DEBUG = ENV['debug']
 
     YAVDB_DB_URL    = 'https://github.com/rtfpessoa/yavdb.git'
     YAVDB_DB_BRANCH = 'database'

@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
   spec.executables = ['yavdb', 'vulndb', 'vulnerabilitydb']
   spec.require_paths = ['lib']
 
-  spec.required_ruby_version = '>= 2.3.7'
+  spec.required_ruby_version = '>= 2.5.5'
 
   # Development
   spec.add_development_dependency 'codacy-coverage'
@@ -31,13 +31,14 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'simplecov'
 
   # Linters
-  spec.add_development_dependency 'rubocop', ['~> 0.59']
-  spec.add_development_dependency 'rubocop-rspec', ['~> 1.29']
+  spec.add_development_dependency 'dependency_spy', ['~> 0.4']
+  spec.add_development_dependency 'rubocop', ['~> 0.69']
+  spec.add_development_dependency 'rubocop-rspec', ['~> 1.33']
 
   # Runtime
-  spec.add_runtime_dependency 'execjs', ['~> 2.7.0']
-  spec.add_runtime_dependency 'json', ['~> 2.1']
-  spec.add_runtime_dependency 'kramdown', ['~> 1.17']
+  spec.add_runtime_dependency 'execjs', ['~> 2.7']
+  spec.add_runtime_dependency 'json', ['~> 2.2']
+  spec.add_runtime_dependency 'kramdown', ['~> 2.1']
   spec.add_runtime_dependency 'oga', ['~> 2.15']
   spec.add_runtime_dependency 'semantic_interval', ['~> 0.1']
   spec.add_runtime_dependency 'therubyracer', ['~> 0.12']

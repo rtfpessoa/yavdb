@@ -57,6 +57,9 @@ RSpec.describe YAVDB do
                 puts ''
                 puts 'Fail!'
                 puts vuln.id
+                puts vuln.vulnerable_versions
+                puts vuln.unaffected_versions
+                puts vuln.patched_versions
                 puts vuln.title
                 puts vuln.package_manager
                 puts vuln.affected_package

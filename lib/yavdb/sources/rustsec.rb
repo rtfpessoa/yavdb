@@ -51,12 +51,14 @@ module YAVDB
 
             vuln_id = "rustsec:cargo:#{advisory_hash['package']}:#{advisory_hash['id']}"
 
+            vulnerable_versions = (['*'] if (advisory_hash['unaffected_versions'].nil? || advisory_hash['unaffected_versions'].empty?) && (advisory_hash['patched_versions'].nil? || advisory_hash['patched_versions'].empty?))
+
             YAVDB::Advisory.new(
               vuln_id,
               advisory_hash['title'],
               advisory_hash['description'],
               advisory_hash['package'],
-              nil,
+              vulnerable_versions,
               advisory_hash['unaffected_versions'],
               advisory_hash['patched_versions'],
               severity,
