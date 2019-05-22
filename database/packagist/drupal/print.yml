@@ -1,0 +1,39 @@
+---
+- id: snykio:packagist:drupal/print:174745
+  title: Remote Code Execution (RCE)
+  description: |
+    [drupal/print][1] allows to generate the following printer-friendly
+    versions of any node:
+
+    * Web page printer-friendly version (at [www.example.com/print/nid][2])
+    * PDF version (at [www.example.com/printpdf/nid][3])
+    * Send by-email (at [www.example.com/printmail/nid][4])
+
+    Affected versions of this package are vulnerable to Remote Code
+    Execution (RCE). It didn\'t sufficiently sanitize the arguments passed
+    to the `wkhtmltopdf` executable, allowing a remote attacker to execute
+    arbitrary shell commands. It also doesn\'t sufficiently sanitize the
+    HTML content passed to `dompdf`, allowing a privileged attacker to
+    execute arbitrary PHP code.
+
+
+
+    [1]: https://github.com/drupalprojects/print
+    [2]: http://www.example.com/print/nid
+    [3]: http://www.example.com/printpdf/nid
+    [4]: http://www.example.com/printmail/nid
+  affected_package: drupal/print
+  vulnerable_versions:
+  - ">=2.0.0  <2.1.0"
+  severity: high
+  package_manager: packagist
+  cwe:
+  - CWE-94
+  disclosed_date: 2019-02-22
+  created_date: 2019-02-22
+  last_modified_date: 2019-02-22
+  credit:
+  - Unknown
+  references:
+  - https://www.drupal.org/sa-contrib-2018-063
+  source_url: https://snyk.io/vuln/SNYK-PHP-DRUPALPRINT-174745
