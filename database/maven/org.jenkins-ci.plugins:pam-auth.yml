@@ -1,0 +1,34 @@
+---
+- id: snykio:maven:org.jenkins-ci.plugins:pam-auth:174762
+  title: Access Control Bypass
+  description: |
+    [org.jenkins-ci.plugins:pam-auth][1] is a package that adds Unix
+    Pluggable Authentication Module (PAM) support to Jenkins.
+
+    Affected versions of this package are vulnerable to Access Control
+    Bypass. A missing permission check in the plugin within
+    `PamSecurityRealm.DescriptorImpl#doTest` allows users with
+    `Overall/Read` permission to obtain limited information about the file
+    `/etc/shadow` and the user Jenkins is running as.
+
+
+
+    [1]: https://wiki.jenkins.io/display/JENKINS/PAM+Authentication+Plugin
+  affected_package: org.jenkins-ci.plugins:pam-auth
+  vulnerable_versions:
+  - "< 1.5.1"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2019-10319
+  cwe:
+  - CWE-288
+  disclosed_date: 2019-05-21
+  created_date: 2019-05-21
+  last_modified_date: 2019-05-21
+  credit:
+  - Daniel Beck
+  references:
+  - https://github.com/jenkinsci/pam-auth-plugin/commit/a9d8314706d6d7645e49f2c9607baa7758af29cd
+  - https://jenkins.io/security/advisory/2019-05-21/#SECURITY-1316
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGJENKINSCIPLUGINS-174762
