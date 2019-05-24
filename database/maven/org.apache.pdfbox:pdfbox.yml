@@ -60,6 +60,7 @@
         <?xml version="1.0" encoding="ISO-8859-1"?>
            <username>John</username>
         </xml>
+    {: .language-xml}
 
     An external XML entity - `xxe`, is defined using a system identifier and
     present within a DOCTYPE header. These entities can access local or
@@ -72,6 +73,7 @@
            <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
            <username>&xxe;</username>
         </xml>
+    {: .language-xml}
 
     Other XXE Injection attacks can access local resources that may not stop
     returning data, possibly impacting application availability and leading
@@ -79,7 +81,7 @@
 
   affected_package: org.apache.pdfbox:pdfbox
   vulnerable_versions:
-  - "< 2.0.15"
+  - ">= 2.0.14 < 2.0.15"
   severity: medium
   package_manager: maven
   cve:
@@ -93,19 +95,21 @@
   - Kurt Boberg from DocuSign
   references:
   - https://bugzilla.redhat.com/show_bug.cgi?id=1699740
+  - https://github.com/apache/pdfbox/commit/072d68ec99a71bf271ec0f879e5cd71511e89093
+  - https://issues.apache.org/jira/browse/PDFBOX-4505
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEPDFBOX-174324
 - id: snykio:maven:org.apache.pdfbox:pdfbox:30025
   title: XML External Entity (XXE) Injection
   description: |+
-    [`org.apache.pdfbox:pdfbox`][1] Apache PDFBox XML External Entity (XXE)
-    attack Apache PDFBox before 1.8.12 and 2.x before 2.0.1 does not
-    properly initialize the XML parsers, which allows context-dependent
-    attackers to conduct XML External Entity (XXE) attacks via a crafted
-    PDF.
+    \[`org.apache.pdfbox:pdfbox`\]([http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22pdfbox][1]
+    %22) Apache PDFBox XML External Entity (XXE) attack Apache PDFBox before
+    1.8.12 and 2.x before 2.0.1 does not properly initialize the XML
+    parsers, which allows context-dependent attackers to conduct XML
+    External Entity (XXE) attacks via a crafted PDF.
 
 
 
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22pdfbox %22
+    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22pdfbox
     \nXXE Injection is a type of attack against an application that parses XML
     input. XML is a markup language that defines a set of rules for encoding
     documents in a format that is both human-readable and machine-readable.
@@ -124,6 +128,7 @@
         <?xml version="1.0" encoding="ISO-8859-1"?>
            <username>John</username>
         </xml>
+    {: .language-xml}
 
     An external XML entity - `xxe`, is defined using a system identifier and
     present within a DOCTYPE header. These entities can access local or
@@ -136,6 +141,7 @@
            <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
            <username>&xxe;</username>
         </xml>
+    {: .language-xml}
 
     Other XXE Injection attacks can access local resources that may not stop
     returning data, possibly impacting application availability and leading

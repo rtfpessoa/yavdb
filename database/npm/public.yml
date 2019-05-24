@@ -97,12 +97,20 @@
 - id: snykio:npm:public:20180415
   title: Cross-site Scripting (XSS)
   description: |+
-    [public][1] is a Run static file hosting server with specified public
-    dir &amp; port. Support a \"direcotry index\" like Apache httpd.
+    [public][1] is a package used for running static file hosting server
+    with specified public dir &amp; port. Also it supports a \"direcotry
+    index\" like Apache httpd.
 
     Affected versions of this package are vulnerable to Cross-site Scripting
     (XSS) attacks. It allows to embed HTML in file names, which (in certain
     conditions) might lead to execute malicious JavaScript.
+
+    Vulnerable Code:
+
+        // node_modules/public/bin/public, line 106:
+        files.forEach(function(file) {
+            list.push('<li><a href="', path.join(base, file),'">', file, '</a></li>');
+        });
 
 
 
@@ -181,10 +189,11 @@
 
   affected_package: public
   vulnerable_versions:
-  - "<=0.1.3"
+  - "<0.1.4"
   severity: low
   package_manager: npm
   cve:
+  - CVE-2018-16480
   - CVE-2018-3747
   cwe:
   - CWE-79
@@ -195,4 +204,5 @@
   - bl4de
   references:
   - https://hackerone.com/reports/316346
+  - https://hackerone.com/reports/329950
   source_url: https://snyk.io/vuln/npm:public:20180415

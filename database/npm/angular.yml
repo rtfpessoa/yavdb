@@ -310,6 +310,7 @@
         .rootOfTheIncludedContent svg {
           overflow: hidden !important;
         }
+    {: .language-ruby}
 
 
 
@@ -426,16 +427,18 @@
     To migrate the code follow the example below: Before:
 
         JS:   scope.foo = 'alert(1)';
-    ^
+    {: .language-js}
 
         HTML: <div onclick="{{foo}}">
+    {: .language-html}
 
     After:
 
         JS:   scope.foo = function() { alert(1); }
-    ^
+    {: .language-js}
 
         HTML: <div ng-click="foo()">
+    {: .language-html}
 
 
 
@@ -554,12 +557,13 @@
         scope.baseUrl = 'page';
         scope.a = 1;
         scope.b = 2;
-    ^
+    {: .language-js}
 
         HTML:
         <!-- Are a and b properly escaped here? Is baseUrl
          controlled by user? -->
         <iframe src="{{baseUrl}}?a={{a}&b={{b}}">
+    {: .language-html}
 
     After:
 
@@ -577,9 +581,10 @@
           // controlled value.
           return baseUrl + "?" + qs;
         }
-    ^
+    {: .language-js}
 
         HTML: <iframe src="{{getIframeSrc()}}">Before:
+    {: .language-html}
 
 
 
@@ -750,8 +755,8 @@
     * The vulnerabilities in the server-side templating are being guarded by
       server-side XSS filters or on the client-side via CSP
     * The server-side XSS vulnerabilities can be used to augment the
-      client-side template processed by Angular **Applications not meeting
-      all of the conditions are not vulnerable.**
+      client-side template processed by Angular
+    * *Applications not meeting all of the conditions are not vulnerable.\**
 
 
 
@@ -891,6 +896,7 @@
 
         hasOwnProperty.constructor.prototype.valueOf = valueOf.call;
             ["a", "alert(1)"].sort(hasOwnProperty.constructor);
+    {: .language-js}
 
     The exploit:
 
@@ -973,6 +979,7 @@
             <animate attributeName="xlink:href" begin="0" from="javascript:alert(1)" to="&" />
           </a>
         </svg>
+    {: .language-html}
 
     Here the anchor\'s href is animated, starting from a value that\'s a
     javascript URI. This allows execution of arbitrary javascript in the
@@ -1295,6 +1302,7 @@
     SVG to sanitize:
 
         <svg><use xlink:href="test.svg#xss" /></svg>
+    {: .language-html}
 
     External SVG file (test.svg):
 
@@ -1307,6 +1315,7 @@
           <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />
         </a>
         </svg>
+    {: .language-html}
 
     Here the SVG to sanitize loads in the `test.svg` file via the `<use>`
     element. The sanitizer is not able to parse this file, which contains
@@ -1524,6 +1533,7 @@
     at `https://docs.angularjs.org` then the following will fail:
 
         <link href="{{ 'http://mydomain.org/unsafe.css' }}" rel="stylesheet">
+    {: .language-html}
 
     By default, `RESOURCE_URL` safe URLs are only allowed from the same
     domain and protocol as the application document.
@@ -1602,6 +1612,7 @@
         var innerHTML = h1.innerHTML;
         console.log(innerHTML);
         h1.innerHTML = innerHTML;
+    {: .language-js}
 
     The sanitizer contains a bit of code that triggers this mutation on an
     inert piece of DOM, [before angular sanitizes it][2].

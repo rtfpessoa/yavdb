@@ -14,19 +14,20 @@
     and `renderFile` expects a path to a template file.\n\nBoth functions can be invoked
     in two ways. The first is calling them\nwith `template`, `data`, and `options`\\:\n\n
     \   ejs.render(str, data, options);\n    \n    ejs.renderFile(filename, data,
-    options, callback)\n\nThe second way would be by calling only the `template` and
-    `data`, while\n`ejs` lets the `options` be passed as part of the `data`\\:\n\n
-    \   ejs.render(str, dataAndOptions);\n    \n    ejs.renderFile(filename, dataAndOptions,
-    callback)\n\nIf used with a variable list supplied by the user (e.g. by reading
-    it\nfrom the URI with `qs` or equivalent), an attacker can control `ejs`\noptions.
-    This includes the `root` option, which allows changing the\nproject root for includes
-    with an absolute path.\n\n    ejs.renderFile('my-template', {root:'/bad/root/'},
-    callback);\n\nBy passing along the root directive in the line above, any includes\nwould
-    now be pulled from `/bad/root` instead of the path intended. This\nallows the
-    attacker to take control of the root directory for included\nscripts and divert
-    it to a library under his control, thus leading to\nremote code execution.\n\nThe
-    [fix][1] introduced in version `2.5.3` blacklisted `root` options\nfrom options
-    passed via the `data` object.\n\n\n\n[1]: https://github.com/mde/ejs/commit/3d447c5a335844b25faec04b1132dbc721f9c8f6\n"
+    options, callback)\n{: .language-js}\n\nThe second way would be by calling only
+    the `template` and `data`, while\n`ejs` lets the `options` be passed as part of
+    the `data`\\:\n\n    ejs.render(str, dataAndOptions);\n    \n    ejs.renderFile(filename,
+    dataAndOptions, callback)\n{: .language-js}\n\nIf used with a variable list supplied
+    by the user (e.g. by reading it\nfrom the URI with `qs` or equivalent), an attacker
+    can control `ejs`\noptions. This includes the `root` option, which allows changing
+    the\nproject root for includes with an absolute path.\n\n    ejs.renderFile('my-template',
+    {root:'/bad/root/'}, callback);\n{: .language-js}\n\nBy passing along the root
+    directive in the line above, any includes\nwould now be pulled from `/bad/root`
+    instead of the path intended. This\nallows the attacker to take control of the
+    root directory for included\nscripts and divert it to a library under his control,
+    thus leading to\nremote code execution.\n\nThe [fix][1] introduced in version
+    `2.5.3` blacklisted `root` options\nfrom options passed via the `data` object.\n\n\n\n[1]:
+    https://github.com/mde/ejs/commit/3d447c5a335844b25faec04b1132dbc721f9c8f6\n"
   affected_package: ejs
   vulnerable_versions:
   - "< 2.5.3"
@@ -58,16 +59,16 @@
     `render` expects a string to be used for the\ntemplate and `renderFile` expects
     a path to a template file.\n\nBoth functions can be invoked in two ways. The first
     is calling them\nwith `template`, `data`, and `options`\\:\n\n    ejs.render(str,
-    data, options);\n    \n    ejs.renderFile(filename, data, options, callback)\n\nThe
-    second way would be by calling only the `template` and `data`, while\n`ejs` lets
-    the `options` be passed as part of the `data`\\:\n\n    ejs.render(str, dataAndOptions);\n
-    \   \n    ejs.renderFile(filename, dataAndOptions, callback)\n\nIf used with a
-    variable list supplied by the user (e.g. by reading it\nfrom the URI with `qs`
-    or equivalent), an attacker can control `ejs`\noptions. This includes the `filename`
-    option, which will be rendered as\nis when an error occurs during rendering.\n\n
-    \   ejs.renderFile('my-template', {filename:'<script>alert(1)</script>'}, callback);\n\nThe
-    [fix][1] introduced in version `2.5.3` blacklisted `root` options\nfrom options
-    passed via the `data` object.\n\n\n\n[1]: https://github.com/mde/ejs/commit/49264e0037e313a0a3e033450b5c184112516d8f\n\\nA
+    data, options);\n    \n    ejs.renderFile(filename, data, options, callback)\n{:
+    .language-js}\n\nThe second way would be by calling only the `template` and `data`,
+    while\n`ejs` lets the `options` be passed as part of the `data`\\:\n\n    ejs.render(str,
+    dataAndOptions);\n    \n    ejs.renderFile(filename, dataAndOptions, callback)\n{:
+    .language-js}\n\nIf used with a variable list supplied by the user (e.g. by reading
+    it\nfrom the URI with `qs` or equivalent), an attacker can control `ejs`\noptions.
+    This includes the `filename` option, which will be rendered as\nis when an error
+    occurs during rendering.\n\n    ejs.renderFile('my-template', {filename:'<script>alert(1)</script>'},
+    callback);\n{: .language-js}\n\nThe [fix][1] introduced in version `2.5.3` blacklisted
+    `root` options\nfrom options passed via the `data` object.\n\n\n\n[1]: https://github.com/mde/ejs/commit/49264e0037e313a0a3e033450b5c184112516d8f\n\\nA
     cross-site scripting attack occurs when the attacker tricks a\nlegitimate web-based
     application or site to accept a request as\noriginating from a trusted source.\n\nThis
     is done by escaping the context of the web application; the web\napplication then
@@ -147,15 +148,15 @@
     and `renderFile` expects a path to a template file.\n\nBoth functions can be invoked
     in two ways. The first is calling them\nwith `template`, `data`, and `options`\\:\n\n
     \   ejs.render(str, data, options);\n    \n    ejs.renderFile(filename, data,
-    options, callback)\n\nThe second way would be by calling only the `template` and
-    `data`, while\n`ejs` lets the `options` be passed as part of the `data`\\:\n\n
-    \   ejs.render(str, dataAndOptions);\n    \n    ejs.renderFile(filename, dataAndOptions,
-    callback)\n\nIf used with a variable list supplied by the user (e.g. by reading
-    it\nfrom the URI with `qs` or equivalent), an attacker can control `ejs`\noptions.
-    This includes the `localNames` option, which will cause the\nrenderer to crash.\n\n
-    \   ejs.renderFile('my-template', {localNames:'try'}, callback);\n\nThe [fix][1]
-    introduced in version `2.5.3` blacklisted `root` options\nfrom options passed
-    via the `data` object.\n\n\n\n[1]: https://github.com/mde/ejs/commit/49264e0037e313a0a3e033450b5c184112516d8f\n"
+    options, callback)\n{: .language-js}\n\nThe second way would be by calling only
+    the `template` and `data`, while\n`ejs` lets the `options` be passed as part of
+    the `data`\\:\n\n    ejs.render(str, dataAndOptions);\n    \n    ejs.renderFile(filename,
+    dataAndOptions, callback)\n{: .language-js}\n\nIf used with a variable list supplied
+    by the user (e.g. by reading it\nfrom the URI with `qs` or equivalent), an attacker
+    can control `ejs`\noptions. This includes the `localNames` option, which will
+    cause the\nrenderer to crash.\n\n    ejs.renderFile('my-template', {localNames:'try'},
+    callback);\n{: .language-js}\n\nThe [fix][1] introduced in version `2.5.3` blacklisted
+    `root` options\nfrom options passed via the `data` object.\n\n\n\n[1]: https://github.com/mde/ejs/commit/49264e0037e313a0a3e033450b5c184112516d8f\n"
   affected_package: ejs
   vulnerable_versions:
   - "< 2.5.5"

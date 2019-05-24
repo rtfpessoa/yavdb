@@ -26,3 +26,28 @@
   references:
   - https://github.com/gnzlbg/slice_deque/issues/57
   source_url: https://github.com/RustSec/advisory-db/blob/master/crates/slice-deque/RUSTSEC-2018-0008.toml
+- id: rustsec:cargo:slice-deque:RUSTSEC-2019-0002
+  title: Bug in SliceDeque::move_head_unchecked corrupts its memory
+  description: "Affected versions of this crate entered a corrupted state if\n`mem::size_of::<T>()
+    % allocation_granularity() != 0` and a specific allocation\npattern was used:
+    sufficiently shifting the deque elements over the mirrored\npage boundary.\n\nThis
+    allows an attacker that controls controls both element insertion and\nremoval
+    to corrupt the deque, such that reading elements from it would read\nbytes corresponding
+    to other elements in the deque. (e.g. a read of T could read\nsome bytes from
+    one value and some bytes from an adjacent one, resulting in a T\nwhose value representation
+    is not meaningful). This is undefined behavior.\n \nThe flaw was corrected by
+    using a pair of pointers to track the head and tail of\nthe deque instead of a
+    pair of indices. This pair of pointers are represented\nusing a Rust slice."
+  affected_package: slice-deque
+  patched_versions:
+  - ">= 0.2.0"
+  severity: high
+  package_manager: cargo
+  disclosed_date: 2019-05-07
+  created_date: 2019-05-07
+  last_modified_date: 2019-05-07
+  credit:
+  - RustSec
+  references:
+  - https://github.com/gnzlbg/slice_deque/issues/57
+  source_url: https://github.com/RustSec/advisory-db/blob/master/crates/slice-deque/RUSTSEC-2019-0002.toml

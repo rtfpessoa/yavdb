@@ -67,7 +67,7 @@
     [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22xstream%22
   affected_package: com.thoughtworks.xstream:xstream
   vulnerable_versions:
-  - "<= 1.4.6"
+  - "< 1.4.6"
   severity: medium
   package_manager: maven
   cve:
@@ -115,6 +115,7 @@
         <?xml version="1.0" encoding="ISO-8859-1"?>
            <username>John</username>
         </xml>
+    {: .language-xml}
 
     An external XML entity - `xxe`, is defined using a system identifier and
     present within a DOCTYPE header. These entities can access local or
@@ -127,6 +128,7 @@
            <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
            <username>&xxe;</username>
         </xml>
+    {: .language-xml}
 
     Other XXE Injection attacks can access local resources that may not stop
     returning data, possibly impacting application availability and leading
@@ -154,18 +156,18 @@
 - id: snykio:maven:com.thoughtworks.xstream:xstream:31394
   title: Denial of Service (DoS)
   description: |+
-    [`com.thoughtworks.xstream:xstream`][1] is a simple library to serialize
+    [com.thoughtworks.xstream:xstream][1] is a simple library to serialize
     objects to XML and back again.
 
     Affected versions of this package are vulnerable to Denial of Service
-    attacks. When a certain denyTypes workaround is not used, mishandles
+    (DoS) When a certain denyTypes workaround is not used, mishandles
     attempts to create an instance of the primitive type \'void\' during
     unmarshalling, leading to a remote application crash, as demonstrated by
     an `xstream.fromXML("&lt;void/>")` call.
 
 
 
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22xstream%22
+    [1]: https://x-stream.github.io/
     \nDenial of Service (DoS) describes a family of attacks, all aimed at
     making a system inaccessible to its intended and legitimate users.
 
@@ -194,7 +196,7 @@
 
   affected_package: com.thoughtworks.xstream:xstream
   vulnerable_versions:
-  - "<= 1.4.9"
+  - "< 1.4.10"
   severity: high
   package_manager: maven
   cve:

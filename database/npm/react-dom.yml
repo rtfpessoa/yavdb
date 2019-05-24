@@ -22,15 +22,18 @@
         props[userProvidedData] = "hello";
         let element = <div {...props} />;
         let html = ReactDOMServer.renderToString(element);
+    {: .language-js}
 
     Given the attacker could influence the `userProvidedData`, they could
     craft an attribute name that would triggler an XSS vulnerability, like:
 
         ></div><script>alert("hi")</script>`
+    {: .language-html}
 
     Allowing the attacker to inject arbitrary markup:
 
         <div ></div><script>alert("hi")</script>
+    {: .language-html}
 
     **Note:** This vulnerability affects only some server-rendered React
     apps, which contain a the pattern. Purely client-rendered apps are not

@@ -259,7 +259,7 @@
     of Service (ReDoS) is a type of Denial of\nService attack. Regular expressions
     are incredibly powerful, but they\naren\\'t very intuitive and can ultimately
     end up making it easy for\nattackers to take your site down.\n\nLet’s take the
-    following regular expression as an example:\n\n    regex = /A(B|C+)+D/\n\nThis
+    following regular expression as an example:\n\n    regex = /A(B|C+)+D/\n{: .language-js}\n\nThis
     regular expression accomplishes the following:\n\n* `A` The string must start
     with the letter \\'A\\'\n* `(B|C+)+` The string must then follow the letter A
     with either the\n  letter \\'B\\' or some number of occurrences of the letter
@@ -270,30 +270,30 @@
     it doesn\\'t take very long for a regex engine to find a\nmatch:\n\n    $ time
     node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCD\")'\n    0.04s user
     0.01s system 95% cpu 0.052 total\n    \n    $ time node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCX\")'\n
-    \   1.79s user 0.02s system 99% cpu 1.812 total\n\nThe entire process of testing
-    it against a 30 characters long string\ntakes around ~52ms. But when given an
-    invalid string, it takes nearly\ntwo seconds to complete the test, over ten times
-    as long as it took to\ntest a valid string. The dramatic difference is due to
-    the way regular\nexpressions get evaluated.\n\nMost Regex engines will work very
-    similarly (with minor differences).\nThe engine will match the first possible
-    way to accept the current\ncharacter and proceed to the next one. If it then fails
-    to match the\nnext one, it will backtrack and see if there was another way to
-    digest\nthe previous character. If it goes too far down the rabbit hole only to\nfind
-    out the string doesn’t match in the end, and if many characters\nhave multiple
-    valid regex paths, the number of backtracking steps can\nbecome very large, resulting
-    in what is known as *catastrophic\nbacktracking*.\n\nLet\\'s look at how our expression
-    runs into this problem, using a\nshorter string: \\\"ACCCX\\\". While it seems
-    fairly straightforward, there\nare still four different ways that the engine could
-    match those three\nC\\'s:\n\n1.  CCC\n2.  CC+C\n3.  C+CC\n4.  C+C+C.\n\nThe engine
-    has to try each of those combinations to see if any of them\npotentially match
-    against the expression. When you combine that with the\nother steps the engine
-    must take, we can use [RegEx 101 debugger][1] to\nsee the engine has to take a
-    total of 38 steps before it can determine\nthe string doesn\\'t match.\n\nFrom
-    there, the number of steps the engine must use to validate a string\njust continues
-    to grow.\n\n| String | Number of C\\'s | Number of steps |\n|----------\n| ACCCX
-    | 3 | 38 |\n| ACCCCX | 4 | 71 |\n| ACCCCCX | 5 | 136 |\n| ACCCCCCCCCCCCCCX | 14
-    | 65,553 |\n\nBy the time the string includes 14 C\\'s, the engine has to take
-    over\n65,000 steps just to see if the string is valid. These extreme\nsituations
+    \   1.79s user 0.02s system 99% cpu 1.812 total\n{: .language-bash}\n\nThe entire
+    process of testing it against a 30 characters long string\ntakes around ~52ms.
+    But when given an invalid string, it takes nearly\ntwo seconds to complete the
+    test, over ten times as long as it took to\ntest a valid string. The dramatic
+    difference is due to the way regular\nexpressions get evaluated.\n\nMost Regex
+    engines will work very similarly (with minor differences).\nThe engine will match
+    the first possible way to accept the current\ncharacter and proceed to the next
+    one. If it then fails to match the\nnext one, it will backtrack and see if there
+    was another way to digest\nthe previous character. If it goes too far down the
+    rabbit hole only to\nfind out the string doesn’t match in the end, and if many
+    characters\nhave multiple valid regex paths, the number of backtracking steps
+    can\nbecome very large, resulting in what is known as *catastrophic\nbacktracking*.\n\nLet\\'s
+    look at how our expression runs into this problem, using a\nshorter string: \\\"ACCCX\\\".
+    While it seems fairly straightforward, there\nare still four different ways that
+    the engine could match those three\nC\\'s:\n\n1.  CCC\n2.  CC+C\n3.  C+CC\n4.
+    \ C+C+C.\n\nThe engine has to try each of those combinations to see if any of
+    them\npotentially match against the expression. When you combine that with the\nother
+    steps the engine must take, we can use [RegEx 101 debugger][1] to\nsee the engine
+    has to take a total of 38 steps before it can determine\nthe string doesn\\'t
+    match.\n\nFrom there, the number of steps the engine must use to validate a string\njust
+    continues to grow.\n\n| String | Number of C\\'s | Number of steps |\n|----------\n|
+    ACCCX | 3 | 38 |\n| ACCCCX | 4 | 71 |\n| ACCCCCX | 5 | 136 |\n| ACCCCCCCCCCCCCCX
+    | 14 | 65,553 |\n\nBy the time the string includes 14 C\\'s, the engine has to
+    take over\n65,000 steps just to see if the string is valid. These extreme\nsituations
     can cause them to work very slowly (exponentially related to\ninput size, as shown
     above), allowing an attacker to exploit this and\ncan cause the service to excessively
     consume CPU, resulting in a Denial\nof Service.\n\n\n\n[1]: https://regex101.com/debugger\n"
@@ -328,41 +328,41 @@
     expression Denial of Service (ReDoS) is a type of Denial of\nService attack. Regular
     expressions are incredibly powerful, but they\naren\\'t very intuitive and can
     ultimately end up making it easy for\nattackers to take your site down.\n\nLet’s
-    take the following regular expression as an example:\n\n    regex = /A(B|C+)+D/\n\nThis
-    regular expression accomplishes the following:\n\n* `A` The string must start
-    with the letter \\'A\\'\n* `(B|C+)+` The string must then follow the letter A
-    with either the\n  letter \\'B\\' or some number of occurrences of the letter
-    \\'C\\' (the\n  `+` matches one or more times). The `+` at the end of this section\n
-    \ states that we can look for one or more matches of this section.\n* `D` Finally,
-    we ensure this section of the string ends with a \\'D\\'\n\nThe expression would
-    match inputs such as `ABBD`, `ABCCCCD`, `ABCBCCCD`\nand `ACCCCCD`\n\nIt most cases,
-    it doesn\\'t take very long for a regex engine to find a\nmatch:\n\n    $ time
-    node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCD\")'\n    0.04s user
-    0.01s system 95% cpu 0.052 total\n    \n    $ time node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCX\")'\n
-    \   1.79s user 0.02s system 99% cpu 1.812 total\n\nThe entire process of testing
-    it against a 30 characters long string\ntakes around ~52ms. But when given an
-    invalid string, it takes nearly\ntwo seconds to complete the test, over ten times
-    as long as it took to\ntest a valid string. The dramatic difference is due to
-    the way regular\nexpressions get evaluated.\n\nMost Regex engines will work very
-    similarly (with minor differences).\nThe engine will match the first possible
-    way to accept the current\ncharacter and proceed to the next one. If it then fails
-    to match the\nnext one, it will backtrack and see if there was another way to
-    digest\nthe previous character. If it goes too far down the rabbit hole only to\nfind
-    out the string doesn’t match in the end, and if many characters\nhave multiple
-    valid regex paths, the number of backtracking steps can\nbecome very large, resulting
-    in what is known as *catastrophic\nbacktracking*.\n\nLet\\'s look at how our expression
-    runs into this problem, using a\nshorter string: \\\"ACCCX\\\". While it seems
-    fairly straightforward, there\nare still four different ways that the engine could
-    match those three\nC\\'s:\n\n1.  CCC\n2.  CC+C\n3.  C+CC\n4.  C+C+C.\n\nThe engine
-    has to try each of those combinations to see if any of them\npotentially match
-    against the expression. When you combine that with the\nother steps the engine
-    must take, we can use [RegEx 101 debugger][1] to\nsee the engine has to take a
-    total of 38 steps before it can determine\nthe string doesn\\'t match.\n\nFrom
-    there, the number of steps the engine must use to validate a string\njust continues
-    to grow.\n\n| String | Number of C\\'s | Number of steps |\n|----------\n| ACCCX
-    | 3 | 38 |\n| ACCCCX | 4 | 71 |\n| ACCCCCX | 5 | 136 |\n| ACCCCCCCCCCCCCCX | 14
-    | 65,553 |\n\nBy the time the string includes 14 C\\'s, the engine has to take
-    over\n65,000 steps just to see if the string is valid. These extreme\nsituations
+    take the following regular expression as an example:\n\n    regex = /A(B|C+)+D/\n{:
+    .language-js}\n\nThis regular expression accomplishes the following:\n\n* `A`
+    The string must start with the letter \\'A\\'\n* `(B|C+)+` The string must then
+    follow the letter A with either the\n  letter \\'B\\' or some number of occurrences
+    of the letter \\'C\\' (the\n  `+` matches one or more times). The `+` at the end
+    of this section\n  states that we can look for one or more matches of this section.\n*
+    `D` Finally, we ensure this section of the string ends with a \\'D\\'\n\nThe expression
+    would match inputs such as `ABBD`, `ABCCCCD`, `ABCBCCCD`\nand `ACCCCCD`\n\nIt
+    most cases, it doesn\\'t take very long for a regex engine to find a\nmatch:\n\n
+    \   $ time node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCD\")'\n    0.04s
+    user 0.01s system 95% cpu 0.052 total\n    \n    $ time node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCX\")'\n
+    \   1.79s user 0.02s system 99% cpu 1.812 total\n{: .language-bash}\n\nThe entire
+    process of testing it against a 30 characters long string\ntakes around ~52ms.
+    But when given an invalid string, it takes nearly\ntwo seconds to complete the
+    test, over ten times as long as it took to\ntest a valid string. The dramatic
+    difference is due to the way regular\nexpressions get evaluated.\n\nMost Regex
+    engines will work very similarly (with minor differences).\nThe engine will match
+    the first possible way to accept the current\ncharacter and proceed to the next
+    one. If it then fails to match the\nnext one, it will backtrack and see if there
+    was another way to digest\nthe previous character. If it goes too far down the
+    rabbit hole only to\nfind out the string doesn’t match in the end, and if many
+    characters\nhave multiple valid regex paths, the number of backtracking steps
+    can\nbecome very large, resulting in what is known as *catastrophic\nbacktracking*.\n\nLet\\'s
+    look at how our expression runs into this problem, using a\nshorter string: \\\"ACCCX\\\".
+    While it seems fairly straightforward, there\nare still four different ways that
+    the engine could match those three\nC\\'s:\n\n1.  CCC\n2.  CC+C\n3.  C+CC\n4.
+    \ C+C+C.\n\nThe engine has to try each of those combinations to see if any of
+    them\npotentially match against the expression. When you combine that with the\nother
+    steps the engine must take, we can use [RegEx 101 debugger][1] to\nsee the engine
+    has to take a total of 38 steps before it can determine\nthe string doesn\\'t
+    match.\n\nFrom there, the number of steps the engine must use to validate a string\njust
+    continues to grow.\n\n| String | Number of C\\'s | Number of steps |\n|----------\n|
+    ACCCX | 3 | 38 |\n| ACCCCX | 4 | 71 |\n| ACCCCCX | 5 | 136 |\n| ACCCCCCCCCCCCCCX
+    | 14 | 65,553 |\n\nBy the time the string includes 14 C\\'s, the engine has to
+    take over\n65,000 steps just to see if the string is valid. These extreme\nsituations
     can cause them to work very slowly (exponentially related to\ninput size, as shown
     above), allowing an attacker to exploit this and\ncan cause the service to excessively
     consume CPU, resulting in a Denial\nof Service.\n\n\n\n[1]: https://regex101.com/debugger\n"
@@ -461,19 +461,19 @@
 - id: snykio:npm:marked:20150520
   title: Content & Code Injection (XSS)
   description: |+
-    [`marked`][1] is a markdown parser and compiler used for rendering
-    markdown content to html.
+    [marked][1] is a low-level compiler for parsing markdown without caching
+    or blocking for long periods of time.
 
-    It is vulnerable to content injection attack allowing the attacker to
-    bypass its output sanitization (`sanitize: true`) protection. Using the
-    [HTML Coded Character Set][2], attackers can inject `javascript:` code
-    snippets into the output. For example, the following input
-    `javascript&#x58document;alert(1)` will result in `alert(1)` being
-    executed when the user clicks on the link.
+    Affected versions of this package are vulnerable to Content &amp; Code
+    Injection (XSS). An attacker could bypass its output sanitization
+    (`sanitize: true`) protection. Using the [HTML Coded Character Set][2],
+    attackers can inject `javascript:` code snippets into the output. For
+    example, the following input `javascript&#x58document;alert(1)` will
+    result in `alert(1)` being executed when the user clicks on the link.
 
 
 
-    [1]: https://www.npmjs.com/package/marked
+    [1]: https://marked.js.org/
     [2]: https://www.w3.org/MarkUp/html-spec/html-spec_13.html#SEC13
     \nA cross-site scripting attack occurs when the attacker tricks a
     legitimate web-based application or site to accept a request as
@@ -549,7 +549,7 @@
 
   affected_package: marked
   vulnerable_versions:
-  - "<0.3.6"
+  - ">=0.3.1 <0.3.6"
   severity: high
   package_manager: npm
   cve:
@@ -580,6 +580,7 @@
     `<script>alert('XSS')</script>` tag in base64 encoded format.
 
         [xss link](data:text/html;base64,PHNjcmlwdD5hbGVydCgnWFNTJyk8L3NjcmlwdD4K)
+    {: .language-html}
 
 
 
@@ -683,12 +684,13 @@
     to create a link with javascript code.\n\nFor example:\n\n    var marked = require('marked');\n
     \   marked.setOptions({\n      renderer: new marked.Renderer(),\n      sanitize:
     true\n    });\n    \n    text = `\n    lower[click me](javascript:...)lower\n
-    \   upper[click me](javascript&#X3a;...)upper\n    `;\n    \n    console.log(marked(text));\n\nwill
-    render the following:\n\n    <p>lowerlower\n    upper<a href=\"javascript&#X3a;...\">click
-    me</a>upper</p>\n\n\n\n[1]: https://github.com/chjj/marked/blob/v0.3.7/lib/marked.js#L1096-L1108\n\\nA
-    cross-site scripting attack occurs when the attacker tricks a\nlegitimate web-based
-    application or site to accept a request as\noriginating from a trusted source.\n\nThis
-    is done by escaping the context of the web application; the web\napplication then
+    \   upper[click me](javascript&#X3a;...)upper\n    `;\n    \n    console.log(marked(text));\n{:
+    .language-js}\n\nwill render the following:\n\n    <p>lowerlower\n    upper<a
+    href=\"javascript&#X3a;...\">click me</a>upper</p>\n{: .language-html}\n\n\n\n[1]:
+    https://github.com/chjj/marked/blob/v0.3.7/lib/marked.js#L1096-L1108\n\\nA cross-site
+    scripting attack occurs when the attacker tricks a\nlegitimate web-based application
+    or site to accept a request as\noriginating from a trusted source.\n\nThis is
+    done by escaping the context of the web application; the web\napplication then
     delivers that data to its users along with other\ntrusted dynamic content, without
     validating it. The browser unknowingly\nexecutes malicious script on the client
     side (through client-side\nlanguages; usually JavaScript or HTML) in order to
@@ -765,7 +767,7 @@
     of Service (ReDoS) is a type of Denial of\nService attack. Regular expressions
     are incredibly powerful, but they\naren\\'t very intuitive and can ultimately
     end up making it easy for\nattackers to take your site down.\n\nLet’s take the
-    following regular expression as an example:\n\n    regex = /A(B|C+)+D/\n\nThis
+    following regular expression as an example:\n\n    regex = /A(B|C+)+D/\n{: .language-js}\n\nThis
     regular expression accomplishes the following:\n\n* `A` The string must start
     with the letter \\'A\\'\n* `(B|C+)+` The string must then follow the letter A
     with either the\n  letter \\'B\\' or some number of occurrences of the letter
@@ -776,30 +778,30 @@
     it doesn\\'t take very long for a regex engine to find a\nmatch:\n\n    $ time
     node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCD\")'\n    0.04s user
     0.01s system 95% cpu 0.052 total\n    \n    $ time node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCX\")'\n
-    \   1.79s user 0.02s system 99% cpu 1.812 total\n\nThe entire process of testing
-    it against a 30 characters long string\ntakes around ~52ms. But when given an
-    invalid string, it takes nearly\ntwo seconds to complete the test, over ten times
-    as long as it took to\ntest a valid string. The dramatic difference is due to
-    the way regular\nexpressions get evaluated.\n\nMost Regex engines will work very
-    similarly (with minor differences).\nThe engine will match the first possible
-    way to accept the current\ncharacter and proceed to the next one. If it then fails
-    to match the\nnext one, it will backtrack and see if there was another way to
-    digest\nthe previous character. If it goes too far down the rabbit hole only to\nfind
-    out the string doesn’t match in the end, and if many characters\nhave multiple
-    valid regex paths, the number of backtracking steps can\nbecome very large, resulting
-    in what is known as *catastrophic\nbacktracking*.\n\nLet\\'s look at how our expression
-    runs into this problem, using a\nshorter string: \\\"ACCCX\\\". While it seems
-    fairly straightforward, there\nare still four different ways that the engine could
-    match those three\nC\\'s:\n\n1.  CCC\n2.  CC+C\n3.  C+CC\n4.  C+C+C.\n\nThe engine
-    has to try each of those combinations to see if any of them\npotentially match
-    against the expression. When you combine that with the\nother steps the engine
-    must take, we can use [RegEx 101 debugger][1] to\nsee the engine has to take a
-    total of 38 steps before it can determine\nthe string doesn\\'t match.\n\nFrom
-    there, the number of steps the engine must use to validate a string\njust continues
-    to grow.\n\n| String | Number of C\\'s | Number of steps |\n|----------\n| ACCCX
-    | 3 | 38 |\n| ACCCCX | 4 | 71 |\n| ACCCCCX | 5 | 136 |\n| ACCCCCCCCCCCCCCX | 14
-    | 65,553 |\n\nBy the time the string includes 14 C\\'s, the engine has to take
-    over\n65,000 steps just to see if the string is valid. These extreme\nsituations
+    \   1.79s user 0.02s system 99% cpu 1.812 total\n{: .language-bash}\n\nThe entire
+    process of testing it against a 30 characters long string\ntakes around ~52ms.
+    But when given an invalid string, it takes nearly\ntwo seconds to complete the
+    test, over ten times as long as it took to\ntest a valid string. The dramatic
+    difference is due to the way regular\nexpressions get evaluated.\n\nMost Regex
+    engines will work very similarly (with minor differences).\nThe engine will match
+    the first possible way to accept the current\ncharacter and proceed to the next
+    one. If it then fails to match the\nnext one, it will backtrack and see if there
+    was another way to digest\nthe previous character. If it goes too far down the
+    rabbit hole only to\nfind out the string doesn’t match in the end, and if many
+    characters\nhave multiple valid regex paths, the number of backtracking steps
+    can\nbecome very large, resulting in what is known as *catastrophic\nbacktracking*.\n\nLet\\'s
+    look at how our expression runs into this problem, using a\nshorter string: \\\"ACCCX\\\".
+    While it seems fairly straightforward, there\nare still four different ways that
+    the engine could match those three\nC\\'s:\n\n1.  CCC\n2.  CC+C\n3.  C+CC\n4.
+    \ C+C+C.\n\nThe engine has to try each of those combinations to see if any of
+    them\npotentially match against the expression. When you combine that with the\nother
+    steps the engine must take, we can use [RegEx 101 debugger][1] to\nsee the engine
+    has to take a total of 38 steps before it can determine\nthe string doesn\\'t
+    match.\n\nFrom there, the number of steps the engine must use to validate a string\njust
+    continues to grow.\n\n| String | Number of C\\'s | Number of steps |\n|----------\n|
+    ACCCX | 3 | 38 |\n| ACCCCX | 4 | 71 |\n| ACCCCCX | 5 | 136 |\n| ACCCCCCCCCCCCCCX
+    | 14 | 65,553 |\n\nBy the time the string includes 14 C\\'s, the engine has to
+    take over\n65,000 steps just to see if the string is valid. These extreme\nsituations
     can cause them to work very slowly (exponentially related to\ninput size, as shown
     above), allowing an attacker to exploit this and\ncan cause the service to excessively
     consume CPU, resulting in a Denial\nof Service.\n\n\n\n[1]: https://regex101.com/debugger\n"
@@ -836,7 +838,7 @@
     of Service (ReDoS) is a type of Denial of\nService attack. Regular expressions
     are incredibly powerful, but they\naren\\'t very intuitive and can ultimately
     end up making it easy for\nattackers to take your site down.\n\nLet’s take the
-    following regular expression as an example:\n\n    regex = /A(B|C+)+D/\n\nThis
+    following regular expression as an example:\n\n    regex = /A(B|C+)+D/\n{: .language-js}\n\nThis
     regular expression accomplishes the following:\n\n* `A` The string must start
     with the letter \\'A\\'\n* `(B|C+)+` The string must then follow the letter A
     with either the\n  letter \\'B\\' or some number of occurrences of the letter
@@ -847,30 +849,30 @@
     it doesn\\'t take very long for a regex engine to find a\nmatch:\n\n    $ time
     node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCD\")'\n    0.04s user
     0.01s system 95% cpu 0.052 total\n    \n    $ time node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCX\")'\n
-    \   1.79s user 0.02s system 99% cpu 1.812 total\n\nThe entire process of testing
-    it against a 30 characters long string\ntakes around ~52ms. But when given an
-    invalid string, it takes nearly\ntwo seconds to complete the test, over ten times
-    as long as it took to\ntest a valid string. The dramatic difference is due to
-    the way regular\nexpressions get evaluated.\n\nMost Regex engines will work very
-    similarly (with minor differences).\nThe engine will match the first possible
-    way to accept the current\ncharacter and proceed to the next one. If it then fails
-    to match the\nnext one, it will backtrack and see if there was another way to
-    digest\nthe previous character. If it goes too far down the rabbit hole only to\nfind
-    out the string doesn’t match in the end, and if many characters\nhave multiple
-    valid regex paths, the number of backtracking steps can\nbecome very large, resulting
-    in what is known as *catastrophic\nbacktracking*.\n\nLet\\'s look at how our expression
-    runs into this problem, using a\nshorter string: \\\"ACCCX\\\". While it seems
-    fairly straightforward, there\nare still four different ways that the engine could
-    match those three\nC\\'s:\n\n1.  CCC\n2.  CC+C\n3.  C+CC\n4.  C+C+C.\n\nThe engine
-    has to try each of those combinations to see if any of them\npotentially match
-    against the expression. When you combine that with the\nother steps the engine
-    must take, we can use [RegEx 101 debugger][1] to\nsee the engine has to take a
-    total of 38 steps before it can determine\nthe string doesn\\'t match.\n\nFrom
-    there, the number of steps the engine must use to validate a string\njust continues
-    to grow.\n\n| String | Number of C\\'s | Number of steps |\n|----------\n| ACCCX
-    | 3 | 38 |\n| ACCCCX | 4 | 71 |\n| ACCCCCX | 5 | 136 |\n| ACCCCCCCCCCCCCCX | 14
-    | 65,553 |\n\nBy the time the string includes 14 C\\'s, the engine has to take
-    over\n65,000 steps just to see if the string is valid. These extreme\nsituations
+    \   1.79s user 0.02s system 99% cpu 1.812 total\n{: .language-bash}\n\nThe entire
+    process of testing it against a 30 characters long string\ntakes around ~52ms.
+    But when given an invalid string, it takes nearly\ntwo seconds to complete the
+    test, over ten times as long as it took to\ntest a valid string. The dramatic
+    difference is due to the way regular\nexpressions get evaluated.\n\nMost Regex
+    engines will work very similarly (with minor differences).\nThe engine will match
+    the first possible way to accept the current\ncharacter and proceed to the next
+    one. If it then fails to match the\nnext one, it will backtrack and see if there
+    was another way to digest\nthe previous character. If it goes too far down the
+    rabbit hole only to\nfind out the string doesn’t match in the end, and if many
+    characters\nhave multiple valid regex paths, the number of backtracking steps
+    can\nbecome very large, resulting in what is known as *catastrophic\nbacktracking*.\n\nLet\\'s
+    look at how our expression runs into this problem, using a\nshorter string: \\\"ACCCX\\\".
+    While it seems fairly straightforward, there\nare still four different ways that
+    the engine could match those three\nC\\'s:\n\n1.  CCC\n2.  CC+C\n3.  C+CC\n4.
+    \ C+C+C.\n\nThe engine has to try each of those combinations to see if any of
+    them\npotentially match against the expression. When you combine that with the\nother
+    steps the engine must take, we can use [RegEx 101 debugger][1] to\nsee the engine
+    has to take a total of 38 steps before it can determine\nthe string doesn\\'t
+    match.\n\nFrom there, the number of steps the engine must use to validate a string\njust
+    continues to grow.\n\n| String | Number of C\\'s | Number of steps |\n|----------\n|
+    ACCCX | 3 | 38 |\n| ACCCCX | 4 | 71 |\n| ACCCCCX | 5 | 136 |\n| ACCCCCCCCCCCCCCX
+    | 14 | 65,553 |\n\nBy the time the string includes 14 C\\'s, the engine has to
+    take over\n65,000 steps just to see if the string is valid. These extreme\nsituations
     can cause them to work very slowly (exponentially related to\ninput size, as shown
     above), allowing an attacker to exploit this and\ncan cause the service to excessively
     consume CPU, resulting in a Denial\nof Service.\n\n\n\n[1]: https://regex101.com/debugger\n"

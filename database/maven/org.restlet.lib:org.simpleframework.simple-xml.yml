@@ -9,37 +9,37 @@
     (DoS) or server-side\n> request forgery (SSRF) attacks. The main problem is that
     the XML\n> standard allows an XML document to define entities, which are like\n>
     variables that can refer to resources outside of the XML document.\n> Let\\'s
-    consider the following XML document: `` ` ``xml &lt;?xml\n> version=\\\"1.0\\\"
-    encoding=\\\"ISO-8859-1\\\"?&gt; &lt;!DOCTYPE foo \\[\n> &lt;!ELEMENT foo ANY
-    &gt; &lt;!ENTITY abc SYSTEM\n> \\\"file:///etc/passwd\\\" &gt;\\]&gt;\n\n<foo
-    />\n\n    \n    >This document defines an external entity named abc, that refers
-    to the content of the file `/etc/passwd`. When the XML document is parsed, the
-    entity `&abc;` will be replaced by the content of `/etc/passwd`. Now if an application
-    is parsing XML data from an untrusted source, then by defining an external entity
-    that points to a sensitive file, the attacker will be able to force the application
-    to include sensitive data in the parsed XML document. If the attacker can then
-    retrieve the content of the parsed document, they will be able to view the content
-    of /etc/passwd.\n    - LGTM Blog\n    \n    ## Details\n    \n    XXE Injection
-    is a type of attack against an application that parses XML input.\n    XML is
-    a markup language that defines a set of rules for encoding documents in a format
-    that is both human-readable and machine-readable. By default, many XML processors
-    allow specification of an external entity, a URI that is dereferenced and evaluated
-    during XML processing. When an XML document is being parsed, the parser can make
-    a request and include the content at the specified URI inside of the XML document.\n
-    \   \n    Attacks can include disclosing local files, which may contain sensitive
-    data such as passwords or private user data, using file: schemes or relative paths
-    in the system identifier.\n    \n    For example, below is a sample XML document,
-    containing an XML element- username.\n    \n    ```xml\n    <?xml version=\"1.0\"
-    encoding=\"ISO-8859-1\"?>\n       <username>John</username>\n    </xml>\n\nAn
+    consider the following XML document:\n> \n>     <?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n>
+    \     <!DOCTYPE foo [\n>       <!ELEMENT foo ANY >\n>       <!ENTITY abc SYSTEM
+    \"file:///etc/passwd\" >]>\n>     <foo>&abc;</foo>\n> {: .language-xml}\n\n> This
+    document defines an external entity named abc, that refers to the\n> content of
+    the file `/etc/passwd`. When the XML document is parsed,\n> the entity `&abc;`
+    will be replaced by the content of `/etc/passwd`.\n> Now if an application is
+    parsing XML data from an untrusted source,\n> then by defining an external entity
+    that points to a sensitive file,\n> the attacker will be able to force the application
+    to include\n> sensitive data in the parsed XML document. If the attacker can then\n>
+    retrieve the content of the parsed document, they will be able to view\n> the
+    content of /etc/passwd.\n> \n> * LGTM Blog\n\n\n\n[1]: https://snyk.io/vuln/SNYK-JAVA-ORGSIMPLEFRAMEWORK-31528\n\\nXXE
+    Injection is a type of attack against an application that parses XML\ninput. XML
+    is a markup language that defines a set of rules for encoding\ndocuments in a
+    format that is both human-readable and machine-readable.\nBy default, many XML
+    processors allow specification of an external\nentity, a URI that is dereferenced
+    and evaluated during XML processing.\nWhen an XML document is being parsed, the
+    parser can make a request and\ninclude the content at the specified URI inside
+    of the XML document.\n\nAttacks can include disclosing local files, which may
+    contain sensitive\ndata such as passwords or private user data, using file: schemes
+    or\nrelative paths in the system identifier.\n\nFor example, below is a sample
+    XML document, containing an XML element-\nusername.\n\n    <?xml version=\"1.0\"
+    encoding=\"ISO-8859-1\"?>\n       <username>John</username>\n    </xml>\n{: .language-xml}\n\nAn
     external XML entity - `xxe`, is defined using a system identifier and\npresent
     within a DOCTYPE header. These entities can access local or\nremote content. For
     example the below code contains an external XML\nentity that would fetch the content
     of `/etc/passwd` and display it to\nthe user rendered by `username`.\n\n    <?xml
     version=\"1.0\" encoding=\"ISO-8859-1\"?>\n    <!DOCTYPE foo [\n       <!ENTITY
-    xxe SYSTEM \"file:///etc/passwd\" >]>\n       <username>&xxe;</username>\n    </xml>\n\nOther
-    XXE Injection attacks can access local resources that may not stop\nreturning
-    data, possibly impacting application availability and leading\nto Denial of Service.\n\n\n\n[1]:
-    https://snyk.io/vuln/SNYK-JAVA-ORGSIMPLEFRAMEWORK-31528\n"
+    xxe SYSTEM \"file:///etc/passwd\" >]>\n       <username>&xxe;</username>\n    </xml>\n{:
+    .language-xml}\n\nOther XXE Injection attacks can access local resources that
+    may not stop\nreturning data, possibly impacting application availability and
+    leading\nto Denial of Service.\n\n"
   affected_package: org.restlet.lib:org.simpleframework.simple-xml
   vulnerable_versions:
   - "< 2.7.3"

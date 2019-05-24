@@ -31,20 +31,21 @@
     100 bytes of\nmemory, while the second example will allocate the memory needed
     for the\nstring \\\"100\\\":\n\n    // uninitialized Buffer of length 100\n    x
     = new Buffer(100);\n    // initialized Buffer with value of '100'\n    x = new
-    Buffer('100');\n\n`bl`\\'s `append` function uses the default `Buffer` constructor
-    as-is,\nmaking it easy to append uninitialized memory to an existing list. If\nthe
-    value of the buffer list is exposed to users, it may expose raw\nserver side memory,
-    potentially holding secrets, private data and code.\nThis is a similar vulnerability
-    to the infamous [`Heartbleed`][1] flaw\nin OpenSSL.\n\n    const BufferList =
-    require('bl')\n    \n    var bl = new BufferList()\n    bl.append(new Buffer('abcd'))\n
-    \   bl.append(new Buffer('efg'))\n    bl.append('100')\n    // appends a Buffer
-    holding 100 bytes of uninitialized memory\n    bl.append(100)                     \n
-    \   bl.append(new Buffer('j'))\n\nYou can read more about the insecure `Buffer`
-    behavior [on our blog][2].\n\nSimilar vulnerabilities were discovered in [request][3],
-    [mongoose][4],\n[ws][5] and [sequelize][6].\n\n**Note** This is vulnerable only
-    for Node &lt;=4\n\n\n\n[1]: http://heartbleed.com/\n[2]: https://snyk.io/blog/exploiting-buffer/\n[3]:
-    https://snyk.io/vuln/npm:request:20160119\n[4]: https://snyk.io/vuln/npm:mongoose:20160116\n[5]:
-    https://snyk.io/vuln/npm:ws:20160104\n[6]: https://snyk.io/vuln/npm:sequelize:20160115\n"
+    Buffer('100');\n{: .language-js}\n\n`bl`\\'s `append` function uses the default
+    `Buffer` constructor as-is,\nmaking it easy to append uninitialized memory to
+    an existing list. If\nthe value of the buffer list is exposed to users, it may
+    expose raw\nserver side memory, potentially holding secrets, private data and
+    code.\nThis is a similar vulnerability to the infamous [`Heartbleed`][1] flaw\nin
+    OpenSSL.\n\n    const BufferList = require('bl')\n    \n    var bl = new BufferList()\n
+    \   bl.append(new Buffer('abcd'))\n    bl.append(new Buffer('efg'))\n    bl.append('100')\n
+    \   // appends a Buffer holding 100 bytes of uninitialized memory\n    bl.append(100)
+    \                    \n    bl.append(new Buffer('j'))\n{: .language-js}\n\nYou
+    can read more about the insecure `Buffer` behavior [on our blog][2].\n\nSimilar
+    vulnerabilities were discovered in [request][3], [mongoose][4],\n[ws][5] and [sequelize][6].\n\n**Note**
+    This is vulnerable only for Node &lt;=4\n\n\n\n[1]: http://heartbleed.com/\n[2]:
+    https://snyk.io/blog/exploiting-buffer/\n[3]: https://snyk.io/vuln/npm:request:20160119\n[4]:
+    https://snyk.io/vuln/npm:mongoose:20160116\n[5]: https://snyk.io/vuln/npm:ws:20160104\n[6]:
+    https://snyk.io/vuln/npm:sequelize:20160115\n"
   affected_package: bl
   vulnerable_versions:
   - "<0.9.5"

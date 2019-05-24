@@ -13,6 +13,31 @@
   references:
   - https://symfony.com/blog/security-release-symfony-2-0-17-released
   source_url: https://github.com/FriendsOfPHP/security-advisories/blob/master/symfony/dependency-injection/2012-08-28.yaml
+- id: friendsofphp:packagist:symfony/dependency-injection:CVE-2019-10910
+  title: 'CVE-2019-10910: Check service IDs are valid'
+  affected_package: symfony/dependency-injection
+  vulnerable_versions:
+  - ">=2.7.0 <2.7.51"
+  - ">=2.8.0 <2.8.50"
+  - ">=3.0.0 <3.1.0"
+  - ">=3.1.0 <3.2.0"
+  - ">=3.2.0 <3.3.0"
+  - ">=3.3.0 <3.4.0"
+  - ">=3.4.0 <3.4.26"
+  - ">=4.0.0 <4.1.0"
+  - ">=4.1.0 <4.1.12"
+  - ">=4.2.0 <4.2.7"
+  package_manager: packagist
+  cve:
+  - CVE-2019-10910
+  disclosed_date: 2019-04-16
+  created_date: 2019-04-16
+  last_modified_date: 2019-04-16
+  credit:
+  - FriendsOfPHP
+  references:
+  - https://symfony.com/cve-2019-10910
+  source_url: https://github.com/FriendsOfPHP/security-advisories/blob/master/symfony/dependency-injection/CVE-2019-10910.yaml
 - id: ossindex:packagist:symfony/dependency-injection:8399183302
   title: Security fixes related to the way XML is handled
   description: Security fixes related to the way XML is handled
@@ -104,6 +129,7 @@
         <?xml version="1.0" encoding="ISO-8859-1"?>
            <username>John</username>
         </xml>
+    {: .language-xml}
 
     An external XML entity - `xxe`, is defined using a system identifier and
     present within a DOCTYPE header. These entities can access local or
@@ -116,6 +142,7 @@
            <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
            <username>&xxe;</username>
         </xml>
+    {: .language-xml}
 
     Other XXE Injection attacks can access local resources that may not stop
     returning data, possibly impacting application availability and leading
@@ -123,7 +150,7 @@
 
   affected_package: symfony/dependency-injection
   vulnerable_versions:
-  - ">=2  <2.0.17"
+  - ">=2.0.0  <2.0.17"
   severity: high
   package_manager: packagist
   cwe:

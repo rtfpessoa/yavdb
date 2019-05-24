@@ -60,13 +60,13 @@
     + aFile.getName();\n    \n           OutputStream downloadedStream = new BufferedOutputStream(new
     FileOutputStream(new File(localFile)));\n           boolean success = ftpClient.retrieveFile(remoteFile,
     downloadedStream);\n           outputStream.close();            \n        }\n
-    \     }\n    }\n\nThe code above, iterates over each file returned by the server,
-    and\ndownloads it into a local destination folder. So for example, if the\nfirst
-    file in the remote folder is named `passwd`, and the local\ndestination folder
-    is `/var/data/sync/`, it\\'d end up downloading the\nfile to `/var/data/sync/passwd`.\n\nBut
-    if the FTP server turns malicious, and instead of responding to the\nLIST command
-    with `passwd`, it responds with `../../../../etc/passwd` as\nthe filename. The
-    code above will end up placing the file into\n`/var/data/sync/../../../../etc/passwd`,
+    \     }\n    }\n{: .language-java}\n\nThe code above, iterates over each file
+    returned by the server, and\ndownloads it into a local destination folder. So
+    for example, if the\nfirst file in the remote folder is named `passwd`, and the
+    local\ndestination folder is `/var/data/sync/`, it\\'d end up downloading the\nfile
+    to `/var/data/sync/passwd`.\n\nBut if the FTP server turns malicious, and instead
+    of responding to the\nLIST command with `passwd`, it responds with `../../../../etc/passwd`
+    as\nthe filename. The code above will end up placing the file into\n`/var/data/sync/../../../../etc/passwd`,
     practically overwriting\n`/etc/passwd` with the newly downloaded file.\n\nFor
     more information you can check out our [blog post][1].\n\n\n\n[1]: https://snyk.io/blog/attacking-an-ftp-client/\n"
   affected_package: org.apache.hive:hive-common

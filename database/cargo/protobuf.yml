@@ -1,0 +1,22 @@
+---
+- id: rustsec:cargo:protobuf:RUSTSEC-2019-0003
+  title: Out of Memory in stream::read_raw_bytes_into()
+  description: |
+    Affected versions of this crate called Vec::reserve() on user-supplied input.
+
+    This allows an attacker to cause an Out of Memory condition while calling the
+    vulnerable method on untrusted data.
+  affected_package: protobuf
+  patched_versions:
+  - ">= 2.6.0"
+  - "^1.7.5"
+  severity: high
+  package_manager: cargo
+  disclosed_date: 2019-06-08
+  created_date: 2019-06-08
+  last_modified_date: 2019-06-08
+  credit:
+  - RustSec
+  references:
+  - https://github.com/stepancheg/rust-protobuf/issues/411
+  source_url: https://github.com/RustSec/advisory-db/blob/master/crates/protobuf/RUSTSEC-2019-0003.toml

@@ -1,0 +1,24 @@
+---
+- id: rustsec:cargo:ammonia:RUSTSEC-2019-0001
+  title: Uncontrolled recursion leads to abort in HTML serialization
+  description: |
+    Affected versions of this crate did use recursion for serialization of HTML
+    DOM trees.
+
+    This allows an attacker to cause abort due to stack overflow by providing
+    a pathologically nested input.
+
+    The flaw was corrected by serializing the DOM tree iteratively instead.
+  affected_package: ammonia
+  patched_versions:
+  - ">= 2.1.0"
+  severity: high
+  package_manager: cargo
+  disclosed_date: 2019-04-27
+  created_date: 2019-04-27
+  last_modified_date: 2019-04-27
+  credit:
+  - RustSec
+  references:
+  - https://github.com/rust-ammonia/ammonia/blob/master/CHANGELOG.md#210
+  source_url: https://github.com/RustSec/advisory-db/blob/master/crates/ammonia/RUSTSEC-2019-0001.toml

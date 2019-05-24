@@ -180,10 +180,12 @@
     Entering the following:
 
         <IMG SRC= onmouseover="alert('XSS');">
+    {: .language-html}
 
     produces the following:
 
         <img src="onmouseover="alert('XSS');"" />
+    {: .language-html}
 
 
 
@@ -478,19 +480,19 @@
     conduct an XSS attack.\n\n**PoC:**\n\n    var sanitizeHtml = require('sanitize-html');\n
     \   \n    var dirty = '!<textarea>&lt;/textarea&gt;<svg/onload=prompt`xs`&gt;</textarea>!';\n
     \   var clean = sanitizeHtml(dirty, {\n        allowedTags: [ 'textarea' ]\n    });\n
-    \   \n    console.log(clean);\n    \n    // !<textarea></textarea><svg/onload=prompt`xs`></textarea>!\n\n\n\n[1]:
-    https://www.npmjs.com/package/sanitize-html\n\\nA cross-site scripting attack
-    occurs when the attacker tricks a\nlegitimate web-based application or site to
-    accept a request as\noriginating from a trusted source.\n\nThis is done by escaping
-    the context of the web application; the web\napplication then delivers that data
-    to its users along with other\ntrusted dynamic content, without validating it.
-    The browser unknowingly\nexecutes malicious script on the client side (through
-    client-side\nlanguages; usually JavaScript or HTML) in order to perform actions
-    that\nare otherwise typically blocked by the browser’s Same Origin Policy.\n\nֿInjecting
-    malicious code is the most prevalent manner by which XSS is\nexploited; for this
-    reason, escaping characters in order to prevent this\nmanipulation is the top
-    method for securing code against this\nvulnerability.\n\nEscaping means that the
-    application is coded to mark key characters, and\nparticularly key characters
+    \   \n    console.log(clean);\n    \n    // !<textarea></textarea><svg/onload=prompt`xs`></textarea>!\n{:
+    .language-js}\n\n\n\n[1]: https://www.npmjs.com/package/sanitize-html\n\\nA cross-site
+    scripting attack occurs when the attacker tricks a\nlegitimate web-based application
+    or site to accept a request as\noriginating from a trusted source.\n\nThis is
+    done by escaping the context of the web application; the web\napplication then
+    delivers that data to its users along with other\ntrusted dynamic content, without
+    validating it. The browser unknowingly\nexecutes malicious script on the client
+    side (through client-side\nlanguages; usually JavaScript or HTML) in order to
+    perform actions that\nare otherwise typically blocked by the browser’s Same Origin
+    Policy.\n\nֿInjecting malicious code is the most prevalent manner by which XSS
+    is\nexploited; for this reason, escaping characters in order to prevent this\nmanipulation
+    is the top method for securing code against this\nvulnerability.\n\nEscaping means
+    that the application is coded to mark key characters, and\nparticularly key characters
     included in user input, to prevent those\ncharacters from being interpreted in
     a dangerous context. For example,\nin HTML, `<` can be coded as `&lt`; and `>`
     can be coded as `&gt`; in\norder to be interpreted and displayed as themselves

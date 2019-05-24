@@ -439,19 +439,20 @@
   title: Information Exposure
   description: "[`actionview`][1] is a conventions and helpers gem for building web\npages.
     Affected versions of this Gem are vulnerable to directory\ntraversal and information
-    leaks.\n\n# Details   {#details}\n\nApplications that pass unverified user input
-    to the `render` method in a\ncontroller may be vulnerable to an information leak
-    vulnerability.\n\nImpacted code will look something like this:\n\n    def index\n
-    \     render params[:id]\n    end\n\nCarefully crafted requests can cause the
-    above code to render files from\nunexpected places like outside the application\\'s
-    view directory, and\ncan possibly escalate this to a remote code execution attack.\n\nAll
-    users running an affected release should either upgrade or use one\nof the workarounds
-    immediately.\n\nA workaround to this issue is to not pass arbitrary user input
-    to the\n`render` method. Instead, verify that data before passing it to the\n`render`
-    method.\n\nFor example, change this:\n\n    def index\n      render params[:id]\n
-    \   end\n\nTo this:\n\n    def index\n      render verify_template(params[:id])\n
-    \   end\n    \n    private\n    def verify_template(name)\n      # add verification
-    logic particular to your application here\n    end\n\n\n\n[1]: https://rubygems.org/gems/actionview\n"
+    leaks.\n\n\n\n[1]: https://rubygems.org/gems/actionview\n\\nApplications that
+    pass unverified user input to the `render` method in a\ncontroller may be vulnerable
+    to an information leak vulnerability.\n\nImpacted code will look something like
+    this:\n\n    def index\n      render params[:id]\n    end\n{: .language-ruby}\n\nCarefully
+    crafted requests can cause the above code to render files from\nunexpected places
+    like outside the application\\'s view directory, and\ncan possibly escalate this
+    to a remote code execution attack.\n\nAll users running an affected release should
+    either upgrade or use one\nof the workarounds immediately.\n\nA workaround to
+    this issue is to not pass arbitrary user input to the\n`render` method. Instead,
+    verify that data before passing it to the\n`render` method.\n\nFor example, change
+    this:\n\n    def index\n      render params[:id]\n    end\n{: .language-ruby}\n\nTo
+    this:\n\n    def index\n      render verify_template(params[:id])\n    end\n    \n
+    \   private\n    def verify_template(name)\n      # add verification logic particular
+    to your application here\n    end\n{: .language-ruby}\n\n"
   affected_package: actionview
   vulnerable_versions:
   - "<3.2.22.1"
@@ -482,16 +483,17 @@
     https://snyk.io/vuln/SNYK-RUBY-ACTIONVIEW-20262\n\\nApplications that pass unverified
     user input to the `render` method in a\ncontroller may be vulnerable to an information
     leak vulnerability.\n\nImpacted code will look something like this:\n\n    def
-    index\n      render params[:id]\n    end\n\nCarefully crafted requests can cause
-    the above code to render files from\nunexpected places like outside the application\\'s
-    view directory, and\ncan possibly escalate this to a remote code execution attack.\n\nAll
-    users running an affected release should either upgrade or use one\nof the workarounds
-    immediately.\n\nA workaround to this issue is to not pass arbitrary user input
-    to the\n`render` method. Instead, verify that data before passing it to the\n`render`
-    method.\n\nFor example, change this:\n\n    def index\n      render params[:id]\n
-    \   end\n\nTo this:\n\n    def index\n      render verify_template(params[:id])\n
-    \   end\n    \n    private\n    def verify_template(name)\n      # add verification
-    logic particular to your application here\n    end\n\n"
+    index\n      render params[:id]\n    end\n{: .language-ruby}\n\nCarefully crafted
+    requests can cause the above code to render files from\nunexpected places like
+    outside the application\\'s view directory, and\ncan possibly escalate this to
+    a remote code execution attack.\n\nAll users running an affected release should
+    either upgrade or use one\nof the workarounds immediately.\n\nA workaround to
+    this issue is to not pass arbitrary user input to the\n`render` method. Instead,
+    verify that data before passing it to the\n`render` method.\n\nFor example, change
+    this:\n\n    def index\n      render params[:id]\n    end\n{: .language-ruby}\n\nTo
+    this:\n\n    def index\n      render verify_template(params[:id])\n    end\n    \n
+    \   private\n    def verify_template(name)\n      # add verification logic particular
+    to your application here\n    end\n{: .language-ruby}\n\n"
   affected_package: actionview
   vulnerable_versions:
   - "<3.2.22.2"
@@ -518,14 +520,15 @@
     unescaped quotes when used as attribute values in tag\nhelpers.\n\nText declared
     as \\\"HTML safe\\\" when passed as an attribute value to a\ntag helper will not
     have quotes escaped which can lead to a Cross-site\nScripting (XSS) attack. Impacted
-    code looks something like this:\n\n    content_tag(:div, \"hi\", title: user_input.html_safe)\n\nSome
-    helpers like the `sanitize` helper will automatically mark strings\nas \\\"HTML
-    safe\\\", so impacted code could also look something like this:\n\n    content_tag(:div,
-    \"hi\", title: sanitize(user_input))\n\nAll users running an affected release
-    should either upgrade or use one\nof the workarounds immediately.\n\nYou can work
-    around this issue by either *not* marking arbitrary user\ninput as safe, or by
-    manually escaping quotes like this:\n\n    def escape_quotes(value)\n      value.gsub(/\"/,
-    '&quot;'.freeze)\n    end\n    \n    content_tag(:div, \"hi\", title: escape_quotes(sanitize(user_input)))\n\n\n\n[1]:
+    code looks something like this:\n\n    content_tag(:div, \"hi\", title: user_input.html_safe)\n{:
+    .language-ruby}\n\nSome helpers like the `sanitize` helper will automatically
+    mark strings\nas \\\"HTML safe\\\", so impacted code could also look something
+    like this:\n\n    content_tag(:div, \"hi\", title: sanitize(user_input))\n{: .language-ruby}\n\nAll
+    users running an affected release should either upgrade or use one\nof the workarounds
+    immediately.\n\nYou can work around this issue by either *not* marking arbitrary
+    user\ninput as safe, or by manually escaping quotes like this:\n\n    def escape_quotes(value)\n
+    \     value.gsub(/\"/, '&quot;'.freeze)\n    end\n    \n    content_tag(:div,
+    \"hi\", title: escape_quotes(sanitize(user_input)))\n{: .language-ruby}\n\n\n\n[1]:
     https://rubygems.org/gems/actionview\n\\nA cross-site scripting attack occurs
     when the attacker tricks a\nlegitimate web-based application or site to accept
     a request as\noriginating from a trusted source.\n\nThis is done by escaping the
