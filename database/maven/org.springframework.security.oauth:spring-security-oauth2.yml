@@ -53,6 +53,49 @@
   references:
   - https://pivotal.io/security/cve-2019-3778
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGSPRINGFRAMEWORKSECURITYOAUTH-173755
+- id: snykio:maven:org.springframework.security.oauth:spring-security-oauth2:174830
+  title: Open Redirect
+  description: |
+    [org.springframework.security.oauth:spring-security-oauth2][1] is a
+    provides support for using Spring Security with OAuth (1a) and OAuth2.
+
+    Affected versions of this package are vulnerable to Open Redirect. A
+    malicious user or attacker can craft a request to the authorization
+    endpoint using the authorization code grant type, and specify a
+    manipulated redirection URI via the `redirect_uri` parameter. This can
+    cause the authorization server to redirect the resource owner user-agent
+    to a URI under the control of the attacker with the leaked authorization
+    code. This vulnerability exposes applications that meet all of the
+    following requirements:
+
+    * Act in the role of an `Authorization` Server (e.g.
+      `@EnableAuthorizationServer`)
+    * Uses the `DefaultRedirectResolver` in the AuthorizationEndpoint
+
+
+
+    [1]: https://github.com/spring-projects/spring-security-oauth
+  affected_package: org.springframework.security.oauth:spring-security-oauth2
+  vulnerable_versions:
+  - ">= 2.0.0 < 2.0.18.RELEASE"
+  - ">= 2.1.0 < 2.1.5.RELEASE"
+  - ">= 2.2.0 < 2.2.5.RELEASE"
+  - ">= 2.3.0 < 2.3.6.RELEASE"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2019-11269
+  cwe:
+  - CWE-601
+  disclosed_date: 2019-05-30
+  created_date: 2019-05-30
+  last_modified_date: 2019-05-30
+  credit:
+  - Mike Noordermeer
+  references:
+  - https://github.com/spring-projects/spring-security-oauth/commit/f769ff98c7b0c7aba42dd67538f6912c8e0d2ef7
+  - https://pivotal.io/security/cve-2019-11269
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGSPRINGFRAMEWORKSECURITYOAUTH-174830
 - id: snykio:maven:org.springframework.security.oauth:spring-security-oauth2:31345
   title: Arbitrary Code Execution
   description: |
