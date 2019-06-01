@@ -1,0 +1,37 @@
+---
+- id: snykio:go:github.com/kubernetes/kubernetes/pkg/kubelet/kuberuntime:174841
+  title: Insecure Permissions
+  description: |
+    [github.com/kubernetes/kubernetes/pkg/kubelet/kuberuntime][1] is a
+    package that contains an implementation of kubecontainer.
+
+    Affected versions of this package are vulnerable to Insecure
+    Permissions. Containers for pods that do not specify an explicit
+    `runAsUser` will attempt to run as uid 0 (root) on container restart, or
+    if the image was previously pulled to the node. This behaviour also
+    occurs if `mustRunAsNonRoot: true` setting is used.
+
+
+
+    [1]: https://godoc.org/k8s.io/kubernetes/pkg/kubelet/kuberuntime
+  affected_package: github.com/kubernetes/kubernetes/pkg/kubelet/kuberuntime
+  vulnerable_versions:
+  - ">=1.13.0 <1.13.7"
+  - ">=1.14.0 <1.14.3"
+  severity: medium
+  package_manager: go
+  cve:
+  - CVE-2019-11245
+  cwe:
+  - CWE-266
+  disclosed_date: 2019-05-31
+  created_date: 2019-05-25
+  last_modified_date: 2019-05-25
+  credit:
+  - Dhananjay Arunesh
+  references:
+  - https://bugzilla.redhat.com/show_bug.cgi?id=1715726
+  - https://github.com/kubernetes/kubernetes/issues/78308
+  - https://github.com/kubernetes/kubernetes/pull/76665
+  - https://github.com/kubernetes/kubernetes/pull/76665/commits/26e3c8674e66f0d10170d34f5445f0aed207387f
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMKUBERNETESKUBERNETESPKGKUBELETKUBERUNTIME-174841
