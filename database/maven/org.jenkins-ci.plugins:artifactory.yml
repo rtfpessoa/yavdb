@@ -31,3 +31,88 @@
   references:
   - https://jenkins.io/security/advisory/2019-05-31/
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGJENKINSCIPLUGINS-174858
+- id: snykio:maven:org.jenkins-ci.plugins:artifactory:174878
+  title: Cross-site Request Forgery (CSRF)
+  description: |
+    [org.jenkins-ci.plugins:artifactory][1] is a integrates Jenkins and
+    Artifactory to publish, resolve, promote and release traceable build
+    artifacts.
+
+    Affected versions of this package are vulnerable to Cross-site Request
+    Forgery (CSRF). Artifactory Plugin does not perform permission checks on
+    a method implementing form validation.
+
+    This allows users with Overall/Read access to Jenkins to connect to an
+    attacker-specified URL using attacker-specified credentials IDs obtained
+    through another method, capturing credentials stored in Jenkins.
+
+    `ReleaseAction#doSubmit`, `GradleReleaseApiAction#doStaging`,
+    `MavenReleaseApiAction#doStaging`, and
+    `UnifiedPromoteBuildAction#doSubmit` allows attackers to schedule a
+    release build, perform release staging for Gradle and Maven projects,
+    and promote previously staged builds, respectively.
+
+    Additionally, this form validation method does not require POST
+    requests, resulting in a cross-site request forgery vulnerability.
+
+
+
+    [1]: https://github.com/jfrog/jenkins-artifactory-plugin
+  affected_package: org.jenkins-ci.plugins:artifactory
+  vulnerable_versions:
+  - ">= 0"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2019-10321
+  - CVE-2019-10322
+  cwe:
+  - CWE-352
+  disclosed_date: 2019-05-31
+  created_date: 2019-06-02
+  last_modified_date: 2019-06-02
+  credit:
+  - and Peter Adkins of Cisco Umbrella
+  - CloudBees
+  - Inc.
+  - Oleg Nenashev
+  references:
+  - https://jenkins.io/security/advisory/2019-05-31/
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGJENKINSCIPLUGINS-174878
+- id: snykio:maven:org.jenkins-ci.plugins:artifactory:174880
+  title: Cross-site Request Forgery (CSRF)
+  description: |
+    [org.jenkins-ci.plugins:artifactory][1] is a integrates Jenkins and
+    Artifactory to publish, resolve, promote and release traceable build
+    artifacts.
+
+    Affected versions of this package are vulnerable to Cross-site Request
+    Forgery (CSRF). Artifactory Plugin implements a number of API endpoints
+    allowing users to trigger various actions related to releasing and
+    promotion.
+
+    These endpoints do not require POST requests, resulting in a cross-site
+    request forgery vulnerability.
+
+
+
+    [1]: https://github.com/jfrog/jenkins-artifactory-plugin
+  affected_package: org.jenkins-ci.plugins:artifactory
+  vulnerable_versions:
+  - ">= 0"
+  severity: low
+  package_manager: maven
+  cve:
+  - CVE-2019-10322
+  cwe:
+  - CWE-352
+  disclosed_date: 2019-05-31
+  created_date: 2019-06-02
+  last_modified_date: 2019-06-02
+  credit:
+  - CloudBees
+  - Inc.
+  - Oleg Naneshev and Fred Blaise
+  references:
+  - https://jenkins.io/security/advisory/2019-05-31/
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGJENKINSCIPLUGINS-174880
