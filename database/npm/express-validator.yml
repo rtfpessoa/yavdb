@@ -1,0 +1,34 @@
+---
+- id: snykio:npm:express-validator:174763
+  title: Filter Bypass
+  description: "[express-validator][1] is an express.js middleware for validator.js.\n\nAffected
+    versions of this package are vulnerable to Filter Bypass.\n`express-validator`
+    by default does not sanitize arrays or non-string\nvalues. This vulnerability
+    could be leveraged by an attacker to bypass\nexpress-validator protections and
+    inject malicious JavaScript into a\nwebpage.\n\n### POC   {#poc}\n\n    const
+    express = require(\"express\");\n    const app = express();\n    const { sanitizeQuery
+    } = require(\"express-validator/filter\");\n    \n    app.get(\n      \"/\",\n
+    \     [sanitizeQuery(\"id\").escape()],\n      async (req, res) => {\n        res.send(\"id
+    is \" + req.query.id);\n      }\n    );\n    \n    app.listen(8080, function()
+    {\n      console.log(\"server running on 8080\");\n    }); //the server object
+    listens on port 8080\n\nSending an HTTP request such as\n`http://URL:8080/?id[]=<script>alert('XSS')</script>`
+    will result in\nexecution of JavaScript successfully bypassing the module.\n\n\n\n[1]:
+    https://express-validator.github.io\n"
+  affected_package: express-validator
+  vulnerable_versions:
+  - ">=4.2.1"
+  severity: medium
+  package_manager: npm
+  cwe:
+  - CWE-79
+  disclosed_date: 2018-10-28
+  created_date: 2019-05-28
+  last_modified_date: 2019-05-28
+  credit:
+  - Meisam Monsef
+  references:
+  - https://codesandbox.io/s/expressvalidatorbypasspoc-ezrfx
+  - https://github.com/express-validator/express-validator/commit/3425295ac42e717ec09095e3c2c657a214679c4b
+  - https://github.com/express-validator/express-validator/issues/651
+  - https://github.com/express-validator/express-validator/pull/711
+  source_url: https://snyk.io/vuln/SNYK-JS-EXPRESSVALIDATOR-174763

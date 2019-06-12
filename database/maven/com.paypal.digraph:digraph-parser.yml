@@ -1,0 +1,35 @@
+---
+- id: snykio:maven:com.paypal.digraph:digraph-parser:174826
+  title: Man-in-the-Middle (MitM)
+  description: |
+    [com.paypal.digraph:digraph-parser][1] is a Java parser for digraph DSL
+    (Graphviz DOT language).
+
+    Affected versions of this package are vulnerable to Man-in-the-Middle
+    (MitM). The build files indicate that this project is resolving
+    dependencies over HTTP instead of HTTPS. Any of these artifacts could
+    have been MITM to maliciously compromise them and infect the build
+    artifacts that were produced. Additionally, if any of these JARs or
+    other dependencies were compromised, any developers using these could
+    continue to be infected past updating to fix this.
+
+
+
+    [1]: https://github.com/paypal/digraph-parser
+  affected_package: com.paypal.digraph:digraph-parser
+  vulnerable_versions:
+  - ">= 0"
+  severity: high
+  package_manager: maven
+  cwe:
+  - CWE-494
+  - CWE-829
+  disclosed_date: 2019-02-22
+  created_date: 2019-06-11
+  last_modified_date: 2019-06-11
+  credit:
+  - JLLeitschuh
+  references:
+  - https://github.com/paypal/digraph-parser/issues/2
+  - https://medium.com/@jonathan.leitschuh/1fc329d898fb
+  source_url: https://snyk.io/vuln/SNYK-JAVA-COMPAYPALDIGRAPH-174826

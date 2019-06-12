@@ -1,0 +1,36 @@
+---
+- id: snykio:maven:io.dropwizard:dropwizard-example:174793
+  title: Man-in-the-Middle (MitM)
+  description: |
+    [io.dropwizard:dropwizard-example][1] is a simple library for building
+    production-ready RESTful web services.
+
+    Affected versions of this package are vulnerable to Man-in-the-Middle
+    (MitM). The build files indicate that this project is resolving
+    dependencies over HTTP instead of HTTPS. Any of these artifacts could
+    have been MITM to maliciously compromise them and infect the build
+    artifacts that were produced. Additionally, if any of these JARs or
+    other dependencies were compromised, any developers using these could
+    continue to be infected past updating to fix this.
+
+
+
+    [1]: https://github.com/dropwizard/dropwizard
+  affected_package: io.dropwizard:dropwizard-example
+  vulnerable_versions:
+  - "< 2.0.0-rc2"
+  severity: high
+  package_manager: maven
+  cwe:
+  - CWE-494
+  - CWE-829
+  disclosed_date: 2019-02-22
+  created_date: 2019-06-11
+  last_modified_date: 2019-06-11
+  credit:
+  - JLLeitschuh
+  references:
+  - https://github.com/dropwizard/dropwizard/commit/3330d54f9d27c56f6d6aa68be14451f9ca4e0e1d
+  - https://github.com/dropwizard/dropwizard/pull/2664
+  - https://medium.com/@jonathan.leitschuh/1fc329d898fb
+  source_url: https://snyk.io/vuln/SNYK-JAVA-IODROPWIZARD-174793

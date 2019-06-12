@@ -1,0 +1,38 @@
+---
+- id: snykio:maven:com.fasterxml.jackson.module:jackson-module-scalaapache:174825
+  title: Man-in-the-Middle (MitM)
+  description: |
+    [com.fasterxml.jackson.module:jackson-module-scalaApache][1] is an
+    Add-on module for Jackson ([http://wiki.fasterxml.com/JacksonHome][2])
+    to support Scala-specific datatypes.
+
+    Affected versions of this package are vulnerable to Man-in-the-Middle
+    (MitM). The build files indicate that this project is resolving
+    dependencies over HTTP instead of HTTPS. Any of these artifacts could
+    have been MITM to maliciously compromise them and infect the build
+    artifacts that were produced. Additionally, if any of these JARs or
+    other dependencies were compromised, any developers using these could
+    continue to be infected past updating to fix this.
+
+
+
+    [1]: https://mvnrepository.com/artifact/com.fasterxml.jackson.module/jackson-module-scala
+    [2]: http://wiki.fasterxml.com/JacksonHome
+  affected_package: com.fasterxml.jackson.module:jackson-module-scalaapache
+  vulnerable_versions:
+  - "< 2.9.9"
+  severity: high
+  package_manager: maven
+  cwe:
+  - CWE-494
+  - CWE-829
+  disclosed_date: 2019-02-22
+  created_date: 2019-06-11
+  last_modified_date: 2019-06-11
+  credit:
+  - JLLeitschuh
+  references:
+  - https://github.com/FasterXML/jackson-module-scala/issues/400
+  - https://github.com/FasterXML/jackson-module-scala/pull/406/commits/a2d13cea104ee790759519ade6f2f688791e8198
+  - https://medium.com/@jonathan.leitschuh/1fc329d898fb
+  source_url: https://snyk.io/vuln/SNYK-JAVA-COMFASTERXMLJACKSONMODULE-174825

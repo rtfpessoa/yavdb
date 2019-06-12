@@ -1,0 +1,40 @@
+---
+- id: snykio:maven:org.eclipse.hawkbit:hawkbit-parent:174824
+  title: Man-in-the-Middle (MitM)
+  description: |
+    [org.eclipse.hawkbit:hawkbit-parent][1] is a domain independent back end
+    solution for rolling out software updates to constrained edge devices as
+    well as more powerful controllers and gateways connected to IP based
+    networking infrastructure.
+
+    Affected versions of this package are vulnerable to Man-in-the-Middle
+    (MitM). The build files indicate that this project is resolving
+    dependencies over HTTP instead of HTTPS. Any of these artifacts could
+    have been MITM to maliciously compromise them and infect the build
+    artifacts that were produced. Additionally, if any of these JARs or
+    other dependencies were compromised, any developers using these could
+    continue to be infected past updating to fix this.
+
+
+
+    [1]: https://github.com/eclipse/hawkbit
+  affected_package: org.eclipse.hawkbit:hawkbit-parent
+  vulnerable_versions:
+  - "< 0.3.0M2"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2019-10240
+  cwe:
+  - CWE-494
+  - CWE-829
+  disclosed_date: 2019-02-22
+  created_date: 2019-06-11
+  last_modified_date: 2019-06-11
+  credit:
+  - JLLeitschuh
+  references:
+  - https://github.com/eclipse/hawkbit/commit/fa6520a094a24897035dae4a3af2a69d174c7f9d
+  - https://github.com/eclipse/hawkbit/issues/812
+  - https://medium.com/@jonathan.leitschuh/1fc329d898fb
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGECLIPSEHAWKBIT-174824

@@ -1,104 +1,17 @@
 ---
-- id: rubyadvisory:rubygems:jquery-rails:CVE-2015-1840
-  title: CSRF Vulnerability in jquery-rails
-  description: |
-    In the scenario where an attacker might be able to control the href attribute
-    of an anchor tag or the action attribute of a form tag that will trigger a
-    POST action, the attacker can set the href or action to
-    " https://attacker.com" (note the leading space) that will be passed to
-    JQuery, who will see this as a same origin request, and send the user's CSRF
-    token to the attacker domain.
-
-    To work around this problem, change code that allows users to control the
-    href attribute of an anchor tag or the action attribute of a form tag to
-    filter the user parameters.
-
-    For example, code like this:
-
-      link_to params
-
-    to code like this:
-
-      link_to filtered_params
-
-      def filtered_params
-        \# Filter just the parameters that you trust
-      end
-
-    See also:
-    - http://blog.honeybadger.io/understanding-the-rails-jquery-csrf-vulnerability-cve-2015-1840/
-  affected_package: jquery-rails
-  patched_versions:
-  - ">= 4.0.4"
-  - "~> 3.1.3"
-  severity: medium
-  package_manager: rubygems
-  cve:
-  - CVE-2015-1840
-  cvss_v2_score: 5.0
-  disclosed_date: 2015-06-16
-  created_date: 2015-06-16
-  last_modified_date: 2015-06-16
-  credit:
-  - Rubysec
-  references:
-  - https://github.com/rubysec/ruby-advisory-db
-  source_url: https://groups.google.com/forum/#!topic/ruby-security-ann/XIZPbobuwaY
-- id: snykio:rubygems:jquery-rails:20225
-  title: Cross-site Request Forgery (CSRF)
-  description: |
-    [`jquery-rails`][1] provides jQuery and the jQuery-ujs driver for your
-    Rails 4+ application.
-
-    Affected versions allow a CSRF attack with a maliciously crafted anchor
-    element. In the scenario where an attacker might be able to control the
-    href attribute of an anchor tag or the action attribute of a form tag
-    that will trigger a POST action, the attacker can set the href or action
-    to \" [https://attacker.com\"][2] (note the leading space). This will be
-    passed to JQuery, and be treated as a same origin request, potentially
-    send the user\'s CSRF token to the attacker domain.
-
-
-
-    [1]: https://rubygems.org/gems/jquery-rails
-    [2]: https://attacker.com&quot;
-  affected_package: jquery-rails
-  vulnerable_versions:
-  - "< 3.1.3"
-  - "< 4.0.4  >= 3.2"
-  severity: medium
-  package_manager: rubygems
-  cve:
-  - CVE-2015-1840
-  cwe:
-  - CWE-352
-  disclosed_date: 2015-06-15
-  created_date: 2015-06-15
-  last_modified_date: 2015-06-15
-  credit:
-  - Ben Toews
-  references:
-  - http://blog.honeybadger.io/understanding-the-rails-jquery-csrf-vulnerability-cve-2015-1840/
-  - http://rubysec.com/advisories/jquery-rails-CVE-2015-1840
-  - https://groups.google.com/forum/#!topic/ruby-security-ann/XIZPbobuwaY
-  source_url: https://snyk.io/vuln/SNYK-RUBY-JQUERYRAILS-20225
-- id: snykio:rubygems:jquery-rails:449585
+- id: snykio:nuget:jquery.mobile:449563
   title: Cross-site Scripting (XSS)
   description: |+
-    [jquery-rails][1] is a gem provides jQuery and the jQuery-ujs driver for
-    your Rails 4+ application.
+    [jquery.mobile][1] is a NuGet Community Package for jQuery Mobile.
 
     Affected versions of this package are vulnerable to Cross-site Scripting
-    (XSS). The `location.hash()` function was used to select elements, but
-    also allows remote attackers to inject script into the page.
-
-    This vulnerability is related to a vulnerability in [jQuery-migrate][2]
-    and in [fullpage.js](npm:fullpage.js:20151207).
+    (XSS). This is possible because of a lack of validation in the
+    `Content-Type` header of the XHR response when parsing the AJAX response
+    as HTML.
 
 
 
-    [1]: https://rubygems.org/gems/jquery-rails
-    [2]: https://snyk.io/vuln/npm:jquery-migrate:20130419
+    [1]: https://www.nuget.org/packages/jquery.mobile/
     \nA cross-site scripting attack occurs when the attacker tricks a
     legitimate web-based application or site to accept a request as
     originating from a trusted source.
@@ -171,46 +84,36 @@
     * Read the documentation for any of the libraries referenced in your
       code to understand which elements allow for embedded HTML.
 
-  affected_package: jquery-rails
+  affected_package: jquery.mobile
   vulnerable_versions:
-  - "<1.0.16"
+  - ">= 0"
   severity: medium
-  package_manager: rubygems
-  cve:
-  - CVE-2011-4969
+  package_manager: nuget
   cwe:
   - CWE-79
-  disclosed_date: 2011-06-05
-  created_date: 2016-10-20
-  last_modified_date: 2016-10-20
+  disclosed_date: 2019-05-04
+  created_date: 2019-05-07
+  last_modified_date: 2019-05-07
   credit:
-  - Dave Methvin
+  - Juho Nurminen
   references:
-  - http://blog.jquery.com/2011/09/01/jquery-1-6-3-released/
-  - http://www.openwall.com/lists/oss-security/2013/01/31/3
-  - https://bugs.jquery.com/ticket/9521
-  source_url: https://snyk.io/vuln/SNYK-RUBY-JQUERYRAILS-449585
-- id: snykio:rubygems:jquery-rails:449590
+  - https://gist.github.com/jupenur/e5d0c6f9b58aa81860bf74e010cf1685
+  - https://github.com/jquery/jquery-mobile/issues/8640
+  - https://github.com/jquery/jquery-mobile/pull/8649
+  - https://github.com/jquery/jquery-mobile/pull/8650
+  source_url: https://snyk.io/vuln/SNYK-DOTNET-JQUERYMOBILE-449563
+- id: snykio:nuget:jquery.mobile:449565
   title: Cross-site Scripting (XSS)
   description: |+
-    [jquery-rails][1] is a gem provides jQuery and the jQuery-ujs driver for
-    your Rails 4+ application.
+    [jquery.mobile][1] is a NuGet Community Package for jQuery Mobile.
 
     Affected versions of this package are vulnerable to Cross-site Scripting
-    (XSS). The `jQuery(strInput)` function does not differentiate selectors
-    from HTML in a reliable fashion. In the vulnerable version, jQuery
-    determined whether the input was HTML or not by looking for the \'&lt;\'
-    character anywhere in the string, giving attackers more flexibility when
-    attempting to construct malicious payload.
-
-    In the fixed versions, jQuery only deems the input to be HTML if it
-    explicitly starts with \'&lt;\', limiting exploitability only to
-    attackers who can control the beginning of a string, which is far less
-    common.
+    (XSS) via the `location.href` decoding the `user:password@` part of the
+    url.
 
 
 
-    [1]: https://rubygems.org/gems/jquery-rails
+    [1]: https://www.nuget.org/packages/jquery.mobile/
     \nA cross-site scripting attack occurs when the attacker tricks a
     legitimate web-based application or site to accept a request as
     originating from a trusted source.
@@ -283,23 +186,20 @@
     * Read the documentation for any of the libraries referenced in your
       code to understand which elements allow for embedded HTML.
 
-  affected_package: jquery-rails
+  affected_package: jquery.mobile
   vulnerable_versions:
-  - ">=2.0.1  <2.2.0"
+  - "< 1.2.0"
   severity: medium
-  package_manager: rubygems
-  cve:
-  - CVE-2012-6708
-  - CVE-2017-16011
+  package_manager: nuget
   cwe:
   - CWE-79
-  disclosed_date: 2012-06-19
-  created_date: 2016-10-20
-  last_modified_date: 2016-10-20
+  disclosed_date: 2012-08-01
+  created_date: 2016-12-26
+  last_modified_date: 2016-12-26
   credit:
-  - Richard Gibson
+  - Masato Kinugawa
   references:
-  - http://jsfiddle.net/C8dgG/
-  - https://bugs.jquery.com/ticket/11290
-  - https://github.com/jquery/jquery/commit/05531fc4080ae24070930d15ae0cea7ae056457d
-  source_url: https://snyk.io/vuln/SNYK-RUBY-JQUERYRAILS-449590
+  - http://jquerymobile.com/changelog/1.2.0/
+  - https://github.com/jquery/jquery-mobile/commit/370413072db4fd8ee0da4455d9a08abc9ef5ba24
+  - https://github.com/jquery/jquery-mobile/issues/4787
+  source_url: https://snyk.io/vuln/SNYK-DOTNET-JQUERYMOBILE-449565
