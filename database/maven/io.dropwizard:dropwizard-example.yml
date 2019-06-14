@@ -1,17 +1,29 @@
 ---
 - id: snykio:maven:io.dropwizard:dropwizard-example:174793
-  title: Man-in-the-Middle (MitM)
+  title: Unsafe Dependancy Resolution
   description: |
     [io.dropwizard:dropwizard-example][1] is a simple library for building
     production-ready RESTful web services.
 
-    Affected versions of this package are vulnerable to Man-in-the-Middle
-    (MitM). The build files indicate that this project is resolving
-    dependencies over HTTP instead of HTTPS. Any of these artifacts could
-    have been MITM to maliciously compromise them and infect the build
-    artifacts that were produced. Additionally, if any of these JARs or
-    other dependencies were compromised, any developers using these could
-    continue to be infected past updating to fix this.
+    Affected versions of this package are vulnerable to Unsafe Dependancy
+    Resolution due to resolving dependencies over an insecure channel
+    (http).
+
+    If the build occurred over an insecure connection, a malicious user
+    could have perform a Man-in-the-Middle attack during the build and alter
+    the build artifacts that were produced. In case that any of these
+    artifacts were compromised, any developers using these could be altered.
+
+    **Note:** In order to validate that this artifact was not compromised,
+    the maintainer would need to confirm that none of the artifacts
+    published to the registry were not altered with. Until this happens, we
+    can not guarantee that this artifact was not compromised even though the
+    probability that this happened is low.
+
+    We have chosen to alert on this issue when maintainers either decided to
+    issue CVEs themselves, or in cases when maintainers decided against
+    performing audits on there build to verify they had not been
+    compromised.
 
 
 
@@ -19,7 +31,7 @@
   affected_package: io.dropwizard:dropwizard-example
   vulnerable_versions:
   - "< 2.0.0-rc2"
-  severity: high
+  severity: medium
   package_manager: maven
   cwe:
   - CWE-494

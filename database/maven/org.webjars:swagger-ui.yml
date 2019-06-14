@@ -1,880 +1,8 @@
 ---
-- id: npmjs:npm:swagger-ui:123
-  title: Cross-Site Scripting
-  description: |
-    Affected versions of `swagger-ui` are vulnerable to cross-site scripting in both the `consumes` and `produces` parameters of the swagger JSON document for a given API.
-
-    Additionally, `swagger-ui` allows users to load arbitrary swagger JSON documents via the query string parameter `url`, allowing an attacker to exploit this attack against any user that the attacker can convince to visit a crafted link.
-
-    ## Proof of Concept
-
-    ```
-    http://<USER_HOSTNAME>/swagger-ui/index.html?url=http://<MALICIOUS_HOSTNAME>/malicious-swagger-file.json
-    ````
-  affected_package: swagger-ui
-  vulnerable_versions:
-  - 2.1.4
-  severity: high
-  package_manager: npm
-  cve:
-  - CVE-2016-1000226
-  cwe: CWE-79
-  disclosed_date: 1970-01-01
-  created_date: 1970-01-01
-  last_modified_date: 1970-01-01
-  credit: Joe Vennix
-  references: https://npmjs.com/advisories/123
-  source_url: https://npmjs.com/advisories/123
-- id: npmjs:npm:swagger-ui:126
-  title: XSS in key names
-  description: |
-    Affected versions of `swagger-ui` contain a cross-site scripting vulnerability in the key names of a specific nested object in the JSON document.
-
-
-    ## Proof of Concept
-    The vulnerable object structure is:
-    ```
-    {
-        "definitions": {
-            "arbitraryVal": {
-                "properties": {
-                    "<INJECTABLE_KEY_NAME>": "LoremIpsum"
-                    }
-                }
-            }
-    }
-    ```
-    Malicious JSON documents can be loaded in by providing a URL to them in the `url` query string parameter.
-  affected_package: swagger-ui
-  vulnerable_versions:
-  - "<=2.2.0"
-  severity: high
-  package_manager: npm
-  cve:
-  - CVE-2016-1000229
-  cwe: CWE-79
-  disclosed_date: 1970-01-01
-  created_date: 1970-01-01
-  last_modified_date: 1970-01-01
-  credit: Joe Vennix
-  references: https://npmjs.com/advisories/126
-  source_url: https://npmjs.com/advisories/126
-- id: npmjs:npm:swagger-ui:131
-  title: Cross-Site Scripting
-  description: |-
-    Affected versions of `swagger-ui` are vulnerable to cross-site scripting. This vulnerability exists because `swagger-ui` automatically executes external Javascript that is loaded in via the `url` query string parameter when a `Content-Type: application/javascript` header is included.
-
-    An attacker can create a server that replies with a malicious script and the proper content-type, and then craft a `swagger-ui` URL that includes the location to their server/script in the `url` query string parameter. When viewed, such a link would execute the attacker's malicious script.
-  affected_package: swagger-ui
-  vulnerable_versions:
-  - 2.1.4
-  severity: high
-  package_manager: npm
-  cve:
-  - CVE-2016-1000233
-  cwe: CWE-79
-  disclosed_date: 1970-01-01
-  created_date: 1970-01-01
-  last_modified_date: 1970-01-01
-  credit: Joe Vennix
-  references: https://npmjs.com/advisories/131
-  source_url: https://npmjs.com/advisories/131
-- id: npmjs:npm:swagger-ui:137
-  title: Cross-Site Scripting
-  description: Affected versions of `swagger-ui` are vulnerable to cross-site scripting
-    via the `url` query string parameter.
-  affected_package: swagger-ui
-  vulnerable_versions:
-  - 2.1.0-M1
-  - 2.1.0-M2
-  severity: high
-  package_manager: npm
-  cve:
-  - CVE-2016-1000239
-  cwe: CWE-80
-  disclosed_date: 1970-01-01
-  created_date: 1970-01-01
-  last_modified_date: 1970-01-01
-  credit: mehmetaydogdu
-  references: https://npmjs.com/advisories/137
-  source_url: https://npmjs.com/advisories/137
-- id: ossindex:npm:swagger-ui:8399946929
-  title: Cross Site Scripting (XSS)
-  description: A malicious swagger JSON document can be loaded via the `url` parameter
-    in a query, taking advantage of an XSS vulnerability.
-  affected_package: swagger-ui
-  vulnerable_versions:
-  - 2.1.4
-  package_manager: npm
-  disclosed_date: 2016-07-22
-  created_date: 2016-07-22
-  last_modified_date: 2017-03-13
-  credit:
-  - OSSIndex
-  references:
-  - https://cwe.mitre.org/data/definitions/79.html
-  - https://github.com/swagger-api/swagger-ui/issues/1866
-  - https://github.com/swagger-api/swagger-ui/pull/1867
-  - https://nodesecurity.io/advisories/123
-  source_url: https://ossindex.net/resource/package/7014509999/vulnerabilities
-- id: ossindex:npm:swagger-ui:8399946983
-  title: Cross Site Scripting (XSS)
-  description: Property names are not escaped and allow XSS, by providing a schema
-    file with a malicious property.
-  affected_package: swagger-ui
-  vulnerable_versions:
-  - "<=2.2.0"
-  package_manager: npm
-  disclosed_date: 2016-07-22
-  created_date: 2016-07-22
-  last_modified_date: 2017-03-13
-  credit:
-  - OSSIndex
-  references:
-  - https://cwe.mitre.org/data/definitions/79.html
-  - https://en.wikipedia.org/wiki/Content_Security_Policy
-  - https://github.com/swagger-api/swagger-ui/issues/1865
-  - https://nodesecurity.io/advisories/126
-  source_url: https://ossindex.net/resource/package/7014509999/vulnerabilities
-- id: ossindex:npm:swagger-ui:8402377071
-  title: XSS via Content-type header
-  description: "> By using a malicious server which returns script as the value of
-    the Content-Type header, it is possible to execute arbitrary code using the demonstration
-    capabilities of Swagger-UI.\n> \n> -- [nodesecurity.io](https://nodesecurity.io/advisories/131)"
-  affected_package: swagger-ui
-  vulnerable_versions:
-  - 2.1.4
-  package_manager: npm
-  disclosed_date: 2017-01-25
-  created_date: 2017-01-25
-  last_modified_date: 2017-03-13
-  credit:
-  - OSSIndex
-  references:
-  - https://github.com/swagger-api/swagger-ui/issues/1863
-  - https://nodesecurity.io/advisories/131
-  source_url: https://ossindex.net/resource/package/7014509999/vulnerabilities
-- id: ossindex:npm:swagger-ui:8402397873
-  title: "[Unconfirmed] Cross Site Scripting (XSS)"
-  description: HTML is not escaped when the API responds with `text/html`, allowing
-    for possible XSS attacks.
-  affected_package: swagger-ui
-  vulnerable_versions:
-  - "<=2.0.21"
-  package_manager: npm
-  disclosed_date: 2017-02-11
-  created_date: 2017-02-11
-  last_modified_date: 2017-03-13
-  credit:
-  - OSSIndex
-  references:
-  - https://github.com/wordnik/swagger-ui/issues/1154
-  source_url: https://ossindex.net/resource/package/7014509999/vulnerabilities
-- id: ossindex:npm:swagger-ui:8402397897
-  title: Fix self XSS in request url.
-  description: "> A user who has copy/pasted data from another or has been tricked
-    into pasting into the accessToken box could XSS him/herself.\n> \n> -- [github.com](https://github.com/swagger-api/swagger-ui/pull/541)"
-  affected_package: swagger-ui
-  vulnerable_versions:
-  - "<2.0.24"
-  package_manager: npm
-  disclosed_date: 2017-02-11
-  created_date: 2017-02-11
-  last_modified_date: 2017-03-13
-  credit:
-  - OSSIndex
-  references:
-  - https://cwe.mitre.org/data/definitions/79.html
-  - https://github.com/swagger-api/swagger-ui/commit/3a7b66d34565c104e85650439fbc17f89b294e10
-  - https://github.com/swagger-api/swagger-ui/issues/541
-  source_url: https://ossindex.net/resource/package/7014509999/vulnerabilities
-- id: ossindex:npm:swagger-ui:8402397918
-  title: Cross Site Scripting (XSS) in url parameter
-  description: The `url` query parameter can be used for Cross Site Scripting where
-    showMessage and onFailure both injected strings straight into the DOM, without
-    escaping html entities.
-  affected_package: swagger-ui
-  vulnerable_versions:
-  - 2.1.0-M1
-  - 2.1.0-M2
-  package_manager: npm
-  disclosed_date: 2017-02-11
-  created_date: 2017-02-11
-  last_modified_date: 2017-07-30
-  credit:
-  - OSSIndex
-  references:
-  - https://github.com/swagger-api/swagger-ui/issues/1262
-  source_url: https://ossindex.net/resource/package/7014509999/vulnerabilities
-- id: ossindex:npm:swagger-ui:8402397919
-  title: Cross Site Scripting (XSS)
-  description: 'A regression in URL parameter escaping. '
-  affected_package: swagger-ui
-  vulnerable_versions:
-  - ">2.1.0 <2.2.1"
-  package_manager: npm
-  disclosed_date: 2017-02-11
-  created_date: 2017-02-11
-  last_modified_date: 2017-03-13
-  credit:
-  - OSSIndex
-  references:
-  - https://github.com/swagger-api/swagger-ui/commit/a906cffea4550eaa5369e4933a50753213cf09df
-  - https://github.com/swagger-api/swagger-ui/issues/1617
-  - https://github.com/swagger-api/swagger-ui/pull/2334
-  source_url: https://ossindex.net/resource/package/7014509999/vulnerabilities
-- id: ossindex:npm:swagger-ui:8402398056
-  title: Cross Site Scripting (XSS) in message bar
-  description: Unescaped HTML is rendered in the message bar, enabling possible cross
-    site scripting attacks.
-  affected_package: swagger-ui
-  vulnerable_versions:
-  - ">=2.1.1 <2.1.4"
-  package_manager: npm
-  disclosed_date: 2017-02-12
-  created_date: 2017-02-12
-  last_modified_date: 2017-03-13
-  credit:
-  - OSSIndex
-  references:
-  - https://github.com/swagger-api/swagger-ui/commit/1945404efef053af688d872da806eec092fac7f0
-  - https://github.com/swagger-api/swagger-ui/issues/1530
-  source_url: https://ossindex.net/resource/package/7014509999/vulnerabilities
-- id: ossindex:npm:swagger-ui:8402398059
-  title: Cross Site Scripting (XSS)
-  description: 'Method description text is not properly escaped, enabling an XSS vulnerability.
-
-'
-  affected_package: swagger-ui
-  vulnerable_versions:
-  - "<2.2.1"
-  package_manager: npm
-  disclosed_date: 2017-02-12
-  created_date: 2017-02-12
-  last_modified_date: 2017-03-13
-  credit:
-  - OSSIndex
-  references:
-  - https://github.com/swagger-api/swagger-ui/commit/a906cffea4550eaa5369e4933a50753213cf09df
-  - https://github.com/swagger-api/swagger-ui/issues/1864
-  source_url: https://ossindex.net/resource/package/7014509999/vulnerabilities
-- id: snykio:npm:swagger-ui:20160720
-  title: XSS in Consumes/Produces Parameter
-  description: |+
-    Swagger UI is a dependency-free collection of HTML, Javascript, and CSS
-    assets that dynamically generate documentation from a Swagger-compliant
-    API.
-
-    A key part of this generation is the use of a JSON schema, which can be
-    read locally or by providing a `url` parameter to the Swagger server
-    (e.g. `http://swagger-server/swagger-ui/index.html?url=<schema-url>`).
-
-    The `produces` and `consumes` schema fields are written to the HTML
-    without any HTML encoding, allowing an attacker to perform XSS by adding
-    malicious scripts to their values.
-
-    \nA cross-site scripting attack occurs when the attacker tricks a
-    legitimate web-based application or site to accept a request as
-    originating from a trusted source.
-
-    This is done by escaping the context of the web application; the web
-    application then delivers that data to its users along with other
-    trusted dynamic content, without validating it. The browser unknowingly
-    executes malicious script on the client side (through client-side
-    languages; usually JavaScript or HTML) in order to perform actions that
-    are otherwise typically blocked by the browser’s Same Origin Policy.
-
-    ֿInjecting malicious code is the most prevalent manner by which XSS is
-    exploited; for this reason, escaping characters in order to prevent this
-    manipulation is the top method for securing code against this
-    vulnerability.
-
-    Escaping means that the application is coded to mark key characters, and
-    particularly key characters included in user input, to prevent those
-    characters from being interpreted in a dangerous context. For example,
-    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
-    order to be interpreted and displayed as themselves in text, while
-    within the code itself, they are used for HTML tags. If malicious
-    content is injected into an application that escapes special characters
-    and that malicious content uses `<` and `>` as HTML tags, those
-    characters are nonetheless not interpreted as HTML tags by the browser
-    if they’ve been correctly escaped in the application code and in this
-    way the attempted attack is diverted.
-
-    The most prominent use of XSS is to steal cookies (source: OWASP
-    HttpOnly) and hijack user sessions, but XSS exploits have been used to
-    expose sensitive information, enable access to privileged services and
-    functionality and deliver malware.
-
-    ### Types of attacks   {#types-of-attacks}
-
-    There are a few methods by which XSS can be manipulated:
-
-    | Type | Origin | Description |
-    |----------
-    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
-    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
-    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
-    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
-
-    ### Affected environments   {#affected-environments}
-
-    The following environments are susceptible to an XSS attack:
-
-    * Web servers
-    * Application servers
-    * Web application environments
-
-    ### How to prevent   {#how-to-prevent}
-
-    This section describes the top best practices designed to specifically
-    protect your code:
-
-    * Sanitize data input in an HTTP request before reflecting it back,
-      ensuring all data is validated, filtered or escaped before echoing
-      anything back to the user, such as the values of query parameters
-      during searches.
-    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
-      to their respective HTML or URL encoded equivalents.
-    * Give users the option to disable client-side scripts.
-    * Redirect invalid requests.
-    * Detect simultaneous logins, including those from two separate IP
-      addresses, and invalidate those sessions.
-    * Use and enforce a Content Security Policy (source: Wikipedia) to
-      disable any features that might be manipulated for an XSS attack.
-    * Read the documentation for any of the libraries referenced in your
-      code to understand which elements allow for embedded HTML.
-
-  affected_package: swagger-ui
-  vulnerable_versions:
-  - "<=2.1.4"
-  severity: high
-  package_manager: npm
-  cwe:
-  - CWE-79
-  disclosed_date: 2016-07-20
-  created_date: 2016-07-20
-  last_modified_date: 2016-07-20
-  credit:
-  - Joe Vennix
-  references:
-  - https://github.com/swagger-api/swagger-ui/issues/1866
-  - https://github.com/swagger-api/swagger-ui/pull/1867
-  source_url: https://snyk.io/vuln/npm:swagger-ui:20160720
-- id: snykio:npm:swagger-ui:20160721
-  title: XSS in key names
-  description: |+
-    Swagger UI is a dependency-free collection of HTML, Javascript, and CSS
-    assets that dynamically generate documentation from a Swagger-compliant
-    API.
-
-    A key part of this generation is the use of a JSON schema, which can be
-    read locally or by providing a `url` parameter to the Swagger server
-    (e.g. `http://swagger-server/swagger-ui/index.html?url=<schema-url>`).
-
-    The schema supports property fields, which are in turn included in the
-    generated HTML without any HTML encoding, allowing an attacker to
-    perform XSS by adding malicious scripts to their values.
-
-    \nA cross-site scripting attack occurs when the attacker tricks a
-    legitimate web-based application or site to accept a request as
-    originating from a trusted source.
-
-    This is done by escaping the context of the web application; the web
-    application then delivers that data to its users along with other
-    trusted dynamic content, without validating it. The browser unknowingly
-    executes malicious script on the client side (through client-side
-    languages; usually JavaScript or HTML) in order to perform actions that
-    are otherwise typically blocked by the browser’s Same Origin Policy.
-
-    ֿInjecting malicious code is the most prevalent manner by which XSS is
-    exploited; for this reason, escaping characters in order to prevent this
-    manipulation is the top method for securing code against this
-    vulnerability.
-
-    Escaping means that the application is coded to mark key characters, and
-    particularly key characters included in user input, to prevent those
-    characters from being interpreted in a dangerous context. For example,
-    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
-    order to be interpreted and displayed as themselves in text, while
-    within the code itself, they are used for HTML tags. If malicious
-    content is injected into an application that escapes special characters
-    and that malicious content uses `<` and `>` as HTML tags, those
-    characters are nonetheless not interpreted as HTML tags by the browser
-    if they’ve been correctly escaped in the application code and in this
-    way the attempted attack is diverted.
-
-    The most prominent use of XSS is to steal cookies (source: OWASP
-    HttpOnly) and hijack user sessions, but XSS exploits have been used to
-    expose sensitive information, enable access to privileged services and
-    functionality and deliver malware.
-
-    ### Types of attacks   {#types-of-attacks}
-
-    There are a few methods by which XSS can be manipulated:
-
-    | Type | Origin | Description |
-    |----------
-    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
-    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
-    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
-    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
-
-    ### Affected environments   {#affected-environments}
-
-    The following environments are susceptible to an XSS attack:
-
-    * Web servers
-    * Application servers
-    * Web application environments
-
-    ### How to prevent   {#how-to-prevent}
-
-    This section describes the top best practices designed to specifically
-    protect your code:
-
-    * Sanitize data input in an HTTP request before reflecting it back,
-      ensuring all data is validated, filtered or escaped before echoing
-      anything back to the user, such as the values of query parameters
-      during searches.
-    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
-      to their respective HTML or URL encoded equivalents.
-    * Give users the option to disable client-side scripts.
-    * Redirect invalid requests.
-    * Detect simultaneous logins, including those from two separate IP
-      addresses, and invalidate those sessions.
-    * Use and enforce a Content Security Policy (source: Wikipedia) to
-      disable any features that might be manipulated for an XSS attack.
-    * Read the documentation for any of the libraries referenced in your
-      code to understand which elements allow for embedded HTML.
-
-  affected_package: swagger-ui
-  vulnerable_versions:
-  - "<2.2.1"
-  severity: high
-  package_manager: npm
-  cwe:
-  - CWE-79
-  disclosed_date: 2016-07-21
-  created_date: 2016-07-21
-  last_modified_date: 2016-07-21
-  credit:
-  - Joe Vennix
-  references:
-  - https://github.com/swagger-api/swagger-ui/issues/1865
-  - https://github.com/swagger-api/swagger-ui/releases/tag/v2.2.1
-  source_url: https://snyk.io/vuln/npm:swagger-ui:20160721
-- id: snykio:npm:swagger-ui:20160725
-  title: XSS via Content-type header
-  description: |+
-    `swagger-ui` supports receiving headers (e.g. Content-Type) from the
-    Swagger-conforming API server, to be used when demonstrating use of the
-    API using `curl`. Those headers are injected into the documentation
-    as-is (not encoded), allowing a malicious API server to inject a script
-    (XSS) into the swagger-ui front-end.
-
-    \nA cross-site scripting attack occurs when the attacker tricks a
-    legitimate web-based application or site to accept a request as
-    originating from a trusted source.
-
-    This is done by escaping the context of the web application; the web
-    application then delivers that data to its users along with other
-    trusted dynamic content, without validating it. The browser unknowingly
-    executes malicious script on the client side (through client-side
-    languages; usually JavaScript or HTML) in order to perform actions that
-    are otherwise typically blocked by the browser’s Same Origin Policy.
-
-    ֿInjecting malicious code is the most prevalent manner by which XSS is
-    exploited; for this reason, escaping characters in order to prevent this
-    manipulation is the top method for securing code against this
-    vulnerability.
-
-    Escaping means that the application is coded to mark key characters, and
-    particularly key characters included in user input, to prevent those
-    characters from being interpreted in a dangerous context. For example,
-    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
-    order to be interpreted and displayed as themselves in text, while
-    within the code itself, they are used for HTML tags. If malicious
-    content is injected into an application that escapes special characters
-    and that malicious content uses `<` and `>` as HTML tags, those
-    characters are nonetheless not interpreted as HTML tags by the browser
-    if they’ve been correctly escaped in the application code and in this
-    way the attempted attack is diverted.
-
-    The most prominent use of XSS is to steal cookies (source: OWASP
-    HttpOnly) and hijack user sessions, but XSS exploits have been used to
-    expose sensitive information, enable access to privileged services and
-    functionality and deliver malware.
-
-    ### Types of attacks   {#types-of-attacks}
-
-    There are a few methods by which XSS can be manipulated:
-
-    | Type | Origin | Description |
-    |----------
-    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
-    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
-    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
-    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
-
-    ### Affected environments   {#affected-environments}
-
-    The following environments are susceptible to an XSS attack:
-
-    * Web servers
-    * Application servers
-    * Web application environments
-
-    ### How to prevent   {#how-to-prevent}
-
-    This section describes the top best practices designed to specifically
-    protect your code:
-
-    * Sanitize data input in an HTTP request before reflecting it back,
-      ensuring all data is validated, filtered or escaped before echoing
-      anything back to the user, such as the values of query parameters
-      during searches.
-    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
-      to their respective HTML or URL encoded equivalents.
-    * Give users the option to disable client-side scripts.
-    * Redirect invalid requests.
-    * Detect simultaneous logins, including those from two separate IP
-      addresses, and invalidate those sessions.
-    * Use and enforce a Content Security Policy (source: Wikipedia) to
-      disable any features that might be manipulated for an XSS attack.
-    * Read the documentation for any of the libraries referenced in your
-      code to understand which elements allow for embedded HTML.
-
-  affected_package: swagger-ui
-  vulnerable_versions:
-  - "<=2.1.4"
-  severity: high
-  package_manager: npm
-  cwe:
-  - CWE-79
-  disclosed_date: 2016-07-25
-  created_date: 2016-07-25
-  last_modified_date: 2016-07-25
-  credit:
-  - Joe Vennix
-  references:
-  - https://github.com/swagger-api/swagger-ui/issues/1863
-  source_url: https://snyk.io/vuln/npm:swagger-ui:20160725
-- id: snykio:npm:swagger-ui:20160815
-  title: XSS in URL Query String Parameter
-  description: |+
-    Swagger is a standardized library for documenting API endpoints and
-    their parameters. Versions 2.1.0-M1 and 2.1.0-M2 of the library contain
-    a cross site scripting (XSS) vulnerability in the the `url` query string
-    parameter.
-
-    \nA cross-site scripting attack occurs when the attacker tricks a
-    legitimate web-based application or site to accept a request as
-    originating from a trusted source.
-
-    This is done by escaping the context of the web application; the web
-    application then delivers that data to its users along with other
-    trusted dynamic content, without validating it. The browser unknowingly
-    executes malicious script on the client side (through client-side
-    languages; usually JavaScript or HTML) in order to perform actions that
-    are otherwise typically blocked by the browser’s Same Origin Policy.
-
-    ֿInjecting malicious code is the most prevalent manner by which XSS is
-    exploited; for this reason, escaping characters in order to prevent this
-    manipulation is the top method for securing code against this
-    vulnerability.
-
-    Escaping means that the application is coded to mark key characters, and
-    particularly key characters included in user input, to prevent those
-    characters from being interpreted in a dangerous context. For example,
-    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
-    order to be interpreted and displayed as themselves in text, while
-    within the code itself, they are used for HTML tags. If malicious
-    content is injected into an application that escapes special characters
-    and that malicious content uses `<` and `>` as HTML tags, those
-    characters are nonetheless not interpreted as HTML tags by the browser
-    if they’ve been correctly escaped in the application code and in this
-    way the attempted attack is diverted.
-
-    The most prominent use of XSS is to steal cookies (source: OWASP
-    HttpOnly) and hijack user sessions, but XSS exploits have been used to
-    expose sensitive information, enable access to privileged services and
-    functionality and deliver malware.
-
-    ### Types of attacks   {#types-of-attacks}
-
-    There are a few methods by which XSS can be manipulated:
-
-    | Type | Origin | Description |
-    |----------
-    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
-    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
-    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
-    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
-
-    ### Affected environments   {#affected-environments}
-
-    The following environments are susceptible to an XSS attack:
-
-    * Web servers
-    * Application servers
-    * Web application environments
-
-    ### How to prevent   {#how-to-prevent}
-
-    This section describes the top best practices designed to specifically
-    protect your code:
-
-    * Sanitize data input in an HTTP request before reflecting it back,
-      ensuring all data is validated, filtered or escaped before echoing
-      anything back to the user, such as the values of query parameters
-      during searches.
-    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
-      to their respective HTML or URL encoded equivalents.
-    * Give users the option to disable client-side scripts.
-    * Redirect invalid requests.
-    * Detect simultaneous logins, including those from two separate IP
-      addresses, and invalidate those sessions.
-    * Use and enforce a Content Security Policy (source: Wikipedia) to
-      disable any features that might be manipulated for an XSS attack.
-    * Read the documentation for any of the libraries referenced in your
-      code to understand which elements allow for embedded HTML.
-
-  affected_package: swagger-ui
-  vulnerable_versions:
-  - 2.1.0-M1
-  - 2.1.0-M2
-  severity: high
-  package_manager: npm
-  cwe:
-  - CWE-80
-  disclosed_date: 2016-08-15
-  created_date: 2016-08-15
-  last_modified_date: 2016-08-15
-  credit:
-  - mehmetaydogdu
-  references:
-  - https://github.com/swagger-api/swagger-ui/issues/1262
-  source_url: https://snyk.io/vuln/npm:swagger-ui:20160815
-- id: snykio:npm:swagger-ui:20160901
-  title: Cross-site Scripting (XSS)
-  description: |
-    [`swagger-ui`][1] is a dependency-free collection of HTML, JavaScript,
-    and CSS assets that dynamically generate beautiful documentation from a
-    Swagger-compliant API.
-
-    Affected versions of the package are vulnerable to Cross-site Scripting
-    (XSS) due to not escaping html script tags.
-
-
-
-    [1]: https://www.npmjs.com/package/swagger-ui
-    \nA cross-site scripting attack occurs when the attacker tricks a
-    legitimate web-based application or site to accept a request as
-    originating from a trusted source.
-
-    This is done by escaping the context of the web application; the web
-    application then delivers that data to its users along with other
-    trusted dynamic content, without validating it. The browser unknowingly
-    executes malicious script on the client side (through client-side
-    languages; usually JavaScript or HTML) in order to perform actions that
-    are otherwise typically blocked by the browser’s Same Origin Policy.
-
-    ֿInjecting malicious code is the most prevalent manner by which XSS is
-    exploited; for this reason, escaping characters in order to prevent this
-    manipulation is the top method for securing code against this
-    vulnerability.
-
-    Escaping means that the application is coded to mark key characters, and
-    particularly key characters included in user input, to prevent those
-    characters from being interpreted in a dangerous context. For example,
-    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
-    order to be interpreted and displayed as themselves in text, while
-    within the code itself, they are used for HTML tags. If malicious
-    content is injected into an application that escapes special characters
-    and that malicious content uses `<` and `>` as HTML tags, those
-    characters are nonetheless not interpreted as HTML tags by the browser
-    if they’ve been correctly escaped in the application code and in this
-    way the attempted attack is diverted.
-
-    The most prominent use of XSS is to steal cookies (source: OWASP
-    HttpOnly) and hijack user sessions, but XSS exploits have been used to
-    expose sensitive information, enable access to privileged services and
-    functionality and deliver malware.
-
-    ### Types of attacks   {#types-of-attacks}
-
-    There are a few methods by which XSS can be manipulated:
-
-    | Type | Origin | Description |
-    |----------
-    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
-    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
-    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
-    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
-
-    ### Affected environments   {#affected-environments}
-
-    The following environments are susceptible to an XSS attack:
-
-    * Web servers
-    * Application servers
-    * Web application environments
-
-    ### How to prevent   {#how-to-prevent}
-
-    This section describes the top best practices designed to specifically
-    protect your code:
-
-    * Sanitize data input in an HTTP request before reflecting it back,
-      ensuring all data is validated, filtered or escaped before echoing
-      anything back to the user, such as the values of query parameters
-      during searches.
-    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
-      to their respective HTML or URL encoded equivalents.
-    * Give users the option to disable client-side scripts.
-    * Redirect invalid requests.
-    * Detect simultaneous logins, including those from two separate IP
-      addresses, and invalidate those sessions.
-    * Use and enforce a Content Security Policy (source: Wikipedia) to
-      disable any features that might be manipulated for an XSS attack.
-    * Read the documentation for any of the libraries referenced in your
-      code to understand which elements allow for embedded HTML.
-
-    You can read more about `Cross-site Scripting (XSS)` on our [blog][1].
-
-
-
-    [1]: https://snyk.io/blog/marked-xss-vulnerability/
-  affected_package: swagger-ui
-  vulnerable_versions:
-  - "<=2.2.2"
-  severity: medium
-  package_manager: npm
-  cwe:
-  - CWE-79
-  disclosed_date: 2016-08-31
-  created_date: 2017-03-13
-  last_modified_date: 2017-03-13
-  credit:
-  - bodnia
-  references:
-  - https://github.com/swagger-api/swagger-ui/commit/f87eaaa81073a61e30ff0cedee4fd9cd2dd1fca9
-  - https://github.com/swagger-api/swagger-ui/pull/2374
-  source_url: https://snyk.io/vuln/npm:swagger-ui:20160901
-- id: snykio:npm:swagger-ui:20171031
-  title: Cross-site Scripting (XSS)
-  description: |
-    [`swagger-ui`][1] is [![NPM
-    version](https://badge.fury.io/js/swagger-ui.svg)][2].
-
-    Affected versions of the package are vulnerable to Cross-site Scripting
-    (XSS).
-
-
-
-    [1]: https://www.npmjs.com/package/swagger-ui
-    [2]: http://badge.fury.io/js/swagger-ui
-    \nA cross-site scripting attack occurs when the attacker tricks a
-    legitimate web-based application or site to accept a request as
-    originating from a trusted source.
-
-    This is done by escaping the context of the web application; the web
-    application then delivers that data to its users along with other
-    trusted dynamic content, without validating it. The browser unknowingly
-    executes malicious script on the client side (through client-side
-    languages; usually JavaScript or HTML) in order to perform actions that
-    are otherwise typically blocked by the browser’s Same Origin Policy.
-
-    ֿInjecting malicious code is the most prevalent manner by which XSS is
-    exploited; for this reason, escaping characters in order to prevent this
-    manipulation is the top method for securing code against this
-    vulnerability.
-
-    Escaping means that the application is coded to mark key characters, and
-    particularly key characters included in user input, to prevent those
-    characters from being interpreted in a dangerous context. For example,
-    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
-    order to be interpreted and displayed as themselves in text, while
-    within the code itself, they are used for HTML tags. If malicious
-    content is injected into an application that escapes special characters
-    and that malicious content uses `<` and `>` as HTML tags, those
-    characters are nonetheless not interpreted as HTML tags by the browser
-    if they’ve been correctly escaped in the application code and in this
-    way the attempted attack is diverted.
-
-    The most prominent use of XSS is to steal cookies (source: OWASP
-    HttpOnly) and hijack user sessions, but XSS exploits have been used to
-    expose sensitive information, enable access to privileged services and
-    functionality and deliver malware.
-
-    ### Types of attacks   {#types-of-attacks}
-
-    There are a few methods by which XSS can be manipulated:
-
-    | Type | Origin | Description |
-    |----------
-    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
-    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
-    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
-    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
-
-    ### Affected environments   {#affected-environments}
-
-    The following environments are susceptible to an XSS attack:
-
-    * Web servers
-    * Application servers
-    * Web application environments
-
-    ### How to prevent   {#how-to-prevent}
-
-    This section describes the top best practices designed to specifically
-    protect your code:
-
-    * Sanitize data input in an HTTP request before reflecting it back,
-      ensuring all data is validated, filtered or escaped before echoing
-      anything back to the user, such as the values of query parameters
-      during searches.
-    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
-      to their respective HTML or URL encoded equivalents.
-    * Give users the option to disable client-side scripts.
-    * Redirect invalid requests.
-    * Detect simultaneous logins, including those from two separate IP
-      addresses, and invalidate those sessions.
-    * Use and enforce a Content Security Policy (source: Wikipedia) to
-      disable any features that might be manipulated for an XSS attack.
-    * Read the documentation for any of the libraries referenced in your
-      code to understand which elements allow for embedded HTML.
-
-    You can read more about `Cross-site Scripting (XSS)` on our [blog][1].
-
-
-
-    [1]: https://snyk.io/blog/xss-attacks-the-next-wave/
-  affected_package: swagger-ui
-  vulnerable_versions:
-  - "<3.4.2"
-  severity: medium
-  package_manager: npm
-  cwe:
-  - CWE-79
-  disclosed_date: 2017-10-30
-  created_date: 2017-12-25
-  last_modified_date: 2017-12-25
-  credit:
-  - Unknown
-  references:
-  - https://github.com/swagger-api/swagger-ui/commit/afa615e01dc7f6724d20a11abfe1fcdf8f6ecd57
-  - https://github.com/swagger-api/swagger-ui/issues/3847
-  - https://github.com/swagger-api/swagger-ui/pull/3848
-  source_url: https://snyk.io/vuln/npm:swagger-ui:20171031
-- id: snykio:npm:swagger-ui:449808
+- id: snykio:maven:org.webjars:swagger-ui:449821
   title: Reverse Tabnabbing
   description: |
-    [swagger-ui][1] is a npm module intended for use in single-page
-    applications that are capable of resolving dependencies (via Webpack,
-    Browserify, etc).
+    [org.webjars:swagger-ui][1] is a WebJar for Swagger UI npm library.
 
     Affected versions of this package are vulnerable to Reverse Tabnabbing.
     Setting `target="_blank"` on anchor tags is unsafe unless used in
@@ -886,11 +14,11 @@
 
 
     [1]: https://swagger.io/tools/swagger-ui/
-  affected_package: swagger-ui
+  affected_package: org.webjars:swagger-ui
   vulnerable_versions:
-  - "<3.18.0"
+  - "< 3.18.1"
   severity: medium
-  package_manager: npm
+  package_manager: maven
   cwe:
   - CWE-1022
   disclosed_date: 2018-08-04
@@ -902,4 +30,513 @@
   - https://github.com/swagger-api/swagger-ui/pull/4789
   - https://github.com/swagger-api/swagger-ui/pull/4789/commits/3f4cae3334fdd492a373f4453bd03a9ebd87becf
   - https://github.com/swagger-api/swagger-ui/releases/tag/v3.18.0
-  source_url: https://snyk.io/vuln/SNYK-JS-SWAGGERUI-449808
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARS-449821
+- id: snykio:maven:org.webjars:swagger-ui:449822
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [org.webjars:swagger-ui][1] is a WebJar for Swagger UI npm library.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS) due to insertion of `javascript:` and `data:` URLs from
+    user-influenced href fields in Swagger-UI.
+
+
+
+    [1]: https://swagger.io/tools/swagger-ui/
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
+  affected_package: org.webjars:swagger-ui
+  vulnerable_versions:
+  - "< 3.4.4"
+  severity: medium
+  package_manager: maven
+  cwe:
+  - CWE-79
+  disclosed_date: 2017-10-30
+  created_date: 2017-12-25
+  last_modified_date: 2017-12-25
+  credit:
+  - Unknown
+  references:
+  - https://github.com/swagger-api/swagger-ui/commit/afa615e01dc7f6724d20a11abfe1fcdf8f6ecd57
+  - https://github.com/swagger-api/swagger-ui/issues/3847
+  - https://github.com/swagger-api/swagger-ui/pull/3848
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARS-449822
+- id: snykio:maven:org.webjars:swagger-ui:449832
+  title: XSS in URL Query String Parameter
+  description: |+
+    [org.webjars:swagger-ui][1] is a WebJar for Swagger UI npm library.
+
+    Affected versions of this package are vulnerable to XSS in URL Query
+    String Parameter. Versions prior of the 2.1.0 library contain a cross
+    site scripting (XSS) vulnerability in the the `url` query string
+    parameter.
+
+
+
+    [1]: https://swagger.io/tools/swagger-ui/
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
+  affected_package: org.webjars:swagger-ui
+  vulnerable_versions:
+  - "< 2.1.0"
+  severity: high
+  package_manager: maven
+  cwe:
+  - CWE-80
+  disclosed_date: 2016-08-15
+  created_date: 2016-08-15
+  last_modified_date: 2016-08-15
+  credit:
+  - mehmetaydogdu
+  references:
+  - https://github.com/swagger-api/swagger-ui/issues/1262
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARS-449832
+- id: snykio:maven:org.webjars:swagger-ui:449833
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [org.webjars:swagger-ui][1] is a WebJar for Swagger UI npm library.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS) due to not escaping html script tags.
+
+
+
+    [1]: https://swagger.io/tools/swagger-ui/
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
+  affected_package: org.webjars:swagger-ui
+  vulnerable_versions:
+  - "< 2.2.5"
+  severity: medium
+  package_manager: maven
+  cwe:
+  - CWE-79
+  disclosed_date: 2016-08-31
+  created_date: 2017-03-13
+  last_modified_date: 2017-03-13
+  credit:
+  - bodnia
+  references:
+  - https://github.com/swagger-api/swagger-ui/commit/f87eaaa81073a61e30ff0cedee4fd9cd2dd1fca9
+  - https://github.com/swagger-api/swagger-ui/pull/2374
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARS-449833
+- id: snykio:maven:org.webjars:swagger-ui:449834
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [org.webjars:swagger-ui][1] is a WebJar for Swagger UI npm library.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). `swagger-ui` supports receiving headers (e.g. Content-Type) from
+    the Swagger-conforming API server, to be used when demonstrating use of
+    the API using `curl`. Those headers are injected into the documentation
+    as-is (not encoded), allowing a malicious API server to inject a script
+    (XSS) into the swagger-ui front-end.
+
+
+
+    [1]: https://swagger.io/tools/swagger-ui/
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
+  affected_package: org.webjars:swagger-ui
+  vulnerable_versions:
+  - "< 2.2.2"
+  severity: high
+  package_manager: maven
+  cwe:
+  - CWE-79
+  disclosed_date: 2016-07-25
+  created_date: 2016-07-25
+  last_modified_date: 2016-07-25
+  credit:
+  - Joe Vennix
+  references:
+  - https://github.com/swagger-api/swagger-ui/issues/1863
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARS-449834
+- id: snykio:maven:org.webjars:swagger-ui:449835
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [org.webjars:swagger-ui][1] is a WebJar for Swagger UI npm library.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). A key part of this generation is the use of a JSON schema, which
+    can be read locally or by providing a `url` parameter to the Swagger
+    server (e.g.
+    `http://swagger-server/swagger-ui/index.html?url=<schema-url>`).
+
+    The `produces` and `consumes` schema fields are written to the HTML
+    without any HTML encoding, allowing an attacker to perform XSS by adding
+    malicious scripts to their values.
+
+
+
+    [1]: https://swagger.io/tools/swagger-ui/
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
+  affected_package: org.webjars:swagger-ui
+  vulnerable_versions:
+  - "< 2.2.2"
+  severity: high
+  package_manager: maven
+  cwe:
+  - CWE-79
+  disclosed_date: 2016-07-20
+  created_date: 2016-07-20
+  last_modified_date: 2016-07-20
+  credit:
+  - Joe Vennix
+  references:
+  - https://github.com/swagger-api/swagger-ui/issues/1866
+  - https://github.com/swagger-api/swagger-ui/pull/1867
+  - https://github.com/swagger-api/swagger-ui/releases/tag/v2.2.1
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARS-449835
