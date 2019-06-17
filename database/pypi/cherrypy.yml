@@ -78,3 +78,80 @@
   - https://nvd.nist.gov/vuln/detail/CVE-2008-0252
   - https://security.gentoo.org/glsa/200801-11
   source_url: https://snyk.io/vuln/SNYK-PYTHON-CHERRYPY-42157
+- id: snykio:pypi:cherrypy:449897
+  title: Directory Traversal
+  description: |
+    [CherryPy][1] is a pythonic, object-oriented HTTP framework.
+
+    Affected versions of this package are vulnerable to Directory Traversal.
+    The `staticfilter` component allows remote attackers to read arbitrary
+    files via `".."` sequences in unspecified vectors.
+
+
+
+    [1]: https://cherrypy.org/
+    \nA Directory Traversal attack (also known as path traversal) aims to
+    access files and directories that are stored outside the intended
+    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
+    its variations, or by using absolute file paths, it may be possible to
+    access arbitrary files and directories stored on file system, including
+    application source code, configuration, and other critical system files.
+
+    Directory Traversal vulnerabilities can be generally divided into two
+    types:
+
+    * **Information Disclosure**\: Allows the attacker to gain information
+      about the folder structure or read the contents of sensitive files on
+      the system.
+
+    `st` is a module for serving static files on web pages, and contains a
+    [vulnerability of this type][1]. In our example, we will serve files
+    from the `public` route.
+
+    If an attacker requests the following URL from our server, it will in
+    turn leak the sensitive private key of the root user.
+
+        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
+
+    **Note** `%2e` is the URL encoded version of `.` (dot).
+
+    * **Writing arbitrary files**\: Allows the attacker to create or replace
+      existing files. This type of vulnerability is also known as
+      `Zip-Slip`.
+
+    One way to achieve this is by using a malicious `zip` archive that holds
+    path traversal filenames. When each filename in the zip archive gets
+    concatenated to the target extraction folder, without validation, the
+    final path ends up outside of the target folder. If an executable or a
+    configuration file is overwritten with a file containing malicious code,
+    the problem can turn into an arbitrary code execution issue quite
+    easily.
+
+    The following is an example of a `zip` archive with one benign file and
+    one malicious file. Extracting the malicious file will result in
+    traversing out of the target folder, ending up in `/root/.ssh/`
+    overwriting the `authorized_keys` file:
+
+        2018-04-15 22:04:29 .....           19           19  good.txt
+        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
+
+
+
+    [1]: https://snyk.io/vuln/npm:st:20140206
+  affected_package: cherrypy
+  vulnerable_versions:
+  - "< 2.2.1"
+  severity: high
+  package_manager: pypi
+  cve:
+  - CVE-2006-0847
+  cwe:
+  - CWE-22
+  disclosed_date: 2006-02-21
+  created_date: 2019-06-14
+  last_modified_date: 2019-06-14
+  credit:
+  - Unknown
+  references:
+  - https://github.com/cherrypy/cherrypy/commit/7e6187ee19a90ebe7f8597296bfa942cd1eb1864
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-CHERRYPY-449897

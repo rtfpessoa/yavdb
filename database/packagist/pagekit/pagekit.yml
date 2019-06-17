@@ -1,4 +1,212 @@
 ---
+- id: snykio:packagist:pagekit/pagekit:449908
+  title: Cross Site Scripting (XSS)
+  description: |+
+    [pagekit/pagekit][1] is a modular and lightweight CMS built with Symfony
+    components and Vue.js.
+
+    Affected versions of this package are vulnerable to Cross Site Scripting
+    (XSS). A user with elevated privileges could upload a photo to the
+    system in an SVG format. This feature can be used to upload malicious
+    JavaScript code on a user\'s browser.
+
+
+
+    [1]: https://pagekit.com
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
+  affected_package: pagekit/pagekit
+  vulnerable_versions:
+  - "<1.0.14"
+  severity: medium
+  package_manager: packagist
+  cve:
+  - CVE-2018-11564
+  cwe:
+  - CWE-79
+  disclosed_date: 2018-01-06
+  created_date: 2019-06-14
+  last_modified_date: 2019-06-14
+  credit:
+  - Unknown
+  references:
+  - http://ruffsecurity.blogspot.com/2018/05/my-first-cve-found.html
+  - https://www.exploit-db.com/exploits/44837
+  source_url: https://snyk.io/vuln/SNYK-PHP-PAGEKITPAGEKIT-449908
+- id: snykio:packagist:pagekit/pagekit:449909
+  title: Cross Site Scripting (XSS)
+  description: |+
+    [pagekit/pagekit][1] is a modular and lightweight CMS built with Symfony
+    components and Vue.js.
+
+    Affected versions of this package are vulnerable to Cross Site Scripting
+    (XSS). Multiple areas including error and login areas reflects user
+    input without sanitation resulting in execution of JavaScript code.
+
+
+
+    [1]: https://pagekit.com
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
+  affected_package: pagekit/pagekit
+  vulnerable_versions:
+  - "<1.0.6"
+  severity: medium
+  package_manager: packagist
+  cwe:
+  - CWE-79
+  disclosed_date: 2016-11-09
+  created_date: 2019-06-14
+  last_modified_date: 2019-06-14
+  credit:
+  - Onur Yilmaz
+  - Raphael de la Vienne
+  references:
+  - https://github.com/pagekit/pagekit/blob/1.0.6/CHANGELOG.md
+  - https://github.com/pagekit/pagekit/commit/34333064bb2809f7b940634918e8fdd641f27b08
+  - https://github.com/pagekit/pagekit/commit/83bf4ea1c2c08949e67afa04baffb34493c402a7
+  - https://www.netsparker.com/web-applications-advisories/ns-16-010-reflected-xss-vulnerability-identified-in-pagekit-1-0-5/
+  source_url: https://snyk.io/vuln/SNYK-PHP-PAGEKITPAGEKIT-449909
 - id: snykio:packagist:pagekit/pagekit:72243
   title: Open Redirect
   description: |
