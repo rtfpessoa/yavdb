@@ -62,3 +62,42 @@
   - https://github.com/jenkinsci/email-ext-plugin/commit/af2cc9bf649781c3c84c6891298db0d8601b193d
   - https://jenkins.io/security/advisory/2017-03-20/
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGJENKINSCIPLUGINS-32468
+- id: snykio:maven:org.jenkins-ci.plugins:email-ext:450040
+  title: Arbitrary Code Execution
+  description: |
+    [org.jenkins-ci.plugins:email-ext][1] is a plugin that allows you to
+    configure every aspect of email notifications.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution. A sandbox bypass vulnerability exists that allows attackers
+    with Job/Configure permission to execute arbitrary code on the Jenkins
+    master JVM.
+
+    The vulnerability exists in the following files:
+
+    * `pom.xml`
+    * `src/main/java/hudson/plugins/emailext/ExtendedEmailPublisher.java`
+    * `src/main/java/hudson/plugins/emailext/plugins/content/EmailExtScript.java`
+    * `src/main/java/hudson/plugins/emailext/plugins/content/ScriptContent.java`
+    * `src/main/java/hudson/plugins/emailext/plugins/trigger/AbstractScriptTrigger.java`
+
+
+
+    [1]: https://plugins.jenkins.io/email-ext
+  affected_package: org.jenkins-ci.plugins:email-ext
+  vulnerable_versions:
+  - "< 2.65"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2019-1003032
+  cwe:
+  - CWE-254
+  disclosed_date: 2019-03-06
+  created_date: 2019-06-17
+  last_modified_date: 2019-06-17
+  credit:
+  - Unknown
+  references:
+  - https://jenkins.io/security/advisory/2019-03-06/
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGJENKINSCIPLUGINS-450040
