@@ -1,35 +1,19 @@
 ---
-- id: npmjs:npm:diagram-js-direct-editing:983
-  title: Cross-Site Scripting
-  description: Versions of `diagram-js-direct-editing` prior to 1.4.3 are vulnerable
-    to Cross-Site Scripting. The package fails to sanitize input from the clipboard,
-    allowing attackers to execute arbitrary JavaScript in the victim's browser.
-  affected_package: diagram-js-direct-editing
-  vulnerable_versions:
-  - "<1.4.3"
-  severity: medium
-  package_manager: npm
-  cwe: CWE-79
-  disclosed_date: 1970-01-01
-  created_date: 1970-01-01
-  last_modified_date: 1970-01-01
-  credit: naoey
-  references: https://npmjs.com/advisories/983
-  source_url: https://npmjs.com/advisories/983
-- id: snykio:npm:diagram-js-direct-editing:450046
-  title: Cross Site Scripting (XSS)
+- id: snykio:packagist:mantisbt/mantisbt:450220
+  title: Cross-site Scripting (XSS)
   description: |+
-    [diagram-js-direct-editing][1] is a direct editing box for diagram-js.
+    [mantisbt/mantisbt][1] is a mantis bug tracker.
 
-    Affected versions of this package are vulnerable to Cross Site Scripting
-    (XSS). Pasting HTML text anywhere that allows text input in the modeler
-    evaluates the HTML as is. It can be exploited by adding a new element on
-    the canvas and editing the name to contain html. For example, `<video
-    src=1 onerror=alert('Running a script')>`
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS) in the View Filters page (view\_filters\_page.php) and Edit Filter
+    page (manage\_filter\_edit\_page.php). A remote attacker is able to
+    inject arbitrary code (if CSP settings permit it) through a crafted
+    `PATH_INFO`. **Note**\: this vulnerability exists because of an
+    incomplete fix for CVE-2018-13055.
 
 
 
-    [1]: https://www.npmjs.com/package/diagram-js-direct-editing
+    [1]: https://packagist.org/packages/mantisbt/mantisbt
     \nA cross-site scripting attack occurs when the attacker tricks a
     legitimate web-based application or site to accept a request as
     originating from a trusted source.
@@ -102,21 +86,21 @@
     * Read the documentation for any of the libraries referenced in your
       code to understand which elements allow for embedded HTML.
 
-  affected_package: diagram-js-direct-editing
+  affected_package: mantisbt/mantisbt
   vulnerable_versions:
-  - "<1.4.3"
+  - ">=2.1.0  <2.17.1"
   severity: medium
-  package_manager: npm
+  package_manager: packagist
+  cve:
+  - CVE-2018-16514
   cwe:
   - CWE-79
-  disclosed_date: 2019-06-10
-  created_date: 2019-06-17
-  last_modified_date: 2019-06-17
+  disclosed_date: 2019-06-20
+  created_date: 2019-06-20
+  last_modified_date: 2019-06-20
   credit:
-  - naoey
+  - Unknown
   references:
-  - https://bpmn.io/blog/posts/2019-html-injection-vulnerabilities-fixed.html
-  - https://github.com/bpmn-io/bpmn-js/issues/1073
-  - https://github.com/bpmn-io/diagram-js-direct-editing/pull/14/commits
-  - https://github.com/bpmn-io/diagram-js/commit/2565c40449379284a55163f290ec812db34244d1
-  source_url: https://snyk.io/vuln/SNYK-JS-DIAGRAMJSDIRECTEDITING-450046
+  - https://github.com/mantisbt/mantisbt/commit/66091a42626631a3063774eb0fb8a4218ab22fd4
+  - https://mantisbt.org/bugs/view.php?id=24731
+  source_url: https://snyk.io/vuln/SNYK-PHP-MANTISBTMANTISBT-450220
