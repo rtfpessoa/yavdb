@@ -303,3 +303,164 @@
   - https://bugs.jquery.com/ticket/11290
   - https://github.com/jquery/jquery/commit/05531fc4080ae24070930d15ae0cea7ae056457d
   source_url: https://snyk.io/vuln/SNYK-RUBY-JQUERYRAILS-449590
+- id: snykio:rubygems:jquery-rails:450225
+  title: Prototype Pollution
+  description: "[jquery-rails][1] is a gem provides jQuery and the jQuery-ujs driver
+    for\nyour Rails 4+ application.\n\nAffected versions of this package are vulnerable
+    to Prototype Pollution.\nThe `extend` function can be tricked into modifying the
+    prototype of\n`Object` when the attacker controls part of the structure passed
+    to this\nfunction. This can let an attacker add or modify an existing property\nthat
+    will then exist on all objects.\n\n\n\n[1]: https://rubygems.org/gems/jquery-rails\n\\nPrototype
+    Pollution is a vulnerability affecting JavaScript. Prototype\nPollution refers
+    to the ability to inject properties into existing\nJavaScript language construct
+    prototypes, such as objects. JavaScript\nallows all Object attributes to be altered,
+    including their magical\nattributes such as `_proto_`, `constructor` and `prototype`.
+    An attacker\nmanipulates these attributes to overwrite, or pollute, a JavaScript\napplication
+    object prototype of the base object by injecting other\nvalues. Properties on
+    the `Object.prototype` are then inherited by all\nthe JavaScript objects through
+    the prototype chain. When that happens,\nthis leads to either denial of service
+    by triggering JavaScript\nexceptions, or it tampers with the application source
+    code to force the\ncode path that the attacker injects, thereby leading to remote
+    code\nexecution.\n\nThere are two main ways in which the pollution of prototypes
+    occurs:\n\n* Unsafe `Object` recursive merge\n\n* Property definition by path\n\n###
+    Unsafe Object recursive merge   {#unsafe-object-recursive-merge}\n\nThe logic
+    of a vulnerable recursive merge function follows the following\nhigh-level model:\n\n
+    \   merge (target, source)\n    \n    foreach property of source\n    \n    if
+    property exists and is an object on both the target and the source\n    \n    merge(target[property],
+    source[property])\n    \n    else\n    \n    target[property] = source[property]\n\n\n\nWhen
+    the source object contains a property named `_proto_` defined with\n`Object.defineProperty()`
+    , the condition that checks if the property\nexists and is an object on both the
+    target and the source passes and the\nmerge recurses with the target, being the
+    prototype of `Object` and the\nsource of `Object` as defined by the attacker.
+    Properties are then\ncopied on the `Object` prototype.\n\nClone operations are
+    a special sub-class of unsafe recursive merges,\nwhich occur when a recursive
+    merge is conducted on an empty object:\n`merge({},source)`.\n\n`lodash` and `Hoek`
+    are examples of libraries susceptible to recursive\nmerge attacks.\n\n### Property
+    definition by path   {#property-definition-by-path}\n\nThere are a few JavaScript
+    libraries that use an API to define property\nvalues on an object based on a given
+    path. The function that is\ngenerally affected contains this signature: `theFunction(object,
+    path,\nvalue)`\n\nIf the attacker can control the value of “path”, they can set
+    this value\nto `_proto_.myValue`. `myValue` is then assigned to the prototype
+    of the\nclass of the object.\n\n"
+  affected_package: jquery-rails
+  vulnerable_versions:
+  - "<4.3.4"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2019-11358
+  - CVE-2019-5428
+  cwe:
+  - CWE-400
+  disclosed_date: 2019-03-26
+  created_date: 2019-03-27
+  last_modified_date: 2019-03-27
+  credit:
+  - Semmle Security Research Team
+  references:
+  - https://github.com/jquery/jquery/commit/753d591aea698e57d6db58c9f722cd0808619b1b
+  - https://github.com/jquery/jquery/pull/4333
+  - https://snyk.io/blog/after-three-years-of-silence-a-new-jquery-prototype-pollution-vulnerability-emerges-once-again/
+  source_url: https://snyk.io/vuln/SNYK-RUBY-JQUERYRAILS-450225
+- id: snykio:rubygems:jquery-rails:450229
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [jquery-rails][1] is a gem provides jQuery and the jQuery-ujs driver for
+    your Rails 4+ application.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). due to using the `text()` function inside the `after()` function.
+
+
+
+    [1]: https://rubygems.org/gems/jquery-rails
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
+  affected_package: jquery-rails
+  vulnerable_versions:
+  - ">=0.2.5  <1.0.15"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2014-6071
+  cwe:
+  - CWE-79
+  disclosed_date: 2014-09-01
+  created_date: 2016-10-20
+  last_modified_date: 2016-10-20
+  credit:
+  - Mauro Risonho de Paula Assumpção
+  references:
+  - http://seclists.org/fulldisclosure/2014/Sep/10
+  - https://bugzilla.redhat.com/show_bug.cgi?id=1136683
+  source_url: https://snyk.io/vuln/SNYK-RUBY-JQUERYRAILS-450229
