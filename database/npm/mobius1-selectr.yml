@@ -6,11 +6,9 @@
     select box replacement written in vanilla javascript.
 
     Affected versions of this package are vulnerable to Cross-site Scripting
-    (XSS) due to the `util.createElement` method using the `innerHTML`
-    method. This method can then be leveraged:
-
-        const name = "<img src='x' onerror='alert(1)'>";
-        el.innerHTML = name; // shows the alert
+    (XSS) Multiple areas within the package including
+    `addTag`,`textContent`,`match` and `util` elements writes user input to
+    innerHTML allowing executing of JavaScript.
 
 
 
@@ -89,7 +87,7 @@
 
   affected_package: mobius1-selectr
   vulnerable_versions:
-  - ">=2.0.0"
+  - ">=2.0.0 <2.4.11"
   severity: medium
   package_manager: npm
   cwe:
@@ -101,5 +99,8 @@
   - reno1979
   references:
   - https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML#Security_considerations
+  - https://github.com/Mobius1/Selectr/commit/06ec255da91aeaaf91650298f1111136a1f84b20
+  - https://github.com/Mobius1/Selectr/commit/512a58100ed65be6b772d86e68041f9051d9274c
   - https://github.com/Mobius1/Selectr/issues/102
+  - https://github.com/Mobius1/Selectr/pull/120
   source_url: https://snyk.io/vuln/SNYK-JS-MOBIUS1SELECTR-173698

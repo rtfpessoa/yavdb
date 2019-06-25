@@ -1,0 +1,30 @@
+---
+- id: snykio:npm:serve-here.js:450884
+  title: Path Traversal
+  description: |
+    [serve-here.js][1] is a package that serves static files over HTTP.
+
+    Affected versions of this package are vulnerable to Path Traversal. The
+    package accepts pathnames of urls and adds it to the web root without
+    sanitization. This means that by inputing `../` to the pathname it will
+    add it to web root and allows you to traverse to any folder from root.
+
+
+
+    [1]: https://github.com/ChristoPy/serve-here.js#readme
+  affected_package: serve-here.js
+  vulnerable_versions:
+  - "<1.2.0"
+  severity: high
+  package_manager: npm
+  cwe:
+  - CWE-22
+  disclosed_date: 2019-06-24
+  created_date: 2019-06-24
+  last_modified_date: 2019-06-24
+  credit:
+  - toannc123
+  references:
+  - https://github.com/ChristoPy/serve-here.js/commit/cefb51d03290b6a88dd13143ab2de31b8cf57c39
+  - https://hackerone.com/reports/569966
+  source_url: https://snyk.io/vuln/SNYK-JS-SERVEHEREJS-450884

@@ -1,0 +1,100 @@
+---
+- id: snykio:maven:org.jvnet.hudson.plugins:ftppublisher:449973
+  title: Access Control Bypass
+  description: |
+    [org.jvnet.hudson.plugins:ftppublisher][1] is a Jenkins plugin used to
+    upload project artifacts and whole directories to an ftp server.
+
+    Affected versions of this package are vulnerable to Access Control
+    Bypass. A missing permission check in a form validation method allows
+    users with Overall/Read permission to initiate a connection test to an
+    attacker-specified FTP server with attacker-specified credentials.
+    Additionally, the form validation method does not require POST requests,
+    resulting in a CSRF vulnerability (CVE-2019-1003058).
+
+
+
+    [1]: https://wiki.jenkins.io/display/JENKINS/FTP-Publisher+Plugin
+  affected_package: org.jvnet.hudson.plugins:ftppublisher
+  vulnerable_versions:
+  - ">= 0"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2019-1003059
+  cwe:
+  - CWE-284
+  disclosed_date: 2019-04-03
+  created_date: 2019-06-17
+  last_modified_date: 2019-06-17
+  credit:
+  - Viktor Gazdag
+  references:
+  - https://jenkins.io/security/advisory/2019-04-03/
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGJVNETHUDSONPLUGINS-449973
+- id: snykio:maven:org.jvnet.hudson.plugins:ftppublisher:450015
+  title: Insufficiently Protected Credentials
+  description: |
+    [org.jvnet.hudson.plugins:ftppublisher][1] is a Jenkins plugin used to
+    upload project artifacts and whole directories to an ftp server.
+
+    Affected versions of this package are vulnerable to Insufficiently
+    Protected Credentials. Credentials are stored unencrypted in the
+    plugin\'s global configuration file
+    `com.zanox.hudson.plugins.FTPPublisher.xml` on the Jenkins master
+    system. These credentials can be viewed by users with access to the
+    master file system.
+
+
+
+    [1]: https://wiki.jenkins.io/display/JENKINS/FTP-Publisher+Plugin
+  affected_package: org.jvnet.hudson.plugins:ftppublisher
+  vulnerable_versions:
+  - ">= 0"
+  severity: low
+  package_manager: maven
+  cve:
+  - CVE-2019-1003055
+  cwe:
+  - CWE-522
+  disclosed_date: 2019-04-03
+  created_date: 2019-06-17
+  last_modified_date: 2019-06-17
+  credit:
+  - Viktor Gazdag
+  references:
+  - https://jenkins.io/security/advisory/2019-04-03/
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGJVNETHUDSONPLUGINS-450015
+- id: snykio:maven:org.jvnet.hudson.plugins:ftppublisher:450886
+  title: Cross-Site Request Forgery (CSRF)
+  description: |
+    [org.jvnet.hudson.plugins:ftppublisher][1] is a Jenkins plugin used to
+    upload project artifacts and whole directories to an ftp server.
+
+    Affected versions of this package are vulnerable to Cross-Site Request
+    Forgery (CSRF). The form validation method used by the plugin does not
+    require POST requests, and is predictable resulting in a CSRF
+    vulnerability. This vulnerability could be leveraged with
+    CVE-2019-1003059 to trick a user into initiating a connection test to an
+    attacker-specified FTP server with attacker-specified credentials.
+
+
+
+    [1]: https://wiki.jenkins.io/display/JENKINS/FTP-Publisher+Plugin
+  affected_package: org.jvnet.hudson.plugins:ftppublisher
+  vulnerable_versions:
+  - ">= 0"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2019-1003058
+  cwe:
+  - CWE-352
+  disclosed_date: 2019-04-03
+  created_date: 2019-06-24
+  last_modified_date: 2019-06-24
+  credit:
+  - Viktor Gazdag
+  references:
+  - https://jenkins.io/security/advisory/2019-04-03/
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGJVNETHUDSONPLUGINS-450886

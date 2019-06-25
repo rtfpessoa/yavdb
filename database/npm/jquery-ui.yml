@@ -151,16 +151,16 @@
 - id: snykio:npm:jquery-ui:20100903
   title: Cross-site Scripting (XSS)
   description: |+
-    [`jquery-ui`][1] is a curated set of user interface interactions,
-    effects, widgets, and themes built on top of the jQuery JavaScript
-    Library.. Affected versions of the package are vulnerable to Cross-site
-    Scripting (XSS) due to improper escaping of the title option in
+    [jquery-ui][1] is a library for manipulating UI elements via jQuery.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS) due to improper escaping of the title option in
     `jquery.ui.dialog.js`, before it being set in the DOM. This results in
     an XSS vulnerability for applications with dynamic titles.
 
 
 
-    [1]: https://www.npmjs.com/package/jquery-ui
+    [1]: https://github.com/jquery/jquery-ui
     \nA cross-site scripting attack occurs when the attacker tricks a
     legitimate web-based application or site to accept a request as
     originating from a trusted source.
@@ -355,21 +355,24 @@
   - https://github.com/jquery/jquery-ui/commit/f2854408cce7e4b7fc6bf8676761904af9c96bde
   source_url: https://snyk.io/vuln/npm:jquery-ui:20121127
 - id: snykio:npm:jquery-ui:20160721
-  title: XSS in dialog closeText
+  title: Cross-site Scripting (XSS)
   description: |+
-    jQuery-UI is a library for manipulating UI elements via jQuery.
+    [jquery-ui][1] is a library for manipulating UI elements via jQuery.
 
-    One of the provided elements is a dialog, which also supports showing
-    custom text for closing via the [*closeText*][1] property. However, the
-    content of this property is added to the HTML with no sanitization,
-    allowing arbitrary scripts.
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). One of the provided elements is a dialog, which also supports
+    showing custom text for closing via the
+    `[_closeText_]`([https://api.jqueryui.com/dialog/#option-closeText][2])
+    property. However, the content of this property is added to the HTML
+    with no sanitization, allowing arbitrary scripts.
 
-    If you allow user input to be passed through to the *closeText*
+    If you allow user input to be passed through to the `_closeText_`
     property, you may have a Cross-site Scripting (XSS) vulnerability.
 
 
 
-    [1]: https://api.jqueryui.com/dialog/#option-closeText
+    [1]: https://github.com/jquery/jquery-ui
+    [2]: https://api.jqueryui.com/dialog/#option-closeText
     \nA cross-site scripting attack occurs when the attacker tricks a
     legitimate web-based application or site to accept a request as
     originating from a trusted source.
@@ -444,7 +447,7 @@
 
   affected_package: jquery-ui
   vulnerable_versions:
-  - "<=1.11.4"
+  - "<1.12.0"
   severity: high
   package_manager: npm
   cve:

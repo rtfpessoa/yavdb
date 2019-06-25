@@ -2,17 +2,18 @@
 - id: snykio:maven:com.typesafe.akka:akka-http-core_2.11:31710
   title: Denial of Service (DoS)
   description: |+
-    [com.typesafe.akka:akka-http-core\_2.11][1] implement a full server- and
-    client-side HTTP stack on top of akka-actor and akka-stream.
+    [com.typesafe.akka:akka-http-core\_2.11][1] is a Scala implementation of
+    the akka-http-core library which provides a streaming-first HTTP server
+    and client.
 
     Affected versions of this package are vulnerable to Denial of Service
-    (DoS). When using the decodeRequest function to handle gzip files, the
-    withSizeLimit applies to the compressed size, but not the uncompressed
+    (DoS). When using the `decodeRequest` function to handle gzip files, the
+    `withSizeLimit` applies to the compressed size, but not the uncompressed
     size.
 
 
 
-    [1]: https://index.scala-lang.org/akka/akka-http/akka-http-core/10.1.4?target=_2.12
+    [1]: http://akka.io
     \nDenial of Service (DoS) describes a family of attacks, all aimed at
     making a system inaccessible to its intended and legitimate users.
 
@@ -41,7 +42,8 @@
 
   affected_package: com.typesafe.akka:akka-http-core_2.11
   vulnerable_versions:
-  - ">= 0"
+  - ">= 10.0.0 < 10.0.14"
+  - ">= 10.1.0 < 10.1.5"
   severity: high
   package_manager: maven
   cve:
@@ -54,6 +56,7 @@
   credit:
   - Unknown
   references:
+  - https://doc.akka.io/docs/akka-http/current/security/2018-09-05-denial-of-service-via-decodeRequest.html
   - https://github.com/akka/akka-http/issues/2137
   - https://groups.google.com/forum/#!topic/akka-security/Dj7INsYWdjg
   source_url: https://snyk.io/vuln/SNYK-JAVA-COMTYPESAFEAKKA-31710

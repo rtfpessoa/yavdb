@@ -1,4 +1,33 @@
 ---
+- id: rubyadvisory:rubygems:chartkick:CVE-2019-12732
+  title: XSS Vulnerability in Chartkick Ruby Gem
+  description: |
+    Chartkick is vulnerable to a cross-site scripting (XSS) attack if
+    both the following conditions are met:
+
+    Condition 1:
+      It's used with `ActiveSupport.escape_html_entities_in_json = false`
+      (this is not the default for Rails)
+      OR used with a non-Rails framework like Sinatra.
+
+    Condition 2:
+      Untrusted data or options are passed to a chart.
+
+      <%= line_chart params[:data], min: params[:min] %>
+  affected_package: chartkick
+  patched_versions:
+  - ">= 3.2.0"
+  package_manager: rubygems
+  cve:
+  - CVE-2019-12732
+  disclosed_date: 2019-06-04
+  created_date: 2019-06-04
+  last_modified_date: 2019-06-04
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://github.com/ankane/chartkick/issues/488
 - id: snykio:rubygems:chartkick:174912
   title: Cross-site Scripting (XSS)
   description: |+

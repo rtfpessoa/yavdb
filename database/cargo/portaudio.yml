@@ -1,0 +1,22 @@
+---
+- id: rustsec:cargo:portaudio:RUSTSEC-2016-0003
+  title: HTTP download and execution allows MitM RCE
+  description: |
+    The build script in the portaudio crate will attempt to download via HTTP
+    the portaudio source and build it.
+
+    A Mallory in the middle can intercept the download with their own archive
+    and get RCE.
+  affected_package: portaudio
+  vulnerable_versions:
+  - "*"
+  severity: high
+  package_manager: cargo
+  disclosed_date: 2016-08-01
+  created_date: 2016-08-01
+  last_modified_date: 2016-08-01
+  credit:
+  - RustSec
+  references:
+  - https://github.com/RustAudio/rust-portaudio/issues/144
+  source_url: https://github.com/RustSec/advisory-db/blob/master/crates/portaudio/RUSTSEC-2016-0003.toml
