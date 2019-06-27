@@ -1,4 +1,37 @@
 ---
+- id: snykio:maven:com.acunetix:acunetix:449968
+  title: Server-side Request Forgery (SSRF)
+  description: |
+    [com.acunetix:acunetix][1] package that allows you to trigger automated
+    Acunetix scans as part of your web application’s build process inside of
+    Jenkins.
+
+    Affected versions of this package are vulnerable to Server-side Request
+    Forgery (SSRF). A missing permission check in a form validation method
+    in Acunetix Plugin allowed users with Overall/Read permission to
+    initiate a connection test, sending an HTTP GET request to an
+    attacker-specified URL, adding a /me suffix, returning whether the
+    connection could be established and whether the HTTP response code is
+    200.
+
+
+
+    [1]: https://github.com/jenkinsci/acunetix-plugin
+  affected_package: com.acunetix:acunetix
+  vulnerable_versions:
+  - "< 1.1.0"
+  severity: medium
+  package_manager: maven
+  cwe:
+  - CWE-918
+  disclosed_date: 2019-02-19
+  created_date: 2019-06-26
+  last_modified_date: 2019-06-26
+  credit:
+  - Viktor Gazdag
+  references:
+  - https://jenkins.io/security/advisory/2019-02-19/
+  source_url: https://snyk.io/vuln/SNYK-JAVA-COMACUNETIX-449968
 - id: snykio:maven:com.acunetix:acunetix:450022
   title: Information Exposure
   description: |

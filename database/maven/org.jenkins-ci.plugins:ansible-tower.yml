@@ -1,4 +1,41 @@
 ---
+- id: snykio:maven:org.jenkins-ci.plugins:ansible-tower:449970
+  title: Cross-site Request Forgery (CSRF)
+  description: |
+    [org.jenkins-ci.plugins:ansible-tower][1] gives you the ability to run
+    Ansible Tower jobs as a build step.
+
+    Affected versions of this package are vulnerable to Cross-site Request
+    Forgery (CSRF). Ansible Tower Plugin did not perform permission checks
+    on a method implementing form validation. This allowed users with
+    Overall/Read access to Jenkins to connect to an attacker-specified URL
+    using attacker-specified credentials IDs obtained through another
+    method, capturing credentials stored in Jenkins.
+
+    Additionally, this form validation method did not require POST requests,
+    resulting in a cross-site request forgery vulnerability.
+
+
+
+    [1]: https://github.com/jenkinsci/ansible-tower-plugin
+  affected_package: org.jenkins-ci.plugins:ansible-tower
+  vulnerable_versions:
+  - "< 0.9.2"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2019-10310
+  - CVE-2019-10311
+  cwe:
+  - CWE-352
+  disclosed_date: 2019-04-30
+  created_date: 2019-06-26
+  last_modified_date: 2019-06-26
+  credit:
+  - Peter Adkins of Cisco Umbrella
+  references:
+  - https://jenkins.io/security/advisory/2019-04-30/
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGJENKINSCIPLUGINS-449970
 - id: snykio:maven:org.jenkins-ci.plugins:ansible-tower:450030
   title: Missing Permission Check
   description: |
