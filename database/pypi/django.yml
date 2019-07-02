@@ -3835,6 +3835,46 @@
   - https://github.com/django/django/commit/c4e5ff7fdb5fce447675e90291fd33fddd052b3c
   - https://www.djangoproject.com/weblog/2018/aug/01/security-releases/
   source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-42178
+- id: snykio:pypi:django:451300
+  title: Man-in-the-Middle (MitM)
+  description: |
+    [django][1] is a high-level Python Web framework that encourages rapid
+    development and clean, pragmatic design.
+
+    Affected versions of this package are vulnerable to Man-in-the-Middle
+    (MitM). An HTTP request is not redirected to HTTPS when the
+    `SECURE_PROXY_SSL_HEADER` and `SECURE_SSL_REDIRECT` settings are used,
+    and the proxy connects to Django via HTTPS. As such,
+    `django.http.HttpRequest.scheme` has incorrect behavior when a client
+    uses HTTP. This entails incorrect results for `is_secure()`, and
+    `build_absolute_uri()`, and that HTTP requests would not be redirected
+    to HTTPS in accordance with `SECURE_SSL_REDIRECT`.
+
+
+
+    [1]: https://pypi.org/project/Django/
+  affected_package: django
+  vulnerable_versions:
+  - ">= 1.11.0 < 1.11.22"
+  - ">= 2.1.0 < 2.1.10"
+  - ">= 2.2.0 < 2.2.3"
+  severity: high
+  package_manager: pypi
+  cve:
+  - CVE-2019-12781
+  cwe:
+  - CWE-300
+  disclosed_date: 2019-07-01
+  created_date: 2019-07-01
+  last_modified_date: 2019-07-01
+  credit:
+  - Gavin Wahl
+  references:
+  - https://docs.djangoproject.com/en/dev/releases/security/
+  - https://github.com/django/django/commit/54d0f5e62f54c29a12dd96f44bacd810cbe03ac8
+  - https://groups.google.com/forum/#!topic/django-announce/Is4kLY9ZcZQ
+  - https://www.djangoproject.com/weblog/2019/jul/01/security-releases/
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-451300
 - id: snykio:pypi:django:72562
   title: Information Exposure
   description: |

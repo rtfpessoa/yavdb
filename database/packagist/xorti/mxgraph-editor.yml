@@ -1,77 +1,10 @@
 ---
-- id: snykio:npm:mxgraph:20171122
-  title: XML External Entity (XXE) Injection
-  description: |+
-    [mxgraph][1] is a fully client side JavaScript diagramming library that
-    uses SVG and HTML for rendering.
-
-    Affected versions of this package are vulnerable to XML External Entity
-    (XXE) injection, the `SAXParserFactory` instance in `convert()` is
-    missing flags to prevent it.
-
-
-
-    [1]: https://github.com/jgraph/mxgraph
-    \nXXE Injection is a type of attack against an application that parses XML
-    input. XML is a markup language that defines a set of rules for encoding
-    documents in a format that is both human-readable and machine-readable.
-    By default, many XML processors allow specification of an external
-    entity, a URI that is dereferenced and evaluated during XML processing.
-    When an XML document is being parsed, the parser can make a request and
-    include the content at the specified URI inside of the XML document.
-
-    Attacks can include disclosing local files, which may contain sensitive
-    data such as passwords or private user data, using file: schemes or
-    relative paths in the system identifier.
-
-    For example, below is a sample XML document, containing an XML element-
-    username.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-           <username>John</username>
-        </xml>
-    {: .language-xml}
-
-    An external XML entity - `xxe`, is defined using a system identifier and
-    present within a DOCTYPE header. These entities can access local or
-    remote content. For example the below code contains an external XML
-    entity that would fetch the content of `/etc/passwd` and display it to
-    the user rendered by `username`.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-        <!DOCTYPE foo [
-           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
-           <username>&xxe;</username>
-        </xml>
-    {: .language-xml}
-
-    Other XXE Injection attacks can access local resources that may not stop
-    returning data, possibly impacting application availability and leading
-    to Denial of Service.
-
-  affected_package: mxgraph
-  vulnerable_versions:
-  - "<3.7.6"
-  severity: high
-  package_manager: npm
-  cve:
-  - CVE-2017-18197
-  cwe:
-  - CWE-611
-  disclosed_date: 2017-11-22
-  created_date: 2018-03-21
-  last_modified_date: 2018-03-21
-  credit:
-  - unknown
-  references:
-  - https://github.com/jgraph/mxgraph/issues/124
-  - https://nvd.nist.gov/vuln/detail/CVE-2017-18197
-  source_url: https://snyk.io/vuln/npm:mxgraph:20171122
-- id: snykio:npm:mxgraph:451302
+- id: snykio:packagist:xorti/mxgraph-editor:451315
   title: Cross-site Scripting (XSS)
   description: |+
-    [mxgraph][1] is a fully client side JavaScript diagramming library that
-    uses SVG and HTML for rendering.
+    [xorti/mxgraph-editor][1] is a repository which contains the grapheditor
+    example and the mxGraph src to display the necessary files to build your
+    own editor.
 
     Affected versions of this package are vulnerable to Cross-site Scripting
     (XSS). Improper input sanitization of a color field leads to XSS. This
@@ -79,7 +12,7 @@
 
 
 
-    [1]: https://github.com/jgraph/mxgraph
+    [1]: https://github.com/xorti/mxgraph-editor
     \nA cross-site scripting attack occurs when the attacker tricks a
     legitimate web-based application or site to accept a request as
     originating from a trusted source.
@@ -152,11 +85,11 @@
     * Read the documentation for any of the libraries referenced in your
       code to understand which elements allow for embedded HTML.
 
-  affected_package: mxgraph
+  affected_package: xorti/mxgraph-editor
   vulnerable_versions:
-  - "*"
+  - ">=0.0.0"
   severity: high
-  package_manager: npm
+  package_manager: packagist
   cve:
   - CVE-2019-13127
   cwe:
@@ -170,4 +103,4 @@
   - https://github.com/jgraph/mxgraph/commit/76e8e2809b622659a9c5ffdc4f19922b7a68cfa3
   - https://marketplace.atlassian.com/apps/1210933/draw-io-diagrams-for-confluence/version-history
   - https://www.syss.de/fileadmin/dokumente/Publikationen/Advisories/SYSS-2019-032.txt
-  source_url: https://snyk.io/vuln/SNYK-JS-MXGRAPH-451302
+  source_url: https://snyk.io/vuln/SNYK-PHP-XORTIMXGRAPHEDITOR-451315
