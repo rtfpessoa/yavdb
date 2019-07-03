@@ -1,0 +1,32 @@
+---
+- id: snykio:pypi:modulemd:451344
+  title: Remote Code Execution
+  description: |
+    [modulemd][1] is a python library for manipulation of the proposed
+    module metadata format.
+
+    Affected versions of this package are vulnerable to Remote Code
+    Execution. When processing externally provided data, the `loads_all`
+    function in `modulemd/__init__.py` uses `yaml.load_all` instead of
+    `yaml.safe_load_all`. This can lead to random remote code execution.
+
+
+
+    [1]: https://pagure.io/modulemd
+  affected_package: modulemd
+  vulnerable_versions:
+  - "< 1.3.2"
+  severity: high
+  package_manager: pypi
+  cve:
+  - CVE-2017-1002157
+  cwe:
+  - CWE-94
+  disclosed_date: 2019-01-13
+  created_date: 2019-01-13
+  last_modified_date: 2019-01-13
+  credit:
+  - Unknown
+  references:
+  - https://pagure.io/modulemd/issue/55
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-MODULEMD-451344

@@ -30,3 +30,39 @@
   - https://github.com/centreon/centreon/releases/tag/18.10.5
   - https://github.com/centreon/centreon/releases/tag/2.8.28
   source_url: https://snyk.io/vuln/SNYK-PHP-CENTREONCENTREON-450214
+- id: snykio:packagist:centreon/centreon:451340
+  title: Arbitrary Command Execution
+  description: |
+    [centreon/centreon][1] is a network, system, applicative supervision and
+    monitoring tool.
+
+    Affected versions of this package are vulnerable to Arbitrary Command
+    Execution. An attacker can execute arbitrary system commands by using
+    the value \"init\_script\"-\"Monitoring Engine Binary\" in
+    `main.get.php` to insert an arbitrary command into the database, and
+    execute it by calling the vulnerable page
+    `www/include/configuration/configGenerate/xml/generateFiles.php` (which
+    passes the inserted value to the database to `shell_exec` without
+    sanitizing it, allowing one to execute system arbitrary commands).
+
+
+
+    [1]: https://www.centreon.com
+  affected_package: centreon/centreon
+  vulnerable_versions:
+  - ">=0.0.0"
+  severity: high
+  package_manager: packagist
+  cve:
+  - CVE-2019-13024
+  cwe:
+  - CWE-94
+  disclosed_date: 2019-07-01
+  created_date: 2019-07-02
+  last_modified_date: 2019-07-02
+  credit:
+  - Askar
+  references:
+  - https://gist.github.com/mhaskar/c4255f6cf45b19b8a852c780f50576da
+  - https://shells.systems/centreon-v19-04-remote-code-execution-cve-2019-13024/
+  source_url: https://snyk.io/vuln/SNYK-PHP-CENTREONCENTREON-451340
