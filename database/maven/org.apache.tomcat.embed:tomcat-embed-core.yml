@@ -13929,3 +13929,172 @@
   - https://tomcat.apache.org/security-8.html#Fixed_in_Apache_Tomcat_8.5.40
   - https://tomcat.apache.org/security-9.html#Fixed_in_Apache_Tomcat_9.0.19
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHETOMCATEMBED-451343
+- id: snykio:maven:org.apache.tomcat.embed:tomcat-embed-core:451458
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [org.apache.tomcat.embed:tomcat-embed-core][1] is a Core Tomcat
+    implementation.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS) via the SSI `printenv` command.
+
+    Note: Server Side Includes (SSI) is disabled by default and is intended
+    for debugging purposes only.
+
+
+
+    [1]: https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-core
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
+  affected_package: org.apache.tomcat.embed:tomcat-embed-core
+  vulnerable_versions:
+  - ">= 7.0.0 < 7.0.94"
+  - ">= 8.5.0 < 8.5.40"
+  - ">= 9.0.0.M1 < 9.0.18"
+  severity: low
+  package_manager: maven
+  cve:
+  - CVE-2019-0221
+  cwe:
+  - CWE-79
+  disclosed_date: 2019-05-17
+  created_date: 2019-05-28
+  last_modified_date: 2019-05-28
+  credit:
+  - Nightwatch Cybersecurity Research
+  references:
+  - https://lists.apache.org/thread.html/6e6e9eacf7b28fd63d249711e9d3ccd4e0a83f556e324aee37be5a8c@%3Cannounce.tomcat.apache.org%3E
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHETOMCATEMBED-451458
+- id: snykio:maven:org.apache.tomcat.embed:tomcat-embed-core:451459
+  title: Denial of Service (DoS)
+  description: |+
+    [org.apache.tomcat.embed:tomcat-embed-core][1] is a Core Tomcat
+    implementation.
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS). The `HTTP/2` implementation accepted streams with excessive
+    numbers of `SETTINGS` frames and also permitted clients to keep streams
+    open without reading/writing request/response data. By keeping streams
+    open for requests that utilised the Servlet API\'s blocking I/O, clients
+    were able to cause server-side threads to block eventually leading to
+    thread exhaustion.
+
+
+
+    [1]: https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-core
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+  affected_package: org.apache.tomcat.embed:tomcat-embed-core
+  vulnerable_versions:
+  - ">= 8.5.0 < 8.5.38"
+  - ">= 9.0.0.M1 < 9.0.16"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2019-0199
+  cwe:
+  - CWE-400
+  disclosed_date: 2019-03-25
+  created_date: 2019-04-04
+  last_modified_date: 2019-04-04
+  credit:
+  - Michal Karm
+  references:
+  - http://tomcat.apache.org/security-8.html
+  - http://tomcat.apache.org/security-9.html
+  - https://bugzilla.redhat.com/show_bug.cgi?id=1693325
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHETOMCATEMBED-451459
