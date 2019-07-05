@@ -1,4 +1,38 @@
 ---
+- id: snykio:maven:ro.pippo:pippo-jaxb:449734
+  title: XML Entity Expansion (Billion Laughs Attack)
+  description: |
+    [ro.pippo:pippo-jaxb][1] is an open source (Apache License) micro web
+    framework in Java.
+
+    Affected versions of this package are vulnerable to XML Entity Expansion
+    (Billion Laughs Attack) due to unsafely parsing user provided XML file.
+    The `fromString()` in the `ro.pippo.jaxb.JaxbEngine` class allows user
+    provided DTDs that the rest of the XML may reference. This can lead to
+    recursive entity expansion and a subsequent billion laughs attack,
+    leading to denial of service.
+
+
+
+    [1]: https://github.com/pippo-java/pippo
+  affected_package: ro.pippo:pippo-jaxb
+  vulnerable_versions:
+  - ">= 0"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2019-5442
+  cwe:
+  - CWE-776
+  disclosed_date: 2019-06-12
+  created_date: 2019-06-12
+  last_modified_date: 2019-06-12
+  credit:
+  - Aaron Massey
+  references:
+  - https://github.com/pippo-java/pippo/blob/7da9f4db945d10113cf4ea4ed44ba0f1a7f83a8f/pippo-content-type-parent/pippo-jaxb/src/main/java/ro/pippo/jaxb/JaxbEngine.java#L78
+  - https://hackerone.com/reports/506791
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ROPIPPO-449734
 - id: snykio:maven:ro.pippo:pippo-jaxb:72692
   title: XML External Entity Injection (XXE)
   description: |

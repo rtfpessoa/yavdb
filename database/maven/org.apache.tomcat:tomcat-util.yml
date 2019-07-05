@@ -542,3 +542,246 @@
   references:
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-0714
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHETOMCAT-30950
+- id: snykio:maven:org.apache.tomcat:tomcat-util:451507
+  title: Denial of Service (DoS)
+  description: |+
+    [org.apache.tomcat:tomcat-util][1] is a Common code shared by multiple
+    Tomcat components.
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS) via the UTF-8 decoder. When handling some special characters, the
+    decoder may enter an infinite loop, thus denying service to other
+    requests.
+
+
+
+    [1]: https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-util
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+  affected_package: org.apache.tomcat:tomcat-util
+  vulnerable_versions:
+  - "< 7.0.90"
+  - ">= 8.0.0 < 8.0.52"
+  - ">= 8.5.0 < 8.5.32"
+  - ">= 9.0.0 < 9.0.10"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2018-1336
+  cwe:
+  - CWE-400
+  disclosed_date: 2018-07-22
+  created_date: 2018-07-24
+  last_modified_date: 2018-07-24
+  credit:
+  - Unknown
+  references:
+  - https://bugzilla.redhat.com/show_bug.cgi?id=1607591
+  - https://tomcat.apache.org/security-7.html
+  - https://tomcat.apache.org/security-8.html
+  - https://tomcat.apache.org/security-9.html
+  - https://www.alphabot.com/security/blog/2018/java/Apache-Tomcat-user-session-mix-up-and-DoS.html#no-host-name-verification-in-websocket-client
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHETOMCAT-451507
+- id: snykio:maven:org.apache.tomcat:tomcat-util:451514
+  title: Arbitrary Code Execution
+  description: |
+    [org.apache.tomcat:tomcat-util][1] is a Common code shared by multiple
+    Tomcat components.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution. When running Apache Tomcat versions 9.0.0.M1 to 9.0.0, 8.5.0
+    to 8.5.22, 8.0.0.RC1 to 8.0.46 and 7.0.0 to 7.0.81 with HTTP PUTs
+    enabled (e.g. via setting the readonly initialisation parameter of the
+    Default servlet to false) it was possible to upload a JSP file to the
+    server via a specially crafted request. This JSP could then be requested
+    and any code it contained would be executed by the server.
+
+    This is due to an incomplete fix for [CVE-2017-12615][2].
+
+
+
+    [1]: https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-util
+    [2]: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHETOMCAT-31534
+  affected_package: org.apache.tomcat:tomcat-util
+  vulnerable_versions:
+  - "< 7.0.82"
+  - ">= 8 < 8.0.46"
+  - ">= 8.5 < 8.5.22"
+  - ">= 9 < 9.0.1"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2017-12617
+  cwe:
+  - CWE-94
+  disclosed_date: 2017-09-21
+  created_date: 2017-10-11
+  last_modified_date: 2017-10-11
+  credit:
+  - Unknown
+  references:
+  - http://tomcat.apache.org/security-8.html
+  - https://access.redhat.com/security/cve/cve-2017-12617
+  - https://bz.apache.org/bugzilla/show_bug.cgi?id=61542
+  - https://github.com/apache/tomcat/blob/52a2f5ba1eb954c93d52897b25d3599bda271f88/webapps/docs/changelog.xml#L51
+  - https://github.com/cyberheartmi9/CVE-2017-12617
+  - https://lists.apache.org/thread.html/3fd341a604c4e9eab39e7eaabbbac39c30101a022acc11dd09d7ebcb@%3Cannounce.tomcat.apache.org%3E
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHETOMCAT-451514
+- id: snykio:maven:org.apache.tomcat:tomcat-util:451523
+  title: Information Exposure
+  description: |
+    [org.apache.tomcat:tomcat-util][1] is a Common code shared by multiple
+    Tomcat components.
+
+    Affected versions of this package are vulnerable to Information
+    Exposure. The refactoring of the Connector code for 8.5.x onwards
+    introduced a regression in the error handling of the send file code for
+    the NIO HTTP connector. An error during send file processing resulted in
+    the current Processor object being added to the Processor cache multiple
+    times. This in turn meant that the same Processor could be used for
+    concurrent requests. Sharing a Processor can result in information
+    leakage between requests including, not not limited to, session ID and
+    the response body.
+
+
+
+    [1]: https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-util
+  affected_package: org.apache.tomcat:tomcat-util
+  vulnerable_versions:
+  - ">= 7 < 7.0.74"
+  - ">= 8.0.0RC1 < 8.0.40"
+  - ">= 8.5.0 < 8.5.9"
+  - ">= 9.0.0M1 < 9.0.0M15"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2016-8745
+  cwe:
+  - CWE-200
+  disclosed_date: 2016-12-13
+  created_date: 2016-12-13
+  last_modified_date: 2016-12-13
+  credit:
+  - Unknown
+  references:
+  - http://seclists.org/bugtraq/2016/Dec/15
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHETOMCAT-451523
+- id: snykio:maven:org.apache.tomcat:tomcat-util:451528
+  title: Information Exposure
+  description: |
+    [org.apache.tomcat:tomcat-util][1] is a Common code shared by multiple
+    Tomcat components.
+
+    Affected versions of this package are vulnerable to Information
+    Exposure. It was discovered that when a SecurityManager is configured
+    Tomcat\'s system property replacement feature for configuration files
+    could be used by a malicious web application to bypass the
+    SecurityManager and read system properties that should not be visible.
+
+
+
+    [1]: https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-util
+  affected_package: org.apache.tomcat:tomcat-util
+  vulnerable_versions:
+  - ">= 8 < 8.0.37"
+  - ">= 8.5.0 < 8.5.5"
+  - ">= 9-alpha < 9.0.0.M10"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2016-6794
+  cwe:
+  - CWE-200
+  disclosed_date: 2016-10-28
+  created_date: 2016-10-28
+  last_modified_date: 2016-10-28
+  credit:
+  - the Apache Tomcat Security Team
+  references:
+  - http://www.openwall.com/lists/oss-security/2016/10/27/10
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHETOMCAT-451528
+- id: snykio:maven:org.apache.tomcat:tomcat-util:451530
+  title: Denial of Service (DoS)
+  description: |+
+    [org.apache.tomcat:tomcat-util][1] is a Common code shared by multiple
+    Tomcat components.
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS). It allows remote attackers to cause a denial of service (CPU
+    consumption) via a long boundary string.
+
+
+
+    [1]: https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-util
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+  affected_package: org.apache.tomcat:tomcat-util
+  vulnerable_versions:
+  - ">= 7.0.0 < 7.0.70"
+  - ">= 8.0 < 8.0.36"
+  - ">= 8.5.0 < 8.5.3"
+  - ">= 9-alpha < 9.0.0.M7"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2016-3092
+  cwe:
+  - CWE-20
+  disclosed_date: 2016-12-25
+  created_date: 2016-12-25
+  last_modified_date: 2016-12-25
+  credit:
+  - TERASOLUNA Framework Development Team
+  references:
+  - http://mail-archives.us.apache.org/mod_mbox/www-announce/201606.mbox/%3C6223ece6-2b41-ef4f-22f9-d3481e492832@apache.org%3E
+  - http://svn.apache.org/viewvc/commons/proper/fileupload/trunk/RELEASE-NOTES.txt?r1=1745717&r2=1749637&diff_format=h
+  - https://bugzilla.redhat.com/show_bug.cgi?id=1349475
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHETOMCAT-451530

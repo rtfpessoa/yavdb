@@ -14173,6 +14173,172 @@
   - https://lists.apache.org/thread.html/fbfb713e4f8a4c0f81089b89450828011343593800cae3fb629192b1@%3Cannounce.tomcat.apache.org%3E
   - https://nvd.nist.gov/vuln/detail/CVE-2018-8014
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHETOMCAT-32281
+- id: snykio:maven:org.apache.tomcat:tomcat-catalina:451516
+  title: Arbitrary Code Execution
+  description: |
+    [org.apache.tomcat:tomcat-catalina][1] is a Tomcat Servlet Engine Core
+    Classes and Standard implementations.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution. When running Apache Tomcat versions 9.0.0.M1 to 9.0.0, 8.5.0
+    to 8.5.22, 8.0.0.RC1 to 8.0.46 and 7.0.0 to 7.0.81 with HTTP PUTs
+    enabled (e.g. via setting the readonly initialisation parameter of the
+    Default servlet to false) it was possible to upload a JSP file to the
+    server via a specially crafted request. This JSP could then be requested
+    and any code it contained would be executed by the server.
+
+    This is due to an incomplete fix for [CVE-2017-12615][2].
+
+
+
+    [1]: https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-catalina
+    [2]: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHETOMCAT-31534
+  affected_package: org.apache.tomcat:tomcat-catalina
+  vulnerable_versions:
+  - "< 7.0.82"
+  - ">= 8 < 8.0.46"
+  - ">= 8.5 < 8.5.22"
+  - ">= 9 < 9.0.1"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2017-12617
+  cwe:
+  - CWE-94
+  disclosed_date: 2017-09-21
+  created_date: 2017-10-11
+  last_modified_date: 2017-10-11
+  credit:
+  - Unknown
+  references:
+  - http://tomcat.apache.org/security-8.html
+  - https://access.redhat.com/security/cve/cve-2017-12617
+  - https://bz.apache.org/bugzilla/show_bug.cgi?id=61542
+  - https://github.com/apache/tomcat/blob/52a2f5ba1eb954c93d52897b25d3599bda271f88/webapps/docs/changelog.xml#L51
+  - https://github.com/cyberheartmi9/CVE-2017-12617
+  - https://lists.apache.org/thread.html/3fd341a604c4e9eab39e7eaabbbac39c30101a022acc11dd09d7ebcb@%3Cannounce.tomcat.apache.org%3E
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHETOMCAT-451516
+- id: snykio:maven:org.apache.tomcat:tomcat-catalina:451517
+  title: Directory Traversal
+  description: |
+    [org.apache.tomcat:tomcat-catalina][1] is a Tomcat Servlet Engine Core
+    Classes and Standard implementations.
+
+    Affected versions of this package are vulnerable to Directory Traversal.
+    The HTTP/2 implementation in Apache Tomcat 9.0.0.M1 to 9.0.0.M21 and
+    8.5.0 to 8.5.15 bypassed a number of security checks that prevented
+    directory traversal attacks. It was therefore possible to bypass
+    security constraints using a specially crafted URL.
+
+
+
+    [1]: https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-catalina
+    \nA Directory Traversal attack (also known as path traversal) aims to
+    access files and directories that are stored outside the intended
+    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
+    its variations, or by using absolute file paths, it may be possible to
+    access arbitrary files and directories stored on file system, including
+    application source code, configuration, and other critical system files.
+
+    Directory Traversal vulnerabilities can be generally divided into two
+    types:
+
+    * **Information Disclosure**\: Allows the attacker to gain information
+      about the folder structure or read the contents of sensitive files on
+      the system.
+
+    `st` is a module for serving static files on web pages, and contains a
+    [vulnerability of this type][1]. In our example, we will serve files
+    from the `public` route.
+
+    If an attacker requests the following URL from our server, it will in
+    turn leak the sensitive private key of the root user.
+
+        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
+
+    **Note** `%2e` is the URL encoded version of `.` (dot).
+
+    * **Writing arbitrary files**\: Allows the attacker to create or replace
+      existing files. This type of vulnerability is also known as
+      `Zip-Slip`.
+
+    One way to achieve this is by using a malicious `zip` archive that holds
+    path traversal filenames. When each filename in the zip archive gets
+    concatenated to the target extraction folder, without validation, the
+    final path ends up outside of the target folder. If an executable or a
+    configuration file is overwritten with a file containing malicious code,
+    the problem can turn into an arbitrary code execution issue quite
+    easily.
+
+    The following is an example of a `zip` archive with one benign file and
+    one malicious file. Extracting the malicious file will result in
+    traversing out of the target folder, ending up in `/root/.ssh/`
+    overwriting the `authorized_keys` file:
+
+        2018-04-15 22:04:29 .....           19           19  good.txt
+        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
+
+
+
+    [1]: https://snyk.io/vuln/npm:st:20140206
+  affected_package: org.apache.tomcat:tomcat-catalina
+  vulnerable_versions:
+  - ">= 8.5.0 < 8.5.16"
+  - ">= 9.0.0.M1 < 9.0.0.M22"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2017-7675
+  cwe:
+  - CWE-22
+  disclosed_date: 2017-05-23
+  created_date: 2017-10-09
+  last_modified_date: 2017-10-09
+  credit:
+  - Apache Tomcat Security Team
+  references:
+  - https://github.com/apache/tomcat/commit/cf181edc9a8c239cde704cffc3c503425bdcae2b
+  - https://nvd.nist.gov/vuln/detail/CVE-2017-7675
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHETOMCAT-451517
+- id: snykio:maven:org.apache.tomcat:tomcat-catalina:451522
+  title: Information Exposure
+  description: |
+    [org.apache.tomcat:tomcat-catalina][1] is a Tomcat Servlet Engine Core
+    Classes and Standard implementations.
+
+    Affected versions of this package are vulnerable to Information
+    Exposure. The refactoring of the Connector code for 8.5.x onwards
+    introduced a regression in the error handling of the send file code for
+    the NIO HTTP connector. An error during send file processing resulted in
+    the current Processor object being added to the Processor cache multiple
+    times. This in turn meant that the same Processor could be used for
+    concurrent requests. Sharing a Processor can result in information
+    leakage between requests including, not not limited to, session ID and
+    the response body.
+
+
+
+    [1]: https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-catalina
+  affected_package: org.apache.tomcat:tomcat-catalina
+  vulnerable_versions:
+  - ">= 7 < 7.0.74"
+  - ">= 8.0.0RC1 < 8.0.40"
+  - ">= 8.5.0 < 8.5.9"
+  - ">= 9.0.0M1 < 9.0.0M15"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2016-8745
+  cwe:
+  - CWE-200
+  disclosed_date: 2016-12-13
+  created_date: 2016-12-13
+  last_modified_date: 2016-12-13
+  credit:
+  - Unknown
+  references:
+  - http://seclists.org/bugtraq/2016/Dec/15
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHETOMCAT-451522
 - id: victims:maven:org.apache.tomcat:tomcat-catalina:2016-3092
   title: 'Apache Commons Fileupload: Denial of Service'
   description: 'A malicious client can send file upload requests that cause the HTTP
