@@ -1,0 +1,25 @@
+---
+- id: npmjs:npm:zencashjs:1035
+  title: Undefined Behavior
+  description: Versions of `zencashjs` prior to 1.2.0 may cause loss of funds when
+    used with cryptocurrency wallets. The package relies on a string comparison of
+    the first two characters of a Horizen address to determine the destination address
+    type of a transaction (P2PKH or P2SH). Due to the base58 address prefixes chosen
+    in Horizen there exists the possibility of a clash of address prefixes for testnet
+    P2PKH and mainnet P2SH addresses, testnet P2PKH addresses start with “zt” while
+    a subset of mainnet P2SH addresses can also start with “zt”. The package interprets
+    transactions sent to a “zt” P2SH address on mainnet as P2PKH transactions erroneously.
+    Any funds sent to a mainnet P2SH multisignature address starting with “zt” will
+    be sent to the wrong address and be lost.
+  affected_package: zencashjs
+  vulnerable_versions:
+  - "<1.2.0"
+  severity: high
+  package_manager: npm
+  cwe: CWE-941
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Horizen Infrastructure Team
+  references: https://npmjs.com/advisories/1035
+  source_url: https://npmjs.com/advisories/1035

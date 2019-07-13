@@ -1,4 +1,38 @@
 ---
+- id: snykio:maven:org.apache.kafka:kafka-clients:451568
+  title: Access Restriction Bypass
+  description: |
+    [org.apache.kafka:kafka-clients][1] is a streaming platform that can
+    publish and subscribe to streams of records, store streams of records in
+    a fault-tolerant durable way, and process streams of records as they
+    occur.
+
+    Affected versions of this package are vulnerable to Access Restriction
+    Bypass. It was possible to manually craft a Produce request which
+    bypasses `transaction/idempotent` ACL validation. Only authenticated
+    clients with Write permission on the respective topics are able to
+    exploit this vulnerability.
+
+
+
+    [1]: http://kafka.apache.org/
+  affected_package: org.apache.kafka:kafka-clients
+  vulnerable_versions:
+  - ">= 0.11.0.0 < 2.1.1"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2018-17196
+  cwe:
+  - CWE-284
+  disclosed_date: 2019-07-11
+  created_date: 2019-07-12
+  last_modified_date: 2019-07-12
+  credit:
+  - Unknown
+  references:
+  - https://www.mail-archive.com/dev@kafka.apache.org/msg99277.html
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEKAFKA-451568
 - id: snykio:maven:org.apache.kafka:kafka-clients:73631
   title: Cryptographic Issues - Insufficient Entropy
   description: |

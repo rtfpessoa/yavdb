@@ -1,4 +1,28 @@
 ---
+- id: npmjs:npm:squel:575
+  title: Failure to sanitize quotes which can lead to sql injection
+  description: |-
+    All versions of `squel` are vulnerable to sql injection.
+
+    The `squel` package does not properly escape user provided input when provided using the `setFields` method. This could lead to sql injection if the query was then executed.
+
+    Proof of concept demonstrating the injection of a single quote into a generated sql statement from user provided input.
+    ```
+    > console.log(squel.insert().into('buh').setFields({foo: "bar'baz"}).toString());
+    INSERT INTO buh (foo) VALUES ('bar'baz')
+    ```
+  affected_package: squel
+  vulnerable_versions:
+  - ">=0.0.0"
+  severity: high
+  package_manager: npm
+  cwe: CWE-89
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Sean Lynch
+  references: https://npmjs.com/advisories/575
+  source_url: https://npmjs.com/advisories/575
 - id: snykio:npm:squel:20180322
   title: SQL Injection
   description: |
