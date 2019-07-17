@@ -1,4 +1,25 @@
 ---
+- id: npmjs:npm:jquery-mobile:883
+  title: Cross-Site Scripting
+  description: All version of `jquery-mobile` are vulnerable to Cross-Site Scripting.
+    The package checks for content in `location.hash` and if a URL is found it does
+    an XmlHttpRequest (XHR) to the URL and renders the response with `innerHTML`.
+    It fails to validate the `Content-Type` of the response, allowing attackers to
+    include malicious payloads as part of query parameters that are reflected back
+    to the user. A response such as `{"q":"<iframe/src='javascript:alert(1)'></iframe>","results":[]}`
+    would be parsed as HTML and the JavaScript payload executed.
+  affected_package: jquery-mobile
+  vulnerable_versions:
+  - ">=0"
+  severity: high
+  package_manager: npm
+  cwe: CWE-241
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Juho Nurminen
+  references: https://npmjs.com/advisories/883
+  source_url: https://npmjs.com/advisories/883
 - id: ossindex:npm:jquery-mobile:8399960339
   title: Cross Site Scripting (XSS)
   description: Incorrect decoding of location.href can result in a XSS vulnerability.
