@@ -5074,6 +5074,155 @@
   references:
   - https://jenkins.io/security/advisory/2018-08-15/#SECURITY-1076
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGJENKINSCIMAIN-32490
+- id: snykio:maven:org.jenkins-ci.main:jenkins-core:451651
+  title: Cross Site Request Forgery (CSRF)
+  description: |
+    [org.jenkins-ci.main:jenkins-core][1] is an open source automation
+    server.
+
+    Affected versions of this package are vulnerable to Cross Site Request
+    Forgery (CSRF). CSRF tokens in older releases of did not expire, thereby
+    allowing attackers able to obtain them to bypass CSRF protection. By
+    default, CSRF tokens only validated user authentication access and IP
+    address. This could allow attackers the ability to obtain a CSRF token
+    for another user to implement CSRF attacks as long as the victim’s IP
+    address remained unchanged.
+
+
+
+    [1]: https://github.com/jenkinsci/jenkins
+  affected_package: org.jenkins-ci.main:jenkins-core
+  vulnerable_versions:
+  - ">= 0"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2019-10353
+  cwe:
+  - CWE-352
+  disclosed_date: 2019-07-17
+  created_date: 2019-07-18
+  last_modified_date: 2019-07-18
+  credit:
+  - Unknown
+  references:
+  - https://github.com/jenkinsci/jenkins/commit/772152315aa0a9ba27b812a4ba0f3f9b64af78d9
+  - https://jenkins.io/security/advisory/2019-07-17/
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGJENKINSCIMAIN-451651
+- id: snykio:maven:org.jenkins-ci.main:jenkins-core:451652
+  title: Directory Traversal
+  description: |
+    [org.jenkins-ci.main:jenkins-core][1] is an open source automation
+    server.
+
+    Affected versions of this package are vulnerable to Directory Traversal.
+    A path traversal vulnerability exists in
+    `core/src/main/java/hudson/model/FileParameterValue.java` which allows
+    attackers with `Job/Configure` permission to define a file parameter
+    with a file name outside the intended directory, resulting in an
+    arbitrary file write on the Jenkins master when scheduling a build.
+
+    A Directory Traversal attack (also known as path traversal) aims to
+    access files and directories that are stored outside the intended
+    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
+    its variations, or by using absolute file paths, it may be possible to
+    access arbitrary files and directories stored on file system, including
+    application source code, configuration, and other critical system files.
+
+    Directory Traversal vulnerabilities can be generally divided into two
+    types:
+
+    * **Information Disclosure**\: Allows the attacker to gain information
+      about the folder structure or read the contents of sensitive files on
+      the system.
+
+    `st` is a module for serving static files on web pages, and contains a
+    [vulnerability of this type][2]. In our example, we will serve files
+    from the `public` route.
+
+    If an attacker requests the following URL from our server, it will in
+    turn leak the sensitive private key of the root user.
+
+        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
+
+    **Note** `%2e` is the URL encoded version of `.` (dot).
+
+    * **Writing arbitrary files**\: Allows the attacker to create or replace
+      existing files. This type of vulnerability is also known as
+      `Zip-Slip`.
+
+    One way to achieve this is by using a malicious `zip` archive that holds
+    path traversal filenames. When each filename in the zip archive gets
+    concatenated to the target extraction folder, without validation, the
+    final path ends up outside of the target folder. If an executable or a
+    configuration file is overwritten with a file containing malicious code,
+    the problem can turn into an arbitrary code execution issue quite
+    easily.
+
+    The following is an example of a `zip` archive with one benign file and
+    one malicious file. Extracting the malicious file will result in
+    traversing out of the target folder, ending up in `/root/.ssh/`
+    overwriting the `authorized_keys` file:
+
+        2018-04-15 22:04:29 .....           19           19  good.txt
+        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
+
+
+
+    [1]: https://github.com/jenkinsci/jenkins
+    [2]: https://snyk.io/vuln/npm:st:20140206
+  affected_package: org.jenkins-ci.main:jenkins-core
+  vulnerable_versions:
+  - ">= 0"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2019-10352
+  cwe:
+  - CWE-22
+  disclosed_date: 2019-07-17
+  created_date: 2019-07-18
+  last_modified_date: 2019-07-18
+  credit:
+  - Conor O'Neill of Tenable
+  references:
+  - https://github.com/jenkinsci/jenkins/commit/18fc7c0b466553cbd4f790db3270964305bee7f9
+  - https://jenkins.io/security/advisory/2019-07-17/
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGJENKINSCIMAIN-451652
+- id: snykio:maven:org.jenkins-ci.main:jenkins-core:451653
+  title: Access Control Bypass
+  description: |
+    [org.jenkins-ci.main:jenkins-core][1] is an open source automation
+    server.
+
+    Affected versions of this package are vulnerable to Access Control
+    Bypass. A vulnerability in the Stapler web framework used in Jenkins
+    allows attackers to access view fragments directly, bypassing permission
+    checks and possibly obtain sensitive information.
+
+
+
+    [1]: https://github.com/jenkinsci/jenkins
+  affected_package: org.jenkins-ci.main:jenkins-core
+  vulnerable_versions:
+  - ">= 0"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2019-10354
+  cwe:
+  - CWE-288
+  disclosed_date: 2019-07-17
+  created_date: 2019-07-18
+  last_modified_date: 2019-07-18
+  credit:
+  - CloudBees
+  - Inc.
+  - Jesse Glick
+  references:
+  - https://github.com/jenkinsci/jenkins/commit/279d8109eddb7a494428baf25af9756c2e33576b
+  - https://jenkins.io/security/advisory/2019-07-17/
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGJENKINSCIMAIN-451653
 - id: snykio:maven:org.jenkins-ci.main:jenkins-core:72668
   title: Denial of Service (DoS)
   description: |+
