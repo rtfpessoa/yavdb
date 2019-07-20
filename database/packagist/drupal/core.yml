@@ -1606,6 +1606,47 @@
   references:
   - https://www.drupal.org/sa-core-2019-005
   source_url: https://snyk.io/vuln/SNYK-PHP-DRUPALCORE-174351
+- id: snykio:packagist:drupal/core:451663
+  title: Improper Access Control
+  description: |
+    [drupal/core][1] is a an open source content management platform
+    powering millions of websites and applications.
+
+    Affected versions of this package are vulnerable to Improper Access
+    Control. The `Workspaces` module has to be enabled to be able to attempt
+    to bypass access control.
+
+    In `modules/workspaces/src/EntityAccess.php`, roles are incorrectly
+    assigned as a the `$access_bypass` entity has full read, write
+    permissions on the workspace/node as it\'s assigned as an owner of the
+    workspace.
+
+    In the fix, the `$access_bypass` entity\'s role was changed, so the
+    permissions were changed to stop the entity from being a workplace
+    owner, so it no longer has write/create permissions on the
+    workplace/node.
+
+
+
+    [1]: https://www.drupal.org/project/drupal
+  affected_package: drupal/core
+  vulnerable_versions:
+  - ">=8.7.4  <8.7.5"
+  severity: high
+  package_manager: packagist
+  cve:
+  - CVE-2019-6342
+  cwe:
+  - CWE-284
+  disclosed_date: 2019-07-18
+  created_date: 2019-07-18
+  last_modified_date: 2019-07-18
+  credit:
+  - Unknown
+  references:
+  - https://github.com/drupal/core/commit/bac9bde22bb545ff72570d8a46055c6c6e70e7c5
+  - https://www.drupal.org/sa-core-2019-008
+  source_url: https://snyk.io/vuln/SNYK-PHP-DRUPALCORE-451663
 - id: snykio:packagist:drupal/core:70037
   title: Denial of Service (DoS)
   description: |+
