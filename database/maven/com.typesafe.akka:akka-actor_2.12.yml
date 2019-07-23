@@ -50,3 +50,39 @@
   - https://github.com/akka/akka/blob/bfdde013e1174914cdb4aa27d33f8797a58973dd/akka-docs/src/main/paradox/scala/security/2017-02-10-java-serialization.md
   - https://nvd.nist.gov/vuln/detail/CVE-2017-1000034
   source_url: https://snyk.io/vuln/SNYK-JAVA-COMTYPESAFEAKKA-31453
+- id: snykio:maven:com.typesafe.akka:akka-actor_2.12:451679
+  title: Insecure Random Number Generation
+  description: |
+    [com.typesafe.akka:akka-actor\_2.12][1] is a toolkit for building highly
+    concurrent, distributed, and resilient message-driven applications for
+    Java and Scala.
+
+    Affected versions of this package are vulnerable to Insecure Random
+    Number Generation. When a custom random number generator is configured,
+    if the `AES128CounterSecureRNG` and `AES256CounterSecureRNG` are
+    enabled, a malicious user could easily guess the random number used
+    during encryption and possibly eavesdrop onto ongoing communications.
+    This is due a bug in the `AES128CounterSecureRNG` and
+    `AES256CounterSecureRNG` implementations, causing the generated numbers
+    to repeat themselves after a few bytes.
+
+
+
+    [1]: https://mvnrepository.com/artifact/com.typesafe.akka/akka-actor_2.11/2.3.2
+  affected_package: com.typesafe.akka:akka-actor_2.12
+  vulnerable_versions:
+  - ">= 2.5.0 < 2.5.16"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2018-16115
+  cwe:
+  - CWE-338
+  disclosed_date: 2018-08-29
+  created_date: 2019-07-22
+  last_modified_date: 2019-07-22
+  credit:
+  - Rafal Sumislawski
+  references:
+  - https://doc.akka.io/docs/akka/current/security/2018-08-29-aes-rng.html
+  source_url: https://snyk.io/vuln/SNYK-JAVA-COMTYPESAFEAKKA-451679
