@@ -17,3 +17,34 @@
   credit: Henrik Sommerland
   references: https://npmjs.com/advisories/1087
   source_url: https://npmjs.com/advisories/1087
+- id: snykio:npm:otpauth:451697
+  title: Authentication Bypass
+  description: |
+    [otpauth][1] is a One Time Password (HOTP/TOTP) authentication library
+    for Node.js and browser.
+
+    Affected versions of this package are vulnerable to Authentication
+    Bypass. The `totp.validate()` function may return positive values for
+    single digit tokens even if they are invalid. This may allow attackers
+    to bypass the OTP authentication by providing single digit tokens.
+
+
+
+    [1]: https://www.npmjs.com/package/otpauth
+  affected_package: otpauth
+  vulnerable_versions:
+  - "<3.2.8"
+  severity: high
+  package_manager: npm
+  cwe:
+  - CWE-287
+  disclosed_date: 2019-07-22
+  created_date: 2019-07-23
+  last_modified_date: 2019-07-23
+  credit:
+  - Henrik Sommerland
+  references:
+  - https://github.com/hectorm/otpauth/commit/662ee16acfd92571a86e3efeeefff246abe8be78
+  - https://github.com/hectorm/otpauth/issues/3
+  - https://www.npmjs.com/advisories/1087
+  source_url: https://snyk.io/vuln/SNYK-JS-OTPAUTH-451697
