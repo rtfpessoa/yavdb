@@ -1,64 +1,18 @@
 ---
-- id: npmjs:npm:http-file-server:1077
-  title: Path Traversal
-  description: All versions of `http-file-server` are vulnerable to Path Traversal.
-    The package fails to sanitize URLs, allowing attackers to access server files
-    outside of the served folder using relative paths.
-  affected_package: http-file-server
-  vulnerable_versions:
-  - ">=0.0.0"
-  severity: high
-  package_manager: npm
-  cve:
-  - CVE-2019-5447
-  cwe: CWE-22
-  disclosed_date: 1970-01-01
-  created_date: 1970-01-01
-  last_modified_date: 1970-01-01
-  credit: toannc123
-  references: https://npmjs.com/advisories/1077
-  source_url: https://npmjs.com/advisories/1077
-- id: snykio:npm:http-file-server:451564
-  title: Path Traversal
-  description: |
-    [http-file-server][1] is a Simple HTTP file server.
-
-    Affected versions of this package are vulnerable to Path Traversal. The
-    package does not properly sanitize URL paths, allowing an attacker to
-    relatively traverse the filesystem.
-
-
-
-    [1]: https://www.npmjs.com/package/http-file-server
-  affected_package: http-file-server
-  vulnerable_versions:
-  - "*"
-  severity: high
-  package_manager: npm
-  cve:
-  - CVE-2019-5447
-  cwe:
-  - CWE-23
-  disclosed_date: 2019-07-10
-  created_date: 2019-07-10
-  last_modified_date: 2019-07-10
-  credit:
-  - toannc123
-  references:
-  - https://hackerone.com/reports/570133
-  source_url: https://snyk.io/vuln/SNYK-JS-HTTPFILESERVER-451564
-- id: snykio:npm:http-file-server:455304
+- id: snykio:npm:@risingstack/protect:455402
   title: Cross-site Scripting (XSS)
   description: |+
-    [http-file-server][1] is a Simple HTTP file server.
+    [@risingstack/protect][1] is a package that provides out-of-box,
+    proactive protection for common security problems, like SQL injection
+    attacks, XSS attacks, brute force, etc.
 
     Affected versions of this package are vulnerable to Cross-site Scripting
-    (XSS). The filename is not sanitized and HTML is not escaped in the
-    listing directory page.
+    (XSS) via the `isXss()` function in `lib/rules/xss.js`. It can result in
+    dangerous XSS strings being validated as safe.
 
 
 
-    [1]: https://www.npmjs.com/package/http-file-server
+    [1]: https://www.npmjs.com/package/@risingstack/protect
     \nA cross-site scripting attack occurs when the attacker tricks a
     legitimate web-based application or site to accept a request as
     originating from a trusted source.
@@ -131,18 +85,20 @@
     * Read the documentation for any of the libraries referenced in your
       code to understand which elements allow for embedded HTML.
 
-  affected_package: http-file-server
+  affected_package: "@risingstack/protect"
   vulnerable_versions:
   - "*"
   severity: medium
   package_manager: npm
+  cve:
+  - CVE-2018-1000160
   cwe:
   - CWE-79
-  disclosed_date: 2019-07-24
-  created_date: 2019-07-24
-  last_modified_date: 2019-07-24
+  disclosed_date: 2017-03-27
+  created_date: 2019-07-25
+  last_modified_date: 2019-07-25
   credit:
-  - lightangel1412
+  - Unknown
   references:
-  - https://hackerone.com/reports/570563
-  source_url: https://snyk.io/vuln/SNYK-JS-HTTPFILESERVER-455304
+  - https://github.com/RisingStack/protect/issues/16
+  source_url: https://snyk.io/vuln/SNYK-JS-RISINGSTACKPROTECT-455402
