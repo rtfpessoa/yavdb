@@ -55,26 +55,27 @@
     main ways in which the pollution of prototypes occurs:\n\n* Unsafe `Object` recursive
     merge\n\n* Property definition by path\n\n### Unsafe Object recursive merge   {#unsafe-object-recursive-merge}\n\nThe
     logic of a vulnerable recursive merge function follows the following\nhigh-level
-    model:\n\n    merge (target, source)\n    \n    foreach property of source\n    \n
-    \   if property exists and is an object on both the target and the source\n    \n
-    \   merge(target[property], source[property])\n    \n    else\n    \n    target[property]
-    = source[property]\n\n\n\nWhen the source object contains a property named `_proto_`
-    defined with\n`Object.defineProperty()` , the condition that checks if the property\nexists
-    and is an object on both the target and the source passes and the\nmerge recurses
-    with the target, being the prototype of `Object` and the\nsource of `Object` as
-    defined by the attacker. Properties are then\ncopied on the `Object` prototype.\n\nClone
-    operations are a special sub-class of unsafe recursive merges,\nwhich occur when
-    a recursive merge is conducted on an empty object:\n`merge({},source)`.\n\n`lodash`
-    and `Hoek` are examples of libraries susceptible to recursive\nmerge attacks.\n\n###
-    Property definition by path   {#property-definition-by-path}\n\nThere are a few
-    JavaScript libraries that use an API to define property\nvalues on an object based
-    on a given path. The function that is\ngenerally affected contains this signature:
-    `theFunction(object, path,\nvalue)`\n\nIf the attacker can control the value of
-    “path”, they can set this value\nto `_proto_.myValue`. `myValue` is then assigned
-    to the prototype of the\nclass of the object.\n\n"
+    model:\n\n    merge (target, source)\n    \n      foreach property of source\n
+    \   \n        if property exists and is an object on both the target and the source\n
+    \   \n          merge(target[property], source[property])\n    \n        else\n
+    \   \n          target[property] = source[property]\n\n\n\nWhen the source object
+    contains a property named `_proto_` defined with\n`Object.defineProperty()` ,
+    the condition that checks if the property\nexists and is an object on both the
+    target and the source passes and the\nmerge recurses with the target, being the
+    prototype of `Object` and the\nsource of `Object` as defined by the attacker.
+    Properties are then\ncopied on the `Object` prototype.\n\nClone operations are
+    a special sub-class of unsafe recursive merges,\nwhich occur when a recursive
+    merge is conducted on an empty object:\n`merge({},source)`.\n\n`lodash` and `Hoek`
+    are examples of libraries susceptible to recursive\nmerge attacks.\n\n### Property
+    definition by path   {#property-definition-by-path}\n\nThere are a few JavaScript
+    libraries that use an API to define property\nvalues on an object based on a given
+    path. The function that is\ngenerally affected contains this signature: `theFunction(object,
+    path,\nvalue)`\n\nIf the attacker can control the value of “path”, they can set
+    this value\nto `_proto_.myValue`. `myValue` is then assigned to the prototype
+    of the\nclass of the object.\n\n"
   affected_package: lodash.merge
   vulnerable_versions:
-  - "*"
+  - "<4.6.2"
   severity: high
   package_manager: npm
   cve:
@@ -88,7 +89,12 @@
   - asgerf
   references:
   - https://github.com/lodash/lodash/commit/90e6199a161b6445b01454517b40ef65ebecd2ad
+  - https://github.com/lodash/lodash/pull/4337
   - https://hackerone.com/reports/380873
+  - https://www.npmjs.com/advisories/1066
+  - https://www.npmjs.com/advisories/1068
+  - https://www.npmjs.com/advisories/1071
+  - https://www.npmjs.com/advisories/782
   source_url: https://snyk.io/vuln/SNYK-JS-LODASHMERGE-173732
 - id: snykio:npm:lodash.merge:173733
   title: Prototype Pollution
@@ -111,9 +117,9 @@
     occurs:\n\n* Unsafe `Object` recursive merge\n\n* Property definition by path\n\n###
     Unsafe Object recursive merge   {#unsafe-object-recursive-merge}\n\nThe logic
     of a vulnerable recursive merge function follows the following\nhigh-level model:\n\n
-    \   merge (target, source)\n    \n    foreach property of source\n    \n    if
-    property exists and is an object on both the target and the source\n    \n    merge(target[property],
-    source[property])\n    \n    else\n    \n    target[property] = source[property]\n\n\n\nWhen
+    \   merge (target, source)\n    \n      foreach property of source\n    \n        if
+    property exists and is an object on both the target and the source\n    \n          merge(target[property],
+    source[property])\n    \n        else\n    \n          target[property] = source[property]\n\n\n\nWhen
     the source object contains a property named `_proto_` defined with\n`Object.defineProperty()`
     , the condition that checks if the property\nexists and is an object on both the
     target and the source passes and the\nmerge recurses with the target, being the
@@ -130,7 +136,7 @@
     of the\nclass of the object.\n\n"
   affected_package: lodash.merge
   vulnerable_versions:
-  - "*"
+  - "<4.6.2"
   severity: medium
   package_manager: npm
   cve:
@@ -146,4 +152,7 @@
   - https://github.com/lodash/lodash/commit/d8e069cc3410082e44eb18fcf8e7f3d08ebe1d4a
   - https://github.com/lodash/lodash/pull/4337
   - https://hackerone.com/reports/310443
+  - https://www.npmjs.com/advisories/1067
+  - https://www.npmjs.com/advisories/1069
+  - https://www.npmjs.com/advisories/1070
   source_url: https://snyk.io/vuln/SNYK-JS-LODASHMERGE-173733

@@ -12261,6 +12261,7 @@
   - Unknown
   references:
   - https://codewhitesec.blogspot.com/2016/02/java-and-command-line-injections-in-windows.html
+  - https://exploit-db.com/exploits/47073
   - https://tomcat.apache.org/security-7.html#Fixed_in_Apache_Tomcat_7.0.94
   - https://tomcat.apache.org/security-8.html#Fixed_in_Apache_Tomcat_8.5.40
   - https://tomcat.apache.org/security-9.html#Fixed_in_Apache_Tomcat_9.0.19
@@ -12408,15 +12409,16 @@
 - id: snykio:maven:org.apache.tomcat:tomcat-catalina:30065
   title: Denial of Service (DoS)
   description: |+
-    [`org.apache.tomcat:tomcat-catalina`][1] The MultipartStream class in
-    Apache Commons Fileupload before 1.3.2, as used in Apache Tomcat 7.x
-    before 7.0.70, 8.x before 8.0.36, 8.5.x before 8.5.3, and 9.x before
-    9.0.0.M7 and other products, allows remote attackers to cause a denial
-    of service (CPU consumption) via a long boundary string.
+    [org.apache.tomcat:tomcat-catalina][1] is a Tomcat Servlet Engine Core
+    Classes and Standard implementations.
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS). It allows remote attackers to cause a denial of service (CPU
+    consumption) via a long boundary string.
 
 
 
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22tomcat-catalina%22
+    [1]: https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-catalina
     \nDenial of Service (DoS) describes a family of attacks, all aimed at
     making a system inaccessible to its intended and legitimate users.
 
@@ -12464,7 +12466,6 @@
   - http://mail-archives.us.apache.org/mod_mbox/www-announce/201606.mbox/%3C6223ece6-2b41-ef4f-22f9-d3481e492832@apache.org%3E
   - http://svn.apache.org/viewvc/commons/proper/fileupload/trunk/RELEASE-NOTES.txt?r1=1745717&r2=1749637&diff_format=h
   - https://bugzilla.redhat.com/show_bug.cgi?id=1349475
-  - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-3092
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHETOMCAT-30065
 - id: snykio:maven:org.apache.tomcat:tomcat-catalina:30882
   title: Directory Traversal
@@ -12911,7 +12912,7 @@
     [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22tomcat-catalina%22
   affected_package: org.apache.tomcat:tomcat-catalina
   vulnerable_versions:
-  - ">= 7.12 <= 7.0.13"
+  - ">= 7.0.12 < 7.0.14"
   severity: medium
   package_manager: maven
   cve:
@@ -13508,7 +13509,7 @@
   affected_package: org.apache.tomcat:tomcat-catalina
   vulnerable_versions:
   - ">= 7.0.0 < 7.0.50"
-  - ">= 8 < 8.0.0-RC10"
+  - ">= 8.0.0-RC1 < 8.0.0-RC10"
   severity: medium
   package_manager: maven
   cve:
@@ -13894,14 +13895,17 @@
 - id: snykio:maven:org.apache.tomcat:tomcat-catalina:30918
   title: Access Restriction Bypass
   description: |
-    [`org.apache.tomcat:tomcat-catalina`][1] Affected versions of the
-    package are vulnerable to Access Restriction Bypass. It was discovered
-    that it was possible for a web application to access any global JNDI
-    resource whether an explicit ResourceLink had been configured or not.
+    [org.apache.tomcat:tomcat-catalina][1] is a Tomcat Servlet Engine Core
+    Classes and Standard implementations.
+
+    Affected versions of this package are vulnerable to Access Restriction
+    Bypass. It was discovered that it was possible for a web application to
+    access any global JNDI resource whether an explicit ResourceLink had
+    been configured or not.
 
 
 
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22tomcat-catalina%22
+    [1]: https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-catalina
   affected_package: org.apache.tomcat:tomcat-catalina
   vulnerable_versions:
   - ">= 7.0.0 < 7.0.72"
@@ -13961,14 +13965,15 @@
 - id: snykio:maven:org.apache.tomcat:tomcat-catalina:31531
   title: Access Restriction Bypass
   description: |
-    Affected versions of [`org.apache.tomcat:tomcat-catalina`][1] are
-    vulnerable to Access Restriction Bypass.
+    [org.apache.tomcat:tomcat-catalina][1] is a Tomcat Servlet Engine Core
+    Classes and Standard implementations.
 
-    The error page mechanism of the Java Servlet Specification requires
-    that, when an error occurs and an error page is configured for the error
-    that occurred, the original request and response are forwarded to the
-    error page. This means that the request is presented to the error page
-    with the original HTTP method. If the error page is a static file,
+    Affected versions of this package are vulnerable to Access Restriction
+    Bypass. The error page mechanism of the Java Servlet Specification
+    requires that, when an error occurs and an error page is configured for
+    the error that occurred, the original request and response are forwarded
+    to the error page. This means that the request is presented to the error
+    page with the original HTTP method. If the error page is a static file,
     expected behaviour is to serve content of the file as if processing a
     GET request, regardless of the actual HTTP method. The Default Servlet
     in Apache Tomcat 9.0.0.M1 to 9.0.0.M20, 8.5.0 to 8.5.14, 8.0.0.RC1 to
@@ -13986,7 +13991,7 @@
 
 
 
-    [1]: https://tomcat.apache.org
+    [1]: https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-catalina
   affected_package: org.apache.tomcat:tomcat-catalina
   vulnerable_versions:
   - ">= 7.0.0 < 7.0.78"
@@ -14011,9 +14016,8 @@
 - id: snykio:maven:org.apache.tomcat:tomcat-catalina:32110
   title: Directory Traversal
   description: |
-    [org.apache.tomcat:tomcat][1] is an open source implementation of the
-    Java Servlet, JavaServer Pages, Java Expression Language and Java
-    WebSocket technologies.
+    [org.apache.tomcat:tomcat-catalina][1] is a Tomcat Servlet Engine Core
+    Classes and Standard implementations.
 
     Affected versions of this package are vulnerable to Directory Traversal.
     Security constraints defined by annotations of Servlets were only
@@ -14025,7 +14029,7 @@
 
 
 
-    [1]: http://tomcat.apache.org/
+    [1]: https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-catalina
     \nA Directory Traversal attack (also known as path traversal) aims to
     access files and directories that are stored outside the intended
     folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
@@ -14098,9 +14102,8 @@
 - id: snykio:maven:org.apache.tomcat:tomcat-catalina:32115
   title: Access Restriction Bypass
   description: |
-    [org.apache.tomcat:tomcat-catalina][1] is an open source implementation
-    of the Java Servlet, JavaServer Pages, Java Expression Language and Java
-    WebSocket technologies.
+    [org.apache.tomcat:tomcat-catalina][1] is a Tomcat Servlet Engine Core
+    Classes and Standard implementations.
 
     Affected versions of this package are vulnerable to Access Restriction
     Bypass. The URL pattern of (the empty string) which exactly maps to the
@@ -14112,7 +14115,7 @@
 
 
 
-    [1]: https://github.com/apache/tomcat
+    [1]: https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-catalina
   affected_package: org.apache.tomcat:tomcat-catalina
   vulnerable_versions:
   - ">= 7.0.0 < 7.0.85"
@@ -14138,9 +14141,8 @@
 - id: snykio:maven:org.apache.tomcat:tomcat-catalina:32281
   title: Insecure Defaults
   description: |
-    [org.apache.tomcat:tomcat-catalina][1] is an open source implementation
-    of the Java Servlet, JavaServer Pages, Java Expression Language and Java
-    WebSocket technologies.
+    [org.apache.tomcat:tomcat-catalina][1] is a Tomcat Servlet Engine Core
+    Classes and Standard implementations.
 
     Affected versions of this package are vulnerable to Insecure Defaults.
     The defaults settings for the `CORS` filter are insecure and enable
@@ -14148,7 +14150,7 @@
 
 
 
-    [1]: http://tomcat.apache.org/
+    [1]: https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-catalina
   affected_package: org.apache.tomcat:tomcat-catalina
   vulnerable_versions:
   - "< 7.0.89"

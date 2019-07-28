@@ -31,3 +31,49 @@
   references:
   - https://github.com/servo/rust-smallvec/issues/96
   source_url: https://github.com/RustSec/advisory-db/blob/master/crates/smallvec/RUSTSEC-2018-0003.toml
+- id: rustsec:cargo:smallvec:RUSTSEC-2019-0009
+  title: Double-free and use-after-free in SmallVec::grow()
+  description: |
+    Attempting to call `grow` on a spilled SmallVec with a value equal to the current capacity causes it to free the existing data. This performs a double free immediately and may lead to use-after-free on subsequent accesses to the SmallVec contents.
+
+    An attacker that controls the value passed to `grow` may exploit this flaw to obtain memory contents or gain remote code execution.
+
+    Credits to @ehuss for discovering, reporting and fixing the bug.
+  affected_package: smallvec
+  unaffected_versions:
+  - "< 0.6.5"
+  patched_versions:
+  - ">= 0.6.10"
+  severity: high
+  package_manager: cargo
+  disclosed_date: 2019-06-06
+  created_date: 2019-06-06
+  last_modified_date: 2019-06-06
+  credit:
+  - RustSec
+  references:
+  - https://github.com/servo/rust-smallvec/issues/148
+  source_url: https://github.com/RustSec/advisory-db/blob/master/crates/smallvec/RUSTSEC-2019-0009.toml
+- id: rustsec:cargo:smallvec:RUSTSEC-2019-0012
+  title: Memory corruption in SmallVec::grow()
+  description: |
+    Attempting to call `grow` on a spilled SmallVec with a value less than the current capacity causes corruption of memory allocator data structures.
+
+    An attacker that controls the value passed to `grow` may exploit this flaw to obtain memory contents or gain remote code execution.
+
+    Credits to @ehuss for discovering, reporting and fixing the bug.
+  affected_package: smallvec
+  unaffected_versions:
+  - "< 0.6.3"
+  patched_versions:
+  - ">= 0.6.10"
+  severity: high
+  package_manager: cargo
+  disclosed_date: 2019-07-19
+  created_date: 2019-07-19
+  last_modified_date: 2019-07-19
+  credit:
+  - RustSec
+  references:
+  - https://github.com/servo/rust-smallvec/issues/149
+  source_url: https://github.com/RustSec/advisory-db/blob/master/crates/smallvec/RUSTSEC-2019-0012.toml

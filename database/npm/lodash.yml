@@ -81,9 +81,9 @@
     occurs:\n\n* Unsafe `Object` recursive merge\n\n* Property definition by path\n\n###
     Unsafe Object recursive merge   {#unsafe-object-recursive-merge}\n\nThe logic
     of a vulnerable recursive merge function follows the following\nhigh-level model:\n\n
-    \   merge (target, source)\n    \n    foreach property of source\n    \n    if
-    property exists and is an object on both the target and the source\n    \n    merge(target[property],
-    source[property])\n    \n    else\n    \n    target[property] = source[property]\n\n\n\nWhen
+    \   merge (target, source)\n    \n      foreach property of source\n    \n        if
+    property exists and is an object on both the target and the source\n    \n          merge(target[property],
+    source[property])\n    \n        else\n    \n          target[property] = source[property]\n\n\n\nWhen
     the source object contains a property named `_proto_` defined with\n`Object.defineProperty()`
     , the condition that checks if the property\nexists and is an object on both the
     target and the source passes and the\nmerge recurses with the target, being the
@@ -116,6 +116,9 @@
   - https://github.com/lodash/lodash/commit/d8e069cc3410082e44eb18fcf8e7f3d08ebe1d4a
   - https://github.com/lodash/lodash/pull/4337
   - https://hackerone.com/reports/310443
+  - https://www.npmjs.com/advisories/1067
+  - https://www.npmjs.com/advisories/1069
+  - https://www.npmjs.com/advisories/1070
   source_url: https://snyk.io/vuln/npm:lodash:20180130
 - id: snykio:npm:lodash:450202
   title: Prototype Pollution
@@ -196,9 +199,9 @@
     occurs:\n\n* Unsafe `Object` recursive merge\n\n* Property definition by path\n\n###
     Unsafe Object recursive merge   {#unsafe-object-recursive-merge}\n\nThe logic
     of a vulnerable recursive merge function follows the following\nhigh-level model:\n\n
-    \   merge (target, source)\n    \n    foreach property of source\n    \n    if
-    property exists and is an object on both the target and the source\n    \n    merge(target[property],
-    source[property])\n    \n    else\n    \n    target[property] = source[property]\n\n\n\nWhen
+    \   merge (target, source)\n    \n      foreach property of source\n    \n        if
+    property exists and is an object on both the target and the source\n    \n          merge(target[property],
+    source[property])\n    \n        else\n    \n          target[property] = source[property]\n\n\n\nWhen
     the source object contains a property named `_proto_` defined with\n`Object.defineProperty()`
     , the condition that checks if the property\nexists and is an object on both the
     target and the source passes and the\nmerge recurses with the target, being the
@@ -229,7 +232,12 @@
   - asgerf
   references:
   - https://github.com/lodash/lodash/commit/90e6199a161b6445b01454517b40ef65ebecd2ad
+  - https://github.com/lodash/lodash/pull/4337
   - https://hackerone.com/reports/380873
+  - https://www.npmjs.com/advisories/1066
+  - https://www.npmjs.com/advisories/1068
+  - https://www.npmjs.com/advisories/1071
+  - https://www.npmjs.com/advisories/782
   source_url: https://snyk.io/vuln/SNYK-JS-LODASH-73638
 - id: snykio:npm:lodash:73639
   title: Regular Expression Denial of Service (ReDoS)
@@ -289,6 +297,8 @@
   - "<4.17.11"
   severity: medium
   package_manager: npm
+  cve:
+  - CVE-2019-1010266
   cwe:
   - CWE-185
   disclosed_date: 2017-09-05

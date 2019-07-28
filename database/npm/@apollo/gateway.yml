@@ -38,23 +38,24 @@
     main ways in which the pollution of prototypes occurs:\n\n* Unsafe `Object` recursive
     merge\n\n* Property definition by path\n\n### Unsafe Object recursive merge   {#unsafe-object-recursive-merge}\n\nThe
     logic of a vulnerable recursive merge function follows the following\nhigh-level
-    model:\n\n    merge (target, source)\n    \n    foreach property of source\n    \n
-    \   if property exists and is an object on both the target and the source\n    \n
-    \   merge(target[property], source[property])\n    \n    else\n    \n    target[property]
-    = source[property]\n\n\n\nWhen the source object contains a property named `_proto_`
-    defined with\n`Object.defineProperty()` , the condition that checks if the property\nexists
-    and is an object on both the target and the source passes and the\nmerge recurses
-    with the target, being the prototype of `Object` and the\nsource of `Object` as
-    defined by the attacker. Properties are then\ncopied on the `Object` prototype.\n\nClone
-    operations are a special sub-class of unsafe recursive merges,\nwhich occur when
-    a recursive merge is conducted on an empty object:\n`merge({},source)`.\n\n`lodash`
-    and `Hoek` are examples of libraries susceptible to recursive\nmerge attacks.\n\n###
-    Property definition by path   {#property-definition-by-path}\n\nThere are a few
-    JavaScript libraries that use an API to define property\nvalues on an object based
-    on a given path. The function that is\ngenerally affected contains this signature:
-    `theFunction(object, path,\nvalue)`\n\nIf the attacker can control the value of
-    “path”, they can set this value\nto `_proto_.myValue`. `myValue` is then assigned
-    to the prototype of the\nclass of the object.\n\n"
+    model:\n\n    merge (target, source)\n    \n      foreach property of source\n
+    \   \n        if property exists and is an object on both the target and the source\n
+    \   \n          merge(target[property], source[property])\n    \n        else\n
+    \   \n          target[property] = source[property]\n\n\n\nWhen the source object
+    contains a property named `_proto_` defined with\n`Object.defineProperty()` ,
+    the condition that checks if the property\nexists and is an object on both the
+    target and the source passes and the\nmerge recurses with the target, being the
+    prototype of `Object` and the\nsource of `Object` as defined by the attacker.
+    Properties are then\ncopied on the `Object` prototype.\n\nClone operations are
+    a special sub-class of unsafe recursive merges,\nwhich occur when a recursive
+    merge is conducted on an empty object:\n`merge({},source)`.\n\n`lodash` and `Hoek`
+    are examples of libraries susceptible to recursive\nmerge attacks.\n\n### Property
+    definition by path   {#property-definition-by-path}\n\nThere are a few JavaScript
+    libraries that use an API to define property\nvalues on an object based on a given
+    path. The function that is\ngenerally affected contains this signature: `theFunction(object,
+    path,\nvalue)`\n\nIf the attacker can control the value of “path”, they can set
+    this value\nto `_proto_.myValue`. `myValue` is then assigned to the prototype
+    of the\nclass of the object.\n\n"
   affected_package: "@apollo/gateway"
   vulnerable_versions:
   - "<0.6.2"

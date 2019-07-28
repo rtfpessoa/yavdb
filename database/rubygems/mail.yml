@@ -1,4 +1,36 @@
 ---
+- id: rubyadvisory:rubygems:mail:CVE-2015-9097
+  title: SMTP command injection
+  description: |
+    Because Mail does not disallow CRLF in email addresses, an attacker can
+    inject SMTP commands in specially crafted email addresses passed to
+    RCPT TO and MAIL FROM.
+
+    Not affected by this vulnerability:
+      * Ruby 2.4.0+ with a fix for CVE-2015-9096.
+      * Applications that do not use SMTP delivery.
+      * Applications that validate email addresses to not include CRLF.
+
+    The injection attack is described in Terada, Takeshi. "SMTP Injection via
+    Recipient Email Addresses." 2015. The attacks described in the paper
+    (Terada, p. 4) can be applied to the library without any modification.
+  affected_package: mail
+  patched_versions:
+  - ">= 2.5.5"
+  package_manager: rubygems
+  cve:
+  - CVE-2015-9097
+  osvdb: 131677
+  disclosed_date: 2015-12-09
+  created_date: 2015-12-09
+  last_modified_date: 2015-12-09
+  credit:
+  - Rubysec
+  references:
+  - http://www.mbsd.jp/Whitepaper/smtpi.pdf
+  - https://github.com/mikel/mail/pull/1097
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://hackerone.com/reports/137631
 - id: rubyadvisory:rubygems:mail:OSVDB-131677
   title: SMTP command injection
   description: |

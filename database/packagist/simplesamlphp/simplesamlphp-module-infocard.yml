@@ -17,26 +17,39 @@
   source_url: https://github.com/FriendsOfPHP/security-advisories/blob/master/simplesamlphp/simplesamlphp-module-infocard/CVE-2017-12874.yaml
 - id: snykio:packagist:simplesamlphp/simplesamlphp-module-infocard:70167
   title: Incorrect Signature Verification
-  description: "Affected versions of [`simplesamlphp/simplesamlphp-module-infocard`][1]\nare
-    vulnerable to Incorrect signature verification.\n\n> The InfoCard SimpleSAMLphp
-    module allows incorporates a series of\n> libraries provided by the Zend Framework.
-    As part of this third-party\n> library, the class Zend\\_InfoCard\\_Xml\\_Security
-    allows the\n> verification of the XML digital signature of XML chunks with a given\n>
-    key. In particular, the validateXMLSignature() method receives an\n> string containing
-    an XML document and a key to verify it, and throws\n> an exception in case there
-    is any error, either caused by incorrect\n> input or an invalid signature. This
-    method uses the openssl\\_verify()\n> function provided by the openssl PHP extension.\n\n>
-    The openssl\\_verify() function returns 1 when the signature was\n> successfully
-    verified, 0 if it failed to verify with the given key,\n> and -1 in case an error
-    occurs. PHP allows translating numerical\n> values to boolean implicitly, with
-    the following correspondences:\n> \n> * 0 equals false.\n> * Non-zero equals true.
-    This means that an implicit conversion to\n>   boolean of the values returned
-    by openssl\\_verify() will convert an\n>   error state, signaled by the value
-    -1, to a successful verification\n>   of the signature (represented by the boolean
-    true).\n\n> The aforementioned method was performing an implicit conversion to\n>
-    boolean of the values returned by the openssl\\_verify() function. This\n> means
-    an error during signature verification is treated as a\n> successful verification
-    by the method.\n\n\n\n[1]: https://packagist.org/packages/simplesamlphp/simplesamlphp-module-infocard\n"
+  description: |
+    Affected versions of [`simplesamlphp/simplesamlphp-module-infocard`][1]
+    are vulnerable to Incorrect signature verification.
+
+    > The InfoCard SimpleSAMLphp module allows incorporates a series of
+    > libraries provided by the Zend Framework. As part of this third-party
+    > library, the class Zend\_InfoCard\_Xml\_Security allows the
+    > verification of the XML digital signature of XML chunks with a given
+    > key. In particular, the validateXMLSignature() method receives an
+    > string containing an XML document and a key to verify it, and throws
+    > an exception in case there is any error, either caused by incorrect
+    > input or an invalid signature. This method uses the openssl\_verify()
+    > function provided by the openssl PHP extension.
+
+    > The openssl\_verify() function returns 1 when the signature was
+    > successfully verified, 0 if it failed to verify with the given key,
+    > and -1 in case an error occurs. PHP allows translating numerical
+    > values to boolean implicitly, with the following correspondences:
+
+    * 0 equals false.
+    * Non-zero equals true. This means that an implicit conversion to
+      boolean of the values returned by openssl\_verify() will convert an
+      error state, signaled by the value -1, to a successful verification of
+      the signature (represented by the boolean true).
+
+    > The aforementioned method was performing an implicit conversion to
+    > boolean of the values returned by the openssl\_verify() function. This
+    > means an error during signature verification is treated as a
+    > successful verification by the method.
+
+
+
+    [1]: https://packagist.org/packages/simplesamlphp/simplesamlphp-module-infocard
   affected_package: simplesamlphp/simplesamlphp-module-infocard
   vulnerable_versions:
   - "<1.0.1"

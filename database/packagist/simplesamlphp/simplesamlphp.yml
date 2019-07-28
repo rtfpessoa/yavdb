@@ -43,6 +43,25 @@
   references:
   - https://simplesamlphp.org/security/201812-01
   source_url: https://github.com/FriendsOfPHP/security-advisories/blob/master/simplesamlphp/simplesamlphp/2018-12-20.yaml
+- id: friendsofphp:packagist:simplesamlphp/simplesamlphp:2019-07-10
+  title: Reflected Cross-Site-Scripting
+  affected_package: simplesamlphp/simplesamlphp
+  vulnerable_versions:
+  - ">=1.12.0 <1.13.0"
+  - ">=1.13.0 <1.14.0"
+  - ">=1.14.0 <1.15.0"
+  - ">=1.15.0 <1.16.0"
+  - ">=1.16.0 <1.17.0"
+  - ">=1.17.0 <1.17.3"
+  package_manager: packagist
+  disclosed_date: 2019-07-09
+  created_date: 2019-07-09
+  last_modified_date: 2019-07-09
+  credit:
+  - FriendsOfPHP
+  references:
+  - https://simplesamlphp.org/security/201907-01
+  source_url: https://github.com/FriendsOfPHP/security-advisories/blob/master/simplesamlphp/simplesamlphp/2019-07-10.yaml
 - id: friendsofphp:packagist:simplesamlphp/simplesamlphp:CVE-2016-3124
   title: Information leakage issue in the sanitycheck module
   affected_package: simplesamlphp/simplesamlphp
@@ -551,26 +570,38 @@
   source_url: https://snyk.io/vuln/SNYK-PHP-SIMPLESAMLPHPSIMPLESAMLPHP-70165
 - id: snykio:packagist:simplesamlphp/simplesamlphp:70166
   title: Incorrect Signature Verification
-  description: "Affected versions of [`simplesamlphp/simplesamlphp`][1] are vulnerable\nto
-    Incorrect signature verification.\n\n> The SimpleSAML\\_XML\\_Validator class
-    allows the verification of the\n> XML digital signature of a SAML 1 message with
-    a given key. In\n> particular, the constructor of the class receives an XML node
-    and a\n> key to verify it, and throws an exception in case there is any error,\n>
-    either caused by incorrect input or an invalid signature. This method\n> uses
-    the verify() method from the RobRichards\\\\XMLSecDSig class to\n> verify the
-    signature with the given key, which in turn will end up\n> calling openssl\\_verify()
-    depending on the signature algorithm used.\n\n> The openssl\\_verify() function
-    returns 1 when the signature was\n> successfully verified, 0 if it failed to verify
-    with the given key,\n> and -1 in case an error occurs. PHP allows translating
-    numerical\n> values to boolean implicitly, with the following correspondences:\n>
-    \n> * 0 equals false.\n> * Non-zero equals true. This means that an implicit conversion
-    to\n>   boolean of the values returned by openssl\\_verify() will convert an\n>
-    \  error state, signaled by the value -1, to a successful verification\n>   of
-    the signature (represented by the boolean true). The\n>   aforementioned constructor
-    was performing an implicit conversion to\n>   boolean of the values returned by
-    the verify() method, which\n>   subsequently will return the same output as openssl\\_verify()
-    under\n>   most circumstances. This means an error during signature\n>   verification
-    is treated as a successful verification by the method.\n\n\n\n[1]: https://packagist.org/packages/simplesamlphp/simplesamlphp\n"
+  description: |
+    Affected versions of [`simplesamlphp/simplesamlphp`][1] are vulnerable
+    to Incorrect signature verification.
+
+    > The SimpleSAML\_XML\_Validator class allows the verification of the
+    > XML digital signature of a SAML 1 message with a given key. In
+    > particular, the constructor of the class receives an XML node and a
+    > key to verify it, and throws an exception in case there is any error,
+    > either caused by incorrect input or an invalid signature. This method
+    > uses the verify() method from the RobRichards\\XMLSecDSig class to
+    > verify the signature with the given key, which in turn will end up
+    > calling openssl\_verify() depending on the signature algorithm used.
+
+    > The openssl\_verify() function returns 1 when the signature was
+    > successfully verified, 0 if it failed to verify with the given key,
+    > and -1 in case an error occurs. PHP allows translating numerical
+    > values to boolean implicitly, with the following correspondences:
+
+    * 0 equals false.
+    * Non-zero equals true. This means that an implicit conversion to
+      boolean of the values returned by openssl\_verify() will convert an
+      error state, signaled by the value -1, to a successful verification of
+      the signature (represented by the boolean true). The aforementioned
+      constructor was performing an implicit conversion to boolean of the
+      values returned by the verify() method, which subsequently will return
+      the same output as openssl\_verify() under most circumstances. This
+      means an error during signature verification is treated as a
+      successful verification by the method.
+
+
+
+    [1]: https://packagist.org/packages/simplesamlphp/simplesamlphp
   affected_package: simplesamlphp/simplesamlphp
   vulnerable_versions:
   - "<1.14.11"

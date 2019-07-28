@@ -1,72 +1,108 @@
 ---
 - id: snykio:nuget:microsoft.aspnet.mvc.core:60001
   title: Cross-site Scripting (XSS)
-  description: "[`Microsoft.AspNet.Mvc.Core`][1] is the core runtime components of\nASP.NET
-    MVC.\n\nAffected versions of this package are vulnerable to Cross-site Scripting\n(XSS)
-    attacks via the `System.Web.Mvc.dll` in Microsoft ASP.NET Model\nView Controller
-    (MVC).\n\n> The vulnerability could allow security feature bypass if an attacker\n>
-    convinces a user to click a specially crafted link or to visit a\n> webpage that
-    contains specially crafted content designed to exploit\n> the vulnerability. In
-    a web-based attack scenario, an attacker could\n> host a specially crafted website
-    that is designed to exploit the\n> vulnerability through a web browser, and then
-    convince a user to view\n> the website. The attacker could also take advantage
-    of compromised\n> websites and websites that accept or host user-provided content
-    or\n> advertisements. These websites could contain specially crafted content\n>
-    that could exploit the vulnerability. In all cases, however, an\n> attacker would
-    have no way to force users to view the\n> attacker-controlled content. Instead,
-    an attacker would have to\n> convince users to take action, typically by getting
-    them to click a\n> link in an email message or in an Instant Messenger message
-    that takes\n> them to the attacker\\'s website, or by getting them to open an\n>
-    attachment sent through email.\n> \n> * Microsoft Security Bulletin MS14-059\n\n\n\n[1]:
-    https://www.nuget.org/packages/Microsoft.AspNet.Mvc.Core\n\\nA cross-site scripting
-    attack occurs when the attacker tricks a\nlegitimate web-based application or
-    site to accept a request as\noriginating from a trusted source.\n\nThis is done
-    by escaping the context of the web application; the web\napplication then delivers
-    that data to its users along with other\ntrusted dynamic content, without validating
-    it. The browser unknowingly\nexecutes malicious script on the client side (through
-    client-side\nlanguages; usually JavaScript or HTML) in order to perform actions
-    that\nare otherwise typically blocked by the browser’s Same Origin Policy.\n\nֿInjecting
-    malicious code is the most prevalent manner by which XSS is\nexploited; for this
-    reason, escaping characters in order to prevent this\nmanipulation is the top
-    method for securing code against this\nvulnerability.\n\nEscaping means that the
-    application is coded to mark key characters, and\nparticularly key characters
-    included in user input, to prevent those\ncharacters from being interpreted in
-    a dangerous context. For example,\nin HTML, `<` can be coded as `&lt`; and `>`
-    can be coded as `&gt`; in\norder to be interpreted and displayed as themselves
-    in text, while\nwithin the code itself, they are used for HTML tags. If malicious\ncontent
-    is injected into an application that escapes special characters\nand that malicious
-    content uses `<` and `>` as HTML tags, those\ncharacters are nonetheless not interpreted
-    as HTML tags by the browser\nif they’ve been correctly escaped in the application
-    code and in this\nway the attempted attack is diverted.\n\nThe most prominent
-    use of XSS is to steal cookies (source: OWASP\nHttpOnly) and hijack user sessions,
-    but XSS exploits have been used to\nexpose sensitive information, enable access
-    to privileged services and\nfunctionality and deliver malware.\n\n### Types of
-    attacks   {#types-of-attacks}\n\nThere are a few methods by which XSS can be manipulated:\n\n|
-    Type | Origin | Description |\n|----------\n| **Stored** | Server | The malicious
-    code is inserted in the application (usually as a link) by the attacker. The code
-    is activated every time a user clicks the link. |\n| **Reflected** | Server |
-    The attacker delivers a malicious link externally from the vulnerable web site
-    application to a user. When clicked, malicious code is sent to the vulnerable
-    web site, which reflects the attack back to the user’s browser. |\n| **DOM-based**
-    | Client | The attacker forces the user’s browser to render a malicious page.
-    The data in the page itself delivers the cross-site scripting data. |\n| **Mutated**
-    |  | The attacker injects code that appears safe, but is then rewritten and modified
-    by the browser, while parsing the markup. An example is rebalancing unclosed quotation
-    marks or even adding quotation marks to unquoted parameters. |\n\n### Affected
-    environments   {#affected-environments}\n\nThe following environments are susceptible
-    to an XSS attack:\n\n* Web servers\n* Application servers\n* Web application environments\n\n###
-    How to prevent   {#how-to-prevent}\n\nThis section describes the top best practices
-    designed to specifically\nprotect your code:\n\n* Sanitize data input in an HTTP
-    request before reflecting it back,\n  ensuring all data is validated, filtered
-    or escaped before echoing\n  anything back to the user, such as the values of
-    query parameters\n  during searches.\n* Convert special characters such as `?`,
-    `&`, `/`, `<`, `>` and spaces\n  to their respective HTML or URL encoded equivalents.\n*
-    Give users the option to disable client-side scripts.\n* Redirect invalid requests.\n*
-    Detect simultaneous logins, including those from two separate IP\n  addresses,
-    and invalidate those sessions.\n* Use and enforce a Content Security Policy (source:
-    Wikipedia) to\n  disable any features that might be manipulated for an XSS attack.\n*
-    Read the documentation for any of the libraries referenced in your\n  code to
-    understand which elements allow for embedded HTML.\n\n"
+  description: |+
+    [`Microsoft.AspNet.Mvc.Core`][1] is the core runtime components of
+    ASP.NET MVC.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS) attacks via the `System.Web.Mvc.dll` in Microsoft ASP.NET Model
+    View Controller (MVC).
+
+    > The vulnerability could allow security feature bypass if an attacker
+    > convinces a user to click a specially crafted link or to visit a
+    > webpage that contains specially crafted content designed to exploit
+    > the vulnerability. In a web-based attack scenario, an attacker could
+    > host a specially crafted website that is designed to exploit the
+    > vulnerability through a web browser, and then convince a user to view
+    > the website. The attacker could also take advantage of compromised
+    > websites and websites that accept or host user-provided content or
+    > advertisements. These websites could contain specially crafted content
+    > that could exploit the vulnerability. In all cases, however, an
+    > attacker would have no way to force users to view the
+    > attacker-controlled content. Instead, an attacker would have to
+    > convince users to take action, typically by getting them to click a
+    > link in an email message or in an Instant Messenger message that takes
+    > them to the attacker\'s website, or by getting them to open an
+    > attachment sent through email.
+
+    * Microsoft Security Bulletin MS14-059
+
+
+
+    [1]: https://www.nuget.org/packages/Microsoft.AspNet.Mvc.Core
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
   affected_package: microsoft.aspnet.mvc.core
   vulnerable_versions:
   - ">= 2 < 2.0.60814.0"

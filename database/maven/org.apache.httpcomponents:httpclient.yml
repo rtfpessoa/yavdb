@@ -458,16 +458,17 @@
 - id: snykio:maven:org.apache.httpcomponents:httpclient:31517
   title: Directory Traversal
   description: |
-    [`org.apache.httpcomponents:httpclient`][1] is HttpClient component of
+    [org.apache.httpcomponents:httpclient][1] is a HttpClient component of
     the Apache HttpComponents project.
 
-    Affected versions of the package are vulnerable to `Directory
-    Traversal`, which may allow access to sensitive files and data on the
-    server.
+    Affected versions of this package are vulnerable to Directory Traversal.
+    String input by user is not validated for the presence of leading
+    character `/` and is passed to the constructor as `path` information,
+    resulting in a Directory Traversal vulnerability.
 
 
 
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22httpclient%22
+    [1]: http://hc.apache.org/
     \nA Directory Traversal attack (also known as path traversal) aims to
     access files and directories that are stored outside the intended
     folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
@@ -518,7 +519,7 @@
     [1]: https://snyk.io/vuln/npm:st:20140206
   affected_package: org.apache.httpcomponents:httpclient
   vulnerable_versions:
-  - "< 4.5.2"
+  - "< 4.5.3"
   severity: medium
   package_manager: maven
   cwe:

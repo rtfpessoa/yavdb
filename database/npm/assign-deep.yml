@@ -59,9 +59,9 @@
     occurs:\n\n* Unsafe `Object` recursive merge\n\n* Property definition by path\n\n###
     Unsafe Object recursive merge   {#unsafe-object-recursive-merge}\n\nThe logic
     of a vulnerable recursive merge function follows the following\nhigh-level model:\n\n
-    \   merge (target, source)\n    \n    foreach property of source\n    \n    if
-    property exists and is an object on both the target and the source\n    \n    merge(target[property],
-    source[property])\n    \n    else\n    \n    target[property] = source[property]\n\n\n\nWhen
+    \   merge (target, source)\n    \n      foreach property of source\n    \n        if
+    property exists and is an object on both the target and the source\n    \n          merge(target[property],
+    source[property])\n    \n        else\n    \n          target[property] = source[property]\n\n\n\nWhen
     the source object contains a property named `_proto_` defined with\n`Object.defineProperty()`
     , the condition that checks if the property\nexists and is an object on both the
     target and the source passes and the\nmerge recurses with the target, being the
@@ -99,7 +99,7 @@
     and symbols from one or more source objects to\na target object.\n\nAffected versions
     of this package are vulnerable to Prototype Pollution.\nThe function `assign-deep`
     could be tricked into adding or modifying\nproperties of `Object.prototype` using
-    either a `constructor` ot a\n`_proto_` payload.\n\n\n\n[1]: https://github.com/jonschlinkert/assign-deep\n\\nPrototype
+    either a `constructor` or a\n`_proto_` payload.\n\n\n\n[1]: https://github.com/jonschlinkert/assign-deep\n\\nPrototype
     Pollution is a vulnerability affecting JavaScript. Prototype\nPollution refers
     to the ability to inject properties into existing\nJavaScript language construct
     prototypes, such as objects. JavaScript\nallows all Object attributes to be altered,
@@ -114,9 +114,9 @@
     occurs:\n\n* Unsafe `Object` recursive merge\n\n* Property definition by path\n\n###
     Unsafe Object recursive merge   {#unsafe-object-recursive-merge}\n\nThe logic
     of a vulnerable recursive merge function follows the following\nhigh-level model:\n\n
-    \   merge (target, source)\n    \n    foreach property of source\n    \n    if
-    property exists and is an object on both the target and the source\n    \n    merge(target[property],
-    source[property])\n    \n    else\n    \n    target[property] = source[property]\n\n\n\nWhen
+    \   merge (target, source)\n    \n      foreach property of source\n    \n        if
+    property exists and is an object on both the target and the source\n    \n          merge(target[property],
+    source[property])\n    \n        else\n    \n          target[property] = source[property]\n\n\n\nWhen
     the source object contains a property named `_proto_` defined with\n`Object.defineProperty()`
     , the condition that checks if the property\nexists and is an object on both the
     target and the source passes and the\nmerge recurses with the target, being the
@@ -133,7 +133,8 @@
     of the\nclass of the object.\n\n"
   affected_package: assign-deep
   vulnerable_versions:
-  - "<1.0.1"
+  - "<0.4.8"
+  - ">=1.0.0 <1.0.1"
   severity: high
   package_manager: npm
   cve:
