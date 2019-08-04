@@ -1,0 +1,91 @@
+---
+- id: snykio:npm:parse-server:455635
+  title: Denial of Service (DoS)
+  description: |+
+    [parse-server][1] is a version of the Parse backend that can be deployed
+    to any infrastructure that can run Node.js.
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS). If a POST request is made to `/parse/classes/_Audience` (or other
+    volatile class), any subsuquent POST requests result in an internal
+    server error (500).
+
+
+
+    [1]: https://github.com/parse-community/parse-server#readme
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+  affected_package: parse-server
+  vulnerable_versions:
+  - "<3.4.1"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2019-1020012
+  cwe:
+  - CWE-400
+  disclosed_date: 2019-07-29
+  created_date: 2019-07-29
+  last_modified_date: 2019-07-29
+  credit:
+  - Unknown
+  references:
+  - https://github.com/parse-community/parse-server/commit/8709daf698ea69b59268cb66f0f7cee75b52daa5
+  - https://github.com/parse-community/parse-server/security/advisories/GHSA-2479-qvv7-47qq
+  source_url: https://snyk.io/vuln/SNYK-JS-PARSESERVER-455635
+- id: snykio:npm:parse-server:455637
+  title: Account Enumeration
+  description: |
+    [parse-server][1] is a version of the Parse backend that can be deployed
+    to any infrastructure that can run Node.js.
+
+    Affected versions of this package are vulnerable to Account Enumeration.
+    `ParseError.ACCOUNT_ALREADY_LINKED(208)` is thrown before the
+    `AuthController`checks the password and throws a
+    `ParseError.SESSION_MISSING(206)` for Insufficient auth. An attacker can
+    guess ids and get information about linked accounts and email addresses.
+
+
+
+    [1]: https://github.com/parse-community/parse-server#readme
+  affected_package: parse-server
+  vulnerable_versions:
+  - "<3.6.0"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2019-1020013
+  cwe:
+  - CWE-204
+  disclosed_date: 2019-07-29
+  created_date: 2019-07-29
+  last_modified_date: 2019-07-29
+  credit:
+  - Unknown
+  references:
+  - https://github.com/parse-community/parse-server/security/advisories/GHSA-8w3j-g983-8jh5
+  source_url: https://snyk.io/vuln/SNYK-JS-PARSESERVER-455637
