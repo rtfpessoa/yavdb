@@ -1,0 +1,33 @@
+---
+- id: snykio:rubygems:thin:456067
+  title: Improper Input Validation
+  description: |
+    [thin][1] is a thin and fast web server.
+
+    Affected versions of this package are vulnerable to Improper Input
+    Validation. `lib/thin/connection.rb` relies on the `X-Forwarded-For`
+    header to determine the IP address of the client, which allows remote
+    attackers to spoof the IP address and hide activities via a modified
+    `X-Forwarded-For` header.
+
+
+
+    [1]: https://rubygems.org/gems/thin
+  affected_package: thin
+  vulnerable_versions:
+  - "<1.2.4"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2009-3287
+  cwe:
+  - CWE-20
+  disclosed_date: 2009-09-22
+  created_date: 2019-07-31
+  last_modified_date: 2019-07-31
+  credit:
+  - Unknown
+  references:
+  - http://github.com/macournoyer/thin/blob/master/CHANGELOG
+  - https://github.com/macournoyer/thin/commit/7bd027914c5ffd36bb408ef47dc749de3b6e063a
+  source_url: https://snyk.io/vuln/SNYK-RUBY-THIN-456067
