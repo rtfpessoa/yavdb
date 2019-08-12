@@ -411,3 +411,551 @@
   - https://github.com/firefly-iii/firefly-iii/commit/17a66b3056096244a2198a7351847d26cb7b37c5
   - https://github.com/firefly-iii/firefly-iii/issues/2337
   source_url: https://snyk.io/vuln/SNYK-PHP-GRUMPYDICTATORFIREFLYIII-451648
+- id: snykio:packagist:grumpydictator/firefly-iii:456753
+  title: Information Exposure
+  description: |
+    [grumpydictator/firefly-iii][1] is a personal finances manager.
+
+    Affected versions of this package are vulnerable to Information
+    Exposure. An attacker can enumerate local files due to the lack of
+    protocol scheme sanitization, such as for `file:///` URLs. This is
+    related to `fints_url`, `import/job/configuration`, and
+    `import/create/fints`.
+
+
+
+    [1]: https://firefly-iii.org/
+  affected_package: grumpydictator/firefly-iii
+  vulnerable_versions:
+  - "<4.7.17.4"
+  severity: medium
+  package_manager: packagist
+  cve:
+  - CVE-2019-14671
+  cwe:
+  - CWE-538
+  disclosed_date: 2019-08-05
+  created_date: 2019-08-06
+  last_modified_date: 2019-08-06
+  credit:
+  - '0x2500'
+  references:
+  - https://github.com/firefly-iii/firefly-iii/commit/e80d616ef4397e6e764f6b7b7a5b30121244933c
+  - https://github.com/firefly-iii/firefly-iii/issues/2367
+  source_url: https://snyk.io/vuln/SNYK-PHP-GRUMPYDICTATORFIREFLYIII-456753
+- id: snykio:packagist:grumpydictator/firefly-iii:456754
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [grumpydictator/firefly-iii][1] is a personal finances manager.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS) due to the lack of filtration of user-supplied data in the asset
+    account name. The JavaScript code is executed during a visit to the
+    audit account statistics page.
+
+
+
+    [1]: https://firefly-iii.org/
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
+  affected_package: grumpydictator/firefly-iii
+  vulnerable_versions:
+  - "<4.7.17.4"
+  severity: medium
+  package_manager: packagist
+  cve:
+  - CVE-2019-14669
+  cwe:
+  - CWE-79
+  disclosed_date: 2019-08-05
+  created_date: 2019-08-06
+  last_modified_date: 2019-08-06
+  credit:
+  - '0x2500'
+  references:
+  - https://github.com/firefly-iii/firefly-iii/commit/2ddf48f15cbdbb475221c299872420f625c3bc3f
+  - https://github.com/firefly-iii/firefly-iii/issues/2366
+  source_url: https://snyk.io/vuln/SNYK-PHP-GRUMPYDICTATORFIREFLYIII-456754
+- id: snykio:packagist:grumpydictator/firefly-iii:456755
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [grumpydictator/firefly-iii][1] is a personal finances manager.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS) due to the lack of filtration of user-supplied data in the bill
+    name field. The JavaScript code is executed during rule-from-bill
+    creation.
+
+
+
+    [1]: https://firefly-iii.org/
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
+  affected_package: grumpydictator/firefly-iii
+  vulnerable_versions:
+  - "<4.7.17.4"
+  severity: medium
+  package_manager: packagist
+  cve:
+  - CVE-2019-14670
+  cwe:
+  - CWE-79
+  disclosed_date: 2019-08-05
+  created_date: 2019-08-06
+  last_modified_date: 2019-08-06
+  credit:
+  - '0x2500'
+  references:
+  - https://github.com/firefly-iii/firefly-iii/commit/692b256f3f6d9eab992a72eb042844220b314054
+  - https://github.com/firefly-iii/firefly-iii/issues/2365
+  source_url: https://snyk.io/vuln/SNYK-PHP-GRUMPYDICTATORFIREFLYIII-456755
+- id: snykio:packagist:grumpydictator/firefly-iii:456756
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [grumpydictator/firefly-iii][1] is a personal finances manager.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS) due to the lack of filtration of user-supplied data in the
+    transaction description field. The JavaScript code is executed during
+    deletion of a transaction link.
+
+
+
+    [1]: https://firefly-iii.org/
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
+  affected_package: grumpydictator/firefly-iii
+  vulnerable_versions:
+  - "<4.7.17.4"
+  severity: medium
+  package_manager: packagist
+  cve:
+  - CVE-2019-14668
+  cwe:
+  - CWE-79
+  disclosed_date: 2019-08-05
+  created_date: 2019-08-06
+  last_modified_date: 2019-08-06
+  credit:
+  - '0x2500'
+  references:
+  - https://github.com/firefly-iii/firefly-iii/commit/3ad4e04e2ae50e60564b60b68dfac083e5684882
+  - https://github.com/firefly-iii/firefly-iii/issues/2364
+  source_url: https://snyk.io/vuln/SNYK-PHP-GRUMPYDICTATORFIREFLYIII-456756
+- id: snykio:packagist:grumpydictator/firefly-iii:456757
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [grumpydictator/firefly-iii][1] is a personal finances manager.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS) due to the lack of filtration of user-supplied data in the
+    transaction description field and the asset account name. The JavaScript
+    code is executed during a convert transaction action.
+
+
+
+    [1]: https://firefly-iii.org/
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
+  affected_package: grumpydictator/firefly-iii
+  vulnerable_versions:
+  - "<4.7.17.5"
+  severity: medium
+  package_manager: packagist
+  cve:
+  - CVE-2019-14667
+  cwe:
+  - CWE-79
+  disclosed_date: 2019-08-05
+  created_date: 2019-08-06
+  last_modified_date: 2019-08-06
+  credit:
+  - '0x2500'
+  references:
+  - https://github.com/firefly-iii/firefly-iii/commit/15d4d185bbedf2bb9db4a8fa2ccf9fc359a06194
+  - https://github.com/firefly-iii/firefly-iii/commit/427de0594d05a8222f55b2894311e648ba1be991
+  - https://github.com/firefly-iii/firefly-iii/issues/2363
+  source_url: https://snyk.io/vuln/SNYK-PHP-GRUMPYDICTATORFIREFLYIII-456757
+- id: snykio:packagist:grumpydictator/firefly-iii:456758
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [grumpydictator/firefly-iii][1] is a personal finances manager.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS) due to the lack of filtration of user-supplied data in the
+    liability name field. The JavaScript code is executed upon an error
+    condition during a visit to the account show page.
+
+
+
+    [1]: https://firefly-iii.org/
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
+  affected_package: grumpydictator/firefly-iii
+  vulnerable_versions:
+  - "<4.7.17.6"
+  severity: medium
+  package_manager: packagist
+  cve:
+  - CVE-2019-14672
+  cwe:
+  - CWE-79
+  disclosed_date: 2019-08-05
+  created_date: 2019-08-06
+  last_modified_date: 2019-08-06
+  credit:
+  - '0x2500'
+  references:
+  - https://github.com/firefly-iii/firefly-iii/commit/8717f469b10e9f7e1547c6f70f7d24e1359d28d4
+  - https://github.com/firefly-iii/firefly-iii/issues/2370
+  source_url: https://snyk.io/vuln/SNYK-PHP-GRUMPYDICTATORFIREFLYIII-456758
