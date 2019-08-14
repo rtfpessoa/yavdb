@@ -1,0 +1,42 @@
+---
+- id: snykio:maven:org.jenkins-ci.plugins:jclouds-jenkins:458739
+  title: Cross-site Request Forgery (CSRF)
+  description: |
+    [org.jenkins-ci.plugins:jclouds-jenkins][1] is a plugin that uses
+    JClouds to provide slave launching on most of the currently usable Cloud
+    infrastructures.
+
+    Affected versions of this package are vulnerable to Cross-site Request
+    Forgery (CSRF). The plugin does not perform permission checks on a
+    method implementing form validation. This form validation method did not
+    require POST requests. This allows users with `Overall/Read access` to
+    Jenkins to connect to an attacker-specified URL using attacker-specified
+    credentials IDs obtained through another method, capturing credentials
+    stored in Jenkins.
+
+
+
+    [1]: https://github.com/jenkinsci/jclouds-plugin
+  affected_package: org.jenkins-ci.plugins:jclouds-jenkins
+  vulnerable_versions:
+  - "< 2.15"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2019-10368
+  - CVE-2019-10369
+  cwe:
+  - CWE-352
+  disclosed_date: 2019-08-07
+  created_date: 2019-08-08
+  last_modified_date: 2019-08-08
+  credit:
+  - and
+  - CloudBees
+  - Inc.
+  - independently
+  - Oleg Nenashev
+  - Viktor Gazdag NCC Group
+  references:
+  - https://jenkins.io/security/advisory/2019-08-07/
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGJENKINSCIPLUGINS-458739
