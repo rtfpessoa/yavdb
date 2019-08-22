@@ -790,6 +790,97 @@
   - https://nvd.nist.gov/vuln/detail/CVE-2018-1271
   - https://pivotal.io/security/cve-2018-1271
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGSPRINGFRAMEWORK-32202
+- id: snykio:maven:org.springframework:spring-webmvc:460108
+  title: Directory Traversal
+  description: |
+    [org.springframework:spring-webmvc][1] is a package that provides
+    Model-View-Controller (MVC) architecture and ready components that can
+    be used to develop flexible and loosely coupled web applications.
+
+    Affected versions of this package are vulnerable to Directory Traversal.
+
+
+
+    [1]: https://mvnrepository.com/artifact/org.springframework/spring-webmvc
+    \n[`org.springframework:spring`][1] An issue was discovered in Pivotal
+    Spring Framework before 3.2.18, 4.2.x before 4.2.9, and 4.3.x before
+    4.3.5. Paths provided to the `ResourceServlet` were not properly
+    sanitized and as a result exposed to directory traversal attacks.
+
+
+
+    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22spring-webmvc%22
+    \nA Directory Traversal attack (also known as path traversal) aims to
+    access files and directories that are stored outside the intended
+    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
+    its variations, or by using absolute file paths, it may be possible to
+    access arbitrary files and directories stored on file system, including
+    application source code, configuration, and other critical system files.
+
+    Directory Traversal vulnerabilities can be generally divided into two
+    types:
+
+    * **Information Disclosure**\: Allows the attacker to gain information
+      about the folder structure or read the contents of sensitive files on
+      the system.
+
+    `st` is a module for serving static files on web pages, and contains a
+    [vulnerability of this type][1]. In our example, we will serve files
+    from the `public` route.
+
+    If an attacker requests the following URL from our server, it will in
+    turn leak the sensitive private key of the root user.
+
+        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
+
+    **Note** `%2e` is the URL encoded version of `.` (dot).
+
+    * **Writing arbitrary files**\: Allows the attacker to create or replace
+      existing files. This type of vulnerability is also known as
+      `Zip-Slip`.
+
+    One way to achieve this is by using a malicious `zip` archive that holds
+    path traversal filenames. When each filename in the zip archive gets
+    concatenated to the target extraction folder, without validation, the
+    final path ends up outside of the target folder. If an executable or a
+    configuration file is overwritten with a file containing malicious code,
+    the problem can turn into an arbitrary code execution issue quite
+    easily.
+
+    The following is an example of a `zip` archive with one benign file and
+    one malicious file. Extracting the malicious file will result in
+    traversing out of the target folder, ending up in `/root/.ssh/`
+    overwriting the `authorized_keys` file:
+
+        2018-04-15 22:04:29 .....           19           19  good.txt
+        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
+
+
+
+    [1]: https://snyk.io/vuln/npm:st:20140206
+  affected_package: org.springframework:spring-webmvc
+  vulnerable_versions:
+  - ">= 1.2.1 < 3.2.18.RELEASE"
+  - ">= 4.2.0.RELEASE < 4.2.9.RELEASE"
+  - ">= 4.3.0.RELEASE < 4.3.5.RELEASE"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2016-9878
+  cwe:
+  - CWE-22
+  disclosed_date: 2016-12-28
+  created_date: 2016-12-28
+  last_modified_date: 2016-12-28
+  credit:
+  - Shumpei Asahara
+  - Yuji Ito
+  references:
+  - https://github.com/spring-projects/spring-framework/commit/43bf008fbcd0d7945e2fcd5e30039bc4d74c7a98
+  - https://github.com/spring-projects/spring-framework/commit/a7dc48534ea501525f11369d369178a60c2f47d0
+  - https://github.com/spring-projects/spring-framework/commit/e2d6e709c3c65a4951eb096843ee75d5200cfcad
+  - https://pivotal.io/security/cve-2016-9878
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGSPRINGFRAMEWORK-460108
 - id: victims:maven:org.springframework:spring-webmvc:2014-0054
   title: 'Spring MVC: XML External Entities'
   description: 'Spring MVC''s Jaxb2RootElementHttpMessageConverter also processed
