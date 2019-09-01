@@ -168,27 +168,19 @@ module YAVDB
               body   = section[:body]
 
               case header.text
-                when 'Overview' then
+                when %r{^(Overview|Details)$} then
                   overview_str = body
                                    .map(&:to_xml)
+                                   .map { |e| e.force_encoding('UTF-8') }
                                    .join("\n")
-                                   .force_encoding('UTF-8')
                   begin
-                    data[:description] += '\n' if data[:description]
-                    data[:description] = '' unless data[:description]
+                    if data[:description]
+                      data[:description] += '\n'
+                    else
+                      data[:description] = ''
+                    end
+
                     data[:description] += utf8(Kramdown::Document.new(overview_str, :html_to_native => true).to_kramdown)
-                  rescue StandardError
-                    # ignore
-                  end
-                when 'Details' then
-                  details_str = body
-                                  .map(&:to_xml)
-                                  .join("\n")
-                                  .force_encoding('UTF-8')
-                  begin
-                    data[:description] += '\n' if data[:description]
-                    data[:description] = '' unless data[:description]
-                    data[:description] += utf8(Kramdown::Document.new(details_str, :html_to_native => true).to_kramdown)
                   rescue StandardError
                     # ignore
                   end
@@ -211,19 +203,19 @@ module YAVDB
 
             advisory_page.css('.l-col .card .card__content dl > *').each_slice(2).to_a.map do |key, value|
               case key.text
-                when 'Credit' then
+                when 'Credit'
                   data[:credit] = utf8(value.text.split(',').map { |str| str.strip.sub(%r{-\s*}, '') }.reject(&:empty?))
-                when 'CVE' then
+                when 'CVE'
                   data[:cve] = value.css('a').map { |a| a.text.strip.split(',') }.flatten.map(&:strip).reject(&:empty?)
-                when 'CWE' then
+                when 'CWE'
                   data[:cwe] = value.css('a').map { |a| a.text.strip.split(',') }.flatten.map(&:strip).reject(&:empty?)
-                when 'Snyk ID' then
+                when 'Snyk ID'
                   data[:id] = value.text.strip
-                when 'Disclosed' then
+                when 'Disclosed'
                   data[:disclosed_date] = value.text.strip
-                when 'Published' then
+                when 'Published'
                   data[:published_date] = value.text.strip
-                when 'Last modified' then
+                when 'Last modified'
                   data[:last_modified_date] = value.text.strip
               end
             end

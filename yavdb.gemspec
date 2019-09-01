@@ -31,9 +31,9 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'simplecov'
 
   # Linters
-  spec.add_development_dependency 'dependency_spy', ['~> 0.4']
-  spec.add_development_dependency 'rubocop', ['~> 0.69']
-  spec.add_development_dependency 'rubocop-rspec', ['~> 1.33']
+  spec.add_development_dependency 'dependency_spy'
+  spec.add_development_dependency 'rubocop', ['~> 0.74']
+  spec.add_development_dependency 'rubocop-rspec', ['~> 1.35']
 
   # Runtime
   spec.add_runtime_dependency 'execjs', ['~> 2.7']

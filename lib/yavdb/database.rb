@@ -43,7 +43,6 @@ module YAVDB
         vulns
           .group_by(&:package_manager)
           .map do |package_manager, vunerabilities_by_pm|
-
           puts "#{package_manager}: #{vunerabilities_by_pm.length}"
 
           vunerabilities_by_pm =

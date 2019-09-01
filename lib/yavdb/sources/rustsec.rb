@@ -25,7 +25,7 @@ module YAVDB
     module RustSec
       class Client
 
-        REPOSITORY_URL = 'https://github.com/RustSec/advisory-db'.freeze
+        REPOSITORY_URL  = 'https://github.com/RustSec/advisory-db'.freeze
         PACKAGE_MANAGER = 'cargo'.freeze
 
         def self.advisories
@@ -44,9 +44,9 @@ module YAVDB
           private
 
           def create(advisory_hash)
-            date = Date.strptime(advisory_hash['date'].to_s, '%Y-%m-%d')
-            severity = 'high' # since no value is provided will use highest
-            cve = advisory_hash['aliases']&.select { |a| a.start_with?('CVE') }
+            date       = Date.strptime(advisory_hash['date'].to_s, '%Y-%m-%d')
+            severity   = 'high' # since no value is provided will use highest
+            cve        = advisory_hash['aliases']&.select { |a| a.start_with?('CVE') }
             references = advisory_hash['url'] && [advisory_hash['url']]
 
             vuln_id = "rustsec:cargo:#{advisory_hash['package']}:#{advisory_hash['id']}"

@@ -40,13 +40,13 @@ module YAVDB
           def fetch_packages_recursive(page_number)
             page = get_page_html(get_page_url(page_number), false, 'npmjs/feed')
 
-            script_tag = page.css('script').find { |script| script.text.include?('window.__context__') }.text
-            context = ExecJS.compile("var window = {};\n#{script_tag.force_encoding('utf-8')};")
+            script_tag    = page.css('script').find { |script| script.text.include?('window.__context__') }.text
+            context       = ExecJS.compile("var window = {};\n#{script_tag.force_encoding('utf-8')};")
             advisory_data = context.exec('return window.__context__.context.advisoriesData')
 
             packages = advisory_data['objects']
 
-            next_url = advisory_data['urls']['next']
+            next_url      = advisory_data['urls']['next']
             next_packages = if next_url && !next_url&.include?("page=#{page_number}")
                               fetch_packages_recursive(page_number + 1)
                             else
@@ -62,7 +62,7 @@ module YAVDB
 
           def create(package)
             published_date = Date.strptime(package['created'], '%s')
-            updated_date = Date.strptime(package['updated'], '%s')
+            updated_date   = Date.strptime(package['updated'], '%s')
 
             cves = package['cves'] || []
 
@@ -108,13 +108,13 @@ module YAVDB
 
           def parse_severity(severity)
             case severity
-              when 'low' then
+              when 'low'
                 'low'
-              when 'moderate' then
+              when 'moderate'
                 'medium'
-              when 'high' then
+              when 'high'
                 'high'
-              when 'critical' then
+              when 'critical'
                 'high'
               else
                 'high'

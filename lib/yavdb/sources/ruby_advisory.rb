@@ -107,9 +107,9 @@ module YAVDB
 
           def severity_level(cvss_score)
             case cvss_score
-              when 0.0..3.3 then
+              when 0.0..3.3
                 'low'
-              when 3.3..6.6 then
+              when 3.3..6.6
                 'medium'
               else
                 'high'
