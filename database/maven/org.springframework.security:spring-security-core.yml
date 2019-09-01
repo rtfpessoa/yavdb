@@ -332,19 +332,20 @@
 - id: snykio:maven:org.springframework.security:spring-security-core:31337
   title: Access Restriction Bypass
   description: |
-    [`org.springframework.security:spring-security-core`][1] VMware
-    SpringSource Spring Security 2.x before 2.0.6 and 3.x before 3.0.4, and
-    Acegi Security 1.0.0 through 1.0.7, as used in IBM WebSphere Application
-    Server (WAS) 6.1 and 7.0, allows remote attackers to bypass security
+    [org.springframework.security:spring-security-core][1] is a package that
+    provides security services for the Spring IO Platform.
+
+    Affected versions of this package are vulnerable to Access Restriction
+    Bypass. Spring Security allows remote attackers to bypass security
     constraints via a path parameter.
 
 
 
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22spring-security-core%22
+    [1]: http://spring.io/spring-security
   affected_package: org.springframework.security:spring-security-core
   vulnerable_versions:
-  - ">= 2.0.0 < 2.0.6"
-  - ">= 3 < 3.0.4"
+  - ">= 2.0.0.RELEASE < 2.0.6.RELEASE"
+  - ">= 3.0.0..RELEASE < 3.0.4.RELEASE"
   severity: medium
   package_manager: maven
   cve:
@@ -392,19 +393,22 @@
 - id: snykio:maven:org.springframework.security:spring-security-core:31339
   title: Arbitrary Code Execution
   description: |
-    [`org.springframework.security:spring-security-core`][1] CRLF injection
-    vulnerability in the logout functionality in VMware SpringSource Spring
-    Security before 2.0.7 and 3.0.x before 3.0.6 allows remote attackers to
-    inject arbitrary HTTP headers and conduct HTTP response splitting
-    attacks via the spring-security-redirect parameter.
+    [org.springframework.security:spring-security-core][1] is a package that
+    provides security services for the Spring IO Platform.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution. CRLF injection vulnerability in the logout functionality in
+    Spring Security allows remote attackers to inject arbitrary HTTP headers
+    and conduct HTTP response splitting attacks via the
+    spring-security-redirect parameter.
 
 
 
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22spring-security-core%22
+    [1]: http://spring.io/spring-security
   affected_package: org.springframework.security:spring-security-core
   vulnerable_versions:
-  - "< 2.0.7"
-  - ">= 3 < 3.0.6"
+  - ">= 2.0.0 < 2.0.7.RELEASE"
+  - ">= 3.0.0.RELEASE < 3.0.6.RELEASE"
   severity: medium
   package_manager: maven
   cve:
@@ -415,8 +419,9 @@
   created_date: 2014-09-08
   last_modified_date: 2014-09-08
   credit:
-  - Unknown
+  - David Mas
   references:
+  - https://jira.spring.io/browse/SEC-1790
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2011-2732
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGSPRINGFRAMEWORKSECURITY-31339
 - id: snykio:maven:org.springframework.security:spring-security-core:31340
@@ -456,14 +461,14 @@
 - id: snykio:maven:org.springframework.security:spring-security-core:31509
   title: Deserialization of Untrusted Data
   description: |
-    Affected versions of
-    [`org.springframework.security:spring-security-core`][1] are vulnerable
-    to Deserialization of Untrusted Data, via `Jackson`.
+    [org.springframework.security:spring-security-core][1] is a package that
+    provides security services for the Spring IO Platform.
 
-    `spring-security-core` configures `Jackson` with the global `default
-    typing` enabled. Although `Jackson` blacklisted known `deserialization
-    gadgets`, it is still possible for a malicious user to execute arbitrary
-    code on the following conditions:
+    Affected versions of this package are vulnerable to Deserialization of
+    Untrusted Data. `spring-security-core` configures `Jackson` with the
+    global `default typing` enabled. Although `Jackson` blacklisted known
+    `deserialization gadgets`, it is still possible for a malicious user to
+    execute arbitrary code on the following conditions:
 
     1.  Spring Security’s Jackson support is being leveraged by invoking
         SecurityJackson2Modules.getModules(ClassLoader) or
@@ -477,9 +482,11 @@
 
     This is related to [SNYK-JAVA-COMFASTERXMLJACKSONCORE-31507][2].
 
-    # Details   {#details}
 
-    Serialization is a process of converting an object into a sequence of
+
+    [1]: http://spring.io/spring-security
+    [2]: https://snyk.io/vuln/SNYK-JAVA-COMFASTERXMLJACKSONCORE-31507
+    \nSerialization is a process of converting an object into a sequence of
     bytes which can be persisted to a disk or database or can be sent
     through streams. The reverse process of creating object from sequence of
     bytes is called deserialization. Serialization is commonly used for
@@ -489,7 +496,7 @@
     Management Extension (JMX)*, *Java Messaging System (JMS)*, *Action
     Message Format (AMF)*, *Java Server Faces (JSF) ViewState*, etc.
 
-    *Deserialization of untrusted data* ([CWE-502][3]), is when the
+    *Deserialization of untrusted data* ([CWE-502][1]), is when the
     application deserializes untrusted data without sufficiently verifying
     that the resulting data will be valid, letting the attacker to control
     the state or the flow of the execution.
@@ -497,7 +504,7 @@
     Java deserialization issues have been known for years. However, interest
     in the issue intensified greatly in 2015, when classes that could be
     abused to achieve remote code execution were found in a [popular library
-    (Apache Commons Collection)][4]. These classes were used in zero-days
+    (Apache Commons Collection)][2]. These classes were used in zero-days
     affecting IBM WebSphere, Oracle WebLogic and many other products.
 
     An attacker just needs to identify a piece of software that has both a
@@ -538,14 +545,11 @@
 
 
 
-    [1]: https://projects.spring.io/spring-security/
-    [2]: https://snyk.io/vuln/SNYK-JAVA-COMFASTERXMLJACKSONCORE-31507
-    [3]: https://cwe.mitre.org/data/definitions/502.html
-    [4]: https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078
+    [1]: https://cwe.mitre.org/data/definitions/502.html
+    [2]: https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078
   affected_package: org.springframework.security:spring-security-core
   vulnerable_versions:
-  - "< 4.2.3"
-  - ">= 5.0.0.M1 < 5.0.0.M2"
+  - ">= 4.2.0.RELEASE < 4.2.3.RELEASE"
   severity: high
   package_manager: maven
   cve:

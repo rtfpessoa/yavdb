@@ -1,0 +1,30 @@
+---
+- id: rustsec:cargo:spin:RUSTSEC-2019-0013
+  title: Wrong memory orderings in RwLock potentially violates mutual exclusion
+  description: "Wrong memory orderings inside the RwLock implementation allow for
+    two writers to acquire the lock at the same time. The drop implementation used
+    Ordering::Relaxed, which allows the compiler or CPU to reorder a mutable access
+    on the locked data after the lock has been yielded.\n\nOnly users of the RwLock
+    implementation are affected. Users of Once (including users of lazy_static with
+    the `spin_no_std` feature enabled) are NOT affected.\n\nOn strongly ordered CPU
+    architectures like x86, the only real way that this would lead to a memory corruption
+    is if the compiler reorders an access after the lock is yielded, which is possible
+    but in practice unlikely. It is a more serious issue on weakly ordered architectures
+    such as ARM which, except in the presence of certain instructions, allow the hardware
+    to decide which accesses are seen at what times. Therefore on an ARM system it
+    is likely that using the wrong memory ordering would result in a memory corruption,
+    even if the compiler itself doesn't reorder the memory accesses in a buggy way.\n
+    \nThe flaw was corrected by https://github.com/mvdnes/spin-rs/pull/66.\n"
+  affected_package: spin
+  patched_versions:
+  - ">= 0.5.2"
+  severity: high
+  package_manager: cargo
+  disclosed_date: 2019-08-27
+  created_date: 2019-08-27
+  last_modified_date: 2019-08-27
+  credit:
+  - RustSec
+  references:
+  - https://github.com/mvdnes/spin-rs/issues/65
+  source_url: https://github.com/RustSec/advisory-db/blob/master/crates/spin/RUSTSEC-2019-0013.toml

@@ -1,13 +1,14 @@
 ---
 - id: snykio:go:github.com/kubernetes/kubernetes/pkg/kubectl/cmd/cp:174090
-  title: Directory Traversal
+  title: Symlink Attack
   description: |
     [github.com/kubernetes/kubernetes/pkg/kubectl/cmd/cp][1] is a
     Production-Grade Container Scheduling and Management.
 
-    Affected versions of this package are vulnerable to Directory Traversal
-    via the `oauth/token/request` endpoint. It could allow to retrieve a
-    token for CLI usage when using non default configs.
+    Affected versions of this package are vulnerable to Symlink Attack via
+    the `kubectl cp` command. It could allow writing files to any path on
+    the user’s machine when \'kubectl cp\' is called, limited only by the
+    system permissions of the local user.
 
 
 
@@ -70,7 +71,7 @@
   cve:
   - CVE-2019-1002101
   cwe:
-  - CWE-22
+  - CWE-59
   disclosed_date: 2019-03-06
   created_date: 2019-04-02
   last_modified_date: 2019-04-02

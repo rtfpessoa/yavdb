@@ -12779,19 +12779,24 @@
 - id: snykio:maven:org.apache.tomcat:tomcat-catalina:30886
   title: Access Restriction Bypass
   description: |
-    [`org.apache.tomcat:tomcat-catalina`][1] Apache Tomcat 7.0.11, when
-    web.xml has no login configuration, does not follow security
-    constraints, which allows remote attackers to bypass intended access
-    restrictions via HTTP requests to a meta-data complete web application.
-    NOTE: this vulnerability exists because of an incorrect fix for
-    CVE-2011-1088 and CVE-2011-1419.
+    [org.apache.tomcat:tomcat-catalina][1] is a Tomcat Servlet Engine Core
+    Classes and Standard implementations.
+
+    Affected versions of this package are vulnerable to Access Restriction
+    Bypass. When `web.xml` has no login configuration, does not follow
+    security constraints, which allows remote attackers to bypass intended
+    access restrictions via HTTP requests to a meta-data complete web
+    application.
+
+    **NOTE:** this vulnerability exists because of an incorrect fix for
+    `CVE-2011-1088` and `CVE-2011-1419`.
 
 
 
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22tomcat-catalina%22
+    [1]: https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-catalina
   affected_package: org.apache.tomcat:tomcat-catalina
   vulnerable_versions:
-  - ">= 7.11"
+  - ">= 7.0.12 < 7.0.14"
   severity: medium
   package_manager: maven
   cve:
@@ -14200,7 +14205,7 @@
   - "< 7.0.82"
   - ">= 8 < 8.0.46"
   - ">= 8.5 < 8.5.22"
-  - ">= 9 < 9.0.1"
+  - ">= 9.0.0.M1 < 9.0.1"
   severity: high
   package_manager: maven
   cve:
@@ -14458,6 +14463,112 @@
   references:
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2010-3718
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHETOMCAT-460327
+- id: snykio:maven:org.apache.tomcat:tomcat-catalina:460342
+  title: Access Restriction Bypass
+  description: |
+    [org.apache.tomcat:tomcat-catalina][1] is a Tomcat Servlet Engine Core
+    Classes and Standard implementations.
+
+    Affected versions of this package are vulnerable to Access Restriction
+    Bypass. When using a `VirtualDirContext` it was possible to bypass
+    security constraints and/or view the source code of JSPs for resources
+    served by the `VirtualDirContext` using a specially crafted request.
+
+
+
+    [1]: https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-catalina
+  affected_package: org.apache.tomcat:tomcat-catalina
+  vulnerable_versions:
+  - ">= 7.0.0 < 7.0.81"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2017-12616
+  cwe:
+  - CWE-94
+  disclosed_date: 2017-09-19
+  created_date: 2017-10-11
+  last_modified_date: 2017-10-11
+  credit:
+  - Tomcat Security Team
+  references:
+  - https://access.redhat.com/security/cve/cve-2017-12616
+  - https://lists.apache.org/thread.html/1df9b4552464caa42047062fe7175da0da06c18ecc8daf99258bbda6@%3Cannounce.tomcat.apache.org%3E
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHETOMCAT-460342
+- id: snykio:maven:org.apache.tomcat:tomcat-catalina:460343
+  title: Arbitrary Code Execution
+  description: |
+    [org.apache.tomcat:tomcat-catalina][1] is a Tomcat Servlet Engine Core
+    Classes and Standard implementations.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution. When running Apache Tomcat on Windows with HTTP PUTs enabled
+    (e.g. via setting the readonly initialisation parameter of the Default
+    to false) it was possible to upload a JSP file to the server via a
+    specially crafted request. This JSP could then be requested and any code
+    it contained would be executed by the server.
+
+    The fix for this vulnerability was incomplete, see [CVE-2017-12617][2].
+
+
+
+    [1]: https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-catalina
+    [2]: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHETOMCAT-31537
+  affected_package: org.apache.tomcat:tomcat-catalina
+  vulnerable_versions:
+  - ">= 7.0.0 < 7.0.81"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2017-12615
+  cwe:
+  - CWE-94
+  disclosed_date: 2017-09-19
+  created_date: 2017-10-11
+  last_modified_date: 2017-10-11
+  credit:
+  - iswin
+  references:
+  - https://access.redhat.com/security/cve/cve-2017-12615
+  - https://lists.apache.org/thread.html/8fcb1e2d5895413abcf266f011b9918ae03e0b7daceb118ffbf23f8c@%3Cannounce.tomcat.apache.org%3E
+  - https://www.exploit-db.com/exploits/42953
+  - https://www.exploit-db.com/exploits/42953/
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHETOMCAT-460343
+- id: snykio:maven:org.apache.tomcat:tomcat-catalina:460344
+  title: Cache Poisoning
+  description: |
+    [org.apache.tomcat:tomcat-catalina][1] is a Tomcat Servlet Engine Core
+    Classes and Standard implementations.
+
+    Affected versions of this package are vulnerable to Cache Poisoning. The
+    CORS Filter did not add an HTTP Vary header indicating that the response
+    varies depending on Origin. This permitted client and server side cache
+    poisoning in some circumstances.
+
+
+
+    [1]: https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-catalina
+  affected_package: org.apache.tomcat:tomcat-catalina
+  vulnerable_versions:
+  - ">= 7.0.0 < 7.0.79"
+  - ">= 8.0.0RC1 < 8.0.45"
+  - ">= 8.5.0 < 8.5.16"
+  - ">= 9.0.0.M1 < 9.0.0.M22"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2017-7674
+  cwe:
+  - CWE-345
+  disclosed_date: 2017-05-21
+  created_date: 2017-10-09
+  last_modified_date: 2017-10-09
+  credit:
+  - Rick Riemer
+  references:
+  - https://github.com/apache/tomcat/commit/b94478d45b7e1fc06134a785571f78772fa30fed
+  - https://nvd.nist.gov/vuln/detail/CVE-2017-7674
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHETOMCAT-460344
 - id: victims:maven:org.apache.tomcat:tomcat-catalina:2016-3092
   title: 'Apache Commons Fileupload: Denial of Service'
   description: 'A malicious client can send file upload requests that cause the HTTP

@@ -291,13 +291,13 @@
   source_url: https://ossindex.net/resource/package/7012057027/vulnerabilities
 - id: snykio:npm:angular:1
   title: Clickjacking
-  description: |+
-    [`angular`][1] is an open-source JavaScript framework, maintained by
-    Google, that assists with running single-page applications with the goal
-    of making development and testing easier by augmenting browser-based
-    applications with model–view–controller (MVC) capability.
+  description: |
+    [angular][1] is a package that lets you write client-side web
+    applications as if you had a smarter browser. It also lets you use HTML
+    as your template language and lets you extend HTML’s syntax to express
+    your application’s components clearly and succinctly.
 
-    Affected versions of the package are vulnerable to Clickjacking. By
+    Affected versions of this package are vulnerable to Clickjacking By
     enabling the SVG setting without taking other precautions, you might
     expose your application to click-hijacking attacks. In these attacks,
     sanitized SVG elements could be positioned outside of the containing
@@ -315,81 +315,9 @@
 
 
     [1]: https://www.npmjs.com/package/angular
-    \nA cross-site scripting attack occurs when the attacker tricks a
-    legitimate web-based application or site to accept a request as
-    originating from a trusted source.
-
-    This is done by escaping the context of the web application; the web
-    application then delivers that data to its users along with other
-    trusted dynamic content, without validating it. The browser unknowingly
-    executes malicious script on the client side (through client-side
-    languages; usually JavaScript or HTML) in order to perform actions that
-    are otherwise typically blocked by the browser’s Same Origin Policy.
-
-    ֿInjecting malicious code is the most prevalent manner by which XSS is
-    exploited; for this reason, escaping characters in order to prevent this
-    manipulation is the top method for securing code against this
-    vulnerability.
-
-    Escaping means that the application is coded to mark key characters, and
-    particularly key characters included in user input, to prevent those
-    characters from being interpreted in a dangerous context. For example,
-    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
-    order to be interpreted and displayed as themselves in text, while
-    within the code itself, they are used for HTML tags. If malicious
-    content is injected into an application that escapes special characters
-    and that malicious content uses `<` and `>` as HTML tags, those
-    characters are nonetheless not interpreted as HTML tags by the browser
-    if they’ve been correctly escaped in the application code and in this
-    way the attempted attack is diverted.
-
-    The most prominent use of XSS is to steal cookies (source: OWASP
-    HttpOnly) and hijack user sessions, but XSS exploits have been used to
-    expose sensitive information, enable access to privileged services and
-    functionality and deliver malware.
-
-    ### Types of attacks   {#types-of-attacks}
-
-    There are a few methods by which XSS can be manipulated:
-
-    | Type | Origin | Description |
-    |----------
-    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
-    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
-    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
-    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
-
-    ### Affected environments   {#affected-environments}
-
-    The following environments are susceptible to an XSS attack:
-
-    * Web servers
-    * Application servers
-    * Web application environments
-
-    ### How to prevent   {#how-to-prevent}
-
-    This section describes the top best practices designed to specifically
-    protect your code:
-
-    * Sanitize data input in an HTTP request before reflecting it back,
-      ensuring all data is validated, filtered or escaped before echoing
-      anything back to the user, such as the values of query parameters
-      during searches.
-    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
-      to their respective HTML or URL encoded equivalents.
-    * Give users the option to disable client-side scripts.
-    * Redirect invalid requests.
-    * Detect simultaneous logins, including those from two separate IP
-      addresses, and invalidate those sessions.
-    * Use and enforce a Content Security Policy (source: Wikipedia) to
-      disable any features that might be manipulated for an XSS attack.
-    * Read the documentation for any of the libraries referenced in your
-      code to understand which elements allow for embedded HTML.
-
   affected_package: angular
   vulnerable_versions:
-  - "<1.5.0-beta.0 >=1.3.1"
+  - ">=1.3.1 <1.5.0-beta.0"
   severity: medium
   package_manager: npm
   cwe:
@@ -405,24 +333,23 @@
   source_url: https://snyk.io/vuln/npm:angular:20150807-1
 - id: snykio:npm:angular:20130621
   title: Cross-site Scripting (XSS)
-  description: |+
-    [`angular`][1] is an open-source JavaScript framework, maintained by
-    Google, that assists with running single-page applications with the goal
-    of making development and testing easier by augmenting browser-based
-    applications with model–view–controller (MVC) capability.
+  description: |-
+    [angular][1] is a package that lets you write client-side web
+    applications as if you had a smarter browser. It also lets you use HTML
+    as your template language and lets you extend HTML’s syntax to express
+    your application’s components clearly and succinctly.
 
-    Affected versions of the package are vulnerable to Cross-site Scripting
-    (XSS) attacks.
-
-    DOM event handlers await events to occur (e.g. onclick, onkeypress, etc)
-    and execute arbitrary Javascript code in accordance to the event. By
-    default, interpolations inside DOM event handlers are disallowed. Using
-    an interpolation for such handlers means that the interpolated value is
-    a JS string being evaluated. Storing or generating such strings is error
-    prone and likely leads to a Cross-site Scripting (XSS) vulnerability if
-    you\'re not careful. On the other hand, ng-click and such event handlers
-    evaluate Angular expressions that are a lot safer (e.g. No direct access
-    to global objects - only scope), cleaner and harder to exploit.
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). DOM event handlers await events to occur (e.g. onclick,
+    onkeypress, etc) and execute arbitrary Javascript code in accordance to
+    the event. By default, interpolations inside DOM event handlers are
+    disallowed. Using an interpolation for such handlers means that the
+    interpolated value is a JS string being evaluated. Storing or generating
+    such strings is error prone and likely leads to a Cross-site Scripting
+    (XSS) vulnerability if you\'re not careful. On the other hand, ng-click
+    and such event handlers evaluate Angular expressions that are a lot
+    safer (e.g. No direct access to global objects - only scope), cleaner
+    and harder to exploit.
 
     To migrate the code follow the example below: Before:
 
@@ -443,81 +370,10 @@
 
 
     [1]: https://www.npmjs.com/package/angular
-    \nA cross-site scripting attack occurs when the attacker tricks a
-    legitimate web-based application or site to accept a request as
-    originating from a trusted source.
-
-    This is done by escaping the context of the web application; the web
-    application then delivers that data to its users along with other
-    trusted dynamic content, without validating it. The browser unknowingly
-    executes malicious script on the client side (through client-side
-    languages; usually JavaScript or HTML) in order to perform actions that
-    are otherwise typically blocked by the browser’s Same Origin Policy.
-
-    ֿInjecting malicious code is the most prevalent manner by which XSS is
-    exploited; for this reason, escaping characters in order to prevent this
-    manipulation is the top method for securing code against this
-    vulnerability.
-
-    Escaping means that the application is coded to mark key characters, and
-    particularly key characters included in user input, to prevent those
-    characters from being interpreted in a dangerous context. For example,
-    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
-    order to be interpreted and displayed as themselves in text, while
-    within the code itself, they are used for HTML tags. If malicious
-    content is injected into an application that escapes special characters
-    and that malicious content uses `<` and `>` as HTML tags, those
-    characters are nonetheless not interpreted as HTML tags by the browser
-    if they’ve been correctly escaped in the application code and in this
-    way the attempted attack is diverted.
-
-    The most prominent use of XSS is to steal cookies (source: OWASP
-    HttpOnly) and hijack user sessions, but XSS exploits have been used to
-    expose sensitive information, enable access to privileged services and
-    functionality and deliver malware.
-
-    ### Types of attacks   {#types-of-attacks}
-
-    There are a few methods by which XSS can be manipulated:
-
-    | Type | Origin | Description |
-    |----------
-    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
-    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
-    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
-    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
-
-    ### Affected environments   {#affected-environments}
-
-    The following environments are susceptible to an XSS attack:
-
-    * Web servers
-    * Application servers
-    * Web application environments
-
-    ### How to prevent   {#how-to-prevent}
-
-    This section describes the top best practices designed to specifically
-    protect your code:
-
-    * Sanitize data input in an HTTP request before reflecting it back,
-      ensuring all data is validated, filtered or escaped before echoing
-      anything back to the user, such as the values of query parameters
-      during searches.
-    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
-      to their respective HTML or URL encoded equivalents.
-    * Give users the option to disable client-side scripts.
-    * Redirect invalid requests.
-    * Detect simultaneous logins, including those from two separate IP
-      addresses, and invalidate those sessions.
-    * Use and enforce a Content Security Policy (source: Wikipedia) to
-      disable any features that might be manipulated for an XSS attack.
-    * Read the documentation for any of the libraries referenced in your
-      code to understand which elements allow for embedded HTML.
-
+    \n
   affected_package: angular
   vulnerable_versions:
-  - "<=1.1.5"
+  - "<1.2.0"
   severity: medium
   package_manager: npm
   cwe:
@@ -529,19 +385,20 @@
   - Chirayu Krishnappa
   references:
   - https://github.com/angular/angular.js/commit/39841f2ec9b17b3b2920fd1eb548d444251f4f56
+  - https://github.com/angular/angular.js/pull/3028
   source_url: https://snyk.io/vuln/npm:angular:20130621
 - id: snykio:npm:angular:20130622
   title: Cross-site Scripting (XSS)
-  description: |+
-    [`angular`][1] is an open-source JavaScript framework, maintained by
-    Google, that assists with running single-page applications with the goal
-    of making development and testing easier by augmenting browser-based
-    applications with model–view–controller (MVC) capability. Affected
-    versions of the package are vulnerable to Cross-site Scripting (XSS).
+  description: |
+    [angular][1] is a package that lets you write client-side web
+    applications as if you had a smarter browser. It also lets you use HTML
+    as your template language and lets you extend HTML’s syntax to express
+    your application’s components clearly and succinctly.
 
-    Concatenating expressions makes it hard to reason about whether some
-    combination of concatenated values are unsafe to use and could easily
-    lead to XSS. By requiring that a single expression be used for
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS) Concatenating expressions makes it hard to reason about whether
+    some combination of concatenated values are unsafe to use and could
+    easily lead to XSS. By requiring that a single expression be used for
     `*[src/ng-src]` such as `iframe[src]`, `object[src]`, etc. (but not
     `img[src/ng-src]` since that value is sanitized), it is ensured that the
     value that\'s used is assigned or constructed by some JS code somewhere
@@ -586,11 +443,8 @@
         HTML: <iframe src="{{getIframeSrc()}}">Before:
     {: .language-html}
 
-
-
-    [1]: https://www.npmjs.com/package/angular
-    \nA cross-site scripting attack occurs when the attacker tricks a
-    legitimate web-based application or site to accept a request as
+    \##Details A cross-site scripting attack occurs when the attacker tricks
+    a legitimate web-based application or site to accept a request as
     originating from a trusted source.
 
     This is done by escaping the context of the web application; the web
@@ -661,9 +515,12 @@
     * Read the documentation for any of the libraries referenced in your
       code to understand which elements allow for embedded HTML.
 
+
+
+    [1]: https://www.npmjs.com/package/angular
   affected_package: angular
   vulnerable_versions:
-  - "<1.2.0 >=1.0.0"
+  - ">=1.0.0 <1.2.0"
   severity: medium
   package_manager: npm
   cwe:
@@ -680,14 +537,15 @@
 - id: snykio:npm:angular:20130625
   title: Arbitrary Script Injection
   description: |
-    [`angular`][1] is an open-source JavaScript framework, maintained by
-    Google, that assists with running single-page applications with the goal
-    of making development and testing easier by augmenting browser-based
-    applications with model–view–controller (MVC) capability. Affected
-    versions of the package are vulnerable to Arbitrary Script Injection due
-    to improper sanitization of the `$event` object passed to the native
-    constructor functions. That isn\'t protected by the fast paths in
-    `$parse`.
+    [angular][1] is a package that lets you write client-side web
+    applications as if you had a smarter browser. It also lets you use HTML
+    as your template language and lets you extend HTML’s syntax to express
+    your application’s components clearly and succinctly.
+
+    Affected versions of this package are vulnerable to Arbitrary Script
+    Injection due to improper sanitization of the `$event` object passed to
+    the native constructor functions. That isn\'t protected by the fast
+    paths in `$parse`.
 
 
 
@@ -705,17 +563,22 @@
   credit:
   - Chirayu Krishnappa
   - Igor Minar
+  references:
+  - https://github.com/angular/angular.js/blob/master/CHANGELOG.md#120rc1-spooky-giraffe-2013-08-13
+  - https://github.com/angular/angular.js/commit/5349b20097dc5cdff0216ee219ac5f6e6ef8c219
+  - https://github.com/angular/angular.js/pull/3043
   source_url: https://snyk.io/vuln/npm:angular:20130625
 - id: snykio:npm:angular:20131113
   title: Protection Bypass
   description: |
-    [`angular`][1] is an open-source JavaScript framework, maintained by
-    Google, that assists with running single-page applications with the goal
-    of making development and testing easier by augmenting browser-based
-    applications with model–view–controller (MVC) capability. Affected
-    versions of the package are vulnerable to Protection Bypass via
-    `ng-attr-action` and `ng-attr-srcdoc` allowing binding to Javascript.
-    The fix was to require bindings to `form[action]` to be
+    [angular][1] is a package that lets you write client-side web
+    applications as if you had a smarter browser. It also lets you use HTML
+    as your template language and lets you extend HTML’s syntax to express
+    your application’s components clearly and succinctly.
+
+    Affected versions of this package are vulnerable to Protection Bypass
+    via `ng-attr-action` and `ng-attr-srcdoc` allowing binding to
+    Javascript. The fix was to require bindings to `form[action]` to be
     `$sce.RESOURCE_URL` and bindings to `iframe[srcdoc]` to be `$sce.HTML`
 
 
@@ -741,14 +604,16 @@
 - id: snykio:npm:angular:20140608
   title: Arbitrary Code Execution
   description: |
-    [`angular`][1] is an open-source JavaScript framework, maintained by
-    Google, that assists with running single-page applications with the goal
-    of making development and testing easier by augmenting browser-based
-    applications with model–view–controller (MVC) capability. Affected
-    versions of the package are vulnerable to Arbitrary Code Execution.
-    `$parse` allowed arbitrary code execution via Angular expressions under
-    some very specific conditions. The only applications affected by these
-    vulnerabilities are those that match all of the following conditions:
+    [angular][1] is a package that lets you write client-side web
+    applications as if you had a smarter browser. It also lets you use HTML
+    as your template language and lets you extend HTML’s syntax to express
+    your application’s components clearly and succinctly.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution. `$parse` allowed arbitrary code execution via Angular
+    expressions under some very specific conditions. The only applications
+    affected by these vulnerabilities are those that match all of the
+    following conditions:
 
     * Application mixes server-side and client-side templating
     * The server-side templating contains XSS vulnerabilities
@@ -782,12 +647,13 @@
 - id: snykio:npm:angular:20140908
   title: Cross-site Scripting (XSS)
   description: |+
-    [`angular`][1] is an open-source JavaScript framework, maintained by
-    Google, that assists with running single-page applications with the goal
-    of making development and testing easier by augmenting browser-based
-    applications with model–view–controller (MVC) capability. Affected
-    versions of the package are vulnerable to Cross-site Scripting (XSS) due
-    to unsanitized URIs in `ng-srcset`.
+    [angular][1] is a package that lets you write client-side web
+    applications as if you had a smarter browser. It also lets you use HTML
+    as your template language and lets you extend HTML’s syntax to express
+    your application’s components clearly and succinctly.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS) due to unsanitized URIs in `ng-srcset`.
 
 
 
@@ -882,38 +748,21 @@
   source_url: https://snyk.io/vuln/npm:angular:20140908
 - id: snykio:npm:angular:20140909
   title: Unsafe Object Deserialization
-  description: |+
-    [`angular`][1] is an open-source JavaScript framework, maintained by
-    Google, that assists with running single-page applications with the goal
-    of making development and testing easier by augmenting browser-based
-    applications with model–view–controller (MVC) capability. Affected
-    versions of the package are vulnerable to Unsafe Object Deserialization.
+  description: |
+    [angular][1] is a package that lets you write client-side web
+    applications as if you had a smarter browser. It also lets you use HTML
+    as your template language and lets you extend HTML’s syntax to express
+    your application’s components clearly and succinctly.
+
+    Affected versions of this package are vulnerable to Unsafe Object
+    Deserialization.
 
 
 
     [1]: https://www.npmjs.com/package/angular
-    \nThe exploitable code:
-
-        hasOwnProperty.constructor.prototype.valueOf = valueOf.call;
-            ["a", "alert(1)"].sort(hasOwnProperty.constructor);
-    {: .language-js}
-
-    The exploit:
-
-    * 1.  `Array.sort` takes a comparison function and passes it 2
-          parameters to compare.
-      2.  It then calls `.valueOf()` if the result is not a primitive.
-
-    * The `Function` object conveniently accepts two string arguments so so
-      it can be used to construct a function. However, this doesn\'t do much
-      unless it can be executed.
-    * The `valueOf` function on `Function.prototype` was set to
-      `Function.prototype.call`. This causes the function constructed to be
-      executed when sort calls `.valueOf()` on the result of the comparison.
-
   affected_package: angular
   vulnerable_versions:
-  - "<1.2.24 >=1.2.19"
+  - ">=1.2.19 <1.2.24"
   severity: high
   package_manager: npm
   cwe:
@@ -925,17 +774,19 @@
   - Chirayu Krishnappa
   references:
   - https://github.com/angular/angular.js/commit/b39e1d47b9a1b39a9fe34c847a81f589fba522f8
+  - https://github.com/angular/angular.js/pull/8984
   source_url: https://snyk.io/vuln/npm:angular:20140909
 - id: snykio:npm:angular:20141104
   title: Arbitrary Command Execution
   description: |
-    [`angular`][1] is an open-source JavaScript framework, maintained by
-    Google, that assists with running single-page applications with the goal
-    of making development and testing easier by augmenting browser-based
-    applications with model–view–controller (MVC) capability. Affected
-    versions of the package are vulnerable to Arbitrary Command Injection
-    due to the assignment functions accessing constructors functions,
-    allowing attackers to execute their malicious code.
+    [angular][1] is a package that lets you write client-side web
+    applications as if you had a smarter browser. It also lets you use HTML
+    as your template language and lets you extend HTML’s syntax to express
+    your application’s components clearly and succinctly.
+
+    Affected versions of this package are vulnerable to Arbitrary Command
+    Execution due to the assignment functions accessing constructors
+    functions, allowing attackers to execute their malicious code.
 
 
 
@@ -961,12 +812,13 @@
 - id: snykio:npm:angular:20150310
   title: Arbitrary Code Execution
   description: |+
-    [`angular`][1] is an open-source JavaScript framework, maintained by
-    Google, that assists with running single-page applications with the goal
-    of making development and testing easier by augmenting browser-based
-    applications with model–view–controller (MVC) capability. Affected
-    versions of the package are vulnerable to Arbitrary Code Execution via
-    unsafe svg animation tags.
+    [angular][1] is a package that lets you write client-side web
+    applications as if you had a smarter browser. It also lets you use HTML
+    as your template language and lets you extend HTML’s syntax to express
+    your application’s components clearly and succinctly.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution via unsafe svg animation tags.
 
 
 
@@ -1006,16 +858,14 @@
 - id: snykio:npm:angular:20150315
   title: JSONP Callback Attack
   description: |
-    [`angular`][1] is an open-source JavaScript framework, maintained by
-    Google, that assists with running single-page applications with the goal
-    of making development and testing easier by augmenting browser-based
-    applications with model–view–controller (MVC) capability.
+    [angular][1] is a package that lets you write client-side web
+    applications as if you had a smarter browser. It also lets you use HTML
+    as your template language and lets you extend HTML’s syntax to express
+    your application’s components clearly and succinctly.
 
-    Affected versions of the package are vulnerable to JSONP Callbacks
-    attacks.
-
-    `JSONP` (JSON with padding) is a method used to request data from a
-    server residing in a different domain than the client.
+    Affected versions of this package are vulnerable to JSONP Callback
+    Attack. `JSONP` (JSON with padding) is a method used to request data
+    from a server residing in a different domain than the client.
 
     Any url could perform JSONP requests, allowing full access to the
     browser and the JavaScript context. This can lead to Cross-site
@@ -1043,20 +893,93 @@
   source_url: https://snyk.io/vuln/npm:angular:20150315
 - id: snykio:npm:angular:20150807
   title: Cross-site Scripting (XSS)
-  description: |
-    [`angular`][1] is an open-source JavaScript framework, maintained by
-    Google, that assists with running single-page applications with the goal
-    of making development and testing easier by augmenting browser-based
-    applications with model–view–controller (MVC) capability. Affected
-    versions of the package are vulnerable to Cross-site Scripting (XSS) due
-    to no proper sanitization of `xlink:href` attributes.
+  description: |+
+    [angular][1] is a package that lets you write client-side web
+    applications as if you had a smarter browser. It also lets you use HTML
+    as your template language and lets you extend HTML’s syntax to express
+    your application’s components clearly and succinctly.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS) due to no proper sanitization of `xlink:href` attributes.
 
 
 
     [1]: https://www.npmjs.com/package/angular
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
   affected_package: angular
   vulnerable_versions:
-  - "<1.5.0-beta.0 >=1.0.0"
+  - ">=1.0.0 <1.5.0-beta.0"
   severity: high
   package_manager: npm
   cwe:
@@ -1073,16 +996,16 @@
 - id: snykio:npm:angular:20150909
   title: Cross-site Scripting (XSS)
   description: |+
-    [`angular`][1] is an open-source JavaScript framework, maintained by
-    Google, that assists with running single-page applications with the goal
-    of making development and testing easier by augmenting browser-based
-    applications with model–view–controller (MVC) capability.
+    [angular][1] is a package that lets you write client-side web
+    applications as if you had a smarter browser. It also lets you use HTML
+    as your template language and lets you extend HTML’s syntax to express
+    your application’s components clearly and succinctly.
 
-    Affected versions of the package are vulnerable to Mutation Cross-site
-    Scripting (mXSS). This error occurs when `$sanitize` sanitizer tries to
-    check the input for possible mXSS payload and the verification errors
-    due to the input mutating indefinitely. This could be a sign that the
-    payload contains code exploiting an mXSS vulnerability in the browser.
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). This error occurs when `$sanitize` sanitizer tries to check the
+    input for possible mXSS payload and the verification errors due to the
+    input mutating indefinitely. This could be a sign that the payload
+    contains code exploiting an mXSS vulnerability in the browser.
 
     mXSS attack exploit browser bugs that cause some browsers parse a
     certain html strings into DOM, which once serialized doesn\'t match the
@@ -1165,6 +1088,9 @@
       disable any features that might be manipulated for an XSS attack.
     * Read the documentation for any of the libraries referenced in your
       code to understand which elements allow for embedded HTML.
+      ## Remediation   {#remediation}
+
+    Upgrade `angular` to version 1.5.0-beta.2 or higher.
 
   affected_package: angular
   vulnerable_versions:
@@ -1185,12 +1111,13 @@
 - id: snykio:npm:angular:20151130
   title: Cross-site Scripting (XSS)
   description: |+
-    [`angular`][1] is an open-source JavaScript framework, maintained by
-    Google, that assists with running single-page applications with the goal
-    of making development and testing easier by augmenting browser-based
-    applications with model–view–controller (MVC) capability. Affected
-    versions of the package are vulnerable to Cross-site Scripting (XSS)
-    attacks involving assignment on `constructor` properties.
+    [angular][1] is a package that lets you write client-side web
+    applications as if you had a smarter browser. It also lets you use HTML
+    as your template language and lets you extend HTML’s syntax to express
+    your application’s components clearly and succinctly.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS) attacks involving assignment on `constructor` properties.
 
 
 
@@ -1286,12 +1213,12 @@
 - id: snykio:npm:angular:20151205
   title: Cross-site Scripting (XSS)
   description: |+
-    [`angular`][1] is an open-source JavaScript framework, maintained by
-    Google, that assists with running single-page applications with the goal
-    of making development and testing easier by augmenting browser-based
-    applications with model–view–controller (MVC) capability.
+    [angular][1] is a package that lets you write client-side web
+    applications as if you had a smarter browser. It also lets you use HTML
+    as your template language and lets you extend HTML’s syntax to express
+    your application’s components clearly and succinctly.
 
-    Affected versions of the package are vulnerable to Cross-site Scripting
+    Affected versions of this package are vulnerable to Cross-site Scripting
     (XSS) via the SVG `<use>` element. The `<use>` element can reference
     external SVG\'s (same origin) and can include `xlink:href` javascript
     urls or foreign object that can execute XSS. The change disallows
@@ -1396,6 +1323,9 @@
       disable any features that might be manipulated for an XSS attack.
     * Read the documentation for any of the libraries referenced in your
       code to understand which elements allow for embedded HTML.
+      ## Remediation   {#remediation}
+
+    Upgrade `angular` to version 1.5.0-rc.0 or higher.
 
   affected_package: angular
   vulnerable_versions:
@@ -1416,12 +1346,13 @@
 - id: snykio:npm:angular:20160122
   title: Cross-site Scripting (XSS)
   description: |+
-    [`angular`][1] is an open-source JavaScript framework, maintained by
-    Google, that assists with running single-page applications with the goal
-    of making development and testing easier by augmenting browser-based
-    applications with model–view–controller (MVC) capability. Affected
-    versions of the package are vulnerable to Cross-site Scripting (XSS) due
-    to the `usemap` attribute not being blacklisted.
+    [angular][1] is a package that lets you write client-side web
+    applications as if you had a smarter browser. It also lets you use HTML
+    as your template language and lets you extend HTML’s syntax to express
+    your application’s components clearly and succinctly.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS) due to the `usemap` attribute not being blacklisted.
 
 
 
@@ -1497,10 +1428,13 @@
       disable any features that might be manipulated for an XSS attack.
     * Read the documentation for any of the libraries referenced in your
       code to understand which elements allow for embedded HTML.
+      ## Remediation   {#remediation}
+
+    Upgrade `angular` to version 1.5.0-rc.2 or higher.
 
   affected_package: angular
   vulnerable_versions:
-  - "<1.5.0-rc.2 >=1.3.0"
+  - ">=1.3.0 <1.5.0-rc.2"
   severity: medium
   package_manager: npm
   cwe:
@@ -1517,17 +1451,14 @@
   source_url: https://snyk.io/vuln/npm:angular:20160122
 - id: snykio:npm:angular:20160527
   title: Arbitrary Script Injection
-  description: |+
-    [`angular`][1] is an open-source JavaScript framework, maintained by
-    Google, that assists with running single-page applications with the goal
-    of making development and testing easier by augmenting browser-based
-    applications with model–view–controller (MVC) capability. Affected
-    versions of the package are vulnerable to Arbitrary Script Injection.
+  description: |
+    [angular][1] is a package that lets you write client-side web
+    applications as if you had a smarter browser. It also lets you use HTML
+    as your template language and lets you extend HTML’s syntax to express
+    your application’s components clearly and succinctly.
 
-
-
-    [1]: https://www.npmjs.com/package/angular
-    \n`link[href]` attributes were not protected via `$sce`, which prevents
+    Affected versions of this package are vulnerable to Arbitrary Script
+    Injection. Attributes were not protected via `$sce`, which prevents
     interpolated values that fail the `RESOURCE_URL` context tests from
     being used in interpolation. For example if the application is running
     at `https://docs.angularjs.org` then the following will fail:
@@ -1538,9 +1469,12 @@
     By default, `RESOURCE_URL` safe URLs are only allowed from the same
     domain and protocol as the application document.
 
+
+
+    [1]: https://www.npmjs.com/package/angular
   affected_package: angular
   vulnerable_versions:
-  - "<1.2.30 >=1.0.0"
+  - ">=1.0.0 <1.2.30"
   severity: medium
   package_manager: npm
   cwe:
@@ -1558,25 +1492,25 @@
 - id: snykio:npm:angular:20161101
   title: Content Security Policy (CSP) Bypass
   description: |
-    [`angular`][1] is an open-source JavaScript framework, maintained by
-    Google, that assists with running single-page applications with the goal
-    of making development and testing easier by augmenting browser-based
-    applications with model–view–controller (MVC) capability.
+    [angular][1] is a package that lets you write client-side web
+    applications as if you had a smarter browser. It also lets you use HTML
+    as your template language and lets you extend HTML’s syntax to express
+    your application’s components clearly and succinctly.
 
-    Affected versions of the package are vulnerable to CSP Bypass. Extension
-    URIs (`resource://...`) bypass Content-Security-Policy in Chrome and
-    Firefox and can always be loaded. Now if a site already has a XSS bug,
-    and uses CSP to protect itself, but the user has an extension installed
-    that uses Angular, an attacker can load Angular from the extension, and
-    Angular\'s auto-bootstrapping can be used to bypass the victim site\'s
-    CSP protection.
+    Affected versions of this package are vulnerable to Content Security
+    Policy (CSP) Bypass. Extension URIs (`resource://...`) bypass
+    Content-Security-Policy in Chrome and Firefox and can always be loaded.
+    Now if a site already has a XSS bug, and uses CSP to protect itself, but
+    the user has an extension installed that uses Angular, an attacker can
+    load Angular from the extension, and Angular\'s auto-bootstrapping can
+    be used to bypass the victim site\'s CSP protection.
 
 
 
     [1]: https://www.npmjs.com/package/angular
   affected_package: angular
   vulnerable_versions:
-  - "<1.5.9 >=1.5.0"
+  - ">=1.5.0 <1.5.9"
   severity: medium
   package_manager: npm
   cwe:
@@ -1592,15 +1526,16 @@
   source_url: https://snyk.io/vuln/npm:angular:20161101
 - id: snykio:npm:angular:20171018
   title: Cross-site Scripting (XSS)
-  description: |+
-    [`angular`][1] is an HTML enhanced for web apps.
+  description: |-
+    [angular][1] is a package that lets you write client-side web
+    applications as if you had a smarter browser. It also lets you use HTML
+    as your template language and lets you extend HTML’s syntax to express
+    your application’s components clearly and succinctly.
 
-    Affected versions of the package are vulnerable to Cross-site Scripting
-    (XSS) via ideographic space chararcters in URIs.
-
-    Browsers mutate attributes values such as `　javascript:alert(1)` when
-    they are written to the DOM via `innerHTML` in various vendor specific
-    ways. In Chrome (&lt;62), this mutation removed the preceding
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). Browsers mutate attributes values such as `　javascript:alert(1)`
+    when they are written to the DOM via `innerHTML` in various vendor
+    specific ways. In Chrome (&lt;62), this mutation removed the preceding
     \"whitespace\" resulting in a value that could end up being executed as
     JavaScript.
 
@@ -1626,78 +1561,7 @@
 
     [1]: https://www.npmjs.com/package/angular
     [2]: https://github.com/angular/angular.js/blob/817ac567/src/ngSanitize/sanitize.js#L406-L417
-    \nA cross-site scripting attack occurs when the attacker tricks a
-    legitimate web-based application or site to accept a request as
-    originating from a trusted source.
-
-    This is done by escaping the context of the web application; the web
-    application then delivers that data to its users along with other
-    trusted dynamic content, without validating it. The browser unknowingly
-    executes malicious script on the client side (through client-side
-    languages; usually JavaScript or HTML) in order to perform actions that
-    are otherwise typically blocked by the browser’s Same Origin Policy.
-
-    ֿInjecting malicious code is the most prevalent manner by which XSS is
-    exploited; for this reason, escaping characters in order to prevent this
-    manipulation is the top method for securing code against this
-    vulnerability.
-
-    Escaping means that the application is coded to mark key characters, and
-    particularly key characters included in user input, to prevent those
-    characters from being interpreted in a dangerous context. For example,
-    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
-    order to be interpreted and displayed as themselves in text, while
-    within the code itself, they are used for HTML tags. If malicious
-    content is injected into an application that escapes special characters
-    and that malicious content uses `<` and `>` as HTML tags, those
-    characters are nonetheless not interpreted as HTML tags by the browser
-    if they’ve been correctly escaped in the application code and in this
-    way the attempted attack is diverted.
-
-    The most prominent use of XSS is to steal cookies (source: OWASP
-    HttpOnly) and hijack user sessions, but XSS exploits have been used to
-    expose sensitive information, enable access to privileged services and
-    functionality and deliver malware.
-
-    ### Types of attacks   {#types-of-attacks}
-
-    There are a few methods by which XSS can be manipulated:
-
-    | Type | Origin | Description |
-    |----------
-    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
-    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
-    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
-    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
-
-    ### Affected environments   {#affected-environments}
-
-    The following environments are susceptible to an XSS attack:
-
-    * Web servers
-    * Application servers
-    * Web application environments
-
-    ### How to prevent   {#how-to-prevent}
-
-    This section describes the top best practices designed to specifically
-    protect your code:
-
-    * Sanitize data input in an HTTP request before reflecting it back,
-      ensuring all data is validated, filtered or escaped before echoing
-      anything back to the user, such as the values of query parameters
-      during searches.
-    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
-      to their respective HTML or URL encoded equivalents.
-    * Give users the option to disable client-side scripts.
-    * Redirect invalid requests.
-    * Detect simultaneous logins, including those from two separate IP
-      addresses, and invalidate those sessions.
-    * Use and enforce a Content Security Policy (source: Wikipedia) to
-      disable any features that might be manipulated for an XSS attack.
-    * Read the documentation for any of the libraries referenced in your
-      code to understand which elements allow for embedded HTML.
-
+    \n
   affected_package: angular
   vulnerable_versions:
   - "<1.6.7"
@@ -1718,15 +1582,17 @@
 - id: snykio:npm:angular:20180202
   title: Cross-site Scripting (XSS)
   description: |+
-    [`angularjs`][1] is a toolset for building the framework suited to your
-    application development.
+    [angular][1] is a package that lets you write client-side web
+    applications as if you had a smarter browser. It also lets you use HTML
+    as your template language and lets you extend HTML’s syntax to express
+    your application’s components clearly and succinctly.
 
     Affected versions of this package are vulnerable to Cross-site Scripting
-    (XSS) through SVG files if enableSvg is set.
+    (XSS) through SVG files if `enableSvg` is set.
 
 
 
-    [1]: https://www.npmjs.com/package/angularjs
+    [1]: https://www.npmjs.com/package/angular
     \nA cross-site scripting attack occurs when the attacker tricks a
     legitimate web-based application or site to accept a request as
     originating from a trusted source.
@@ -1813,4 +1679,6 @@
   - Unknown
   references:
   - https://github.com/angular/angular.js/blob/master/CHANGELOG.md#169-fiery-basilisk-2018-02-02
+  - https://github.com/angular/angular.js/commit/b9ef6585e10477fbbf912a971fe0b390bca692a6
+  - https://github.com/angular/angular.js/pull/16414
   source_url: https://snyk.io/vuln/npm:angular:20180202

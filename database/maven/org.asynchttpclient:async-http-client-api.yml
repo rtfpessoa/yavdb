@@ -1,0 +1,35 @@
+---
+- id: snykio:maven:org.asynchttpclient:async-http-client-api:174923
+  title: Improper Certificate Validation
+  description: |
+    [org.asynchttpclient:async-http-client-api][1] is a library for Async
+    Http Client (AHC) API classes.
+
+    Affected versions of this package are vulnerable to Improper Certificate
+    Validation. SSL/TLS certificate verification was found to be disabled
+    under certain conditions where client certificates were used to
+    establish encrypted communications. The package also did not verify that
+    the server hostname matched the domain name in the subject\'s Common
+    Name or subjectAltName field in X.509 certificates. This could allow a
+    man-in-the-middle attacker to spoof an SSL server if they had a
+    certificate that was valid for any domain name.
+
+
+
+    [1]: https://mvnrepository.com/artifact/org.asynchttpclient/async-http-client-api
+  affected_package: org.asynchttpclient:async-http-client-api
+  vulnerable_versions:
+  - "< 2.0.0-alpha1"
+  severity: high
+  package_manager: maven
+  cwe:
+  - CWE-295
+  disclosed_date: 2013-07-13
+  created_date: 2019-08-25
+  last_modified_date: 2019-08-25
+  credit:
+  - Unknown
+  references:
+  - https://github.com/AsyncHttpClient/async-http-client/commit/df6ed70e86c8fc340ed75563e016c8baa94d7e72
+  - https://github.com/AsyncHttpClient/async-http-client/issues/352
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGASYNCHTTPCLIENT-174923

@@ -1,0 +1,35 @@
+---
+- id: snykio:npm:connect-pg-simple:460154
+  title: SQL Injection
+  description: |
+    [connect-pg-simple][1] is a minimal PostgreSQL session store for
+    Express/Connect.
+
+    Affected versions of this package are vulnerable to SQL Injection within
+    `PGStore.prototype.quotedTable` function where user input is wrapped
+    using double quotes. If the schemaName is set to `'web".session WHERE
+    $1=$1;--`, it is possible to wipe the web.session table every time the
+    prune process runs.
+
+
+
+    [1]: https://github.com/voxpelli/node-connect-pg-simple
+  affected_package: connect-pg-simple
+  vulnerable_versions:
+  - "<6.0.1"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2019-15658
+  cwe:
+  - CWE-89
+  disclosed_date: 2019-08-21
+  created_date: 2019-08-27
+  last_modified_date: 2019-08-27
+  credit:
+  - Robert Nilsson
+  references:
+  - https://github.com/voxpelli/node-connect-pg-simple/commit/df61c9507f804ba72803e4f567c3cbcfa0a9d7e1
+  - https://github.com/voxpelli/node-connect-pg-simple/issues/151
+  - https://github.com/voxpelli/node-connect-pg-simple/security/advisories/GHSA-xqh8-5j36-4556
+  source_url: https://snyk.io/vuln/SNYK-JS-CONNECTPGSIMPLE-460154
