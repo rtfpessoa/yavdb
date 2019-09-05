@@ -29,3 +29,40 @@
   - https://github.com/apache/karaf/blob/43d8cd0ae2368ce40465ea5511c5c150ec82e275/jaas/modules/src/main/java/org/apache/karaf/jaas/modules/jdbc/JDBCLoginModule.java#L95
   - https://issues.apache.org/jira/browse/KARAF-4199
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEKARAFJAAS-30661
+- id: snykio:maven:org.apache.karaf.jaas:org.apache.karaf.jaas.modules:460762
+  title: LDAP injection
+  description: |
+    [org.apache.karaf.jaas:org.apache.karaf.jaas.modules][1] is a bundle
+    that provides JAAS modules which can be used in Karaf (LDAP, JDBC, etc).
+
+    Affected versions of this package are vulnerable to LDAP injection. It
+    uses the`LDAPLoginModule` to authenticate users to a directory via LDAP.
+    However, it is not encoding usernames properly and hence is vulnerable
+    to LDAP injection attacks.
+
+    While it appears that it not possible to exploit this vulnerability to
+    allow an attacker to gain remote access, it allows an attacker to insert
+    special characters into the search query step. Therefore, it can
+    potentially be exploited as part of a Denial Of Service attack.
+
+
+
+    [1]: https://search.maven.org/artifact/org.apache.karaf.jaas/org.apache.karaf.jaas.modules/4.2.6/bundle
+  affected_package: org.apache.karaf.jaas:org.apache.karaf.jaas.modules
+  vulnerable_versions:
+  - "< 4.0.8"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2016-8750
+  cwe:
+  - CWE-502
+  disclosed_date: 2014-05-08
+  created_date: 2017-11-20
+  last_modified_date: 2017-11-20
+  credit:
+  - Colm O hEigeartaigh
+  references:
+  - http://karaf.apache.org/security/cve-2016-8750.txt
+  - https://github.com/apache/karaf/blob/ac07cb2440ceff94b3001728c1611fc471253d19/jaas/modules/src/main/java/org/apache/karaf/jaas/modules/ldap/LDAPLoginModule.java
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEKARAFJAAS-460762

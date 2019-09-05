@@ -1,0 +1,62 @@
+---
+- id: snykio:maven:org.apache.hive:hive-hplsql:460761
+  title: Arbitrary File Write
+  description: "[org.apache.hive:hive-hplsql][1] is a data warehouse software\nfacilitates
+    reading, writing, and managing large datasets residing in\ndistributed storage
+    using SQL.\n\nAffected versions of this package are vulnerable to Arbitrary File
+    Write\nvia the File Transfer Protocol (FTP) client functionality. Hive gives an\nSQL-like
+    interface to query data stored in various databases and file\nsystems that integrate
+    with Hadoop. Among other things, it supports\ncopying data from FTP servers, using
+    the [COPY-FROM-FTP command][2].\n\n    COPY FROM FTP host [USER user [PWD password]]
+    [DIR directory] [FILES files_wildcard]\n      [TO [LOCAL] target_directory] [options]\n
+    \   \n    options:\n      OVERWRITE | NEW\n      SUBDIR\n      SESSIONS num  \n\nA
+    possible attack can be overriding the ssh authorized\\_keys file for\nthe root
+    user, making it possible to login as root later on. Assumming\nthat Apache Hive
+    instance connects to the attacker\\'s malicious FTP\nserver, to download some
+    merchant data daily, by using the following\nquery:\n\n    COPY FROM FTP remote.merchant.domain.com\n
+    \     USER 'foo' PWD '***'\n      DIR data/sales/in FILES  '.*'\n      TO /data/sales/raw
+    OVERWRITE\n\nThe malicious FTP server would send back *path traversal* filenames
+    to\nthe client. For instance, responding to a LIST command with\n`../../../../../../../home/root/.ssh/authorized_keys`.\n\nWhen
+    Hive executes the above statement (assuming it’s running as root),\nroot’s `authorized_keys`
+    ssh file will be overwritten with one known by\nthe attacker.\n\n\n\n[1]: https://search.maven.org/search?q=a:hive-hplsql\n[2]:
+    http://www.hplsql.org/copy-from-ftp\n\\nFTP is a standard network protocol used
+    to transfer files between a\nclient and server. Out of the box, it does not offer
+    a *download folder*\ncommand, but it does allow the following:\n\n1.  Listing
+    all of the files in a remote folder (`LIST` or `NLST` FTP\n    commands)\n2.  For
+    each file in the list results above: Download the file and save\n    it to a local
+    folder (`GET` or `MGET` FTP commands)\n\nThe following is an example of some Java
+    code downloading a folder,\nusing the Apache commons-net library:\n\n    private
+    void downloadDirectory(FTPClient ftpClient, String remoteDir, String localDir)
+    throws IOException\n    {\n      FTPFile[] subFiles = ftpClient.listFiles(remoteDir);\n
+    \     for (FTPFile aFile : subFiles)\n      {\n        if (!aFile.isDirectory())\n
+    \       {\n           String remoteFile = ftpClient.printWorkingDirectory() +
+    File.separator + aFile.getName();\n           String localFile = localDir + File.separator
+    + aFile.getName();\n    \n           OutputStream downloadedStream = new BufferedOutputStream(new
+    FileOutputStream(new File(localFile)));\n           boolean success = ftpClient.retrieveFile(remoteFile,
+    downloadedStream);\n           outputStream.close();            \n        }\n
+    \     }\n    }\n{: .language-java}\n\nThe code above, iterates over each file
+    returned by the server, and\ndownloads it into a local destination folder. So
+    for example, if the\nfirst file in the remote folder is named `passwd`, and the
+    local\ndestination folder is `/var/data/sync/`, it\\'d end up downloading the\nfile
+    to `/var/data/sync/passwd`.\n\nBut if the FTP server turns malicious, and instead
+    of responding to the\nLIST command with `passwd`, it responds with `../../../../etc/passwd`
+    as\nthe filename. The code above will end up placing the file into\n`/var/data/sync/../../../../etc/passwd`,
+    practically overwriting\n`/etc/passwd` with the newly downloaded file.\n\nFor
+    more information you can check out our [blog post][1].\n\n\n\n[1]: https://snyk.io/blog/attacking-an-ftp-client/\n"
+  affected_package: org.apache.hive:hive-hplsql
+  vulnerable_versions:
+  - ">= 2.1.0 < 2.3.3"
+  severity: low
+  package_manager: maven
+  cve:
+  - CVE-2018-1315
+  cwe:
+  - CWE-269
+  disclosed_date: 2018-04-04
+  created_date: 2018-04-04
+  last_modified_date: 2018-04-04
+  credit:
+  - Snyk Security Research Team
+  references:
+  - https://snyk.io/blog/attacking-an-ftp-client/
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEHIVE-460761

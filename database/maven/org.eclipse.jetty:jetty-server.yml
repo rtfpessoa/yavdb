@@ -1563,3 +1563,41 @@
   - https://bugs.eclipse.org/bugs/show_bug.cgi?id=535669
   - https://nvd.nist.gov/vuln/detail/CVE-2017-7658
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGECLIPSEJETTY-32385
+- id: snykio:maven:org.eclipse.jetty:jetty-server:460763
+  title: Cache Poisoning
+  description: |
+    [org.eclipse.jetty:jetty-server][1] is a lightweight highly scalable
+    java based web server and servlet engine.
+
+    Affected versions of this package are vulnerable to Cache Poisoning. An
+    `HTTP/1` style request line (i.e. method space URI space version) that
+    declares a version of `HTTP/0.9` was accepted and treated as a 0.9
+    request. If deployed behind an intermediary that also accepted and
+    passed through the 0.9 version, the response sent could be interpreted
+    by the intermediary as `HTTP/1` headers. This could be used to poison
+    the cache if the server allowed the origin client to generate arbitrary
+    content in the response.
+
+
+
+    [1]: https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-server
+  affected_package: org.eclipse.jetty:jetty-server
+  vulnerable_versions:
+  - "< 9.3.24.v20180605"
+  - ">= 9.4.0.M0 < 9.4.11.v20180605"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2017-7656
+  cwe:
+  - CWE-444
+  disclosed_date: 2018-06-07
+  created_date: 2018-06-28
+  last_modified_date: 2018-06-28
+  credit:
+  - Regis Leroy
+  references:
+  - https://bugs.eclipse.org/bugs/show_bug.cgi?id=535667
+  - https://github.com/eclipse/jetty.project/commit/a285deea42fcab60d9edcf994e458c238a348b55
+  - https://nvd.nist.gov/vuln/detail/CVE-2017-7656
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGECLIPSEJETTY-460763
