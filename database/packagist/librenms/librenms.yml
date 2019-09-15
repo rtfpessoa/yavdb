@@ -98,6 +98,323 @@
   - https://github.com/librenms/librenms/commit/d3094fa6578b29dc34fb5a7d0bd6deab49ecc911
   - https://github.com/librenms/librenms/pull/7184
   source_url: https://snyk.io/vuln/SNYK-PHP-LIBRENMSLIBRENMS-174588
+- id: snykio:packagist:librenms/librenms:466416
+  title: Authentication Bypass
+  description: |
+    [librenms/librenms][1] is a fully featured network monitoring system
+    that provides a wealth of features and device support.
+
+    Affected versions of this package are vulnerable to Authentication
+    Bypass. Multiple LibreNMS scripts do not correctly enforce or completely
+    lacks authentication checks. Attackers can take advantage of this to
+    access several scripts, including some that suffer from additional
+    vulnerabilities. This vulnerability can be combined with other
+    vulnerabilities could be used to achieve unauthenticated remote code
+    execution.
+
+
+
+    [1]: https://packagist.org/packages/librenms/librenms
+  affected_package: librenms/librenms
+  vulnerable_versions:
+  - "<1.50.1"
+  severity: high
+  package_manager: packagist
+  cve:
+  - CVE-2019-10668
+  cwe:
+  - CWE-287
+  disclosed_date: 2019-09-09
+  created_date: 2019-09-09
+  last_modified_date: 2019-09-09
+  credit:
+  - Eldar Marcussen
+  references:
+  - https://github.com/librenms/librenms/pull/10091
+  - https://github.com/librenms/librenms/pull/10091/commits/678cf548b61aa0db8019141d3577c997e87a0b42
+  - https://www.darkmatter.ae/xen1thlabs/librenms-authentication-bypass-vulnerability-xl-19-016/
+  source_url: https://snyk.io/vuln/SNYK-PHP-LIBRENMSLIBRENMS-466416
+- id: snykio:packagist:librenms/librenms:466417
+  title: Directory Traversal
+  description: |
+    [librenms/librenms][1] is a fully featured network monitoring system
+    that provides a wealth of features and device support.
+
+    Affected versions of this package are vulnerable to Directory Traversal.
+    An authenticated user can perform a directory traversal attack against
+    the `/pdf.php` file with a partial filename in the report parameter, to
+    cause local file inclusion resulting in code execution.
+
+
+
+    [1]: https://packagist.org/packages/librenms/librenms
+    \nA Directory Traversal attack (also known as path traversal) aims to
+    access files and directories that are stored outside the intended
+    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
+    its variations, or by using absolute file paths, it may be possible to
+    access arbitrary files and directories stored on file system, including
+    application source code, configuration, and other critical system files.
+
+    Directory Traversal vulnerabilities can be generally divided into two
+    types:
+
+    * **Information Disclosure**\: Allows the attacker to gain information
+      about the folder structure or read the contents of sensitive files on
+      the system.
+
+    `st` is a module for serving static files on web pages, and contains a
+    [vulnerability of this type][1]. In our example, we will serve files
+    from the `public` route.
+
+    If an attacker requests the following URL from our server, it will in
+    turn leak the sensitive private key of the root user.
+
+        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
+
+    **Note** `%2e` is the URL encoded version of `.` (dot).
+
+    * **Writing arbitrary files**\: Allows the attacker to create or replace
+      existing files. This type of vulnerability is also known as
+      `Zip-Slip`.
+
+    One way to achieve this is by using a malicious `zip` archive that holds
+    path traversal filenames. When each filename in the zip archive gets
+    concatenated to the target extraction folder, without validation, the
+    final path ends up outside of the target folder. If an executable or a
+    configuration file is overwritten with a file containing malicious code,
+    the problem can turn into an arbitrary code execution issue quite
+    easily.
+
+    The following is an example of a `zip` archive with one benign file and
+    one malicious file. Extracting the malicious file will result in
+    traversing out of the target folder, ending up in `/root/.ssh/`
+    overwriting the `authorized_keys` file:
+
+        2018-04-15 22:04:29 .....           19           19  good.txt
+        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
+
+
+
+    [1]: https://snyk.io/vuln/npm:st:20140206
+  affected_package: librenms/librenms
+  vulnerable_versions:
+  - "<1.53"
+  severity: medium
+  package_manager: packagist
+  cve:
+  - CVE-2019-12464
+  cwe:
+  - CWE-23
+  disclosed_date: 2019-09-09
+  created_date: 2019-09-09
+  last_modified_date: 2019-09-09
+  credit:
+  - Eldar Marcussen
+  references:
+  - https://github.com/librenms/librenms/pull/10270
+  - https://www.darkmatter.ae/xen1thlabs/librenms-limited-local-file-inclusion-via-directory-traversal-vulnerability-xl-19-019/
+  source_url: https://snyk.io/vuln/SNYK-PHP-LIBRENMSLIBRENMS-466417
+- id: snykio:packagist:librenms/librenms:466429
+  title: SQL injection
+  description: |
+    [librenms/librenms][1] is a fully featured network monitoring system
+    that provides a wealth of features and device support.
+
+    Affected versions of this package are vulnerable to SQL injection.
+    Multiple areas within LibreNMS is vulnerable to SQL Injection. This
+    includes:
+
+    * The `term` parameter is used insecurely in a database query for
+      showing columns of a table within `ajax_rulesuggest.php` and
+      `ajax_search.php`
+    * Multiple parameters used by `graph.php` which are sufficiently
+      parameterized
+
+
+
+    [1]: https://packagist.org/packages/librenms/librenms
+  affected_package: librenms/librenms
+  vulnerable_versions:
+  - "<1.53"
+  severity: high
+  package_manager: packagist
+  cve:
+  - CVE-2019-10671
+  - CVE-2019-12465
+  cwe:
+  - CWE-89
+  disclosed_date: 2019-09-09
+  created_date: 2019-09-09
+  last_modified_date: 2019-09-09
+  credit:
+  - Eldar Marcussen
+  references:
+  - https://github.com/librenms/librenms/pull/10088/commits/0559014c5813ee38d400b593ae5f69da230040ae
+  - https://www.darkmatter.ae/xen1thlabs/librenms-multiple-sql-injection-vulnerability-xl-19-025/
+  - https://www.darkmatter.ae/xen1thlabs/librenms-sql-injection-vulnerability-xl-19-024/
+  source_url: https://snyk.io/vuln/SNYK-PHP-LIBRENMSLIBRENMS-466429
+- id: snykio:packagist:librenms/librenms:466430
+  title: Insufficient Input Validation
+  description: |
+    [librenms/librenms][1] is a fully featured network monitoring system
+    that provides a wealth of features and device support.
+
+    Affected versions of this package are vulnerable to Insufficient Input
+    Validation. It is possible to inject syntax to the RRDtool used by
+    LibreNMS to draw graphs. This could lead to information disclosure,
+    denial of service, remote code execution and arbitrary file writes under
+    certain conditions.
+
+    ### PoC by Eldar Marcussen   {#poc-by-eldar-marcussen}
+
+        $ curl "http://host/graph.php?device=&type=device_ber&from=1&graph_title=1'%0a%0acd+.. %0als%0a'&to=2&width=50&height=300&debug=1"
+
+
+
+    [1]: https://packagist.org/packages/librenms/librenms
+  affected_package: librenms/librenms
+  vulnerable_versions:
+  - "<1.53"
+  severity: medium
+  package_manager: packagist
+  cve:
+  - CVE-2019-10665
+  - CVE-2019-12463
+  cwe:
+  - CWE-284
+  disclosed_date: 2019-09-09
+  created_date: 2019-09-09
+  last_modified_date: 2019-09-09
+  credit:
+  - Eldar Marcussen
+  references:
+  - https://github.com/librenms/librenms/pull/10276
+  - https://www.darkmatter.ae/xen1thlabs/librenms-rrdtool-injection-vulnerability-xl-19-023/
+  source_url: https://snyk.io/vuln/SNYK-PHP-LIBRENMSLIBRENMS-466430
+- id: snykio:packagist:librenms/librenms:466431
+  title: Command Injection
+  description: |
+    [librenms/librenms][1] is a fully featured network monitoring system
+    that provides a wealth of features and device support.
+
+    Affected versions of this package are vulnerable to Command Injection.
+    It is possible to inject arbitrary commands in
+    `html/includes/graphs/device/collectd.inc.php` where user supplied
+    parameters are filtered with the`mysqli_escape_real_string function`.
+    This function is not the appropriate function to sanitize command
+    arguments as it does not escape a number of command line syntax
+    characters such as backticks, allowing an attacker to inject commands
+    into the variable `$rrd_cmd`, which gets executed via `passthru()`.
+
+
+
+    [1]: https://packagist.org/packages/librenms/librenms
+  affected_package: librenms/librenms
+  vulnerable_versions:
+  - "<1.50.1"
+  severity: high
+  package_manager: packagist
+  cve:
+  - CVE-2019-10669
+  cwe:
+  - CWE-94
+  disclosed_date: 2019-09-09
+  created_date: 2019-09-09
+  last_modified_date: 2019-09-09
+  credit:
+  - Eldar Marcussen
+  references:
+  - https://github.com/librenms/librenms/pull/10091
+  - https://github.com/librenms/librenms/pull/10091/commits/678cf548b61aa0db8019141d3577c997e87a0b42
+  - https://www.darkmatter.ae/xen1thlabs/librenms-command-injection-vulnerability-xl-19-017/
+  source_url: https://snyk.io/vuln/SNYK-PHP-LIBRENMSLIBRENMS-466431
+- id: snykio:packagist:librenms/librenms:466432
+  title: Directory Traversal
+  description: |
+    [librenms/librenms][1] is a fully featured network monitoring system
+    that provides a wealth of features and device support.
+
+    Affected versions of this package are vulnerable to Directory Traversal.
+    Several areas within the package perform dynamic script inclusion via
+    the `include()` function on user supplied input without sanitizing the
+    values by calling `basename()` or a similar function. An attacker can
+    leverage this to execute PHP code from an included file such as
+    `csv.php?report=../`
+
+    Exploitation of these scripts is made difficult by additional text being
+    appended such as`.inc.php`. As such, an attacker would need to be able
+    to control both a filename and its content on the target server.
+
+
+
+    [1]: https://packagist.org/packages/librenms/librenms
+    \nA Directory Traversal attack (also known as path traversal) aims to
+    access files and directories that are stored outside the intended
+    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
+    its variations, or by using absolute file paths, it may be possible to
+    access arbitrary files and directories stored on file system, including
+    application source code, configuration, and other critical system files.
+
+    Directory Traversal vulnerabilities can be generally divided into two
+    types:
+
+    * **Information Disclosure**\: Allows the attacker to gain information
+      about the folder structure or read the contents of sensitive files on
+      the system.
+
+    `st` is a module for serving static files on web pages, and contains a
+    [vulnerability of this type][1]. In our example, we will serve files
+    from the `public` route.
+
+    If an attacker requests the following URL from our server, it will in
+    turn leak the sensitive private key of the root user.
+
+        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
+
+    **Note** `%2e` is the URL encoded version of `.` (dot).
+
+    * **Writing arbitrary files**\: Allows the attacker to create or replace
+      existing files. This type of vulnerability is also known as
+      `Zip-Slip`.
+
+    One way to achieve this is by using a malicious `zip` archive that holds
+    path traversal filenames. When each filename in the zip archive gets
+    concatenated to the target extraction folder, without validation, the
+    final path ends up outside of the target folder. If an executable or a
+    configuration file is overwritten with a file containing malicious code,
+    the problem can turn into an arbitrary code execution issue quite
+    easily.
+
+    The following is an example of a `zip` archive with one benign file and
+    one malicious file. Extracting the malicious file will result in
+    traversing out of the target folder, ending up in `/root/.ssh/`
+    overwriting the `authorized_keys` file:
+
+        2018-04-15 22:04:29 .....           19           19  good.txt
+        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
+
+
+
+    [1]: https://snyk.io/vuln/npm:st:20140206
+  affected_package: librenms/librenms
+  vulnerable_versions:
+  - "<1.53"
+  severity: high
+  package_manager: packagist
+  cve:
+  - CVE-2019-10666
+  cwe:
+  - CWE-23
+  disclosed_date: 2019-07-15
+  created_date: 2019-09-09
+  last_modified_date: 2019-09-09
+  credit:
+  - Eldar Marcussen
+  references:
+  - https://github.com/librenms/librenms/pull/10091
+  - https://github.com/librenms/librenms/pull/10276
+  - https://www.darkmatter.ae/xen1thlabs/librenms-limited-local-file-inclusion-via-directory-traversal-vulnerability-xl-19-020/
+  source_url: https://snyk.io/vuln/SNYK-PHP-LIBRENMSLIBRENMS-466432
 - id: snykio:packagist:librenms/librenms:72473
   title: Cross-site Scripting (XSS)
   description: |+
