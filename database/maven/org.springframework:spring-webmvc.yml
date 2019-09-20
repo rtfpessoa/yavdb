@@ -881,6 +881,46 @@
   - https://github.com/spring-projects/spring-framework/commit/e2d6e709c3c65a4951eb096843ee75d5200cfcad
   - https://pivotal.io/security/cve-2016-9878
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGSPRINGFRAMEWORK-460108
+- id: snykio:maven:org.springframework:spring-webmvc:467268
+  title: Information Exposure
+  description: |
+    [org.springframework:spring-webmvc][1] is a package that provides
+    Model-View-Controller (MVC) architecture and ready components that can
+    be used to develop flexible and loosely coupled web applications.
+
+    Affected versions of this package are vulnerable to Information
+    Exposure. It allows web applications to enable cross-domain requests via
+    JSONP (JSON with Padding) through `AbstractJsonpResponseBodyAdvice` for
+    REST controllers, and `MappingJackson2JsonView` for browser requests.
+    When `MappingJackson2JsonView` is configured in an application, JSONP
+    support is automatically ready to use through the `jsonp` and `callback`
+    JSONP parameters, enabling cross-domain requests. Allowing cross-domain
+    requests from untrusted origins may expose user information to 3rd party
+    browser scripts.
+
+
+
+    [1]: https://mvnrepository.com/artifact/org.springframework/spring-webmvc
+  affected_package: org.springframework:spring-webmvc
+  vulnerable_versions:
+  - ">= 4.3.0.RELEASE < 4.3.18.RELEASE"
+  - ">= 5.0.0.RELEASE < 5.0.7.RELEASE"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2018-11040
+  cwe:
+  - CWE-200
+  disclosed_date: 2018-06-08
+  created_date: 2016-12-25
+  last_modified_date: 2016-12-25
+  credit:
+  - Mariusz Luciow
+  references:
+  - https://github.com/spring-projects/spring-framework/commit/b80c13b722bb207ddf43f53a007ee3ddc1dd2e26
+  - https://github.com/spring-projects/spring-framework/issues/21338
+  - https://pivotal.io/security/cve-2018-11040
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGSPRINGFRAMEWORK-467268
 - id: victims:maven:org.springframework:spring-webmvc:2014-0054
   title: 'Spring MVC: XML External Entities'
   description: 'Spring MVC''s Jaxb2RootElementHttpMessageConverter also processed
