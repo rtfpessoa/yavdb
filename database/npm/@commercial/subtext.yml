@@ -18,3 +18,60 @@
   credit: Yurii Chuhaienko
   references: https://npmjs.com/advisories/1166
   source_url: https://npmjs.com/advisories/1166
+- id: snykio:npm:@commercial/subtext:467263
+  title: Denial of Service (DoS)
+  description: |+
+    [@commercial/subtext][1] is an HTTP payload parsing library.
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS). The package fails to enforce the `maxBytes` configuration for
+    payloads with chunked encoding that are written to the file system. This
+    allows attackers to send requests with arbitrary payload sizes, which
+    may exhaust system resources.
+
+
+
+    [1]: https://www.npmjs.com/package/@commercial/subtext
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+  affected_package: "@commercial/subtext"
+  vulnerable_versions:
+  - "<5.1.1"
+  severity: high
+  package_manager: npm
+  cwe:
+  - CWE-400
+  disclosed_date: 2019-09-16
+  created_date: 2019-09-19
+  last_modified_date: 2019-09-19
+  credit:
+  - Yurii Chuhaienko
+  references:
+  - https://github.com/brave-intl/subtext/commit/9557c115b1384191a0d6e4a9ea028fedf8b44ae6
+  - https://github.com/hapijs/subtext/issues/72
+  - https://www.npmjs.com/advisories/1166
+  source_url: https://snyk.io/vuln/SNYK-JS-COMMERCIALSUBTEXT-467263
