@@ -1,0 +1,33 @@
+---
+- id: snykio:maven:org.apereo.cas:cas-server-support-oauth-core-api:467406
+  title: Insecure Randomness
+  description: |
+    [org.apereo.cas:cas-server-support-oauth-core-api][1] is a CAS Server
+    Support OAuth Core API for supporting OAuth within Apereo CAS.
+
+    Affected versions of this package are vulnerable to Insecure Randomness.
+    A insecure source of randomness is used to generate all of its random
+    values as it relies upon apache commons lang3 `RandomStringUtils`.
+    Multiple classes within Apereo CAS were found to make use of
+    `RandomStringUtils` for `token` and `userID` generation.
+
+
+
+    [1]: https://mvnrepository.com/artifact/org.apereo.cas/cas-server-support-oauth-core-api
+  affected_package: org.apereo.cas:cas-server-support-oauth-core-api
+  vulnerable_versions:
+  - "< 6.1.0-RC5"
+  severity: high
+  package_manager: maven
+  cwe:
+  - CWE-338
+  disclosed_date: 2019-09-20
+  created_date: 2019-09-20
+  last_modified_date: 2019-09-20
+  credit:
+  - Jonathan Leitschuh
+  references:
+  - https://github.com/alex91ar/randomstringutils
+  - https://github.com/apereo/cas/commit/40bf278e66786544411c471de5123e7a71826b9f
+  - https://medium.com/@alex91ar/the-java-soothsayer-a-practical-application-for-insecure-randomness-c67b0cd148cd
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPEREOCAS-467406
