@@ -119,3 +119,36 @@
   - https://github.com/rubyzip/rubyzip/commit/d07b13a6cf0a413e010c48879aebd9576bfb5f68
   - https://github.com/rubyzip/rubyzip/issues/369
   source_url: https://snyk.io/vuln/SNYK-RUBY-RUBYZIP-22039
+- id: snykio:rubygems:rubyzip:469156
+  title: Denial of Service (DoS)
+  description: |
+    [rubyzip][1] is a ruby module for reading and writing zip files.
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS). It is possible for a crafted ZIP file to bypass application
+    checks on ZIP entry sizes because data about the uncompressed size can
+    be spoofed. This allows attackers to cause a denial of service through
+    maximum disk consumption. By default, the `validate_entry_sizes` option
+    should be set to true, so that callers can trust an entry\'s reported
+    size when using `extract`.
+
+
+
+    [1]: https://github.com/rubyzip/rubyzip
+  affected_package: rubyzip
+  vulnerable_versions:
+  - "<1.3.0"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2019-16892
+  cwe:
+  - CWE-776
+  disclosed_date: 2019-09-25
+  created_date: 2019-09-25
+  last_modified_date: 2019-09-25
+  credit:
+  - Unknown
+  references:
+  - https://github.com/rubyzip/rubyzip/pull/403
+  source_url: https://snyk.io/vuln/SNYK-RUBY-RUBYZIP-469156
