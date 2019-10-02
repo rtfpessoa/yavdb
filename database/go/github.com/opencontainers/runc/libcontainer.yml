@@ -1,4 +1,37 @@
 ---
+- id: snykio:go:github.com/opencontainers/runc/libcontainer:469151
+  title: Access Restriction Bypass
+  description: |
+    [github.com/opencontainers/runc/libcontainer][1] is a package for a
+    modern container runtime.
+
+    Affected versions of this package are vulnerable to Access Restriction
+    Bypass. AppArmor restriction bypass is possible because
+    `libcontainer/rootfs_linux.go` incorrectly checks mount targets, and
+    thus a malicious Docker image can mount over a `/proc` directory.
+
+
+
+    [1]: https://www.opencontainers.org/
+  affected_package: github.com/opencontainers/runc/libcontainer
+  vulnerable_versions:
+  - "*"
+  severity: medium
+  package_manager: go
+  cve:
+  - CVE-2019-16884
+  cwe:
+  - CWE-284
+  disclosed_date: 2019-09-22
+  created_date: 2019-09-26
+  last_modified_date: 2019-09-26
+  credit:
+  - Unknown
+  references:
+  - https://github.com/crosbymichael/runc/commit/78dce1cf1ec36bbe7fe6767bdb81f7cbf6d34d70
+  - https://github.com/opencontainers/runc/issues/2128
+  - https://github.com/opencontainers/runc/pull/2129
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMOPENCONTAINERSRUNCLIBCONTAINER-469151
 - id: snykio:go:github.com/opencontainers/runc/libcontainer:50017
   title: Information Exposure
   description: |

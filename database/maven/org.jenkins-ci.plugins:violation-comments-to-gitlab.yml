@@ -1,0 +1,37 @@
+---
+- id: snykio:maven:org.jenkins-ci.plugins:violation-comments-to-gitlab:469188
+  title: Insufficiently Protected Credentials
+  description: |
+    [org.jenkins-ci.plugins:violation-comments-to-gitlab][1] is a Jenkins
+    plugin that finds violations reported by code analyzers and comments
+    GitLab merge requests with them.
+
+    Affected versions of this package are vulnerable to Insufficiently
+    Protected Credentials. API tokens were found to be stored in plain text
+    within job `config.xml` files and its global configuration file
+    `org.jenkinsci.plugins.jvctgl.ViolationsToGitLabGlobalConfiguration.xml`
+    on the Jenkins master. These credentials could be viewed by users with
+    `Extended Read` permission, or access to the master file system.
+
+
+
+    [1]: https://plugins.jenkins.io/violation-comments-to-gitlab
+  affected_package: org.jenkins-ci.plugins:violation-comments-to-gitlab
+  vulnerable_versions:
+  - "< 2.29"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2019-10415
+  - CVE-2019-10416
+  cwe:
+  - CWE-522
+  disclosed_date: 2019-09-25
+  created_date: 2019-09-26
+  last_modified_date: 2019-09-26
+  credit:
+  - IB Boost
+  - James Holderness
+  references:
+  - https://jenkins.io/security/advisory/2019-09-25/
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGJENKINSCIPLUGINS-469188
