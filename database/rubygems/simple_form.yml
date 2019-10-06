@@ -1,0 +1,42 @@
+---
+- id: snykio:rubygems:simple_form:469443
+  title: Incorrect Access Control
+  description: |
+    [simple\_form][1] is a Forms made easy gem for Rails with simple DSL.
+
+    Affected versions of this package are vulnerable to Incorrect Access
+    Control. For pages that build a form using user input, it is possible
+    for an attacker to manipulate the input and send any method present in
+    the form object. This is due to the `file_method?` in
+    `lib/simple_form/form_builder.rb` treating a user-supplied string as a
+    method call. The vulnerability is only applicable for pages that build
+    forms based on user input.
+
+    ### PoC   {#poc}
+
+        <%= simple_form_for @user do |f| %>
+          <%= f.label @user_supplied_string %>
+          ...
+        <% end %>
+
+
+
+    [1]: http://blog.plataformatec.com.br/tag/simple_form
+  affected_package: simple_form
+  vulnerable_versions:
+  - "<5.0.0"
+  severity: low
+  package_manager: rubygems
+  cve:
+  - CVE-2019-16676
+  cwe:
+  - CWE-284
+  disclosed_date: 2019-09-27
+  created_date: 2019-09-30
+  last_modified_date: 2019-09-30
+  credit:
+  - Unknown
+  references:
+  - https://github.com/plataformatec/simple_form/commit/8c91bd76a5052ddf3e3ab9fd8333f9aa7b2e2dd6
+  - https://github.com/plataformatec/simple_form/security/advisories/GHSA-r74q-gxcg-73hx
+  source_url: https://snyk.io/vuln/SNYK-RUBY-SIMPLEFORM-469443
