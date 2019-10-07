@@ -1,0 +1,25 @@
+---
+- id: rustsec:cargo:renderdoc:RUSTSEC-2019-0018
+  title: Internally mutating methods take immutable ref self
+  description: |
+    Affected versions of this crate exposed several methods which took `self` by
+    immutable reference, despite the requesting the RenderDoc API to set a mutable
+    value internally.
+
+    This is technically unsound and calling these methods from multiple threads
+    without synchronization could lead to unexpected and unpredictable behavior.
+
+    The flaw was corrected in release 0.5.0.
+  affected_package: renderdoc
+  patched_versions:
+  - ">= 0.5.0"
+  severity: high
+  package_manager: cargo
+  disclosed_date: 2019-09-02
+  created_date: 2019-09-02
+  last_modified_date: 2019-09-02
+  credit:
+  - RustSec
+  references:
+  - https://github.com/ebkalderon/renderdoc-rs/pull/32
+  source_url: https://github.com/RustSec/advisory-db/blob/master/crates/renderdoc/RUSTSEC-2019-0018.toml

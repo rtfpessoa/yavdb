@@ -33,16 +33,23 @@
 - id: snykio:maven:org.apache.commons:commons-collections4:30008
   title: Deserialization of Untrusted Data
   description: |
-    [`org.apache.commons:commons-collections4`][1] It was found that the
-    Apache commons-collections library permitted code execution when
-    deserializing objects involving a specially constructed chain of
-    classes. A remote attacker could use this flaw to execute arbitrary code
-    with the permissions of the application using the commons-collections
-    library.
+    [org.apache.commons:commons-collections4][1] is a Apache Commons
+    Collections package contains types that extend and augment the Java
+    Collections Framework.
+
+    Affected versions of this package are vulnerable to Deserialization of
+    Untrusted Data. It is possible to execute arbitrary Java code with the
+    `InvokerTransformer` serializable collections . The
+    `sun.reflect.annotation.AnnotationInvocationHandler#readObject` method
+    invokes `#entrySet` and `#get` on a deserialized collection. If an
+    attacker has to ability to send serialized data (JMX, RMI, EJB) to an
+    application using the `common-collections` library, it is possible to
+    combine the aforementioned methods to execute arbitrary code on the
+    application.
 
 
 
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22commons-collections4%22
+    [1]: https://mvnrepository.com/artifact/org.apache.commons/commons-collections4
     \nSerialization is a process of converting an object into a sequence of
     bytes which can be persisted to a disk or database or can be sent
     through streams. The reverse process of creating object from sequence of
@@ -106,11 +113,11 @@
     [2]: https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078
   affected_package: org.apache.commons:commons-collections4
   vulnerable_versions:
-  - ">= 3.0.0 < 3.2.2"
-  - ">= 4.0.0 < 4.1"
+  - ">= 4.0 < 4.1"
   severity: high
   package_manager: maven
   cve:
+  - CVE-2015-4852
   - CVE-2015-7501
   cwe:
   - CWE-502
@@ -122,6 +129,8 @@
   references:
   - http://foxglovesecurity.com/2015/11/06/what-do-weblogic-websphere-jboss-jenkins-opennms-and-your-application-have-in-common-this-vulnerability/
   - https://access.redhat.com/security/cve/CVE-2015-7501
+  - https://github.com/apache/commons-collections/commit/e585cd0433ae4cfbc56e58572b9869bd0c86b611
+  - https://issues.apache.org/jira/browse/COLLECTIONS-580
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHECOMMONS-30008
 - id: victims:maven:org.apache.commons:commons-collections4:2015-7501
   title: 'apache-commons-collections: InvokerTransformer code execution during deserialization'

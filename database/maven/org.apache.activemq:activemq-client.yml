@@ -57,16 +57,17 @@
 - id: snykio:maven:org.apache.activemq:activemq-client:30482
   title: Cross-site Scripting (XSS)
   description: |+
-    [`org.apache.activemq:activemq-client`][1] is an open source messaging
-    and Integration Patterns server.
+    [org.apache.activemq:activemq-client][1] is a high performance Apache
+    2.0 licensed Message Broker and JMS 1.1 implementation.
 
-    Cross-site Scripting (XSS) vulnerability in scheduled.jsp in Apache
-    ActiveMQ 5.8.0 and earlier allows remote attackers to inject arbitrary
-    web script or HTML via vectors involving the \"cron of a message.\"
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). The vulnerability exists in `scheduled.jsp` in ActiveMQ that
+    allows remote attackers to inject arbitrary web script or HTML via
+    vectors involving the \"cron of a message.\"
 
 
 
-    [1]: http://activemq.apache.org/
+    [1]: https://mvnrepository.com/artifact/org.apache.activemq/activemq-client
     \nA cross-site scripting attack occurs when the attacker tricks a
     legitimate web-based application or site to accept a request as
     originating from a trusted source.
@@ -141,7 +142,7 @@
 
   affected_package: org.apache.activemq:activemq-client
   vulnerable_versions:
-  - ">= 4.0.0 < 5.8.0"
+  - ">= 4.0.0 < 5.9.0"
   severity: medium
   package_manager: maven
   cve:
@@ -154,6 +155,7 @@
   credit:
   - Unknown
   references:
+  - https://github.com/apache/activemq/commit/148ca81dcd8f14cfe2ff37012fd1aa42518f02dc
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2013-1879
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEACTIVEMQ-30482
 - id: snykio:maven:org.apache.activemq:activemq-client:30483
@@ -192,20 +194,22 @@
 - id: snykio:maven:org.apache.activemq:activemq-client:30484
   title: Arbitrary Code Execution
   description: |
-    \[\`org.apache.activemq:activemq-client\]([http://activemq.apache.org/][1])
-    is an open source messaging and Integration Patterns server.
+    [org.apache.activemq:activemq-client][1] is a high performance Apache
+    2.0 licensed Message Broker and JMS 1.1 implementation.
 
-    Apache ActiveMQ 5.x before 5.13.0 does not restrict the classes that can
-    be serialized in the broker, which allows remote attackers to execute
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution. Apache ActiveMQ does restrict the classes that can be
+    serialized in the broker, which allows remote attackers to execute
     arbitrary code via a crafted serialized Java Message Service (JMS)
     ObjectMessage object.
 
 
 
-    [1]: http://activemq.apache.org/
+    [1]: https://mvnrepository.com/artifact/org.apache.activemq/activemq-client
   affected_package: org.apache.activemq:activemq-client
   vulnerable_versions:
-  - ">= 5.00 < 5.13.0"
+  - "< 5.11.3"
+  - ">= 5.12.0 < 5.12.2"
   severity: high
   package_manager: maven
   cve:
@@ -218,11 +222,14 @@
   credit:
   - Unknown
   references:
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-5254
+  - https://github.com/apache/activemq/commit/6f03921b31d9fefeddb0f4fa63150ed1f94a14b
+  - https://github.com/apache/activemq/commit/a7e2a44fe8d4435ae99532eb0ab852e6247f7b16
+  - https://github.com/apache/activemq/commit/e7a4b53f799685e337972dd36ba0253c04bcc01f
+  - https://issues.apache.org/jira/browse/AMQ-6013
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEACTIVEMQ-30484
 - id: snykio:maven:org.apache.activemq:activemq-client:451539
   title: Denial of Service (DoS)
-  description: |
+  description: |+
     [org.apache.activemq:activemq-client][1] is a high performance Apache
     2.0 licensed Message Broker and JMS 1.1 implementation.
 
@@ -234,6 +241,32 @@
 
 
     [1]: https://mvnrepository.com/artifact/org.apache.activemq/activemq-client
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
   affected_package: org.apache.activemq:activemq-client
   vulnerable_versions:
   - ">= 5.0.0 < 5.14.5"
@@ -247,7 +280,7 @@
   created_date: 2019-07-04
   last_modified_date: 2019-07-04
   credit:
-  - Unknown
+  - Chess Hazlett
   references:
   - https://activemq.apache.org/security-advisories.data/CVE-2015-7559-announcement.txt
   - https://github.com/apache/activemq/commit/338a74dfa42a7b19d39adecacfa5f626a050e807
@@ -281,7 +314,7 @@
   - Peter StAckli
   references:
   - http://activemq.apache.org/security-advisories.data/CVE-2018-11775-announcement.txt
-  - https://github.com/apache/activemq/commit/1e31df9800fc2db258f2458628bd9863c11b2846
+  - https://github.com/apache/activemq/commit/bde7097fb8173cf871827df7811b3865679b963d
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEACTIVEMQ-460123
 - id: snykio:maven:org.apache.activemq:activemq-client:461169
   title: Denial of Service (DoS)

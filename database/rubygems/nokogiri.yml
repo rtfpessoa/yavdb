@@ -560,9 +560,12 @@
   affected_package: nokogiri
   patched_versions:
   - ">= 1.10.4"
+  severity: high
   package_manager: rubygems
   cve:
   - CVE-2019-5477
+  cvss_v2_score: 7.5
+  cvss_v3_score: 9.8
   disclosed_date: 2019-08-11
   created_date: 2019-08-11
   last_modified_date: 2019-08-11
@@ -1188,8 +1191,8 @@
     crafted XML documents on an internal XML parsing service and may lead to
     unauthorized disclosure of potentially sensitive information.
 
-    **Note:** This vulnerability exists also in versions `>= 1.5.4` only
-    when opting into the `DTDLOAD` option and opting out of the `NONET`
+    **Note:** This vulnerability exists also in versions `>=1.5.4 <1.8.3`
+    only when opting into the `DTDLOAD` option and opting out of the `NONET`
     option. See information [here][2]
 
 
@@ -1235,7 +1238,7 @@
 
   affected_package: nokogiri
   vulnerable_versions:
-  - "< 1.5.4"
+  - "<1.5.4"
   severity: high
   package_manager: rubygems
   cwe:
@@ -1251,7 +1254,7 @@
   source_url: https://snyk.io/vuln/SNYK-RUBY-NOKOGIRI-20298
 - id: snykio:rubygems:nokogiri:20299
   title: XML External Entity (XXE) Injection
-  description: |+
+  description: |
     [nokogiri][1] is an HTML, XML, SAX, and Reader parser, with the ability
     to search documents via XPath or CSS3 selectors.
 
@@ -1266,54 +1269,16 @@
     crafted XML documents on an internal XML parsing service and may lead to
     unauthorized disclosure of potentially sensitive information.
 
-    **Note:** This vulnerability exists also in versions `< 1.5.4`
-    regardless of the options opted into or out of. See information
-    [here][2]
+    **Note:** This vulnerability exists also in versions `<1.5.4` regardless
+    of the options opted into or out of. See information [here][2]
 
 
 
     [1]: https://rubygems.org/gems/nokogiri
     [2]: https://snyk.io/vuln/SNYK-RUBY-NOKOGIRI-20298
-    \nXXE Injection is a type of attack against an application that parses XML
-    input. XML is a markup language that defines a set of rules for encoding
-    documents in a format that is both human-readable and machine-readable.
-    By default, many XML processors allow specification of an external
-    entity, a URI that is dereferenced and evaluated during XML processing.
-    When an XML document is being parsed, the parser can make a request and
-    include the content at the specified URI inside of the XML document.
-
-    Attacks can include disclosing local files, which may contain sensitive
-    data such as passwords or private user data, using file: schemes or
-    relative paths in the system identifier.
-
-    For example, below is a sample XML document, containing an XML element-
-    username.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-           <username>John</username>
-        </xml>
-    {: .language-xml}
-
-    An external XML entity - `xxe`, is defined using a system identifier and
-    present within a DOCTYPE header. These entities can access local or
-    remote content. For example the below code contains an external XML
-    entity that would fetch the content of `/etc/passwd` and display it to
-    the user rendered by `username`.
-
-        <?xml version="1.0" encoding="ISO-8859-1"?>
-        <!DOCTYPE foo [
-           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
-           <username>&xxe;</username>
-        </xml>
-    {: .language-xml}
-
-    Other XXE Injection attacks can access local resources that may not stop
-    returning data, possibly impacting application availability and leading
-    to Denial of Service.
-
   affected_package: nokogiri
   vulnerable_versions:
-  - ">= 1.5.4"
+  - ">=1.5.4  <1.8.3"
   severity: high
   package_manager: rubygems
   cwe:
@@ -1632,6 +1597,8 @@
   references:
   - https://github.com/sparklemotion/nokogiri/commit/5fe449fd3ab8cc25a71499128529c821c10dde83
   - https://github.com/sparklemotion/nokogiri/issues/1915
+  - https://github.com/tenderlove/rexical/commit/a652474dbc66be350055db3e8f9b3a7b3fd75926
+  - https://hackerone.com/reports/650835
   source_url: https://snyk.io/vuln/SNYK-RUBY-NOKOGIRI-459107
 - id: snykio:rubygems:nokogiri:72433
   title: Denial of Service (DoS)

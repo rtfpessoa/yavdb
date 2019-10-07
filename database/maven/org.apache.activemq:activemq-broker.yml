@@ -56,16 +56,17 @@
 - id: snykio:maven:org.apache.activemq:activemq-broker:30479
   title: Denial of Service (DoS)
   description: |+
-    [`org.apache.activemq:activemq-broker`][1] is an open source messaging
-    and Integration Patterns server.
+    [org.apache.activemq:activemq-broker][1] is a high performance Apache
+    2.0 licensed Message Broker and JMS 1.1 implementation.
 
-    The processControlCommand function in broker/TransportConnection.java in
-    Apache ActiveMQ before 5.11.0 allows remote attackers to cause a denial
-    of service (shutdown) via a shutdown command.
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS). The `processControlCommand` function in
+    `broker/TransportConnection.java` in ActiveMQ allows remote attackers to
+    cause a denial of service (shutdown) via a shutdown command.
 
 
 
-    [1]: http://activemq.apache.org/
+    [1]: https://activemq.apache.org
     \nDenial of Service (DoS) describes a family of attacks, all aimed at
     making a system inaccessible to its intended and legitimate users.
 
@@ -94,7 +95,7 @@
 
   affected_package: org.apache.activemq:activemq-broker
   vulnerable_versions:
-  - "< 5.10.1"
+  - "< 5.11.0"
   severity: high
   package_manager: maven
   cve:
@@ -107,7 +108,7 @@
   credit:
   - Unknown
   references:
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-3576
+  - https://github.com/apache/activemq/commit/00921f22ff9a8792d7663ef8fadd4823402a6324
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEACTIVEMQ-30479
 - id: snykio:maven:org.apache.activemq:activemq-broker:30480
   title: XML External Entity (XXE) Injection
@@ -178,21 +179,27 @@
 - id: snykio:maven:org.apache.activemq:activemq-broker:30481
   title: Improper Authentication
   description: |
-    The LDAPLoginModule implementation in the Java Authentication and
-    Authorization Service (JAAS) in Apache ActiveMQ 5.x before 5.10.1 allows
-    remote attackers to bypass authentication by logging in with an empty
-    password and valid username, which triggers an unauthenticated bind.
+    [org.apache.activemq:activemq-broker][1] is a high performance Apache
+    2.0 licensed Message Broker and JMS 1.1 implementation.
+
+    Affected versions of this package are vulnerable to Improper
+    Authentication. The LDAPLoginModule implementation in the Java
+    Authentication and Authorization Service (JAAS) in Apache ActiveMQ 5.x
+    before 5.10.1 allows remote attackers to bypass authentication by
+    logging in with an empty password and valid username, which triggers an
+    unauthenticated bind.
 
     **NOTE:** this identifier has been SPLIT per ADT2 due to different
-    vulnerability types. See [CVE-2015-6524][1] for the use of wildcard
+    vulnerability types. See [CVE-2015-6524][2] for the use of wildcard
     operators in usernames.
 
 
 
-    [1]: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEACTIVEMQ-30477
+    [1]: https://activemq.apache.org
+    [2]: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEACTIVEMQ-30477
   affected_package: org.apache.activemq:activemq-broker
   vulnerable_versions:
-  - ">= 0"
+  - ">= 5.0.0 < 5.10.1"
   severity: high
   package_manager: maven
   cve:
@@ -240,5 +247,5 @@
   - Peter StAckli
   references:
   - http://activemq.apache.org/security-advisories.data/CVE-2018-11775-announcement.txt
-  - https://github.com/apache/activemq/commit/1e31df9800fc2db258f2458628bd9863c11b2846
+  - https://github.com/apache/activemq/commit/bde7097fb8173cf871827df7811b3865679b963d
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEACTIVEMQ-460122

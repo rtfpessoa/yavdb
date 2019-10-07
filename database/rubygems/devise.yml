@@ -62,6 +62,26 @@
   references:
   - https://github.com/rubysec/ruby-advisory-db
   source_url: http://blog.plataformatec.com.br/2016/01/improve-remember-me-cookie-expiration-in-devise/
+- id: rubyadvisory:rubygems:devise:CVE-2019-16109
+  title: Devise Gem for Ruby confirmation token validation with a blank string
+  description: |
+    Devise before 4.7.1 confirms accounts upon receiving a request with a blank
+    confirmation_token, if a database record has a blank value in the confirmation_token column.
+    However, there is no scenario within Devise itself in which such database records would exist.
+  affected_package: devise
+  patched_versions:
+  - ">= 4.7.1"
+  package_manager: rubygems
+  cve:
+  - CVE-2019-16109
+  disclosed_date: 2019-09-08
+  created_date: 2019-09-08
+  last_modified_date: 2019-09-08
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://github.com/plataformatec/devise/issues/5071
 - id: rubyadvisory:rubygems:devise:CVE-2019-5421
   title: Devise Gem for Ruby Time-of-check Time-of-use race condition with lockable
     module
@@ -72,9 +92,12 @@
   affected_package: devise
   patched_versions:
   - ">= 4.6.0"
+  severity: high
   package_manager: rubygems
   cve:
   - CVE-2019-5421
+  cvss_v2_score: 7.5
+  cvss_v3_score: 9.8
   disclosed_date: 2019-02-07
   created_date: 2019-02-07
   last_modified_date: 2019-02-07

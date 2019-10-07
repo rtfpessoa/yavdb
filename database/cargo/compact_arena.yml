@@ -1,0 +1,25 @@
+---
+- id: rustsec:cargo:compact_arena:RUSTSEC-2019-0015
+  title: Flaw in generativity allows out-of-bounds access
+  description: |
+    Affected versions of this crate did not properly implement the generativity,
+    because the invariant lifetimes were not necessarily `drop`ped.
+
+    This allows an attacker to mix up two arenas, using indices created from one
+    arena with another one. This might lead to an out-of-bounds read or write
+    access into the memory reserved for the arena.
+
+    The flaw was corrected by implementing generativity correctly in version 0.4.0.
+  affected_package: compact_arena
+  patched_versions:
+  - ">= 0.4.0"
+  severity: high
+  package_manager: cargo
+  disclosed_date: 2019-05-21
+  created_date: 2019-05-21
+  last_modified_date: 2019-05-21
+  credit:
+  - RustSec
+  references:
+  - https://github.com/llogiq/compact_arena/issues/22
+  source_url: https://github.com/RustSec/advisory-db/blob/master/crates/compact_arena/RUSTSEC-2019-0015.toml

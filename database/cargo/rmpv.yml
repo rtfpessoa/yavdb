@@ -1,0 +1,22 @@
+---
+- id: rustsec:cargo:rmpv:RUSTSEC-2017-0006
+  title: Unchecked vector pre-allocation
+  description: |
+    Affected versions of this crate pre-allocate memory on deserializing raw
+    buffers without checking whether there is sufficient data available.
+
+    This allows an attacker to do denial-of-service attacks by sending small
+    msgpack messages that allocate gigabytes of memory.
+  affected_package: rmpv
+  vulnerable_versions:
+  - "*"
+  severity: high
+  package_manager: cargo
+  disclosed_date: 2017-11-21
+  created_date: 2017-11-21
+  last_modified_date: 2017-11-21
+  credit:
+  - RustSec
+  references:
+  - https://github.com/3Hren/msgpack-rust/issues/151
+  source_url: https://github.com/RustSec/advisory-db/blob/master/crates/rmpv/RUSTSEC-2017-0006.toml

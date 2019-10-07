@@ -41,7 +41,7 @@
     [1]: https://spring.io/projects/spring-data-jpa
   affected_package: org.springframework.data:spring-data-jpa
   vulnerable_versions:
-  - ">= 1.11.0.RELEASE < 1.11.20.RELEASE"
+  - "< 1.11.20.RELEASE"
   - ">= 2.0.0.RELEASE < 2.0.14.RELEASE"
   - ">= 2.1.0.RELEASE < 2.1.6.RELEASE"
   severity: low
@@ -62,20 +62,21 @@
 - id: snykio:maven:org.springframework.data:spring-data-jpa:31335
   title: SQL Injection
   description: |
-    [`org.springframework.data:spring-data-jpa`][1] SQL injection
-    vulnerability in Pivotal Spring Data JPA before 1.9.6 (Gosling SR6) and
-    1.10.x before 1.10.4 (Hopper SR4), when used with a repository that
-    defines a String query using the @Query annotation, allows attackers to
-    execute arbitrary JPQL commands via a sort instance with a function
-    call.
+    [org.springframework.data:spring-data-jpa][1] is a package that is used
+    to implement JPA based repositories.
+
+    Affected versions of this package are vulnerable to SQL Injection.
+    Attackers to execute arbitrary JPQL commands via a sort instance with a
+    function call, when used with a repository that defines a String query
+    using the @Query annotation.
 
 
 
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22spring-data-jpa%22
+    [1]: https://spring.io/projects/spring-data-jpa
   affected_package: org.springframework.data:spring-data-jpa
   vulnerable_versions:
-  - "< 1.9.6"
-  - ">= 1.10 < 1.10.4"
+  - "< 1.9.6.RELEASE"
+  - ">= 1.10.0.RELEASE < 1.10.4.RELEASE"
   severity: medium
   package_manager: maven
   cve:
@@ -88,6 +89,9 @@
   credit:
   - Unknown
   references:
+  - https://github.com/spring-projects/spring-data-jpa/commit/b8e7fecccc7dc8edcabb4704656a7abe6352c08f
+  - https://jira.spring.io/browse/DATAJPA-965
+  - https://pivotal.io/security/cve-2016-6652
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-6652
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGSPRINGFRAMEWORKDATA-31335
 - id: snykio:maven:org.springframework.data:spring-data-jpa:451633

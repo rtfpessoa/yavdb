@@ -50,17 +50,25 @@
   - https://bugzilla.redhat.com/show_bug.cgi?id=1279330
   source_url: https://ossindex.net/resource/package/7015420133/vulnerabilities
 - id: snykio:maven:commons-collections:commons-collections:30078
-  title: Arbitrary Code Execution
+  title: Deserialization of Untrusted Data
   description: |
-    [`commons-collections:commons-collections`][1] Apache
-    commons-collections library permitted code execution when deserializing
-    objects involving a specially constructed chain of classes. A remote
-    attacker could use this flaw to execute arbitrary code with the
-    permissions of the application using the commons-collections library.
+    [commons-collections:commons-collections][1] is a library which contains
+    types that extend and augment the Java Collections Framework.
 
-    # Details   {#details}
+    Affected versions of this package are vulnerable to Deserialization of
+    Untrusted Data. It is possible to execute arbitrary Java code with the
+    `InvokerTransformer` serializable collections . The
+    `sun.reflect.annotation.AnnotationInvocationHandler#readObject` method
+    invokes `#entrySet` and `#get` on a deserialized collection. If an
+    attacker has to ability to send serialized data (JMX, RMI, EJB) to an
+    application using the `common-collections` library, it is possible to
+    combine the aforementioned methods to execute arbitrary code on the
+    application.
 
-    Serialization is a process of converting an object into a sequence of
+
+
+    [1]: https://mvnrepository.com/artifact/commons-collections/commons-collections
+    \nSerialization is a process of converting an object into a sequence of
     bytes which can be persisted to a disk or database or can be sent
     through streams. The reverse process of creating object from sequence of
     bytes is called deserialization. Serialization is commonly used for
@@ -70,7 +78,7 @@
     Management Extension (JMX)*, *Java Messaging System (JMS)*, *Action
     Message Format (AMF)*, *Java Server Faces (JSF) ViewState*, etc.
 
-    *Deserialization of untrusted data* ([CWE-502][2]), is when the
+    *Deserialization of untrusted data* ([CWE-502][1]), is when the
     application deserializes untrusted data without sufficiently verifying
     that the resulting data will be valid, letting the attacker to control
     the state or the flow of the execution.
@@ -78,7 +86,7 @@
     Java deserialization issues have been known for years. However, interest
     in the issue intensified greatly in 2015, when classes that could be
     abused to achieve remote code execution were found in a [popular library
-    (Apache Commons Collection)][3]. These classes were used in zero-days
+    (Apache Commons Collection)][2]. These classes were used in zero-days
     affecting IBM WebSphere, Oracle WebLogic and many other products.
 
     An attacker just needs to identify a piece of software that has both a
@@ -119,15 +127,15 @@
 
 
 
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22commons-collections%22
-    [2]: https://cwe.mitre.org/data/definitions/502.html
-    [3]: https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078
+    [1]: https://cwe.mitre.org/data/definitions/502.html
+    [2]: https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078
   affected_package: commons-collections:commons-collections
   vulnerable_versions:
   - ">= 3.0 < 3.2.2"
   severity: high
   package_manager: maven
   cve:
+  - CVE-2015-4852
   - CVE-2015-7501
   cwe:
   - CWE-502
@@ -138,6 +146,8 @@
   - Unknown
   references:
   - http://foxglovesecurity.com/2015/11/06/what-do-weblogic-websphere-jboss-jenkins-opennms-and-your-application-have-in-common-this-vulnerability/
+  - https://github.com/apache/commons-collections/commit/e585cd0433ae4cfbc56e58572b9869bd0c86b611
+  - https://issues.apache.org/jira/browse/COLLECTIONS-580
   source_url: https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078
 - id: victims:maven:commons-collections:commons-collections:2015-7501
   title: 'apache-commons-collections: InvokerTransformer code execution during deserialization'

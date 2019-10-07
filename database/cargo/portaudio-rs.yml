@@ -1,0 +1,22 @@
+---
+- id: rustsec:cargo:portaudio-rs:RUSTSEC-2019-0022
+  title: Stream callback function is not unwind safe
+  description: "Affected versions of this crate is not panic safe within callback
+    functions `stream_callback` and `stream_finished_callback`.\n\nThe call to user-provided
+    closure might panic before a `mem::forget` call, which then causes a use after
+    free that grants attacker to control the callback function pointer.\n\nThis allows
+    an attacker to construct an arbitrary code execution .\n \nThe flaw was reported
+    by Phosphorus15.\n"
+  affected_package: portaudio-rs
+  patched_versions:
+  - "> 0.3.1"
+  severity: high
+  package_manager: cargo
+  disclosed_date: 2019-09-14
+  created_date: 2019-09-14
+  last_modified_date: 2019-09-14
+  credit:
+  - RustSec
+  references:
+  - https://github.com/mvdnes/portaudio-rs/issues/20
+  source_url: https://github.com/RustSec/advisory-db/blob/master/crates/portaudio-rs/RUSTSEC-2019-0022.toml
