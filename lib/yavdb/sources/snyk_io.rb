@@ -66,7 +66,7 @@ module YAVDB
             page_vuln_urls = snykio
                                .css('table tbody tr td span a')
                                .map { |anchor| anchor.get('href') }
-                               .map { |link| link if link =~ %r{\/vuln\/.+} }.compact
+                               .map { |link| link if %r{\/vuln\/.+}.match?(link) }.compact
 
             next_urls = if page_vuln_urls.any?
                           next_url = snykio.css('a.pagination__next')
