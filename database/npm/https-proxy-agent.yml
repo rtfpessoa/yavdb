@@ -67,3 +67,35 @@
   references:
   - https://hackerone.com/reports/319532
   source_url: https://snyk.io/vuln/npm:https-proxy-agent:20180402
+- id: snykio:npm:https-proxy-agent:469131
+  title: Man-in-the-Middle (MitM)
+  description: "[https-proxy-agent][1] is a module that provides an http.Agent\nimplementation
+    that connects to a specified HTTP or HTTPS proxy server,\nand can be used with
+    the built-in https module.\n\nAffected versions of this package are vulnerable
+    to Man-in-the-Middle\n(MitM). When targeting a HTTP proxy, `https-proxy-agent`
+    opens a socket\nto the proxy, and sends the proxy server a `CONNECT` request.
+    If the\nproxy server responds with something other than a HTTP response `200`,\n`https-proxy-agent`
+    incorrectly returns the socket without any TLS\nupgrade. This request data may
+    contain basic auth credentials or other\nsecrets, is sent over an unencrypted
+    connection. A suitably positioned\nattacker could steal these secrets and impersonate
+    the client.\n\n### PoC by Kris Adler   {#poc-by-kris-adler}\n\n    var url = require('url');\n
+    \   var https = require('https');\n    var HttpsProxyAgent = require('https-proxy-agent');\n
+    \   \n    var proxyOpts = url.parse('http://127.0.0.1:80');\n    var opts = url.parse('https://www.google.com');\n
+    \   var agent = new HttpsProxyAgent(proxyOpts);\n    opts.agent = agent;\n    opts.auth
+    = 'username:password';\n    https.get(opts);\n\n\n\n[1]: https://github.com/TooTallNate/node-https-proxy-agent#readme\n"
+  affected_package: https-proxy-agent
+  vulnerable_versions:
+  - "*"
+  severity: medium
+  package_manager: npm
+  cwe:
+  - CWE-300
+  disclosed_date: 2019-09-25
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Kris Adler
+  references:
+  - https://github.com/TooTallNate/node-https-proxy-agent/pull/77
+  - https://hackerone.com/reports/541502
+  source_url: https://snyk.io/vuln/SNYK-JS-HTTPSPROXYAGENT-469131
