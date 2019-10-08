@@ -32,8 +32,9 @@ Gem::Specification.new do |spec|
 
   # Linters
   spec.add_development_dependency 'dependency_spy'
-  spec.add_development_dependency 'rubocop', ['~> 0.74']
-  spec.add_development_dependency 'rubocop-rspec', ['~> 1.35']
+  spec.add_development_dependency 'rubocop', ['~> 0.75']
+  spec.add_development_dependency 'rubocop-performance', ['~> 1.5.0']
+  spec.add_development_dependency 'rubocop-rspec', ['~> 1.36']
 
   # Runtime
   spec.add_runtime_dependency 'execjs', ['~> 2.7']
