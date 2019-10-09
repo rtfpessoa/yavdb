@@ -1,0 +1,31 @@
+---
+- id: snykio:npm:http-auth:471683
+  title: Authentication Bypass
+  description: |
+    [http-auth][1] is a package for HTTP basic and digest access
+    authentication.
+
+    Affected versions of this package are vulnerable to Authentication
+    Bypass. If a client specifies large `nonceCount` then this request can
+    be replayed `nonceCount - serverNonce[2]` times.
+
+
+
+    [1]: https://www.npmjs.com/package/http-auth
+  affected_package: http-auth
+  vulnerable_versions:
+  - "<3.2.4"
+  severity: high
+  package_manager: npm
+  cwe:
+  - CWE-294
+  disclosed_date: 2019-03-13
+  created_date: 2019-10-03
+  last_modified_date: 2019-10-03
+  credit:
+  - Dmitry Kochin
+  references:
+  - https://github.com/http-auth/http-auth/blob/0896bab1aae03d04d9df859575e485fb1a952c5d/src/auth/digest.js#L159
+  - https://github.com/http-auth/http-auth/issues/94
+  - https://github.com/http-auth/http-auth/issues/95
+  source_url: https://snyk.io/vuln/SNYK-JS-HTTPAUTH-471683
