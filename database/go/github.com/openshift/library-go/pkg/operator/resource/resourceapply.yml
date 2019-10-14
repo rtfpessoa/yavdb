@@ -1,0 +1,36 @@
+---
+- id: snykio:go:github.com/openshift/library-go/pkg/operator/resource/resourceapply:472066
+  title: Sensitive Data Exposure
+  description: |
+    [github.com/openshift/library-go/pkg/operator/resource/resourceapply][1]
+    is a package for creating helpers for going from apis and clients to
+    useful runtime constructs.
+
+    Affected versions of this package are vulnerable to Sensitive Data
+    Exposure. Secret data can be written to pod logs when the log level in a
+    given operator is set to `Debug` or higher. A low privileged user could
+    read pod logs to discover secret material if the log level has already
+    been modified in an operator by a privileged user.
+
+
+
+    [1]: https://github.com/openshift/library-go
+  affected_package: github.com/openshift/library-go/pkg/operator/resource/resourceapply
+  vulnerable_versions:
+  - ">=4.0 <4.1"
+  severity: low
+  package_manager: go
+  cve:
+  - CVE-2019-10213
+  cwe:
+  - CWE-532
+  disclosed_date: 2019-09-29
+  created_date: 2019-10-08
+  last_modified_date: 2019-10-08
+  credit:
+  - Unknown
+  references:
+  - https://bugzilla.redhat.com/show_bug.cgi?id=1734615
+  - https://github.com/openshift/library-go/pull/244
+  - https://github.com/openshift/library-go/pull/472
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMOPENSHIFTLIBRARYGOPKGOPERATORRESOURCERESOURCEAPPLY-472066
