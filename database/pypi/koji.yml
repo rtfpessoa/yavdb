@@ -29,3 +29,90 @@
   - https://pagure.io/koji/c/ab1ade7
   - https://pagure.io/koji/issue/850
   source_url: https://snyk.io/vuln/SNYK-PYTHON-KOJI-451682
+- id: snykio:pypi:koji:472485
+  title: Directory Traversal
+  description: |
+    [koji][1] is a system for building and tracking RPMS.
+
+    Affected versions of this package are vulnerable to Directory Traversal
+    due to insufficient upload path validation. An attacker with credentials
+    could choose an arbitrary destination for the uploaded file, resulting
+    with Privilege Escalation.
+
+    Note: the legacy-py24 branch is unaffected since it is client-only (no
+    hub)
+
+
+
+    [1]: https://pypi.org/project/koji/
+    \nA Directory Traversal attack (also known as path traversal) aims to
+    access files and directories that are stored outside the intended
+    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
+    its variations, or by using absolute file paths, it may be possible to
+    access arbitrary files and directories stored on file system, including
+    application source code, configuration, and other critical system files.
+
+    Directory Traversal vulnerabilities can be generally divided into two
+    types:
+
+    * **Information Disclosure**\: Allows the attacker to gain information
+      about the folder structure or read the contents of sensitive files on
+      the system.
+
+    `st` is a module for serving static files on web pages, and contains a
+    [vulnerability of this type][1]. In our example, we will serve files
+    from the `public` route.
+
+    If an attacker requests the following URL from our server, it will in
+    turn leak the sensitive private key of the root user.
+
+        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
+
+    **Note** `%2e` is the URL encoded version of `.` (dot).
+
+    * **Writing arbitrary files**\: Allows the attacker to create or replace
+      existing files. This type of vulnerability is also known as
+      `Zip-Slip`.
+
+    One way to achieve this is by using a malicious `zip` archive that holds
+    path traversal filenames. When each filename in the zip archive gets
+    concatenated to the target extraction folder, without validation, the
+    final path ends up outside of the target folder. If an executable or a
+    configuration file is overwritten with a file containing malicious code,
+    the problem can turn into an arbitrary code execution issue quite
+    easily.
+
+    The following is an example of a `zip` archive with one benign file and
+    one malicious file. Extracting the malicious file will result in
+    traversing out of the target folder, ending up in `/root/.ssh/`
+    overwriting the `authorized_keys` file:
+
+        2018-04-15 22:04:29 .....           19           19  good.txt
+        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
+
+
+
+    [1]: https://snyk.io/vuln/npm:st:20140206
+  affected_package: koji
+  vulnerable_versions:
+  - "< 1.14.3"
+  - ">= 1.15.0 < 1.15.3"
+  - ">= 1.16.0 < 1.16.3"
+  - ">= 1.17.0 < 1.17.1"
+  - ">= 1.18.0 < 1.18.1"
+  severity: high
+  package_manager: pypi
+  cve:
+  - CVE-2019-17109
+  cwe:
+  - CWE-23
+  disclosed_date: 2019-10-09
+  created_date: 2019-10-10
+  last_modified_date: 2019-10-10
+  credit:
+  - Yu Ming Zhu of Red Hat
+  references:
+  - http://www.openwall.com/lists/oss-security/2019/10/09/5
+  - https://docs.pagure.org/koji/CVE-2019-17109/
+  - https://pagure.io/koji/issue/1634
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-KOJI-472485
