@@ -1,0 +1,38 @@
+---
+- id: snykio:go:github.com/rclone/rclone/cmd/rcd:472939
+  title: Arbitrary File Write via Archive Extraction (Zip Slip)
+  description: "[github.com/rclone/rclone/cmd/rcd][1] is a package part of rclone
+    -\n\\\"rsync for cloud storage\\\".\n\nAffected versions of this package are vulnerable
+    to Arbitrary File Write\nvia Archive Extraction (Zip Slip). Downloaded files passed
+    to the\npackage could traverse outside of the intended folder and overwrite\nfiles
+    within a system when a malicious archive is extracted. Note: This\nvulnerability
+    is considered to be of low risk since files passed to\nunzip function can occur
+    from only specific inputs provided by rclone.\n\n\n\n[1]: https://github.com/rclone/rclone/releases\n\\nIt
+    is exploited using a specially crafted zip archive, that holds path\ntraversal
+    filenames. When exploited, a filename in a malicious archive\nis concatenated
+    to the target extraction directory, which results in the\nfinal path ending up
+    outside of the target folder. For instance, a zip\nmay hold a file with a \\\"../../file.exe\\\"
+    location and thus break out of\nthe target folder. If an executable or a configuration
+    file is\noverwritten with a file containing malicious code, the problem can turn\ninto
+    an arbitrary code execution issue quite easily.\n\nThe following is an example
+    of a zip archive with one benign file and\none malicious file. Extracting the
+    malicous file will result in\ntraversing out of the target folder, ending up in
+    `/root/.ssh/`\noverwriting the `authorized_keys` file:\n\n    \n    +2018-04-15
+    22:04:29 ..... 19 19 good.txt\n    \n    +2018-04-15 22:04:42 ..... 20 20 ../../../../../../root/.ssh/authorized_keys\n\n"
+  affected_package: github.com/rclone/rclone/cmd/rcd
+  vulnerable_versions:
+  - "<1.49.4"
+  severity: low
+  package_manager: go
+  cwe:
+  - CWE-22
+  disclosed_date: 2019-09-11
+  created_date: 2019-10-11
+  last_modified_date: 2019-10-11
+  credit:
+  - Semmle Security Research
+  references:
+  - https://github.com/rclone/rclone/blob/master/cmd/rcd/rcd.go#L105
+  - https://github.com/rclone/rclone/commit/32d5af8fb61adf1f3ebdadaf2c61350587965b0f
+  - https://github.com/rclone/rclone/issues/3529
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMRCLONERCLONECMDRCD-472939
