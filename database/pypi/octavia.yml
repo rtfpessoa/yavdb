@@ -36,3 +36,40 @@
   references:
   - https://bugs.launchpad.net/octavia/+bug/1620629
   source_url: https://snyk.io/vuln/SNYK-PYTHON-OCTAVIA-174798
+- id: snykio:pypi:octavia:473092
+  title: Improper Certificate Validation
+  description: |
+    [octavia][1] is anoperator-grade reference implementation for Load
+    Balancing as a Service (LBaaS) for OpenStack.
+
+    Affected versions of this package are vulnerable to Improper Certificate
+    Validation. This allows anyone with access to the management network to
+    bypass client-certificate based authentication and retrieve information
+    or issue configuration commands via simple HTTP requests to the Agent on
+    port https/9443, because the `cmd/agent.py gunicorn cert_reqs` option is
+    `True` but is supposed to be `ssl.CERT_REQUIRED`.
+
+
+
+    [1]: https://docs.openstack.org/octavia/latest/
+  affected_package: octavia
+  vulnerable_versions:
+  - ">= 0.10.0 < 2.1.2"
+  - ">= 3.0.0 < 3.2.0"
+  - ">= 4.0.0 < 4.1.0"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2019-17134
+  cwe:
+  - CWE-295
+  disclosed_date: 2019-10-08
+  created_date: 2019-10-15
+  last_modified_date: 2019-10-15
+  credit:
+  - Daniel Preussker
+  references:
+  - https://github.com/openstack/octavia/commit/b0c2cd7b4c835c391cfedf12cf9f9ff8a0aabd17
+  - https://security.openstack.org/ossa/OSSA-2019-005.html
+  - https://storyboard.openstack.org/#!/story/2006660
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-OCTAVIA-473092
