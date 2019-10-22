@@ -1,0 +1,31 @@
+---
+- id: snykio:pypi:reportlab:473444
+  title: Remote Code Execution (RCE)
+  description: |
+    [reportlab][1] is a Python library for generating PDFs and graphics.
+
+    Affected versions of this package are vulnerable to Remote Code
+    Execution (RCE) due to `toColor(eval(arg))` in `colors.py`, as
+    demonstrated by a crafted XML document with `<span color="` followed by
+    arbitrary Python code.
+
+
+
+    [1]: https://pypi.org/project/reportlab/
+  affected_package: reportlab
+  vulnerable_versions:
+  - ">= 0"
+  severity: high
+  package_manager: pypi
+  cve:
+  - CVE-2019-17626
+  cwe:
+  - CWE-94
+  disclosed_date: 2019-10-16
+  created_date: 2019-10-16
+  last_modified_date: 2019-10-16
+  credit:
+  - Unknown
+  references:
+  - https://bitbucket.org/rptlab/reportlab/issues/199/eval-in-colorspy-leads-to-remote-code
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-REPORTLAB-473444
