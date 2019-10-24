@@ -1,0 +1,41 @@
+---
+- id: snykio:maven:io.ratpack:ratpack-core:473841
+  title: HTTP Response Splitting
+  description: |
+    [io.ratpack:ratpack-core][1] is a simple, capable, toolkit for creating
+    high performance web applications.
+
+    Affected versions of this package are vulnerable to HTTP Response
+    Splitting. If untrusted and unsanitized data is used to populate the
+    headers of an HTTP response, an attacker can utilize this vulnerability
+    to have the server issue any HTTP response they specify. The root cause
+    was due to using the `netty` `DefaultHttpHeaders object` with
+    verification disabled.
+
+    If your application uses arbitrary user input as the value of a response
+    header it is vulnerable. If your application does not use arbitrary
+    values as response header values, it is not vulnerable.
+
+
+
+    [1]: http://www.ratpack.io/
+  affected_package: io.ratpack:ratpack-core
+  vulnerable_versions:
+  - "> 0.9.1 < 1.7.5"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2019-17513
+  cwe:
+  - CWE-113
+  disclosed_date: 2019-10-17
+  created_date: 2019-10-18
+  last_modified_date: 2019-10-18
+  credit:
+  - Jonathan Leitschuh
+  references:
+  - https://github.com/ratpack/ratpack/blob/af1e8c8590f164d7dd84d4212886fad4ead99080/ratpack-core/src/main/java/ratpack/server/internal/NettyHandlerAdapter.java#L159
+  - https://github.com/ratpack/ratpack/commit/c560a8d10cb8bdd7a526c1ca2e67c8f224ca23ae
+  - https://github.com/ratpack/ratpack/commit/efb910d38a96494256f36675ef0e5061097dd77d
+  - https://github.com/ratpack/ratpack/security/advisories/GHSA-mvqp-q37c-wf9j
+  source_url: https://snyk.io/vuln/SNYK-JAVA-IORATPACK-473841
