@@ -1,33 +1,16 @@
 ---
-- id: npmjs:npm:express-fileupload:1216
-  title: Denial of Service
-  description: "All versions of `express-fileupload` are vulnerable to Denial of Service.
-    The package causes server responses to be delayed (up to 30s in internal testing)
-    if the request contains a large `filename` of `.` characters.\n\n"
-  affected_package: express-fileupload
-  vulnerable_versions:
-  - ">=0.0.0"
-  severity: low
-  package_manager: npm
-  cwe: CWE-248
-  disclosed_date: 1970-01-01
-  created_date: 1970-01-01
-  last_modified_date: 1970-01-01
-  credit: posix
-  references: https://npmjs.com/advisories/1216
-  source_url: https://npmjs.com/advisories/1216
-- id: snykio:npm:express-fileupload:473997
-  title: Denial of Service (DDoS)
+- id: snykio:npm:vue-apollo:474013
+  title: Denial of Service (DoS)
   description: |+
-    [express-fileupload][1] is a file upload middleware for express that
-    wraps around busboy.
+    [vue-apollo][1] is a package providing Apollo/GraphQL integration for
+    VueJS.
 
     Affected versions of this package are vulnerable to Denial of Service
-    (DDoS). The package does not limit file name length.
+    (DoS). Visiting pages with Smart Query cause the memory to leak.
 
 
 
-    [1]: https://github.com/richardgirges/express-fileupload
+    [1]: https://github.com/Akryum/vue-apollo#readme
     \nDenial of Service (DoS) describes a family of attacks, all aimed at
     making a system inaccessible to its intended and legitimate users.
 
@@ -54,18 +37,20 @@
     * Crash - An attacker sending crafted requests that could cause the
       system to crash. For Example, [npm `ws` package](npm:ws:20171108)
 
-  affected_package: express-fileupload
+  affected_package: vue-apollo
   vulnerable_versions:
-  - "*"
+  - ">=3.0.0-alpha.1 <3.0.0"
   severity: high
   package_manager: npm
   cwe:
-  - CWE-79
-  disclosed_date: 2019-10-18
+  - CWE-401
+  disclosed_date: 2019-10-21
   created_date: 2019-10-22
   last_modified_date: 2019-10-22
   credit:
-  - Roman Burunkov
+  - Lam Kieu
   references:
-  - https://github.com/richardgirges/express-fileupload/pull/171
-  source_url: https://snyk.io/vuln/SNYK-JS-EXPRESSFILEUPLOAD-473997
+  - https://github.com/Akryum/vue-apollo/issues/806
+  - https://github.com/nuxt-community/apollo-module/issues/231
+  - https://github.com/vuejs/vue-apollo/commit/c3b840c368d50cb21f7410119a50443596baa537
+  source_url: https://snyk.io/vuln/SNYK-JS-VUEAPOLLO-474013
