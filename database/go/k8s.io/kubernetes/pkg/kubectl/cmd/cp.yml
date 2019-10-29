@@ -1,0 +1,35 @@
+---
+- id: snykio:go:k8s.io/kubernetes/pkg/kubectl/cmd/cp:174801
+  title: Symlink Attack
+  description: |
+    [k8s.io/kubernetes/pkg/kubectl/cmd/cp][1] is a Production-Grade
+    Container Scheduling and Management.
+
+    Affected versions of this package are vulnerable to Symlink Attack. via
+    the `kubectl cp` command. It could allow writing files to any path on
+    the user’s machine when \'kubectl cp\' is called, limited only by the
+    system permissions of the local user.
+
+
+
+    [1]: https://godoc.org/k8s.io/kubernetes/pkg/kubectl/cmd/cp
+  affected_package: k8s.io/kubernetes/pkg/kubectl/cmd/cp
+  vulnerable_versions:
+  - "<1.11.9"
+  - ">=1.12.0 <1.12.7"
+  - ">=1.13.0 <1.13.5"
+  severity: high
+  package_manager: go
+  cve:
+  - CVE-2019-1002101
+  cwe:
+  - CWE-59
+  disclosed_date: 2019-03-06
+  created_date: 2019-04-02
+  last_modified_date: 2019-04-02
+  credit:
+  - Unknown
+  references:
+  - https://github.com/kubernetes/kubernetes/commit/47063891dd782835170f500a83f37cc98c3c1013
+  - https://github.com/kubernetes/kubernetes/pull/75037
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-K8SIOKUBERNETESPKGKUBECTLCMDCP-174801
