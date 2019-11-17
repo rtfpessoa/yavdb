@@ -99,8 +99,9 @@ module YAVDB
             affected_package = advisory_page.css('.custom-package-name').text
             affected_package = advisory_page.css('.header__lede .breadcrumbs__list-item__link').text if affected_package.empty?
 
-            vulnerable_versions = advisory_page.css('.custom-affected-versions').text.strip
-            vulnerable_versions = if vulnerable_versions.empty? || vulnerable_versions == 'ALL'
+            vulnerable_versions = (advisory_page.css('.custom-affected-versions') ||
+              advisory_page.css('.header__lede strong').drop(1).first).text.strip
+            vulnerable_versions = if vulnerable_versions.empty? || vulnerable_versions == 'ALL' || vulnerable_versions == '(,)'
                                     ['*']
                                   elsif ['maven', 'nuget', 'pypi'].include?(package_manager)
                                     [vulnerable_versions]
