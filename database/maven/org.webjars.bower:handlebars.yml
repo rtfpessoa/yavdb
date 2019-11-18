@@ -1,0 +1,275 @@
+---
+- id: snykio:maven:org.webjars.bower:handlebars:479719
+  title: Prototype Pollution
+  description: "[org.webjars.bower:handlebars][1] is a extension to the Mustache\ntemplating
+    language.\n\nAffected versions of this package are vulnerable to Prototype Pollution.\nTemplates
+    may alter an Object\\'s `__proto__` and `__defineGetter__`\nproperties, which
+    may allow an attacker to execute arbitrary code on the\nserver through crafted
+    payloads.\n\n\n\n[1]: https://www.npmjs.com/package/handlebars\n\\nPrototype Pollution
+    is a vulnerability affecting JavaScript. Prototype\nPollution refers to the ability
+    to inject properties into existing\nJavaScript language construct prototypes,
+    such as objects. JavaScript\nallows all Object attributes to be altered, including
+    their magical\nattributes such as `_proto_`, `constructor` and `prototype`. An
+    attacker\nmanipulates these attributes to overwrite, or pollute, a JavaScript\napplication
+    object prototype of the base object by injecting other\nvalues. Properties on
+    the `Object.prototype` are then inherited by all\nthe JavaScript objects through
+    the prototype chain. When that happens,\nthis leads to either denial of service
+    by triggering JavaScript\nexceptions, or it tampers with the application source
+    code to force the\ncode path that the attacker injects, thereby leading to remote
+    code\nexecution.\n\nThere are two main ways in which the pollution of prototypes
+    occurs:\n\n* Unsafe `Object` recursive merge\n\n* Property definition by path\n\n###
+    Unsafe Object recursive merge   {#unsafe-object-recursive-merge}\n\nThe logic
+    of a vulnerable recursive merge function follows the following\nhigh-level model:\n\n
+    \   merge (target, source)\n    \n      foreach property of source\n    \n        if
+    property exists and is an object on both the target and the source\n    \n          merge(target[property],
+    source[property])\n    \n        else\n    \n          target[property] = source[property]\n\n\n\nWhen
+    the source object contains a property named `_proto_` defined with\n`Object.defineProperty()`
+    , the condition that checks if the property\nexists and is an object on both the
+    target and the source passes and the\nmerge recurses with the target, being the
+    prototype of `Object` and the\nsource of `Object` as defined by the attacker.
+    Properties are then\ncopied on the `Object` prototype.\n\nClone operations are
+    a special sub-class of unsafe recursive merges,\nwhich occur when a recursive
+    merge is conducted on an empty object:\n`merge({},source)`.\n\n`lodash` and `Hoek`
+    are examples of libraries susceptible to recursive\nmerge attacks.\n\n### Property
+    definition by path   {#property-definition-by-path}\n\nThere are a few JavaScript
+    libraries that use an API to define property\nvalues on an object based on a given
+    path. The function that is\ngenerally affected contains this signature: `theFunction(object,
+    path,\nvalue)`\n\nIf the attacker can control the value of “path”, they can set
+    this value\nto `_proto_.myValue`. `myValue` is then assigned to the prototype
+    of the\nclass of the object.\n\n"
+  affected_package: org.webjars.bower:handlebars
+  vulnerable_versions:
+  - "< 4.3.0"
+  severity: high
+  package_manager: maven
+  cwe:
+  - CWE-471
+  disclosed_date: 2019-09-24
+  created_date: 2019-09-25
+  last_modified_date: 2019-09-25
+  credit:
+  - itszn
+  references:
+  - https://github.com/wycats/handlebars.js/blob/master/release-notes.md#v430---september-24th-2019
+  - https://github.com/wycats/handlebars.js/commit/213c0bbe3c4bd83a534d67384e5afa0000347ff6
+  - https://github.com/wycats/handlebars.js/commit/7b67a29a8c926b38af265c727ff6551fbb277111
+  - https://github.com/wycats/handlebars.js/issues/1558
+  - https://www.npmjs.com/advisories/1164
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSBOWER-479719
+- id: snykio:maven:org.webjars.bower:handlebars:479722
+  title: Prototype Pollution
+  description: "[org.webjars.bower:handlebars][1] is a extension to the Mustache\ntemplating
+    language.\n\nAffected versions of this package are vulnerable to Prototype Pollution.\nTemplates
+    may alter an Objects\\' prototype, thus allowing an attacker to\nexecute arbitrary
+    code on the server.\n\n\n\n[1]: https://www.npmjs.com/package/handlebars\n\\nPrototype
+    Pollution is a vulnerability affecting JavaScript. Prototype\nPollution refers
+    to the ability to inject properties into existing\nJavaScript language construct
+    prototypes, such as objects. JavaScript\nallows all Object attributes to be altered,
+    including their magical\nattributes such as `_proto_`, `constructor` and `prototype`.
+    An attacker\nmanipulates these attributes to overwrite, or pollute, a JavaScript\napplication
+    object prototype of the base object by injecting other\nvalues. Properties on
+    the `Object.prototype` are then inherited by all\nthe JavaScript objects through
+    the prototype chain. When that happens,\nthis leads to either denial of service
+    by triggering JavaScript\nexceptions, or it tampers with the application source
+    code to force the\ncode path that the attacker injects, thereby leading to remote
+    code\nexecution.\n\nThere are two main ways in which the pollution of prototypes
+    occurs:\n\n* Unsafe `Object` recursive merge\n\n* Property definition by path\n\n###
+    Unsafe Object recursive merge   {#unsafe-object-recursive-merge}\n\nThe logic
+    of a vulnerable recursive merge function follows the following\nhigh-level model:\n\n
+    \   merge (target, source)\n    \n      foreach property of source\n    \n        if
+    property exists and is an object on both the target and the source\n    \n          merge(target[property],
+    source[property])\n    \n        else\n    \n          target[property] = source[property]\n\n\n\nWhen
+    the source object contains a property named `_proto_` defined with\n`Object.defineProperty()`
+    , the condition that checks if the property\nexists and is an object on both the
+    target and the source passes and the\nmerge recurses with the target, being the
+    prototype of `Object` and the\nsource of `Object` as defined by the attacker.
+    Properties are then\ncopied on the `Object` prototype.\n\nClone operations are
+    a special sub-class of unsafe recursive merges,\nwhich occur when a recursive
+    merge is conducted on an empty object:\n`merge({},source)`.\n\n`lodash` and `Hoek`
+    are examples of libraries susceptible to recursive\nmerge attacks.\n\n### Property
+    definition by path   {#property-definition-by-path}\n\nThere are a few JavaScript
+    libraries that use an API to define property\nvalues on an object based on a given
+    path. The function that is\ngenerally affected contains this signature: `theFunction(object,
+    path,\nvalue)`\n\nIf the attacker can control the value of “path”, they can set
+    this value\nto `_proto_.myValue`. `myValue` is then assigned to the prototype
+    of the\nclass of the object.\n\n"
+  affected_package: org.webjars.bower:handlebars
+  vulnerable_versions:
+  - "< 4.0.13"
+  severity: high
+  package_manager: maven
+  cwe:
+  - CWE-471
+  disclosed_date: 2018-12-28
+  created_date: 2019-02-14
+  last_modified_date: 2019-02-14
+  credit:
+  - Mahmoud Gamal
+  - Matias Lang
+  references:
+  - https://github.com/wycats/handlebars.js/commit/7372d4e9dffc9d70c09671aa28b9392a1577fd86
+  - https://github.com/wycats/handlebars.js/issues/1495
+  - https://www.npmjs.com/advisories/755
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSBOWER-479722
+- id: snykio:maven:org.webjars.bower:handlebars:479728
+  title: Prototype Pollution
+  description: "[org.webjars.bower:handlebars][1] is a extension to the Mustache\ntemplating
+    language.\n\nAffected versions of this package are vulnerable to Prototype Pollution.\nA
+    Prototype Pollution allowing Remote Code Execution can be exploited\nusing the
+    constructor, via the \\'lookup\\' helper. This vulnerability is\ndue to an incomplete
+    fix for: `SNYK-JS-HANDLEBARS-173692`\n\n\n\n[1]: https://www.npmjs.com/package/handlebars\n\\nPrototype
+    Pollution is a vulnerability affecting JavaScript. Prototype\nPollution refers
+    to the ability to inject properties into existing\nJavaScript language construct
+    prototypes, such as objects. JavaScript\nallows all Object attributes to be altered,
+    including their magical\nattributes such as `_proto_`, `constructor` and `prototype`.
+    An attacker\nmanipulates these attributes to overwrite, or pollute, a JavaScript\napplication
+    object prototype of the base object by injecting other\nvalues. Properties on
+    the `Object.prototype` are then inherited by all\nthe JavaScript objects through
+    the prototype chain. When that happens,\nthis leads to either denial of service
+    by triggering JavaScript\nexceptions, or it tampers with the application source
+    code to force the\ncode path that the attacker injects, thereby leading to remote
+    code\nexecution.\n\nThere are two main ways in which the pollution of prototypes
+    occurs:\n\n* Unsafe `Object` recursive merge\n\n* Property definition by path\n\n###
+    Unsafe Object recursive merge   {#unsafe-object-recursive-merge}\n\nThe logic
+    of a vulnerable recursive merge function follows the following\nhigh-level model:\n\n
+    \   merge (target, source)\n    \n      foreach property of source\n    \n        if
+    property exists and is an object on both the target and the source\n    \n          merge(target[property],
+    source[property])\n    \n        else\n    \n          target[property] = source[property]\n\n\n\nWhen
+    the source object contains a property named `_proto_` defined with\n`Object.defineProperty()`
+    , the condition that checks if the property\nexists and is an object on both the
+    target and the source passes and the\nmerge recurses with the target, being the
+    prototype of `Object` and the\nsource of `Object` as defined by the attacker.
+    Properties are then\ncopied on the `Object` prototype.\n\nClone operations are
+    a special sub-class of unsafe recursive merges,\nwhich occur when a recursive
+    merge is conducted on an empty object:\n`merge({},source)`.\n\n`lodash` and `Hoek`
+    are examples of libraries susceptible to recursive\nmerge attacks.\n\n### Property
+    definition by path   {#property-definition-by-path}\n\nThere are a few JavaScript
+    libraries that use an API to define property\nvalues on an object based on a given
+    path. The function that is\ngenerally affected contains this signature: `theFunction(object,
+    path,\nvalue)`\n\nIf the attacker can control the value of “path”, they can set
+    this value\nto `_proto_.myValue`. `myValue` is then assigned to the prototype
+    of the\nclass of the object.\n\n"
+  affected_package: org.webjars.bower:handlebars
+  vulnerable_versions:
+  - ">= 3.0.0 < 3.0.7"
+  - ">= 4.0.0 < 4.0.14"
+  - ">= 4.1.0 < 4.1.2"
+  severity: high
+  package_manager: maven
+  cwe:
+  - CWE-471
+  disclosed_date: 2019-04-13
+  created_date: 2019-04-14
+  last_modified_date: 2019-04-14
+  credit:
+  - Nils Knappmeier
+  references:
+  - https://github.com/wycats/handlebars.js/commit/cd38583216dce3252831916323202749431c773e
+  - https://github.com/wycats/handlebars.js/issues/1495
+  - https://snyk.io/vuln/SNYK-JS-HANDLEBARS-173692
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSBOWER-479728
+- id: snykio:maven:org.webjars.bower:handlebars:479731
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [handlebars][1] provides the power necessary to let you build semantic
+    templates.
+
+    When using attributes without quotes in a handlebars template, an
+    attacker can manipulate the input to introduce additional attributes,
+    potentially executing code. This may lead to a Cross-site Scripting
+    (XSS) vulnerability, assuming an attacker can influence the value
+    entered into the template. If the handlebars template is used to render
+    user-generated content, this vulnerability may escalate to a persistent
+    XSS vulnerability.
+
+
+
+    [1]: https://github.com/wycats/handlebars.js/
+    \nCross-Site Scripting (XSS) attacks occur when an attacker tricks a
+    user’s browser to execute malicious JavaScript code in the context of a
+    victim’s domain. Such scripts can steal the user’s session cookies for
+    the domain, scrape or modify its content, and perform or modify actions
+    on the user’s behalf, actions typically blocked by the browser’s Same
+    Origin Policy.
+
+    These attacks are possible by escaping the context of the web
+    application and injecting malicious scripts in an otherwise trusted
+    website. These scripts can introduce additional attributes (say, a
+    \"new\" option in a dropdown list or a new link to a malicious site) and
+    can potentially execute code on the clients side, unbeknown to the
+    victim. This occurs when characters like `<` `>` `"` `'` are not escaped
+    properly.
+
+    There are a few types of XSS:
+
+    * **Persistent XSS** is an attack in which the malicious code persists
+      into the web app’s database.
+    * **Reflected XSS** is an which the website echoes back a portion of the
+      request. The attacker needs to trick the user into clicking a
+      malicious link (for instance through a phishing email or malicious JS
+      on another page), which triggers the XSS attack.
+    * **DOM-based XSS** is an that occurs purely in the browser when
+      client-side JavaScript echoes back a portion of the URL onto the page.
+      DOM-Based XSS is notoriously hard to detect, as the server never gets
+      a chance to see the attack taking place.
+
+    **Example:**
+
+    Assume handlebars was used to display user comments and avatar, using
+    the following template: `<img src={{avatarUrl}}><pre>{{comment}}</pre>`
+
+    If an attacker spoofed their avatar URL and provided the following
+    value: `http://evil.org/avatar.png onload=alert(document.cookie)`
+
+    The resulting HTML would be the following, triggering the script once
+    the image loads: `<img src=http://evil.org/avatar.png
+    onload=alert(document.cookie)><pre>Gotcha!</pre>`
+
+  affected_package: org.webjars.bower:handlebars
+  vulnerable_versions:
+  - "< 4.0.0"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2015-8861
+  cwe:
+  - CWE-79
+  disclosed_date: 2015-12-07
+  created_date: 2015-12-14
+  last_modified_date: 2015-12-14
+  credit:
+  - Matias P. Brutti
+  references:
+  - https://github.com/wycats/handlebars.js/commit/83b8e846a3569bd366cf0b6bdc1e4604d1a2077e
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSBOWER-479731
+- id: snykio:maven:org.webjars.bower:handlebars:480389
+  title: Denial of Service (DoS)
+  description: |
+    [org.webjars.bower:handlebars][1] is an extension to the Mustache
+    templating language.
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS). The package\'s parser may be forced into an endless loop while
+    processing specially-crafted templates, which may allow attackers to
+    exhaust system resources leading to Denial of Service.
+
+
+
+    [1]: https://www.npmjs.com/package/handlebars
+  affected_package: org.webjars.bower:handlebars
+  vulnerable_versions:
+  - ">= 4.0.0"
+  severity: high
+  package_manager: maven
+  cwe:
+  - CWE-400
+  disclosed_date: 2019-10-30
+  created_date: 2019-11-05
+  last_modified_date: 2019-11-05
+  credit:
+  - Unknown
+  references:
+  - https://github.com/wycats/handlebars.js/commit/8d5530ee2c3ea9f0aee3fde310b9f36887d00b8b
+  - https://github.com/wycats/handlebars.js/issues/1579
+  - https://www.npmjs.com/advisories/1300
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSBOWER-480389

@@ -29,20 +29,23 @@
 - id: snykio:maven:org.apache.qpid:qpid-jms-client:30714
   title: Improper Input Validation
   description: |
-    [`org.apache.qpid:qpid-jms-client`][1] Apache Qpid AMQP 0-x JMS client
-    before 6.0.4 and JMS (AMQP 1.0) before 0.10.0 does not restrict the use
-    of classes available on the classpath, which might allow remote
+    [org.apache.qpid:qpid-jms-client][1] is a AMQP 1.0 Java Message Service
+    2.0 client built using Qpid Proton.
+
+    Affected versions of this package are vulnerable to Improper Input
+    Validation. Apache Qpid AMQP 0-x JMS client does not restrict the use of
+    classes available on the classpath, which might allow remote
     authenticated users with permission to send messages to deserialize
     arbitrary objects and execute arbitrary code by leveraging a crafted
     serialized object in a JMS ObjectMessage that is handled by the
-    getObject function.
+    `getObject` function.
 
 
 
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22qpid-jms-client%22
+    [1]: http://qpid.apache.org/components/jms/index.html
   affected_package: org.apache.qpid:qpid-jms-client
   vulnerable_versions:
-  - ">= 0.1.0 <= 0.9.0"
+  - ">= 0.1.0 < 0.10.0"
   severity: high
   package_manager: maven
   cve:
@@ -55,5 +58,6 @@
   credit:
   - Unknown
   references:
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-4974
+  - https://git-wip-us.apache.org/repos/asf?p=qpid-jms.git;h=669cfff
+  - https://issues.apache.org/jira/browse/QPIDJMS-188
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEQPID-30714

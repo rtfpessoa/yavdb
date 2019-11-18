@@ -1,0 +1,764 @@
+---
+- id: snykio:maven:org.webjars:marked:479899
+  title: Regular Expression Denial of Service (ReDoS)
+  description: "[org.webjars:marked][1] is a low-level compiler for parsing markdown\nwithout
+    caching or blocking for long periods of time.\n\nAffected versions of this package
+    are vulnerable to Regular Expression\nDenial of Service (ReDoS). The `inline.text
+    regex` may take quadratic\ntime to scan for potential email addresses starting
+    at every point.\n\n\n\n[1]: https://marked.js.org/\n\\nDenial of Service (DoS)
+    describes a family of attacks, all aimed at\nmaking a system inaccessible to its
+    original and legitimate users. There\nare many types of DoS attacks, ranging from
+    trying to clog the network\npipes to the system by generating a large volume of
+    traffic from many\nmachines (a Distributed Denial of Service - DDoS - attack)
+    to sending\ncrafted requests that cause a system to crash or take a disproportional\namount
+    of time to process.\n\nThe Regular expression Denial of Service (ReDoS) is a type
+    of Denial of\nService attack. Regular expressions are incredibly powerful, but
+    they\naren\\'t very intuitive and can ultimately end up making it easy for\nattackers
+    to take your site down.\n\nLet’s take the following regular expression as an example:\n\n
+    \   regex = /A(B|C+)+D/\n{: .language-js}\n\nThis regular expression accomplishes
+    the following:\n\n* `A` The string must start with the letter \\'A\\'\n* `(B|C+)+`
+    The string must then follow the letter A with either the\n  letter \\'B\\' or
+    some number of occurrences of the letter \\'C\\' (the\n  `+` matches one or more
+    times). The `+` at the end of this section\n  states that we can look for one
+    or more matches of this section.\n* `D` Finally, we ensure this section of the
+    string ends with a \\'D\\'\n\nThe expression would match inputs such as `ABBD`,
+    `ABCCCCD`, `ABCBCCCD`\nand `ACCCCCD`\n\nIt most cases, it doesn\\'t take very
+    long for a regex engine to find a\nmatch:\n\n    $ time node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCD\")'\n
+    \   0.04s user 0.01s system 95% cpu 0.052 total\n    \n    $ time node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCX\")'\n
+    \   1.79s user 0.02s system 99% cpu 1.812 total\n{: .language-bash}\n\nThe entire
+    process of testing it against a 30 characters long string\ntakes around ~52ms.
+    But when given an invalid string, it takes nearly\ntwo seconds to complete the
+    test, over ten times as long as it took to\ntest a valid string. The dramatic
+    difference is due to the way regular\nexpressions get evaluated.\n\nMost Regex
+    engines will work very similarly (with minor differences).\nThe engine will match
+    the first possible way to accept the current\ncharacter and proceed to the next
+    one. If it then fails to match the\nnext one, it will backtrack and see if there
+    was another way to digest\nthe previous character. If it goes too far down the
+    rabbit hole only to\nfind out the string doesn’t match in the end, and if many
+    characters\nhave multiple valid regex paths, the number of backtracking steps
+    can\nbecome very large, resulting in what is known as *catastrophic\nbacktracking*.\n\nLet\\'s
+    look at how our expression runs into this problem, using a\nshorter string: \\\"ACCCX\\\".
+    While it seems fairly straightforward, there\nare still four different ways that
+    the engine could match those three\nC\\'s:\n\n1.  CCC\n2.  CC+C\n3.  C+CC\n4.
+    \ C+C+C.\n\nThe engine has to try each of those combinations to see if any of
+    them\npotentially match against the expression. When you combine that with the\nother
+    steps the engine must take, we can use [RegEx 101 debugger][1] to\nsee the engine
+    has to take a total of 38 steps before it can determine\nthe string doesn\\'t
+    match.\n\nFrom there, the number of steps the engine must use to validate a string\njust
+    continues to grow.\n\n| String | Number of C\\'s | Number of steps |\n|----------\n|
+    ACCCX | 3 | 38 |\n| ACCCCX | 4 | 71 |\n| ACCCCCX | 5 | 136 |\n| ACCCCCCCCCCCCCCX
+    | 14 | 65,553 |\n\nBy the time the string includes 14 C\\'s, the engine has to
+    take over\n65,000 steps just to see if the string is valid. These extreme\nsituations
+    can cause them to work very slowly (exponentially related to\ninput size, as shown
+    above), allowing an attacker to exploit this and\ncan cause the service to excessively
+    consume CPU, resulting in a Denial\nof Service.\n\n\n\n[1]: https://regex101.com/debugger\n"
+  affected_package: org.webjars:marked
+  vulnerable_versions:
+  - ">= 0.1.3 < 0.6.2"
+  severity: medium
+  package_manager: maven
+  cwe:
+  - CWE-400
+  disclosed_date: 2019-04-04
+  created_date: 2019-04-07
+  last_modified_date: 2019-04-07
+  credit:
+  - Anders Kaseorg
+  references:
+  - https://github.com/markedjs/marked/commit/00f1f7a23916ef27186d0904635aa3509af63d47
+  - https://github.com/markedjs/marked/pull/1460
+  - https://github.com/markedjs/marked/pull/1460/commits/be27472a8169dda7875330939f8115ab677cdc07
+  - https://www.npmjs.com/advisories/812
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARS-479899
+- id: snykio:maven:org.webjars:marked:479904
+  title: Regular Expression Denial of Service (DoS)
+  description: "[org.webjars:marked][1] is a low-level compiler for parsing markdown\nwithout
+    caching or blocking for long periods of time.\n\nAffected versions of this package
+    are vulnerable to Regular Expression\nDenial of Service (DoS) when certain types
+    of input are passed in to be\nparsed.\n\n\n\n[1]: https://marked.js.org/\n\\nDenial
+    of Service (DoS) describes a family of attacks, all aimed at\nmaking a system
+    inaccessible to its original and legitimate users. There\nare many types of DoS
+    attacks, ranging from trying to clog the network\npipes to the system by generating
+    a large volume of traffic from many\nmachines (a Distributed Denial of Service
+    - DDoS - attack) to sending\ncrafted requests that cause a system to crash or
+    take a disproportional\namount of time to process.\n\nThe Regular expression Denial
+    of Service (ReDoS) is a type of Denial of\nService attack. Regular expressions
+    are incredibly powerful, but they\naren\\'t very intuitive and can ultimately
+    end up making it easy for\nattackers to take your site down.\n\nLet’s take the
+    following regular expression as an example:\n\n    regex = /A(B|C+)+D/\n{: .language-js}\n\nThis
+    regular expression accomplishes the following:\n\n* `A` The string must start
+    with the letter \\'A\\'\n* `(B|C+)+` The string must then follow the letter A
+    with either the\n  letter \\'B\\' or some number of occurrences of the letter
+    \\'C\\' (the\n  `+` matches one or more times). The `+` at the end of this section\n
+    \ states that we can look for one or more matches of this section.\n* `D` Finally,
+    we ensure this section of the string ends with a \\'D\\'\n\nThe expression would
+    match inputs such as `ABBD`, `ABCCCCD`, `ABCBCCCD`\nand `ACCCCCD`\n\nIt most cases,
+    it doesn\\'t take very long for a regex engine to find a\nmatch:\n\n    $ time
+    node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCD\")'\n    0.04s user
+    0.01s system 95% cpu 0.052 total\n    \n    $ time node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCX\")'\n
+    \   1.79s user 0.02s system 99% cpu 1.812 total\n{: .language-bash}\n\nThe entire
+    process of testing it against a 30 characters long string\ntakes around ~52ms.
+    But when given an invalid string, it takes nearly\ntwo seconds to complete the
+    test, over ten times as long as it took to\ntest a valid string. The dramatic
+    difference is due to the way regular\nexpressions get evaluated.\n\nMost Regex
+    engines will work very similarly (with minor differences).\nThe engine will match
+    the first possible way to accept the current\ncharacter and proceed to the next
+    one. If it then fails to match the\nnext one, it will backtrack and see if there
+    was another way to digest\nthe previous character. If it goes too far down the
+    rabbit hole only to\nfind out the string doesn’t match in the end, and if many
+    characters\nhave multiple valid regex paths, the number of backtracking steps
+    can\nbecome very large, resulting in what is known as *catastrophic\nbacktracking*.\n\nLet\\'s
+    look at how our expression runs into this problem, using a\nshorter string: \\\"ACCCX\\\".
+    While it seems fairly straightforward, there\nare still four different ways that
+    the engine could match those three\nC\\'s:\n\n1.  CCC\n2.  CC+C\n3.  C+CC\n4.
+    \ C+C+C.\n\nThe engine has to try each of those combinations to see if any of
+    them\npotentially match against the expression. When you combine that with the\nother
+    steps the engine must take, we can use [RegEx 101 debugger][1] to\nsee the engine
+    has to take a total of 38 steps before it can determine\nthe string doesn\\'t
+    match.\n\nFrom there, the number of steps the engine must use to validate a string\njust
+    continues to grow.\n\n| String | Number of C\\'s | Number of steps |\n|----------\n|
+    ACCCX | 3 | 38 |\n| ACCCCX | 4 | 71 |\n| ACCCCCX | 5 | 136 |\n| ACCCCCCCCCCCCCCX
+    | 14 | 65,553 |\n\nBy the time the string includes 14 C\\'s, the engine has to
+    take over\n65,000 steps just to see if the string is valid. These extreme\nsituations
+    can cause them to work very slowly (exponentially related to\ninput size, as shown
+    above), allowing an attacker to exploit this and\ncan cause the service to excessively
+    consume CPU, resulting in a Denial\nof Service.\n\n\n\n[1]: https://regex101.com/debugger\n"
+  affected_package: org.webjars:marked
+  vulnerable_versions:
+  - "< 0.3.4"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2015-8854
+  cwe:
+  - CWE-185
+  - CWE-730
+  disclosed_date: 2014-01-30
+  created_date: 2014-01-30
+  last_modified_date: 2014-01-30
+  credit:
+  - Barış Soner Uşaklı
+  references:
+  - https://github.com/chjj/marked/commit/a37bd643f05bf95ff18cafa2b06e7d741d2e2157
+  - https://github.com/chjj/marked/issues/497
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARS-479904
+- id: snykio:maven:org.webjars:marked:479909
+  title: Regular Expression Denial of Service (ReDoS)
+  description: "[`marked`][1] is a markdown parser built for speed\n\nAffected versions
+    of this package are vulnerable to Regular Expression\nDenial of Service (ReDoS)
+    attacks. This can cause an impact of about 10\nseconds matching time for data
+    150 characters long.\n\n\n\n[1]: https://www.npmjs.com/package/marked\n\\nDenial
+    of Service (DoS) describes a family of attacks, all aimed at\nmaking a system
+    inaccessible to its original and legitimate users. There\nare many types of DoS
+    attacks, ranging from trying to clog the network\npipes to the system by generating
+    a large volume of traffic from many\nmachines (a Distributed Denial of Service
+    - DDoS - attack) to sending\ncrafted requests that cause a system to crash or
+    take a disproportional\namount of time to process.\n\nThe Regular expression Denial
+    of Service (ReDoS) is a type of Denial of\nService attack. Regular expressions
+    are incredibly powerful, but they\naren\\'t very intuitive and can ultimately
+    end up making it easy for\nattackers to take your site down.\n\nLet’s take the
+    following regular expression as an example:\n\n    regex = /A(B|C+)+D/\n{: .language-js}\n\nThis
+    regular expression accomplishes the following:\n\n* `A` The string must start
+    with the letter \\'A\\'\n* `(B|C+)+` The string must then follow the letter A
+    with either the\n  letter \\'B\\' or some number of occurrences of the letter
+    \\'C\\' (the\n  `+` matches one or more times). The `+` at the end of this section\n
+    \ states that we can look for one or more matches of this section.\n* `D` Finally,
+    we ensure this section of the string ends with a \\'D\\'\n\nThe expression would
+    match inputs such as `ABBD`, `ABCCCCD`, `ABCBCCCD`\nand `ACCCCCD`\n\nIt most cases,
+    it doesn\\'t take very long for a regex engine to find a\nmatch:\n\n    $ time
+    node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCD\")'\n    0.04s user
+    0.01s system 95% cpu 0.052 total\n    \n    $ time node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCX\")'\n
+    \   1.79s user 0.02s system 99% cpu 1.812 total\n{: .language-bash}\n\nThe entire
+    process of testing it against a 30 characters long string\ntakes around ~52ms.
+    But when given an invalid string, it takes nearly\ntwo seconds to complete the
+    test, over ten times as long as it took to\ntest a valid string. The dramatic
+    difference is due to the way regular\nexpressions get evaluated.\n\nMost Regex
+    engines will work very similarly (with minor differences).\nThe engine will match
+    the first possible way to accept the current\ncharacter and proceed to the next
+    one. If it then fails to match the\nnext one, it will backtrack and see if there
+    was another way to digest\nthe previous character. If it goes too far down the
+    rabbit hole only to\nfind out the string doesn’t match in the end, and if many
+    characters\nhave multiple valid regex paths, the number of backtracking steps
+    can\nbecome very large, resulting in what is known as *catastrophic\nbacktracking*.\n\nLet\\'s
+    look at how our expression runs into this problem, using a\nshorter string: \\\"ACCCX\\\".
+    While it seems fairly straightforward, there\nare still four different ways that
+    the engine could match those three\nC\\'s:\n\n1.  CCC\n2.  CC+C\n3.  C+CC\n4.
+    \ C+C+C.\n\nThe engine has to try each of those combinations to see if any of
+    them\npotentially match against the expression. When you combine that with the\nother
+    steps the engine must take, we can use [RegEx 101 debugger][1] to\nsee the engine
+    has to take a total of 38 steps before it can determine\nthe string doesn\\'t
+    match.\n\nFrom there, the number of steps the engine must use to validate a string\njust
+    continues to grow.\n\n| String | Number of C\\'s | Number of steps |\n|----------\n|
+    ACCCX | 3 | 38 |\n| ACCCCX | 4 | 71 |\n| ACCCCCX | 5 | 136 |\n| ACCCCCCCCCCCCCCX
+    | 14 | 65,553 |\n\nBy the time the string includes 14 C\\'s, the engine has to
+    take over\n65,000 steps just to see if the string is valid. These extreme\nsituations
+    can cause them to work very slowly (exponentially related to\ninput size, as shown
+    above), allowing an attacker to exploit this and\ncan cause the service to excessively
+    consume CPU, resulting in a Denial\nof Service.\n\n\n\n[1]: https://regex101.com/debugger\n"
+  affected_package: org.webjars:marked
+  vulnerable_versions:
+  - "< 0.3.18"
+  severity: high
+  package_manager: maven
+  cwe:
+  - CWE-185
+  - CWE-400
+  disclosed_date: 2018-02-27
+  created_date: 2018-02-27
+  last_modified_date: 2018-02-27
+  credit:
+  - Jamie Davis
+  references:
+  - https://github.com/markedjs/marked/pull/1083
+  - https://github.com/markedjs/marked/pull/1083
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARS-479909
+- id: snykio:maven:org.webjars:marked:479914
+  title: Content & Code Injection (XSS)
+  description: |+
+    [org.webjars:marked][1] is a low-level compiler for parsing markdown
+    without caching or blocking for long periods of time.
+
+    Affected versions of this package are vulnerable to Content &amp; Code
+    Injection (XSS). An attacker could bypass its output sanitization
+    (`sanitize: true`) protection. Using the [HTML Coded Character Set][2],
+    attackers can inject `javascript:` code snippets into the output. For
+    example, the following input `javascript&#x58document;alert(1)` will
+    result in `alert(1)` being executed when the user clicks on the link.
+
+
+
+    [1]: https://marked.js.org/
+    [2]: https://www.w3.org/MarkUp/html-spec/html-spec_13.html#SEC13
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
+  affected_package: org.webjars:marked
+  vulnerable_versions:
+  - ">= 0.3.1 < 0.3.6"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2016-10531
+  cwe:
+  - CWE-79
+  disclosed_date: 2015-05-20
+  created_date: 2016-04-20
+  last_modified_date: 2016-04-20
+  credit:
+  - Matt Austin
+  references:
+  - https://github.com/chjj/marked/pull/592
+  - https://github.com/chjj/marked/pull/592/commits/2cff85979be8e7a026a9aca35542c470cf5da523
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARS-479914
+- id: snykio:maven:org.webjars:marked:479924
+  title: Regular Expression Denial of Service (ReDoS)
+  description: "[org.webjars:marked][1] is a low-level compiler for parsing markdown\nwithout
+    caching or blocking for long periods of time.\n\nAffected versions of this package
+    are vulnerable to Regular Expression\nDenial of Service (ReDoS). A Denial of Service
+    condition could be\ntriggered through exploitation of the `heading` regex.\n\n\n\n[1]:
+    https://marked.js.org/\n\\nDenial of Service (DoS) describes a family of attacks,
+    all aimed at\nmaking a system inaccessible to its original and legitimate users.
+    There\nare many types of DoS attacks, ranging from trying to clog the network\npipes
+    to the system by generating a large volume of traffic from many\nmachines (a Distributed
+    Denial of Service - DDoS - attack) to sending\ncrafted requests that cause a system
+    to crash or take a disproportional\namount of time to process.\n\nThe Regular
+    expression Denial of Service (ReDoS) is a type of Denial of\nService attack. Regular
+    expressions are incredibly powerful, but they\naren\\'t very intuitive and can
+    ultimately end up making it easy for\nattackers to take your site down.\n\nLet’s
+    take the following regular expression as an example:\n\n    regex = /A(B|C+)+D/\n{:
+    .language-js}\n\nThis regular expression accomplishes the following:\n\n* `A`
+    The string must start with the letter \\'A\\'\n* `(B|C+)+` The string must then
+    follow the letter A with either the\n  letter \\'B\\' or some number of occurrences
+    of the letter \\'C\\' (the\n  `+` matches one or more times). The `+` at the end
+    of this section\n  states that we can look for one or more matches of this section.\n*
+    `D` Finally, we ensure this section of the string ends with a \\'D\\'\n\nThe expression
+    would match inputs such as `ABBD`, `ABCCCCD`, `ABCBCCCD`\nand `ACCCCCD`\n\nIt
+    most cases, it doesn\\'t take very long for a regex engine to find a\nmatch:\n\n
+    \   $ time node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCD\")'\n    0.04s
+    user 0.01s system 95% cpu 0.052 total\n    \n    $ time node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCX\")'\n
+    \   1.79s user 0.02s system 99% cpu 1.812 total\n{: .language-bash}\n\nThe entire
+    process of testing it against a 30 characters long string\ntakes around ~52ms.
+    But when given an invalid string, it takes nearly\ntwo seconds to complete the
+    test, over ten times as long as it took to\ntest a valid string. The dramatic
+    difference is due to the way regular\nexpressions get evaluated.\n\nMost Regex
+    engines will work very similarly (with minor differences).\nThe engine will match
+    the first possible way to accept the current\ncharacter and proceed to the next
+    one. If it then fails to match the\nnext one, it will backtrack and see if there
+    was another way to digest\nthe previous character. If it goes too far down the
+    rabbit hole only to\nfind out the string doesn’t match in the end, and if many
+    characters\nhave multiple valid regex paths, the number of backtracking steps
+    can\nbecome very large, resulting in what is known as *catastrophic\nbacktracking*.\n\nLet\\'s
+    look at how our expression runs into this problem, using a\nshorter string: \\\"ACCCX\\\".
+    While it seems fairly straightforward, there\nare still four different ways that
+    the engine could match those three\nC\\'s:\n\n1.  CCC\n2.  CC+C\n3.  C+CC\n4.
+    \ C+C+C.\n\nThe engine has to try each of those combinations to see if any of
+    them\npotentially match against the expression. When you combine that with the\nother
+    steps the engine must take, we can use [RegEx 101 debugger][1] to\nsee the engine
+    has to take a total of 38 steps before it can determine\nthe string doesn\\'t
+    match.\n\nFrom there, the number of steps the engine must use to validate a string\njust
+    continues to grow.\n\n| String | Number of C\\'s | Number of steps |\n|----------\n|
+    ACCCX | 3 | 38 |\n| ACCCCX | 4 | 71 |\n| ACCCCCX | 5 | 136 |\n| ACCCCCCCCCCCCCCX
+    | 14 | 65,553 |\n\nBy the time the string includes 14 C\\'s, the engine has to
+    take over\n65,000 steps just to see if the string is valid. These extreme\nsituations
+    can cause them to work very slowly (exponentially related to\ninput size, as shown
+    above), allowing an attacker to exploit this and\ncan cause the service to excessively
+    consume CPU, resulting in a Denial\nof Service.\n\n\n\n[1]: https://regex101.com/debugger\n"
+  affected_package: org.webjars:marked
+  vulnerable_versions:
+  - "< 0.4.0"
+  severity: medium
+  package_manager: maven
+  cwe:
+  - CWE-400
+  disclosed_date: 2018-04-16
+  created_date: 2019-07-04
+  last_modified_date: 2019-07-04
+  credit:
+  - Adam Cazzolla
+  - Nick Starke
+  references:
+  - https://github.com/markedjs/marked/commit/09afabf69c6d0c919c03443f47bdfe476566105d
+  - https://github.com/markedjs/marked/pull/1224
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARS-479924
+- id: snykio:maven:org.webjars:marked:479929
+  title: Cross-site Scripting (XSS)
+  description: "[org.webjars:marked][1] is a low-level compiler for parsing markdown\nwithout
+    caching or blocking for long periods of time.\n\nAffected versions of this package
+    are vulnerable to Cross-site Scripting\n(XSS). Browsers support both lowercase
+    and uppercase x in hexadecimal\nform of HTML character entity, but marked [unescaped
+    only lowercase][2].\n\nThis may allow an attacker to create a link with javascript
+    code.\n\nFor example:\n\n    var marked = require('marked');\n    marked.setOptions({\n
+    \     renderer: new marked.Renderer(),\n      sanitize: true\n    });\n    \n
+    \   text = `\n    lower[click me](javascript:...)lower\n    upper[click me](javascript&#X3a;...)upper\n
+    \   `;\n    \n    console.log(marked(text));\n{: .language-js}\n\nwill render
+    the following:\n\n    <p>lowerlower\n    upper<a href=\"javascript&#X3a;...\">click
+    me</a>upper</p>\n{: .language-html}\n\n\n\n[1]: https://marked.js.org/\n[2]: https://github.com/chjj/marked/blob/v0.3.7/lib/marked.js#L1096-L1108\n\\nA
+    cross-site scripting attack occurs when the attacker tricks a\nlegitimate web-based
+    application or site to accept a request as\noriginating from a trusted source.\n\nThis
+    is done by escaping the context of the web application; the web\napplication then
+    delivers that data to its users along with other\ntrusted dynamic content, without
+    validating it. The browser unknowingly\nexecutes malicious script on the client
+    side (through client-side\nlanguages; usually JavaScript or HTML) in order to
+    perform actions that\nare otherwise typically blocked by the browser’s Same Origin
+    Policy.\n\nֿInjecting malicious code is the most prevalent manner by which XSS
+    is\nexploited; for this reason, escaping characters in order to prevent this\nmanipulation
+    is the top method for securing code against this\nvulnerability.\n\nEscaping means
+    that the application is coded to mark key characters, and\nparticularly key characters
+    included in user input, to prevent those\ncharacters from being interpreted in
+    a dangerous context. For example,\nin HTML, `<` can be coded as `&lt`; and `>`
+    can be coded as `&gt`; in\norder to be interpreted and displayed as themselves
+    in text, while\nwithin the code itself, they are used for HTML tags. If malicious\ncontent
+    is injected into an application that escapes special characters\nand that malicious
+    content uses `<` and `>` as HTML tags, those\ncharacters are nonetheless not interpreted
+    as HTML tags by the browser\nif they’ve been correctly escaped in the application
+    code and in this\nway the attempted attack is diverted.\n\nThe most prominent
+    use of XSS is to steal cookies (source: OWASP\nHttpOnly) and hijack user sessions,
+    but XSS exploits have been used to\nexpose sensitive information, enable access
+    to privileged services and\nfunctionality and deliver malware.\n\n### Types of
+    attacks   {#types-of-attacks}\n\nThere are a few methods by which XSS can be manipulated:\n\n|
+    Type | Origin | Description |\n|----------\n| **Stored** | Server | The malicious
+    code is inserted in the application (usually as a link) by the attacker. The code
+    is activated every time a user clicks the link. |\n| **Reflected** | Server |
+    The attacker delivers a malicious link externally from the vulnerable web site
+    application to a user. When clicked, malicious code is sent to the vulnerable
+    web site, which reflects the attack back to the user’s browser. |\n| **DOM-based**
+    | Client | The attacker forces the user’s browser to render a malicious page.
+    The data in the page itself delivers the cross-site scripting data. |\n| **Mutated**
+    |  | The attacker injects code that appears safe, but is then rewritten and modified
+    by the browser, while parsing the markup. An example is rebalancing unclosed quotation
+    marks or even adding quotation marks to unquoted parameters. |\n\n### Affected
+    environments   {#affected-environments}\n\nThe following environments are susceptible
+    to an XSS attack:\n\n* Web servers\n* Application servers\n* Web application environments\n\n###
+    How to prevent   {#how-to-prevent}\n\nThis section describes the top best practices
+    designed to specifically\nprotect your code:\n\n* Sanitize data input in an HTTP
+    request before reflecting it back,\n  ensuring all data is validated, filtered
+    or escaped before echoing\n  anything back to the user, such as the values of
+    query parameters\n  during searches.\n* Convert special characters such as `?`,
+    `&`, `/`, `<`, `>` and spaces\n  to their respective HTML or URL encoded equivalents.\n*
+    Give users the option to disable client-side scripts.\n* Redirect invalid requests.\n*
+    Detect simultaneous logins, including those from two separate IP\n  addresses,
+    and invalidate those sessions.\n* Use and enforce a Content Security Policy (source:
+    Wikipedia) to\n  disable any features that might be manipulated for an XSS attack.\n*
+    Read the documentation for any of the libraries referenced in your\n  code to
+    understand which elements allow for embedded HTML.\n\n"
+  affected_package: org.webjars:marked
+  vulnerable_versions:
+  - "< 0.3.9"
+  severity: high
+  package_manager: maven
+  cwe:
+  - CWE-79
+  disclosed_date: 2017-08-15
+  created_date: 2017-12-25
+  last_modified_date: 2017-12-25
+  credit:
+  - Andrew Krasichkov
+  references:
+  - https://github.com/chjj/marked/issues/925
+  - https://github.com/chjj/marked/pull/958
+  - https://github.com/markedjs/marked/pull/976/commits/6d1901ff71abb83aa32ca9a5ce47471382ea42a9
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARS-479929
+- id: snykio:maven:org.webjars:marked:479939
+  title: VBScript Content Injection
+  description: |
+    Marked 0.3.2 and earlier is vulnerable to content injection even when
+    `sanitize: true` is enabled.
+
+    `[xss link](vbscript:alert(1))`
+
+    will get a link
+
+    `<a href="vbscript:alert(1)">xss link</a>`
+
+    This script does not work in IE 11 edge mode, but works in IE 10
+    compatibility view.
+
+    *Source: [Node Security Project][1]*
+
+
+
+    [1]: https://nodesecurity.io/advisories/24
+  affected_package: org.webjars:marked
+  vulnerable_versions:
+  - "< 0.3.3"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2015-1370
+  cwe:
+  - CWE-74
+  disclosed_date: 2014-01-30
+  created_date: 2014-01-30
+  last_modified_date: 2014-01-30
+  credit:
+  - Xiao Long
+  references:
+  - https://github.com/chjj/marked/issues/492
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARS-479939
+- id: snykio:maven:org.webjars:marked:479944
+  title: Cross-site Scripting (XSS)
+  description: "[`marked`][1] is a markdown parser and compiler used for rendering\nmarkdown
+    content to html.\n\nAffected versions of the package are vulnerable to Cross-site
+    Scripting\n(XSS) attacks.\n\n\n\n[1]: https://www.npmjs.com/package/marked\n\\nWhen
+    mangling is disabled via option `mangle`, marked doesn\\'t escape\ntarget `href`.
+    This may allow an attacker to inject arbitrary\n`html-event` into resulting a
+    tag.\n\nFor example:\n\n    var marked = require('marked');\n    marked.setOptions({\n
+    \     renderer: new marked.Renderer(),\n      sanitize: true,\n      mangle: false\n
+    \   });\n    \n    text = `\n    <bar\"onclick=\"alert('XSS')\"@foo>\n    `;\n
+    \   \n    console.log(marked(text));\n{: .language-js}\n\nwill render:\n\n    <p><a
+    href=\"mailto:bar\"onclick=\"alert('XSS')\"@foo\">bar\"onclick=\"alert('XSS')\"@foo</a></p>\n{:
+    .language-html}\n\n\\nA cross-site scripting attack occurs when the attacker tricks
+    a\nlegitimate web-based application or site to accept a request as\noriginating
+    from a trusted source.\n\nThis is done by escaping the context of the web application;
+    the web\napplication then delivers that data to its users along with other\ntrusted
+    dynamic content, without validating it. The browser unknowingly\nexecutes malicious
+    script on the client side (through client-side\nlanguages; usually JavaScript
+    or HTML) in order to perform actions that\nare otherwise typically blocked by
+    the browser’s Same Origin Policy.\n\nֿInjecting malicious code is the most prevalent
+    manner by which XSS is\nexploited; for this reason, escaping characters in order
+    to prevent this\nmanipulation is the top method for securing code against this\nvulnerability.\n\nEscaping
+    means that the application is coded to mark key characters, and\nparticularly
+    key characters included in user input, to prevent those\ncharacters from being
+    interpreted in a dangerous context. For example,\nin HTML, `<` can be coded as
+    `&lt`; and `>` can be coded as `&gt`; in\norder to be interpreted and displayed
+    as themselves in text, while\nwithin the code itself, they are used for HTML tags.
+    If malicious\ncontent is injected into an application that escapes special characters\nand
+    that malicious content uses `<` and `>` as HTML tags, those\ncharacters are nonetheless
+    not interpreted as HTML tags by the browser\nif they’ve been correctly escaped
+    in the application code and in this\nway the attempted attack is diverted.\n\nThe
+    most prominent use of XSS is to steal cookies (source: OWASP\nHttpOnly) and hijack
+    user sessions, but XSS exploits have been used to\nexpose sensitive information,
+    enable access to privileged services and\nfunctionality and deliver malware.\n\n###
+    Types of attacks   {#types-of-attacks}\n\nThere are a few methods by which XSS
+    can be manipulated:\n\n| Type | Origin | Description |\n|----------\n| **Stored**
+    | Server | The malicious code is inserted in the application (usually as a link)
+    by the attacker. The code is activated every time a user clicks the link. |\n|
+    **Reflected** | Server | The attacker delivers a malicious link externally from
+    the vulnerable web site application to a user. When clicked, malicious code is
+    sent to the vulnerable web site, which reflects the attack back to the user’s
+    browser. |\n| **DOM-based** | Client | The attacker forces the user’s browser
+    to render a malicious page. The data in the page itself delivers the cross-site
+    scripting data. |\n| **Mutated** |  | The attacker injects code that appears safe,
+    but is then rewritten and modified by the browser, while parsing the markup. An
+    example is rebalancing unclosed quotation marks or even adding quotation marks
+    to unquoted parameters. |\n\n### Affected environments   {#affected-environments}\n\nThe
+    following environments are susceptible to an XSS attack:\n\n* Web servers\n* Application
+    servers\n* Web application environments\n\n### How to prevent   {#how-to-prevent}\n\nThis
+    section describes the top best practices designed to specifically\nprotect your
+    code:\n\n* Sanitize data input in an HTTP request before reflecting it back,\n
+    \ ensuring all data is validated, filtered or escaped before echoing\n  anything
+    back to the user, such as the values of query parameters\n  during searches.\n*
+    Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces\n  to their
+    respective HTML or URL encoded equivalents.\n* Give users the option to disable
+    client-side scripts.\n* Redirect invalid requests.\n* Detect simultaneous logins,
+    including those from two separate IP\n  addresses, and invalidate those sessions.\n*
+    Use and enforce a Content Security Policy (source: Wikipedia) to\n  disable any
+    features that might be manipulated for an XSS attack.\n* Read the documentation
+    for any of the libraries referenced in your\n  code to understand which elements
+    allow for embedded HTML.\n\n"
+  affected_package: org.webjars:marked
+  vulnerable_versions:
+  - "< 0.3.9"
+  severity: medium
+  package_manager: maven
+  cwe:
+  - CWE-79
+  disclosed_date: 2017-08-15
+  created_date: 2017-12-25
+  last_modified_date: 2017-12-25
+  credit:
+  - Andrew Krasichkov
+  references:
+  - https://github.com/chjj/marked/issues/926
+  - https://github.com/chjj/marked/pull/958
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARS-479944
+- id: snykio:maven:org.webjars:marked:479949
+  title: Regular Expression Denial of Service (ReDoS)
+  description: "[`marked`][1] is a full-featured markdown parser and compiler.\n\nAffected
+    versions of this package are vulnerable to Regular expression\nDenial of Service
+    (ReDoS) attacks when parsing the input markdown\ncontent (1,000 characters costs
+    around 6 seconds matching time).\n\n\n\n[1]: https://www.npmjs.com/package/marked\n\\nDenial
+    of Service (DoS) describes a family of attacks, all aimed at\nmaking a system
+    inaccessible to its original and legitimate users. There\nare many types of DoS
+    attacks, ranging from trying to clog the network\npipes to the system by generating
+    a large volume of traffic from many\nmachines (a Distributed Denial of Service
+    - DDoS - attack) to sending\ncrafted requests that cause a system to crash or
+    take a disproportional\namount of time to process.\n\nThe Regular expression Denial
+    of Service (ReDoS) is a type of Denial of\nService attack. Regular expressions
+    are incredibly powerful, but they\naren\\'t very intuitive and can ultimately
+    end up making it easy for\nattackers to take your site down.\n\nLet’s take the
+    following regular expression as an example:\n\n    regex = /A(B|C+)+D/\n{: .language-js}\n\nThis
+    regular expression accomplishes the following:\n\n* `A` The string must start
+    with the letter \\'A\\'\n* `(B|C+)+` The string must then follow the letter A
+    with either the\n  letter \\'B\\' or some number of occurrences of the letter
+    \\'C\\' (the\n  `+` matches one or more times). The `+` at the end of this section\n
+    \ states that we can look for one or more matches of this section.\n* `D` Finally,
+    we ensure this section of the string ends with a \\'D\\'\n\nThe expression would
+    match inputs such as `ABBD`, `ABCCCCD`, `ABCBCCCD`\nand `ACCCCCD`\n\nIt most cases,
+    it doesn\\'t take very long for a regex engine to find a\nmatch:\n\n    $ time
+    node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCD\")'\n    0.04s user
+    0.01s system 95% cpu 0.052 total\n    \n    $ time node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCX\")'\n
+    \   1.79s user 0.02s system 99% cpu 1.812 total\n{: .language-bash}\n\nThe entire
+    process of testing it against a 30 characters long string\ntakes around ~52ms.
+    But when given an invalid string, it takes nearly\ntwo seconds to complete the
+    test, over ten times as long as it took to\ntest a valid string. The dramatic
+    difference is due to the way regular\nexpressions get evaluated.\n\nMost Regex
+    engines will work very similarly (with minor differences).\nThe engine will match
+    the first possible way to accept the current\ncharacter and proceed to the next
+    one. If it then fails to match the\nnext one, it will backtrack and see if there
+    was another way to digest\nthe previous character. If it goes too far down the
+    rabbit hole only to\nfind out the string doesn’t match in the end, and if many
+    characters\nhave multiple valid regex paths, the number of backtracking steps
+    can\nbecome very large, resulting in what is known as *catastrophic\nbacktracking*.\n\nLet\\'s
+    look at how our expression runs into this problem, using a\nshorter string: \\\"ACCCX\\\".
+    While it seems fairly straightforward, there\nare still four different ways that
+    the engine could match those three\nC\\'s:\n\n1.  CCC\n2.  CC+C\n3.  C+CC\n4.
+    \ C+C+C.\n\nThe engine has to try each of those combinations to see if any of
+    them\npotentially match against the expression. When you combine that with the\nother
+    steps the engine must take, we can use [RegEx 101 debugger][1] to\nsee the engine
+    has to take a total of 38 steps before it can determine\nthe string doesn\\'t
+    match.\n\nFrom there, the number of steps the engine must use to validate a string\njust
+    continues to grow.\n\n| String | Number of C\\'s | Number of steps |\n|----------\n|
+    ACCCX | 3 | 38 |\n| ACCCCX | 4 | 71 |\n| ACCCCCX | 5 | 136 |\n| ACCCCCCCCCCCCCCX
+    | 14 | 65,553 |\n\nBy the time the string includes 14 C\\'s, the engine has to
+    take over\n65,000 steps just to see if the string is valid. These extreme\nsituations
+    can cause them to work very slowly (exponentially related to\ninput size, as shown
+    above), allowing an attacker to exploit this and\ncan cause the service to excessively
+    consume CPU, resulting in a Denial\nof Service.\n\n\n\n[1]: https://regex101.com/debugger\n"
+  affected_package: org.webjars:marked
+  vulnerable_versions:
+  - "< 0.3.9"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2017-16114
+  cwe:
+  - CWE-400
+  disclosed_date: 2017-09-07
+  created_date: 2017-09-21
+  last_modified_date: 2017-09-21
+  credit:
+  - CristianAlexandru Staicu
+  references:
+  - https://github.com/chjj/marked/issues/937
+  - https://github.com/chjj/marked/pull/958
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARS-479949
+- id: snykio:maven:org.webjars:marked:479954
+  title: Cross-site Scripting (XSS) via Data URIs
+  description: |+
+    [`marked`][1] is a markdown parser and compiler used for rendering
+    markdown content to html.
+
+    Affected versions of the package are vulnerable to Cross-site Scripting
+    (XSS). Data URIs enable embedding small files in line in HTML documents,
+    provided in the URL itself. Attackers can craft malicious web pages
+    containing either HTML or script code that utilizes the data URI scheme,
+    allowing them to bypass access controls or steal sensitive information.
+
+    An example of data URI used to deliver javascript code. The data holds
+    `<script>alert('XSS')</script>` tag in base64 encoded format.
+
+        [xss link](data:text/html;base64,PHNjcmlwdD5hbGVydCgnWFNTJyk8L3NjcmlwdD4K)
+    {: .language-html}
+
+
+
+    [1]: https://www.npmjs.com/package/marked
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
+  affected_package: org.webjars:marked
+  vulnerable_versions:
+  - "< 0.3.7"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2017-1000427
+  cwe:
+  - CWE-79
+  disclosed_date: 2017-01-12
+  created_date: 2017-01-30
+  last_modified_date: 2017-01-30
+  credit:
+  - Snyk Security Research Team
+  references:
+  - https://github.com/chjj/marked/commit/cd2f6f5b7091154c5526e79b5f3bfb4d15995a51
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARS-479954

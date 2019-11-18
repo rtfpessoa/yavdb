@@ -1,0 +1,36 @@
+---
+- id: snykio:maven:org.webjars.bower:ag-grid:479374
+  title: HTML Injection
+  description: |
+    [`ag-grid`][1] is an advanced Data Grid / Data Table supporting
+    Javascript / React / AngularJS / Web Components.
+
+    Affected versions of the package are vulnerable to HTML Injection.
+    `ag-grid` used mozilla\'s `Element.innerHTML`, which is vulnerable to
+    Cross-site Scripting (XSS) attacks when used within a user-inputted
+    value. In this case an attacker could insert a malicious username and
+    initiate a XSS attack, like:
+
+        <span onclick="alert('hacked!')">John Smith</span>
+    {: .language-html}
+
+
+
+    [1]: https://www.npmjs.com/package/ag-grid
+  affected_package: org.webjars.bower:ag-grid
+  vulnerable_versions:
+  - ">= 3.3.0 < 5.0.0-alpha.0"
+  severity: medium
+  package_manager: maven
+  cwe:
+  - CWE-80
+  disclosed_date: 2016-05-18
+  created_date: 2017-03-16
+  last_modified_date: 2017-03-16
+  credit:
+  - Theodore Brown
+  references:
+  - https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML#Security_considerations
+  - https://github.com/ceolter/ag-grid/commit/828cdcf68aa9c766439448db50b696b87e1d4962
+  - https://github.com/ceolter/ag-grid/issues/913
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSBOWER-479374

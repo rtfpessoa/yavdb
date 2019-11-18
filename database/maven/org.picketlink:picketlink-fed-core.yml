@@ -36,17 +36,20 @@
 - id: snykio:maven:org.picketlink:picketlink-fed-core:30147
   title: XML External Entity (XXE) Injection
   description: |+
-    [`org.picketlink:picketlink-fed-core`][1] The
-    org.picketlink.common.util.DocumentUtil.getDocumentBuilderFactory method
-    in PicketLink, as used in Red Hat JBoss Enterprise Application Platform
-    (JBEAP) 5.2.0 and 6.2.4, expands entity references, which allows remote
+    [org.picketlink:picketlink-fed-core][1] is a PicketLink Federation Core
+    contains the core infrastructure code.
+
+    Affected versions of this package are vulnerable to XML External Entity
+    (XXE) Injection. The
+    `org.picketlink.common.util.DocumentUtil.getDocumentBuilderFactory`
+    method in PicketLink expands entity references, which allows remote
     attackers to read arbitrary code and possibly have other unspecified
     impact via unspecified vectors, related to an XML External Entity (XXE)
     issue.
 
 
 
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22picketlink-fed-core%22
+    [1]: http://picketlink.org/
     \nXXE Injection is a type of attack against an application that parses XML
     input. XML is a markup language that defines a set of rules for encoding
     documents in a format that is both human-readable and machine-readable.
@@ -86,7 +89,7 @@
 
   affected_package: org.picketlink:picketlink-fed-core
   vulnerable_versions:
-  - "<= 2.0.3.Final"
+  - ">= 0"
   severity: high
   package_manager: maven
   cve:
@@ -100,6 +103,7 @@
   - Alexander Papadakis
   references:
   - https://bugzilla.redhat.com/CVE-2014-3530
+  - https://github.com/picketlink/picketlink/commit/8c78668e4f08cf3c4ed14d8a36d402dcf02cb057
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGPICKETLINK-30147
 - id: victims:maven:org.picketlink:picketlink-fed-core:2014-3530
   title: 'PicketLink: XXE via insecure DocumentBuilderFactory usage '

@@ -1,0 +1,50 @@
+---
+- id: snykio:maven:org.webjars.npm:base64url:479472
+  title: Uninitialized Memory Exposure
+  description: |+
+    [base64url][1] Converting to, and from, base64url.
+
+    Affected versions of this package are vulnerable to Uninitialized Memory
+    Exposure. An attacker could extract sensitive data from uninitialized
+    memory or may cause a Denial of Service (DoS) by passing in a large
+    number, in setups where typed user input can be passed (e.g. from JSON).
+
+
+
+    [1]: https://www.npmjs.com/package/base64url
+    \nThe Buffer class on Node.js is a mutable array of binary data, and can
+    be initialized with a string, array or number.
+
+        const buf1 = new Buffer([1,2,3]);
+        // creates a buffer containing [01, 02, 03]
+        const buf2 = new Buffer('test');
+        // creates a buffer containing ASCII bytes [74, 65, 73, 74]
+        const buf3 = new Buffer(10);
+        // creates a buffer of length 10
+    {: .language-js}
+
+    The first two variants simply create a binary representation of the
+    value it received. The last one, however, pre-allocates a buffer of the
+    specified size, making it a useful buffer, especially when reading data
+    from a stream. When using the number constructor of Buffer, it will
+    allocate the memory, but will not fill it with zeros. Instead, the
+    allocated buffer will hold whatever was in memory at the time. If the
+    buffer is not `zeroed` by using `buf.fill(0)`, it may leak sensitive
+    information like keys, source code, and system info.
+
+  affected_package: org.webjars.npm:base64url
+  vulnerable_versions:
+  - "< 3.0.0"
+  severity: high
+  package_manager: maven
+  cwe:
+  - CWE-201
+  disclosed_date: 2018-05-11
+  created_date: 2018-05-13
+  last_modified_date: 2018-05-13
+  credit:
+  - ChALkeR
+  references:
+  - https://github.com/brianloveswords/base64url/commit/4355cb294123e86171daa9389f7afe6d2b2b9dae
+  - https://hackerone.com/reports/321687
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-479472

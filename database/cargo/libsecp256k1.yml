@@ -1,0 +1,22 @@
+---
+- id: rustsec:cargo:libsecp256k1:RUSTSEC-2019-0027
+  title: Flaw in Scalar::check_overflow allows side-channel timing attack
+  description: |
+    Versions of `libsecp256k1` prior to `0.3.1` did not execute
+    Scalar::check_overflow in constant time.
+
+    This allows an attacker to potentially leak information via a timing attack.
+
+    The flaw was corrected by modifying Scalar::check_overflow to execute in
+    constant time.
+  affected_package: libsecp256k1
+  patched_versions:
+  - ">= 0.3.1"
+  severity: high
+  package_manager: cargo
+  disclosed_date: 2019-10-14
+  created_date: 2019-10-14
+  last_modified_date: 2019-10-14
+  credit:
+  - RustSec
+  source_url: https://github.com/RustSec/advisory-db/blob/master/crates/libsecp256k1/RUSTSEC-2019-0027.toml

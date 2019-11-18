@@ -22,19 +22,22 @@
 - id: snykio:maven:edu.vt.middleware:vt-ldap:30091
   title: Improper Certificate Validation
   description: |
-    [`edu.vt.middleware:vt-ldap`][1] It was discovered that the
-    implementation used by the vtldap/ldaptive project to check that the
-    server hostname matches the domain name in the subject\'s CN field was
-    flawed. This can be exploited by a Man-in-the-middle (MITM) attack,
-    where the attacker can spoof a valid certificate using a specially
-    crafted subject.
+    [edu.vt.middleware:vt-ldap][1] is a Library for performing common LDAP
+    operations.
+
+    Affected versions of this package are vulnerable to Improper Certificate
+    Validation. It was discovered that the implementation used by the
+    vtldap/ldaptive project to check that the server hostname matches the
+    domain name in the subject\'s CN field was flawed. This can be exploited
+    by a Man-in-the-middle (MITM) attack, where the attacker can spoof a
+    valid certificate using a specially crafted subject.
 
 
 
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22vt-ldap%22
+    [1]: https://mvnrepository.com/artifact/edu.vt.middleware/vt-ldap
   affected_package: edu.vt.middleware:vt-ldap
   vulnerable_versions:
-  - "<= 3.3.7"
+  - ">= 3.3.5 < 3.3.8"
   severity: medium
   package_manager: maven
   cve:
@@ -49,6 +52,7 @@
   references:
   - http://shibboleth.net/community/advisories/secadv_20140919.txt
   - https://bugzilla.redhat.com/CVE-2014-3607
+  - https://github.com/dfish3r/vt-ldap/commit/7894c3941641df8d9448d3480205d605520c7efa
   source_url: https://snyk.io/vuln/SNYK-JAVA-EDUVTMIDDLEWARE-30091
 - id: victims:maven:edu.vt.middleware:vt-ldap:2014-3607
   title: 'vtldap/ldaptive: Hostname verification susceptible to MITM attack'

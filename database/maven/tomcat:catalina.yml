@@ -12780,14 +12780,17 @@
 - id: snykio:maven:tomcat:catalina:31373
   title: Access Restriction Bypass
   description: |
-    [`tomcat:catalina`][1] Affected versions of the package are vulnerable
-    to Access Restriction Bypass. It was discovered that it was possible for
-    a web application to access any global JNDI resource whether an explicit
-    ResourceLink had been configured or not.
+    [tomcat:catalina][1] is a library that contains Tomcat Servlet Engine
+    Core Classes and Standard implementations.
+
+    Affected versions of this package are vulnerable to Access Restriction
+    Bypass. It was discovered that it was possible for a web application to
+    access any global JNDI resource whether an explicit ResourceLink had
+    been configured or not.
 
 
 
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22catalina%22
+    [1]: https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-catalina
   affected_package: tomcat:catalina
   vulnerable_versions:
   - ">= 4.0.4 < 5.5.24"
@@ -12804,6 +12807,10 @@
   - the Apache Tomcat Security Team
   references:
   - http://seclists.org/oss-sec/2016/q4/257
+  - https://github.com/apache/tomcat/commit/2859ac3eae132383cb6f3f2042e25d7a4a281b0d
+  - https://github.com/apache/tomcat/commit/b3406e6c318378cbf440f902f9fdbb8b440aef4e
+  - https://github.com/apache/tomcat/commit/d6b5600afe75e1086dd564344e1d085966e4237d
+  - https://github.com/apache/tomcat80/commit/824c7dc781056442046db0ae34bcf1497f23f44c
   source_url: https://snyk.io/vuln/SNYK-JAVA-TOMCAT-31373
 - id: snykio:maven:tomcat:catalina:467409
   title: Authentication Bypass
@@ -13068,3 +13075,39 @@
   - https://svn.apache.org/viewvc?view=rev&rev=783292
   - https://tomcat.apache.org/security-4.html
   source_url: https://snyk.io/vuln/SNYK-JAVA-TOMCAT-471343
+- id: snykio:maven:tomcat:catalina:472788
+  title: Cross-site Request Forgery (CSRF)
+  description: |
+    [tomcat:catalina][1] is a library that contains Tomcat Servlet Engine
+    Core Classes and Standard implementations.
+
+    Affected versions of this package are vulnerable to Cross-site Request
+    Forgery (CSRF). It allows remote attackers to hijack the authentication
+    of administrators for requests that manipulate application deployment
+    via the POST method, as demonstrated by a `/manager/html/undeploy?path=`
+    URI. **NOTE:** the vendor disputes the significance of this report,
+    stating that the Apache Tomcat Security team has not accepted any
+    reports of CSRF attacks against the Manager application ... as they
+    require a reckless system administrator.
+
+
+
+    [1]: https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-catalina
+  affected_package: tomcat:catalina
+  vulnerable_versions:
+  - ">= 0"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2013-6357
+  cwe:
+  - CWE-352
+  disclosed_date: 2013-11-13
+  created_date: 2019-10-10
+  last_modified_date: 2019-10-10
+  credit:
+  - unknown
+  references:
+  - http://www.webapp-security.com/wp-content/uploads/2013/11/Apache-Tomcat-5.5.25-CSRF-Vulnerabilities.txt
+  - https://www.exploit-db.com/exploits/29435
+  source_url: https://snyk.io/vuln/SNYK-JAVA-TOMCAT-472788

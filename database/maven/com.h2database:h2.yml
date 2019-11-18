@@ -1,20 +1,14 @@
 ---
 - id: snykio:maven:com.h2database:h2:31685
-  title: Arbitrary Code Execution
+  title: Remote Code Execution (RCE)
   description: |
-    [com.h2database:h2][1] is a database engine.
+    [com.h2database:h2][1] is a database engine
 
-    Affected versions of this package are vulnerable to Arbitrary Code
-    Execution.
-
-    It provides a web console for managing the database, and by default it
-    does not have an password set. The `CREATE ALIAS` function calls a java
-    code, allowing an attacker to execute arbitrary java code on projects
-    running the h2 database.
-
-        CREATE ALIAS REVERSE AS $$ String reverse(String s) { return new StringBuilder(s).reverse().toString(); } $$;
-        CALL REVERSE('Test');
-    {: .language-sql}
+    Affected versions of this package are vulnerable to Remote Code
+    Execution (RCE). It provides a web console for managing the database,
+    and by default it does not have a password set. The `CREATE ALIAS`
+    function calls a java code, allowing an attacker to execute arbitrary
+    java code on projects running the h2 database.
 
 
 
@@ -36,6 +30,7 @@
   - Matheus Bernardes
   - Nubank
   references:
+  - https://github.com/h2database/h2database/issues/1225
   - https://mthbernardes.github.io/rce/2018/03/14/abusing-h2-database-alias.html
   - https://www.exploit-db.com/exploits/44422/
   source_url: https://snyk.io/vuln/SNYK-JAVA-COMH2DATABASE-31685

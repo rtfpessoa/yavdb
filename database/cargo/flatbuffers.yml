@@ -1,0 +1,21 @@
+---
+- id: rustsec:cargo:flatbuffers:RUSTSEC-2019-0028
+  title: Unsound `impl Follow for bool`
+  description: |
+    The implementation of `impl Follow for bool` allows to reinterpret arbitrary bytes as a `bool`.
+
+    In Rust `bool` has stringent requirements for its in-memory representation. Use of this function
+    allows to violate these requirements and invoke undefined behaviour in safe code.
+  affected_package: flatbuffers
+  unaffected_versions:
+  - "< 0.4.0"
+  severity: high
+  package_manager: cargo
+  disclosed_date: 2019-10-20
+  created_date: 2019-10-20
+  last_modified_date: 2019-10-20
+  credit:
+  - RustSec
+  references:
+  - https://github.com/google/flatbuffers/issues/5530
+  source_url: https://github.com/RustSec/advisory-db/blob/master/crates/flatbuffers/RUSTSEC-2019-0028.toml

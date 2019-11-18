@@ -152,3 +152,351 @@
   - https://github.com/jquery/jquery/issues/3133
   - https://nodesecurity.io/advisories/330
   source_url: https://ossindex.net/resource/package/7107922103/vulnerabilities
+- id: snykio:maven:org.webjars.npm:jquery:479775
+  title: Prototype Pollution
+  description: "[org.webjars.npm:jquery][1] is a JavaScript library. It makes things\nlike
+    HTML document traversal and manipulation, event handling,\nanimation, and Ajax
+    much simpler with an easy-to-use API that works\nacross a multitude of browsers.\n\nAffected
+    versions of this package are vulnerable to Prototype Pollution.\nThe `extend`
+    function can be tricked into modifying the prototype of\n`Object` when the attacker
+    controls part of the structure passed to this\nfunction. This can let an attacker
+    add or modify an existing property\nthat will then exist on all objects.\n\n\n\n[1]:
+    https://www.npmjs.com/package/jquery\n\\nPrototype Pollution is a vulnerability
+    affecting JavaScript. Prototype\nPollution refers to the ability to inject properties
+    into existing\nJavaScript language construct prototypes, such as objects. JavaScript\nallows
+    all Object attributes to be altered, including their magical\nattributes such
+    as `_proto_`, `constructor` and `prototype`. An attacker\nmanipulates these attributes
+    to overwrite, or pollute, a JavaScript\napplication object prototype of the base
+    object by injecting other\nvalues. Properties on the `Object.prototype` are then
+    inherited by all\nthe JavaScript objects through the prototype chain. When that
+    happens,\nthis leads to either denial of service by triggering JavaScript\nexceptions,
+    or it tampers with the application source code to force the\ncode path that the
+    attacker injects, thereby leading to remote code\nexecution.\n\nThere are two
+    main ways in which the pollution of prototypes occurs:\n\n* Unsafe `Object` recursive
+    merge\n\n* Property definition by path\n\n### Unsafe Object recursive merge   {#unsafe-object-recursive-merge}\n\nThe
+    logic of a vulnerable recursive merge function follows the following\nhigh-level
+    model:\n\n    merge (target, source)\n    \n      foreach property of source\n
+    \   \n        if property exists and is an object on both the target and the source\n
+    \   \n          merge(target[property], source[property])\n    \n        else\n
+    \   \n          target[property] = source[property]\n\n\n\nWhen the source object
+    contains a property named `_proto_` defined with\n`Object.defineProperty()` ,
+    the condition that checks if the property\nexists and is an object on both the
+    target and the source passes and the\nmerge recurses with the target, being the
+    prototype of `Object` and the\nsource of `Object` as defined by the attacker.
+    Properties are then\ncopied on the `Object` prototype.\n\nClone operations are
+    a special sub-class of unsafe recursive merges,\nwhich occur when a recursive
+    merge is conducted on an empty object:\n`merge({},source)`.\n\n`lodash` and `Hoek`
+    are examples of libraries susceptible to recursive\nmerge attacks.\n\n### Property
+    definition by path   {#property-definition-by-path}\n\nThere are a few JavaScript
+    libraries that use an API to define property\nvalues on an object based on a given
+    path. The function that is\ngenerally affected contains this signature: `theFunction(object,
+    path,\nvalue)`\n\nIf the attacker can control the value of “path”, they can set
+    this value\nto `_proto_.myValue`. `myValue` is then assigned to the prototype
+    of the\nclass of the object.\n\n"
+  affected_package: org.webjars.npm:jquery
+  vulnerable_versions:
+  - "< 3.4.0"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2019-11358
+  - CVE-2019-5428
+  cwe:
+  - CWE-400
+  disclosed_date: 2019-03-26
+  created_date: 2019-03-27
+  last_modified_date: 2019-03-27
+  credit:
+  - Semmle Security Research Team
+  references:
+  - https://github.com/jquery/jquery/commit/753d591aea698e57d6db58c9f722cd0808619b1b
+  - https://github.com/jquery/jquery/pull/4333
+  - https://hackerone.com/reports/454365
+  - https://snyk.io/blog/after-three-years-of-silence-a-new-jquery-prototype-pollution-vulnerability-emerges-once-again/
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-479775
+- id: snykio:maven:org.webjars.npm:jquery:479779
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [org.webjars.npm:jquery][1] is a JavaScript library. It makes things
+    like HTML document traversal and manipulation, event handling,
+    animation, and Ajax much simpler with an easy-to-use API that works
+    across a multitude of browsers.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). The `jQuery(strInput)` function does not differentiate selectors
+    from HTML in a reliable fashion. In the vulnerable version, jQuery
+    determined whether the input was HTML or not by looking for the \'&lt;\'
+    character anywhere in the string, giving attackers more flexibility when
+    attempting to construct malicious payload.
+
+    In the fixed versions, jQuery only deems the input to be HTML if it
+    explicitly starts with \'&lt;\', limiting exploitability only to
+    attackers who can control the beginning of a string, which is far less
+    common.
+
+
+
+    [1]: https://www.npmjs.com/package/jquery
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
+  affected_package: org.webjars.npm:jquery
+  vulnerable_versions:
+  - ">= 1.7.1 < 1.9.0"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2012-6708
+  - CVE-2017-16011
+  cwe:
+  - CWE-79
+  disclosed_date: 2012-06-19
+  created_date: 2016-10-20
+  last_modified_date: 2016-10-20
+  credit:
+  - Richard Gibson
+  references:
+  - http://jsfiddle.net/C8dgG/
+  - https://bugs.jquery.com/ticket/11290
+  - https://github.com/jquery/jquery/commit/05531fc4080ae24070930d15ae0cea7ae056457d
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-479779
+- id: snykio:maven:org.webjars.npm:jquery:479783
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [org.webjars.npm:jquery][1] is a JavaScript library. It makes things
+    like HTML document traversal and manipulation, event handling,
+    animation, and Ajax much simpler with an easy-to-use API that works
+    across a multitude of browsers.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS) attacks when a cross-domain ajax request is performed without the
+    `dataType` option causing `text/javascript` responses to be executed.
+
+
+
+    [1]: https://www.npmjs.com/package/jquery
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
+  affected_package: org.webjars.npm:jquery
+  vulnerable_versions:
+  - "< 1.12.2"
+  - ">= 1.12.3 < 2.2.2"
+  - ">= 2.2.3 < 3.0.0"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2015-9251
+  - CVE-2017-16012
+  cwe:
+  - CWE-79
+  disclosed_date: 2015-06-26
+  created_date: 2016-11-27
+  last_modified_date: 2016-11-27
+  credit:
+  - Egor Homakov
+  references:
+  - https://github.com/jquery/jquery/commit/f60729f3903d17917dc351f3ac87794de379b0cc
+  - https://github.com/jquery/jquery/issues/2432
+  - https://github.com/jquery/jquery/pull/2588
+  - https://github.com/jquery/jquery/pull/2588/commits/c254d308a7d3f1eac4d0b42837804cfffcba4bb2
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-479783
+- id: snykio:maven:org.webjars.npm:jquery:479787
+  title: Denial of Service (DoS)
+  description: |+
+    [org.webjars.npm:jquery][1] is a JavaScript library. It makes things
+    like HTML document traversal and manipulation, event handling,
+    animation, and Ajax much simpler with an easy-to-use API that works
+    across a multitude of browsers.
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS) due to removing a logic that lowercased attribute names. Any
+    attribute getter using a mixed-cased name for boolean attributes goes
+    into an infinite recursion, exceeding the stack call limit.
+
+
+
+    [1]: https://www.npmjs.com/package/jquery
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+  affected_package: org.webjars.npm:jquery
+  vulnerable_versions:
+  - ">= 3.0.0-rc1 < 3.0.0"
+  severity: low
+  package_manager: maven
+  cve:
+  - CVE-2016-10707
+  cwe:
+  - CWE-400
+  disclosed_date: 2016-05-28
+  created_date: 2016-12-26
+  last_modified_date: 2016-12-26
+  credit:
+  - Michał Gołębiowski
+  references:
+  - https://github.com/jquery/jquery/issues/3133
+  - https://github.com/jquery/jquery/pull/3134
+  - https://jsfiddle.net/shnann6y/2/
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-479787

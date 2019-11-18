@@ -1,0 +1,139 @@
+---
+- id: snykio:maven:org.webjars.npm:webtorrent:480342
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [org.webjars.npm:webtorrent][1] is a streaming torrent client for
+    node.js and the browser.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). If the torrent contains a specially crafted title or file name,
+    and the user starts the WebTorrent HTTP server via `createServer()`, and
+    then the user visits the HTTP server index page (which lists the
+    contents of the torrent), then the attacker can run JavaScript in this
+    browser context. The WebTorrent HTTP server only allows fetching data
+    pieces from the torrent allowing attacker code could e.g. figure out
+    what content the user is downloading and exfiltrate that to an external
+    domain.
+
+
+
+    [1]: https://www.npmjs.com/package/webtorrent
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
+  affected_package: org.webjars.npm:webtorrent
+  vulnerable_versions:
+  - "< 0.107.6"
+  severity: low
+  package_manager: maven
+  cve:
+  - CVE-2019-15782
+  cwe:
+  - CWE-79
+  disclosed_date: 2019-08-27
+  created_date: 2019-08-29
+  last_modified_date: 2019-08-29
+  credit:
+  - Feross Aboukhadijeh
+  references:
+  - https://github.com/webtorrent/webtorrent/commit/22546df6d9ba9ca4523142d98b5e70f6db213f3e
+  - https://github.com/webtorrent/webtorrent/pull/1714
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-480342
+- id: snykio:maven:org.webjars.npm:webtorrent:480343
+  title: DNS Rebinding
+  description: |
+    [org.webjars.npm:webtorrent][1] is a streaming torrent client for
+    node.js and the browser.
+
+    Affected versions of this package are vulnerable to DNS Rebinding. When
+    the request hostname does not match the user-provided `opts.hostname`
+    value. It omits the `Access-Control-Allow-Origin` header, instead of
+    stop processing the request and return nothing.
+
+
+
+    [1]: https://www.npmjs.com/package/webtorrent
+  affected_package: org.webjars.npm:webtorrent
+  vulnerable_versions:
+  - "< 0.105.2"
+  severity: low
+  package_manager: maven
+  cwe:
+  - CWE-350
+  disclosed_date: 2019-07-30
+  created_date: 2019-07-31
+  last_modified_date: 2019-07-31
+  credit:
+  - feross
+  references:
+  - https://github.com/webtorrent/webtorrent/commit/8a0936f915c07c6a405caa2360e1c1255767345a
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-480343

@@ -39,18 +39,21 @@
 - id: snykio:maven:org.jboss.weld:weld-core-impl:30126
   title: Sensitive Information Disclosure via Stale Thread State
   description: |
-    [`org.jboss.weld:weld-core-impl`][1] Race condition in JBoss Weld before
-    2.2.8 and 3.x before 3.0.0 Alpha3 allows remote attackers to obtain
-    information from a previous conversation via vectors related to a stale
-    thread state.
+    [org.jboss.weld:weld-core-impl][1] is a Weld\'s implementation of CDI
+
+    Affected versions of this package are vulnerable to Sensitive
+    Information Disclosure via Stale Thread State. Race condition allows
+    remote attackers to obtain information from a previous conversation via
+    vectors related to a stale thread state.
 
 
 
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22weld-core-impl%22
+    [1]: https://mvnrepository.com/artifact/org.jboss.weld/weld-core-impl
   affected_package: org.jboss.weld:weld-core-impl
   vulnerable_versions:
-  - ">= 2 <= 2.2.7.Final"
-  - ">= 3-alpha <= 3.0.0.Alpha1"
+  - "< 1.1.28.Final"
+  - ">= 2 < 2.2.8.Final"
+  - ">= 3-alpha < 3.0.0.Alpha3"
   severity: medium
   package_manager: maven
   cve:
@@ -64,6 +67,9 @@
   - Rune Steinseth
   references:
   - https://bugzilla.redhat.com/CVE-2014-8122
+  - https://github.com/weld/core/commit/6808b11cd6d97c71a2eed754ed4f955acd789086
+  - https://github.com/weld/core/commit/8e413202fa1af08c09c580f444e4fd16874f9c65
+  - https://issues.jboss.org/browse/WELD-1802?_sscc=t
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGJBOSSWELD-30126
 - id: victims:maven:org.jboss.weld:weld-core-impl:2014-8122
   title: 'JBoss Weld: Limited information disclosure via stale thread state'

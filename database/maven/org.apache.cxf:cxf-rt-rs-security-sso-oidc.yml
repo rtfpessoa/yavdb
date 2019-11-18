@@ -1,0 +1,37 @@
+---
+- id: snykio:maven:org.apache.cxf:cxf-rt-rs-security-sso-oidc:480440
+  title: Improper Access Control
+  description: |
+    [org.apache.cxf:cxf-rt-rs-security-sso-oidc][1] is a Apache CXF Runtime
+    OpenId Connect library.
+
+    Affected versions of this package are vulnerable to Improper Access
+    Control. There is a vulnerability in the access token services, where it
+    does not validate that the authenticated principal is equal to that of
+    the supplied clientId parameter in the request. If a malicious client
+    was able to somehow steal an authorization code issued to another
+    client, then they could exploit this vulnerability to obtain an access
+    token for the other client.
+
+
+
+    [1]: https://mvnrepository.com/artifact/org.apache.cxf/cxf-rt-rs-security-sso-oidc
+  affected_package: org.apache.cxf:cxf-rt-rs-security-sso-oidc
+  vulnerable_versions:
+  - ">= 3.2.0 < 3.2.11"
+  - ">= 3.3.0 < 3.3.4"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2019-12419
+  cwe:
+  - CWE-284
+  disclosed_date: 2019-11-06
+  created_date: 2019-11-06
+  last_modified_date: 2019-11-06
+  credit:
+  - Unknown
+  references:
+  - http://cxf.apache.org/security-advisories.data/CVE-2019-12419.txt.asc
+  - https://github.com/apache/cxf/commit/661c271f4890b05896eee5de9cb8fb503fb3bccb
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHECXF-480440

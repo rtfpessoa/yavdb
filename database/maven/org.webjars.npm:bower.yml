@@ -1,0 +1,40 @@
+---
+- id: snykio:maven:org.webjars.npm:bower:479524
+  title: Arbitrary File Write via Archive Extraction (Zip Slip)
+  description: "[org.webjars.npm:bower][1] offers a generic, unopinionated solution
+    to\nthe problem of front-end package management.\n\nAffected versions of this
+    package are vulnerable to Arbitrary File Write\nvia Archive Extraction (Zip Slip).
+    Attackers can write arbitrary files\nwhen a malicious archive is extracted.\n\n\n\n[1]:
+    https://www.npmjs.com/package/bower\n\\nIt is exploited using a specially crafted
+    zip archive, that holds path\ntraversal filenames. When exploited, a filename
+    in a malicious archive\nis concatenated to the target extraction directory, which
+    results in the\nfinal path ending up outside of the target folder. For instance,
+    a zip\nmay hold a file with a \\\"../../file.exe\\\" location and thus break out
+    of\nthe target folder. If an executable or a configuration file is\noverwritten
+    with a file containing malicious code, the problem can turn\ninto an arbitrary
+    code execution issue quite easily.\n\nThe following is an example of a zip archive
+    with one benign file and\none malicious file. Extracting the malicous file will
+    result in\ntraversing out of the target folder, ending up in `/root/.ssh/`\noverwriting
+    the `authorized_keys` file:\n\n    \n    +2018-04-15 22:04:29 ..... 19 19 good.txt\n
+    \   \n    +2018-04-15 22:04:42 ..... 20 20 ../../../../../../root/.ssh/authorized_keys\n\n"
+  affected_package: org.webjars.npm:bower
+  vulnerable_versions:
+  - "< 1.8.8"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2019-5484
+  cwe:
+  - CWE-29
+  disclosed_date: 2019-01-24
+  created_date: 2019-01-25
+  last_modified_date: 2019-01-25
+  credit:
+  - skyn3t
+  references:
+  - https://github.com/bower/bower/commit/45c6bfa86f6e57731b153baca9e0b41a1cc699e3
+  - https://hackerone.com/reports/473811
+  - https://snyk.io/blog/severe-security-vulnerability-in-bowers-zip-archive-extraction/
+  - https://snyk.io/research/zip-slip-vulnerability
+  - https://www.npmjs.com/advisories/776
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-479524

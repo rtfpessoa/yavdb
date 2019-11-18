@@ -452,3 +452,770 @@
   references:
   - https://github.com/rubysec/ruby-advisory-db
   source_url: http://www.osvdb.org/show/osvdb/85809
+- id: snykio:rubygems:rubygems-update:472642
+  title: Regular Expression Denial of Service (ReDoS)
+  description: "[rubygems-update][1] is a inbuilt rubygem for updating rubygems.\n\nAffected
+    versions of this package are vulnerable to Regular Expression\nDenial of Service
+    (ReDoS). Algorithmic complexity vulnerability in\n`Gem::Version::ANCHORED_VERSION_PATTERN`
+    in `lib/rubygems/version.rb` as\nused in Ruby 1.9.0 through 2.0.0p247, allows
+    remote attackers to cause a\ndenial of service (CPU consumption) via a crafted
+    gem version that\ntriggers a large amount of backtracking in a regular expression.
+    NOTE:\nthis issue is due to an incomplete fix for `CVE-2013-4287`.\n\n\n\n[1]:
+    https://rubygems.org/\n\\nDenial of Service (DoS) describes a family of attacks,
+    all aimed at\nmaking a system inaccessible to its original and legitimate users.
+    There\nare many types of DoS attacks, ranging from trying to clog the network\npipes
+    to the system by generating a large volume of traffic from many\nmachines (a Distributed
+    Denial of Service - DDoS - attack) to sending\ncrafted requests that cause a system
+    to crash or take a disproportional\namount of time to process.\n\nThe Regular
+    expression Denial of Service (ReDoS) is a type of Denial of\nService attack. Regular
+    expressions are incredibly powerful, but they\naren\\'t very intuitive and can
+    ultimately end up making it easy for\nattackers to take your site down.\n\nLet’s
+    take the following regular expression as an example:\n\n    regex = /A(B|C+)+D/\n{:
+    .language-js}\n\nThis regular expression accomplishes the following:\n\n* `A`
+    The string must start with the letter \\'A\\'\n* `(B|C+)+` The string must then
+    follow the letter A with either the\n  letter \\'B\\' or some number of occurrences
+    of the letter \\'C\\' (the\n  `+` matches one or more times). The `+` at the end
+    of this section\n  states that we can look for one or more matches of this section.\n*
+    `D` Finally, we ensure this section of the string ends with a \\'D\\'\n\nThe expression
+    would match inputs such as `ABBD`, `ABCCCCD`, `ABCBCCCD`\nand `ACCCCCD`\n\nIt
+    most cases, it doesn\\'t take very long for a regex engine to find a\nmatch:\n\n
+    \   $ time node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCD\")'\n    0.04s
+    user 0.01s system 95% cpu 0.052 total\n    \n    $ time node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCX\")'\n
+    \   1.79s user 0.02s system 99% cpu 1.812 total\n{: .language-bash}\n\nThe entire
+    process of testing it against a 30 characters long string\ntakes around ~52ms.
+    But when given an invalid string, it takes nearly\ntwo seconds to complete the
+    test, over ten times as long as it took to\ntest a valid string. The dramatic
+    difference is due to the way regular\nexpressions get evaluated.\n\nMost Regex
+    engines will work very similarly (with minor differences).\nThe engine will match
+    the first possible way to accept the current\ncharacter and proceed to the next
+    one. If it then fails to match the\nnext one, it will backtrack and see if there
+    was another way to digest\nthe previous character. If it goes too far down the
+    rabbit hole only to\nfind out the string doesn’t match in the end, and if many
+    characters\nhave multiple valid regex paths, the number of backtracking steps
+    can\nbecome very large, resulting in what is known as *catastrophic\nbacktracking*.\n\nLet\\'s
+    look at how our expression runs into this problem, using a\nshorter string: \\\"ACCCX\\\".
+    While it seems fairly straightforward, there\nare still four different ways that
+    the engine could match those three\nC\\'s:\n\n1.  CCC\n2.  CC+C\n3.  C+CC\n4.
+    \ C+C+C.\n\nThe engine has to try each of those combinations to see if any of
+    them\npotentially match against the expression. When you combine that with the\nother
+    steps the engine must take, we can use [RegEx 101 debugger][1] to\nsee the engine
+    has to take a total of 38 steps before it can determine\nthe string doesn\\'t
+    match.\n\nFrom there, the number of steps the engine must use to validate a string\njust
+    continues to grow.\n\n| String | Number of C\\'s | Number of steps |\n|----------\n|
+    ACCCX | 3 | 38 |\n| ACCCCX | 4 | 71 |\n| ACCCCCX | 5 | 136 |\n| ACCCCCCCCCCCCCCX
+    | 14 | 65,553 |\n\nBy the time the string includes 14 C\\'s, the engine has to
+    take over\n65,000 steps just to see if the string is valid. These extreme\nsituations
+    can cause them to work very slowly (exponentially related to\ninput size, as shown
+    above), allowing an attacker to exploit this and\ncan cause the service to excessively
+    consume CPU, resulting in a Denial\nof Service.\n\n\n\n[1]: https://regex101.com/debugger\n"
+  affected_package: rubygems-update
+  vulnerable_versions:
+  - "<1.8.23.2"
+  - ">=1.8.24  <1.8.27"
+  - ">=2.0.0  <2.0.10"
+  - ">=2.1.0  <2.1.5"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2013-4363
+  cwe:
+  - CWE-310
+  disclosed_date: 2013-09-24
+  created_date: 2019-11-13
+  last_modified_date: 2019-11-13
+  credit:
+  - Alexander Cherepanov
+  references:
+  - http://blog.rubygems.org/2013/09/24/CVE-2013-4363.html
+  - http://www.openwall.com/lists/oss-security/2013/09/14/3
+  - https://puppet.com/security/cve/cve-2013-4363
+  source_url: https://snyk.io/vuln/SNYK-RUBY-RUBYGEMSUPDATE-472642
+- id: snykio:rubygems:rubygems-update:472643
+  title: Arbitrary Code Injection
+  description: |
+    [rubygems-update][1] is a inbuilt rubygem for updating rubygems.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Injection. Is vulnerable to maliciously crafted gem specifications that
+    include terminal escape characters. Printing the gem specification would
+    execute terminal escape sequences.
+
+
+
+    [1]: https://rubygems.org/
+  affected_package: rubygems-update
+  vulnerable_versions:
+  - "<2.6.13"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2017-0899
+  cwe:
+  - CWE-94
+  disclosed_date: 2017-08-27
+  created_date: 2019-11-13
+  last_modified_date: 2019-11-13
+  credit:
+  - unknown
+  references:
+  - http://blog.rubygems.org/2017/08/27/2.6.13-released.html
+  - http://www.securityfocus.com/bid/100576
+  - http://www.securitytracker.com/id/1039249
+  - https://access.redhat.com/errata/RHSA-2017:3485
+  - https://github.com/rubygems/rubygems/commit/1bcbc7fe637b03145401ec9c094066285934a7f1
+  - https://github.com/rubygems/rubygems/commit/ef0aa611effb5f54d40c7fba6e8235eb43c5a491
+  - https://hackerone.com/reports/226335
+  - https://lists.debian.org/debian-lts-announce/2018/07/msg00012.html
+  - https://security.gentoo.org/glsa/201710-01
+  - https://www.debian.org/security/2017/dsa-3966
+  source_url: https://snyk.io/vuln/SNYK-RUBY-RUBYGEMSUPDATE-472643
+- id: snykio:rubygems:rubygems-update:472644
+  title: Infinite Loop
+  description: |
+    [rubygems-update][1] is a inbuilt rubygem for updating rubygems.
+
+    Affected versions of this package are vulnerable to Infinite Loop.
+    Contains a infinite loop caused by negative size vulnerability in ruby
+    gem package `tar_header` that can result in a negative size could cause
+    an infinite loop.
+
+
+
+    [1]: https://rubygems.org/
+  affected_package: rubygems-update
+  vulnerable_versions:
+  - "<2.7.6"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2018-1000075
+  cwe:
+  - CWE-835
+  disclosed_date: 2018-02-15
+  created_date: 2019-11-13
+  last_modified_date: 2019-11-13
+  credit:
+  - Samuel Giddins
+  references:
+  - http://blog.rubygems.org/2018/02/15/2.7.6-released.html
+  - https://github.com/rubygems/rubygems/commit/92e98bf8f810bd812f919120d4832df51bc25d83
+  source_url: https://snyk.io/vuln/SNYK-RUBY-RUBYGEMSUPDATE-472644
+- id: snykio:rubygems:rubygems-update:472645
+  title: Man-in-the-Middle (MitM)
+  description: |
+    [rubygems-update][1] is a inbuilt rubygem for updating rubygems.
+
+    Affected versions of this package are vulnerable to Man-in-the-Middle
+    (MitM). Does not verify an SSL certificate, which allows remote
+    attackers to modify a gem during installation via a man-in-the-middle
+    attack.
+
+
+
+    [1]: https://rubygems.org/
+  affected_package: rubygems-update
+  vulnerable_versions:
+  - "<1.8.23"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2012-2126
+  cwe:
+  - CWE-310
+  disclosed_date: 2012-04-19
+  created_date: 2019-11-13
+  last_modified_date: 2019-11-13
+  credit:
+  - unknown
+  references:
+  - http://secunia.com/advisories/55381
+  - http://www.openwall.com/lists/oss-security/2012/04/20/24
+  - https://bugzilla.redhat.com/show_bug.cgi?id=814718
+  - https://github.com/rubygems/rubygems/blob/1.8/History.txt
+  - https://github.com/rubygems/rubygems/commit/d4c7eafb8efe1e13a7abf5be5a5b4548870b15b7
+  source_url: https://snyk.io/vuln/SNYK-RUBY-RUBYGEMSUPDATE-472645
+- id: snykio:rubygems:rubygems-update:472646
+  title: Out-of-Bounds
+  description: |
+    [rubygems-update][1] is a inbuilt rubygem for updating rubygems.
+
+    Affected versions of this package are vulnerable to Out-of-Bounds.
+    `Gem::CommandManager#run` calls alert\_error without escaping, therefore
+    escape sequence injection is possible.
+
+
+
+    [1]: https://rubygems.org/
+  affected_package: rubygems-update
+  vulnerable_versions:
+  - "<2.7.8"
+  - ">=3.0.0  <3.0.3"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2019-8325
+  cwe:
+  - CWE-119
+  disclosed_date: 2019-03-05
+  created_date: 2019-11-13
+  last_modified_date: 2019-11-13
+  credit:
+  - ooooooo_q
+  references:
+  - https://blog.rubygems.org/2019/03/05/security-advisories-2019-03.html
+  - https://bugs.ruby-lang.org/attachments/7669
+  - https://bugzilla.redhat.com/show_bug.cgi?id=1692522
+  - https://hackerone.com/reports/317353
+  source_url: https://snyk.io/vuln/SNYK-RUBY-RUBYGEMSUPDATE-472646
+- id: snykio:rubygems:rubygems-update:472647
+  title: Man-in-the-Middle (MitM)
+  description: |
+    [rubygems-update][1] is a inbuilt rubygem for updating rubygems.
+
+    Affected versions of this package are vulnerable to Man-in-the-Middle
+    (MitM) via a DNS hijacking vulnerability that allows a MITM attacker to
+    force the RubyGems client to download and install gems from a server
+    that the attacker controls.
+
+
+
+    [1]: https://rubygems.org/
+  affected_package: rubygems-update
+  vulnerable_versions:
+  - "<2.6.13"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2017-0902
+  cwe:
+  - CWE-346
+  disclosed_date: 2017-08-27
+  created_date: 2019-11-13
+  last_modified_date: 2019-11-13
+  credit:
+  - unknown
+  references:
+  - http://blog.rubygems.org/2017/08/27/2.6.13-released.html
+  - http://www.securitytracker.com/id/1039249
+  - https://github.com/rubygems/rubygems/commit/8d91516fb7037ecfb27622f605dc40245e0f8d32
+  - https://hackerone.com/reports/218088
+  source_url: https://snyk.io/vuln/SNYK-RUBY-RUBYGEMSUPDATE-472647
+- id: snykio:rubygems:rubygems-update:472648
+  title: Directory Traversal
+  description: |
+    [rubygems-update][1] is a inbuilt rubygem for updating rubygems.
+
+    Affected versions of this package are vulnerable to Directory Traversal.
+    Gem installation can result in the gem writing to arbitrary filesystem
+    locations during installation. This attack appears to be exploitable via
+    the victim installing a malicious gem.
+
+
+
+    [1]: https://rubygems.org/
+    \nA Directory Traversal attack (also known as path traversal) aims to
+    access files and directories that are stored outside the intended
+    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
+    its variations, or by using absolute file paths, it may be possible to
+    access arbitrary files and directories stored on file system, including
+    application source code, configuration, and other critical system files.
+
+    Directory Traversal vulnerabilities can be generally divided into two
+    types:
+
+    * **Information Disclosure**\: Allows the attacker to gain information
+      about the folder structure or read the contents of sensitive files on
+      the system.
+
+    `st` is a module for serving static files on web pages, and contains a
+    [vulnerability of this type][1]. In our example, we will serve files
+    from the `public` route.
+
+    If an attacker requests the following URL from our server, it will in
+    turn leak the sensitive private key of the root user.
+
+        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
+
+    **Note** `%2e` is the URL encoded version of `.` (dot).
+
+    * **Writing arbitrary files**\: Allows the attacker to create or replace
+      existing files. This type of vulnerability is also known as
+      `Zip-Slip`.
+
+    One way to achieve this is by using a malicious `zip` archive that holds
+    path traversal filenames. When each filename in the zip archive gets
+    concatenated to the target extraction folder, without validation, the
+    final path ends up outside of the target folder. If an executable or a
+    configuration file is overwritten with a file containing malicious code,
+    the problem can turn into an arbitrary code execution issue quite
+    easily.
+
+    The following is an example of a `zip` archive with one benign file and
+    one malicious file. Extracting the malicious file will result in
+    traversing out of the target folder, ending up in `/root/.ssh/`
+    overwriting the `authorized_keys` file:
+
+        2018-04-15 22:04:29 .....           19           19  good.txt
+        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
+
+
+
+    [1]: https://snyk.io/vuln/npm:st:20140206
+  affected_package: rubygems-update
+  vulnerable_versions:
+  - "<2.7.6"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2018-1000079
+  cwe:
+  - CWE-22
+  disclosed_date: 2018-02-15
+  created_date: 2019-11-13
+  last_modified_date: 2019-11-13
+  credit:
+  - Unknown
+  references:
+  - http://blog.rubygems.org/2018/02/15/2.7.6-released.html
+  - https://github.com/rubygems/rubygems/commit/666ef793cad42eed96f7aee1cdf77865db921099
+  - https://github.com/rubygems/rubygems/commit/f83f911e19e27cbac1ccce7471d96642241dd759
+  source_url: https://snyk.io/vuln/SNYK-RUBY-RUBYGEMSUPDATE-472648
+- id: snykio:rubygems:rubygems-update:472649
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [rubygems-update][1] is a inbuilt rubygem for updating rubygems.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). in gem server display of homepage attribute. This attack appears
+    to be exploitable via the victim browsing to a malicious gem on a
+    vulnerable gem server.
+
+
+
+    [1]: https://rubygems.org/
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
+  affected_package: rubygems-update
+  vulnerable_versions:
+  - "<2.7.6"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2018-1000078
+  cwe:
+  - CWE-79
+  disclosed_date: 2018-02-15
+  created_date: 2019-11-13
+  last_modified_date: 2019-11-13
+  credit:
+  - Yasin Soliman
+  references:
+  - http://blog.rubygems.org/2018/02/15/2.7.6-released.html
+  - https://github.com/rubygems/rubygems/commit/66a28b9275551384fdab45f3591a82d6b59952cb
+  source_url: https://snyk.io/vuln/SNYK-RUBY-RUBYGEMSUPDATE-472649
+- id: snykio:rubygems:rubygems-update:472650
+  title: Deserialization of Untrusted Data
+  description: |
+    [rubygems-update][1] is a inbuilt rubygem for updating rubygems.
+
+    Affected versions of this package are vulnerable to Deserialization of
+    Untrusted Data in owner command that can result in code execution. This
+    attack appears to be exploitable via the victim running the `gem owner`
+    command on a gem with a specially crafted YAML file.
+
+
+
+    [1]: https://rubygems.org/
+  affected_package: rubygems-update
+  vulnerable_versions:
+  - "<2.7.6"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2018-1000074
+  cwe:
+  - CWE-502
+  disclosed_date: 2018-02-15
+  created_date: 2019-11-13
+  last_modified_date: 2019-11-13
+  credit:
+  - Unknown
+  references:
+  - http://blog.rubygems.org/2018/02/15/2.7.6-released.html
+  - https://github.com/rubygems/rubygems/commit/254e3d0ee873c008c0b74e8b8abcbdab4caa0a6d
+  source_url: https://snyk.io/vuln/SNYK-RUBY-RUBYGEMSUPDATE-472650
+- id: snykio:rubygems:rubygems-update:472651
+  title: Improper Input Validation
+  description: |
+    [rubygems-update][1] is a inbuilt rubygem for updating rubygems.
+
+    Affected versions of this package are vulnerable to Improper Input
+    Validation. in ruby gems specification homepage attribute that can
+    result in a malicious gem setting an invalid homepage URL.
+
+
+
+    [1]: https://rubygems.org/
+  affected_package: rubygems-update
+  vulnerable_versions:
+  - "<2.7.6"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2018-1000077
+  cwe:
+  - CWE-20
+  disclosed_date: 2018-12-15
+  created_date: 2019-11-13
+  last_modified_date: 2019-11-13
+  credit:
+  - Yasin Soliman
+  references:
+  - http://blog.rubygems.org/2018/02/15/2.7.6-released.html
+  - https://github.com/rubygems/rubygems/commit/feadefc2d351dcb95d6492f5ad17ebca546eb964
+  source_url: https://snyk.io/vuln/SNYK-RUBY-RUBYGEMSUPDATE-472651
+- id: snykio:rubygems:rubygems-update:472652
+  title: Arbitrary Code Execution
+  description: |
+    [rubygems-update][1] is a inbuilt rubygem for updating rubygems.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution. A crafted gem with a multi-line name is not handled
+    correctly. Therefore, an attacker can inject arbitrary code to the stub
+    line of gemspec, which is eval-ed by code in `ensure_loadable_spec`
+    during the preinstall check.
+
+
+
+    [1]: https://rubygems.org/
+  affected_package: rubygems-update
+  vulnerable_versions:
+  - "<2.7.8"
+  - ">=3.0.0  <3.0.3"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2019-8324
+  cwe:
+  - CWE-20
+  disclosed_date: 2019-03-05
+  created_date: 2019-11-13
+  last_modified_date: 2019-11-13
+  credit:
+  - nyangawa of Chaitin Tech
+  references:
+  - https://blog.rubygems.org/2019/03/05/security-advisories-2019-03.html
+  - https://bugs.ruby-lang.org/attachments/7669
+  - https://github.com/rubygems/rubygems/commit/00ff3037a577889bd1e555966d9e0d17bea8d28d
+  - https://github.com/rubygems/rubygems/commit/be3ad330cd1d7403389a3cc53a68b95a0a2b6491
+  - https://hackerone.com/reports/328571
+  - https://www.ruby-lang.org/en/news/2019/03/05/multiple-vulnerabilities-in-rubygems/
+  source_url: https://snyk.io/vuln/SNYK-RUBY-RUBYGEMSUPDATE-472652
+- id: snykio:rubygems:rubygems-update:472653
+  title: Directory Traversal
+  description: |
+    [rubygems-update][1] is a inbuilt rubygem for updating rubygems.
+
+    Affected versions of this package are vulnerable to Directory Traversal.
+    The `install_location` function of `package.rb` can result in path
+    traversal when writing to a symlinked basedir outside of the root.
+
+
+
+    [1]: https://rubygems.org/
+    \nA Directory Traversal attack (also known as path traversal) aims to
+    access files and directories that are stored outside the intended
+    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
+    its variations, or by using absolute file paths, it may be possible to
+    access arbitrary files and directories stored on file system, including
+    application source code, configuration, and other critical system files.
+
+    Directory Traversal vulnerabilities can be generally divided into two
+    types:
+
+    * **Information Disclosure**\: Allows the attacker to gain information
+      about the folder structure or read the contents of sensitive files on
+      the system.
+
+    `st` is a module for serving static files on web pages, and contains a
+    [vulnerability of this type][1]. In our example, we will serve files
+    from the `public` route.
+
+    If an attacker requests the following URL from our server, it will in
+    turn leak the sensitive private key of the root user.
+
+        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
+
+    **Note** `%2e` is the URL encoded version of `.` (dot).
+
+    * **Writing arbitrary files**\: Allows the attacker to create or replace
+      existing files. This type of vulnerability is also known as
+      `Zip-Slip`.
+
+    One way to achieve this is by using a malicious `zip` archive that holds
+    path traversal filenames. When each filename in the zip archive gets
+    concatenated to the target extraction folder, without validation, the
+    final path ends up outside of the target folder. If an executable or a
+    configuration file is overwritten with a file containing malicious code,
+    the problem can turn into an arbitrary code execution issue quite
+    easily.
+
+    The following is an example of a `zip` archive with one benign file and
+    one malicious file. Extracting the malicious file will result in
+    traversing out of the target folder, ending up in `/root/.ssh/`
+    overwriting the `authorized_keys` file:
+
+        2018-04-15 22:04:29 .....           19           19  good.txt
+        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
+
+
+
+    [1]: https://snyk.io/vuln/npm:st:20140206
+  affected_package: rubygems-update
+  vulnerable_versions:
+  - "<2.7.6"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2018-1000073
+  cwe:
+  - CWE-22
+  disclosed_date: 2018-02-15
+  created_date: 2019-11-13
+  last_modified_date: 2019-11-13
+  credit:
+  - nmalkin and David Fifield
+  references:
+  - http://blog.rubygems.org/2018/02/15/2.7.6-released.html
+  - https://github.com/rubygems/rubygems/commit/1b931fc03b819b9a0214be3eaca844ef534175e2
+  source_url: https://snyk.io/vuln/SNYK-RUBY-RUBYGEMSUPDATE-472653
+- id: snykio:rubygems:rubygems-update:472654
+  title: Improper Verification of Cryptographic Signature
+  description: |
+    [rubygems-update][1] is a inbuilt rubygem for updating rubygems.
+
+    Affected versions of this package are vulnerable to Improper
+    Verification of Cryptographic Signature. In `package.rb` a mis-signed
+    gem could be installed, as the tarball would contain multiple gem
+    signatures.
+
+
+
+    [1]: https://rubygems.org/
+  affected_package: rubygems-update
+  vulnerable_versions:
+  - "<2.7.6"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2018-1000076
+  cwe:
+  - CWE-347
+  disclosed_date: 2018-02-15
+  created_date: 2019-11-13
+  last_modified_date: 2019-11-13
+  credit:
+  - Samuel Giddins
+  references:
+  - http://blog.rubygems.org/2018/02/15/2.7.6-released.html
+  - https://github.com/rubygems/rubygems/commit/f5042b879259b1f1ce95a0c5082622c646376693
+  source_url: https://snyk.io/vuln/SNYK-RUBY-RUBYGEMSUPDATE-472654
+- id: snykio:rubygems:rubygems-update:472655
+  title: Arbitrary Code Execution
+  description: |
+    [rubygems-update][1] is a inbuilt rubygem for updating rubygems.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution. RubyGems version 2.6.12 and earlier fails to validate
+    specification names, allowing a maliciously crafted gem to potentially
+    overwrite any file on the filesystem.
+
+
+
+    [1]: https://rubygems.org/
+  affected_package: rubygems-update
+  vulnerable_versions:
+  - "<2.6.13"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2017-0901
+  cwe:
+  - CWE-20
+  disclosed_date: 2017-08-27
+  created_date: 2019-11-13
+  last_modified_date: 2019-11-13
+  credit:
+  - Yusuke Endoh
+  references:
+  - http://blog.rubygems.org/2017/08/27/2.6.13-released.html
+  - https://github.com/rubygems/rubygems/commit/ad5c0a53a86ca5b218c7976765c0365b91d22cb2
+  - https://hackerone.com/reports/243156
+  - https://www.exploit-db.com/exploits/42611/
+  source_url: https://snyk.io/vuln/SNYK-RUBY-RUBYGEMSUPDATE-472655
+- id: snykio:rubygems:rubygems-update:472656
+  title: Denial of Service (DoS)
+  description: |+
+    [rubygems-update][1] is a inbuilt rubygem for updating rubygems.
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS). Vulnerable to maliciously crafted gem specifications that can
+    cause a denial of service attack against RubyGems clients who have
+    issued a `query` command.
+
+
+
+    [1]: https://rubygems.org/
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+  affected_package: rubygems-update
+  vulnerable_versions:
+  - "<2.6.13"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2017-0900
+  cwe:
+  - CWE-20
+  disclosed_date: 2017-08-27
+  created_date: 2019-11-13
+  last_modified_date: 2019-11-13
+  credit:
+  - Samuel Giddins
+  references:
+  - http://blog.rubygems.org/2017/08/27/2.6.13-released.html
+  - https://github.com/rubygems/rubygems/commit/8a38a4fc24c6591e6c8f43d1fadab6efeb4d6251
+  - https://hackerone.com/reports/243003
+  source_url: https://snyk.io/vuln/SNYK-RUBY-RUBYGEMSUPDATE-472656
+- id: snykio:rubygems:rubygems-update:472657
+  title: DNS Hijack Attack
+  description: |
+    [rubygems-update][1] is a inbuilt rubygem for updating rubygems.
+
+    Affected versions of this package are vulnerable to DNS Hijack Attack.
+    It does not validate the hostname when fetching gems or making API
+    requests, which allows remote attackers to redirect requests to
+    arbitrary domains via a crafted DNS SRV record with a domain that is
+    suffixed with the original domain name, aka a DNS hijack attack. NOTE:
+    this vulnerability exists because to an incomplete fix for
+    `CVE-2015-3900`.
+
+
+
+    [1]: https://rubygems.org/
+  affected_package: rubygems-update
+  vulnerable_versions:
+  - ">=2.0.0  <2.0.17"
+  - ">=2.2.0  <2.2.5"
+  - ">=2.4.0  <2.4.8"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2015-4020
+  cwe:
+  - CWE-20
+  disclosed_date: 2015-06-08
+  created_date: 2019-11-13
+  last_modified_date: 2019-11-13
+  credit:
+  - unknown
+  references:
+  - http://blog.rubygems.org/2015/06/08/2.2.5-released.html
+  - http://blog.rubygems.org/2015/06/08/2.4.8-released.html
+  - http://www.oracle.com/technetwork/topics/security/bulletinoct2015-2511968.html
+  - https://github.com/rubygems/rubygems/commit/5c7bfb5
+  source_url: https://snyk.io/vuln/SNYK-RUBY-RUBYGEMSUPDATE-472657

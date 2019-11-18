@@ -1,0 +1,39 @@
+---
+- id: snykio:maven:org.webjars:dustjs-linkedin:479640
+  title: Code Injection
+  description: |
+    [org.webjars:dustjs-linkedin][1] is a Javascript templating engine
+    designed to run asynchronously on both the server and the browser.
+
+    Affected versions of this package are vulnerable to Code Injection.
+    Dust.js uses Javascript\'s `eval()` function to evaluate the \"if\"
+    statement conditions. The input to the function is sanitized by escaping
+    all potentially dangerous characters.
+
+    However, if the variable passed in is an array, no escaping is applied,
+    exposing an easy path to code injection. The risk of exploit is
+    especially high given the fact `express`, `koa` and many other Node.js
+    servers allow users to force a query parameter to be an array using the
+    `param[]=value` notation.
+
+
+
+    [1]: https://www.npmjs.com/package/dustjs-linkedin
+  affected_package: org.webjars:dustjs-linkedin
+  vulnerable_versions:
+  - "< 2.6.0"
+  severity: high
+  package_manager: maven
+  cwe:
+  - CWE-95
+  disclosed_date: 2015-01-09
+  created_date: 2016-09-14
+  last_modified_date: 2016-09-14
+  credit:
+  - Michael Stepankin
+  references:
+  - https://artsploit.blogspot.co.il/2016/08/pprce2.html
+  - https://github.com/linkedin/dustjs/issues/741
+  - https://github.com/linkedin/dustjs/pull/534
+  - https://github.com/linkedin/dustjs/pull/534/commits/884be3bb3a34a843e6fb411100088e9b02326bd4
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARS-479640

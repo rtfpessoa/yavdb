@@ -136,3 +136,62 @@
   - https://bugzilla.redhat.com/show_bug.cgi?id=880671
   - https://www.131002.net/data/talks/appsec12_slides.pdf
   source_url: https://ossindex.net/resource/package/7015268759/vulnerabilities
+- id: snykio:maven:org.jruby:jruby-core:472855
+  title: Denial of Service (DoS)
+  description: |+
+    [org.jruby:jruby-core][1] is a maven package that contains core classes
+    of JRuby.
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS). It computes hash values without restricting the ability to
+    trigger hash collisions predictably, which allows context-dependent
+    attackers to cause a denial of service (CPU consumption) via crafted
+    input to an application that maintains a hash table.
+
+
+
+    [1]: https://www.jruby.org/
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+  affected_package: org.jruby:jruby-core
+  vulnerable_versions:
+  - "< 1.6.5.1"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2011-4838
+  cwe:
+  - CWE-189
+  disclosed_date: 2019-10-10
+  created_date: 2019-10-10
+  last_modified_date: 2019-10-10
+  credit:
+  - Unknown
+  references:
+  - http://jruby.org/2011/12/27/jruby-1-6-5-1.html
+  - https://github.com/jruby/jruby/commit/c1c9f95ed29cb93806fbc90e9eaabb9c406581e5
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGJRUBY-472855

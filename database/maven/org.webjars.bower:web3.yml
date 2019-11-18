@@ -1,0 +1,36 @@
+---
+- id: snykio:maven:org.webjars.bower:web3:480337
+  title: Insecure Credential Storage
+  description: |
+    [org.webjars.bower:web3][1] is a JavaScript API which connects to the
+    Generic JSON RPC spec.
+
+    Affected versions of this package are vulnerable to Insecure Credential
+    Storage. The current implementation of web3.js could result in wallet
+    decryption under certain circumstances. When a wallet is saved and
+    encrypted into local storage, a private key is needed to load the
+    wallet. However, this private key is available via LocalStorage and is
+    readable in plaintext on a webpage after a wallet is loaded.
+
+    This implementation could be abused by an attacker through client-side
+    attacks such as Cross-site Scripting (XSS) and could result in theft of
+    a user\'s wallet private key.
+
+
+
+    [1]: https://www.npmjs.com/package/web3
+  affected_package: org.webjars.bower:web3
+  vulnerable_versions:
+  - "*"
+  severity: low
+  package_manager: maven
+  cwe:
+  - CWE-255
+  disclosed_date: 2019-04-26
+  created_date: 2019-04-28
+  last_modified_date: 2019-04-28
+  credit:
+  - sshelton76
+  references:
+  - https://github.com/ethereum/web3.js/issues/2739
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSBOWER-480337

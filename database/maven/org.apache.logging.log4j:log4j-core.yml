@@ -2,15 +2,18 @@
 - id: snykio:maven:org.apache.logging.log4j:log4j-core:31409
   title: Deserialization of Untrusted Data
   description: |
-    [`org.apache.logging.log4j:log4j-core`][1] In Apache Log4j 2.x before
-    2.8.2, when using the TCP socket server or UDP socket server to receive
-    serialized log events from another application, a specially crafted
-    binary payload can be sent that, when deserialized, can execute
+    [org.apache.logging.log4j:log4j-core][1] is a logging library for Java
+
+    Affected versions of this package are vulnerable to Deserialization of
+    Untrusted Data. When using the TCP socket server or UDP socket server to
+    receive serialized log events from another application, a specially
+    crafted binary payload can be sent that, when deserialized, can execute
     arbitrary code.
 
-    # Details   {#details}
 
-    Serialization is a process of converting an object into a sequence of
+
+    [1]: http://logging.apache.org/log4j/1.2/
+    \nSerialization is a process of converting an object into a sequence of
     bytes which can be persisted to a disk or database or can be sent
     through streams. The reverse process of creating object from sequence of
     bytes is called deserialization. Serialization is commonly used for
@@ -20,7 +23,7 @@
     Management Extension (JMX)*, *Java Messaging System (JMS)*, *Action
     Message Format (AMF)*, *Java Server Faces (JSF) ViewState*, etc.
 
-    *Deserialization of untrusted data* ([CWE-502][2]), is when the
+    *Deserialization of untrusted data* ([CWE-502][1]), is when the
     application deserializes untrusted data without sufficiently verifying
     that the resulting data will be valid, letting the attacker to control
     the state or the flow of the execution.
@@ -28,7 +31,7 @@
     Java deserialization issues have been known for years. However, interest
     in the issue intensified greatly in 2015, when classes that could be
     abused to achieve remote code execution were found in a [popular library
-    (Apache Commons Collection)][3]. These classes were used in zero-days
+    (Apache Commons Collection)][2]. These classes were used in zero-days
     affecting IBM WebSphere, Oracle WebLogic and many other products.
 
     An attacker just needs to identify a piece of software that has both a
@@ -51,11 +54,26 @@
 
     * Apache Blog
 
+    The vulnerability, also know as *Mad Gadget*
+
+    > Mad Gadget is one of the most pernicious vulnerabilities we’ve seen.
+    > By merely existing on the Java classpath, seven “gadget” classes in
+    > Apache Commons Collections (versions 3.0, 3.1, 3.2, 3.2.1, and 4.0)
+    > make object deserialization for the entire JVM process Turing complete
+    > with an exec function. Since many business applications use object
+    > deserialization to send messages across the network, it would be like
+    > hiring a bank teller who was trained to hand over all the money in the
+    > vault if asked to do so politely, and then entrusting that teller with
+    > the key. The only thing that would keep a bank safe in such a
+    > circumstance is that most people wouldn’t consider asking such a
+    > question.
+
+    * Google
 
 
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22log4j-core%22
-    [2]: https://cwe.mitre.org/data/definitions/502.html
-    [3]: https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078
+
+    [1]: https://cwe.mitre.org/data/definitions/502.html
+    [2]: https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078
   affected_package: org.apache.logging.log4j:log4j-core
   vulnerable_versions:
   - ">= 2.0-alpha1 < 2.8.2"
@@ -71,6 +89,6 @@
   credit:
   - Marcio Almeida de Macedo
   references:
+  - https://github.com/apache/logging-log4j2/commit/5dcc19215827db29c993d0305ee2b0d8dd05939d
   - https://issues.apache.org/jira/browse/LOG4J2-1863
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2017-5645
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHELOGGINGLOG4J-31409

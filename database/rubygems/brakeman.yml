@@ -1,0 +1,61 @@
+---
+- id: rubyadvisory:rubygems:brakeman:CVE-2019-18409
+  title: brakeman world writable files allow local privilege escalation
+  description: |
+    The ruby_parser-legacy (aka legacy) gem 1.0.0 for Ruby allows local
+    privilege escalation because of world-writable files. For example,
+    if the brakeman gem (which has a legacy dependency) 4.5.0 through 4.7.0 is used,
+    a local user can insert malicious code into the
+    ruby_parser-legacy-1.0.0/lib/ruby_parser/legacy/ruby_parser.rb file.
+  affected_package: brakeman
+  unaffected_versions:
+  - "<= 4.4.0"
+  patched_versions:
+  - ">= 4.7.1"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2019-18409
+  cvss_v2_score: 4.6
+  cvss_v3_score: 7.8
+  disclosed_date: 2019-10-24
+  created_date: 2019-10-24
+  last_modified_date: 2019-10-24
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  - https://github.com/zenspider/ruby_parser-legacy/issues/1
+  source_url: https://brakemanscanner.org/blog/2019/10/14/brakeman-4-dot-7-dot-1-released
+- id: snykio:rubygems:brakeman:480459
+  title: Improper Privilege Management
+  description: |
+    [brakeman][1] is a is a gem that detects security vulnerabilities in
+    Ruby on Rails applications via static analysis.
+
+    Affected versions of this package are vulnerable to Improper Privilege
+    Management as it allows local privilege escalation because of
+    world-writable files. A local user can insert malicious code into the
+    `ruby_parser-legacy-1.0.0/lib/ruby_parser/legacy/ruby_parser.rb` file.
+
+
+
+    [1]: https://rubygems.org/gems/brakeman
+  affected_package: brakeman
+  vulnerable_versions:
+  - ">=4.5.0  <4.7.1"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2019-18409
+  cwe:
+  - CWE-732
+  disclosed_date: 2019-11-08
+  created_date: 2019-11-08
+  last_modified_date: 2019-11-08
+  credit:
+  - fwininger
+  references:
+  - https://brakemanscanner.org
+  - https://github.com/zenspider/ruby_parser-legacy/issues/1
+  source_url: https://snyk.io/vuln/SNYK-RUBY-BRAKEMAN-480459

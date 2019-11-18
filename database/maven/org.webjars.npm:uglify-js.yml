@@ -83,3 +83,126 @@
   - http://www.securityfocus.com/bid/96409
   - https://nodesecurity.io/advisories/48
   source_url: https://ossindex.net/resource/package/7108814170/vulnerabilities
+- id: snykio:maven:org.webjars.npm:uglify-js:480287
+  title: Improper minification of non-boolean comparisons
+  description: "[`uglify-js`][1] is a JavaScript parser, minifier, compressor and\nbeautifier
+    toolkit.\n\n[Tom MacWright][2] discovered that UglifyJS versions 2.4.23 and earlier\nare
+    affected by a vulnerability which allows a specially crafted\nJavascript file
+    to have altered functionality after minification. This\nbug was [demonstrated][3]
+    by [Yan][4] to allow potentially malicious\ncode to be hidden within secure code,
+    activated by minification.\n\n### Details   {#details}\n\nIn Boolean algebra,
+    DeMorgan\\'s laws describe the relationships between\nconjunctions (`&&`), disjunctions
+    (`||`) and negations (`!`). In\nJavascript form, they state that:\n\n     !(a
+    && b) === (!a) || (!b)\n     !(a || b) === (!a) && (!b)\n{: .language-savascript}\n\nThe
+    law does not hold true when one of the values is not a boolean\nhowever.\n\nVulnerable
+    versions of UglifyJS do not account for this restriction, and\nerroneously apply
+    the laws to a statement if it can be reduced in length\nby it.\n\nConsider this
+    authentication function:\n\n    function isTokenValid(user) {\n        var timeLeft
+    =\n            !!config && // config object exists\n            !!user.token &&
+    // user object has a token\n            !user.token.invalidated && // token is
+    not explicitly invalidated\n            !config.uninitialized && // config is
+    initialized\n            !config.ignoreTimestamps && // don't ignore timestamps\n
+    \           getTimeLeft(user.token.expiry); // > 0 if expiration is in the future\n
+    \   \n        // The token must not be expired\n        return timeLeft > 0;\n
+    \   }\n    \n    function getTimeLeft(expiry) {\n      return expiry - getSystemTime();\n
+    \   }\n{: .language-javascript}\n\nWhen minified with a vulnerable version of
+    UglifyJS, it will produce the\nfollowing insecure output, where a token will never
+    expire:\n\n( Formatted for readability )\n\n    function isTokenValid(user) {\n
+    \       var timeLeft = !(                       // negation\n            !config
+    \                            // config object does not exist\n            || !user.token
+    \                     // user object does not have a token\n            || user.token.invalidated
+    \          // token is explicitly invalidated\n            || config.uninitialized
+    \            // config isn't initialized\n            || config.ignoreTimestamps
+    \         // ignore timestamps\n            || !getTimeLeft(user.token.expiry)
+    \ // > 0 if expiration is in the future\n        );\n        return timeLeft >
+    0\n    }\n    \n    function getTimeLeft(expiry) {\n        return expiry - getSystemTime()\n
+    \   }\n{: .language-javascript}\n\n\n\n[1]: http://npmjs.com/package/uglify-js\n[2]:
+    https://github.com/mishoo/UglifyJS2/issues/751\n[3]: https://zyan.scripts.mit.edu/blog/backdooring-js/\n[4]:
+    https://twitter.com/bcrypt\n"
+  affected_package: org.webjars.npm:uglify-js
+  vulnerable_versions:
+  - ">= 2.2.0 < 2.4.24"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2015-8857
+  cwe:
+  - CWE-95
+  disclosed_date: 2015-08-24
+  created_date: 2015-08-24
+  last_modified_date: 2015-08-24
+  credit:
+  - Tom MacWright
+  references:
+  - https://github.com/mishoo/UglifyJS2/issues/751
+  - https://zyan.scripts.mit.edu/blog/backdooring-js/
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-480287
+- id: snykio:maven:org.webjars.npm:uglify-js:480288
+  title: Regular Expression Denial of Service (DoS)
+  description: "The `parse()` function in the [`uglify-js`][1] package prior to version\n2.6.0
+    is vulnerable to regular expression denial of service (ReDoS)\nattacks when long
+    inputs of certain patterns are processed.\n\n\n\n[1]: https://www.npmjs.com/package/uglify-js\n\\nDenial
+    of Service (DoS) describes a family of attacks, all aimed at\nmaking a system
+    inaccessible to its original and legitimate users. There\nare many types of DoS
+    attacks, ranging from trying to clog the network\npipes to the system by generating
+    a large volume of traffic from many\nmachines (a Distributed Denial of Service
+    - DDoS - attack) to sending\ncrafted requests that cause a system to crash or
+    take a disproportional\namount of time to process.\n\nThe Regular expression Denial
+    of Service (ReDoS) is a type of Denial of\nService attack. Regular expressions
+    are incredibly powerful, but they\naren\\'t very intuitive and can ultimately
+    end up making it easy for\nattackers to take your site down.\n\nLet’s take the
+    following regular expression as an example:\n\n    regex = /A(B|C+)+D/\n{: .language-js}\n\nThis
+    regular expression accomplishes the following:\n\n* `A` The string must start
+    with the letter \\'A\\'\n* `(B|C+)+` The string must then follow the letter A
+    with either the\n  letter \\'B\\' or some number of occurrences of the letter
+    \\'C\\' (the\n  `+` matches one or more times). The `+` at the end of this section\n
+    \ states that we can look for one or more matches of this section.\n* `D` Finally,
+    we ensure this section of the string ends with a \\'D\\'\n\nThe expression would
+    match inputs such as `ABBD`, `ABCCCCD`, `ABCBCCCD`\nand `ACCCCCD`\n\nIt most cases,
+    it doesn\\'t take very long for a regex engine to find a\nmatch:\n\n    $ time
+    node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCD\")'\n    0.04s user
+    0.01s system 95% cpu 0.052 total\n    \n    $ time node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCX\")'\n
+    \   1.79s user 0.02s system 99% cpu 1.812 total\n{: .language-bash}\n\nThe entire
+    process of testing it against a 30 characters long string\ntakes around ~52ms.
+    But when given an invalid string, it takes nearly\ntwo seconds to complete the
+    test, over ten times as long as it took to\ntest a valid string. The dramatic
+    difference is due to the way regular\nexpressions get evaluated.\n\nMost Regex
+    engines will work very similarly (with minor differences).\nThe engine will match
+    the first possible way to accept the current\ncharacter and proceed to the next
+    one. If it then fails to match the\nnext one, it will backtrack and see if there
+    was another way to digest\nthe previous character. If it goes too far down the
+    rabbit hole only to\nfind out the string doesn’t match in the end, and if many
+    characters\nhave multiple valid regex paths, the number of backtracking steps
+    can\nbecome very large, resulting in what is known as *catastrophic\nbacktracking*.\n\nLet\\'s
+    look at how our expression runs into this problem, using a\nshorter string: \\\"ACCCX\\\".
+    While it seems fairly straightforward, there\nare still four different ways that
+    the engine could match those three\nC\\'s:\n\n1.  CCC\n2.  CC+C\n3.  C+CC\n4.
+    \ C+C+C.\n\nThe engine has to try each of those combinations to see if any of
+    them\npotentially match against the expression. When you combine that with the\nother
+    steps the engine must take, we can use [RegEx 101 debugger][1] to\nsee the engine
+    has to take a total of 38 steps before it can determine\nthe string doesn\\'t
+    match.\n\nFrom there, the number of steps the engine must use to validate a string\njust
+    continues to grow.\n\n| String | Number of C\\'s | Number of steps |\n|----------\n|
+    ACCCX | 3 | 38 |\n| ACCCCX | 4 | 71 |\n| ACCCCCX | 5 | 136 |\n| ACCCCCCCCCCCCCCX
+    | 14 | 65,553 |\n\nBy the time the string includes 14 C\\'s, the engine has to
+    take over\n65,000 steps just to see if the string is valid. These extreme\nsituations
+    can cause them to work very slowly (exponentially related to\ninput size, as shown
+    above), allowing an attacker to exploit this and\ncan cause the service to excessively
+    consume CPU, resulting in a Denial\nof Service.\n\n\n\n[1]: https://regex101.com/debugger\n"
+  affected_package: org.webjars.npm:uglify-js
+  vulnerable_versions:
+  - "< 2.6.0"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2015-8858
+  cwe:
+  - CWE-400
+  disclosed_date: 2015-10-24
+  created_date: 2015-11-06
+  last_modified_date: 2015-11-06
+  credit:
+  - Adam Baldwin
+  references:
+  - https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-480288

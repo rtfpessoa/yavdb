@@ -324,16 +324,55 @@
 - id: snykio:maven:org.jboss.resteasy:resteasy-jaxrs:30118
   title: XML External Entity (XXE) Injection
   description: |+
-    `org.jboss.resteasy:resteasy-jaxrs` is a jboss project that provides
-    various frameworks to help you build RESTful Web Services and RESTful
-    Java applications.
+    [org.jboss.resteasy:resteasy-jaxrs][1] is a JCP specification that
+    provides a Java API for RESTful Web Services over the HTTP protocol.
 
     Affected versions of this package are vulnerable to XML External Entity
     (XXE) Injection via an external entity reference in a DOM document.
 
+
+
+    [1]: https://mvnrepository.com/artifact/org.jboss.resteasy/resteasy-jaxrs
+    \nXXE Injection is a type of attack against an application that parses XML
+    input. XML is a markup language that defines a set of rules for encoding
+    documents in a format that is both human-readable and machine-readable.
+    By default, many XML processors allow specification of an external
+    entity, a URI that is dereferenced and evaluated during XML processing.
+    When an XML document is being parsed, the parser can make a request and
+    include the content at the specified URI inside of the XML document.
+
+    Attacks can include disclosing local files, which may contain sensitive
+    data such as passwords or private user data, using file: schemes or
+    relative paths in the system identifier.
+
+    For example, below is a sample XML document, containing an XML element-
+    username.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+           <username>John</username>
+        </xml>
+    {: .language-xml}
+
+    An external XML entity - `xxe`, is defined using a system identifier and
+    present within a DOCTYPE header. These entities can access local or
+    remote content. For example the below code contains an external XML
+    entity that would fetch the content of `/etc/passwd` and display it to
+    the user rendered by `username`.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+        <!DOCTYPE foo [
+           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
+           <username>&xxe;</username>
+        </xml>
+    {: .language-xml}
+
+    Other XXE Injection attacks can access local resources that may not stop
+    returning data, possibly impacting application availability and leading
+    to Denial of Service.
+
   affected_package: org.jboss.resteasy:resteasy-jaxrs
   vulnerable_versions:
-  - ">= 1.2.1.GA < 2.0-beta-1"
+  - ">= 1.1GA < 2.3.1.GA"
   severity: medium
   package_manager: maven
   cve:
@@ -346,6 +385,8 @@
   credit:
   - Unknown
   references:
+  - https://github.com/resteasy/Resteasy/commit/020d979fb702e2f3c332f38ab4565b3d254b3c33
+  - https://github.com/resteasy/Resteasy/commit/71ace879cf92d323bfa4d3e88db0c3059109bbf6
   - https://issues.jboss.org/browse/RESTEASY-637
   - https://issues.jboss.org/browse/RESTEASY-647
   - https://issues.jboss.org/browse/RESTEASY-659
@@ -400,11 +441,11 @@
 
   affected_package: org.jboss.resteasy:resteasy-jaxrs
   vulnerable_versions:
-  - ">= 2 <= 2.3.7.Final"
-  - ">= 2 <= 2.3.9.Final"
+  - ">= 2 < 2.3.7.Final"
+  - ">= 2 < 2.3.9.Final"
   - ">= 2.1-beta-1 < 3.0.0.Final"
-  - ">= 2.3 <= 2.3.8.SP3-redhat-2"
-  - ">= 3.0.0.Final <= 3.0.10.Final"
+  - ">= 2.3 < 2.3.8.SP3-redhat-2"
+  - ">= 3.0.0.Final < 3.0.10.Final"
   severity: medium
   package_manager: maven
   cve:
@@ -544,7 +585,7 @@
 
   affected_package: org.jboss.resteasy:resteasy-jaxrs
   vulnerable_versions:
-  - ">= 1.2 <= 1.2.1.GA"
+  - ">= 1.2 < 1.2.1.GA"
   severity: high
   package_manager: maven
   cve:
@@ -645,7 +686,7 @@
 
   affected_package: org.jboss.resteasy:resteasy-jaxrs
   vulnerable_versions:
-  - ">= 1.0-beta-6 <= 3.1.0.Beta1"
+  - ">= 1.0-beta-6 < 3.1.0.Beta1"
   severity: medium
   package_manager: maven
   cve:
@@ -745,7 +786,7 @@
 
   affected_package: org.jboss.resteasy:resteasy-jaxrs
   vulnerable_versions:
-  - ">= 1.0-beta-6 <= 3.1.0.Beta1"
+  - ">= 1.0-beta-6 < 3.1.0.Beta1"
   severity: medium
   package_manager: maven
   cve:

@@ -12162,19 +12162,15 @@
   source_url: https://ossindex.net/resource/package/7015341983/vulnerabilities
 - id: snykio:maven:org.apache.tomcat:catalina:30826
   title: Information Exposure
-  description: |
-    [`org.apache.tomcat:catalina`][1] Apache Tomcat 5.5.0 through 5.5.29 and
-    6.0.0 through 6.0.26 might allow remote attackers to discover the
-    server\'s hostname or IP address by sending a request for a resource
-    that requires (1) BASIC or (2) DIGEST authentication, and then reading
-    the realm field in the WWW-Authenticate header in the reply.
+  description: |+
+    It might allow remote attackers to discover the server\'s hostname or IP
+    address by sending a request for a resource that requires (1) BASIC or
+    (2) DIGEST authentication, and then reading the realm field in the
+    WWW-Authenticate header in the reply.
 
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22catalina%22
   affected_package: org.apache.tomcat:catalina
   vulnerable_versions:
-  - ">= 6 <= 6.0.26"
+  - ">= 6.0.0 < 6.0.27"
   severity: low
   package_manager: maven
   cve:
@@ -12188,6 +12184,7 @@
   - Unknown
   references:
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2010-1157
+  - https://www.exploit-db.com/exploits/12343
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHETOMCAT-30826
 - id: snykio:maven:org.apache.tomcat:catalina:30827
   title: Directory Traversal
@@ -12473,20 +12470,23 @@
 - id: snykio:maven:org.apache.tomcat:catalina:30830
   title: Access Restriction Bypass
   description: |
-    [`org.apache.tomcat:catalina`][1] The HTTP Digest Access Authentication
-    implementation in Apache Tomcat 5.5.x before 5.5.34, 6.x before 6.0.33,
-    and 7.x before 7.0.12 does not have the expected countermeasures against
-    replay attacks, which makes it easier for remote attackers to bypass
-    intended access restrictions by sniffing the network for valid requests,
-    related to lack of checking of nonce (aka server nonce) and nc (aka
-    nonce-count or client nonce count) values.
+    [org.apache.tomcat:catalina][1] is a Servlet Engine Core Classes and
+    Standard implementations.
+
+    Affected versions of this package are vulnerable to Access Restriction
+    Bypass. The HTTP Digest Access Authentication implementation in Apache
+    Tomcat. It does not have the expected countermeasures against replay
+    attacks, which makes it easier for remote attackers to bypass intended
+    access restrictions by sniffing the network for valid requests, related
+    to lack of checking of nonce (aka server nonce) and nc (aka nonce-count
+    or client nonce count) values.
 
 
 
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22catalina%22
+    [1]: https://mvnrepository.com/artifact/org.apache.tomcat/catalina
   affected_package: org.apache.tomcat:catalina
   vulnerable_versions:
-  - ">= 6 <= 6.0.32"
+  - ">= 6.0.0 < 6.0.33"
   severity: medium
   package_manager: maven
   cve:
@@ -12499,6 +12499,7 @@
   credit:
   - Unknown
   references:
+  - https://github.com/apache/tomcat55/commit/644dfdf96cf82fcd2a2046d93f2b5495f7e94584
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2011-1184
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHETOMCAT-30830
 - id: snykio:maven:org.apache.tomcat:catalina:30831
@@ -12533,19 +12534,22 @@
 - id: snykio:maven:org.apache.tomcat:catalina:30832
   title: Improper Input Validation
   description: |
-    [`org.apache.tomcat:catalina`][1] Apache Tomcat 5.5.x before 5.5.34, 6.x
-    before 6.0.33, and 7.x before 7.0.19, when sendfile is enabled for the
-    HTTP APR or HTTP NIO connector, does not validate certain request
-    attributes, which allows local users to bypass intended file access
-    restrictions or cause a denial of service (infinite loop or JVM crash)
-    by leveraging an untrusted web application.
+    [org.apache.tomcat:catalina][1] is a Servlet Engine Core Classes and
+    Standard implementations.
+
+    Affected versions of this package are vulnerable to Improper Input
+    Validation. When sendfile is enabled for the HTTP APR or HTTP NIO
+    connector, does not validate certain request attributes, which allows
+    local users to bypass intended file access restrictions or cause a
+    denial of service (infinite loop or JVM crash) by leveraging an
+    untrusted web application.
 
 
 
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22catalina%22
+    [1]: https://mvnrepository.com/artifact/org.apache.tomcat/catalina
   affected_package: org.apache.tomcat:catalina
   vulnerable_versions:
-  - ">= 6 <= 6.0.32"
+  - ">= 6 < 6.0.33"
   severity: medium
   package_manager: maven
   cve:
@@ -12558,6 +12562,7 @@
   credit:
   - Unknown
   references:
+  - https://github.com/apache/tomcat55/commit/e67f6882118f2a8285e4e8acd050dad64a3ef3e4
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2011-2526
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHETOMCAT-30832
 - id: snykio:maven:org.apache.tomcat:catalina:30833
@@ -13005,18 +13010,22 @@
 - id: snykio:maven:org.apache.tomcat:catalina:30846
   title: Improper Input Validation
   description: |
-    [`org.apache.tomcat:catalina`][1]
-    org/apache/catalina/connector/CoyoteAdapter.java in Apache Tomcat 6.0.33
-    through 6.0.37 does not consider the disableURLRewriting setting when
-    handling a session ID in a URL, which allows remote attackers to conduct
-    session fixation attacks via a crafted URL.
+    [org.apache.tomcat:catalina][1] is a Servlet Engine Core Classes and
+    Standard implementations.
+
+    Affected versions of this package are vulnerable to Improper Input
+    Validation. The `org/apache/catalina/connector/CoyoteAdapter.java` in
+    Apache Tomcat 6.0.33 through 6.0.37 does not consider the
+    disableURLRewriting setting when handling a session ID in a URL, which
+    allows remote attackers to conduct session fixation attacks via a
+    crafted URL.
 
 
 
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22catalina%22
+    [1]: https://mvnrepository.com/artifact/org.apache.tomcat/catalina
   affected_package: org.apache.tomcat:catalina
   vulnerable_versions:
-  - ">= 6.0.33 <= 6.0.37"
+  - ">= 6.0.33 < 6.0.38"
   severity: medium
   package_manager: maven
   cve:

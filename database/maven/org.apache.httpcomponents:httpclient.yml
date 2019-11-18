@@ -296,9 +296,8 @@
     (MitM) due to not verify the requesting server\'s hostname against
     existing domain names in the SSL Certificate.
 
-    The `AbstractVerifier` in Apache Commons HttpClient before 4.3.5 and
-    HttpAsyncClient before 4.0.2 does not properly verify that the server
-    hostname matches a domain name in the subject\'s `Common Name (CN)` or
+    The `AbstractVerifier` does not properly verify that the server hostname
+    matches a domain name in the subject\'s `Common Name (CN)` or
     `subjectAltName` field of the X.509 certificate, which allows
     man-in-the-middle attackers to spoof SSL servers via a `"CN="` string in
     a field in the distinguished name (DN) of a certificate, as demonstrated
@@ -394,6 +393,8 @@
   credit:
   - Unknown
   references:
+  - http://svn.apache.org/viewvc?view=revision&revision=1411705
+  - https://bugzilla.redhat.com/show_bug.cgi?id=1129074
   - https://github.com/apache/httpcomponents-client/commit/b930227f907af1198765fc47beabbddae344ca7b
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-3577
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEHTTPCOMPONENTS-30646

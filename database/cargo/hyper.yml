@@ -25,13 +25,14 @@
   source_url: https://github.com/RustSec/advisory-db/blob/master/crates/hyper/RUSTSEC-2016-0002.toml
 - id: rustsec:cargo:hyper:RUSTSEC-2017-0002
   title: headers containing newline characters can split messages
-  description: "Serializing of headers to the socket did not filter the values for
-    newline bytes (\r or \n),\nwhich allowed for header values to split a request
-    or response. People would not likely include\nnewlines in the headers in their
-    own applications, so the way for most people to exploit this\nis if an application
-    constructs headers based on unsanitized user input.\n\nThis issue was fixed by
-    replacing all newline characters with a space during serialization of\na header
-    value.\n"
+  description: |
+    Serializing of headers to the socket did not filter the values for newline bytes (`\r` or `\n`),
+    which allowed for header values to split a request or response. People would not likely include
+    newlines in the headers in their own applications, so the way for most people to exploit this
+    is if an application constructs headers based on unsanitized user input.
+
+    This issue was fixed by replacing all newline characters with a space during serialization of
+    a header value.
   affected_package: hyper
   patched_versions:
   - "< 0.10.0"

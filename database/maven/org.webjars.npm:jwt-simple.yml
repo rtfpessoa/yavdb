@@ -1,0 +1,33 @@
+---
+- id: snykio:maven:org.webjars.npm:jwt-simple:479855
+  title: Signature Verification Bypass
+  description: |
+    [org.webjars.npm:jwt-simple][1] is a JWT(JSON Web Token) encode and
+    decode module.
+
+    Affected versions of this package are vulnerable to Signature
+    Verification Bypass. If no algorithm is specified in the `decode()`
+    function, the packages uses the algorithm in the JWT to decode tokens.
+    This allows an attacker to create a HS256 (symmetric algorithm) JWT with
+    the server\'s public key as secret, and the package will verify it as
+    HS256 instead of RS256 (asymmetric algorithm).
+
+
+
+    [1]: https://www.npmjs.com/package/jwt-simple
+  affected_package: org.webjars.npm:jwt-simple
+  vulnerable_versions:
+  - "< 0.5.3"
+  severity: medium
+  package_manager: maven
+  cwe:
+  - CWE-358
+  disclosed_date: 2019-04-24
+  created_date: 2019-04-25
+  last_modified_date: 2019-04-25
+  credit:
+  - Daniel Gunawan
+  references:
+  - https://github.com/hokaccha/node-jwt-simple/commit/ead36e1d687645da9c3be8befdaaef622ea33106
+  - https://www.npmjs.com/advisories/831
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-479855

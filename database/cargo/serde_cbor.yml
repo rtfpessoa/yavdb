@@ -1,0 +1,20 @@
+---
+- id: rustsec:cargo:serde_cbor:RUSTSEC-2019-0025
+  title: Flaw in CBOR deserializer allows stack overflow
+  description: "Affected versions of this crate did not properly check if semantic
+    tags were nested excessively during deserialization.\n\nThis allows an attacker
+    to craft small (< 1 kB) CBOR documents that cause a stack overflow.\n \nThe flaw
+    was corrected by limiting the allowed number of nested tags.\n"
+  affected_package: serde_cbor
+  patched_versions:
+  - ">= 0.10.2"
+  severity: high
+  package_manager: cargo
+  disclosed_date: 2019-10-03
+  created_date: 2019-10-03
+  last_modified_date: 2019-10-03
+  credit:
+  - RustSec
+  references:
+  - https://github.com/pyfisch/cbor/releases/tag/v0.10.2
+  source_url: https://github.com/RustSec/advisory-db/blob/master/crates/serde_cbor/RUSTSEC-2019-0025.toml

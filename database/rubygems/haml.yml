@@ -1,4 +1,29 @@
 ---
+- id: rubyadvisory:rubygems:haml:CVE-2017-1002201
+  title: haml failure to escape single quotes
+  description: |
+    In haml versions prior to version 5.0.0.beta.2, when using user input to
+    perform tasks on the server, characters like < > " ' must be escaped properly.
+    In this case, the ' character was missed. An attacker can manipulate the input
+    to introduce additional attributes, potentially executing code.
+  affected_package: haml
+  patched_versions:
+  - ">= 5.0.0.beta.2"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2017-1002201
+  cvss_v2_score: 4.3
+  cvss_v3_score: 6.1
+  disclosed_date: 2017-05-08
+  created_date: 2017-05-08
+  last_modified_date: 2017-05-08
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  - https://snyk.io/vuln/SNYK-RUBY-HAML-20362
+  source_url: https://github.com/haml/haml/commit/18576ae6e9bdcb4303fdbe6b3199869d289d67c2
 - id: snykio:rubygems:haml:20339
   title: Cross-site Scripting (XSS)
   description: |+
@@ -306,8 +331,9 @@
 - id: snykio:rubygems:haml:20362
   title: Cross-site Scripting (XSS)
   description: |+
-    [`haml`][1] is a layer on top of HTML or XML that\'s designed to express
-    the structure of documents in an elegant way.
+    [haml][1] is a layer on top of HTML or XML that\'s designed to express
+    the structure of documents in an easy way by using indentation rather
+    than closing tags and allowing Ruby to be embedded with ease.
 
     Affected versions of this package are vulnerable to Cross-site Scripting
     (XSS). When using user input to perform tasks on the server, characters
@@ -402,6 +428,8 @@
   - "<5.0.0.beta.2"
   severity: medium
   package_manager: rubygems
+  cve:
+  - CVE-2017-1002201
   cwe:
   - CWE-79
   disclosed_date: 2017-02-07

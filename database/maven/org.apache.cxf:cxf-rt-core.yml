@@ -83,12 +83,27 @@
     sending a header with a SOAP Action String that is inconsistent with the
     message body.
 
+    In some cases, CXF uses the received SOAP Action to select the correct
+    operation to invoke, and does not check to see that the message body is
+    correct. This can be exploitable to execute a SOAP Action spoofing
+    attack, where an adversary can execute another operation in the web
+    service by sending the corresponding SOAP Action. This attack only works
+    if the different operation takes the same parameter types, and hence has
+    somewhat limited applicability.
+
+    This attack also only applies for web services that use unique
+    SOAPActions per service operation which is not the default in CXF. Also
+    note that WS-Policy validation is done against the operation being
+    invoked and thus the incoming message must meet those policy
+    requirements as well, also limiting applicability.
+
 
 
     [1]: https://http://cxf.apache.org/
   affected_package: org.apache.cxf:cxf-rt-core
   vulnerable_versions:
-  - ">= 0 <= 2.4.8"
+  - ">= 0 < 2.4.9"
+  - ">= 2.5.0 < 2.5.5"
   severity: medium
   package_manager: maven
   cve:
@@ -101,7 +116,10 @@
   credit:
   - Unknown
   references:
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2012-3451
+  - http://cxf.apache.org/cve-2012-3451.html
+  - http://svn.apache.org/viewvc?view=revision&revision=1368559
+  - https://bugzilla.redhat.com/show_bug.cgi?id=851896
+  - https://github.com/apache/cxf/commit/9c70abe28fbf2b4c4df0b93ed12295ea5a012554
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHECXF-30576
 - id: snykio:maven:org.apache.cxf:cxf-rt-core:30577
   title: Improper Authentication
@@ -118,7 +136,7 @@
     [1]: https://http://cxf.apache.org/
   affected_package: org.apache.cxf:cxf-rt-core
   vulnerable_versions:
-  - ">= 2.0.6 <= 2.5.7"
+  - "< 2.5.8"
   severity: medium
   package_manager: maven
   cve:

@@ -2860,21 +2860,23 @@
 - id: snykio:maven:org.apache.struts:struts2-core:30038
   title: Arbitrary OGNL Statemant Execution
   description: |
-    [`org.apache.struts:struts2-core`][1] ParametersInterceptor in
-    OpenSymphony XWork 2.0.x before 2.0.6 and 2.1.x before 2.1.2, as used in
-    Apache Struts and other products, does not properly restrict # (pound
-    sign) references to context objects, which allows remote attackers to
-    execute Object-Graph Navigation Language (OGNL) statements and modify
-    server-side context objects, as demonstrated by use of a \\u0023
-    representation for the # character.
+    [org.apache.struts:struts2-core][1] is a popular open-source framework
+    for developing web applications in the Java programming language.
+
+    Affected versions of this package are vulnerable to Arbitrary OGNL
+    Statemant Execution. `ParametersInterceptor` as used in Apache Struts
+    and other products, does not properly restrict `#` (pound sign)
+    references to context objects, which allows remote attackers to execute
+    Object-Graph Navigation Language (OGNL) statements and modify
+    server-side context objects, as demonstrated by use of a `\u0023`
+    representation for the `#` character.
 
 
 
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22struts2-core%22
+    [1]: https://github.com/apache/struts
   affected_package: org.apache.struts:struts2-core
   vulnerable_versions:
-  - ">= 2.0 <= 2.0.11.2"
-  - ">= 2.1 <= 2.1.2"
+  - ">= 2.0.0 < 2.2.1"
   severity: medium
   package_manager: maven
   cve:
@@ -2885,10 +2887,11 @@
   created_date: 2008-06-12
   last_modified_date: 2008-06-12
   credit:
-  - Unknown
+  - Meder Kydyraliev
   references:
   - http://jira.opensymphony.com/browse/XW-641
   - http://struts.apache.org/release/2.2.x/docs/s2-003.html
+  - https://github.com/apache/struts/commit/73df90c49f064799f59b7a21b5a753623598679c
   - https://issues.apache.org/jira/browse/WW-2692
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHESTRUTS-30038
 - id: snykio:maven:org.apache.struts:struts2-core:30039
@@ -2928,16 +2931,18 @@
 - id: snykio:maven:org.apache.struts:struts2-core:30040
   title: Cross-site Scripting (XSS)
   description: |+
-    [`org.apache.struts:struts2-core`][1] Multiple cross-site scripting
-    (XSS) vulnerabilities in XWork in Apache Struts 2.x before 2.2.3, and
-    OpenSymphony XWork in OpenSymphony WebWork, allow remote attackers to
-    inject arbitrary web script or HTML via vectors involving (1) an action
-    name, (2) the action attribute of an s:submit element, or (3) the method
-    attribute of an s:submit element.
+    [org.apache.struts:struts2-core][1] is a popular open-source framework
+    for developing web applications in the Java programming language.
+
+    Affected versions of this package are vulnerable to multiple Cross-site
+    Scripting (XSS) vulnerabilities allowing remote attackers to inject
+    arbitrary web script or HTML via vectors involving (1) an action name,
+    (2) the action attribute of an `s:submit` element, or (3) the method
+    attribute of an `s:submit` element.
 
 
 
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22struts2-core%22
+    [1]: https://github.com/apache/struts
     \nA cross-site scripting attack occurs when the attacker tricks a
     legitimate web-based application or site to accept a request as
     originating from a trusted source.
@@ -3012,7 +3017,7 @@
 
   affected_package: org.apache.struts:struts2-core
   vulnerable_versions:
-  - ">= 2 <= 2.2.1.1"
+  - ">= 2.0.0 < 2.2.3"
   severity: low
   package_manager: maven
   cve:
@@ -3025,7 +3030,10 @@
   credit:
   - Dr. Marian Ventuneac
   references:
+  - http://secureappdev.blogspot.co.il/2011/05/apache-struts-2-xwork-webwork-reflected.html
   - http://struts.apache.org/docs/s2-006.html
+  - https://github.com/apache/struts/commit/885ab3459e146ff830d1f7257f809f4a3dd4493a
+  - https://issues.apache.org/jira/browse/WW-3579
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHESTRUTS-30040
 - id: snykio:maven:org.apache.struts:struts2-core:30041
   title: Remote code execution
@@ -3073,18 +3081,21 @@
 - id: snykio:maven:org.apache.struts:struts2-core:30042
   title: Arbitrary Code Execution
   description: |
-    [`org.apache.struts:struts2-core`][1] Apache Struts 2 before 2.2.3.1
-    evaluates a string as an OGNL expression during the handling of a
-    conversion error, which allows remote attackers to modify run-time data
-    values, and consequently execute arbitrary code, via invalid input to a
-    field.
+    [org.apache.struts:struts2-core][1] is a popular open-source framework
+    for developing web applications in the Java programming language.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution. It evaluates a string as an OGNL expression during the
+    handling of a conversion error, which allows remote attackers to modify
+    run-time data values, and consequently execute arbitrary code, via
+    invalid input to a field.
 
 
 
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22struts2-core%22
+    [1]: https://github.com/apache/struts
   affected_package: org.apache.struts:struts2-core
   vulnerable_versions:
-  - ">= 2 <= 2.2.3"
+  - ">= 2.0.0 < 2.2.3.1"
   severity: high
   package_manager: maven
   cve:
@@ -3098,22 +3109,28 @@
   - Hideyuki Suzumi
   references:
   - http://struts.apache.org/docs/s2-007.html
+  - https://github.com/apache/struts/commit/5f54b8d087f5125d96838aafa5f64c2190e6885b
+  - https://github.com/apache/struts/commit/b4265d369dc29d57a9f2846a85b26598e83f3892
+  - https://issues.apache.org/jira/browse/WW-3668
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHESTRUTS-30042
 - id: snykio:maven:org.apache.struts:struts2-core:30043
   title: Cross-site Request Forgery (CSRF)
   description: |
-    [`org.apache.struts:struts2-core`][1] The token check mechanism in
-    Apache Struts 2.0.0 through 2.3.4 does not properly validate the token
-    name configuration parameter, which allows remote attackers to perform
-    cross-site request forgery (CSRF) attacks by setting the token name
-    configuration parameter to a session attribute.
+    [org.apache.struts:struts2-core][1] is a popular open-source framework
+    for developing web applications in the Java programming language.
+
+    Affected versions of this package are vulnerable to Cross-site Request
+    Forgery (CSRF). The token check mechanism does not properly validate the
+    token name configuration parameter, which allows remote attackers to
+    perform cross-site request forgery (CSRF) attacks by setting the token
+    name configuration parameter to a session attribute.
 
 
 
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22struts2-core%22
+    [1]: https://github.com/apache/struts
   affected_package: org.apache.struts:struts2-core
   vulnerable_versions:
-  - ">= 2 <= 2.3.4"
+  - ">= 2.0.0 < 2.3.4.1"
   severity: medium
   package_manager: maven
   cve:
@@ -3127,6 +3144,8 @@
   - James K. Williams
   references:
   - http://struts.apache.org/docs/s2-010.html
+  - https://github.com/apache/struts/commit/a1ca307981b0930d1687ed89f0b7305af79da0f3
+  - https://issues.apache.org/jira/browse/WW-3858
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHESTRUTS-30043
 - id: snykio:maven:org.apache.struts:struts2-core:30044
   title: Denial of Service (DoS)
@@ -3213,18 +3232,21 @@
 - id: snykio:maven:org.apache.struts:struts2-core:30046
   title: Arbitrary Code Injection
   description: |
-    [`org.apache.struts:struts2-core`][1] Apache Struts 2 before 2.3.14.2
-    allows remote attackers to execute arbitrary OGNL code via a crafted
-    request that is not properly handled when using the includeParams
-    attribute in the (1) URL or (2) A tag. NOTE: this issue is due to an
-    incomplete fix for CVE-2013-1966.
+    [org.apache.struts:struts2-core][1] is a popular open-source framework
+    for developing web applications in the Java programming language.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Injection. Apache Struts 2 before 2.3.14.2 allows remote attackers to
+    execute arbitrary OGNL code via a crafted request that is not properly
+    handled when using the includeParams attribute in the (1) URL or (2) A
+    tag. NOTE: this issue is due to an incomplete fix for CVE-2013-1966.
 
 
 
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22struts2-core%22
+    [1]: https://github.com/apache/struts
   affected_package: org.apache.struts:struts2-core
   vulnerable_versions:
-  - ">= 2 < 2.3.14.1"
+  - ">= 2 < 2.3.14.2"
   severity: high
   package_manager: maven
   cve:
@@ -3238,21 +3260,27 @@
   - Unknown
   references:
   - http://struts.apache.org/docs/s2-014.html
+  - https://exploit-db.com/exploits/25980
+  - https://github.com/apache/struts/commit/d7804297e319c7a12245e1b536e565fcea6d650
+  - https://github.com/apache/struts/commit/fed4f8e8a4ec69b5e7612b92d8ce3e476680474
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHESTRUTS-30046
 - id: snykio:maven:org.apache.struts:struts2-core:30047
   title: Arbitrary Code Injection
   description: |
-    [`org.apache.struts:struts2-core`][1] Apache Struts 2 before 2.3.14.3
-    allows remote attackers to execute arbitrary OGNL code via a request
-    with a crafted action name that is not properly handled during wildcard
-    matching, a different vulnerability than CVE-2013-2135.
+    [org.apache.struts:struts2-core][1] is a popular open-source framework
+    for developing web applications in the Java programming language.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Injection. It allows remote attackers to execute arbitrary OGNL code via
+    a request with a crafted action name that is not properly handled during
+    wildcard matching, a different vulnerability than CVE-2013-2135.
 
 
 
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22struts2-core%22
+    [1]: https://github.com/apache/struts
   affected_package: org.apache.struts:struts2-core
   vulnerable_versions:
-  - ">= 2 <= 2.3.14.2"
+  - ">= 2.0.0 < 2.3.14.3"
   severity: high
   package_manager: maven
   cve:
@@ -3263,24 +3291,32 @@
   created_date: 2013-06-05
   last_modified_date: 2013-06-05
   credit:
-  - Unknown
+  - Jon Passki
   references:
   - http://struts.apache.org/docs/s2-015.html
+  - https://github.com/apache/struts/commit/01e6b251b4db78bfb7971033652e81d1af4cb3e
+  - https://github.com/apache/struts/commit/54e5c912ebd9a1599bfcf7a719da17c28127bbe
+  - https://github.com/apache/struts/commit/711cf0201cdd319a38cf29238913312355db29ba
+  - https://github.com/apache/struts/commit/8b4fc81daeea3834bcbf73de5f48d0021917aa3
+  - https://github.com/apache/struts/commit/cfb6e9afbae320a4dd5bdd655154ab9fe5a92c1
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHESTRUTS-30047
 - id: snykio:maven:org.apache.struts:struts2-core:30048
   title: Arbitrary Code Injection
   description: |
-    [`org.apache.struts:struts2-core`][1] Apache Struts 2 before 2.3.14.3
-    allows remote attackers to execute arbitrary OGNL code via a request
-    with a crafted value that contains both \"$\{}\" and \"%\{}\" sequences,
-    which causes the OGNL code to be evaluated twice.
+    [org.apache.struts:struts2-core][1] is a popular open-source framework
+    for developing web applications in the Java programming language.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Injection. It allows remote attackers to execute arbitrary OGNL code via
+    a request with a crafted value that contains both \"$\{}\" and \"%\{}\"
+    sequences, which causes the OGNL code to be evaluated twice.
 
 
 
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22struts2-core%22
+    [1]: https://github.com/apache/struts
   affected_package: org.apache.struts:struts2-core
   vulnerable_versions:
-  - ">= 2 <= 2.3.14.2"
+  - ">= 2.0.0 < 2.3.14.3"
   severity: high
   package_manager: maven
   cve:
@@ -3291,9 +3327,11 @@
   created_date: 2013-06-05
   last_modified_date: 2013-06-05
   credit:
-  - Unknown
+  - Jon Passki
   references:
   - http://struts.apache.org/docs/s2-015.html
+  - https://github.com/apache/struts/commit/711cf0201cdd319a38cf29238913312355db29ba
+  - https://issues.apache.org/jira/browse/WW-4090
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHESTRUTS-30048
 - id: snykio:maven:org.apache.struts:struts2-core:30049
   title: URL Redirection to Untrusted Site
@@ -3355,16 +3393,19 @@
 - id: snykio:maven:org.apache.struts:struts2-core:30051
   title: Bypass Access Controls
   description: |
-    [`org.apache.struts:struts2-core`][1] Apache Struts 2.0.0 through
-    2.3.15.1 allows remote attackers to bypass access controls via a crafted
-    action: prefix.
+    [org.apache.struts:struts2-core][1] is a popular open-source framework
+    for developing web applications in the Java programming language.
+
+    Affected versions of this package are vulnerable to Bypass Access
+    Controls. It allows remote attackers to bypass access controls via a
+    crafted action: prefix.
 
 
 
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22struts2-core%22
+    [1]: https://github.com/apache/struts
   affected_package: org.apache.struts:struts2-core
   vulnerable_versions:
-  - ">= 2 <= 2.3.15.2"
+  - ">= 2.0.0 < 2.3.15.3"
   severity: medium
   package_manager: maven
   cve:
@@ -3379,20 +3420,24 @@
   - Zhu Gang
   references:
   - http://struts.apache.org/docs/s2-018.html
+  - https://github.com/apache/struts/commit/0c8366cb792227d484b9ca13e537037dd0cb57dc
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHESTRUTS-30051
 - id: snykio:maven:org.apache.struts:struts2-core:30052
   title: Dynamic Method Executions
   description: |
-    [`org.apache.struts:struts2-core`][1] Apache Struts 2.0.0 through
-    2.3.15.1 enables Dynamic Method Invocation by default, which has unknown
-    impact and attack vectors.
+    [org.apache.struts:struts2-core][1] is a popular open-source framework
+    for developing web applications in the Java programming language.
+
+    Affected versions of this package are vulnerable to Dynamic Method
+    Executions. It enables Dynamic Method Invocation by default, which has
+    unknown impact and attack vectors.
 
 
 
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22struts2-core%22
+    [1]: https://github.com/apache/struts
   affected_package: org.apache.struts:struts2-core
   vulnerable_versions:
-  - ">= 2 <= 2.3.15.1"
+  - ">= 2.0.0 < 2.3.15.2"
   severity: high
   package_manager: maven
   cve:
@@ -3406,6 +3451,7 @@
   - Unknown
   references:
   - http://struts.apache.org/docs/s2-019.html
+  - https://github.com/apache/struts/commit/58947c3f85ae641c1a476316a2888e53605948d1
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2013-4316
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHESTRUTS-30052
 - id: snykio:maven:org.apache.struts:struts2-core:30053
@@ -3473,23 +3519,26 @@
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-0112
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHESTRUTS-30054
 - id: snykio:maven:org.apache.struts:struts2-core:30055
-  title: ClassLoader manipulation via ParametersInterceptor
+  title: Arbitrary Code Execution
   description: |
-    [`org.apache.struts:struts2-core`][1] Apache Struts 2: Classloader
-    manipulation via CookieInterceptor CookieInterceptor in Apache Struts
-    before 2.3.16.2, when a wildcard cookiesName value is used, does not
-    properly restrict access to the getClass method, which allows remote
-    attackers to \"manipulate\" the ClassLoader and execute arbitrary code
-    via a crafted request. NOTE: this vulnerability exists because of an
-    incomplete fix for [CVE-2014-0094][2].
+    [org.apache.struts:struts2-core][1] is a popular open-source framework
+    for developing web applications in the Java programming language.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution. When a wildcard cookiesName value is used,
+    `CookieInterceptor`does not properly restrict access to the `getClass`
+    method, which allows remote attackers to \"manipulate\" the ClassLoader
+    and execute arbitrary code via a crafted request. NOTE: this
+    vulnerability exists because of an incomplete fix for
+    [CVE-2014-0094][2].
 
 
 
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22struts2-core%22
+    [1]: https://github.com/apache/struts
     [2]: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHESTRUTS-30053
   affected_package: org.apache.struts:struts2-core
   vulnerable_versions:
-  - "<= 2.3.16.1"
+  - ">= 2.0.0 < 2.3.16.2"
   severity: high
   package_manager: maven
   cve:
@@ -3503,25 +3552,30 @@
   - Unknown
   references:
   - http://struts.apache.org/docs/s2-021.html
+  - https://github.com/apache/struts/commit/1be8ed61e499b58b3fb6a45253f47865f83f35fb
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-0113
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHESTRUTS-30055
 - id: snykio:maven:org.apache.struts:struts2-core:30056
   title: Classloader manipulation via CookieInterceptor
   description: |
-    [`org.apache.struts:struts2-core`][1] CookieInterceptor in Apache Struts
-    2.x before 2.3.16.3, when a wildcard cookiesName value is used, does not
-    properly restrict access to the getClass method, which allows remote
-    attackers to \"manipulate\" the ClassLoader and modify session state via
-    a crafted request. NOTE: this vulnerability exists because of an
-    incomplete fix for [CVE-2014-0113][2].
+    [org.apache.struts:struts2-core][1] is a popular open-source framework
+    for developing web applications in the Java programming language.
+
+    Affected versions of this package are vulnerable to Classloader
+    manipulation via CookieInterceptor. When a wildcard cookiesName value is
+    used, CookieInterceptor does not properly restrict access to the
+    getClass method, which allows remote attackers to \"manipulate\" the
+    ClassLoader and modify session state via a crafted request. NOTE: this
+    vulnerability exists because of an incomplete fix for
+    [CVE-2014-0113][2].
 
 
 
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22struts2-core%22
+    [1]: https://github.com/apache/struts
     [2]: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHESTRUTS-30055
   affected_package: org.apache.struts:struts2-core
   vulnerable_versions:
-  - "<= 2.3.16.2"
+  - ">= 2.0.0 < 2.3.20"
   severity: medium
   package_manager: maven
   cve:
@@ -3535,21 +3589,18 @@
   - Zubair Ashraf
   references:
   - http://struts.apache.org/docs/s2-022.html
+  - https://github.com/apache/struts/commit/1a668af7f1ffccea4a3b46d8d8c1fe1c7331ff02
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-0116
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHESTRUTS-30056
 - id: snykio:maven:org.apache.struts:struts2-core:30057
   title: Cross-site Request Forgery (CSRF)
-  description: |
-    [`org.apache.struts:struts2-core`][1] Apache Struts 2.0.0 through 2.3.x
-    before 2.3.20 uses predictable &lt;s:token/&gt; values, which allows
-    remote attackers to bypass the CSRF protection mechanism.
+  description: |+
+    It uses predictable `<s:token/>` values, which allows remote attackers
+    to bypass the CSRF protection mechanism.
 
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22struts2-core%22
   affected_package: org.apache.struts:struts2-core
   vulnerable_versions:
-  - "<= 2.3.16.3"
+  - ">= 2.0.0 < 2.3.20"
   severity: medium
   package_manager: maven
   cve:
@@ -3560,10 +3611,11 @@
   created_date: 2014-12-08
   last_modified_date: 2014-12-08
   credit:
-  - Unknown
+  - Philippe Arteau
   references:
   - http://blog.h3xstream.com/2014/12/predicting-struts-csrf-token-cve-2014.html
   - http://struts.apache.org/docs/s2-023.html
+  - https://github.com/apache/struts/commit/1f301038a751bf16e525607c3db513db835b2999%23diff-fdda7326ddc2f0d989ed7beaf9f67982
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-7809
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHESTRUTS-30057
 - id: snykio:maven:org.apache.struts:struts2-core:30058
@@ -3597,14 +3649,18 @@
 - id: snykio:maven:org.apache.struts:struts2-core:30059
   title: Cross-site Scripting (XSS)
   description: |+
-    [`org.apache.struts:struts2-core`][1] When the Struts2 debug mode is
-    turned on, under certain conditions an arbitrary script may be executed
-    in the \'Problem Report\' screen. Also if JSP files are exposed to be
-    accessed directly it\'s possible to execute an arbitrary script.
+    [org.apache.struts:struts2-core][1] is a popular open-source framework
+    for developing web applications in the Java programming language.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). When debug mode is turned on, under certain conditions an
+    arbitrary script may be executed in the \'Problem Report\' screen. Also
+    if JSP files are exposed to be accessed directly it\'s possible to
+    execute an arbitrary script.
 
 
 
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22struts2-core%22
+    [1]: https://github.com/apache/struts
     \nA cross-site scripting attack occurs when the attacker tricks a
     legitimate web-based application or site to accept a request as
     originating from a trusted source.
@@ -3679,7 +3735,7 @@
 
   affected_package: org.apache.struts:struts2-core
   vulnerable_versions:
-  - "<= 2.3.16.3"
+  - ">= 2.0.0 < 2.3.20"
   severity: medium
   package_manager: maven
   cve:
@@ -3690,24 +3746,20 @@
   created_date: 2015-08-26
   last_modified_date: 2015-08-26
   credit:
-  - Masaki Yoshikawa
+  - Takayoshi Isayama
   references:
   - http://struts.apache.org/docs/s2-025.html
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHESTRUTS-30059
 - id: snykio:maven:org.apache.struts:struts2-core:30060
   title: Manipulation of Struts' internals
-  description: |
-    [`org.apache.struts:struts2-core`][1] ValueStack defines special top
-    object which represents root of execution context. It can be used to
-    manipulate Struts\' internals or can be used to affect container\'s
-    settings.
+  description: |+
+    `ValueStack` defines special `top` object which represents root of
+    execution context. It can be used to manipulate Struts\' internals or
+    can be used to affect container\'s settings.
 
-
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22struts2-core%22
   affected_package: org.apache.struts:struts2-core
   vulnerable_versions:
-  - "<= 2.3.24"
+  - ">= 2.0.0 < 2.3.24.1"
   severity: high
   package_manager: maven
   cve:
@@ -3718,7 +3770,7 @@
   created_date: 2015-07-01
   last_modified_date: 2015-07-01
   credit:
-  - Unknown
+  - Viettel Information Security Center
   references:
   - http://struts.apache.org/docs/s2-026.html
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHESTRUTS-30060
@@ -4230,17 +4282,19 @@
 - id: snykio:maven:org.apache.struts:struts2-core:30774
   title: Cross-site Request Forgery (CSRF)
   description: |
-    [`org.apache.struts:struts2-core`][1] Apache Struts 2 2.3.20 through
-    2.3.28.1 mishandles token validation, which allows remote attackers to
-    conduct cross-site request forgery (CSRF) attacks via unspecified
-    vectors.
+    [org.apache.struts:struts2-core][1] is a popular open-source framework
+    for developing web applications in the Java programming language.
+
+    Affected versions of this package are vulnerable to Cross-site Request
+    Forgery (CSRF). It mishandles token validation, which allows remote
+    attackers to conduct CSRF attacks via unspecified vectors.
 
 
 
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22struts2-core%22
+    [1]: https://github.com/apache/struts
   affected_package: org.apache.struts:struts2-core
   vulnerable_versions:
-  - ">= 2.3.20 <= 2.3.28.1"
+  - ">= 2.3.20 < 2.3.29"
   severity: high
   package_manager: maven
   cve:
@@ -4251,23 +4305,29 @@
   created_date: 2016-06-20
   last_modified_date: 2016-06-20
   credit:
-  - Unknown
+  - Takeshi Terada
   references:
+  - https://github.com/apache/struts/commit/b28b78c062f0bf3c79793a25aab8c9b6c12bce6e
+  - https://struts.apache.org/docs/s2-038.html
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-4430
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHESTRUTS-30774
 - id: snykio:maven:org.apache.struts:struts2-core:30775
   title: Access Restriction Bypass
   description: |
-    [`org.apache.struts:struts2-core`][1] Apache Struts 2 2.3.20 through
-    2.3.28.1 allows remote attackers to bypass intended access restrictions
-    and conduct redirection attacks by leveraging a default method.
+    [org.apache.struts:struts2-core][1] is a popular open-source framework
+    for developing web applications in the Java programming language.
+
+    Affected versions of this package are vulnerable to Access Restriction
+    Bypass. It allows remote attackers to bypass intended access
+    restrictions and conduct redirection attacks by leveraging a default
+    method.
 
 
 
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22struts2-core%22
+    [1]: https://github.com/apache/struts
   affected_package: org.apache.struts:struts2-core
   vulnerable_versions:
-  - ">= 2.3.20 <= 2.3.28.1"
+  - ">= 2.3.20 < 2.3.29"
   severity: high
   package_manager: maven
   cve:
@@ -4278,23 +4338,28 @@
   created_date: 2016-06-21
   last_modified_date: 2016-06-21
   credit:
-  - Unknown
+  - Takeshi Terada
   references:
+  - https://github.com/apache/struts/commit/b28b78c062f0bf3c79793a25aab8c9b6c12bce6e
+  - https://struts.apache.org/docs/s2-040.html
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-4431
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHESTRUTS-30775
 - id: snykio:maven:org.apache.struts:struts2-core:30776
   title: Access Restriction Bypass
   description: |
-    [`org.apache.struts:struts2-core`][1] Apache Struts 2 2.3.20 through
-    2.3.28.1 allows remote attackers to bypass intended access restrictions
-    and conduct redirection attacks via a crafted request.
+    [org.apache.struts:struts2-core][1] is a popular open-source framework
+    for developing web applications in the Java programming language.
+
+    Affected versions of this package are vulnerable to Access Restriction
+    Bypass. It allows remote attackers to bypass intended access
+    restrictions and conduct redirection attacks via a crafted request.
 
 
 
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22struts2-core%22
+    [1]: https://github.com/apache/struts
   affected_package: org.apache.struts:struts2-core
   vulnerable_versions:
-  - ">= 2.3.20 <= 2.3.28.1"
+  - ">= 2.3.20 < 2.3.29"
   severity: high
   package_manager: maven
   cve:
@@ -4305,8 +4370,9 @@
   created_date: 2016-06-21
   last_modified_date: 2016-06-21
   credit:
-  - Unknown
+  - Takeshi Terada
   references:
+  - https://github.com/apache/struts/commit/b28b78c062f0bf3c79793a25aab8c9b6c12bce6e
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-4433
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHESTRUTS-30776
 - id: snykio:maven:org.apache.struts:struts2-core:30777
@@ -4440,15 +4506,18 @@
 - id: snykio:maven:org.apache.struts:struts2-core:30779
   title: Denial of Service (DoS)
   description: |+
-    [`org.apache.struts:struts2-core`][1] Affected versions of the package
-    are vulnerable to Denial Of Service (DoS). If an application allows
-    enter an URL in a form field and built-in URLValidator is used, it is
-    possible to prepare a special URL which will be used to overload server
-    process when performing validation of the URL.
+    [org.apache.struts:struts2-core][1] is a popular open-source framework
+    for developing web applications in the Java programming language.
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS). If an application allows enter an URL in a form field and
+    built-in URLValidator is used, it is possible to prepare a special URL
+    which will be used to overload server process when performing validation
+    of the URL.
 
 
 
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22struts2-core%22
+    [1]: https://github.com/apache/struts
     \nDenial of Service (DoS) describes a family of attacks, all aimed at
     making a system inaccessible to its intended and legitimate users.
 
@@ -4477,7 +4546,7 @@
 
   affected_package: org.apache.struts:struts2-core
   vulnerable_versions:
-  - ">= 2.5 <= 2.5.5"
+  - ">= 2.5 < 2.5.13"
   severity: medium
   package_manager: maven
   cve:
@@ -4491,6 +4560,7 @@
   - Jonathan Bullock
   references:
   - http://struts.apache.org/docs/s2-044.html
+  - https://github.com/apache/struts/commit/554b9dddb0fbd1e581ef577dd62a7c22955ad0f6
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHESTRUTS-30779
 - id: snykio:maven:org.apache.struts:struts2-core:31495
   title: Arbitrary Command Execution

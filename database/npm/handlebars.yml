@@ -35,6 +35,29 @@
   credit: Unknown
   references: https://npmjs.com/advisories/1300
   source_url: https://npmjs.com/advisories/1300
+- id: npmjs:npm:handlebars:1316
+  title: Arbitrary Code Execution
+  description: "Versions of `handlebars` prior to 4.5.2 are vulnerable to Arbitrary
+    Code Execution The package's lookup helper fails to properly validate templates,
+    allowing attackers to submit templates that execute arbitrary JavaScript in the
+    system. It can be used to run arbitrary code in a server processing Handlebars
+    templates or on a victim's browser (effectively serving as Cross-Site Scripting).\n\nThe
+    following template can be used to demonstrate the vulnerability:  \n```{{#with
+    \"constructor\"}}\n\t{{#with split as |a|}}\n\t\t{{pop (push \"alert('Vulnerable
+    Handlebars JS');\")}}\n\t\t{{#with (concat (lookup join (slice 0 1)))}}\n\t\t\t{{#each
+    (slice 2 3)}}\n\t\t\t\t{{#with (apply 0 a)}}\n\t\t\t\t\t{{.}}\n\t\t\t\t{{/with}}\n\t\t\t{{/each}}\n\t\t{{/with}}\n\t{{/with}}\n{{/with}}```"
+  affected_package: handlebars
+  vulnerable_versions:
+  - "<4.5.2"
+  severity: high
+  package_manager: npm
+  cwe: CWE-79
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: François Lajeunesse-Robert
+  references: https://npmjs.com/advisories/1316
+  source_url: https://npmjs.com/advisories/1316
 - id: npmjs:npm:handlebars:61
   title: Cross-Site Scripting
   description: |-
@@ -239,8 +262,8 @@
     of the\nclass of the object.\n\n"
   affected_package: handlebars
   vulnerable_versions:
-  - "<3.0.7"
-  - "<4.0.14"
+  - ">=3.0.0 <3.0.7"
+  - ">=4.0.0 <4.0.14"
   - ">=4.1.0 <4.1.2"
   severity: high
   package_manager: npm
@@ -434,17 +457,42 @@
   source_url: https://snyk.io/vuln/npm:handlebars:20151207
 - id: snykio:npm:handlebars:469063
   title: Prototype Pollution
-  description: |
-    [handlebars][1] is a extension to the Mustache templating language.
-
-    Affected versions of this package are vulnerable to Prototype Pollution.
-    Templates may alter an Object\'s `__proto__` and `__defineGetter__`
-    properties, which may allow an attacker to execute arbitrary code on the
-    server through crafted payloads.
-
-
-
-    [1]: https://www.npmjs.com/package/handlebars
+  description: "[handlebars][1] is a extension to the Mustache templating language.\n\nAffected
+    versions of this package are vulnerable to Prototype Pollution.\nTemplates may
+    alter an Object\\'s `__proto__` and `__defineGetter__`\nproperties, which may
+    allow an attacker to execute arbitrary code on the\nserver through crafted payloads.\n\n\n\n[1]:
+    https://www.npmjs.com/package/handlebars\n\\nPrototype Pollution is a vulnerability
+    affecting JavaScript. Prototype\nPollution refers to the ability to inject properties
+    into existing\nJavaScript language construct prototypes, such as objects. JavaScript\nallows
+    all Object attributes to be altered, including their magical\nattributes such
+    as `_proto_`, `constructor` and `prototype`. An attacker\nmanipulates these attributes
+    to overwrite, or pollute, a JavaScript\napplication object prototype of the base
+    object by injecting other\nvalues. Properties on the `Object.prototype` are then
+    inherited by all\nthe JavaScript objects through the prototype chain. When that
+    happens,\nthis leads to either denial of service by triggering JavaScript\nexceptions,
+    or it tampers with the application source code to force the\ncode path that the
+    attacker injects, thereby leading to remote code\nexecution.\n\nThere are two
+    main ways in which the pollution of prototypes occurs:\n\n* Unsafe `Object` recursive
+    merge\n\n* Property definition by path\n\n### Unsafe Object recursive merge   {#unsafe-object-recursive-merge}\n\nThe
+    logic of a vulnerable recursive merge function follows the following\nhigh-level
+    model:\n\n    merge (target, source)\n    \n      foreach property of source\n
+    \   \n        if property exists and is an object on both the target and the source\n
+    \   \n          merge(target[property], source[property])\n    \n        else\n
+    \   \n          target[property] = source[property]\n\n\n\nWhen the source object
+    contains a property named `_proto_` defined with\n`Object.defineProperty()` ,
+    the condition that checks if the property\nexists and is an object on both the
+    target and the source passes and the\nmerge recurses with the target, being the
+    prototype of `Object` and the\nsource of `Object` as defined by the attacker.
+    Properties are then\ncopied on the `Object` prototype.\n\nClone operations are
+    a special sub-class of unsafe recursive merges,\nwhich occur when a recursive
+    merge is conducted on an empty object:\n`merge({},source)`.\n\n`lodash` and `Hoek`
+    are examples of libraries susceptible to recursive\nmerge attacks.\n\n### Property
+    definition by path   {#property-definition-by-path}\n\nThere are a few JavaScript
+    libraries that use an API to define property\nvalues on an object based on a given
+    path. The function that is\ngenerally affected contains this signature: `theFunction(object,
+    path,\nvalue)`\n\nIf the attacker can control the value of “path”, they can set
+    this value\nto `_proto_.myValue`. `myValue` is then assigned to the prototype
+    of the\nclass of the object.\n\n"
   affected_package: handlebars
   vulnerable_versions:
   - "<4.3.0"
@@ -459,7 +507,38 @@
   - itszn
   references:
   - https://github.com/wycats/handlebars.js/blob/master/release-notes.md#v430---september-24th-2019
+  - https://github.com/wycats/handlebars.js/commit/213c0bbe3c4bd83a534d67384e5afa0000347ff6
   - https://github.com/wycats/handlebars.js/commit/7b67a29a8c926b38af265c727ff6551fbb277111
   - https://github.com/wycats/handlebars.js/issues/1558
   - https://www.npmjs.com/advisories/1164
   source_url: https://snyk.io/vuln/SNYK-JS-HANDLEBARS-469063
+- id: snykio:npm:handlebars:480388
+  title: Denial of Service (DoS)
+  description: |
+    [handlebars][1] is an extension to the Mustache templating language.
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS). The package\'s parser may be forced into an endless loop while
+    processing specially-crafted templates, which may allow attackers to
+    exhaust system resources leading to Denial of Service.
+
+
+
+    [1]: https://www.npmjs.com/package/handlebars
+  affected_package: handlebars
+  vulnerable_versions:
+  - ">=4.0.0 <4.4.5"
+  severity: high
+  package_manager: npm
+  cwe:
+  - CWE-400
+  disclosed_date: 2019-10-30
+  created_date: 2019-11-05
+  last_modified_date: 2019-11-05
+  credit:
+  - Unknown
+  references:
+  - https://github.com/wycats/handlebars.js/commit/8d5530ee2c3ea9f0aee3fde310b9f36887d00b8b
+  - https://github.com/wycats/handlebars.js/issues/1579
+  - https://www.npmjs.com/advisories/1300
+  source_url: https://snyk.io/vuln/SNYK-JS-HANDLEBARS-480388

@@ -17,3 +17,41 @@
   - https://github.com/joyent/node-http-signature/issues/10
   - https://nodesecurity.io/advisories/318
   source_url: https://ossindex.net/resource/package/8115002094/vulnerabilities
+- id: snykio:maven:org.webjars.npm:http-signature:479741
+  title: Timing Attack
+  description: |
+    [`http-signature`][1] is a reference implementation of Joyent\'s HTTP
+    Signature scheme.
+
+    Affected versions of the package are vulnerable to Timing Attacks due to
+    time-variable comparison of signatures.
+
+    The library implemented a character to character comparison, similar to
+    the built-in string comparison mechanism, `===`, and not a time constant
+    string comparison. As a result, the comparison will fail faster when the
+    first characters in the signature are incorrect. An attacker can use
+    this difference to perform a timing attack, essentially allowing them to
+    guess the signature one character at a time.
+
+    You can read more about timing attacks in Node.js on the [Snyk blog][2].
+
+
+
+    [1]: https://www.npmjs.com/package/http-signature
+    [2]: https://snyk.io/blog/node-js-timing-attack-ccc-ctf/
+  affected_package: org.webjars.npm:http-signature
+  vulnerable_versions:
+  - "< 1.0.0"
+  severity: medium
+  package_manager: maven
+  cwe:
+  - CWE-310
+  disclosed_date: 2015-01-21
+  created_date: 2017-06-28
+  last_modified_date: 2017-06-28
+  credit:
+  - Alok Menghrajani
+  references:
+  - https://github.com/joyent/node-http-signature/commit/78ab1da232f31f695f5c362d863593a143aa8b56
+  - https://github.com/joyent/node-http-signature/pull/36
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-479741

@@ -15,6 +15,77 @@
   references:
   - https://github.com/PHPOffice/PhpSpreadsheet/issues/771
   source_url: https://github.com/FriendsOfPHP/security-advisories/blob/master/phpoffice/phpspreadsheet/CVE-2018-19277.yaml
+- id: snykio:packagist:phpoffice/phpspreadsheet:480564
+  title: XML External Entity
+  description: |+
+    [phpoffice/phpspreadsheet][1] is a Spreadsheet engine that Read, Create
+    and Write Spreadsheet documents in PHP .
+
+    Affected versions of this package are vulnerable to XML External Entity.
+    The XmlScanner decodes the `sheet1.xml` from an `.xlsx` to `UTF-8` if
+    something else than `UTF-8` is declared in the header. This was a
+    security measurement to prevent CVE-2018-19277 but the fix is not
+    sufficient. By double-encoding the the XML payload to `UTF-7` it is
+    possible to bypass the check for the string `<!ENTITY`.
+
+
+
+    [1]: https://packagist.org/packages/phpoffice/phpspreadsheet
+    \nXXE Injection is a type of attack against an application that parses XML
+    input. XML is a markup language that defines a set of rules for encoding
+    documents in a format that is both human-readable and machine-readable.
+    By default, many XML processors allow specification of an external
+    entity, a URI that is dereferenced and evaluated during XML processing.
+    When an XML document is being parsed, the parser can make a request and
+    include the content at the specified URI inside of the XML document.
+
+    Attacks can include disclosing local files, which may contain sensitive
+    data such as passwords or private user data, using file: schemes or
+    relative paths in the system identifier.
+
+    For example, below is a sample XML document, containing an XML element-
+    username.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+           <username>John</username>
+        </xml>
+    {: .language-xml}
+
+    An external XML entity - `xxe`, is defined using a system identifier and
+    present within a DOCTYPE header. These entities can access local or
+    remote content. For example the below code contains an external XML
+    entity that would fetch the content of `/etc/passwd` and display it to
+    the user rendered by `username`.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+        <!DOCTYPE foo [
+           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
+           <username>&xxe;</username>
+        </xml>
+    {: .language-xml}
+
+    Other XXE Injection attacks can access local resources that may not stop
+    returning data, possibly impacting application availability and leading
+    to Denial of Service.
+
+  affected_package: phpoffice/phpspreadsheet
+  vulnerable_versions:
+  - "<1.8.0"
+  severity: high
+  package_manager: packagist
+  cve:
+  - CVE-2019-12331
+  cwe:
+  - CWE-611
+  disclosed_date: 2019-10-21
+  created_date: 2019-11-07
+  last_modified_date: 2019-11-07
+  credit:
+  - Daniel Hoffmann
+  references:
+  - https://github.com/PHPOffice/PhpSpreadsheet/blob/master/CHANGELOG.md#180---2019-07-01
+  - https://herolab.usd.de/security-advisories/usd-2019-0046/
+  source_url: https://snyk.io/vuln/SNYK-PHP-PHPOFFICEPHPSPREADSHEET-480564
 - id: snykio:packagist:phpoffice/phpspreadsheet:72604
   title: XML External Entity (XXE) Injection
   description: |+

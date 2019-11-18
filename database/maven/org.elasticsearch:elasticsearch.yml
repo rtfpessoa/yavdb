@@ -134,14 +134,16 @@
 - id: snykio:maven:org.elasticsearch:elasticsearch:30092
   title: Cross-site Scripting (XSS)
   description: |+
-    [`org.elasticsearch:elasticsearch`][1] Cross-site Scripting (XSS)
-    vulnerability in the CORS functionality in Elasticsearch before
-    1.4.0.Beta1 allows remote attackers to inject arbitrary web script or
-    HTML via unspecified vectors.
+    [org.elasticsearch:elasticsearch][1] is a Distributed, RESTful Search
+    Engine.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). It is possible for remote attackers to inject arbitrary web
+    script or HTML via unspecified vectors.
 
 
 
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22elasticsearch%22
+    [1]: https://mvnrepository.com/artifact/org.elasticsearch/elasticsearch
     \nA cross-site scripting attack occurs when the attacker tricks a
     legitimate web-based application or site to accept a request as
     originating from a trusted source.
@@ -216,7 +218,7 @@
 
   affected_package: org.elasticsearch:elasticsearch
   vulnerable_versions:
-  - "<= 1.3.4"
+  - "< 1.4.0.Beta1"
   severity: medium
   package_manager: maven
   cve:
@@ -229,8 +231,8 @@
   credit:
   - Unknown
   references:
-  - http://www.elasticsearch.org/community/security/
   - https://bugzilla.redhat.com/CVE-2014-6439
+  - https://github.com/elastic/elasticsearch/pull/7642
   - https://github.com/elasticsearch/elasticsearch/issues/7151
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGELASTICSEARCH-30092
 - id: snykio:maven:org.elasticsearch:elasticsearch:31127
@@ -340,18 +342,23 @@
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-3337
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGELASTICSEARCH-31128
 - id: snykio:maven:org.elasticsearch:elasticsearch:31129
-  title: Arbitrary code execution
+  title: Arbitrary Code Execution
   description: |
-    [`org.elasticsearch:elasticsearch`][1] Affected versions of the package
-    are vulnerable to Arbitrary Code Execution attacks that use
-    Elasticsearch to modify files read and executed by other applications.
+    [org.elasticsearch:elasticsearch][1] is a Distributed, RESTful Search
+    Engine.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution. The snapshot API may be used indirectly to place snapshot
+    metadata files into locations that are writeable by the user running the
+    Elasticsearch process. It is possible to create a file that another
+    application could read and take action on, resulting in code execution.
 
 
 
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22elasticsearch%22
+    [1]: https://mvnrepository.com/artifact/org.elasticsearch/elasticsearch
   affected_package: org.elasticsearch:elasticsearch
   vulnerable_versions:
-  - "<= 1.5.2"
+  - "< 1.6.0"
   severity: high
   package_manager: maven
   cve:
@@ -365,23 +372,27 @@
   - Unknown
   references:
   - http://seclists.org/bugtraq/2015/Jun/53
+  - https://github.com/elastic/elasticsearch/commit/f5cfb2a1869d1a52930cbd3138278a6e2c1b22e6
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGELASTICSEARCH-31129
 - id: snykio:maven:org.elasticsearch:elasticsearch:31130
   title: Arbitrary Code Execution
   description: |
-    [`org.elasticsearch:elasticsearch`][1] Affected versions of the package
-    are vulnerable to Remote Code Execution. Elasticsearch versions prior to
-    1.6.1 are vulnerable to an engineered attack on its transport protocol
-    that enables remote code execution. This issue is related to the Groovy
-    announcement in [CVE-2015-3253][2].
+    [org.elasticsearch:elasticsearch][1] is a Distributed, RESTful Search
+    Engine.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution. Elasticsearch versions prior to 1.6.1 are vulnerable to an
+    engineered attack on its transport protocol that enables remote code
+    execution. This issue is related to the Groovy announcement in
+    [CVE-2015-3253][2].
 
 
 
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22elasticsearch%22
+    [1]: https://mvnrepository.com/artifact/org.elasticsearch/elasticsearch
     [2]: https://snyk.io/vuln/SNYK-JAVA-ORGELASTICSEARCH-31130
   affected_package: org.elasticsearch:elasticsearch
   vulnerable_versions:
-  - "<= 1.6.0"
+  - "< 1.6.1"
   severity: high
   package_manager: maven
   cve:
@@ -395,6 +406,8 @@
   - Unknown
   references:
   - http://seclists.org/bugtraq/2015/Jul/82
+  - https://discuss.elastic.co/t/elasticsearch-remote-code-execution-cve-2015-5377/25736
+  - https://github.com/elastic/elasticsearch/commit/bf3052d14c874aead7da8855c5fcadf5428a43f2
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGELASTICSEARCH-31130
 - id: snykio:maven:org.elasticsearch:elasticsearch:31131
   title: Directory Traversal

@@ -1,0 +1,59 @@
+---
+- id: rubyadvisory:rubygems:ruby_parser-legacy:CVE-2019-18409
+  title: ruby_parser-legacy world writable files allow local privilege escalation
+  description: |
+    The ruby_parser-legacy (aka legacy) gem 1.0.0 for Ruby allows local
+    privilege escalation because of world-writable files. For example,
+    if the brakeman gem (which has a legacy dependency) 4.5.0 through 4.7.0 is used,
+    a local user can insert malicious code into the
+    ruby_parser-legacy-1.0.0/lib/ruby_parser/legacy/ruby_parser.rb file.
+  affected_package: ruby_parser-legacy
+  vulnerable_versions:
+  - "*"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2019-18409
+  cvss_v2_score: 4.6
+  cvss_v3_score: 7.8
+  disclosed_date: 2019-10-24
+  created_date: 2019-10-24
+  last_modified_date: 2019-10-24
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://github.com/zenspider/ruby_parser-legacy/issues/1
+- id: snykio:rubygems:ruby_parser-legacy:480458
+  title: Improper Privilege Management
+  description: |
+    [ruby\_parser-legacy][1] is the ruby 1.8 and 1.9 parsers from
+    `ruby_parser` (which are now removed) and plugs them into the existing
+    system.
+
+    Affected versions of this package are vulnerable to Improper Privilege
+    Management as it allows local privilege escalation because of
+    world-writable files. A local user can insert malicious code into the
+    `ruby_parser-legacy-1.0.0/lib/ruby_parser/legacy/ruby_parser.rb` file.
+
+
+
+    [1]: https://rubygems.org/gems/ruby_parser-legacy
+  affected_package: ruby_parser-legacy
+  vulnerable_versions:
+  - ">=1.0.0"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2019-18409
+  cwe:
+  - CWE-732
+  disclosed_date: 2019-11-08
+  created_date: 2019-11-08
+  last_modified_date: 2019-11-08
+  credit:
+  - fwininger
+  references:
+  - https://brakemanscanner.org
+  - https://github.com/zenspider/ruby_parser-legacy/issues/1
+  source_url: https://snyk.io/vuln/SNYK-RUBY-RUBYPARSERLEGACY-480458

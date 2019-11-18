@@ -1,0 +1,55 @@
+---
+- id: snykio:maven:org.webjars.npm:cli:479548
+  title: Insecure use of /tmp folder
+  description: |
+    [`cli`][1] is an npm package used for rapidly building command line
+    apps.
+
+    When used in `daemon` mode, the library makes insecure use of two files
+    in the `/tmp/` folder: `/tmp/<app-name>.pid` and `/tmp/<app-name>.log`.
+    These allow an attacker to overwrite files they typically cannot access,
+    but that are accessible by the user running the CLI-using app. This is
+    possible since the `/tmp/` folder is (typically) writeable to all system
+    users, and because the names of the files in question are easily
+    predicted by an attacker.
+
+    Note that while this is a real vulnerability, it relies on functionality
+    (`daemon` mode) which is only supported in very old Node versions (0.8
+    or older), and so is unlikely to be used by most `cli` users. To avoid
+    any doubt, the fixed version (1.0.0) removes support for this feature
+    entirely.
+
+
+
+    [1]: https://www.npmjs.com/package/cli
+    \nFor example, assume user *victim* occasionally runs a CLI tool called
+    `cli-tool`, which uses the `cli` package. If an attacker gains write
+    access to the `/tmp/` folder of that machine (but not the higher
+    permissions *victim* has), they can create the symbolic link
+    `/tmp/cli-tool.pid -> /home/victim/important-file`. When *victim* runs
+    `cli-tool`, the `important-file` in victim\'s root directory will be
+    nullified. If the CLI tool is run as root, the same can be done to
+    nullify `/etc/passwd` and make the system unbootable.
+
+    Note that popular CLI tools have no reason to mask their names, and so
+    attackers can easily guess a long list of tools victims may run by
+    checking the `cli` package [dependents][1].
+
+
+
+    [1]: https://www.npmjs.com/browse/depended/cli
+  affected_package: org.webjars.npm:cli
+  vulnerable_versions:
+  - "< 1.0.0"
+  severity: low
+  package_manager: maven
+  cve:
+  - CVE-2016-10538
+  cwe:
+  - CWE-59
+  disclosed_date: 2015-12-28
+  created_date: 2016-08-27
+  last_modified_date: 2016-08-27
+  credit:
+  - Steve Kemp
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-479548

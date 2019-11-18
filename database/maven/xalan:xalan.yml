@@ -67,21 +67,27 @@
 - id: snykio:maven:xalan:xalan:31385
   title: Arbitrary Class Load
   description: |
-    [`xalan:xalan`][1] The TransformerFactory in Apache Xalan-Java before
-    2.7.2 does not properly restrict access to certain properties when
-    FEATURE\_SECURE\_PROCESSING is enabled, which allows remote attackers to
-    bypass expected restrictions and load arbitrary classes or access
-    external resources via a crafted (1) xalan:content-header, (2)
-    xalan:entities, (3) xslt:content-header, or (4) xslt:entities property,
-    or a Java property that is bound to the XSLT 1.0 system-property
-    function.
+    [xalan:xalan][1] is a XSLT processor for transforming XML documents into
+    HTML, text, or other XML document types. It implements XSL
+    Transformations (XSLT) Version 1.0 and XML Path Language (XPath) Version
+    1.0 and can be used from the command line, in an applet or a servlet, or
+    as a module in other program.
+
+    Affected versions of this package are vulnerable to Arbitrary Class
+    Load. The TransformerFactory in does not properly restrict access to
+    certain properties when FEATURE\_SECURE\_PROCESSING is enabled, which
+    allows remote attackers to bypass expected restrictions and load
+    arbitrary classes or access external resources via a crafted
+    `xalan:content-header`, `xalan:entities`, `xslt:content-header`,
+    `xslt:entities` property, or a Java property that is bound to the XSLT
+    1.0 system-property function.
 
 
 
     [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22xalan%22
   affected_package: xalan:xalan
   vulnerable_versions:
-  - ">= 2.0 <= 2.7.1"
+  - "< 2.7.0"
   severity: high
   package_manager: maven
   cve:
@@ -94,5 +100,8 @@
   credit:
   - Unknown
   references:
+  - https://bugzilla.redhat.com/show_bug.cgi?id=1080248
+  - https://github.com/apache/xalan-j/commit/cbfd906cc5a1f1566fa1a98400c82e56077fae0c
+  - https://issues.apache.org/jira/browse/XALANJ-2435
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-0107
   source_url: https://snyk.io/vuln/SNYK-JAVA-XALAN-31385
