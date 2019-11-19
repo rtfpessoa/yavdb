@@ -76,3 +76,39 @@
   - https://github.com/symfony/cache/commit/5b62d7796f6c0adccd1a89051e0b3b792573951a
   - https://symfony.com/blog/cve-2019-10912-prevent-destructors-with-side-effects-from-being-unserialized
   source_url: https://snyk.io/vuln/SNYK-PHP-SYMFONYCACHE-174502
+- id: snykio:packagist:symfony/cache:485654
+  title: Remote Code Execution
+  description: |
+    [symfony/cache][1] is a cache component provides an extended PSR-6
+    implementation for adding cache to your applications.
+
+    Affected versions of this package are vulnerable to Remote Code
+    Execution. When an instance of `TagAwareAdapter` is destructed, Symfony
+    execute callables stored in privates properties in order to invalidates
+    tags. When the instance has been created by unserializing an external
+    payload, those properties are not checked leading to a remote code
+    execution.
+
+
+
+    [1]: https://symfony.com/cache
+  affected_package: symfony/cache
+  vulnerable_versions:
+  - ">=2.8.0  <2.8.52"
+  - ">=3.4.0  <3.4.35"
+  - ">=4.2.0  <4.2.12"
+  - ">=4.3.0  <4.3.8"
+  severity: high
+  package_manager: packagist
+  cve:
+  - CVE-2019-18889
+  cwe:
+  - CWE-94
+  disclosed_date: 2019-11-13
+  created_date: 2019-11-13
+  last_modified_date: 2019-11-13
+  credit:
+  - wisdomtree
+  references:
+  - https://symfony.com/cve-2019-18889
+  source_url: https://snyk.io/vuln/SNYK-PHP-SYMFONYCACHE-485654
