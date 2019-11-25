@@ -1,0 +1,36 @@
+---
+- id: snykio:maven:org.apache.nifi:nifi-administration:534972
+  title: Session Fixation
+  description: |
+    [org.apache.nifi:nifi-administration][1] is a system to process and
+    distribute data.
+
+    Affected versions of this package are vulnerable to Session Fixation.
+    When using an authentication mechanism other than PKI, when the user
+    clicks Log Out, NiFi invalidates the authentication token on the client
+    side but not on the server side. This permits the user\'s client-side
+    token to be used for up to 12 hours after logging out to make API
+    requests to NiFi.
+
+
+
+    [1]: https://nifi.apache.org
+  affected_package: org.apache.nifi:nifi-administration
+  vulnerable_versions:
+  - ">= 1.0.0 < 1.10.0"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2019-12421
+  cwe:
+  - CWE-384
+  disclosed_date: 2019-02-27
+  created_date: 2019-11-19
+  last_modified_date: 2019-11-19
+  credit:
+  - Abdu Sahin
+  references:
+  - https://github.com/apache/nifi/pull/3362
+  - https://issues.apache.org/jira/browse/NIFI-6085
+  - https://nifi.apache.org/security.html#CVE-2019-12421
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHENIFI-534972
