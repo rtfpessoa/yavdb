@@ -1,0 +1,40 @@
+---
+- id: snykio:maven:org.jenkins-ci.plugins:support-core:535479
+  title: Arbitrary File Read
+  description: |
+    [org.jenkins-ci.plugins:support-core][1] is a plugin that provides the
+    basic infrastructure for generating \"bundles\" of support information
+    within Jenkins.
+
+    Affected versions of this package are vulnerable to Arbitrary File Read.
+    It did not validate the paths submitted for the \"Delete Support
+    Bundles\" feature. This allowed users to delete arbitrary files on the
+    Jenkins master file system accessible to the OS user account running
+    Jenkins. Additionally, this endpoint did not perform a permission check,
+    allowing users with Overall/Read permission to delete support bundles,
+    and any arbitrary other file, with a known name/path.
+
+
+
+    [1]: https://plugins.jenkins.io/support-core
+  affected_package: org.jenkins-ci.plugins:support-core
+  vulnerable_versions:
+  - "< 2.64"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2019-16539
+  - CVE-2019-16540
+  cwe:
+  - CWE-22
+  disclosed_date: 2019-11-21
+  created_date: 2019-11-24
+  last_modified_date: 2019-11-24
+  credit:
+  - CloudBees
+  - Daniel Beck
+  - Inc.
+  references:
+  - https://jenkins.io/security/advisory/2019-11-21/
+  - https://plugins.jenkins.io/support-core
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGJENKINSCIPLUGINS-535479
