@@ -687,6 +687,42 @@
   - https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2019-10206
   - https://github.com/ansible/ansible/commit/d728127310b4f3a40ce8b9df3affb88ffaeea073
   source_url: https://snyk.io/vuln/SNYK-PYTHON-ANSIBLE-535490
+- id: snykio:pypi:ansible:535522
+  title: Information Exposure
+  description: |
+    [ansible][1] is a simple IT automation system.
+
+    Affected versions of this package are vulnerable to Information
+    Exposure. Fields managing sensitive data should be set as such by
+    no\_log feature. Some of these fields in GCP modules are not set
+    properly. `service_account_contents()` which is a common class for all
+    gcp modules does not set `no_log` to `True`. Any sensitive data managed
+    by that function would be leak as an output when running ansible
+    playbooks.
+
+
+
+    [1]: https://pypi.org/project/ansible/
+  affected_package: ansible
+  vulnerable_versions:
+  - ">= 2.8.0 < 2.8.4"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2019-10217
+  cwe:
+  - CWE-200
+  disclosed_date: 2019-11-25
+  created_date: 2019-11-25
+  last_modified_date: 2019-11-25
+  credit:
+  - Romain ALBON
+  references:
+  - https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2019-10217
+  - https://github.com/ansible/ansible/issues/56269
+  - https://github.com/ansible/ansible/pull/59427
+  - https://github.com/ansible/ansible/pull/59427/commits/642a3b4d3133d0cff3ea5b8300757045b2bda09d
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-ANSIBLE-535522
 - id: snykio:pypi:ansible:72546
   title: Information Exposure
   description: |
