@@ -1094,6 +1094,41 @@
   - https://issues.apache.org/jira/browse/SOLR-12450
   - https://mail-archives.apache.org/mod_mbox/lucene-solr-user/201807.mbox/%3C0cdc01d413b7%24f97ba580%24ec72f080%24%40apache.org%3E
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHESOLR-32408
+- id: snykio:maven:org.apache.solr:solr-core:536063
+  title: Improper Authentication
+  description: |
+    [org.apache.solr:solr-core][1] is an open source enterprise search
+    platform built on Apache Lucene
+
+    Affected versions of this package are vulnerable to Improper
+    Authentication. `DataImportHandler` has a feature in which the whole DIH
+    configuration can come from a request\'s \"dataConfig\" parameter, and
+    since a DIH config can contain scripts, this parameter is a security
+    risk. Starting with version 8.2.0 of Solr, use of this parameter
+    requires setting the Java System property \"enable.dih.dataConfigParam\"
+    to true.
+
+
+
+    [1]: http://lucene.apache.org/solr/
+  affected_package: org.apache.solr:solr-core
+  vulnerable_versions:
+  - "< 8.2.0"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2019-0193
+  cwe:
+  - CWE-287
+  disclosed_date: 2019-08-01
+  created_date: 2019-11-26
+  last_modified_date: 2019-11-26
+  credit:
+  - Unknown
+  references:
+  - https://issues.apache.org/jira/browse/SOLR-13669
+  - https://nvd.nist.gov/vuln/detail/CVE-2019-0193
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHESOLR-536063
 - id: victims:maven:org.apache.solr:solr-core:2013-6397
   title: 'Apache Solr: directory traversal when loading XSL stylesheets and Velocity
     templates'

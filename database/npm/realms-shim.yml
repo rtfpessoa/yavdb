@@ -125,3 +125,43 @@
   - https://www.npmjs.com/advisories/1190
   - https://www.npmjs.com/advisories/1191
   source_url: https://snyk.io/vuln/SNYK-JS-REALMSSHIM-471680
+- id: snykio:npm:realms-shim:536069
+  title: Sandbox Breakout
+  description: |
+    [realms-shim][1] is a shim implementation of the Realm API Proposal.
+
+    Affected versions of this package are vulnerable to Sandbox Breakout.
+    The realms-shim is intended to provide a \"safe evaluator\" which
+    executes arbitrary strings code with limited authority. This provides a
+    \"sandbox\" which only has access to the specific objects and power that
+    the caller chooses to expose. The `evaluate()` function it implements
+    takes two additional arguments: `endowments` (which are exposed in the
+    global lexical scope), and an options bag. The `transforms` option is a
+    list of functions that are applied to the string of code, to apply
+    Babel-like transformations before it gets executed (e.g. to implement
+    syntax extensions).
+
+    A bug was found in the transformation pipeline that exposed a
+    primal-Realm object to one of the transform functions. The confined code
+    could use this to escape the sandbox and compromise the Realm which
+    created it. This generally leads to a full compromise of the
+    application.
+
+
+
+    [1]: https://www.npmjs.com/package/realms-shim
+  affected_package: realms-shim
+  vulnerable_versions:
+  - "<1.2.1"
+  severity: high
+  package_manager: npm
+  cwe:
+  - CWE-265
+  disclosed_date: 2019-10-21
+  created_date: 2019-11-26
+  last_modified_date: 2019-11-26
+  credit:
+  - Unknown
+  references:
+  - https://github.com/Agoric/realms-shim/security/advisories/GHSA-7cg8-pq9v-x98q
+  source_url: https://snyk.io/vuln/SNYK-JS-REALMSSHIM-536069
