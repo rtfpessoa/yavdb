@@ -1,0 +1,35 @@
+---
+- id: snykio:go:github.com/cockroachdb/cockroach/pkg/sql/sqlbase:536005
+  title: Improper Authorization
+  description: |
+    [github.com/cockroachdb/cockroach/pkg/sql/sqlbase][1] is an open source,
+    cloud-native SQL database.
+
+    Affected versions of this package are vulnerable to Improper
+    Authorization. A non-admin authenticated user can call any admin
+    endpoint, even if they should be admin-only operations, as long as the
+    endpoint is visible over HTTP. It makes it possible for non-admin users
+    to shut down a node or view SQL objects on which they have no
+    permission.
+
+
+
+    [1]: https://github.com/cockroachdb/cockroach
+  affected_package: github.com/cockroachdb/cockroach/pkg/sql/sqlbase
+  vulnerable_versions:
+  - ">=19.1.0 <19.1.16"
+  - ">=19.2.0 <19.2.2"
+  severity: high
+  package_manager: go
+  cwe:
+  - CWE-285
+  disclosed_date: 2019-11-19
+  created_date: 2019-11-27
+  last_modified_date: 2019-11-27
+  credit:
+  - kena
+  references:
+  - https://github.com/cockroachdb/cockroach/issues/42567
+  - https://github.com/cockroachdb/cockroach/pull/42726
+  - https://github.com/cockroachdb/cockroach/pull/42727
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMCOCKROACHDBCOCKROACHPKGSQLSQLBASE-536005
