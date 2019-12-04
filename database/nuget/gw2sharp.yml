@@ -1,0 +1,35 @@
+---
+- id: snykio:nuget:gw2sharp:536077
+  title: Information Exposure
+  description: |
+    [Gw2Sharp][1] is a .NET wrapper library for the official Guild Wars 2
+    API.
+
+    Affected versions of this package are vulnerable to Information
+    Exposure. When using an instance of `MemoryCacheMethod` and using it
+    with multiple instances of `Gw2WebApiClient`, there\'s a possibility
+    that cached authenticated responses will leak to another request to the
+    same endpoint, but with a different Guild Wars 2 access token. The
+    latter request will not start however, and will return the first cached
+    response immediately. This means that the second response (or later
+    responses) may contain the same data as the first response, therefore
+    leaking data from another authenticated endpoint.
+
+
+
+    [1]: https://www.nuget.org/packages/Gw2Sharp
+  affected_package: gw2sharp
+  vulnerable_versions:
+  - "< 0.3.1"
+  severity: medium
+  package_manager: nuget
+  cwe:
+  - CWE-200
+  disclosed_date: 2019-06-18
+  created_date: 2019-11-28
+  last_modified_date: 2019-11-28
+  credit:
+  - Unknown
+  references:
+  - https://github.com/Archomeda/Gw2Sharp/security/advisories/GHSA-4vr3-9v7h-5f8v
+  source_url: https://snyk.io/vuln/SNYK-DOTNET-GW2SHARP-536077
