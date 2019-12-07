@@ -1,209 +1,250 @@
 ---
-- id: snykio:npm:devalue:174176
-  title: Cross-site Scripting (XSS)
-  description: |+
-    [devalue][1] is a JSON.stringify, but handles cyclical references,
-    repeated references, undefined, regular expressions, dates, Map and Set.
+- id: snykio:maven:org.wicketstuff:jquery:536832
+  title: Prototype Pollution
+  description: |
+    [org.wicketstuff:jquery][1] is a JQuery integration for Wicket package.
 
-    Affected versions of this package are vulnerable to Cross-site Scripting
-    (XSS). Server-rendered HTML will have unescaped route parameters in it,
-    allowing to break the page or inject JS code into it when an object key
-    contains unsafe characters.
+    Affected versions of this package are vulnerable to Prototype Pollution.
+    The `extend` function can be tricked into modifying the prototype of
+    `Object` when the attacker controls part of the structure passed to this
+    function. This can let an attacker add or modify an existing property
+    that will then exist on all objects.
 
 
 
-    [1]: https://github.com/Rich-Harris/devalue#readme
-    \nA cross-site scripting attack occurs when the attacker tricks a
-    legitimate web-based application or site to accept a request as
-    originating from a trusted source.
-
-    This is done by escaping the context of the web application; the web
-    application then delivers that data to its users along with other
-    trusted dynamic content, without validating it. The browser unknowingly
-    executes malicious script on the client side (through client-side
-    languages; usually JavaScript or HTML) in order to perform actions that
-    are otherwise typically blocked by the browser’s Same Origin Policy.
-
-    ֿInjecting malicious code is the most prevalent manner by which XSS is
-    exploited; for this reason, escaping characters in order to prevent this
-    manipulation is the top method for securing code against this
-    vulnerability.
-
-    Escaping means that the application is coded to mark key characters, and
-    particularly key characters included in user input, to prevent those
-    characters from being interpreted in a dangerous context. For example,
-    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
-    order to be interpreted and displayed as themselves in text, while
-    within the code itself, they are used for HTML tags. If malicious
-    content is injected into an application that escapes special characters
-    and that malicious content uses `<` and `>` as HTML tags, those
-    characters are nonetheless not interpreted as HTML tags by the browser
-    if they’ve been correctly escaped in the application code and in this
-    way the attempted attack is diverted.
-
-    The most prominent use of XSS is to steal cookies (source: OWASP
-    HttpOnly) and hijack user sessions, but XSS exploits have been used to
-    expose sensitive information, enable access to privileged services and
-    functionality and deliver malware.
-
-    ### Types of attacks   {#types-of-attacks}
-
-    There are a few methods by which XSS can be manipulated:
-
-    | Type | Origin | Description |
-    |----------
-    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
-    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
-    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
-    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
-
-    ### Affected environments   {#affected-environments}
-
-    The following environments are susceptible to an XSS attack:
-
-    * Web servers
-    * Application servers
-    * Web application environments
-
-    ### How to prevent   {#how-to-prevent}
-
-    This section describes the top best practices designed to specifically
-    protect your code:
-
-    * Sanitize data input in an HTTP request before reflecting it back,
-      ensuring all data is validated, filtered or escaped before echoing
-      anything back to the user, such as the values of query parameters
-      during searches.
-    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
-      to their respective HTML or URL encoded equivalents.
-    * Give users the option to disable client-side scripts.
-    * Redirect invalid requests.
-    * Detect simultaneous logins, including those from two separate IP
-      addresses, and invalidate those sessions.
-    * Use and enforce a Content Security Policy (source: Wikipedia) to
-      disable any features that might be manipulated for an XSS attack.
-    * Read the documentation for any of the libraries referenced in your
-      code to understand which elements allow for embedded HTML.
-
-  affected_package: devalue
+    [1]: https://mvnrepository.com/artifact/org.wicketstuff/jquery
+  affected_package: org.wicketstuff:jquery
   vulnerable_versions:
-  - "<1.1.1"
-  severity: high
-  package_manager: npm
-  cve:
-  - CVE-2019-13506
-  cwe:
-  - CWE-79
-  disclosed_date: 2019-04-12
-  created_date: 2019-04-12
-  last_modified_date: 2019-04-12
-  credit:
-  - Johannes Lamberts
-  references:
-  - https://codesandbox.io/s/5x2wpo27k4
-  - https://github.com/nuxt/devalue/pull/8
-  - https://github.com/Rich-Harris/devalue/commits?author=pi0
-  - https://github.com/Rich-Harris/devalue/issues/19
-  - https://github.com/Rich-Harris/devalue/pull/20
-  - https://www.npmjs.com/advisories/814
-  source_url: https://snyk.io/vuln/SNYK-JS-DEVALUE-174176
-- id: snykio:npm:devalue:536388
-  title: Cross-site Scripting (XSS)
-  description: |+
-    [devalue][1] is a JSON.stringify, but handles cyclical references,
-    repeated references, undefined, regular expressions, dates, Map and Set.
-
-    Affected versions of this package are vulnerable to Cross-site Scripting
-    (XSS). It does not properly mitigate against unsafe characters in
-    serialized regular expressions.
-
-
-
-    [1]: https://github.com/Rich-Harris/devalue#readme
-    \nA cross-site scripting attack occurs when the attacker tricks a
-    legitimate web-based application or site to accept a request as
-    originating from a trusted source.
-
-    This is done by escaping the context of the web application; the web
-    application then delivers that data to its users along with other
-    trusted dynamic content, without validating it. The browser unknowingly
-    executes malicious script on the client side (through client-side
-    languages; usually JavaScript or HTML) in order to perform actions that
-    are otherwise typically blocked by the browser’s Same Origin Policy.
-
-    ֿInjecting malicious code is the most prevalent manner by which XSS is
-    exploited; for this reason, escaping characters in order to prevent this
-    manipulation is the top method for securing code against this
-    vulnerability.
-
-    Escaping means that the application is coded to mark key characters, and
-    particularly key characters included in user input, to prevent those
-    characters from being interpreted in a dangerous context. For example,
-    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
-    order to be interpreted and displayed as themselves in text, while
-    within the code itself, they are used for HTML tags. If malicious
-    content is injected into an application that escapes special characters
-    and that malicious content uses `<` and `>` as HTML tags, those
-    characters are nonetheless not interpreted as HTML tags by the browser
-    if they’ve been correctly escaped in the application code and in this
-    way the attempted attack is diverted.
-
-    The most prominent use of XSS is to steal cookies (source: OWASP
-    HttpOnly) and hijack user sessions, but XSS exploits have been used to
-    expose sensitive information, enable access to privileged services and
-    functionality and deliver malware.
-
-    ### Types of attacks   {#types-of-attacks}
-
-    There are a few methods by which XSS can be manipulated:
-
-    | Type | Origin | Description |
-    |----------
-    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
-    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
-    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
-    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
-
-    ### Affected environments   {#affected-environments}
-
-    The following environments are susceptible to an XSS attack:
-
-    * Web servers
-    * Application servers
-    * Web application environments
-
-    ### How to prevent   {#how-to-prevent}
-
-    This section describes the top best practices designed to specifically
-    protect your code:
-
-    * Sanitize data input in an HTTP request before reflecting it back,
-      ensuring all data is validated, filtered or escaped before echoing
-      anything back to the user, such as the values of query parameters
-      during searches.
-    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
-      to their respective HTML or URL encoded equivalents.
-    * Give users the option to disable client-side scripts.
-    * Redirect invalid requests.
-    * Detect simultaneous logins, including those from two separate IP
-      addresses, and invalidate those sessions.
-    * Use and enforce a Content Security Policy (source: Wikipedia) to
-      disable any features that might be manipulated for an XSS attack.
-    * Read the documentation for any of the libraries referenced in your
-      code to understand which elements allow for embedded HTML.
-
-  affected_package: devalue
-  vulnerable_versions:
-  - "<2.0.1"
+  - ">= 0"
   severity: medium
-  package_manager: npm
+  package_manager: maven
+  cve:
+  - CVE-2019-11358
+  - CVE-2019-5428
+  cwe:
+  - CWE-400
+  disclosed_date: 2019-03-26
+  created_date: 2019-03-27
+  last_modified_date: 2019-03-27
+  credit:
+  - Semmle Security Research Team
+  references:
+  - https://github.com/DanielRuf/snyk-js-jquery-174006
+  - https://github.com/jquery/jquery/commit/753d591aea698e57d6db58c9f722cd0808619b1b
+  - https://github.com/jquery/jquery/pull/4333
+  - https://hackerone.com/reports/454365
+  - https://snyk.io/blog/after-three-years-of-silence-a-new-jquery-prototype-pollution-vulnerability-emerges-once-again/
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWICKETSTUFF-536832
+- id: snykio:maven:org.wicketstuff:jquery:536833
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [org.wicketstuff:jquery][1] is a JQuery integration for Wicket package.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS) attacks when a cross-domain ajax request is performed without the
+    `dataType` option causing `text/javascript` responses to be executed.
+
+
+
+    [1]: https://mvnrepository.com/artifact/org.wicketstuff/jquery
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
+  affected_package: org.wicketstuff:jquery
+  vulnerable_versions:
+  - ">= 0"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2015-9251
+  - CVE-2017-16012
   cwe:
   - CWE-79
-  disclosed_date: 2019-12-01
-  created_date: 2019-12-01
-  last_modified_date: 2019-12-01
+  disclosed_date: 2015-06-26
+  created_date: 2016-11-27
+  last_modified_date: 2016-11-27
   credit:
-  - Max Schaefer
+  - Egor Homakov
   references:
-  - https://github.com/Rich-Harris/devalue/commit/0debc411fef5028abfac1d40b7553c0bde089c5f
-  source_url: https://snyk.io/vuln/SNYK-JS-DEVALUE-536388
+  - https://github.com/jquery/jquery/commit/f60729f3903d17917dc351f3ac87794de379b0cc
+  - https://github.com/jquery/jquery/issues/2432
+  - https://github.com/jquery/jquery/pull/2588
+  - https://github.com/jquery/jquery/pull/2588/commits/c254d308a7d3f1eac4d0b42837804cfffcba4bb2
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWICKETSTUFF-536833
+- id: snykio:maven:org.wicketstuff:jquery:536834
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [org.wicketstuff:jquery][1] JQuery integration for Wicket package.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). The `location.hash()` function was used to select elements, but
+    also allows remote attackers to inject script into the page.
+
+    This vulnerability is related to a vulnerability in [jQuery-migrate][2]
+    and in [fullpage.js](npm:fullpage.js:20151207).
+
+
+
+    [1]: https://mvnrepository.com/artifact/org.wicketstuff/jquery
+    [2]: https://snyk.io/vuln/npm:jquery-migrate:20130419
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
+  affected_package: org.wicketstuff:jquery
+  vulnerable_versions:
+  - ">= 0"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2011-4969
+  cwe:
+  - CWE-79
+  disclosed_date: 2011-06-05
+  created_date: 2016-10-20
+  last_modified_date: 2016-10-20
+  credit:
+  - Dave Methvin
+  references:
+  - http://blog.jquery.com/2011/09/01/jquery-1-6-3-released/
+  - http://www.openwall.com/lists/oss-security/2013/01/31/3
+  - https://bugs.jquery.com/ticket/9521
+  - https://github.com/rails/jquery-rails/blob/master/VERSIONS.md
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWICKETSTUFF-536834
