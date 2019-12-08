@@ -4096,6 +4096,43 @@
   references:
   - https://www.djangoproject.com/weblog/2019/aug/01/security-releases/
   source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-456566
+- id: snykio:pypi:django:536439
+  title: Privilege Escalation
+  description: |
+    [django][1] is a high-level Python Web framework that encourages rapid
+    development and clean, pragmatic design.
+
+    Affected versions of this package are vulnerable to Privilege
+    Escalation. A Django model admin displaying inline related models, where
+    the user has view-only permissions to a parent model but edit
+    permissions to the inline model, would be presented with an editing UI,
+    allowing POST requests, for updating the inline model. Directly editing
+    the view-only parent model was not possible, but the parent model\'s
+    `save()` method was called, triggering potential side effects, and
+    causing pre and post-save signal handlers to be invoked.
+
+
+
+    [1]: https://pypi.org/project/Django/
+  affected_package: django
+  vulnerable_versions:
+  - ">= 2.1 < 2.1.15"
+  - ">= 2.2 < 2.2.8"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2019-19118
+  cwe:
+  - CWE-269
+  disclosed_date: 2019-12-02
+  created_date: 2019-12-02
+  last_modified_date: 2019-12-02
+  credit:
+  - Unknown
+  references:
+  - https://github.com/django/django/commit/11c5e0609bcc0db93809de2a08e0dc3d70b393e4
+  - https://www.djangoproject.com/weblog/2019/dec/02/security-releases/
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGO-536439
 - id: snykio:pypi:django:72562
   title: Information Exposure
   description: |

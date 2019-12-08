@@ -1,0 +1,57 @@
+---
+- id: snykio:go:github.com/albertito/chasquid/internal/smtpsrv:536440
+  title: Denial of Service (DoS)
+  description: |+
+    [github.com/albertito/chasquid/internal/smtpsrv][1] is a SMTP (email)
+    server with a focus on simplicity, security, and ease of operation.
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS). There is no limit to incoming line length in `textproto.Conn`, so
+    an evil client could cause a memory exhaustion by issuing very long
+    lines.
+
+
+
+    [1]: https://github.com/albertito/chasquid
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+  affected_package: github.com/albertito/chasquid/internal/smtpsrv
+  vulnerable_versions:
+  - "*"
+  severity: high
+  package_manager: go
+  cwe:
+  - CWE-400
+  disclosed_date: 2019-12-02
+  created_date: 2019-12-02
+  last_modified_date: 2019-12-02
+  credit:
+  - Max Mazurov
+  references:
+  - https://github.com/albertito/chasquid/commit/06d808c8ee2b57d4e9312f9692d9d28984281417
+  - https://github.com/albertito/chasquid/commit/99df5e7b5718e08dbb26ee145282ab17c68d16f7
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMALBERTITOCHASQUIDINTERNALSMTPSRV-536440
