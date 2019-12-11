@@ -118,3 +118,28 @@
   references:
   - https://hackerone.com/reports/578138
   source_url: https://snyk.io/vuln/SNYK-JS-HTTPSERVER-466986
+- id: snykio:npm:http_server:536780
+  title: Path Traversal
+  description: "[http\\_server][1] is a http server module\n\nAffected versions of
+    this package are vulnerable to Path Traversal. With\na symbolically linked file
+    is present witin the working directory, it is\npossible to read arbitrary files
+    outside of the web root directory.\n\n### PoC by vineetpandey   {#poc-by-vineetpandey}\n\n
+    \   1. Install the http_server: npm install http_server -g\n    \n    2. Create
+    a symlink file within the directory\n    ln -s /etc/shadow test_shadow\n    \n
+    \   3. Request the file within browser\n    http://localhost:8888/test_shadow\n\n\n\n[1]:
+    https://www.npmjs.com/package/http_server\n"
+  affected_package: http_server
+  vulnerable_versions:
+  - "*"
+  severity: medium
+  package_manager: npm
+  cwe:
+  - CWE-22
+  disclosed_date: 2019-12-04
+  created_date: 2019-12-05
+  last_modified_date: 2019-12-05
+  credit:
+  - Vineet Pandey
+  references:
+  - https://hackerone.com/reports/692262
+  source_url: https://snyk.io/vuln/SNYK-JS-HTTPSERVER-536780

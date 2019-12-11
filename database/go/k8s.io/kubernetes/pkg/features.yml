@@ -1,0 +1,33 @@
+---
+- id: snykio:go:k8s.io/kubernetes/pkg/features:536841
+  title: Insecure Defaults
+  description: |
+    [k8s.io/kubernetes/pkg/features][1] is a features package part of
+    Kubernetes.
+
+    Affected versions of this package are vulnerable to Insecure Defaults.
+    The `ValidateProxyRedirects` feature can be manually enabled with the
+    `kube-apiserver` flag `--feature-gates=ValidateProxyRedirects=true` but
+    it\'s not enabled by default. The fix enables it by default.
+
+
+
+    [1]: https://github.com/kubernetes/kubernetes
+  affected_package: k8s.io/kubernetes/pkg/features
+  vulnerable_versions:
+  - ">=1.10.0 <1.14.0-alpha.2"
+  severity: low
+  package_manager: go
+  cve:
+  - CVE-2018-1002102
+  cwe:
+  - CWE-601
+  disclosed_date: 2019-12-05
+  created_date: 2019-12-05
+  last_modified_date: 2019-12-05
+  credit:
+  - Alban Crequy
+  references:
+  - https://github.com/kubernetes/kubernetes/issues/85867
+  - https://github.com/kubernetes/kubernetes/pull/72552/commits/d9aeea6ba4a52a4924050636c2205d007d4a507d
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-K8SIOKUBERNETESPKGFEATURES-536841
