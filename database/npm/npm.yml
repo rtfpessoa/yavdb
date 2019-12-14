@@ -5,9 +5,10 @@
     File Write. It fails to prevent access to folders outside of the intended node_modules
     folder through the bin field. A properly constructed entry in the package.json
     bin field would allow a package publisher to modify and/or gain access to arbitrary
-    files on a user’s system when the package is installed.  \n\nThis behavior is
-    still possible through install scripts. This vulnerability bypasses a user using
-    the --ignore-scripts install option."
+    files on a user’s system when the package is installed. It is only possible to
+    affect files that the user running `npm install` has access to. \n\nThis behavior
+    is still possible through install scripts. This vulnerability bypasses a user
+    using the --ignore-scripts install option."
   affected_package: npm
   vulnerable_versions:
   - "<6.13.3"
@@ -21,13 +22,14 @@
   references: https://npmjs.com/advisories/1434
   source_url: https://npmjs.com/advisories/1434
 - id: npmjs:npm:npm:1436
-  title: Unauthorized File Access
-  description: "Versions of the npm CLI prior to 6.13.3 are vulnerable to an Arbitrary
-    File Write. It is possible for packages to create symlinks to files outside of
-    the`node_modules` folder through the `bin` field upon installation. A properly
-    constructed entry in the package.json bin field would allow a package publisher
-    to create a symlink pointing to arbitrary files on a user’s system when the package
-    is installed.  \n\nThis behavior is still possible through install scripts. This
+  title: Symlink reference outside of node_modules
+  description: "Versions of the npm CLI prior to 6.13.3 are vulnerable to a symlink
+    reference outside of node_modules. It is possible for packages to create symlinks
+    to files outside of the`node_modules` folder through the `bin` field upon installation.
+    A properly constructed entry in the package.json bin field would allow a package
+    publisher to create a symlink pointing to arbitrary files on a user’s system when
+    the package is installed. Only files accessible by the user running the `npm install`
+    are affected.  \n\nThis behavior is still possible through install scripts. This
     vulnerability bypasses a user using the --ignore-scripts install option."
   affected_package: npm
   vulnerable_versions:
@@ -42,13 +44,14 @@
   references: https://npmjs.com/advisories/1436
   source_url: https://npmjs.com/advisories/1436
 - id: npmjs:npm:npm:1437
-  title: Arbitrary File Overwrite
-  description: "Versions of  the npm CLI prior to 6.13.4 are vulnerable to an Arbitrary
-    File Overwrite. It fails to prevent existing globally-installed binaries to be
-    overwritten by other package installations. For example, if a package was installed
-    globally and created a `serve` binary, any subsequent installs of packages that
-    also create a `serve` binary would overwrite the first binary. This only affects
-    files in `/usr/local/bin`.  \n\nThis behavior is still allowed in local installations
+  title: Global node_modules Binary Overwrite
+  description: "Versions of  the npm CLI prior to 6.13.4 are vulnerable to a Global
+    node_modules Binary Overwrite. It fails to prevent existing globally-installed
+    binaries to be overwritten by other package installations. \n\nFor example, if
+    a package was installed globally and created a `serve` binary, any subsequent
+    installs of packages that also create a `serve` binary would overwrite the first
+    binary. This will not overwrite system binaries but only binaries put into the
+    global node_modules directory.\n\nThis behavior is still allowed in local installations
     and also through install scripts. This vulnerability bypasses a user using the
     --ignore-scripts install option."
   affected_package: npm
