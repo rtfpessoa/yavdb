@@ -47,7 +47,7 @@ module YAVDB
           urls.map do |advisory_url|
             advisory_page = get_page_html(advisory_url, true, 'snyk.io/advisories')
             create(advisory_url, advisory_page)
-          end
+          end.reject(&:nil?)
         end
 
         class << self
@@ -92,7 +92,7 @@ module YAVDB
             severity = advisory_page.css('span.label__text').text.gsub(%r{(.*?) severity}, '\1')
 
             package_manager = advisory_page.css('.breadcrumbs__list-item')[1].text.gsub(%r{\s+}, '').downcase
-            package_manager = PACKAGE_MANAGER_ALIAS[package_manager] || raise("Could not find alias for package manager #{package_manager}")
+            package_manager = PACKAGE_MANAGER_ALIAS[package_manager] || return
 
             title = utf8(advisory_page.css('h1.header__title span.header__title__text').text)
 
