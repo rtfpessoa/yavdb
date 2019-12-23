@@ -30,3 +30,119 @@
   - https://github.com/npm/npm/commit/74e149da6efe6ed89477faa81fef08eee7999ad0
   - https://github.com/npm/npm/issues/19883
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-480060
+- id: snykio:maven:org.webjars.npm:npm:537642
+  title: Arbitrary File Overwrite
+  description: |
+    [org.webjars.npm:npm][1] is a a package manager for JavaScript.
+
+    Affected versions of this package are vulnerable to Arbitrary File
+    Overwrite. It fails to prevent existing globally-installed binaries to
+    be overwritten by other package installations. For example, if a package
+    was installed globally and created a `serve` binary, any subsequent
+    installs of packages that also create a `serve` binary would overwrite
+    the first binary. This only affects files in `/usr/local/bin`.
+
+    For `npm`, this behaviour is still allowed in local installations and
+    also through install scripts. This vulnerability bypasses a user using
+    the `--ignore-scripts` install option.
+
+
+
+    [1]: https://www.npmjs.com/package/npm
+  affected_package: org.webjars.npm:npm
+  vulnerable_versions:
+  - "< 6.13.4"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2019-16777
+  cwe:
+  - CWE-22
+  disclosed_date: 2019-12-11
+  created_date: 2019-12-12
+  last_modified_date: 2019-12-12
+  credit:
+  - Daniel Ruf
+  references:
+  - https://blog.daniel-ruf.de/critical-design-flaw-npm-pnpm-yarn/
+  - https://blog.npmjs.org/post/189618601100/binary-planting-with-the-npm-cli
+  - https://nodejs.org/en/blog/vulnerability/december-2019-security-releases/
+  - https://www.npmjs.com/advisories/1437
+  - https://www.npmjs.com/advisories/1438
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-537642
+- id: snykio:maven:org.webjars.npm:npm:537643
+  title: Unauthorized File Access
+  description: |
+    [org.webjars.npm:npm][1] is a a package manager for JavaScript.
+
+    Affected versions of this package are vulnerable to Unauthorized File
+    Access. It is possible for packages to create symlinks to files outside
+    of the`node_modules` folder through the `bin` field upon installation.
+
+    For `npm`, a properly constructed entry in the `package.json` bin field
+    would allow a package publisher to create a symlink pointing to
+    arbitrary files on a user’s system when the package is installed. This
+    behaviour is possible through install scripts. This vulnerability
+    bypasses a user using the `--ignore-scripts` install option.
+
+
+
+    [1]: https://www.npmjs.com/package/npm
+  affected_package: org.webjars.npm:npm
+  vulnerable_versions:
+  - "< 6.13.3"
+  severity: low
+  package_manager: maven
+  cve:
+  - CVE-2019-16775
+  cwe:
+  - CWE-552
+  disclosed_date: 2019-12-11
+  created_date: 2019-12-12
+  last_modified_date: 2019-12-12
+  credit:
+  - Daniel Ruf
+  references:
+  - https://blog.daniel-ruf.de/critical-design-flaw-npm-pnpm-yarn/
+  - https://nodejs.org/en/blog/vulnerability/december-2019-security-releases/
+  - https://www.npmjs.com/advisories/1435
+  - https://www.npmjs.com/advisories/1436
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-537643
+- id: snykio:maven:org.webjars.npm:npm:537644
+  title: Arbitrary File Write
+  description: |
+    [org.webjars.npm:npm][1] is a a package manager for JavaScript.
+
+    Affected versions of this package are vulnerable to Arbitrary File
+    Write. It fails to prevent access to folders outside of the intended
+    `node_modules` folder through the bin field.
+
+    For `npm`, a properly constructed entry in the `package.json` bin field
+    would allow a package publisher to modify and/or gain access to
+    arbitrary files on a user’s system when the package is installed. This
+    behaviour is possible through install scripts. This vulnerability
+    bypasses a user using the `--ignore-scripts install` option.
+
+
+
+    [1]: https://www.npmjs.com/package/npm
+  affected_package: org.webjars.npm:npm
+  vulnerable_versions:
+  - "< 6.13.3"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2019-16776
+  cwe:
+  - CWE-22
+  disclosed_date: 2019-12-11
+  created_date: 2019-12-12
+  last_modified_date: 2019-12-12
+  credit:
+  - Daniel Ruf
+  references:
+  - https://blog.daniel-ruf.de/critical-design-flaw-npm-pnpm-yarn/
+  - https://nodejs.org/en/blog/vulnerability/december-2019-security-releases/
+  - https://www.npmjs.com/advisories/1427
+  - https://www.npmjs.com/advisories/1434
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-537644

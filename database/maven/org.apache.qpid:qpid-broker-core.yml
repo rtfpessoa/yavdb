@@ -84,18 +84,21 @@
 - id: snykio:maven:org.apache.qpid:qpid-broker-core:30708
   title: Improper Input Validation
   description: |
-    [`org.apache.qpid:qpid-broker-core`][1] PlainSaslServer.java in Apache
-    Qpid Java before 6.0.3, when the broker is configured to allow plaintext
-    passwords, allows remote attackers to cause a denial of service (broker
-    termination) via a crafted authentication attempt, which triggers an
-    uncaught exception.
+    [org.apache.qpid:qpid-broker-core][1] is a package that manages Broker
+    core functionality and initial configuration.
+
+    Affected versions of this package are vulnerable to Improper Input
+    Validation. In `PlainSaslServer.java`, when the broker is configured to
+    allow plaintext passwords, allows remote attackers to cause a denial of
+    service (broker termination) via a crafted authentication attempt, which
+    triggers an uncaught exception.
 
 
 
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22qpid-broker-core%22
+    [1]: https://mvnrepository.com/artifact/org.apache.qpid/qpid-broker-core
   affected_package: org.apache.qpid:qpid-broker-core
   vulnerable_versions:
-  - ">= 6.0.0 <= 6.0.2"
+  - "< 6.1.0"
   severity: medium
   package_manager: maven
   cve:
@@ -106,9 +109,12 @@
   created_date: 2016-05-30
   last_modified_date: 2016-05-30
   credit:
-  - Unknown
+  - Alex Szczuczko
   references:
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-3094
+  - http://mail-archives.apache.org/mod_mbox/qpid-users/201605.mbox/%3C5748641A.2050701%40gmail.com%3E
+  - https://github.com/apache/qpid-broker-j/commit/a4c8ecf0ac4884f63cfd57c07c12a144863c896c
+  - https://issues.apache.org/jira/browse/QPID-7271
+  - https://packetstormsecurity.com/files/137215/Apache-Qpid-Java-Broker-6.0.2-Denial-Of-Service.html
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEQPID-30708
 - id: snykio:maven:org.apache.qpid:qpid-broker-core:30709
   title: Information Exposure

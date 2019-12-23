@@ -2,15 +2,14 @@
 - id: snykio:maven:org.sonatype.nexus.xstream:xstream:31395
   title: Denial of Service (DoS)
   description: |+
-    [`org.sonatype.nexus.xstream:xstream`][1] XStream through 1.4.9, when a
-    certain denyTypes workaround is not used, mishandles attempts to create
-    an instance of the primitive type \'void\' during unmarshalling, leading
-    to a remote application crash, as demonstrated by an
-    `xstream.fromXML("&lt;void/>")` call.
+    `org.sonatype.nexus.xstream:xstream` is a None
 
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS). When a certain `denyTypes` workaround is not used, mishandles
+    attempts to create an instance of the primitive type \'void\' during
+    unmarshalling, leading to a remote application crash, as demonstrated by
+    an `xstream.fromXML("&lt;void/>")` call.
 
-
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22xstream%22
     \nDenial of Service (DoS) describes a family of attacks, all aimed at
     making a system inaccessible to its intended and legitimate users.
 
@@ -39,7 +38,7 @@
 
   affected_package: org.sonatype.nexus.xstream:xstream
   vulnerable_versions:
-  - ">= 1.4 <= 1.4.6-SONATYPE-03"
+  - ">= 0"
   severity: high
   package_manager: maven
   cve:
@@ -53,5 +52,7 @@
   - Unknown
   references:
   - http://x-stream.github.io/CVE-2017-7957.html
+  - https://github.com/x-stream/xstream/commit/6e546ec366419158b1e393211be6d78ab9604ab
+  - https://github.com/x-stream/xstream/commit/8542d02d9ac5d384c85f4b33d6c1888c53bd55d
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2017-7957
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGSONATYPENEXUSXSTREAM-31395

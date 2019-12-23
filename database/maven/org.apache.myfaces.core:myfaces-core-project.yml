@@ -136,92 +136,25 @@
   source_url: https://ossindex.net/resource/package/7015354953/vulnerabilities
 - id: snykio:maven:org.apache.myfaces.core:myfaces-core-project:30672
   title: Cross-site Scripting (XSS)
-  description: |+
-    [`org.apache.myfaces.core:myfaces-core-project`][1] Apache MyFaces 1.1.7
-    and 1.2.8, as used in IBM WebSphere Application Server and other
-    applications, does not properly handle an unencrypted view state, which
+  description: |
+    [org.apache.myfaces.core:myfaces-core-project][1] is a MyFaces
+    implementation of the JavaServer Faces 2.3 specification, and consists
+    of an API module (javax.faces.\* classes) and an implementation module
+    (org.apache.myfaces.\* classes).
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). It does not properly handle an unencrypted view state, which
     allows remote attackers to conduct cross-site scripting (XSS) attacks or
     execute arbitrary Expression Language (EL) statements via vectors that
     involve modifying the serialized view object.
 
 
 
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22myfaces-core-project%22
-    \nA cross-site scripting attack occurs when the attacker tricks a
-    legitimate web-based application or site to accept a request as
-    originating from a trusted source.
-
-    This is done by escaping the context of the web application; the web
-    application then delivers that data to its users along with other
-    trusted dynamic content, without validating it. The browser unknowingly
-    executes malicious script on the client side (through client-side
-    languages; usually JavaScript or HTML) in order to perform actions that
-    are otherwise typically blocked by the browser’s Same Origin Policy.
-
-    ֿInjecting malicious code is the most prevalent manner by which XSS is
-    exploited; for this reason, escaping characters in order to prevent this
-    manipulation is the top method for securing code against this
-    vulnerability.
-
-    Escaping means that the application is coded to mark key characters, and
-    particularly key characters included in user input, to prevent those
-    characters from being interpreted in a dangerous context. For example,
-    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
-    order to be interpreted and displayed as themselves in text, while
-    within the code itself, they are used for HTML tags. If malicious
-    content is injected into an application that escapes special characters
-    and that malicious content uses `<` and `>` as HTML tags, those
-    characters are nonetheless not interpreted as HTML tags by the browser
-    if they’ve been correctly escaped in the application code and in this
-    way the attempted attack is diverted.
-
-    The most prominent use of XSS is to steal cookies (source: OWASP
-    HttpOnly) and hijack user sessions, but XSS exploits have been used to
-    expose sensitive information, enable access to privileged services and
-    functionality and deliver malware.
-
-    ### Types of attacks   {#types-of-attacks}
-
-    There are a few methods by which XSS can be manipulated:
-
-    | Type | Origin | Description |
-    |----------
-    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
-    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
-    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
-    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
-
-    ### Affected environments   {#affected-environments}
-
-    The following environments are susceptible to an XSS attack:
-
-    * Web servers
-    * Application servers
-    * Web application environments
-
-    ### How to prevent   {#how-to-prevent}
-
-    This section describes the top best practices designed to specifically
-    protect your code:
-
-    * Sanitize data input in an HTTP request before reflecting it back,
-      ensuring all data is validated, filtered or escaped before echoing
-      anything back to the user, such as the values of query parameters
-      during searches.
-    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
-      to their respective HTML or URL encoded equivalents.
-    * Give users the option to disable client-side scripts.
-    * Redirect invalid requests.
-    * Detect simultaneous logins, including those from two separate IP
-      addresses, and invalidate those sessions.
-    * Use and enforce a Content Security Policy (source: Wikipedia) to
-      disable any features that might be manipulated for an XSS attack.
-    * Read the documentation for any of the libraries referenced in your
-      code to understand which elements allow for embedded HTML.
-
+    [1]: https://mvnrepository.com/artifact/org.apache.myfaces.core/myfaces-core-project
   affected_package: org.apache.myfaces.core:myfaces-core-project
   vulnerable_versions:
-  - ">= 1.1.7"
+  - ">= 1.1.7 < 1.1.8"
+  - ">= 1.2.8 < 1.2.9"
   severity: medium
   package_manager: maven
   cve:
@@ -234,72 +167,30 @@
   credit:
   - Unknown
   references:
+  - https://access.redhat.com/security/cve/cve-2010-2086
+  - https://bugzilla.redhat.com/show_bug.cgi?id=598164
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2010-2086
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEMYFACESCORE-30672
 - id: snykio:maven:org.apache.myfaces.core:myfaces-core-project:30673
   title: Directory Traversal
   description: |
-    [`org.apache.myfaces.core:myfaces-core-project`][1] Multiple directory
-    traversal vulnerabilities in MyFaces JavaServer Faces (JSF) in Apache
-    MyFaces Core 2.0.x before 2.0.12 and 2.1.x before 2.1.6 allow remote
-    attackers to read arbitrary files via a .. (dot dot) in the (1) ln
-    parameter to faces/javax.faces.resource/web.xml or (2) the PATH\_INFO to
-    faces/javax.faces.resource/.
+    [org.apache.myfaces.core:myfaces-core-project][1] is a MyFaces
+    implementation of the JavaServer Faces 2.3 specification, and consists
+    of an API module (javax.faces.\* classes) and an implementation module
+    (org.apache.myfaces.\* classes).
+
+    Affected versions of this package are vulnerable to Directory Traversal.
+    It allows remote attackers to read arbitrary files via a `..` (dot dot)
+    in the (1) ln parameter to `faces/javax.faces.resource/web.xml` or (2)
+    the `PATH_INFO` to `faces/javax.faces.resource/`.
 
 
 
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22myfaces-core-project%22
-    \nA Directory Traversal attack (also known as path traversal) aims to
-    access files and directories that are stored outside the intended
-    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
-    its variations, or by using absolute file paths, it may be possible to
-    access arbitrary files and directories stored on file system, including
-    application source code, configuration, and other critical system files.
-
-    Directory Traversal vulnerabilities can be generally divided into two
-    types:
-
-    * **Information Disclosure**\: Allows the attacker to gain information
-      about the folder structure or read the contents of sensitive files on
-      the system.
-
-    `st` is a module for serving static files on web pages, and contains a
-    [vulnerability of this type][1]. In our example, we will serve files
-    from the `public` route.
-
-    If an attacker requests the following URL from our server, it will in
-    turn leak the sensitive private key of the root user.
-
-        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
-
-    **Note** `%2e` is the URL encoded version of `.` (dot).
-
-    * **Writing arbitrary files**\: Allows the attacker to create or replace
-      existing files. This type of vulnerability is also known as
-      `Zip-Slip`.
-
-    One way to achieve this is by using a malicious `zip` archive that holds
-    path traversal filenames. When each filename in the zip archive gets
-    concatenated to the target extraction folder, without validation, the
-    final path ends up outside of the target folder. If an executable or a
-    configuration file is overwritten with a file containing malicious code,
-    the problem can turn into an arbitrary code execution issue quite
-    easily.
-
-    The following is an example of a `zip` archive with one benign file and
-    one malicious file. Extracting the malicious file will result in
-    traversing out of the target folder, ending up in `/root/.ssh/`
-    overwriting the `authorized_keys` file:
-
-        2018-04-15 22:04:29 .....           19           19  good.txt
-        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
-
-
-
-    [1]: https://snyk.io/vuln/npm:st:20140206
+    [1]: https://mvnrepository.com/artifact/org.apache.myfaces.core/myfaces-core-project
   affected_package: org.apache.myfaces.core:myfaces-core-project
   vulnerable_versions:
-  - ">= 2.0.0 <= 2.0.11"
+  - ">= 2.0.0 < 2.0.12"
+  - ">= 2.1.0 < 2.1.6"
   severity: medium
   package_manager: maven
   cve:
@@ -310,9 +201,11 @@
   created_date: 2015-04-13
   last_modified_date: 2015-04-13
   credit:
-  - Unknown
+  - Paul Nicolucci
   references:
-  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2011-4367
+  - https://exchange.xforce.ibmcloud.com/vulnerabilities/73100
+  - https://seclists.org/fulldisclosure/2012/Feb/150
+  - https://www.securityfocus.com/bid/51939
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEMYFACESCORE-30673
 - id: snykio:maven:org.apache.myfaces.core:myfaces-core-project:30680
   title: Deserialization of Untrusted Data

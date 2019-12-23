@@ -157,20 +157,19 @@
 - id: snykio:maven:org.apache.sling:org.apache.sling.servlets.post:30731
   title: Denial of Service (DoS)
   description: |+
-    [`org.apache.sling:org.apache.sling.servlets.post`][1] is a framework
-    for RESTful web-applications based on an extensible content tree.
+    [org.apache.sling:org.apache.sling.servlets.post][1] is a framework for
+    RESTful web-applications based on an extensible content tree.
 
-    The deepGetOrCreateNode function in
-    impl/operations/AbstractCreateOperation.java in
-    org.apache.sling.servlets.post.bundle 2.2.0 and 2.3.0 in Apache Sling
-    does not properly handle a NULL value that returned when the session
-    does not have permissions to the root node, which allows remote
-    attackers to cause a denial of service (infinite loop) via unspecified
-    vectors.
-
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS). The deepGetOrCreateNode function in
+    `impl/operations/AbstractCreateOperation.java` does not properly handle
+    a `NULL` value that returned when the session does not have permissions
+    to the root node, which allows remote attackers to cause a denial of
+    service (infinite loop) via unspecified vectors.
 
 
-    [1]: https://sling.apache.org/
+
+    [1]: https://mvnrepository.com/artifact/org.apache.sling/org.apache.sling.servlets.post
     \nDenial of Service (DoS) describes a family of attacks, all aimed at
     making a system inaccessible to its intended and legitimate users.
 
@@ -199,7 +198,7 @@
 
   affected_package: org.apache.sling:org.apache.sling.servlets.post
   vulnerable_versions:
-  - ">= 2.2.0 <= 2.3.0"
+  - ">= 2.2.0 < 2.3.24"
   severity: medium
   package_manager: maven
   cve:
@@ -212,6 +211,8 @@
   credit:
   - Unknown
   references:
+  - https://github.com/apache/sling-org-apache-sling-servlets-post/commit/7ddd5df1282a47a99af1f7f4897fc7abe1ec056b
+  - https://issues.apache.org/jira/browse/SLING-2913
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2013-2254
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHESLING-30731
 - id: snykio:maven:org.apache.sling:org.apache.sling.servlets.post:30732
@@ -333,7 +334,7 @@
     [1]: https://sling.apache.org/
   affected_package: org.apache.sling:org.apache.sling.servlets.post
   vulnerable_versions:
-  - ">= 2.1.2 <= 2.3.6"
+  - ">= 2.1.2 < 2.3.8"
   severity: high
   package_manager: maven
   cve:

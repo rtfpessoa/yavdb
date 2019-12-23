@@ -1,4 +1,30 @@
 ---
+- id: rubyadvisory:rubygems:excon:CVE-2019-16779
+  title: Race condition when using persistent connections
+  description: |-
+    There was a race condition around persistent connections, where a connection
+    which is interrupted (such as by a timeout) would leave data on the socket.
+    Subsequent requests would then read this data, returning content from the
+    previous response. The race condition window appears to be short, and it
+    would be difficult to purposefully exploit this.
+
+    Users can workaround the problem by disabling persistent connections, though
+    this may cause performance implications.
+  affected_package: excon
+  patched_versions:
+  - ">= 0.71.0"
+  package_manager: rubygems
+  cve:
+  - CVE-2019-16779
+  disclosed_date: 2019-12-16
+  created_date: 2019-12-16
+  last_modified_date: 2019-12-16
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/excon/excon/commit/ccb57d7a422f020dc74f1de4e8fb505ab46d8a29
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://github.com/excon/excon/security/advisories/GHSA-q58g-455p-8vw9
 - id: snykio:rubygems:excon:20404
   title: Man-in-the-Middle (MitM)
   description: |
@@ -33,3 +59,34 @@
   - https://github.com/excon/excon/commit/be9f4f2c4419f1b826c503f2a4063f3073802a59
   - https://github.com/excon/excon/pull/616
   source_url: https://snyk.io/vuln/SNYK-RUBY-EXCON-20404
+- id: snykio:rubygems:excon:537866
+  title: Race Condition
+  description: |
+    [excon][1] is a is Extended http(s) connections.
+
+    Affected versions of this package are vulnerable to Race Condition. A
+    persistent connection which is interrupted (such as by a timeout) would
+    leave data on the socket.
+
+
+
+    [1]: https://github.com/excon/excon
+  affected_package: excon
+  vulnerable_versions:
+  - "<0.71.0"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2019-16779
+  cwe:
+  - CWE-362
+  - CWE-664
+  disclosed_date: 2019-12-16
+  created_date: 2019-12-17
+  last_modified_date: 2019-12-17
+  credit:
+  - Patrick Ellis
+  references:
+  - https://github.com/excon/excon/commit/ccb57d7a422f020dc74f1de4e8fb505ab46d8a29
+  - https://github.com/excon/excon/security/advisories/GHSA-q58g-455p-8vw9
+  source_url: https://snyk.io/vuln/SNYK-RUBY-EXCON-537866

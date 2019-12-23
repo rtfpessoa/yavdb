@@ -39,15 +39,19 @@
 - id: snykio:maven:org.fusesource.hawtjni:hawtjni-runtime:30093
   title: Arbitrary Code Injection
   description: |
-    [`org.fusesource.hawtjni:hawtjni-runtime`][1] Race condition in
-    hawtjni-runtime/src/main/java/org/fusesource/hawtjni/runtime/Library.java
-    in HawtJNI before 1.8, when a custom library path is not specified,
-    allows local users to execute arbitrary Java code by overwriting a
-    temporary JAR file with a predictable name in /tmp.
+    [org.fusesource.hawtjni:hawtjni-runtime][1] is a JNI code generator
+    based on the JNI generator used by the eclipse SWT project.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Injection in
+    `hawtjni-runtime/src/main/java/org/fusesource/hawtjni/runtime/Library.java
+    in`. When a custom library path is not specified, allows local users to
+    execute arbitrary Java code by overwriting a temporary JAR file with a
+    predictable name in /tmp.
 
 
 
-    [1]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22hawtjni-runtime%22
+    [1]: https://github.com/fusesource/hawtjni
   affected_package: org.fusesource.hawtjni:hawtjni-runtime
   vulnerable_versions:
   - "< 1.8"

@@ -2,7 +2,9 @@
 - id: snykio:pypi:keystone:40020
   title: Privilege Escalation
   description: |
-    [`keystone`][1] is a very simple web framework
+    [keystone][1] is a that provides authentication, authorization and
+    service discovery mechanisms via HTTP primarily for use by projects in
+    the OpenStack family.
 
     Affected versions of this package are vulnerable to Privilege
     Escalation. The LDAP backend in OpenStack Identity (Keystone) Grizzly
@@ -12,10 +14,10 @@
 
 
 
-    [1]: https://pypi.python.org/pypi/keystone
+    [1]: https://docs.openstack.org/keystone/latest/
   affected_package: keystone
   vulnerable_versions:
-  - "<= 2013.2.1"
+  - "< 2014.1"
   severity: medium
   package_manager: pypi
   cve:
@@ -31,6 +33,39 @@
   - https://github.com/openstack/keystone/commit/c6800c
   - https://nvd.nist.gov/vuln/detail/CVE-2013-4477
   source_url: https://snyk.io/vuln/SNYK-PYTHON-KEYSTONE-40020
+- id: snykio:pypi:keystone:537036
+  title: Privilege Escalation
+  description: |
+    [keystone][1] is a that provides authentication, authorization and
+    service discovery mechanisms via HTTP primarily for use by projects in
+    the OpenStack family.
+
+    Affected versions of this package are vulnerable to Privilege Escalation
+    via the list credentials API. Any user with a role on a project is able
+    to list any credentials with the `/v3/credentials` API when
+    `enforce_scope` is false.
+
+
+
+    [1]: https://docs.openstack.org/keystone/latest/
+  affected_package: keystone
+  vulnerable_versions:
+  - ">= 15.0.0"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2019-19687
+  cwe:
+  - CWE-269
+  disclosed_date: 2019-12-09
+  created_date: 2019-12-09
+  last_modified_date: 2019-12-09
+  credit:
+  - Unknown
+  references:
+  - https://bugs.launchpad.net/keystone/+bug/968696
+  - https://github.com/openstack/keystone/commit/17c337dbdbfb9d548ad531c2ad0483c9bce5b98f
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-KEYSTONE-537036
 - id: victims:pypi:keystone:2013-4477
   title: 'OpenStack keystone: unintentional role granting'
   affected_package: keystone
