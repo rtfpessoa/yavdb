@@ -2642,6 +2642,172 @@
   - https://github.com/TYPO3/TYPO3.CMS/commit/d593a69cce127af59d62d2c22184d491cd9f5408
   - https://typo3.org/security/advisory/typo3-core-sa-2019-014/
   source_url: https://snyk.io/vuln/SNYK-PHP-TYPO3CMS-450932
+- id: snykio:packagist:typo3/cms:538226
+  title: SQL injection
+  description: |
+    [typo3/cms][1] is a free open source Content Management Framework.
+
+    Affected versions of this package are vulnerable to SQL injection via
+    the class `QueryGenerator`. Exploitation requires having the system
+    extension `ext:lowlevel` installed, and a valid backend user who has
+    administrator privileges.
+
+
+
+    [1]: https://packagist.org/packages/typo3/cms
+  affected_package: typo3/cms
+  vulnerable_versions:
+  - ">=10.0.0  <10.2.1"
+  - ">=8.0.0  <8.7.30"
+  - ">=9.0.0  <9.5.12"
+  severity: medium
+  package_manager: packagist
+  cve:
+  - CVE-2019-19850
+  cwe:
+  - CWE-89
+  disclosed_date: 2019-12-17
+  created_date: 2019-12-18
+  last_modified_date: 2019-12-18
+  credit:
+  - Dhiraj Shrikant Data
+  references:
+  - https://github.com/TYPO3/TYPO3.CMS/commit/948df21e45cf8beffa3d472e5c06f2f84833e432
+  - https://typo3.org/security/advisory/typo3-core-sa-2019-025/
+  source_url: https://snyk.io/vuln/SNYK-PHP-TYPO3CMS-538226
+- id: snykio:packagist:typo3/cms:538229
+  title: Deserialization of Untrusted Data
+  description: |
+    [typo3/cms][1] is a free open source Content Management Framework.
+
+    Affected versions of this package are vulnerable to Deserialization of
+    Untrusted Data. User submitted payload has to be signed with a
+    corresponding HMAC-SHA1 using the sensitive TYPO3 encryptionKey as
+    secret - invalid or unsigned payload is not deserialized. This could
+    lead to sensitive information being leaked.
+
+
+
+    [1]: https://packagist.org/packages/typo3/cms
+  affected_package: typo3/cms
+  vulnerable_versions:
+  - ">=8.0.0  <8.7.30"
+  - ">=9.0.0  <9.5.12"
+  severity: high
+  package_manager: packagist
+  cwe:
+  - CWE-502
+  disclosed_date: 2019-12-17
+  created_date: 2019-12-18
+  last_modified_date: 2019-12-18
+  credit:
+  - Oliver Hader
+  references:
+  - https://github.com/TYPO3-CMS/core/commit/6af9558b9cd490d9130b85f99e3fdcfad2885ec1
+  - https://typo3.org/security/advisory/typo3-psa-2019-011/
+  source_url: https://snyk.io/vuln/SNYK-PHP-TYPO3CMS-538229
+- id: snykio:packagist:typo3/cms:538230
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [typo3/cms][1] is a free open source Content Management Framework.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). Output of field validation errors in the Form Framework can
+    result in user input being reflected without proper output encoding.
+
+
+
+    [1]: https://packagist.org/packages/typo3/cms
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
+  affected_package: typo3/cms
+  vulnerable_versions:
+  - ">=10.0.0  <10.2.1"
+  - ">=8.0.0  <8.7.30"
+  - ">=9.0.0  <9.5.12"
+  severity: medium
+  package_manager: packagist
+  cwe:
+  - CWE-79
+  disclosed_date: 2019-12-17
+  created_date: 2019-12-18
+  last_modified_date: 2019-12-18
+  credit:
+  - Aslam Idrisov
+  references:
+  - https://github.com/TYPO3/TYPO3.CMS/commit/37ed78a1988af220eeb1933bf5a3137e4e7bbf4e
+  - https://typo3.org/security/advisory/typo3-core-sa-2019-021/
+  source_url: https://snyk.io/vuln/SNYK-PHP-TYPO3CMS-538230
 - id: snykio:packagist:typo3/cms:538236
   title: Cross-site Scripting (XSS)
   description: |+
@@ -2747,6 +2913,43 @@
   - https://github.com/TYPO3/TYPO3.CMS/commit/21e9e6430586b66f425dd6f93a83f597ecd20b3c
   - https://typo3.org/security/advisory/typo3-core-sa-2019-023/
   source_url: https://snyk.io/vuln/SNYK-PHP-TYPO3CMS-538236
+- id: snykio:packagist:typo3/cms:538238
+  title: Arbitrary File Write via Archive Extraction (Zip Slip)
+  description: "[typo3/cms][1] is a free open source Content Management Framework.\n\nAffected
+    versions of this package are vulnerable to Arbitrary File Write\nvia Archive Extraction
+    (Zip Slip). Extraction of manually uploaded ZIP\narchives in Extension Manager
+    is vulnerable to directory traversal.\nAdmin privileges are required in order
+    to exploit this vulnerability.\nSince TYPO3 v9 LTS, System Maintainer privileges
+    are required as well.\n\n\n\n[1]: https://packagist.org/packages/typo3/cms\n\\nIt
+    is exploited using a specially crafted zip archive, that holds path\ntraversal
+    filenames. When exploited, a filename in a malicious archive\nis concatenated
+    to the target extraction directory, which results in the\nfinal path ending up
+    outside of the target folder. For instance, a zip\nmay hold a file with a \\\"../../file.exe\\\"
+    location and thus break out of\nthe target folder. If an executable or a configuration
+    file is\noverwritten with a file containing malicious code, the problem can turn\ninto
+    an arbitrary code execution issue quite easily.\n\nThe following is an example
+    of a zip archive with one benign file and\none malicious file. Extracting the
+    malicous file will result in\ntraversing out of the target folder, ending up in
+    `/root/.ssh/`\noverwriting the `authorized_keys` file:\n\n    \n    +2018-04-15
+    22:04:29 ..... 19 19 good.txt\n    \n    +2018-04-15 22:04:42 ..... 20 20 ../../../../../../root/.ssh/authorized_keys\n\n"
+  affected_package: typo3/cms
+  vulnerable_versions:
+  - ">=10.0.0  <10.2.1"
+  - ">=8.0.0  <8.7.30"
+  - ">=9.0.0  <9.5.12"
+  severity: medium
+  package_manager: packagist
+  cwe:
+  - CWE-22
+  disclosed_date: 2019-12-17
+  created_date: 2019-12-18
+  last_modified_date: 2019-12-18
+  credit:
+  - Unknown
+  references:
+  - https://github.com/TYPO3/TYPO3.CMS/commit/0efda30ca4181898e17614a195b234954d353f2b
+  - https://typo3.org/security/advisory/typo3-core-sa-2019-024/
+  source_url: https://snyk.io/vuln/SNYK-PHP-TYPO3CMS-538238
 - id: snykio:packagist:typo3/cms:538240
   title: Cross-site Scripting (XSS)
   description: |+
