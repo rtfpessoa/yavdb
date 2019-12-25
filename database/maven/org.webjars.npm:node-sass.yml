@@ -1,0 +1,33 @@
+---
+- id: snykio:maven:org.webjars.npm:node-sass:539666
+  title: Use After Free
+  description: |
+    [org.webjars.npm:node-sass][1] is a Node.js bindings to libsass.
+
+    Affected versions of this package are vulnerable to Use After Free. A
+    use-after-free vulnerability exists in `handle_error()` in
+    `sass_context.cpp` in LibSass 3.4.x and 3.5.x through 3.5.4 that could
+    be leveraged to cause a denial of service (application crash) or
+    possibly unspecified other impact. `node-sass` is affected by this
+    vulnerability due to its usage of `libsass`.
+
+
+
+    [1]: https://npmjs.org/package/node-sass
+  affected_package: org.webjars.npm:node-sass
+  vulnerable_versions:
+  - ">= 4.6.1"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2018-11499
+  cwe:
+  - CWE-416
+  disclosed_date: 2018-05-28
+  created_date: 2019-11-25
+  last_modified_date: 2019-11-25
+  credit:
+  - Unkown
+  references:
+  - https://github.com/sass/libsass/issues/2643
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-539666
