@@ -1,0 +1,37 @@
+---
+- id: snykio:maven:io.alauda.jenkins.plugins:alauda-kubernetes-support:538456
+  title: Cross-Site Request Forgery (CSRF)
+  description: |
+    [io.alauda.jenkins.plugins:alauda-kubernetes-support][1] is a plugin for
+    Jenkins.
+
+    Affected versions of this package are vulnerable to Cross-Site Request
+    Forgery (CSRF). The package does not require POST requests on a
+    connection test method, resulting in a CSRF vulnerability. This allows
+    attackers to have Jenkins connect to Kubernetes-related paths on an
+    attacker-specified web server using attacker-specified credentials IDs
+    obtained through another method, capturing \'Secret Text\' credentials
+    stored in Jenkins.
+
+    Additionally, if no credentials ID is specified, the connection uses the
+    default Kubernetes token from
+    `/var/run/secrets/kubernetes.io/serviceaccount/token`.
+
+
+
+    [1]: https://plugins.jenkins.io/alauda-kubernetes-support
+  affected_package: io.alauda.jenkins.plugins:alauda-kubernetes-support
+  vulnerable_versions:
+  - ">= 0"
+  severity: medium
+  package_manager: maven
+  cwe:
+  - CWE-352
+  disclosed_date: 2019-12-17
+  created_date: 2019-12-20
+  last_modified_date: 2019-12-20
+  credit:
+  - Viktor Gazdag NCC Group
+  references:
+  - https://jenkins.io/security/advisory/2019-12-17/
+  source_url: https://snyk.io/vuln/SNYK-JAVA-IOALAUDAJENKINSPLUGINS-538456

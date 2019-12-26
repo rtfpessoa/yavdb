@@ -1,38 +1,19 @@
 ---
-- id: npmjs:npm:nextcloud-vue-collections:1442
-  title: Cross-Site Scripting
-  description: Versions of `nextcloud-vue-collections` prior to 0.4.2 are vulnerable
-    to Cross-Site Scripting (XSS).  The `v-tooltip` component has an insecure `defaultHTML`
-    configuration that allows arbitrary JavaScript to be injected in the tooltip of
-    a collection item. This allows attackers to execute arbitrary code in a victim's
-    browser.
-  affected_package: nextcloud-vue-collections
-  vulnerable_versions:
-  - "<0.4.2"
-  severity: high
-  package_manager: npm
-  cwe: CWE-79
-  disclosed_date: 1970-01-01
-  created_date: 1970-01-01
-  last_modified_date: 1970-01-01
-  credit: Julius Härtl
-  references: https://npmjs.com/advisories/1442
-  source_url: https://npmjs.com/advisories/1442
-- id: snykio:npm:nextcloud-vue-collections:538459
+- id: snykio:maven:tech.andrey.jenkins:mission-control-view:538446
   title: Cross-site Scripting (XSS)
   description: |+
-    [nextcloud-vue-collections][1] is a vue component for collections
-    management introduced in Nextcloud 16 to be integrated in apps.
+    [tech.andrey.jenkins:mission-control-view][1] is a full screen dashboard
+    view featuring job history, build queue, and current status of jobs and
+    nodes.
 
     Affected versions of this package are vulnerable to Cross-site Scripting
-    (XSS). The `v-tooltip` component has an insecure `defaultHTML`
-    configuration that allows arbitrary JavaScript to be injected in the
-    tooltip of a collection item. This allows attackers to execute arbitrary
-    code in a victim\'s browser.
+    (XSS). The plugin does not escape job display names and build names
+    shown on its view, resulting in a stored XSS vulnerability exploitable
+    by attackers able to change these properties.
 
 
 
-    [1]: https://github.com/juliushaertl/nextcloud-vue-collections
+    [1]: https://plugins.jenkins.io/mission-control-view
     \nA cross-site scripting attack occurs when the attacker tricks a
     legitimate web-based application or site to accept a request as
     originating from a trusted source.
@@ -105,19 +86,20 @@
     * Read the documentation for any of the libraries referenced in your
       code to understand which elements allow for embedded HTML.
 
-  affected_package: nextcloud-vue-collections
+  affected_package: tech.andrey.jenkins:mission-control-view
   vulnerable_versions:
-  - "<0.4.2"
-  severity: high
-  package_manager: npm
+  - ">= 0"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2019-16563
   cwe:
   - CWE-79
-  disclosed_date: 2019-12-19
+  disclosed_date: 2019-12-17
   created_date: 2019-12-20
   last_modified_date: 2019-12-20
   credit:
-  - Julius Härtl
+  - Viktor Gazdag NCC Group
   references:
-  - https://github.com/juliushaertl/nextcloud-vue-collections/commit/8ec1fca214f003538cec4137792ede928f25f583
-  - https://www.npmjs.com/advisories/1442
-  source_url: https://snyk.io/vuln/SNYK-JS-NEXTCLOUDVUECOLLECTIONS-538459
+  - https://jenkins.io/security/advisory/2019-12-17/
+  source_url: https://snyk.io/vuln/SNYK-JAVA-TECHANDREYJENKINS-538446

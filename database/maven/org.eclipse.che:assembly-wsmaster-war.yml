@@ -1,0 +1,37 @@
+---
+- id: snykio:maven:org.eclipse.che:assembly-wsmaster-war:538427
+  title: Cross-Site Request Forgery (CSRF)
+  description: |
+    [org.eclipse.che:assembly-wsmaster-war][1] is a next-generation
+    container development platform, developer workspace server and cloud IDE
+
+    Affected versions of this package are vulnerable to Cross-Site Request
+    Forgery (CSRF). With both authentication and TLS disabled, visiting a
+    malicious web site could trigger the start of an arbitrary Che
+    workspace. Che with no authentication and no TLS is not usually deployed
+    on a public network but is often used for local installations (e.g. on
+    personal laptops). In this case, even if the Che API is not exposed
+    externally, some javascript running in the local browser is able to send
+    requests to it.
+
+
+
+    [1]: http://eclipse.org/che
+  affected_package: org.eclipse.che:assembly-wsmaster-war
+  vulnerable_versions:
+  - ">= 6.16.0 < 7.3.1"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2019-17633
+  cwe:
+  - CWE-352
+  disclosed_date: 2019-12-19
+  created_date: 2019-12-20
+  last_modified_date: 2019-12-20
+  credit:
+  - Unknown
+  references:
+  - https://bugs.eclipse.org/bugs/show_bug.cgi?id=551596
+  - https://github.com/eclipse/che/pull/14921
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGECLIPSECHE-538427

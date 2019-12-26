@@ -1,0 +1,41 @@
+---
+- id: snykio:maven:com.sonyericsson.hudson.plugins.gerrit:gerrit-trigger:538458
+  title: Cross-Site Request Forgery (CSRF)
+  description: |
+    [com.sonyericsson.hudson.plugins.gerrit:gerrit-trigger][1] is a that
+    integrates Jenkins to Gerrit code review for triggering builds when a
+    \"patch set\" is created
+
+    Affected versions of this package are vulnerable to Cross-Site Request
+    Forgery (CSRF). Does not perform permission checks in methods performing
+    form validation. This allows users with Overall/Read access to perform
+    connection tests, connecting to an HTTP URL or SSH server using
+    attacker-specified credentials, or determine whether files with an
+    attacker-specified path exist on the Jenkins master file system.
+
+    Additionally, these form validation methods do not require POST
+    requests, resulting in a CSRF vulnerability.
+
+
+
+    [1]: https://plugins.jenkins.io/gerrit-trigger
+  affected_package: com.sonyericsson.hudson.plugins.gerrit:gerrit-trigger
+  vulnerable_versions:
+  - "< 2.30.2"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2019-16551
+  - CVE-2019-16552
+  cwe:
+  - CWE-352
+  disclosed_date: 2019-12-17
+  created_date: 2019-12-20
+  last_modified_date: 2019-12-20
+  credit:
+  - Alex Earl (@alexcearl)
+  - Inc.
+  - Marvell Semiconductor
+  references:
+  - https://jenkins.io/security/advisory/2019-12-17/
+  source_url: https://snyk.io/vuln/SNYK-JAVA-COMSONYERICSSONHUDSONPLUGINSGERRIT-538458
