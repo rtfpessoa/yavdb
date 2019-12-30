@@ -1,0 +1,74 @@
+---
+- id: snykio:go:github.com/square/go-jose:540149
+  title: Signature Validation Bypass
+  description: |
+    [github.com/square/go-jose][1] is a Package that aims to provide an
+    implementation of the Javascript Object Signing and Encryption set of
+    standards.
+
+    Affected versions of this package are vulnerable to Signature Validation
+    Bypass. The go-jose library supports messages with multiple signatures.
+    However, when validating a signed message the API did not indicate which
+    signature was valid, which could potentially lead to confusion. For
+    example, users of the library might mistakenly read protected header
+    values from an attached signature that was different from the one
+    originally validated.
+
+
+
+    [1]: https://github.com/square/go-jose
+  affected_package: github.com/square/go-jose
+  vulnerable_versions:
+  - "<1.1.0"
+  severity: high
+  package_manager: go
+  cve:
+  - CVE-2016-9122
+  cwe:
+  - CWE-284
+  disclosed_date: 2016-09-22
+  created_date: 2016-09-22
+  last_modified_date: 2016-09-22
+  credit:
+  - Unknown
+  references:
+  - http://www.openwall.com/lists/oss-security/2016/11/03/1
+  - https://github.com/square/go-jose/commit/2c5656adca9909843c4ff50acf1d2cf8f32da7e6
+  - https://hackerone.com/reports/169629
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMSQUAREGOJOSE-540149
+- id: snykio:go:github.com/square/go-jose:540150
+  title: Elliptic Curve Key Disclosure
+  description: |
+    [github.com/square/go-jose][1] is a Package that aims to provide an
+    implementation of the Javascript Object Signing and Encryption set of
+    standards.
+
+    Affected versions of this package are vulnerable to Elliptic Curve Key
+    Disclosure. It suffers from an invalid curve attack for the ECDH-ES
+    algorithm. When deriving a shared key using ECDH-ES for an encrypted
+    message, go-jose neglected to check that the received public key on a
+    message is on the same curve as the static private key of the receiver,
+    thus making it vulnerable to an invalid curve attack.
+
+
+
+    [1]: https://github.com/square/go-jose
+  affected_package: github.com/square/go-jose
+  vulnerable_versions:
+  - "<1.0.4"
+  severity: high
+  package_manager: go
+  cve:
+  - CVE-2016-9121
+  cwe:
+  - CWE-200
+  disclosed_date: 2017-02-16
+  created_date: 2017-02-16
+  last_modified_date: 2017-02-16
+  credit:
+  - Unknown
+  references:
+  - http://www.openwall.com/lists/oss-security/2016/11/03/1
+  - https://github.com/square/go-jose/commit/c7581939a3656bb65e89d64da0a52364a33d2507
+  - https://hackerone.com/reports/164590
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMSQUAREGOJOSE-540150
