@@ -40,7 +40,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'execjs', ['~> 2.7']
   spec.add_runtime_dependency 'json', ['~> 2.2']
   spec.add_runtime_dependency 'kramdown', ['~> 2.1']
-  spec.add_runtime_dependency 'oga', ['~> 2.15']
+  spec.add_runtime_dependency 'oga', '>= 2.15', '< 4.0'
   spec.add_runtime_dependency 'semantic_interval', ['~> 0.1']
   spec.add_runtime_dependency 'therubyracer', ['~> 0.12']
   spec.add_runtime_dependency 'thor', ['~> 0.20']
