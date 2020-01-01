@@ -25,7 +25,7 @@ Gem::Specification.new do |spec|
 
   # Development
   spec.add_development_dependency 'codacy-coverage'
-  spec.add_development_dependency 'rake', ['~> 12.3']
+  spec.add_development_dependency 'rake', '~> 13.0'
   spec.add_development_dependency 'rspec', ['~> 3.8']
   spec.add_development_dependency 'rspec_junit_formatter', ['~> 0.4']
   spec.add_development_dependency 'simplecov'
