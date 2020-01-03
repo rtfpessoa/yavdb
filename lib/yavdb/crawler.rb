@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Dir[File.expand_path('sources/*.rb', __dir__)].each do |file|
+Dir[File.expand_path('sources/*.rb', __dir__)].sort.each do |file|
   require file
 end
 
