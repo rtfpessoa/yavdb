@@ -127,3 +127,41 @@
   - https://github.com/opencontainers/runc/pull/2185
   - https://github.com/opencontainers/runc/pull/2185/commits/8541d9cf3d8b6d46614cc41aaf38eaa2419549df
   source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMOPENCONTAINERSRUNCLIBCONTAINER-539933
+- id: snykio:go:github.com/opencontainers/runc/libcontainer:540485
+  title: Race Condition
+  description: |
+    [github.com/opencontainers/runc/libcontainer][1] is a package for a
+    modern container runtime.
+
+    Affected versions of this package are vulnerable to Race Condition. an
+    attacker who controls the container image for two containers that share
+    a volume can race volume mounts during container initialization, by
+    adding a symlink to the rootfs that points to a directory on the volume.
+    The second container won\'t be able to see the actual mount, but it can
+    race it by modifying the mount point on the volume.
+
+    This can be exploited for a full container breakout by racing
+    readonly/mask mounts, allowing writes to dangerous paths like
+    `/proc/sys/kernel/core_pattern`.
+
+
+
+    [1]: https://www.opencontainers.org/
+  affected_package: github.com/opencontainers/runc/libcontainer
+  vulnerable_versions:
+  - "*"
+  severity: medium
+  package_manager: go
+  cve:
+  - CVE-2019-19921
+  cwe:
+  - CWE-362
+  disclosed_date: 2019-12-24
+  created_date: 2020-01-02
+  last_modified_date: 2020-01-02
+  credit:
+  - Unknown
+  references:
+  - https://github.com/opencontainers/runc/issues/2197
+  - https://github.com/opencontainers/runc/pull/2190
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMOPENCONTAINERSRUNCLIBCONTAINER-540485

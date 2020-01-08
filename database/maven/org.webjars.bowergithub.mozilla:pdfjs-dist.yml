@@ -1,16 +1,19 @@
 ---
-- id: snykio:maven:org.webjars.npm:editor.md:539330
+- id: snykio:maven:org.webjars.bowergithub.mozilla:pdfjs-dist:539598
   title: Cross-site Scripting (XSS)
   description: |+
-    [editor.md][1] is the open source embeddable online markdown editor
-    (component), based on CodeMirror &amp; jQuery &amp; Marked.
+    [org.webjars.bowergithub.mozilla:pdfjs-dist][1] is a Portable Document
+    Format (PDF) library that is built with HTML5.
 
     Affected versions of this package are vulnerable to Cross-site Scripting
-    (XSS) via crafted attributes of an invalid `IMG` element.
+    (XSS). The PDF viewer does not sufficiently sanitize PostScript
+    calculator functions, allowing malicious JavaScript to be injected
+    through a crafted PDF file. This JavaScript can then be run with the
+    permissions of the PDF viewer by its worker.
 
 
 
-    [1]: https://www.npmjs.com/package/editor.md
+    [1]: http://mozilla.github.io/pdf.js/
     \nA cross-site scripting attack occurs when the attacker tricks a
     legitimate web-based application or site to accept a request as
     originating from a trusted source.
@@ -83,54 +86,23 @@
     * Read the documentation for any of the libraries referenced in your
       code to understand which elements allow for embedded HTML.
 
-  affected_package: org.webjars.npm:editor.md
+  affected_package: org.webjars.bowergithub.mozilla:pdfjs-dist
   vulnerable_versions:
-  - ">= 0"
-  severity: medium
+  - "< 2.0.943"
+  severity: high
   package_manager: maven
   cve:
-  - CVE-2018-16330
+  - CVE-2018-5158
   cwe:
   - CWE-79
-  disclosed_date: 2018-09-02
-  created_date: 2018-09-05
-  last_modified_date: 2018-09-05
+  disclosed_date: 2018-06-11
+  created_date: 2019-09-26
+  last_modified_date: 2019-09-26
   credit:
-  - Unknown
+  - Wladimir Palant
   references:
-  - https://github.com/pandao/editor.md/issues/612
-  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-539330
-- id: snykio:maven:org.webjars.npm:editor.md:539677
-  title: Cross-site Scripting (XSS)
-  description: |
-    [org.webjars.npm:editor.md][1] is a open source embeddable online
-    markdown editor (component), based on CodeMirror &amp; jQuery &amp;
-    Marked.
-
-    Affected versions of this package are vulnerable to Cross-site Scripting
-    (XSS) via the `Javascript:` string.
-
-    \##POC by pzyc0k: `[xss poc](Javascript:alert("pzyc0 poc xss with cookie:
-    " + document.cookie))`
-
-
-
-    [1]: https://www.npmjs.com/package/editor.md
-  affected_package: org.webjars.npm:editor.md
-  vulnerable_versions:
-  - "> 0.0.0"
-  severity: medium
-  package_manager: maven
-  cve:
-  - CVE-2019-14517
-  cwe:
-  - CWE-79
-  disclosed_date: 2019-08-01
-  created_date: 2019-11-26
-  last_modified_date: 2019-11-26
-  credit:
-  - pzyc0k
-  references:
-  - https://github.com/pandao/editor.md/issues/709
-  - https://nvd.nist.gov/vuln/detail/CVE-2019-14517
-  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-539677
+  - https://bugzilla.mozilla.org/show_bug.cgi?id=1452075
+  - https://github.com/mozilla/pdf.js/commit/2dc4af525d1612c98afcd1e6bee57d4788f78f97
+  - https://github.com/mozilla/pdf.js/pull/9659
+  - https://www.mozilla.org/en-US/security/advisories/mfsa2018-12/#CVE-2018-5158
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSBOWERGITHUBMOZILLA-539598
