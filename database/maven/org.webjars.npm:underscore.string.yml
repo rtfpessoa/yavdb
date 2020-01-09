@@ -1,30 +1,29 @@
 ---
 - id: snykio:maven:org.webjars.npm:underscore.string:480293
   title: Regular Expression Denial of Service (ReDoS)
-  description: "[underscore.string][1] is a String manipulation helpers for javascript.\n\nAffected
-    versions of this package are vulnerable to Regular Expression\nDenial of Service
-    (ReDoS). It parses dates using regex strings, which\nmay cause a slowdown of 2
-    seconds per 50k characters.\n\n\n\n[1]: https://www.npmjs.com/package/underscore.string\n\\nDenial
-    of Service (DoS) describes a family of attacks, all aimed at\nmaking a system
-    inaccessible to its original and legitimate users. There\nare many types of DoS
-    attacks, ranging from trying to clog the network\npipes to the system by generating
-    a large volume of traffic from many\nmachines (a Distributed Denial of Service
-    - DDoS - attack) to sending\ncrafted requests that cause a system to crash or
-    take a disproportional\namount of time to process.\n\nThe Regular expression Denial
-    of Service (ReDoS) is a type of Denial of\nService attack. Regular expressions
-    are incredibly powerful, but they\naren\\'t very intuitive and can ultimately
-    end up making it easy for\nattackers to take your site down.\n\nLet’s take the
-    following regular expression as an example:\n\n    regex = /A(B|C+)+D/\n{: .language-js}\n\nThis
-    regular expression accomplishes the following:\n\n* `A` The string must start
-    with the letter \\'A\\'\n* `(B|C+)+` The string must then follow the letter A
-    with either the\n  letter \\'B\\' or some number of occurrences of the letter
-    \\'C\\' (the\n  `+` matches one or more times). The `+` at the end of this section\n
-    \ states that we can look for one or more matches of this section.\n* `D` Finally,
-    we ensure this section of the string ends with a \\'D\\'\n\nThe expression would
-    match inputs such as `ABBD`, `ABCCCCD`, `ABCBCCCD`\nand `ACCCCCD`\n\nIt most cases,
-    it doesn\\'t take very long for a regex engine to find a\nmatch:\n\n    $ time
-    node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCD\")'\n    0.04s user
-    0.01s system 95% cpu 0.052 total\n    \n    $ time node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCX\")'\n
+  description: "`org.webjars.npm:underscore.string` is a None\n\nAffected versions
+    of this package are vulnerable to Regular Expression\nDenial of Service (ReDoS).
+    It parses dates using regex strings, which\nmay cause a slowdown of 2 seconds
+    per 50k characters.\n\n\\nDenial of Service (DoS) describes a family of attacks,
+    all aimed at\nmaking a system inaccessible to its original and legitimate users.
+    There\nare many types of DoS attacks, ranging from trying to clog the network\npipes
+    to the system by generating a large volume of traffic from many\nmachines (a Distributed
+    Denial of Service - DDoS - attack) to sending\ncrafted requests that cause a system
+    to crash or take a disproportional\namount of time to process.\n\nThe Regular
+    expression Denial of Service (ReDoS) is a type of Denial of\nService attack. Regular
+    expressions are incredibly powerful, but they\naren\\'t very intuitive and can
+    ultimately end up making it easy for\nattackers to take your site down.\n\nLet’s
+    take the following regular expression as an example:\n\n    regex = /A(B|C+)+D/\n{:
+    .language-js}\n\nThis regular expression accomplishes the following:\n\n* `A`
+    The string must start with the letter \\'A\\'\n* `(B|C+)+` The string must then
+    follow the letter A with either the\n  letter \\'B\\' or some number of occurrences
+    of the letter \\'C\\' (the\n  `+` matches one or more times). The `+` at the end
+    of this section\n  states that we can look for one or more matches of this section.\n*
+    `D` Finally, we ensure this section of the string ends with a \\'D\\'\n\nThe expression
+    would match inputs such as `ABBD`, `ABCCCCD`, `ABCBCCCD`\nand `ACCCCCD`\n\nIt
+    most cases, it doesn\\'t take very long for a regex engine to find a\nmatch:\n\n
+    \   $ time node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCD\")'\n    0.04s
+    user 0.01s system 95% cpu 0.052 total\n    \n    $ time node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCX\")'\n
     \   1.79s user 0.02s system 99% cpu 1.812 total\n{: .language-bash}\n\nThe entire
     process of testing it against a 30 characters long string\ntakes around ~52ms.
     But when given an invalid string, it takes nearly\ntwo seconds to complete the

@@ -4,17 +4,13 @@
   description: "[github.com/cockroachdb/cockroach/pkg/workload/querylog][1] is a package\npart
     of CockroachDB - the open source, cloud-native SQL database.\n\nAffected versions
     of this package are vulnerable to Arbitrary File Write\nvia Archive Extraction
-    (Zip Slip). Downloaded files passed to the\npackage could traverse outside of
-    the intended folder and overwrite\nfiles within a system when a malicious archive
-    is extracted. Note: This\nvulnerability is considered to be of low risk since
-    files passed to\nunzip function can occur from only specific inputs provided by
-    rclone.\n\n\n\n[1]: https://github.com/cockroachdb/cockroach\n\\nIt is exploited
-    using a specially crafted zip archive, that holds path\ntraversal filenames. When
-    exploited, a filename in a malicious archive\nis concatenated to the target extraction
-    directory, which results in the\nfinal path ending up outside of the target folder.
-    For instance, a zip\nmay hold a file with a \\\"../../file.exe\\\" location and
-    thus break out of\nthe target folder. If an executable or a configuration file
-    is\noverwritten with a file containing malicious code, the problem can turn\ninto
+    (Zip Slip). None\n\n\n\n[1]: https://github.com/cockroachdb/cockroach\n\\nIt is
+    exploited using a specially crafted zip archive, that holds path\ntraversal filenames.
+    When exploited, a filename in a malicious archive\nis concatenated to the target
+    extraction directory, which results in the\nfinal path ending up outside of the
+    target folder. For instance, a zip\nmay hold a file with a \\\"../../file.exe\\\"
+    location and thus break out of\nthe target folder. If an executable or a configuration
+    file is\noverwritten with a file containing malicious code, the problem can turn\ninto
     an arbitrary code execution issue quite easily.\n\nThe following is an example
     of a zip archive with one benign file and\none malicious file. Extracting the
     malicous file will result in\ntraversing out of the target folder, ending up in

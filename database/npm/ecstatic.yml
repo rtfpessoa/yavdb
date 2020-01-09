@@ -173,19 +173,22 @@
 - id: snykio:npm:ecstatic:20151223
   title: Denial of Service (DoS)
   description: |+
-    Sending a purposefully crafted invalid date in the `If-Modified-Since`
-    header will cause the `Ecstatic` server to crash, enabling an easily
-    exploited `Denial of Service` attack.
+    [ecstatic][1] is a simple static file server middleware. Use it with a
+    raw http server, express/connect or on the CLI.
 
-    The vulnerability is caused by the combination of two bugs. First, the
-    underlying V8 engine throws an exception when processing the specially
-    crafted date, instead of stating the date is invalid as it should.
-    Second, the ecstatic server does not handle the exception, triggering
-    the crash.
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS). The vulnerability is caused by the combination of two bugs.
+    First, the underlying V8 engine throws an exception when processing the
+    specially crafted date, instead of stating the date is invalid as it
+    should. Second, the ecstatic server does not handle the exception,
+    triggering the crash.
 
     Upgrading `Ecstatic` will address the second issue and thus fix the
     vulnerability.
 
+
+
+    [1]: https://www.npmjs.com/package/ecstatic
     \nDenial of Service (DoS) describes a family of attacks, all aimed at
     making a system inaccessible to its intended and legitimate users.
 
@@ -233,10 +236,10 @@
 - id: snykio:npm:ecstatic:20160809
   title: Denial of Service (DoS)
   description: |+
-    [`ecstatic`][1] is a simple static file server middleware that works
-    with both Express and Flatiron.
+    [ecstatic][1] is a simple static file server middleware. Use it with a
+    raw http server, express/connect or on the CLI.
 
-    Affected versions of the package are vulnerable to Denial of Service
+    Affected versions of this package are vulnerable to Denial of Service
     (DoS). The process of replacing null bytes in the url string is being
     done in a loop:
 

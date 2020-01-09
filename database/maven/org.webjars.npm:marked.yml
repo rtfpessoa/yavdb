@@ -268,30 +268,30 @@
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-479905
 - id: snykio:maven:org.webjars.npm:marked:479910
   title: Regular Expression Denial of Service (ReDoS)
-  description: "[`marked`][1] is a markdown parser built for speed\n\nAffected versions
-    of this package are vulnerable to Regular Expression\nDenial of Service (ReDoS)
-    attacks. This can cause an impact of about 10\nseconds matching time for data
-    150 characters long.\n\n\n\n[1]: https://www.npmjs.com/package/marked\n\\nDenial
-    of Service (DoS) describes a family of attacks, all aimed at\nmaking a system
-    inaccessible to its original and legitimate users. There\nare many types of DoS
-    attacks, ranging from trying to clog the network\npipes to the system by generating
-    a large volume of traffic from many\nmachines (a Distributed Denial of Service
-    - DDoS - attack) to sending\ncrafted requests that cause a system to crash or
-    take a disproportional\namount of time to process.\n\nThe Regular expression Denial
-    of Service (ReDoS) is a type of Denial of\nService attack. Regular expressions
-    are incredibly powerful, but they\naren\\'t very intuitive and can ultimately
-    end up making it easy for\nattackers to take your site down.\n\nLet’s take the
-    following regular expression as an example:\n\n    regex = /A(B|C+)+D/\n{: .language-js}\n\nThis
-    regular expression accomplishes the following:\n\n* `A` The string must start
-    with the letter \\'A\\'\n* `(B|C+)+` The string must then follow the letter A
-    with either the\n  letter \\'B\\' or some number of occurrences of the letter
-    \\'C\\' (the\n  `+` matches one or more times). The `+` at the end of this section\n
-    \ states that we can look for one or more matches of this section.\n* `D` Finally,
-    we ensure this section of the string ends with a \\'D\\'\n\nThe expression would
-    match inputs such as `ABBD`, `ABCCCCD`, `ABCBCCCD`\nand `ACCCCCD`\n\nIt most cases,
-    it doesn\\'t take very long for a regex engine to find a\nmatch:\n\n    $ time
-    node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCD\")'\n    0.04s user
-    0.01s system 95% cpu 0.052 total\n    \n    $ time node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCX\")'\n
+  description: "[org.webjars.npm:marked][1] is a low-level compiler for parsing markdown\nwithout
+    caching or blocking for long periods of time.\n\nAffected versions of this package
+    are vulnerable to Regular Expression\nDenial of Service (ReDoS). This can cause
+    an impact of about 10 seconds\nmatching time for data 150 characters long.\n\n\n\n[1]:
+    https://marked.js.org/\n\\nDenial of Service (DoS) describes a family of attacks,
+    all aimed at\nmaking a system inaccessible to its original and legitimate users.
+    There\nare many types of DoS attacks, ranging from trying to clog the network\npipes
+    to the system by generating a large volume of traffic from many\nmachines (a Distributed
+    Denial of Service - DDoS - attack) to sending\ncrafted requests that cause a system
+    to crash or take a disproportional\namount of time to process.\n\nThe Regular
+    expression Denial of Service (ReDoS) is a type of Denial of\nService attack. Regular
+    expressions are incredibly powerful, but they\naren\\'t very intuitive and can
+    ultimately end up making it easy for\nattackers to take your site down.\n\nLet’s
+    take the following regular expression as an example:\n\n    regex = /A(B|C+)+D/\n{:
+    .language-js}\n\nThis regular expression accomplishes the following:\n\n* `A`
+    The string must start with the letter \\'A\\'\n* `(B|C+)+` The string must then
+    follow the letter A with either the\n  letter \\'B\\' or some number of occurrences
+    of the letter \\'C\\' (the\n  `+` matches one or more times). The `+` at the end
+    of this section\n  states that we can look for one or more matches of this section.\n*
+    `D` Finally, we ensure this section of the string ends with a \\'D\\'\n\nThe expression
+    would match inputs such as `ABBD`, `ABCCCCD`, `ABCBCCCD`\nand `ACCCCCD`\n\nIt
+    most cases, it doesn\\'t take very long for a regex engine to find a\nmatch:\n\n
+    \   $ time node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCD\")'\n    0.04s
+    user 0.01s system 95% cpu 0.052 total\n    \n    $ time node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCX\")'\n
     \   1.79s user 0.02s system 99% cpu 1.812 total\n{: .language-bash}\n\nThe entire
     process of testing it against a 30 characters long string\ntakes around ~52ms.
     But when given an invalid string, it takes nearly\ntwo seconds to complete the
@@ -334,7 +334,7 @@
   - Jamie Davis
   references:
   - https://github.com/markedjs/marked/pull/1083
-  - https://github.com/markedjs/marked/pull/1083
+  - https://github.com/markedjs/marked/pull/1083/commits/b15e42b67cec9ded8505e9d68bb8741ad7a9590d
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-479910
 - id: snykio:maven:org.webjars.npm:marked:479915
   title: Content & Code Injection (XSS)
@@ -699,10 +699,11 @@
 - id: snykio:maven:org.webjars.npm:marked:479940
   title: VBScript Content Injection
   description: |
-    Marked 0.3.2 and earlier is vulnerable to content injection even when
-    `sanitize: true` is enabled.
+    [org.webjars.npm:marked][1] is a low-level compiler for parsing markdown
+    without caching or blocking for long periods of time.
 
-    `[xss link](vbscript:alert(1))`
+    Affected versions of this package are vulnerable to VBScript Content
+    Injection. `[xss link](vbscript:alert(1))`
 
     will get a link
 
@@ -711,11 +712,9 @@
     This script does not work in IE 11 edge mode, but works in IE 10
     compatibility view.
 
-    *Source: [Node Security Project][1]*
 
 
-
-    [1]: https://nodesecurity.io/advisories/24
+    [1]: https://marked.js.org/
   affected_package: org.webjars.npm:marked
   vulnerable_versions:
   - "< 0.3.3"
@@ -732,68 +731,69 @@
   - Xiao Long
   references:
   - https://github.com/chjj/marked/issues/492
+  - https://github.com/markedjs/marked/commit/3c191144939107c45a7fa11ab6cb88be6694a1ba
+  - https://github.com/markedjs/marked/issues/492
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-479940
 - id: snykio:maven:org.webjars.npm:marked:479945
   title: Cross-site Scripting (XSS)
-  description: "[`marked`][1] is a markdown parser and compiler used for rendering\nmarkdown
-    content to html.\n\nAffected versions of the package are vulnerable to Cross-site
-    Scripting\n(XSS) attacks.\n\n\n\n[1]: https://www.npmjs.com/package/marked\n\\nWhen
-    mangling is disabled via option `mangle`, marked doesn\\'t escape\ntarget `href`.
-    This may allow an attacker to inject arbitrary\n`html-event` into resulting a
-    tag.\n\nFor example:\n\n    var marked = require('marked');\n    marked.setOptions({\n
-    \     renderer: new marked.Renderer(),\n      sanitize: true,\n      mangle: false\n
-    \   });\n    \n    text = `\n    <bar\"onclick=\"alert('XSS')\"@foo>\n    `;\n
-    \   \n    console.log(marked(text));\n{: .language-js}\n\nwill render:\n\n    <p><a
-    href=\"mailto:bar\"onclick=\"alert('XSS')\"@foo\">bar\"onclick=\"alert('XSS')\"@foo</a></p>\n{:
-    .language-html}\n\n\\nA cross-site scripting attack occurs when the attacker tricks
-    a\nlegitimate web-based application or site to accept a request as\noriginating
-    from a trusted source.\n\nThis is done by escaping the context of the web application;
-    the web\napplication then delivers that data to its users along with other\ntrusted
-    dynamic content, without validating it. The browser unknowingly\nexecutes malicious
-    script on the client side (through client-side\nlanguages; usually JavaScript
-    or HTML) in order to perform actions that\nare otherwise typically blocked by
-    the browser’s Same Origin Policy.\n\nֿInjecting malicious code is the most prevalent
-    manner by which XSS is\nexploited; for this reason, escaping characters in order
-    to prevent this\nmanipulation is the top method for securing code against this\nvulnerability.\n\nEscaping
-    means that the application is coded to mark key characters, and\nparticularly
-    key characters included in user input, to prevent those\ncharacters from being
-    interpreted in a dangerous context. For example,\nin HTML, `<` can be coded as
-    `&lt`; and `>` can be coded as `&gt`; in\norder to be interpreted and displayed
-    as themselves in text, while\nwithin the code itself, they are used for HTML tags.
-    If malicious\ncontent is injected into an application that escapes special characters\nand
-    that malicious content uses `<` and `>` as HTML tags, those\ncharacters are nonetheless
-    not interpreted as HTML tags by the browser\nif they’ve been correctly escaped
-    in the application code and in this\nway the attempted attack is diverted.\n\nThe
-    most prominent use of XSS is to steal cookies (source: OWASP\nHttpOnly) and hijack
-    user sessions, but XSS exploits have been used to\nexpose sensitive information,
-    enable access to privileged services and\nfunctionality and deliver malware.\n\n###
-    Types of attacks   {#types-of-attacks}\n\nThere are a few methods by which XSS
-    can be manipulated:\n\n| Type | Origin | Description |\n|----------\n| **Stored**
-    | Server | The malicious code is inserted in the application (usually as a link)
-    by the attacker. The code is activated every time a user clicks the link. |\n|
-    **Reflected** | Server | The attacker delivers a malicious link externally from
-    the vulnerable web site application to a user. When clicked, malicious code is
-    sent to the vulnerable web site, which reflects the attack back to the user’s
-    browser. |\n| **DOM-based** | Client | The attacker forces the user’s browser
-    to render a malicious page. The data in the page itself delivers the cross-site
-    scripting data. |\n| **Mutated** |  | The attacker injects code that appears safe,
-    but is then rewritten and modified by the browser, while parsing the markup. An
-    example is rebalancing unclosed quotation marks or even adding quotation marks
-    to unquoted parameters. |\n\n### Affected environments   {#affected-environments}\n\nThe
-    following environments are susceptible to an XSS attack:\n\n* Web servers\n* Application
-    servers\n* Web application environments\n\n### How to prevent   {#how-to-prevent}\n\nThis
-    section describes the top best practices designed to specifically\nprotect your
-    code:\n\n* Sanitize data input in an HTTP request before reflecting it back,\n
-    \ ensuring all data is validated, filtered or escaped before echoing\n  anything
-    back to the user, such as the values of query parameters\n  during searches.\n*
-    Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces\n  to their
-    respective HTML or URL encoded equivalents.\n* Give users the option to disable
-    client-side scripts.\n* Redirect invalid requests.\n* Detect simultaneous logins,
-    including those from two separate IP\n  addresses, and invalidate those sessions.\n*
-    Use and enforce a Content Security Policy (source: Wikipedia) to\n  disable any
-    features that might be manipulated for an XSS attack.\n* Read the documentation
-    for any of the libraries referenced in your\n  code to understand which elements
-    allow for embedded HTML.\n\n"
+  description: "[org.webjars.npm:marked][1] is a low-level compiler for parsing markdown\nwithout
+    caching or blocking for long periods of time.\n\nAffected versions of this package
+    are vulnerable to Cross-site Scripting\n(XSS). When mangling is disabled via option
+    `mangle`, marked doesn\\'t\nescape target `href`. This may allow an attacker to
+    inject arbitrary\n`html-event` into resulting a tag.\n\nFor example:\n\n    var
+    marked = require('marked');\n    marked.setOptions({\n      renderer: new marked.Renderer(),\n
+    \     sanitize: true,\n      mangle: false\n    });\n    \n    text = `\n    <bar\"onclick=\"alert('XSS')\"@foo>\n
+    \   `;\n    \n    console.log(marked(text));\n{: .language-js}\n\nwill render:\n\n
+    \   <p><a href=\"mailto:bar\"onclick=\"alert('XSS')\"@foo\">bar\"onclick=\"alert('XSS')\"@foo</a></p>\n{:
+    .language-html}\n\n\n\n[1]: https://marked.js.org/\n\\nA cross-site scripting
+    attack occurs when the attacker tricks a\nlegitimate web-based application or
+    site to accept a request as\noriginating from a trusted source.\n\nThis is done
+    by escaping the context of the web application; the web\napplication then delivers
+    that data to its users along with other\ntrusted dynamic content, without validating
+    it. The browser unknowingly\nexecutes malicious script on the client side (through
+    client-side\nlanguages; usually JavaScript or HTML) in order to perform actions
+    that\nare otherwise typically blocked by the browser’s Same Origin Policy.\n\nֿInjecting
+    malicious code is the most prevalent manner by which XSS is\nexploited; for this
+    reason, escaping characters in order to prevent this\nmanipulation is the top
+    method for securing code against this\nvulnerability.\n\nEscaping means that the
+    application is coded to mark key characters, and\nparticularly key characters
+    included in user input, to prevent those\ncharacters from being interpreted in
+    a dangerous context. For example,\nin HTML, `<` can be coded as `&lt`; and `>`
+    can be coded as `&gt`; in\norder to be interpreted and displayed as themselves
+    in text, while\nwithin the code itself, they are used for HTML tags. If malicious\ncontent
+    is injected into an application that escapes special characters\nand that malicious
+    content uses `<` and `>` as HTML tags, those\ncharacters are nonetheless not interpreted
+    as HTML tags by the browser\nif they’ve been correctly escaped in the application
+    code and in this\nway the attempted attack is diverted.\n\nThe most prominent
+    use of XSS is to steal cookies (source: OWASP\nHttpOnly) and hijack user sessions,
+    but XSS exploits have been used to\nexpose sensitive information, enable access
+    to privileged services and\nfunctionality and deliver malware.\n\n### Types of
+    attacks   {#types-of-attacks}\n\nThere are a few methods by which XSS can be manipulated:\n\n|
+    Type | Origin | Description |\n|----------\n| **Stored** | Server | The malicious
+    code is inserted in the application (usually as a link) by the attacker. The code
+    is activated every time a user clicks the link. |\n| **Reflected** | Server |
+    The attacker delivers a malicious link externally from the vulnerable web site
+    application to a user. When clicked, malicious code is sent to the vulnerable
+    web site, which reflects the attack back to the user’s browser. |\n| **DOM-based**
+    | Client | The attacker forces the user’s browser to render a malicious page.
+    The data in the page itself delivers the cross-site scripting data. |\n| **Mutated**
+    |  | The attacker injects code that appears safe, but is then rewritten and modified
+    by the browser, while parsing the markup. An example is rebalancing unclosed quotation
+    marks or even adding quotation marks to unquoted parameters. |\n\n### Affected
+    environments   {#affected-environments}\n\nThe following environments are susceptible
+    to an XSS attack:\n\n* Web servers\n* Application servers\n* Web application environments\n\n###
+    How to prevent   {#how-to-prevent}\n\nThis section describes the top best practices
+    designed to specifically\nprotect your code:\n\n* Sanitize data input in an HTTP
+    request before reflecting it back,\n  ensuring all data is validated, filtered
+    or escaped before echoing\n  anything back to the user, such as the values of
+    query parameters\n  during searches.\n* Convert special characters such as `?`,
+    `&`, `/`, `<`, `>` and spaces\n  to their respective HTML or URL encoded equivalents.\n*
+    Give users the option to disable client-side scripts.\n* Redirect invalid requests.\n*
+    Detect simultaneous logins, including those from two separate IP\n  addresses,
+    and invalidate those sessions.\n* Use and enforce a Content Security Policy (source:
+    Wikipedia) to\n  disable any features that might be manipulated for an XSS attack.\n*
+    Read the documentation for any of the libraries referenced in your\n  code to
+    understand which elements allow for embedded HTML.\n\n"
   affected_package: org.webjars.npm:marked
   vulnerable_versions:
   - "< 0.3.9"
@@ -809,33 +809,34 @@
   references:
   - https://github.com/chjj/marked/issues/926
   - https://github.com/chjj/marked/pull/958
+  - https://github.com/markedjs/marked/pull/976/commits/cb72584c5d9d32ebfdbb99e35fb9b81af2b79686
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-479945
 - id: snykio:maven:org.webjars.npm:marked:479950
   title: Regular Expression Denial of Service (ReDoS)
-  description: "[`marked`][1] is a full-featured markdown parser and compiler.\n\nAffected
-    versions of this package are vulnerable to Regular expression\nDenial of Service
-    (ReDoS) attacks when parsing the input markdown\ncontent (1,000 characters costs
-    around 6 seconds matching time).\n\n\n\n[1]: https://www.npmjs.com/package/marked\n\\nDenial
-    of Service (DoS) describes a family of attacks, all aimed at\nmaking a system
-    inaccessible to its original and legitimate users. There\nare many types of DoS
-    attacks, ranging from trying to clog the network\npipes to the system by generating
-    a large volume of traffic from many\nmachines (a Distributed Denial of Service
-    - DDoS - attack) to sending\ncrafted requests that cause a system to crash or
-    take a disproportional\namount of time to process.\n\nThe Regular expression Denial
-    of Service (ReDoS) is a type of Denial of\nService attack. Regular expressions
-    are incredibly powerful, but they\naren\\'t very intuitive and can ultimately
-    end up making it easy for\nattackers to take your site down.\n\nLet’s take the
-    following regular expression as an example:\n\n    regex = /A(B|C+)+D/\n{: .language-js}\n\nThis
-    regular expression accomplishes the following:\n\n* `A` The string must start
-    with the letter \\'A\\'\n* `(B|C+)+` The string must then follow the letter A
-    with either the\n  letter \\'B\\' or some number of occurrences of the letter
-    \\'C\\' (the\n  `+` matches one or more times). The `+` at the end of this section\n
-    \ states that we can look for one or more matches of this section.\n* `D` Finally,
-    we ensure this section of the string ends with a \\'D\\'\n\nThe expression would
-    match inputs such as `ABBD`, `ABCCCCD`, `ABCBCCCD`\nand `ACCCCCD`\n\nIt most cases,
-    it doesn\\'t take very long for a regex engine to find a\nmatch:\n\n    $ time
-    node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCD\")'\n    0.04s user
-    0.01s system 95% cpu 0.052 total\n    \n    $ time node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCX\")'\n
+  description: "[org.webjars.npm:marked][1] is a low-level compiler for parsing markdown\nwithout
+    caching or blocking for long periods of time.\n\nAffected versions of this package
+    are vulnerable to Regular Expression\nDenial of Service (ReDoS) when parsing the
+    input markdown content (1,000\ncharacters costs around 6 seconds matching time).\n\n\n\n[1]:
+    https://marked.js.org/\n\\nDenial of Service (DoS) describes a family of attacks,
+    all aimed at\nmaking a system inaccessible to its original and legitimate users.
+    There\nare many types of DoS attacks, ranging from trying to clog the network\npipes
+    to the system by generating a large volume of traffic from many\nmachines (a Distributed
+    Denial of Service - DDoS - attack) to sending\ncrafted requests that cause a system
+    to crash or take a disproportional\namount of time to process.\n\nThe Regular
+    expression Denial of Service (ReDoS) is a type of Denial of\nService attack. Regular
+    expressions are incredibly powerful, but they\naren\\'t very intuitive and can
+    ultimately end up making it easy for\nattackers to take your site down.\n\nLet’s
+    take the following regular expression as an example:\n\n    regex = /A(B|C+)+D/\n{:
+    .language-js}\n\nThis regular expression accomplishes the following:\n\n* `A`
+    The string must start with the letter \\'A\\'\n* `(B|C+)+` The string must then
+    follow the letter A with either the\n  letter \\'B\\' or some number of occurrences
+    of the letter \\'C\\' (the\n  `+` matches one or more times). The `+` at the end
+    of this section\n  states that we can look for one or more matches of this section.\n*
+    `D` Finally, we ensure this section of the string ends with a \\'D\\'\n\nThe expression
+    would match inputs such as `ABBD`, `ABCCCCD`, `ABCBCCCD`\nand `ACCCCCD`\n\nIt
+    most cases, it doesn\\'t take very long for a regex engine to find a\nmatch:\n\n
+    \   $ time node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCD\")'\n    0.04s
+    user 0.01s system 95% cpu 0.052 total\n    \n    $ time node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCX\")'\n
     \   1.79s user 0.02s system 99% cpu 1.812 total\n{: .language-bash}\n\nThe entire
     process of testing it against a 30 characters long string\ntakes around ~52ms.
     But when given an invalid string, it takes nearly\ntwo seconds to complete the
@@ -884,14 +885,15 @@
 - id: snykio:maven:org.webjars.npm:marked:479955
   title: Cross-site Scripting (XSS) via Data URIs
   description: |+
-    [`marked`][1] is a markdown parser and compiler used for rendering
-    markdown content to html.
+    [org.webjars.npm:marked][1] is a low-level compiler for parsing markdown
+    without caching or blocking for long periods of time.
 
-    Affected versions of the package are vulnerable to Cross-site Scripting
-    (XSS). Data URIs enable embedding small files in line in HTML documents,
-    provided in the URL itself. Attackers can craft malicious web pages
-    containing either HTML or script code that utilizes the data URI scheme,
-    allowing them to bypass access controls or steal sensitive information.
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS) via Data URIs. Data URIs enable embedding small files in line in
+    HTML documents, provided in the URL itself. Attackers can craft
+    malicious web pages containing either HTML or script code that utilizes
+    the data URI scheme, allowing them to bypass access controls or steal
+    sensitive information.
 
     An example of data URI used to deliver javascript code. The data holds
     `<script>alert('XSS')</script>` tag in base64 encoded format.
@@ -901,7 +903,7 @@
 
 
 
-    [1]: https://www.npmjs.com/package/marked
+    [1]: https://marked.js.org/
     \nA cross-site scripting attack occurs when the attacker tricks a
     legitimate web-based application or site to accept a request as
     originating from a trusted source.

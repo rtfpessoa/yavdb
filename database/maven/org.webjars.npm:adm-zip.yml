@@ -1,33 +1,20 @@
 ---
 - id: snykio:maven:org.webjars.npm:adm-zip:479372
   title: Arbitrary File Write via Archive Extraction (Zip Slip)
-  description: |
-    [`adm-zip`][1] is a Javascript implementation of zip for NodeJS with
-    support for electron original-fs.
-
-    Affected versions of the package are vulnerable to Arbitrary File Write
-    via Archive Extraction (AKA \"Zip Slip\").
-
-    It can be exploited using a specially crafted zip archive, that holds
-    path traversal filenames. When exploited, a filename in a malicious
-    archive is concatenated to the target extraction directory, which
-    results in the final path ending up outside of the target folder. For
-    instance, a zip may hold a file with a `../../file.exe` location and
-    thus break out of the target folder. If an executable or a configuration
-    file is overwritten with a file containing malicious code, the problem
-    can turn into an arbitrary code execution issue quite easily.
-
-    The following is an example of a zip archive with one benign file and
-    one malicious file. Extracting the malicous file will result in
-    traversing out of the target folder, ending up in `/root/.ssh/`
-    overwriting the `authorized_keys` file:
-
-        +2018-04-15 22:04:29 .....           19           19  good.txt
-        +2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
-
-
-
-    [1]: https://www.npmjs.com/package/adm-zip
+  description: "[org.webjars.npm:adm-zip][1] is a JavaScript implementation for zip
+    data\ncompression for NodeJS.\n\nAffected versions of this package are vulnerable
+    to Arbitrary File Write\nvia Archive Extraction (Zip Slip).\n\n\n\n[1]: https://search.maven.org/artifact/org.webjars.npm/adm-zip\n\\nIt
+    is exploited using a specially crafted zip archive, that holds path\ntraversal
+    filenames. When exploited, a filename in a malicious archive\nis concatenated
+    to the target extraction directory, which results in the\nfinal path ending up
+    outside of the target folder. For instance, a zip\nmay hold a file with a \\\"../../file.exe\\\"
+    location and thus break out of\nthe target folder. If an executable or a configuration
+    file is\noverwritten with a file containing malicious code, the problem can turn\ninto
+    an arbitrary code execution issue quite easily.\n\nThe following is an example
+    of a zip archive with one benign file and\none malicious file. Extracting the
+    malicous file will result in\ntraversing out of the target folder, ending up in
+    `/root/.ssh/`\noverwriting the `authorized_keys` file:\n\n    \n    +2018-04-15
+    22:04:29 ..... 19 19 good.txt\n    \n    +2018-04-15 22:04:42 ..... 20 20 ../../../../../../root/.ssh/authorized_keys\n\n"
   affected_package: org.webjars.npm:adm-zip
   vulnerable_versions:
   - "< 0.4.11"
@@ -46,8 +33,8 @@
   - Sébastien Mignot
   references:
   - https://github.com/cthackers/adm-zip/commit/d01fa8c80c3a5fcf5ce1eda82d96600c62910d3f
-  - https://github.com/cthackers/adm-zip/pull/212
   - https://github.com/cthackers/adm-zip/pull/212/commits/6f4dfeb9a2166e93207443879988f97d88a37cde
   - https://github.com/snyk/zip-slip-vulnerability
+  - https://hackerone.com/reports/362118
   - https://snyk.io/research/zip-slip-vulnerability
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-479372

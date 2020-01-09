@@ -1,22 +1,49 @@
 ---
 - id: snykio:maven:org.webjars.bower:qs:480106
   title: Denial of Service (Event Loop Blocking)
-  description: |
-    [`qs`][1] is a querystring parser that supports nesting and arrays, with
-    a depth limit.
+  description: |+
+    [org.webjars.bower:qs][1] is a querystring parser that supports nesting
+    and arrays, with a depth limit.
 
     Affected versions of this package are vulnerable to Denial of Service
-    (DoS). When parsing a string representing a deeply nested object, qs
-    will block the event loop for long periods of time. Such a delay may
-    hold up the server\'s resources, keeping it from processing other
-    requests in the meantime, thus enabling a Denial-of-Service attack.
+    (Event Loop Blocking). When parsing a string representing a deeply
+    nested object, qs will block the event loop for long periods of time.
+    Such a delay may hold up the server\'s resources, keeping it from
+    processing other requests in the meantime, thus enabling a
+    Denial-of-Service attack.
 
 
 
     [1]: https://www.npmjs.com/package/qs
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
   affected_package: org.webjars.bower:qs
   vulnerable_versions:
-  - "< 1.0.0"
+  - ">= 0"
   severity: medium
   package_manager: maven
   cve:
@@ -33,32 +60,31 @@
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSBOWER-480106
 - id: snykio:maven:org.webjars.bower:qs:480109
   title: Prototype Override Protection Bypass
-  description: "[`qs`][1] is a querystring parser that supports nesting and arrays,
-    with\na depth limit.\n\nBy default `qs` protects against attacks that attempt
-    to overwrite an\nobject\\'s existing prototype properties, such as `toString()`,\n`hasOwnProperty()`,etc.\n\nFrom
-    [`qs` documentation][2]\\:\n\n> By default parameters that would overwrite properties
-    on the object\n> prototype are ignored, if you wish to keep the data from those
-    fields\n> either use plainObjects as mentioned above, or set allowPrototypes to\n>
-    true which will allow user input to overwrite those properties.\n> WARNING It
-    is generally a bad idea to enable this option as it can\n> cause problems when
-    attempting to use the properties that have been\n> overwritten. Always be careful
-    with this option.\n\nOverwriting these properties can impact application logic,
-    potentially\nallowing attackers to work around security controls, modify data,
-    make\nthe application unstable and more.\n\nIn versions of the package affected
-    by this vulnerability, it is\npossible to circumvent this protection and overwrite
-    prototype\nproperties and functions by prefixing the name of the parameter with
-    `[`\nor `]`. e.g. `qs.parse(\"]=toString\")` will return `{toString = true}`,\nas
-    a result, calling `toString()` on the object will throw an exception.\n\n**Example:**\n\n
-    \   qs.parse('toString=foo', { allowPrototypes: false })\n    // {}\n    \n    qs.parse(\"]=toString\",
-    { allowPrototypes: false })\n    // {toString = true} <== prototype overwritten\n{:
-    .language-js}\n\nFor more information, you can check out our [blog][3].\n\n\n\n[1]:
-    https://www.npmjs.com/package/qs\n[2]: https://github.com/ljharb/qs\n[3]: https://snyk.io/blog/high-severity-vulnerability-qs/\n"
+  description: "[org.webjars.bower:qs][1] is a querystring parser that supports nesting\nand
+    arrays, with a depth limit.\n\nAffected versions of this package are vulnerable
+    to Prototype Override\nProtection Bypass. By default `qs` protects against attacks
+    that attempt\nto overwrite an object\\'s existing prototype properties, such as\n`toString()`,
+    `hasOwnProperty()`,etc.\n\nFrom [`qs` documentation][2]\\:\n\n> By default parameters
+    that would overwrite properties on the object\n> prototype are ignored, if you
+    wish to keep the data from those fields\n> either use plainObjects as mentioned
+    above, or set allowPrototypes to\n> true which will allow user input to overwrite
+    those properties.\n> WARNING It is generally a bad idea to enable this option
+    as it can\n> cause problems when attempting to use the properties that have been\n>
+    overwritten. Always be careful with this option.\n\nOverwriting these properties
+    can impact application logic, potentially\nallowing attackers to work around security
+    controls, modify data, make\nthe application unstable and more.\n\nIn versions
+    of the package affected by this vulnerability, it is\npossible to circumvent this
+    protection and overwrite prototype\nproperties and functions by prefixing the
+    name of the parameter with `[`\nor `]`. e.g. `qs.parse(\"]=toString\")` will return
+    `{toString = true}`,\nas a result, calling `toString()` on the object will throw
+    an exception.\n\n**Example:**\n\n    qs.parse('toString=foo', { allowPrototypes:
+    false })\n    // {}\n    \n    qs.parse(\"]=toString\", { allowPrototypes: false
+    })\n    // {toString = true} <== prototype overwritten\n{: .language-js}\n\nFor
+    more information, you can check out our [blog][3].\n\n\n\n[1]: https://www.npmjs.com/package/qs\n[2]:
+    https://github.com/ljharb/qs\n[3]: https://snyk.io/blog/high-severity-vulnerability-qs/\n"
   affected_package: org.webjars.bower:qs
   vulnerable_versions:
-  - "< 6.0.4"
-  - ">= 6.1.0 < 6.1.2"
-  - ">= 6.2.0 < 6.2.3"
-  - ">= 6.3.0 < 6.3.2"
+  - ">= 0"
   severity: high
   package_manager: maven
   cve:
@@ -120,7 +146,7 @@
 
   affected_package: org.webjars.bower:qs
   vulnerable_versions:
-  - "< 1.0.0"
+  - ">= 0"
   severity: high
   package_manager: maven
   cve:

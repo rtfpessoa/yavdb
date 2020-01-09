@@ -407,10 +407,11 @@
 - id: snykio:npm:marked:2
   title: VBScript Content Injection
   description: |
-    Marked 0.3.2 and earlier is vulnerable to content injection even when
-    `sanitize: true` is enabled.
+    [marked][1] is a low-level compiler for parsing markdown without caching
+    or blocking for long periods of time.
 
-    `[xss link](vbscript:alert(1))`
+    Affected versions of this package are vulnerable to VBScript Content
+    Injection. `[xss link](vbscript:alert(1))`
 
     will get a link
 
@@ -419,11 +420,9 @@
     This script does not work in IE 11 edge mode, but works in IE 10
     compatibility view.
 
-    *Source: [Node Security Project][1]*
 
 
-
-    [1]: https://nodesecurity.io/advisories/24
+    [1]: https://marked.js.org/
   affected_package: marked
   vulnerable_versions:
   - "<0.3.3"
@@ -440,6 +439,8 @@
   - Xiao Long
   references:
   - https://github.com/chjj/marked/issues/492
+  - https://github.com/markedjs/marked/commit/3c191144939107c45a7fa11ab6cb88be6694a1ba
+  - https://github.com/markedjs/marked/issues/492
   source_url: https://snyk.io/vuln/npm:marked:20140131-2
 - id: snykio:npm:marked:20140131
   title: Multiple Content Injection Vulnerabilities
@@ -589,14 +590,15 @@
 - id: snykio:npm:marked:20170112
   title: Cross-site Scripting (XSS) via Data URIs
   description: |+
-    [`marked`][1] is a markdown parser and compiler used for rendering
-    markdown content to html.
+    [marked][1] is a low-level compiler for parsing markdown without caching
+    or blocking for long periods of time.
 
-    Affected versions of the package are vulnerable to Cross-site Scripting
-    (XSS). Data URIs enable embedding small files in line in HTML documents,
-    provided in the URL itself. Attackers can craft malicious web pages
-    containing either HTML or script code that utilizes the data URI scheme,
-    allowing them to bypass access controls or steal sensitive information.
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS) via Data URIs. Data URIs enable embedding small files in line in
+    HTML documents, provided in the URL itself. Attackers can craft
+    malicious web pages containing either HTML or script code that utilizes
+    the data URI scheme, allowing them to bypass access controls or steal
+    sensitive information.
 
     An example of data URI used to deliver javascript code. The data holds
     `<script>alert('XSS')</script>` tag in base64 encoded format.
@@ -606,7 +608,7 @@
 
 
 
-    [1]: https://www.npmjs.com/package/marked
+    [1]: https://marked.js.org/
     \nA cross-site scripting attack occurs when the attacker tricks a
     legitimate web-based application or site to accept a request as
     originating from a trusted source.
@@ -776,30 +778,30 @@
   source_url: https://snyk.io/vuln/npm:marked:20170815
 - id: snykio:npm:marked:20170907
   title: Regular Expression Denial of Service (ReDoS)
-  description: "[`marked`][1] is a full-featured markdown parser and compiler.\n\nAffected
-    versions of this package are vulnerable to Regular expression\nDenial of Service
-    (ReDoS) attacks when parsing the input markdown\ncontent (1,000 characters costs
-    around 6 seconds matching time).\n\n\n\n[1]: https://www.npmjs.com/package/marked\n\\nDenial
-    of Service (DoS) describes a family of attacks, all aimed at\nmaking a system
-    inaccessible to its original and legitimate users. There\nare many types of DoS
-    attacks, ranging from trying to clog the network\npipes to the system by generating
-    a large volume of traffic from many\nmachines (a Distributed Denial of Service
-    - DDoS - attack) to sending\ncrafted requests that cause a system to crash or
-    take a disproportional\namount of time to process.\n\nThe Regular expression Denial
-    of Service (ReDoS) is a type of Denial of\nService attack. Regular expressions
-    are incredibly powerful, but they\naren\\'t very intuitive and can ultimately
-    end up making it easy for\nattackers to take your site down.\n\nLet’s take the
-    following regular expression as an example:\n\n    regex = /A(B|C+)+D/\n{: .language-js}\n\nThis
-    regular expression accomplishes the following:\n\n* `A` The string must start
-    with the letter \\'A\\'\n* `(B|C+)+` The string must then follow the letter A
-    with either the\n  letter \\'B\\' or some number of occurrences of the letter
-    \\'C\\' (the\n  `+` matches one or more times). The `+` at the end of this section\n
-    \ states that we can look for one or more matches of this section.\n* `D` Finally,
-    we ensure this section of the string ends with a \\'D\\'\n\nThe expression would
-    match inputs such as `ABBD`, `ABCCCCD`, `ABCBCCCD`\nand `ACCCCCD`\n\nIt most cases,
-    it doesn\\'t take very long for a regex engine to find a\nmatch:\n\n    $ time
-    node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCD\")'\n    0.04s user
-    0.01s system 95% cpu 0.052 total\n    \n    $ time node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCX\")'\n
+  description: "[marked][1] is a low-level compiler for parsing markdown without caching\nor
+    blocking for long periods of time.\n\nAffected versions of this package are vulnerable
+    to Regular Expression\nDenial of Service (ReDoS) when parsing the input markdown
+    content (1,000\ncharacters costs around 6 seconds matching time).\n\n\n\n[1]:
+    https://marked.js.org/\n\\nDenial of Service (DoS) describes a family of attacks,
+    all aimed at\nmaking a system inaccessible to its original and legitimate users.
+    There\nare many types of DoS attacks, ranging from trying to clog the network\npipes
+    to the system by generating a large volume of traffic from many\nmachines (a Distributed
+    Denial of Service - DDoS - attack) to sending\ncrafted requests that cause a system
+    to crash or take a disproportional\namount of time to process.\n\nThe Regular
+    expression Denial of Service (ReDoS) is a type of Denial of\nService attack. Regular
+    expressions are incredibly powerful, but they\naren\\'t very intuitive and can
+    ultimately end up making it easy for\nattackers to take your site down.\n\nLet’s
+    take the following regular expression as an example:\n\n    regex = /A(B|C+)+D/\n{:
+    .language-js}\n\nThis regular expression accomplishes the following:\n\n* `A`
+    The string must start with the letter \\'A\\'\n* `(B|C+)+` The string must then
+    follow the letter A with either the\n  letter \\'B\\' or some number of occurrences
+    of the letter \\'C\\' (the\n  `+` matches one or more times). The `+` at the end
+    of this section\n  states that we can look for one or more matches of this section.\n*
+    `D` Finally, we ensure this section of the string ends with a \\'D\\'\n\nThe expression
+    would match inputs such as `ABBD`, `ABCCCCD`, `ABCBCCCD`\nand `ACCCCCD`\n\nIt
+    most cases, it doesn\\'t take very long for a regex engine to find a\nmatch:\n\n
+    \   $ time node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCD\")'\n    0.04s
+    user 0.01s system 95% cpu 0.052 total\n    \n    $ time node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCX\")'\n
     \   1.79s user 0.02s system 99% cpu 1.812 total\n{: .language-bash}\n\nThe entire
     process of testing it against a 30 characters long string\ntakes around ~52ms.
     But when given an invalid string, it takes nearly\ntwo seconds to complete the
@@ -847,10 +849,10 @@
   source_url: https://snyk.io/vuln/npm:marked:20170907
 - id: snykio:npm:marked:20180225
   title: Regular Expression Denial of Service (ReDoS)
-  description: "[`marked`][1] is a markdown parser built for speed\n\nAffected versions
-    of this package are vulnerable to Regular Expression\nDenial of Service (ReDoS)
-    attacks. This can cause an impact of about 10\nseconds matching time for data
-    150 characters long.\n\n\n\n[1]: https://www.npmjs.com/package/marked\n\\nDenial
+  description: "[marked][1] is a low-level compiler for parsing markdown without caching\nor
+    blocking for long periods of time.\n\nAffected versions of this package are vulnerable
+    to Regular Expression\nDenial of Service (ReDoS). This can cause an impact of
+    about 10 seconds\nmatching time for data 150 characters long.\n\n\n\n[1]: https://marked.js.org/\n\\nDenial
     of Service (DoS) describes a family of attacks, all aimed at\nmaking a system
     inaccessible to its original and legitimate users. There\nare many types of DoS
     attacks, ranging from trying to clog the network\npipes to the system by generating
@@ -913,7 +915,7 @@
   - Jamie Davis
   references:
   - https://github.com/markedjs/marked/pull/1083
-  - https://github.com/markedjs/marked/pull/1083
+  - https://github.com/markedjs/marked/pull/1083/commits/b15e42b67cec9ded8505e9d68bb8741ad7a9590d
   source_url: https://snyk.io/vuln/npm:marked:20180225
 - id: snykio:npm:marked:451341
   title: Regular Expression Denial of Service (ReDoS)

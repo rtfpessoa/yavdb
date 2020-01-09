@@ -2,7 +2,10 @@
 - id: snykio:maven:org.webjars.npm:atob:479455
   title: Uninitialized Memory Exposure
   description: |+
-    Affected versions of [atob][1] are vulnerable to Uninitialized Memory
+    [org.webjars.npm:atob][1] is a package that Uses Buffer to emulate the
+    exact functionality of the browser\'s atob.
+
+    Affected versions of this package are vulnerable to Uninitialized Memory
     Exposure. It allocates uninitialized Buffers when a number is passed in
     user provided fields.
 
@@ -29,9 +32,11 @@
     buffer is not `zeroed` by using `buf.fill(0)`, it may leak sensitive
     information like keys, source code, and system info.
 
+    **Note** This is vulnerable only for Node &lt;=4
+
   affected_package: org.webjars.npm:atob
   vulnerable_versions:
-  - "< 2.1.0"
+  - ">= 0"
   severity: medium
   package_manager: maven
   cve:

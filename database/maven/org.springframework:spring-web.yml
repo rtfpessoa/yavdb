@@ -139,10 +139,10 @@
   source_url: https://ossindex.net/resource/package/7015204622/vulnerabilities
 - id: snykio:maven:org.springframework:spring-web:30160
   title: XML External Entity (XXE) Injection
-  description: |
-    [org.springframework:spring-web][1] is a provides a comprehensive
-    programming and configuration model for modern Java-based enterprise
-    applications - on any kind of deployment platform.
+  description: |+
+    [org.springframework:spring-web][1] is a package that provides a
+    comprehensive programming and configuration model for modern Java-based
+    enterprise applications - on any kind of deployment platform.
 
     Affected versions of this package are vulnerable to XML External Entity
     (XXE) Injection. The `SourceHttpMessageConverter` processor does not
@@ -156,6 +156,43 @@
     [1]: https://github.com/spring-projects/spring-framework
     [2]: https://snyk.io/vuln/SNYK-JAVA-ORGSPRINGFRAMEWORK-31330
     [3]: https://snyk.io/vuln/SNYK-JAVA-ORGSPRINGFRAMEWORK-30162
+    \nXXE Injection is a type of attack against an application that parses XML
+    input. XML is a markup language that defines a set of rules for encoding
+    documents in a format that is both human-readable and machine-readable.
+    By default, many XML processors allow specification of an external
+    entity, a URI that is dereferenced and evaluated during XML processing.
+    When an XML document is being parsed, the parser can make a request and
+    include the content at the specified URI inside of the XML document.
+
+    Attacks can include disclosing local files, which may contain sensitive
+    data such as passwords or private user data, using file: schemes or
+    relative paths in the system identifier.
+
+    For example, below is a sample XML document, containing an XML element-
+    username.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+           <username>John</username>
+        </xml>
+    {: .language-xml}
+
+    An external XML entity - `xxe`, is defined using a system identifier and
+    present within a DOCTYPE header. These entities can access local or
+    remote content. For example the below code contains an external XML
+    entity that would fetch the content of `/etc/passwd` and display it to
+    the user rendered by `username`.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+        <!DOCTYPE foo [
+           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
+           <username>&xxe;</username>
+        </xml>
+    {: .language-xml}
+
+    Other XXE Injection attacks can access local resources that may not stop
+    returning data, possibly impacting application availability and leading
+    to Denial of Service.
+
   affected_package: org.springframework:spring-web
   vulnerable_versions:
   - ">= 3.0.0.RELEASE < 3.2.4.RELEASE"
@@ -166,7 +203,7 @@
   - CVE-2013-6429
   cwe:
   - CWE-661
-  disclosed_date: 2016-12-25
+  disclosed_date: 2014-01-26
   created_date: 2016-12-25
   last_modified_date: 2016-12-25
   credit:
@@ -179,9 +216,9 @@
 - id: snykio:maven:org.springframework:spring-web:30161
   title: Cross-site Scripting (XSS)
   description: |+
-    [org.springframework:spring-web][1] provides a comprehensive programming
-    and configuration model for modern Java-based enterprise applications -
-    on any kind of deployment platform.
+    [org.springframework:spring-web][1] package that provides a
+    comprehensive programming and configuration model for modern Java-based
+    enterprise applications - on any kind of deployment platform.
 
     Affected versions of this package are vulnerable to Cross-site Scripting
     (XSS). The `JavaScriptUtils.javaScriptEscape()` method did not escape
@@ -289,9 +326,9 @@
 - id: snykio:maven:org.springframework:spring-web:30162
   title: XML External Entity (XXE) Injection
   description: |+
-    [org.springframework:spring-web][1] is a provides a comprehensive
-    programming and configuration model for modern Java-based enterprise
-    applications - on any kind of deployment platform.
+    [org.springframework:spring-web][1] is a package that provides a
+    comprehensive programming and configuration model for modern Java-based
+    enterprise applications - on any kind of deployment platform.
 
     Affected versions of this package are vulnerable to XML External Entity
     (XXE) Injection. due to not disabling external entity resolution for the
@@ -365,10 +402,10 @@
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGSPRINGFRAMEWORK-30162
 - id: snykio:maven:org.springframework:spring-web:30163
   title: XML External Entity (XXE) Injection
-  description: |
-    [org.springframework:spring-web][1] is a provides a comprehensive
-    programming and configuration model for modern Java-based enterprise
-    applications - on any kind of deployment platform.
+  description: |+
+    [org.springframework:spring-web][1] is a package that provides a
+    comprehensive programming and configuration model for modern Java-based
+    enterprise applications - on any kind of deployment platform.
 
     Affected versions of this package are vulnerable to XML External Entity
     (XXE) Injection. This is due to not disabling the resolution of URI
@@ -378,54 +415,43 @@
 
 
     [1]: https://github.com/spring-projects/spring-framework
-    \nA Directory Traversal attack (also known as path traversal) aims to
-    access files and directories that are stored outside the intended
-    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
-    its variations, or by using absolute file paths, it may be possible to
-    access arbitrary files and directories stored on file system, including
-    application source code, configuration, and other critical system files.
+    \nXXE Injection is a type of attack against an application that parses XML
+    input. XML is a markup language that defines a set of rules for encoding
+    documents in a format that is both human-readable and machine-readable.
+    By default, many XML processors allow specification of an external
+    entity, a URI that is dereferenced and evaluated during XML processing.
+    When an XML document is being parsed, the parser can make a request and
+    include the content at the specified URI inside of the XML document.
 
-    Directory Traversal vulnerabilities can be generally divided into two
-    types:
+    Attacks can include disclosing local files, which may contain sensitive
+    data such as passwords or private user data, using file: schemes or
+    relative paths in the system identifier.
 
-    * **Information Disclosure**\: Allows the attacker to gain information
-      about the folder structure or read the contents of sensitive files on
-      the system.
+    For example, below is a sample XML document, containing an XML element-
+    username.
 
-    `st` is a module for serving static files on web pages, and contains a
-    [vulnerability of this type][1]. In our example, we will serve files
-    from the `public` route.
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+           <username>John</username>
+        </xml>
+    {: .language-xml}
 
-    If an attacker requests the following URL from our server, it will in
-    turn leak the sensitive private key of the root user.
+    An external XML entity - `xxe`, is defined using a system identifier and
+    present within a DOCTYPE header. These entities can access local or
+    remote content. For example the below code contains an external XML
+    entity that would fetch the content of `/etc/passwd` and display it to
+    the user rendered by `username`.
 
-        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+        <!DOCTYPE foo [
+           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
+           <username>&xxe;</username>
+        </xml>
+    {: .language-xml}
 
-    **Note** `%2e` is the URL encoded version of `.` (dot).
+    Other XXE Injection attacks can access local resources that may not stop
+    returning data, possibly impacting application availability and leading
+    to Denial of Service.
 
-    * **Writing arbitrary files**\: Allows the attacker to create or replace
-      existing files. This type of vulnerability is also known as
-      `Zip-Slip`.
-
-    One way to achieve this is by using a malicious `zip` archive that holds
-    path traversal filenames. When each filename in the zip archive gets
-    concatenated to the target extraction folder, without validation, the
-    final path ends up outside of the target folder. If an executable or a
-    configuration file is overwritten with a file containing malicious code,
-    the problem can turn into an arbitrary code execution issue quite
-    easily.
-
-    The following is an example of a `zip` archive with one benign file and
-    one malicious file. Extracting the malicious file will result in
-    traversing out of the target folder, ending up in `/root/.ssh/`
-    overwriting the `authorized_keys` file:
-
-        2018-04-15 22:04:29 .....           19           19  good.txt
-        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
-
-
-
-    [1]: https://snyk.io/vuln/npm:st:20140206
   affected_package: org.springframework:spring-web
   vulnerable_versions:
   - ">= 3.0.0.RELEASE < 3.2.9.RELEASE"
@@ -450,9 +476,9 @@
 - id: snykio:maven:org.springframework:spring-web:30164
   title: Denial of Service (DoS)
   description: |+
-    [org.springframework:spring-web][1] provides a comprehensive programming
-    and configuration model for modern Java-based enterprise applications -
-    on any kind of deployment platform.
+    [org.springframework:spring-web][1] is a package that provides a
+    comprehensive programming and configuration model for modern Java-based
+    enterprise applications - on any kind of deployment platform.
 
     Affected versions of this package are vulnerable to Denial of Service
     (DoS). It does not properly process inline DTD declarations when DTD is
@@ -499,7 +525,7 @@
   - CVE-2015-3192
   cwe:
   - CWE-119
-  disclosed_date: 2016-12-25
+  disclosed_date: 2016-07-12
   created_date: 2016-12-25
   last_modified_date: 2016-12-25
   credit:
@@ -512,9 +538,9 @@
 - id: snykio:maven:org.springframework:spring-web:30165
   title: Reflected File Download
   description: |
-    [org.springframework:spring-web][1] provides a comprehensive programming
-    and configuration model for modern Java-based enterprise applications -
-    on any kind of deployment platform.
+    [org.springframework:spring-web][1] package that provides a
+    comprehensive programming and configuration model for modern Java-based
+    enterprise applications - on any kind of deployment platform.
 
     Affected versions of this package are vulnerable to Reflected File
     Download via a crafted URL with a batch script extension, resulting in
@@ -551,9 +577,9 @@
 - id: snykio:maven:org.springframework:spring-web:31329
   title: Expression Language Injection
   description: |
-    [org.springframework:spring-web][1] is a provides a comprehensive
-    programming and configuration model for modern Java-based enterprise
-    applications - on any kind of deployment platform.
+    [org.springframework:spring-web][1] is a package that provides a
+    comprehensive programming and configuration model for modern Java-based
+    enterprise applications - on any kind of deployment platform.
 
     Affected versions of this package are vulnerable to Expression Language
     Injection. When a container supports Expression Language (EL), evaluates
@@ -586,19 +612,17 @@
   - Stefano Di Paola
   references:
   - https://github.com/spring-projects/spring-framework/commit/9772eb8410e37cd0bdec0d1b133218446c778beb
-  - https://github.com/spring-projects/spring-framework/commit/c8649087792d07df209fc75e0f9e2e3284e09fe
-  - https://github.com/spring-projects/spring-framework/commit/d95cbe23ee462245c5c2482e175f7b2a921b31c
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2011-2730
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGSPRINGFRAMEWORK-31329
 - id: snykio:maven:org.springframework:spring-web:31330
   title: XML External Entity (XXE) Injection
   description: |+
-    [org.springframework:spring-web][1] is a provides a comprehensive
-    programming and configuration model for modern Java-based enterprise
-    applications - on any kind of deployment platform.
+    [org.springframework:spring-web][1] is a package that provides a
+    comprehensive programming and configuration model for modern Java-based
+    enterprise applications - on any kind of deployment platform.
 
     Affected versions of this package are vulnerable to XML External Entity
-    (XXE) Injection. due to not disabling entity resolution when using the
+    (XXE) Injection due to not disabling entity resolution when using the
     `JAXB` marshaller. This allows context-dependent attackers to read
     arbitrary files, cause a denial of service, and conduct CSRF attacks via
     an XML external entity declaration in conjunction with an entity
@@ -659,7 +683,7 @@
   - CVE-2013-4152
   cwe:
   - CWE-264
-  disclosed_date: 2014-06-08
+  disclosed_date: 2014-01-23
   created_date: 2014-06-08
   last_modified_date: 2014-06-08
   credit:
@@ -698,7 +722,7 @@
   - CVE-2014-0054
   cwe:
   - CWE-352
-  disclosed_date: 2014-06-06
+  disclosed_date: 2014-04-17
   created_date: 2014-06-06
   last_modified_date: 2014-06-06
   credit:
@@ -737,9 +761,9 @@
 - id: snykio:maven:org.springframework:spring-web:31689
   title: Information Exposure
   description: |
-    [org.springframework:spring-web][1] is a provides a comprehensive
-    programming and configuration model for modern Java-based enterprise
-    applications - on any kind of deployment platform.
+    [org.springframework:spring-web][1] is a package that provides a
+    comprehensive programming and configuration model for modern Java-based
+    enterprise applications - on any kind of deployment platform.
 
     Affected versions of this package are vulnerable to Information
     Exposure. It allows web applications to enable cross-domain requests via
@@ -764,7 +788,7 @@
   - CVE-2018-11040
   cwe:
   - CWE-200
-  disclosed_date: 2018-06-08
+  disclosed_date: 2016-12-25
   created_date: 2016-12-25
   last_modified_date: 2016-12-25
   credit:
@@ -777,9 +801,9 @@
 - id: snykio:maven:org.springframework:spring-web:451604
   title: Cross-Site Tracing (XST)
   description: |
-    [org.springframework:spring-web][1] is a provides a comprehensive
-    programming and configuration model for modern Java-based enterprise
-    applications - on any kind of deployment platform.
+    [org.springframework:spring-web][1] is a package that provides a
+    comprehensive programming and configuration model for modern Java-based
+    enterprise applications - on any kind of deployment platform.
 
     Affected versions of this package are vulnerable to Cross-Site Tracing
     (XST). It allows web applications to change the HTTP request method to
@@ -801,7 +825,7 @@
   - CVE-2018-11039
   cwe:
   - CWE-284
-  disclosed_date: 2018-06-08
+  disclosed_date: 2016-12-25
   created_date: 2016-12-25
   last_modified_date: 2016-12-25
   credit:
@@ -815,9 +839,9 @@
 - id: snykio:maven:org.springframework:spring-web:72470
   title: Denial of Service (DoS)
   description: |+
-    [org.springframework:spring-web][1] is a provides a comprehensive
-    programming and configuration model for modern Java-based enterprise
-    applications - on any kind of deployment platform.
+    [org.springframework:spring-web][1] is a package that provides a
+    comprehensive programming and configuration model for modern Java-based
+    enterprise applications - on any kind of deployment platform.
 
     Affected versions of this package are vulnerable to Denial of Service
     (DoS). A malicious user could add a range header with a high number of
