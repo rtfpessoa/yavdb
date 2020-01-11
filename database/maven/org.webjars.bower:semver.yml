@@ -1,0 +1,45 @@
+---
+- id: snykio:maven:org.webjars.bower:semver:541385
+  title: Regular Expression Denial of Service (ReDoS)
+  description: |+
+    `org.webjars.bower:semver` is a None
+
+    Affected versions of this package are vulnerable to Regular Expression
+    Denial of Service (ReDoS).
+
+    \n[npm][1] is a package manager for javascript.
+
+    Affected versions of this package are vulnerable to Regular Expression
+    Denial of Service (ReDoS). The semver module uses regular expressions
+    when parsing a version string. For a carefully crafted input, the time
+    it takes to process these regular expressions is not linear to the
+    length of the input. Since the semver module did not enforce a limit on
+    the version string length, an attacker could provide a long string that
+    would take up a large amount of resources, potentially taking a server
+    down. This issue therefore enables a potential Denial of Service attack.
+    This is a slightly differnt variant of a typical Regular Expression
+    Denial of Service ([ReDoS][2]) vulnerability.
+
+
+
+    [1]: https://github.com/npm/npm
+    [2]: https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS
+    \n&lt;&lt;ReDoS&gt;&gt;
+
+  affected_package: org.webjars.bower:semver
+  vulnerable_versions:
+  - "< 4.3.2"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2015-8855
+  cwe:
+  - CWE-400
+  disclosed_date: 2015-04-03
+  created_date: 2015-04-03
+  last_modified_date: 2015-04-03
+  credit:
+  - Adam Baldwin
+  references:
+  - https://github.com/npm/npm/releases/tag/v2.7.5
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSBOWER-541385
