@@ -197,3 +197,35 @@
   - https://github.com/cyu/rack-cors/commit/e4d4fc362a4315808927011cbe5afcfe5486f17d
   - https://github.com/cyu/rack-cors/compare/v1.0.3...v1.0.4
   source_url: https://snyk.io/vuln/SNYK-RUBY-RACKCORS-534477
+- id: snykio:rubygems:rack-cors:540775
+  title: Improper Access Control
+  description: |
+    [rack-cors][1] is a Rack Middleware for handling Cross-Origin Resource
+    Sharing (CORS), which makes cross-origin AJAX possible.
+
+    Affected versions of this package are vulnerable to Improper Access
+    Control. Setting origin: \'\*\' reflects the origin header as oppose to
+    returning: `Access-Control-Allow-Origin: *`. Defaulting to
+    `Access-Control-Allow-Credentials: true` is also inherently insecure,
+    and when combined with this unexpected reflection of the origin header
+    means sites are configured without a `SAMEORIGIN` policy.
+
+
+
+    [1]: https://github.com/cyu/rack-cors
+  affected_package: rack-cors
+  vulnerable_versions:
+  - "<1.0.0"
+  severity: medium
+  package_manager: rubygems
+  cwe:
+  - CWE-284
+  disclosed_date: 2016-09-27
+  created_date: 2020-01-06
+  last_modified_date: 2020-01-06
+  credit:
+  - Evan J Johnson
+  references:
+  - https://github.com/cyu/rack-cors/issues/126
+  - https://github.com/cyu/rack-cors/pull/142
+  source_url: https://snyk.io/vuln/SNYK-RUBY-RACKCORS-540775
