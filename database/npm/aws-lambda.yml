@@ -1,0 +1,29 @@
+---
+- id: snykio:npm:aws-lambda:540839
+  title: Command Injection
+  description: "[aws-lambda][1] is a command line tool deploy code to AWS Lambda.\n\nAffected
+    versions of this package are vulnerable to Command Injection.\nThe `config.FunctioName`
+    is used to construct the argument used within\nthe `exec` function without any
+    sanitization. It is possible for a user\nto inject arbitrary commands to the `zipCmd`
+    used within\n`config.FunctionName` located in the file `lib/main.js` (line 78).\n\n###
+    PoC by JHU System Security Lab   {#poc-by-jhu-system-security-lab}\n\n    // aws-lambda-config.lambda\n
+    \   {\"FunctionName\": \"& touch Song &\", \n    \"PATH\": \"./\"}\n^\n\n    var
+    root = require(\"aws-lambda\");\n    root.deploy(\"aws-lambda-config\");\n\n\n\n[1]:
+    https://www.npmjs.com/package/aws-lambda\n"
+  affected_package: aws-lambda
+  vulnerable_versions:
+  - "<1.0.5"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2019-10777
+  cwe:
+  - CWE-78
+  disclosed_date: 2020-01-07
+  created_date: 2020-01-07
+  last_modified_date: 2020-01-07
+  credit:
+  - JHU System Security Lab
+  references:
+  - https://github.com/awspilot/cli-lambda-deploy/commit/0985a18bffb265817bc84836c9a65f2bb04a51ac
+  source_url: https://snyk.io/vuln/SNYK-JS-AWSLAMBDA-540839
