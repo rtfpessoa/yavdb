@@ -31,3 +31,40 @@
   - https://github.com/fofanov/gunicorn/commit/6c3d8f9c205f541a6ae0a1d5eba32b1cfca252ee
   - https://nvd.nist.gov/vuln/detail/CVE-2018-1000164
   source_url: https://snyk.io/vuln/SNYK-PYTHON-GUNICORN-42097
+- id: snykio:pypi:gunicorn:541164
+  title: HTTP Request Smuggling
+  description: |
+    [gunicorn][1] is a Python WSGI HTTP Server for UNIX
+
+    Affected versions of this package are vulnerable to HTTP Request
+    Smuggling. It fails to properly process the `Transfer-Encoding` and
+    `Content-Length` headers when both are present in a package request.
+    This allows for conflicting information to be sent regarding the length
+    of the package, which when processed by back-end servers under certain
+    configurations would allow for malicious users to bypass security
+    controls, gain unauthorized access to sensitive data, and directly
+    compromise other application users.
+
+
+
+    [1]: http://gunicorn.org/
+  affected_package: gunicorn
+  vulnerable_versions:
+  - "< 19.10.0"
+  - ">= 20.0.0 < 20.0.1"
+  severity: medium
+  package_manager: pypi
+  cwe:
+  - CWE-444
+  disclosed_date: 2019-11-15
+  created_date: 2020-01-09
+  last_modified_date: 2020-01-09
+  credit:
+  - Austin Jones
+  references:
+  - https://docs.gunicorn.org/en/stable/news.html#id1
+  - https://github.com/benoitc/gunicorn/commit/c5be1bae5c42b1e600be22d0655fc3ec4e4711cb
+  - https://github.com/benoitc/gunicorn/issues/2176
+  - https://github.com/benoitc/gunicorn/pull/2181
+  - https://portswigger.net/web-security/request-smuggling
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-GUNICORN-541164
