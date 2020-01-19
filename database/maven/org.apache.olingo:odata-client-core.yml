@@ -1,0 +1,37 @@
+---
+- id: snykio:maven:org.apache.olingo:odata-client-core:541532
+  title: Server-Side Request Forgery (SSRF)
+  description: |
+    [org.apache.olingo:odata-client-core][1] is a Java library and
+    extensions around the OData specification.
+
+    Affected versions of this package are vulnerable to Server-Side Request
+    Forgery (SSRF). It provides the `AsyncRequestWrapperImpl` class which
+    reads a URL from the Location header, and then sends a GET or DELETE
+    request to this URL. It may allow to implement a SSRF attack. If an
+    attacker tricks a client to connect to a malicious server, the server
+    can make the client call any URL including internal resources which are
+    not directly accessible by the attacker.
+
+
+
+    [1]: http://olingo.apache.org/
+  affected_package: org.apache.olingo:odata-client-core
+  vulnerable_versions:
+  - "< 4.7.1"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2020-1925
+  cwe:
+  - CWE-352
+  disclosed_date: 2020-01-08
+  created_date: 2020-01-13
+  last_modified_date: 2020-01-13
+  credit:
+  - Unknown
+  references:
+  - https://bugzilla.redhat.com/show_bug.cgi?id=1790309
+  - https://github.com/apache/olingo-odata4/pull/63/files
+  - https://issues.apache.org/jira/browse/OLINGO-1416
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEOLINGO-541532
