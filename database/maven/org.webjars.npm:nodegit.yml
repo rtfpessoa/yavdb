@@ -1,0 +1,163 @@
+---
+- id: snykio:maven:org.webjars.npm:nodegit:542724
+  title: Improper Link Resolution Before File Access
+  description: |
+    [org.webjars.npm:nodegit][1] is a Node bindings to the libgit2 project.
+
+    Affected versions of this package are vulnerable to Improper Link
+    Resolution Before File Access. Filenames on Linux/Unix can contain
+    backslashes. On Windows, backslashes are directory separators. Git did
+    not use to refuse to write out tracked files with such filenames.
+
+    The exploit uses backslashes in the file names stored in tree objects,
+    allowing arbitrary files even outside of the Git worktree to be
+    over-written.
+
+    **Note:** This is a Windows-only vulnerability.
+
+
+
+    [1]: https://www.npmjs.com/package/nodegit
+  affected_package: org.webjars.npm:nodegit
+  vulnerable_versions:
+  - ">= 0"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2019-1354
+  cwe:
+  - CWE-59
+  disclosed_date: 2019-12-10
+  created_date: 2020-01-07
+  last_modified_date: 2020-01-07
+  credit:
+  - Unknown
+  references:
+  - http://github.com/nodegit/nodegit/blob/master/CHANGELOG.md
+  - https://github.com/git/git/commit/e1d911dd4c7b76a5a8cec0f5c8de15981e34da83
+  - https://github.com/git/git/security/advisories/GHSA-xjx4-8694-q2fq
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-542724
+- id: snykio:maven:org.webjars.npm:nodegit:542725
+  title: Improper Handling of Alternate Data Stream
+  description: |
+    [org.webjars.npm:nodegit][1] is a Node bindings to the libgit2 project.
+
+    Affected versions of this package are vulnerable to Improper Handling of
+    Alternate Data Stream. When running Git in the Windows Subsystem for
+    Linux (also known as \"WSL\") while accessing a working directory on a
+    regular Windows drive, none of the NTFS protections were active.
+
+    This vulnerability affects Git when running inside the [Windows
+    Subsystem for Linux][2] and only when working on Windows drives where
+    NTFS short names are enabled (which is the case, by default, for the
+    system drive, i.e. `C:`).
+
+    The exploit uses a directory named `git~1` and it allows remote code
+    execution during a regular `git clone`.
+
+    For this reason, Git now turns on `core.protectNTFS` by default, which
+    is also required to address CVE-2019-1352.
+
+
+
+    [1]: https://www.npmjs.com/package/nodegit
+    [2]: https://docs.microsoft.com/en-us/windows/wsl/about
+  affected_package: org.webjars.npm:nodegit
+  vulnerable_versions:
+  - ">= 0"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2019-1353
+  cwe:
+  - CWE-69
+  disclosed_date: 2019-12-10
+  created_date: 2020-01-07
+  last_modified_date: 2020-01-07
+  credit:
+  - Garima Singh
+  - Nicolas Joly
+  references:
+  - http://github.com/nodegit/nodegit/blob/master/CHANGELOG.md
+  - https://github.com/git/git/commit/9102f958ee5254b10c0be72672aa3305bf4f4704
+  - https://github.com/git/git/security/advisories/GHSA-589j-mmg9-733v
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-542725
+- id: snykio:maven:org.webjars.npm:nodegit:542726
+  title: Directory Traversal
+  description: |
+    [org.webjars.npm:nodegit][1] is a Node bindings to the libgit2 project.
+
+    Affected versions of this package are vulnerable to Directory Traversal.
+    While the only permitted drive letters for physical drives on Windows
+    are letters of the US-English alphabet, this restriction does not apply
+    to virtual drives assigned via `subst <letter>: <path>`. Git mistook
+    such paths for relative paths, allowing writing outside of the worktree
+    while cloning.
+
+    This vulnerability can only be exploited on Windows, and only when the
+    targeted user is known to use non-alphabetical drive letters on logical
+    drives registered with the `subst.exe` command, allowing to overwrite
+    arbitrary files on said logical drive during a regular `git clone`.
+
+
+
+    [1]: https://www.npmjs.com/package/nodegit
+  affected_package: org.webjars.npm:nodegit
+  vulnerable_versions:
+  - ">= 0"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2019-1351
+  cwe:
+  - CWE-73
+  disclosed_date: 2019-12-10
+  created_date: 2020-01-07
+  last_modified_date: 2020-01-07
+  credit:
+  - Unknown
+  references:
+  - http://github.com/nodegit/nodegit/blob/master/CHANGELOG.md
+  - https://github.com/git/git/commit/f82a97eb9197c1e3768e72648f37ce0ca3233734
+  - https://github.com/git/git/security/advisories/GHSA-39hj-fvvf-mq4f
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-542726
+- id: snykio:maven:org.webjars.npm:nodegit:542727
+  title: Improper Handling of Alternate Data Stream
+  description: |
+    [org.webjars.npm:nodegit][1] is a Node bindings to the libgit2 project.
+
+    Affected versions of this package are vulnerable to Improper Handling of
+    Alternate Data Stream. Git was unaware of NTFS Alternate Data Streams,
+    allowing files inside the `.git/` directory to be overwritten during a
+    clone.
+
+    While the description contains \"NTFS\", this vulnerability can not only
+    be exploited on Windows, but also on macOS when working on
+    `smb://`-mounted network shares. The exploit involves naming a directory
+    `.git::$INDEX_ALLOCATION`, allowing remote code execution during a
+    regular `git clone`.
+
+    The fix for this CVE requires the fix for CVE-2019-1353.
+
+
+
+    [1]: https://www.npmjs.com/package/nodegit
+  affected_package: org.webjars.npm:nodegit
+  vulnerable_versions:
+  - ">= 0"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2019-1352
+  cwe:
+  - CWE-69
+  disclosed_date: 2019-12-10
+  created_date: 2020-01-07
+  last_modified_date: 2020-01-07
+  credit:
+  - Unknown
+  references:
+  - http://github.com/nodegit/nodegit/blob/master/CHANGELOG.md
+  - https://github.com/git/git/commit/7c3745fc6185495d5765628b4dfe1bd2c25a2981
+  - https://github.com/git/git/security/advisories/GHSA-5wph-8frv-58vj
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-542727
