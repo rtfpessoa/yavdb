@@ -1,34 +1,19 @@
 ---
-- id: npmjs:npm:@hapi/boom:1459
-  title: Cross-Site Scripting
-  description: Versions of `@hapi/boom` prior t 0.3.8 are vulnerable to Cross-Site
-    Scripting (XSS). The package fails to properly escape error messages, which may
-    allow attackers to execute arbitrary JavaScript in a victim's browser.
-  affected_package: "@hapi/boom"
-  vulnerable_versions:
-  - "<0.3.8"
-  severity: medium
-  package_manager: npm
-  cwe: CWE-79
-  disclosed_date: 1970-01-01
-  created_date: 1970-01-01
-  last_modified_date: 1970-01-01
-  credit: Unknown
-  references: https://npmjs.com/advisories/1459
-  source_url: https://npmjs.com/advisories/1459
-- id: snykio:npm:@hapi/boom:541183
+- id: snykio:maven:stroom:stroom-app:541182
   title: Cross-site Scripting (XSS)
   description: |+
-    [@hapi/boom][1] is a used to utilize HTTP-friendly error objects within
-    hapi.
+    [stroom:stroom-app][1] is a highly scalable data storage, processing and
+    analysis platform
 
     Affected versions of this package are vulnerable to Cross-site Scripting
-    (XSS) due to error messages provided by the package not being properly
-    output encoded.
+    (XSS). An attacker website is able to load the Stroom UI into a hidden
+    iframe. Using that iframe, the attacker site can issue commands to the
+    Stroom UI via an XSS vulnerability to take full control of the Stroom UI
+    on behalf of the logged-in user.
 
 
 
-    [1]: https://www.npmjs.com/package/@hapi/boom
+    [1]: https://github.com/gchq/stroom
     \nA cross-site scripting attack occurs when the attacker tricks a
     legitimate web-based application or site to accept a request as
     originating from a trusted source.
@@ -101,19 +86,22 @@
     * Read the documentation for any of the libraries referenced in your
       code to understand which elements allow for embedded HTML.
 
-  affected_package: "@hapi/boom"
+  affected_package: stroom:stroom-app
   vulnerable_versions:
-  - "<0.3.8"
-  severity: medium
-  package_manager: npm
+  - "< 5.5.12"
+  - ">= 6.0.0 < 6.0.25"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2019-10779
   cwe:
   - CWE-79
-  disclosed_date: 2013-03-30
+  disclosed_date: 2020-01-09
   created_date: 2020-01-09
   last_modified_date: 2020-01-09
   credit:
-  - Unknown
+  - Jonathan Leitschuh
   references:
-  - https://github.com/hapijs/boom/commit/0f8640bdba65aec6e6799bfc16ff5753150bfcaf
-  - https://github.com/hapijs/boom/pull
-  source_url: https://snyk.io/vuln/SNYK-JS-HAPIBOOM-541183
+  - https://gist.github.com/JLLeitschuh/a6d6eb3886170dafa7c0cbe1d63edefa
+  - https://github.com/gchq/stroom/security/advisories/GHSA-6p78-9hh5-384m
+  source_url: https://snyk.io/vuln/SNYK-JAVA-STROOM-541182
