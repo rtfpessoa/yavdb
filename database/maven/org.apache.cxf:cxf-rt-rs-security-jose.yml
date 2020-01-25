@@ -66,3 +66,44 @@
   - https://github.com/apache/cxf/commit/555843f
   - https://github.com/apache/cxf/commit/e66ce235
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHECXF-536488
+- id: snykio:maven:org.apache.cxf:cxf-rt-rs-security-jose:542665
+  title: Information Exposure
+  description: |
+    [org.apache.cxf:cxf-rt-rs-security-jose][1] is a services framework.
+
+    Affected versions of this package are vulnerable to Information
+    Exposure. Apache CXF ships with a OpenId Connect JWK Keys service, which
+    allows a client to obtain the public keys in JWK format, which can then
+    be used to verify the signature of tokens issued by the service.
+    Typically, the service obtains the public key from a local keystore
+    (JKS/PKCS12) by specifing the path of the keystore and the alias of the
+    keystore entry. This case is not vulnerable. However it is also possible
+    to obtain the keys from a JWK keystore file, by setting the
+    configuration parameter `rs.security.keystore.type` to `jwk`. For this
+    case all keys are returned in this file \"as is\", including all private
+    key and secret key credentials. This is an obvious security risk if the
+    user has configured the signature keystore file with private or secret
+    key credentials.
+
+
+
+    [1]: http://cxf.apache.org/
+  affected_package: org.apache.cxf:cxf-rt-rs-security-jose
+  vulnerable_versions:
+  - "< 3.2.12"
+  - ">= 3.3.0 < 3.3.5"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2019-12423
+  cwe:
+  - CWE-200
+  disclosed_date: 2019-11-14
+  created_date: 2020-01-19
+  last_modified_date: 2020-01-19
+  credit:
+  - Unknown
+  references:
+  - http://cxf.apache.org/security-advisories.data/CVE-2019-12423.txt.asc?version=1&modificationDate=1579178393000&api=v2
+  - https://github.com/apache/cxf/commit/2de7e14eb95626fffef6f61365186de9a1c9de3d
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHECXF-542665
