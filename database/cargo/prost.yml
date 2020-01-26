@@ -1,0 +1,22 @@
+---
+- id: rustsec:cargo:prost:RUSTSEC-2020-0002
+  title: Parsing a specially crafted message can result in a stack overflow
+  description: "Affected versions of this crate contained a bug in which decoding
+    untrusted\ninput could overflow the stack.\n\nOn architectures with stack probes
+    (like x86), this can be used for denial of\nservice attacks, while on architectures
+    without stack probes (like ARM)\noverflowing the stack is unsound and can result
+    in potential memory corruption\n(or even RCE).\n \nThe flaw was quickly corrected
+    by @danburkert and released in version 0.6.1.\n"
+  affected_package: prost
+  patched_versions:
+  - ">= 0.6.1"
+  severity: high
+  package_manager: cargo
+  disclosed_date: 2020-01-16
+  created_date: 2020-01-16
+  last_modified_date: 2020-01-16
+  credit:
+  - RustSec
+  references:
+  - https://github.com/danburkert/prost/issues/267
+  source_url: https://github.com/RustSec/advisory-db/blob/master/crates/prost/RUSTSEC-2020-0002.toml

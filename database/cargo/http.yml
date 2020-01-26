@@ -1,0 +1,48 @@
+---
+- id: rustsec:cargo:http:RUSTSEC-2019-0033
+  title: Integer Overflow in HeaderMap::reserve() can cause Denial of Service
+  description: |
+    `HeaderMap::reserve()` used `usize::next_power_of_two()` to calculate the increased capacity.
+    However, `next_power_of_two()` silently overflows to 0 if given a sufficently large number
+    in release mode.
+
+    If the map was not empty when the overflow happens,
+    the library will invoke `self.grow(0)` and start infinite probing.
+    This allows an attacker who controls the argument to `reserve()`
+    to cause a potential denial of service (DoS).
+
+    The flaw was corrected in 0.1.20 release of `http` crate.
+  affected_package: http
+  patched_versions:
+  - ">= 0.1.20"
+  severity: high
+  package_manager: cargo
+  disclosed_date: 2019-11-16
+  created_date: 2019-11-16
+  last_modified_date: 2019-11-16
+  credit:
+  - RustSec
+  references:
+  - https://github.com/hyperium/http/issues/352
+  source_url: https://github.com/RustSec/advisory-db/blob/master/crates/http/RUSTSEC-2019-0033.toml
+- id: rustsec:cargo:http:RUSTSEC-2019-0034
+  title: HeaderMap::Drain API is unsound
+  description: |
+    Affected versions of this crate incorrectly used raw pointer,
+    which introduced unsoundness in its public safe API.
+
+    [Failing to drop the Drain struct causes double-free](https://github.com/hyperium/http/issues/354),
+    and [it is possible to violate Rust's alias rule and cause data race with Drain's Iterator implementation](https://github.com/hyperium/http/issues/355).
+
+    The flaw was corrected in 0.1.20 release of `http` crate.
+  affected_package: http
+  patched_versions:
+  - ">= 0.1.20"
+  severity: high
+  package_manager: cargo
+  disclosed_date: 2019-11-16
+  created_date: 2019-11-16
+  last_modified_date: 2019-11-16
+  credit:
+  - RustSec
+  source_url: https://github.com/RustSec/advisory-db/blob/master/crates/http/RUSTSEC-2019-0034.toml
