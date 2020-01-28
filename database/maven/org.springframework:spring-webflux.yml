@@ -37,3 +37,78 @@
   - https://nvd.nist.gov/vuln/detail/CVE-2018-1272
   - https://pivotal.io/security/cve-2018-1272
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGSPRINGFRAMEWORK-31663
+- id: snykio:maven:org.springframework:spring-webflux:542932
+  title: Cross-Site Request Forgery (CSRF)
+  description: |
+    [org.springframework:spring-webflux][1] is a Spring Framework module
+    that contains support for reactive HTTP and WebSocket clients as well as
+    for reactive server web applications including REST, HTML browser, and
+    WebSocket style interactions.
+
+    Affected versions of this package are vulnerable to Cross-Site Request
+    Forgery (CSRF) through CORS preflight requests that target Spring MVC
+    (`spring-webmvc` module) or Spring WebFlux (`spring-webflux` module)
+    endpoints. Only non-authenticated endpoints are vulnerable because
+    preflight requests should not include credentials and therefore requests
+    should fail authentication. However a notable exception to this are
+    Chrome based browsers when using client certificates for authentication
+    since Chrome sends TLS client certificates in CORS preflight requests in
+    violation of spec requirements. No HTTP body can be sent or received as
+    a result of this attack.
+
+
+
+    [1]: https://github.com/spring-projects/spring-framework
+  affected_package: org.springframework:spring-webflux
+  vulnerable_versions:
+  - ">= 5.2.0 < 5.2.3"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2020-5397
+  cwe:
+  - CWE-352
+  disclosed_date: 2020-01-16
+  created_date: 2020-01-22
+  last_modified_date: 2020-01-22
+  credit:
+  - Eric Zimanyi
+  references:
+  - https://pivotal.io/security/cve-2020-5397
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGSPRINGFRAMEWORK-542932
+- id: snykio:maven:org.springframework:spring-webflux:542934
+  title: Reflected File Download (RFD)
+  description: |
+    [org.springframework:spring-webflux][1] is a Spring Framework module
+    that contains support for reactive HTTP and WebSocket clients as well as
+    for reactive server web applications including REST, HTML browser, and
+    WebSocket style interactions.
+
+    Affected versions of this package are vulnerable to Reflected File
+    Download (RFD). A reflected file download attack is possible when the
+    filename attribute of the `Content-Disposition` header is derived from
+    user-supplied input.
+
+
+
+    [1]: https://github.com/spring-projects/spring-framework
+  affected_package: org.springframework:spring-webflux
+  vulnerable_versions:
+  - ">= 5.0.0 < 5.0.16"
+  - ">= 5.1.0 < 5.1.13"
+  - ">= 5.2.0 < 5.2.3"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2020-5398
+  cwe:
+  - CWE-494
+  disclosed_date: 2020-01-16
+  created_date: 2020-01-22
+  last_modified_date: 2020-01-22
+  credit:
+  - Roman Shalymov
+  references:
+  - https://github.com/spring-projects/spring-framework/issues/24220
+  - https://pivotal.io/security/cve-2020-5398
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGSPRINGFRAMEWORK-542934

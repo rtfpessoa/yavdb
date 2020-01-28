@@ -171,3 +171,40 @@
   - https://github.com/github/advisory-review/pull/14604
   - https://github.com/Pylons/waitress/commit/11d9e138125ad46e951027184b13242a3c1de017
   source_url: https://snyk.io/vuln/SNYK-PYTHON-WAITRESS-539932
+- id: snykio:pypi:waitress:543054
+  title: HTTP Request Smuggling
+  description: |
+    [waitress][1] is a production-quality pure-Python WSGI server with very
+    acceptable performance.
+
+    Affected versions of this package are vulnerable to HTTP Request
+    Smuggling. It is possible to conduct request smuggling by sending the
+    `Content-Length` header twice. Waitress would header fold a double
+    `Content-Length` header and due to being unable to cast the now comma
+    separated value to an integer would set the Content-Length to `0`
+    internally. If two Content-Length headers are sent in a single request,
+    Waitress would treat the request as having no body, thereby treating the
+    body of the request as a new request in HTTP pipelining. This issue is
+    fixed in Waitress
+
+
+
+    [1]: https://pypi.org/project/waitress/
+  affected_package: waitress
+  vulnerable_versions:
+  - "< 1.4.0"
+  severity: high
+  package_manager: pypi
+  cve:
+  - CVE-2019-16792
+  cwe:
+  - CWE-444
+  disclosed_date: 2020-01-22
+  created_date: 2020-01-22
+  last_modified_date: 2020-01-22
+  credit:
+  - Unknown
+  references:
+  - https://docs.pylonsproject.org/projects/waitress/en/latest/#security-fixes
+  - https://github.com/Pylons/waitress/commit/575994cd42e83fd772a5f7ec98b2c56751bd3f65
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-WAITRESS-543054

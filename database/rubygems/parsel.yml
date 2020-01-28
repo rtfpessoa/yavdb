@@ -1,0 +1,101 @@
+---
+- id: snykio:rubygems:parsel:542917
+  title: Insecure Encryption
+  description: |
+    [parsel][1] is a gem to encrypt and decrypt data with a given key.
+
+    Affected versions of this package are vulnerable to Insecure Encryption.
+    It contains a weak key derivation function, in which a key of arbitrary
+    length is run through one round of SHA256 to gain key material of the
+    correct length. This allows for the use of weak key material without
+    appropriate key stretching.
+
+
+
+    [1]: https://rubygems.org/gems/parsel
+  affected_package: parsel
+  vulnerable_versions:
+  - ">=0.0.0"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2020-6763
+  cwe:
+  - CWE-326
+  disclosed_date: 2020-01-22
+  created_date: 2020-01-22
+  last_modified_date: 2020-01-22
+  credit:
+  - Daniel Bond
+  references:
+  - https://github.com/fnando/parsel-rb/blob/master/lib/parsel.rb
+  source_url: https://snyk.io/vuln/SNYK-RUBY-PARSEL-542917
+- id: snykio:rubygems:parsel:542918
+  title: Insecure Encryption
+  description: |
+    [parsel][1] is a gem to encrypt and decrypt data with a given key.
+
+    Affected versions of this package are vulnerable to Insecure Encryption.
+    In cases where an initialisation vector is not supplied to the encrypt
+    or decrypt call in `parsel.rb`, the initialisation vector used by the
+    library is set to the hardcoded value in L10 of `config.rb`. This makes
+    the cipher vulnerable to chosen plaintext attacks and data leakage
+    within the first block.
+
+
+
+    [1]: https://rubygems.org/gems/parsel
+  affected_package: parsel
+  vulnerable_versions:
+  - ">=0.0.0"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2020-6762
+  cwe:
+  - CWE-326
+  disclosed_date: 2020-01-22
+  created_date: 2020-01-22
+  last_modified_date: 2020-01-22
+  credit:
+  - Daniel Bond
+  references:
+  - https://github.com/fnando/parsel-rb/blob/master/lib/parsel.rb
+  source_url: https://snyk.io/vuln/SNYK-RUBY-PARSEL-542918
+- id: snykio:rubygems:parsel:542919
+  title: Bit-Flipping Attack
+  description: |
+    [parsel][1] is a gem to encrypt and decrypt data with a given key.
+
+    Affected versions of this package are vulnerable to Bit-Flipping Attack
+    via the `ciphertext` function. `AES-256-CBC`, the construct used in
+    `parsel.rb`, has no integrity check (i.e., there is no MAC for
+    integrity.)
+
+    ### Details   {#details}
+
+    A bit-flipping attack is an attack on a cryptographic cipher in which
+    the attacker can change the ciphertext in such a way as to result in a
+    predictable change of the plaintext, although the attacker is not able
+    to learn the plaintext itself.
+
+
+
+    [1]: https://rubygems.org/gems/parsel
+  affected_package: parsel
+  vulnerable_versions:
+  - ">=0.0.0"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2020-6763
+  cwe:
+  - CWE-649
+  disclosed_date: 2020-01-22
+  created_date: 2020-01-22
+  last_modified_date: 2020-01-22
+  credit:
+  - Daniel Bond
+  references:
+  - https://github.com/fnando/parsel-rb/blob/master/lib/parsel.rb
+  source_url: https://snyk.io/vuln/SNYK-RUBY-PARSEL-542919
