@@ -387,6 +387,160 @@
   references:
   - https://simplesamlphp.org/security/201911-02
   source_url: https://snyk.io/vuln/SNYK-PHP-SIMPLESAMLPHPSIMPLESAMLPHP-536104
+- id: snykio:packagist:simplesamlphp/simplesamlphp:543283
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [simplesamlphp/simplesamlphp][1] is a PHP implementation of a SAML 2.0
+    service provider and identity provider, also compatible with Shibboleth
+    1.3 and 2.0.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). It allows error reports to be submitted and sent to the system
+    administrator. Starting with SimpleSAMLphp 1.18.0, a new
+    SimpleSAML\\Utils\\EMail class was introduced to handle sending emails,
+    implemented as a wrapper of an external dependency. This new wrapper
+    allows us to use Twig templates in order to create the email sent with
+    an error report. Since Twig provides automatic escaping of variables,
+    manual escaping of the free-text field in www/errorreport.php was
+    removed to avoid double escaping. However, for those not using the new
+    user interface yet, an email template is hardcoded into the class itself
+    in plain PHP. Since no escaping is provided in this template, it is then
+    possible to inject HTML inside the template by manually crafting the
+    contents of the free-text field.
+
+
+
+    [1]: https://packagist.org/packages/simplesamlphp/simplesamlphp
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
+  affected_package: simplesamlphp/simplesamlphp
+  vulnerable_versions:
+  - ">=1.18.0  <1.18.4"
+  severity: medium
+  package_manager: packagist
+  cve:
+  - CVE-2020-5226
+  cwe:
+  - CWE-79
+  disclosed_date: 2020-01-24
+  created_date: 2020-01-26
+  last_modified_date: 2020-01-26
+  credit:
+  - Unknown
+  references:
+  - https://github.com/simplesamlphp/simplesamlphp/security/advisories/GHSA-mj9p-v2r8-wf8w
+  - https://simplesamlphp.org/security/202001-01
+  source_url: https://snyk.io/vuln/SNYK-PHP-SIMPLESAMLPHPSIMPLESAMLPHP-543283
+- id: snykio:packagist:simplesamlphp/simplesamlphp:543287
+  title: Log Injection
+  description: |
+    [simplesamlphp/simplesamlphp][1] is a PHP implementation of a SAML 2.0
+    service provider and identity provider, also compatible with Shibboleth
+    1.3 and 2.0.
+
+    Affected versions of this package are vulnerable to Log Injection. The
+    `www/erroreport.php` script, which receives error reports and sends them
+    via email to the system administrator, did not properly sanitize the
+    report identifier obtained from the request. This allows an attacker,
+    under specific circumstances, to inject new log lines by manually
+    crafting this report ID. When configured to use the file logging
+    handler, SimpleSAMLphp will output all its logs by appending each log
+    line to a given file. Since the reportID parameter received in a request
+    sent to www/errorreport.php was not properly sanitized, it was possible
+    to inject newline characters into it, effectively allowing a malicious
+    user to inject new log lines with arbitrary content.
+
+
+
+    [1]: https://packagist.org/packages/simplesamlphp/simplesamlphp
+  affected_package: simplesamlphp/simplesamlphp
+  vulnerable_versions:
+  - "<1.18.4"
+  severity: medium
+  package_manager: packagist
+  cve:
+  - CVE-2020-5225
+  cwe:
+  - CWE-200
+  disclosed_date: 2020-01-24
+  created_date: 2020-01-26
+  last_modified_date: 2020-01-26
+  credit:
+  - Frederic Vleminckx
+  references:
+  - https://github.com/simplesamlphp/simplesamlphp/security/advisories/GHSA-6gc6-m364-85ww
+  - https://simplesamlphp.org/security/202001-02
+  source_url: https://snyk.io/vuln/SNYK-PHP-SIMPLESAMLPHPSIMPLESAMLPHP-543287
 - id: snykio:packagist:simplesamlphp/simplesamlphp:70160
   title: Link Injection
   description: |

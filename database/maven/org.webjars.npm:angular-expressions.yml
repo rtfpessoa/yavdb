@@ -1,0 +1,38 @@
+---
+- id: snykio:maven:org.webjars.npm:angular-expressions:543285
+  title: Remote Code Execution (RCE)
+  description: |
+    [org.webjars.npm:angular-expressions][1] is an Angular expression as
+    standalone module.
+
+    Affected versions of this package are vulnerable to Remote Code
+    Execution (RCE) when `expressions.compile`(userControlledInput) is
+    called where `userControlledInput` is text that comes from user input.
+    If running angular-expressions in the browser, an attacker could run any
+    browser script when the application code calls
+    `expressions.compile`(userControlledInput). If running
+    angular-expressions on the server, an attacker could run any Javascript
+    expression, thus gaining Remote Code Execution.
+
+
+
+    [1]: https://www.npmjs.com/package/angular-expressions
+  affected_package: org.webjars.npm:angular-expressions
+  vulnerable_versions:
+  - ">= 0"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2020-5219
+  cwe:
+  - CWE-94
+  disclosed_date: 2020-01-26
+  created_date: 2020-01-26
+  last_modified_date: 2020-01-26
+  credit:
+  - Unknown
+  references:
+  - http://blog.angularjs.org/2016/09/angular-16-expression-sandbox-removal.html
+  - https://github.com/peerigon/angular-expressions/commit/061addfb9a9e932a970e5fcb913d020038e65667
+  - https://github.com/peerigon/angular-expressions/security/advisories/GHSA-hxhm-96pp-2m43
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-543285

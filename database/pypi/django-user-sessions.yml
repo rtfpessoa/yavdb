@@ -1,0 +1,35 @@
+---
+- id: snykio:pypi:django-user-sessions:543286
+  title: Session Key Exposure
+  description: |
+    [django-user-sessions][1] is a Django sessions with a foreign key to the
+    user.
+
+    Affected versions of this package are vulnerable to Session Key
+    Exposure. The views provided allow users to terminate specific sessions.
+    The session key is used to identify sessions, and thus included in the
+    rendered HTML. In itself this is not a problem. However if the website
+    has an XSS vulnerability, the session key could be extracted by the
+    attacker and a session takeover could happen.
+
+
+
+    [1]: https://pypi.org/project/django-user-sessions/
+  affected_package: django-user-sessions
+  vulnerable_versions:
+  - "< 1.7.1"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2020-5224
+  cwe:
+  - CWE-287
+  disclosed_date: 2020-01-24
+  created_date: 2020-01-26
+  last_modified_date: 2020-01-26
+  credit:
+  - Unknown
+  references:
+  - https://github.com/Bouke/django-user-sessions/security/advisories/GHSA-5fq8-3q2f-4m5g
+  - https://github.com/jazzband/django-user-sessions/commit/f0c4077e7d1436ba6d721af85cee89222ca5d2d9
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGOUSERSESSIONS-543286
