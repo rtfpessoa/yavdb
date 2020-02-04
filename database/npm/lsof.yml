@@ -1,0 +1,37 @@
+---
+- id: snykio:npm:lsof:543632
+  title: Command Injection
+  description: |
+    [lsof][1] is a lsof processor for node.
+
+    Affected versions of this package are vulnerable to Command Injection.
+    Multiple areas of the package is vulnerable to command injection. Every
+    exported method used by the packages uses the `exec` function to parse
+    user input.
+
+    ### PoC by JHU System Security Lab   {#poc-by-jhu-system-security-lab}
+
+        var root = require("lsof");
+        var attack_code = "& echo vulnerable > create.txt &";
+        root.rawTcpPort(attack_code, function(){});
+
+
+
+    [1]: https://www.npmjs.com/package/lsof
+  affected_package: lsof
+  vulnerable_versions:
+  - "*"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2019-10783
+  cwe:
+  - CWE-78
+  disclosed_date: 2020-01-29
+  created_date: 2020-01-29
+  last_modified_date: 2020-01-29
+  credit:
+  - JHU System Security Lab
+  references:
+  - https://github.com/davglass/node-lsof/blob/628a457434031d321038ef4b39da72c519e2949e/lib/lsof.js#L37
+  source_url: https://snyk.io/vuln/SNYK-JS-LSOF-543632

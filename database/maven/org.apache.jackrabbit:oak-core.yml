@@ -32,6 +32,42 @@
   - http://struts.apache.org/release/2.2.x/docs/s2-003.html
   - https://issues.apache.org/jira/browse/WW-2692
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEJACKRABBIT-30021
+- id: snykio:maven:org.apache.jackrabbit:oak-core:543625
+  title: Information Exposure
+  description: |
+    [org.apache.jackrabbit:oak-core][1] is a complementary implementation of
+    the JCR specification.
+
+    Affected versions of this package are vulnerable to Information
+    Exposure. The optional initial password change and password expiration
+    features are prone to a sensitive information disclosure vulnerability.
+    The code mandates the changed password to be passed as an additional
+    attribute to the credentials object but does not remove it upon
+    processing during the first phase of the authentication. In combination
+    with additional, independent authentication mechanisms, this may lead to
+    the new password being disclosed.
+
+
+
+    [1]: https://search.maven.org/artifact/org.apache.jackrabbit/oak-core
+  affected_package: org.apache.jackrabbit:oak-core
+  vulnerable_versions:
+  - "< 1.10.8"
+  - ">= 1.12.0 < 1.24.0"
+  severity: low
+  package_manager: maven
+  cve:
+  - CVE-2020-1940
+  cwe:
+  - CWE-200
+  disclosed_date: 2020-01-28
+  created_date: 2020-01-29
+  last_modified_date: 2020-01-29
+  credit:
+  - Andrew Khoury and Russ Wright
+  references:
+  - https://lists.apache.org/thread.html/rccc0ed467faa35734ea16b8f5de5603e708936c41a4eddd90fddeaf0%40%3Cusers.jackrabbit.apache.org%3E
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEJACKRABBIT-543625
 - id: victims:maven:org.apache.jackrabbit:oak-core:2008-6504
   title: 'Apache Struts2/WebWorks/XWork: XWork ParameterInterceptors bypass allows
     OGNL statement execution'
