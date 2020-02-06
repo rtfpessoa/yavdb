@@ -1,0 +1,41 @@
+---
+- id: snykio:maven:org.opencastproject:base:543832
+  title: Resource Injection
+  description: |
+    [org.opencastproject:base][1] is a free and open source solution for
+    automated video capture and distribution at scale.
+
+    Affected versions of this package are vulnerable to Resource Injection.
+    Opencast allows almost arbitrary identifiers for media packages and
+    elements to be used. This can be problematic for operation and security
+    since such identifiers are sometimes used for file system operations
+    which may lead to an attacker being able to escape working directories
+    and write files to other locations.
+
+    In addition, Opencast\'s `Id.toString()` vs `Id.compact()` behavior, the
+    latter trying to mitigate some of the file system problems, can cause
+    errors due to identifier mismatch since an identifier may
+    unintentionally change.
+
+
+
+    [1]: https://opencast.org/
+  affected_package: org.opencastproject:base
+  vulnerable_versions:
+  - "< 7.6"
+  - ">= 8.0 < 8.1"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2020-5230
+  cwe:
+  - CWE-99
+  disclosed_date: 2020-01-30
+  created_date: 2020-01-31
+  last_modified_date: 2020-01-31
+  credit:
+  - Unknown
+  references:
+  - https://github.com/opencast/opencast/commit/bbb473f34ab95497d6c432c81285efb0c739f317
+  - https://github.com/opencast/opencast/security/advisories/GHSA-w29m-fjp4-qhmq
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGOPENCASTPROJECT-543832

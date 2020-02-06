@@ -1,0 +1,115 @@
+---
+- id: snykio:maven:org.opencastproject:opencast-kernel:543824
+  title: Privilege Escalation
+  description: |
+    [org.opencastproject:opencast-kernel][1] is a free and open source
+    solution for automated video capture and distribution at scale.
+
+    Affected versions of this package are vulnerable to Privilege
+    Escalation. Users with the role `ROLE_COURSE_ADMIN` can use the
+    user-utils endpoint to create new users not including the role
+    `ROLE_ADMIN`. `ROLE_COURSE_ADMIN` is a non-standard role in Opencast
+    which is referenced neither in the documentation nor in any code (except
+    for tests) but only in the security configuration. From the name –
+    implying an admin for a specific course – users would never expect that
+    this role allows user creation.
+
+
+
+    [1]: https://opencast.org
+  affected_package: org.opencastproject:opencast-kernel
+  vulnerable_versions:
+  - "< 7.6"
+  - ">= 8.0 < 8.1"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2020-5231
+  cwe:
+  - CWE-269
+  disclosed_date: 2020-01-31
+  created_date: 2020-01-31
+  last_modified_date: 2020-01-31
+  credit:
+  - Unknown
+  references:
+  - https://github.com/opencast/opencast/commit/72fad0031d8a82c860e2bde0b27570c5042320ee
+  - https://github.com/opencast/opencast/security/advisories/GHSA-94qw-r73x-j7hg
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGOPENCASTPROJECT-543824
+- id: snykio:maven:org.opencastproject:opencast-kernel:543831
+  title: Improper Authorization
+  description: |
+    [org.opencastproject:opencast-kernel][1] is a free and open source
+    solution for automated video capture and distribution at scale.
+
+    Affected versions of this package are vulnerable to Improper
+    Authorization. Enables a remember-me cookie based on a hash created from
+    the username, password, and an additional system key. This means that an
+    attacker getting access to a remember-me token for one server can get
+    access to all servers which allow log-in using the same credentials
+    without ever needing the credentials.
+
+    Such an attack will usually not work on different installations –
+    assuming that safe, unique passwords are used – but it is basically
+    guaranteed to work to get access to all machines of one cluster if a
+    token from one machine is compromised.
+
+
+
+    [1]: https://opencast.org
+  affected_package: org.opencastproject:opencast-kernel
+  vulnerable_versions:
+  - "< 7.6"
+  - ">= 8.0 < 8.1"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2020-5222
+  cwe:
+  - CWE-285
+  disclosed_date: 2020-01-30
+  created_date: 2020-01-31
+  last_modified_date: 2020-01-31
+  credit:
+  - Lukas Kalbertodt
+  references:
+  - https://github.com/opencast/opencast/commit/1a7172c95af8d542a77ae5b153e4c834dd4788a6
+  - https://github.com/opencast/opencast/security/advisories/GHSA-mh8g-hprg-8363
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGOPENCASTPROJECT-543831
+- id: snykio:maven:org.opencastproject:opencast-kernel:543833
+  title: Improper Authorization
+  description: |
+    [org.opencastproject:opencast-kernel][1] is a free and open source
+    solution for automated video capture and distribution at scale.
+
+    Affected versions of this package are vulnerable to Improper
+    Authorization. Using a remember-me cookie with an arbitrary username can
+    cause Opencast to assume proper authentication for that user even if the
+    remember-me cookie was incorrect given that the attacked endpoint also
+    allows anonymous access. This way, an attacker can, for example, fake a
+    remember-me token, assume the identity of the global system
+    administrator and request non-public content from the search service
+    without ever providing any proper authentication.
+
+
+
+    [1]: https://opencast.org
+  affected_package: org.opencastproject:opencast-kernel
+  vulnerable_versions:
+  - "< 7.6"
+  - ">= 8.0 < 8.1"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2020-5206
+  cwe:
+  - CWE-285
+  disclosed_date: 2020-01-30
+  created_date: 2020-01-31
+  last_modified_date: 2020-01-31
+  credit:
+  - Unknown
+  references:
+  - https://github.com/opencast/opencast/commit/b157e1fb3b35991ca7bf59f0730329fbe7ce82e8
+  - https://github.com/opencast/opencast/security/advisories/GHSA-vmm6-w4cf-7f3x
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGOPENCASTPROJECT-543833

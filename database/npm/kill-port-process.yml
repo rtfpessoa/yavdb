@@ -1,0 +1,28 @@
+---
+- id: snykio:npm:kill-port-process:543829
+  title: Command Injection
+  description: |+
+    `kill-port-process` is a None
+
+    Affected versions of this package are vulnerable to Command Injection.
+    An attacker able to control the port number can insert a shell command
+    instead of a port number, due to weak sanitisation. The command will run
+    under the `root` user, since the `root` user is the only user able to
+    execute the `kill` command.
+
+  affected_package: kill-port-process
+  vulnerable_versions:
+  - "<2.2.0"
+  severity: medium
+  package_manager: npm
+  cwe:
+  - CWE-78
+  disclosed_date: 2020-01-30
+  created_date: 2020-01-31
+  last_modified_date: 2020-01-31
+  credit:
+  - effectrenan
+  references:
+  - https://github.com/hilleer/kill-port-process/pull/14
+  - https://hackerone.com/reports/661959
+  source_url: https://snyk.io/vuln/SNYK-JS-KILLPORTPROCESS-543829

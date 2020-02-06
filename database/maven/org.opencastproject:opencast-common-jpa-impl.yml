@@ -1,0 +1,41 @@
+---
+- id: snykio:maven:org.opencastproject:opencast-common-jpa-impl:543835
+  title: Inadequate Encryption Strength
+  description: |
+    [org.opencastproject:opencast-common-jpa-impl][1] is a free and open
+    source solution for automated video capture and distribution at scale.
+
+    Affected versions of this package are vulnerable to Inadequate
+    Encryption Strength. User passwords are stored in the database using the
+    rather outdated and cryptographically insecure MD5 hash algorithm.
+    Furthermore, the hashes are salted using the username instead of a
+    random salt, causing hashes for users with the same username and
+    password to collide which is problematic especially for popular users
+    like the default `admin` user. This essentially means that for an
+    attacker, it might be feasible to reconstruct a user\'s password given
+    access to these hashes. Note that attackers needing access to the hashes
+    means that they must gain access to the database in which these are
+    stored first to be able to start cracking the passwords.
+
+
+
+    [1]: https://opencast.org
+  affected_package: org.opencastproject:opencast-common-jpa-impl
+  vulnerable_versions:
+  - "< 7.6"
+  - ">= 8.0 < 8.1"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2020-5229
+  cwe:
+  - CWE-327
+  disclosed_date: 2020-01-30
+  created_date: 2020-01-31
+  last_modified_date: 2020-01-31
+  credit:
+  - Unknown
+  references:
+  - https://github.com/opencast/opencast/commit/32bfbe5f78e214e2d589f92050228b91d704758e
+  - https://github.com/opencast/opencast/security/advisories/GHSA-h362-m8f2-5x7c
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGOPENCASTPROJECT-543835
