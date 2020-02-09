@@ -1,0 +1,31 @@
+---
+- id: snykio:npm:@azhou/basemodel:544026
+  title: SQL Injection
+  description: |
+    [@azhou/basemodel][1] is a package.
+
+    Affected versions of this package are vulnerable to SQL Injection. All
+    table names and fields arguments of all methods are fed directly into
+    query by string concatenation without escaping which may lead to sql
+    injection. In addition, `order by` fields of `model.getAll(fields,
+    orderby)` is not escaped and directly used in query which lead to blind
+    sql injection.
+
+
+
+    [1]: https://www.npmjs.com/package/@azhou/basemodel
+  affected_package: "@azhou/basemodel"
+  vulnerable_versions:
+  - "*"
+  severity: high
+  package_manager: npm
+  cwe:
+  - CWE-89
+  disclosed_date: 2020-02-02
+  created_date: 2020-02-03
+  last_modified_date: 2020-02-03
+  credit:
+  - verichains
+  references:
+  - https://hackerone.com/reports/506644
+  source_url: https://snyk.io/vuln/SNYK-JS-AZHOUBASEMODEL-544026

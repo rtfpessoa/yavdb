@@ -1,0 +1,40 @@
+---
+- id: snykio:maven:fr.acinq.eclair:eclair-core_2.11:543997
+  title: Improper Access Control
+  description: |
+    [fr.acinq.eclair:eclair-core\_2.11][1] is a scala implementation of the
+    Lightning Network.
+
+    Affected versions of this package are vulnerable to Improper Access
+    Control. A lightning node accepting a channel must check that the
+    funding transaction output does indeed open the channel proposed.
+    Otherwise an attacker can claim to open a channel but either not pay to
+    the peer, or not pay the full amount. Once that transaction reaches the
+    minimum depth, it can spend funds from the channel. The victim will only
+    notice when it tries to close the channel and none of the commitment or
+    mutual close transactions it has are valid.
+
+    *NOTE:* README.md states \"it is beta-quality software and don\'t put
+    too much money in it.\"
+
+
+
+    [1]: https://github.com/ACINQ/eclair
+  affected_package: fr.acinq.eclair:eclair-core_2.11
+  vulnerable_versions:
+  - "< 0.3.1"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2019-13000
+  cwe:
+  - CWE-284
+  disclosed_date: 2020-01-31
+  created_date: 2020-02-03
+  last_modified_date: 2020-02-03
+  credit:
+  - Unknown
+  references:
+  - https://github.com/ACINQ/eclair/releases
+  - https://lists.linuxfoundation.org/pipermail/lightning-dev/2019-September/002174.html
+  source_url: https://snyk.io/vuln/SNYK-JAVA-FRACINQECLAIR-543997
