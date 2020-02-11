@@ -1,0 +1,36 @@
+---
+- id: snykio:npm:curling:546484
+  title: Command Injection
+  description: |
+    [curling][1] is a node wrapper for curl with a very simple api.
+
+    Affected versions of this package are vulnerable to Command Injection
+    via the `run(command,cb)` function. The `command` argument can be
+    controlled by users without any sanitization.
+
+    ### PoC by JHU System Security Lab   {#poc-by-jhu-system-security-lab}
+
+        var root = require("curling");
+        root.run("& touch JHU",function(){});
+    {: .language-js}
+
+
+
+    [1]: https://www.npmjs.com/package/curling
+  affected_package: curling
+  vulnerable_versions:
+  - "*"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2019-10789
+  cwe:
+  - CWE-78
+  disclosed_date: 2020-02-05
+  created_date: 2020-02-05
+  last_modified_date: 2020-02-05
+  credit:
+  - JHU System Security Lab
+  references:
+  - https://github.com/hgarcia/curling/blob/e861d625c074679a2931bcf4ce8da0afa8162c53/lib/curl-transport.js#L56
+  source_url: https://snyk.io/vuln/SNYK-JS-CURLING-546484

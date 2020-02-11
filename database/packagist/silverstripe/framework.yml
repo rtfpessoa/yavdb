@@ -782,6 +782,1688 @@
   - https://github.com/silverstripe/silverstripe-framework/commit/8b7063a8e2773e2bbec3cabf94ed86e11f607071
   - https://www.silverstripe.org/download/security-releases/CVE-2019-12617
   source_url: https://snyk.io/vuln/SNYK-PHP-SILVERSTRIPEFRAMEWORK-469236
+- id: snykio:packagist:silverstripe/framework:546481
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [silverstripe/framework][1] is a PHP framework forming the base for the
+    SilverStripe CMS.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS) in CMSSecurity BackURL.
+
+
+
+    [1]: https://packagist.org/packages/silverstripe/framework
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
+  affected_package: silverstripe/framework
+  vulnerable_versions:
+  - ">=3.1.18  <3.1.19"
+  - ">=3.2.3  <3.2.4"
+  - ">=3.3.1  <3.3.2"
+  severity: high
+  package_manager: packagist
+  cwe:
+  - CWE-79
+  disclosed_date: 2020-02-05
+  created_date: 2020-02-05
+  last_modified_date: 2020-02-05
+  credit:
+  - David Julio
+  references:
+  - https://www.silverstripe.org/download/security-releases/ss-2016-016/
+  source_url: https://snyk.io/vuln/SNYK-PHP-SILVERSTRIPEFRAMEWORK-546481
+- id: snykio:packagist:silverstripe/framework:546483
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [silverstripe/framework][1] is a PHP framework forming the base for the
+    SilverStripe CMS.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). A third party library their own documentation, which in turn
+    included a vulnerable SWF file. This file was accessible on SilverStripe
+    websites by default. Older browsers executed SWF directly, and in
+    certain circumstances can expose the document object and associated data
+    (e.g. cookies).
+
+
+
+    [1]: https://packagist.org/packages/silverstripe/framework
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
+  affected_package: silverstripe/framework
+  vulnerable_versions:
+  - ">=3.0.0  <4.3.5"
+  - ">=4.4.0  <4.4.4"
+  severity: medium
+  package_manager: packagist
+  cve:
+  - CVE-2019-12205
+  cwe:
+  - CWE-79
+  disclosed_date: 2020-02-05
+  created_date: 2020-02-05
+  last_modified_date: 2020-02-05
+  credit:
+  - Jay Richardson
+  references:
+  - https://www.silverstripe.org/download/security-releases/cve-2019-12205/
+  source_url: https://snyk.io/vuln/SNYK-PHP-SILVERSTRIPEFRAMEWORK-546483
+- id: snykio:packagist:silverstripe/framework:546485
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [silverstripe/framework][1] is a PHP framework forming the base for the
+    SilverStripe CMS.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). It allows XSS by authenicated users through editing file titles
+    through the CMS. This can lead to privilege escalation by malicious
+    authenticated users with otherwise more limited access.
+
+
+
+    [1]: https://packagist.org/packages/silverstripe/framework
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
+  affected_package: silverstripe/framework
+  vulnerable_versions:
+  - ">=4.0.0  <4.3.5"
+  - ">=4.4.0  <4.4.4"
+  severity: medium
+  package_manager: packagist
+  cve:
+  - CVE-2019-14272
+  cwe:
+  - CWE-79
+  disclosed_date: 2020-02-05
+  created_date: 2020-02-05
+  last_modified_date: 2020-02-05
+  credit:
+  - Bot Kotatu
+  references:
+  - https://www.silverstripe.org/download/security-releases/cve-2019-14272/
+  source_url: https://snyk.io/vuln/SNYK-PHP-SILVERSTRIPEFRAMEWORK-546485
+- id: snykio:packagist:silverstripe/framework:546487
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [silverstripe/framework][1] is a PHP framework forming the base for the
+    SilverStripe CMS.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). Setting a page name to `"><svg/onload=alert(/xss/)>` will trigger
+    an XSS alert.
+
+
+
+    [1]: https://packagist.org/packages/silverstripe/framework
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
+  affected_package: silverstripe/framework
+  vulnerable_versions:
+  - "<3.4.4"
+  - ">=3.5.0  <3.5.2"
+  severity: high
+  package_manager: packagist
+  cwe:
+  - CWE-79
+  disclosed_date: 2020-02-05
+  created_date: 2020-02-05
+  last_modified_date: 2020-02-05
+  credit:
+  - Edric Teo
+  references:
+  - https://www.silverstripe.org/download/security-releases/ss-2017-001/
+  source_url: https://snyk.io/vuln/SNYK-PHP-SILVERSTRIPEFRAMEWORK-546487
+- id: snykio:packagist:silverstripe/framework:546488
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [silverstripe/framework][1] is a PHP framework forming the base for the
+    SilverStripe CMS.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). An authenticated user with page edit permission can craft HTML,
+    which when rendered in a page history comparison can execute client
+    scripts.
+
+
+
+    [1]: https://packagist.org/packages/silverstripe/framework
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
+  affected_package: silverstripe/framework
+  vulnerable_versions:
+  - "<3.4.6"
+  - ">=3.5.0  <3.5.4"
+  severity: high
+  package_manager: packagist
+  cwe:
+  - CWE-79
+  disclosed_date: 2020-02-05
+  created_date: 2020-02-05
+  last_modified_date: 2020-02-05
+  credit:
+  - Anti Rais
+  references:
+  - https://www.silverstripe.org/download/security-releases/ss-2017-004/
+  source_url: https://snyk.io/vuln/SNYK-PHP-SILVERSTRIPEFRAMEWORK-546488
+- id: snykio:packagist:silverstripe/framework:546489
+  title: Cross-site Scripting (XSS)
+  description: |
+    [silverstripe/framework][1] is a PHP framework forming the base for the
+    SilverStripe CMS.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). List of key / value pairs assigned to `OptionsetField` or
+    `CheckboxSetField` do not have a default casting assigned to them. The
+    effect of this is a potential XSS vulnerability in lists where either
+    key or value contain unescaped HTML.
+
+
+
+    [1]: https://packagist.org/packages/silverstripe/framework
+  affected_package: silverstripe/framework
+  vulnerable_versions:
+  - ">=3.1.19  <3.1.20"
+  - ">=3.2.4  <3.2.5"
+  - ">=3.3.2  <3.3.3"
+  - ">=3.4.0  <3.4.1"
+  severity: high
+  package_manager: packagist
+  cwe:
+  - CWE-79
+  disclosed_date: 2020-02-05
+  created_date: 2020-02-05
+  last_modified_date: 2020-02-05
+  credit:
+  - Unknown
+  source_url: https://snyk.io/vuln/SNYK-PHP-SILVERSTRIPEFRAMEWORK-546489
+- id: snykio:packagist:silverstripe/framework:546492
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [silverstripe/framework][1] is a PHP framework forming the base for the
+    SilverStripe CMS.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). Due to a lack of parameter sanitisation a carefully crafted URL
+    could be used to inject arbitrary HTML into the CMS Edit page. An
+    attacker could create a URL and share it with a site administrator to
+    perform an attack.
+
+
+
+    [1]: https://packagist.org/packages/silverstripe/framework
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
+  affected_package: silverstripe/framework
+  vulnerable_versions:
+  - ">=3.1.18  <3.1.19"
+  - ">=3.2.3  <3.2.4"
+  - ">=3.3.1  <3.3.2"
+  severity: high
+  package_manager: packagist
+  cwe:
+  - CWE-79
+  disclosed_date: 2020-02-05
+  created_date: 2020-02-05
+  last_modified_date: 2020-02-05
+  credit:
+  - Eric Flokstra
+  references:
+  - https://www.silverstripe.org/download/security-releases/ss-2016-004/
+  source_url: https://snyk.io/vuln/SNYK-PHP-SILVERSTRIPEFRAMEWORK-546492
+- id: snykio:packagist:silverstripe/framework:546493
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [silverstripe/framework][1] is a PHP framework forming the base for the
+    SilverStripe CMS.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). `RedirectorPage` will allow users to specify a non-url malicious
+    script as the redirection path without validation. Users which follow
+    this url may allow this script to execute within their browser.
+
+
+
+    [1]: https://packagist.org/packages/silverstripe/framework
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
+  affected_package: silverstripe/framework
+  vulnerable_versions:
+  - "<3.4.6"
+  - ">=3.5.0  <3.5.4"
+  severity: high
+  package_manager: packagist
+  cwe:
+  - CWE-79
+  disclosed_date: 2020-02-05
+  created_date: 2020-02-05
+  last_modified_date: 2020-02-05
+  credit:
+  - Wester
+  references:
+  - https://www.silverstripe.org/download/security-releases/ss-2017-003/
+  source_url: https://snyk.io/vuln/SNYK-PHP-SILVERSTRIPEFRAMEWORK-546493
+- id: snykio:packagist:silverstripe/framework:546494
+  title: SQL Injection
+  description: |
+    [silverstripe/framework][1] is a PHP framework forming the base for the
+    SilverStripe CMS.
+
+    Affected versions of this package are vulnerable to SQL Injection. When
+    performing a fulltext search the \'start\' querystring parameter is
+    never escaped safely.
+
+
+
+    [1]: https://packagist.org/packages/silverstripe/framework
+  affected_package: silverstripe/framework
+  vulnerable_versions:
+  - "<3.5.6"
+  - ">=3.6.0  <3.6.3"
+  - ">=4.0.0  <4.0.1"
+  severity: high
+  package_manager: packagist
+  cwe:
+  - CWE-89
+  disclosed_date: 2020-02-05
+  created_date: 2020-02-05
+  last_modified_date: 2020-02-05
+  credit:
+  - Stephan Bauer
+  references:
+  - https://www.silverstripe.org/download/security-releases/ss-2017-008/
+  source_url: https://snyk.io/vuln/SNYK-PHP-SILVERSTRIPEFRAMEWORK-546494
+- id: snykio:packagist:silverstripe/framework:546495
+  title: Privilege Escalation
+  description: |
+    [silverstripe/framework][1] is a PHP framework forming the base for the
+    SilverStripe CMS.
+
+    Affected versions of this package are vulnerable to Privilege
+    Escalation. A member with the permission `EDIT_PERMISSIONS` and access
+    to the \"Security\" section is able to re-assign themselves (or another
+    member) to `ADMIN` level. CMS Fields for the member are constructed
+    using DirectGroups instead of Groups relation which results in bypassing
+    security logic preventing privilege escalation.
+
+
+
+    [1]: https://packagist.org/packages/silverstripe/framework
+  affected_package: silverstripe/framework
+  vulnerable_versions:
+  - ">=3.5.7  <3.5.8"
+  - ">=3.6.0  <3.6.6"
+  - ">=4.0.0  <4.0.4"
+  - ">=4.1.0  <4.1.1"
+  severity: high
+  package_manager: packagist
+  cwe:
+  - CWE-264
+  disclosed_date: 2020-02-05
+  created_date: 2020-02-05
+  last_modified_date: 2020-02-05
+  credit:
+  - Worik Stanton
+  references:
+  - https://www.silverstripe.org/download/security-releases/ss-2018-001/
+  source_url: https://snyk.io/vuln/SNYK-PHP-SILVERSTRIPEFRAMEWORK-546495
+- id: snykio:packagist:silverstripe/framework:546496
+  title: Open Redirect
+  description: |
+    [silverstripe/framework][1] is a PHP framework forming the base for the
+    SilverStripe CMS.
+
+    Affected versions of this package are vulnerable to Open Redirect. A
+    carefully constructed malformed URL can be used to circumvent the
+    offsite redirection protection used on BackURL parameters. This could
+    lead to users entering sensitive data in malicious websites instead of
+    the intended one.
+
+
+
+    [1]: https://packagist.org/packages/silverstripe/framework
+  affected_package: silverstripe/framework
+  vulnerable_versions:
+  - ">=4.0.0  <4.0.4"
+  severity: high
+  package_manager: packagist
+  cwe:
+  - CWE-601
+  disclosed_date: 2020-02-05
+  created_date: 2020-02-05
+  last_modified_date: 2020-02-05
+  credit:
+  - Mustafa Hasan
+  references:
+  - https://www.silverstripe.org/download/security-releases/ss-2018-008/
+  source_url: https://snyk.io/vuln/SNYK-PHP-SILVERSTRIPEFRAMEWORK-546496
+- id: snykio:packagist:silverstripe/framework:546497
+  title: Arbitrary Code Execution
+  description: |
+    [silverstripe/framework][1] is a PHP framework forming the base for the
+    SilverStripe CMS.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution. There is a vulnerability whereby arbitrary global functions
+    may be executed if malicious user input is passed through to in the
+    second argument of `ViewableData::renderWith`. This argument resolves
+    associative arrays as template placehoders. This exploit requires that
+    user code has been written which makes use of the second argument in
+    `renderWith` and where user input is passed directly as a value in an
+    associative array without sanitisation such as `Convert::raw2xml()`.
+
+    `ViewableData::customise` is not vulnerable.
+
+
+
+    [1]: https://packagist.org/packages/silverstripe/framework
+  affected_package: silverstripe/framework
+  vulnerable_versions:
+  - ">=4.0.3  <4.0.4"
+  - ">=4.1.0  <4.1.1"
+  severity: high
+  package_manager: packagist
+  cwe:
+  - CWE-94
+  disclosed_date: 2020-02-05
+  created_date: 2020-02-05
+  last_modified_date: 2020-02-05
+  credit:
+  - Logan Woods and Josh Leroux
+  references:
+  - https://www.silverstripe.org/download/security-releases/ss-2018-006/
+  source_url: https://snyk.io/vuln/SNYK-PHP-SILVERSTRIPEFRAMEWORK-546497
+- id: snykio:packagist:silverstripe/framework:546498
+  title: Information Exposure
+  description: |
+    [silverstripe/framework][1] is a PHP framework forming the base for the
+    SilverStripe CMS.
+
+    Affected versions of this package are vulnerable to Information
+    Exposure. There is a user ID enumeration vulnerability in the brute
+    force error messages. Users that don\'t exist in will never get a locked
+    out message, while users that do exist, will get a locked out message.
+    This means an attacker can infer or confirm user details that exist in
+    the member table.
+
+
+
+    [1]: https://packagist.org/packages/silverstripe/framework
+  affected_package: silverstripe/framework
+  vulnerable_versions:
+  - ">=4.0.0  <4.0.4"
+  severity: medium
+  package_manager: packagist
+  cwe:
+  - CWE-200
+  disclosed_date: 2020-02-05
+  created_date: 2020-02-05
+  last_modified_date: 2020-02-05
+  credit:
+  - Dan Hensby
+  references:
+  - https://www.silverstripe.org/download/security-releases/ss-2018-010/
+  source_url: https://snyk.io/vuln/SNYK-PHP-SILVERSTRIPEFRAMEWORK-546498
+- id: snykio:packagist:silverstripe/framework:546499
+  title: Denial of Service (DoS)
+  description: |+
+    [silverstripe/framework][1] is a PHP framework forming the base for the
+    SilverStripe CMS.
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS) in the dev/build system controller.
+
+
+
+    [1]: https://packagist.org/packages/silverstripe/framework
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+  affected_package: silverstripe/framework
+  vulnerable_versions:
+  - ">=4.0.0  <4.0.5"
+  - ">=4.1.0  <4.1.3"
+  - ">=4.2.0  <4.2.2"
+  severity: high
+  package_manager: packagist
+  cwe:
+  - CWE-400
+  disclosed_date: 2020-02-05
+  created_date: 2020-02-05
+  last_modified_date: 2020-02-05
+  credit:
+  - Michael Strong
+  references:
+  - https://www.silverstripe.org/download/security-releases/ss-2018-019/
+  source_url: https://snyk.io/vuln/SNYK-PHP-SILVERSTRIPEFRAMEWORK-546499
+- id: snykio:packagist:silverstripe/framework:546500
+  title: Information Exposure
+  description: |
+    [silverstripe/framework][1] is a PHP framework forming the base for the
+    SilverStripe CMS.
+
+    Affected versions of this package are vulnerable to Information
+    Exposure. The URL parameters isDev and isTest are accessible to
+    unauthenticated users who access a SilverStripe website or application.
+    This allows unauthorised users to expose information that is usually
+    hidden on production environments such as verbose errors (including
+    backtraces) and other debugging tools only available to sites running in
+    \"dev mode\". Core functionality does not expose user data through these
+    methods. Depending on your website configuration, community modules
+    might have added more specific functionality which can be used to either
+    access or alter user data.
+
+
+
+    [1]: https://packagist.org/packages/silverstripe/framework
+  affected_package: silverstripe/framework
+  vulnerable_versions:
+  - ">=4.0.0  <4.0.4"
+  - ">=4.1.0  <4.1.1"
+  severity: medium
+  package_manager: packagist
+  cwe:
+  - CWE-200
+  disclosed_date: 2020-02-05
+  created_date: 2020-02-05
+  last_modified_date: 2020-02-05
+  credit:
+  - Will Barker
+  references:
+  - https://www.silverstripe.org/download/security-releases/ss-2018-005/
+  source_url: https://snyk.io/vuln/SNYK-PHP-SILVERSTRIPEFRAMEWORK-546500
+- id: snykio:packagist:silverstripe/framework:546501
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [silverstripe/framework][1] is a PHP framework forming the base for the
+    SilverStripe CMS.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS) via the `Member.Name` field. If the currently logged in members
+    first name or surname contain XSS, this prints the raw HTML out, because
+    `Member->getName()` just returns the raw FirstName + Surname as a
+    string, which is injected directly.
+
+
+
+    [1]: https://packagist.org/packages/silverstripe/framework
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
+  affected_package: silverstripe/framework
+  vulnerable_versions:
+  - ">=3.1.9  <3.1.20"
+  - ">=3.2.4  <3.2.5"
+  - ">=3.3.2  <3.3.3"
+  - ">=3.4.0  <3.4.1"
+  severity: high
+  package_manager: packagist
+  cwe:
+  - CWE-79
+  disclosed_date: 2020-02-05
+  created_date: 2020-02-05
+  last_modified_date: 2020-02-05
+  credit:
+  - Matt Peel
+  references:
+  - https://www.silverstripe.org/download/security-releases/ss-2016-013/
+  source_url: https://snyk.io/vuln/SNYK-PHP-SILVERSTRIPEFRAMEWORK-546501
+- id: snykio:packagist:silverstripe/framework:546502
+  title: Information Exposure
+  description: |
+    [silverstripe/framework][1] is a PHP framework forming the base for the
+    SilverStripe CMS.
+
+    Affected versions of this package are vulnerable to Information
+    Exposure. User enumeration is possible by performing a timing attack on
+    the login or password reset pages with user credentials.
+
+
+
+    [1]: https://packagist.org/packages/silverstripe/framework
+  affected_package: silverstripe/framework
+  vulnerable_versions:
+  - ">=3.5.0  <3.5.5"
+  - ">=3.6.0  <3.6.2"
+  severity: high
+  package_manager: packagist
+  cwe:
+  - CWE-200
+  disclosed_date: 2020-02-05
+  created_date: 2020-02-05
+  last_modified_date: 2020-02-05
+  credit:
+  - Daniel Hensby
+  - Erez Yalon
+  references:
+  - https://www.silverstripe.org/download/security-releases/ss-2017-005/
+  source_url: https://snyk.io/vuln/SNYK-PHP-SILVERSTRIPEFRAMEWORK-546502
+- id: snykio:packagist:silverstripe/framework:546503
+  title: CSV Injection
+  description: |
+    [silverstripe/framework][1] is a PHP framework forming the base for the
+    SilverStripe CMS.
+
+    Affected versions of this package are vulnerable to CSV Injection. In
+    the CSV export feature of the CMS it\'s possible for the output to
+    contain macros and scripts, which if imported without sanitisation into
+    software (including Microsoft Excel) may be executed.
+
+
+
+    [1]: https://packagist.org/packages/silverstripe/framework
+  affected_package: silverstripe/framework
+  vulnerable_versions:
+  - ">=3.5.0  <3.5.6"
+  - ">=3.6.0  <3.6.3"
+  - ">=4.0.0  <4.0.1"
+  severity: high
+  package_manager: packagist
+  cwe:
+  - CWE-20
+  disclosed_date: 2020-02-05
+  created_date: 2020-02-05
+  last_modified_date: 2020-02-05
+  credit:
+  - Ishaq Mohammed
+  references:
+  - https://www.silverstripe.org/download/security-releases/ss-2017-007/
+  source_url: https://snyk.io/vuln/SNYK-PHP-SILVERSTRIPEFRAMEWORK-546503
+- id: snykio:packagist:silverstripe/framework:546504
+  title: Information Exposure
+  description: |
+    [silverstripe/framework][1] is a PHP framework forming the base for the
+    SilverStripe CMS.
+
+    Affected versions of this package are vulnerable to Information
+    Exposure. There is a user ID enumeration vulnerability in the brute
+    force error messages. Users that don\'t exist in will never get a locked
+    out message, while users that do exist, will get a locked out message
+    This means an attacker can infer or confirm user details that exist in
+    the member table.
+
+
+
+    [1]: https://packagist.org/packages/silverstripe/framework
+  affected_package: silverstripe/framework
+  vulnerable_versions:
+  - ">=3.4.0  <3.4.6"
+  - ">=3.5.0  <3.5.4"
+  severity: medium
+  package_manager: packagist
+  cwe:
+  - CWE-200
+  disclosed_date: 2020-02-05
+  created_date: 2020-02-05
+  last_modified_date: 2020-02-05
+  credit:
+  - Unknown
+  references:
+  - https://www.silverstripe.org/download/security-releases/ss-2017-002/
+  source_url: https://snyk.io/vuln/SNYK-PHP-SILVERSTRIPEFRAMEWORK-546504
+- id: snykio:packagist:silverstripe/framework:546505
+  title: Cross-site Request Forgery (CSRF)
+  description: |
+    [silverstripe/framework][1] is a PHP framework forming the base for the
+    SilverStripe CMS.
+
+    Affected versions of this package are vulnerable to Cross-site Request
+    Forgery (CSRF). `LoginForm` method calls `disableSecurityToken()`, which
+    causes a \"shared host domain\" vulnerability.
+
+
+
+    [1]: https://packagist.org/packages/silverstripe/framework
+  affected_package: silverstripe/framework
+  vulnerable_versions:
+  - ">=3.1.18  <3.1.19"
+  - ">=3.2.3  <3.2.4"
+  - ">=3.3.1  <3.3.2"
+  severity: high
+  package_manager: packagist
+  cwe:
+  - CWE-352
+  disclosed_date: 2020-02-05
+  created_date: 2020-02-05
+  last_modified_date: 2020-02-05
+  credit:
+  - Anthony Thorpe
+  references:
+  - https://www.silverstripe.org/download/security-releases/ss-2016-006/
+  source_url: https://snyk.io/vuln/SNYK-PHP-SILVERSTRIPEFRAMEWORK-546505
+- id: snykio:packagist:silverstripe/framework:546506
+  title: Information Exposure
+  description: |
+    [silverstripe/framework][1] is a PHP framework forming the base for the
+    SilverStripe CMS.
+
+    Affected versions of this package are vulnerable to Information
+    Exposure. When running SilverStripe in dev mode with the mysqli database
+    driver, there is a potential to disclose the connection details.
+
+
+
+    [1]: https://packagist.org/packages/silverstripe/framework
+  affected_package: silverstripe/framework
+  vulnerable_versions:
+  - ">=3.7.0  <3.7.1"
+  - ">=4.0.0  <4.0.5"
+  - ">=4.1.0  <4.1.3"
+  - ">=4.2.0  <4.2.2"
+  severity: medium
+  package_manager: packagist
+  cwe:
+  - CWE-200
+  disclosed_date: 2020-02-05
+  created_date: 2020-02-05
+  last_modified_date: 2020-02-05
+  credit:
+  - Dylan Wagstaff
+  - Lukas Erni
+  references:
+  - https://www.silverstripe.org/download/security-releases/ss-2018-018/
+  source_url: https://snyk.io/vuln/SNYK-PHP-SILVERSTRIPEFRAMEWORK-546506
+- id: snykio:packagist:silverstripe/framework:546507
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [silverstripe/framework][1] is a PHP framework forming the base for the
+    SilverStripe CMS.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). Form fields returning `isReadonly()` as true are vulnerable to
+    reflected XSS injections. This includes `ReadonlyField`, `LookupField`,
+    `HTMLReadonlyField`, as well as special purpose fields like
+    `TimeField_Readonly`. Values submitted to through these form fields are
+    not filtered out from the form session data, and might be shown to the
+    user depending on the form behaviour. For example, form validation
+    errors cause the form to re-render with previously submitted values by
+    default.
+
+    SilverStripe forms automatically load values from request data (GET and
+    POST), which enables malicious use of URLs if your form uses these
+    fields and doesn\'t overwrite data on form construction.
+
+    `Readonly` and `disabled` form fields are already filtered out in
+    `Form->saveInto()`, so maliciously submitted data on these fields
+    doesn\'t make it into the database unless you are accessing form values
+    directly in your saving logic.
+
+
+
+    [1]: https://packagist.org/packages/silverstripe/framework
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
+  affected_package: silverstripe/framework
+  vulnerable_versions:
+  - ">=3.1.0  <3.1.21"
+  - ">=3.2.0  <3.2.6"
+  - ">=3.3.0  <3.3.4"
+  - ">=3.4.0  <3.4.2"
+  severity: high
+  package_manager: packagist
+  cwe:
+  - CWE-79
+  disclosed_date: 2020-02-05
+  created_date: 2020-02-05
+  last_modified_date: 2020-02-05
+  credit:
+  - securityassessment.com
+  references:
+  - https://www.silverstripe.org/download/security-releases/ss-2016-010/
+  source_url: https://snyk.io/vuln/SNYK-PHP-SILVERSTRIPEFRAMEWORK-546507
+- id: snykio:packagist:silverstripe/framework:546508
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [silverstripe/framework][1] is a PHP framework forming the base for the
+    SilverStripe CMS.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). If an incoming user request should not be able to access the
+    requested stage, an error message is created for display on the CMS
+    login page that they are redirected to. In this error message, the URL
+    of the requested page is interpolated into the error message without
+    being escaped; hence, arbitrary HTML can be injected into the CMS login
+    page.
+
+
+
+    [1]: https://packagist.org/packages/silverstripe/framework
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
+  affected_package: silverstripe/framework
+  vulnerable_versions:
+  - ">=3.3.2  <3.3.3"
+  - ">=3.4.0  <3.4.1"
+  severity: high
+  package_manager: packagist
+  cwe:
+  - CWE-79
+  disclosed_date: 2020-02-05
+  created_date: 2020-02-05
+  last_modified_date: 2020-02-05
+  credit:
+  - Matthew Daley
+  references:
+  - https://www.silverstripe.org/download/security-releases/ss-2016-007/
+  source_url: https://snyk.io/vuln/SNYK-PHP-SILVERSTRIPEFRAMEWORK-546508
+- id: snykio:packagist:silverstripe/framework:546509
+  title: Information Exposure
+  description: |
+    [silverstripe/framework][1] is a PHP framework forming the base for the
+    SilverStripe CMS.
+
+    Affected versions of this package are vulnerable to Information
+    Exposure. When accessing the `install.php` script it is possible to
+    extract any pre-configured database or default admin account password by
+    viewing the source of the page, and inspecting the `value` property of
+    the password fields.
+
+
+
+    [1]: https://packagist.org/packages/silverstripe/framework
+  affected_package: silverstripe/framework
+  vulnerable_versions:
+  - ">=4.0.0  <4.0.1"
+  severity: high
+  package_manager: packagist
+  cwe:
+  - CWE-200
+  disclosed_date: 2020-02-05
+  created_date: 2020-02-05
+  last_modified_date: 2020-02-05
+  credit:
+  - Unknown
+  references:
+  - https://www.silverstripe.org/download/security-releases/ss-2017-010/
+  source_url: https://snyk.io/vuln/SNYK-PHP-SILVERSTRIPEFRAMEWORK-546509
+- id: snykio:packagist:silverstripe/framework:546514
+  title: Improper Access Control
+  description: |
+    [silverstripe/framework][1] is a PHP framework forming the base for the
+    SilverStripe CMS.
+
+    Affected versions of this package are vulnerable to Improper Access
+    Control. The `SS_Report`, and the reports CMS section only checks
+    `canView()` when listing the reports that can be viewed by the current
+    user. It does not (and should) perform `canView` checks when the report
+    is actually viewed, so if you know the URL to a report and can otherwise
+    access the Reports section of the CMS, you can view any report.
+
+
+
+    [1]: https://packagist.org/packages/silverstripe/framework
+  affected_package: silverstripe/framework
+  vulnerable_versions:
+  - ">=3.1.19  <3.1.20"
+  - ">=3.2.4  <3.2.5"
+  - ">=3.3.2  <3.3.3"
+  - ">=3.4.0  <3.4.1"
+  severity: medium
+  package_manager: packagist
+  cwe:
+  - CWE-284
+  disclosed_date: 2020-02-05
+  created_date: 2020-02-05
+  last_modified_date: 2020-02-05
+  credit:
+  - Matt Peel
+  references:
+  - https://www.silverstripe.org/download/security-releases/ss-2016-012/
+  source_url: https://snyk.io/vuln/SNYK-PHP-SILVERSTRIPEFRAMEWORK-546514
+- id: snykio:packagist:silverstripe/framework:546515
+  title: Improper Authentication
+  description: |
+    [silverstripe/framework][1] is a PHP framework forming the base for the
+    SilverStripe CMS.
+
+    Affected versions of this package are vulnerable to Improper
+    Authentication. If remember me is on and users log in with the box
+    checked, if the developer then disabled \"remember me\" function, any
+    pre-existing cookies will continue to authenticate users.
+
+
+
+    [1]: https://packagist.org/packages/silverstripe/framework
+  affected_package: silverstripe/framework
+  vulnerable_versions:
+  - ">=3.1.19  <3.1.20"
+  - ">=3.2.4  <3.2.5"
+  - ">=3.3.2  <3.3.3"
+  - ">=3.4.0  <3.4.1"
+  severity: medium
+  package_manager: packagist
+  cwe:
+  - CWE-287
+  disclosed_date: 2020-02-05
+  created_date: 2020-02-05
+  last_modified_date: 2020-02-05
+  credit:
+  - Patrick Nelson
+  references:
+  - https://www.silverstripe.org/download/security-releases/ss-2016-014/
+  source_url: https://snyk.io/vuln/SNYK-PHP-SILVERSTRIPEFRAMEWORK-546515
+- id: snykio:packagist:silverstripe/framework:546516
+  title: Unrestricted Upload
+  description: |
+    [silverstripe/framework][1] is a PHP framework forming the base for the
+    SilverStripe CMS.
+
+    Affected versions of this package are vulnerable to Unrestricted Upload.
+    Some potentially dangerous file types exist in `File.allowed_extensions`
+    which could allow a malicious CMS user to upload files that then get
+    executed in the security context of the website. We have removed the
+    ability to upload `.css, .js, .potm, .dotm, .xltm and .jar` files in the
+    default configuration. Since `allowed_extensions` are synced to
+    webserver configuration (in `assets/.htaccess`) automatically, this will
+    also deny access to any existing uploads with these extensions.
+
+
+
+    [1]: https://packagist.org/packages/silverstripe/framework
+  affected_package: silverstripe/framework
+  vulnerable_versions:
+  - ">=3.6.5  <3.6.6"
+  - ">=4.0.3  <4.0.4"
+  - ">=4.1.0  <4.1.1"
+  severity: high
+  package_manager: packagist
+  cwe:
+  - CWE-434
+  disclosed_date: 2020-02-05
+  created_date: 2020-02-05
+  last_modified_date: 2020-02-05
+  credit:
+  - Insomnia Security
+  references:
+  - https://www.silverstripe.org/download/security-releases/ss-2018-014/
+  source_url: https://snyk.io/vuln/SNYK-PHP-SILVERSTRIPEFRAMEWORK-546516
+- id: snykio:packagist:silverstripe/framework:546519
+  title: Improper Restriction of Excessive Authentication Attempts
+  description: |
+    [silverstripe/framework][1] is a PHP framework forming the base for the
+    SilverStripe CMS.
+
+    Affected versions of this package are vulnerable to Improper Restriction
+    of Excessive Authentication Attempts. `Default Administrator` accounts
+    were not subject to the same brute force protection afforded to other
+    Member accounts. Failed login counts were not logged for default admins
+    resulting in unlimited attempts on the default admin username and
+    password.
+
+
+
+    [1]: https://packagist.org/packages/silverstripe/framework
+  affected_package: silverstripe/framework
+  vulnerable_versions:
+  - ">=3.1.18  <3.1.19"
+  - ">=3.2.3  <3.2.4"
+  - ">=3.3.1  <3.3.2"
+  severity: low
+  package_manager: packagist
+  cwe:
+  - CWE-307
+  disclosed_date: 2020-02-05
+  created_date: 2020-02-05
+  last_modified_date: 2020-02-05
+  credit:
+  - Will Rossiter
+  references:
+  - https://www.silverstripe.org/download/security-releases/ss-2016-005/
+  source_url: https://snyk.io/vuln/SNYK-PHP-SILVERSTRIPEFRAMEWORK-546519
+- id: snykio:packagist:silverstripe/framework:546520
+  title: Session Hijacking
+  description: |
+    [silverstripe/framework][1] is a PHP framework forming the base for the
+    SilverStripe CMS.
+
+    Affected versions of this package are vulnerable to Session Hijacking. A
+    security protection device in Session designed to protect session
+    hijacking was not correctly functioning. This function intended to
+    protect user sessions by detecting changes in the User-Agent header, but
+    modifications to this header were not correctly invalidating the user
+    session.
+
+
+
+    [1]: https://packagist.org/packages/silverstripe/framework
+  affected_package: silverstripe/framework
+  vulnerable_versions:
+  - ">=3.5.0  <3.5.6"
+  - ">=3.6.0  <3.6.3"
+  severity: medium
+  package_manager: packagist
+  cwe:
+  - CWE-287
+  disclosed_date: 2020-02-05
+  created_date: 2020-02-05
+  last_modified_date: 2020-02-05
+  credit:
+  - Patrick Nelson
+  references:
+  - https://www.silverstripe.org/download/security-releases/ss-2017-006/
+  source_url: https://snyk.io/vuln/SNYK-PHP-SILVERSTRIPEFRAMEWORK-546520
 - id: snykio:packagist:silverstripe/framework:70140
   title: Arbitrary Code Injection
   description: |
