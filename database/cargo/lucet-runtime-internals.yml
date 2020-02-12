@@ -1,0 +1,26 @@
+---
+- id: rustsec:cargo:lucet-runtime-internals:RUSTSEC-2020-0004
+  title: sigstack allocation bug can cause memory corruption or leak
+  description: |
+    An embedding using affected versions of lucet-runtime configured to use
+    non-default Wasm globals sizes of more than 4KiB, or compiled in debug mode
+    without optimizations, could leak data from the signal handler stack to guest
+    programs. This can potentially cause data from the embedding host to leak to
+    guest programs or cause corruption of guest program memory.
+
+    This flaw was resolved by correcting the sigstack allocation logic.
+  affected_package: lucet-runtime-internals
+  patched_versions:
+  - "< 0.5.0"
+  - ">= 0.4.3"
+  - ">= 0.5.1"
+  severity: high
+  package_manager: cargo
+  disclosed_date: 2020-01-24
+  created_date: 2020-01-24
+  last_modified_date: 2020-01-24
+  credit:
+  - RustSec
+  references:
+  - https://github.com/bytecodealliance/lucet/pull/401
+  source_url: https://github.com/RustSec/advisory-db/blob/master/crates/lucet-runtime-internals/RUSTSEC-2020-0004.toml

