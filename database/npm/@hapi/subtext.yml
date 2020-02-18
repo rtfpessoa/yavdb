@@ -18,6 +18,49 @@
   credit: Yurii Chuhaienko
   references: https://npmjs.com/advisories/1165
   source_url: https://npmjs.com/advisories/1165
+- id: npmjs:npm:@hapi/subtext:1476
+  title: Denial of Service
+  description: Versions of `@hapi/subtext` prior to 6.1.3 or 7.0.3 are vulnerable
+    to Denial of Service. The Content-Encoding HTTP header parser has a vulnerability
+    which will cause the function to throw a system error if the header contains some
+    invalid values. Because hapi rethrows system errors (as opposed to catching expected
+    application errors), the error is thrown all the way up the stack. If no unhandled
+    exception handler is available, the application will exist, allowing an attacker
+    to shut down services.
+  affected_package: "@hapi/subtext"
+  vulnerable_versions:
+  - ">= 7.0.0 <7.0.3"
+  - ">=4.1.0 <6.1.3"
+  severity: high
+  package_manager: npm
+  cwe: CWE-400
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Gal Goldshtein (F5 Networks)
+  references: https://npmjs.com/advisories/1476
+  source_url: https://npmjs.com/advisories/1476
+- id: npmjs:npm:@hapi/subtext:1480
+  title: Prototype Pollution
+  description: Versions of `@hapi/subtext` prior to 6.1.3 or 7.0.3 are vulnerable
+    to Prototype Pollution. A multipart payload can be constructed in a way that one
+    of the parts’ content can be set as the entire payload object’s prototype. If
+    this prototype contains data, it may bypass other validation rules which enforce
+    access and privacy. If this prototype evaluates to null, it can cause unhandled
+    exceptions when the request payload is accessed.
+  affected_package: "@hapi/subtext"
+  vulnerable_versions:
+  - "<6.1.3"
+  - ">=7.0.0 <7.0.3"
+  severity: high
+  package_manager: npm
+  cwe: CWE-400
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Unknown
+  references: https://npmjs.com/advisories/1480
+  source_url: https://npmjs.com/advisories/1480
 - id: snykio:npm:@hapi/subtext:467262
   title: Denial of Service (DoS)
   description: |+
