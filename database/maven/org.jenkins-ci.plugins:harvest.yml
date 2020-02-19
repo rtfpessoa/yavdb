@@ -1,0 +1,39 @@
+---
+- id: snykio:maven:org.jenkins-ci.plugins:harvest:548699
+  title: Information Disclosure
+  description: |
+    [org.jenkins-ci.plugins:harvest][1] is a plugin makes it possible to
+    retrieve files from a Harvest SCM.
+
+    Affected versions of this package are vulnerable to Information
+    Disclosure. The plugin stores SCM passwords unencrypted in its global
+    configuration file `hudson.plugins.harvest.HarvestSCM.xml` and in job
+    `config.xml` files on the Jenkins master. These credentials can be
+    viewed by users with Extended Read permission (job config.xml only) or
+    access to the master file system (both).
+
+    As of publication of this advisory, there is no fix.
+
+
+
+    [1]: https://plugins.jenkins.io/harvest/
+  affected_package: org.jenkins-ci.plugins:harvest
+  vulnerable_versions:
+  - ">= 0"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2020-2130
+  - CVE-2020-2131
+  cwe:
+  - CWE-200
+  disclosed_date: 2020-02-12
+  created_date: 2020-02-13
+  last_modified_date: 2020-02-13
+  credit:
+  - IB Boost
+  - James Holderness
+  references:
+  - https://jenkins.io/security/advisory/2020-02-12/
+  - https://plugins.jenkins.io/harvest
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGJENKINSCIPLUGINS-548699

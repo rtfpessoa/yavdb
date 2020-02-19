@@ -120,6 +120,77 @@
   - http://poi.apache.org/#20+March+2017+-+CVE-2017-5644+-+Possible+DOS+%28Denial+of+Service%29+in+Apache+POI+versions+prior+to+3.15
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2017-5644
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEPOI-31438
+- id: snykio:maven:org.apache.poi:poi-ooxml:548686
+  title: XML External Entity (XXE) Injection
+  description: |+
+    [org.apache.poi:poi-ooxml][1] is a Java API To Access Microsoft Format
+    Files.
+
+    Affected versions of this package are vulnerable to XML External Entity
+    (XXE) Injection. When using the tool `XSSFExportToXml` to convert
+    user-provided Microsoft Excel documents, a specially crafted document
+    can allow an attacker to read files from the local filesystem or from
+    internal network resources via XML External Entity (XXE) Processing.
+
+
+
+    [1]: https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml
+    \nXXE Injection is a type of attack against an application that parses XML
+    input. XML is a markup language that defines a set of rules for encoding
+    documents in a format that is both human-readable and machine-readable.
+    By default, many XML processors allow specification of an external
+    entity, a URI that is dereferenced and evaluated during XML processing.
+    When an XML document is being parsed, the parser can make a request and
+    include the content at the specified URI inside of the XML document.
+
+    Attacks can include disclosing local files, which may contain sensitive
+    data such as passwords or private user data, using file: schemes or
+    relative paths in the system identifier.
+
+    For example, below is a sample XML document, containing an XML element-
+    username.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+           <username>John</username>
+        </xml>
+    {: .language-xml}
+
+    An external XML entity - `xxe`, is defined using a system identifier and
+    present within a DOCTYPE header. These entities can access local or
+    remote content. For example the below code contains an external XML
+    entity that would fetch the content of `/etc/passwd` and display it to
+    the user rendered by `username`.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+        <!DOCTYPE foo [
+           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
+           <username>&xxe;</username>
+        </xml>
+    {: .language-xml}
+
+    Other XXE Injection attacks can access local resources that may not stop
+    returning data, possibly impacting application availability and leading
+    to Denial of Service.
+
+  affected_package: org.apache.poi:poi-ooxml
+  vulnerable_versions:
+  - "< 4.1.0"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2019-12415
+  cwe:
+  - CWE-611
+  disclosed_date: 2020-02-13
+  created_date: 2020-02-13
+  last_modified_date: 2020-02-13
+  credit:
+  - Artem Smotrakov from SAP
+  references:
+  - https://github.com/apache/poi/commit/2b8200f7d701ea6ff9638f629f0bd81d2e48410c
+  - https://github.com/apache/poi/compare/REL_4_0_1...REL_4_1_0
+  - https://lists.apache.org/thread.html/13a54b6a03369cfb418a699180ffb83bd727320b6ddfec198b9b728e@%3Cannounce.apache.org%3E
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEPOI-548686
 - id: victims:maven:org.apache.poi:poi-ooxml:2014-3529
   title: 'apache-poi: entity expansion (billion laughs) flaw'
   affected_package: org.apache.poi:poi-ooxml

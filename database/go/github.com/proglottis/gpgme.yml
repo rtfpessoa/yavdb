@@ -1,0 +1,35 @@
+---
+- id: snykio:go:github.com/proglottis/gpgme:548683
+  title: Use After Free
+  description: |
+    [github.com/proglottis/gpgme][1] is a package gpgme provides a Go
+    wrapper for the GPGME library.
+
+    Affected versions of this package are vulnerable to Use After Free. The
+    proglottis Go wrapper for the GPGME library has a use-after-free, as
+    demonstrated by use for container image pulls by Docker or CRI-O. This
+    leads to a crash or potential code execution during GPG signature
+    verification.
+
+
+
+    [1]: https://github.com/proglottis/gpgme
+  affected_package: github.com/proglottis/gpgme
+  vulnerable_versions:
+  - "<0.1.1"
+  severity: high
+  package_manager: go
+  cve:
+  - CVE-2020-8945
+  cwe:
+  - CWE-416
+  disclosed_date: 2020-02-13
+  created_date: 2020-02-13
+  last_modified_date: 2020-02-13
+  credit:
+  - Unknown
+  references:
+  - https://bugzilla.redhat.com/show_bug.cgi?id=1795838
+  - https://github.com/proglottis/gpgme/commit/92153bcb59bd2f511e502262c46c7bd660e21733
+  - https://github.com/proglottis/gpgme/pull/23
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMPROGLOTTISGPGME-548683
