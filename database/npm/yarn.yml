@@ -67,3 +67,33 @@
   - https://github.com/yarnpkg/yarn/issues/7761#issuecomment-565493023
   - https://snyk.io/blog/understanding-filesystem-takeover-vulnerabilities-in-npm-javascript-package-manager/
   source_url: https://snyk.io/vuln/SNYK-JS-YARN-537806
+- id: snykio:npm:yarn:548869
+  title: Arbitrary File Overwrite
+  description: |
+    [yarn][1] is a package for dependency management.
+
+    Affected versions of this package are vulnerable to Arbitrary File
+    Overwrite. It is possible for a malicious package, upon install, to
+    write to any path on the filesystem even when the `--ignore-scripts`
+    option is set. This occurs due to symlinks not being correctly unpacked
+    as part of the Yarn install process.
+
+
+
+    [1]: https://yarnpkg.com/
+  affected_package: yarn
+  vulnerable_versions:
+  - "<1.22.0"
+  severity: medium
+  package_manager: npm
+  cwe:
+  - CWE-22
+  disclosed_date: 2020-02-15
+  created_date: 2020-02-15
+  last_modified_date: 2020-02-15
+  credit:
+  - Rhys Elsmore
+  references:
+  - https://github.com/yarnpkg/yarn/commit/0e7133ca28618513503b4e1d9063f1c18ea318e5
+  - https://hackerone.com/reports/730239
+  source_url: https://snyk.io/vuln/SNYK-JS-YARN-548869
