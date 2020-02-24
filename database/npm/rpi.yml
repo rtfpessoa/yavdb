@@ -1,0 +1,36 @@
+---
+- id: snykio:npm:rpi:548942
+  title: Command Injection
+  description: |
+    [rpi][1] is a Node.js library to use the Raspberry Pi GPIOs.
+
+    Affected versions of this package are vulnerable to Command Injection.
+    The variable `pinNumbver` in function `GPIO` within `src/lib/gpio.js` is
+    used as part of the arguement of `exec` function without any
+    sanitization.
+
+    ### PoC by JHU System Security Lab   {#poc-by-jhu-system-security-lab}
+
+        var RPI = require("rpi");
+        var pin = new RPI.GPIO(';touch vulnerable.txt;', '123');
+
+
+
+    [1]: http://github.com/xseignard/rpi
+  affected_package: rpi
+  vulnerable_versions:
+  - "*"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2019-10796
+  cwe:
+  - CWE-78
+  disclosed_date: 2020-02-18
+  created_date: 2020-02-18
+  last_modified_date: 2020-02-18
+  credit:
+  - JHU System Security Lab
+  references:
+  - https://github.com/xseignard/rpi/blob/master/src/lib/gpio.js#L47
+  source_url: https://snyk.io/vuln/SNYK-JS-RPI-548942
