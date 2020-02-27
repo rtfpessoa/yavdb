@@ -1,0 +1,36 @@
+---
+- id: snykio:go:github.com/golang/crypto:551925
+  title: Improper Signature Verification
+  description: |
+    [github.com/golang/crypto][1] is a SSH client and server
+
+    Affected versions of this package are vulnerable to Improper Signature
+    Verification. An attacker can craft an `ssh-ed25519` or
+    `sk-ssh-...@openssh.com` public key, such that the library will panic
+    when trying to verify a signature with it. Clients can deliver such a
+    public key and signature to any `golang.org/x/crypto/ssh` server with a
+    `PublicKeyCallback`, and servers can deliver them to any
+    `golang.org/x/crypto/ssh` client.
+
+
+
+    [1]: https://github.com/golang/crypto
+  affected_package: github.com/golang/crypto
+  vulnerable_versions:
+  - "<0.0.0-20200220183623-bac4c82f6975"
+  severity: high
+  package_manager: go
+  cve:
+  - CVE-2020-9283
+  cwe:
+  - CWE-347
+  disclosed_date: 2020-02-21
+  created_date: 2020-02-21
+  last_modified_date: 2020-02-21
+  credit:
+  - Alex Gaynor
+  references:
+  - https://github.com/golang/crypto/commit/bac4c82f69751a6dd76e702d54b3ceb88adab236
+  - https://groups.google.com/forum/#!topic/golang-announce/3L45YRc91SY
+  - https://www.exploit-db.com/exploits/48121
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMGOLANGCRYPTO-551925
