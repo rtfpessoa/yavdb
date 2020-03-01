@@ -1,0 +1,174 @@
+---
+- id: snykio:nuget:dnn.platform:551997
+  title: Arbitrary File Write via Archive Extraction (Zip Slip)
+  description: "[Dnn.Platform][1] is a Open Source Web Application Framework.\n\nAffected
+    versions of this package are vulnerable to Arbitrary File Write\nvia Archive Extraction
+    (Zip Slip). The zip file extraction function of\nDNN file upload feature allows
+    an attacker to replace any files with\nfollowing extension on system - `jpg, jpeg,
+    jpe, gif, bmp, png, svg,\nttf, eot, woff, doc, docx, xls, xlsx, ppt, pptx, pdf,
+    txt, xml, xsl,\nxsd, css, zip, rar, template, htmtemplate, ico, avi, mpg, mpeg,
+    mp3,\nwmv, mov, wav, mp4, webm, ogv`.\n\n\n\n[1]: https://www.nuget.org/packages/Dnn.Platform/\n\\nIt
+    is exploited using a specially crafted zip archive, that holds path\ntraversal
+    filenames. When exploited, a filename in a malicious archive\nis concatenated
+    to the target extraction directory, which results in the\nfinal path ending up
+    outside of the target folder. For instance, a zip\nmay hold a file with a \\\"../../file.exe\\\"
+    location and thus break out of\nthe target folder. If an executable or a configuration
+    file is\noverwritten with a file containing malicious code, the problem can turn\ninto
+    an arbitrary code execution issue quite easily.\n\nThe following is an example
+    of a zip archive with one benign file and\none malicious file. Extracting the
+    malicous file will result in\ntraversing out of the target folder, ending up in
+    `/root/.ssh/`\noverwriting the `authorized_keys` file:\n\n    \n    +2018-04-15
+    22:04:29 ..... 19 19 good.txt\n    \n    +2018-04-15 22:04:42 ..... 20 20 ../../../../../../root/.ssh/authorized_keys\n\n"
+  affected_package: dnn.platform
+  vulnerable_versions:
+  - ">= 0"
+  severity: medium
+  package_manager: nuget
+  cve:
+  - CVE-2020-5187
+  cwe:
+  - CWE-434
+  disclosed_date: 2020-02-24
+  created_date: 2020-02-24
+  last_modified_date: 2020-02-24
+  credit:
+  - Unknown
+  references:
+  - http://packetstormsecurity.com/files/156489/DotNetNuke-CMS-9.4.4-Zip-Directory-Traversal.html
+  - https://medium.com/@SajjadPourali/dnn-dotnetnuke-cms-not-as-secure-as-you-think-e8516f789175
+  source_url: https://snyk.io/vuln/SNYK-DOTNET-DNNPLATFORM-551997
+- id: snykio:nuget:dnn.platform:551998
+  title: Privilege Escalation
+  description: |
+    [Dnn.Platform][1] is a Open Source Web Application Framework.
+
+    Affected versions of this package are vulnerable to Privilege
+    Escalation. For normal users, extra extension validation is performed at
+    client-side only. Hence, a low privileged normal user can bypass the
+    client-side validation and upload files with extensions which are
+    allowed only for superuser only.
+
+
+
+    [1]: https://www.nuget.org/packages/Dnn.Platform/
+  affected_package: dnn.platform
+  vulnerable_versions:
+  - ">= 0"
+  severity: medium
+  package_manager: nuget
+  cve:
+  - CVE-2020-5188
+  cwe:
+  - CWE-264
+  disclosed_date: 2020-02-24
+  created_date: 2020-02-24
+  last_modified_date: 2020-02-24
+  credit:
+  - Unknown
+  references:
+  - http://packetstormsecurity.com/files/156484/DotNetNuke-CMS-9.5.0-File-Extension-Check-Bypass.html
+  - https://medium.com/@SajjadPourali/dnn-dotnetnuke-cms-not-as-secure-as-you-think-e8516f789175
+  source_url: https://snyk.io/vuln/SNYK-DOTNET-DNNPLATFORM-551998
+- id: snykio:nuget:dnn.platform:551999
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [Dnn.Platform][1] is a Open Source Web Application Framework.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). DNN allows normal users to upload XML files by using journal
+    tools in their profile. An attacker could upload XML files which may
+    execute malicious scripts in the user’s browser.
+
+
+
+    [1]: https://www.nuget.org/packages/Dnn.Platform/
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
+  affected_package: dnn.platform
+  vulnerable_versions:
+  - ">= 0"
+  severity: high
+  package_manager: nuget
+  cve:
+  - CVE-2020-5186
+  cwe:
+  - CWE-79
+  disclosed_date: 2020-02-24
+  created_date: 2020-02-24
+  last_modified_date: 2020-02-24
+  credit:
+  - Sajjad Pourali
+  references:
+  - https://medium.com/@SajjadPourali/dnn-dotnetnuke-cms-not-as-secure-as-you-think-e8516f789175
+  - https://packetstormsecurity.com/files/156483/DotNetNuke-CMS-9.5.0-Cross-Site-Scripting.html
+  source_url: https://snyk.io/vuln/SNYK-DOTNET-DNNPLATFORM-551999
