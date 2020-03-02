@@ -1,0 +1,39 @@
+---
+- id: snykio:packagist:cardgate/magento2:552157
+  title: User Impersonation
+  description: |
+    [cardgate/magento2][1] is a CardGate module for Magento 2.
+
+    Affected versions of this package are vulnerable to User Impersonation.
+    Lack of origin authentication in the `IPN` callback processing function
+    in `Controller/Payment/Callback.php` allows an attacker to remotely
+    replace critical plugin settings (merchant ID, secret key, etc.).The
+    attacker can then bypass the payment process (e.g., spoof an order
+    status by manually sending an `IPN` callback request with a valid
+    signature but without real payment) and/or receive all of the subsequent
+    payments.
+
+
+
+    [1]: https://github.com/cardgate/magento2
+  affected_package: cardgate/magento2
+  vulnerable_versions:
+  - "<2.0.30"
+  severity: high
+  package_manager: packagist
+  cve:
+  - CVE-2020-8818
+  cwe:
+  - CWE-346
+  disclosed_date: 2020-02-25
+  created_date: 2020-02-25
+  last_modified_date: 2020-02-25
+  credit:
+  - Unknown
+  references:
+  - https://github.com/cardgate/magento2/blob/715979e54e1a335d78a8c5586f9e9987c3bf94fd/Controller/Payment/Callback.php#L88-L107
+  - https://github.com/cardgate/magento2/issues/54
+  - https://github.com/cardgate/magento2/pull/53
+  - https://github.com/cardgate/magento2/pull/53/commits/93fb0d1de8c3b85d72d986e46bdf97db5206efda
+  - https://www.exploit-db.com/exploits/48135
+  source_url: https://snyk.io/vuln/SNYK-PHP-CARDGATEMAGENTO2-552157
