@@ -1,0 +1,38 @@
+---
+- id: snykio:npm:irc-framework:557137
+  title: Remote Code Execution (RCE)
+  description: |
+    [irc-framework][1] is an IRC framework for node.js.
+
+    Affected versions of this package are vulnerable to Remote Code
+    Execution (RCE). Calling `event.reply` with a message like `Hello
+    World\nQUIT` will cause the package to pass the input straight to
+    sockets, which in turn will split its input by newlines, resulting in
+    IRC server receiving two lines from client: `PRIVMSG #dev :Hello World`
+    and `QUIT`.
+
+    The underlying function responsible for handling reply to events will
+    properly split messages and append appropriate prefix (`PRIVMSG #dev` in
+    previous example) for lines that are above threshold length, however it
+    does not do such thing for messages that explicitly contain `\n` in
+    them.
+
+
+
+    [1]: https://github.com/kiwiirc/irc-framework
+  affected_package: irc-framework
+  vulnerable_versions:
+  - "<4.7.0"
+  severity: high
+  package_manager: npm
+  cwe:
+  - CWE-94
+  disclosed_date: 2020-02-26
+  created_date: 2020-02-26
+  last_modified_date: 2020-02-26
+  credit:
+  - protonab
+  references:
+  - https://github.com/kiwiirc/irc-framework/commit/24be97dbe2160a679e905d95b45c5461ab173b61
+  - https://github.com/kiwiirc/irc-framework/issues/244
+  source_url: https://snyk.io/vuln/SNYK-JS-IRCFRAMEWORK-557137
