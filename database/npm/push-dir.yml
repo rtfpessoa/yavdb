@@ -1,0 +1,38 @@
+---
+- id: snykio:npm:push-dir:559009
+  title: Command Injection
+  description: |
+    [push-dir][1] is a package to push the contents of a directory to a
+    remote branch.
+
+    Affected versions of this package are vulnerable to Command Injection.
+    Arguments provided as part of the variable `opt.branch` is not validated
+    before being provided to the `git` command within `index.js#L139`. This
+    could be abused by an attacker to inject arbitrary commands.
+
+    ### PoC by JHU System Security Lab   {#poc--by-jhu-system-security-lab}
+
+        var root = require("push-dir");
+        var opt = {"branch": "& echo vulnerable > create.txt &"};
+        root(opt);
+
+
+
+    [1]: https://www.npmjs.com/package/push-dir
+  affected_package: push-dir
+  vulnerable_versions:
+  - "*"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2019-10803
+  cwe:
+  - CWE-79
+  disclosed_date: 2020-02-28
+  created_date: 2020-02-28
+  last_modified_date: 2020-02-28
+  credit:
+  - JHU System Security Lab
+  references:
+  - https://github.com/L33T-KR3W/push-dir/blob/master/index.js#L139
+  source_url: https://snyk.io/vuln/SNYK-JS-PUSHDIR-559009

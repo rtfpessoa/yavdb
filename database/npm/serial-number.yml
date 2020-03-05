@@ -1,0 +1,36 @@
+---
+- id: snykio:npm:serial-number:559010
+  title: Command Injection
+  description: |
+    [serial-number][1] is a simple Node.js module for accessing the serial
+    number (a.k.a. Dell Service Tag, asset tag) of the local machine.
+
+    Affected versions of this package are vulnerable to Command Injection.
+    The `cmdPrefix` argument in serialNumber function is used by the `exec`
+    function without any validation.
+
+    ### PoC by JHU System Security Lab   {#poc-by-jhu-system-security-lab}
+
+        var root = require("serial-number");
+        root(function(){},"echo vulnerable > create.txt;");
+
+
+
+    [1]: https://www.npmjs.com/package/serial-number
+  affected_package: serial-number
+  vulnerable_versions:
+  - "*"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2019-10804
+  cwe:
+  - CWE-79
+  disclosed_date: 2020-02-28
+  created_date: 2020-02-28
+  last_modified_date: 2020-02-28
+  credit:
+  - JHU System Security Lab
+  references:
+  - https://github.com/es128/serial-number/blob/master/index.js#L106
+  source_url: https://snyk.io/vuln/SNYK-JS-SERIALNUMBER-559010

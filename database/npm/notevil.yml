@@ -22,6 +22,24 @@
   credit: Alan S Wang
   references: https://npmjs.com/advisories/1093
   source_url: https://npmjs.com/advisories/1093
+- id: npmjs:npm:notevil:1338
+  title: Sandbox Breakout / Prototype Pollution
+  description: |-
+    Versions of `notevil` prior to 1.3.3 are vulnerable to Sandbox Escape leading to Prototype pollution. The package fails to restrict access to the main context, allowing attacker to add or modify an object's prototype.
+
+    Evaluating the payload ```try{a[b];}catch(e){e.constructor.constructor('return __proto__.arguments.callee.__proto__.polluted=true')()}``` add the `polluted` property to Function.
+  affected_package: notevil
+  vulnerable_versions:
+  - "<1.3.3"
+  severity: medium
+  package_manager: npm
+  cwe: CWE-693
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: posix
+  references: https://npmjs.com/advisories/1338
+  source_url: https://npmjs.com/advisories/1338
 - id: snykio:npm:notevil:467405
   title: Remote Code Execution (RCE)
   description: |

