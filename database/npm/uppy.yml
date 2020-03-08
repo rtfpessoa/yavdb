@@ -1,0 +1,34 @@
+---
+- id: snykio:npm:uppy:559068
+  title: Server Side Request Forgery (SSRF)
+  description: |
+    [uppy][1] is a sleek, modular JavaScript file uploader that integrates
+    seamlessly with any application.
+
+    Affected versions of this package are vulnerable to Server Side Request
+    Forgery (SSRF). The `get` endpoint is using the function `downloadURL`
+    that calls the url directly without any kind of sanitization or
+    validation, allowing an attacker to extract information from any
+    internal resource, or take control of any internal service.
+
+
+
+    [1]: https://github.com/transloadit/uppy
+  affected_package: uppy
+  vulnerable_versions:
+  - "<1.9.3"
+  severity: high
+  package_manager: npm
+  cwe:
+  - CWE-918
+  disclosed_date: 2020-03-02
+  created_date: 2020-03-02
+  last_modified_date: 2020-03-02
+  credit:
+  - eslamshieldfy
+  references:
+  - https://gist.github.com/netcode/1c8c28943f82ed24f77773c28f031168
+  - https://github.com/transloadit/uppy/commit/d98384989fd00d955a7de1504d48433357a3b2e5
+  - https://github.com/transloadit/uppy/pull/2083
+  - https://hackerone.com/reports/786956
+  source_url: https://snyk.io/vuln/SNYK-JS-UPPY-559068

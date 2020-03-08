@@ -159,3 +159,45 @@
   - https://github.com/puma/puma/security/advisories/GHSA-84j7-475p-hp8v
   - https://www.ruby-lang.org/en/news/2019/10/01/http-response-splitting-in-webrick-cve-2019-16254
   source_url: https://snyk.io/vuln/SNYK-RUBY-PUMA-559020
+- id: snykio:rubygems:puma:559100
+  title: HTTP Response Splitting
+  description: |
+    [puma][1] is a simple, fast, threaded, and highly concurrent HTTP 1.1
+    server for Ruby/Rack applications. Puma is intended for use in both
+    development and production environments. It\'s great for highly
+    concurrent Ruby implementations such as Rubinius and JRuby as well as as
+    providing process worker support to support CRuby well.
+
+    Affected versions of this package are vulnerable to HTTP Response
+    Splitting. If an application using Puma allows untrusted input in an
+    early-hints header, an attacker can use a carriage return character to
+    end the header and inject malicious content, such as additional headers
+    or an entirely new response body. While not an attack in itself,
+    response splitting is a vector for several other attacks, such as
+    cross-site scripting (XSS).
+
+    *Note:* This is related to `CVE-2020-5247`, which fixed this
+    vulnerability but only for regular responses.
+
+
+
+    [1]: https://puma.io/
+  affected_package: puma
+  vulnerable_versions:
+  - "<3.12.4"
+  - ">=4.0.0  <4.3.3"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2020-5249
+  cwe:
+  - CWE-113
+  disclosed_date: 2020-03-02
+  created_date: 2020-03-02
+  last_modified_date: 2020-03-02
+  credit:
+  - Unknown
+  references:
+  - https://github.com/puma/puma/commit/c22712fc93284a45a93f9ad7023888f3a65524f3
+  - https://github.com/puma/puma/security/advisories/GHSA-33vf-4xgg-9r58
+  source_url: https://snyk.io/vuln/SNYK-RUBY-PUMA-559100
