@@ -130,3 +130,36 @@
   references:
   - https://github.com/parse-community/parse-server/security/advisories/GHSA-8w3j-g983-8jh5
   source_url: https://snyk.io/vuln/SNYK-JS-PARSESERVER-455637
+- id: snykio:npm:parse-server:559169
+  title: Improper Input Validation
+  description: |
+    [parse-server][1] is a version of the Parse backend that can be deployed
+    to any infrastructure that can run Node.js.
+
+    Affected versions of this package are vulnerable to Improper Input
+    Validation. It is possible to fetch all the users\' objects, by using
+    regex for `sessionToken` in the NoSQL query:
+    `{"_SessionToken":{"$regex":"r:027f"}}`. In addition, it is possible to
+    verify someone else\'s account by simply using regex in the token param:
+    `http://localhost:1337/parse/apps/kickbox/verify_email?token[$regex]=a&username=some@email.com`.
+
+
+
+    [1]: https://github.com/parse-community/parse-server#readme
+  affected_package: parse-server
+  vulnerable_versions:
+  - "<4.1.0"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2020-5251
+  cwe:
+  - CWE-20
+  disclosed_date: 2020-03-03
+  created_date: 2020-03-04
+  last_modified_date: 2020-03-04
+  credit:
+  - Wolfwood
+  references:
+  - https://github.com/parse-community/parse-server/security/advisories/GHSA-h4mf-75hf-67w4
+  source_url: https://snyk.io/vuln/SNYK-JS-PARSESERVER-559169
