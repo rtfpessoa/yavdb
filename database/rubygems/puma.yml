@@ -26,6 +26,33 @@
   references:
   - https://github.com/rubysec/ruby-advisory-db
   source_url: https://github.com/puma/puma/security/advisories/GHSA-7xx3-m584-x994
+- id: rubyadvisory:rubygems:puma:CVE-2020-5247
+  title: HTTP Response Splitting vulnerability in puma
+  description: |
+    If an application using Puma allows untrusted input in a response header,
+    an attacker can use newline characters (i.e. CR, LF) to end the header and
+    inject malicious content, such as additional headers or an entirely new
+    response body. This vulnerability is known as HTTP Response Splitting.
+
+    While not an attack in itself, response splitting is a vector for several
+    other attacks, such as cross-site scripting (XSS).
+  affected_package: puma
+  patched_versions:
+  - ">= 4.3.3"
+  - "~> 3.12.4"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2020-5247
+  cvss_v3_score: 6.5
+  disclosed_date: 2020-02-27
+  created_date: 2020-02-27
+  last_modified_date: 2020-02-27
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://github.com/puma/puma/security/advisories/GHSA-84j7-475p-hp8v
 - id: snykio:rubygems:puma:20375
   title: Man-in-the-Middle (Mitm)
   description: |
@@ -55,7 +82,7 @@
   - https://github.com/puma/puma/pull/590
   source_url: https://snyk.io/vuln/SNYK-RUBY-PUMA-20375
 - id: snykio:rubygems:puma:536835
-  title: Denial of Sevice (DoS)
+  title: Denial of Service (DoS)
   description: |+
     [puma][1] is a simple, fast, threaded, and highly concurrent HTTP 1.1
     server for Ruby/Rack applications. Puma is intended for use in both
@@ -63,7 +90,7 @@
     concurrent Ruby implementations such as Rubinius and JRuby as well as as
     providing process worker support to support CRuby well.
 
-    Affected versions of this package are vulnerable to Denial of Sevice
+    Affected versions of this package are vulnerable to Denial of Service
     (DoS). A malicious client could use `keepalive` requests to flood
     Puma\'s reactor. If more `keepalive` requests to Puma are sent than
     there are threads available, additional connections will be queued

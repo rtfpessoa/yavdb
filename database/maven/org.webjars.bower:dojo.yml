@@ -207,3 +207,32 @@
   - https://github.com/dojo/dojo/commit/9117ffd5a3863e44c92fcd58564c0da22be858f4
   - https://github.com/dojo/dojo/pull/307
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSBOWER-479609
+- id: snykio:maven:org.webjars.bower:dojo:559772
+  title: Prototype Pollution
+  description: "[org.webjars.bower:dojo][1] is a foundation package for the Dojo 1\nToolkit.
+    While still being maintained, new development is primarily\nfocused on modern
+    Dojo.\n\nAffected versions of this package are vulnerable to Prototype Pollution.\nThe
+    `deepCopy` method within dojo could be tricked into adding or\nmodifying properties
+    of `Object.prototype`\n\n### PoC by Snyk   {#poc-by-snyk}\n\n        require([\"dojo/request/util\"],
+    function(lang) {\n            var malicious_payload = '{\"__proto__\":{\"vulnerable\":\"Polluted\"}}';\n
+    \           var a = { b: \"c\", d: \"e\" };\n            var newOjb = lang.deepCopy(a,
+    JSON.parse(malicious_payload));\n            console.log({}.vulnerable);\n    \n
+    \     })\n\n\n\n[1]: https://dojo.io/\n"
+  affected_package: org.webjars.bower:dojo
+  vulnerable_versions:
+  - ">= 0"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2020-5258
+  cwe:
+  - CWE-400
+  disclosed_date: 2020-03-04
+  created_date: 2020-03-11
+  last_modified_date: 2020-03-11
+  credit:
+  - Snyk Security Team
+  references:
+  - https://github.com/dojo/dojo/commit/20a00afb68f5587946dc76fbeaa68c39bda2171d
+  - https://github.com/dojo/dojo/security/advisories/GHSA-jxfh-8wgv-vfr2
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSBOWER-559772

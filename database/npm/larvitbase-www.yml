@@ -23,7 +23,10 @@
     [larvitbase-www][1] is a website base framework based on `larvitbase`.
 
     Affected versions of this package are vulnerable to Directory Traversal.
-    None
+    The package dynamically loads (with help of `require()`) some parts of
+    the code. As long as the path to required module is partially depend on
+    the url (`req.urlBase`), anybody can cause code to load that was not
+    intended to run on the server.
 
 
 
@@ -78,7 +81,7 @@
     [1]: https://snyk.io/vuln/npm:st:20140206
   affected_package: larvitbase-www
   vulnerable_versions:
-  - "*"
+  - "<0.7.6"
   severity: medium
   package_manager: npm
   cwe:
@@ -89,6 +92,7 @@
   credit:
   - Vasiliy Ermilov
   references:
+  - https://github.com/larvit/larvitbase-www/commit/c73eefd490192cd438e9fbea86bfc5cb57309026
   - https://hackerone.com/reports/579560
   - https://www.npmjs.com/advisories/1156
   source_url: https://snyk.io/vuln/SNYK-JS-LARVITBASEWWW-460645
