@@ -1,31 +1,13 @@
 ---
-- id: npmjs:npm:minimist:1179
+- id: snykio:npm:querymen:559867
   title: Prototype Pollution
-  description: "Versions of `minimist` prior to 1.2.3 are vulnerable to prototype
-    pollution. Arguments are not properly sanitized, allowing an attacker to modify
-    the prototype of `Object`, causing the addition or modification of an existing
-    property that will exist on all objects.  \nParsing the argument `--__proto__.y=Polluted`
-    adds a `y` property with value `Polluted` to all objects. The argument `--__proto__=Polluted`
-    raises and uncaught error and crashes the application.  \nThis is exploitable
-    if attackers have control over the arguments being passed to `minimist`.\n"
-  affected_package: minimist
-  vulnerable_versions:
-  - "<1.2.3"
-  severity: medium
-  package_manager: npm
-  cwe: CWE-471
-  disclosed_date: 1970-01-01
-  created_date: 1970-01-01
-  last_modified_date: 1970-01-01
-  credit: Checkmarx Research Team
-  references: https://npmjs.com/advisories/1179
-  source_url: https://npmjs.com/advisories/1179
-- id: snykio:npm:minimist:559764
-  title: Prototype Pollution
-  description: "[minimist][1] is a parse argument options module.\n\nAffected versions
-    of this package are vulnerable to Prototype Pollution.\nThe library could be tricked
-    into adding or modifying properties of\n`Object.prototype` using a `constructor`
-    or `__proto__` payload.\n\n\n\n[1]: https://www.npmjs.com/package/minimist\n\\nPrototype
+  description: "[querymen][1] is a Querystring parser middleware for MongoDB, Express\nand
+    Nodejs.\n\nAffected versions of this package are vulnerable to Prototype Pollution.\nThe
+    parameters of exported function `handler(type, name, fn)` can be\ncontrolled by
+    users without any sanitization. This could be abused for\nPrototype Pollution
+    attacks.\n\n### PoC by System Security Lab   {#poc-by-system-security-lab}\n\n
+    \   var a = require(\"querymen\");\n    a.handler(\"__proto__\",\"toString\",\"JHU\");\n
+    \   console.log({}.toString);\n\n\n\n[1]: https://www.npmjs.com/package/querymen\n\\nPrototype
     Pollution is a vulnerability affecting JavaScript. Prototype\nPollution refers
     to the ability to inject properties into existing\nJavaScript language construct
     prototypes, such as objects. JavaScript\nallows all Object attributes to be altered,
@@ -57,22 +39,20 @@
     path,\nvalue)`\n\nIf the attacker can control the value of “path”, they can set
     this value\nto `_proto_.myValue`. `myValue` is then assigned to the prototype
     of the\nclass of the object.\n\n"
-  affected_package: minimist
+  affected_package: querymen
   vulnerable_versions:
-  - "<0.2.1"
-  - ">=1.0.0 <1.2.2"
+  - "<2.1.4"
   severity: medium
   package_manager: npm
   cve:
-  - CVE-2020-7598
+  - CVE-2020-7600
   cwe:
   - CWE-400
-  disclosed_date: 2020-03-10
-  created_date: 2020-03-11
-  last_modified_date: 2020-03-11
+  disclosed_date: 2020-03-12
+  created_date: 2020-03-12
+  last_modified_date: 2020-03-12
   credit:
   - Snyk Security Team
   references:
-  - https://gist.github.com/Kirill89/47feb345b09bf081317f08dd43403a8a
-  - https://github.com/substack/minimist/commit/63e7ed05aa4b1889ec2f3b196426db4500cbda94
-  source_url: https://snyk.io/vuln/SNYK-JS-MINIMIST-559764
+  - https://github.com/diegohaz/querymen/commit/1987fefcb3b7508253a29502a008d5063a873cef
+  source_url: https://snyk.io/vuln/SNYK-JS-QUERYMEN-559867

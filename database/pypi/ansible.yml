@@ -924,6 +924,75 @@
   - https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2020-1737
   - https://github.com/ansible/ansible/issues/67795
   source_url: https://snyk.io/vuln/SNYK-PYTHON-ANSIBLE-559542
+- id: snykio:pypi:ansible:559860
+  title: Race Condition
+  description: |
+    [ansible][1] is a simple IT automation system.
+
+    Affected versions of this package are vulnerable to Race Condition. A
+    race condition flaw exists when running a playbook with an unprivileged
+    become user. When Ansible needs to run a module with become user, the
+    temporary directory is created in `/var/tmp`. This directory is created
+    with `umask 77 && mkdir -p <dir>;`. This operation does not fail if the
+    directory already exists and is owned by another user. An attacker could
+    take advantage to gain control of the become user as the target
+    directory can be retrieved by iterating `/proc/<pid>/cmdline`.
+
+
+
+    [1]: https://pypi.org/project/ansible/
+  affected_package: ansible
+  vulnerable_versions:
+  - ">= 0"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2020-1733
+  cwe:
+  - CWE-362
+  disclosed_date: 2020-03-11
+  created_date: 2020-03-12
+  last_modified_date: 2020-03-12
+  credit:
+  - Unknown
+  references:
+  - https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2020-1733
+  - https://github.com/ansible/ansible/blob/79dfae9624480f757795224732bfaa9ca1dd4543/lib/ansible/plugins/shell/__init__.py#L159-L163
+  - https://github.com/ansible/ansible/issues/67791
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-ANSIBLE-559860
+- id: snykio:pypi:ansible:560128
+  title: Information Exposure
+  description: |
+    [ansible][1] is a simple IT automation system.
+
+    Affected versions of this package are vulnerable to Information
+    Exposure. When a password is set with the argument `password` of svn
+    module, it is used on svn command line, disclosing to other users within
+    the same node. An attacker could take advantage by reading the `cmdline`
+    file from that particular PID on the procfs.
+
+
+
+    [1]: https://pypi.org/project/ansible/
+  affected_package: ansible
+  vulnerable_versions:
+  - ">= 0"
+  severity: low
+  package_manager: pypi
+  cve:
+  - CVE-2020-1739
+  cwe:
+  - CWE-200
+  disclosed_date: 2020-03-12
+  created_date: 2020-03-12
+  last_modified_date: 2020-03-12
+  credit:
+  - Unknown
+  references:
+  - https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2020-1739
+  - https://github.com/ansible/ansible/issues/67797
+  - https://github.com/ansible/ansible/pull/67829
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-ANSIBLE-560128
 - id: snykio:pypi:ansible:72546
   title: Information Exposure
   description: |
