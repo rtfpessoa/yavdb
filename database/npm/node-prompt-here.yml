@@ -1,0 +1,40 @@
+---
+- id: snykio:npm:node-prompt-here:560115
+  title: Command Injection
+  description: |
+    [node-prompt-here][1] is a package to open a console window at given
+    absolute directory.
+
+    Affected versions of this package are vulnerable to Command Injection.
+    The `runCommand()` is called by `getDevices()` function in file
+    `linux/manager.js`, which is required by the `index. process.env.NM_CLI`
+    in the file \"linux/manager.js\" . This function is used to construct
+    the argument of function `execSync()`, which can be controlled by users
+    without any sanitization.
+
+    ### PoC   {#poc}
+
+        process.env.NM_CLI = 'echo vulnerable > create.txt & nmcli';
+        var root = require("network-manager");
+        root.getDevices();
+
+
+
+    [1]: https://www.npmjs.com/package/node-prompt-here
+  affected_package: node-prompt-here
+  vulnerable_versions:
+  - "*"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2020-7602
+  cwe:
+  - CWE-78
+  disclosed_date: 2020-03-13
+  created_date: 2020-03-13
+  last_modified_date: 2020-03-13
+  credit:
+  - JHU System Security Lab
+  references:
+  - https://github.com/s-a/node-prompt-here/blob/master/index.js#L19
+  source_url: https://snyk.io/vuln/SNYK-JS-NODEPROMPTHERE-560115

