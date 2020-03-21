@@ -46,3 +46,39 @@
   - http://rubysec.com/advisories/CVE-2016-3098
   - http://seclists.org/oss-sec/2016/q2/0
   source_url: https://snyk.io/vuln/SNYK-RUBY-ADMINISTRATE-20265
+- id: snykio:rubygems:administrate:560317
+  title: SQL Injection
+  description: |
+    [administrate][1] is a gem that is inspired by projects like Rails Admin
+    and ActiveAdmin, but aims to provide a better user experience for site
+    admins, and to be easier for developers to customize.
+
+    Affected versions of this package are vulnerable to SQL Injection. When
+    sorting by attributes on a dashboard, the direction parameter was not
+    validated before being interpolated into the SQL query. This could
+    present a SQL injection if the attacker were able to modify the
+    `direction` parameter and bypass ActiveRecord SQL protections. Whilst
+    this does have a high-impact, to exploit this you need access to the
+    Administrate dashboards, which we would expect to be behind
+    authentication.
+
+
+
+    [1]: https://rubygems.org/gems/administrate
+  affected_package: administrate
+  vulnerable_versions:
+  - "<0.13.0"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2020-5257
+  cwe:
+  - CWE-89
+  disclosed_date: 2020-03-13
+  created_date: 2020-03-15
+  last_modified_date: 2020-03-15
+  credit:
+  - Unknown
+  references:
+  - https://github.com/thoughtbot/administrate/commit/3ab838b83c5f565fba50e0c6f66fe4517f98eed3
+  source_url: https://snyk.io/vuln/SNYK-RUBY-ADMINISTRATE-560317

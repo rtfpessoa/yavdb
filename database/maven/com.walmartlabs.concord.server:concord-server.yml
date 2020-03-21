@@ -1,0 +1,35 @@
+---
+- id: snykio:maven:com.walmartlabs.concord.server:concord-server:560359
+  title: Information Exposure
+  description: |
+    [com.walmartlabs.concord.server:concord-server][1] is a workflow server.
+    It is the orchestration engine that connects different systems together
+    using scenarios and plugins created by users.
+
+    Affected versions of this package are vulnerable to Information
+    Exposure. CORS `Access-Control-Allow-Origin` headers have a potentially
+    unsafe dependency on Origin headers, and are not configurable. This
+    allows remote attackers to discover host information, nodes, API
+    metadata, and references to usernames via `api/v1/apikey`.
+
+
+
+    [1]: https://concord.walmartlabs.com/
+  affected_package: com.walmartlabs.concord.server:concord-server
+  vulnerable_versions:
+  - "< 1.44.0"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2020-10591
+  cwe:
+  - CWE-213
+  disclosed_date: 2020-03-15
+  created_date: 2020-03-15
+  last_modified_date: 2020-03-15
+  credit:
+  - Rob Fitzpatrick
+  references:
+  - https://github.com/walmartlabs/concord/commit/ab32c17f85200545ed6376badc528c7df95f5adb
+  - https://github.com/walmartlabs/concord/issues/22
+  source_url: https://snyk.io/vuln/SNYK-JAVA-COMWALMARTLABSCONCORDSERVER-560359

@@ -1,0 +1,37 @@
+---
+- id: snykio:maven:org.apache.commons:commons-configuration2:560326
+  title: Remote Code Execution (RCE)
+  description: |
+    [org.apache.commons:commons-configuration2][1] is a group of tools to
+    assist in the reading of configuration/preferences files in various
+    formats.
+
+    Affected versions of this package are vulnerable to Remote Code
+    Execution (RCE). It uses a third-party library to parse YAML files
+    (`org.yaml:snakeyaml`) which by default allows the instantiation of
+    classes if the YAML includes special statements. Apache Commons
+    Configuration did not change the default settings of this library.
+    Therefore if a YAML file was loaded from an untrusted source, it could
+    therefore load and execute code out of the control of the host
+    application.
+
+
+
+    [1]: https://mvnrepository.com/artifact/org.apache.commons/commons-configuration2/2.0
+  affected_package: org.apache.commons:commons-configuration2
+  vulnerable_versions:
+  - ">= 2.2 < 2.7"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2020-1953
+  cwe:
+  - CWE-94
+  disclosed_date: 2020-03-13
+  created_date: 2020-03-15
+  last_modified_date: 2020-03-15
+  credit:
+  - Unknown
+  references:
+  - https://github.com/apache/commons-configuration/commit/add7375cf37fd316d4838c6c56b054fc293b4641
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHECOMMONS-560326
