@@ -993,6 +993,146 @@
   - https://github.com/ansible/ansible/issues/67797
   - https://github.com/ansible/ansible/pull/67829
   source_url: https://snyk.io/vuln/SNYK-PYTHON-ANSIBLE-560128
+- id: snykio:pypi:ansible:560365
+  title: Information Exposure
+  description: |
+    [ansible][1] is a simple IT automation system.
+
+    Affected versions of this package are vulnerable to Information
+    Exposure. When a file is moved using `atomic_move` primitive as the file
+    mode cannot be specified. This sets the destination files world-readable
+    if the destination file does not exist and if the file exists, the file
+    could be changed to have less restrictive permissions before the move.
+    This could lead to the disclosure of sensitive data.
+
+
+
+    [1]: https://pypi.org/project/ansible/
+  affected_package: ansible
+  vulnerable_versions:
+  - ">= 2.7"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2020-1736
+  cwe:
+  - CWE-200
+  disclosed_date: 2020-03-16
+  created_date: 2020-03-16
+  last_modified_date: 2020-03-16
+  credit:
+  - Unknown
+  references:
+  - https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2020-1736
+  - https://github.com/ansible/ansible/issues/67794
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-ANSIBLE-560365
+- id: snykio:pypi:ansible:560366
+  title: Arbitrary Code Execution
+  description: |
+    [ansible][1] is a simple IT automation system.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution. A flaw was found in Ansible Engine when the module package or
+    service is used and the parameter \'use\' is not specified. If a
+    previous task is executed with a malicious user, the module sent can be
+    selected by the attacker using the ansible facts file.
+
+    Both package and service modules use facts to determine the name of the
+    module to run if use is not passed to the module. The
+    ansible\_facts\[\'pkg\_mgr\'\] and ansible\_facts\[\'service\_mgr\'\]
+    facts could be set to another module name or a module name installed in
+    a collection such as
+    ansible\_collections.namespace.name./tmp/reverse-shell, which would
+    allow arbitrary code execution on the managed node.
+
+
+
+    [1]: https://pypi.org/project/ansible/
+  affected_package: ansible
+  vulnerable_versions:
+  - ">= 2.7.0"
+  severity: high
+  package_manager: pypi
+  cve:
+  - CVE-2020-1738
+  cwe:
+  - CWE-119
+  disclosed_date: 2020-03-16
+  created_date: 2020-03-16
+  last_modified_date: 2020-03-16
+  credit:
+  - Unknown
+  references:
+  - https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2020-1738
+  - https://github.com/ansible/ansible/issues/67796
+  - https://github.com/ansible/ansible/pull/67808
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-ANSIBLE-560366
+- id: snykio:pypi:ansible:560367
+  title: Information Exposure
+  description: |
+    [ansible][1] is a simple IT automation system.
+
+    Affected versions of this package are vulnerable to Information
+    Exposure. When a user executes `ansible-vault edit`, another user on the
+    same computer can read the old and new secret, as it is created in a
+    temporary file with `mkstemp` and the returned file descriptor is closed
+    and the method `write_data` is called to write the existing secret in
+    the file. This method will delete the file before recreating it
+    insecurely.
+
+
+
+    [1]: https://pypi.org/project/ansible/
+  affected_package: ansible
+  vulnerable_versions:
+  - ">= 2.7"
+  severity: low
+  package_manager: pypi
+  cve:
+  - CVE-2020-1740
+  cwe:
+  - CWE-200
+  disclosed_date: 2020-03-16
+  created_date: 2020-03-16
+  last_modified_date: 2020-03-16
+  credit:
+  - Unknown
+  references:
+  - https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2020-1740
+  - https://github.com/ansible/ansible/issues/67798
+  - https://github.com/ansible/ansible/pull/67800
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-ANSIBLE-560367
+- id: snykio:pypi:ansible:560368
+  title: Directory Traversal
+  description: |
+    [ansible][1] is a simple IT automation system.
+
+    Affected versions of this package are vulnerable to Directory Traversal.
+    An attacker could intercept the module, inject a new path, and then
+    choose a new destination path on the controller node.
+
+
+
+    [1]: https://pypi.org/project/ansible/
+  affected_package: ansible
+  vulnerable_versions:
+  - ">= 2.7"
+  severity: high
+  package_manager: pypi
+  cve:
+  - CVE-2020-1735
+  cwe:
+  - CWE-22
+  disclosed_date: 2020-03-16
+  created_date: 2020-03-16
+  last_modified_date: 2020-03-16
+  credit:
+  - Unknown
+  references:
+  - https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2020-1735
+  - https://github.com/ansible/ansible/issues/67793
+  - https://github.com/ansible/ansible/pull/67801
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-ANSIBLE-560368
 - id: snykio:pypi:ansible:72546
   title: Information Exposure
   description: |
