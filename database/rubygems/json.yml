@@ -259,3 +259,41 @@
   references:
   - http://rubysec.com/advisories/OSVDB-101157
   source_url: https://snyk.io/vuln/SNYK-RUBY-JSON-20209
+- id: snykio:rubygems:json:560838
+  title: Denial of Service (DoS)
+  description: |
+    [json][1] is a JSON implementation as a Ruby extension in C
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS). When parsing certain JSON documents, the json gem (including the
+    one bundled with Ruby) can be coerced into creating arbitrary objects in
+    the target system.
+
+    This is the same issue as CVE-2013-0269. The previous fix was
+    incomplete, which addressed `JSON.parse(user_input)`, but didn’t address
+    some other styles of JSON parsing including `JSON(user_input) and
+    JSON.parse(user_input, nil)`.
+
+    See [CVE-2013-0269][2] in detail.
+
+
+
+    [1]: https://rubygems.org/gems/json
+    [2]: https://snyk.io/vuln/SNYK-RUBY-JSON-20060
+  affected_package: json
+  vulnerable_versions:
+  - "<2.3.0"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2020-10663
+  cwe:
+  - CWE-400
+  disclosed_date: 2020-03-20
+  created_date: 2020-03-19
+  last_modified_date: 2020-03-19
+  credit:
+  - Unknown
+  references:
+  - https://www.ruby-lang.org/en/news/2020/03/19/json-dos-cve-2020-10663/
+  source_url: https://snyk.io/vuln/SNYK-RUBY-JSON-560838
