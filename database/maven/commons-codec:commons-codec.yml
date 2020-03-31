@@ -1,0 +1,33 @@
+---
+- id: snykio:maven:commons-codec:commons-codec:561518
+  title: Information Exposure
+  description: |
+    [commons-codec:commons-codec][1] is a package that contains simple
+    encoder and decoders for various formats such as Base64 and Hexadecimal.
+
+    Affected versions of this package are vulnerable to Information
+    Exposure. When there is no byte array value that can be encoded into a
+    string the Base32 implementation does not reject it, and instead decodes
+    it into an arbitrary value which can be re-encoded again using the same
+    implementation. This allows for information exposure exploits such as
+    tunneling additional information via seemingly valid base 32 strings.
+
+
+
+    [1]: https://commons.apache.org/proper/commons-codec
+  affected_package: commons-codec:commons-codec
+  vulnerable_versions:
+  - "< 1.13"
+  severity: low
+  package_manager: maven
+  cwe:
+  - CWE-200
+  disclosed_date: 2020-03-30
+  created_date: 2012-03-03
+  last_modified_date: 2012-03-03
+  credit:
+  - Hanson Char
+  references:
+  - https://github.com/apache/commons-codec/commit/48b615756d1d770091ea3322eefc08011ee8b113
+  - https://issues.apache.org/jira/browse/CODEC-134
+  source_url: https://snyk.io/vuln/SNYK-JAVA-COMMONSCODEC-561518
