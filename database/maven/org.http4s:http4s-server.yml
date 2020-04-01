@@ -1,0 +1,40 @@
+---
+- id: snykio:maven:org.http4s:http4s-server:561337
+  title: Local File Inclusion
+  description: |
+    [org.http4s:http4s-server][1] is a base library for building http4s
+    servers.
+
+    Affected versions of this package are vulnerable to Local File
+    Inclusion. This vulnerability applies to all users of
+    `org.http4s.server.staticcontent.FileService`,
+    `org.http4s.server.staticcontent.ResourceService` and
+    `org.http4s.server.staticcontent.WebjarService`. URI normalization is
+    applied incorrectly. Requests whose path info contain `../` or `//` can
+    expose resources outside of the configured location.
+
+
+
+    [1]: https://mvnrepository.com/artifact/org.http4s/http4s-server
+  affected_package: org.http4s:http4s-server
+  vulnerable_versions:
+  - "< 0.18.26"
+  - ">= 0.19.0 < 0.20.20"
+  - ">= 0.21.0 < 0.21.2"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2020-5280
+  cwe:
+  - CWE-23
+  disclosed_date: 2020-03-25
+  created_date: 2020-03-26
+  last_modified_date: 2020-03-26
+  credit:
+  - Unknown
+  references:
+  - https://github.com/advisories/GHSA-66q9-f7ff-mmx6
+  - https://github.com/http4s/http4s/commit/250afddbb2e65b70ca9ddaec9d1eb3aaa56de7ec
+  - https://github.com/http4s/http4s/commit/752b3f63a05a31d2de4f8706877aa08d6b89efca
+  - https://github.com/http4s/http4s/commit/b87f31b2292dabe667bec3b04ce66176c8a3e17b
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGHTTP4S-561337
