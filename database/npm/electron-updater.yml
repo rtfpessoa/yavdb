@@ -1,0 +1,46 @@
+---
+- id: snykio:npm:electron-updater:561421
+  title: Signature Validation Bypass
+  description: |
+    [electron-updater][1] is a module allowing applications to implement
+    auto-update functionality.
+
+    Affected versions of this package are vulnerable to Signature Validation
+    Bypass. The signature verification check is based on a string comparison
+    between the installed binary’s `publisherName` and the certificate’s
+    `Common Name` attribute of the update binary. During a software update,
+    the application will request a file named `latest.yml` from the update
+    server, which contains the definition of the new release - including the
+    binary filename and hashes.
+
+    Using a filename containing a single quote and a matching hash, an
+    attacker could bypass the entire signature verification by triggering a
+    parse error in the script.
+
+    This can be leveraged to force a malicious update on **Windows**
+    clients, effectively gaining code execution and persistence
+    capabilities.
+
+    Exploitation of this vulnerability requires the attacker to also have
+    control over the update server, or alternatively a man-in-the-middle.
+
+
+
+    [1]: https://github.com/electron-userland/electron-builder/tree/master/packages/electron-updater
+  affected_package: electron-updater
+  vulnerable_versions:
+  - "<4.2.2"
+  severity: medium
+  package_manager: npm
+  cwe:
+  - CWE-347
+  disclosed_date: 2020-02-17
+  created_date: 2020-03-27
+  last_modified_date: 2020-03-27
+  credit:
+  - Lorenzo Stella
+  - Luca Carettoni
+  references:
+  - https://blog.doyensec.com/2020/02/24/electron-updater-update-signature-bypass.html
+  - https://github.com/electron-userland/electron-builder/commit/dead150769463adbff38b19e9099df6547db0e24
+  source_url: https://snyk.io/vuln/SNYK-JS-ELECTRONUPDATER-561421
