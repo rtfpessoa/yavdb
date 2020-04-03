@@ -1,0 +1,40 @@
+---
+- id: snykio:maven:com.gradle.plugin-publish:com.gradle.plugin-publish.gradle.plugin:559866
+  title: Insertion of Sensitive Information into Log File
+  description: |
+    [com.gradle.plugin-publish:com.gradle.plugin-publish.gradle.plugin][1]
+    is a plugin that publishes plugins to the Gradle Plugin Portal.
+
+    Affected versions of this package are vulnerable to Insertion of
+    Sensitive Information into Log File. When a plugin author publishes a
+    Gradle plugin while running Gradle with the `--info` log level flag, the
+    Gradle Logger logs an AWS pre-signed URL. If this build log is publicly
+    visible (as it is in many popular public CI systems like TravisCI) this
+    AWS pre-signed URL would allow a malicious actor to replace a recently
+    uploaded plugin with their own. Malicious plugins can be potentially
+    used to perform large scale supply chain attacks.
+
+    An example of this sensitive data leakage can be found here:
+    [https://travis-ci.org/nebula-plugins/nebula-kotlin-plugin/jobs/657945740#L660-L668][2]
+
+
+
+    [1]: https://plugins.gradle.org/plugin/com.gradle.plugin-publish
+    [2]: https://travis-ci.org/nebula-plugins/nebula-kotlin-plugin/jobs/657945740#L660-L668
+  affected_package: com.gradle.plugin-publish:com.gradle.plugin-publish.gradle.plugin
+  vulnerable_versions:
+  - "< 0.11.0"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2020-7599
+  cwe:
+  - CWE-532
+  disclosed_date: 2020-03-27
+  created_date: 2020-03-28
+  last_modified_date: 2020-03-28
+  credit:
+  - Danny Thomas of Netflix
+  references:
+  - https://blog.gradle.org/plugin-portal-update
+  source_url: https://snyk.io/vuln/SNYK-JAVA-COMGRADLEPLUGINPUBLISH-559866

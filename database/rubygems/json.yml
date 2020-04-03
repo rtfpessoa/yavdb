@@ -1,4 +1,41 @@
 ---
+- id: rubyadvisory:rubygems:json:CVE-2020-10663
+  title: json Gem for Ruby Unsafe Object Creation Vulnerability (additional fix)
+  description: |
+    There is an unsafe object creation vulnerability in the json gem bundled with
+    Ruby. This vulnerability has been assigned the CVE identifier CVE-2020-10663.
+    We strongly recommend upgrading the json gem.
+
+    Details
+    -------
+
+    When parsing certain JSON documents, the json gem (including the one bundled
+    with Ruby) can be coerced into creating arbitrary objects in the target system.
+
+    This is the same issue as CVE-2013-0269. The previous fix was incomplete, which
+    addressed JSON.parse(user_input), but didn’t address some other styles of JSON
+    parsing including JSON(user_input) and JSON.parse(user_input, nil).
+
+    See CVE-2013-0269 in detail. Note that the issue was exploitable to cause a
+    Denial of Service by creating many garbage-uncollectable Symbol objects, but
+    this kind of attack is no longer valid because Symbol objects are now
+    garbage-collectable. However, creating arbitrary objects may cause severe
+    security consequences depending upon the application code.
+  affected_package: json
+  patched_versions:
+  - ">= 2.3.0"
+  package_manager: rubygems
+  cve:
+  - CVE-2020-10663
+  disclosed_date: 2020-03-19
+  created_date: 2020-03-19
+  last_modified_date: 2020-03-19
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  - https://groups.google.com/forum/#!topic/ruby-security-ann/ermX1eQqqKA
+  source_url: https://www.ruby-lang.org/en/news/2020/03/19/json-dos-cve-2020-10663/
 - id: rubyadvisory:rubygems:json:OSVDB-101137
   title: json Gem for Ruby JSON::GenericObject Function Arbitrary Addition Creation
   description: |
@@ -117,7 +154,7 @@
 
   affected_package: json
   vulnerable_versions:
-  - "< 1.1.0"
+  - "<1.1.0"
   severity: high
   package_manager: rubygems
   cwe:
@@ -145,7 +182,7 @@
     [1]: https://rubygems.org/gems/json
   affected_package: json
   vulnerable_versions:
-  - "< 1.7.7  >= 1.7.0"
+  - ">=1.7.0  <1.7.7"
   severity: high
   package_manager: rubygems
   cwe:
@@ -210,9 +247,9 @@
 
   affected_package: json
   vulnerable_versions:
-  - "< 1.5.5"
-  - "< 1.6.8  >= 1.6"
-  - "< 1.7.7  >= 1.7"
+  - "<1.5.5"
+  - ">=1.6  <1.6.8"
+  - ">=1.7  <1.7.7"
   severity: high
   package_manager: rubygems
   cve:
@@ -246,7 +283,7 @@
     [2]: https://snyk.io/vuln/SNYK-RUBY-JSON-20000
   affected_package: json
   vulnerable_versions:
-  - "< 1.1.0"
+  - "<1.1.0"
   severity: high
   package_manager: rubygems
   cwe:
