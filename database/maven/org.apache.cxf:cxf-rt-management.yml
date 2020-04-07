@@ -1,0 +1,41 @@
+---
+- id: snykio:maven:org.apache.cxf:cxf-rt-management:564238
+  title: Man in The Middle (MiTM)
+  description: |
+    [org.apache.cxf:cxf-rt-management][1] is a Apache CXF Runtime Management
+    package.
+
+    Affected versions of this package are vulnerable to Man in The Middle
+    (MiTM). Apache CXF has the ability to integrate with JMX by registering
+    an `InstrumentationManager` extension with the CXF bus. If the
+    `createMBServerConnectorFactory` property of the default
+    `InstrumentationManagerImpl` is not disabled, then it is vulnerable to a
+    man-in-the-middle (MITM) style attack.
+
+    An attacker on the same host can connect to the registry and rebind the
+    entry to another server, thus acting as a proxy to the original. They
+    are then able to gain access to all of the information that is sent and
+    received over JMX.
+
+
+
+    [1]: https://mvnrepository.com/artifact/org.apache.cxf/cxf-rt-management
+  affected_package: org.apache.cxf:cxf-rt-management
+  vulnerable_versions:
+  - ">= 3.2.0 < 3.2.13"
+  - ">= 3.3.0 < 3.3.6"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2020-1954
+  cwe:
+  - CWE-300
+  disclosed_date: 2020-04-01
+  created_date: 2020-04-01
+  last_modified_date: 2020-04-01
+  credit:
+  - Unknown
+  references:
+  - http://cxf.apache.org/security-advisories.data/CVE-2020-1954.txt.asc?version=1&modificationDate=1585730169000&api=v2
+  - https://github.com/apache/cxf/commit/1cf4fed546904a4a2560f53a2a2391d834b4026c
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHECXF-564238

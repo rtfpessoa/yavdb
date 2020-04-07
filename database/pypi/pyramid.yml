@@ -95,3 +95,186 @@
   references:
   - https://github.com/Pylons/pyramid/commit/67efda77a878450c217b90370e1a47e2d35d772a
   source_url: https://snyk.io/vuln/SNYK-PYTHON-PYRAMID-40730
+- id: snykio:pypi:pyramid:564352
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [pyramid][1] is a Python Web Framework.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). The default Mako renderer was not configured to escape all HTML
+    in expression tags.
+
+
+
+    [1]: https://github.com/Pylons/pyramid
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
+  affected_package: pyramid
+  vulnerable_versions:
+  - "< 1.1a1"
+  severity: high
+  package_manager: pypi
+  cwe:
+  - CWE-94
+  disclosed_date: 2011-05-24
+  created_date: 2020-04-01
+  last_modified_date: 2020-04-01
+  credit:
+  - Unknown
+  references:
+  - https://github.com/Pylons/pyramid/commit/d0f62591ceb2f6ba6efe98ccf75703e7baee687e
+  - https://github.com/Pylons/pyramid/issues/193
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-PYRAMID-564352
+- id: snykio:pypi:pyramid:564353
+  title: Timing Attack
+  description: |
+    [pyramid][1] is a Python Web Framework.
+
+    Affected versions of this package are vulnerable to Timing Attack.
+    Several timing attack vectors exist in the `AuthTktCookieHelper` and the
+    `SignedCookieSessionFactory` as well as via CSRF tokens.
+
+
+
+    [1]: https://github.com/Pylons/pyramid
+  affected_package: pyramid
+  vulnerable_versions:
+  - "< 1.6a1"
+  severity: medium
+  package_manager: pypi
+  cwe:
+  - CWE-362
+  disclosed_date: 2017-11-07
+  created_date: 2020-04-01
+  last_modified_date: 2020-04-01
+  credit:
+  - Unknown
+  references:
+  - https://github.com/Pylons/pyramid/pull/1457
+  - https://github.com/Pylons/pyramid/pull/1574
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-PYRAMID-564353
+- id: snykio:pypi:pyramid:564354
+  title: Timing Attack
+  description: |
+    [pyramid][1] is a Python Web Framework.
+
+    Affected versions of this package are vulnerable to Timing Attack. The
+    `AuthTktAuthenticationPolicy` does not use a timing-attack-aware string
+    comparator.
+
+
+
+    [1]: https://github.com/Pylons/pyramid
+  affected_package: pyramid
+  vulnerable_versions:
+  - "< 1.3a1"
+  severity: medium
+  package_manager: pypi
+  cwe:
+  - CWE-362
+  disclosed_date: 2011-10-15
+  created_date: 2020-04-01
+  last_modified_date: 2020-04-01
+  credit:
+  - Unknown
+  references:
+  - https://github.com/Pylons/pyramid/pull/320
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-PYRAMID-564354
+- id: snykio:pypi:pyramid:564355
+  title: Information Exposure
+  description: |
+    [pyramid][1] is a Python Web Framework.
+
+    Affected versions of this package are vulnerable to Information
+    Exposure. The `pylons_*` paster template uses the same string
+    (`your_app_secret_string`) for the `session.secret` setting in the
+    generated `development.ini`. This is a security risk if left unchanged
+    in a project that uses one of the templates to produce production
+    applications.
+
+
+
+    [1]: https://github.com/Pylons/pyramid
+  affected_package: pyramid
+  vulnerable_versions:
+  - "< 1.0a3"
+  severity: medium
+  package_manager: pypi
+  cwe:
+  - CWE-200
+  disclosed_date: 2011-10-01
+  created_date: 2020-04-01
+  last_modified_date: 2020-04-01
+  credit:
+  - Unknown
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-PYRAMID-564355

@@ -32,3 +32,38 @@
   - https://github.com/marshmallow-code/webargs/issues/371
   - https://webargs.readthedocs.io/en/latest/changelog.html
   source_url: https://snyk.io/vuln/SNYK-PYTHON-WEBARGS-173773
+- id: snykio:pypi:webargs:564231
+  title: Cross-Site Request Forgery (CSRF)
+  description: |
+    [webargs][1] is a python library for parsing and validating HTTP request
+    objects, with built-in support for popular web frameworks, including
+    Flask, Django, Bottle, Tornado, Pyramid, webapp2, Falcon, and aiohttp.
+
+    Affected versions of this package are vulnerable to Cross-Site Request
+    Forgery (CSRF). `Flaskparser.py` does not check that the `Content-Type`
+    header is `application/json` when receiving JSON input. If the request
+    body is valid JSON, it will accept it even if the content type is
+    `application/x-www-form-urlencoded`. This allows for JSON POST requests
+    to be made across domains, leading to CSRF.
+
+
+
+    [1]: https://pypi.org/project/webargs/
+  affected_package: webargs
+  vulnerable_versions:
+  - "< 5.5.3"
+  - ">= 6.0.0b1 < 6.0.0b4"
+  severity: high
+  package_manager: pypi
+  cve:
+  - CVE-2020-7965
+  cwe:
+  - CWE-352
+  disclosed_date: 2020-04-01
+  created_date: 2020-04-01
+  last_modified_date: 2020-04-01
+  credit:
+  - Unknown
+  references:
+  - https://github.com/marshmallow-code/webargs/commit/74fada601a31b03dca0e4ae34c7d40246dcef598
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-WEBARGS-564231
