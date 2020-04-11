@@ -1076,3 +1076,78 @@
   - https://github.com/electron/electron/pull/22870
   - https://github.com/electron/electron/pull/22870/commits/d6e5fb4052b027eb43e4e355ce40827406753c46
   source_url: https://snyk.io/vuln/SNYK-JS-ELECTRON-564272
+- id: snykio:npm:electron:565051
+  title: Heap Overflow
+  description: |
+    [electron][1] is a framework which lets you write cross-platform desktop
+    applications using JavaScript, HTML and CSS.
+
+    Affected versions of this package are vulnerable to Heap Overflow. A
+    Heap buffer overflow exists in the media component of Google Chrome,
+    which also affects chromium.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+  affected_package: electron
+  vulnerable_versions:
+  - "<8.2.1"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2020-6452
+  cwe:
+  - CWE-125
+  disclosed_date: 2020-04-02
+  created_date: 2020-04-02
+  last_modified_date: 2020-04-02
+  credit:
+  - Unknown
+  references:
+  - https://bugzilla.redhat.com/show_bug.cgi?id=1820157
+  - https://chromereleases.googleblog.com/2020/03/stable-channel-update-for-desktop_31.html
+  - https://github.com/electron/electron/pull/23044
+  source_url: https://snyk.io/vuln/SNYK-JS-ELECTRON-565051
+- id: snykio:npm:electron:565052
+  title: Out-of-bounds Read
+  description: |
+    [electron][1] is a framework which lets you write cross-platform desktop
+    applications using JavaScript, HTML and CSS.
+
+    Affected versions of this package are vulnerable to Out-of-bounds Read.
+    The input to `sctp_load_addresses_from_init` is verified by calling
+    `sctp_arethere_unrecognized_parameters`, however there is a difference
+    in how these functions handle parameter bounds. The function
+    `sctp_arethere_unrecognized_parameters` does not process a parameter
+    that is partially outside of the limit of the chunk, meanwhile,
+    `sctp_load_addresses_from_init` will continue processing until a
+    parameter that is entirely outside of the chunk occurs.
+
+    This means that the last parameter of a chunk is not always verified,
+    which can lead to parameters with very short `plen` values being
+    processed by `sctp_load_addresses_from_init`. This can lead to
+    out-of-bounds reads whenever the `plen` is subtracted from the header
+    `len`.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+  affected_package: electron
+  vulnerable_versions:
+  - "<8.2.0"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2019-20503
+  cwe:
+  - CWE-125
+  disclosed_date: 2020-03-06
+  created_date: 2020-03-09
+  last_modified_date: 2020-03-09
+  credit:
+  - Natalie Silvanovich
+  references:
+  - https://bugs.chromium.org/p/project-zero/issues/detail?id=1992
+  - https://github.com/electron/electron/pull/22986
+  - https://github.com/sctplab/usrsctp/commit/790a7a2555aefb392a5a69923f1e9d17b4968467
+  source_url: https://snyk.io/vuln/SNYK-JS-ELECTRON-565052
