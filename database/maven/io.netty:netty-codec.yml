@@ -1,0 +1,33 @@
+---
+- id: snykio:maven:io.netty:netty-codec:564897
+  title: Uncontrolled Memory Allocation
+  description: |
+    [io.netty:netty-codec][1] is an event-driven asynchronous network
+    application framework.
+
+    Affected versions of this package are vulnerable to Uncontrolled Memory
+    Allocation while decoding a ZlibEncoded byte stream. An attacker could
+    send a large ZlibEncoded byte stream to the Netty server, forcing the
+    server to allocate all of its free memory to a single decoder.
+
+
+
+    [1]: https://github.com/netty/netty
+  affected_package: io.netty:netty-codec
+  vulnerable_versions:
+  - ">= 4.1.0.Final < 4.1.46.Final"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2020-11612
+  cwe:
+  - CWE-789
+  disclosed_date: 2020-04-07
+  created_date: 2020-04-07
+  last_modified_date: 2020-04-07
+  credit:
+  - Scott Mitchell
+  references:
+  - https://github.com/netty/netty/issues/6168
+  - https://github.com/netty/netty/pull/9924
+  source_url: https://snyk.io/vuln/SNYK-JAVA-IONETTY-564897
