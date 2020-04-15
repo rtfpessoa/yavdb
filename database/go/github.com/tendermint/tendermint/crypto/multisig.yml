@@ -1,0 +1,58 @@
+---
+- id: snykio:go:github.com/tendermint/tendermint/crypto/multisig:564992
+  title: Denial of Service (DoS)
+  description: |+
+    [github.com/tendermint/tendermint/crypto/multisig][1] is a crypto
+    package part of tendermint.
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS). Tendermint will crash when an evil peer sends `nil` pubkey during
+    an handshake due to no checks in place when a remote pubkey is nil or
+    not, and use it to verify signature.
+
+
+
+    [1]: https://github.com/tendermint/tendermint/
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+  affected_package: github.com/tendermint/tendermint/crypto/multisig
+  vulnerable_versions:
+  - "<0.32.6"
+  severity: high
+  package_manager: go
+  cwe:
+  - CWE-20
+  disclosed_date: 2019-10-02
+  created_date: 2020-04-09
+  last_modified_date: 2020-04-09
+  credit:
+  - fudongbai
+  references:
+  - https://github.com/tendermint/tendermint/blob/master/CHANGELOG.md#v0326
+  - https://github.com/tendermint/tendermint/commit/ab62fd977f3baa7087fb0fd8c5f2c8d38fe11642
+  - https://github.com/tendermint/tendermint/issues/4030
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMTENDERMINTTENDERMINTCRYPTOMULTISIG-564992
