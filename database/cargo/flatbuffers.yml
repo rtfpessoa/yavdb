@@ -19,3 +19,36 @@
   references:
   - https://github.com/google/flatbuffers/issues/5530
   source_url: https://github.com/RustSec/advisory-db/blob/master/crates/flatbuffers/RUSTSEC-2019-0028.toml
+- id: rustsec:cargo:flatbuffers:RUSTSEC-2020-0009
+  title: "`read_scalar` and `read_scalar_at` allow transmuting values without `unsafe`
+    blocks"
+  description: |
+    The `read_scalar` and `read_scalar_at` functions are unsound
+    because they allow transmuting values without `unsafe` blocks.
+
+    The following example shows how to create a dangling reference:
+
+    ```
+    fn main() {
+        #[derive(Copy, Clone, PartialEq, Debug)]
+        struct S(&'static str);
+        impl flatbuffers::EndianScalar for S {
+            fn to_little_endian(self) -> Self { self }
+            fn from_little_endian(self) -> Self { self }
+        }
+        println!("{:?}", flatbuffers::read_scalar::<S>(&[1; std::mem::size_of::<S>()]));
+    }
+    ```
+  affected_package: flatbuffers
+  vulnerable_versions:
+  - "*"
+  severity: high
+  package_manager: cargo
+  disclosed_date: 2020-04-11
+  created_date: 2020-04-11
+  last_modified_date: 2020-04-11
+  credit:
+  - RustSec
+  references:
+  - https://github.com/google/flatbuffers/issues/5825
+  source_url: https://github.com/RustSec/advisory-db/blob/master/crates/flatbuffers/RUSTSEC-2020-0009.toml
