@@ -1126,6 +1126,140 @@
   - https://chromereleases.googleblog.com/2020/03/stable-channel-update-for-desktop_18.html
   - https://github.com/electron/electron/pull/23046#issuecomment-612203340
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-565372
+- id: snykio:maven:org.webjars.npm:electron:565492
+  title: Buffer Underflow
+  description: |
+    [org.webjars.npm:electron][1] is a framework which lets you write
+    cross-platform desktop applications using JavaScript, HTML and CSS.
+
+    Affected versions of this package are vulnerable to Buffer Underflow.
+    Since there may be multiple instance of `DWriteFontProxyImpl`
+    instantiated for multiple `RenderProcessHosts`, and
+    `DWriteFontProxyImpl::GetUniqueNameLookupTable` may access
+    `DWriteFontLookupTableBuilder::QueueShareMemoryRegionWhenReady` from
+    separate threads, there may be race conditions around the
+    `pending_callbacks_` member of `DWriteFontLookupTableBuilder`.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+  affected_package: org.webjars.npm:electron
+  vulnerable_versions:
+  - "< 6.1.10"
+  - ">= 7.0.0 < 7.2.2"
+  - ">= 8.0.0-beta.1 < 8.2.0"
+  severity: medium
+  package_manager: maven
+  cwe:
+  - CWE-124
+  disclosed_date: 2020-04-08
+  created_date: 2020-04-15
+  last_modified_date: 2020-04-15
+  credit:
+  - Unknown
+  references:
+  - https://chromium-review.googlesource.com/c/chromium/src/+/2032119
+  - https://github.com/electron/electron/pull/22979
+  - https://github.com/electron/electron/pull/22980
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-565492
+- id: snykio:maven:org.webjars.npm:electron:565572
+  title: Use After Free
+  description: |
+    [org.webjars.npm:electron][1] is a framework which lets you write
+    cross-platform desktop applications using JavaScript, HTML and CSS.
+
+    Affected versions of this package are vulnerable to Use After Free. It
+    allows a remote attacker to potentially exploit heap corruption via a
+    crafted HTML page.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+  affected_package: org.webjars.npm:electron
+  vulnerable_versions:
+  - ">= 0"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2020-6429
+  cwe:
+  - CWE-416
+  disclosed_date: 2020-04-08
+  created_date: 2020-04-15
+  last_modified_date: 2020-04-15
+  credit:
+  - Unknown
+  references:
+  - https://chromium-review.googlesource.com/c/chromium/src/+/2082897/7
+  - https://github.com/electron/electron/pull/23011
+  - https://github.com/electron/electron/pull/23012
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-565572
+- id: snykio:maven:org.webjars.npm:electron:565706
+  title: Use After Free
+  description: |
+    [org.webjars.npm:electron][1] is a framework which lets you write
+    cross-platform desktop applications using JavaScript, HTML and CSS.
+
+    Affected versions of this package are vulnerable to Use After Free. An
+    `AudioContext` is considered to have activity if it\'s not closed.
+    Previously, suspended contexts were considered has having no activity,
+    but that\'s not quite true since the context can be resumed at any time
+    after. This would allow contexts to be collected prematurely even though
+    the context was resumed. This causes the audio thread to access objects
+    that are possibly deleted.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+  affected_package: org.webjars.npm:electron
+  vulnerable_versions:
+  - ">= 0"
+  severity: high
+  package_manager: maven
+  cwe:
+  - CWE-416
+  disclosed_date: 2020-04-08
+  created_date: 2020-04-15
+  last_modified_date: 2020-04-15
+  credit:
+  - Unknown
+  references:
+  - https://chromium-review.googlesource.com/c/chromium/src/+/1955339
+  - https://github.com/electron/electron/pull/22869
+  - https://github.com/electron/electron/pull/22870
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-565706
+- id: snykio:maven:org.webjars.npm:electron:565714
+  title: Site Isolation Bypass
+  description: |
+    [org.webjars.npm:electron][1] is a framework which lets you write
+    cross-platform desktop applications using JavaScript, HTML and CSS.
+
+    Affected versions of this package are vulnerable to Site Isolation
+    Bypass. `parent_execution_origin_` is provided from parent\'s
+    `RenderFrameHostImpl::last_committed_origin_` that is set during
+    navigation commit. Worker creation IPC from the renderer to browser
+    could race with navigation commit, and could see the wrong last
+    committed origin.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+  affected_package: org.webjars.npm:electron
+  vulnerable_versions:
+  - ">= 0"
+  severity: high
+  package_manager: maven
+  cwe:
+  - CWE-284
+  disclosed_date: 2020-04-08
+  created_date: 2020-04-15
+  last_modified_date: 2020-04-15
+  credit:
+  - Unknown
+  references:
+  - https://chromium-review.googlesource.com/c/chromium/src/+/1971660
+  - https://github.com/electron/electron/pull/23040
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-565714
 - id: snykio:maven:org.webjars.npm:electron:567045
   title: Use After Free
   description: |
@@ -1218,3 +1352,93 @@
   - https://chromereleases.googleblog.com/2020/03/stable-channel-update-for-desktop_18.html
   - https://github.com/electron/electron/pull/23015
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-567047
+- id: snykio:maven:org.webjars.npm:electron:567048
+  title: Use After Free
+  description: |
+    [org.webjars.npm:electron][1] is a framework which lets you write
+    cross-platform desktop applications using JavaScript, HTML and CSS.
+
+    Affected versions of this package are vulnerable to Use After Free.
+    `FileChooserImpl` can outlive `ListenerProxy` leading to a crash.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+  affected_package: org.webjars.npm:electron
+  vulnerable_versions:
+  - ">= 0"
+  severity: high
+  package_manager: maven
+  cwe:
+  - CWE-416
+  disclosed_date: 2020-04-08
+  created_date: 2020-04-15
+  last_modified_date: 2020-04-15
+  credit:
+  - Unknown
+  references:
+  - https://chromium-review.googlesource.com/c/chromium/src/+/2067819
+  - https://github.com/electron/electron/pull/22981
+  - https://github.com/electron/electron/pull/22982
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-567048
+- id: snykio:maven:org.webjars.npm:electron:567049
+  title: Use After Free
+  description: |
+    [org.webjars.npm:electron][1] is a framework which lets you write
+    cross-platform desktop applications using JavaScript, HTML and CSS.
+
+    Affected versions of this package are vulnerable to Use After Free.
+    `Initialize()` could potentially run twice in
+    `MojoVideoEncodeAcceleratorService`.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+  affected_package: org.webjars.npm:electron
+  vulnerable_versions:
+  - ">= 0"
+  severity: high
+  package_manager: maven
+  cwe:
+  - CWE-416
+  disclosed_date: 2020-04-08
+  created_date: 2020-04-15
+  last_modified_date: 2020-04-15
+  credit:
+  - Unknown
+  references:
+  - https://chromium-review.googlesource.com/c/chromium/src/+/2090031
+  - https://github.com/electron/electron/pull/22983
+  - https://github.com/electron/electron/pull/22984
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-567049
+- id: snykio:maven:org.webjars.npm:electron:567050
+  title: Use After Free
+  description: |
+    [org.webjars.npm:electron][1] is a framework which lets you write
+    cross-platform desktop applications using JavaScript, HTML and CSS.
+
+    Affected versions of this package are vulnerable to Use After Free. The
+    `rendering_orphan_handlers_` and `deletable_orphan_handlers_` handlers
+    can hold references to the context after `BaseAudioContext` is
+    destroyed.
+
+
+
+    [1]: https://www.npmjs.com/package/electron
+  affected_package: org.webjars.npm:electron
+  vulnerable_versions:
+  - ">= 0"
+  severity: medium
+  package_manager: maven
+  cwe:
+  - CWE-416
+  disclosed_date: 2020-04-08
+  created_date: 2020-04-15
+  last_modified_date: 2020-04-15
+  credit:
+  - Unknown
+  references:
+  - https://chromium-review.googlesource.com/c/chromium/src/+/2107806
+  - https://github.com/electron/electron/pull/22943
+  - https://github.com/electron/electron/pull/22944
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-567050

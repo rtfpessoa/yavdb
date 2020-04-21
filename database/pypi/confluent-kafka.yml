@@ -1,0 +1,30 @@
+---
+- id: snykio:pypi:confluent-kafka:565716
+  title: Buffer Overflow
+  description: |
+    [confluent-kafka][1] is a high-level Producer, Consumer and AdminClient
+    compatible with all Apache KafkaTM broker
+
+    Affected versions of this package are vulnerable to Buffer Overflow. In
+    the SASL SCRAM protocol handler if `sasl.username` and `sasl.password`
+    contained characters that needed escaping, a buffer overflow and heap
+    corruption occurs. This is protected, but too late, by an assertion.
+
+
+
+    [1]: https://github.com/confluentinc/confluent-kafka-python
+  affected_package: confluent-kafka
+  vulnerable_versions:
+  - "< 1.4.0"
+  severity: medium
+  package_manager: pypi
+  cwe:
+  - CWE-120
+  disclosed_date: 2020-04-15
+  created_date: 2020-04-15
+  last_modified_date: 2020-04-15
+  credit:
+  - Unknown
+  references:
+  - https://github.com/edenhill/librdkafka/commit/8f7a4c858afc8ff24672426473448c3e0c56cfc3
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-CONFLUENTKAFKA-565716

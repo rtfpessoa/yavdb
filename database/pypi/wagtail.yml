@@ -1,84 +1,21 @@
 ---
-- id: snykio:maven:org.sonatype.nexus:nexus-core:473931
-  title: Remote Code Execution
-  description: |
-    [org.sonatype.nexus:nexus-core][1] is a Nexus Core package.
-
-    Affected versions of this package are vulnerable to Remote Code
-    Execution. Sonatype Nexus Repository Manager 2.x before 2.14.15 and 3.x
-    before 3.19, and IQ Server before 72, has a vulnerability where an
-    attacker with elevated privileges can upload a specially crafted file to
-    result in code execution.
-
-
-
-    [1]: https://mvnrepository.com/artifact/org.sonatype.nexus/nexus-core
-  affected_package: org.sonatype.nexus:nexus-core
-  vulnerable_versions:
-  - ">= 2.4.0-1 < 2.14.15-01"
-  - ">= 3.0.0-b2014101001 < 3.19.0-01"
-  severity: high
-  package_manager: maven
-  cve:
-  - CVE-2019-16530
-  cwe:
-  - CWE-94
-  disclosed_date: 2019-10-21
-  created_date: 2019-10-21
-  last_modified_date: 2019-10-21
-  credit:
-  - Unknown
-  references:
-  - https://github.com/sonatype/nexus-public/commit/489b60472df89ad90eac84cc46995a54dfe2fb1b
-  - https://issues.sonatype.org/browse/NEXUS-21193
-  - https://support.sonatype.com/hc/en-us/articles/360036132453
-  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGSONATYPENEXUS-473931
-- id: snykio:maven:org.sonatype.nexus:nexus-core:565710
-  title: Remote Code Execution (RCE)
-  description: |
-    [org.sonatype.nexus:nexus-core][1] is a Nexus Core package.
-
-    Affected versions of this package are vulnerable to Remote Code
-    Execution (RCE). It is possible for any authenticated user, no matter
-    the permissions granted, to run arbitrary code on the server (with Nexus
-    process privileges) by injecting arbitrary Java Expression Language (EL)
-    expressions.
-
-
-
-    [1]: https://mvnrepository.com/artifact/org.sonatype.nexus/nexus-core
-  affected_package: org.sonatype.nexus:nexus-core
-  vulnerable_versions:
-  - "< 3.21.2"
-  severity: high
-  package_manager: maven
-  cve:
-  - CVE-2020-10204
-  cwe:
-  - CWE-94
-  disclosed_date: 2020-04-14
-  created_date: 2020-04-15
-  last_modified_date: 2020-04-15
-  credit:
-  - Unknown
-  references:
-  - https://github.com/advisories/GHSA-8h56-v53h-5hhj
-  - https://securitylab.github.com/advisories/GHSL-2020-011-nxrm-sonatype
-  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGSONATYPENEXUS-565710
-- id: snykio:maven:org.sonatype.nexus:nexus-core:565711
+- id: snykio:pypi:wagtail:565486
   title: Cross-site Scripting (XSS)
   description: |+
-    [org.sonatype.nexus:nexus-core][1] is a Nexus Core package.
+    [wagtail][1] is an open source content management system built on
+    Django.
 
     Affected versions of this package are vulnerable to Cross-site Scripting
-    (XSS). An attacker with elevated privileges can create content selectors
-    with a specially crafted name using the REST API (not allowed by the UI)
-    which when viewed by another user can execute arbitrary JavaScript in
-    the context of the NXRM application.
+    (XSS) on the page revision comparison view within the Wagtail admin
+    interface. A user with a limited-permission editor account for the
+    Wagtail admin could potentially craft a page revision history that, when
+    viewed by a user with higher privileges, could perform actions with that
+    user\'s credentials. The vulnerability is not exploitable by an ordinary
+    site visitor without access to the Wagtail admin.
 
 
 
-    [1]: https://mvnrepository.com/artifact/org.sonatype.nexus/nexus-core
+    [1]: https://wagtail.io
     \nA cross-site scripting attack occurs when the attacker tricks a
     legitimate web-based application or site to accept a request as
     originating from a trusted source.
@@ -151,21 +88,22 @@
     * Read the documentation for any of the libraries referenced in your
       code to understand which elements allow for embedded HTML.
 
-  affected_package: org.sonatype.nexus:nexus-core
+  affected_package: wagtail
   vulnerable_versions:
-  - "< 3.21.2"
-  severity: medium
-  package_manager: maven
+  - ">= 1.9.0 < 2.7.2"
+  - ">= 2.8.0 < 2.8.1"
+  severity: high
+  package_manager: pypi
   cve:
-  - CVE-2020-10203
+  - CVE-2020-11001
   cwe:
   - CWE-79
-  disclosed_date: 2020-04-14
+  disclosed_date: 2020-04-15
   created_date: 2020-04-15
   last_modified_date: 2020-04-15
   credit:
-  - Alvaro Muñoz
+  - Vlad Gerasimenko
   references:
-  - https://securitylab.github.com/advisories/GHSL-2020-016-nxrm-sonatype
-  - https://support.sonatype.com/hc/en-us/articles/360044361594
-  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGSONATYPENEXUS-565711
+  - https://github.com/wagtail/wagtail/commit/61045ceefea114c40ac4b680af58990dbe732389
+  - https://github.com/wagtail/wagtail/security/advisories/GHSA-v2wc-pfq2-5cm6
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-WAGTAIL-565486
