@@ -1,0 +1,33 @@
+---
+- id: snykio:go:github.com/pion/dtls:567073
+  title: Remote Code Execution (RCE)
+  description: |
+    [github.com/pion/dtls][1] is a DTLS 1.2 Server/Client implementation for
+    Go.
+
+    Affected versions of this package are vulnerable to Remote Code
+    Execution (RCE). `handleIncomingPacket` in `conn.go` lacks a check for
+    application data with epoch 0, which allows remote attackers to inject
+    arbitrary unencrypted data after handshake completion.
+
+
+
+    [1]: https://github.com/pion/dtls
+  affected_package: github.com/pion/dtls
+  vulnerable_versions:
+  - "<1.5.2"
+  severity: medium
+  package_manager: go
+  cve:
+  - CVE-2019-20786
+  cwe:
+  - CWE-94
+  disclosed_date: 2020-04-19
+  created_date: 2020-04-19
+  last_modified_date: 2020-04-19
+  credit:
+  - Usenix
+  references:
+  - https://github.com/pion/dtls/commit/fd73a5df2ff0e1fb6ae6a51e2777d7a16cc4f4e0
+  - https://www.usenix.org/system/files/sec20fall_fiterau-brostean_prepub.pdf
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMPIONDTLS-567073
