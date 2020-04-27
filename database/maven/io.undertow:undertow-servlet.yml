@@ -136,3 +136,38 @@
   - https://github.com/undertow-io/undertow/pull/794/commits/d2715e3afa13f50deaa19643676816ce391551e9
   - https://issues.jboss.org/browse/UNDERTOW-1578
   source_url: https://snyk.io/vuln/SNYK-JAVA-IOUNDERTOW-460241
+- id: snykio:maven:io.undertow:undertow-servlet:567266
+  title: Security Bypass
+  description: |
+    [io.undertow:undertow-servlet][1] is a Servlet 4.0 implementation for
+    Undertow
+
+    Affected versions of this package are vulnerable to Security Bypass. The
+    `servletPath` is normalized by the Servlet container, and truncated
+    after the semicolon, leading to a partial `servletPath`. Leading to a
+    full path `/api/public/aa/secret` and `servletPath` `/api/public/aa`
+    leading to application mapping `/secret`. This can lead to a security
+    bypass depending on where and how URL-based security is applied.
+
+
+
+    [1]: http://undertow.io/
+  affected_package: io.undertow:undertow-servlet
+  vulnerable_versions:
+  - "< 2.1.0.Final"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2020-1757
+  cwe:
+  - CWE-358
+  disclosed_date: 2020-04-21
+  created_date: 2020-04-21
+  last_modified_date: 2020-04-21
+  credit:
+  - Fedorov Oleksii
+  - Keitaro Yamazaki
+  - Shiga Ryota (LINE Corporation)
+  references:
+  - https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2020-1757
+  source_url: https://snyk.io/vuln/SNYK-JAVA-IOUNDERTOW-567266
