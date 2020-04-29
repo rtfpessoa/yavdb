@@ -1,0 +1,41 @@
+---
+- id: snykio:go:github.com/binance-chain/tss-lib/ecdsa/resharing:567415
+  title: Information Disclosure
+  description: |
+    [github.com/binance-chain/tss-lib/ecdsa/resharing][1] is a ECDSA key
+    resharing module for tss-lib.
+
+    Affected versions of this package are vulnerable to Information
+    Disclosure. It is possible for a malicious actor to generate bad
+    parameters `h1`,`h2` that are shared with other parties during keygen.
+    This allowed such an actor to compromise signing rounds and potentially
+    expose the private data of other parties.
+
+    Existing save data for signing groups that have already completed keygen
+    should be considered secure if the parties were trusted at the time of
+    keygen. This vulnerability could only have been exploited when a
+    malicious actor with prior knowledge of this vulnerability had
+    participated in keygen.
+
+
+
+    [1]: https://godoc.org/github.com/binance-chain/tss-lib/ecdsa/resharing
+  affected_package: github.com/binance-chain/tss-lib/ecdsa/resharing
+  vulnerable_versions:
+  - "<1.2.0"
+  severity: high
+  package_manager: go
+  cve:
+  - CVE-2020-12118
+  cwe:
+  - CWE-200
+  disclosed_date: 2020-04-23
+  created_date: 2020-04-23
+  last_modified_date: 2020-04-23
+  credit:
+  - Unknown
+  references:
+  - https://github.com/binance-chain/tss-lib/pull/89
+  - https://github.com/binance-chain/tss-lib/pull/89/commits/7b7c17e90504d5dad94b938e84fec690bb1ec311
+  - https://github.com/binance-chain/tss-lib/releases/tag/v1.2.0
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMBINANCECHAINTSSLIBECDSARESHARING-567415
