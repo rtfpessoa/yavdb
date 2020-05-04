@@ -180,6 +180,59 @@
   - https://snyk.io/blog/snyk-research-team-discovers-severe-prototype-pollution-security-vulnerabilities-affecting-all-versions-of-lodash/
   - https://www.npmjs.com/advisories/1065
   source_url: https://snyk.io/vuln/SNYK-JS-LODASH-450202
+- id: snykio:npm:lodash:567746
+  title: Prototype Pollution
+  description: "[lodash][1] is a modern JavaScript utility library delivering\nmodularity,
+    performance, &amp; extras.\n\nAffected versions of this package are vulnerable
+    to Prototype Pollution.\nThe function `zipObjectDeep` can be tricked into adding
+    or modifying\nproperties of the Object prototype. These properties will be present
+    on\nall objects.\n\n\n\n[1]: https://www.npmjs.com/package/lodash\n\\nPrototype
+    Pollution is a vulnerability affecting JavaScript. Prototype\nPollution refers
+    to the ability to inject properties into existing\nJavaScript language construct
+    prototypes, such as objects. JavaScript\nallows all Object attributes to be altered,
+    including their magical\nattributes such as `_proto_`, `constructor` and `prototype`.
+    An attacker\nmanipulates these attributes to overwrite, or pollute, a JavaScript\napplication
+    object prototype of the base object by injecting other\nvalues. Properties on
+    the `Object.prototype` are then inherited by all\nthe JavaScript objects through
+    the prototype chain. When that happens,\nthis leads to either denial of service
+    by triggering JavaScript\nexceptions, or it tampers with the application source
+    code to force the\ncode path that the attacker injects, thereby leading to remote
+    code\nexecution.\n\nThere are two main ways in which the pollution of prototypes
+    occurs:\n\n* Unsafe `Object` recursive merge\n\n* Property definition by path\n\n###
+    Unsafe Object recursive merge   {#unsafe-object-recursive-merge}\n\nThe logic
+    of a vulnerable recursive merge function follows the following\nhigh-level model:\n\n
+    \   merge (target, source)\n    \n      foreach property of source\n    \n        if
+    property exists and is an object on both the target and the source\n    \n          merge(target[property],
+    source[property])\n    \n        else\n    \n          target[property] = source[property]\n\n&lt;br&gt;\n\nWhen
+    the source object contains a property named `_proto_` defined with\n`Object.defineProperty()`
+    , the condition that checks if the property\nexists and is an object on both the
+    target and the source passes and the\nmerge recurses with the target, being the
+    prototype of `Object` and the\nsource of `Object` as defined by the attacker.
+    Properties are then\ncopied on the `Object` prototype.\n\nClone operations are
+    a special sub-class of unsafe recursive merges,\nwhich occur when a recursive
+    merge is conducted on an empty object:\n`merge({},source)`.\n\n`lodash` and `Hoek`
+    are examples of libraries susceptible to recursive\nmerge attacks.\n\n### Property
+    definition by path   {#property-definition-by-path}\n\nThere are a few JavaScript
+    libraries that use an API to define property\nvalues on an object based on a given
+    path. The function that is\ngenerally affected contains this signature: `theFunction(object,
+    path,\nvalue)`\n\nIf the attacker can control the value of “path”, they can set
+    this value\nto `_proto_.myValue`. `myValue` is then assigned to the prototype
+    of the\nclass of the object.\n\n"
+  affected_package: lodash
+  vulnerable_versions:
+  - "*"
+  severity: medium
+  package_manager: npm
+  cwe:
+  - CWE-400
+  disclosed_date: 2020-04-27
+  created_date: 2020-04-28
+  last_modified_date: 2020-04-28
+  credit:
+  - posix
+  references:
+  - https://hackerone.com/reports/712065
+  source_url: https://snyk.io/vuln/SNYK-JS-LODASH-567746
 - id: snykio:npm:lodash:73638
   title: Prototype Pollution
   description: "[lodash][1] is a modern JavaScript utility library delivering\nmodularity,
