@@ -1,0 +1,38 @@
+---
+- id: snykio:npm:@actions/http-client:567876
+  title: Information Disclosure
+  description: |
+    [@actions/http-client][1] is a actions-http-client.
+
+    Affected versions of this package are vulnerable to Information
+    Disclosure. Actions Http-Client can disclose Authorization headers to
+    incorrect domain in certain redirect scenarios. The conditions in which
+    this happens are if consumers of the http-client:
+
+    1.  make an http request with an authorization header
+    2.  that request leads to a redirect (302) and
+    3.  the redirect url redirects to another domain or hostname
+
+    Then the authorization header will get passed to the other domain.
+
+
+
+    [1]: https://www.npmjs.com/package/@actions/http-client
+  affected_package: "@actions/http-client"
+  vulnerable_versions:
+  - "<1.0.8"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2020-11021
+  cwe:
+  - CWE-200
+  disclosed_date: 2020-04-29
+  created_date: 2020-04-29
+  last_modified_date: 2020-04-29
+  credit:
+  - Unknown
+  references:
+  - https://github.com/actions/http-client/commit/f6aae3dda4f4c9dc0b49737b36007330f78fd53a
+  - https://github.com/actions/http-client/pull/27
+  source_url: https://snyk.io/vuln/SNYK-JS-ACTIONSHTTPCLIENT-567876

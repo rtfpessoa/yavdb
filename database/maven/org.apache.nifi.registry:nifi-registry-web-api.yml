@@ -1,0 +1,38 @@
+---
+- id: snykio:maven:org.apache.nifi.registry:nifi-registry-web-api:567823
+  title: Insufficient Session Expiration
+  description: |
+    [org.apache.nifi.registry:nifi-registry-web-api][1] is a subproject of
+    Apache NiFi. It is a complementary application that provides a central
+    location for storage and management of shared resources across one or
+    more instances of NiFi and/or MiNiFi.
+
+    Affected versions of this package are vulnerable to Insufficient Session
+    Expiration. If NiFi Registry uses an authentication mechanism other than
+    PKI, when the user clicks `Log Out`, NiFi Registry invalidates the
+    authentication token on the client side but not on the server side. This
+    permits the user\'s client-side token to be used for up to 12 hours
+    after logging out to make API requests to NiFi Registry.
+
+
+
+    [1]: https://github.com/apache/nifi-registry
+  affected_package: org.apache.nifi.registry:nifi-registry-web-api
+  vulnerable_versions:
+  - ">= 0"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2020-9482
+  cwe:
+  - CWE-613
+  disclosed_date: 2020-02-13
+  created_date: 2020-04-29
+  last_modified_date: 2020-04-29
+  credit:
+  - Unknown
+  references:
+  - https://github.com/apache/nifi-registry/pull/259
+  - https://issues.apache.org/jira/browse/NIFIREG-361
+  - https://nifi.apache.org/registry-security.html#CVE-2020-9482
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHENIFIREGISTRY-567823
