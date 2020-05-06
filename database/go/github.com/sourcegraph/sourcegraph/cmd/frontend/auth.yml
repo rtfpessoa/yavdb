@@ -1,0 +1,35 @@
+---
+- id: snykio:go:github.com/sourcegraph/sourcegraph/cmd/frontend/auth:567868
+  title: Open Redirect
+  description: |
+    [github.com/sourcegraph/sourcegraph/cmd/frontend/auth][1] is a auth
+    package for sourcegraph frontend.
+
+    Affected versions of this package are vulnerable to Open Redirect. The
+    SourceGraph application has a vulnerable authentication workflow because
+    of improper validation in the `SafeRedirectURL` method in
+    `cmd/frontend/auth/redirect.go`, such as for the `//foo//example.com`
+    substring.
+
+
+
+    [1]: https://github.com/sourcegraph/sourcegraph
+  affected_package: github.com/sourcegraph/sourcegraph/cmd/frontend/auth
+  vulnerable_versions:
+  - "<3.15.1"
+  severity: low
+  package_manager: go
+  cve:
+  - CVE-2020-12283
+  cwe:
+  - CWE-601
+  disclosed_date: 2020-04-30
+  created_date: 2020-04-30
+  last_modified_date: 2020-04-30
+  credit:
+  - Unknown
+  references:
+  - https://github.com/sourcegraph/sourcegraph/blob/master/CHANGELOG.md
+  - https://github.com/sourcegraph/sourcegraph/commit/c0f48172e815c7f66471a38f0a06d1fc32a77a64
+  - https://github.com/sourcegraph/sourcegraph/pull/10167
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMSOURCEGRAPHSOURCEGRAPHCMDFRONTENDAUTH-567868

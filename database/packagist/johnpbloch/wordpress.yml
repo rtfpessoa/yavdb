@@ -1,82 +1,17 @@
 ---
-- id: snykio:maven:org.webjars.bowergithub.jquery:jquery:479777
-  title: Prototype Pollution
-  description: "[org.webjars.bowergithub.jquery:jquery][1] is a JavaScript library.
-    It\nmakes things like HTML document traversal and manipulation, event\nhandling,
-    animation, and Ajax much simpler with an easy-to-use API that\nworks across a
-    multitude of browsers.\n\nAffected versions of this package are vulnerable to
-    Prototype Pollution.\nThe `extend` function can be tricked into modifying the
-    prototype of\n`Object` when the attacker controls part of the structure passed
-    to this\nfunction. This can let an attacker add or modify an existing property\nthat
-    will then exist on all objects.\n\n\n\n[1]: https://www.npmjs.com/package/jquery\n\\nPrototype
-    Pollution is a vulnerability affecting JavaScript. Prototype\nPollution refers
-    to the ability to inject properties into existing\nJavaScript language construct
-    prototypes, such as objects. JavaScript\nallows all Object attributes to be altered,
-    including their magical\nattributes such as `_proto_`, `constructor` and `prototype`.
-    An attacker\nmanipulates these attributes to overwrite, or pollute, a JavaScript\napplication
-    object prototype of the base object by injecting other\nvalues. Properties on
-    the `Object.prototype` are then inherited by all\nthe JavaScript objects through
-    the prototype chain. When that happens,\nthis leads to either denial of service
-    by triggering JavaScript\nexceptions, or it tampers with the application source
-    code to force the\ncode path that the attacker injects, thereby leading to remote
-    code\nexecution.\n\nThere are two main ways in which the pollution of prototypes
-    occurs:\n\n* Unsafe `Object` recursive merge\n\n* Property definition by path\n\n###
-    Unsafe Object recursive merge   {#unsafe-object-recursive-merge}\n\nThe logic
-    of a vulnerable recursive merge function follows the following\nhigh-level model:\n\n
-    \   merge (target, source)\n    \n      foreach property of source\n    \n        if
-    property exists and is an object on both the target and the source\n    \n          merge(target[property],
-    source[property])\n    \n        else\n    \n          target[property] = source[property]\n\n&lt;br&gt;\n\nWhen
-    the source object contains a property named `_proto_` defined with\n`Object.defineProperty()`
-    , the condition that checks if the property\nexists and is an object on both the
-    target and the source passes and the\nmerge recurses with the target, being the
-    prototype of `Object` and the\nsource of `Object` as defined by the attacker.
-    Properties are then\ncopied on the `Object` prototype.\n\nClone operations are
-    a special sub-class of unsafe recursive merges,\nwhich occur when a recursive
-    merge is conducted on an empty object:\n`merge({},source)`.\n\n`lodash` and `Hoek`
-    are examples of libraries susceptible to recursive\nmerge attacks.\n\n### Property
-    definition by path   {#property-definition-by-path}\n\nThere are a few JavaScript
-    libraries that use an API to define property\nvalues on an object based on a given
-    path. The function that is\ngenerally affected contains this signature: `theFunction(object,
-    path,\nvalue)`\n\nIf the attacker can control the value of “path”, they can set
-    this value\nto `_proto_.myValue`. `myValue` is then assigned to the prototype
-    of the\nclass of the object.\n\n"
-  affected_package: org.webjars.bowergithub.jquery:jquery
-  vulnerable_versions:
-  - "< 3.4.0"
-  severity: medium
-  package_manager: maven
-  cve:
-  - CVE-2019-11358
-  - CVE-2019-5428
-  cwe:
-  - CWE-400
-  disclosed_date: 2019-03-26
-  created_date: 2019-03-27
-  last_modified_date: 2019-03-27
-  credit:
-  - Semmle Security Research Team
-  references:
-  - https://github.com/DanielRuf/snyk-js-jquery-174006
-  - https://github.com/jquery/jquery/commit/753d591aea698e57d6db58c9f722cd0808619b1b
-  - https://github.com/jquery/jquery/pull/4333
-  - https://hackerone.com/reports/454365
-  - https://snyk.io/blog/after-three-years-of-silence-a-new-jquery-prototype-pollution-vulnerability-emerges-once-again/
-  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSBOWERGITHUBJQUERY-479777
-- id: snykio:maven:org.webjars.bowergithub.jquery:jquery:479785
+- id: snykio:packagist:johnpbloch/wordpress:568019
   title: Cross-site Scripting (XSS)
   description: |+
-    [org.webjars.bowergithub.jquery:jquery][1] is a JavaScript library. It
-    makes things like HTML document traversal and manipulation, event
-    handling, animation, and Ajax much simpler with an easy-to-use API that
-    works across a multitude of browsers.
+    [johnpbloch/wordpress][1] is a software you can use to create a
+    beautiful website, blog, or app.
 
     Affected versions of this package are vulnerable to Cross-site Scripting
-    (XSS) attacks when a cross-domain ajax request is performed without the
-    `dataType` option causing `text/javascript` responses to be executed.
+    (XSS) in the navigation section of `Customizer` allows JavaScript code
+    to be executed. Exploitation requires an authenticated user.
 
 
 
-    [1]: https://www.npmjs.com/package/jquery
+    [1]: https://packagist.org/packages/johnpbloch/wordpress
     \nA cross-site scripting attack occurs when the attacker tricks a
     legitimate web-based application or site to accept a request as
     originating from a trusted source.
@@ -149,164 +84,352 @@
     * Read the documentation for any of the libraries referenced in your
       code to understand which elements allow for embedded HTML.
 
-  affected_package: org.webjars.bowergithub.jquery:jquery
+  affected_package: johnpbloch/wordpress
   vulnerable_versions:
-  - "< 1.12.2"
-  - ">= 1.12.3 < 2.2.2"
-  - ">= 2.2.3 < 3.0.0"
+  - ">=3.7.0  <3.7.33"
+  - ">=3.8.0  <3.8.33"
+  - ">=3.9.0  <3.9.31"
+  - ">=4.0.0  <4.0.30"
+  - ">=4.0.0  <4.9.14"
+  - ">=4.1.0  <4.1.30"
+  - ">=4.2.0  <4.2.27"
+  - ">=4.3.0  <4.3.23"
+  - ">=4.4.0  <4.4.22"
+  - ">=4.5.0  <4.5.21"
+  - ">=4.6.0  <4.6.18"
+  - ">=4.7.0  <4.7.17"
+  - ">=4.8.0  <4.8.13"
+  - ">=5.0.0  <5.0.9"
+  - ">=5.1.0  <5.1.5"
+  - ">=5.2.0  <5.2.6"
+  - ">=5.3.0  <5.3.3"
+  - ">=5.4.0  <5.4.1"
   severity: medium
-  package_manager: maven
+  package_manager: packagist
   cve:
-  - CVE-2015-9251
-  - CVE-2017-16012
+  - CVE-2020-11025
   cwe:
   - CWE-79
-  disclosed_date: 2015-06-26
-  created_date: 2016-11-27
-  last_modified_date: 2016-11-27
-  credit:
-  - Egor Homakov
-  references:
-  - https://github.com/jquery/jquery/commit/f60729f3903d17917dc351f3ac87794de379b0cc
-  - https://github.com/jquery/jquery/issues/2432
-  - https://github.com/jquery/jquery/pull/2588
-  - https://github.com/jquery/jquery/pull/2588/commits/c254d308a7d3f1eac4d0b42837804cfffcba4bb2
-  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSBOWERGITHUBJQUERY-479785
-- id: snykio:maven:org.webjars.bowergithub.jquery:jquery:565170
-  title: Cross-site Scripting (XSS)
-  description: |+
-    [org.webjars.bowergithub.jquery:jquery][1] is a JavaScript library. It
-    makes things like HTML document traversal and manipulation, event
-    handling, animation, and Ajax much simpler with an easy-to-use API that
-    works across a multitude of browsers.
-
-    Affected versions of this package are vulnerable to Cross-site Scripting
-    (XSS) via the regex operation in `jQuery.htmlPrefilter`.
-
-
-
-    [1]: https://www.npmjs.com/package/jquery
-    \nA cross-site scripting attack occurs when the attacker tricks a
-    legitimate web-based application or site to accept a request as
-    originating from a trusted source.
-
-    This is done by escaping the context of the web application; the web
-    application then delivers that data to its users along with other
-    trusted dynamic content, without validating it. The browser unknowingly
-    executes malicious script on the client side (through client-side
-    languages; usually JavaScript or HTML) in order to perform actions that
-    are otherwise typically blocked by the browser’s Same Origin Policy.
-
-    ֿInjecting malicious code is the most prevalent manner by which XSS is
-    exploited; for this reason, escaping characters in order to prevent this
-    manipulation is the top method for securing code against this
-    vulnerability.
-
-    Escaping means that the application is coded to mark key characters, and
-    particularly key characters included in user input, to prevent those
-    characters from being interpreted in a dangerous context. For example,
-    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
-    order to be interpreted and displayed as themselves in text, while
-    within the code itself, they are used for HTML tags. If malicious
-    content is injected into an application that escapes special characters
-    and that malicious content uses `<` and `>` as HTML tags, those
-    characters are nonetheless not interpreted as HTML tags by the browser
-    if they’ve been correctly escaped in the application code and in this
-    way the attempted attack is diverted.
-
-    The most prominent use of XSS is to steal cookies (source: OWASP
-    HttpOnly) and hijack user sessions, but XSS exploits have been used to
-    expose sensitive information, enable access to privileged services and
-    functionality and deliver malware.
-
-    ### Types of attacks   {#types-of-attacks}
-
-    There are a few methods by which XSS can be manipulated:
-
-    | Type | Origin | Description |
-    |----------
-    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
-    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
-    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
-    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
-
-    ### Affected environments   {#affected-environments}
-
-    The following environments are susceptible to an XSS attack:
-
-    * Web servers
-    * Application servers
-    * Web application environments
-
-    ### How to prevent   {#how-to-prevent}
-
-    This section describes the top best practices designed to specifically
-    protect your code:
-
-    * Sanitize data input in an HTTP request before reflecting it back,
-      ensuring all data is validated, filtered or escaped before echoing
-      anything back to the user, such as the values of query parameters
-      during searches.
-    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
-      to their respective HTML or URL encoded equivalents.
-    * Give users the option to disable client-side scripts.
-    * Redirect invalid requests.
-    * Detect simultaneous logins, including those from two separate IP
-      addresses, and invalidate those sessions.
-    * Use and enforce a Content Security Policy (source: Wikipedia) to
-      disable any features that might be manipulated for an XSS attack.
-    * Read the documentation for any of the libraries referenced in your
-      code to understand which elements allow for embedded HTML.
-
-  affected_package: org.webjars.bowergithub.jquery:jquery
-  vulnerable_versions:
-  - ">= 0"
-  severity: medium
-  package_manager: maven
-  cwe:
-  - CWE-79
-  disclosed_date: 2020-04-10
-  created_date: 2020-04-13
-  last_modified_date: 2020-04-13
+  disclosed_date: 2020-04-30
+  created_date: 2020-04-30
+  last_modified_date: 2020-04-30
   credit:
   - Unknown
   references:
-  - https://blog.jquery.com/2020/04/10/jquery-3-5-0-released/
-  - https://github.com/jquery/jquery/commit/1d61fd9407e6fbe82fe55cb0b938307aa0791f77
-  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSBOWERGITHUBJQUERY-565170
-- id: snykio:maven:org.webjars.bowergithub.jquery:jquery:567884
+  - https://github.com/WordPress/wordpress-develop/security/advisories/GHSA-4mhg-j6fx-5g3c
+  - https://wordpress.org/support/wordpress-version/version-5-4-1/#security-updates
+  source_url: https://snyk.io/vuln/SNYK-PHP-JOHNPBLOCHWORDPRESS-568019
+- id: snykio:packagist:johnpbloch/wordpress:568020
+  title: Arbitrary Code Execution
+  description: |
+    [johnpbloch/wordpress][1] is a software you can use to create a
+    beautiful website, blog, or app.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution. Files with a specially crafted name when uploaded to the
+    `Media` section can lead to script execution upon accessing the file.
+    This requires an authenticated user with privileges to upload files.
+
+
+
+    [1]: https://packagist.org/packages/johnpbloch/wordpress
+  affected_package: johnpbloch/wordpress
+  vulnerable_versions:
+  - ">=3.7.0  <3.7.33"
+  - ">=3.8.0  <3.8.33"
+  - ">=3.9.0  <3.9.31"
+  - ">=4.0.0  <4.0.30"
+  - ">=4.0.0  <4.9.14"
+  - ">=4.1.0  <4.1.30"
+  - ">=4.2.0  <4.2.27"
+  - ">=4.3.0  <4.3.23"
+  - ">=4.4.0  <4.4.22"
+  - ">=4.5.0  <4.5.21"
+  - ">=4.6.0  <4.6.18"
+  - ">=4.7.0  <4.7.17"
+  - ">=4.8.0  <4.8.13"
+  - ">=5.0.0  <5.0.9"
+  - ">=5.1.0  <5.1.5"
+  - ">=5.2.0  <5.2.6"
+  - ">=5.3.0  <5.3.3"
+  - ">=5.4.0  <5.4.1"
+  severity: medium
+  package_manager: packagist
+  cve:
+  - CVE-2020-11026
+  cwe:
+  - CWE-78
+  disclosed_date: 2020-05-01
+  created_date: 2020-05-01
+  last_modified_date: 2020-05-01
+  credit:
+  - Unknown
+  references:
+  - https://github.com/WordPress/wordpress-develop/security/advisories/GHSA-3gw2-4656-pfr2
+  - https://wordpress.org/support/wordpress-version/version-5-4-1/#security-updates
+  source_url: https://snyk.io/vuln/SNYK-PHP-JOHNPBLOCHWORDPRESS-568020
+- id: snykio:packagist:johnpbloch/wordpress:568021
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [johnpbloch/wordpress][1] is a software you can use to create a
+    beautiful website, blog, or app.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS) in the `stats()` method of `class-wp-object-cache.php`.
+
+
+
+    [1]: https://packagist.org/packages/johnpbloch/wordpress
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
+  affected_package: johnpbloch/wordpress
+  vulnerable_versions:
+  - ">=3.7.0  <3.7.33"
+  - ">=3.8.0  <3.8.33"
+  - ">=3.9.0  <3.9.31"
+  - ">=4.0.0  <4.0.30"
+  - ">=4.0.0  <4.9.14"
+  - ">=4.1.0  <4.1.30"
+  - ">=4.2.0  <4.2.27"
+  - ">=4.3.0  <4.3.23"
+  - ">=4.4.0  <4.4.22"
+  - ">=4.5.0  <4.5.21"
+  - ">=4.6.0  <4.6.18"
+  - ">=4.7.0  <4.7.17"
+  - ">=4.8.0  <4.8.13"
+  - ">=5.0.0  <5.0.9"
+  - ">=5.1.0  <5.1.5"
+  - ">=5.2.0  <5.2.6"
+  - ">=5.3.0  <5.3.3"
+  - ">=5.4.0  <5.4.1"
+  severity: high
+  package_manager: packagist
+  cve:
+  - CVE-2020-11029
+  cwe:
+  - CWE-79
+  disclosed_date: 2020-05-01
+  created_date: 2020-05-01
+  last_modified_date: 2020-05-01
+  credit:
+  - Unknown
+  references:
+  - https://github.com/WordPress/wordpress-develop/security/advisories/GHSA-568w-8m88-8g2c
+  - https://wordpress.org/support/wordpress-version/version-5-4-1/#security-updates
+  source_url: https://snyk.io/vuln/SNYK-PHP-JOHNPBLOCHWORDPRESS-568021
+- id: snykio:packagist:johnpbloch/wordpress:568022
+  title: Improper Access Control
+  description: |
+    [johnpbloch/wordpress][1] is a software you can use to create a
+    beautiful website, blog, or app.
+
+    Affected versions of this package are vulnerable to Improper Access
+    Control. When a password reset link is emailed to a user, it does not
+    expire upon changing the user password. Access would be needed to the
+    email account of the user by a malicious party for successful execution.
+
+
+
+    [1]: https://packagist.org/packages/johnpbloch/wordpress
+  affected_package: johnpbloch/wordpress
+  vulnerable_versions:
+  - ">=3.7.0  <3.7.33"
+  - ">=3.8.0  <3.8.33"
+  - ">=3.9.0  <3.9.31"
+  - ">=4.0.0  <4.0.30"
+  - ">=4.0.0  <4.9.14"
+  - ">=4.1.0  <4.1.30"
+  - ">=4.2.0  <4.2.27"
+  - ">=4.3.0  <4.3.23"
+  - ">=4.4.0  <4.4.22"
+  - ">=4.5.0  <4.5.21"
+  - ">=4.6.0  <4.6.18"
+  - ">=4.7.0  <4.7.17"
+  - ">=4.8.0  <4.8.13"
+  - ">=5.0.0  <5.0.9"
+  - ">=5.1.0  <5.1.5"
+  - ">=5.2.0  <5.2.6"
+  - ">=5.3.0  <5.3.3"
+  - ">=5.4.0  <5.4.1"
+  severity: high
+  package_manager: packagist
+  cve:
+  - CVE-2020-11027
+  cwe:
+  - CWE-284
+  disclosed_date: 2020-05-01
+  created_date: 2020-05-01
+  last_modified_date: 2020-05-01
+  credit:
+  - Unknown
+  references:
+  - https://github.com/WordPress/wordpress-develop/security/advisories/GHSA-ww7v-jg8c-q6jw
+  - https://wordpress.org/support/wordpress-version/version-5-4-1/#security-updates
+  source_url: https://snyk.io/vuln/SNYK-PHP-JOHNPBLOCHWORDPRESS-568022
+- id: snykio:packagist:johnpbloch/wordpress:568023
+  title: Information Disclosure
+  description: |
+    [johnpbloch/wordpress][1] is a software you can use to create a
+    beautiful website, blog, or app.
+
+    Affected versions of this package are vulnerable to Information
+    Disclosure. In some private posts, which were previously public, can
+    result in unauthenticated disclosure under a specific set of conditions.
+
+
+
+    [1]: https://packagist.org/packages/johnpbloch/wordpress
+  affected_package: johnpbloch/wordpress
+  vulnerable_versions:
+  - ">=3.7.0  <3.7.33"
+  - ">=3.8.0  <3.8.33"
+  - ">=3.9.0  <3.9.31"
+  - ">=4.0.0  <4.0.30"
+  - ">=4.0.0  <4.9.14"
+  - ">=4.1.0  <4.1.30"
+  - ">=4.2.0  <4.2.27"
+  - ">=4.3.0  <4.3.23"
+  - ">=4.4.0  <4.4.22"
+  - ">=4.5.0  <4.5.21"
+  - ">=4.6.0  <4.6.18"
+  - ">=4.7.0  <4.7.17"
+  - ">=4.8.0  <4.8.13"
+  - ">=5.0.0  <5.0.9"
+  - ">=5.1.0  <5.1.5"
+  - ">=5.2.0  <5.2.6"
+  - ">=5.3.0  <5.3.3"
+  - ">=5.4.0  <5.4.1"
+  severity: medium
+  package_manager: packagist
+  cve:
+  - CVE-2020-11028
+  cwe:
+  - CWE-200
+  disclosed_date: 2020-05-01
+  created_date: 2020-05-01
+  last_modified_date: 2020-05-01
+  credit:
+  - Unknown
+  references:
+  - https://github.com/WordPress/wordpress-develop/security/advisories/GHSA-xhx9-759f-6p2w
+  - https://wordpress.org/support/wordpress-version/version-5-4-1/#security-updates
+  source_url: https://snyk.io/vuln/SNYK-PHP-JOHNPBLOCHWORDPRESS-568023
+- id: snykio:packagist:johnpbloch/wordpress:568024
   title: Cross-site Scripting (XSS)
   description: |
-    [org.webjars.bowergithub.jquery:jquery][1] is a JavaScript library. It
-    makes things like HTML document traversal and manipulation, event
-    handling, animation, and Ajax much simpler with an easy-to-use API that
-    works across a multitude of browsers.
+    [johnpbloch/wordpress][1] is a software you can use to create a
+    beautiful website, blog, or app.
 
     Affected versions of this package are vulnerable to Cross-site Scripting
-    (XSS). Passing HTML from untrusted sources - even after sanitizing it -
-    to one of jQuery\'s DOM manipulation methods (i.e. `.html(), .append()`,
-    and others) may execute untrusted code.
+    (XSS). A special payload can be crafted that can lead to scripts getting
+    executed within the search block of the block editor. This requires an
+    authenticated user with the ability to add content.
 
 
 
-    [1]: https://www.npmjs.com/package/jquery
-  affected_package: org.webjars.bowergithub.jquery:jquery
+    [1]: https://packagist.org/packages/johnpbloch/wordpress
+  affected_package: johnpbloch/wordpress
   vulnerable_versions:
-  - ">= 1.2.0 < 3.5.0"
+  - ">=3.7.0  <3.7.33"
+  - ">=3.8.0  <3.8.33"
+  - ">=3.9.0  <3.9.31"
+  - ">=4.0.0  <4.0.30"
+  - ">=4.0.0  <4.9.14"
+  - ">=4.1.0  <4.1.30"
+  - ">=4.2.0  <4.2.27"
+  - ">=4.3.0  <4.3.23"
+  - ">=4.4.0  <4.4.22"
+  - ">=4.5.0  <4.5.21"
+  - ">=4.6.0  <4.6.18"
+  - ">=4.7.0  <4.7.17"
+  - ">=4.8.0  <4.8.13"
+  - ">=5.0.0  <5.0.9"
+  - ">=5.1.0  <5.1.5"
+  - ">=5.2.0  <5.2.6"
+  - ">=5.3.0  <5.3.3"
+  - ">=5.4.0  <5.4.1"
   severity: medium
-  package_manager: maven
+  package_manager: packagist
   cve:
-  - CVE-2020-11022
+  - CVE-2020-11030
   cwe:
   - CWE-79
-  disclosed_date: 2020-04-29
-  created_date: 2020-04-29
-  last_modified_date: 2020-04-29
+  disclosed_date: 2020-05-01
+  created_date: 2020-05-01
+  last_modified_date: 2020-05-01
   credit:
   - Unknown
   references:
-  - https://blog.jquery.com/2020/04/10/jquery-3-5-0-released/
-  - https://github.com/jquery/jquery/commit/1d61fd9407e6fbe82fe55cb0b938307aa0791f77
-  - https://github.com/jquery/jquery/security/advisories/GHSA-gxr4-xjj5-5px2
-  - https://jquery.com/upgrade-guide/3.5/
-  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSBOWERGITHUBJQUERY-567884
+  - https://github.com/WordPress/wordpress-develop/security/advisories/GHSA-vccm-6gmc-qhjh
+  - https://wordpress.org/support/wordpress-version/version-5-4-1/#security-updates
+  source_url: https://snyk.io/vuln/SNYK-PHP-JOHNPBLOCHWORDPRESS-568024

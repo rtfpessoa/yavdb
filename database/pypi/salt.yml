@@ -904,6 +904,86 @@
   references:
   - https://docs.saltstack.com/en/latest/topics/releases/2019.2.3.html#security-fix
   source_url: https://snyk.io/vuln/SNYK-PYTHON-SALT-542668
+- id: snykio:pypi:salt:568025
+  title: Directory Traversal
+  description: |
+    [salt][1] is a new approach to infrastructure management built on a
+    dynamic communication bus. Salt can be used for data-driven
+    orchestration, remote execution for any infrastructure, configuration
+    management for any app stack, and much more.
+
+    Affected versions of this package are vulnerable to Directory Traversal.
+    The wheel module contains commands used to read and write files under
+    specific directory paths. The inputs to these functions are concatenated
+    with the target directory and the resulting path is not canonicalized,
+    leading to an escape of the intended path restriction.
+
+    The get\_token() method of the salt.tokens.localfs class (which is
+    exposed to unauthenticated requests by the ClearFuncs class) fails to
+    sanitize the token input parameter which is then used as a filename,
+    allowing insertion of \"..\" path elements and thus reading of files
+    outside of the intended directory. The only restriction is that the file
+    has to be deserializable by salt.payload.Serial.loads().
+
+
+
+    [1]: https://www.saltstack.com/
+  affected_package: salt
+  vulnerable_versions:
+  - "< 2019.2.4"
+  - ">= 3000 < 3000.2"
+  severity: high
+  package_manager: pypi
+  cve:
+  - CVE-2020-11652
+  cwe:
+  - CWE-761
+  disclosed_date: 2020-04-30
+  created_date: 2020-04-30
+  last_modified_date: 2020-04-30
+  credit:
+  - FSecure Labs
+  references:
+  - https://docs.saltstack.com/en/latest/topics/releases/2019.2.4.html
+  - https://github.com/saltstack/salt/blob/v3000.2_docs/doc/topics/releases/3000.2.rst
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-SALT-568025
+- id: snykio:pypi:salt:568031
+  title: Arbitrary Code Execution
+  description: |
+    [salt][1] is a new approach to infrastructure management built on a
+    dynamic communication bus. Salt can be used for data-driven
+    orchestration, remote execution for any infrastructure, configuration
+    management for any app stack, and much more.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution. The salt-master process`ClearFuncs` class does not properly
+    validate method calls. This allows a remote user to access some methods
+    without authentication. These methods can be used to retrieve user
+    tokens from the salt master and/or run arbitrary commands on salt
+    minions.
+
+
+
+    [1]: https://www.saltstack.com/
+  affected_package: salt
+  vulnerable_versions:
+  - "< 2019.2.4"
+  - ">= 3000 < 3000.2"
+  severity: high
+  package_manager: pypi
+  cve:
+  - CVE-2020-11651
+  cwe:
+  - CWE-94
+  disclosed_date: 2020-04-30
+  created_date: 2020-04-30
+  last_modified_date: 2020-04-30
+  credit:
+  - Unknown
+  references:
+  - https://docs.saltstack.com/en/latest/topics/releases/2019.2.4.html
+  - https://github.com/saltstack/salt/blob/v3000.2_docs/doc/topics/releases/3000.2.rst
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-SALT-568031
 - id: snykio:pypi:salt:72538
   title: Arbitrary Command Execution
   description: |
