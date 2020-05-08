@@ -202,6 +202,41 @@
   - https://github.com/doorkeeper-gem/doorkeeper/pull/1120
   - https://github.com/rubysec/ruby-advisory-db
   source_url: https://blog.justinbull.ca/cve-2018-1000211-public-apps-cant-revoke-tokens-in-doorkeeper/
+- id: rubyadvisory:rubygems:doorkeeper:CVE-2020-10187
+  title: Doorkeeper application secret information disclosure vulnerability
+  description: |
+    Information disclosure vulnerability. Allows an attacker to see all
+    Doorkeeper::Application model attribute values (including secrets) after
+    authorizing an application to their user.
+
+    An application is vulnerable if the authorized applications controller is
+    enabled (GET /oauth/authorized_applications.json).
+
+    Recommended additional hardening for >= 5.1 is to enable application secrets
+    hashing. This would render the exposed secret useless.
+  affected_package: doorkeeper
+  unaffected_versions:
+  - "< 5.0.0"
+  patched_versions:
+  - ">= 5.3.2"
+  - "~> 5.0.3"
+  - "~> 5.1.1"
+  - "~> 5.2.5"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2020-10187
+  cvss_v2_score: 5.5
+  cvss_v3_score: 5.4
+  disclosed_date: 2020-05-02
+  created_date: 2020-05-02
+  last_modified_date: 2020-05-02
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/doorkeeper-gem/doorkeeper/commit/25d038022c2fcad45af5b73f9d003cf38ff491f6
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://github.com/doorkeeper-gem/doorkeeper/security/advisories/GHSA-j7vx-8mqj-cqp9
 - id: rubyadvisory:rubygems:doorkeeper:OSVDB-118830
   title: |
     Doorkeeper Gem for Ruby stores sensitive information
@@ -270,8 +305,8 @@
     [1]: https://rubygems.org/gems/doorkeeper
   affected_package: doorkeeper
   vulnerable_versions:
-  - "< 1.4.2"
-  - "< 2.1.2  >= 1.5"
+  - "<1.4.2"
+  - ">=1.5.0  <2.1.2"
   severity: low
   package_manager: rubygems
   cwe:

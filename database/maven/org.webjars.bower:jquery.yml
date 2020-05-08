@@ -725,7 +725,10 @@
     across a multitude of browsers.
 
     Affected versions of this package are vulnerable to Cross-site Scripting
-    (XSS) via the regex operation in `jQuery.htmlPrefilter`.
+    (XSS) Passing HTML containing `<option>` elements from untrusted sources
+    - even after sanitizing it - to one of jQuery\'s DOM manipulation
+    methods (i.e. `.html()`, `.append()`, and others) may execute untrusted
+    code.
 
 
 
@@ -804,9 +807,11 @@
 
   affected_package: org.webjars.bower:jquery
   vulnerable_versions:
-  - "< 3.5.0"
+  - ">= 1.0.3 < 3.5.0"
   severity: medium
   package_manager: maven
+  cve:
+  - CVE-2020-11023
   cwe:
   - CWE-79
   disclosed_date: 2020-04-10

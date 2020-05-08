@@ -44,6 +44,33 @@
   references:
   - https://github.com/rubysec/ruby-advisory-db
   source_url: https://groups.google.com/forum/#!topic/ruby-security-ann/XIZPbobuwaY
+- id: rubyadvisory:rubygems:jquery-rails:CVE-2019-11358
+  title: Prototype pollution attack through jQuery $.extend
+  description: |
+    jQuery before 3.4.0 mishandles jQuery.extend(true, {}, ...) because of
+    bject.prototype pollution. If an unsanitized source object contained an
+    enumerable __proto__ property, it could extend the native Object.prototype.
+  affected_package: jquery-rails
+  patched_versions:
+  - ">= 4.3.4"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2019-11358
+  cvss_v2_score: 4.3
+  cvss_v3_score: 6.1
+  disclosed_date: 2019-04-19
+  created_date: 2019-04-19
+  last_modified_date: 2019-04-19
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/jquery/jquery/commit/753d591aea698e57d6db58c9f722cd0808619b1b
+  - https://github.com/jquery/jquery/pull/4333
+  - https://github.com/rails/jquery-rails/blob/master/CHANGELOG.md#434
+  - https://github.com/rubysec/ruby-advisory-db
+  - https://hackerone.com/reports/454365
+  source_url: https://blog.jquery.com/2019/04/10/jquery-3-4-0-released/
 - id: snykio:rubygems:jquery-rails:20225
   title: Cross-site Request Forgery (CSRF)
   description: |
@@ -474,7 +501,10 @@
     your Rails 4+ application.
 
     Affected versions of this package are vulnerable to Cross-site Scripting
-    (XSS) via the regex operation in `jQuery.htmlPrefilter`.
+    (XSS) Passing HTML containing `<option>` elements from untrusted sources
+    - even after sanitizing it - to one of jQuery\'s DOM manipulation
+    methods (i.e. `.html()`, `.append()`, and others) may execute untrusted
+    code.
 
 
 
@@ -556,6 +586,8 @@
   - ">=0.0.0"
   severity: medium
   package_manager: rubygems
+  cve:
+  - CVE-2020-11023
   cwe:
   - CWE-79
   disclosed_date: 2020-04-10
