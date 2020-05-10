@@ -1,0 +1,35 @@
+---
+- id: snykio:pypi:pylint:568073
+  title: Remote Code Execution
+  description: |
+    [pylint][1] is a Python static code analysis tool which looks for
+    programming errors, helps enforcing a coding standard, sniffs for code
+    smells and offers simple refactoring suggestions.
+
+    Affected versions of this package are vulnerable to Remote Code
+    Execution. `python -m pylint` imports user code. It adds the current
+    working directory as the first element of `sys.path` this opens up a
+    security hole where `pylint` imports user level code as long as that
+    code resides in modules with the same name as `stdlib` or `pylint`\'s
+    own modules.
+
+
+
+    [1]: https://github.com/PyCQA/pylint
+  affected_package: pylint
+  vulnerable_versions:
+  - ">= 1.1.0 < 2.5.0"
+  severity: medium
+  package_manager: pypi
+  cwe:
+  - CWE-94
+  disclosed_date: 2020-05-01
+  created_date: 2020-05-04
+  last_modified_date: 2020-05-04
+  credit:
+  - Unknown
+  references:
+  - https://github.com/PyCQA/pylint/commit/4becf6f9e596b45401680c4947e2d92c953d5e08
+  - https://github.com/PyCQA/pylint/issues/959
+  - https://github.com/PyCQA/pylint/pull/3411
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-PYLINT-568073
