@@ -66,6 +66,116 @@
   - https://bugs.launchpad.net/keystone/+bug/968696
   - https://github.com/openstack/keystone/commit/17c337dbdbfb9d548ad531c2ad0483c9bce5b98f
   source_url: https://snyk.io/vuln/SNYK-PYTHON-KEYSTONE-537036
+- id: snykio:pypi:keystone:568463
+  title: Improper Access Control
+  description: |
+    [keystone][1] is a package that provides authentication, authorization
+    and service discovery mechanisms via HTTP primarily for use by projects
+    in the OpenStack family.
+
+    Affected versions of this package are vulnerable to Improper Access
+    Control. The list of roles provided for an OAuth1 access token is
+    silently ignored. Thus, when an access token is used to request a
+    keystone token, the keystone token contains every role assignment the
+    creator had for the project. This results in the provided keystone token
+    having more role assignments than the creator intended, possibly giving
+    unintended escalated access.
+
+
+
+    [1]: https://docs.openstack.org/keystone/latest/
+  affected_package: keystone
+  vulnerable_versions:
+  - ">= 0"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2020-12690
+  cwe:
+  - CWE-284
+  disclosed_date: 2020-05-06
+  created_date: 2020-05-07
+  last_modified_date: 2020-05-07
+  credit:
+  - Unknown
+  references:
+  - https://bugs.launchpad.net/keystone/+bug/1873290
+  - https://review.opendev.org/725894
+  - https://www.openwall.com/lists/oss-security/2020/05/06/6
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-KEYSTONE-568463
+- id: snykio:pypi:keystone:568466
+  title: Improper Access Control
+  description: |
+    [keystone][1] is a package that provides authentication, authorization
+    and service discovery mechanisms via HTTP primarily for use by projects
+    in the OpenStack family.
+
+    Affected versions of this package are vulnerable to Improper Access
+    Control. Any user authenticated within a limited scope
+    (trust/oauth/application credential) can create an EC2 credential with
+    an escalated permission, such as obtaining admin while the user is on a
+    limited viewer role.
+
+    This potentially allows a malicious user to act as the admin on a
+    project another user has the admin role on, which can effectively grant
+    that user global admin privileges.
+
+
+
+    [1]: https://docs.openstack.org/keystone/latest/
+  affected_package: keystone
+  vulnerable_versions:
+  - ">= 0"
+  severity: high
+  package_manager: pypi
+  cve:
+  - CVE-2020-12689
+  cwe:
+  - CWE-284
+  disclosed_date: 2020-05-07
+  created_date: 2020-05-07
+  last_modified_date: 2020-05-07
+  credit:
+  - Unknown
+  references:
+  - https://bugs.launchpad.net/keystone/+bug/1872735
+  - https://review.opendev.org/#/c/725895/
+  - https://www.openwall.com/lists/oss-security/2020/05/06/5
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-KEYSTONE-568466
+- id: snykio:pypi:keystone:568468
+  title: Improper Authentication
+  description: |
+    [keystone][1] is a package that provides authentication, authorization
+    and service discovery mechanisms via HTTP primarily for use by projects
+    in the OpenStack family.
+
+    Affected versions of this package are vulnerable to Improper
+    Authentication. The EC2 API doesn\'t have a signature TTL check for AWS
+    Signature V4. An attacker can sniff the Authorization header, and then
+    use it to reissue an OpenStack token an unlimited number of times.
+
+
+
+    [1]: https://docs.openstack.org/keystone/latest/
+  affected_package: keystone
+  vulnerable_versions:
+  - ">= 0"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2020-12692
+  cwe:
+  - CWE-287
+  disclosed_date: 2020-05-07
+  created_date: 2020-05-07
+  last_modified_date: 2020-05-07
+  credit:
+  - Unknown
+  references:
+  - https://bugs.launchpad.net/keystone/+bug/1872737
+  - https://github.com/openstack/keystone/commit/ab89ea749013e7f2c46260f68504f5687763e019
+  - https://www.openwall.com/lists/oss-security/2020/05/06/4
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-KEYSTONE-568468
 - id: victims:pypi:keystone:2013-4477
   title: 'OpenStack keystone: unintentional role granting'
   affected_package: keystone

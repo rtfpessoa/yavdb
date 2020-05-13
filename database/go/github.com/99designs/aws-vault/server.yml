@@ -1,0 +1,36 @@
+---
+- id: snykio:go:github.com/99designs/aws-vault/server:568165
+  title: DNS Rebinding
+  description: |
+    [github.com/99designs/aws-vault/server][1] is a vault for securely
+    storing and accessing AWS credentials in development environments.
+
+    Affected versions of this package are vulnerable to DNS Rebinding. With
+    the aws-vault EC2 metadata service running, it\'s possible for an
+    attacker controlling any web page the victim visits with javascript
+    enabled to mount a DNS rebinding attack to grab short-lived credentials
+    from the aws-vault server.
+
+
+
+    [1]: https://github.com/99designs/aws-vault
+  affected_package: github.com/99designs/aws-vault/server
+  vulnerable_versions:
+  - ">=4.0.0 <4.7.2"
+  - ">=5.0.0 <5.4.4"
+  severity: medium
+  package_manager: go
+  cwe:
+  - CWE-350
+  disclosed_date: 2020-05-05
+  created_date: 2020-05-07
+  last_modified_date: 2020-05-07
+  credit:
+  - philsnow
+  references:
+  - https://github.com/99designs/aws-vault/commit/ae369037cc75150edef7fbb7799933b48fcc1183
+  - https://github.com/99designs/aws-vault/issues/578
+  - https://github.com/99designs/aws-vault/issues/578#issuecomment-623921862
+  - https://github.com/99designs/aws-vault/pull/580
+  - https://github.com/99designs/aws-vault/releases/tag/v5.4.4
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOM99DESIGNSAWSVAULTSERVER-568165
