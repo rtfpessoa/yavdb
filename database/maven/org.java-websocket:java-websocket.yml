@@ -1,0 +1,37 @@
+---
+- id: snykio:maven:org.java-websocket:java-websocket:568685
+  title: Improper Validation of Certificate with Host Mismatch
+  description: |
+    [org.java-websocket:Java-WebSocket][1] is a barebones WebSocket server
+    and client implementation written in 100% Java.
+
+    Affected versions of this package are vulnerable to Improper Validation
+    of Certificate with Host Mismatch. The Java-WebSocket Client does not
+    perform hostname verification. This means that SSL certificates of other
+    hosts are accepted as long as they are trusted. To exploit this
+    vulnerability an attacker has to perform a man-in-the-middle (MITM)
+    attack between a Java application using the Java-WebSocket Client and an
+    WebSocket server it\'s connecting to. TLS normally protects users and
+    systems against MITM attacks, it cannot if certificates from other
+    trusted hosts are accepted by the client.
+
+
+
+    [1]: https://github.com/TooTallNate/Java-WebSocket
+  affected_package: org.java-websocket:java-websocket
+  vulnerable_versions:
+  - "< 1.5.0"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2020-11050
+  cwe:
+  - CWE-297
+  disclosed_date: 2020-05-07
+  created_date: 2020-05-08
+  last_modified_date: 2020-05-08
+  credit:
+  - Peter Stöckli
+  references:
+  - https://github.com/TooTallNate/Java-WebSocket/security/advisories/GHSA-gw55-jm4h-x339
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGJAVAWEBSOCKET-568685
