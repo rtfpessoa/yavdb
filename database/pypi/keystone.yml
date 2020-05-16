@@ -178,6 +178,43 @@
   - https://github.com/openstack/keystone/commit/ab89ea749013e7f2c46260f68504f5687763e019
   - https://www.openwall.com/lists/oss-security/2020/05/06/4
   source_url: https://snyk.io/vuln/SNYK-PYTHON-KEYSTONE-568468
+- id: snykio:pypi:keystone:568766
+  title: Privilege Escalation
+  description: |
+    [keystone][1] is a package that provides authentication, authorization
+    and service discovery mechanisms via HTTP primarily for use by projects
+    in the OpenStack family.
+
+    Affected versions of this package are vulnerable to Privilege
+    Escalation. Any authenticated user can create an EC2 credential for
+    themselves for a project that they have a specified role on, and then
+    perform an update to the credential user and project, allowing them to
+    masquerade as another user. This potentially allows a malicious user to
+    act as the admin on a project another user has the admin role on, which
+    can effectively grant that user global admin privileges.
+
+
+
+    [1]: https://docs.openstack.org/keystone/latest/
+  affected_package: keystone
+  vulnerable_versions:
+  - "< 15.0.1"
+  - ">= 16.0.0 < 16.0.1"
+  severity: high
+  package_manager: pypi
+  cve:
+  - CVE-2020-12691
+  cwe:
+  - CWE-264
+  disclosed_date: 2020-05-06
+  created_date: 2020-05-10
+  last_modified_date: 2020-05-10
+  credit:
+  - Unknown
+  references:
+  - https://bugzilla.redhat.com/show_bug.cgi?id=1830384
+  - https://security.openstack.org/ossa/OSSA-2020-004.html
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-KEYSTONE-568766
 - id: victims:pypi:keystone:2013-4477
   title: 'OpenStack keystone: unintentional role granting'
   affected_package: keystone
