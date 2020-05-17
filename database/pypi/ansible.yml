@@ -1216,6 +1216,43 @@
   - https://github.com/ansible/ansible/pull/68596
   - https://github.com/ansible/ansible/pull/68596/commits/b9d89ade0415675752f4652cbe353543a79aaf09
   source_url: https://snyk.io/vuln/SNYK-PYTHON-ANSIBLE-568018
+- id: snykio:pypi:ansible:568827
+  title: Credential Exposure
+  description: |
+    [ansible][1] is a simple IT automation system.
+
+    Affected versions of this package are vulnerable to Credential Exposure.
+    When using modules which decrypt vault files such as `assemble`,
+    `script`, `unarchive`, `win_copy`, `aws_s3` or `copy` modules. The
+    temporary directory is created in `/tmp` leaves the secrets unencrypted.
+    On Operating Systems in which `/tmp` is not a `tmpfs` but part of the
+    root partition, the directory is only cleared on boot and the `decryp`
+    remains when the host is switched off. The system will be vulnerable
+    when the system is not running.
+
+
+
+    [1]: https://pypi.org/project/ansible/
+  affected_package: ansible
+  vulnerable_versions:
+  - ">= 2.7.0 < 2.7.17"
+  - ">= 2.8.0 < 2.8.11"
+  - ">= 2.9.0 < 2.9.7"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2020-10685
+  cwe:
+  - CWE-522
+  disclosed_date: 2020-05-11
+  created_date: 2020-05-11
+  last_modified_date: 2020-05-11
+  credit:
+  - Unknown
+  references:
+  - https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2020-10685
+  - https://github.com/ansible/ansible/pull/68433
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-ANSIBLE-568827
 - id: snykio:pypi:ansible:72546
   title: Information Exposure
   description: |

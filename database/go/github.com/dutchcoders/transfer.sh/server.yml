@@ -1,0 +1,54 @@
+---
+- id: snykio:go:github.com/dutchcoders/transfer.sh/server:568775
+  title: Directory Traversal
+  description: "[github.com/dutchcoders/transfer.sh/server][1] is an Easy and fast
+    file\nsharing from the command-line\n\nAffected versions of this package are vulnerable
+    to Directory Traversal.\nGiven the known URL of an item on the server, you can
+    freely read it\\'s\nmetadata, which includes its delete token and simply delete
+    it. It also\nallows for arbitrary traversal and reading of the filesystem if the\nprovider
+    is local and is not using a posix-style path such as windows.\n\n### PoC   {#poc}\n\n
+    \   URL='http://localhost:8080/dRz9w/thing'\n    curl -X DELETE \"$URL/$(curl
+    $URL.metadata | jq -r .DeletionToken)\"\n    echo \"And poof. It's gone\"\n    \n
+    \   curl localhost:8080/AHWlO/..\\..\\private.txt\n\n\n\n[1]: https://github.com/dutchcoders/transfer.sh\n\\nA
+    Directory Traversal attack (also known as path traversal) aims to\naccess files
+    and directories that are stored outside the intended\nfolder. By manipulating
+    files with \\\"dot-dot-slash (../)\\\" sequences and\nits variations, or by using
+    absolute file paths, it may be possible to\naccess arbitrary files and directories
+    stored on file system, including\napplication source code, configuration, and
+    other critical system files.\n\nDirectory Traversal vulnerabilities can be generally
+    divided into two\ntypes:\n\n* **Information Disclosure**\\: Allows the attacker
+    to gain information\n  about the folder structure or read the contents of sensitive
+    files on\n  the system.\n\n`st` is a module for serving static files on web pages,
+    and contains a\n[vulnerability of this type][1]. In our example, we will serve
+    files\nfrom the `public` route.\n\nIf an attacker requests the following URL from
+    our server, it will in\nturn leak the sensitive private key of the root user.\n\n
+    \   curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa\n\n**Note**
+    `%2e` is the URL encoded version of `.` (dot).\n\n* **Writing arbitrary files**\\:
+    Allows the attacker to create or replace\n  existing files. This type of vulnerability
+    is also known as\n  `Zip-Slip`.\n\nOne way to achieve this is by using a malicious
+    `zip` archive that holds\npath traversal filenames. When each filename in the
+    zip archive gets\nconcatenated to the target extraction folder, without validation,
+    the\nfinal path ends up outside of the target folder. If an executable or a\nconfiguration
+    file is overwritten with a file containing malicious code,\nthe problem can turn
+    into an arbitrary code execution issue quite\neasily.\n\nThe following is an example
+    of a `zip` archive with one benign file and\none malicious file. Extracting the
+    malicious file will result in\ntraversing out of the target folder, ending up
+    in `/root/.ssh/`\noverwriting the `authorized_keys` file:\n\n    2018-04-15 22:04:29
+    .....           19           19  good.txt\n    2018-04-15 22:04:42 .....           20
+    \          20  ../../../../../../root/.ssh/authorized_keys\n\n\n\n[1]: https://snyk.io/vuln/npm:st:20140206\n"
+  affected_package: github.com/dutchcoders/transfer.sh/server
+  vulnerable_versions:
+  - "*"
+  severity: high
+  package_manager: go
+  cwe:
+  - CWE-22
+  disclosed_date: 2020-05-10
+  created_date: 2020-05-11
+  last_modified_date: 2020-05-11
+  credit:
+  - cheeseandcereal
+  references:
+  - https://github.com/dutchcoders/transfer.sh/issues/308
+  - https://github.com/dutchcoders/transfer.sh/pull/309
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMDUTCHCODERSTRANSFERSHSERVER-568775
