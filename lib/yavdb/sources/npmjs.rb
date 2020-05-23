@@ -103,7 +103,7 @@ module YAVDB
           end
 
           def get_page_url(page)
-            "#{API_URL}/advisories?page=#{page}&perPage=300&order=-id"
+            "#{API_URL}/advisories?page=#{page}&perPage=100&order=-id"
           end
 
           def parse_severity(severity)
