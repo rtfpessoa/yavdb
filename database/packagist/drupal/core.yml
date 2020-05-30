@@ -273,6 +273,43 @@
   references:
   - https://www.drupal.org/sa-core-2020-001
   source_url: https://github.com/FriendsOfPHP/security-advisories/blob/master/drupal/core/2020-03-18.yaml
+- id: friendsofphp:packagist:drupal/core:2020-05-20-1
+  title: Drupal core - Moderately critical - Open Redirect - SA-CORE-2020-003
+  affected_package: drupal/core
+  vulnerable_versions:
+  - ">=7.0.0 <7.70"
+  package_manager: packagist
+  disclosed_date: 2020-05-20
+  created_date: 2020-05-20
+  last_modified_date: 2020-05-20
+  credit:
+  - FriendsOfPHP
+  references:
+  - https://www.drupal.org/sa-core-2020-003
+  source_url: https://github.com/FriendsOfPHP/security-advisories/blob/master/drupal/core/2020-05-20-1.yaml
+- id: friendsofphp:packagist:drupal/core:2020-05-20-2
+  title: Drupal core - Moderately critical - Cross Site Scripting - SA-CORE-2020-002
+  affected_package: drupal/core
+  vulnerable_versions:
+  - ">=7.0.0 <7.70"
+  - ">=8.0.0 <8.1.0"
+  - ">=8.1.0 <8.2.0"
+  - ">=8.2.0 <8.3.0"
+  - ">=8.3.0 <8.4.0"
+  - ">=8.4.0 <8.5.0"
+  - ">=8.5.0 <8.6.0"
+  - ">=8.6.0 <8.7.0"
+  - ">=8.7.0 <8.7.14"
+  - ">=8.8.0 <8.8.6"
+  package_manager: packagist
+  disclosed_date: 2020-05-20
+  created_date: 2020-05-20
+  last_modified_date: 2020-05-20
+  credit:
+  - FriendsOfPHP
+  references:
+  - https://www.drupal.org/sa-core-2020-002
+  source_url: https://github.com/FriendsOfPHP/security-advisories/blob/master/drupal/core/2020-05-20-2.yaml
 - id: friendsofphp:packagist:drupal/core:CVE-2016-3162
   title: File upload access bypass and denial of service
   affected_package: drupal/core
@@ -1897,6 +1934,147 @@
   references:
   - https://www.drupal.org/sa-core-2019-009
   source_url: https://snyk.io/vuln/SNYK-PHP-DRUPALCORE-538571
+- id: snykio:packagist:drupal/core:570195
+  title: Open Redirect
+  description: |
+    [drupal/core][1] is an an open source content management platform
+    powering millions of websites and applications.
+
+    Affected versions of this package are vulnerable to Open Redirect. A
+    user could be tricked into visiting a specially crafted link which would
+    redirect them to an arbitrary external URL. The vulnerability is caused
+    by insufficient validation of the destination query parameter in the
+    `drupal_goto()` function.
+
+
+
+    [1]: https://www.drupal.org/project/drupal
+  affected_package: drupal/core
+  vulnerable_versions:
+  - ">=7.0.0  <7.70"
+  severity: medium
+  package_manager: packagist
+  cwe:
+  - CWE-601
+  disclosed_date: 2020-05-22
+  created_date: 2020-05-22
+  last_modified_date: 2020-05-22
+  credit:
+  - vortfu
+  references:
+  - https://www.drupal.org/sa-core-2020-003
+  source_url: https://snyk.io/vuln/SNYK-PHP-DRUPALCORE-570195
+- id: snykio:packagist:drupal/core:570197
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [drupal/core][1] is an an open source content management platform
+    powering millions of websites and applications.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). Multiple outdated JQuery libraries are embeded as part of Drupal.
+    They were found to be vulnerable to CVE-2020-11022 and CVE-2020-11023.
+
+
+
+    [1]: https://www.drupal.org/project/drupal
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
+  affected_package: drupal/core
+  vulnerable_versions:
+  - ">=7.0.0  <7.70"
+  - ">=8.0.0  <8.1.0"
+  - ">=8.1.0  <8.2.0"
+  - ">=8.2.0  <8.3.0"
+  - ">=8.3.0  <8.4.0"
+  - ">=8.4.0  <8.5.0"
+  - ">=8.5.0  <8.6.0"
+  - ">=8.6.0  <8.7.0"
+  - ">=8.7.0  <8.7.14"
+  - ">=8.8.0  <8.8.6"
+  severity: medium
+  package_manager: packagist
+  cwe:
+  - CWE-79
+  disclosed_date: 2020-05-22
+  created_date: 2020-05-22
+  last_modified_date: 2020-05-22
+  credit:
+  - Drew Webber of the Drupal Security Team
+  - Emerson Jair Reis
+  - Oliveira da Silva
+  references:
+  - https://www.drupal.org/sa-core-2020-002
+  source_url: https://snyk.io/vuln/SNYK-PHP-DRUPALCORE-570197
 - id: snykio:packagist:drupal/core:70037
   title: Denial of Service (DoS)
   description: |+

@@ -1,0 +1,39 @@
+---
+- id: snykio:maven:org.apache.flink:flink-metrics-core:569132
+  title: Information Exposure
+  description: |
+    [org.apache.flink:flink-metrics-core][1] is an open-source
+    stream-processing framework developed by the Apache Software Foundation.
+
+    Affected versions of this package are vulnerable to Information
+    Exposure. When running a process with an enabled `JMXReporter`, with a
+    port configured via `metrics.reporter.<reporter_name>.port`, an attacker
+    with local access to the machine and JMX port can execute a
+    man-in-the-middle attack using a specially crafted request to rebind the
+    JMXRMI registry to one under the attacker\'s control. This compromises
+    any connection established to the process via JMX, allowing extraction
+    of credentials and any other transferred data.
+
+
+
+    [1]: https://flink.apache.org
+  affected_package: org.apache.flink:flink-metrics-core
+  vulnerable_versions:
+  - ">= 1.1.0 < 1.9.3"
+  - ">= 1.10.0 < 1.10.1"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2020-1960
+  cwe:
+  - CWE-200
+  disclosed_date: 2020-05-14
+  created_date: 2020-05-14
+  last_modified_date: 2020-05-14
+  credit:
+  - Colm O hEigeartaigh
+  - Jonathan Gallimore
+  references:
+  - https://issues.apache.org/jira/browse/FLINK-16697
+  - https://lists.apache.org/thread.html/r23e559dee1e69741557b5fe431846de1f1a5981356d0ddb9482df88a%40%3Cdev.flink.apache.org%3E
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEFLINK-569132

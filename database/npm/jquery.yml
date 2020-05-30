@@ -1,4 +1,22 @@
 ---
+- id: npmjs:npm:jquery:1518
+  title: Cross-Site Scripting
+  description: Versions of `jquery` prior to 3.5.0 are vulnerable to Cross-Site Scripting.
+    Passing HTML from untrusted sources - even after sanitizing it - to one of jQuery's
+    DOM manipulation methods (i.e. .html(), .append(), and others) may execute arbitrary
+    JavaScript in a victim's browser.
+  affected_package: jquery
+  vulnerable_versions:
+  - "<3.5.0"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2020-11022
+  cwe: CWE-79
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Masato Kinugawa
 - id: npmjs:npm:jquery:328
   title: Cross-Site Scripting (XSS)
   description: Affected versions of `jquery` interpret `text/javascript` responses
@@ -17,8 +35,6 @@
   created_date: 1970-01-01
   last_modified_date: 1970-01-01
   credit: Egor Homakov
-  references: https://npmjs.com/advisories/328
-  source_url: https://npmjs.com/advisories/328
 - id: npmjs:npm:jquery:329
   title: Cross-Site Scripting
   description: |+
@@ -43,8 +59,6 @@
   created_date: 1970-01-01
   last_modified_date: 1970-01-01
   credit: Richard Gibson
-  references: https://npmjs.com/advisories/329
-  source_url: https://npmjs.com/advisories/329
 - id: npmjs:npm:jquery:330
   title: Denial of Service
   description: Affected versions of `jquery` use a lowercasing logic on attribute
@@ -63,8 +77,6 @@
   created_date: 1970-01-01
   last_modified_date: 1970-01-01
   credit: Michał Gołębiowski
-  references: https://npmjs.com/advisories/330
-  source_url: https://npmjs.com/advisories/330
 - id: npmjs:npm:jquery:796
   title: Prototype Pollution
   description: Versions of `jquery`  prior to 3.4.0 are vulnerable to Prototype Pollution.
@@ -82,8 +94,6 @@
   created_date: 1970-01-01
   last_modified_date: 1970-01-01
   credit: asgerf
-  references: https://npmjs.com/advisories/796
-  source_url: https://npmjs.com/advisories/796
 - id: snykio:npm:jquery:174006
   title: Prototype Pollution
   description: "[jquery][1] is a package that makes things like HTML document traversal\nand
@@ -783,3 +793,36 @@
   - https://github.com/jquery/jquery/security/advisories/GHSA-gxr4-xjj5-5px2
   - https://jquery.com/upgrade-guide/3.5/
   source_url: https://snyk.io/vuln/SNYK-JS-JQUERY-567880
+- id: snykio:npm:jquery:569619
+  title: Cross-site Scripting (XSS)
+  description: |
+    [jquery][1] is a package that makes things like HTML document traversal
+    and manipulation, event handling, animation, and Ajax much simpler with
+    an easy-to-use API that works across a multitude of browsers.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). `load()` fails to recognize and remove \"`<script>`\" HTML tags
+    that contain a whitespace character, i.e: \"`</script >`\" which results
+    in the enclosed script logic to be executed. This can lead to Cross-site
+    Scripting attacks when an attacker has control of the enclosed script.
+
+
+
+    [1]: https://www.npmjs.com/package/jquery
+  affected_package: jquery
+  vulnerable_versions:
+  - "<1.9.0"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2020-7656
+  cwe:
+  - CWE-79
+  disclosed_date: 2020-05-19
+  created_date: 2020-05-19
+  last_modified_date: 2020-05-19
+  credit:
+  - Robert McLaughlin
+  references:
+  - https://github.com/jquery/jquery/blob/9e6393b0bcb52b15313f88141d0bd7dd54227426/src/ajax.js#L203
+  source_url: https://snyk.io/vuln/SNYK-JS-JQUERY-569619

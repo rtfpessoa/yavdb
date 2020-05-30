@@ -415,6 +415,92 @@
   references:
   - https://github.com/rubysec/ruby-advisory-db
   source_url: https://groups.google.com/forum/#!topic/rubyonrails-security/55reWMM_Pg8
+- id: rubyadvisory:rubygems:actionview:CVE-2020-8163
+  title: Potential remote code execution of user-provided local names in ActionView
+  description: |
+    There was a vulnerability in versions of Rails prior to 5.0.1 that would
+    allow an attacker who controlled the `locals` argument of a `render` call.
+
+    Versions Affected:  rails < 5.0.1
+    Not affected:       Applications that do not allow users to control the names of locals.
+    Fixed Versions:     4.2.11.2
+
+    Impact
+    ------
+
+    In the scenario where an attacker might be able to control the name of a
+    local passed into `render`, they can acheive remote code execution.
+
+    Workarounds
+    -----------
+
+    Until such time as the patch can be applied, application developers should
+    ensure that all user-provided local names are alphanumeric.
+  affected_package: actionview
+  patched_versions:
+  - ">= 4.2.11.2"
+  package_manager: rubygems
+  cve:
+  - CVE-2020-8163
+  disclosed_date: 2020-05-15
+  created_date: 2020-05-15
+  last_modified_date: 2020-05-15
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://groups.google.com/forum/#!topic/rubyonrails-security/hWuKcHyoKh0
+- id: rubyadvisory:rubygems:actionview:CVE-2020-8167
+  title: CSRF Vulnerability in rails-ujs
+  description: |
+    There is an vulnerability in rails-ujs that allows attackers to send
+    CSRF tokens to wrong domains.
+
+    Versions Affected:  rails <= 6.0.3
+    Not affected:       Applications which don't use rails-ujs.
+    Fixed Versions:     rails >= 5.2.4.3, rails >= 6.0.3.1
+
+    Impact
+    ------
+
+    This is a regression of CVE-2015-1840.
+
+    In the scenario where an attacker might be able to control the href attribute of an anchor tag or
+    the action attribute of a form tag that will trigger a POST action, the attacker can set the
+    href or action to a cross-origin URL, and the CSRF token will be sent.
+
+    Workarounds
+    -----------
+
+    To work around this problem, change code that allows users to control the href attribute of an anchor
+    tag or the action attribute of a form tag to filter the user parameters.
+
+    For example, code like this:
+
+        link_to params
+
+    to code like this:
+
+        link_to filtered_params
+
+        def filtered_params
+          # Filter just the parameters that you trust
+        end
+  affected_package: actionview
+  patched_versions:
+  - ">= 6.0.3.1"
+  - "~> 5.2.4.3"
+  package_manager: rubygems
+  cve:
+  - CVE-2020-8167
+  disclosed_date: 2020-05-18
+  created_date: 2020-05-18
+  last_modified_date: 2020-05-18
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://groups.google.com/forum/#!topic/rubyonrails-security/x9DixQDG9a0
 - id: snykio:rubygems:actionview:173783
   title: Denial of Service (DoS)
   description: |+
@@ -750,3 +836,71 @@
   references:
   - https://groups.google.com/forum/#!topic/rubyonrails-security/55reWMM_Pg8
   source_url: https://snyk.io/vuln/SNYK-RUBY-ACTIONVIEW-560837
+- id: snykio:rubygems:actionview:569156
+  title: Remote Code Execution (RCE)
+  description: |
+    [actionview][1] is a simple, battle-tested conventions and helpers for
+    building web pages.
+
+    Affected versions of this package are vulnerable to Remote Code
+    Execution (RCE). An attacker might be able to control the `locals`
+    argument of a `render` call.
+
+    **Note:** It doesn\'t affect applications that don\'t allow users to
+    control the names of locals.
+
+
+
+    [1]: https://rubygems.org/gems/actionview
+  affected_package: actionview
+  vulnerable_versions:
+  - "<5.0.1"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2020-8163
+  cwe:
+  - CWE-94
+  disclosed_date: 2020-05-17
+  created_date: 2020-05-17
+  last_modified_date: 2020-05-17
+  credit:
+  - Unknown
+  references:
+  - https://groups.google.com/forum/#!topic/rubyonrails-security/hWuKcHyoKh0
+  source_url: https://snyk.io/vuln/SNYK-RUBY-ACTIONVIEW-569156
+- id: snykio:rubygems:actionview:569601
+  title: Cross-site Request Forgery (CSRF)
+  description: |
+    [actionview][1] is a simple, battle-tested conventions and helpers for
+    building web pages.
+
+    Affected versions of this package are vulnerable to Cross-site Request
+    Forgery (CSRF). An attacker might be able to set the href attribute of
+    an anchor tag or the action attribute of a form tag that will trigger a
+    POST action to a cross-origin URL.
+
+    This is a regression of CVE-2015-1840.
+
+
+
+    [1]: https://rubygems.org/gems/actionview
+  affected_package: actionview
+  vulnerable_versions:
+  - "<5.2.4.3"
+  - ">=6.0.0  <6.0.3.1"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2020-8167
+  cwe:
+  - CWE-352
+  disclosed_date: 2020-05-19
+  created_date: 2020-05-19
+  last_modified_date: 2020-05-19
+  credit:
+  - Unknown
+  references:
+  - https://github.com/rails/rails/commit/a20fbf9bc52e9596a675c1071ab3fe052ac4f0dc
+  - https://groups.google.com/forum/#!topic/rubyonrails-security/x9DixQDG9a0
+  source_url: https://snyk.io/vuln/SNYK-RUBY-ACTIONVIEW-569601

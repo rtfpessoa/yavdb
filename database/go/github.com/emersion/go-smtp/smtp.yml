@@ -1,0 +1,57 @@
+---
+- id: snykio:go:github.com/emersion/go-smtp/smtp:569479
+  title: Denial of Service (DoS)
+  description: |+
+    [github.com/emersion/go-smtp/smtp][1] is an ESMTP client and server
+    library written in Go.
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS) when the length message exceed `MaxMessageBytes` causes connection
+    to hang.
+
+
+
+    [1]: https://github.com/emersion/go-smtp
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+  affected_package: github.com/emersion/go-smtp/smtp
+  vulnerable_versions:
+  - "<0.13.0"
+  severity: high
+  package_manager: go
+  cwe:
+  - CWE-400
+  disclosed_date: 2020-05-18
+  created_date: 2020-05-18
+  last_modified_date: 2020-05-18
+  credit:
+  - oogali
+  references:
+  - https://github.com/emersion/go-smtp/commit/d143b3ef4b5ef1ad21c38f3400d4d8feeefe1a29
+  - https://github.com/emersion/go-smtp/issues/98
+  - https://github.com/emersion/go-smtp/pull/99
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMEMERSIONGOSMTPSMTP-569479

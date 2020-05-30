@@ -182,6 +182,54 @@
   references:
   - https://github.com/rubysec/ruby-advisory-db
   source_url: https://groups.google.com/forum/#!topic/rubyonrails-security/bahr2JLnxvk
+- id: rubyadvisory:rubygems:activesupport:CVE-2020-8165
+  title: Potentially unintended unmarshalling of user-provided objects in MemCacheStore
+    and RedisCacheStore
+  description: |
+    There is potentially unexpected behaviour in the MemCacheStore and RedisCacheStore where, when
+    untrusted user input is written to the cache store using the `raw: true` parameter, re-reading the result
+    from the cache can evaluate the user input as a Marshalled object instead of plain text. Vulnerable code looks like:
+
+    ```
+    data = cache.fetch("demo", raw: true) { untrusted_string }
+    ```
+
+    Versions Affected:  rails < 5.2.5, rails < 6.0.4
+    Not affected:       Applications not using MemCacheStore or RedisCacheStore. Applications that do not use the `raw` option when storing untrusted user input.
+    Fixed Versions:     rails >= 5.2.4.3, rails >= 6.0.3.1
+
+    Impact
+    ------
+
+    Unmarshalling of untrusted user input can have impact up to and including RCE. At a minimum,
+    this vulnerability allows an attacker to inject untrusted Ruby objects into a web application.
+
+    In addition to upgrading to the latest versions of Rails, developers should ensure that whenever
+    they are calling `Rails.cache.fetch` they are using consistent values of the `raw` parameter for both
+    reading and writing, especially in the case of the RedisCacheStore which does not, prior to these changes,
+    detect if data was serialized using the raw option upon deserialization.
+
+    Workarounds
+    -----------
+
+    It is recommended that application developers apply the suggested patch or upgrade to the latest release as
+    soon as possible. If this is not possible, we recommend ensuring that all user-provided strings cached using
+    the `raw` argument should be double-checked to ensure that they conform to the expected format.
+  affected_package: activesupport
+  patched_versions:
+  - ">= 6.0.3.1"
+  - "~> 5.2.4.3"
+  package_manager: rubygems
+  cve:
+  - CVE-2020-8165
+  disclosed_date: 2020-05-18
+  created_date: 2020-05-18
+  last_modified_date: 2020-05-18
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://groups.google.com/forum/#!topic/rubyonrails-security/bv6fW4S0Y1c
 - id: rubyadvisory:rubygems:activesupport:OSVDB-79726
   title: Ruby on Rails SafeBuffer Object [] Direct Manipulation XSS
   description: |
@@ -954,3 +1002,37 @@
   - https://github.com/rails/rails/commit/bfc432574d0b141fd7fe759edfe9b6771dd306bd
   - https://groups.google.com/forum/#!topic/rubyonrails-security/Vr_7WSOrEZU
   source_url: https://snyk.io/vuln/SNYK-RUBY-ACTIVESUPPORT-536101
+- id: snykio:rubygems:activesupport:569598
+  title: Deserialization of Untrusted Data
+  description: |
+    [activesupport][1] is a toolkit of support libraries and Ruby core
+    extensions extracted from the Rails framework.
+
+    Affected versions of this package are vulnerable to Deserialization of
+    Untrusted Data via the `MemCacheStore` and `RedisCacheStore`. when
+    untrusted user input is written to the cache store using the `raw: true`
+    parameter, re-reading the result from the cache can evaluate the user
+    input as a Marshalled object instead of plain text.
+
+
+
+    [1]: https://rubygems.org/gems/activesupport
+  affected_package: activesupport
+  vulnerable_versions:
+  - "<5.2.4.3"
+  - ">=6.0.0  <6.0.3.1"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2020-8165
+  cwe:
+  - CWE-502
+  disclosed_date: 2020-05-19
+  created_date: 2020-05-19
+  last_modified_date: 2020-05-19
+  credit:
+  - Unknown
+  references:
+  - https://github.com/rails/rails/commit/9b4aef4be3dc58eb08f694387857b52be8050954
+  - https://groups.google.com/forum/#!topic/rubyonrails-security/bv6fW4S0Y1c
+  source_url: https://snyk.io/vuln/SNYK-RUBY-ACTIVESUPPORT-569598

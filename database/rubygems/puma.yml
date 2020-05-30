@@ -26,9 +26,74 @@
   references:
   - https://github.com/rubysec/ruby-advisory-db
   source_url: https://github.com/puma/puma/security/advisories/GHSA-7xx3-m584-x994
+- id: rubyadvisory:rubygems:puma:CVE-2020-11076
+  title: HTTP Smuggling via Transfer-Encoding Header in Puma
+  description: |-
+    ### Impact
+
+    By using an invalid transfer-encoding header, an attacker could
+    [smuggle an HTTP response.](https://portswigger.net/web-security/request-smuggling)
+
+    ### Patches
+
+    The problem has been fixed in Puma 3.12.5 and Puma 4.3.4.
+  affected_package: puma
+  patched_versions:
+  - ">= 4.3.4"
+  - "~> 3.12.5"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2020-11076
+  cvss_v3_score: 7.5
+  disclosed_date: 2020-05-22
+  created_date: 2020-05-22
+  last_modified_date: 2020-05-22
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://github.com/puma/puma/security/advisories/GHSA-x7jg-6pwg-fx5h
+- id: rubyadvisory:rubygems:puma:CVE-2020-11077
+  title: HTTP Smuggling via Transfer-Encoding Header in Puma
+  description: |-
+    ### Impact
+
+    This is a similar but different vulnerability to the one patched in 3.12.5 and 4.3.4.
+
+    A client could smuggle a request through a proxy, causing the proxy to send a response
+    back to another unknown client.
+
+    If the proxy uses persistent connections and the client adds another request in via HTTP
+    pipelining, the proxy may mistake it as the first request's body. Puma, however,
+    would see it as two requests, and when processing the second request, send back
+    a response that the proxy does not expect. If the proxy has reused the persistent
+    connection to Puma to send another request for a different client, the second response
+    from the first client will be sent to the second client.
+
+    ### Patches
+
+    The problem has been fixed in Puma 3.12.6 and Puma 4.3.5.
+  affected_package: puma
+  patched_versions:
+  - ">= 4.3.5"
+  - "~> 3.12.6"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2020-11077
+  cvss_v3_score: 6.8
+  disclosed_date: 2020-05-22
+  created_date: 2020-05-22
+  last_modified_date: 2020-05-22
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://github.com/puma/puma/security/advisories/GHSA-w64w-qqph-5gxm
 - id: rubyadvisory:rubygems:puma:CVE-2020-5247
   title: HTTP Response Splitting vulnerability in puma
-  description: |
+  description: |-
     If an application using Puma allows untrusted input in a response header,
     an attacker can use newline characters (i.e. CR, LF) to end the header and
     inject malicious content, such as additional headers or an entirely new
@@ -53,6 +118,44 @@
   references:
   - https://github.com/rubysec/ruby-advisory-db
   source_url: https://github.com/puma/puma/security/advisories/GHSA-84j7-475p-hp8v
+- id: rubyadvisory:rubygems:puma:CVE-2020-5249
+  title: HTTP Response Splitting (Early Hints) in Puma
+  description: |-
+    ### Impact
+    If an application using Puma allows untrusted input in an early-hints header,
+    an attacker can use a carriage return character to end the header and inject
+    malicious content, such as additional headers or an entirely new response body.
+    This vulnerability is known as [HTTP Response
+    Splitting](https://owasp.org/www-community/attacks/HTTP_Response_Splitting)
+
+    While not an attack in itself, response splitting is a vector for several other
+    attacks, such as cross-site scripting (XSS).
+
+    This is related to [CVE-2020-5247](https://github.com/puma/puma/security/advisories/GHSA-84j7-475p-hp8v),
+    which fixed this vulnerability but only for regular responses.
+
+    ### Patches
+    This has been fixed in 4.3.3 and 3.12.4.
+
+    ### Workarounds
+    Users can not allow untrusted/user input in the Early Hints response header.
+  affected_package: puma
+  patched_versions:
+  - ">= 4.3.3"
+  - "~> 3.12.4"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2020-5249
+  cvss_v3_score: 6.5
+  disclosed_date: 2020-03-03
+  created_date: 2020-03-03
+  last_modified_date: 2020-03-03
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://github.com/puma/puma/security/advisories/GHSA-33vf-4xgg-9r58
 - id: snykio:rubygems:puma:20375
   title: Man-in-the-Middle (Mitm)
   description: |
@@ -228,3 +331,82 @@
   - https://github.com/puma/puma/commit/c22712fc93284a45a93f9ad7023888f3a65524f3
   - https://github.com/puma/puma/security/advisories/GHSA-33vf-4xgg-9r58
   source_url: https://snyk.io/vuln/SNYK-RUBY-PUMA-559100
+- id: snykio:rubygems:puma:570205
+  title: HTTP Request Smuggling
+  description: |
+    [puma][1] is a simple, fast, threaded, and highly concurrent HTTP 1.1
+    server for Ruby/Rack applications. Puma is intended for use in both
+    development and production environments. It\'s great for highly
+    concurrent Ruby implementations such as Rubinius and JRuby as well as as
+    providing process worker support to support CRuby well.
+
+    Affected versions of this package are vulnerable to HTTP Request
+    Smuggling. An attacker could smuggle an HTTP response, by using an
+    invalid transfer-encoding header.
+
+
+
+    [1]: https://puma.io/
+  affected_package: puma
+  vulnerable_versions:
+  - "<3.12.5"
+  - ">=4.0.0  <4.3.4"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2020-11076
+  cwe:
+  - CWE-444
+  disclosed_date: 2020-05-22
+  created_date: 2020-05-22
+  last_modified_date: 2020-05-22
+  credit:
+  - Zeddy Yu
+  references:
+  - https://github.com/puma/puma/commit/f24d5521295a2152c286abb0a45a1e1e2bd275bd
+  source_url: https://snyk.io/vuln/SNYK-RUBY-PUMA-570205
+- id: snykio:rubygems:puma:570206
+  title: HTTP Request Smuggling
+  description: |
+    [puma][1] is a simple, fast, threaded, and highly concurrent HTTP 1.1
+    server for Ruby/Rack applications. Puma is intended for use in both
+    development and production environments. It\'s great for highly
+    concurrent Ruby implementations such as Rubinius and JRuby as well as as
+    providing process worker support to support CRuby well.
+
+    Affected versions of this package are vulnerable to HTTP Request
+    Smuggling. A client could smuggle a request through a proxy, causing the
+    proxy to send a response back to another unknown client.
+
+    If the proxy uses persistent connections and the client adds another
+    request in via HTTP pipelining, the proxy may mistake it as the first
+    request\'s body. Puma, however, would see it as two requests, and when
+    processing the second request, send back a response that the proxy does
+    not expect.
+
+    If the proxy has reused the persistent connection to Puma to send
+    another request for a different client, the second response from the
+    first client will be sent to the second client.This is a similar but
+    different vulnerability from CVE-2020-11076.
+
+
+
+    [1]: https://puma.io/
+  affected_package: puma
+  vulnerable_versions:
+  - "<3.12.6"
+  - ">=4.0.0  <4.3.5"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2020-11077
+  cwe:
+  - CWE-444
+  disclosed_date: 2020-05-22
+  created_date: 2020-05-22
+  last_modified_date: 2020-05-22
+  credit:
+  - Zeddy Yu
+  references:
+  - https://github.com/puma/puma/security/advisories/GHSA-w64w-qqph-5gxm
+  source_url: https://snyk.io/vuln/SNYK-RUBY-PUMA-570206

@@ -1,0 +1,32 @@
+---
+- id: snykio:pypi:scikit-learn:569144
+  title: Remote Code Execution (RCE)
+  description: |
+    [scikit-learn][1] is a Python module for machine learning built on top
+    of SciPy and is distributed under the 3-Clause BSD license.
+
+    Affected versions of this package are vulnerable to Remote Code
+    Execution (RCE). It can unserialize and execute commands from an
+    untrusted file that is passed to the `joblib.load()` function, if
+    `__reduce__` makes an os.system call.
+
+
+
+    [1]: https://pypi.org/project/scikit-learn/
+  affected_package: scikit-learn
+  vulnerable_versions:
+  - ">= 0"
+  severity: high
+  package_manager: pypi
+  cve:
+  - CVE-2020-13092
+  cwe:
+  - CWE-94
+  disclosed_date: 2020-05-15
+  created_date: 2020-05-17
+  last_modified_date: 2020-05-17
+  credit:
+  - 0FuzzingQ
+  references:
+  - https://github.com/0FuzzingQ/vuln/blob/master/sklearn%20unserialize.md
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-SCIKITLEARN-569144

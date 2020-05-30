@@ -1,0 +1,40 @@
+---
+- id: snykio:pypi:meinheld:569140
+  title: HTTP Request Smuggling
+  description: |
+    [meinheld][1] is a High performance asynchronous Python WSGI Web Server
+
+    Affected versions of this package are vulnerable to HTTP Request
+    Smuggling. HTTP pipelining issues and request smuggling attacks might be
+    possible due to incorrect Content-Length and Transfer encoding header
+    parsing.
+
+    It is possible conduct HTTP request smuggling attacks by sending the
+    `Content-Length` header twice. By manipulating the HTTP response the
+    attacker could poison a web-cache, perform an XSS attack, or obtain
+    sensitive information from requests other than their own. Furthermore,
+    invalid Transfer Encoding headers were found to be parsed as valid which
+    could be leveraged for CL:TE or TE:CL smuggling attacks.
+
+
+
+    [1]: https://meinheld.org/
+  affected_package: meinheld
+  vulnerable_versions:
+  - "< 1.0.2"
+  severity: high
+  package_manager: pypi
+  cve:
+  - CVE-2020-7658
+  cwe:
+  - CWE-200
+  disclosed_date: 2020-05-17
+  created_date: 2020-05-21
+  last_modified_date: 2020-05-21
+  credit:
+  - Snyk Security Team
+  references:
+  - https://github.com/mopemope/meinheld/blob/master/CHANGES.rst
+  - https://github.com/mopemope/meinheld/commit/3bc3e7ccd534277af955c0c92981d0aa033929a7
+  - https://github.com/mopemope/meinheld/commit/4155876bfd3e8fc4adad4aaa59ec3f1cefa1d2d1
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-MEINHELD-569140

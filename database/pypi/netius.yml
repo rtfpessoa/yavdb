@@ -1,0 +1,36 @@
+---
+- id: snykio:pypi:netius:569141
+  title: HTTP Request Smuggling
+  description: |
+    [netius][1] is a Python network library that can be used for the rapid
+    creation of asynchronous non-blocking servers and clients.
+
+    Affected versions of this package are vulnerable to HTTP Request
+    Smuggling. HTTP pipelining issues and request smuggling attacks might be
+    possible due to incorrect Transfer encoding header parsing which could
+    allow for CL:TE or TE:TE attacks.
+
+    By manipulating the HTTP response the attacker could poison a web-cache,
+    perform an XSS attack, or obtain sensitive information from requests
+    other than their own.
+
+
+
+    [1]: https://github.com/hivesolutions/netius
+  affected_package: netius
+  vulnerable_versions:
+  - "< 1.17.58"
+  severity: high
+  package_manager: pypi
+  cve:
+  - CVE-2020-7655
+  cwe:
+  - CWE-200
+  disclosed_date: 2020-05-19
+  created_date: 2020-05-19
+  last_modified_date: 2020-05-19
+  credit:
+  - Snyk Security Team
+  references:
+  - https://github.com/hivesolutions/netius/commit/9830881ef68328f8ea9c7901db1d11690677e7d1
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-NETIUS-569141

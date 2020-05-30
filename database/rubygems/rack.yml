@@ -378,6 +378,45 @@
   references:
   - https://github.com/rubysec/ruby-advisory-db
   source_url: https://github.com/rack/rack/security/advisories/GHSA-hrqr-hxpp-chr3
+- id: rubyadvisory:rubygems:rack:CVE-2020-8161
+  title: Directory traversal in Rack::Directory app bundled with Rack
+  description: |
+    There was a possible directory traversal vulnerability in the Rack::Directory app
+    that is bundled with Rack.
+
+    Versions Affected:  rack < 2.2.0
+    Not affected:       Applications that do not use Rack::Directory.
+    Fixed Versions:     2.1.3, >= 2.2.0
+
+    Impact
+    ------
+
+    If certain directories exist in a director that is managed by
+    `Rack::Directory`, an attacker could, using this vulnerability, read the
+    contents of files on the server that were outside of the root specified in the
+    Rack::Directory initializer.
+
+    Workarounds
+    -----------
+
+    Until such time as the patch is applied or their Rack version is upgraded,
+    we recommend that developers do not use Rack::Directory in their
+    applications.
+  affected_package: rack
+  patched_versions:
+  - ">= 2.2.0"
+  - "~> 2.1.3"
+  package_manager: rubygems
+  cve:
+  - CVE-2020-8161
+  disclosed_date: 2020-05-12
+  created_date: 2020-05-12
+  last_modified_date: 2020-05-12
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://groups.google.com/forum/#!topic/ruby-security-ann/T4ZIsfRf2eA
 - id: rubyadvisory:rubygems:rack:OSVDB-78121
   title: 'Rack Hash Collision Form Parameter Parsing Remote DoS
 
@@ -1189,6 +1228,89 @@
   - https://github.com/rack/rack/commit/7fecaee81f59926b6e1913511c90650e76673b38
   - https://github.com/rack/rack/security/advisories/GHSA-hrqr-hxpp-chr3
   source_url: https://snyk.io/vuln/SNYK-RUBY-RACK-538324
+- id: snykio:rubygems:rack:569066
+  title: Directory Traversal
+  description: |
+    [rack][1] is a minimal, modular and adaptable interface for developing
+    web applications in Ruby. By wrapping HTTP requests and responses in the
+    simplest way possible, it unifies and distills the API for web servers,
+    web frameworks, and software in between (the so-called middleware) into
+    a single method call.
+
+    Affected versions of this package are vulnerable to Directory Traversal.
+    If certain directories exist in a directory that is managed by
+    `Rack::Directory`, an attacker could, using this vulnerability, read the
+    contents of files on the server that were outside of the root specified
+    in the `Rack::Directory` initializer.
+
+
+
+    [1]: https://rack.github.io/
+    \nA Directory Traversal attack (also known as path traversal) aims to
+    access files and directories that are stored outside the intended
+    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
+    its variations, or by using absolute file paths, it may be possible to
+    access arbitrary files and directories stored on file system, including
+    application source code, configuration, and other critical system files.
+
+    Directory Traversal vulnerabilities can be generally divided into two
+    types:
+
+    * **Information Disclosure**\: Allows the attacker to gain information
+      about the folder structure or read the contents of sensitive files on
+      the system.
+
+    `st` is a module for serving static files on web pages, and contains a
+    [vulnerability of this type][1]. In our example, we will serve files
+    from the `public` route.
+
+    If an attacker requests the following URL from our server, it will in
+    turn leak the sensitive private key of the root user.
+
+        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
+
+    **Note** `%2e` is the URL encoded version of `.` (dot).
+
+    * **Writing arbitrary files**\: Allows the attacker to create or replace
+      existing files. This type of vulnerability is also known as
+      `Zip-Slip`.
+
+    One way to achieve this is by using a malicious `zip` archive that holds
+    path traversal filenames. When each filename in the zip archive gets
+    concatenated to the target extraction folder, without validation, the
+    final path ends up outside of the target folder. If an executable or a
+    configuration file is overwritten with a file containing malicious code,
+    the problem can turn into an arbitrary code execution issue quite
+    easily.
+
+    The following is an example of a `zip` archive with one benign file and
+    one malicious file. Extracting the malicious file will result in
+    traversing out of the target folder, ending up in `/root/.ssh/`
+    overwriting the `authorized_keys` file:
+
+        2018-04-15 22:04:29 .....           19           19  good.txt
+        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
+
+
+
+    [1]: https://snyk.io/vuln/npm:st:20140206
+  affected_package: rack
+  vulnerable_versions:
+  - "<2.1.3"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2020-8161
+  cwe:
+  - CWE-22
+  disclosed_date: 2020-05-13
+  created_date: 2020-05-13
+  last_modified_date: 2020-05-13
+  credit:
+  - Unknown
+  references:
+  - https://groups.google.com/forum/#!topic/ruby-security-ann/T4ZIsfRf2eA
+  source_url: https://snyk.io/vuln/SNYK-RUBY-RACK-569066
 - id: snykio:rubygems:rack:72566
   title: Denial of Service (DoS)
   description: |

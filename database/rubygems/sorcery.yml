@@ -1,4 +1,37 @@
 ---
+- id: rubyadvisory:rubygems:sorcery:CVE-2020-11052
+  title: Improper Restriction of Excessive Authentication Attempts in Sorcery
+  description: |-
+    ### Impact
+    Brute force vulnerability when using password authentication via Sorcery.
+    The brute force protection submodule will prevent a brute force attack for
+    the defined lockout period, but once expired protection will not be re-enabled
+    until a user or malicious actor logs in successfully. This does not affect users
+    that do not use the built-in brute force protection submodule, nor users that use
+    permanent account lockout.
+
+    ### Patches
+    Patched as of version `0.15.0`.
+
+    ### Workarounds
+    Currently no workarounds, other than monkey patching the authenticate method
+    provided by Sorcery or upgrading to version `0.15.0`.
+  affected_package: sorcery
+  patched_versions:
+  - ">= 0.15.0"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2020-11052
+  cvss_v3_score: 8.3
+  disclosed_date: 2020-05-07
+  created_date: 2020-05-07
+  last_modified_date: 2020-05-07
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://github.com/Sorcery/sorcery/security/advisories/GHSA-jc8m-cxhj-668x
 - id: snykio:rubygems:sorcery:20425
   title: Authorization Bypass
   description: |
@@ -13,7 +46,7 @@
     [1]: https://rubygems.org/gems/sorcery
   affected_package: sorcery
   vulnerable_versions:
-  - "<0.9.1  >=0.8.3"
+  - ">=0.8.3  <0.9.1"
   severity: low
   package_manager: rubygems
   cwe:

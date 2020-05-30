@@ -15322,3 +15322,45 @@
   - https://github.com/apache/tomcat/commit/060ecc5
   - https://lists.apache.org/thread.html/r88def002c5c78534674ca67472e035099fbe088813d50062094a1390%40%3Cannounce.tomcat.apache.org%3E
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHETOMCATEMBED-557361
+- id: snykio:maven:org.apache.tomcat.embed:tomcat-embed-core:570072
+  title: Remote Code Execution (RCE)
+  description: |
+    [org.apache.tomcat.embed:tomcat-embed-core][1] is a Core Tomcat
+    implementation.
+
+    Affected versions of this package are vulnerable to Remote Code
+    Execution (RCE). If an attacker is able to control the contents and name
+    of a file on the server; and the server is configured to use the
+    PersistenceManager with a FileStore; and the PersistenceManager is
+    configured with sessionAttributeValueClassNameFilter=\"null\" (the
+    default unless a SecurityManager is used) or a sufficiently lax filter
+    to allow the attacker provided object to be deserialized; and the
+    attacker knows the relative file path from the storage location used by
+    FileStore to the file the attacker has control over; then, using a
+    specifically crafted request, the attacker will be able to trigger
+    remote code execution via deserialization of the file under their
+    control.
+
+
+
+    [1]: https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-core
+  affected_package: org.apache.tomcat.embed:tomcat-embed-core
+  vulnerable_versions:
+  - ">= 10.0.0-M1 < 10.0.0-M5"
+  - ">= 7.0.0 < 7.0.104"
+  - ">= 8.5.0 < 8.5.55"
+  - ">= 9.0.0M1 < 9.0.35"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2020-9484
+  cwe:
+  - CWE-94
+  disclosed_date: 2020-05-21
+  created_date: 2020-05-20
+  last_modified_date: 2020-05-20
+  credit:
+  - Apache Tomcat Security Team
+  references:
+  - https://github.com/apache/tomcat/commit/3aa8f28db7efb311cdd1b6fe15a9cd3b167a2222
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHETOMCATEMBED-570072

@@ -46,6 +46,71 @@
   references:
   - https://github.com/rubysec/ruby-advisory-db
   source_url: https://groups.google.com/forum/#!topic/rubyonrails-security/3KQRnXDIuLg
+- id: rubyadvisory:rubygems:activestorage:CVE-2020-8162
+  title: Circumvention of file size limits in ActiveStorage
+  description: |
+    There is a vulnerability in ActiveStorage's S3 adapter that allows the Content-Length of a
+    direct file upload to be modified by an end user.
+
+    Versions Affected:  rails < 5.2.4.2, rails < 6.0.3.1
+    Not affected:       Applications that do not use the direct upload functionality of the ActiveStorage S3 adapter.
+    Fixed Versions:     rails >= 5.2.4.3, rails >= 6.0.3.1
+
+    Impact
+    ------
+
+    Utilizing this vulnerability, an attacker can control the Content-Length of an S3 direct upload URL without receiving a
+    new signature from the server. This could be used to bypass controls in place on the server to limit upload size.
+
+    Workarounds
+    -----------
+
+    This is a low-severity security issue. As such, no workaround is necessarily
+    until such time as the application can be upgraded.
+  affected_package: activestorage
+  patched_versions:
+  - ">= 6.0.3.1"
+  - "~> 5.2.4.3"
+  package_manager: rubygems
+  cve:
+  - CVE-2020-8162
+  disclosed_date: 2020-05-18
+  created_date: 2020-05-18
+  last_modified_date: 2020-05-18
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://groups.google.com/forum/#!topic/rubyonrails-security/PjU3946mreQ
+- id: snykio:rubygems:activestorage:569602
+  title: Improper Validation
+  description: |+
+    Affected versions of this package are vulnerable to Improper Validation.
+    Utilizing this vulnerability, an attacker can control the Content-Length
+    of an S3 direct upload URL without receiving a new signature from the
+    server. This could be used to bypass controls in place on the server to
+    limit upload size.
+
+  affected_package: activestorage
+  vulnerable_versions:
+  - "<5.2.4.3"
+  - ">=6.0.0  <6.0.3.1"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2020-8162
+  cwe:
+  - CWE-20
+  disclosed_date: 2020-05-19
+  created_date: 2020-05-19
+  last_modified_date: 2020-05-19
+  credit:
+  - Unknown
+  references:
+  - https://github.com/rails/rails/commit/c0ab9a7d29b84a6ccb1ffa3e8ca1ce61f7a9fbb8
+  - https://groups.google.com/forum/#!topic/rubyonrails-security/PjU3946mreQ
+  - https://hackerone.com/reports/789579
+  source_url: https://snyk.io/vuln/SNYK-RUBY-ACTIVESTORAGE-569602
 - id: snykio:rubygems:activestorage:72641
   title: Access Restriction Bypass
   description: |

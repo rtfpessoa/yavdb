@@ -1,0 +1,35 @@
+---
+- id: snykio:go:github.com/prebid/prebid-server/ccpa:569478
+  title: Information Exposure
+  description: |
+    [github.com/prebid/prebid-server/ccpa][1] is an open source
+    implementation of Server-Side Header Bidding. It is managed by
+    Prebid.org, and upholds the principles from the Prebid Code of Conduct.
+
+    Affected versions of this package are vulnerable to Information
+    Exposure. Specifically, `privacy/ccpa/policy.go` and
+    `privacy/gdpr/policy.go` include code that attempts to generate JSON by
+    concatenating strings. If the `us_privacy` or `consent` fields contain
+    the character `"`, this can produce malformed JSON, or JSON with an
+    unintended structure. An attacker could exploit this bug to trick Prebid
+    Server into mutating an OpenRTB bid request to contain arbitrary data,
+    bypassing validation.
+
+
+
+    [1]: https://github.com/prebid/prebid-server
+  affected_package: github.com/prebid/prebid-server/ccpa
+  vulnerable_versions:
+  - "<0.113.0"
+  severity: high
+  package_manager: go
+  cwe:
+  - CWE-200
+  disclosed_date: 2020-05-18
+  created_date: 2020-05-18
+  last_modified_date: 2020-05-18
+  credit:
+  - djcsdy
+  references:
+  - https://github.com/prebid/prebid-server/pull/1304
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMPREBIDPREBIDSERVERCCPA-569478

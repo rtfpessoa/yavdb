@@ -822,6 +822,97 @@
   references:
   - https://github.com/rubysec/ruby-advisory-db
   source_url: https://groups.google.com/forum/#!topic/rubyonrails-security/I-VWr034ouk
+- id: rubyadvisory:rubygems:actionpack:CVE-2020-8164
+  title: Possible Strong Parameters Bypass in ActionPack
+  description: |
+    There is a strong parameters bypass vector in ActionPack.
+
+    Versions Affected:  rails <= 6.0.3
+    Not affected:       rails < 4.0.0
+    Fixed Versions:     rails >= 5.2.4.3, rails >= 6.0.3.1
+
+    Impact
+    ------
+    In some cases user supplied information can be inadvertently leaked from
+    Strong Parameters.  Specifically the return value of `each`, or `each_value`,
+    or `each_pair` will return the underlying "untrusted" hash of data that was
+    read from the parameters.  Applications that use this return value may be
+    inadvertently use untrusted user input.
+
+    Impacted code will look something like this:
+
+    ```
+    def update
+      # Attacker has included the parameter: `{ is_admin: true }`
+      User.update(clean_up_params)
+    end
+
+    def clean_up_params
+       params.each { |k, v|  SomeModel.check(v) if k == :name }
+    end
+    ```
+
+    Note the mistaken use of `each` in the `clean_up_params` method in the above
+    example.
+
+    Workarounds
+    -----------
+    Do not use the return values of `each`, `each_value`, or `each_pair` in your
+    application.
+  affected_package: actionpack
+  unaffected_versions:
+  - "< 4.0.0"
+  patched_versions:
+  - ">= 6.0.3.1"
+  - "~> 5.2.4.3"
+  package_manager: rubygems
+  cve:
+  - CVE-2020-8164
+  disclosed_date: 2020-05-18
+  created_date: 2020-05-18
+  last_modified_date: 2020-05-18
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://groups.google.com/forum/#!topic/rubyonrails-security/f6ioe4sdpbY
+- id: rubyadvisory:rubygems:actionpack:CVE-2020-8166
+  title: Ability to forge per-form CSRF tokens given a global CSRF token
+  description: |
+    It is possible to possible to, given a global CSRF token such as the one
+    present in the authenticity_token meta tag, forge a per-form CSRF token for
+    any action for that session.
+
+    Versions Affected:  rails < 5.2.5, rails < 6.0.4
+    Not affected:       Applications without existing HTML injection vulnerabilities.
+    Fixed Versions:     rails >= 5.2.4.3, rails >= 6.0.3.1
+
+    Impact
+    ------
+
+    Given the ability to extract the global CSRF token, an attacker would be able to
+    construct a per-form CSRF token for that session.
+
+    Workarounds
+    -----------
+
+    This is a low-severity security issue. As such, no workaround is necessarily
+    until such time as the application can be upgraded.
+  affected_package: actionpack
+  patched_versions:
+  - ">= 6.0.3.1"
+  - "~> 5.2.4.3"
+  package_manager: rubygems
+  cve:
+  - CVE-2020-8166
+  disclosed_date: 2020-05-18
+  created_date: 2020-05-18
+  last_modified_date: 2020-05-18
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://groups.google.com/forum/#!topic/rubyonrails-security/NOjKiGeXUgw
 - id: rubyadvisory:rubygems:actionpack:OSVDB-100524
   title: XSS Vulnerability in number_to_currency
   description: |
@@ -3358,3 +3449,56 @@
   - https://github.com/rails/rails/commit/586a944ddd4d03e66dea1093306147594748037a
   - https://groups.google.com/forum/#!topic/rubyonrails-security/K5EwdJt06hI
   source_url: https://snyk.io/vuln/SNYK-RUBY-ACTIONPACK-20281
+- id: snykio:rubygems:actionpack:569599
+  title: Cross-site Request Forgery (CSRF)
+  description: |+
+    Affected versions of this package are vulnerable to Cross-site Request
+    Forgery (CSRF) given a global CSRF token such as the one present in the
+    `authenticity_token` meta tag.
+
+  affected_package: actionpack
+  vulnerable_versions:
+  - "<5.2.4.3"
+  - ">=6.0.0  <6.0.3.1"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2020-8166
+  cwe:
+  - CWE-352
+  disclosed_date: 2020-05-19
+  created_date: 2020-05-19
+  last_modified_date: 2020-05-19
+  credit:
+  - Unknown
+  references:
+  - https://github.com/rails/rails/commit/d124f19287f4892c72ca54da728a781591c6fca1
+  - https://groups.google.com/forum/#!topic/rubyonrails-security/NOjKiGeXUgw
+  source_url: https://snyk.io/vuln/SNYK-RUBY-ACTIONPACK-569599
+- id: snykio:rubygems:actionpack:569600
+  title: Information Exposure
+  description: |+
+    Affected versions of this package are vulnerable to Information Exposure
+    by Bypassing Strong Parameters. Specifically the return value of `each`,
+    or `each_value`, or `each_pair` will return the underlying \"untrusted\"
+    hash of data that was read from the parameters.
+
+  affected_package: actionpack
+  vulnerable_versions:
+  - "<5.2.4.3"
+  - ">=6.0.0  <6.0.3.1"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2020-8164
+  cwe:
+  - CWE-200
+  disclosed_date: 2020-05-19
+  created_date: 2020-05-19
+  last_modified_date: 2020-05-19
+  credit:
+  - Unknown
+  references:
+  - https://github.com/rails/rails/commit/b3230c500d780b5a5d500cc57496074e1d3d8ea9
+  - https://groups.google.com/forum/#!topic/rubyonrails-security/f6ioe4sdpbY
+  source_url: https://snyk.io/vuln/SNYK-RUBY-ACTIONPACK-569600
