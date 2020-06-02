@@ -1,0 +1,33 @@
+---
+- id: snykio:npm:front-matter:569103
+  title: Arbitrary Code Execution
+  description: |
+    [front-matter][1] is a package that extracts meta data (front-matter)
+    from documents.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution due to the default usage of the function `yaml.load()` of the
+    package [js-yaml][2] instead of its secure replacement ,
+    `yaml.safeLoad()`.
+
+
+
+    [1]: https://github.com/jxson/front-matter
+    [2]: https://www.npmjs.com/package/js-yaml
+  affected_package: front-matter
+  vulnerable_versions:
+  - "<4.0.1"
+  severity: high
+  package_manager: npm
+  cwe:
+  - CWE-94
+  disclosed_date: 2020-05-14
+  created_date: 2020-05-19
+  last_modified_date: 2020-05-19
+  credit:
+  - peterbe
+  references:
+  - https://github.com/jxson/front-matter/commit/1d9094f639f302d932d3a041cc215bbfcc6db51e
+  - https://github.com/jxson/front-matter/commit/f71652cfef6f296f7b5ab495461914ae61d76da2
+  - https://github.com/jxson/front-matter/issues/65
+  source_url: https://snyk.io/vuln/SNYK-JS-FRONTMATTER-569103

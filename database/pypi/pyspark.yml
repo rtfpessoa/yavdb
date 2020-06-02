@@ -1,4 +1,38 @@
 ---
+- id: snykio:pypi:pyspark:570764
+  title: Information Exposure
+  description: |
+    [pyspark][1] is a fast and general cluster computing system for Big
+    Data.
+
+    Affected versions of this package are vulnerable to Information
+    Exposure. In certain situations Spark would write user data to local
+    disk unencrypted, even if `spark.io.encryption.enabled=true`. This
+    includes cached blocks that are fetched to disk (controlled by
+    `spark.maxRemoteBlockSizeFetchToMem`); in SparkR, using parallelize; in
+    Pyspark, using broadcast and parallelize; and use of python udfs.
+
+
+
+    [1]: https://pypi.org/project/pyspark/
+  affected_package: pyspark
+  vulnerable_versions:
+  - "< 2.3.3"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2019-10099
+  cwe:
+  - CWE-200
+  disclosed_date: 2019-08-07
+  created_date: 2019-08-08
+  last_modified_date: 2019-08-08
+  credit:
+  - Thomas Graves
+  references:
+  - https://issues.apache.org/jira/browse/SPARK-28626
+  - https://lists.apache.org/thread.html/c2a39c207421797f82823a8aff488dcd332d9544038307bf69a2ba9e@%3Cuser.spark.apache.org%3E
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-PYSPARK-570764
 - id: snykio:pypi:pyspark:73649
   title: User Impersonation
   description: |
