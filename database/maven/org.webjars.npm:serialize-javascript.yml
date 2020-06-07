@@ -107,3 +107,44 @@
   - https://github.com/commenthol/serialize-to-js/commit/181d7d583ae5293cd47cc99b14ad13352875f3e3
   - https://github.com/yahoo/serialize-javascript/commit/16a68ab53d9626fc7c942b48a1163108fcd184c8
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-536898
+- id: snykio:maven:org.webjars.npm:serialize-javascript:570745
+  title: Arbitrary Code Injection
+  description: |
+    [org.webjars.npm:serialize-javascript][1] is a package to serialize
+    JavaScript to a superset of JSON that includes regular expressions and
+    functions.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Injection. An object like `{"foo": /1"/, "bar": "a\"@__R-<UID>-0__@"}`
+    would be serialized as `{"foo": /1"/, "bar": "a\/1"/}`, meaning an
+    attacker could escape out of `bar` if they controlled both `foo` and
+    `bar` and were able to guess the value of `<UID>`. UID is generated once
+    on startup, is chosen using `Math.random()` and has a keyspace of
+    roughly 4 billion, so within the realm of an online attack.
+
+    ### PoC   {#poc}
+
+    `eval('('+ serialize({"foo": /1" + console.log(1)/i, "bar":
+    '"@__R-<UID>-0__@'}) + ')');`
+
+
+
+    [1]: https://www.npmjs.com/package/serialize-javascript
+  affected_package: org.webjars.npm:serialize-javascript
+  vulnerable_versions:
+  - "< 3.1.0"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2020-7660
+  cwe:
+  - CWE-94
+  disclosed_date: 2020-05-19
+  created_date: 2020-06-01
+  last_modified_date: 2020-06-01
+  credit:
+  - Unknown
+  references:
+  - https://github.com/yahoo/serialize-javascript/commit/f21a6fb3ace2353413761e79717b2d210ba6ccbd
+  - https://github.com/yahoo/serialize-javascript/pull/79
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-570745

