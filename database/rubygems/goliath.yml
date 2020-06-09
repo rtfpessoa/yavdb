@@ -1,0 +1,40 @@
+---
+- id: snykio:rubygems:goliath:569136
+  title: HTTP Request Smuggling
+  description: |
+    [goliath][1] is an Async framework for writing API servers.
+
+    Affected versions of this package are vulnerable to HTTP Request
+    Smuggling. HTTP pipelining issues and request smuggling attacks might be
+    possible due to incorrect Content-Length and Transfer encoding header
+    parsing.
+
+    It is possible conduct HTTP request smuggling attacks by sending the
+    `Content-Length` header twice. Furthermore, invalid Transfer Encoding
+    headers were found to be parsed as valid which could be leveraged for
+    TE:CL smuggling attacks.
+
+    By manipulating the HTTP response the attacker could poison a web-cache,
+    perform an XSS attack, or obtain sensitive information from requests
+    other than their own.
+
+
+
+    [1]: https://rubygems.org/gems/goliath
+  affected_package: goliath
+  vulnerable_versions:
+  - ">=0.0.0"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2020-7671
+  cwe:
+  - CWE-200
+  disclosed_date: 2020-06-03
+  created_date: 2020-06-03
+  last_modified_date: 2020-06-03
+  credit:
+  - Snyk Security Team
+  references:
+  - https://github.com/postrank-labs/goliath/issues/351
+  source_url: https://snyk.io/vuln/SNYK-RUBY-GOLIATH-569136

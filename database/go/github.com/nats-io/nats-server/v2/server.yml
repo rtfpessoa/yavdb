@@ -1,47 +1,22 @@
 ---
-- id: snykio:pypi:gdal:473011
-  title: Double Free
-  description: |
-    [GDAL][1] is a number of tools for programming and manipulating the GDAL
-    Geospatial Data Abstraction Library.
-
-    Affected versions of this package are vulnerable to Double Free. A
-    poolDestroy double free in `OGRExpatRealloc` in `ogr/ogr_expat.cpp` can
-    be exploited when the 10MB threshold is exceeded.
-
-
-
-    [1]: http://www.gdal.org/
-  affected_package: gdal
-  vulnerable_versions:
-  - "< 3.0.2"
-  severity: high
-  package_manager: pypi
-  cve:
-  - CVE-2019-17545
-  cwe:
-  - CWE-415
-  disclosed_date: 2019-08-02
-  created_date: 2019-10-14
-  last_modified_date: 2019-10-14
-  credit:
-  - OSS Fuzz
-  references:
-  - https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=16178
-  - https://github.com/OSGeo/gdal/commit/148115fcc40f1651a5d15fa34c9a8c528e7147bb
-  source_url: https://snyk.io/vuln/SNYK-PYTHON-GDAL-473011
-- id: snykio:pypi:gdal:571002
+- id: snykio:go:github.com/nats-io/nats-server/v2/server:570968
   title: Denial of Service (DoS)
   description: |+
-    [GDAL][1] is a number of tools for programming and manipulating the GDAL
-    Geospatial Data Abstraction Library.
+    [github.com/nats-io/nats-server/v2/server][1] is an A simple, secure and
+    performant communications system for digital systems, services and
+    devices.
 
     Affected versions of this package are vulnerable to Denial of Service
-    (DoS) via the `OverviewScan` function.
+    (DoS). As a user, you can send a publish request which will publish a
+    message to a subject, and all of the clients who are subscribed to the
+    subject will receive the message. The problem is that the go runtime
+    function `make` treats the capacity parameter as an unsigned int so
+    instead of a negative number, it treats it like the number we sent it
+    and then it tries to allocate an abnormal slice and panics.
 
 
 
-    [1]: http://www.gdal.org/
+    [1]: https://pkg.go.dev/github.com/nats-io/nats-server/v2/server?tab=doc
     \nDenial of Service (DoS) describes a family of attacks, all aimed at
     making a system inaccessible to its intended and legitimate users.
 
@@ -68,19 +43,21 @@
     * Crash - An attacker sending crafted requests that could cause the
       system to crash. For Example, [npm `ws` package](npm:ws:20171108)
 
-  affected_package: gdal
+  affected_package: github.com/nats-io/nats-server/v2/server
   vulnerable_versions:
-  - "< 3.1.0"
-  severity: medium
-  package_manager: pypi
+  - "*"
+  severity: high
+  package_manager: go
+  cve:
+  - CVE-2019-13126
   cwe:
   - CWE-400
-  disclosed_date: 2020-02-01
+  disclosed_date: 2019-07-23
   created_date: 2020-06-03
   last_modified_date: 2020-06-03
   credit:
-  - Unknown
+  - Aviv Sasson from Twistlock Security Team
   references:
-  - https://github.com/OSGeo/gdal/pull/2207/files
-  - https://github.com/OSGeo/gdal/pull/2461
-  source_url: https://snyk.io/vuln/SNYK-PYTHON-GDAL-571002
+  - https://github.com/nats-io/nats-server/pull/1441
+  - https://www.twistlock.com/labs-blog/finding-dos-vulnerability-nats-go-fuzz-cve-2019-13126/
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMNATSIONATSSERVERV2SERVER-570968

@@ -33,3 +33,37 @@
   - https://github.com/indutny/elliptic/pull/203
   - https://github.com/warner/python-ecdsa/commit/b516f06d0e94eca6deeb3bdb82027ad2f2f55ac6
   source_url: https://snyk.io/vuln/SNYK-PYTHON-FASTECDSA-511943
+- id: snykio:pypi:fastecdsa:570964
+  title: Timing Attack
+  description: |
+    [fastecdsa][1] is a python package for doing fast elliptic curve
+    cryptography, specifically digital signatures.
+
+    Affected versions of this package are vulnerable to Timing Attack. When
+    using the `NIST P-256` curve in the ECDSA implementation, the point at
+    infinity is mishandled. This means that for an extreme value in `k` and
+    `s^-1`, the signature verification fails even if the signature is
+    correct. There are some threat models where an attacker can benefit by
+    successfully guessing users for whom signature verification will fail.
+
+
+
+    [1]: https://github.com/AntonKueltz/fastecdsa
+  affected_package: fastecdsa
+  vulnerable_versions:
+  - "< 2.1.2"
+  severity: low
+  package_manager: pypi
+  cve:
+  - CVE-2020-12607
+  cwe:
+  - CWE-208
+  disclosed_date: 2020-06-03
+  created_date: 2020-06-03
+  last_modified_date: 2020-06-03
+  credit:
+  - Unknown
+  references:
+  - https://github.com/AntonKueltz/fastecdsa/commit/e592f106edd5acf6dacedfab2ad16fe6c735c9d1
+  - https://github.com/AntonKueltz/fastecdsa/issues/52
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-FASTECDSA-570964
