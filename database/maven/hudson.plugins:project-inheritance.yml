@@ -62,3 +62,50 @@
   references:
   - https://jenkins.io/security/advisory/2019-09-25/
   source_url: https://snyk.io/vuln/SNYK-JAVA-HUDSONPLUGINS-469245
+- id: snykio:maven:hudson.plugins:project-inheritance:571316
+  title: Authorization Bypass
+  description: |
+    [hudson.plugins:project-inheritance][1] is a Project Inheritance Plugin
+
+    Affected versions of this package are vulnerable to Authorization
+    Bypass. Jenkins limits access to job configuration XML data
+    (`config.xml`) to users with `Job/ExtendedRead` permission, typically
+    implied by Job/Configure permission. Project Inheritance Plugin has
+    several job inspection features, including the API URL
+    `/job/…​/getConfigAsXML` for its Inheritance Project job type that does
+    something similar.
+
+    Affected versions do not check permissions for this new endpoint,
+    granting access to job configuration XML data to every user with
+    Job/Read permission.
+
+    Additionally, the encrypted values of secrets stored in the job
+    configuration are not redacted, as they would be by the `config.xml` API
+    for users without Job/Configure permission.
+
+
+
+    [1]: https://wiki.jenkins.io/display/JENKINS/inheritance-plugin
+  affected_package: hudson.plugins:project-inheritance
+  vulnerable_versions:
+  - ">= 0"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2020-2197
+  - CVE-2020-2198
+  cwe:
+  - CWE-285
+  disclosed_date: 2020-06-04
+  created_date: 2020-06-04
+  last_modified_date: 2020-06-04
+  credit:
+  - CloudBees
+  - Daniel Beck
+  - Inc. and
+  - independently
+  - Markus Winter
+  - SAP SE
+  references:
+  - https://www.jenkins.io/security/advisory/2020-06-03/#SECURITY-1582
+  source_url: https://snyk.io/vuln/SNYK-JAVA-HUDSONPLUGINS-571316

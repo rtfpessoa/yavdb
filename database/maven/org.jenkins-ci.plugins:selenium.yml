@@ -1,0 +1,41 @@
+---
+- id: snykio:maven:org.jenkins-ci.plugins:selenium:571319
+  title: Cross-site Request Forgery (CSRF)
+  description: |
+    [org.jenkins-ci.plugins:selenium][1] is a Jenkins selenium plugin.
+
+    Affected versions of this package are vulnerable to Cross-site Request
+    Forgery (CSRF). They have no CSRF protection for their HTTP endpoints.
+    This allows attackers to perform the following actions:
+
+    * Restart the Selenium Grid hub.
+    * Delete or replace the plugin configuration.
+    * Start, stop, or restart Selenium configurations on specific nodes.
+
+    Through carefully chosen configuration parameters, these actions can
+    result in OS command injection on the Jenkins master.
+
+
+
+    [1]: https://github.com/jenkinsci/selenium-plugin
+  affected_package: org.jenkins-ci.plugins:selenium
+  vulnerable_versions:
+  - ">= 0"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2020-2196
+  cwe:
+  - CWE-352
+  disclosed_date: 2020-06-04
+  created_date: 2020-06-04
+  last_modified_date: 2020-06-04
+  credit:
+  - CloudBees
+  - CloudBees
+  - Inc.
+  - Inc. and Daniel Beck
+  - Wadeck Follonier
+  references:
+  - https://www.jenkins.io/security/advisory/2020-06-03/#SECURITY-1766
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGJENKINSCIPLUGINS-571319

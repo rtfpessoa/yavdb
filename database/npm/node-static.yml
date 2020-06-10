@@ -1,0 +1,52 @@
+---
+- id: npmjs:npm:node-static:1206
+  title: Unauthorized File Access
+  description: All versions of `node-static` are vulnerable to Unauthorized File Access.
+    The package fails to prevent access to files outside of the served folder if the
+    filename begins with the name of the served folder. For example if an application
+    is serving the folder `./public`, a file such as `./public.txt` is served. The
+    expected behavior is for only files inside `./public` to be served. This allows
+    attackers to access files served outside of the intended folder.
+  affected_package: node-static
+  vulnerable_versions:
+  - ">=0.0.0"
+  severity: low
+  package_manager: npm
+  cwe: CWE-552
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Toshiki Sasazaki (LINE Corp)
+- id: npmjs:npm:node-static:1207
+  title: Open Redirect
+  description: 'All versions of `node-static` are vulnerable to Open Redirect. The
+    package fails to sanitize URLs and may redirect users to domains passed through
+    the URL. The possible redirect domains are restricted to hosts whose name matches
+    a served folder from the application. For example if the application serves the
+    folder `./public` and has a folder `./public/example.com`, accessing `localhost:8080//example.com`
+    redirects to `https://www.example.com/`. '
+  affected_package: node-static
+  vulnerable_versions:
+  - ">=0.0.0"
+  severity: low
+  package_manager: npm
+  cwe: CWE-601
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Toshiki Sasazaki (LINE Corp)
+- id: npmjs:npm:node-static:1208
+  title: Denial of Service
+  description: All versions of `node-static` are vulnerable to a Denial of Service.
+    The package fails to catch an exception when user input includes null bytes. This
+    allows attackers to access `http://host/%00` and crash the server.
+  affected_package: node-static
+  vulnerable_versions:
+  - ">=0.0.0"
+  severity: high
+  package_manager: npm
+  cwe: CWE-248
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Guangcong Luo

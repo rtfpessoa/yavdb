@@ -1,0 +1,50 @@
+---
+- id: snykio:go:github.com/weaveworks/weave:571285
+  title: Arbitrary Code Execution
+  description: |
+    [github.com/weaveworks/weave][1] is a package that provides simple,
+    resilient multi-host containers networking.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution. An attacker able to run a process as root in a container is
+    able to respond to DNS requests from the host and thereby insert
+    themselves as a fake service. In a cluster with an IPv4 internal
+    network, if IPv6 is not disabled on the host (via `ipv6.disable=1` on
+    the kernel command line), it will be either unconfigured or configured
+    on some interfaces, but it\'s pretty likely that ipv6 forwarding is
+    disabled, ie `/proc/sys/net/ipv6/conf//forwarding == 0`.
+
+    Also by default, `/proc/sys/net/ipv6/conf/accept_ra == 1`. The
+    combination of these 2 sysctls means that the host accepts router
+    advertisements and configure the IPv6 stack using them.By sending rogue
+    router advertisements, an attacker can reconfigure the host to redirect
+    part or all of the IPv6 traffic of the host to the attacker controlled
+    container. Even if there was no IPv6 traffic before, if the DNS returns
+    A (IPv4) and AAAA (IPv6) records, many HTTP libraries will try to
+    connect via IPv6 first then fallback to IPv4, giving an opportunity to
+    the attacker to respond. A combination with the existence of
+    CVE-2019-3462 on the host can allow escalation to the host. Weave Net
+    version 2.6.3 disables the `accept_ra` option on the veth devices that
+    it creates.
+
+
+
+    [1]: https://github.com/weaveworks/weave
+  affected_package: github.com/weaveworks/weave
+  vulnerable_versions:
+  - "<2.6.3"
+  severity: high
+  package_manager: go
+  cve:
+  - CVE-2020-11091
+  cwe:
+  - CWE-94
+  disclosed_date: 2020-06-04
+  created_date: 2020-06-04
+  last_modified_date: 2020-06-04
+  credit:
+  - Unknown
+  references:
+  - https://github.com/weaveworks/weave/commit/15f21f1899060f7716c70a8555a084e836f39a60
+  - https://github.com/weaveworks/weave/security/advisories/GHSA-59qg-grp7-5r73
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMWEAVEWORKSWEAVE-571285

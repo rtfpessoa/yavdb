@@ -1,0 +1,38 @@
+---
+- id: snykio:pypi:cinder:571308
+  title: Insufficiently Protected Credentials
+  description: |
+    [cinder][1] is a storage service for an open cloud computing service
+
+    Affected versions of this package are vulnerable to Insufficiently
+    Protected Credentials. When using Cinder with the Dell EMC ScaleIO or
+    VxFlex OS backend storage driver, credentials for the entire backend are
+    exposed in the `connection_info` element in all Block Storage v3
+    Attachments API calls containing that element. This enables an end user
+    to create a volume, make an API call to show the attachment detail
+    information, and retrieve a username and password that may be used to
+    connect to another user\'s volume. Additionally, these credentials are
+    valid for the ScaleIO or VxFlex OS Management API, should an attacker
+    discover the Management API endpoint.
+
+
+
+    [1]: https://github.com/openstack/cinder
+  affected_package: cinder
+  vulnerable_versions:
+  - ">= 0"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2020-10755
+  cwe:
+  - CWE-255
+  disclosed_date: 2020-06-03
+  created_date: 2020-06-04
+  last_modified_date: 2020-06-04
+  credit:
+  - David Hill
+  - Eric Harney
+  references:
+  - https://bugzilla.redhat.com/show_bug.cgi?id=1842748
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-CINDER-571308

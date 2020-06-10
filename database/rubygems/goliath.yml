@@ -9,14 +9,9 @@
     possible due to incorrect Content-Length and Transfer encoding header
     parsing.
 
-    It is possible conduct HTTP request smuggling attacks by sending the
-    `Content-Length` header twice. Furthermore, invalid Transfer Encoding
-    headers were found to be parsed as valid which could be leveraged for
-    TE:CL smuggling attacks.
-
-    By manipulating the HTTP response the attacker could poison a web-cache,
-    perform an XSS attack, or obtain sensitive information from requests
-    other than their own.
+    It is possible to conduct HTTP request smuggling attacks where `goliath`
+    is used as part of a chain of backend servers due to insufficient
+    `Content-Length` and `Transfer Encoding` parsing.
 
 
 
@@ -24,10 +19,8 @@
   affected_package: goliath
   vulnerable_versions:
   - ">=0.0.0"
-  severity: high
+  severity: medium
   package_manager: rubygems
-  cve:
-  - CVE-2020-7671
   cwe:
   - CWE-200
   disclosed_date: 2020-06-03

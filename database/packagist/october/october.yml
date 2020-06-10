@@ -1,4 +1,216 @@
 ---
+- id: snykio:packagist:october/october:571242
+  title: Command Injection
+  description: "Affected versions of this package are vulnerable to Command Injection.\nAny
+    users with the ability to modify any data that could eventually be\nexported as
+    a CSV file from the `ImportExportController`could\npotentially introduce a CSV
+    injection into the data to cause the\ngenerated CSV export file to be malicious.This
+    requires attackers to\nachieve the following before a successful attack can be
+    completed:\n\n1.  Have found a vulnerability in the victim\\'s spreadsheet software
+    of\n    choice.\n2.  Control data that would potentially be exported through the\n
+    \   `ImportExportController` by a theoretical victim.\n3.  Convince the victim
+    to export above data as a CSV and run it in\n    vulnerable spreadsheet software
+    while also bypassing any sanity\n    checks by said software.\n    ## Remediation
+    \  {#remediation}\n    \n    Upgrade `october/october` to version 1.0.466 or higher.\n
+    \   ## References   {#references}\n\n* [GitHub Advisory][1]\n* [GitHub Commit][2]\n*
+    [GitHub Commit][3]\n\n\n\n[1]: https://github.com/octobercms/october/security/advisories/GHSA-4rhm-m2fp-hx7q\n[2]:
+    https://github.com/octobercms/library/commit/c84bf03f506052c848f2fddc05f24be631427a1a\n[3]:
+    https://github.com/octobercms/october/commit/802d8c8e09a2b342649393edb6d3ceb958851484\n"
+  affected_package: october/october
+  vulnerable_versions:
+  - ">=1.0.319  <1.0.466"
+  severity: medium
+  package_manager: packagist
+  cve:
+  - CVE-2020-5299
+  cwe:
+  - CWE-77
+  disclosed_date: 2020-06-04
+  created_date: 2020-06-04
+  last_modified_date: 2020-06-04
+  credit:
+  - Unknown
+  source_url: https://snyk.io/vuln/SNYK-PHP-OCTOBEROCTOBER-571242
+- id: snykio:packagist:october/october:571243
+  title: Arbitrary File Write
+  description: |+
+    Affected versions of this package are vulnerable to Arbitrary File
+    Write. An attacker can exploit this vulnerability to delete arbitrary
+    local files of an October CMS server. The vulnerability is only
+    exploitable by an authenticated backend user with the
+    `cms.manage_assets` permission.
+
+  affected_package: october/october
+  vulnerable_versions:
+  - ">=1.0.319  <1.0.466"
+  severity: medium
+  package_manager: packagist
+  cve:
+  - CVE-2020-5296
+  cwe:
+  - CWE-20
+  disclosed_date: 2020-06-04
+  created_date: 2020-06-04
+  last_modified_date: 2020-06-04
+  credit:
+  - Unknown
+  references:
+  - https://github.com/octobercms/october/commit/2b8939cc8b5b6fe81e093fe2c9f883ada4e3c8cc
+  - https://github.com/octobercms/october/security/advisories/GHSA-jv6v-fvvx-4932
+  source_url: https://snyk.io/vuln/SNYK-PHP-OCTOBEROCTOBER-571243
+- id: snykio:packagist:october/october:571244
+  title: Arbitrary File Upload
+  description: |+
+    Affected versions of this package are vulnerable to Arbitrary File
+    Upload. An attacker can exploit this vulnerability to upload jpg, jpeg,
+    bmp, png, webp, gif, ico, css, js, woff, woff2, svg, ttf, eot, json, md,
+    less, sass, scss, xml files to any directory of an October CMS server.
+    The vulnerability is only exploitable by an authenticated backend user
+    with the `cms.manage_assets` permission.
+
+  affected_package: october/october
+  vulnerable_versions:
+  - ">=1.0.319  <1.0.466"
+  severity: medium
+  package_manager: packagist
+  cve:
+  - CVE-2020-5297
+  cwe:
+  - CWE-434
+  disclosed_date: 2020-06-04
+  created_date: 2020-06-04
+  last_modified_date: 2020-06-04
+  credit:
+  - Unknown
+  references:
+  - https://github.com/octobercms/october/commit/6711dae8ef70caf0e94cec434498012a2ccd86b8
+  - https://github.com/octobercms/october/security/advisories/GHSA-9722-rr68-rfpg
+  source_url: https://snyk.io/vuln/SNYK-PHP-OCTOBEROCTOBER-571244
+- id: snykio:packagist:october/october:571245
+  title: Cross-site Scripting (XSS)
+  description: |+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). A user with the ability to use the import functionality of the
+    `ImportExportController` behavior can be socially engineered by an
+    attacker to upload a maliciously crafted CSV file which could result in
+    a reflected XSS attack on the user in question.
+
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
+  affected_package: october/october
+  vulnerable_versions:
+  - ">=1.0.319  <1.0.466"
+  severity: high
+  package_manager: packagist
+  cve:
+  - CVE-2020-5298
+  cwe:
+  - CWE-79
+  disclosed_date: 2020-06-04
+  created_date: 2020-06-04
+  last_modified_date: 2020-06-04
+  credit:
+  - Unknown
+  references:
+  - https://github.com/octobercms/october/commit/cd0b6a791f995d86071a024464c1702efc50f46c
+  - https://github.com/octobercms/october/security/advisories/GHSA-gg6x-xx78-448c
+  source_url: https://snyk.io/vuln/SNYK-PHP-OCTOBEROCTOBER-571245
+- id: snykio:packagist:october/october:571246
+  title: Arbitrary File Read
+  description: |+
+    Affected versions of this package are vulnerable to Arbitrary File Read.
+    An attacker can exploit this vulnerability to read local files of an
+    October CMS server. The vulnerability is only exploitable by an
+    authenticated backend user with the `cms.manage_assets` permission.
+
+  affected_package: october/october
+  vulnerable_versions:
+  - ">=1.0.319  <1.0.466"
+  severity: medium
+  package_manager: packagist
+  cve:
+  - CVE-2020-5295
+  cwe:
+  - CWE-22
+  disclosed_date: 2020-06-04
+  created_date: 2020-06-04
+  last_modified_date: 2020-06-04
+  credit:
+  - Unknown
+  references:
+  - https://github.com/octobercms/october/commit/2b8939cc8b5b6fe81e093fe2c9f883ada4e3c8cc
+  - https://github.com/octobercms/october/security/advisories/GHSA-r23f-c2j5-rx2f
+  source_url: https://snyk.io/vuln/SNYK-PHP-OCTOBEROCTOBER-571246
 - id: snykio:packagist:october/october:70383
   title: Configuration Modification
   description: |
