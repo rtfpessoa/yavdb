@@ -1,0 +1,41 @@
+---
+- id: snykio:go:github.com/grafana/grafana/pkg/api/avatar:571488
+  title: Improper Access Control
+  description: |
+    [github.com/grafana/grafana/pkg/api/avatar][1] is a tool for beautiful
+    monitoring and metric analytics &amp; dashboards for Graphite, InfluxDB
+    &amp; Prometheus &amp; More.
+
+    Affected versions of this package are vulnerable to Improper Access
+    Control. It is possible for an unauthenticated user/client to make
+    Grafana send HTTP requests to any URL and return its result to the
+    user/client. This can be used to gain information about the network that
+    Grafana is running on, leading to a `Server-side request forgery (SSRF)`
+    vulnerability, due to insufficient access control.
+
+
+
+    [1]: https://github.com/grafana/grafana
+  affected_package: github.com/grafana/grafana/pkg/api/avatar
+  vulnerable_versions:
+  - ">=3.0.1 <6.7.4"
+  - ">=7.0.0 <7.0.2"
+  severity: medium
+  package_manager: go
+  cve:
+  - CVE-2020-13379
+  cwe:
+  - CWE-284
+  disclosed_date: 2020-06-04
+  created_date: 2020-06-05
+  last_modified_date: 2020-06-05
+  credit:
+  - Unknown
+  references:
+  - http://www.openwall.com/lists/oss-security/2020/06/03/4
+  - https://community.grafana.com/t/grafana-7-0-2-and-6-7-4-security-update/31408
+  - https://community.grafana.com/t/release-notes-v6-7-x/27119
+  - https://community.grafana.com/t/release-notes-v7-0-x/29381
+  - https://github.com/grafana/grafana/commit/ba953be95f0302c2ea80d23f1e5f2c1847365192
+  - https://grafana.com/blog/2020/06/03/grafana-6.7.4-and-7.0.2-released-with-important-security-fix/
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMGRAFANAGRAFANAPKGAPIAVATAR-571488
