@@ -15,16 +15,19 @@ jobs:
       - name: Restore yavdb cache
         type: cache-restore
         keys:
-          - crawler-yavdb-cache-1
-          - crawler-yavdb-cache
+          - crawler-yavdb-cache-2
 
       - name: Generate database
         type: shell
         command: yavdb generate -p database
 
+      - name: Create cache stamp
+        type: shell
+        command: date > /tmp/cache-stamp.txt
+
       - name: Save yavdb cache
         type: cache-save
-        key: crawler-yavdb-cache-1
+        key: crawler-yavdb-cache-2-{{ checksum "/tmp/cache-stamp.txt" }}
         paths:
           - ~/.yavdb/cache
 
