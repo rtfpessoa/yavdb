@@ -1,27 +1,52 @@
 ---
 - id: snykio:npm:curlrequest:568274
-  title: Command Injection
+  title: Arbitrary File Read
   description: "[curlrequest][1] is a curlrequest is a node wrapper for the command
-    line\ncurl(1).\n\nAffected versions of this package are vulnerable to Command
-    Injection.\nIt is possible to inject arbitrary commands by using a semicolon char
-    in\nany of the `options` values.\n\n### PoC   {#poc}\n\n    var curl = require(\"curlrequest\");\n
-    \   \n    let userPayload = \";whoami#\";\n    curl.request({ url: userPayload,
-    pretend: true }, function(err, stdout, meta) {\n      console.log(\"%s %s\", meta.cmd,
-    meta.args.join(\" \"));\n    });\n\n\n\n[1]: https://www.npmjs.com/package/curlrequest\n"
+    line\ncurl(1).\n\nAffected versions of this package are vulnerable to Arbitrary
+    File Read.\nIt is possible to read any file by populating the `file` parameter
+    with\nuser input.\n\n### PoC   {#poc}\n\n    var curl = require(\"curlrequest\");\n
+    \   \n    let userPayload = \"/etc/passwd\";\n    curl.request({ file: userPayload
+    }, function (err, stdout, meta) {\n        console.log(\"%s %s\", meta.cmd, meta.args.join(\"
+    \"));\n    });\n\n\n\n[1]: https://www.npmjs.com/package/curlrequest\n\\nA Directory
+    Traversal attack (also known as path traversal) aims to\naccess files and directories
+    that are stored outside the intended\nfolder. By manipulating files with \\\"dot-dot-slash
+    (../)\\\" sequences and\nits variations, or by using absolute file paths, it may
+    be possible to\naccess arbitrary files and directories stored on file system,
+    including\napplication source code, configuration, and other critical system files.\n\nDirectory
+    Traversal vulnerabilities can be generally divided into two\ntypes:\n\n* **Information
+    Disclosure**\\: Allows the attacker to gain information\n  about the folder structure
+    or read the contents of sensitive files on\n  the system.\n\n`st` is a module
+    for serving static files on web pages, and contains a\n[vulnerability of this
+    type][1]. In our example, we will serve files\nfrom the `public` route.\n\nIf
+    an attacker requests the following URL from our server, it will in\nturn leak
+    the sensitive private key of the root user.\n\n    curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa\n\n**Note**
+    `%2e` is the URL encoded version of `.` (dot).\n\n* **Writing arbitrary files**\\:
+    Allows the attacker to create or replace\n  existing files. This type of vulnerability
+    is also known as\n  `Zip-Slip`.\n\nOne way to achieve this is by using a malicious
+    `zip` archive that holds\npath traversal filenames. When each filename in the
+    zip archive gets\nconcatenated to the target extraction folder, without validation,
+    the\nfinal path ends up outside of the target folder. If an executable or a\nconfiguration
+    file is overwritten with a file containing malicious code,\nthe problem can turn
+    into an arbitrary code execution issue quite\neasily.\n\nThe following is an example
+    of a `zip` archive with one benign file and\none malicious file. Extracting the
+    malicious file will result in\ntraversing out of the target folder, ending up
+    in `/root/.ssh/`\noverwriting the `authorized_keys` file:\n\n    2018-04-15 22:04:29
+    .....           19           19  good.txt\n    2018-04-15 22:04:42 .....           20
+    \          20  ../../../../../../root/.ssh/authorized_keys\n\n\n\n[1]: https://snyk.io/vuln/npm:st:20140206\n"
   affected_package: curlrequest
   vulnerable_versions:
   - "*"
-  severity: high
+  severity: medium
   package_manager: npm
   cve:
   - CVE-2020-7646
   cwe:
-  - CWE-78
+  - CWE-22
   disclosed_date: 2020-05-07
   created_date: 2020-05-07
   last_modified_date: 2020-05-07
   credit:
   - Snyk Security Team
   references:
-  - https://github.com/node-js-libs/curlrequest
+  - https://github.com/node-js-libs/curlrequest/blob/master/index.js#L239
   source_url: https://snyk.io/vuln/SNYK-JS-CURLREQUEST-568274

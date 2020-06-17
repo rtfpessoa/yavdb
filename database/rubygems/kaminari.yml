@@ -1,4 +1,44 @@
 ---
+- id: rubyadvisory:rubygems:kaminari:CVE-2020-11082
+  title: Cross-Site Scripting in Kaminari via `original_script_name` parameter
+  description: |-
+    ### Impact
+    There was a vulnerability in versions of Kaminari that would allow an attacker to inject arbitrary code into pages with pagination links.
+
+    For example, an attacker could craft pagination links that link to other domain or host:
+    https://example.com/posts?page=4&original_script_name=https://another-host.example.com
+
+    In addition, an attacker could also craft pagination links that include JavaScript code that runs when a user clicks the link:
+    https://example.com/posts?page=4&original_script_name=javascript:alert(42)%3b//
+
+    ### Releases
+    The 1.2.1 gem including the patch has already been released.
+    All past released versions are affected by this vulnerability.
+
+    ### Workarounds
+    Application developers who can't update the gem can workaround by overriding the `PARAM_KEY_EXCEPT_LIST` constant.
+
+    ```ruby
+    module Kaminari::Helpers
+      PARAM_KEY_EXCEPT_LIST = [:authenticity_token, :commit, :utf8, :_method, :script_name, :original_script_name].freeze
+    end
+    ```
+  affected_package: kaminari
+  patched_versions:
+  - ">= 1.2.1"
+  severity: medium
+  package_manager: rubygems
+  cve:
+  - CVE-2020-11082
+  cvss_v3_score: 6.4
+  disclosed_date: 2020-05-28
+  created_date: 2020-05-28
+  last_modified_date: 2020-05-28
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://github.com/kaminari/kaminari/security/advisories/GHSA-r5jw-62xg-j433
 - id: snykio:rubygems:kaminari:570586
   title: Cross-site Scripting (XSS)
   description: |+

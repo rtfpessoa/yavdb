@@ -37,38 +37,53 @@
     versions of this package are vulnerable to Prototype Pollution.\nThe functions
     `merge`, `mergeWith`, and `defaultsDeep` could be tricked\ninto adding or modifying
     properties of `Object.prototype`. This is due\nto an incomplete fix to `CVE-2018-3721`.\n\n\n\n[1]:
-    https://www.npmjs.com/package/lodash.merge\n\\nPrototype Pollution is a vulnerability
-    affecting JavaScript. Prototype\nPollution refers to the ability to inject properties
-    into existing\nJavaScript language construct prototypes, such as objects. JavaScript\nallows
-    all Object attributes to be altered, including their magical\nattributes such
-    as `_proto_`, `constructor` and `prototype`. An attacker\nmanipulates these attributes
-    to overwrite, or pollute, a JavaScript\napplication object prototype of the base
-    object by injecting other\nvalues. Properties on the `Object.prototype` are then
-    inherited by all\nthe JavaScript objects through the prototype chain. When that
-    happens,\nthis leads to either denial of service by triggering JavaScript\nexceptions,
-    or it tampers with the application source code to force the\ncode path that the
-    attacker injects, thereby leading to remote code\nexecution.\n\nThere are two
-    main ways in which the pollution of prototypes occurs:\n\n* Unsafe `Object` recursive
-    merge\n\n* Property definition by path\n\n### Unsafe Object recursive merge   {#unsafe-object-recursive-merge}\n\nThe
-    logic of a vulnerable recursive merge function follows the following\nhigh-level
-    model:\n\n    merge (target, source)\n    \n      foreach property of source\n
-    \   \n        if property exists and is an object on both the target and the source\n
-    \   \n          merge(target[property], source[property])\n    \n        else\n
-    \   \n          target[property] = source[property]\n\n&lt;br&gt;\n\nWhen the
-    source object contains a property named `_proto_` defined with\n`Object.defineProperty()`
-    , the condition that checks if the property\nexists and is an object on both the
-    target and the source passes and the\nmerge recurses with the target, being the
-    prototype of `Object` and the\nsource of `Object` as defined by the attacker.
-    Properties are then\ncopied on the `Object` prototype.\n\nClone operations are
-    a special sub-class of unsafe recursive merges,\nwhich occur when a recursive
-    merge is conducted on an empty object:\n`merge({},source)`.\n\n`lodash` and `Hoek`
-    are examples of libraries susceptible to recursive\nmerge attacks.\n\n### Property
-    definition by path   {#property-definition-by-path}\n\nThere are a few JavaScript
-    libraries that use an API to define property\nvalues on an object based on a given
-    path. The function that is\ngenerally affected contains this signature: `theFunction(object,
-    path,\nvalue)`\n\nIf the attacker can control the value of “path”, they can set
-    this value\nto `_proto_.myValue`. `myValue` is then assigned to the prototype
-    of the\nclass of the object.\n\n"
+    https://www.npmjs.com/package/lodash.merge\n\\nDenial of Service (DoS) describes
+    a family of attacks, all aimed at\nmaking a system inaccessible to its original
+    and legitimate users. There\nare many types of DoS attacks, ranging from trying
+    to clog the network\npipes to the system by generating a large volume of traffic
+    from many\nmachines (a Distributed Denial of Service - DDoS - attack) to sending\ncrafted
+    requests that cause a system to crash or take a disproportional\namount of time
+    to process.\n\nThe Regular expression Denial of Service (ReDoS) is a type of Denial
+    of\nService attack. Regular expressions are incredibly powerful, but they\naren\\'t
+    very intuitive and can ultimately end up making it easy for\nattackers to take
+    your site down.\n\nLet’s take the following regular expression as an example:\n\n
+    \   regex = /A(B|C+)+D/\n{: .language-js}\n\nThis regular expression accomplishes
+    the following:\n\n* `A` The string must start with the letter \\'A\\'\n* `(B|C+)+`
+    The string must then follow the letter A with either the\n  letter \\'B\\' or
+    some number of occurrences of the letter \\'C\\' (the\n  `+` matches one or more
+    times). The `+` at the end of this section\n  states that we can look for one
+    or more matches of this section.\n* `D` Finally, we ensure this section of the
+    string ends with a \\'D\\'\n\nThe expression would match inputs such as `ABBD`,
+    `ABCCCCD`, `ABCBCCCD`\nand `ACCCCCD`\n\nIt most cases, it doesn\\'t take very
+    long for a regex engine to find a\nmatch:\n\n    $ time node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCD\")'\n
+    \   0.04s user 0.01s system 95% cpu 0.052 total\n    \n    $ time node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCX\")'\n
+    \   1.79s user 0.02s system 99% cpu 1.812 total\n{: .language-bash}\n\nThe entire
+    process of testing it against a 30 characters long string\ntakes around ~52ms.
+    But when given an invalid string, it takes nearly\ntwo seconds to complete the
+    test, over ten times as long as it took to\ntest a valid string. The dramatic
+    difference is due to the way regular\nexpressions get evaluated.\n\nMost Regex
+    engines will work very similarly (with minor differences).\nThe engine will match
+    the first possible way to accept the current\ncharacter and proceed to the next
+    one. If it then fails to match the\nnext one, it will backtrack and see if there
+    was another way to digest\nthe previous character. If it goes too far down the
+    rabbit hole only to\nfind out the string doesn’t match in the end, and if many
+    characters\nhave multiple valid regex paths, the number of backtracking steps
+    can\nbecome very large, resulting in what is known as *catastrophic\nbacktracking*.\n\nLet\\'s
+    look at how our expression runs into this problem, using a\nshorter string: \\\"ACCCX\\\".
+    While it seems fairly straightforward, there\nare still four different ways that
+    the engine could match those three\nC\\'s:\n\n1.  CCC\n2.  CC+C\n3.  C+CC\n4.
+    \ C+C+C.\n\nThe engine has to try each of those combinations to see if any of
+    them\npotentially match against the expression. When you combine that with the\nother
+    steps the engine must take, we can use [RegEx 101 debugger][1] to\nsee the engine
+    has to take a total of 38 steps before it can determine\nthe string doesn\\'t
+    match.\n\nFrom there, the number of steps the engine must use to validate a string\njust
+    continues to grow.\n\n| String | Number of C\\'s | Number of steps |\n|----------\n|
+    ACCCX | 3 | 38 |\n| ACCCCX | 4 | 71 |\n| ACCCCCX | 5 | 136 |\n| ACCCCCCCCCCCCCCX
+    | 14 | 65,553 |\n\nBy the time the string includes 14 C\\'s, the engine has to
+    take over\n65,000 steps just to see if the string is valid. These extreme\nsituations
+    can cause them to work very slowly (exponentially related to\ninput size, as shown
+    above), allowing an attacker to exploit this and\ncan cause the service to excessively
+    consume CPU, resulting in a Denial\nof Service.\n\n\n\n[1]: https://regex101.com/debugger\n"
   affected_package: lodash.merge
   vulnerable_versions:
   - "<4.6.2"
@@ -98,38 +113,53 @@
     versions of this package are vulnerable to Prototype Pollution.\nThe utilities
     function allow modification of the `Object` prototype. If\nan attacker can control
     part of the structure passed to this function,\nthey could add or modify an existing
-    property.\n\n\n\n[1]: https://www.npmjs.com/package/lodash.merge\n\\nPrototype
-    Pollution is a vulnerability affecting JavaScript. Prototype\nPollution refers
-    to the ability to inject properties into existing\nJavaScript language construct
-    prototypes, such as objects. JavaScript\nallows all Object attributes to be altered,
-    including their magical\nattributes such as `_proto_`, `constructor` and `prototype`.
-    An attacker\nmanipulates these attributes to overwrite, or pollute, a JavaScript\napplication
-    object prototype of the base object by injecting other\nvalues. Properties on
-    the `Object.prototype` are then inherited by all\nthe JavaScript objects through
-    the prototype chain. When that happens,\nthis leads to either denial of service
-    by triggering JavaScript\nexceptions, or it tampers with the application source
-    code to force the\ncode path that the attacker injects, thereby leading to remote
-    code\nexecution.\n\nThere are two main ways in which the pollution of prototypes
-    occurs:\n\n* Unsafe `Object` recursive merge\n\n* Property definition by path\n\n###
-    Unsafe Object recursive merge   {#unsafe-object-recursive-merge}\n\nThe logic
-    of a vulnerable recursive merge function follows the following\nhigh-level model:\n\n
-    \   merge (target, source)\n    \n      foreach property of source\n    \n        if
-    property exists and is an object on both the target and the source\n    \n          merge(target[property],
-    source[property])\n    \n        else\n    \n          target[property] = source[property]\n\n&lt;br&gt;\n\nWhen
-    the source object contains a property named `_proto_` defined with\n`Object.defineProperty()`
-    , the condition that checks if the property\nexists and is an object on both the
-    target and the source passes and the\nmerge recurses with the target, being the
-    prototype of `Object` and the\nsource of `Object` as defined by the attacker.
-    Properties are then\ncopied on the `Object` prototype.\n\nClone operations are
-    a special sub-class of unsafe recursive merges,\nwhich occur when a recursive
-    merge is conducted on an empty object:\n`merge({},source)`.\n\n`lodash` and `Hoek`
-    are examples of libraries susceptible to recursive\nmerge attacks.\n\n### Property
-    definition by path   {#property-definition-by-path}\n\nThere are a few JavaScript
-    libraries that use an API to define property\nvalues on an object based on a given
-    path. The function that is\ngenerally affected contains this signature: `theFunction(object,
-    path,\nvalue)`\n\nIf the attacker can control the value of “path”, they can set
-    this value\nto `_proto_.myValue`. `myValue` is then assigned to the prototype
-    of the\nclass of the object.\n\n"
+    property.\n\n\n\n[1]: https://www.npmjs.com/package/lodash.merge\n\\nDenial of
+    Service (DoS) describes a family of attacks, all aimed at\nmaking a system inaccessible
+    to its original and legitimate users. There\nare many types of DoS attacks, ranging
+    from trying to clog the network\npipes to the system by generating a large volume
+    of traffic from many\nmachines (a Distributed Denial of Service - DDoS - attack)
+    to sending\ncrafted requests that cause a system to crash or take a disproportional\namount
+    of time to process.\n\nThe Regular expression Denial of Service (ReDoS) is a type
+    of Denial of\nService attack. Regular expressions are incredibly powerful, but
+    they\naren\\'t very intuitive and can ultimately end up making it easy for\nattackers
+    to take your site down.\n\nLet’s take the following regular expression as an example:\n\n
+    \   regex = /A(B|C+)+D/\n{: .language-js}\n\nThis regular expression accomplishes
+    the following:\n\n* `A` The string must start with the letter \\'A\\'\n* `(B|C+)+`
+    The string must then follow the letter A with either the\n  letter \\'B\\' or
+    some number of occurrences of the letter \\'C\\' (the\n  `+` matches one or more
+    times). The `+` at the end of this section\n  states that we can look for one
+    or more matches of this section.\n* `D` Finally, we ensure this section of the
+    string ends with a \\'D\\'\n\nThe expression would match inputs such as `ABBD`,
+    `ABCCCCD`, `ABCBCCCD`\nand `ACCCCCD`\n\nIt most cases, it doesn\\'t take very
+    long for a regex engine to find a\nmatch:\n\n    $ time node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCD\")'\n
+    \   0.04s user 0.01s system 95% cpu 0.052 total\n    \n    $ time node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCX\")'\n
+    \   1.79s user 0.02s system 99% cpu 1.812 total\n{: .language-bash}\n\nThe entire
+    process of testing it against a 30 characters long string\ntakes around ~52ms.
+    But when given an invalid string, it takes nearly\ntwo seconds to complete the
+    test, over ten times as long as it took to\ntest a valid string. The dramatic
+    difference is due to the way regular\nexpressions get evaluated.\n\nMost Regex
+    engines will work very similarly (with minor differences).\nThe engine will match
+    the first possible way to accept the current\ncharacter and proceed to the next
+    one. If it then fails to match the\nnext one, it will backtrack and see if there
+    was another way to digest\nthe previous character. If it goes too far down the
+    rabbit hole only to\nfind out the string doesn’t match in the end, and if many
+    characters\nhave multiple valid regex paths, the number of backtracking steps
+    can\nbecome very large, resulting in what is known as *catastrophic\nbacktracking*.\n\nLet\\'s
+    look at how our expression runs into this problem, using a\nshorter string: \\\"ACCCX\\\".
+    While it seems fairly straightforward, there\nare still four different ways that
+    the engine could match those three\nC\\'s:\n\n1.  CCC\n2.  CC+C\n3.  C+CC\n4.
+    \ C+C+C.\n\nThe engine has to try each of those combinations to see if any of
+    them\npotentially match against the expression. When you combine that with the\nother
+    steps the engine must take, we can use [RegEx 101 debugger][1] to\nsee the engine
+    has to take a total of 38 steps before it can determine\nthe string doesn\\'t
+    match.\n\nFrom there, the number of steps the engine must use to validate a string\njust
+    continues to grow.\n\n| String | Number of C\\'s | Number of steps |\n|----------\n|
+    ACCCX | 3 | 38 |\n| ACCCCX | 4 | 71 |\n| ACCCCCX | 5 | 136 |\n| ACCCCCCCCCCCCCCX
+    | 14 | 65,553 |\n\nBy the time the string includes 14 C\\'s, the engine has to
+    take over\n65,000 steps just to see if the string is valid. These extreme\nsituations
+    can cause them to work very slowly (exponentially related to\ninput size, as shown
+    above), allowing an attacker to exploit this and\ncan cause the service to excessively
+    consume CPU, resulting in a Denial\nof Service.\n\n\n\n[1]: https://regex101.com/debugger\n"
   affected_package: lodash.merge
   vulnerable_versions:
   - "<4.6.2"

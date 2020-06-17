@@ -1,4 +1,39 @@
 ---
+- id: snykio:maven:org.springframework.batch:spring-batch-core:572008
+  title: Insecure Defaults
+  description: "[org.springframework.batch:spring-batch-core][1] is a framework for\nwriting
+    offline and batch applications using Spring and Java.\n\nAffected versions of
+    this package are vulnerable to Insecure Defaults.\nWhen configured to enable default
+    typing, Jackson contained a\ndeserialization vulnerability\n([https://github.com/FasterXML/jackson-databind/issues/1599][2])
+    that\ncould lead to arbitrary code execution. Jackson fixed this vulnerability\nby
+    blacklisting known \\\"deserialization gadgets\\\".\n\nSpring Batch configures
+    Jackson with global default typing enabled\n([https://github.com/FasterXML/jackson-docs/wiki/JacksonPolymorphicDeserialization#11-global-default-typing][3])\nwhich
+    means that through the previous exploit, arbitrary code could be\nexecuted if
+    all of the following is true:\n\n* Spring Batch’s Jackson support is being leveraged
+    to serialize a job’s\n  ExecutionContext.\n* A malicious user gains write access
+    to the data store used by the\n  JobRepository (where the data to be deserialized
+    is stored).\n  ## Remediation   {#remediation}\n  \n  A fix was pushed into the
+    `master` branch but not yet published.\n  ## References   {#references}\n\n* [GitHub
+    Commit][4]\n* [GitHub Issue][5]\n* [Pivotal Security Advisory][6]\n\n\n\n[1]:
+    http://projects.spring.io/spring-batch/\n[2]: https://github.com/FasterXML/jackson-databind/issues/1599\n[3]:
+    https://github.com/FasterXML/jackson-docs/wiki/JacksonPolymorphicDeserialization#11-global-default-typing\n[4]:
+    https://github.com/spring-projects/spring-batch/commit/9a79b4572d0aa4bec38fe90957c850920b7f9cea#diff-07cf6d4475ae662ecb8675743a20e20d\n[5]:
+    https://github.com/spring-projects/spring-batch/issues/3729\n[6]: https://pivotal.io/security/cve-2020-5411\n"
+  affected_package: org.springframework.batch:spring-batch-core
+  vulnerable_versions:
+  - ">= 4.0.0"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2020-5411
+  cwe:
+  - CWE-453
+  disclosed_date: 2020-06-11
+  created_date: 2020-06-11
+  last_modified_date: 2020-06-11
+  credit:
+  - Unknown
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGSPRINGFRAMEWORKBATCH-572008
 - id: snykio:maven:org.springframework.batch:spring-batch-core:73519
   title: XML External Entity (XXE) Injection
   description: |+

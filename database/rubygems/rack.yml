@@ -417,6 +417,63 @@
   references:
   - https://github.com/rubysec/ruby-advisory-db
   source_url: https://groups.google.com/forum/#!topic/ruby-security-ann/T4ZIsfRf2eA
+- id: rubyadvisory:rubygems:rack:CVE-2020-8184
+  title: Percent-encoded cookies can be used to overwrite existing prefixed cookie
+    names
+  description: |
+    It is possible to forge a secure or host-only cookie prefix in Rack using
+    an arbitrary cookie write by using URL encoding (percent-encoding) on the
+    name of the cookie. This could result in an application that is dependent on
+    this prefix to determine if a cookie is safe to process being manipulated
+    into processing an insecure or cross-origin request.
+    This vulnerability has been assigned the CVE identifier CVE-2020-8184.
+
+    Versions Affected:  rack < 2.2.3, rack < 2.1.4
+    Not affected:       Applications which do not rely on __Host- and __Secure- prefixes to determine if a cookie is safe to process
+    Fixed Versions:     rack >= 2.2.3, rack >= 2.1.4
+
+    Impact
+    ------
+
+    An attacker may be able to trick a vulnerable application into processing an
+    insecure (non-SSL) or cross-origin request if they can gain the ability to write
+    arbitrary cookies that are sent to the application.
+
+    Workarounds
+    -----------
+
+    If your application is impacted but you cannot upgrade to the released versions or apply
+    the provided patch, this issue can be temporarily addressed by adding the following workaround:
+
+    ```
+    module Rack
+      module Utils
+        module_function def parse_cookies_header(header)
+          return {} unless header
+          header.split(/[;] */n).each_with_object({}) do |cookie, cookies|
+            next if cookie.empty?
+            key, value = cookie.split('=', 2)
+            cookies[key] = (unescape(value) rescue value) unless cookies.key?(key)
+          end
+        end
+      end
+    end
+    ```
+  affected_package: rack
+  patched_versions:
+  - ">= 2.2.3"
+  - "~> 2.1.4"
+  package_manager: rubygems
+  cve:
+  - CVE-2020-8184
+  disclosed_date: 2020-06-15
+  created_date: 2020-06-15
+  last_modified_date: 2020-06-15
+  credit:
+  - Rubysec
+  references:
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://groups.google.com/g/rubyonrails-security/c/OWtmozPH9Ak
 - id: rubyadvisory:rubygems:rack:OSVDB-78121
   title: 'Rack Hash Collision Form Parameter Parsing Remote DoS
 
@@ -1346,7 +1403,7 @@
   source_url: https://snyk.io/vuln/SNYK-RUBY-RACK-72566
 - id: snykio:rubygems:rack:72567
   title: Cross-site Scripting (XSS)
-  description: |
+  description: |+
     [rack][1] is a minimal, modular and adaptable interface for developing
     web applications in Ruby. By wrapping HTTP requests and responses in the
     simplest way possible, it unifies and distills the API for web servers,
@@ -1359,6 +1416,78 @@
 
 
     [1]: https://rack.github.io/
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
   affected_package: rack
   vulnerable_versions:
   - "<1.6.11"

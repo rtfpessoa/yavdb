@@ -1,8 +1,9 @@
 ---
 - id: snykio:maven:org.lsp4xml:lsp4xml-extensions:474261
   title: XML External Entity (XXE) Injection
-  description: |
-    [org.lsp4xml:lsp4xml-extensions][1] is a extensions package for Lsp4xml.
+  description: |+
+    [org.lsp4xml:lsp4xml-extensions][1] is an extensions package for
+    Lsp4xml.
 
     Affected versions of this package are vulnerable to XML External Entity
     (XXE) Injection via a crafted XML document, allowing Server Side Request
@@ -13,6 +14,43 @@
 
 
     [1]: https://github.com/angelozerr/lsp4xml/
+    \nXXE Injection is a type of attack against an application that parses XML
+    input. XML is a markup language that defines a set of rules for encoding
+    documents in a format that is both human-readable and machine-readable.
+    By default, many XML processors allow specification of an external
+    entity, a URI that is dereferenced and evaluated during XML processing.
+    When an XML document is being parsed, the parser can make a request and
+    include the content at the specified URI inside of the XML document.
+
+    Attacks can include disclosing local files, which may contain sensitive
+    data such as passwords or private user data, using file: schemes or
+    relative paths in the system identifier.
+
+    For example, below is a sample XML document, containing an XML element-
+    username.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+           <username>John</username>
+        </xml>
+    {: .language-xml}
+
+    An external XML entity - `xxe`, is defined using a system identifier and
+    present within a DOCTYPE header. These entities can access local or
+    remote content. For example the below code contains an external XML
+    entity that would fetch the content of `/etc/passwd` and display it to
+    the user rendered by `username`.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+        <!DOCTYPE foo [
+           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
+           <username>&xxe;</username>
+        </xml>
+    {: .language-xml}
+
+    Other XXE Injection attacks can access local resources that may not stop
+    returning data, possibly impacting application availability and leading
+    to Denial of Service.
+
   affected_package: org.lsp4xml:lsp4xml-extensions
   vulnerable_versions:
   - ">= 0"
@@ -34,7 +72,8 @@
 - id: snykio:maven:org.lsp4xml:lsp4xml-extensions:474267
   title: Directory Traversal
   description: |
-    [org.lsp4xml:lsp4xml-extensions][1] is a extensions package for Lsp4xml.
+    [org.lsp4xml:lsp4xml-extensions][1] is an extensions package for
+    Lsp4xml.
 
     Affected versions of this package are vulnerable to Directory Traversal
     via `XMLLanguageService.java` allowing attackers to write to arbitrary
@@ -43,6 +82,54 @@
 
 
     [1]: https://github.com/angelozerr/lsp4xml/
+    \nA Directory Traversal attack (also known as path traversal) aims to
+    access files and directories that are stored outside the intended
+    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
+    its variations, or by using absolute file paths, it may be possible to
+    access arbitrary files and directories stored on file system, including
+    application source code, configuration, and other critical system files.
+
+    Directory Traversal vulnerabilities can be generally divided into two
+    types:
+
+    * **Information Disclosure**\: Allows the attacker to gain information
+      about the folder structure or read the contents of sensitive files on
+      the system.
+
+    `st` is a module for serving static files on web pages, and contains a
+    [vulnerability of this type][1]. In our example, we will serve files
+    from the `public` route.
+
+    If an attacker requests the following URL from our server, it will in
+    turn leak the sensitive private key of the root user.
+
+        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
+
+    **Note** `%2e` is the URL encoded version of `.` (dot).
+
+    * **Writing arbitrary files**\: Allows the attacker to create or replace
+      existing files. This type of vulnerability is also known as
+      `Zip-Slip`.
+
+    One way to achieve this is by using a malicious `zip` archive that holds
+    path traversal filenames. When each filename in the zip archive gets
+    concatenated to the target extraction folder, without validation, the
+    final path ends up outside of the target folder. If an executable or a
+    configuration file is overwritten with a file containing malicious code,
+    the problem can turn into an arbitrary code execution issue quite
+    easily.
+
+    The following is an example of a `zip` archive with one benign file and
+    one malicious file. Extracting the malicious file will result in
+    traversing out of the target folder, ending up in `/root/.ssh/`
+    overwriting the `authorized_keys` file:
+
+        2018-04-15 22:04:29 .....           19           19  good.txt
+        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
+
+
+
+    [1]: https://snyk.io/vuln/npm:st:20140206
   affected_package: org.lsp4xml:lsp4xml-extensions
   vulnerable_versions:
   - ">= 0"

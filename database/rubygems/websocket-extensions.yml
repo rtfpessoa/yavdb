@@ -1,4 +1,42 @@
 ---
+- id: rubyadvisory:rubygems:websocket-extensions:CVE-2020-7663
+  title: Regular Expression Denial of Service in websocket-extensions (RubyGem)
+  description: |-
+    ### Impact
+
+    The ReDoS flaw allows an attacker to exhaust the server's capacity to process
+    incoming requests by sending a WebSocket handshake request containing a header
+    of the following form:
+
+        Sec-WebSocket-Extensions: a; b="\c\c\c\c\c\c\c\c\c\c ...
+
+    That is, a header containing an unclosed string parameter value whose content is
+    a repeating two-byte sequence of a backslash and some other character. The
+    parser takes exponential time to reject this header as invalid, and this will
+    block the processing of any other work on the same thread. Thus if you are
+    running a single-threaded server, such a request can render your service
+    completely unavailable.
+
+    ### Workarounds
+
+    There are no known work-arounds other than disabling any public-facing WebSocket functionality you are operating.
+  affected_package: websocket-extensions
+  patched_versions:
+  - ">= 0.1.5"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2020-7663
+  cvss_v3_score: 7.5
+  disclosed_date: 2020-06-05
+  created_date: 2020-06-05
+  last_modified_date: 2020-06-05
+  credit:
+  - Rubysec
+  references:
+  - https://blog.jcoglan.com/2020/06/02/redos-vulnerability-in-websocket-extensions/
+  - https://github.com/rubysec/ruby-advisory-db
+  source_url: https://github.com/faye/websocket-extensions-ruby/security/advisories/GHSA-g6wq-qcwm-j5g2
 - id: snykio:rubygems:websocket-extensions:570830
   title: Regular Expression Denial of Service (ReDoS)
   description: "[websocket-extensions][1] is a generic extension manager for WebSocket\nconnections.\n\nAffected

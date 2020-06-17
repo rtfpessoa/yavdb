@@ -528,7 +528,7 @@
   source_url: http://www.osvdb.org/show/osvdb/85809
 - id: snykio:rubygems:rubygems-update:472642
   title: Regular Expression Denial of Service (ReDoS)
-  description: "[rubygems-update][1] is a inbuilt rubygem for updating rubygems.\n\nAffected
+  description: "[rubygems-update][1] is an inbuilt rubygem for updating rubygems.\n\nAffected
     versions of this package are vulnerable to Regular Expression\nDenial of Service
     (ReDoS). Algorithmic complexity vulnerability in\n`Gem::Version::ANCHORED_VERSION_PATTERN`
     in `lib/rubygems/version.rb` as\nused in Ruby 1.9.0 through 2.0.0p247, allows
@@ -607,7 +607,7 @@
 - id: snykio:rubygems:rubygems-update:472643
   title: Arbitrary Code Injection
   description: |
-    [rubygems-update][1] is a inbuilt rubygem for updating rubygems.
+    [rubygems-update][1] is an inbuilt rubygem for updating rubygems.
 
     Affected versions of this package are vulnerable to Arbitrary Code
     Injection. Is vulnerable to maliciously crafted gem specifications that
@@ -646,7 +646,7 @@
 - id: snykio:rubygems:rubygems-update:472644
   title: Infinite Loop
   description: |
-    [rubygems-update][1] is a inbuilt rubygem for updating rubygems.
+    [rubygems-update][1] is an inbuilt rubygem for updating rubygems.
 
     Affected versions of this package are vulnerable to Infinite Loop.
     Contains a infinite loop caused by negative size vulnerability in ruby
@@ -677,7 +677,7 @@
 - id: snykio:rubygems:rubygems-update:472645
   title: Man-in-the-Middle (MitM)
   description: |
-    [rubygems-update][1] is a inbuilt rubygem for updating rubygems.
+    [rubygems-update][1] is an inbuilt rubygem for updating rubygems.
 
     Affected versions of this package are vulnerable to Man-in-the-Middle
     (MitM). Does not verify an SSL certificate, which allows remote
@@ -711,7 +711,7 @@
 - id: snykio:rubygems:rubygems-update:472646
   title: Out-of-Bounds
   description: |
-    [rubygems-update][1] is a inbuilt rubygem for updating rubygems.
+    [rubygems-update][1] is an inbuilt rubygem for updating rubygems.
 
     Affected versions of this package are vulnerable to Out-of-Bounds.
     `Gem::CommandManager#run` calls alert\_error without escaping, therefore
@@ -744,7 +744,7 @@
 - id: snykio:rubygems:rubygems-update:472647
   title: Man-in-the-Middle (MitM)
   description: |
-    [rubygems-update][1] is a inbuilt rubygem for updating rubygems.
+    [rubygems-update][1] is an inbuilt rubygem for updating rubygems.
 
     Affected versions of this package are vulnerable to Man-in-the-Middle
     (MitM) via a DNS hijacking vulnerability that allows a MITM attacker to
@@ -777,7 +777,7 @@
 - id: snykio:rubygems:rubygems-update:472648
   title: Directory Traversal
   description: |
-    [rubygems-update][1] is a inbuilt rubygem for updating rubygems.
+    [rubygems-update][1] is an inbuilt rubygem for updating rubygems.
 
     Affected versions of this package are vulnerable to Directory Traversal.
     Gem installation can result in the gem writing to arbitrary filesystem
@@ -857,10 +857,10 @@
 - id: snykio:rubygems:rubygems-update:472649
   title: Cross-site Scripting (XSS)
   description: |+
-    [rubygems-update][1] is a inbuilt rubygem for updating rubygems.
+    [rubygems-update][1] is an inbuilt rubygem for updating rubygems.
 
     Affected versions of this package are vulnerable to Cross-site Scripting
-    (XSS). in gem server display of homepage attribute. This attack appears
+    (XSS) in gem server display of homepage attribute. This attack appears
     to be exploitable via the victim browsing to a malicious gem on a
     vulnerable gem server.
 
@@ -960,7 +960,7 @@
 - id: snykio:rubygems:rubygems-update:472650
   title: Deserialization of Untrusted Data
   description: |
-    [rubygems-update][1] is a inbuilt rubygem for updating rubygems.
+    [rubygems-update][1] is an inbuilt rubygem for updating rubygems.
 
     Affected versions of this package are vulnerable to Deserialization of
     Untrusted Data in owner command that can result in code execution. This
@@ -970,6 +970,51 @@
 
 
     [1]: https://rubygems.org/
+    \nSerialization is a process of converting an object into a sequence of
+    bytes which can be persisted to a disk or database or can be sent
+    through streams. The reverse process of creating object from sequence of
+    bytes is called deserialization. Serialization is commonly used for
+    communication (sharing objects between multiple hosts) and persistence
+    (store the object state in a file or a database). It is an integral part
+    of popular protocols like *Remote Method Invocation (RMI)*, *Java
+    Management Extension (JMX)*, *Java Messaging System (JMS)*, *Action
+    Message Format (AMF)*, *Java Server Faces (JSF) ViewState*, etc.
+
+    *Deserialization of untrusted data* ([CWE-502][1]), is when the
+    application deserializes untrusted data without sufficiently verifying
+    that the resulting data will be valid, letting the attacker to control
+    the state or the flow of the execution.
+
+    Java deserialization issues have been known for years. However, interest
+    in the issue intensified greatly in 2015, when classes that could be
+    abused to achieve remote code execution were found in a [popular library
+    (Apache Commons Collection)][2]. These classes were used in zero-days
+    affecting IBM WebSphere, Oracle WebLogic and many other products.
+
+    An attacker just needs to identify a piece of software that has both a
+    vulnerable class on its path, and performs deserialization on untrusted
+    data. Then all they need to do is send the payload into the
+    deserializer, getting the command executed.
+
+    > Developers put too much trust in Java Object Serialization. Some even
+    > de-serialize objects pre-authentication. When deserializing an Object
+    > in Java you typically cast it to an expected type, and therefore
+    > Java\'s strict type system will ensure you only get valid object
+    > trees. Unfortunately, by the time the type checking happens, platform
+    > code has already created and executed significant logic. So, before
+    > the final type is checked a lot of code is executed from the
+    > readObject() methods of various objects, all of which is out of the
+    > developer\'s control. By combining the readObject() methods of various
+    > classes which are available on the classpath of the vulnerable
+    > application an attacker can execute functions (including calling
+    > Runtime.exec() to execute local OS commands).
+
+    * Apache Blog
+
+
+
+    [1]: https://cwe.mitre.org/data/definitions/502.html
+    [2]: https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078
   affected_package: rubygems-update
   vulnerable_versions:
   - "<2.7.6"
@@ -991,11 +1036,11 @@
 - id: snykio:rubygems:rubygems-update:472651
   title: Improper Input Validation
   description: |
-    [rubygems-update][1] is a inbuilt rubygem for updating rubygems.
+    [rubygems-update][1] is an inbuilt rubygem for updating rubygems.
 
     Affected versions of this package are vulnerable to Improper Input
-    Validation. in ruby gems specification homepage attribute that can
-    result in a malicious gem setting an invalid homepage URL.
+    Validation in ruby gems specification homepage attribute that can result
+    in a malicious gem setting an invalid homepage URL.
 
 
 
@@ -1021,7 +1066,7 @@
 - id: snykio:rubygems:rubygems-update:472652
   title: Arbitrary Code Execution
   description: |
-    [rubygems-update][1] is a inbuilt rubygem for updating rubygems.
+    [rubygems-update][1] is an inbuilt rubygem for updating rubygems.
 
     Affected versions of this package are vulnerable to Arbitrary Code
     Execution. A crafted gem with a multi-line name is not handled
@@ -1058,7 +1103,7 @@
 - id: snykio:rubygems:rubygems-update:472653
   title: Directory Traversal
   description: |
-    [rubygems-update][1] is a inbuilt rubygem for updating rubygems.
+    [rubygems-update][1] is an inbuilt rubygem for updating rubygems.
 
     Affected versions of this package are vulnerable to Directory Traversal.
     The `install_location` function of `package.rb` can result in path
@@ -1136,7 +1181,7 @@
 - id: snykio:rubygems:rubygems-update:472654
   title: Improper Verification of Cryptographic Signature
   description: |
-    [rubygems-update][1] is a inbuilt rubygem for updating rubygems.
+    [rubygems-update][1] is an inbuilt rubygem for updating rubygems.
 
     Affected versions of this package are vulnerable to Improper
     Verification of Cryptographic Signature. In `package.rb` a mis-signed
@@ -1167,7 +1212,7 @@
 - id: snykio:rubygems:rubygems-update:472655
   title: Arbitrary Code Execution
   description: |
-    [rubygems-update][1] is a inbuilt rubygem for updating rubygems.
+    [rubygems-update][1] is an inbuilt rubygem for updating rubygems.
 
     Affected versions of this package are vulnerable to Arbitrary Code
     Execution. RubyGems version 2.6.12 and earlier fails to validate
@@ -1200,7 +1245,7 @@
 - id: snykio:rubygems:rubygems-update:472656
   title: Denial of Service (DoS)
   description: |+
-    [rubygems-update][1] is a inbuilt rubygem for updating rubygems.
+    [rubygems-update][1] is an inbuilt rubygem for updating rubygems.
 
     Affected versions of this package are vulnerable to Denial of Service
     (DoS). Vulnerable to maliciously crafted gem specifications that can
@@ -1258,7 +1303,7 @@
 - id: snykio:rubygems:rubygems-update:472657
   title: DNS Hijack Attack
   description: |
-    [rubygems-update][1] is a inbuilt rubygem for updating rubygems.
+    [rubygems-update][1] is an inbuilt rubygem for updating rubygems.
 
     Affected versions of this package are vulnerable to DNS Hijack Attack.
     It does not validate the hostname when fetching gems or making API
@@ -1296,7 +1341,7 @@
 - id: snykio:rubygems:rubygems-update:472658
   title: Man-in-the-Middle (MitM)
   description: |
-    [rubygems-update][1] is a inbuilt rubygem for updating rubygems.
+    [rubygems-update][1] is an inbuilt rubygem for updating rubygems.
 
     Affected versions of this package are vulnerable to Man-in-the-Middle
     (MitM). It can redirect HTTPS connections to HTTP, which makes it easier

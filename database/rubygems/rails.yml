@@ -70,7 +70,7 @@
 - id: snykio:rubygems:rails:455850
   title: Remote Code Execution (RCE)
   description: |
-    [rails][1] is a opensource MVC web framework.
+    [rails][1] is an opensource MVC web framework.
 
     Affected versions of this package are vulnerable to Remote Code
     Execution (RCE). It allows remote attackers to execute Ruby code via a
@@ -158,7 +158,7 @@
 - id: snykio:rubygems:rails:455852
   title: Cross-site Scripting (XSS)
   description: |+
-    [rails][1] is a opensource MVC web framework.
+    [rails][1] is an opensource MVC web framework.
 
     Affected versions of this package are vulnerable to Cross-site Scripting
     (XSS). The t`ActiveRecord::Base#to_json` function allows remote
@@ -262,7 +262,7 @@
 - id: snykio:rubygems:rails:455853
   title: Information Exposure
   description: |
-    [rails][1] is a opensource MVC web framework.
+    [rails][1] is an opensource MVC web framework.
 
     Affected versions of this package are vulnerable to Information
     Exposure. It allows remote attackers and `ActiveResource` servers to
@@ -293,7 +293,7 @@
 - id: snykio:rubygems:rails:455951
   title: Session Fixation
   description: |
-    [rails][1] is a opensource MVC web framework.
+    [rails][1] is an opensource MVC web framework.
 
     Affected versions of this package are vulnerable to Session Fixation. It
     allows remote attackers to hijack web sessions by changing session based
@@ -324,7 +324,7 @@
 - id: snykio:rubygems:rails:455952
   title: Session Fixation
   description: |
-    [rails][1] is a opensource MVC web framework.
+    [rails][1] is an opensource MVC web framework.
 
     Affected versions of this package are vulnerable to Session Fixation.
     The session fixation protection mechanism in `cgi_process.rb` in Rails
@@ -360,7 +360,7 @@
 - id: snykio:rubygems:rails:455953
   title: Cross-Site Request Forgery (CSRF)
   description: |
-    [rails][1] is a opensource MVC web framework.
+    [rails][1] is an opensource MVC web framework.
 
     Affected versions of this package are vulnerable to Cross-Site Request
     Forgery (CSRF). It allows remote attackers to inject arbitrary HTTP
@@ -393,7 +393,7 @@
 - id: snykio:rubygems:rails:455954
   title: Improper Input Validation
   description: |
-    [rails][1] is a opensource MVC web framework.
+    [rails][1] is an opensource MVC web framework.
 
     Affected versions of this package are vulnerable to Improper Input
     Validation. The package does not verify tokens for requests with certain
@@ -426,7 +426,7 @@
 - id: snykio:rubygems:rails:456064
   title: Improper Authentication
   description: |
-    [rails][1] is a opensource MVC web framework.
+    [rails][1] is an opensource MVC web framework.
 
     Affected versions of this package are vulnerable to Improper
     Authentication. The example code for the digest authentication
@@ -573,7 +573,7 @@
 - id: snykio:rubygems:rails:456066
   title: Information Exposure
   description: |
-    [rails][1] is a opensource MVC web framework.
+    [rails][1] is an opensource MVC web framework.
 
     Affected versions of this package are vulnerable to Information
     Exposure. It allows leaks of information about the complexity of
@@ -604,8 +604,8 @@
   source_url: https://snyk.io/vuln/SNYK-RUBY-RAILS-456066
 - id: snykio:rubygems:rails:456069
   title: Cross-site Scripting (XSS)
-  description: |
-    [rails][1] is a opensource MVC web framework.
+  description: |+
+    [rails][1] is an opensource MVC web framework.
 
     Affected versions of this package are vulnerable to Cross-site Scripting
     (XSS). The `strip_tags` function allows remote attackers to inject
@@ -616,6 +616,78 @@
 
 
     [1]: https://rubyonrails.org/
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
   affected_package: rails
   vulnerable_versions:
   - "<2.2.2"
@@ -642,7 +714,7 @@
 - id: snykio:rubygems:rails:472693
   title: SQL Injection
   description: |
-    [rails][1] is a opensource MVC web framework.
+    [rails][1] is an opensource MVC web framework.
 
     Affected versions of this package are vulnerable to SQL Injection. It
     allows remote attackers to execute arbitrary SQL commands via the (1)
@@ -677,7 +749,7 @@
 - id: snykio:rubygems:rails:472695
   title: Access Restriction Bypass
   description: |
-    [rails][1] is a opensource MVC web framework.
+    [rails][1] is an opensource MVC web framework.
 
     Affected versions of this package are vulnerable to Access Restriction
     Bypass. `actionpack/lib/action_dispatch/http/request.rb` does not
@@ -720,7 +792,7 @@
 - id: snykio:rubygems:rails:472697
   title: SQL Injection
   description: |
-    [rails][1] is a opensource MVC web framework.
+    [rails][1] is an opensource MVC web framework.
 
     Affected versions of this package are vulnerable to SQL Injection. The
     Active Record component does not properly implement the passing of
@@ -761,7 +833,7 @@
 - id: snykio:rubygems:rails:536097
   title: Improper Input Validation
   description: |
-    [rails][1] is a opensource MVC web framework.
+    [rails][1] is an opensource MVC web framework.
 
     Affected versions of this package are vulnerable to Improper Input
     Validation. It allows remote attackers to modify arbitrary records by

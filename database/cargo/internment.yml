@@ -1,0 +1,22 @@
+---
+- id: rustsec:cargo:internment:RUSTSEC-2020-0017
+  title: Use after free in ArcIntern::drop
+  description: |
+    `ArcIntern::drop` has a race condition where it can release memory
+    which is about to get another user. The new user will get a reference
+    to freed memory.
+
+    Versions prior to 0.3.12 used stronger locking which avoided the problem.
+  affected_package: internment
+  vulnerable_versions:
+  - "*"
+  severity: high
+  package_manager: cargo
+  disclosed_date: 2020-05-28
+  created_date: 2020-05-28
+  last_modified_date: 2020-05-28
+  credit:
+  - RustSec
+  references:
+  - https://github.com/droundy/internment/issues/11
+  source_url: https://github.com/RustSec/advisory-db/blob/master/crates/internment/RUSTSEC-2020-0017.toml

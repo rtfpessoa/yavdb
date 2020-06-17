@@ -898,20 +898,24 @@
   source_url: https://snyk.io/vuln/SNYK-PYTHON-ANSIBLE-559165
 - id: snykio:pypi:ansible:559542
   title: Arbitrary File Write via Archive Extraction (Zip Slip)
-  description: |
-    [ansible][1] is a simple IT automation system.
-
-    Affected versions of this package are vulnerable to Arbitrary File Write
-    via Archive Extraction (Zip Slip). A flaw was found when using the
-    `Extract-Zip` function from the `win_unzip` module as the extracted
-    file(s) are not checked if they belong to the destination folder. An
-    attacker could take advantage of this flaw by crafting an archive
-    anywhere in the file system, using a path traversal. This issue is fixed
-    in 2.10.
-
-
-
-    [1]: https://pypi.org/project/ansible/
+  description: "[ansible][1] is a simple IT automation system.\n\nAffected versions
+    of this package are vulnerable to Arbitrary File Write\nvia Archive Extraction
+    (Zip Slip). A flaw was found when using the\n`Extract-Zip` function from the `win_unzip`
+    module as the extracted\nfile(s) are not checked if they belong to the destination
+    folder. An\nattacker could take advantage of this flaw by crafting an archive\nanywhere
+    in the file system, using a path traversal. This issue is fixed\nin 2.10.\n\n\n\n[1]:
+    https://pypi.org/project/ansible/\n\\nIt is exploited using a specially crafted
+    zip archive, that holds path\ntraversal filenames. When exploited, a filename
+    in a malicious archive\nis concatenated to the target extraction directory, which
+    results in the\nfinal path ending up outside of the target folder. For instance,
+    a zip\nmay hold a file with a \\\"../../file.exe\\\" location and thus break out
+    of\nthe target folder. If an executable or a configuration file is\noverwritten
+    with a file containing malicious code, the problem can turn\ninto an arbitrary
+    code execution issue quite easily.\n\nThe following is an example of a zip archive
+    with one benign file and\none malicious file. Extracting the malicous file will
+    result in\ntraversing out of the target folder, ending up in `/root/.ssh/`\noverwriting
+    the `authorized_keys` file:\n\n    \n    +2018-04-15 22:04:29 ..... 19 19 good.txt\n
+    \   \n    +2018-04-15 22:04:42 ..... 20 20 ../../../../../../root/.ssh/authorized_keys\n\n"
   affected_package: ansible
   vulnerable_versions:
   - "< 2.7.17"
@@ -1136,6 +1140,54 @@
 
 
     [1]: https://pypi.org/project/ansible/
+    \nA Directory Traversal attack (also known as path traversal) aims to
+    access files and directories that are stored outside the intended
+    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
+    its variations, or by using absolute file paths, it may be possible to
+    access arbitrary files and directories stored on file system, including
+    application source code, configuration, and other critical system files.
+
+    Directory Traversal vulnerabilities can be generally divided into two
+    types:
+
+    * **Information Disclosure**\: Allows the attacker to gain information
+      about the folder structure or read the contents of sensitive files on
+      the system.
+
+    `st` is a module for serving static files on web pages, and contains a
+    [vulnerability of this type][1]. In our example, we will serve files
+    from the `public` route.
+
+    If an attacker requests the following URL from our server, it will in
+    turn leak the sensitive private key of the root user.
+
+        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
+
+    **Note** `%2e` is the URL encoded version of `.` (dot).
+
+    * **Writing arbitrary files**\: Allows the attacker to create or replace
+      existing files. This type of vulnerability is also known as
+      `Zip-Slip`.
+
+    One way to achieve this is by using a malicious `zip` archive that holds
+    path traversal filenames. When each filename in the zip archive gets
+    concatenated to the target extraction folder, without validation, the
+    final path ends up outside of the target folder. If an executable or a
+    configuration file is overwritten with a file containing malicious code,
+    the problem can turn into an arbitrary code execution issue quite
+    easily.
+
+    The following is an example of a `zip` archive with one benign file and
+    one malicious file. Extracting the malicious file will result in
+    traversing out of the target folder, ending up in `/root/.ssh/`
+    overwriting the `authorized_keys` file:
+
+        2018-04-15 22:04:29 .....           19           19  good.txt
+        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
+
+
+
+    [1]: https://snyk.io/vuln/npm:st:20140206
   affected_package: ansible
   vulnerable_versions:
   - ">= 2.7 < 2.7.17"
@@ -1194,11 +1246,11 @@
   description: |
     [ansible][1] is a simple IT automation system.
 
-    Affected versions of this package are vulnerable to Insecure Permissions
-    , within `ansible-engine` when running `ansible-galaxy` collection
-    install. When extracting a collection `.tar.gz` file, the directory is
-    created without sanitizing the filename. An attacker could take
-    advantage to overwrite any file within the system.
+    Affected versions of this package are vulnerable to Insecure
+    Permissions. , within `ansible-engine` when running `ansible-galaxy`
+    collection install. When extracting a collection `.tar.gz` file, the
+    directory is created without sanitizing the filename. An attacker could
+    take advantage to overwrite any file within the system.
 
 
 
@@ -1276,9 +1328,7 @@
     [1]: https://pypi.org/project/ansible/
   affected_package: ansible
   vulnerable_versions:
-  - "< 2.7.19"
-  - ">= 2.8.0 < 2.8.13"
-  - ">= 2.9.0 < 2.9.10"
+  - ">= 0"
   severity: medium
   package_manager: pypi
   cve:
