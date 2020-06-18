@@ -1,0 +1,37 @@
+---
+- id: snykio:npm:ssb-db:572109
+  title: Information Exposure
+  description: |
+    [ssb-db][1] is an a secure, replicatable database
+
+    Affected versions of this package are vulnerable to Information
+    Exposure. The `get()` method is supposed to only decrypt messages when
+    explicitly asked, however a bug exists where it decrypts any message
+    that it can. This means that it returns the decrypted content of private
+    messages, which a malicious peer could use to get access to private
+    data. This only affects peers who also have private messages, and is
+    only known to be exploitable if you\'re also running `SSB-OOO` (default
+    in SSB-Server), which exposes a thin wrapper around `get()` to anonymous
+    peers.
+
+
+
+    [1]: https://www.npmjs.com/package/ssb-db
+  affected_package: ssb-db
+  vulnerable_versions:
+  - ">=20.0.0 <20.0.1"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2020-4045
+  cwe:
+  - CWE-200
+  disclosed_date: 2020-06-12
+  created_date: 2020-06-12
+  last_modified_date: 2020-06-12
+  credit:
+  - Unknown
+  references:
+  - https://github.com/ssbc/ssb-db/commit/43334d0871c9cc6220e0f6d6338499060f7761d4
+  - https://github.com/ssbc/ssb-db/security/advisories/GHSA-mpgr-2cx9-327h
+  source_url: https://snyk.io/vuln/SNYK-JS-SSBDB-572109

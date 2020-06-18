@@ -1,0 +1,80 @@
+---
+- id: snykio:go:github.com/hashicorp/consul/agent/structs:572112
+  title: Insecure Permissions
+  description: |
+    [github.com/hashicorp/consul/agent/structs][1] is a tool for service
+    discovery and configuration.
+
+    Affected versions of this package are vulnerable to Insecure
+    Permissions. Consul fails to enforce changes to legacy ACL token rules
+    due to non-propagation to secondary data centers.
+
+
+
+    [1]: https://github.com/hashicorp/consul
+  affected_package: github.com/hashicorp/consul/agent/structs
+  vulnerable_versions:
+  - ">=1.6.0-beta1 <1.6.6"
+  - ">=1.7.0 <1.7.4"
+  severity: low
+  package_manager: go
+  cve:
+  - CVE-2020-12797
+  cwe:
+  - CWE-275
+  disclosed_date: 2020-06-12
+  created_date: 2020-06-12
+  last_modified_date: 2020-06-12
+  credit:
+  - Unknown
+  references:
+  - https://github.com/hashicorp/consul/blob/v1.6.6/CHANGELOG.md
+  - https://github.com/hashicorp/consul/blob/v1.7.4/CHANGELOG.md
+  - https://github.com/hashicorp/consul/commit/98eea08d3ba1b220a14cf6eedf3b6b07ae2795d7
+  - https://github.com/hashicorp/consul/issues/5606
+  - https://github.com/hashicorp/consul/pull/8047
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMHASHICORPCONSULAGENTSTRUCTS-572112
+- id: snykio:go:github.com/hashicorp/consul/agent/structs:572116
+  title: Privilege Escalation
+  description: |
+    [github.com/hashicorp/consul/agent/structs][1] is a tool for service
+    discovery and configuration.
+
+    Affected versions of this package are vulnerable to Privilege
+    Escalation. Consul has two types of tokens, Global and Local. Local
+    tokens are meant to only be resolvable and used within a single
+    datacenter. Creation of local tokens is only allowed if either token
+    replication is enabled in a secondary datacenter, or if the datacenter
+    the token is scoped to is the primary. In a typical cluster we expect
+    that either token replication is on in all datacenters or local tokens
+    are not used at all.
+
+    When token replication is not enabled in a secondary datacenter,
+    attempts to use a local token created in the primary are successful for
+    operations targeting that secondary datacenter. Thus what was meant to
+    be scoped to a single datacenter is valid in other datacenters.
+
+
+
+    [1]: https://github.com/hashicorp/consul
+  affected_package: github.com/hashicorp/consul/agent/structs
+  vulnerable_versions:
+  - ">=1.6.0-beta1 <1.6.6"
+  - ">=1.7.0 <1.7.4"
+  severity: medium
+  package_manager: go
+  cve:
+  - CVE-2020-13170
+  cwe:
+  - CWE-264
+  disclosed_date: 2020-06-12
+  created_date: 2020-06-12
+  last_modified_date: 2020-06-12
+  credit:
+  - Unknown
+  references:
+  - https://github.com/hashicorp/consul/blob/v1.6.6/CHANGELOG.md
+  - https://github.com/hashicorp/consul/blob/v1.7.4/CHANGELOG.md
+  - https://github.com/hashicorp/consul/commit/242994a016a181d6c62a5bb83189716ad13d4216
+  - https://github.com/hashicorp/consul/pull/8068
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMHASHICORPCONSULAGENTSTRUCTS-572116
