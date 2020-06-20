@@ -1,0 +1,43 @@
+---
+- id: snykio:maven:org.apache.karaf.management:org.apache.karaf.management.server:572298
+  title: Access Restriction Bypass
+  description: |
+    [org.apache.karaf.management:org.apache.karaf.management.server][1] is a
+    package that bundles starts the Karaf embedded MBean server and RMI
+    registry allowing users to use JMX to manage Karaf.
+
+    Affected versions of this package are vulnerable to Access Restriction
+    Bypass. In Karaf, JMX authentication takes place using JAAS and
+    authorization takes place using ACL files. By default, only an \"admin\"
+    can actually invoke on an MBean. However there is a vulnerability there
+    for someone who is not an admin, but has a \"viewer\" role. In the
+    \'etc/jmx.acl.cfg\', such as role can call get\*. It\'s possible to
+    authenticate as a viewer role + invokes on the MLet getMBeansFromURL
+    method, which goes off to a remote server to fetch the desired MBean,
+    which is then registered in Karaf. At this point the attack fails as
+    \"viewer\" doesn\'t have the permission to invoke on the MBean. Still,
+    it could act as a SSRF style attack and also it essentially allows a
+    \"viewer\" role to pollute the MBean registry, which is a kind of
+    privilege escalation.
+
+
+
+    [1]: https://search.maven.org/artifact/org.apache.karaf.management/org.apache.karaf.management.server
+  affected_package: org.apache.karaf.management:org.apache.karaf.management.server
+  vulnerable_versions:
+  - "< 4.2.8"
+  severity: low
+  package_manager: maven
+  cve:
+  - CVE-2020-11980
+  cwe:
+  - CWE-284
+  disclosed_date: 2020-06-14
+  created_date: 2020-06-14
+  last_modified_date: 2020-06-14
+  credit:
+  - Colm O hEigeartaigh
+  references:
+  - http://karaf.apache.org/security/cve-2020-11980.txt
+  - https://gitbox.apache.org/repos/asf?p=karaf.git;a=commit;h=3e4c4bed2d08e81ca5961ab5fcadab23470db1c9
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEKARAFMANAGEMENT-572298
