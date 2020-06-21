@@ -1,0 +1,40 @@
+---
+- id: snykio:npm:node-import:571691
+  title: Arbitrary Code Execution
+  description: |
+    [node-import][1] is a package that imports dependencies and run it
+    directly or concatenate them and exports to file.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution. The \"params\" argument of module function can be controlled
+    by users without any sanitization.b. This is then provided to the “eval”
+    function located in line 79 in the index file \"index.js\".
+
+    ### PoC   {#poc}
+
+        var a = require("node-import");
+        var params = {
+          'fs=require("fs");fs.writeFile("JHU");//':123
+        }
+        a.module('',params,true)
+
+
+
+    [1]: https://github.com/mahdaen/node-import
+  affected_package: node-import
+  vulnerable_versions:
+  - "*"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2020-7678
+  cwe:
+  - CWE-78
+  disclosed_date: 2020-06-15
+  created_date: 2020-06-15
+  last_modified_date: 2020-06-15
+  credit:
+  - JHU System Security Lab
+  references:
+  - https://github.com/mahdaen/node-import/blob/master/index.js#L79
+  source_url: https://snyk.io/vuln/SNYK-JS-NODEIMPORT-571691

