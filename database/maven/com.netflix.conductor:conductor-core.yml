@@ -1,0 +1,37 @@
+---
+- id: snykio:maven:com.netflix.conductor:conductor-core:572437
+  title: Remote Code Execution (RCE)
+  description: |
+    [com.netflix.conductor:conductor-core][1] is a microservices
+    orchestration engine.
+
+    Affected versions of this package are vulnerable to Remote Code
+    Execution (RCE). It uses Java Bean Validation (JSR 380) custom
+    constraint validators. When building custom constraint violation error
+    messages, different types of interpolation are supported, including Java
+    EL expressions. If an attacker can inject arbitrary data in the error
+    message template being passed to
+    ConstraintValidatorContext.buildConstraintViolationWithTemplate()
+    argument, they will be able to run arbitrary Java code.
+
+
+
+    [1]: https://github.com/Netflix/conductor
+  affected_package: com.netflix.conductor:conductor-core
+  vulnerable_versions:
+  - "< 2.25.3"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2020-9296
+  cwe:
+  - CWE-94
+  disclosed_date: 2020-06-16
+  created_date: 2020-06-16
+  last_modified_date: 2020-06-16
+  credit:
+  - Unknown
+  references:
+  - https://github.com/Netflix/conductor/pull/1543/commits/375f8d8b708a801647c327e0848b30d34f804edd
+  - https://github.com/Netflix/security-bulletins/blob/master/advisories/nflx-2020-001.md
+  source_url: https://snyk.io/vuln/SNYK-JAVA-COMNETFLIXCONDUCTOR-572437

