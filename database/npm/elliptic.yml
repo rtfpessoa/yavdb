@@ -33,3 +33,47 @@
   - https://github.com/indutny/elliptic/pull/203
   - https://github.com/warner/python-ecdsa/commit/b516f06d0e94eca6deeb3bdb82027ad2f2f55ac6
   source_url: https://snyk.io/vuln/SNYK-JS-ELLIPTIC-511941
+- id: snykio:npm:elliptic:571484
+  title: Cryptographic Issues
+  description: "[elliptic][1] is a Fast elliptic-curve cryptography in a plain\njavascript
+    implementation.\n\nAffected versions of this package are vulnerable to Cryptographic\nIssues.
+    Elliptic allows ECDSA signature malleability via variations in\nencoding, leading
+    `\\0` bytes, or integer overflows. This could\nconceivably have a security-relevant
+    impact if an application relied on\na single canonical signature.\n\n### PoC   {#poc}\n\n
+    \   var crypto = require('crypto')\n    var EC = require('elliptic').ec;\n    var
+    ec = new EC('secp256k1');\n    \n    var obj = require(\"./poc_ecdsa_secp256k1_sha256_test.json\");\n
+    \   \n    for (let testGroup of obj.testGroups) {\n    \n        var key = ec.keyFromPublic(testGroup.key.uncompressed,
+    'hex');\n    \n        for(let test of testGroup.tests) {\n         console.log(\"[*]
+    Test \" + test.tcId + \" result: \" + test.result)\n    \n         msgHash = crypto.createHash('sha256').update(Buffer.from(test.msg,
+    'hex')).digest();\n    \n         try {\n          result = key.verify(msgHash,
+    Buffer.from(test.sig, 'hex'));\n    \n         if (result == true) {\n          if
+    (test.result == \"valid\" || test.result == \"acceptable\")\n           console.log(\"Result:
+    PASS\");\n          else\n           console.log(\"Result: FAIL\")     \n         }\n
+    \   \n         if (result == false) {\n          if (test.result == \"valid\"
+    || test.result == \"acceptable\")\n           console.log(\"Result: FAIL\");\n
+    \         else\n           console.log(\"Result: PASS\")     \n         }\n    \n
+    \   \n    \n         } catch (e) {\n          console.log(\"ERROR - VERIFY: \"
+    + e)\n    \n          if (test.result == \"valid\" || test.result == \"acceptable\")\n
+    \          console.log(\"Result: FAIL\");\n          else\n           console.log(\"Result:
+    PASS\")     \n    \n    \n    \n         }\n    \n    \n        }\n    \n    }\n\n\n\n[1]:
+    https://www.npmjs.com/package/elliptic\n"
+  affected_package: elliptic
+  vulnerable_versions:
+  - "<6.5.3"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2020-13822
+  cwe:
+  - CWE-310
+  disclosed_date: 2020-06-05
+  created_date: 2020-06-17
+  last_modified_date: 2020-06-17
+  credit:
+  - Unknown
+  references:
+  - https://github.com/indutny/elliptic/issues/226
+  - https://medium.com/@herman_10687/malleability-attack-why-it-matters-7b5f59fb99a4
+  - https://www.npmjs.com/package/elliptic
+  - https://yondon.blog/2019/01/01/how-not-to-use-ecdsa/
+  source_url: https://snyk.io/vuln/SNYK-JS-ELLIPTIC-571484
