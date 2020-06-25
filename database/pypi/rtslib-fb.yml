@@ -1,0 +1,32 @@
+---
+- id: snykio:pypi:rtslib-fb:572839
+  title: Insecure Permissions
+  description: |
+    [rtslib-fb][1] is a Python library for configuring the Linux
+    kernel-based multiprotocol SCSI target (LIO)
+
+    Affected versions of this package are vulnerable to Insecure
+    Permissions. It has weak permissions for `/etc/target/saveconfig.json`
+    due to `shutil.copyfile` being used, instead of `shutil.copy`. That
+    results in the file\'s permissions not being preserved.
+
+
+
+    [1]: https://github.com/open-iscsi/rtslib-fb
+  affected_package: rtslib-fb
+  vulnerable_versions:
+  - "< 2.1.73"
+  severity: low
+  package_manager: pypi
+  cve:
+  - CVE-2020-14019
+  cwe:
+  - CWE-275
+  disclosed_date: 2020-05-28
+  created_date: 2020-06-19
+  last_modified_date: 2020-06-19
+  credit:
+  - Unknown
+  references:
+  - https://github.com/open-iscsi/rtslib-fb/pull/162
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-RTSLIBFB-572839
