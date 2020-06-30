@@ -1,0 +1,37 @@
+---
+- id: snykio:pypi:django-basic-auth-ip-whitelist:573160
+  title: Timing Attack
+  description: |
+    [django-basic-auth-ip-whitelist][1] is a Hide your Django site behind
+    basic authentication mechanism with IP whitelisting support.
+
+    Affected versions of this package are vulnerable to Timing Attack.
+    Potential timing attack exists on websites where the basic
+    authentication is used or configured, i.e. `BASIC_AUTH_LOGIN` and
+    `BASIC_AUTH_PASSWORD` is set. Currently the string comparison between
+    configured credentials and the ones provided by users is performed
+    through a character-by-character string comparison. This enables a
+    possibility that attacker may time the time it takes the server to
+    validate different usernames and password, and use this knowledge to
+    work out the valid credentials.
+
+
+
+    [1]: https://www.pypi.org/project/django-basic-auth-ip-whitelist
+  affected_package: django-basic-auth-ip-whitelist
+  vulnerable_versions:
+  - "< 0.3.4"
+  severity: low
+  package_manager: pypi
+  cve:
+  - CVE-2020-4071
+  cwe:
+  - CWE-208
+  disclosed_date: 2020-06-24
+  created_date: 2020-06-24
+  last_modified_date: 2020-06-24
+  credit:
+  - Thibaud Colas
+  references:
+  - https://github.com/tm-kn/django-basic-auth-ip-whitelist/commit/106237b3736981a9d10fd9c8859a1bd46117e822
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-DJANGOBASICAUTHIPWHITELIST-573160

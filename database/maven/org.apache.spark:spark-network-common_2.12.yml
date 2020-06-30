@@ -1,0 +1,39 @@
+---
+- id: snykio:maven:org.apache.spark:spark-network-common_2.12:573163
+  title: Remote Code Execution (RCE)
+  description: |
+    [org.apache.spark:spark-network-common\_2.12][1] is an open-source
+    distributed general-purpose cluster-computing framework.
+
+    Affected versions of this package are vulnerable to Remote Code
+    Execution (RCE). A standalone resource manager\'s master may be
+    configured to require authentication (`spark.authenticate`) via a shared
+    secret. When enabled, however, a specially-crafted RPC to the master can
+    succeed in starting an application\'s resources on the Spark cluster,
+    even without the shared key. This can be leveraged to execute shell
+    commands on the host machine. This does not affect Spark clusters using
+    other resource managers (YARN, Mesos, etc).
+
+
+
+    [1]: https://github.com/apache/spark
+  affected_package: org.apache.spark:spark-network-common_2.12
+  vulnerable_versions:
+  - "< 2.4.6"
+  - ">= 3.0.0-preview < 3.0.0"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2020-9480
+  cwe:
+  - CWE-94
+  disclosed_date: 2020-06-24
+  created_date: 2020-06-24
+  last_modified_date: 2020-06-24
+  credit:
+  - Ayoub Elaassal
+  references:
+  - https://github.com/apache/spark/commit/9416b7c54bdf5613c1a65e6d1779a87591c6c9bd
+  - https://github.com/apache/spark/commit/c80d5f7aa0fd9e7b37e1bf4175204750098a44a6
+  - https://spark.apache.org/security.html#CVE-2020-9480
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHESPARK-573163
