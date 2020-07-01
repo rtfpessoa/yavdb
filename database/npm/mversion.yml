@@ -29,3 +29,29 @@
   - https://github.com/mikaelbr/mversion/commit/6c76c9efd27c7ff5a5c6f187e8b7a435c4722338
   - https://github.com/mikaelbr/mversion/issues/55
   source_url: https://snyk.io/vuln/SNYK-JS-MVERSION-572433
+- id: snykio:npm:mversion:573174
+  title: Command Injection
+  description: "[mversion][1] is a cross packaging manager module version\nhandler/bumper.\n\nAffected
+    versions of this package are vulnerable to Command Injection.\nThe issue occurs
+    because `tagName` user input is formatted inside the\n`exec` function is executed
+    without any checks.\n\n### PoC:   {#poc}\n\n    var mversion = require('mversion');\n
+    \   \n    mversion.update({\n           version: \"major\",\n           commitMessage:
+    \"testing\",\n           tagName: \"; touch hbkhan\",\n     })\n\n\n\n[1]: https://www.npmjs.com/package/mversion\n"
+  affected_package: mversion
+  vulnerable_versions:
+  - "<2.0.1"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2020-7688
+  cwe:
+  - CWE-78
+  disclosed_date: 2020-06-24
+  created_date: 2020-06-25
+  last_modified_date: 2020-06-25
+  credit:
+  - Habib Ullah
+  references:
+  - https://github.com/418sec/huntr/pull/102
+  - https://github.com/mikaelbr/mversion/commit/b7a8b32600e60759a7ad3921ec4a2750bf173482
+  source_url: https://snyk.io/vuln/SNYK-JS-MVERSION-573174
