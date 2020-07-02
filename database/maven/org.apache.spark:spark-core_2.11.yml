@@ -241,6 +241,43 @@
   - https://lists.apache.org/thread.html/4d6d210e319a501b740293daaeeeadb51927111fb8261a3e4cd60060@%3Cdev.spark.apache.org%3E
   - https://spark.apache.org/security.html#CVE-2018-1334
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHESPARK-31695
+- id: snykio:maven:org.apache.spark:spark-core_2.11:574943
+  title: Information Exposure
+  description: |
+    [org.apache.spark:spark-core\_2.11][1] is a cluster computing system for
+    Big Data.
+
+    Affected versions of this package are vulnerable to Information
+    Exposure. In certain situations Spark would write user data to local
+    disk unencrypted, even if `spark.io.encryption.enabled=true`. This
+    includes cached blocks that are fetched to disk (controlled by
+    `spark.maxRemoteBlockSizeFetchToMem`); in SparkR, using parallelize; in
+    Pyspark, using broadcast and parallelize; and use of python udfs.
+
+
+
+    [1]: https://github.com/apache/spark
+  affected_package: org.apache.spark:spark-core_2.11
+  vulnerable_versions:
+  - "< 2.3.3"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2019-10099
+  cwe:
+  - CWE-200
+  disclosed_date: 2019-08-07
+  created_date: 2019-08-08
+  last_modified_date: 2019-08-08
+  credit:
+  - Thomas Graves
+  references:
+  - https://github.com/apache/spark/commit/09dd34cb1706f2477a89174d6a1a0f17ed5b0a65
+  - https://github.com/apache/spark/commit/575fea120e25249716e3f680396580c5f9e26b5b
+  - https://github.com/apache/spark/commit/6d742d1bd71aa3803dce91a830b37284cb18cf70
+  - https://issues.apache.org/jira/browse/SPARK-28626
+  - https://lists.apache.org/thread.html/c2a39c207421797f82823a8aff488dcd332d9544038307bf69a2ba9e@%3Cuser.spark.apache.org%3E
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHESPARK-574943
 - id: snykio:maven:org.apache.spark:spark-core_2.11:72494
   title: Information Exposure
   description: |
