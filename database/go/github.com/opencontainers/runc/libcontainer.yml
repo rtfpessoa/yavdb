@@ -164,3 +164,50 @@
   - https://github.com/opencontainers/runc/pull/2190
   - https://github.com/opencontainers/runc/pull/2207
   source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMOPENCONTAINERSRUNCLIBCONTAINER-540485
+- id: snykio:go:github.com/opencontainers/runc/libcontainer:575144
+  title: Privilege Escalation
+  description: |
+    [github.com/opencontainers/runc/libcontainer][1] is a package for a
+    modern container runtime.
+
+    Affected versions of this package are vulnerable to Privilege
+    Escalation. `runc`\'s implementation of the `linux.resources.devices`
+    list was a black-list by default. This means that users who created
+    their own `config.json` objects and didn\'t prefix a deny-all rule
+    (`{"allow": false, "permissions": "rwm"}` or equivalent) were not
+    provided protection by the devices cgroup. This would allow malicious
+    containers (with sufficient privileges) to create arbitrary device
+    inodes (assuming they have CAP\_MKNOD) and operate on any device inodes
+    they may have access to (assuming they have regular Unix DAC
+    permissions).
+
+    However, most (if not all) programs that make use of `runc` include this
+    deny-all rule. This was most likely added before the specification
+    mandated a white-list of devices, and the fact that all programs wrote
+    their own deny-all rule obscured the existence of this bug for several
+    years. In fact, even the specification\'s examples include a default
+    deny-all rule! We therefore believe that while this is a security bug
+    (and has been fixed as such), it was almost certainly not exploitable in
+    the wild due to the inclusion of default deny-all rules by all known
+    users of runc -- hence why this advisory has low severity.
+
+
+
+    [1]: https://www.opencontainers.org/
+  affected_package: github.com/opencontainers/runc/libcontainer
+  vulnerable_versions:
+  - "<1.0.0-rc91"
+  severity: medium
+  package_manager: go
+  cwe:
+  - CWE-264
+  disclosed_date: 2020-07-02
+  created_date: 2020-07-02
+  last_modified_date: 2020-07-02
+  credit:
+  - cyphar
+  references:
+  - https://github.com/opencontainers/runc/pull/2391
+  - https://github.com/opencontainers/runc/releases/tag/v1.0.0-rc91
+  - https://github.com/opencontainers/runc/security/advisories/GHSA-g54h-m393-cpwq
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMOPENCONTAINERSRUNCLIBCONTAINER-575144

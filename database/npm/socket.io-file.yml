@@ -1,0 +1,19 @@
+---
+- id: npmjs:npm:socket.io-file:1519
+  title: Path Traversal
+  description: All versions of `socket.io-file` are vulnerable to Path Traversal.
+    The package fails to sanitize user input and uses it to generate the file upload
+    paths. The `socket.io-file::createFile` message contains a `name` option that
+    is passed directly to `path.join()`.   It is possible to upload files to arbitrary
+    folders on the server by sending relative paths on the `name` value, such as `../../test.js`.  The
+    `uploadDir` and `rename` options can be used to define the file upload path.
+  affected_package: socket.io-file
+  vulnerable_versions:
+  - ">=0.0.0"
+  severity: high
+  package_manager: npm
+  cwe: CWE-22
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Thomas Sermpinis
