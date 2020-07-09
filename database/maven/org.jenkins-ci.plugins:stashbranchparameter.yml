@@ -1,0 +1,38 @@
+---
+- id: snykio:maven:org.jenkins-ci.plugins:stashbranchparameter:575266
+  title: Cleartext Transmission of Sensitive Information
+  description: |
+    [org.jenkins-ci.plugins:StashBranchParameter][1] is a Jenkins CI Plugin
+    that searches for branches and tags to use as a parameter.
+
+    Affected versions of this package are vulnerable to Cleartext
+    Transmission of Sensitive Information. Stash Branch Parameter Plugin
+    stores Stash API passwords in its global configuration file. While the
+    password is stored encrypted on disk, it is transmitted in plain text as
+    part of the configuration. This can result in the exposure of the
+    password through browser extensions, cross-site scripting
+    vulnerabilities, and similar situations. This only affects Jenkins
+    before 2.236, including 2.235.x LTS, as Jenkins 2.236 introduces a
+    security hardening that transparently encrypts and decrypts data used
+    for a Jenkins password form field.
+
+
+
+    [1]: https://github.com/jenkinsci/stash-branch-parameters-plugin
+  affected_package: org.jenkins-ci.plugins:stashbranchparameter
+  vulnerable_versions:
+  - ">= 0"
+  severity: low
+  package_manager: maven
+  cve:
+  - CVE-2020-2210
+  cwe:
+  - CWE-319
+  disclosed_date: 2020-07-03
+  created_date: 2020-07-03
+  last_modified_date: 2020-07-03
+  credit:
+  - Pavel Roskin
+  references:
+  - https://www.jenkins.io/security/advisory/2020-07-02/#SECURITY-1656
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGJENKINSCIPLUGINS-575266

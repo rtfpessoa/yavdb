@@ -1,0 +1,35 @@
+---
+- id: snykio:maven:org.jenkins-ci.plugins:whitesource:575279
+  title: Unprotected Storage of Credentials
+  description: |
+    [org.jenkins-ci.plugins:whitesource][1] is a White Source external
+    update agent for Jenkins CI.
+
+    Affected versions of this package are vulnerable to Unprotected Storage
+    of Credentials. It stores credentials in plain text as part of its
+    global configuration file
+    `org.whitesource.jenkins.pipeline.WhiteSourcePipelineStep.xml` and job
+    `config.xml` files on the Jenkins master. These credentials could be
+    viewed by users with Extended Read permission (in the case of job
+    `config.xml` files) or access to the master file system.
+
+
+
+    [1]: https://github.com/jenkinsci/whitesource-plugin
+  affected_package: org.jenkins-ci.plugins:whitesource
+  vulnerable_versions:
+  - ">= 0"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2020-2213
+  cwe:
+  - CWE-256
+  disclosed_date: 2020-07-03
+  created_date: 2020-07-03
+  last_modified_date: 2020-07-03
+  credit:
+  - Wasin Saengow
+  references:
+  - https://www.jenkins.io/security/advisory/2020-07-02/#SECURITY-1630
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGJENKINSCIPLUGINS-575279

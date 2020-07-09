@@ -1,96 +1,21 @@
 ---
-- id: npmjs:npm:keycloak-connect:978
-  title: Forced Logout
-  description: Versions of `keycloak-connect` prior to 4.4.0 are vulnerable to Forced
-    Logout. The package fails to validate JWT signatures on the `/k_logout` route,
-    allowing attackers to logout users and craft malicious JWTs with NBF values that
-    prevent user access indefinitely.
-  affected_package: keycloak-connect
-  vulnerable_versions:
-  - "<4.4.0"
-  severity: medium
-  package_manager: npm
-  cve:
-  - CVE-2019-10157
-  cwe: CWE-1018
-  disclosed_date: 1970-01-01
-  created_date: 1970-01-01
-  last_modified_date: 1970-01-01
-  credit: Marian Rehak
-- id: snykio:npm:keycloak-connect:461168
-  title: Denial of Service (DoS)
-  description: |+
-    [keycloak-connect][1] is an Identity and Access Management solution for
-    modern Applications and Services.
-
-    Affected versions of this package are vulnerable to Denial of Service
-    (DoS). The Node.js adapter did not properly verify the web token
-    received from the server. An attacker with local access could use this
-    to construct a malicious web token setting an NBF parameter that could
-    prevent user access indefinitely.
-
-
-
-    [1]: https://www.npmjs.com/package/keycloak-connect
-    \nDenial of Service (DoS) describes a family of attacks, all aimed at
-    making a system inaccessible to its intended and legitimate users.
-
-    Unlike other vulnerabilities, DoS attacks usually do not aim at
-    breaching security. Rather, they are focused on making websites and
-    services unavailable to genuine users resulting in downtime.
-
-    One popular Denial of Service vulnerability is DDoS (a Distributed
-    Denial of Service), an attack that attempts to clog network pipes to the
-    system by generating a large volume of traffic from many machines.
-
-    When it comes to open source libraries, DoS vulnerabilities allow
-    attackers to trigger such a crash or crippling of the service by using a
-    flaw either in the application code or from the use of open source
-    libraries.
-
-    Two common types of DoS vulnerabilities:
-
-    * High CPU/Memory Consumption- An attacker sending crafted requests that
-      could cause the system to take a disproportionate amount of time to
-      process. For example,
-      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
-
-    * Crash - An attacker sending crafted requests that could cause the
-      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
-
-  affected_package: keycloak-connect
-  vulnerable_versions:
-  - "<4.4.0"
-  severity: medium
-  package_manager: npm
-  cve:
-  - CVE-2019-10157
-  cwe:
-  - CWE-287
-  disclosed_date: 2019-06-12
-  created_date: 2019-06-14
-  last_modified_date: 2019-06-14
-  credit:
-  - Unknown
-  references:
-  - https://access.redhat.com/security/cve/cve-2019-10157
-  - https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2019-10157
-  - https://github.com/keycloak/keycloak-nodejs-connect/commit/55e54b55d05ba636bc125a8f3d39f0052d13f8f6
-  source_url: https://snyk.io/vuln/SNYK-JS-KEYCLOAKCONNECT-461168
-- id: snykio:npm:keycloak-connect:575263
+- id: snykio:maven:org.jenkins-ci.plugins:link-column:575272
   title: Cross-site Scripting (XSS)
   description: |+
-    [keycloak-connect][1] is an Identity and Access Management solution for
-    modern Applications and Services.
+    [org.jenkins-ci.plugins:link-column][1] is a plugin for the Jenkins CI
+    server which provides additional custom link column in the main UI
+    screen.
 
     Affected versions of this package are vulnerable to Cross-site Scripting
-    (XSS). The Keycloak NodeJS adapter did not support
-    `verify-token-audience`. This could result in some users having access
-    to sensitive information outside of their permissions.
+    (XSS). Link Column Plugin allows users with View/Configure permission to
+    add a new column to list views that contains a user-configurable link.
+    It does not filter the URL for these links, allowing the `javascript:`
+    scheme. This results in a stored cross-site scripting (XSS)
+    vulnerability exploitable by users able to configure list views.
 
 
 
-    [1]: https://www.npmjs.com/package/keycloak-connect
+    [1]: https://github.com/jenkinsci/link-column-plugin
     \nA cross-site scripting attack occurs when the attacker tricks a
     legitimate web-based application or site to accept a request as
     originating from a trusted source.
@@ -163,22 +88,22 @@
     * Read the documentation for any of the libraries referenced in your
       code to understand which elements allow for embedded HTML.
 
-  affected_package: keycloak-connect
+  affected_package: org.jenkins-ci.plugins:link-column
   vulnerable_versions:
-  - "<10.0.0"
-  severity: low
-  package_manager: npm
+  - ">= 0"
+  severity: medium
+  package_manager: maven
   cve:
-  - CVE-2020-1694
+  - CVE-2020-2219
   cwe:
   - CWE-79
-  disclosed_date: 2020-07-02
+  disclosed_date: 2020-07-03
   created_date: 2020-07-03
   last_modified_date: 2020-07-03
   credit:
-  - Unknown
+  - CloudBees
+  - Daniel Beck
+  - Inc.
   references:
-  - https://bugzilla.redhat.com/show_bug.cgi?id=1790759
-  - https://github.com/keycloak/keycloak-nodejs-connect/commit/49f313dc831abd4e4901b6ac99e7f38f84688eb0
-  - https://github.com/keycloak/keycloak-nodejs-connect/pull/244
-  source_url: https://snyk.io/vuln/SNYK-JS-KEYCLOAKCONNECT-575263
+  - https://www.jenkins.io/security/advisory/2020-07-02/#SECURITY-1803
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGJENKINSCIPLUGINS-575272

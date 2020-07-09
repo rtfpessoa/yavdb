@@ -1,0 +1,40 @@
+---
+- id: snykio:maven:com.google.oauth-client:google-oauth-client:575276
+  title: Improper Authorization
+  description: |
+    [com.google.oauth-client:google-oauth-client][1] is a powerful and
+    easy-to-use Java library for the OAuth 1.0a and OAuth 2.0 authorization
+    standards.
+
+    Affected versions of this package are vulnerable to Improper
+    Authorization. PKCE support is not implemented in accordance with the
+    RFC for OAuth 2.0 for Native Apps. Without the use of PKCE, the
+    authorization code returned by an authorization server is not enough to
+    guarantee that the client that issued the initial authorization request
+    is the one that will be authorized. An attacker is able to obtain the
+    authorization code using a malicious app on the client-side and use it
+    to gain authorization to the protected resource.
+
+
+
+    [1]: https://github.com/googleapis/google-oauth-java-client
+  affected_package: com.google.oauth-client:google-oauth-client
+  vulnerable_versions:
+  - "< 1.31.0"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2020-7692
+  cwe:
+  - CWE-285
+  disclosed_date: 2020-07-03
+  created_date: 2020-07-03
+  last_modified_date: 2020-07-03
+  credit:
+  - Stefán Freyr Stefánsson
+  references:
+  - https://github.com/googleapis/google-oauth-java-client/commit/13433cd7dd06267fc261f0b1d4764f8e3432c824
+  - https://github.com/googleapis/google-oauth-java-client/issues/469
+  - https://tools.ietf.org/html/rfc7636#section-1
+  - https://tools.ietf.org/html/rfc8252#section-8.1
+  source_url: https://snyk.io/vuln/SNYK-JAVA-COMGOOGLEOAUTHCLIENT-575276
