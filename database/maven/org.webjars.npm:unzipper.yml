@@ -1,0 +1,41 @@
+---
+- id: snykio:maven:org.webjars.npm:unzipper:575707
+  title: Arbitrary File Write via Archive Extraction (Zip Slip)
+  description: "[org.webjars.npm:unzipper][1] is a library for the Uzip cross-platform\nstreaming
+    AP.I\n\nAffected versions of this package are vulnerable to Arbitrary File Write\nvia
+    Archive Extraction (Zip Slip). ## Overview [`unzipper`][2] is an\nUnzip cross-platform
+    streaming API.\n\nAffected versions of the package are vulnerable to Arbitrary
+    File Write\nvia Archive Extraction (AKA \\\"Zip Slip\\\").\n\n&lt;<ZipSlip>&gt;</ZipSlip>\n\n\n\n[1]:
+    https://github.com/ZJONSSON/node-unzipper\n[2]: https://www.npmjs.com/package/unzipper\n\\nIt
+    is exploited using a specially crafted zip archive, that holds path\ntraversal
+    filenames. When exploited, a filename in a malicious archive\nis concatenated
+    to the target extraction directory, which results in the\nfinal path ending up
+    outside of the target folder. For instance, a zip\nmay hold a file with a \\\"../../file.exe\\\"
+    location and thus break out of\nthe target folder. If an executable or a configuration
+    file is\noverwritten with a file containing malicious code, the problem can turn\ninto
+    an arbitrary code execution issue quite easily.\n\nThe following is an example
+    of a zip archive with one benign file and\none malicious file. Extracting the
+    malicous file will result in\ntraversing out of the target folder, ending up in
+    `/root/.ssh/`\noverwriting the `authorized_keys` file:\n\n    \n    +2018-04-15
+    22:04:29 ..... 19 19 good.txt\n    \n    +2018-04-15 22:04:42 ..... 20 20 ../../../../../../root/.ssh/authorized_keys\n\n"
+  affected_package: org.webjars.npm:unzipper
+  vulnerable_versions:
+  - "< 0.8.13"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2018-1002203
+  cwe:
+  - CWE-29
+  disclosed_date: 2018-04-14
+  created_date: 2018-05-31
+  last_modified_date: 2018-05-31
+  credit:
+  - Snyk Security Research Team
+  references:
+  - https://github.com/snyk/zip-slip-vulnerability
+  - https://github.com/ZJONSSON/node-unzipper/pull/59
+  - https://github.com/ZJONSSON/node-unzipper/pull/59/commits/5f68901c2e2e062a5e0083a81d257eccea0eb760
+  - https://hackerone.com/reports/362119
+  - https://snyk.io/research/zip-slip-vulnerability
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-575707

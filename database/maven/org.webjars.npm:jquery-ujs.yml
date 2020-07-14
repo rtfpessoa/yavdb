@@ -1,0 +1,39 @@
+---
+- id: snykio:maven:org.webjars.npm:jquery-ujs:575702
+  title: Cross-site Request Forgery (CSRF)
+  description: |
+    [org.webjars.npm:jquery-ujs][1] is an Unobtrusive scripting adapter for
+    jQuery
+
+    Affected versions of this package are vulnerable to Cross-site Request
+    Forgery (CSRF). It can be used to bypass CSP protections and allows
+    attackers to send CSRF tokens to attacker domains. In the scenario where
+    an attacker might be able to control the href attribute of an anchor tag
+    or the action attribute of a form tag that will trigger a POST action,
+    the attacker can set the href or action to \"
+    [https://attacker.com\"][2] (note the leading space) that will be passed
+    to JQuery, who will see this as a same origin request, and send the
+    user\'s CSRF token to the attacker domain.
+
+
+
+    [1]: https://github.com/rails/jquery-ujs
+    [2]: https://attacker.com&quot;
+  affected_package: org.webjars.npm:jquery-ujs
+  vulnerable_versions:
+  - "< 1.0.4"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2015-1840
+  cwe:
+  - CWE-352
+  disclosed_date: 2015-06-24
+  created_date: 2015-06-24
+  last_modified_date: 2015-06-24
+  credit:
+  - Ben Toews of GitHub
+  references:
+  - https://groups.google.com/forum/#!msg/rubyonrails-security/XIZPbobuwaY/fqnzzpuOlA4J
+  - https://hackerone.com/reports/49935
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-575702

