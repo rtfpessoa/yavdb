@@ -1,0 +1,37 @@
+---
+- id: snykio:go:k8s.io/kube-proxy:575535
+  title: Privilege Escalation
+  description: |
+    [k8s.io/kube-proxy][1] is a Package app does all of the work necessary
+    to configure and run a Kubernetes app process.
+
+    Affected versions of this package are vulnerable to Privilege
+    Escalation. A flaw was found in Kubernetes that allows attackers on
+    adjacent networks to reach services exposed on localhost ports,
+    previously thought to be unreachable. This flaw allows an attacker to
+    gain privileges or access confidential information for any services
+    listening on localhost ports that are not protected by authentication.
+
+
+
+    [1]: https://pkg.go.dev/k8s.io/kubernetes/cmd/kube-proxy/app?tab=doc
+  affected_package: k8s.io/kube-proxy
+  vulnerable_versions:
+  - ">0.0.0 <1.16.11"
+  - ">1.17.0 <1.17.7"
+  - ">1.18.0 <1.18.4"
+  severity: medium
+  package_manager: go
+  cve:
+  - CVE-2020-8558
+  cwe:
+  - CWE-264
+  disclosed_date: 2020-07-08
+  created_date: 2020-07-09
+  last_modified_date: 2020-07-09
+  credit:
+  - Unknown
+  references:
+  - https://bugzilla.redhat.com/show_bug.cgi?id=1843358
+  - https://groups.google.com/g/kubernetes-security-announce/c/B1VegbBDMTE
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-K8SIOKUBEPROXY-575535
