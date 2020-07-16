@@ -1,0 +1,43 @@
+---
+- id: snykio:go:k8s.io/kubernetes/pkg/volume/scaleio:575599
+  title: Server Side Request Forgery (SSRF)
+  description: |
+    [k8s.io/kubernetes/pkg/volume/scaleio][1] is a scaleio volume package
+
+    Affected versions of this package are vulnerable to Server Side Request
+    Forgery (SSRF). There exists a Server Side Request Forgery (SSRF)
+    vulnerability in kube-controller-manager that allows certain authorized
+    users to leak up to 500 bytes of arbitrary information from unprotected
+    endpoints within the master\'s host network (such as link-local or
+    loopback services).
+
+    An attacker with permissions to create a pod with certain built-in
+    Volume types (GlusterFS, Quobyte, StorageOS, ScaleIO) or permissions to
+    create a StorageClass can cause kube-controller-manager to make GET
+    requests or POST requests without an attacker controlled request body
+    from the master\'s host network.
+
+
+
+    [1]: https://pkg.go.dev/k8s.io/kubernetes/pkg/volume/scaleio?tab=doc
+  affected_package: k8s.io/kubernetes/pkg/volume/scaleio
+  vulnerable_versions:
+  - "<1.15.12"
+  - ">=1.16.0 <1.16.9"
+  - ">=1.17.0 <1.17.4"
+  - ">=1.18.0 <1.18.1"
+  severity: medium
+  package_manager: go
+  cve:
+  - CVE-2020-8555
+  cwe:
+  - CWE-918
+  disclosed_date: 2020-06-05
+  created_date: 2020-07-10
+  last_modified_date: 2020-07-10
+  credit:
+  - Unknown
+  references:
+  - https://github.com/kubernetes/kubernetes/issues/91542
+  - https://github.com/kubernetes/kubernetes/pull/89794
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-K8SIOKUBERNETESPKGVOLUMESCALEIO-575599

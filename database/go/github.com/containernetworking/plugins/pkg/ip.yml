@@ -1,0 +1,38 @@
+---
+- id: snykio:go:github.com/containernetworking/plugins/pkg/ip:575664
+  title: Man-in-the-Middle (MitM)
+  description: |
+    [github.com/containernetworking/plugins/pkg/ip][1] is a CNI network
+    plugins, maintained by the containernetworking team.
+
+    Affected versions of this package are vulnerable to Man-in-the-Middle
+    (MitM). A cluster configured to use an affected container networking
+    implementation is susceptible to man-in-the-middle (MitM) attacks. By
+    sending “rogue” router advertisements, a malicious container can
+    reconfigure the host to redirect part or all of the IPv6 traffic of the
+    host to the attacker-controlled container. Even if there was no IPv6
+    traffic before, if the DNS returns A (IPv4) and AAAA (IPv6) records,
+    many HTTP libraries will try to connect via IPv6 first then fallback to
+    IPv4, giving an opportunity to the attacker to respond.
+
+
+
+    [1]: https://github.com/containernetworking/plugins
+  affected_package: github.com/containernetworking/plugins/pkg/ip
+  vulnerable_versions:
+  - "<0.8.6"
+  severity: medium
+  package_manager: go
+  cve:
+  - CVE-2020-13597
+  cwe:
+  - CWE-200
+  disclosed_date: 2020-06-08
+  created_date: 2020-07-10
+  last_modified_date: 2020-07-10
+  credit:
+  - Unknown
+  references:
+  - https://github.com/containernetworking/plugins/commit/ad10b6fa91aacd720f1f9ab94341a97a82a24965
+  - https://github.com/containernetworking/plugins/pull/484/
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMCONTAINERNETWORKINGPLUGINSPKGIP-575664
