@@ -1,0 +1,35 @@
+---
+- id: snykio:npm:react-native-fast-image:572228
+  title: Information Exposure
+  description: |
+    [react-native-fast-image][1] is a FastImage, performant React Native
+    image component.
+
+    Affected versions of this package are vulnerable to Information
+    Exposure. When an image with `source={{uri: "...", headers: { host:
+    "somehost.com", authorization: "..." }}` is loaded, all other subsequent
+    images will use the same headers, this can lead to signing credentials
+    or other session tokens being leaked to other servers.
+
+
+
+    [1]: https://www.npmjs.com/package/react-native-fast-image
+  affected_package: react-native-fast-image
+  vulnerable_versions:
+  - "<8.3.0"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2020-7696
+  cwe:
+  - CWE-255
+  disclosed_date: 2020-06-12
+  created_date: 2020-07-13
+  last_modified_date: 2020-07-13
+  credit:
+  - Andrei Alecu
+  references:
+  - https://github.com/DylanVann/react-native-fast-image/commit/4a7cd64f5b0aa40b04d63ccb105ee2b511abe624
+  - https://github.com/DylanVann/react-native-fast-image/issues/690
+  - https://github.com/DylanVann/react-native-fast-image/pull/691
+  source_url: https://snyk.io/vuln/SNYK-JS-REACTNATIVEFASTIMAGE-572228
