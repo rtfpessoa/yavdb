@@ -1,0 +1,38 @@
+---
+- id: snykio:pypi:dogtag-pki:584429
+  title: Man-in-the-Middle (MitM)
+  description: |
+    [dogtag-pki][1] is a Client library for Dogtag Certificate System
+
+    Affected versions of this package are vulnerable to Man-in-the-Middle
+    (MitM). The `pki.client.PKIConnection` class did not enable
+    `python-requests` certificate validation. Since the verify parameter was
+    hard-coded in all request functions, it was not possible to override the
+    setting. As a result, tools making use of this class, such as the
+    `pki-server` command, may have been vulnerable to Person-in-the-Middle
+    attacks in certain non-localhost use cases.
+
+    *Note*\:This is fixed in 10.9.0-b1 which is not published on PyPi.
+
+
+
+    [1]: https://www.pypi.org/project/dogtag-pki
+  affected_package: dogtag-pki
+  vulnerable_versions:
+  - ">= 0"
+  severity: high
+  package_manager: pypi
+  cve:
+  - CVE-2020-15720
+  cwe:
+  - CWE-300
+  disclosed_date: 2020-07-15
+  created_date: 2020-07-15
+  last_modified_date: 2020-07-15
+  credit:
+  - Unknown
+  references:
+  - https://bugzilla.redhat.com/show_bug.cgi?id=1855273
+  - https://github.com/dogtagpki/pki/commit/50c23ec146ee9abf28c9de87a5f7787d495f0b72
+  - https://github.com/dogtagpki/pki/compare/v10.9.0-a2...v10.9.0-b1
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-DOGTAGPKI-584429
