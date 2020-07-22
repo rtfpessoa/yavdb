@@ -98,3 +98,52 @@
   - https://www.silverstripe.org/blog/tag/release
   - https://www.silverstripe.org/download/security-releases/
   source_url: https://snyk.io/vuln/SNYK-PHP-SILVERSTRIPEGRAPHQL-550160
+- id: snykio:packagist:silverstripe/graphql:584900
+  title: Improper Input Validation
+  description: |
+    [silverstripe/graphql][1] is a GraphQL server for SilverStripe models
+    and other data.
+
+    Affected versions of this package are vulnerable to Improper Input
+    Validation. The automatic permission checking mechanism in the
+    silverstripe/graphql module does not provide complete protection against
+    lists that are limited (e.g. through pagination), resulting in records
+    that should fail the permission check being added to the final result
+    set.
+
+    GraphQL endpoints are configured by default through the CMS (e.g. for
+    assets), but the admin/graphql endpoint is access protected by default.
+    This limits the vulnerability to users with access to the CMS, but still
+    applies when those authenticated users have limited permissions (e.g.
+    where viewing records exposed through admin/graphql require
+    administrator permissions).
+
+    Where custom GraphQL endpoints have been be configured for a specific
+    implementation (usually under /graphql), this vulnerability could also
+    be exploited through unauthenticated requests.
+
+    This vulnerability only applies for reading records it does not allow
+    unauthorised changing of records.
+
+
+
+    [1]: https://packagist.org/packages/silverstripe/graphql
+  affected_package: silverstripe/graphql
+  vulnerable_versions:
+  - ">=3.2.0  <3.2.4"
+  severity: medium
+  package_manager: packagist
+  cve:
+  - CVE-2020-6165
+  cwe:
+  - CWE-20
+  disclosed_date: 2020-07-16
+  created_date: 2020-07-16
+  last_modified_date: 2020-07-16
+  credit:
+  - CEO
+  - Matthias Leutenegger
+  - Syntro GmbH and Rob Ingram
+  references:
+  - https://www.silverstripe.org/download/security-releases/cve-2020-6165
+  source_url: https://snyk.io/vuln/SNYK-PHP-SILVERSTRIPEGRAPHQL-584900

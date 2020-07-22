@@ -3397,6 +3397,167 @@
   references:
   - https://www.silverstripe.org/download/security-releases/cve-2020-9280/
   source_url: https://snyk.io/vuln/SNYK-PHP-SILVERSTRIPEFRAMEWORK-565483
+- id: snykio:packagist:silverstripe/framework:584901
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [silverstripe/framework][1] is a PHP framework forming the base for the
+    SilverStripe CMS.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). Malicious users with a valid Silverstripe CMS login (usually CMS
+    access) can craft profile information which can lead to XSS for other
+    users through specially crafted login form URLs.
+
+
+
+    [1]: https://packagist.org/packages/silverstripe/framework
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
+  affected_package: silverstripe/framework
+  vulnerable_versions:
+  - ">=3.0.0  <3.7.5"
+  severity: medium
+  package_manager: packagist
+  cve:
+  - CVE-2020-9311
+  cwe:
+  - CWE-79
+  disclosed_date: 2020-07-16
+  created_date: 2020-07-16
+  last_modified_date: 2020-07-16
+  credit:
+  - Application Security
+  - Ceva Logistics
+  - Devi Prasad
+  references:
+  - https://www.silverstripe.org/download/security-releases/cve-2020-9311/
+  source_url: https://snyk.io/vuln/SNYK-PHP-SILVERSTRIPEFRAMEWORK-584901
+- id: snykio:packagist:silverstripe/framework:584903
+  title: Cache Poisoning
+  description: |
+    [silverstripe/framework][1] is a PHP framework forming the base for the
+    SilverStripe CMS.
+
+    Affected versions of this package are vulnerable to Cache Poisoning.
+    Silverstripe CMS sites which have opted into HTTP Cache Headers on
+    responses served by the framework\'s HTTP layer can be vulnerable to web
+    cache poisoning. Through modifying the `X-Original-Url` and
+    `X-HTTP-Method-Override` headers, responses with malicious HTTP headers
+    can return unexpected responses to other consumers of this cached
+    response. Most other headers associated with web cache poisoning are
+    already disabled through request hostname forgery whitelists.
+
+    Silverstripe CMS also supports an alternative means to override a
+    request\'s HTTP method by including a `_method` parameter in a POST
+    request. This behaves similarly to the `X-HTTP-Method-Override` headers
+    and is susceptible to the same vulnerability.
+
+    The impact of this vulnerability depends on how you are using request
+    data. The risk potential increases when your site allows user
+    contributed content (such as comments or wiki-style pages).
+
+    In addition to public cache headers such as `Cache-Control:
+    max-age=<age>`, there needs to be an intermediary HTTP cache between the
+    website user and the server. This role is often filled by Content
+    Delivery Networks (CDNs) and system components such as Varnish, but can
+    also appear in the user\'s own network path (corporate proxies).
+
+
+
+    [1]: https://packagist.org/packages/silverstripe/framework
+  affected_package: silverstripe/framework
+  vulnerable_versions:
+  - ">=3.0.0  <3.7.5"
+  - ">=4.0.0  <4.4.7"
+  - ">=4.5.0  <4.5.4"
+  severity: medium
+  package_manager: packagist
+  cve:
+  - CVE-2019-19326
+  cwe:
+  - CWE-444
+  disclosed_date: 2020-07-16
+  created_date: 2020-07-16
+  last_modified_date: 2020-07-16
+  credit:
+  - Aura Information Security
+  - memN0ps
+  - Pulse Security
+  - Sabine Degen
+  - Will Boucher
+  references:
+  - https://www.silverstripe.org/download/security-releases/cve-2019-19326/
+  source_url: https://snyk.io/vuln/SNYK-PHP-SILVERSTRIPEFRAMEWORK-584903
 - id: snykio:packagist:silverstripe/framework:70140
   title: Arbitrary Code Injection
   description: |
