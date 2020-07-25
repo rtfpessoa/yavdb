@@ -38,3 +38,37 @@
   - https://groups.google.com/forum/#!topic/kubernetes-announce/GVllWCg6L88
   - https://www.exploit-db.com/exploits/46053
   source_url: https://snyk.io/vuln/SNYK-GOLANG-K8SIOAPIMACHINERYPKGUTILPROXY-174797
+- id: snykio:go:k8s.io/apimachinery/pkg/util/proxy:590104
+  title: Privilege Escalation
+  description: |
+    [k8s.io/apimachinery/pkg/util/proxy][1] is a package that provides
+    transport and upgrade support for proxies.
+
+    Affected versions of this package are vulnerable to Privilege
+    Escalation. If an attacker is able to intercept certain requests to the
+    Kubelet, they can send a redirect response that may be followed by a
+    client using the credentials from the original request. This can lead to
+    compromise of other nodes.
+
+
+
+    [1]: https://godoc.org/k8s.io/apimachinery/pkg/util/proxy
+  affected_package: k8s.io/apimachinery/pkg/util/proxy
+  vulnerable_versions:
+  - "<0.19.0-rc.1"
+  severity: medium
+  package_manager: go
+  cve:
+  - CVE-2020-8559
+  cwe:
+  - CWE-264
+  disclosed_date: 2020-07-15
+  created_date: 2020-07-16
+  last_modified_date: 2020-07-16
+  credit:
+  - Unknown
+  references:
+  - https://bugzilla.redhat.com/show_bug.cgi?id=1851422
+  - https://github.com/kubernetes/kubernetes/pull/92941
+  - https://groups.google.com/g/kubernetes-security-announce/c/JAIGG5yNROs
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-K8SIOAPIMACHINERYPKGUTILPROXY-590104

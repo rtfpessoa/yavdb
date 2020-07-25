@@ -1,0 +1,40 @@
+---
+- id: snykio:npm:fine-uploader:585902
+  title: Prototype Pollution
+  description: |
+    [fine-uploader][1] is a npm package for upload.
+
+    Note: This project is no longer maintained and the the package should be
+    considered deprecated.
+
+    Affected versions of this package are vulnerable to Prototype Pollution.
+    Given a value such as `__proto__`, this value is used by the `extend`
+    function without any prior validation. `__proto__` will modify the
+    properties of all existing properties and new properties resulting in
+    pollution of an object\'s prototype.
+
+    ### PoC   {#poc}
+
+        //https://docs.fineuploader.com/branch/master/api/qq.html#qq.extend
+        var payload = JSON.parse('{"__proto__": {"a": "polluted"}}');
+        var new = qq.extend({}, payload);
+        console.log({}.a);
+
+
+
+    [1]: https://www.npmjs.com/package/fine-uploader
+  affected_package: fine-uploader
+  vulnerable_versions:
+  - "*"
+  severity: medium
+  package_manager: npm
+  cwe:
+  - CWE-400
+  disclosed_date: 2020-07-19
+  created_date: 2020-07-19
+  last_modified_date: 2020-07-19
+  credit:
+  - Snyk Security Team
+  references:
+  - https://docs.fineuploader.com/branch/master/api/qq.html#qq.extend
+  source_url: https://snyk.io/vuln/SNYK-JS-FINEUPLOADER-585902
