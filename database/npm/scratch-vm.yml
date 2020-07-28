@@ -1,4 +1,21 @@
 ---
+- id: npmjs:npm:scratch-vm:1545
+  title: Remote Code Execution
+  description: |-
+    MIT Lifelong Kindergarten Scratch scratch-vm before 0.2.0-prerelease.20200714185213 loads extension URLs from untrusted project.json files with certain _ characters, resulting in remote code execution because the URL's content is treated as a script and is executed as a worker. The responsible code is getExtensionIdForOpcode in serialization/sb3.js. The use of _ is incompatible with a protection mechanism in older versions, in which URLs were split and consequently deserialization attacks were prevented.
+    NOTE: the scratch.mit.edu hosted service is not affected because of the lack of worker scripts.
+  affected_package: scratch-vm
+  vulnerable_versions:
+  - "<= 0.2.0-prerelease.20200709173451"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2020-14000
+  cwe: CWE-94
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Unknown
 - id: snykio:npm:scratch-vm:584565
   title: Improper Input Validation
   description: |
