@@ -32,3 +32,33 @@
   - http://wp.internetsociety.org/ndss/wp-content/uploads/sites/25/2018/02/ndss2018_07A-2_Staicu_paper.pdf
   - https://github.com/appLhui/mock2easy/issues/2
   source_url: https://snyk.io/vuln/npm:mock2easy:20160408
+- id: snykio:npm:mock2easy:572312
+  title: Command Injection
+  description: |+
+    Affected versions of this package are vulnerable to Command Injection a
+    malicious user could inject commands through the `_data` variable:
+
+    ### Affected Area   {#affected-area}
+
+            require('../server/getJsonByCurl')(mock2easy, function (error, stdout) {
+              if (error) {
+                return  res.json(500, error);
+              }
+              res.json(JSON.parse(stdout));
+            }, '', _data.interfaceUrl, query, _data.cookie,_data.interfaceType);
+
+  affected_package: mock2easy
+  vulnerable_versions:
+  - "*"
+  severity: high
+  package_manager: npm
+  cwe:
+  - CWE-79
+  disclosed_date: 2020-06-15
+  created_date: 2020-07-23
+  last_modified_date: 2020-07-23
+  credit:
+  - Snyk Security Team
+  references:
+  - https://www.npmjs.com/package/mock2easy
+  source_url: https://snyk.io/vuln/SNYK-JS-MOCK2EASY-572312
