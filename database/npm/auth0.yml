@@ -1,0 +1,23 @@
+---
+- id: npmjs:npm:auth0:1546
+  title: Information Exposure
+  description: |+
+    Versions of `auth0`  before `2.27.1` use a block list of specific keys that should be sanitized from the request object contained in the error object.  When a request to Auth0 management API fails, the key for `Authorization` header is not sanitized and the `Authorization` header value can be logged exposing a bearer token.
+
+    You are affected by this vulnerability if all of the following conditions apply:
+
+    - You are using `auth0` npm package
+    - You are using a Machine to Machine application authorized to use Auth0's management API https://auth0.com/docs/flows/concepts/client-credentials
+
+  affected_package: auth0
+  vulnerable_versions:
+  - "< 2.27.1"
+  severity: low
+  package_manager: npm
+  cve:
+  - CVE-2020-15125
+  cwe: CWE-209
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Omar Diab

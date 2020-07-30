@@ -1,0 +1,50 @@
+---
+- id: snykio:npm:parse:590110
+  title: Insufficiently Protected Credentials
+  description: |
+    [parse][1] is a library that gives you access to the powerful Parse
+    Server backend from your JavaScript app.
+
+    Affected versions of this package are vulnerable to Insufficiently
+    Protected Credentials. The `setPassword` method
+    ([http://parseplatform.org/Parse-SDK-JS/api/2.9.1/Parse.User.html#setPassword][2])
+    stores the user\'s password in localStorage as raw text making it
+    vulnerable to anyone with access to your localStorage. We believe this
+    is the only time that password is stored at all. In the documentation
+    under Users &gt; Signing Up, it clearly states, \"We never store
+    passwords in plaintext, nor will we ever transmit passwords back to the
+    client in plaintext.\"
+
+    ### PoC by Diamond Lewis and Colin Ulin   {#poc-by-diamond-lewis-and-colin-ulin}
+
+        async () => {
+            const user = Parse.User.current()
+            if (user) {
+                user.setPassword('newpass')
+                await user.save()
+            }
+        }
+
+    After running the above code, the new password will be stored in
+    localStorage as a property named \"password\".
+
+
+
+    [1]: https://www.npmjs.com/package/parse
+    [2]: http://parseplatform.org/Parse-SDK-JS/api/2.9.1/Parse.User.html#setPassword
+  affected_package: parse
+  vulnerable_versions:
+  - "<2.10.0"
+  severity: medium
+  package_manager: npm
+  cwe:
+  - CWE-255
+  disclosed_date: 2020-07-24
+  created_date: 2020-07-24
+  last_modified_date: 2020-07-24
+  credit:
+  - Colin Ulin
+  - Diamond Lewis
+  references:
+  - https://github.com/advisories/GHSA-wvh7-5p38-2qfc
+  source_url: https://snyk.io/vuln/SNYK-JS-PARSE-590110

