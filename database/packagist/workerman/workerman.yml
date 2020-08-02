@@ -1,0 +1,29 @@
+---
+- id: snykio:packagist:workerman/workerman:569105
+  title: Improper Input Validation
+  description: "[workerman/workerman][1] is an asynchronous event driven PHP framework\nfor
+    easily building fast, scalable network applications.\n\nAffected versions of this
+    package are vulnerable to Improper Input\nValidation. HTTP requests processed
+    by `workerman` does not have\nadequate validation and as such, allows malformed
+    Transfer-Encoding\nheaders.\n\nIn cases where `workerman` is used as an intermediate
+    proxy such as\n`php-http-proxy` as part of a part of a chain of servers , it is\npossible
+    for an attacker to leverage this behaviour to conduct HTTP\nRequest Smuggling.\n\n###
+    PoC   {#poc}\n\n    Violation of RFC 7230 (Mishandling of Space)\n    \n    POST
+    / HTTP/1.1\n    Host:localhost\n    Transfer-Encoding : chunked\n    Content-Length:
+    4\n    Content-Type: application/x-www-form-urlencoded\n    \n    \n    0\n\n\n\n[1]:
+    https://github.com/walkor/Workerman\n"
+  affected_package: workerman/workerman
+  vulnerable_versions:
+  - ">=0.0.0"
+  severity: medium
+  package_manager: packagist
+  cwe:
+  - CWE-20
+  disclosed_date: 2020-07-27
+  created_date: 2020-07-27
+  last_modified_date: 2020-07-27
+  credit:
+  - Snyk Security Team
+  references:
+  - https://github.com/walkor/Workerman
+  source_url: https://snyk.io/vuln/SNYK-PHP-WORKERMANWORKERMAN-569105
