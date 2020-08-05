@@ -18,3 +18,28 @@
   created_date: 1970-01-01
   last_modified_date: 1970-01-01
   credit: Luis Tangui
+- id: snykio:npm:git-tags-remote:596503
+  title: Command Injection
+  description: "[git-tags-remote][1] is a Get remote repository tags.\n\nAffected
+    versions of this package are vulnerable to Command Injection.\nThe package fails
+    to sanitize the repository input and passes it\ndirectly to an `exec` call on
+    the `get` function . This may allow\nattackers to execute arbitrary code in the
+    system if the `repo` value\npassed to the function is user-controlled.\n\n###
+    PoC   {#poc}\n\n    const gitTagsRemote = require('git-tags-remote'); \n    gitTagsRemote.get('https://github.com/sh0ji/git-tags-remote.git;
+    echo \"Injection Success\" > /tmp/command-injection.test') .then(tags => console.log(tags));\n\n\n\n[1]:
+    https://www.npmjs.com/package/git-tags-remote\n"
+  affected_package: git-tags-remote
+  vulnerable_versions:
+  - "*"
+  severity: high
+  package_manager: npm
+  cwe:
+  - CWE-78
+  disclosed_date: 2020-07-29
+  created_date: 2020-07-30
+  last_modified_date: 2020-07-30
+  credit:
+  - Luis Tangui
+  references:
+  - https://github.com/advisories/GHSA-gm9x-q798-hmr4
+  source_url: https://snyk.io/vuln/SNYK-JS-GITTAGSREMOTE-596503
