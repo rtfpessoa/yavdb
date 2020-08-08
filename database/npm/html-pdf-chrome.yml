@@ -17,3 +17,34 @@
   created_date: 1970-01-01
   last_modified_date: 1970-01-01
   credit: Lauri Vakkala, Silverskin information security
+- id: snykio:npm:html-pdf-chrome:597158
+  title: Server-side Request Forgery (SSRF)
+  description: |
+    [html-pdf-chrome][1] is a HTML to PDF converter via Chrome/Chromium
+
+    Affected versions of this package are vulnerable to Server-side Request
+    Forgery (SSRF). It executes HTTP requests if the parsed HTML contains
+    external references to resources, such as `<iframe
+    src="http://localhost" height="800px" width="800px"></iframe>`. This
+    allows attackers to access resources through HTTP that are accessible to
+    the server, including private resources in the hosting environment.
+
+
+
+    [1]: https://www.npmjs.com/package/html-pdf-chrome
+  affected_package: html-pdf-chrome
+  vulnerable_versions:
+  - "*"
+  severity: high
+  package_manager: npm
+  cwe:
+  - CWE-918
+  disclosed_date: 2020-05-20
+  created_date: 2020-08-02
+  last_modified_date: 2020-08-02
+  credit:
+  - Lauri Vakkala
+  - Silverskin information security
+  references:
+  - https://github.com/westy92/html-pdf-chrome/issues/249
+  source_url: https://snyk.io/vuln/SNYK-JS-HTMLPDFCHROME-597158

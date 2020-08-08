@@ -1,0 +1,38 @@
+---
+- id: snykio:pypi:matrix-sydent:597175
+  title: Improper Input Validation
+  description: |
+    [matrix-sydent][1] is a Reference Matrix Identity Verification and
+    Lookup Server
+
+    Affected versions of this package are vulnerable to Improper Input
+    Validation via the `util/emailutils.py` path. It mishandles registration
+    restrictions that are based on e-mail domain, if the
+    `allowed_local_3pids` option is enabled. This occurs because of
+    potentially unwanted behavior in Python, in which an
+    `email.utils.parseaddr` call on
+    [user@bad.example.net](mailto:user@bad.example.net)@good.example.com
+    returns the [user@bad.example.net](mailto:user@bad.example.net)
+    substring.
+
+
+
+    [1]: https://www.pypi.org/project/matrix-sydent
+  affected_package: matrix-sydent
+  vulnerable_versions:
+  - "< 1.0.2"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2019-11340
+  cwe:
+  - CWE-20
+  disclosed_date: 2020-08-02
+  created_date: 2020-08-02
+  last_modified_date: 2020-08-02
+  credit:
+  - Unknown
+  references:
+  - https://github.com/matrix-org/sydent/commit/4e1cfff53429c49c87d5c457a18ed435520044fc
+  - https://matrix.org/blog/2019/04/18/security-update-sydent-1-0-2
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-MATRIXSYDENT-597175

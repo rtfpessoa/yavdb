@@ -1,0 +1,36 @@
+---
+- id: snykio:rubygems:faye-websocket:597162
+  title: Improper Certificate Validation
+  description: |
+    [faye-websocket][1] is a Standards-compliant WebSocket server and
+    client.
+
+    Affected versions of this package are vulnerable to Improper Certificate
+    Validation in TLS handshakes. The `Faye::WebSocket::Client` class uses
+    the `EM::Connection#start_tls` method in EventMachine to implement the
+    TLS handshake whenever a `wss:` URL is used for the connection. This
+    method does not implement certificate verification by default, meaning
+    that it does not check that the server presents a valid and trusted TLS
+    certificate for the expected hostname.
+
+
+
+    [1]: https://rubygems.org/gems/faye-websocket
+  affected_package: faye-websocket
+  vulnerable_versions:
+  - "<0.11.0"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2020-15133
+  cwe:
+  - CWE-295
+  disclosed_date: 2020-07-31
+  created_date: 2020-08-02
+  last_modified_date: 2020-08-02
+  credit:
+  - Unknown
+  references:
+  - https://github.com/faye/faye-websocket-ruby/commit/6257b2c473a274dbcd01b64729f9cf7700a055f6
+  - https://github.com/faye/faye-websocket-ruby/security/advisories/GHSA-2v5c-755p-p4gv
+  source_url: https://snyk.io/vuln/SNYK-RUBY-FAYEWEBSOCKET-597162
