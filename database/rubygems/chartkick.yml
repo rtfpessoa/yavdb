@@ -221,3 +221,38 @@
   - https://github.com/ankane/chartkick.js/commit/3f833c2b229db140295b44074fef56428e0a8b91
   - https://github.com/ankane/chartkick.js/issues/117
   source_url: https://snyk.io/vuln/SNYK-RUBY-CHARTKICK-480561
+- id: snykio:rubygems:chartkick:597471
+  title: CSS Injection
+  description: |
+    [chartkick][1] is a Ruby gem that allows creation of JavaScript charts.
+
+    Affected versions of this package are vulnerable to CSS Injection.
+    Chartkick is vulnerable to CSS injection if user input is passed to the
+    width or height option.
+
+        <%= line_chart data, width: params[:width], height: params[:height] %>
+
+    An attacker can set additional CSS properties, like:
+
+        <%= line_chart data, width: "100%; background-image: url('http://example.com/image.png')" %>
+
+
+
+    [1]: https://chartkick.com
+  affected_package: chartkick
+  vulnerable_versions:
+  - "<3.4.0"
+  severity: high
+  package_manager: rubygems
+  cve:
+  - CVE-2020-16254
+  cwe:
+  - CWE-74
+  disclosed_date: 2020-08-06
+  created_date: 2020-08-06
+  last_modified_date: 2020-08-06
+  credit:
+  - Unknown
+  references:
+  - https://github.com/ankane/chartkick/issues/546
+  source_url: https://snyk.io/vuln/SNYK-RUBY-CHARTKICK-597471

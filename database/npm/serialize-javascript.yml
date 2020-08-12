@@ -16,6 +16,27 @@
   created_date: 1970-01-01
   last_modified_date: 1970-01-01
   credit: Ryuichi Okumura
+- id: npmjs:npm:serialize-javascript:1548
+  title: Remote Code Execution
+  description: "`serialize-javascript` prior to 3.1.0 allows remote attackers to inject
+    arbitrary code via the function \"deleteFunctions\" within \"index.js\".  \n\nAn
+    object such as `{\"foo\": /1\"/, \"bar\": \"a\\\"@__R-<UID>-0__@\"}` was serialized
+    as `{\"foo\": /1\"/, \"bar\": \"a\\/1\"/}`, which allows an attacker to escape
+    the bar key. This requires the attacker to control the values of both foo and
+    bar and guess the value of <UID>. The UID has a keyspace of approximately 4 billion
+    making it a realistic network attack.  \n  \nThe following proof-of-concept calls
+    console.log() when the running eval():  \n`eval('('+ serialize({\"foo\": /1\"
+    + console.log(1)/i, \"bar\": '\"@__R-<UID>-0__@'}) + ')');`"
+  affected_package: serialize-javascript
+  vulnerable_versions:
+  - "<3.1.0"
+  severity: high
+  package_manager: npm
+  cwe: CWE-
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Unknown
 - id: snykio:npm:serialize-javascript:536840
   title: Cross-site Scripting (XSS)
   description: |+

@@ -1,0 +1,32 @@
+---
+- id: snykio:go:github.com/dedis/kyber:597483
+  title: Cryptographic Issues
+  description: |+
+    Affected versions of this package are vulnerable to Cryptographic
+    Issues. If a malicious attacker adds one of points of the subgroups of
+    small order (i.e., non-identity torsion points) to a key image, up to 7
+    double spends could be performed for each authentic spend on the
+    cothority: this is now prevented by the Ge25519HasSmallOrder function.
+
+    This happens because multiplying the sum of a torsion point by a
+    multiple of 8 and a \"normal\" point will return the same point, because
+    multiplying small subgroup points by 8 returns the identity element.
+    Without the function Ge25519HasSmallOrder, signatures verify on
+    malicious key images derived from the authentic ones.
+
+  affected_package: github.com/dedis/kyber
+  vulnerable_versions:
+  - "*"
+  severity: medium
+  package_manager: go
+  cwe:
+  - CWE-310
+  disclosed_date: 2020-08-06
+  created_date: 2020-08-06
+  last_modified_date: 2020-08-06
+  credit:
+  - calctopian
+  references:
+  - https://github.com/dedis/kyber/issues/426
+  - https://github.com/dedis/kyber/pull/430
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMDEDISKYBER-597483

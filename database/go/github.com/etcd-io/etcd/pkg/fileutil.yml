@@ -1,0 +1,30 @@
+---
+- id: snykio:go:github.com/etcd-io/etcd/pkg/fileutil:597476
+  title: Insecure Permissions
+  description: |+
+    Affected versions of this package are vulnerable to Insecure
+    Permissions. Certain directory paths are created (etcd data directory
+    and the directory path when provided to automatically generate
+    self-signed certificates for TLS connections with clients) with
+    restricted access permissions (700) by using the os.MkdirAll. This
+    function does not perform any permission checks when a given directory
+    path exists already. A possible workaround is to ensure the directories
+    have the desired permission (700).
+
+  affected_package: github.com/etcd-io/etcd/pkg/fileutil
+  vulnerable_versions:
+  - "<3.4.10"
+  severity: medium
+  package_manager: go
+  cve:
+  - CVE-2020-15113
+  cwe:
+  - CWE-275
+  disclosed_date: 2020-08-06
+  created_date: 2020-08-06
+  last_modified_date: 2020-08-06
+  credit:
+  - Unknown
+  references:
+  - https://github.com/etcd-io/etcd/commit/e5424fc474b274c9e6b5205165015bc2035745f2
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMETCDIOETCDPKGFILEUTIL-597476

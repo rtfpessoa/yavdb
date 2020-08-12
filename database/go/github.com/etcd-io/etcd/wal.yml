@@ -1,0 +1,55 @@
+---
+- id: snykio:go:github.com/etcd-io/etcd/wal:597475
+  title: Improper Input Validation
+  description: |+
+    Affected versions of this package are vulnerable to Improper Input
+    Validation. It is possible to have an entry index greater then the
+    number of entries in the ReadAll method in `wal/wal.go`. This could
+    cause issues when WAL entries are being read during consensus as an
+    arbitrary etcd consensus participant could go down from a runtime panic
+    when reading the entry.
+
+  affected_package: github.com/etcd-io/etcd/wal
+  vulnerable_versions:
+  - "<3.4.10"
+  severity: medium
+  package_manager: go
+  cve:
+  - CVE-2020-15112
+  cwe:
+  - CWE-20
+  disclosed_date: 2020-08-06
+  created_date: 2020-08-06
+  last_modified_date: 2020-08-06
+  credit:
+  - Unknown
+  references:
+  - https://github.com/etcd-io/etcd/commit/7d1cf640497cbcdfb932e619b13624112c7e3865
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMETCDIOETCDWAL-597475
+- id: snykio:go:github.com/etcd-io/etcd/wal:597477
+  title: Improper Input Validation
+  description: |+
+    Affected versions of this package are vulnerable to Improper Input
+    Validation. A large slice causes panic in decodeRecord method. The size
+    of a record is stored in the length field of a WAL file and no
+    additional validation is done on this data. Therefore, it is possible to
+    forge an extremely large frame size that can unintentionally panic at
+    the expense of any RAFT participant trying to decode the WAL.
+
+  affected_package: github.com/etcd-io/etcd/wal
+  vulnerable_versions:
+  - "<3.4.10"
+  severity: low
+  package_manager: go
+  cve:
+  - CVE-2020-15106
+  cwe:
+  - CWE-20
+  disclosed_date: 2020-08-06
+  created_date: 2020-08-06
+  last_modified_date: 2020-08-06
+  credit:
+  - Unknown
+  references:
+  - https://github.com/etcd-io/etcd/commit/4571e528f49625d3de3170f219a45c3b3d38c675
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMETCDIOETCDWAL-597477
