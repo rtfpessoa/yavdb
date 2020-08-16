@@ -1,0 +1,37 @@
+---
+- id: snykio:go:github.com/gophish/gophish/controllers:597668
+  title: Server-side Request Forgery (SSRF)
+  description: |
+    [github.com/gophish/gophish/controllers][1] is a package middleware is
+    responsible for the definition/​implementation of middleware
+    functionality.
+
+    Affected versions of this package are vulnerable to Server-side Request
+    Forgery (SSRF). It is possible to access the `Import Site` endpoint of
+    the `Create Landing Page` area without cookie/API key authentication.
+    Unauthenticated users who can access the admin portal can use it to
+    perform server side request forgery attacks.
+
+    Note: this is only really an issue if the admin interface is listening
+    on anything other than 127.0.0.1, or if it is running on 127.0.0.1 on a
+    multiuser machine accessed by non gophish admins.
+
+
+
+    [1]: https://github.com/gophish/gophish
+  affected_package: github.com/gophish/gophish/controllers
+  vulnerable_versions:
+  - "<0.6.0"
+  severity: medium
+  package_manager: go
+  cwe:
+  - CWE-918
+  disclosed_date: 2018-03-26
+  created_date: 2020-08-10
+  last_modified_date: 2020-08-10
+  credit:
+  - Unknown
+  references:
+  - https://github.com/gophish/gophish/commit/2131c17c33a0af757c80d94379baaca147de9931?w=1
+  - https://github.com/gophish/gophish/issues/1026
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMGOPHISHGOPHISHCONTROLLERS-597668
