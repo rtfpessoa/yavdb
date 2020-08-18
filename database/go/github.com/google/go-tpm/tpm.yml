@@ -1,0 +1,41 @@
+---
+- id: snykio:go:github.com/google/go-tpm/tpm:598254
+  title: Improper Initialization
+  description: |
+    [github.com/google/go-tpm/tpm][1] is a Go library that communicates
+    directly with a TPM device on Linux or Windows machines.
+
+    Affected versions of this package are vulnerable to Improper
+    Initialization. An improperly initialized `migrationAuth` value in
+    Google\'s go-tpm TPM1.2 library versions prior to 0.3.0 can lead an
+    eavesdropping attacker to discover the auth value for a key created with
+    `CreateWrapKey`. An attacker listening in on the channel can collect
+    both `encUsageAuth` and `encMigrationAuth`, and then can calculate
+    `usageAuth ^ encMigrationAuth` as the `migrationAuth` can be guessed for
+    all keys created with `CreateWrapKey`. TPM2.0 is not impacted by this.
+    We recommend updating your library to 0.3.0 or later, or, if you cannot
+    update, to call `CreateWrapKey` with a random 20-byte value for
+    `migrationAuth`.
+
+
+
+    [1]: http://github.com/google/go-tpm
+  affected_package: github.com/google/go-tpm/tpm
+  vulnerable_versions:
+  - "<0.2.0"
+  - ">0.2.0 <0.3.0"
+  severity: medium
+  package_manager: go
+  cve:
+  - CVE-2020-8918
+  cwe:
+  - CWE-665
+  disclosed_date: 2020-08-12
+  created_date: 2020-08-12
+  last_modified_date: 2020-08-12
+  credit:
+  - Chris Fenner
+  references:
+  - https://github.com/google/go-tpm/pull/195
+  - https://github.com/google/go-tpm/security/advisories/GHSA-5x29-3hr9-6wpw
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMGOOGLEGOTPMTPM-598254
