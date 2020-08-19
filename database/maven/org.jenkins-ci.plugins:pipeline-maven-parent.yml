@@ -70,3 +70,73 @@
   - https://github.com/jenkinsci/pipeline-maven-plugin/commit/e7cb858852c05d2423e3fd9922a090982dcd6392
   - https://jenkins.io/security/advisory/2019-05-31/
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGJENKINSCIPLUGINS-174860
+- id: snykio:maven:org.jenkins-ci.plugins:pipeline-maven-parent:598360
+  title: Insecure Permissions
+  description: |
+    [org.jenkins-ci.plugins:pipeline-maven-parent][1] is a provides maven
+    integration with Pipeline through the withMaven step.
+
+    Affected versions of this package are vulnerable to Insecure
+    Permissions. Pipeline Maven Integration Plugin 3.8.2 and earlier does
+    not perform a permission check in an HTTP endpoint.This allows attackers
+    with Overall/Read access to Jenkins to enumerate credentials IDs of
+    credentials stored in Jenkins. Those can be used as part of an attack to
+    capture the credentials using another vulnerability.
+
+
+
+    [1]: https://github.com/jenkinsci/pipeline-maven-plugin
+  affected_package: org.jenkins-ci.plugins:pipeline-maven-parent
+  vulnerable_versions:
+  - "< 3.8.3"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2020-2233
+  cwe:
+  - CWE-275
+  disclosed_date: 2020-08-13
+  created_date: 2020-08-13
+  last_modified_date: 2020-08-13
+  credit:
+  - Tim Jacomb
+  references:
+  - https://www.jenkins.io/security/advisory/2020-08-12/#SECURITY-1794
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGJENKINSCIPLUGINS-598360
+- id: snykio:maven:org.jenkins-ci.plugins:pipeline-maven-parent:598361
+  title: Cross-site Request Forgery (CSRF)
+  description: |
+    [org.jenkins-ci.plugins:pipeline-maven-parent][1] is a provides maven
+    integration with Pipeline through the withMaven step.
+
+    Affected versions of this package are vulnerable to Cross-site Request
+    Forgery (CSRF). Pipeline Maven Integration Plugin 3.8.2 and earlier does
+    not perform a permission check in a method implementing form
+    validation.This allows users with Overall/Read access to Jenkins to
+    connect to an attacker-specified JDBC URL using attacker-specified
+    credentials IDs obtained through another method, potentially capturing
+    credentials stored in Jenkins.Additionally, this form validation method
+    does not require POST requests, resulting in a cross-site request
+    forgery (CSRF) vulnerability.
+
+
+
+    [1]: https://github.com/jenkinsci/pipeline-maven-plugin
+  affected_package: org.jenkins-ci.plugins:pipeline-maven-parent
+  vulnerable_versions:
+  - "< 3.8.3"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2020-2234
+  - CVE-2020-2235
+  cwe:
+  - CWE-352
+  disclosed_date: 2020-08-13
+  created_date: 2020-08-13
+  last_modified_date: 2020-08-13
+  credit:
+  - Tim Jacomb
+  references:
+  - https://www.jenkins.io/security/advisory/2020-08-12/#SECURITY-1794
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGJENKINSCIPLUGINS-598361
