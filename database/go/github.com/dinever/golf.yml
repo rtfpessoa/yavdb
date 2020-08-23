@@ -1,0 +1,26 @@
+---
+- id: snykio:go:github.com/dinever/golf:598768
+  title: Cryptographic Issues
+  description: |+
+    Affected versions of this package are vulnerable to Cryptographic
+    Issues. `randomBytes` in `xsrf.go` uses `math.rand` to generate CSRF
+    tokens. This is unsafe/insecure, and because it is seeded with
+    `time.UnixNano`, generates predictable results that would allow an
+    attacker to bypass CSRF protection.
+
+  affected_package: github.com/dinever/golf
+  vulnerable_versions:
+  - "<0.3.0"
+  severity: medium
+  package_manager: go
+  cwe:
+  - CWE-310
+  disclosed_date: 2016-04-25
+  created_date: 2020-08-17
+  last_modified_date: 2020-08-17
+  credit:
+  - elithrar
+  references:
+  - https://github.com/dinever/golf/issues/20
+  - https://github.com/dinever/golf/pull/24
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMDINEVERGOLF-598768

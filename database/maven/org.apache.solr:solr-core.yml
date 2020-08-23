@@ -1296,6 +1296,42 @@
   - https://issues.apache.org/jira/browse/SOLR-12514
   - https://www.openwall.com/lists/oss-security/2019/04/24/1
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHESOLR-564255
+- id: snykio:maven:org.apache.solr:solr-core:598793
+  title: Arbitrary File Access
+  description: |
+    [org.apache.solr:solr-core][1] is an open source enterprise search
+    platform built on Apache Lucene
+
+    Affected versions of this package are vulnerable to Arbitrary File
+    Access. The Replication handler allows commands backup, restore and
+    deleteBackup that take unvalidated alocation parameter, i.e you could
+    read/write to any location the solr user can access. Launching SMB
+    attacks which may result in the exfiltration of sensitive data such as
+    OS user hashes (NTLM/LMhashes). In case of misconfigured systems, SMB
+    Relay Attacks which can lead to user impersonation on SMB Shares or, in
+    a worse-case scenario, Remote Code Execution.
+
+
+
+    [1]: http://lucene.apache.org/solr/
+  affected_package: org.apache.solr:solr-core
+  vulnerable_versions:
+  - "< 8.6.0"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2020-13941
+  cwe:
+  - CWE-284
+  disclosed_date: 2020-08-17
+  created_date: 2020-08-17
+  last_modified_date: 2020-08-17
+  credit:
+  - Unknown
+  references:
+  - https://bugzilla.redhat.com/show_bug.cgi?id=1869167
+  - https://github.com/apache/lucene-solr/commit/b52bf267c7aa528b282d09c637344650f9034956
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHESOLR-598793
 - id: victims:maven:org.apache.solr:solr-core:2013-6397
   title: 'Apache Solr: directory traversal when loading XSL stylesheets and Velocity
     templates'
