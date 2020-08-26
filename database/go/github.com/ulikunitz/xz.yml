@@ -1,0 +1,56 @@
+---
+- id: snykio:go:github.com/ulikunitz/xz:607912
+  title: Denial of Service (DoS)
+  description: |+
+    [github.com/ulikunitz/xz][1] is a package for reading and writing of xz
+    compressed streams.
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS). It is possible create an infinite read loop due to the usage of
+    the `ReadUvarint` and `ReadVarint` function when encoding/binary via
+    invalid inputs.
+
+
+
+    [1]: https://github.com/ulikunitz/xz
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+  affected_package: github.com/ulikunitz/xz
+  vulnerable_versions:
+  - "<0.5.8"
+  severity: high
+  package_manager: go
+  cwe:
+  - CWE-400
+  disclosed_date: 2020-08-20
+  created_date: 2020-08-20
+  last_modified_date: 2020-08-20
+  credit:
+  - Ulrich Kunitz
+  references:
+  - https://github.com/ulikunitz/xz/commit/69c6093c7b2397b923acf82cb378f55ab2652b9b
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMULIKUNITZXZ-607912
