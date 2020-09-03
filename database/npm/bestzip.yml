@@ -1,0 +1,17 @@
+---
+- id: npmjs:npm:bestzip:1554
+  title: Command Injection
+  description: |-
+    Versions of `bestzip` prior to 2.1.7 are vulnerable to Command Injection. The package fails to sanitize input rules and passes it directly to an `exec` call on the `zip` function . This may allow attackers to execute arbitrary code in the system as long as the values of `destination` is user-controlled. This only affects users with a native `zip` command available. The following examples demonstrate the issue from the CLI and also programatically:
+    - `bestzip test.zip 'sourcefile; mkdir folder'`
+    - `zip({ source: 'sourcefile', destination: './test.zip; mkdir folder' })`
+  affected_package: bestzip
+  vulnerable_versions:
+  - "<2.1.7"
+  severity: high
+  package_manager: npm
+  cwe: CWE-78
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Konrad Linkowski

