@@ -1,27 +1,11 @@
 ---
-- id: npmjs:npm:safe-object2:1335
+- id: snykio:npm:arr-flatten-unflatten:598396
   title: Prototype Pollution
-  description: "All versions of `safe-object2` are vulnerable to prototype pollution.
-    The `settter()` function does not restrict the modification of an Object's prototype,
-    which may allow an attacker to add or modify an existing property that will exist
-    on all objects.\n\n"
-  affected_package: safe-object2
-  vulnerable_versions:
-  - ">=0.0.0"
-  severity: high
-  package_manager: npm
-  cwe: CWE-471
-  disclosed_date: 1970-01-01
-  created_date: 1970-01-01
-  last_modified_date: 1970-01-01
-  credit: posix
-- id: snykio:npm:safe-object2:598801
-  title: Prototype Pollution
-  description: "[safe-object2][1] is a Secure operation object get/set\n\nAffected
-    versions of this package are vulnerable to Prototype Pollution\nvia the `setter`
-    function.\n\n### POC   {#poc}\n\n    const safeObj2 = require(\"\"safe-object2\"\");\n
-    \   const obj = safeObj2({});\n    obj.setter(['__proto__', 'polluted'], true)\n
-    \   console.log(polluted); // true\n\n\n\n[1]: https://www.npmjs.com/package/safe-object2\n\\nPrototype
+  description: "[arr-flatten-unflatten][1] is a non-recursive method of flattening
+    an\narray or arrays and unflattening the result\n\nAffected versions of this package
+    are vulnerable to Prototype Pollution\nvia the constructor.\n\n### POC:   {#poc}\n\n
+    \   const { unflatten } = require('arr-flatten-unflatten');\n    unflatten({'__proto__.polluted':true});\n
+    \   console.log(polluted);\n\n\n\n[1]: https://www.npmjs.com/package/arr-flatten-unflatten\n\\nPrototype
     Pollution is a vulnerability affecting JavaScript. Prototype\nPollution refers
     to the ability to inject properties into existing\nJavaScript language construct
     prototypes, such as objects. JavaScript\nallows all Object attributes to be altered,
@@ -53,18 +37,18 @@
     path,\nvalue)`\n\nIf the attacker can control the value of “path”, they can set
     this value\nto `_proto_.myValue`. `myValue` is then assigned to the prototype
     of the\nclass of the object.\n\n"
-  affected_package: safe-object2
+  affected_package: arr-flatten-unflatten
   vulnerable_versions:
   - "*"
   severity: high
   package_manager: npm
   cve:
-  - CVE-2020-7726
+  - CVE-2020-7713
   cwe:
   - CWE-400
-  disclosed_date: 2020-08-17
+  disclosed_date: 2020-08-13
   created_date: 2020-09-01
   last_modified_date: 2020-09-01
   credit:
   - NerdJS
-  source_url: https://snyk.io/vuln/SNYK-JS-SAFEOBJECT2-598801
+  source_url: https://snyk.io/vuln/SNYK-JS-ARRFLATTENUNFLATTEN-598396

