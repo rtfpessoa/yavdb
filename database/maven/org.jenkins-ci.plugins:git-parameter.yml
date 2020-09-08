@@ -1,39 +1,19 @@
 ---
-- id: ossindex:maven:org.webjars.bower:bootstrap-tagsinput:8400171337
-  title: "[Duplicate] Cross Site Scripting (XSS) in itemTitle"
-  description: "See https://ossindex.net/resource/vulnerability/8399946930\n\n> The
-    tagClass, itemValue, itemText are all encoded. For some reason, only itemTitle
-    is left out exposing a potential XSS vunerability.\n> \n> -- [github.com](https://github.com/bootstrap-tagsinput/bootstrap-tagsinput/issues/501)"
-  affected_package: org.webjars.bower:bootstrap-tagsinput
-  vulnerable_versions:
-  - "<=0.8.0"
-  package_manager: maven
-  disclosed_date: 2016-10-05
-  created_date: 2016-10-05
-  last_modified_date: 2017-02-20
-  credit:
-  - OSSIndex
-  references:
-  - https://cwe.mitre.org/data/definitions/79.html
-  - https://github.com/TimSchlechter/bootstrap-tagsinput/issues/501
-  - https://nodesecurity.io/advisories/124
-  source_url: https://ossindex.net/resource/package/7104086075/vulnerabilities
-- id: snykio:maven:org.webjars.bower:bootstrap-tagsinput:609845
+- id: snykio:maven:org.jenkins-ci.plugins:git-parameter:609363
   title: Cross-site Scripting (XSS)
   description: |+
-    [org.webjars.bower:bootstrap-tagsinput][1] is a jQuery plugin providing
-    a Twitter Bootstrap user interface for managing tags.
+    [org.jenkins-ci.plugins:git-parameter][1] is a plugin that allows you to
+    assign git branch, tag, pull request or revision number as parameter in
+    your builds.
 
     Affected versions of this package are vulnerable to Cross-site Scripting
-    (XSS). The plugin supports various inputs for each tag, such as
-    tagClass, itemValue and itemText, and all of those are HTML Encoded as
-    they should be. However, HTML encoding was overlooked for the
-    `itemTitle` parameter, exposing a potential Cross-site Scripting (XSS)
-    vulnerability.
+    (XSS). It does not escape the repository field on the \'Build with
+    Parameters\' page. This results in a stored cross-site scripting (XSS)
+    vulnerability exploitable by attackers with Job/Configure permission.
 
 
 
-    [1]: https://github.com/timschlechter/bootstrap-tagsinput
+    [1]: https://github.com/jenkinsci/git-parameter-plugin
     \nA cross-site scripting attack occurs when the attacker tricks a
     legitimate web-based application or site to accept a request as
     originating from a trusted source.
@@ -106,20 +86,22 @@
     * Read the documentation for any of the libraries referenced in your
       code to understand which elements allow for embedded HTML.
 
-  affected_package: org.webjars.bower:bootstrap-tagsinput
+  affected_package: org.jenkins-ci.plugins:git-parameter
   vulnerable_versions:
-  - ">= 0"
+  - "< 0.9.13"
   severity: high
   package_manager: maven
   cve:
-  - CVE-2016-1000227
+  - CVE-2020-2238
   cwe:
   - CWE-79
-  disclosed_date: 2016-07-20
-  created_date: 2016-07-20
-  last_modified_date: 2016-07-20
+  disclosed_date: 2020-09-02
+  created_date: 2020-09-02
+  last_modified_date: 2020-09-02
   credit:
-  - Alex Wong
+  - CloudBees
+  - Inc.
+  - Wadeck Follonier
   references:
-  - https://github.com/bootstrap-tagsinput/bootstrap-tagsinput/issues/501
-  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSBOWER-609845
+  - https://www.jenkins.io/security/advisory/2020-09-01/#SECURITY-1884
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGJENKINSCIPLUGINS-609363

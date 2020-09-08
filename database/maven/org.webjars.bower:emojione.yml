@@ -1,39 +1,27 @@
 ---
-- id: ossindex:maven:org.webjars.bower:bootstrap-tagsinput:8400171337
-  title: "[Duplicate] Cross Site Scripting (XSS) in itemTitle"
-  description: "See https://ossindex.net/resource/vulnerability/8399946930\n\n> The
-    tagClass, itemValue, itemText are all encoded. For some reason, only itemTitle
-    is left out exposing a potential XSS vunerability.\n> \n> -- [github.com](https://github.com/bootstrap-tagsinput/bootstrap-tagsinput/issues/501)"
-  affected_package: org.webjars.bower:bootstrap-tagsinput
-  vulnerable_versions:
-  - "<=0.8.0"
-  package_manager: maven
-  disclosed_date: 2016-10-05
-  created_date: 2016-10-05
-  last_modified_date: 2017-02-20
-  credit:
-  - OSSIndex
-  references:
-  - https://cwe.mitre.org/data/definitions/79.html
-  - https://github.com/TimSchlechter/bootstrap-tagsinput/issues/501
-  - https://nodesecurity.io/advisories/124
-  source_url: https://ossindex.net/resource/package/7104086075/vulnerabilities
-- id: snykio:maven:org.webjars.bower:bootstrap-tagsinput:609845
+- id: snykio:maven:org.webjars.bower:emojione:609847
   title: Cross-site Scripting (XSS)
   description: |+
-    [org.webjars.bower:bootstrap-tagsinput][1] is a jQuery plugin providing
-    a Twitter Bootstrap user interface for managing tags.
+    [org.webjars.bower:emojione][1] is a complete set of emojis designed for
+    the web. It includes libraries to easily convert unicode characters to
+    shortnames (:smile:) and shortnames to our custom emoji images. PNG
+    formats provided for the emoji images.
 
     Affected versions of this package are vulnerable to Cross-site Scripting
-    (XSS). The plugin supports various inputs for each tag, such as
-    tagClass, itemValue and itemText, and all of those are HTML Encoded as
-    they should be. However, HTML encoding was overlooked for the
-    `itemTitle` parameter, exposing a potential Cross-site Scripting (XSS)
-    vulnerability.
+    (XSS). While this package doesn\'t control this decision, emoji
+    shortcodes are typically provided by users as part of some interaction
+    or comment, and often persist on the page. Therefore, sanitizing them to
+    prevent scripts is critical.
+
+    While `emojione` does sanitize passed in shortcodes before echoing back
+    the resulting values, a clever sequence of encoded values will still
+    allow attackers to inject scripts into the result. As a result, attacker
+    can perform a Cross-site Scripting (XSS) attack whenever the output of
+    `emojione` is passed into the page output.
 
 
 
-    [1]: https://github.com/timschlechter/bootstrap-tagsinput
+    [1]: https://github.com/emojione/emojione
     \nA cross-site scripting attack occurs when the attacker tricks a
     legitimate web-based application or site to accept a request as
     originating from a trusted source.
@@ -106,20 +94,22 @@
     * Read the documentation for any of the libraries referenced in your
       code to understand which elements allow for embedded HTML.
 
-  affected_package: org.webjars.bower:bootstrap-tagsinput
+  affected_package: org.webjars.bower:emojione
   vulnerable_versions:
-  - ">= 0"
+  - "< 1.3.1"
   severity: high
   package_manager: maven
   cve:
-  - CVE-2016-1000227
+  - CVE-2016-1000231
   cwe:
   - CWE-79
-  disclosed_date: 2016-07-20
-  created_date: 2016-07-20
-  last_modified_date: 2016-07-20
+  disclosed_date: 2016-07-25
+  created_date: 2016-07-25
+  last_modified_date: 2016-07-25
   credit:
-  - Alex Wong
+  - Andrea Giammarchi
   references:
-  - https://github.com/bootstrap-tagsinput/bootstrap-tagsinput/issues/501
-  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSBOWER-609845
+  - https://gist.github.com/WebReflection/df05641bd04954f6d366
+  - https://github.com/Ranks/emojione/commit/613079b16c00e47fb3c44744a67ed88a9295afb1
+  - https://github.com/Ranks/emojione/issues/61
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSBOWER-609847

@@ -1,0 +1,40 @@
+---
+- id: snykio:packagist:symfony/http-client:609349
+  title: Remote Code Execution (RCE)
+  description: |
+    [symfony/http-client][1] is a Symfony HttpClient component.
+
+    Affected versions of this package are vulnerable to Remote Code
+    Execution (RCE). The `CachingHttpClient` class from the `HttpClient`
+    Symfony component relies on the `HttpCache` class to handle requests.
+    `HttpCache` uses internal headers like `X-Body-Eval` and `X-Body-File`
+    to control the restoration of cached responses. The class was initially
+    written with surrogate caching and ESI support in mind (all HTTP calls
+    come from a trusted backend in that scenario). But when used by
+    `CachingHttpClient` and if an attacker can control the response for a
+    request being made by the `CachingHttpClient`, remote code execution is
+    possible.
+
+
+
+    [1]: https://github.com/symfony/http-client
+  affected_package: symfony/http-client
+  vulnerable_versions:
+  - ">=4.3.0  <4.4.0"
+  - ">=4.4.0  <4.4.13"
+  - ">=5.0.0  <5.1.0"
+  - ">=5.1.0  <5.1.5"
+  severity: high
+  package_manager: packagist
+  cve:
+  - CVE-2020-15094
+  cwe:
+  - CWE-94
+  disclosed_date: 2020-09-02
+  created_date: 2020-09-02
+  last_modified_date: 2020-09-02
+  credit:
+  - Matthias Pigulla
+  references:
+  - https://symfony.com/cve-2020-15094
+  source_url: https://snyk.io/vuln/SNYK-PHP-SYMFONYHTTPCLIENT-609349
