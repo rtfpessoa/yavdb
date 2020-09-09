@@ -1,0 +1,53 @@
+---
+- id: snykio:npm:static-server-gx:609517
+  title: Directory Traversal
+  description: "[static-server-gx][1] is a static-server\n\nAffected versions of this
+    package are vulnerable to Directory Traversal.\nBy manipulating variables that
+    reference files with “dot-dot-slash\n(../)” sequences and its variations or by
+    using absolute file paths, it\nmay be possible to access arbitrary files and directories
+    stored on file\nsystem including application source code or configuration and
+    critical\nsystem files.\n\n### PoC   {#poc}\n\n    Install the module\n    \n
+    \   npm install -g static-server-gx\n    Run 'static-server-gx in \"~/Desktop\"
+    directory:\n    \n    nodejs /usr/lib/node_modules/static-server-gx/server.js
+    \n    Use cURL to access etc/passwd file:\n    \n    curl --path-as-is --url \"localhost:10000/../../../../etc/passwd\"\n\n\n\n[1]:
+    https://www.npmjs.com/package/static-server-gx\n\\nA Directory Traversal attack
+    (also known as path traversal) aims to\naccess files and directories that are
+    stored outside the intended\nfolder. By manipulating files with \\\"dot-dot-slash
+    (../)\\\" sequences and\nits variations, or by using absolute file paths, it may
+    be possible to\naccess arbitrary files and directories stored on file system,
+    including\napplication source code, configuration, and other critical system files.\n\nDirectory
+    Traversal vulnerabilities can be generally divided into two\ntypes:\n\n* **Information
+    Disclosure**\\: Allows the attacker to gain information\n  about the folder structure
+    or read the contents of sensitive files on\n  the system.\n\n`st` is a module
+    for serving static files on web pages, and contains a\n[vulnerability of this
+    type][1]. In our example, we will serve files\nfrom the `public` route.\n\nIf
+    an attacker requests the following URL from our server, it will in\nturn leak
+    the sensitive private key of the root user.\n\n    curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa\n\n**Note**
+    `%2e` is the URL encoded version of `.` (dot).\n\n* **Writing arbitrary files**\\:
+    Allows the attacker to create or replace\n  existing files. This type of vulnerability
+    is also known as\n  `Zip-Slip`.\n\nOne way to achieve this is by using a malicious
+    `zip` archive that holds\npath traversal filenames. When each filename in the
+    zip archive gets\nconcatenated to the target extraction folder, without validation,
+    the\nfinal path ends up outside of the target folder. If an executable or a\nconfiguration
+    file is overwritten with a file containing malicious code,\nthe problem can turn
+    into an arbitrary code execution issue quite\neasily.\n\nThe following is an example
+    of a `zip` archive with one benign file and\none malicious file. Extracting the
+    malicious file will result in\ntraversing out of the target folder, ending up
+    in `/root/.ssh/`\noverwriting the `authorized_keys` file:\n\n    2018-04-15 22:04:29
+    .....           19           19  good.txt\n    2018-04-15 22:04:42 .....           20
+    \          20  ../../../../../../root/.ssh/authorized_keys\n\n\n\n[1]: https://snyk.io/vuln/npm:st:20140206\n"
+  affected_package: static-server-gx
+  vulnerable_versions:
+  - "*"
+  severity: high
+  package_manager: npm
+  cwe:
+  - CWE-22
+  disclosed_date: 2020-09-03
+  created_date: 2020-09-03
+  last_modified_date: 2020-09-03
+  credit:
+  - lightangel1412
+  references:
+  - https://hackerone.com/reports/581939
+  source_url: https://snyk.io/vuln/SNYK-JS-STATICSERVERGX-609517

