@@ -1163,3 +1163,40 @@
   - https://github.com/apache/activemq/commit/b9696ac80bb496b52d05c3884f81b0746d9af9e2
   - https://issues.apache.org/jira/browse/AMQ-5333
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEACTIVEMQ-467283
+- id: snykio:maven:org.apache.activemq:activemq-core:674316
+  title: Improper Authentication
+  description: |
+    [org.apache.activemq:activemq-core][1] is a core package for ActiveMQ
+    Message Broker and Client implementations.
+
+    Affected versions of this package are vulnerable to Improper
+    Authentication. Apache ActiveMQ uses `LocateRegistry.createRegistry()`
+    to create the JMX RMI registry and binds the server to the `jmxrmi`
+    entry. It is possible to connect to the registry without authentication
+    and call the rebind method to rebind jmxrmi to something else. If an
+    attacker creates another server to proxy the original, and bound that,
+    he effectively becomes a man in the middle and is able to intercept the
+    credentials when an user connects. Upgrade to Apache ActiveMQ 5.15.12.
+
+
+
+    [1]: https://mvnrepository.com/artifact/org.apache.activemq/activemq-core
+  affected_package: org.apache.activemq:activemq-core
+  vulnerable_versions:
+  - ">= 0"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2020-13920
+  cwe:
+  - CWE-287
+  disclosed_date: 2020-09-11
+  created_date: 2020-09-11
+  last_modified_date: 2020-09-11
+  credit:
+  - Jonathan Gallimore & Colm O hEigeartaigh
+  references:
+  - http://activemq.apache.org/security-advisories.data/CVE-2020-13920-announcement.txt
+  - https://github.com/apache/activemq/commit/58382283330f7c7b110c7afd8ef4ca2648786532
+  - https://issues.apache.org/jira/browse/AMQ-7400
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEACTIVEMQ-674316

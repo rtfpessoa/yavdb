@@ -1,48 +1,14 @@
 ---
-- id: npmjs:npm:json-logic-js:1542
+- id: snykio:maven:org.webjars.npm:json-logic-js:674309
   title: Prototype Pollution
-  description: |-
-    All versions of `json-logic-js` are vulnerable to Prototype Pollution.  The `method` operation allows a malicious user to modify the prototype of `Object` through the method property name. This causes modification of any existing property that will exist on all objects and leads to Remote Code Execution.
-
-    The following rule creates a popup when run from a browser:
-    ```
-    {
-      "method": [
-        {
-          "method": [
-            {
-              "var": "__proto__.constructor.is.__proto__"
-            },
-            "constructor",
-            [
-              "var x = 'SECURITY!'; console.log(x, window.fetch); alert(x)"
-            ]
-          ]
-        },
-        "call"
-      ]
-    }
-    ```
-  affected_package: json-logic-js
-  vulnerable_versions:
-  - ">=0.0.0"
-  severity: high
-  package_manager: npm
-  cwe: CWE-471
-  disclosed_date: 1970-01-01
-  created_date: 1970-01-01
-  last_modified_date: 1970-01-01
-  credit: Arel Cordero
-- id: snykio:npm:json-logic-js:674308
-  title: Prototype Pollution
-  description: "[json-logic-js][1] is a Build complex rules, serialize them as JSON,
-    and\nexecute them in JavaScript\n\nAffected versions of this package are vulnerable
-    to Prototype Pollution.\nThe `method` operation allows a malicious user to modify
-    the prototype\nof `Object` through the method property name. This causes modification\nof
-    any existing property that will exist on all objects and leads to\nRemote Code
-    Execution. The following rule creates a popup when run from\na browser:\n\n###
-    PoC   {#poc}\n\n    {\n      \"method\": [\n        {\n          \"method\": [\n
-    \           {\n              \"var\": \"__proto__.constructor.is.__proto__\"\n
+  description: "[org.webjars.npm:json-logic-js][1] is a Build complex rules, serialize\nthem
+    as JSON, and execute them in JavaScript\n\nAffected versions of this package are
+    vulnerable to Prototype Pollution.\nThe `method` operation allows a malicious
+    user to modify the prototype\nof `Object` through the method property name. This
+    causes modification\nof any existing property that will exist on all objects and
+    leads to\nRemote Code Execution. The following rule creates a popup when run from\na
+    browser:\n\n### PoC   {#poc}\n\n    {\n      \"method\": [\n        {\n          \"method\":
+    [\n            {\n              \"var\": \"__proto__.constructor.is.__proto__\"\n
     \           },\n            \"constructor\",\n            [\n              \"var
     x = 'SECURITY!'; console.log(x, window.fetch); alert(x)\"\n            ]\n          ]\n
     \       },\n        \"call\"\n      ]\n    }\n\n`{   \"method\": [     {       \"method\":
@@ -81,11 +47,11 @@
     path,\nvalue)`\n\nIf the attacker can control the value of “path”, they can set
     this value\nto `_proto_.myValue`. `myValue` is then assigned to the prototype
     of the\nclass of the object.\n\n"
-  affected_package: json-logic-js
+  affected_package: org.webjars.npm:json-logic-js
   vulnerable_versions:
-  - "*"
+  - ">= 0"
   severity: medium
-  package_manager: npm
+  package_manager: maven
   cwe:
   - CWE-400
   disclosed_date: 2020-09-10
@@ -95,4 +61,4 @@
   - Arel Cordero
   references:
   - https://www.npmjs.com/advisories/1542
-  source_url: https://snyk.io/vuln/SNYK-JS-JSONLOGICJS-674308
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-674309

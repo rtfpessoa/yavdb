@@ -240,3 +240,82 @@
   - http://activemq.apache.org/security-advisories.data/CVE-2018-11775-announcement.txt
   - https://github.com/apache/activemq/commit/bde7097fb8173cf871827df7811b3865679b963d
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEACTIVEMQ-460122
+- id: snykio:maven:org.apache.activemq:activemq-broker:674315
+  title: Improper Authentication
+  description: |
+    [org.apache.activemq:activemq-broker][1] is a high performance Apache
+    2.0 licensed Message Broker and JMS 1.1 implementation.
+
+    Affected versions of this package are vulnerable to Improper
+    Authentication. Apache ActiveMQ uses `LocateRegistry.createRegistry()`
+    to create the JMX RMI registry and binds the server to the `jmxrmi`
+    entry. It is possible to connect to the registry without authentication
+    and call the rebind method to rebind jmxrmi to something else. If an
+    attacker creates another server to proxy the original, and bound that,
+    he effectively becomes a man in the middle and is able to intercept the
+    credentials when an user connects. Upgrade to Apache ActiveMQ 5.15.12.
+
+
+
+    [1]: https://activemq.apache.org
+  affected_package: org.apache.activemq:activemq-broker
+  vulnerable_versions:
+  - "< 5.15.12"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2020-13920
+  cwe:
+  - CWE-287
+  disclosed_date: 2020-09-11
+  created_date: 2020-09-11
+  last_modified_date: 2020-09-11
+  credit:
+  - Jonathan Gallimore & Colm O hEigeartaigh
+  references:
+  - http://activemq.apache.org/security-advisories.data/CVE-2020-13920-announcement.txt
+  - https://github.com/apache/activemq/commit/58382283330f7c7b110c7afd8ef4ca2648786532
+  - https://issues.apache.org/jira/browse/AMQ-7400
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEACTIVEMQ-674315
+- id: snykio:maven:org.apache.activemq:activemq-broker:674317
+  title: Arbitrary Code Execution
+  description: |
+    [org.apache.activemq:activemq-broker][1] is a high performance Apache
+    2.0 licensed Message Broker and JMS 1.1 implementation.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution. A regression has been introduced in Apache ActiveMQ while
+    preventing JMX re-bind (CVE-2020-13920). By passing an empty environment
+    map to `RMIConnectorServer`, instead of the map that contains the
+    authentication credentials, it leaves ActiveMQ open to the following
+    attack:
+    [https://docs.oracle.com/javase/8/docs/technotes/guides/management/agent.html][2]
+
+    A remote client could create a `javax.management.loading.MLet MBean` and
+    use it to create new MBeans from arbitrary URLs, at least if there is no
+    security manager. In other words, a rogue remote client could make your
+    Java application execute arbitrary code.
+
+
+
+    [1]: https://activemq.apache.org
+    [2]: https://docs.oracle.com/javase/8/docs/technotes/guides/management/agent.html
+  affected_package: org.apache.activemq:activemq-broker
+  vulnerable_versions:
+  - ">= 5.15.12 < 5.15.13"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2020-11998
+  cwe:
+  - CWE-94
+  disclosed_date: 2020-09-11
+  created_date: 2020-09-11
+  last_modified_date: 2020-09-11
+  credit:
+  - Unknown
+  references:
+  - http://activemq.apache.org/security-advisories.data/CVE-2020-11998-announcement.txt
+  - https://gitbox.apache.org/repos/asf?p=activemq.git;h=aa8900c
+  - https://issues.apache.org/jira/browse/AMQ-7490
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEACTIVEMQ-674317
