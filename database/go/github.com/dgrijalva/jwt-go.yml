@@ -32,3 +32,28 @@
   - https://github.com/dgrijalva/jwt-go/issues/177
   - https://github.com/dgrijalva/jwt-go/issues/201
   source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMDGRIJALVAJWTGO-50049
+- id: snykio:go:github.com/dgrijalva/jwt-go:596515
+  title: Access Restriction Bypass
+  description: |+
+    Affected versions of this package are vulnerable to Access Restriction
+    Bypass if `m["aud"]` happens to be `[]string{}`, as allowed by the spec,
+    the type assertion fails and the value of `aud` is `""`. This can cause
+    audience verification to succeed even if the audiences being passed are
+    incorrect if `required` is set to `false`.
+
+  affected_package: github.com/dgrijalva/jwt-go
+  vulnerable_versions:
+  - "*"
+  severity: high
+  package_manager: go
+  cwe:
+  - CWE-287
+  disclosed_date: 2020-07-30
+  created_date: 2020-09-13
+  last_modified_date: 2020-09-13
+  credit:
+  - christopherwong
+  references:
+  - https://github.com/dgrijalva/jwt-go/issues/422
+  - https://github.com/dgrijalva/jwt-go/pull/426
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMDGRIJALVAJWTGO-596515
