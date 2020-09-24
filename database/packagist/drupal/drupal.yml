@@ -1333,6 +1333,426 @@
   - https://github.com/FriendsOfPHP/security-advisories/blob/master/drupal/drupal/CVE-2016-7572.yaml
   - https://www.drupal.org/SA-CORE-2016-004
   source_url: https://ossindex.net/resource/package/8397290254/vulnerabilities
+- id: snykio:packagist:drupal/drupal:1009853
+  title: Access Restriction Bypass
+  description: |
+    [drupal/drupal][1] is an open source content management platform
+    powering millions of websites and applications.
+
+    Affected versions of this package are vulnerable to Access Restriction
+    Bypass. The Workspaces module doesn\'t sufficiently check access
+    permissions when switching workspaces, leading to an access bypass
+    vulnerability. An attacker might be able to see content before the site
+    owner intends people to see the content.
+
+
+
+    [1]: https://github.com/drupal/drupal
+  affected_package: drupal/drupal
+  vulnerable_versions:
+  - ">=8.0.0  <8.1.0"
+  - ">=8.1.0  <8.2.0"
+  - ">=8.2.0  <8.3.0"
+  - ">=8.3.0  <8.4.0"
+  - ">=8.4.0  <8.5.0"
+  - ">=8.5.0  <8.6.0"
+  - ">=8.6.0  <8.7.0"
+  - ">=8.7.0  <8.8.0"
+  - ">=8.8.0  <8.8.10"
+  - ">=8.9.0  <8.9.6"
+  - ">=9.0.0  <9.0.6"
+  severity: medium
+  package_manager: packagist
+  cve:
+  - CVE-2020-13667
+  cwe:
+  - CWE-284
+  disclosed_date: 2020-09-18
+  created_date: 2020-09-18
+  last_modified_date: 2020-09-18
+  credit:
+  - Unknown
+  references:
+  - https://www.drupal.org/sa-core-2020-008
+  source_url: https://snyk.io/vuln/SNYK-PHP-DRUPALDRUPAL-1009853
+- id: snykio:packagist:drupal/drupal:1009854
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [drupal/drupal][1] is an open source content management platform
+    powering millions of websites and applications.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). The Drupal AJAX API does not disable JSONP by default, which can
+    lead to cross-site scripting.
+
+
+
+    [1]: https://github.com/drupal/drupal
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
+  affected_package: drupal/drupal
+  vulnerable_versions:
+  - ">=7.0.0  <7.73"
+  - ">=8.0.0  <8.1.0"
+  - ">=8.1.0  <8.2.0"
+  - ">=8.2.0  <8.3.0"
+  - ">=8.3.0  <8.4.0"
+  - ">=8.4.0  <8.5.0"
+  - ">=8.5.0  <8.6.0"
+  - ">=8.6.0  <8.7.0"
+  - ">=8.7.0  <8.8.0"
+  - ">=8.8.0  <8.8.10"
+  - ">=8.9.0  <8.9.6"
+  - ">=9.0.0  <9.0.6"
+  severity: medium
+  package_manager: packagist
+  cve:
+  - CVE-2020-13666
+  cwe:
+  - CWE-79
+  disclosed_date: 2020-09-18
+  created_date: 2020-09-18
+  last_modified_date: 2020-09-18
+  credit:
+  - Unknown
+  references:
+  - https://www.drupal.org/sa-core-2020-007
+  source_url: https://snyk.io/vuln/SNYK-PHP-DRUPALDRUPAL-1009854
+- id: snykio:packagist:drupal/drupal:1009855
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [drupal/drupal][1] is an open source content management platform
+    powering millions of websites and applications.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). An attacker could leverage the way that HTML is rendered for
+    affected forms in order to exploit a reflected XXS vulnerability.
+
+
+
+    [1]: https://github.com/drupal/drupal
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
+  affected_package: drupal/drupal
+  vulnerable_versions:
+  - ">=8.0.0  <8.1.0"
+  - ">=8.1.0  <8.2.0"
+  - ">=8.2.0  <8.3.0"
+  - ">=8.3.0  <8.4.0"
+  - ">=8.4.0  <8.5.0"
+  - ">=8.5.0  <8.6.0"
+  - ">=8.6.0  <8.7.0"
+  - ">=8.7.0  <8.8.0"
+  - ">=8.8.0  <8.8.10"
+  - ">=8.9.0  <8.9.6"
+  - ">=9.0.0  <9.0.6"
+  severity: high
+  package_manager: packagist
+  cve:
+  - CVE-2020-13668
+  cwe:
+  - CWE-79
+  disclosed_date: 2020-09-18
+  created_date: 2020-09-18
+  last_modified_date: 2020-09-18
+  credit:
+  - Unknown
+  references:
+  - https://www.drupal.org/sa-core-2020-009
+  source_url: https://snyk.io/vuln/SNYK-PHP-DRUPALDRUPAL-1009855
+- id: snykio:packagist:drupal/drupal:1009856
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [drupal/drupal][1] is an open source content management platform
+    powering millions of websites and applications.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). Drupal core\'s built-in CKEditor image caption functionality is
+    vulnerable to XSS.
+
+
+
+    [1]: https://github.com/drupal/drupal
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
+  affected_package: drupal/drupal
+  vulnerable_versions:
+  - ">=8.0.0  <8.1.0"
+  - ">=8.1.0  <8.2.0"
+  - ">=8.2.0  <8.3.0"
+  - ">=8.3.0  <8.4.0"
+  - ">=8.4.0  <8.5.0"
+  - ">=8.5.0  <8.6.0"
+  - ">=8.6.0  <8.7.0"
+  - ">=8.7.0  <8.8.0"
+  - ">=8.8.0  <8.8.10"
+  - ">=8.9.0  <8.9.6"
+  - ">=9.0.0  <9.0.6"
+  severity: high
+  package_manager: packagist
+  cve:
+  - CVE-2020-13669
+  cwe:
+  - CWE-79
+  disclosed_date: 2020-09-18
+  created_date: 2020-09-18
+  last_modified_date: 2020-09-18
+  credit:
+  - Unknown
+  references:
+  - https://www.drupal.org/sa-core-2020-010
+  source_url: https://snyk.io/vuln/SNYK-PHP-DRUPALDRUPAL-1009856
+- id: snykio:packagist:drupal/drupal:1009857
+  title: Information Disclosure
+  description: |
+    [drupal/drupal][1] is an open source content management platform
+    powering millions of websites and applications.
+
+    Affected versions of this package are vulnerable to Information
+    Disclosure. A vulnerability exists in the File module which allows an
+    attacker to gain access to the file metadata of a permanent private file
+    that they do not have access to by guessing the ID of the file.
+
+
+
+    [1]: https://github.com/drupal/drupal
+  affected_package: drupal/drupal
+  vulnerable_versions:
+  - ">=8.0.0  <8.1.0"
+  - ">=8.1.0  <8.2.0"
+  - ">=8.2.0  <8.3.0"
+  - ">=8.3.0  <8.4.0"
+  - ">=8.4.0  <8.5.0"
+  - ">=8.5.0  <8.6.0"
+  - ">=8.6.0  <8.7.0"
+  - ">=8.7.0  <8.8.0"
+  - ">=8.8.0  <8.8.10"
+  - ">=8.9.0  <8.9.6"
+  - ">=9.0.0  <9.0.6"
+  severity: medium
+  package_manager: packagist
+  cve:
+  - CVE-2020-13670
+  cwe:
+  - CWE-200
+  disclosed_date: 2020-09-18
+  created_date: 2020-09-18
+  last_modified_date: 2020-09-18
+  credit:
+  - Unknown
+  references:
+  - https://www.drupal.org/sa-core-2020-011
+  source_url: https://snyk.io/vuln/SNYK-PHP-DRUPALDRUPAL-1009857
 - id: snykio:packagist:drupal/drupal:173722
   title: Remote Code Execution (RCE)
   description: "[drupal/drupal][1] is an open source content management platform\npowering

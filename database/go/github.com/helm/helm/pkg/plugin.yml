@@ -1,0 +1,74 @@
+---
+- id: snykio:go:github.com/helm/helm/pkg/plugin:1009820
+  title: Improper Input Validation
+  description: |
+    [github.com/helm/helm/pkg/plugin][1] is a package manager for
+    Kubernetes.
+
+    Affected versions of this package are vulnerable to Improper Input
+    Validation. Plugin names are not sanitized properly. As a result, a
+    malicious plugin author could use characters in a plugin name that would
+    result in unexpected behaviour, such as duplicating the name of another
+    plugin or spoofing the output to `helm --help`.
+
+
+
+    [1]: https://pkg.go.dev/github.com/helm/helm/pkg/plugin
+  affected_package: github.com/helm/helm/pkg/plugin
+  vulnerable_versions:
+  - "<2.16.11"
+  - "<3.3.2"
+  severity: low
+  package_manager: go
+  cve:
+  - CVE-2020-15186
+  cwe:
+  - CWE-20
+  disclosed_date: 2020-09-18
+  created_date: 2020-09-18
+  last_modified_date: 2020-09-18
+  credit:
+  - Unknown
+  references:
+  - https://github.com/helm/helm/commit/809e2d999e2c33e20e77f6bff30652d79c287542
+  - https://github.com/helm/helm/commit/c8d6b01d72c9604e43ee70d0d78fadd54c2d8499
+  - https://github.com/helm/helm/security/advisories/GHSA-m54r-vrmv-hw33
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMHELMHELMPKGPLUGIN-1009820
+- id: snykio:go:github.com/helm/helm/pkg/plugin:1009821
+  title: Arbitrary Code Execution
+  description: |
+    [github.com/helm/helm/pkg/plugin][1] is a package manager for
+    Kubernetes.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Execution. A Helm plugin can contain duplicates of the same entry, with
+    the last one always used. If a plugin is compromised, this lowers the
+    level of access that an attacker needs to modify a plugin\'s install
+    hooks, causing a local execution attack. To perform this attack, an
+    attacker must have write access to the git repository or plugin archive
+    (.tgz) while being downloaded (which can occur during a MITM attack on a
+    non-SSL connection).
+
+
+
+    [1]: https://pkg.go.dev/github.com/helm/helm/pkg/plugin
+  affected_package: github.com/helm/helm/pkg/plugin
+  vulnerable_versions:
+  - "<2.16.11"
+  - "<3.3.2"
+  severity: low
+  package_manager: go
+  cve:
+  - CVE-2020-15187
+  cwe:
+  - CWE-94
+  disclosed_date: 2020-09-18
+  created_date: 2020-09-18
+  last_modified_date: 2020-09-18
+  credit:
+  - Unknown
+  references:
+  - https://github.com/helm/helm/commit/6aab63765f99050b115f0aec3d6350c85e8da946
+  - https://github.com/helm/helm/commit/d9ef5ce8bad512e325390c0011be1244b8380e4b
+  - https://github.com/helm/helm/security/advisories/GHSA-c52f-pq47-2r9j
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMHELMHELMPKGPLUGIN-1009821
