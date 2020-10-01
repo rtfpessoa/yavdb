@@ -1,0 +1,38 @@
+---
+- id: snykio:go:github.com/ory/fosite:1012738
+  title: Improper Authentication
+  description: |
+    [github.com/ory/fosite][1] is an OAuth2 &amp; OpenID Connect framework
+    for Go.
+
+    Affected versions of this package are vulnerable to Improper
+    Authentication. When using \"private\_key\_jwt\" authentication the
+    uniqueness of the `jti` value is not checked. When using client
+    authentication method \"private\_key\_jwt\", OpenId specification says
+    the following about assertion `jti`\: \"A unique identifier for the
+    token, which can be used to prevent reuse of the token. These tokens
+    MUST only be used once, unless conditions for reuse were negotiated
+    between the parties\". Hydra does not seem to check the uniqueness of
+    this `jti` value.
+
+
+
+    [1]: https://pkg.go.dev/github.com/ory/fosite
+  affected_package: github.com/ory/fosite
+  vulnerable_versions:
+  - "<0.31.0"
+  severity: high
+  package_manager: go
+  cve:
+  - CVE-2020-15222
+  cwe:
+  - CWE-287
+  disclosed_date: 2020-09-25
+  created_date: 2020-09-25
+  last_modified_date: 2020-09-25
+  credit:
+  - Unknown
+  references:
+  - https://github.com/ory/fosite/commit/0c9e0f6d654913ad57c507dd9a36631e1858a3e9
+  - https://github.com/ory/fosite/security/advisories/GHSA-v3q9-2p3m-7g43
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMORYFOSITE-1012738

