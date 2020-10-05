@@ -740,6 +740,514 @@
   - https://github.com/tensorflow/tensorflow/releases/tag/v2.3.1
   - https://github.com/tensorflow/tensorflow/security/advisories/GHSA-mxjj-953w-2c2v
   source_url: https://snyk.io/vuln/SNYK-PYTHON-TENSORFLOW-1013548
+- id: snykio:pypi:tensorflow:1013549
+  title: Uninitialized Memory Exposure
+  description: |
+    [tensorflow][1] is a machine learning framework.
+
+    Affected versions of this package are vulnerable to Uninitialized Memory
+    Exposure. If a user passes a list of strings to `dlpack.to_dlpack` there
+    is a memory leak following an expected validation failure.The issue
+    occurs because the `status` argument during validation failures is not
+    properly checked.Since each of the above methods can return an error
+    status, the `status` value must be checked before continuing.
+
+
+
+    [1]: https://pypi.org/project/tensorflow/
+  affected_package: tensorflow
+  vulnerable_versions:
+  - ">= 2.2.0 < 2.2.1"
+  - ">= 2.3.0 < 2.3.1"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2020-15192
+  cwe:
+  - CWE-201
+  disclosed_date: 2020-09-28
+  created_date: 2020-09-29
+  last_modified_date: 2020-09-29
+  credit:
+  - Unknown
+  references:
+  - https://github.com/tensorflow/tensorflow/commit/22e07fb204386768e5bcbea563641ea11f96ceb8
+  - https://github.com/tensorflow/tensorflow/releases/tag/v2.3.1
+  - https://github.com/tensorflow/tensorflow/security/advisories/GHSA-8fxw-76px-3rxv
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-TENSORFLOW-1013549
+- id: snykio:pypi:tensorflow:1013552
+  title: Denial of Service (DoS)
+  description: |
+    [tensorflow][1] is a machine learning framework.
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS). Models using segment sum can trigger a denial of service by
+    causing an out of memory allocation in the implementation of segment
+    sum. Since code uses the last element of the tensor holding them to
+    determine the dimensionality of output tensor, attackers can use a very
+    large value to trigger a large allocation.
+
+
+
+    [1]: https://pypi.org/project/tensorflow/
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package][1]
+
+
+
+    [1]: https://snyk.io/vuln/npm:ws:20171108
+  affected_package: tensorflow
+  vulnerable_versions:
+  - ">= 2.2.0 < 2.2.1"
+  - ">= 2.3.0 < 2.3.1"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2020-15213
+  cwe:
+  - CWE-400
+  disclosed_date: 2020-09-28
+  created_date: 2020-09-29
+  last_modified_date: 2020-09-29
+  credit:
+  - Unknown
+  references:
+  - https://github.com/tensorflow/tensorflow/commit/204945b19e44b57906c9344c0d00120eeeae178a
+  - https://github.com/tensorflow/tensorflow/releases/tag/v2.3.1
+  - https://github.com/tensorflow/tensorflow/security/advisories/GHSA-hjmq-236j-8m87
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-TENSORFLOW-1013552
+- id: snykio:pypi:tensorflow:1013553
+  title: NULL Pointer Dereference
+  description: |
+    [tensorflow][1] is a machine learning framework.
+
+    Affected versions of this package are vulnerable to NULL Pointer
+    Dereference. A crafted TFLite model can force a node to have as input a
+    tensor backed by a `nullptr` buffer. This can be achieved by changing a
+    buffer index in the flatbuffer serialization to convert a read-only
+    tensor to a read-write one. The runtime assumes that these buffers are
+    written to before a possible read, hence they are initialized with
+    `nullptr`. However, by changing the buffer index for a tensor and
+    implicitly converting that tensor to be a read-write one, as there is
+    nothing in the model that writes to it, we get a null pointer
+    dereference.
+
+
+
+    [1]: https://pypi.org/project/tensorflow/
+  affected_package: tensorflow
+  vulnerable_versions:
+  - "< 1.15.4"
+  - ">= 2.0.0 < 2.0.3"
+  - ">= 2.1.0 < 2.1.2"
+  - ">= 2.2.0 < 2.2.1"
+  - ">= 2.3.0 < 2.3.1"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2020-15209
+  cwe:
+  - CWE-476
+  disclosed_date: 2020-09-28
+  created_date: 2020-09-29
+  last_modified_date: 2020-09-29
+  credit:
+  - Unknown
+  references:
+  - https://github.com/tensorflow/tensorflow/commit/0b5662bc2be13a8c8f044d925d87fb6e56247cd8
+  - https://github.com/tensorflow/tensorflow/releases/tag/v2.3.1
+  - https://github.com/tensorflow/tensorflow/security/advisories/GHSA-qh32-6jjc-qprm
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-TENSORFLOW-1013553
+- id: snykio:pypi:tensorflow:1013558
+  title: Uninitialized Memory Exposure
+  description: |
+    [tensorflow][1] is a machine learning framework.
+
+    Affected versions of this package are vulnerable to Uninitialized Memory
+    Exposure. The implementation of `dlpack.to_dlpack` can be made to use
+    uninitialized memory resulting in further memory corruption. This is
+    because the pybind11 glue code assumes that the argument is a tensor.
+    However, there is nothing stopping users from passing in a Python object
+    instead of a tensor.The uninitialized memory address is due to a
+    `reinterpret_cast`Since the `PyObject` is a Python object, not a
+    TensorFlow Tensor, the cast to `EagerTensor` fails.
+
+
+
+    [1]: https://pypi.org/project/tensorflow/
+  affected_package: tensorflow
+  vulnerable_versions:
+  - ">= 2.2.0 < 2.2.1"
+  - ">= 2.3.0 < 2.3.1"
+  severity: high
+  package_manager: pypi
+  cve:
+  - CVE-2020-15193
+  cwe:
+  - CWE-201
+  disclosed_date: 2020-09-28
+  created_date: 2020-09-29
+  last_modified_date: 2020-09-29
+  credit:
+  - Aivul Team from Qihoo 360
+  references:
+  - https://github.com/tensorflow/tensorflow/commit/22e07fb204386768e5bcbea563641ea11f96ceb8
+  - https://github.com/tensorflow/tensorflow/releases/tag/v2.3.1
+  - https://github.com/tensorflow/tensorflow/security/advisories/GHSA-rjjg-hgv6-h69v
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-TENSORFLOW-1013558
+- id: snykio:pypi:tensorflow:1013583
+  title: Out-of-Bounds
+  description: |
+    [tensorflow][1] is a machine learning framework.
+
+    Affected versions of this package are vulnerable to Out-of-Bounds.
+    During validation at model loading time. the `-1` index is a valid
+    tensor index for any operator, including those that don\'t expect
+    optional inputs and including for output tensors. This allows writing
+    and reading from outside the bounds of heap allocated arrays, although
+    only at a specific offset from the start of these arrays. This results
+    in both read and write gadgets, albeit very limited in scope.
+
+
+
+    [1]: https://pypi.org/project/tensorflow/
+  affected_package: tensorflow
+  vulnerable_versions:
+  - "< 1.15.4"
+  - ">= 2.0.0 < 2.0.3"
+  - ">= 2.1.0 < 2.1.2"
+  - ">= 2.2.0 < 2.2.1"
+  - ">= 2.3.0 < 2.3.1"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2020-15211
+  cwe:
+  - CWE-119
+  disclosed_date: 2020-09-28
+  created_date: 2020-09-29
+  last_modified_date: 2020-09-29
+  credit:
+  - Aivul Team from Qihoo 36
+  references:
+  - https://github.com/tensorflow/tensorflow/commit/00302787b788c5ff04cb6f62aed5a74d936e86c0
+  - https://github.com/tensorflow/tensorflow/commit/1970c2158b1ffa416d159d03c3370b9a462aee35
+  - https://github.com/tensorflow/tensorflow/commit/46d5b0852528ddfd614ded79bccc75589f801bd9
+  - https://github.com/tensorflow/tensorflow/commit/cd31fd0ce0449a9e0f83dcad08d6ed7f1d6bef3f
+  - https://github.com/tensorflow/tensorflow/commit/e11f55585f614645b360563072ffeb5c3eeff162
+  - https://github.com/tensorflow/tensorflow/commit/fff2c8326280c07733828f990548979bdc893859
+  - https://github.com/tensorflow/tensorflow/releases/tag/v2.3.1
+  - https://github.com/tensorflow/tensorflow/security/advisories/GHSA-cvpc-8phh-8f45
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-TENSORFLOW-1013583
+- id: snykio:pypi:tensorflow:1013602
+  title: Heap-based Buffer Overflow
+  description: |
+    [tensorflow][1] is a machine learning framework.
+
+    Affected versions of this package are vulnerable to Heap-based Buffer
+    Overflow. The implementation of `SparseFillEmptyRowsGrad` uses a double
+    indexing pattern.It is possible for `reverse_index_map(i)` to be an
+    index outside of bounds of `grad_values`, thus resulting in a heap
+    buffer overflow.
+
+
+
+    [1]: https://pypi.org/project/tensorflow/
+  affected_package: tensorflow
+  vulnerable_versions:
+  - "< 1.15.4"
+  - ">= 2.0.0 < 2.0.3"
+  - ">= 2.1.0 < 2.1.2"
+  - ">= 2.2.0 < 2.2.1"
+  - ">= 2.3.0 < 2.3.1"
+  severity: high
+  package_manager: pypi
+  cve:
+  - CVE-2020-15195
+  cwe:
+  - CWE-119
+  disclosed_date: 2020-09-28
+  created_date: 2020-09-29
+  last_modified_date: 2020-09-29
+  credit:
+  - Unknown
+  references:
+  - https://github.com/tensorflow/tensorflow/commit/390611e0d45c5793c7066110af37c8514e6a6c54
+  - https://github.com/tensorflow/tensorflow/releases/tag/v2.3.1
+  - https://github.com/tensorflow/tensorflow/security/advisories/GHSA-63xm-rx5p-xvqr
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-TENSORFLOW-1013602
+- id: snykio:pypi:tensorflow:1013605
+  title: Improper Input Validation
+  description: |
+    [tensorflow][1] is a machine learning framework.
+
+    Affected versions of this package are vulnerable to Improper Input
+    Validation. If a TFLite saved model uses the same tensor as both input
+    and output of an operator, then, depending on the operator, we can
+    observe a segmentation fault or just memory corruption.
+
+
+
+    [1]: https://pypi.org/project/tensorflow/
+  affected_package: tensorflow
+  vulnerable_versions:
+  - "< 1.15.4"
+  - ">= 2.0.0 < 2.0.3"
+  - ">= 2.1.0 < 2.1.2"
+  - ">= 2.2.0 < 2.2.1"
+  - ">= 2.3.0 < 2.3.1"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2020-15210
+  cwe:
+  - CWE-20
+  disclosed_date: 2020-09-28
+  created_date: 2020-09-29
+  last_modified_date: 2020-09-29
+  credit:
+  - Unknown
+  references:
+  - https://github.com/tensorflow/tensorflow/commit/d58c96946b2880991d63d1dacacb32f0a4dfa453
+  - https://github.com/tensorflow/tensorflow/releases/tag/v2.3.1
+  - https://github.com/tensorflow/tensorflow/security/advisories/GHSA-x9j7-x98r-r4w2
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-TENSORFLOW-1013605
+- id: snykio:pypi:tensorflow:1013606
+  title: NULL Pointer Dereference
+  description: |
+    [tensorflow][1] is a machine learning framework.
+
+    Affected versions of this package are vulnerable to NULL Pointer
+    Dereference. If a user passes an invalid argument to `dlpack.to_dlpack`
+    the expected validations will cause variables to bind to `nullptr` while
+    setting a `status` variable to the error condition.However, this
+    `status` argument is not properly checked.Hence, code following these
+    methods will bind references to null pointers.This is undefined
+    behaviour and reported as an error if compiling with `-fsanitize=null`.
+
+
+
+    [1]: https://pypi.org/project/tensorflow/
+  affected_package: tensorflow
+  vulnerable_versions:
+  - ">= 2.2.0 < 2.2.1"
+  - ">= 2.3.0 < 2.3.1"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2020-15191
+  cwe:
+  - CWE-476
+  disclosed_date: 2020-09-28
+  created_date: 2020-09-29
+  last_modified_date: 2020-09-29
+  credit:
+  - Unknown
+  references:
+  - https://github.com/tensorflow/tensorflow/commit/22e07fb204386768e5bcbea563641ea11f96ceb8
+  - https://github.com/tensorflow/tensorflow/releases/tag/v2.3.1
+  - https://github.com/tensorflow/tensorflow/security/advisories/GHSA-q8qj-fc9q-cphr
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-TENSORFLOW-1013606
+- id: snykio:pypi:tensorflow:1013609
+  title: Heap-based Buffer Overflow
+  description: |
+    [tensorflow][1] is a machine learning framework.
+
+    Affected versions of this package are vulnerable to Heap-based Buffer
+    Overflow. The `SparseCountSparseOutput` and `RaggedCountSparseOutput`
+    implementations don\'t validate that the `weights` tensor has the same
+    shape as the data. The check exists for `DenseCountSparseOutput`, where
+    both tensors are fully specified.In the sparse and ragged count weights
+    are still accessed in parallel with the data.But, since there is no
+    validation, a user passing fewer weights than the values for the tensors
+    can generate a read from outside the bounds of the heap buffer allocated
+    for the weights.
+
+
+
+    [1]: https://pypi.org/project/tensorflow/
+  affected_package: tensorflow
+  vulnerable_versions:
+  - ">= 2.3.0 < 2.3.1"
+  severity: high
+  package_manager: pypi
+  cve:
+  - CVE-2020-15196
+  cwe:
+  - CWE-119
+  disclosed_date: 2020-09-28
+  created_date: 2020-09-29
+  last_modified_date: 2020-09-29
+  credit:
+  - Unknown
+  references:
+  - https://github.com/tensorflow/tensorflow/commit/3cbb917b4714766030b28eba9fb41bb97ce9ee02
+  - https://github.com/tensorflow/tensorflow/releases/tag/v2.3.1
+  - https://github.com/tensorflow/tensorflow/security/advisories/GHSA-pg59-2f92-5cph
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-TENSORFLOW-1013609
+- id: snykio:pypi:tensorflow:1013612
+  title: Heap-based Buffer Overflow
+  description: |
+    [tensorflow][1] is a machine learning framework.
+
+    Affected versions of this package are vulnerable to Heap-based Buffer
+    Overflow. The `SparseCountSparseOutput` implementation does not validate
+    that the input arguments form a valid sparse tensor. In particular,
+    there is no validation that the `indices` tensor has the same shape as
+    the `values` one. The values in these tensors are always accessed in
+    parallel.Thus, a shape mismatch can result in accesses outside the
+    bounds of heap allocated buffers.
+
+
+
+    [1]: https://pypi.org/project/tensorflow/
+  affected_package: tensorflow
+  vulnerable_versions:
+  - ">= 2.3.0 < 2.3.1"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2020-15198
+  cwe:
+  - CWE-122
+  disclosed_date: 2020-09-28
+  created_date: 2020-09-29
+  last_modified_date: 2020-09-29
+  credit:
+  - Unknown
+  references:
+  - https://github.com/tensorflow/tensorflow/commit/3cbb917b4714766030b28eba9fb41bb97ce9ee02
+  - https://github.com/tensorflow/tensorflow/releases/tag/v2.3.1
+  - https://github.com/tensorflow/tensorflow/security/advisories/GHSA-jc87-6vpp-7ff3
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-TENSORFLOW-1013612
+- id: snykio:pypi:tensorflow:1013616
+  title: Heap-based Buffer Overflow
+  description: |
+    [tensorflow][1] is a machine learning framework.
+
+    Affected versions of this package are vulnerable to Heap-based Buffer
+    Overflow. The `RaggedCountSparseOutput` implementation does not validate
+    that the input arguments form a valid ragged tensor. In particular,
+    there is no validation that the values in the `splits` tensor generate a
+    valid partitioning of the `values` tensor. A `BatchedMap` is equivalent
+    to a vector where each element is a hashmap. However, if the first
+    element of `splits_values` is not 0, `batch_idx` will never be 1, hence
+    there will be no hashmap at index 0 in `per_batch_counts`. Trying to
+    access that in the user code results in a segmentation fault.
+
+
+
+    [1]: https://pypi.org/project/tensorflow/
+  affected_package: tensorflow
+  vulnerable_versions:
+  - ">= 2.3.0 < 2.3.1"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2020-15200
+  cwe:
+  - CWE-122
+  disclosed_date: 2020-09-25
+  created_date: 2020-09-29
+  last_modified_date: 2020-09-29
+  credit:
+  - Unknown
+  references:
+  - https://github.com/tensorflow/tensorflow/security/advisories/GHSA-x7rp-74x2-mjf3
+  - https://nvd.nist.gov/vuln/detail/CVE-2020-15200
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-TENSORFLOW-1013616
+- id: snykio:pypi:tensorflow:1013618
+  title: Denial of Service (DoS)
+  description: |
+    [tensorflow][1] is a machine learning framework.
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS). Changing the TensorFlow\'s `SavedModel` protocol buffer and
+    altering the name of required keys results in segfaults and data
+    corruption while loading the model. This can cause a denial of service
+    in products using `tensorflow-serving` or other inference-as-a-service
+    installments. However, this was not enough, as #41097 reports a
+    different failure mode.
+
+
+
+    [1]: https://pypi.org/project/tensorflow/
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package][1]
+
+
+
+    [1]: https://snyk.io/vuln/npm:ws:20171108
+  affected_package: tensorflow
+  vulnerable_versions:
+  - "< 1.15.4"
+  - ">= 2.0.0 < 2.0.3"
+  - ">= 2.1.0 < 2.1.2"
+  - ">= 2.2.0 < 2.2.1"
+  - ">= 2.3.0 < 2.3.1"
+  severity: high
+  package_manager: pypi
+  cve:
+  - CVE-2020-15206
+  cwe:
+  - CWE-400
+  disclosed_date: 2020-09-25
+  created_date: 2020-09-29
+  last_modified_date: 2020-09-29
+  credit:
+  - CUHK
+  - Shuaike Dong
+  references:
+  - https://github.com/advisories/GHSA-w5gh-2wr2-pm6g
+  - https://github.com/tensorflow/tensorflow/security/advisories/GHSA-w5gh-2wr2-pm6g
+  - https://nvd.nist.gov/vuln/detail/CVE-2020-15206
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-TENSORFLOW-1013618
 - id: snykio:pypi:tensorflow:451636
   title: Buffer Overflow
   description: |

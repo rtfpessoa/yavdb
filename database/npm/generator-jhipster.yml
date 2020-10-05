@@ -212,3 +212,44 @@
   - https://github.com/jhipster/generator-jhipster/commit/579af972bbde63a0691cb2769b7365b832ccfac4
   - https://github.com/jhipster/generator-jhipster/pull/11708
   source_url: https://snyk.io/vuln/SNYK-JS-GENERATORJHIPSTER-568301
+- id: snykio:npm:generator-jhipster:608849
+  title: Information Exposure
+  description: |
+    [generator-jhipster][1] is a development platform to generate, develop
+    and deploy Spring Boot + Angular / React / Vue Web applications and
+    Spring microservices.
+
+    Affected versions of this package are vulnerable to Information
+    Exposure. On the user management webpage:
+    `http://localhost:8080/admin/user-management`, it is possible to sort
+    columns and the following URL can be observed when sorting by Login:
+    `http://localhost:8080/admin/user-management?page=1&sort=login,desc`
+
+    The data displayed on the screen is from the
+    `generators/server/templates/src/main/java/package/domain/User.java.ejs`
+    which contains data from the `jhi_user` database table. The issue is
+    that some properties of the model contain security related data and that
+    an administrator can sort them out. For example:
+    `http://localhost:8080/admin/user-management?page=1&sort=password,desc`
+    In this case, the password property is the password\_hash column of the
+    database.
+
+
+
+    [1]: https://www.jhipster.tech/
+  affected_package: generator-jhipster
+  vulnerable_versions:
+  - "<6.10.2"
+  severity: medium
+  package_manager: npm
+  cwe:
+  - CWE-200
+  disclosed_date: 2020-08-27
+  created_date: 2020-09-29
+  last_modified_date: 2020-09-29
+  credit:
+  - cbornet
+  references:
+  - https://github.com/avdev4j/generator-jhipster/commit/26bdfc35ed95c05e238cddcf188f88919f4ccb09
+  - https://github.com/jhipster/generator-jhipster/issues/12312#issuecomment-681791699
+  source_url: https://snyk.io/vuln/SNYK-JS-GENERATORJHIPSTER-608849
