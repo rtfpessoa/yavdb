@@ -1,0 +1,38 @@
+---
+- id: snykio:npm:amp-html:598262
+  title: Open Redirect
+  description: |
+    [amp-html][1] is a Full site AMP Pages validator
+
+    Affected versions of this package are vulnerable to Open Redirect. The
+    default value of the \"return\" parameter for the amp-access login
+    endpoint is set to the cdn.ampproject.org \"login done\" page with a
+    \"url\" parameter that contains the original url of the AMP page, where
+    the canonical backend is supposed to redirect after login or logout.
+    Once redirected, the \"login done\" page is immediately redirecting back
+    to the URL from the \"url\" parameter which is the original AMP page
+    from where the authentication request originated from.
+
+    The issue is that the \"url\" parameter is not being validated by the
+    domain, so when the \"url\" parameter is manually changed to another
+    domain, it\'s still being redirected to that url and not being
+    validated.
+
+
+
+    [1]: https://www.npmjs.com/package/amp-html
+  affected_package: amp-html
+  vulnerable_versions:
+  - "*"
+  severity: high
+  package_manager: npm
+  cwe:
+  - CWE-601
+  disclosed_date: 2020-08-12
+  created_date: 2020-10-01
+  last_modified_date: 2020-10-01
+  credit:
+  - Joelsz
+  references:
+  - https://github.com/ampproject/amphtml/issues/29789
+  source_url: https://snyk.io/vuln/SNYK-JS-AMPHTML-598262

@@ -1,4 +1,40 @@
 ---
+- id: snykio:go:github.com/goharbor/harbor/src/core/api:1014644
+  title: Information Exposure
+  description: |
+    [github.com/goharbor/harbor/src/core/api][1] is a cloud native registry
+    project that stores, signs, and scans content.
+
+    Affected versions of this package are vulnerable to Information
+    Exposure. Non-administrator users (such as those created via
+    self-registration) can list all usernames and user IDs by sending a GET
+    request to /api/users/search with parameter \"username\" and value
+    \"\_\", as follows:
+
+    `curl -X GET "https://<host>/api/users/search?username=_" -H "accept:
+    application/json" --user <user>:<password>`
+
+
+
+    [1]: https://github.com/goharbor/harbor
+  affected_package: github.com/goharbor/harbor/src/core/api
+  vulnerable_versions:
+  - ">2.0.3 <2.1.0"
+  - ">=1.9.0 <2.0.3"
+  severity: high
+  package_manager: go
+  cve:
+  - CVE-2020-13794
+  cwe:
+  - CWE-200
+  disclosed_date: 2020-10-01
+  created_date: 2020-10-01
+  last_modified_date: 2020-10-01
+  credit:
+  - Hidde Smit from Cyber Eagle
+  references:
+  - https://github.com/goharbor/harbor/security/advisories/GHSA-q9p8-33wc-h432
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMGOHARBORHARBORSRCCOREAPI-1014644
 - id: snykio:go:github.com/goharbor/harbor/src/core/api:466311
   title: Access Restriction Bypass
   description: |

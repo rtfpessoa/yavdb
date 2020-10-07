@@ -1,0 +1,55 @@
+---
+- id: snykio:npm:datatables.net:598806
+  title: Prototype Pollution
+  description: "[datatables.net][1] is a DataTables for jQuery\n\nAffected versions
+    of this package are vulnerable to Prototype Pollution.\n\n### POC   {#poc}\n\n
+    \   The following two files are required to be served by an HTTP server.\n    \n
+    \   poc.html:\n    <script src=\"https://code.jquery.com/jquery-3.5.1.js\"></script>\n
+    \   <script src=\"jquery.dataTables.js\"></script>\n    <script>\n        $.fn.dataTable.ext.internal._fnSetObjectDataFn('__proto__.foo')({},'polluted');\n
+    \       document.write('foo : ' + foo);\n    </script>\n    \n    jquery.dataTables.js:\n
+    \   https://github.com/DataTables/Dist-DataTables/blob/master/js/jquery.dataTables.js\n\n\n\n[1]:
+    https://www.npmjs.com/package/datatables.net\n\\nPrototype Pollution is a vulnerability
+    affecting JavaScript. Prototype\nPollution refers to the ability to inject properties
+    into existing\nJavaScript language construct prototypes, such as objects. JavaScript\nallows
+    all Object attributes to be altered, including their magical\nattributes such
+    as `_proto_`, `constructor` and `prototype`. An attacker\nmanipulates these attributes
+    to overwrite, or pollute, a JavaScript\napplication object prototype of the base
+    object by injecting other\nvalues. Properties on the `Object.prototype` are then
+    inherited by all\nthe JavaScript objects through the prototype chain. When that
+    happens,\nthis leads to either denial of service by triggering JavaScript\nexceptions,
+    or it tampers with the application source code to force the\ncode path that the
+    attacker injects, thereby leading to remote code\nexecution.\n\nThere are two
+    main ways in which the pollution of prototypes occurs:\n\n* Unsafe `Object` recursive
+    merge\n\n* Property definition by path\n\n### Unsafe Object recursive merge   {#unsafe-object-recursive-merge}\n\nThe
+    logic of a vulnerable recursive merge function follows the following\nhigh-level
+    model:\n\n    merge (target, source)\n    \n      foreach property of source\n
+    \   \n        if property exists and is an object on both the target and the source\n
+    \   \n          merge(target[property], source[property])\n    \n        else\n
+    \   \n          target[property] = source[property]\n\n\n\nWhen the source object
+    contains a property named `_proto_` defined with\n`Object.defineProperty()` ,
+    the condition that checks if the property\nexists and is an object on both the
+    target and the source passes and the\nmerge recurses with the target, being the
+    prototype of `Object` and the\nsource of `Object` as defined by the attacker.
+    Properties are then\ncopied on the `Object` prototype.\n\nClone operations are
+    a special sub-class of unsafe recursive merges,\nwhich occur when a recursive
+    merge is conducted on an empty object:\n`merge({},source)`.\n\n`lodash` and `Hoek`
+    are examples of libraries susceptible to recursive\nmerge attacks.\n\n### Property
+    definition by path   {#property-definition-by-path}\n\nThere are a few JavaScript
+    libraries that use an API to define property\nvalues on an object based on a given
+    path. The function that is\ngenerally affected contains this signature: `theFunction(object,
+    path,\nvalue)`\n\nIf the attacker can control the value of “path”, they can set
+    this value\nto `_proto_.myValue`. `myValue` is then assigned to the prototype
+    of the\nclass of the object.\n\n"
+  affected_package: datatables.net
+  vulnerable_versions:
+  - "<1.10.22"
+  severity: medium
+  package_manager: npm
+  cwe:
+  - CWE-400
+  disclosed_date: 2020-08-17
+  created_date: 2020-10-01
+  last_modified_date: 2020-10-01
+  credit:
+  - NerdJS
+  source_url: https://snyk.io/vuln/SNYK-JS-DATATABLESNET-598806
