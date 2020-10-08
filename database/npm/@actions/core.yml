@@ -1,0 +1,37 @@
+---
+- id: snykio:npm:@actions/core:1015402
+  title: Improper Input Validation
+  description: |
+    [@actions/core][1] is a package that provides core functions for setting
+    results, logging, registering secrets and exporting variables across
+    actions.
+
+    Affected versions of this package are vulnerable to Improper Input
+    Validation. `addPath` and `exportVariable` functions communicate with
+    the Actions Runner over stdout by generating a string in a specific
+    format. Workflows that log untrusted data to stdout may invoke these
+    commands, resulting in the path or environment variables being modified
+    without the intention of the workflow or action author. The runner will
+    release an update that disables the `set-env` and `add-path` workflow
+    commands in the near future.
+
+
+
+    [1]: https://www.npmjs.com/package/@actions/core
+  affected_package: "@actions/core"
+  vulnerable_versions:
+  - "<1.2.6"
+  severity: low
+  package_manager: npm
+  cve:
+  - CVE-2020-15228
+  cwe:
+  - CWE-20
+  disclosed_date: 2020-10-02
+  created_date: 2020-10-02
+  last_modified_date: 2020-10-02
+  credit:
+  - Unknown
+  references:
+  - https://github.com/actions/toolkit/security/advisories/GHSA-mfwh-5m23-j46w
+  source_url: https://snyk.io/vuln/SNYK-JS-ACTIONSCORE-1015402

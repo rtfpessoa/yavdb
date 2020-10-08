@@ -1,4 +1,39 @@
 ---
+- id: snykio:maven:org.apache.ant:ant:1015405
+  title: Arbitrary Code Injection
+  description: |
+    [org.apache.ant:ant][1] is a software tool for automating software build
+    processes which originated from the Apache Tomcat project in early 2000.
+
+    Affected versions of this package are vulnerable to Arbitrary Code
+    Injection. As mitigation for CVE-2020-1945 Apache Ant 1.10.8 changed the
+    permissions of temporary files it created so that only the current user
+    was allowed to access them. Unfortunately the fixcrlf task deleted the
+    temporary file and created a new one without said protection,
+    effectively nullifying the effort. This would still allow an attacker to
+    inject modified source files into the build process.
+
+
+
+    [1]: https://ant.apache.org
+  affected_package: org.apache.ant:ant
+  vulnerable_versions:
+  - "< 1.10.9"
+  severity: low
+  package_manager: maven
+  cve:
+  - CVE-2020-11979
+  cwe:
+  - CWE-94
+  disclosed_date: 2020-10-02
+  created_date: 2020-10-02
+  last_modified_date: 2020-10-02
+  credit:
+  - Unknown
+  references:
+  - https://github.com/apache/ant/commit/87ac51d3c22bcf7cfd0dc07cb0bd04a496e0d428
+  - https://lists.apache.org/thread.html/rc3c8ef9724b5b1e171529b47f4b35cb7920edfb6e917fa21eb6c64ea%40%3Cdev.ant.apache.org%3E
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEANT-1015405
 - id: snykio:maven:org.apache.ant:ant:30510
   title: Denial of Service (DoS)
   description: |+
