@@ -1,0 +1,31 @@
+---
+- id: snykio:npm:node-pdf-generator:609636
+  title: Server-side Request Forgery (SSRF)
+  description: "[node-pdf-generator][1] is a Web server to generate PDF\\'s from HTML\n\nAffected
+    versions of this package are vulnerable to Server-side Request\nForgery (SSRF).
+    Due to lack of user input validation and sanitization\ndone to the content given
+    to `node-pdf-generator`, it is possible for an\nattacker to craft a url that will
+    be passed to an external server\nallowing an SSRF attack.\n\n### PoC   {#poc}\n\n
+    \   \n    git clone https://github.com/darrenhaken/node-pdf-generator.git\n    \n
+    \   cd node-pdf-generator\n    \n    npm install\n    \n    node index.js\n\nThe
+    app will be available at [https://localhost:1337][2]\n\nsend crafted request like:\n\n
+    \   \n    curl --location --request POST 'https://127.0.0.1:1337/' --header 'Content-Type:
+    text/html' --data-raw ''\n\n\n\n[1]: https://www.npmjs.com/package/node-pdf-generator\n[2]:
+    https://localhost:1337\n"
+  affected_package: node-pdf-generator
+  vulnerable_versions:
+  - "*"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2020-7740
+  cwe:
+  - CWE-918
+  disclosed_date: 2020-09-03
+  created_date: 2020-10-05
+  last_modified_date: 2020-10-05
+  credit:
+  - Vasilii Ermilov
+  references:
+  - https://github.com/darrenhaken/node-pdf-generator/blob/master/index.js#L29
+  source_url: https://snyk.io/vuln/SNYK-JS-NODEPDFGENERATOR-609636

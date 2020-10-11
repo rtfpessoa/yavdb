@@ -1,0 +1,32 @@
+---
+- id: snykio:npm:phantomjs-seo:609638
+  title: Server-side Request Forgery (SSRF)
+  description: "[phantomjs-seo][1] is an express middleware for prerendering pages
+    with\nphantomjs for search engine crawling\n\nAffected versions of this package
+    are vulnerable to Server-side Request\nForgery (SSRF). It is possible for an attacker
+    to craft a `url` that\nwill be passed to a `PhantomJS` instance allowing for an
+    SSRF attack.\n\n### PoC   {#poc}\n\n    mkdir poc\n    cd poc\n    npm init -y\n
+    \   npm install express\n    npm install phantomjs-seo\n{: .language-bash}\n\ncreate
+    `index.js` with basic Express app\n\n    const express = require('express')\n
+    \   const app = express()\n    const port = 3000\n    \n    // phantomjs-seo middleware
+    init\n    const seo = require('phantomjs-seo')\n    app.use(seo)\n    \n    app.get('/',
+    (req, res) => res.send('Hello World!'))\n    app.listen(port, () => console.log(`Example
+    app listening at http://localhost:${port}`))\n{: .language-javascript}\n\nrun
+    it:\n\n    node index.js\n{: .language-bash}\n\n\n\n[1]: https://www.npmjs.com/package/phantomjs-seo\n"
+  affected_package: phantomjs-seo
+  vulnerable_versions:
+  - "*"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2020-7739
+  cwe:
+  - CWE-918
+  disclosed_date: 2020-09-03
+  created_date: 2020-10-05
+  last_modified_date: 2020-10-05
+  credit:
+  - Vasilii Ermilov
+  references:
+  - https://github.com/areverberi/phantomjs-seo/blob/083f66892f97d67031668decb917389ffc32a94c/index.js#L17
+  source_url: https://snyk.io/vuln/SNYK-JS-PHANTOMJSSEO-609638
