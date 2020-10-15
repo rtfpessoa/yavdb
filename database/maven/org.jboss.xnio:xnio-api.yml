@@ -1,0 +1,66 @@
+---
+- id: snykio:maven:org.jboss.xnio:xnio-api:590100
+  title: Denial of Service (DoS)
+  description: |
+    [org.jboss.xnio:xnio-api][1] is a simplified low-level I/O layer which
+    can be used anywhere you are using NIO.
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS). A vulnerability was discovered in XNIO where file descriptor leak
+    caused by growing amounts of NIO Selector file handles between garbage
+    collection cycles. It may allow the attacker to cause a denial of
+    service.
+
+
+
+    [1]: https://mvnrepository.com/artifact/org.jboss.xnio/xnio-api
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package][1]
+
+
+
+    [1]: https://snyk.io/vuln/npm:ws:20171108
+  affected_package: org.jboss.xnio:xnio-api
+  vulnerable_versions:
+  - ">= 3.7.0.Final < 3.7.8.Final"
+  - ">= 3.8.0.Final < 3.8.1.Final"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2020-14340
+  cwe:
+  - CWE-400
+  disclosed_date: 2020-07-24
+  created_date: 2020-10-09
+  last_modified_date: 2020-10-09
+  credit:
+  - Masafumi Miura (Red Hat)
+  references:
+  - https://bugzilla.redhat.com/show_bug.cgi?id=1860218
+  - https://github.com/xnio/xnio/commit/3a6cde771994ad347edacc13f75fbfefd6c4734d
+  - https://github.com/xnio/xnio/pull/233
+  - https://github.com/xnio/xnio/pull/234
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGJBOSSXNIO-590100

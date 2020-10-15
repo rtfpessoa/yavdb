@@ -199,3 +199,42 @@
   - https://github.com/summernote/summernote/issues/3719
   - https://github.com/summernote/summernote/pull/3782
   source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARS-569098
+- id: snykio:maven:org.webjars:summernote:608896
+  title: Cross-site Scripting (XSS)
+  description: "[org.webjars:summernote][1] is a super simple WYSIWYG Editor.\n\nAffected
+    versions of this package are vulnerable to Cross-site Scripting\n(XSS). It is
+    possible to inject malicious JavaScript within the\n`myforms` area due to no sanitization.\n\n###
+    PoC   {#poc}\n\n    from crispy_forms.helper import FormHelper\n    from crispy_forms.layout
+    import Submit, Column, Row, Layout\n    from django.forms import HiddenInput\n
+    \   from django.utils.translation import ugettext as _\n    from django import
+    forms\n    from django_summernote.widgets import SummernoteInplaceWidget\n    \n
+    \   from myapp.models import MyModel\n    \n    \n    class MyForm(forms.ModelForm):\n
+    \   \n        def __init__(self, *args, **kwargs):\n            super(MyForm,
+    self).__init__(*args, **kwargs)\n            self.helper = FormHelper()\n            self.helper.layout
+    = Layout(\n                Row(Column('title', css_class='form-group col-md-6'),
+    css_class='form-row'),\n                Row(Column('base_template', css_class='form-group
+    col-md-12'), css_class='form-row'),\n                Row(Column('base_css_template',
+    css_class='form-group col-md-6', ), css_class='form-row'),\n                'doc',\n
+    \               Submit('submit', _('Save'))\n            )\n    \n        class
+    Meta:\n            model = MyModel\n            fields = '__all__'\n            widgets
+    = {\n                'base_template': SummernoteInplaceWidget(attrs={'summernote':
+    {'width': '100%', 'height': '600px'}}),\n                'document_type': HiddenInput()\n
+    \           }\n            labels = {\n                'title': _('Title'),\n
+    \               'base_template': _('Body'),\n                'base_css_template':
+    _('CSS stylesheet (optional)'),\n                'doc': _('Doc'),\n            }\n\n\n\n[1]:
+    https://www.npmjs.com/package/summernote\n"
+  affected_package: org.webjars:summernote
+  vulnerable_versions:
+  - ">= 0"
+  severity: medium
+  package_manager: maven
+  cwe:
+  - CWE-79
+  disclosed_date: 2020-08-03
+  created_date: 2020-10-09
+  last_modified_date: 2020-10-09
+  credit:
+  - Alejandroid17
+  references:
+  - https://github.com/summernote/django-summernote/issues/415
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARS-608896

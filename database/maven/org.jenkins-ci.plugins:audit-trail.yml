@@ -1,4 +1,86 @@
 ---
+- id: snykio:maven:org.jenkins-ci.plugins:audit-trail:1016910
+  title: Improper Input Validation
+  description: |
+    [org.jenkins-ci.plugins:audit-trail][1] is a Jenkins plugin that keeps a
+    log of who performed particular Jenkins operations, such as configuring
+    jobs.
+
+    Affected versions of this package are vulnerable to Improper Input
+    Validation. Audit Trail Plugin uses regular expressions to match
+    requested URLs whose dispatch should be logged.In Audit Trail Plugin 3.6
+    and earlier, the default regular expression pattern could be bypassed in
+    many cases by adding a suffix to the URL that would be ignored during
+    request handling.Audit Trail Plugin 3.7 changes the default regular
+    expression pattern so that it allows for arbitrary suffixes. It
+    automatically will replace previous default patterns with the new, more
+    complete default pattern.Additionally, an administrative monitor is
+    shown if a user-specified pattern is found to be bypassable through
+    crafted URLs and form validation was improved to recognize patterns that
+    would not match requests with arbitrary suffixes.
+
+
+
+    [1]: https://plugins.jenkins.io/audit-trail/
+  affected_package: org.jenkins-ci.plugins:audit-trail
+  vulnerable_versions:
+  - "< 3.7"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2020-2288
+  cwe:
+  - CWE-20
+  disclosed_date: 2020-10-09
+  created_date: 2020-10-09
+  last_modified_date: 2020-10-09
+  credit:
+  - CloudBees
+  - Daniel Beck
+  - Inc.
+  references:
+  - https://www.jenkins.io/security/advisory/2020-10-08/#SECURITY-1846
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGJENKINSCIPLUGINS-1016910
+- id: snykio:maven:org.jenkins-ci.plugins:audit-trail:1016918
+  title: Improper Authentication
+  description: |
+    [org.jenkins-ci.plugins:audit-trail][1] is a Jenkins plugin that keeps a
+    log of who performed particular Jenkins operations, such as configuring
+    jobs.
+
+    Affected versions of this package are vulnerable to Improper
+    Authentication. It logs requests whose URL path matches an
+    admin-configured regular expression.A discrepancy between the behavior
+    of the plugin and the Stapler web framework in parsing URL paths allows
+    attackers to craft URLs that would bypass request logging in Audit Trail
+    Plugin 3.6 and earlier. This only applies to Jenkins 2.227 and earlier,
+    LTS 2.204.5 and earlier, as the fix for Audit Trail Plugin 3.7 processes
+    request URL paths the same way as the Stapler web framework.
+
+
+
+    [1]: https://plugins.jenkins.io/audit-trail/
+  affected_package: org.jenkins-ci.plugins:audit-trail
+  vulnerable_versions:
+  - "< 3.7"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2020-2287
+  cwe:
+  - CWE-287
+  disclosed_date: 2020-10-09
+  created_date: 2020-10-09
+  last_modified_date: 2020-10-09
+  credit:
+  - CloudBees
+  - CloudBees
+  - Daniel Beck
+  - Inc.
+  - Inc. and Wadeck Follonier
+  references:
+  - https://www.jenkins.io/security/advisory/2020-10-08/#SECURITY-1815
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGJENKINSCIPLUGINS-1016918
 - id: snykio:maven:org.jenkins-ci.plugins:audit-trail:559576
   title: Cross-site Scripting (XSS)
   description: |
