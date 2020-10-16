@@ -28,7 +28,7 @@ module YAVDB
     DEFAULT_YAVDB_DATABASE_PATH = File.expand_path(File.join(DEFAULT_YAVDB_PATH, 'database')).freeze
     DEFAULT_CACHE_PATH          = File.expand_path(File.join(ENV['HOME'], '.yavdb', 'cache')).freeze
 
-    POSSIBLE_PACKAGE_MANAGERS = ['npm', 'rubygems', 'maven', 'nuget', 'packagist', 'pypi', 'go', 'cargo'].freeze
+    POSSIBLE_PACKAGE_MANAGERS = ['npm', 'rubygems', 'maven', 'nuget', 'packagist', 'pypi', 'go', 'cargo', 'cocoapods'].freeze
 
     SEVERITIES = ['low', 'medium', 'high'].freeze
 
