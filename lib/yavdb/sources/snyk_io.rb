@@ -30,7 +30,7 @@ module YAVDB
         BASE_VULN_URL = "#{BASE_URL}/vuln"
         INFO_SEP      = '#=#'
 
-        PACKAGE_MANAGERS = ['composer', 'golang', 'maven', 'npm', 'nuget', 'pip', 'rubygems'].freeze
+        PACKAGE_MANAGERS = ['composer', 'golang', 'maven', 'npm', 'nuget', 'pip', 'rubygems', 'cocoapods'].freeze
 
         PACKAGE_MANAGER_ALIAS = Hash[
           'composer' => 'packagist',
@@ -39,7 +39,8 @@ module YAVDB
           'npm' => 'npm',
           'nuget' => 'nuget',
           'pip' => 'pypi',
-          'rubygems' => 'rubygems'
+          'rubygems' => 'rubygems',
+          'cocoapods' => 'cocoapods'
         ].freeze
 
         def self.advisories

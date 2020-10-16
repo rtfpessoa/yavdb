@@ -28,7 +28,8 @@ RSpec.describe YAVDB::Sources::SnykIO::Client do
     'https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMBTCSUITEGOSOCKSSOCKS-50055',
     'https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMSNAPCORESNAPDDAEMON-50060',
     'https://snyk.io/vuln/SNYK-PHP-CONTAOLISTINGBUNDLE-70371',
-    'https://snyk.io/vuln/SNYK-DOTNET-MIME-60187'
+    'https://snyk.io/vuln/SNYK-DOTNET-MIME-60187',
+    'https://snyk.io/vuln/SNYK-COCOAPODS-MINTEGRALADSDK-598852'
   ]
 
   describe 'create' do
@@ -208,6 +209,24 @@ RSpec.describe YAVDB::Sources::SnykIO::Client do
       expect(vuln).to have_attributes(:credit => ['CristianAlexandru Staicu'])
       expect(vuln).to have_attributes(:references => ['https://github.com/broofa/node-mime/issues/167', 'https://github.com/broofa/node-mime/commit/855d0c4b8b22e4a80b9401a81f2872058eae274d', 'https://github.com/broofa/node-mime/commit/1df903fdeb9ae7eaa048795b8d580ce2c98f40b0'])
       expect(vuln).to have_attributes(:source_url => 'https://snyk.io/vuln/SNYK-DOTNET-MIME-60187')
+    end
+
+    it 'has correct properties for SNYK-COCOAPODS-MINTEGRALADSDK-598852' do
+      vuln = advisories.find { |v| v.id == 'snykio:cocoapods:mintegraladsdk:598852' }
+      expect(vuln).to have_attributes(:title => 'Malicious Package')
+      expect(vuln).to have_attributes(:description => "[MintegralAdSDK][1] is a malicious package. The SDK distributed by the\ncompany contains malicious functionality that tracks any URL opened by\nthe app and reports it back to the company, along with performing\nadvertisement attribution fraud.\n\nMintegral can remotely activate hooks on the `UIApplication`, `openURL`,\n`SKStoreProductViewController`, `loadProductWithParameters` and\n`NSURLProtocol` methods along with anti-debug and proxy detection\nprotection. If those hooks are active `MintegralAdSDK` sends obfuscated\ndata about every opened URL in an application to their servers.\n\nNote that the malicious functionality is enabled even if the SDK was not\nenabled to serve ads.\n\n\n\n[1]: https://github.com/Mintegral-official/MintegralAdSDK-iOS-new\n")
+      expect(vuln).to have_attributes(:affected_package => 'mintegraladsdk')
+      expect(vuln).to have_attributes(:vulnerable_versions => ['<6.6.0.0'])
+      expect(vuln).to have_attributes(:severity => 'high')
+      expect(vuln).to have_attributes(:package_manager => 'cocoapods')
+      expect(vuln).to have_attributes(:cve => ['CVE-2020-7705'])
+      expect(vuln).to have_attributes(:cwe => ['CWE-1021'])
+      expect(vuln).to have_attributes(:disclosed_date => Date.parse('2020-08-18'))
+      expect(vuln).to have_attributes(:created_date => Date.parse('2020-08-24'))
+      expect(vuln).to have_attributes(:last_modified_date => Date.parse('2020-08-24'))
+      expect(vuln).to have_attributes(:credit => ['Snyk Security Team'])
+      expect(vuln).to have_attributes(:references => ['https://snyk.io/blog/sourmint-malicious-code-ad-fraud-and-data-leak-in-ios/', 'https://snyk.io/research/sour-mint-malicious-sdk/'])
+      expect(vuln).to have_attributes(:source_url => 'https://snyk.io/vuln/SNYK-COCOAPODS-MINTEGRALADSDK-598852')
     end
   end
 end

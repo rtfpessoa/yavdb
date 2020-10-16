@@ -42,6 +42,7 @@ gem install yavdb
 
 #### Features/Improvements
 
+- [ ] Support non semver versions
 - [ ] Merge  duplicates
 - [ ] Scrape [NVD](https://nvd.nist.gov/) for other package manager vulnerabilities
 - [ ] Find more sources
