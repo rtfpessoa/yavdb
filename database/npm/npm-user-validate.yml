@@ -1,0 +1,24 @@
+---
+- id: npmjs:npm:npm-user-validate:1572
+  title: Regular Expression Denial of Service
+  description: |-
+    `npm-user-validate` before version `1.0.1` is vulnerable to a Regular Expression Denial of Service (REDos). The regex that validates user emails took exponentially longer to process long input strings beginning with `@` characters.
+
+    #### Impact
+    The issue affects the `email` function. If you use this function to process arbitrary user input with no character limit the application may be susceptible to Denial of Service.
+
+    #### Patches
+    The issue is patched in version 1.0.1 by improving the regular expression used and also enforcing a 254 character limit.
+
+    #### Workarounds
+    Restrict the character length to a reasonable degree before passing a value to `.email()`; Also, consider doing a more rigorous sanitizing/validation beforehand.
+  affected_package: npm-user-validate
+  vulnerable_versions:
+  - "< 1.0.1"
+  severity: low
+  package_manager: npm
+  cwe: CWE-400
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Yeting Li

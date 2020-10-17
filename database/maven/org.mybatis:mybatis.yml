@@ -1,0 +1,27 @@
+---
+- id: snykio:maven:org.mybatis:mybatis:1017032
+  title: Remote Code Execution (RCE)
+  description: "[org.mybatis:mybatis][1] is a SQL mapper framework\n\nAffected versions
+    of this package are vulnerable to Remote Code\nExecution (RCE). It mishandles
+    deserialization of object streams. All of\nthe following conditions needs to be
+    met in order to trigger RCE.\n\n1.  the user enabled the built-in 2nd level cache
+    \\[1\\]\n2.  the user did not setup JEP-290 filter\n3.  the attacker found a way
+    to modify entries of the private Map field\n    i.e. `org.apache.ibatis.cache.impl.PerpetualCache.cache`
+    and a valid\n    cache key\n    ## Remediation   {#remediation}\n    \n    Upgrade
+    `org.mybatis:mybatis` to version 3.5.6 or higher.\n    ## References   {#references}\n\n*
+    [GitHub PR][2]\n\n\n\n[1]: https://github.com/mybatis/mybatis-3\n[2]: https://github.com/mybatis/mybatis-3/pull/2079\n"
+  affected_package: org.mybatis:mybatis
+  vulnerable_versions:
+  - "< 3.5.6"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2020-26945
+  cwe:
+  - CWE-94
+  disclosed_date: 2020-10-11
+  created_date: 2020-10-11
+  last_modified_date: 2020-10-11
+  credit:
+  - Unknown
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGMYBATIS-1017032
