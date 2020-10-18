@@ -1,0 +1,101 @@
+---
+- id: snykio:cocoapods:openssl-osx:471039
+  title: Denial of Service (DoS)
+  description: |
+    [OpenSSL-OSX][1] is a SSL/TLS and Crypto toolkit. Deprecated in OS X,
+    this CocoaPod will add the latest OpenSSL to your OS X project.
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS). The DTLS implementation in does not properly restrict the
+    lifetime of queue entries associated with unused out-of-order messages,
+    which allows remote attackers to cause a denial of service (memory
+    consumption) by maintaining many crafted DTLS sessions simultaneously,
+    related to `d1_lib.c`, `statem_dtls.c`, `statem_lib.c`, and
+    `statem_srvr.c`.
+
+
+
+    [1]: https://www.openssl.org/source/openssl-1.0.2j.tar.gz
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package][1]
+
+
+
+    [1]: https://snyk.io/vuln/npm:ws:20171108
+  affected_package: openssl-osx
+  vulnerable_versions:
+  - ">=1.0.204.1  <1.0.211"
+  severity: high
+  package_manager: cocoapods
+  cve:
+  - CVE-2016-2179
+  cwe:
+  - CWE-399
+  disclosed_date: 2016-08-22
+  created_date: 2019-11-27
+  last_modified_date: 2019-11-27
+  credit:
+  - Quan Luo
+  references:
+  - https://git.openssl.org/?p=openssl.git;a=commit;h=f5c7f5dfbaf0d2f7d946d0fe86f08e6bcb36ed0d
+  - https://github.com/openssl/openssl/commit/00a4c1421407b6ac796688871b0a49a179c694d9
+  - https://www.openssl.org/news/vulnerabilities.html#y2017
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-OPENSSLOSX-471039
+- id: snykio:cocoapods:openssl-osx:471191
+  title: Information Exposure
+  description: |
+    [OpenSSL-OSX][1] is a SSL/TLS and Crypto toolkit. Deprecated in OS X,
+    this CocoaPod will add the latest OpenSSL to your OS X project.
+
+    Affected versions of this package are vulnerable to Information Exposure
+    via timing (side-channel) attacks. The vulnerability exists due to the
+    lack of constant time comparison during the RSA key generation of `p`
+    and `q`, resulting in the potential ability to recover the private key.
+
+
+
+    [1]: https://www.openssl.org/source/openssl-1.0.2j.tar.gz
+  affected_package: openssl-osx
+  vulnerable_versions:
+  - ">=0.0.0"
+  severity: medium
+  package_manager: cocoapods
+  cve:
+  - CVE-2018-0737
+  cwe:
+  - CWE-208
+  disclosed_date: 2018-04-11
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Alejandro Cabrera Aldaya
+  - Billy Brumley
+  - Cesar Pereida Garcia and Luis Manuel Alvarez Tapia
+  references:
+  - https://git.openssl.org/gitweb/?p=openssl.git;a=commitdiff;h=349a41da1ad88ad87825414752a8ff5fdd6a6c3f
+  - https://git.openssl.org/gitweb/?p=openssl.git;a=commitdiff;h=6939eab03a6e23d2bd2c3f5e34fe1d48e542e787
+  - https://www.openssl.org/news/secadv/20180416.txt
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-OPENSSLOSX-471191

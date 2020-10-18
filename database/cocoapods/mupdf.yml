@@ -1,0 +1,960 @@
+---
+- id: snykio:cocoapods:mupdf:470639
+  title: Out-of-Bounds
+  description: |
+    [MuPDF][1] is a lightweight PDF and XPS viewer.
+
+    Affected versions of this package are vulnerable to Out-of-Bounds. MuPDF
+    is vulnerable to memory corruption and possible code execution through
+    the JBIG2 parser. It is possible for attackers to pass a PDF to a user
+    to cause the application to pass `memset` a negative number. This flaw
+    causes memory corruption and potentially code execution as well.
+
+
+
+    [1]: https://git.ghostscript.com/mupdf.git/
+  affected_package: mupdf
+  vulnerable_versions:
+  - ">=1.9  <1.10"
+  severity: high
+  package_manager: cocoapods
+  cve:
+  - CVE-2016-8729
+  cwe:
+  - CWE-119
+  disclosed_date: 2017-05-15
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - http://git.ghostscript.com/?p=mupdf.git;a=commit;h=1a7ef61410884daff8ff8391ddcecc3102acd989
+  - https://www.talosintelligence.com/vulnerability_reports/TALOS-2016-0243
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-MUPDF-470639
+- id: snykio:cocoapods:mupdf:470659
+  title: Resource Management Errors
+  description: |
+    [MuPDF][1] is a lightweight PDF and XPS viewer.
+
+    Affected versions of this package are vulnerable to Resource Management
+    Errors. MuPDF is vulnerable to denial of service (DoS). The attacker can
+    launch the attack by sending a malicious file to the
+    `do_scavenging_malloc` in the PDF parser.
+
+
+
+    [1]: https://git.ghostscript.com/mupdf.git/
+  affected_package: mupdf
+  vulnerable_versions:
+  - ">=1.7"
+  severity: medium
+  package_manager: cocoapods
+  cve:
+  - CVE-2018-1000036
+  cwe:
+  - CWE-399
+  disclosed_date: 2018-01-19
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=5502
+  - https://security.gentoo.org/glsa/201811-15
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-MUPDF-470659
+- id: snykio:cocoapods:mupdf:470704
+  title: Out-of-Bounds
+  description: |
+    [MuPDF][1] is a lightweight PDF and XPS viewer.
+
+    Affected versions of this package are vulnerable to Out-of-Bounds. MuPDF
+    is vulnerable to denial of service (DoS) attacks that could possibly
+    lead to arbitrary code execution. These attacks are possible because
+    there is a heap-based buffer overflow in the pdf\_load\_mesh\_params
+    function.
+
+
+
+    [1]: https://git.ghostscript.com/mupdf.git/
+  affected_package: mupdf
+  vulnerable_versions:
+  - ">=1.7  <1.10"
+  severity: high
+  package_manager: cocoapods
+  cve:
+  - CVE-2016-6525
+  cwe:
+  - CWE-119
+  disclosed_date: 2016-07-27
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - http://bugs.ghostscript.com/show_bug.cgi?id=696954
+  - http://git.ghostscript.com/?p=mupdf.git;h=39b0f07dd960f34e7e6bf230ffc3d87c41ef0f2e
+  - http://www.debian.org/security/2016/dsa-3655
+  - http://www.openwall.com/lists/oss-security/2016/08/03/8
+  - http://www.securityfocus.com/bid/92266
+  - https://security.gentoo.org/glsa/201702-12
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-MUPDF-470704
+- id: snykio:cocoapods:mupdf:470830
+  title: Out-of-Bounds
+  description: |
+    [MuPDF][1] is a lightweight PDF and XPS viewer.
+
+    Affected versions of this package are vulnerable to Out-of-Bounds. MuPDF
+    is vulnerable to remote code execution (RCE) attacks. A malicious user
+    can pass a malicious pdf file to the `pdf_lookup_cmap_full` function in
+    `pdf-cmap.c` to cause a stack buffer overflow that can lead to arbitrary
+    code being executed.
+
+
+
+    [1]: https://git.ghostscript.com/mupdf.git/
+  affected_package: mupdf
+  vulnerable_versions:
+  - ">=1.7"
+  severity: high
+  package_manager: cocoapods
+  cve:
+  - CVE-2018-1000038
+  cwe:
+  - CWE-119
+  disclosed_date: 2018-05-24
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - http://git.ghostscript.com/?p=mupdf.git;a=commitdiff;h=71ceebcf56e682504da22c4035b39a2d451e8ffd;hp=7f82c01523505052615492f8e220f4348ba46995
+  - http://git.ghostscript.com/?p=mupdf.git;a=commitdiff;h=f597300439e62f5e921f0d7b1e880b5c1a1f1607;hp=093fc3b098dc5fadef5d8ad4b225db9fb124758b
+  - https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=5494
+  - https://security.gentoo.org/glsa/201811-15
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-MUPDF-470830
+- id: snykio:cocoapods:mupdf:470831
+  title: Out-of-Bounds
+  description: |
+    [MuPDF][1] is a lightweight PDF and XPS viewer.
+
+    Affected versions of this package are vulnerable to Out-of-Bounds. MuPDF
+    is vulnerable to denial of service (DoS) attacks and possibly other
+    attacks. These attacks can be performed because the `read_zip_dir_imp`
+    function does not check if the size fields in a ZIP entry are negative.
+    It can be triggered using a `.xps` file.
+
+
+
+    [1]: https://git.ghostscript.com/mupdf.git/
+  affected_package: mupdf
+  vulnerable_versions:
+  - ">=1.7"
+  severity: high
+  package_manager: cocoapods
+  cve:
+  - CVE-2017-14686
+  cwe:
+  - CWE-119
+  disclosed_date: 2017-09-15
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - http://git.ghostscript.com/?p=mupdf.git;h=0f0fbc07d9be31f5e83ec5328d7311fdfd8328b1
+  - http://www.debian.org/security/2017/dsa-4006
+  - https://bugs.ghostscript.com/show_bug.cgi?id=698540
+  - https://github.com/wlinzi/security_advisories/tree/master/CVE-2017-14686
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-MUPDF-470831
+- id: snykio:cocoapods:mupdf:470853
+  title: Use After Free
+  description: |
+    [MuPDF][1] is a lightweight PDF and XPS viewer.
+
+    Affected versions of this package are vulnerable to Use After Free.
+    MuPDF is vulnerable to denial of service (DoS) attacks. The application
+    contains a use-after-free bug, allowing a malicious user to crash the
+    application or possibly inject and execute arbitrary code.
+
+
+
+    [1]: https://git.ghostscript.com/mupdf.git/
+  affected_package: mupdf
+  vulnerable_versions:
+  - ">=1.7"
+  severity: high
+  package_manager: cocoapods
+  cve:
+  - CVE-2018-1000051
+  cwe:
+  - CWE-416
+  disclosed_date: 2017-12-19
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - https://bugs.ghostscript.com/show_bug.cgi?id=698825
+  - https://bugs.ghostscript.com/show_bug.cgi?id=698873
+  - https://security.gentoo.org/glsa/201811-15
+  - https://www.debian.org/security/2018/dsa-4152
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-MUPDF-470853
+- id: snykio:cocoapods:mupdf:470866
+  title: Out-of-Bounds
+  description: |
+    [MuPDF][1] is a lightweight PDF and XPS viewer.
+
+    Affected versions of this package are vulnerable to Out-of-Bounds. MuPDF
+    is vulnerable to denial of service (DoS) attacks. Using a pdf file,
+    attackers can user xref subsection object numbers to cause a heap-based
+    buffer overflow.
+
+
+
+    [1]: https://git.ghostscript.com/mupdf.git/
+  affected_package: mupdf
+  vulnerable_versions:
+  - ">=1.7"
+  severity: high
+  package_manager: cocoapods
+  cve:
+  - CVE-2017-17858
+  cwe:
+  - CWE-119
+  disclosed_date: 2017-12-11
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - http://git.ghostscript.com/?p=mupdf.git;a=commit;h=55c3f68d638ac1263a386e0aaa004bb6e8bde731
+  - https://bugs.ghostscript.com/show_bug.cgi?id=698819
+  - https://github.com/mzet-/Security-Advisories/blob/master/mzet-adv-2017-01.md
+  - https://security.gentoo.org/glsa/201811-15
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-MUPDF-470866
+- id: snykio:cocoapods:mupdf:470869
+  title: Out-of-Bounds
+  description: |
+    [MuPDF][1] is a lightweight PDF and XPS viewer.
+
+    Affected versions of this package are vulnerable to Out-of-Bounds. MuPDF
+    is vulnerable to denial of service (DoS) attacks. These attacks are
+    possible when a repair operation occurs during a clean operation because
+    MuPDF incorrectly handles length changes.
+
+
+
+    [1]: https://git.ghostscript.com/mupdf.git/
+  affected_package: mupdf
+  vulnerable_versions:
+  - 1.8-1.10
+  severity: high
+  package_manager: cocoapods
+  cve:
+  - CVE-2017-17866
+  cwe:
+  - CWE-119
+  disclosed_date: 2017-11-08
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - http://www.ghostscript.com/cgi-bin/findgit.cgi?520cc26d18c9ee245b56e9e91f9d4fcae02be5f0
+  - https://bugs.ghostscript.com/show_bug.cgi?id=698699
+  - https://www.debian.org/security/2018/dsa-4334
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-MUPDF-470869
+- id: snykio:cocoapods:mupdf:470872
+  title: Out-of-Bounds
+  description: |
+    [MuPDF][1] is a lightweight PDF and XPS viewer.
+
+    Affected versions of this package are vulnerable to Out-of-Bounds. MuPDF
+    is vulnerable to denial of service (DoS) attacks and possibly other
+    attacks. The vulnerability is related to the mishandling of XML tag name
+    comparisons.
+
+
+
+    [1]: https://git.ghostscript.com/mupdf.git/
+  affected_package: mupdf
+  vulnerable_versions:
+  - ">=1.7"
+  severity: high
+  package_manager: cocoapods
+  cve:
+  - CVE-2017-14687
+  cwe:
+  - CWE-119
+  disclosed_date: 2017-09-18
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - http://git.ghostscript.com/?p=mupdf.git;h=2b16dbd8f73269cb15ca61ece75cf8d2d196ed28
+  - http://www.debian.org/security/2017/dsa-4006
+  - https://bugs.ghostscript.com/show_bug.cgi?id=698558
+  - https://github.com/wlinzi/security_advisories/tree/master/CVE-2017-14687
+  - https://lists.debian.org/debian-lts-announce/2017/11/msg00007.html
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-MUPDF-470872
+- id: snykio:cocoapods:mupdf:470873
+  title: Use After Free
+  description: |
+    [MuPDF][1] is a lightweight PDF and XPS viewer.
+
+    Affected versions of this package are vulnerable to Use After Free.
+    MuPDF is vulnerable to denial of service (DoS) attacks. The library can
+    have a variable reside in a register, causing a use-after-free bug that
+    can crash the application or other impacts through a malicious pdf file.
+
+
+
+    [1]: https://git.ghostscript.com/mupdf.git/
+  affected_package: mupdf
+  vulnerable_versions:
+  - ">=1.7"
+  severity: high
+  package_manager: cocoapods
+  cve:
+  - CVE-2017-15369
+  cwe:
+  - CWE-416
+  disclosed_date: 2017-09-25
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - http://git.ghostscript.com/?p=mupdf.git;h=c2663e51238ec8256da7fc61ad580db891d9fe9a
+  - https://bugs.ghostscript.com/show_bug.cgi?id=698592
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-MUPDF-470873
+- id: snykio:cocoapods:mupdf:470876
+  title: Use After Free
+  description: |
+    [MuPDF][1] is a lightweight PDF and XPS viewer.
+
+    Affected versions of this package are vulnerable to Use After Free.
+    MuPDF is vulnerable to denial of service (DoS) attacks and possibly
+    other attacks. These attacks are possible due to a use-after-free
+    vulnerability in the `fz_subsample_pixmap` function causing the
+    application to crash.
+
+
+
+    [1]: https://git.ghostscript.com/mupdf.git/
+  affected_package: mupdf
+  vulnerable_versions:
+  - ">=1.7"
+  severity: high
+  package_manager: cocoapods
+  cve:
+  - CVE-2017-7264
+  cwe:
+  - CWE-416
+  disclosed_date: 2017-02-09
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - http://git.ghostscript.com/?p=mupdf.git;h=2c4e5867ee699b1081527bc6c6ea0e99a35a5c27
+  - http://www.securityfocus.com/bid/97111
+  - https://blogs.gentoo.org/ago/2017/02/09/mupdf-use-after-free-in-fz_subsample_pixmap-pixmap-c/
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-MUPDF-470876
+- id: snykio:cocoapods:mupdf:470898
+  title: Out-of-bounds Write
+  description: |
+    [MuPDF][1] is a lightweight PDF and XPS viewer.
+
+    Affected versions of this package are vulnerable to Out-of-bounds Write.
+    MuPDF is vulnerable to an out-of-bounds write vulnerability. A flaw in
+    the glyph scaling code leads to an overwrite of heap metadata and
+    sensitive process memory when an attacker opens a malicious file in a
+    vulnerable reader. This vulnerability also potentially results in code
+    execution vulnerability.
+
+
+
+    [1]: https://git.ghostscript.com/mupdf.git/
+  affected_package: mupdf
+  vulnerable_versions:
+  - ">=1.7"
+  severity: high
+  package_manager: cocoapods
+  cve:
+  - CVE-2016-8728
+  cwe:
+  - CWE-787
+  disclosed_date: 2016-11-29
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - https://www.talosintelligence.com/vulnerability_reports/TALOS-2016-0242
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-MUPDF-470898
+- id: snykio:cocoapods:mupdf:470904
+  title: Out-of-Bounds
+  description: |
+    [MuPDF][1] is a lightweight PDF and XPS viewer.
+
+    Affected versions of this package are vulnerable to Out-of-Bounds. MuPDF
+    is vulnerable to denial of service (DoS) attacks and possibly other
+    attacks. This vulnerability is possible because the
+    `xps_load_links_in_glyphs` function doesn\'t verify if a font can be
+    loaded before trying to load it. This can be triggered using a `.xps`
+    file.
+
+
+
+    [1]: https://git.ghostscript.com/mupdf.git/
+  affected_package: mupdf
+  vulnerable_versions:
+  - ">=1.7"
+  severity: high
+  package_manager: cocoapods
+  cve:
+  - CVE-2017-14685
+  cwe:
+  - CWE-119
+  disclosed_date: 2017-09-14
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - http://git.ghostscript.com/?p=mupdf.git;h=ab1a420613dec93c686acbee2c165274e922f82a
+  - http://www.debian.org/security/2017/dsa-4006
+  - https://bugs.ghostscript.com/show_bug.cgi?id=698539
+  - https://github.com/wlinzi/security_advisories/tree/master/CVE-2017-14685
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-MUPDF-470904
+- id: snykio:cocoapods:mupdf:470934
+  title: Resource Exhaustion
+  description: "[MuPDF][1] is a lightweight PDF and XPS viewer.\n\nAffected versions
+    of this package are vulnerable to Resource Exhaustion.\nMuPDF is vulnerable to
+    denial of service. An infinite loop in the\nfunction `svg_dev_end_tile` in `fitz/svg-device.c`
+    allows an attacker to\ncause a denial of service condition.\n\n\n\n[1]: https://git.ghostscript.com/mupdf.git/\n\\nDenial
+    of Service (DoS) describes a family of attacks, all aimed at\nmaking a system
+    inaccessible to its original and legitimate users. There\nare many types of DoS
+    attacks, ranging from trying to clog the network\npipes to the system by generating
+    a large volume of traffic from many\nmachines (a Distributed Denial of Service
+    - DDoS - attack) to sending\ncrafted requests that cause a system to crash or
+    take a disproportional\namount of time to process.\n\nThe Regular expression Denial
+    of Service (ReDoS) is a type of Denial of\nService attack. Regular expressions
+    are incredibly powerful, but they\naren\\'t very intuitive and can ultimately
+    end up making it easy for\nattackers to take your site down.\n\nLet’s take the
+    following regular expression as an example:\n\n    regex = /A(B|C+)+D/\n{: .language-js}\n\nThis
+    regular expression accomplishes the following:\n\n* `A` The string must start
+    with the letter \\'A\\'\n* `(B|C+)+` The string must then follow the letter A
+    with either the\n  letter \\'B\\' or some number of occurrences of the letter
+    \\'C\\' (the\n  `+` matches one or more times). The `+` at the end of this section\n
+    \ states that we can look for one or more matches of this section.\n* `D` Finally,
+    we ensure this section of the string ends with a \\'D\\'\n\nThe expression would
+    match inputs such as `ABBD`, `ABCCCCD`, `ABCBCCCD`\nand `ACCCCCD`\n\nIt most cases,
+    it doesn\\'t take very long for a regex engine to find a\nmatch:\n\n    $ time
+    node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCD\")'\n    0.04s user
+    0.01s system 95% cpu 0.052 total\n    \n    $ time node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCX\")'\n
+    \   1.79s user 0.02s system 99% cpu 1.812 total\n{: .language-bash}\n\nThe entire
+    process of testing it against a 30 characters long string\ntakes around ~52ms.
+    But when given an invalid string, it takes nearly\ntwo seconds to complete the
+    test, over ten times as long as it took to\ntest a valid string. The dramatic
+    difference is due to the way regular\nexpressions get evaluated.\n\nMost Regex
+    engines will work very similarly (with minor differences).\nThe engine will match
+    the first possible way to accept the current\ncharacter and proceed to the next
+    one. If it then fails to match the\nnext one, it will backtrack and see if there
+    was another way to digest\nthe previous character. If it goes too far down the
+    rabbit hole only to\nfind out the string doesn’t match in the end, and if many
+    characters\nhave multiple valid regex paths, the number of backtracking steps
+    can\nbecome very large, resulting in what is known as *catastrophic\nbacktracking*.\n\nLet\\'s
+    look at how our expression runs into this problem, using a\nshorter string: \\\"ACCCX\\\".
+    While it seems fairly straightforward, there\nare still four different ways that
+    the engine could match those three\nC\\'s:\n\n1.  CCC\n2.  CC+C\n3.  C+CC\n4.
+    \ C+C+C.\n\nThe engine has to try each of those combinations to see if any of
+    them\npotentially match against the expression. When you combine that with the\nother
+    steps the engine must take, we can use [RegEx 101 debugger][1] to\nsee the engine
+    has to take a total of 38 steps before it can determine\nthe string doesn\\'t
+    match.\n\nFrom there, the number of steps the engine must use to validate a string\njust
+    continues to grow.\n\n| String | Number of C\\'s | Number of steps |\n|----------\n|
+    ACCCX | 3 | 38 |\n| ACCCCX | 4 | 71 |\n| ACCCCCX | 5 | 136 |\n| ACCCCCCCCCCCCCCX
+    | 14 | 65,553 |\n\nBy the time the string includes 14 C\\'s, the engine has to
+    take over\n65,000 steps just to see if the string is valid. These extreme\nsituations
+    can cause them to work very slowly (exponentially related to\ninput size, as shown
+    above), allowing an attacker to exploit this and\ncan cause the service to excessively
+    consume CPU, resulting in a Denial\nof Service.\n\n\n\n[1]: https://regex101.com/debugger\n"
+  affected_package: mupdf
+  vulnerable_versions:
+  - ">=1.7"
+  severity: medium
+  package_manager: cocoapods
+  cve:
+  - CVE-2018-19777
+  cwe:
+  - CWE-400
+  disclosed_date: 2018-11-30
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - https://bugs.ghostscript.com/show_bug.cgi?id=700301
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-MUPDF-470934
+- id: snykio:cocoapods:mupdf:470992
+  title: Resource Exhaustion
+  description: "[MuPDF][1] is a lightweight PDF and XPS viewer.\n\nAffected versions
+    of this package are vulnerable to Resource Exhaustion.\nArtifex MuPDF is vulnerable
+    to denial of service. A remote attacker is\nable to cause a denial of service
+    condition from `scg/svg-run.c` via a\ncrafted SVG file due to recursive calls
+    which causes a crash in the\nfunction `fz_xml_att` in `fitz/xml.c` resulted from
+    excessive stack\nconsumption.\n\n\n\n[1]: https://git.ghostscript.com/mupdf.git/\n\\nDenial
+    of Service (DoS) describes a family of attacks, all aimed at\nmaking a system
+    inaccessible to its original and legitimate users. There\nare many types of DoS
+    attacks, ranging from trying to clog the network\npipes to the system by generating
+    a large volume of traffic from many\nmachines (a Distributed Denial of Service
+    - DDoS - attack) to sending\ncrafted requests that cause a system to crash or
+    take a disproportional\namount of time to process.\n\nThe Regular expression Denial
+    of Service (ReDoS) is a type of Denial of\nService attack. Regular expressions
+    are incredibly powerful, but they\naren\\'t very intuitive and can ultimately
+    end up making it easy for\nattackers to take your site down.\n\nLet’s take the
+    following regular expression as an example:\n\n    regex = /A(B|C+)+D/\n{: .language-js}\n\nThis
+    regular expression accomplishes the following:\n\n* `A` The string must start
+    with the letter \\'A\\'\n* `(B|C+)+` The string must then follow the letter A
+    with either the\n  letter \\'B\\' or some number of occurrences of the letter
+    \\'C\\' (the\n  `+` matches one or more times). The `+` at the end of this section\n
+    \ states that we can look for one or more matches of this section.\n* `D` Finally,
+    we ensure this section of the string ends with a \\'D\\'\n\nThe expression would
+    match inputs such as `ABBD`, `ABCCCCD`, `ABCBCCCD`\nand `ACCCCCD`\n\nIt most cases,
+    it doesn\\'t take very long for a regex engine to find a\nmatch:\n\n    $ time
+    node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCD\")'\n    0.04s user
+    0.01s system 95% cpu 0.052 total\n    \n    $ time node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCX\")'\n
+    \   1.79s user 0.02s system 99% cpu 1.812 total\n{: .language-bash}\n\nThe entire
+    process of testing it against a 30 characters long string\ntakes around ~52ms.
+    But when given an invalid string, it takes nearly\ntwo seconds to complete the
+    test, over ten times as long as it took to\ntest a valid string. The dramatic
+    difference is due to the way regular\nexpressions get evaluated.\n\nMost Regex
+    engines will work very similarly (with minor differences).\nThe engine will match
+    the first possible way to accept the current\ncharacter and proceed to the next
+    one. If it then fails to match the\nnext one, it will backtrack and see if there
+    was another way to digest\nthe previous character. If it goes too far down the
+    rabbit hole only to\nfind out the string doesn’t match in the end, and if many
+    characters\nhave multiple valid regex paths, the number of backtracking steps
+    can\nbecome very large, resulting in what is known as *catastrophic\nbacktracking*.\n\nLet\\'s
+    look at how our expression runs into this problem, using a\nshorter string: \\\"ACCCX\\\".
+    While it seems fairly straightforward, there\nare still four different ways that
+    the engine could match those three\nC\\'s:\n\n1.  CCC\n2.  CC+C\n3.  C+CC\n4.
+    \ C+C+C.\n\nThe engine has to try each of those combinations to see if any of
+    them\npotentially match against the expression. When you combine that with the\nother
+    steps the engine must take, we can use [RegEx 101 debugger][1] to\nsee the engine
+    has to take a total of 38 steps before it can determine\nthe string doesn\\'t
+    match.\n\nFrom there, the number of steps the engine must use to validate a string\njust
+    continues to grow.\n\n| String | Number of C\\'s | Number of steps |\n|----------\n|
+    ACCCX | 3 | 38 |\n| ACCCCX | 4 | 71 |\n| ACCCCCX | 5 | 136 |\n| ACCCCCCCCCCCCCCX
+    | 14 | 65,553 |\n\nBy the time the string includes 14 C\\'s, the engine has to
+    take over\n65,000 steps just to see if the string is valid. These extreme\nsituations
+    can cause them to work very slowly (exponentially related to\ninput size, as shown
+    above), allowing an attacker to exploit this and\ncan cause the service to excessively
+    consume CPU, resulting in a Denial\nof Service.\n\n\n\n[1]: https://regex101.com/debugger\n"
+  affected_package: mupdf
+  vulnerable_versions:
+  - ">=1.7"
+  severity: medium
+  package_manager: cocoapods
+  cve:
+  - CVE-2018-19881
+  cwe:
+  - CWE-400
+  disclosed_date: 2018-12-03
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - https://bugs.ghostscript.com/show_bug.cgi?id=700342
+  - https://github.com/TeamSeri0us/pocs/tree/master/mupdf/20181203
+  - https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/CNJNEX5EW6YH5OARXXSSXW4HHC5PIBSY/
+  - https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/SEK2EHVNREJ7XZMFF2MXRWKIF4IBHPNE/
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-MUPDF-470992
+- id: snykio:cocoapods:mupdf:471071
+  title: Resource Management Errors
+  description: |
+    [MuPDF][1] is a lightweight PDF and XPS viewer.
+
+    Affected versions of this package are vulnerable to Resource Management
+    Errors. MuPDF is vulnerable to denial of service (DoS) attacks. A
+    malicious user can pass a malicious pdf file to the `fz_skip_space`
+    function in `pdf-xref.c` to cause an infinite loop that can cause the
+    application to crash.
+
+
+
+    [1]: https://git.ghostscript.com/mupdf.git/
+  affected_package: mupdf
+  vulnerable_versions:
+  - ">=1.8"
+  severity: medium
+  package_manager: cocoapods
+  cve:
+  - CVE-2018-10289
+  cwe:
+  - CWE-399
+  disclosed_date: 2018-04-21
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - https://bugs.ghostscript.com/show_bug.cgi?id=699271
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-MUPDF-471071
+- id: snykio:cocoapods:mupdf:471090
+  title: Improper Input Validation
+  description: |
+    [MuPDF][1] is a lightweight PDF and XPS viewer.
+
+    Affected versions of this package are vulnerable to Improper Input
+    Validation. MuPDF is vulnerable to denial of service (DoS). The attack
+    can be launched because PDF parser has multiple reachable assertions
+    which can be introduced by sending a malicious file.
+
+
+
+    [1]: https://git.ghostscript.com/mupdf.git/
+  affected_package: mupdf
+  vulnerable_versions:
+  - ">=1.7"
+  severity: medium
+  package_manager: cocoapods
+  cve:
+  - CVE-2018-1000037
+  cwe:
+  - CWE-20
+  disclosed_date: 2018-01-19
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - http://git.ghostscript.com/?p=mupdf.git;a=commitdiff;h=71ceebcf56e682504da22c4035b39a2d451e8ffd;hp=7f82c01523505052615492f8e220f4348ba46995
+  - http://git.ghostscript.com/?p=mupdf.git;a=commitdiff;h=8a3257b01faa899dd9b5e35c6bb3403cd709c371;hp=de39f005f12a1afc6973c1f5cec362d6545f70cb
+  - http://git.ghostscript.com/?p=mupdf.git;a=commitdiff;h=b2e7d38e845c7d4922d05e6e41f3a2dc1bc1b14a;hp=f51836b9732c38d945b87fda0770009a77ba680c
+  - https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=5490
+  - https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=5501
+  - https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=5503
+  - https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=5511
+  - https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=5564
+  - https://security.gentoo.org/glsa/201811-15
+  - https://www.debian.org/security/2018/dsa-4334
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-MUPDF-471090
+- id: snykio:cocoapods:mupdf:471091
+  title: Out-of-Bounds
+  description: |
+    [MuPDF][1] is a lightweight PDF and XPS viewer.
+
+    Affected versions of this package are vulnerable to Out-of-Bounds. MuPDF
+    is vulnerable to denial of service (DoS) attacks. A malicious user can
+    pass a `pdf` file to the application to cause a segmentation fault
+    through the `pdf_read_new_xref` method in the `pdf/pdf-xref.c` file,
+    causing the application to crash.
+
+
+
+    [1]: https://git.ghostscript.com/mupdf.git/
+  affected_package: mupdf
+  vulnerable_versions:
+  - ">=1.7"
+  severity: medium
+  package_manager: cocoapods
+  cve:
+  - CVE-2018-6192
+  cwe:
+  - CWE-119
+  disclosed_date: 2018-01-24
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - http://www.securityfocus.com/bid/102822
+  - https://bugs.ghostscript.com/show_bug.cgi?id=698916
+  - https://lists.debian.org/debian-lts-announce/2019/06/msg00027.html
+  - https://security.gentoo.org/glsa/201811-15
+  - https://www.debian.org/security/2018/dsa-4334
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-MUPDF-471091
+- id: snykio:cocoapods:mupdf:471093
+  title: Integer Overflow or Wraparound
+  description: |
+    [MuPDF][1] is a lightweight PDF and XPS viewer.
+
+    Affected versions of this package are vulnerable to Integer Overflow or
+    Wraparound. MuPDF is vulnerable to integer overflow. The attack can
+    happen because of the incorrect exponent validation in the `js_strtod`
+    function in `jsdtoa.c`.
+
+
+
+    [1]: https://git.ghostscript.com/mupdf.git/
+  affected_package: mupdf
+  vulnerable_versions:
+  - ">=1.7"
+  severity: medium
+  package_manager: cocoapods
+  cve:
+  - CVE-2018-6191
+  cwe:
+  - CWE-190
+  disclosed_date: 2018-01-18
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - http://git.ghostscript.com/?p=mujs.git;a=commit;h=25821e6d74fab5fcc200fe5e818362e03e114428
+  - http://www.securityfocus.com/bid/102840
+  - https://bugs.ghostscript.com/show_bug.cgi?id=698920
+  - https://www.exploit-db.com/exploits/43903/
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-MUPDF-471093
+- id: snykio:cocoapods:mupdf:471100
+  title: Out-of-Bounds
+  description: |
+    [MuPDF][1] is a lightweight PDF and XPS viewer.
+
+    Affected versions of this package are vulnerable to Out-of-Bounds. MuPDF
+    is vulnerable to denial of service (DoS) attacks. These attacks are
+    possible because there is a heap-base buffer overflow that can be
+    triggered with the `do_pdf_save_document` function in
+    `source/pdf/pdf-write.c`.
+
+
+
+    [1]: https://git.ghostscript.com/mupdf.git/
+  affected_package: mupdf
+  vulnerable_versions:
+  - ">=1.8"
+  severity: medium
+  package_manager: cocoapods
+  cve:
+  - CVE-2018-6187
+  cwe:
+  - CWE-119
+  disclosed_date: 2018-01-23
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - http://www.securityfocus.com/bid/102823
+  - https://bugs.ghostscript.com/show_bug.cgi?id=698908
+  - https://security.gentoo.org/glsa/201811-15
+  - https://www.debian.org/security/2018/dsa-4334
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-MUPDF-471100
+- id: snykio:cocoapods:mupdf:471101
+  title: Resource Exhaustion
+  description: "[MuPDF][1] is a lightweight PDF and XPS viewer.\n\nAffected versions
+    of this package are vulnerable to Resource Exhaustion.\nMuPDF is vulnerable to
+    denial of service (DoS) attacks. These attacks\nare possible when `PDF_TOK_CLOSE_ARRAY`
+    doesn\\'t appear in the\n`pdf_parse_array` function causing an infinite loop.\n\n\n\n[1]:
+    https://git.ghostscript.com/mupdf.git/\n\\nDenial of Service (DoS) describes a
+    family of attacks, all aimed at\nmaking a system inaccessible to its original
+    and legitimate users. There\nare many types of DoS attacks, ranging from trying
+    to clog the network\npipes to the system by generating a large volume of traffic
+    from many\nmachines (a Distributed Denial of Service - DDoS - attack) to sending\ncrafted
+    requests that cause a system to crash or take a disproportional\namount of time
+    to process.\n\nThe Regular expression Denial of Service (ReDoS) is a type of Denial
+    of\nService attack. Regular expressions are incredibly powerful, but they\naren\\'t
+    very intuitive and can ultimately end up making it easy for\nattackers to take
+    your site down.\n\nLet’s take the following regular expression as an example:\n\n
+    \   regex = /A(B|C+)+D/\n{: .language-js}\n\nThis regular expression accomplishes
+    the following:\n\n* `A` The string must start with the letter \\'A\\'\n* `(B|C+)+`
+    The string must then follow the letter A with either the\n  letter \\'B\\' or
+    some number of occurrences of the letter \\'C\\' (the\n  `+` matches one or more
+    times). The `+` at the end of this section\n  states that we can look for one
+    or more matches of this section.\n* `D` Finally, we ensure this section of the
+    string ends with a \\'D\\'\n\nThe expression would match inputs such as `ABBD`,
+    `ABCCCCD`, `ABCBCCCD`\nand `ACCCCCD`\n\nIt most cases, it doesn\\'t take very
+    long for a regex engine to find a\nmatch:\n\n    $ time node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCD\")'\n
+    \   0.04s user 0.01s system 95% cpu 0.052 total\n    \n    $ time node -e '/A(B|C+)+D/.test(\"ACCCCCCCCCCCCCCCCCCCCCCCCCCCCX\")'\n
+    \   1.79s user 0.02s system 99% cpu 1.812 total\n{: .language-bash}\n\nThe entire
+    process of testing it against a 30 characters long string\ntakes around ~52ms.
+    But when given an invalid string, it takes nearly\ntwo seconds to complete the
+    test, over ten times as long as it took to\ntest a valid string. The dramatic
+    difference is due to the way regular\nexpressions get evaluated.\n\nMost Regex
+    engines will work very similarly (with minor differences).\nThe engine will match
+    the first possible way to accept the current\ncharacter and proceed to the next
+    one. If it then fails to match the\nnext one, it will backtrack and see if there
+    was another way to digest\nthe previous character. If it goes too far down the
+    rabbit hole only to\nfind out the string doesn’t match in the end, and if many
+    characters\nhave multiple valid regex paths, the number of backtracking steps
+    can\nbecome very large, resulting in what is known as *catastrophic\nbacktracking*.\n\nLet\\'s
+    look at how our expression runs into this problem, using a\nshorter string: \\\"ACCCX\\\".
+    While it seems fairly straightforward, there\nare still four different ways that
+    the engine could match those three\nC\\'s:\n\n1.  CCC\n2.  CC+C\n3.  C+CC\n4.
+    \ C+C+C.\n\nThe engine has to try each of those combinations to see if any of
+    them\npotentially match against the expression. When you combine that with the\nother
+    steps the engine must take, we can use [RegEx 101 debugger][1] to\nsee the engine
+    has to take a total of 38 steps before it can determine\nthe string doesn\\'t
+    match.\n\nFrom there, the number of steps the engine must use to validate a string\njust
+    continues to grow.\n\n| String | Number of C\\'s | Number of steps |\n|----------\n|
+    ACCCX | 3 | 38 |\n| ACCCCX | 4 | 71 |\n| ACCCCCX | 5 | 136 |\n| ACCCCCCCCCCCCCCX
+    | 14 | 65,553 |\n\nBy the time the string includes 14 C\\'s, the engine has to
+    take over\n65,000 steps just to see if the string is valid. These extreme\nsituations
+    can cause them to work very slowly (exponentially related to\ninput size, as shown
+    above), allowing an attacker to exploit this and\ncan cause the service to excessively
+    consume CPU, resulting in a Denial\nof Service.\n\n\n\n[1]: https://regex101.com/debugger\n"
+  affected_package: mupdf
+  vulnerable_versions:
+  - ">=1.7"
+  severity: medium
+  package_manager: cocoapods
+  cve:
+  - CVE-2018-5686
+  cwe:
+  - CWE-400
+  disclosed_date: 2018-01-13
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - https://bugs.ghostscript.com/show_bug.cgi?id=698860
+  - https://lists.debian.org/debian-lts-announce/2019/06/msg00027.html
+  - https://security.gentoo.org/glsa/201811-15
+  - https://www.debian.org/security/2018/dsa-4334
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-MUPDF-471101
+- id: snykio:cocoapods:mupdf:471108
+  title: Out-of-bounds Read
+  description: |
+    [MuPDF][1] is a lightweight PDF and XPS viewer.
+
+    Affected versions of this package are vulnerable to Out-of-bounds Read.
+    MuPDF is vulnerable to denial of service (DoS) attacks. The attack can
+    be launched if a malicious file is passed to the `fz_subsample_pixmap()`
+    function in `fitz/pixmap.c`, causing an out-of-bound read and
+    application crash.
+
+
+
+    [1]: https://git.ghostscript.com/mupdf.git/
+  affected_package: mupdf
+  vulnerable_versions:
+  - ">=1.7"
+  severity: medium
+  package_manager: cocoapods
+  cve:
+  - CVE-2017-5896
+  cwe:
+  - CWE-125
+  disclosed_date: 2017-02-09
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - http://git.ghostscript.com/?p=mupdf.git;h=2c4e5867ee699b1081527bc6c6ea0e99a35a5c27
+  - http://www.debian.org/security/2017/dsa-3797
+  - http://www.openwall.com/lists/oss-security/2017/02/06/3
+  - http://www.openwall.com/lists/oss-security/2017/02/07/1
+  - http://www.securityfocus.com/bid/96139
+  - https://bugs.ghostscript.com/show_bug.cgi?id=697515
+  - https://security.gentoo.org/glsa/201702-12
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-MUPDF-471108
+- id: snykio:cocoapods:mupdf:471142
+  title: Use After Free
+  description: |
+    [MuPDF][1] is a lightweight PDF and XPS viewer.
+
+    Affected versions of this package are vulnerable to Use After Free.
+    MuPDF is vulnerable to a use-after-free vulnerability. This
+    vulnerability is located in the pdf\_load\_xref function and allows
+    remote attackers to perform denial of service (DoS) attacks using a PDF
+    file.
+
+
+
+    [1]: https://git.ghostscript.com/mupdf.git/
+  affected_package: mupdf
+  vulnerable_versions:
+  - ">=1.7  <1.10"
+  severity: medium
+  package_manager: cocoapods
+  cve:
+  - CVE-2016-6265
+  cwe:
+  - CWE-416
+  disclosed_date: 2016-07-21
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - http://bugs.ghostscript.com/show_bug.cgi?id=696941
+  - http://git.ghostscript.com/?p=mupdf.git;h=fa1936405b6a84e5c9bb440912c23d532772f958
+  - http://lists.opensuse.org/opensuse-updates/2016-08/msg00007.html
+  - http://www.debian.org/security/2016/dsa-3655
+  - http://www.openwall.com/lists/oss-security/2016/07/21/7
+  - http://www.securityfocus.com/bid/92071
+  - https://security.gentoo.org/glsa/201702-12
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-MUPDF-471142
+- id: snykio:cocoapods:mupdf:471207
+  title: Out-of-bounds Write
+  description: |
+    [MuPDF][1] is a lightweight PDF and XPS viewer.
+
+    Affected versions of this package are vulnerable to Out-of-bounds Write.
+    MuPDF is vulnerable to denial of service (DoS) attacks. The attack can
+    be launched if a malicious file is passed to the `my_getline()` function
+    in `jstest_main.c`, causing out-of-bounds write.
+
+
+
+    [1]: https://git.ghostscript.com/mupdf.git/
+  affected_package: mupdf
+  vulnerable_versions:
+  - ">=1.7"
+  severity: medium
+  package_manager: cocoapods
+  cve:
+  - CVE-2016-10247
+  cwe:
+  - CWE-787
+  disclosed_date: 2016-09-23
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - http://git.ghostscript.com/?p=mupdf.git;h=446097f97b71ce20fa8d1e45e070f2e62676003e
+  - http://www.openwall.com/lists/oss-security/2017/03/13/20
+  - http://www.securityfocus.com/bid/97099
+  - https://blogs.gentoo.org/ago/2016/09/24/mupdf-mujstest-global-buffer-overflow-in-my_getline-jstest_main-c/
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-MUPDF-471207
+- id: snykio:cocoapods:mupdf:471209
+  title: Out-of-Bounds
+  description: |
+    [MuPDF][1] is a lightweight PDF and XPS viewer.
+
+    Affected versions of this package are vulnerable to Out-of-Bounds. MuPDF
+    is vulnerable to denial of service (DoS) attacks. Using a PDF document,
+    attackers can use the `count_entries` function to consume the stack and
+    crash the application.
+
+
+
+    [1]: https://git.ghostscript.com/mupdf.git/
+  affected_package: mupdf
+  vulnerable_versions:
+  - ">=1.10"
+  severity: medium
+  package_manager: cocoapods
+  cve:
+  - CVE-2016-10221
+  cwe:
+  - CWE-119
+  disclosed_date: 2016-12-01
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - http://git.ghostscript.com/?p=mupdf.git;h=2590fed7a355a421f062ebd4293df892800fa7ac
+  - https://bugs.ghostscript.com/show_bug.cgi?id=697400
+  - https://security.gentoo.org/glsa/201706-08
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-MUPDF-471209

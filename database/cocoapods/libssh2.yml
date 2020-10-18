@@ -1,0 +1,75 @@
+---
+- id: snykio:cocoapods:libssh2:470846
+  title: Improper Input Validation
+  description: |
+    [libssh2][1] is a client-side C library implementing the SSH2 protocol.
+
+    Affected versions of this package are vulnerable to Improper Input
+    Validation libssh2 is vulnerable to denial of service (DoS) attacks and
+    other attacks. `kex_agree_methods` function in libssh2 reads incoming
+    `SSH_MSG_KEXINIT` packet data without a proper range checking of length
+    values, thereby allowing remote servers to cause a denial of service by
+    using malicious `SSH_MSG_KEXINIT` packet.
+
+
+
+    [1]: https://github.com/endSly/libssh2-pod.git
+  affected_package: libssh2
+  vulnerable_versions:
+  - ">=0.0.0"
+  severity: medium
+  package_manager: cocoapods
+  cve:
+  - CVE-2015-1782
+  cwe:
+  - CWE-20
+  disclosed_date: 2015-03-13
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Mariusz Ziulek
+  references:
+  - http://www.securityfocus.com/bid/73061
+  - https://github.com/libssh2/libssh2/commit/7d94b69b802c03e8d7726f4ae61baba52cb7d871
+  - https://www.libssh2.org/adv_20150311.html
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-LIBSSH2-470846
+- id: snykio:cocoapods:libssh2:471143
+  title: Information Exposure
+  description: |
+    [libssh2][1] is a client-side C library implementing the SSH2 protocol.
+
+    Affected versions of this package are vulnerable to Information
+    Exposure. During the SSHv2 handshake when `libssh2` is to get a suitable
+    value for \'group order\' in the Diffle Hellman negotiation, it would
+    pass in number of bytes to a function that expected number of bits. This
+    would result in the library generating numbers using only an 8th the
+    number of random bits than what were intended: `128` or `256` bits
+    instead of 1023 or 2047.
+
+
+
+    [1]: https://github.com/endSly/libssh2-pod.git
+  affected_package: libssh2
+  vulnerable_versions:
+  - ">=0.0.0"
+  severity: medium
+  package_manager: cocoapods
+  cve:
+  - CVE-2016-0787
+  cwe:
+  - CWE-310
+  disclosed_date: 2016-02-09
+  created_date: 2019-11-19
+  last_modified_date: 2019-11-19
+  credit:
+  - Andreas Schneide
+  references:
+  - http://lists.opensuse.org/opensuse-updates/2016-03/msg00008.html
+  - http://www.debian.org/security/2016/dsa-3487
+  - http://www.securityfocus.com/bid/82514
+  - https://kc.mcafee.com/corporate/index?page=content&id=SB10156
+  - https://puppet.com/security/cve/CVE-2016-0787
+  - https://security.gentoo.org/glsa/201606-12
+  - https://support.symantec.com/us/en/article.symsa1360.html
+  - https://www.libssh2.org/adv_20160223.html
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-LIBSSH2-471143

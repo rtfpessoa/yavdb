@@ -1,0 +1,68 @@
+---
+- id: snykio:cocoapods:starscream:472099
+  title: SSL Certificate Bypass
+  description: |
+    [Starscream][1] is a conforming WebSocket (RFC 6455) client library in
+    Swift.
+
+    Affected versions of this package are vulnerable to SSL Certificate
+    Bypass. Allows an SSL Pinning bypass because of incorrect management of
+    the `certValidated` variable (it can be set to true but cannot be set to
+    false). If an attacker in a man-in-the-middle position is able to reset
+    an established TCP connection between the client and server, the
+    subsequent re-connection will not pin the SSL certificate, allowing
+    traffic interception.
+
+
+
+    [1]: https://github.com/daltoniam/Starscream
+  affected_package: starscream
+  vulnerable_versions:
+  - "<2.0.4"
+  severity: high
+  package_manager: cocoapods
+  cve:
+  - CVE-2017-7192
+  cwe:
+  - CWE-295
+  disclosed_date: 2017-04-06
+  created_date: 2019-10-09
+  last_modified_date: 2019-10-09
+  credit:
+  - Unknown
+  references:
+  - https://github.com/daltoniam/Starscream/commit/dbeb1190b8dcbff4f0b797f9e9d9b9b864d1f0d6
+  - https://seclists.org/bugtraq/2017/Apr/66
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-STARSCREAM-472099
+- id: snykio:cocoapods:starscream:472116
+  title: SSL Certificate Bypass
+  description: |
+    [Starscream][1] is a conforming WebSocket (RFC 6455) client library in
+    Swift.
+
+    Affected versions of this package are vulnerable to SSL Certificate
+    Bypass. `WebSocket.swift` allows an SSL Pinning bypass because pinning
+    occurs in the stream function (this is too late; pinning should occur in
+    the `initStreamsWithData` function).
+
+
+
+    [1]: https://github.com/daltoniam/Starscream
+  affected_package: starscream
+  vulnerable_versions:
+  - "<2.0.4"
+  severity: high
+  package_manager: cocoapods
+  cve:
+  - CVE-2017-5887
+  cwe:
+  - CWE-295
+  disclosed_date: 2017-04-06
+  created_date: 2019-10-09
+  last_modified_date: 2019-10-09
+  credit:
+  - Unknown
+  references:
+  - https://github.com/daltoniam/Starscream/commit/dbeb1190b8dcbff4f0b797f9e9d9b9b864d1f0d6
+  - https://seclists.org/bugtraq/2017/Apr/67
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-STARSCREAM-472116

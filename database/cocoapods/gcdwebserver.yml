@@ -1,0 +1,35 @@
+---
+- id: snykio:cocoapods:gcdwebserver:472118
+  title: Information Exposure
+  description: |
+    [GCDWebServer][1] is a modern and lightweight GCD based HTTP 1.1 server
+    designed to be embedded in iOS, macOS &amp; tvOS apps.
+
+    Affected versions of this package are vulnerable to Information
+    Exposure. An issue was discovered in GCDWebServer before 3.5.3. The
+    method moveItem in the GCDWebUploader class checks the FileExtension of
+    newAbsolutePath but not oldAbsolutePath. By leveraging this
+    vulnerability, an adversary can make an inaccessible file be available
+    (the credential of the app, for instance).
+
+
+
+    [1]: https://github.com/swisspol/GCDWebServer
+  affected_package: gcdwebserver
+  vulnerable_versions:
+  - "<3.5.3"
+  severity: high
+  package_manager: cocoapods
+  cve:
+  - CVE-2019-14924
+  cwe:
+  - CWE-200
+  disclosed_date: 2019-08-10
+  created_date: 2019-10-09
+  last_modified_date: 2019-10-09
+  credit:
+  - SiOSSubmission
+  references:
+  - https://github.com/swisspol/GCDWebServer/commit/02738433bf2e1b820ef48f04edd15df304081802
+  - https://github.com/swisspol/GCDWebServer/issues/433
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-GCDWEBSERVER-472118

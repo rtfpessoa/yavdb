@@ -1,0 +1,899 @@
+---
+- id: snykio:cocoapods:zziplib:470665
+  title: Denial of Service (DoS)
+  description: |
+    [zziplib][1] is a package that offers the ability to easily extract data
+    from files archived in a single zip file
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS). The attack is possible because the function
+    `__zzip_parse_root_directory` in` zip.c` does not handle the memory and
+    free the memory properly, causing memory leaks.
+
+
+
+    [1]: http://freefr.dl.sourceforge.net/project/zziplib/zziplib13/0.13.59/zziplib-0.13.59.tar.bz2
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package][1]
+
+
+
+    [1]: https://snyk.io/vuln/npm:ws:20171108
+  affected_package: zziplib
+  vulnerable_versions:
+  - ">=0.0.0"
+  severity: medium
+  package_manager: cocoapods
+  cve:
+  - CVE-2018-16548
+  cwe:
+  - CWE-399
+  disclosed_date: 2018-09-04
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - https://access.redhat.com/errata/RHSA-2019:2196
+  - https://github.com/gdraheim/zziplib/issues/58
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-ZZIPLIB-470665
+- id: snykio:cocoapods:zziplib:470924
+  title: Directory Traversal
+  description: |
+    [zziplib][1] is a package that offers the ability to easily extract data
+    from files archived in a single zip file
+
+    Affected versions of this package are vulnerable to Directory Traversal.
+    The library does not properly sanitize file paths, allowing a malicious
+    user to overwrite arbitrary files on the system by passing a zip file
+    with `..` in it.
+
+
+
+    [1]: http://freefr.dl.sourceforge.net/project/zziplib/zziplib13/0.13.59/zziplib-0.13.59.tar.bz2
+    \nA Directory Traversal attack (also known as path traversal) aims to
+    access files and directories that are stored outside the intended
+    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
+    its variations, or by using absolute file paths, it may be possible to
+    access arbitrary files and directories stored on file system, including
+    application source code, configuration, and other critical system files.
+
+    Directory Traversal vulnerabilities can be generally divided into two
+    types:
+
+    * **Information Disclosure**\: Allows the attacker to gain information
+      about the folder structure or read the contents of sensitive files on
+      the system.
+
+    `st` is a module for serving static files on web pages, and contains a
+    [vulnerability of this type][1]. In our example, we will serve files
+    from the `public` route.
+
+    If an attacker requests the following URL from our server, it will in
+    turn leak the sensitive private key of the root user.
+
+        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
+
+    **Note** `%2e` is the URL encoded version of `.` (dot).
+
+    * **Writing arbitrary files**\: Allows the attacker to create or replace
+      existing files. This type of vulnerability is also known as
+      `Zip-Slip`.
+
+    One way to achieve this is by using a malicious `zip` archive that holds
+    path traversal filenames. When each filename in the zip archive gets
+    concatenated to the target extraction folder, without validation, the
+    final path ends up outside of the target folder. If an executable or a
+    configuration file is overwritten with a file containing malicious code,
+    the problem can turn into an arbitrary code execution issue quite
+    easily.
+
+    The following is an example of a `zip` archive with one benign file and
+    one malicious file. Extracting the malicious file will result in
+    traversing out of the target folder, ending up in `/root/.ssh/`
+    overwriting the `authorized_keys` file:
+
+        2018-04-15 22:04:29 .....           19           19  good.txt
+        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
+
+
+
+    [1]: https://snyk.io/vuln/npm:st:20140206
+  affected_package: zziplib
+  vulnerable_versions:
+  - ">=0.0.0"
+  severity: medium
+  package_manager: cocoapods
+  cve:
+  - CVE-2018-17828
+  cwe:
+  - CWE-22
+  disclosed_date: 2018-09-25
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - https://github.com/gdraheim/zziplib/issues/62
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-ZZIPLIB-470924
+- id: snykio:cocoapods:zziplib:471083
+  title: Denial of Service (DoS)
+  description: |
+    [zziplib][1] is a package that offers the ability to easily extract data
+    from files archived in a single zip file
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS). Attackers can cause a bus error through the
+    `__zzip_parse_root_directory` function by passing a zip file.
+
+
+
+    [1]: http://freefr.dl.sourceforge.net/project/zziplib/zziplib13/0.13.59/zziplib-0.13.59.tar.bz2
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package][1]
+
+
+
+    [1]: https://snyk.io/vuln/npm:ws:20171108
+  affected_package: zziplib
+  vulnerable_versions:
+  - ">=0.0.0"
+  severity: medium
+  package_manager: cocoapods
+  cve:
+  - CVE-2018-7726
+  cwe:
+  - CWE-119
+  disclosed_date: 2018-03-06
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - https://access.redhat.com/errata/RHSA-2018:3229
+  - https://github.com/gdraheim/zziplib/issues/41
+  - https://usn.ubuntu.com/3699-1/
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-ZZIPLIB-471083
+- id: snykio:cocoapods:zziplib:471084
+  title: Denial of Service (DoS)
+  description: |
+    [zziplib][1] is a package that offers the ability to easily extract data
+    from files archived in a single zip file
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS). The `zzip_disk_fread` function has an invalid memory address
+    dereference which can cause DoS conditions.
+
+
+
+    [1]: http://freefr.dl.sourceforge.net/project/zziplib/zziplib13/0.13.59/zziplib-0.13.59.tar.bz2
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package][1]
+
+
+
+    [1]: https://snyk.io/vuln/npm:ws:20171108
+  affected_package: zziplib
+  vulnerable_versions:
+  - ">=0.0.0"
+  severity: medium
+  package_manager: cocoapods
+  cve:
+  - CVE-2018-7725
+  cwe:
+  - CWE-119
+  disclosed_date: 2018-03-06
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - https://access.redhat.com/errata/RHSA-2018:3229
+  - https://github.com/gdraheim/zziplib/issues/39
+  - https://usn.ubuntu.com/3699-1/
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-ZZIPLIB-471084
+- id: snykio:cocoapods:zziplib:471087
+  title: Denial of Service (DoS)
+  description: |
+    [zziplib][1] is a package that offers the ability to easily extract data
+    from files archived in a single zip file
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS). It is possible that a zip file will cause a bus error due to the
+    loading of a misaligned address in the `__zzip_fetch_disk_trailer`
+    function.
+
+
+
+    [1]: http://freefr.dl.sourceforge.net/project/zziplib/zziplib13/0.13.59/zziplib-0.13.59.tar.bz2
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package][1]
+
+
+
+    [1]: https://snyk.io/vuln/npm:ws:20171108
+  affected_package: zziplib
+  vulnerable_versions:
+  - ">=0.0.0"
+  severity: medium
+  package_manager: cocoapods
+  cve:
+  - CVE-2018-6541
+  cwe:
+  - CWE-399
+  disclosed_date: 2018-02-01
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - https://access.redhat.com/errata/RHSA-2019:2196
+  - https://github.com/gdraheim/zziplib/issues/16
+  - https://usn.ubuntu.com/3699-1/
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-ZZIPLIB-471087
+- id: snykio:cocoapods:zziplib:471088
+  title: Denial of Service (DoS)
+  description: |
+    [zziplib][1] is a package that offers the ability to easily extract data
+    from files archived in a single zip file
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS). The zip file will cause a bus error due to the loading of a
+    misaligned address in the `zzip_disk_findfirst` function in `
+    zzip/mmapped.c` .
+
+
+
+    [1]: http://freefr.dl.sourceforge.net/project/zziplib/zziplib13/0.13.59/zziplib-0.13.59.tar.bz2
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package][1]
+
+
+
+    [1]: https://snyk.io/vuln/npm:ws:20171108
+  affected_package: zziplib
+  vulnerable_versions:
+  - ">=0.0.0"
+  severity: medium
+  package_manager: cocoapods
+  cve:
+  - CVE-2018-6540
+  cwe:
+  - CWE-399
+  disclosed_date: 2018-02-01
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - https://github.com/gdraheim/zziplib/issues/15
+  - https://usn.ubuntu.com/3699-1/
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-ZZIPLIB-471088
+- id: snykio:cocoapods:zziplib:471096
+  title: Denial of Service (DoS)
+  description: |
+    [zziplib][1] is a package that offers the ability to easily extract data
+    from files archived in a single zip file
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS). The library contains a memory alignment error and bus error in
+    the `zzip/zip.c` file, allowing a malicious user to pass a crafted zip
+    file to the application to cause it to crash.
+
+
+
+    [1]: http://freefr.dl.sourceforge.net/project/zziplib/zziplib13/0.13.59/zziplib-0.13.59.tar.bz2
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package][1]
+
+
+
+    [1]: https://snyk.io/vuln/npm:ws:20171108
+  affected_package: zziplib
+  vulnerable_versions:
+  - ">=0.0.0"
+  severity: medium
+  package_manager: cocoapods
+  cve:
+  - CVE-2018-6484
+  cwe:
+  - CWE-399
+  disclosed_date: 2018-02-01
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - https://github.com/gdraheim/zziplib/issues/14
+  - https://usn.ubuntu.com/3699-1/
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-ZZIPLIB-471096
+- id: snykio:cocoapods:zziplib:471174
+  title: Buffer Overflow
+  description: |
+    [zziplib][1] is a package that offers the ability to easily extract data
+    from files archived in a single zip file
+
+    Affected versions of this package are vulnerable to Buffer Overflow. An
+    adversary can trigger heap-based buffer overflow through a ZIP file in
+    the `__zzip_get64` function in `fetch.c`.
+
+
+
+    [1]: http://freefr.dl.sourceforge.net/project/zziplib/zziplib13/0.13.59/zziplib-0.13.59.tar.bz2
+  affected_package: zziplib
+  vulnerable_versions:
+  - ">=0.0.0"
+  severity: medium
+  package_manager: cocoapods
+  cve:
+  - CVE-2017-5976
+  cwe:
+  - CWE-119
+  disclosed_date: 2017-02-09
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - http://www.debian.org/security/2017/dsa-3878
+  - http://www.openwall.com/lists/oss-security/2017/02/14/3
+  - http://www.securityfocus.com/bid/96268
+  - https://blogs.gentoo.org/ago/2017/02/09/zziplib-heap-based-buffer-overflow-in-zzip_mem_entry_extra_block-memdisk-c/
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-ZZIPLIB-471174
+- id: snykio:cocoapods:zziplib:471175
+  title: Denial of Service (DoS)
+  description: |
+    [zziplib][1] is a package that offers the ability to easily extract data
+    from files archived in a single zip file
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS) via NULL Pointer Dereference in `seeko.c`.
+
+    \##Details Denial of Service (DoS) describes a family of attacks, all
+    aimed at making a system inaccessible to its intended and legitimate
+    users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+
+
+    [1]: http://freefr.dl.sourceforge.net/project/zziplib/zziplib13/0.13.59/zziplib-0.13.59.tar.bz2
+  affected_package: zziplib
+  vulnerable_versions:
+  - ">=0.0.0"
+  severity: medium
+  package_manager: cocoapods
+  cve:
+  - CVE-2017-5981
+  cwe:
+  - CWE-476
+  disclosed_date: 2017-02-09
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - http://www.debian.org/security/2017/dsa-3878
+  - http://www.securityfocus.com/bid/96268
+  - https://blogs.gentoo.org/ago/2017/02/09/zziplib-assertion-failure-in-seeko-c/
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-ZZIPLIB-471175
+- id: snykio:cocoapods:zziplib:471176
+  title: Denial of Service (DoS)
+  description: |
+    [zziplib][1] is a package that offers the ability to easily extract data
+    from files archived in a single zip file
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS). via null pointer dereference while using a zip file in
+    `memdisk.c`
+
+    \##Details Denial of Service (DoS) describes a family of attacks, all
+    aimed at making a system inaccessible to its intended and legitimate
+    users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+
+
+    [1]: http://freefr.dl.sourceforge.net/project/zziplib/zziplib13/0.13.59/zziplib-0.13.59.tar.bz2
+  affected_package: zziplib
+  vulnerable_versions:
+  - ">=0.0.0"
+  severity: medium
+  package_manager: cocoapods
+  cve:
+  - CVE-2017-5980
+  cwe:
+  - CWE-476
+  disclosed_date: 2017-02-09
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - http://www.debian.org/security/2017/dsa-3878
+  - http://www.securityfocus.com/bid/96268
+  - https://blogs.gentoo.org/ago/2017/02/09/zziplib-null-pointer-dereference-in-zzip_mem_entry_new-memdisk-c/
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-ZZIPLIB-471176
+- id: snykio:cocoapods:zziplib:471189
+  title: Denial of Service (DoS)
+  description: |
+    [zziplib][1] is a package that offers the ability to easily extract data
+    from files archived in a single zip file
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS). There is an uncontrolled memory allocation and a crash in the
+    `__zzip_parse_root_directory` function of `zzip/zip.c.` Remote attackers
+    could leverage this vulnerability to cause a denial of service via a
+    crafted zip file.
+
+    \##Details Denial of Service (DoS) describes a family of attacks, all
+    aimed at making a system inaccessible to its intended and legitimate
+    users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+
+
+    [1]: http://freefr.dl.sourceforge.net/project/zziplib/zziplib13/0.13.59/zziplib-0.13.59.tar.bz2
+  affected_package: zziplib
+  vulnerable_versions:
+  - ">=0.0.0"
+  severity: medium
+  package_manager: cocoapods
+  cve:
+  - CVE-2018-6869
+  cwe:
+  - CWE-399
+  disclosed_date: 2018-02-08
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - http://www.securityfocus.com/bid/103050
+  - https://github.com/gdraheim/zziplib/issues/22
+  - https://lists.debian.org/debian-lts-announce/2018/02/msg00022.html
+  - https://usn.ubuntu.com/3699-1/
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-ZZIPLIB-471189
+- id: snykio:cocoapods:zziplib:471210
+  title: Denial of Service (DoS)
+  description: |
+    [zziplib][1] is a package that offers the ability to easily extract data
+    from files archived in a single zip file
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS). Due to `zzip_mem_disk_new` \'s ability to trigger memory leaks,
+    it can lead to excessive resource consumption, leading to Denial of
+    Service.
+
+    \##Details Denial of Service (DoS) describes a family of attacks, all
+    aimed at making a system inaccessible to its intended and legitimate
+    users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+
+
+    [1]: http://freefr.dl.sourceforge.net/project/zziplib/zziplib13/0.13.59/zziplib-0.13.59.tar.bz2
+  affected_package: zziplib
+  vulnerable_versions:
+  - ">=0.0.0"
+  severity: medium
+  package_manager: cocoapods
+  cve:
+  - CVE-2018-7727
+  cwe:
+  - CWE-119
+  disclosed_date: 2018-03-06
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - https://access.redhat.com/errata/RHSA-2018:3229
+  - https://github.com/gdraheim/zziplib/issues/40
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-ZZIPLIB-471210
+- id: snykio:cocoapods:zziplib:471240
+  title: Denial of Service (DoS)
+  description: |
+    [zziplib][1] is a package that offers the ability to easily extract data
+    from files archived in a single zip file
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS) via null pointer dereference in `fseeko.c` .
+
+
+
+    [1]: http://freefr.dl.sourceforge.net/project/zziplib/zziplib13/0.13.59/zziplib-0.13.59.tar.bz2
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package][1]
+
+
+
+    [1]: https://snyk.io/vuln/npm:ws:20171108
+  affected_package: zziplib
+  vulnerable_versions:
+  - ">=0.0.0"
+  severity: medium
+  package_manager: cocoapods
+  cve:
+  - CVE-2017-5979
+  cwe:
+  - CWE-476
+  disclosed_date: 2017-02-09
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - http://www.debian.org/security/2017/dsa-3878
+  - http://www.securityfocus.com/bid/96268
+  - https://blogs.gentoo.org/ago/2017/02/09/zziplib-null-pointer-dereference-in-prescan_entry-fseeko-c/
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-ZZIPLIB-471240
+- id: snykio:cocoapods:zziplib:471241
+  title: Denial of Service (DoS)
+  description: |
+    [zziplib][1] is a package that offers the ability to easily extract data
+    from files archived in a single zip file
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS) via an out of bounds read via a ZIP file when it is processed in
+    the `zzip_mem_entry_extra_block` function in `memdisk.c`.
+
+
+
+    [1]: http://freefr.dl.sourceforge.net/project/zziplib/zziplib13/0.13.59/zziplib-0.13.59.tar.bz2
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package][1]
+
+
+
+    [1]: https://snyk.io/vuln/npm:ws:20171108
+  affected_package: zziplib
+  vulnerable_versions:
+  - ">=0.0.0"
+  severity: medium
+  package_manager: cocoapods
+  cve:
+  - CVE-2017-5977
+  cwe:
+  - CWE-125
+  disclosed_date: 2017-02-09
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - http://www.openwall.com/lists/oss-security/2017/02/14/3
+  - http://www.securityfocus.com/bid/96268
+  - https://blogs.gentoo.org/ago/2017/02/09/zziplib-invalid-memory-read-in-zzip_mem_entry_extra_block-memdisk-c/
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-ZZIPLIB-471241
+- id: snykio:cocoapods:zziplib:471304
+  title: Denial of Service (DoS)
+  description: |
+    [zziplib][1] is a package that offers the ability to easily extract data
+    from files archived in a single zip file
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS) by triggering a heap-based buffer overflow in the `__zzip_get64`
+    function in `fetch.c` when processing a ZIP file.
+
+    \##Details Denial of Service (DoS) describes a family of attacks, all
+    aimed at making a system inaccessible to its intended and legitimate
+    users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+
+
+    [1]: http://freefr.dl.sourceforge.net/project/zziplib/zziplib13/0.13.59/zziplib-0.13.59.tar.bz2
+  affected_package: zziplib
+  vulnerable_versions:
+  - ">=0.0.0"
+  severity: medium
+  package_manager: cocoapods
+  cve:
+  - CVE-2017-5975
+  cwe:
+  - CWE-119
+  disclosed_date: 2017-02-09
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - http://www.debian.org/security/2017/dsa-3878
+  - http://www.openwall.com/lists/oss-security/2017/02/14/3
+  - http://www.securityfocus.com/bid/96268
+  - https://blogs.gentoo.org/ago/2017/02/09/zziplib-heap-based-buffer-overflow-in-__zzip_get64-fetch-c/
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-ZZIPLIB-471304

@@ -1,0 +1,39 @@
+---
+- id: snykio:cocoapods:mintegraladsdk:598852
+  title: Malicious Package
+  description: |
+    [MintegralAdSDK][1] is a malicious package. The SDK distributed by the
+    company contains malicious functionality that tracks any URL opened by
+    the app and reports it back to the company, along with performing
+    advertisement attribution fraud.
+
+    Mintegral can remotely activate hooks on the `UIApplication`, `openURL`,
+    `SKStoreProductViewController`, `loadProductWithParameters` and
+    `NSURLProtocol` methods along with anti-debug and proxy detection
+    protection. If those hooks are active `MintegralAdSDK` sends obfuscated
+    data about every opened URL in an application to their servers.
+
+    Note that the malicious functionality is enabled even if the SDK was not
+    enabled to serve ads.
+
+
+
+    [1]: https://github.com/Mintegral-official/MintegralAdSDK-iOS-new
+  affected_package: mintegraladsdk
+  vulnerable_versions:
+  - "<6.6.0.0"
+  severity: high
+  package_manager: cocoapods
+  cve:
+  - CVE-2020-7705
+  cwe:
+  - CWE-1021
+  disclosed_date: 2020-08-18
+  created_date: 2020-08-24
+  last_modified_date: 2020-08-24
+  credit:
+  - Snyk Security Team
+  references:
+  - https://snyk.io/blog/sourmint-malicious-code-ad-fraud-and-data-leak-in-ios/
+  - https://snyk.io/research/sour-mint-malicious-sdk/
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-MINTEGRALADSDK-598852

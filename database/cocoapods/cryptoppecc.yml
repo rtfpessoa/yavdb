@@ -1,0 +1,65 @@
+---
+- id: snykio:cocoapods:cryptoppecc:470948
+  title: Denial of Service (DoS)
+  description: |
+    [CryptoppECC][1] is a CryptoppECC-Encryption/Decryption using
+    ECC(Elliptic curve cryptography)
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS). CryptoppECC contains a copy of the Crypto++ (aka cryptopp and
+    libcrypto++ ) library inside it. The version that it contains is
+    vulnerable to a denial of service (DoS) attack through the mishandling
+    of the `ASN1` encoding. Crypto++ allocates a `SecByteBlock` of the size
+    that the ASN1 decoder reads as the length before checking enough data is
+    available. This causes memory exhaustion and a DoS condition.
+
+
+
+    [1]: https://github.com/SandeepAggarwal/CryptoppECC.git
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package][1]
+
+
+
+    [1]: https://snyk.io/vuln/npm:ws:20171108
+  affected_package: cryptoppecc
+  vulnerable_versions:
+  - ">=0.0.0"
+  severity: high
+  package_manager: cocoapods
+  cve:
+  - CVE-2016-9939
+  cwe:
+  - CWE-20
+  disclosed_date: 2016-12-13
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - https://github.com/weidai11/cryptopp/commit/d0a6d43e16e4677d36bd0567978286938c1cfe6b
+  - https://github.com/weidai11/cryptopp/issues/346
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-CRYPTOPPECC-470948

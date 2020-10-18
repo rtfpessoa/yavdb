@@ -1,0 +1,503 @@
+---
+- id: snykio:cocoapods:expat:470643
+  title: XML External Entity (XXE) Injection
+  description: |+
+    [expat][1] is a XML parser library written in C.
+
+    Affected versions of this package are vulnerable to XML External Entity
+    (XXE) Injection. The attack exists because XML parser does not validate
+    and handle the XML names input with large number of colons, consuming
+    high CPU and memory.
+
+
+
+    [1]: http://sourceforge.net/projects/expat/files/expat/2.1.0
+    \nXXE Injection is a type of attack against an application that parses XML
+    input. XML is a markup language that defines a set of rules for encoding
+    documents in a format that is both human-readable and machine-readable.
+    By default, many XML processors allow specification of an external
+    entity, a URI that is dereferenced and evaluated during XML processing.
+    When an XML document is being parsed, the parser can make a request and
+    include the content at the specified URI inside of the XML document.
+
+    Attacks can include disclosing local files, which may contain sensitive
+    data such as passwords or private user data, using file: schemes or
+    relative paths in the system identifier.
+
+    For example, below is a sample XML document, containing an XML element-
+    username.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+           <username>John</username>
+        </xml>
+    {: .language-xml}
+
+    An external XML entity - `xxe`, is defined using a system identifier and
+    present within a DOCTYPE header. These entities can access local or
+    remote content. For example the below code contains an external XML
+    entity that would fetch the content of `/etc/passwd` and display it to
+    the user rendered by `username`.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+        <!DOCTYPE foo [
+           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
+           <username>&xxe;</username>
+        </xml>
+    {: .language-xml}
+
+    Other XXE Injection attacks can access local resources that may not stop
+    returning data, possibly impacting application availability and leading
+    to Denial of Service.
+
+  affected_package: expat
+  vulnerable_versions:
+  - ">=0.0.0"
+  severity: high
+  package_manager: cocoapods
+  cve:
+  - CVE-2018-20843
+  cwe:
+  - CWE-611
+  disclosed_date: 2019-05-22
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - https://github.com/libexpat/libexpat/blob/R_2_2_7/expat/Changes
+  - https://github.com/libexpat/libexpat/issues/186
+  - https://github.com/libexpat/libexpat/pull/262
+  - https://github.com/libexpat/libexpat/pull/262/commits/11f8838bf99ea0a6f0b76f9760c43704d00c4ff6
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-EXPAT-470643
+- id: snykio:cocoapods:expat:470687
+  title: Denial of Service (DoS)
+  description: |+
+    [expat][1] is a XML parser library written in C.
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS). The vulnerability is due to an incomplete fix of `CVE-2012-0876`
+    which leads to insufficient entropy for hash initialization.
+
+
+
+    [1]: http://sourceforge.net/projects/expat/files/expat/2.1.0
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package](npm:ws:20171108)
+
+  affected_package: expat
+  vulnerable_versions:
+  - ">=0.0.0"
+  severity: high
+  package_manager: cocoapods
+  cve:
+  - CVE-2016-5300
+  cwe:
+  - CWE-399
+  disclosed_date: 2014-04-05
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - http://www.debian.org/security/2016/dsa-3597
+  - http://www.openwall.com/lists/oss-security/2016/06/04/4
+  - http://www.openwall.com/lists/oss-security/2016/06/04/5
+  - http://www.oracle.com/technetwork/security-advisory/cpujul2018-4258247.html
+  - http://www.oracle.com/technetwork/topics/security/bulletinjul2016-3090568.html
+  - http://www.securityfocus.com/bid/91159
+  - http://www.ubuntu.com/usn/USN-3010-1
+  - https://security.gentoo.org/glsa/201701-21
+  - https://source.android.com/security/bulletin/2016-11-01.html
+  - https://sourceforge.net/p/expat/code_git/ci/6acb0a47372a9079cc6ff70c384f015a47f2c34a/
+  - https://www.tenable.com/security/tns-2016-20
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-EXPAT-470687
+- id: snykio:cocoapods:expat:470705
+  title: Integer Overflow or Wraparound
+  description: |
+    [expat][1] is a XML parser library written in C.
+
+    Affected versions of this package are vulnerable to Integer Overflow or
+    Wraparound expat is vulnerable to integer overflows. A malicious user
+    can set `XML_CONTEXT_BYTES` to be undefined to cause an integer
+    overflow, crashing the application.
+
+
+
+    [1]: http://sourceforge.net/projects/expat/files/expat/2.1.0
+  affected_package: expat
+  vulnerable_versions:
+  - ">=0.0.0"
+  severity: high
+  package_manager: cocoapods
+  cve:
+  - CVE-2016-9063
+  cwe:
+  - CWE-190
+  disclosed_date: 2017-04-13
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - http://www.securityfocus.com/bid/94337
+  - http://www.securitytracker.com/id/1037298
+  - http://www.securitytracker.com/id/1039427
+  - https://bugzilla.mozilla.org/show_bug.cgi?id=1274777
+  - https://www.debian.org/security/2017/dsa-3898
+  - https://www.mozilla.org/security/advisories/mfsa2016-89/
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-EXPAT-470705
+- id: snykio:cocoapods:expat:470760
+  title: Denial of Service (DoS)
+  description: |
+    [expat][1] is a XML parser library written in C.
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS). When users input malformed document, expat XML parser mishandles
+    the input which causes a buffer overflow during the processing and error
+    reporting. This leading to a denial of service and conceivably result in
+    remote code execution.
+
+
+
+    [1]: http://sourceforge.net/projects/expat/files/expat/2.1.0
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package][1]
+
+
+
+    [1]: https://snyk.io/vuln/npm:ws:20171108
+  affected_package: expat
+  vulnerable_versions:
+  - ">=0.0.0"
+  severity: high
+  package_manager: cocoapods
+  cve:
+  - CVE-2016-0718
+  cwe:
+  - CWE-119
+  disclosed_date: 2016-01-06
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - https://bugzilla.redhat.com/show_bug.cgi?id=1296102
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-EXPAT-470760
+- id: snykio:cocoapods:expat:470840
+  title: Out-of-Bounds
+  description: |
+    [expat][1] is a XML parser library written in C.
+
+    Affected versions of this package are vulnerable to Out-of-Bounds. The
+    vulnerability exists because there are multiple integer overflows in the
+    `XML_GetBuffer` function that leads to a heap-based buffer overflow
+    which may lead to further unspecified impact. CVE-2016-4472 is related
+    to the original issues CVE-2015-1283 and CVE-2015-2716, which were both
+    incomplete due to the possibility of having the overflow checks
+    optimized out during compilation.
+
+
+
+    [1]: http://sourceforge.net/projects/expat/files/expat/2.1.0
+  affected_package: expat
+  vulnerable_versions:
+  - ">=0.0.0"
+  severity: high
+  package_manager: cocoapods
+  cve:
+  - CVE-2016-4472
+  cwe:
+  - CWE-119
+  disclosed_date: 2016-05-15
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - http://www.securityfocus.com/bid/91528
+  - http://www.ubuntu.com/usn/USN-3013-1
+  - https://bugzilla.redhat.com/show_bug.cgi?id=1344251
+  - https://security.gentoo.org/glsa/201701-21
+  - https://sourceforge.net/p/expat/code_git/ci/f0bec73b018caa07d3e75ec8dd967f3785d71bde
+  - https://www.tenable.com/security/tns-2016-20
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-EXPAT-470840
+- id: snykio:cocoapods:expat:470903
+  title: Buffer Overflow
+  description: |
+    [expat][1] is a XML parser library written in C.
+
+    Affected versions of this package are vulnerable to Buffer Overflow. The
+    vulnerability exists because there are multiple integer overflows in the
+    XML\_GetBuffer function that leads to a heap-based buffer overflow which
+    may lead to further unspecified impact. This issue is related to
+    CVE-2015-2716.
+
+
+
+    [1]: http://sourceforge.net/projects/expat/files/expat/2.1.0
+  affected_package: expat
+  vulnerable_versions:
+  - ">=0.0.0"
+  severity: medium
+  package_manager: cocoapods
+  cve:
+  - CVE-2015-1283
+  cwe:
+  - CWE-189
+  disclosed_date: 2015-07-22
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - http://googlechromereleases.blogspot.com/2015/07/stable-channel-update_21.html
+  - http://lists.opensuse.org/opensuse-security-announce/2015-07/msg00038.html
+  - http://lists.opensuse.org/opensuse-security-announce/2016-05/msg00064.html
+  - http://lists.opensuse.org/opensuse-security-announce/2016-06/msg00006.html
+  - http://lists.opensuse.org/opensuse-security-announce/2016-06/msg00007.html
+  - http://lists.opensuse.org/opensuse-security-announce/2016-06/msg00010.html
+  - http://rhn.redhat.com/errata/RHSA-2015-1499.html
+  - http://www.debian.org/security/2015/dsa-3315
+  - http://www.debian.org/security/2015/dsa-3318
+  - http://www.oracle.com/technetwork/topics/security/bulletinjul2016-3090568.html
+  - http://www.securityfocus.com/bid/75973
+  - http://www.securitytracker.com/id/1033031
+  - http://www.ubuntu.com/usn/USN-2726-1
+  - https://code.google.com/p/chromium/issues/detail?id=492052
+  - https://codereview.chromium.org/1224303003
+  - https://security.gentoo.org/glsa/201603-09
+  - https://security.gentoo.org/glsa/201701-21
+  - https://source.android.com/security/bulletin/2016-11-01.html
+  - https://sourceforge.net/p/expat/code_git/ci/ba0f9c3b40c264b8dd392e02a7a060a8fa54f032
+  - https://www.tenable.com/security/tns-2016-20
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-EXPAT-470903
+- id: snykio:cocoapods:expat:470947
+  title: XML External Entity (XXE) Injection
+  description: |+
+    [expat][1] is a XML parser library written in C.
+
+    Affected versions of this package are vulnerable to XML External Entity
+    (XXE) Injection. A malicious user can cause the parser to enter an
+    infinite loop by passing an XML document with `<el/>` in it.
+
+
+
+    [1]: http://sourceforge.net/projects/expat/files/expat/2.1.0
+    \nXXE Injection is a type of attack against an application that parses XML
+    input. XML is a markup language that defines a set of rules for encoding
+    documents in a format that is both human-readable and machine-readable.
+    By default, many XML processors allow specification of an external
+    entity, a URI that is dereferenced and evaluated during XML processing.
+    When an XML document is being parsed, the parser can make a request and
+    include the content at the specified URI inside of the XML document.
+
+    Attacks can include disclosing local files, which may contain sensitive
+    data such as passwords or private user data, using file: schemes or
+    relative paths in the system identifier.
+
+    For example, below is a sample XML document, containing an XML element-
+    username.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+           <username>John</username>
+        </xml>
+    {: .language-xml}
+
+    An external XML entity - `xxe`, is defined using a system identifier and
+    present within a DOCTYPE header. These entities can access local or
+    remote content. For example the below code contains an external XML
+    entity that would fetch the content of `/etc/passwd` and display it to
+    the user rendered by `username`.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+        <!DOCTYPE foo [
+           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
+           <username>&xxe;</username>
+        </xml>
+    {: .language-xml}
+
+    Other XXE Injection attacks can access local resources that may not stop
+    returning data, possibly impacting application availability and leading
+    to Denial of Service.
+
+  affected_package: expat
+  vulnerable_versions:
+  - ">=0.0.0"
+  severity: high
+  package_manager: cocoapods
+  cve:
+  - CVE-2017-9233
+  cwe:
+  - CWE-611
+  disclosed_date: 2017-06-19
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - http://www.debian.org/security/2017/dsa-3898
+  - http://www.openwall.com/lists/oss-security/2017/06/17/7
+  - http://www.securityfocus.com/bid/99276
+  - http://www.securitytracker.com/id/1039427
+  - https://github.com/libexpat/libexpat/blob/master/expat/Changes
+  - https://libexpat.github.io/doc/cve-2017-9233/
+  - https://support.apple.com/HT208112
+  - https://support.apple.com/HT208113
+  - https://support.apple.com/HT208115
+  - https://support.apple.com/HT208144
+  - https://support.f5.com/csp/article/K03244804
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-EXPAT-470947
+- id: snykio:cocoapods:expat:471188
+  title: Cryptographic Issues
+  description: |
+    [expat][1] is a XML parser library written in C.
+
+    Affected versions of this package are vulnerable to Cryptographic
+    Issues. This would only be possible when a parser that has not called
+    XML\_SetHashSalt or passed it a seed of 0. It is possible due to the use
+    of the srand function.
+
+
+
+    [1]: http://sourceforge.net/projects/expat/files/expat/2.1.0
+  affected_package: expat
+  vulnerable_versions:
+  - ">=0.0.0"
+  severity: medium
+  package_manager: cocoapods
+  cve:
+  - CVE-2012-6702
+  cwe:
+  - CWE-310
+  disclosed_date: 2012-04-05
+  created_date: 2019-10-02
+  last_modified_date: 2019-10-02
+  credit:
+  - Unknown
+  references:
+  - http://www.debian.org/security/2016/dsa-3597
+  - http://www.openwall.com/lists/oss-security/2016/06/03/8
+  - http://www.openwall.com/lists/oss-security/2016/06/04/1
+  - http://www.securityfocus.com/bid/91483
+  - http://www.ubuntu.com/usn/USN-3010-1
+  - https://github.com/libexpat/libexpat/commit/b280bb802631b9e5b8b92f89788ede12011971e0
+  - https://security.gentoo.org/glsa/201701-21
+  - https://source.android.com/security/bulletin/2016-11-01.html
+  - https://www.tenable.com/security/tns-2016-20
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-EXPAT-471188
+- id: snykio:cocoapods:expat:540503
+  title: Buffer Over-read
+  description: |+
+    [expat][1] is a XML parser library written in C.
+
+    Affected versions of this package are vulnerable to Buffer Over-read.
+    Crafted XML input can fool the parser into changing from DTD parsing to
+    document parsing too early; a consecutive call to
+    `XML_GetCurrentLineNumber` (or `XML_GetCurrentColumnNumber`) then
+    results in a heap-based buffer over-read.
+
+
+
+    [1]: http://sourceforge.net/projects/expat/files/expat/2.1.0
+    \nXXE Injection is a type of attack against an application that parses XML
+    input. XML is a markup language that defines a set of rules for encoding
+    documents in a format that is both human-readable and machine-readable.
+    By default, many XML processors allow specification of an external
+    entity, a URI that is dereferenced and evaluated during XML processing.
+    When an XML document is being parsed, the parser can make a request and
+    include the content at the specified URI inside of the XML document.
+
+    Attacks can include disclosing local files, which may contain sensitive
+    data such as passwords or private user data, using file: schemes or
+    relative paths in the system identifier.
+
+    For example, below is a sample XML document, containing an XML element-
+    username.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+           <username>John</username>
+        </xml>
+    {: .language-xml}
+
+    An external XML entity - `xxe`, is defined using a system identifier and
+    present within a DOCTYPE header. These entities can access local or
+    remote content. For example the below code contains an external XML
+    entity that would fetch the content of `/etc/passwd` and display it to
+    the user rendered by `username`.
+
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+        <!DOCTYPE foo [
+           <!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
+           <username>&xxe;</username>
+        </xml>
+    {: .language-xml}
+
+    Other XXE Injection attacks can access local resources that may not stop
+    returning data, possibly impacting application availability and leading
+    to Denial of Service.
+
+  affected_package: expat
+  vulnerable_versions:
+  - ">=0.0.0"
+  severity: high
+  package_manager: cocoapods
+  cve:
+  - CVE-2019-15903
+  cwe:
+  - CWE-611
+  disclosed_date: 2019-08-26
+  created_date: 2020-01-03
+  last_modified_date: 2020-01-03
+  credit:
+  - yuweol
+  references:
+  - https://github.com/libexpat/libexpat/commit/c20b758c332d9a13afbbb276d30db1d183a85d43
+  - https://github.com/libexpat/libexpat/issues/317
+  - https://github.com/libexpat/libexpat/pull/318
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-EXPAT-540503

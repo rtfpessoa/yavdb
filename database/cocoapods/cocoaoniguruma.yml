@@ -1,0 +1,32 @@
+---
+- id: snykio:cocoapods:cocoaoniguruma:535384
+  title: Buffer Over-read
+  description: |
+    [CocoaOniguruma][1] is a binding of Oniguruma regular expression engine
+
+    Affected versions of this package are vulnerable to Buffer Over-read. In
+    the function `fetch_interval_quantifier` (formerly known as
+    `fetch_range_quantifier`) in `regparse.c`, `PFETCH` is called without
+    checking `PEND`.
+
+
+
+    [1]: https://github.com/psychs/cocoaoniguruma
+  affected_package: cocoaoniguruma
+  vulnerable_versions:
+  - ">=0.0.0"
+  severity: medium
+  package_manager: cocoapods
+  cve:
+  - CVE-2019-19204
+  cwe:
+  - CWE-126
+  disclosed_date: 2019-11-21
+  created_date: 2019-11-22
+  last_modified_date: 2019-11-22
+  credit:
+  - ManhNDd
+  references:
+  - https://github.com/kkos/oniguruma/issues/162
+  - https://github.com/psychs/cocoaoniguruma/blob/4fac89ae7b434060a93cc9074dbcf4e2b04236fe/framework/core/oniguruma/regparse.c#L2377
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-COCOAONIGURUMA-535384

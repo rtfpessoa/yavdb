@@ -1,0 +1,70 @@
+---
+- id: snykio:cocoapods:lz4:473025
+  title: Buffer Overflow
+  description: |
+    [lz4][1] is a lossless compression algorithm, providing compression
+    speed at 400 MB/s per core, scalable with multi-cores CPU.
+
+    Affected versions of this package are vulnerable to Buffer Overflow in
+    `LZ4_write32` (related to `LZ4_compress_destSize`), affecting
+    applications that call `LZ4_compress_fast` with a large input. (This
+    issue can also lead to data corruption.)
+
+
+
+    [1]: http://www.lz4.info/
+  affected_package: lz4
+  vulnerable_versions:
+  - ">=0.0.0"
+  severity: high
+  package_manager: cocoapods
+  cve:
+  - CVE-2019-17543
+  cwe:
+  - CWE-120
+  disclosed_date: 2019-07-17
+  created_date: 2019-10-14
+  last_modified_date: 2019-10-14
+  credit:
+  - Unknown
+  references:
+  - https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=15941
+  - https://github.com/lz4/lz4/pull/756
+  - https://github.com/lz4/lz4/pull/760
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-LZ4-473025
+- id: snykio:cocoapods:lz4:473028
+  title: Improper Input Validation
+  description: |
+    [lz4][1] is a lossless compression algorithm, providing compression
+    speed at 400 MB/s per core, scalable with multi-cores CPU.
+
+    Affected versions of this package are vulnerable to Improper Input
+    Validation. The `lz4_uncompress` function in `lib/lz4/lz4_decompress.c`
+    on 32-bit platforms might allow context-dependent attackers to cause a
+    denial of service (memory corruption) or possibly have unspecified other
+    impact via a crafted Literal Run that would be improperly handled by
+    programs not complying with an API limitation.
+
+
+
+    [1]: http://www.lz4.info/
+  affected_package: lz4
+  vulnerable_versions:
+  - ">=0.0.0"
+  severity: medium
+  package_manager: cocoapods
+  cve:
+  - CVE-2014-4611
+  cwe:
+  - CWE-20
+  disclosed_date: 2014-03-07
+  created_date: 2019-09-16
+  last_modified_date: 2019-09-16
+  credit:
+  - Unknown
+  references:
+  - https://github.com/jpountz/lz4-java/commit/8090284100232189632d06881cab14e585d4c08e
+  - https://github.com/lz4/lz4-java/commit/c12a09a07ad39b408eb9590987cc0bc972722893
+  - https://github.com/lz4/lz4/pull/52
+  - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-4611
+  source_url: https://snyk.io/vuln/SNYK-COCOAPODS-LZ4-473028
