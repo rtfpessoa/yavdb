@@ -1,0 +1,39 @@
+---
+- id: snykio:maven:junit:junit:1017047
+  title: Information Exposure
+  description: |
+    [junit:junit][1] is an unit testing framework for Java
+
+    Affected versions of this package are vulnerable to Information
+    Exposure. The JUnit4 test rule `TemporaryFolder` contains a local
+    information disclosure vulnerability. On Unix like systems, the
+    system\'s temporary directory is shared between all users on that
+    system. Because of this, when files and directories are written into
+    this directory they are, by default, readable by other users on that
+    same system.
+
+    *Note:* This vulnerability does not allow other users to overwrite the
+    contents of these directories or files. This only affects Unix like
+    systems.
+
+
+
+    [1]: https://mvnrepository.com/artifact/junit/junit
+  affected_package: junit:junit
+  vulnerable_versions:
+  - "< 4.13.1"
+  severity: low
+  package_manager: maven
+  cve:
+  - CVE-2020-15250
+  cwe:
+  - CWE-200
+  disclosed_date: 2020-10-12
+  created_date: 2020-10-13
+  last_modified_date: 2020-10-13
+  credit:
+  - Jonathan Leitschuh
+  references:
+  - https://github.com/junit-team/junit4/commit/610155b8c22138329f0723eec22521627dbc52ae
+  - https://github.com/junit-team/junit4/security/advisories/GHSA-269g-pwp5-87pp
+  source_url: https://snyk.io/vuln/SNYK-JAVA-JUNIT-1017047
