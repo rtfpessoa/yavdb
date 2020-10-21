@@ -1,0 +1,46 @@
+---
+- id: snykio:maven:com.mintegral.msdk:alphab:1018714
+  title: "Malicious \U000E016E\U000E0170\U000E016DPackage"
+  description: |
+    [com.mintegral.msdk:alphab][1] is a malicious package. The Android SDK
+    distributed by the company contains malicious functionality in this
+    module that tracks:
+
+    1.  Downloads from Google urls either within Google apps or via browser
+        including file downloads, e-mail attachments and Google Docs links.
+    2.  All apk downloads, either organic or not. Mintegral listens to
+        download events in Android\'s download manager and detects if the
+        downloaded file\'s url contains:
+
+    a. `google.com` or comes from a Google app (the `com.android.vending`
+    package)
+
+    b. Ends with `.apk` for apk downloads
+
+    In both cases, the module sends the captured data back to Mintegral\'s
+    servers.
+
+    Note that the malicious functionality keeps running even if the app is
+    currently not in focus (running in the background).
+
+
+
+    [1]: http://cdn-adn.rayjump.com/cdn-adn/v2/markdown_v2/index.html?file=sdk-m_sdk-android&amp;lang=cn
+  affected_package: com.mintegral.msdk:alphab
+  vulnerable_versions:
+  - ">= 0"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2020-7744
+  cwe:
+  - CWE-200
+  disclosed_date: 2020-09-09
+  created_date: 2020-10-15
+  last_modified_date: 2020-10-15
+  credit:
+  - Snyk Security Team
+  references:
+  - https://snyk.io/blog/remote-code-execution-rce-sourmint/
+  - https://snyk.io/research/sour-mint-malicious-sdk/
+  source_url: https://snyk.io/vuln/SNYK-JAVA-COMMINTEGRALMSDK-1018714

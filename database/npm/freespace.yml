@@ -1,0 +1,32 @@
+---
+- id: snykio:npm:freespace:1018705
+  title: Command Injection
+  description: "[freespace][1] is an A library that tells you how much free disk space\nyou
+    have\n\nAffected versions of this package are vulnerable to Command Injection.\nThe
+    library offers a function that allows a developer to pass in a\ndisk-label (Windows)
+    or a mount-point (Linux) and returns space details\nabout the same. However, due
+    to lack of proper sanitization of the\nparameter to that function, injection of
+    multiple commands using\ndelimiters such as `;` and `&&` will cause the shell
+    to interpret and\nexecute each command between those characters. This code is
+    vulnerable\non the Unix platform and not on Windows. The Windows variant also\ndirectly
+    uses the input without sanitization, however, uses only the\nfirst character of
+    the input parameter, which prevents injection.\n\n### PoC   {#poc}\n\n    const
+    freespace = require('freespace');\n    \n    freespace.check('/ ; touch /tmp/semicolon_file')\n
+    \           .then(bytes => {\n                    console.log(bytes);\n            });\n
+    \   \n    freespace.check('/ && touch /tmp/ampersand_file')\n            .then(bytes
+    => {\n                    console.log(bytes);\n            });\n\n\n\n[1]: https://www.npmjs.com/package/freespace\n"
+  affected_package: freespace
+  vulnerable_versions:
+  - "*"
+  severity: high
+  package_manager: npm
+  cwe:
+  - CWE-78
+  disclosed_date: 2020-10-14
+  created_date: 2020-10-15
+  last_modified_date: 2020-10-15
+  credit:
+  - ansuj
+  references:
+  - https://hackerone.com/reports/951249
+  source_url: https://snyk.io/vuln/SNYK-JS-FREESPACE-1018705
