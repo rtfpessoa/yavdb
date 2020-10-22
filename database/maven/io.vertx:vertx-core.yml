@@ -1,4 +1,84 @@
 ---
+- id: snykio:maven:io.vertx:vertx-core:1018903
+  title: Directory Traversal
+  description: |
+    [io.vertx:vertx-core][1] is a tool-kit for building reactive
+    applications on the JVM.
+
+    Affected versions of this package are vulnerable to Directory Traversal.
+    StaticHandler doesn\'t correctly processes back slashes on Windows
+    Operating systems, allowing, escape the webroot folder to the current
+    working directory.
+
+
+
+    [1]: https://github.com/eclipse-vertx/vert.x
+    \nA Directory Traversal attack (also known as path traversal) aims to
+    access files and directories that are stored outside the intended
+    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
+    its variations, or by using absolute file paths, it may be possible to
+    access arbitrary files and directories stored on file system, including
+    application source code, configuration, and other critical system files.
+
+    Directory Traversal vulnerabilities can be generally divided into two
+    types:
+
+    * **Information Disclosure**\: Allows the attacker to gain information
+      about the folder structure or read the contents of sensitive files on
+      the system.
+
+    `st` is a module for serving static files on web pages, and contains a
+    [vulnerability of this type][1]. In our example, we will serve files
+    from the `public` route.
+
+    If an attacker requests the following URL from our server, it will in
+    turn leak the sensitive private key of the root user.
+
+        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
+
+    **Note** `%2e` is the URL encoded version of `.` (dot).
+
+    * **Writing arbitrary files**\: Allows the attacker to create or replace
+      existing files. This type of vulnerability is also known as
+      `Zip-Slip`.
+
+    One way to achieve this is by using a malicious `zip` archive that holds
+    path traversal filenames. When each filename in the zip archive gets
+    concatenated to the target extraction folder, without validation, the
+    final path ends up outside of the target folder. If an executable or a
+    configuration file is overwritten with a file containing malicious code,
+    the problem can turn into an arbitrary code execution issue quite
+    easily.
+
+    The following is an example of a `zip` archive with one benign file and
+    one malicious file. Extracting the malicious file will result in
+    traversing out of the target folder, ending up in `/root/.ssh/`
+    overwriting the `authorized_keys` file:
+
+        2018-04-15 22:04:29 .....           19           19  good.txt
+        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
+
+
+
+    [1]: https://snyk.io/vuln/npm:st:20140206
+  affected_package: io.vertx:vertx-core
+  vulnerable_versions:
+  - ">= 3.4.0 < 3.9.4"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2019-17640
+  cwe:
+  - CWE-22
+  disclosed_date: 2020-10-16
+  created_date: 2020-10-16
+  last_modified_date: 2020-10-16
+  credit:
+  - Unknown
+  references:
+  - https://bugs.eclipse.org/bugs/show_bug.cgi?id=567416
+  - https://github.com/eclipse-vertx/vert.x/commit/baf77ec2e1931965758a0b53b6da6b3473115b56
+  source_url: https://snyk.io/vuln/SNYK-JAVA-IOVERTX-1018903
 - id: snykio:maven:io.vertx:vertx-core:32470
   title: HTTP Header Injection
   description: |

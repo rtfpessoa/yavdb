@@ -1,0 +1,40 @@
+---
+- id: snykio:maven:com.google.crypto.tink:tink:1018839
+  title: Cryptographic Issues
+  description: |
+    [com.google.crypto.tink:tink][1] is a multi-language, cross-platform,
+    open source library that provides cryptographic APIs that are secure,
+    easy to use correctly, and hard(er) to misuse.
+
+    Affected versions of this package are vulnerable to Cryptographic
+    Issues. Under some circumstances it allowed attackers to change the key
+    ID part of the ciphertext, resulting in the attacker creating a second
+    ciphertext that will decrypt to the same plaintext. This can be a
+    problem in particular in the case of encrypting with a deterministic
+    AEAD with a single key, and relying on the fact that there is only a
+    single valid ciphertext per plaintext.
+
+    No loss of confidentiality or loss of plaintext integrity occurs due to
+    this problem, only ciphertext integrity is compromised.
+
+
+
+    [1]: https://search.maven.org/artifact/com.google.crypto.tink/tink/1.5.0/jar
+  affected_package: com.google.crypto.tink:tink
+  vulnerable_versions:
+  - "< 1.5.0"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2020-8929
+  cwe:
+  - CWE-310
+  disclosed_date: 2020-10-16
+  created_date: 2020-10-16
+  last_modified_date: 2020-10-16
+  credit:
+  - Unknown
+  references:
+  - https://github.com/google/tink/commit/93d839a5865b9d950dffdc9d0bc99b71280a8899
+  - https://github.com/google/tink/security/advisories/GHSA-g5vf-v6wf-7w2r
+  source_url: https://snyk.io/vuln/SNYK-JAVA-COMGOOGLECRYPTOTINK-1018839
