@@ -525,3 +525,176 @@
   - https://github.com/FriendsOfPHP/security-advisories/commit/f7a4dde1299a33c611b094c189526275b8235261
   - https://phabricator.wikimedia.org/T230402
   source_url: https://snyk.io/vuln/SNYK-PHP-MEDIAWIKICORE-1019378
+- id: snykio:packagist:mediawiki/core:1019460
+  title: Improper Encoding or Escaping of Output
+  description: |
+    [mediawiki/core][1] is a Free software wiki application developed by the
+    Wikimedia Foundation and others
+
+    Affected versions of this package are vulnerable to Improper Encoding or
+    Escaping of Output. Users can add various Cascading Style Sheets (CSS)
+    classes (which can affect what content is shown or hidden in the user
+    interface) to arbitrary DOM nodes via HTML content within a MediaWiki
+    page. This occurs because `jquery.makeCollapsible` allows applying an
+    event handler to any Cascading Style Sheets (CSS) selector.
+
+
+
+    [1]: https://github.com/wikimedia/mediawiki
+  affected_package: mediawiki/core
+  vulnerable_versions:
+  - ">=1.31.0  <1.31.7"
+  - ">=1.33.0  <1.33.3"
+  - ">=1.34.0  <1.34.1"
+  severity: medium
+  package_manager: packagist
+  cve:
+  - CVE-2020-10960
+  cwe:
+  - CWE-116
+  disclosed_date: 2020-10-20
+  created_date: 2020-10-20
+  last_modified_date: 2020-10-20
+  credit:
+  - Unknown
+  references:
+  - https://phabricator.wikimedia.org/T246602
+  source_url: https://snyk.io/vuln/SNYK-PHP-MEDIAWIKICORE-1019460
+- id: snykio:packagist:mediawiki/core:1019477
+  title: Open Redirect
+  description: |
+    [mediawiki/core][1] is a Free software wiki application developed by the
+    Wikimedia Foundation and others
+
+    Affected versions of this package are vulnerable to Open Redirect. It
+    allows remote attackers to force a logout and external redirection via
+    HTML content in a MediaWiki page.
+
+
+
+    [1]: https://github.com/wikimedia/mediawiki
+  affected_package: mediawiki/core
+  vulnerable_versions:
+  - ">=1.34.0  <1.34.1"
+  severity: medium
+  package_manager: packagist
+  cve:
+  - CVE-2020-10959
+  cwe:
+  - CWE-601
+  disclosed_date: 2020-10-20
+  created_date: 2020-10-20
+  last_modified_date: 2020-10-20
+  credit:
+  - Unknown
+  references:
+  - https://gerrit.wikimedia.org/r/c/mediawiki/core/+/536725
+  source_url: https://snyk.io/vuln/SNYK-PHP-MEDIAWIKICORE-1019477
+- id: snykio:packagist:mediawiki/core:1019478
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [mediawiki/core][1] is a Free software wiki application developed by the
+    Wikimedia Foundation and others
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). An attacker could create a message with \[javascript:payload
+    xss\] and turns it into a jQuery object with `mw.message().parse().` The
+    expected result is that the jQuery object does not contain an `<a>` tag
+    (or it does not have a href attribute, or it\'s empty, etc.). The actual
+    result is that the object contains an `<a href ="javascript...` that
+    executes when clicked.
+
+
+
+    [1]: https://github.com/wikimedia/mediawiki
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
+  affected_package: mediawiki/core
+  vulnerable_versions:
+  - ">=1.31.0  <1.31.9"
+  - ">=1.34.0  <1.34.3"
+  - ">=1.34.99  <1.35.0"
+  severity: medium
+  package_manager: packagist
+  cve:
+  - CVE-2020-25814
+  cwe:
+  - CWE-79
+  disclosed_date: 2020-10-20
+  created_date: 2020-10-20
+  last_modified_date: 2020-10-20
+  credit:
+  - Unknown
+  references:
+  - https://phabricator.wikimedia.org/T86738
+  source_url: https://snyk.io/vuln/SNYK-PHP-MEDIAWIKICORE-1019478
