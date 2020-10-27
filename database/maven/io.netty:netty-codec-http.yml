@@ -1,4 +1,64 @@
 ---
+- id: snykio:maven:io.netty:netty-codec-http:1020439
+  title: Denial of Service (DoS)
+  description: |
+    [io.netty:netty-codec-http][1] is a network application framework for
+    rapid development of maintainable high performance protocol servers
+    &amp; clients.
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS). When the post request body data received by the server is greater
+    than 16k, netty will use `DiskAttribute`, which will create a temporary
+    file, and use `deleteOnExit()` when the file needs to be deleted, which
+    results in `DeleteOnExitHook.files` keeps getting bigger.
+
+
+
+    [1]: https://mvnrepository.com/artifact/io.netty/netty-codec-http
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package][1]
+
+
+
+    [1]: https://snyk.io/vuln/npm:ws:20171108
+  affected_package: io.netty:netty-codec-http
+  vulnerable_versions:
+  - ">= 0 < 4.1.53Final"
+  severity: medium
+  package_manager: maven
+  cwe:
+  - CWE-400
+  disclosed_date: 2020-09-10
+  created_date: 2020-10-21
+  last_modified_date: 2020-10-21
+  credit:
+  - nettybot
+  references:
+  - https://github.com/netty/netty/pull/10560
+  source_url: https://snyk.io/vuln/SNYK-JAVA-IONETTY-1020439
 - id: snykio:maven:io.netty:netty-codec-http:450924
   title: Denial of Service (DoS)
   description: |+
