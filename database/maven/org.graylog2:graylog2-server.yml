@@ -1,4 +1,98 @@
 ---
+- id: snykio:maven:org.graylog2:graylog2-server:1009834
+  title: Directory Traversal
+  description: |
+    [org.graylog2:graylog2-server][1] is a log management platform.
+
+    Affected versions of this package are vulnerable to Directory Traversal.
+    When starting Graylog with the JVM `-cp` classpath options, instead of
+    using the default `-jar` for the bundled classes, the API REST endpoint
+    `/api-browser/.*` would allow path traversal to allow reading files on
+    the server\'s filesystem.
+
+    For example, when starting graylog-server like:
+
+        /usr/local/openjdk-8/bin/java -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -XX:NewRatio=1 -XX:MaxMetaspaceSize=256m -server -XX:+ResizeTLAB -XX:+UseConcMarkSweepGC -XX:+CMSConcurrentMTEnabled -XX:+CMSClassUnloadingEnabled -XX:+UseParNewGC -XX:-OmitStackTraceInFastThrow -cp /usr/share/graylog:/usr/share/graylog/graylog.jar -Dlog4j.configurationFile=/usr/share/graylog/data/config/log4j2.xml -Djava.library.path=/usr/share/graylog/lib/sigar/ -Dgraylog2.installation_source=docker org.graylog2.bootstrap.Main server -f /usr/share/graylog/data/config/graylog.conf
+
+    The use of `-cp /usr/share/graylog:/usr/share/graylog/graylog.jar`
+    triggers the vulnerability.
+
+    The check for `..` elements in the resulting file path for documentation
+    resources is performed too early in the resolution process. As a result,
+    an attacker can craft a URL that can contain `..` elements and thus read
+    files the server process has access to.
+
+    Note: This vulnerability does not apply to the standard installation
+    methods.
+
+
+
+    [1]: https://github.com/Graylog2/graylog2-server.git/graylog-project-parent/graylog2-server
+    \nA Directory Traversal attack (also known as path traversal) aims to
+    access files and directories that are stored outside the intended
+    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
+    its variations, or by using absolute file paths, it may be possible to
+    access arbitrary files and directories stored on file system, including
+    application source code, configuration, and other critical system files.
+
+    Directory Traversal vulnerabilities can be generally divided into two
+    types:
+
+    * **Information Disclosure**\: Allows the attacker to gain information
+      about the folder structure or read the contents of sensitive files on
+      the system.
+
+    `st` is a module for serving static files on web pages, and contains a
+    [vulnerability of this type][1]. In our example, we will serve files
+    from the `public` route.
+
+    If an attacker requests the following URL from our server, it will in
+    turn leak the sensitive private key of the root user.
+
+        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
+
+    **Note** `%2e` is the URL encoded version of `.` (dot).
+
+    * **Writing arbitrary files**\: Allows the attacker to create or replace
+      existing files. This type of vulnerability is also known as
+      `Zip-Slip`.
+
+    One way to achieve this is by using a malicious `zip` archive that holds
+    path traversal filenames. When each filename in the zip archive gets
+    concatenated to the target extraction folder, without validation, the
+    final path ends up outside of the target folder. If an executable or a
+    configuration file is overwritten with a file containing malicious code,
+    the problem can turn into an arbitrary code execution issue quite
+    easily.
+
+    The following is an example of a `zip` archive with one benign file and
+    one malicious file. Extracting the malicious file will result in
+    traversing out of the target folder, ending up in `/root/.ssh/`
+    overwriting the `authorized_keys` file:
+
+        2018-04-15 22:04:29 .....           19           19  good.txt
+        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
+
+
+
+    [1]: https://snyk.io/vuln/npm:st:20140206
+  affected_package: org.graylog2:graylog2-server
+  vulnerable_versions:
+  - ">= 0 < 4.0.0-beta.1"
+  severity: medium
+  package_manager: maven
+  cwe:
+  - CWE-22
+  disclosed_date: 2020-09-17
+  created_date: 2020-10-23
+  last_modified_date: 2020-10-23
+  credit:
+  - Christian Fünfhaus
+  - Florian Hauser
+  references:
+  - https://github.com/Graylog2/graylog2-server/commit/b42f85fbed25ee5446544697bfc06bcce218f7bf
+  - https://github.com/Graylog2/graylog2-server/issues/8986
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGGRAYLOG2-1009834
 - id: snykio:maven:org.graylog2:graylog2-server:32344
   title: Cross-site Scripting (XSS)
   description: |+
