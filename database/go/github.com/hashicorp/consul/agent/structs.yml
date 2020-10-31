@@ -1,4 +1,66 @@
 ---
+- id: snykio:go:github.com/hashicorp/consul/agent/structs:1021890
+  title: Denial of Service (DoS)
+  description: |
+    [github.com/hashicorp/consul/agent/structs][1] is a tool for service
+    discovery and configuration.
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS) via Consul Enterprise Namespace Config Entry Replication. An
+    operator with `service:write` ACL permissions in a Consul Enterprise
+    cluster could write a malicious config entry that caused infinite raft
+    writes due to issues with the namespace replication logic.
+
+
+
+    [1]: https://github.com/hashicorp/consul
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package][1]
+
+
+
+    [1]: https://snyk.io/vuln/npm:ws:20171108
+  affected_package: github.com/hashicorp/consul/agent/structs
+  vulnerable_versions:
+  - "<1.8.5"
+  severity: medium
+  package_manager: go
+  cve:
+  - CVE-2020-25201
+  cwe:
+  - CWE-400
+  disclosed_date: 2020-10-25
+  created_date: 2020-10-25
+  last_modified_date: 2020-10-25
+  credit:
+  - rboyer
+  references:
+  - https://github.com/hashicorp/consul/pull/9024
+  - https://github.com/hashicorp/consul/releases/tag/v1.8.5
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMHASHICORPCONSULAGENTSTRUCTS-1021890
 - id: snykio:go:github.com/hashicorp/consul/agent/structs:572112
   title: Insecure Permissions
   description: |
