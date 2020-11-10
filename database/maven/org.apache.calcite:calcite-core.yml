@@ -1,0 +1,38 @@
+---
+- id: snykio:maven:org.apache.calcite:calcite-core:1038296
+  title: Man-in-the-Middle (MitM)
+  description: |
+    [org.apache.calcite:calcite-core][1] is a Core Calcite APIs and engine.
+
+    Affected versions of this package are vulnerable to Man-in-the-Middle
+    (MitM). The `HttpUtils#getURLConnection` method disables explicitly
+    hostname verification for HTTPS connections making clients vulnerable to
+    man-in-the-middle attacks. Calcite uses this method internally to
+    connect with Druid and Splunk so information leakage may happen when
+    using the respective Calcite adapters.
+
+    The method itself is in a utility class so people may use it to create
+    vulnerable HTTPS connections for other applications.
+
+
+
+    [1]: https://mvnrepository.com/artifact/org.apache.calcite/calcite-core
+  affected_package: org.apache.calcite:calcite-core
+  vulnerable_versions:
+  - "< 1.26"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2020-13955
+  cwe:
+  - CWE-300
+  disclosed_date: 2020-10-09
+  created_date: 2020-10-09
+  last_modified_date: 2020-10-09
+  credit:
+  - Unknown
+  references:
+  - https://github.com/apache/calcite/commit/43eeafcbac29d02c72bd520c003cdfc571de2d15
+  - https://issues.apache.org/jira/browse/CALCITE-4298
+  - https://lists.apache.org/thread.html/r0b0fbe2038388175951ce1028182d980f9e9a7328be13d52dab70bb3%40%3Cdev.calcite.apache.org%3E
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHECALCITE-1038296
