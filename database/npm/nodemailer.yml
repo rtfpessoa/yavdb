@@ -1,0 +1,38 @@
+---
+- id: snykio:npm:nodemailer:1038834
+  title: Command Injection
+  description: |
+    [nodemailer][1] is an Easy as cake e-mail sending from your Node.js
+    applications
+
+    Affected versions of this package are vulnerable to Command Injection.
+    Use of crafted recipient email addresses may result in arbitrary command
+    flag injection in sendmail transport for sending mails.
+
+    ### PoC   {#poc}
+
+        -bi@example.com (-bi Initialize the alias database.)
+        -d0.1a@example.com (The option -d0.1 prints the version of sendmail and the options it was compiled with.)
+        -Dfilename@example.com (Debug output ffile)
+
+
+
+    [1]: https://www.npmjs.org/package/nodemailer
+  affected_package: nodemailer
+  vulnerable_versions:
+  - "<6.4.16"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2020-7769
+  cwe:
+  - CWE-78
+  disclosed_date: 2020-11-11
+  created_date: 2020-11-12
+  last_modified_date: 2020-11-12
+  credit:
+  - Vineet Kumar
+  references:
+  - https://github.com/nodemailer/nodemailer/blob/33b62e2ea6bc9215c99a9bb4bfba94e2fb27ebd0/lib/sendmail-transport/index.js#L75
+  - https://github.com/nodemailer/nodemailer/commit/ba31c64c910d884579875c52d57ac45acc47aa54
+  source_url: https://snyk.io/vuln/SNYK-JS-NODEMAILER-1038834

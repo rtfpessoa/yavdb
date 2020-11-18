@@ -1,0 +1,40 @@
+---
+- id: snykio:go:github.com/hashicorp/nomad/drivers/docker:1039759
+  title: Sandbox Bypass
+  description: |+
+    Affected versions of this package are vulnerable to Sandbox Bypass. A
+    vulnerability was discovered in Nomad and Nomad Enterprise (“Nomad”)
+    such that an operator with job submission capabilities can mount the
+    host file system of a client agent and subvert the default Docker file
+    sandbox feature when not explicitly disabled, or when using a volume
+    mount type.
+
+    Nomad disables host filesystem access by default in 0.12.0 and above to
+    prevent job operators from accessing the client filesystem used to
+    persistently store any required data on disk. The Docker task driver
+    provides a volume mount type which can be used to access the client host
+    filesystem from within a container, but clients must be configured to
+    enable mounting directories outside an allocation’s path to prevent
+    abuse from unprivileged operators.
+
+  affected_package: github.com/hashicorp/nomad/drivers/docker
+  vulnerable_versions:
+  - ">=0.11.0-beta1 <0.11.7"
+  - ">=0.12.0-beta1 <0.12.8"
+  - ">=0.9.0 <0.10.8"
+  severity: medium
+  package_manager: go
+  cve:
+  - CVE-2020-28348
+  cwe:
+  - CWE-265
+  disclosed_date: 2020-11-12
+  created_date: 2020-11-12
+  last_modified_date: 2020-11-12
+  credit:
+  - Tim Gross
+  references:
+  - https://discuss.hashicorp.com/t/nomad-0-12-8-0-11-7-and-0-10-8-released/17491
+  - https://github.com/hashicorp/nomad/blob/master/CHANGELOG.md#0128-november-10-2020
+  - https://github.com/hashicorp/nomad/pull/9321
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMHASHICORPNOMADDRIVERSDOCKER-1039759
