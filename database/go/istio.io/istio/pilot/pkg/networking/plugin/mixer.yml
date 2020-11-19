@@ -1,0 +1,31 @@
+---
+- id: snykio:go:istio.io/istio/pilot/pkg/networking/plugin/mixer:1040846
+  title: Incorrect Access Control
+  description: "[istio.io/istio/pilot/pkg/networking/plugin/mixer][1] is an open\nplatform
+    to connect, manage, and secure microservices.\n\nAffected versions of this package
+    are vulnerable to Incorrect Access\nControl. One will be vulnerable if the following
+    conditions are all\ntrue:\n\n1.  NOT using `HTTP`, `HTTP/2`, or `gRPC` protocols.\n^\n\n1.
+    \ A mixer adapter (e.g., `Deny Checker`, `List Checker`) is used to\n    provide
+    authorization for your backend TCP service.\n{: start=\"2\"}\n\n1.  `disablePolicyChecks`
+    is set to false. To check that use the\n    following command: `kubectl -n istio-system
+    get cm istio -o\n    jsonpath=\"{@.data.mesh}\" | grep disablePolicyChecks`\n
+    \   ## Remediation   {#remediation}\n    \n    Upgrade `istio.io/istio/pilot/pkg/networking/plugin/mixer`
+    to\n    version 1.1.7 or higher.\n    ## References   {#references}\n{: start=\"3\"}\n\n*
+    [GitHub Commit][2]\n* [GitHub Issue][3]\n* [Istio Security Update][4]\n\n\n\n[1]:
+    https://pkg.go.dev/istio.io/istio/pilot/pkg/networking/plugin/mixer\n[2]: https://github.com/istio/istio/commit/eec7a74473deee98cad0a996f41a32a47dd453c2\n[3]:
+    https://github.com/istio/istio/issues/13868\n[4]: https://istio.io/blog/2019/cve-2019-12243/\n"
+  affected_package: istio.io/istio/pilot/pkg/networking/plugin/mixer
+  vulnerable_versions:
+  - ">=1.1.0 <1.1.7"
+  severity: high
+  package_manager: go
+  cve:
+  - CVE-2019-12243
+  cwe:
+  - CWE-284
+  disclosed_date: 2019-05-17
+  created_date: 2019-06-06
+  last_modified_date: 2019-06-06
+  credit:
+  - Haim Helman
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-ISTIOIOISTIOPILOTPKGNETWORKINGPLUGINMIXER-1040846
