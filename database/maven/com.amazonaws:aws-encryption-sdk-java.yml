@@ -1,0 +1,37 @@
+---
+- id: snykio:maven:com.amazonaws:aws-encryption-sdk-java:1040475
+  title: Inadequate Encryption Strength
+  description: |
+    [com.amazonaws:aws-encryption-sdk-java][1] is an AWS Encryption SDK for
+    Java
+
+    Affected versions of this package are vulnerable to Inadequate
+    Encryption Strength. A weak robustness vulnerability exists in the AWS
+    Encryption SDKs for Java, Python, C and Javalcript. Due to the
+    non-committing property of `AES-GCM` (and other `AEAD` ciphers such as
+    `AES-GCM-SIV` or `(X)ChaCha20Poly1305`) used by the SDKs to encrypt
+    messages, an attacker can craft a unique cyphertext which will decrypt
+    to multiple different results, and becomes especially relevant in a
+    multi-recipient setting.
+
+
+
+    [1]: https://search.maven.org/artifact/com.amazonaws/aws-encryption-sdk-java
+  affected_package: com.amazonaws:aws-encryption-sdk-java
+  vulnerable_versions:
+  - "< 2.0.0"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2020-8897
+  cwe:
+  - CWE-326
+  disclosed_date: 2020-11-16
+  created_date: 2020-11-16
+  last_modified_date: 2020-11-16
+  credit:
+  - Thai thaidn Duong
+  references:
+  - https://github.com/aws/aws-encryption-sdk-java/commit/4678ffaf7a4a2dd5cdf0e39b3adfee32afed7559
+  - https://github.com/aws/aws-encryption-sdk-python/commit/ef90351a822890591880c5975e4ac47a0d6f917b
+  source_url: https://snyk.io/vuln/SNYK-JAVA-COMAMAZONAWS-1040475

