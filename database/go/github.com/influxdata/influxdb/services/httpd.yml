@@ -1,0 +1,33 @@
+---
+- id: snykio:go:github.com/influxdata/influxdb/services/httpd:1041719
+  title: Authentication Bypass
+  description: |
+    [github.com/influxdata/influxdb/services/httpd][1] is a httpd package
+    that implements the HTTP service and REST API for InfluxDB.
+
+    Affected versions of this package are vulnerable to Authentication
+    Bypass. InfluxDB has an authentication bypass vulnerability in the
+    authenticate function in `services/httpd/handler.go` because a JWT token
+    may have an empty `SharedSecret` (aka shared secret).
+
+
+
+    [1]: https://github.com/influxdata/influxdb
+  affected_package: github.com/influxdata/influxdb/services/httpd
+  vulnerable_versions:
+  - "<1.7.6"
+  severity: high
+  package_manager: go
+  cve:
+  - CVE-2019-20933
+  cwe:
+  - CWE-287
+  disclosed_date: 2020-11-19
+  created_date: 2020-11-19
+  last_modified_date: 2020-11-19
+  credit:
+  - Unknown
+  references:
+  - https://github.com/influxdata/influxdb/commit/761b557315ff9c1642cf3b0e5797cd3d983a24c0
+  - https://github.com/influxdata/influxdb/compare/v1.7.5...v1.7.6
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMINFLUXDATAINFLUXDBSERVICESHTTPD-1041719
