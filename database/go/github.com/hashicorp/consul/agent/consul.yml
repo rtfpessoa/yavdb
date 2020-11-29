@@ -62,6 +62,44 @@
   - https://github.com/hashicorp/consul/pull/9024
   - https://github.com/hashicorp/consul/releases/tag/v1.8.5
   source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMHASHICORPCONSULAGENTCONSUL-1021891
+- id: snykio:go:github.com/hashicorp/consul/agent/consul:1043754
+  title: Privilege Escalation
+  description: |
+    [github.com/hashicorp/consul/agent/consul][1] is a distributed, highly
+    available, and data center aware solution to connect and configure
+    applications across dynamic, distributed infrastructure.
+
+    Affected versions of this package are vulnerable to Privilege
+    Escalation. Allows operators with `operator:read` ACL permissions to
+    read the Connect CA private key configuration when explicitly configured
+    with the `/v1/connect/ca/configuration endpoint`, including the private
+    key. This allows the user to effectively privilege escalate by enabling
+    the ability to mint certificates for any Consul Connect services. This
+    would potentially allow them to masquerade (receive/send traffic) as any
+    service in the mesh.
+
+
+
+    [1]: https://www.consul.io/
+  affected_package: github.com/hashicorp/consul/agent/consul
+  vulnerable_versions:
+  - ">=1.2.0 <1.8.6"
+  severity: medium
+  package_manager: go
+  cve:
+  - CVE-2020-28053
+  cwe:
+  - CWE-264
+  disclosed_date: 2020-11-23
+  created_date: 2020-11-23
+  last_modified_date: 2020-11-23
+  credit:
+  - Unknown
+  references:
+  - https://github.com/hashicorp/consul/blob/master/CHANGELOG.md#186-november-19-2020
+  - https://github.com/hashicorp/consul/commit/ff5215d882ac51b49c2647aac46b42aa9c890ce3
+  - https://github.com/hashicorp/consul/pull/9240
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMHASHICORPCONSULAGENTCONSUL-1043754
 - id: snykio:go:github.com/hashicorp/consul/agent/consul:548415
   title: Denial of Service (DoS)
   description: |-

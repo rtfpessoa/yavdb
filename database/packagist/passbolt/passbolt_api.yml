@@ -1,0 +1,305 @@
+---
+- id: snykio:packagist:passbolt/passbolt_api:1043737
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [passbolt/passbolt\_api][1] is a Password manager for teams.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS) via the url field on the password workspace grid and sidebar. A
+    registered Passbolt user can create a malicious resource url and share
+    it with victims on the same instance.
+
+
+
+    [1]: https://github.com/passbolt/passbolt_api
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
+  affected_package: passbolt/passbolt_api
+  vulnerable_versions:
+  - "<1.6.5"
+  severity: medium
+  package_manager: packagist
+  cve:
+  - CVE-2017-1000442
+  cwe:
+  - CWE-79
+  disclosed_date: 2020-11-23
+  created_date: 2020-11-23
+  last_modified_date: 2020-11-23
+  credit:
+  - Sumit Sahoo
+  references:
+  - https://github.com/passbolt/passbolt_api/commit/f5eb93485a90195439e12aa8072f45ceb37b19c3
+  - https://www.passbolt.com/incidents/20170914_xss_on_resource_urls
+  source_url: https://snyk.io/vuln/SNYK-PHP-PASSBOLTPASSBOLTAPI-1043737
+- id: snykio:packagist:passbolt/passbolt_api:1043738
+  title: Cross-site Scripting (XSS)
+  description: |+
+    [passbolt/passbolt\_api][1] is a Password manager for teams.
+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). An admin can craft a user with malicious first and last names.
+    When the user clicks on the setup link in the invitation email, the
+    setup start page will run the XSS payload.
+
+
+
+    [1]: https://github.com/passbolt/passbolt_api
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
+  affected_package: passbolt/passbolt_api
+  vulnerable_versions:
+  - "<2.11.0"
+  severity: low
+  package_manager: packagist
+  cwe:
+  - CWE-79
+  disclosed_date: 2020-11-23
+  created_date: 2020-11-23
+  last_modified_date: 2020-11-23
+  credit:
+  - Unknown
+  references:
+  - https://github.com/passbolt/passbolt_api/commit/6135b483f72c6853e6085e329f5f8d7be60c9933
+  - https://www.passbolt.com/incidents/20190807_multiple_vulnerabilities
+  source_url: https://snyk.io/vuln/SNYK-PHP-PASSBOLTPASSBOLTAPI-1043738
+- id: snykio:packagist:passbolt/passbolt_api:1043739
+  title: HTML Injection
+  description: |
+    [passbolt/passbolt\_api][1] is a Password manager for teams.
+
+    Affected versions of this package are vulnerable to HTML Injection.
+    Input is not escaped properly in e-mails sent by Passbolt containing
+    user-specified input, resulting in the user being potentially able to
+    inject HTML code in an e-mail.
+
+
+
+    [1]: https://github.com/passbolt/passbolt_api
+  affected_package: passbolt/passbolt_api
+  vulnerable_versions:
+  - "<2.7.0"
+  severity: low
+  package_manager: packagist
+  cwe:
+  - CWE-79
+  disclosed_date: 2020-11-23
+  created_date: 2020-11-23
+  last_modified_date: 2020-11-23
+  credit:
+  - Unknown
+  references:
+  - https://github.com/passbolt/passbolt_api/commit/00f0ebe37d78815adee26d5e80cf2250fe878647
+  - https://www.passbolt.com/incidents/20190211_multiple_vulnerabilities
+  source_url: https://snyk.io/vuln/SNYK-PHP-PASSBOLTPASSBOLTAPI-1043739
+- id: snykio:packagist:passbolt/passbolt_api:1043745
+  title: Remote Code Execution (RCE)
+  description: |
+    [passbolt/passbolt\_api][1] is a Password manager for teams.
+
+    Affected versions of this package are vulnerable to Remote Code
+    Execution (RCE). During installation, admins can generate a PGP key for
+    the server, providing information that is not escaped or verified, and
+    therefore can allow injection of bash code.
+
+
+
+    [1]: https://github.com/passbolt/passbolt_api
+  affected_package: passbolt/passbolt_api
+  vulnerable_versions:
+  - "<2.7.0"
+  severity: low
+  package_manager: packagist
+  cwe:
+  - CWE-94
+  disclosed_date: 2020-11-23
+  created_date: 2020-11-23
+  last_modified_date: 2020-11-23
+  credit:
+  - Unknown
+  references:
+  - https://github.com/passbolt/passbolt_api/commit/be84671676ebac43d49e326a14f1afe259777611
+  - https://www.passbolt.com/incidents/20190211_multiple_vulnerabilities
+  source_url: https://snyk.io/vuln/SNYK-PHP-PASSBOLTPASSBOLTAPI-1043745
+- id: snykio:packagist:passbolt/passbolt_api:1043746
+  title: Information Exposure
+  description: |
+    [passbolt/passbolt\_api][1] is a Password manager for teams.
+
+    Affected versions of this package are vulnerable to Information
+    Exposure. Passbolt uses three cookies: a session cookie, a CSRF
+    protection cookie and a cookie to keep track of the multiple-factor
+    authentication process.
+
+    Both the session cookie and the mfa cookie are properly set HTTP-only to
+    prevent an attacker from retrieving the content of those cookies if they
+    managed to exploit an XSS.
+
+    The `/auth/verify.json` endpoint returns a JSON that, among other
+    things, contains the cookies sent in the request. (similar to the TRACE
+    HTTP method)
+
+    An attacker who manages to leverage an XSS vulnerability could retrieve
+    the session cookies of a legitimate user, effectively granting them the
+    ability to retrieve information (such as encrypted password list or
+    group list) without requiring user interaction.
+
+
+
+    [1]: https://github.com/passbolt/passbolt_api
+  affected_package: passbolt/passbolt_api
+  vulnerable_versions:
+  - "<2.7.0"
+  severity: medium
+  package_manager: packagist
+  cwe:
+  - CWE-200
+  disclosed_date: 2020-11-23
+  created_date: 2020-11-23
+  last_modified_date: 2020-11-23
+  credit:
+  - JoseAlexandre Mayan
+  references:
+  - https://github.com/passbolt/passbolt_api/commit/fbf99fed4b60db5fec97b58a2251a04bb42c1b15
+  - https://www.passbolt.com/incidents/20190211_multiple_vulnerabilities
+  source_url: https://snyk.io/vuln/SNYK-PHP-PASSBOLTPASSBOLTAPI-1043746
