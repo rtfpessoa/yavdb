@@ -1,0 +1,32 @@
+---
+- id: snykio:go:github.com/kubernetes-csi/external-snapshotter/pkg/common-controller:1044072
+  title: NULL Pointer Dereference
+  description: "[github.com/kubernetes-csi/external-snapshotter/pkg/common-controller][1]\nis
+    a CSI snapshotter that is part of Kubernetes implementation of\nContainer Storage
+    Interface (CSI).\n\nAffected versions of this package are vulnerable to NULL Pointer\nDereference.
+    The snapshot-controller could panic when processing a\nVolumeSnapshot custom resource
+    when:\n\n* The VolumeSnapshot referenced a non-existing PersistentVolumeClaim
+    and\n  the VolumeSnapshot did not reference any VolumeSnapshotClass.\n* The snapshot-controller
+    crashes, is automatically restarted by\n  Kubernetes, and processes the same VolumeSnapshot
+    custom resource\n  after the restart, entering an endless crashloop.\n  ## Remediation
+    \  {#remediation}\n  \n  Upgrade\n  `github.com/kubernetes-csi/external-snapshotter/pkg/common-controller`\n
+    \ to version 3.0.2 or higher.\n  ## References   {#references}\n^\n\n* [GitHub
+    Issue][2]\n* [GitHub PR][3]\n* [RedHat Bugzilla Bug][4]\n* [Security Announcement][5]\n\n\n\n[1]:
+    https://github.com/kubernetes-csi/external-snapshotter\n[2]: https://github.com/kubernetes-csi/external-snapshotter/issues/421\n[3]:
+    https://github.com/kubernetes-csi/external-snapshotter/pull/381\n[4]: https://bugzilla.redhat.com/show_bug.cgi?id=1897314\n[5]:
+    https://groups.google.com/g/kubernetes-security-announce/c/1EzCr1qUxxU\n"
+  affected_package: github.com/kubernetes-csi/external-snapshotter/pkg/common-controller
+  vulnerable_versions:
+  - ">=3.0.0 <3.0.2"
+  severity: medium
+  package_manager: go
+  cve:
+  - CVE-2020-8569
+  cwe:
+  - CWE-476
+  disclosed_date: 2020-11-03
+  created_date: 2020-11-24
+  last_modified_date: 2020-11-24
+  credit:
+  - Unknown
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMKUBERNETESCSIEXTERNALSNAPSHOTTERPKGCOMMONCONTROLLER-1044072

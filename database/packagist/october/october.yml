@@ -1,4 +1,214 @@
 ---
+- id: snykio:packagist:october/october:1044026
+  title: Arbitrary File Read
+  description: |+
+    Affected versions of this package are vulnerable to Arbitrary File Read.
+    An attacker can read local files on an October CMS server via a
+    specially crafted request.
+
+  affected_package: october/october
+  vulnerable_versions:
+  - ">=1.0.421  <1.0.469"
+  severity: medium
+  package_manager: packagist
+  cve:
+  - CVE-2020-15246
+  cwe:
+  - CWE-863
+  disclosed_date: 2020-11-24
+  created_date: 2020-11-24
+  last_modified_date: 2020-11-24
+  credit:
+  - ka1n4t
+  references:
+  - https://github.com/octobercms/library/commit/80aab47f044a2660aa352450f55137598f362aa4
+  source_url: https://snyk.io/vuln/SNYK-PHP-OCTOBEROCTOBER-1044026
+- id: snykio:packagist:october/october:1044027
+  title: Remote Code Execution (RCE)
+  description: |+
+    Affected versions of this package are vulnerable to Remote Code
+    Execution (RCE). An authenticated backend user with the
+    `cms.manage_pages`, `cms.manage_layouts`, or `cms.manage_partials`
+    permissions who would normally not be permitted to provide PHP code to
+    be executed by the CMS due to `cms.enableSafeMode` being enabled is able
+    to write specific Twig code to escape the Twig sandbox and execute
+    arbitrary PHP.
+
+  affected_package: october/october
+  vulnerable_versions:
+  - ">=1.0.319  <1.0.469"
+  severity: medium
+  package_manager: packagist
+  cve:
+  - CVE-2020-15247
+  cwe:
+  - CWE-94
+  disclosed_date: 2020-11-24
+  created_date: 2020-11-24
+  last_modified_date: 2020-11-24
+  credit:
+  - ka1n4t
+  references:
+  - https://github.com/octobercms/october/commit/4c650bb775ab849e48202a4923bac93bd74f9982
+  source_url: https://snyk.io/vuln/SNYK-PHP-OCTOBEROCTOBER-1044027
+- id: snykio:packagist:october/october:1044028
+  title: Privilege Escalation
+  description: |+
+    Affected versions of this package are vulnerable to Privilege
+    Escalation. Backend users with the default \"Publisher\" system role
+    have access to create &amp; manage users where they can choose which
+    role the new user has. This means that a user with \"Publisher\" access
+    has the ability to escalate their access to \"Developer\" access.
+
+  affected_package: october/october
+  vulnerable_versions:
+  - ">=1.0.319  <1.0.470"
+  severity: low
+  package_manager: packagist
+  cve:
+  - CVE-2020-15248
+  cwe:
+  - CWE-264
+  disclosed_date: 2020-11-24
+  created_date: 2020-11-24
+  last_modified_date: 2020-11-24
+  credit:
+  - Unknown
+  references:
+  - https://github.com/octobercms/october/commit/78a37298a4ed4602b383522344a31e311402d829
+  source_url: https://snyk.io/vuln/SNYK-PHP-OCTOBEROCTOBER-1044028
+- id: snykio:packagist:october/october:1044029
+  title: Cross-site Scripting (XSS)
+  description: |+
+    Affected versions of this package are vulnerable to Cross-site Scripting
+    (XSS). Backend users with access to upload files were permitted to
+    upload SVG files without any sanitization applied to the uploaded files.
+    Since SVG files support being parsed as HTML by browsers, this means
+    that they could theoretically upload Javascript that would be executed
+    on a path under the website\'s domain (i.e.
+    `/storage/app/media/evil.svg`), but they would have to convince their
+    target to visit that location directly in the target\'s browser as the
+    backend does not display SVGs inline anywhere, SVGs are only displayed
+    as image resources in the backend and are thus unable to be executed.
+
+    \nA cross-site scripting attack occurs when the attacker tricks a
+    legitimate web-based application or site to accept a request as
+    originating from a trusted source.
+
+    This is done by escaping the context of the web application; the web
+    application then delivers that data to its users along with other
+    trusted dynamic content, without validating it. The browser unknowingly
+    executes malicious script on the client side (through client-side
+    languages; usually JavaScript or HTML) in order to perform actions that
+    are otherwise typically blocked by the browser’s Same Origin Policy.
+
+    ֿInjecting malicious code is the most prevalent manner by which XSS is
+    exploited; for this reason, escaping characters in order to prevent this
+    manipulation is the top method for securing code against this
+    vulnerability.
+
+    Escaping means that the application is coded to mark key characters, and
+    particularly key characters included in user input, to prevent those
+    characters from being interpreted in a dangerous context. For example,
+    in HTML, `<` can be coded as `&lt`; and `>` can be coded as `&gt`; in
+    order to be interpreted and displayed as themselves in text, while
+    within the code itself, they are used for HTML tags. If malicious
+    content is injected into an application that escapes special characters
+    and that malicious content uses `<` and `>` as HTML tags, those
+    characters are nonetheless not interpreted as HTML tags by the browser
+    if they’ve been correctly escaped in the application code and in this
+    way the attempted attack is diverted.
+
+    The most prominent use of XSS is to steal cookies (source: OWASP
+    HttpOnly) and hijack user sessions, but XSS exploits have been used to
+    expose sensitive information, enable access to privileged services and
+    functionality and deliver malware.
+
+    ### Types of attacks   {#types-of-attacks}
+
+    There are a few methods by which XSS can be manipulated:
+
+    | Type | Origin | Description |
+    |----------
+    | **Stored** | Server | The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link. |
+    | **Reflected** | Server | The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser. |
+    | **DOM-based** | Client | The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data. |
+    | **Mutated** |  | The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters. |
+
+    ### Affected environments   {#affected-environments}
+
+    The following environments are susceptible to an XSS attack:
+
+    * Web servers
+    * Application servers
+    * Web application environments
+
+    ### How to prevent   {#how-to-prevent}
+
+    This section describes the top best practices designed to specifically
+    protect your code:
+
+    * Sanitize data input in an HTTP request before reflecting it back,
+      ensuring all data is validated, filtered or escaped before echoing
+      anything back to the user, such as the values of query parameters
+      during searches.
+    * Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces
+      to their respective HTML or URL encoded equivalents.
+    * Give users the option to disable client-side scripts.
+    * Redirect invalid requests.
+    * Detect simultaneous logins, including those from two separate IP
+      addresses, and invalidate those sessions.
+    * Use and enforce a Content Security Policy (source: Wikipedia) to
+      disable any features that might be manipulated for an XSS attack.
+    * Read the documentation for any of the libraries referenced in your
+      code to understand which elements allow for embedded HTML.
+
+  affected_package: october/october
+  vulnerable_versions:
+  - ">=1.0.319  <1.0.469"
+  severity: medium
+  package_manager: packagist
+  cve:
+  - CVE-2020-15249
+  cwe:
+  - CWE-79
+  disclosed_date: 2020-11-24
+  created_date: 2020-11-24
+  last_modified_date: 2020-11-24
+  credit:
+  - Hoan Hoang
+  references:
+  - https://github.com/octobercms/library/commit/80aab47f044a2660aa352450f55137598f362aa4
+  source_url: https://snyk.io/vuln/SNYK-PHP-OCTOBEROCTOBER-1044029
+- id: snykio:packagist:october/october:1044034
+  title: Remote Code Execution (RCE)
+  description: |+
+    Affected versions of this package are vulnerable to Remote Code
+    Execution (RCE). An authenticated backend user with the
+    `cms.manage_pages`, `cms.manage_layouts`, or `cms.manage_partials`
+    permissions who would normally not be permitted to provide PHP code to
+    be executed by the CMS due to `cms.enableSafeMode` being enabled is able
+    to write specific Twig code to escape the Twig sandbox and execute
+    arbitrary PHP.
+
+  affected_package: october/october
+  vulnerable_versions:
+  - ">=1.0.469  <1.0.470"
+  - ">=1.1.0  <1.1.1"
+  severity: medium
+  package_manager: packagist
+  cve:
+  - CVE-2020-26231
+  cwe:
+  - CWE-94
+  disclosed_date: 2020-11-24
+  created_date: 2020-11-24
+  last_modified_date: 2020-11-24
+  credit:
+  - ka1n4t
+  references:
+  - https://github.com/octobercms/october/commit/d34fb8ab51108495a9a651b841202d935f4e12f7
+  source_url: https://snyk.io/vuln/SNYK-PHP-OCTOBEROCTOBER-1044034
 - id: snykio:packagist:october/october:571242
   title: Command Injection
   description: "Affected versions of this package are vulnerable to Command Injection.\nAny
