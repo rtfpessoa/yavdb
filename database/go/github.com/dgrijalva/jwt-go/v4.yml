@@ -1,0 +1,34 @@
+---
+- id: snykio:go:github.com/dgrijalva/jwt-go/v4:1047321
+  title: Access Restriction Bypass
+  description: |
+    [github.com/dgrijalva/jwt-go/v4][1] is a go implementation of JSON Web
+    Tokens.
+
+    Affected versions of this package are vulnerable to Access Restriction
+    Bypass if `m["aud"]` happens to be `[]string{}`, as allowed by the spec,
+    the type assertion fails and the value of `aud` is `""`. This can cause
+    audience verification to succeed even if the audiences being passed are
+    incorrect if `required` is set to `false`.
+
+
+
+    [1]: https://pkg.go.dev/github.com/dgrijalva/jwt-go/v4
+  affected_package: github.com/dgrijalva/jwt-go/v4
+  vulnerable_versions:
+  - "<4.0.0-preview1"
+  severity: high
+  package_manager: go
+  cve:
+  - CVE-2020-26160
+  cwe:
+  - CWE-287
+  disclosed_date: 2020-07-30
+  created_date: 2020-09-13
+  last_modified_date: 2020-09-13
+  credit:
+  - christopherwong
+  references:
+  - https://github.com/dgrijalva/jwt-go/issues/422
+  - https://github.com/dgrijalva/jwt-go/pull/426
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMDGRIJALVAJWTGOV4-1047321
