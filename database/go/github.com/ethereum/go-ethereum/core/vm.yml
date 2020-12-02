@@ -1,0 +1,37 @@
+---
+- id: snykio:go:github.com/ethereum/go-ethereum/core/vm:1045822
+  title: Incorrect Calculation
+  description: |
+    [github.com/ethereum/go-ethereum/core/vm][1] is a Package that
+    implements the Ethereum Virtual Machine.
+
+    Affected versions of this package are vulnerable to Incorrect
+    Calculation. It can be used to cause a chain-split where vulnerable
+    nodes reject the canonical chain. Geth\'s pre-compiled `dataCopy` (at
+    0x00...04) contract did a shallow copy on invocation. An attacker could
+    deploy a contract that writes X to an EVM memory region R, then calls
+    0x00..04 with R as an argument, then overwrites R to Y, and finally
+    invokes the RETURNDATACOPY opcode.When this contract is invoked, a
+    consensus-compliant node would push X on the EVM stack, whereas Geth
+    would push Y.
+
+
+
+    [1]: https://pkg.go.dev/github.com/ethereum/go-ethereum/core/vm
+  affected_package: github.com/ethereum/go-ethereum/core/vm
+  vulnerable_versions:
+  - "<1.19.7"
+  severity: medium
+  package_manager: go
+  cve:
+  - CVE-2020-26241
+  cwe:
+  - CWE-682
+  disclosed_date: 2020-11-26
+  created_date: 2020-11-26
+  last_modified_date: 2020-11-26
+  credit:
+  - Unknown
+  references:
+  - https://github.com/ethereum/go-ethereum/commit/295693759e5ded05fec0b2fb39359965b60da785
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMETHEREUMGOETHEREUMCOREVM-1045822
