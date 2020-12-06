@@ -1423,6 +1423,44 @@
   - http://www.securityfocus.com/bid/90945
   - http://www.zerodayinitiative.com/advisories/ZDI-16-362
   source_url: https://ossindex.net/resource/package/7015304968/vulnerabilities
+- id: snykio:maven:org.eclipse.jetty:jetty-server:1047304
+  title: HTTP Request Smuggling
+  description: |
+    [org.eclipse.jetty:jetty-server][1] is a lightweight highly scalable
+    java based web server and servlet engine.
+
+    Affected versions of this package are vulnerable to HTTP Request
+    Smuggling. If GZIP request body inflation is enabled and requests from
+    different clients are multiplexed onto a single connection, and if an
+    attacker can send a request with a body that is received entirely but
+    not consumed by the application, then a subsequent request on the same
+    connection will see that body prepended to its body. The attacker will
+    not see any data but may inject data into the body of the subsequent
+    request.
+
+
+
+    [1]: https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-server
+  affected_package: org.eclipse.jetty:jetty-server
+  vulnerable_versions:
+  - ">= 10.0.0.alpha0 < 10.0.0.beta3"
+  - ">= 11.0.0.alpha0 < 11.0.0.beta3"
+  - ">= 9.4.0.RC0 < 9.4.35.v20201120"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2020-27218
+  cwe:
+  - CWE-226
+  disclosed_date: 2020-11-29
+  created_date: 2020-11-29
+  last_modified_date: 2020-11-29
+  credit:
+  - easbar
+  - karussell
+  references:
+  - https://bugs.eclipse.org/bugs/show_bug.cgi?id=568892
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGECLIPSEJETTY-1047304
 - id: snykio:maven:org.eclipse.jetty:jetty-server:173763
   title: Cryptographic Issues
   description: |
