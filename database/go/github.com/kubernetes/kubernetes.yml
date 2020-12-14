@@ -1,0 +1,35 @@
+---
+- id: snykio:go:github.com/kubernetes/kubernetes:1048854
+  title: Man-in-the-Middle (MitM)
+  description: "[github.com/kubernetes/kubernetes][1] is a Production-Grade Container\nScheduling
+    and Management.\n\nAffected versions of this package are vulnerable to Man-in-the-Middle\n(MitM).
+    An attacker that is able to create a ClusterIP service and set\nthe `spec.externalIPs`
+    field can intercept traffic to that IP. An\nattacker that is able to patch the
+    status (which is considered a\nprivileged operation and should not typically be
+    granted to users) of a\nLoadBalancer service can set the `status.loadBalancer.ingress.ip`
+    to\nsimilar effect.\n\nMitigations have been published:\n\n1.  To restrict the
+    use of external IPs we are providing an admission\n    webhook container:\n    `k8s.gcr.io/multitenancy/externalip-webhook:v1.0.0`.
+    The source code\n    and deployment instructions are published at\n    [https://github.com/kubernetes-sigs/externalip-webhook][2].\n2.
+    \ Alternatively, external IPs can be restricted using OPA Gatekeeper.\n    A sample
+    ConstraintTemplate and Constraint can be found here:\n    [https://github.com/open-policy-agent/gatekeeper-library/tree/master/library/general/externalip][3].\n
+    \   ## Remediation   {#remediation}\n    \n    There is no fixed version for `github.com/kubernetes/kubernetes`.\n
+    \   ## References   {#references}\n\n* [GitHub Issue][4]\n* [GitHub Issue][5]\n*
+    [Kubernetes Security Advisory][6]\n* [RedHat Bugzilla Bug][7]\n\n\n\n[1]: https://kubernetes.io\n[2]:
+    https://github.com/kubernetes-sigs/externalip-webhook\n[3]: https://github.com/open-policy-agent/gatekeeper-library/tree/master/library/general/externalip\n[4]:
+    https://github.com/kubernetes/kubernetes/issues/97076\n[5]: https://github.com/kubernetes/kubernetes/issues/97110\n[6]:
+    https://groups.google.com/g/kubernetes-security-announce/c/iZWsF9nbKE8\n[7]: https://bugzilla.redhat.com/show_bug.cgi?id=1891051\n"
+  affected_package: github.com/kubernetes/kubernetes
+  vulnerable_versions:
+  - "*"
+  severity: medium
+  package_manager: go
+  cve:
+  - CVE-2020-8554
+  cwe:
+  - CWE-300
+  disclosed_date: 2020-12-07
+  created_date: 2020-12-08
+  last_modified_date: 2020-12-08
+  credit:
+  - Etienne Champetier of Anevia
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMKUBERNETESKUBERNETES-1048854

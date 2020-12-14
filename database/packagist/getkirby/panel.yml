@@ -1,0 +1,40 @@
+---
+- id: snykio:packagist:getkirby/panel:1048842
+  title: Improper Access Control
+  description: |+
+    Affected versions of this package are vulnerable to Improper Access
+    Control. The admin panel may be accessed if hosted on a .dev domain. In
+    order to protect new installations on public servers that don\'t have an
+    admin account for the Panel yet, Kirby blocks account registration there
+    by default. To be able to register the first Panel account on a public
+    server, you have to enforce the installer via a config setting. This
+    helps to push all users to the best practice of registering your first
+    Panel account on your local machine and upload it together with the rest
+    of the site. This installation block implementation still assumed that
+    .dev domains are local domains in the vulnerable versions, which is no
+    longer true. In the meantime, those domains became publicly available.
+    This means that our installation block is no longer working as expected
+    if you use a .dev domain for your Kirby site. Additionally the local
+    installation check may also fail if your site is behind a reverse proxy.
+    You are only affected if you use a .dev domain or your site is behind a
+    reverse proxy and you have not yet registered your first Panel account
+    on the public server and someone finds your site and tries to login at
+    `yourdomain.dev/panel` before you register your first account.
+
+  affected_package: getkirby/panel
+  vulnerable_versions:
+  - "<2.5.14"
+  severity: low
+  package_manager: packagist
+  cve:
+  - CVE-2020-26253
+  cwe:
+  - CWE-284
+  disclosed_date: 2020-12-08
+  created_date: 2020-12-08
+  last_modified_date: 2020-12-08
+  credit:
+  - Unknown
+  references:
+  - https://github.com/getkirby-v2/panel/commit/7f9ac1876bacb89fd8f142f5e561a02ebb725baa
+  source_url: https://snyk.io/vuln/SNYK-PHP-GETKIRBYPANEL-1048842

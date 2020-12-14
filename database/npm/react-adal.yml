@@ -1,0 +1,50 @@
+---
+- id: snykio:npm:react-adal:1018907
+  title: Improper Authentication
+  description: "[react-adal][1] is an Azure Active Directory Library (ADAL) support
+    for\nReactJS.\n\nAffected versions of this package are vulnerable to Improper\nAuthentication.
+    It is possible for a specially crafted JWT token and\nrequest URL can cause the
+    nonce, session and refresh values to be\nincorrectly validated, causing the application
+    to treat an\nattacker-generated JWT token as authentic.\n\nThe logical defect
+    is caused by how the nonce, session and refresh\nvalues are stored in the browser
+    local storage or session storage. Each\nkey is automatically appended by `||`.\n\nWhen
+    the received nonce and session keys are generated, the list of\nvalues is stored
+    in the browser storage, separated by `||`, with `||`\nalways appended to the end
+    of the list. Since `||` will always be the\nlast 2 characters of the stored values,
+    an empty string (\\\"\\\") will\nalways be in the list of the valid values. Therefore,
+    if an empty\nsession parameter is provided in the callback URL, and a\nspecially-crafted
+    JWT token contains an nonce value of \\\"\\\" (empty\nstring), then adal.js will
+    consider the JWT token as authentic.\n\n### PoC   {#poc}\n\n    NOTE: The version
+    number of adal.js in react-adal is marked as 1.0.18, but the file is still vulnerable
+    to the auth bypass and it does not match v1.0.18 from azure-activedirectory-library-for-js.\n
+    \   \n    * src/adal.js:1106\n    Vulnerable verification against adal.nonce.idtoken
+    in AuthenticationContext.prototype._matchNonce()\n    \n    * src/adal.js:1125\n
+    \   Vulnerable verification against adal.state.login in AuthenticationContext.prototype._matchState()\n
+    \   \n    * src/adal.js:1131-1138\n    Vulnerable verification against adal.state.renew
+    in AuthenticationContext.prototype._matchState()\n    \n    A minimal proof-of-concept
+    request template is available in adal_bypass_request.txt (it will require some
+    minor changes for your test environment), and a minimal JWT token body template
+    is in adal_bypass_jwt.json (it also will require minor changes). Using a \"none\"
+    algorithm for generating the JWT token was successful, and using the clientID
+    that can be retrieved without authentiation from a login redirection to login.microsoftonline.com
+    worked successfully in my tests.\n    \n    ### adal_request_bypass.txt ###\n
+    \   https:///#id_token=&state=&session_state=\n    \n    ### adal_bypass_jwt.json
+    ###\n    {\"aud\":\"\",\"exp\":,\"email\":\"malicious@user.com\",\"name\":\"Malicious
+    User\",\"nonce\":\"\"}\n\n\n\n[1]: https://www.npmjs.com/package/react-adal\n"
+  affected_package: react-adal
+  vulnerable_versions:
+  - "*"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2020-7787
+  cwe:
+  - CWE-287
+  disclosed_date: 2020-10-16
+  created_date: 2020-12-08
+  last_modified_date: 2020-12-08
+  credit:
+  - Kris Hardy
+  references:
+  - https://github.com/salvoravida/react-adal/pull/115
+  source_url: https://snyk.io/vuln/SNYK-JS-REACTADAL-1018907
