@@ -1,4 +1,38 @@
 ---
+- id: snykio:go:github.com/kata-containers/runtime/virtcontainers:1048860
+  title: Privilege Escalation
+  description: |
+    [github.com/kata-containers/runtime/virtcontainers][1] is a manages
+    hardware virtualized containers. Each container belongs to a set of
+    containers sharing the same networking namespace and storage, also known
+    as a sandbox.
+
+    Affected versions of this package are vulnerable to Privilege
+    Escalation. The runtime will execute binaries given using annotations
+    without any kind of validation. Someone who is granted access rights to
+    a cluster will be able to have kata-runtime execute arbitrary binaries
+    as root on the worker nodes.
+
+
+
+    [1]: https://godoc.org/github.com/kata-containers/runtime/virtcontainers
+  affected_package: github.com/kata-containers/runtime/virtcontainers
+  vulnerable_versions:
+  - "<1.11.5"
+  severity: high
+  package_manager: go
+  cve:
+  - CVE-2020-27151
+  cwe:
+  - CWE-264
+  disclosed_date: 2020-12-08
+  created_date: 2020-12-09
+  last_modified_date: 2020-12-09
+  credit:
+  - Unknown
+  references:
+  - https://bugs.launchpad.net/katacontainers.io/+bug/1878234
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMKATACONTAINERSRUNTIMEVIRTCONTAINERS-1048860
 - id: snykio:go:github.com/kata-containers/runtime/virtcontainers:570069
   title: Privilege Escalation
   affected_package: github.com/kata-containers/runtime/virtcontainers
