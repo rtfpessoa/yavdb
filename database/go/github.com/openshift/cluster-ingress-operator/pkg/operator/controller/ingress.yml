@@ -1,0 +1,39 @@
+---
+- id: snykio:go:github.com/openshift/cluster-ingress-operator/pkg/operator/controller/ingress:1050164
+  title: Improper Access Control
+  description: |
+    [github.com/openshift/cluster-ingress-operator/pkg/operator/controller/ingress][1]
+    is an OpenShift component which enables external access to cluster
+    services by configuring Ingress Controllers, which route traffic as
+    specified by OpenShift Route and Kubernetes Ingress resources.
+
+    Affected versions of this package are vulnerable to Improper Access
+    Control. Until the 4.6.6 version of `OpenShift` Container Platform
+    changes to the router-default service to allow only certain IP source
+    ranges was possible by directly editing the service object. Since 4.6.6
+    changes to the `loadBalancerSourceRanges` field are overwritten to the
+    default of all IP ranges. If a cluster is affected by this issue an
+    attacker can use the flaw to access resources which should be restricted
+    to the specified IP ranges.
+
+
+
+    [1]: https://github.com/openshift/cluster-ingress-operator
+  affected_package: github.com/openshift/cluster-ingress-operator/pkg/operator/controller/ingress
+  vulnerable_versions:
+  - "*"
+  severity: high
+  package_manager: go
+  cve:
+  - CVE-2020-27836
+  cwe:
+  - CWE-284
+  disclosed_date: 2020-12-10
+  created_date: 2020-12-10
+  last_modified_date: 2020-12-10
+  credit:
+  - Unknown
+  references:
+  - https://bugzilla.redhat.com/show_bug.cgi?id=1906267
+  - https://github.com/openshift/cluster-ingress-operator/pull/507
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMOPENSHIFTCLUSTERINGRESSOPERATORPKGOPERATORCONTROLLERINGRESS-1050164
