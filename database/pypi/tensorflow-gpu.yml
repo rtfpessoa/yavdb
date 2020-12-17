@@ -1134,6 +1134,234 @@
   - https://github.com/tensorflow/tensorflow/commit/eccb7ec454e6617738554a255d77f08e60ee0808
   - https://github.com/tensorflow/tensorflow/issues/42105
   source_url: https://snyk.io/vuln/SNYK-PYTHON-TENSORFLOWGPU-1020820
+- id: snykio:pypi:tensorflow-gpu:1050384
+  title: Improper Input Validation
+  description: |
+    [tensorflow-gpu][1] is a machine learning framework.
+
+    Affected versions of this package are vulnerable to Improper Input
+    Validation. Under certain cases, a saved model can trigger use of
+    uninitialized values during code execution. This is caused by having
+    tensor buffers be filled with the default value of the type but
+    forgetting to default initialize the quantized floating point types in
+    Eigen.
+
+
+
+    [1]: https://pypi.org/project/tensorflow/
+  affected_package: tensorflow-gpu
+  vulnerable_versions:
+  - ">= 0 < 2.4.0"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2020-26266
+  cwe:
+  - CWE-20
+  disclosed_date: 2020-12-10
+  created_date: 2020-12-11
+  last_modified_date: 2020-12-11
+  credit:
+  - Unknown
+  references:
+  - https://nvd.nist.gov/vuln/detail/CVE-2020-26266
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-TENSORFLOWGPU-1050384
+- id: snykio:pypi:tensorflow-gpu:1050393
+  title: Improper Input Validation
+  description: |
+    [tensorflow-gpu][1] is a machine learning framework.
+
+    Affected versions of this package are vulnerable to Improper Input
+    Validation. The `tf.raw_ops.ImmutableConst` operation returns a constant
+    tensor created from a memory mapped file which is assumed immutable.
+    However, if the type of the tensor is not an integral type, the
+    operation crashes the Python interpreter as it tries to write to the
+    memory area: If the file is too small, TensorFlow properly returns an
+    error as the memory area has fewer bytes than what is needed for the
+    tensor it creates. However, as soon as there are enough bytes, the above
+    snippet causes a segmentation fault.
+
+
+
+    [1]: https://pypi.org/project/tensorflow/
+  affected_package: tensorflow-gpu
+  vulnerable_versions:
+  - "< 2.4.0rc0"
+  severity: low
+  package_manager: pypi
+  cve:
+  - CVE-2020-26268
+  cwe:
+  - CWE-20
+  disclosed_date: 2020-12-10
+  created_date: 2020-12-11
+  last_modified_date: 2020-12-11
+  credit:
+  - Aivul Team from Qihoo 360
+  references:
+  - https://nvd.nist.gov/vuln/detail/CVE-2020-26268
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-TENSORFLOWGPU-1050393
+- id: snykio:pypi:tensorflow-gpu:1050402
+  title: Improper Input Validation
+  description: |
+    [tensorflow-gpu][1] is a machine learning framework.
+
+    Affected versions of this package are vulnerable to Improper Input
+    Validation. The `tf.raw_ops.DataFormatVecPermute` API does not validate
+    the `src_format` and `dst_format` attributes.
+
+
+
+    [1]: https://pypi.org/project/tensorflow/
+  affected_package: tensorflow-gpu
+  vulnerable_versions:
+  - ">= 0"
+  severity: low
+  package_manager: pypi
+  cve:
+  - CVE-2020-26267
+  cwe:
+  - CWE-20
+  disclosed_date: 2020-12-10
+  created_date: 2020-12-11
+  last_modified_date: 2020-12-11
+  credit:
+  - Unknown
+  references:
+  - https://github.com/tensorflow/tensorflow/commit/ebc70b7a592420d3d2f359e4b1694c236b82c7ae
+  - https://nvd.nist.gov/vuln/detail/CVE-2020-26267
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-TENSORFLOWGPU-1050402
+- id: snykio:pypi:tensorflow-gpu:1050407
+  title: Denial of Service (DoS)
+  description: |
+    [tensorflow-gpu][1] is a machine learning framework.
+
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS). Running an LSTM/GRU model where the LSTM/GRU layer receives an
+    input with zero-length results in a `CHECK` failure when using the CUDA
+    backend. This can result in a query-of-death vulnerability, via denial
+    of service, if users can control the input to the layer.
+
+
+
+    [1]: https://pypi.org/project/tensorflow/
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package][1]
+
+
+
+    [1]: https://snyk.io/vuln/npm:ws:20171108
+  affected_package: tensorflow-gpu
+  vulnerable_versions:
+  - ">= 0"
+  severity: low
+  package_manager: pypi
+  cve:
+  - CVE-2020-26270
+  cwe:
+  - CWE-400
+  disclosed_date: 2020-12-10
+  created_date: 2020-12-11
+  last_modified_date: 2020-12-11
+  credit:
+  - Unknown
+  references:
+  - https://nvd.nist.gov/vuln/detail/CVE-2020-26270
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-TENSORFLOWGPU-1050407
+- id: snykio:pypi:tensorflow-gpu:1050411
+  title: Uninitialized Memory Exposure
+  description: |
+    [tensorflow-gpu][1] is a machine learning framework.
+
+    Affected versions of this package are vulnerable to Uninitialized Memory
+    Exposure. Under certain cases, loading a saved model can result in
+    accessing uninitialized memory while building the computation graph. The
+    `MakeEdge` function creates an edge between one output tensor of the
+    `src` node (given by `output_index`) and the input slot of the `dst`
+    node (given by `input_index`). This is only possible if the types of the
+    tensors on both sides coincide, so the function begins by obtaining the
+    corresponding `DataType` values and comparing these for equality.
+    However, there is no check that the indices point to inside of the
+    arrays they index into. Thus, this can result in accessing data out of
+    bounds of the corresponding heap allocated arrays. In most scenarios,
+    this can manifest as unitialized data access, but if the index points
+    far away from the boundaries of the arrays this can be used to leak
+    addresses from the library.
+
+
+
+    [1]: https://pypi.org/project/tensorflow/
+  affected_package: tensorflow-gpu
+  vulnerable_versions:
+  - ">= 0"
+  severity: high
+  package_manager: pypi
+  cve:
+  - CVE-2020-26271
+  cwe:
+  - CWE-201
+  disclosed_date: 2020-12-10
+  created_date: 2020-12-11
+  last_modified_date: 2020-12-11
+  credit:
+  - Unknown
+  references:
+  - https://nvd.nist.gov/vuln/detail/CVE-2020-26271
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-TENSORFLOWGPU-1050411
+- id: snykio:pypi:tensorflow-gpu:1050421
+  title: Out-of-bounds Read
+  description: |
+    [tensorflow-gpu][1] is a machine learning framework.
+
+    Affected versions of this package are vulnerable to Out-of-bounds Read.
+    In TensorFlow release candidate versions `2.4.0rc*`, the general
+    implementation for matching filesystem paths to globbing pattern is
+    vulnerable to an access out of bounds of the array holding the
+    directories.
+
+
+
+    [1]: https://pypi.org/project/tensorflow/
+  affected_package: tensorflow-gpu
+  vulnerable_versions:
+  - ">= 2.4.0rc0 < 2.4.0"
+  severity: high
+  package_manager: pypi
+  cve:
+  - CVE-2020-26269
+  cwe:
+  - CWE-125
+  disclosed_date: 2020-12-11
+  created_date: 2020-12-11
+  last_modified_date: 2020-12-11
+  credit:
+  - Aivul Team from Qihoo 360
+  references:
+  - https://github.com/tensorflow/tensorflow/commit/8b5b9dc96666a3a5d27fad7179ff215e3b74b67c
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-TENSORFLOWGPU-1050421
 - id: snykio:pypi:tensorflow-gpu:543631
   title: Denial of Service (DoS)
   description: "[tensorflow-gpu][1] is a machine learning framework.\n\nAffected versions
