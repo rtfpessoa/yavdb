@@ -1,0 +1,31 @@
+---
+- id: snykio:npm:props:1015750
+  title: Command Injection
+  description: |
+    [props][1] is an extract json/yaml from the beginning of text files
+
+    Affected versions of this package are vulnerable to Command Injection
+    due to Unsafe Deserialization in `props` module. The module uses
+    [`yaml-js.load()`][2] function to load a YAML file without any
+    validation/sanitization. If an attacker can control the YAML file, it
+    could run arbitrary JavaScript code on the victim machine.
+
+
+
+    [1]: https://www.npmjs.com/package/props
+    [2]: https://github.com/nodeca/js-yaml#load-string---options-
+  affected_package: props
+  vulnerable_versions:
+  - "*"
+  severity: medium
+  package_manager: npm
+  cwe:
+  - CWE-78
+  disclosed_date: 2020-12-14
+  created_date: 2020-12-14
+  last_modified_date: 2020-12-14
+  credit:
+  - Alessio Della Libera (d3lla)
+  references:
+  - https://github.com/pvorb/node-props/blob/master/props.js#L29
+  source_url: https://snyk.io/vuln/SNYK-JS-PROPS-1015750

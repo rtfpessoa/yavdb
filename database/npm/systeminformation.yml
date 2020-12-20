@@ -189,3 +189,38 @@
   references:
   - https://github.com/sebhildebrandt/systeminformation/commit/8113ff0e87b2f422a5756c48f1057575e73af016
   source_url: https://snyk.io/vuln/SNYK-JS-SYSTEMINFORMATION-1047312
+- id: snykio:npm:systeminformation:1050436
+  title: Command Injection
+  description: |
+    [systeminformation][1] is a Simple system and OS information library
+
+    Affected versions of this package are vulnerable to Command Injection.
+    The `sanitizeShellString` function does not sanitize quotation marks,
+    which could be leveraged by an attacker to execute arbitrary commands.
+
+    ### PoC   {#poc}
+
+        const si = require('systeminformation');
+        si.inetLatency("`<OS command>`");
+
+
+
+    [1]: https://www.npmjs.com/package/systeminformation
+  affected_package: systeminformation
+  vulnerable_versions:
+  - "<4.31.1"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2020-26274
+  cwe:
+  - CWE-78
+  disclosed_date: 2020-12-11
+  created_date: 2020-12-14
+  last_modified_date: 2020-12-14
+  credit:
+  - EffectRenan
+  references:
+  - https://github.com/sebhildebrandt/systeminformation/blob/4f98f2ff208f355b7e242661cf9c4594a702dbec/lib/internet.js#L119
+  - https://github.com/sebhildebrandt/systeminformation/commit/1faadcbf68f1b1fdd5eb2054f68fc932be32ac99
+  source_url: https://snyk.io/vuln/SNYK-JS-SYSTEMINFORMATION-1050436
