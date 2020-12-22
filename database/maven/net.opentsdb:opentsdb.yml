@@ -1,4 +1,31 @@
 ---
+- id: snykio:maven:net.opentsdb:opentsdb:1041751
+  title: Arbitrary Code Execution
+  description: "Affected versions of this package are vulnerable to Arbitrary Code\nExecution.
+    It is possible to bypass the command injection sanitation\nwithin `/src/tsd/GraphHandler.java`
+    and execute arbitrary commands.\nPayload: `[33:system('touch/tmp/poc.txt')]`\n\n###
+    PoC   {#poc}\n\n    \n    http://opentsdbhost.local/q?start=2000/10/21-00:00:00&end=2020/10/25-15:56:44&m=sum:sys.cpu.nice&o=&ylabel=&xrange=10:10&yrange=[33:system('touch/tmp/poc.txt')]&wxh=1516x644&style=linespoint&baba=lala&grid=t&json\n\nWhen
+    passing the payload via one of the parameters it is written to a\n`gnuplot` file
+    in the `/tmp` directory and the `gnuplot` file is\nexecuted by `OpenTSDB` via
+    the `/src/mygnuplot.sh` shell script. When\nexecuted by OpenTSDB **mygnuplot.sh**
+    the *poc.txt* file will be written\nto the temp directory.\n\n"
+  affected_package: net.opentsdb:opentsdb
+  vulnerable_versions:
+  - ">= 0"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2020-35476
+  cwe:
+  - CWE-94
+  disclosed_date: 2020-11-18
+  created_date: 2020-12-15
+  last_modified_date: 2020-12-15
+  credit:
+  - NightRang3r
+  references:
+  - https://github.com/OpenTSDB/opentsdb/issues/2051
+  source_url: https://snyk.io/vuln/SNYK-JAVA-NETOPENTSDB-1041751
 - id: snykio:maven:net.opentsdb:opentsdb:32471
   title: Arbitrary Commend Execution
   description: |
