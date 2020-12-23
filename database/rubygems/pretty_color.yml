@@ -1,0 +1,27 @@
+---
+- id: snykio:rubygems:pretty_color:1052070
+  title: Malicious Package
+  description: "[pretty\\_color][1] is a malicious package. Within `version.rb`,\nobfuscated
+    code can be found which, on Windows systems, generates and\nruns a malicious VBScript
+    `the_Score.vbs`. This script will:\n\n1.  Create (drop) another malicious VBScript
+    at `%PROGRAMDATA%\\Microsoft\n    Essentials\\Software Essentials.vbs`\n2.  This
+    new VBScript monitors the user’s clipboard every second for a\n    Bitcoin address
+    and replaces it with the attacker’s wallet address\n3.  To achieve persistence,
+    `the_Score.vbs` also adds the path of the\n    newly dropped Software Essentials.vbs
+    to the appropriate Windows\n    registry key, to make the malware run every time
+    the system boots.\n    ## Remediation   {#remediation}\n    \n    Avoid using
+    `pretty_color` altogether.\n    ## References   {#references}\n\n* [Sonatype Blog][2]\n\n\n\n[1]:
+    https://rubygems.org/gems/pretty_color\n[2]: https://blog.sonatype.com/rubygems-laced-with-bitcoin-stealing-malware\n"
+  affected_package: pretty_color
+  vulnerable_versions:
+  - ">=0.0.0"
+  severity: high
+  package_manager: rubygems
+  cwe:
+  - CWE-506
+  disclosed_date: 2020-12-17
+  created_date: 2020-12-17
+  last_modified_date: 2020-12-17
+  credit:
+  - Sonatype
+  source_url: https://snyk.io/vuln/SNYK-RUBY-PRETTYCOLOR-1052070
