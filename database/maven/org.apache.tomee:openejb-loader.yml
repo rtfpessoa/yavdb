@@ -1,0 +1,37 @@
+---
+- id: snykio:maven:org.apache.tomee:openejb-loader:1052824
+  title: Authentication Bypass
+  description: |
+    [org.apache.tomee:openejb-loader][1] is a lightweight, yet powerful,
+    JavaEE Application server with feature rich tooling.
+
+    Affected versions of this package are vulnerable to Authentication
+    Bypass. If configured to use the embedded ActiveMQ broker, and the
+    broker config is misconfigured, a JMX port is opened on TCP port 1099,
+    which does not include authentication. CVE-2020-11969 previously
+    addressed the creation of the JMX management interface, however the
+    incomplete fix did not cover this edge case.
+
+
+
+    [1]: https://github.com/apache/tomee
+  affected_package: org.apache.tomee:openejb-loader
+  vulnerable_versions:
+  - ">= 7.0.0-M1 < 7.0.9"
+  - ">= 7.1.0 < 7.1.4"
+  - ">= 8.0.0-M1 < 8.0.4"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2020-13931
+  cwe:
+  - CWE-287
+  disclosed_date: 2020-12-18
+  created_date: 2020-12-18
+  last_modified_date: 2020-12-18
+  credit:
+  - Unknown
+  references:
+  - https://github.com/apache/tomee/commit/a59ca1cc8839e7d7be48d3f2d7977747a59bd107
+  - https://lists.apache.org/thread.html/ref088c4732e1a8dd0bbbb96e13ffafcfe65f984238ffa55f438d78fe%40%3Cdev.tomee.apache.org%3E
+  source_url: https://snyk.io/vuln/SNYK-JAVA-ORGAPACHETOMEE-1052824
