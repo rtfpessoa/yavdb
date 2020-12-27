@@ -1,0 +1,123 @@
+---
+- id: snykio:npm:multi-ini:1048969
+  title: Prototype Pollution
+  description: "[multi-ini][1] is an ini-file parser which supports multi line, multiple\nlevels
+    and arrays to get a maximum of compatibility with Zend config\nfiles.\n\nAffected
+    versions of this package are vulnerable to Prototype Pollution.\nIt is possible
+    to pollute an object\\'s prototype by specifying the proto\nobject as part of
+    an array.\n\n### PoC by Eugene Lim:   {#poc-by-eugene-lim}\n\npayload.ini\n\n
+    \   [__proto__]\n    polluted = \"polluted\"\n\npoc.js:\n\n    var ini = require('multi-ini')\n
+    \   \n    var parsed = ini.read('./payload.toml', { encoding: 'utf8' })\n    console.log(parsed)\n
+    \   console.log(parsed.__proto__)\n    console.log({}.__proto__)\n    console.log(polluted)\n^\n\n
+    \   > node poc.js\n    {}\n    { polluted: 'polluted' }\n    { polluted: 'polluted'
+    }\n    polluted\n\n\n\n[1]: https://www.npmjs.org/package/multi-ini\n\\nPrototype
+    Pollution is a vulnerability affecting JavaScript. Prototype\nPollution refers
+    to the ability to inject properties into existing\nJavaScript language construct
+    prototypes, such as objects. JavaScript\nallows all Object attributes to be altered,
+    including their magical\nattributes such as `_proto_`, `constructor` and `prototype`.
+    An attacker\nmanipulates these attributes to overwrite, or pollute, a JavaScript\napplication
+    object prototype of the base object by injecting other\nvalues. Properties on
+    the `Object.prototype` are then inherited by all\nthe JavaScript objects through
+    the prototype chain. When that happens,\nthis leads to either denial of service
+    by triggering JavaScript\nexceptions, or it tampers with the application source
+    code to force the\ncode path that the attacker injects, thereby leading to remote
+    code\nexecution.\n\nThere are two main ways in which the pollution of prototypes
+    occurs:\n\n* Unsafe `Object` recursive merge\n\n* Property definition by path\n\n###
+    Unsafe Object recursive merge   {#unsafe-object-recursive-merge}\n\nThe logic
+    of a vulnerable recursive merge function follows the following\nhigh-level model:\n\n
+    \   merge (target, source)\n    \n      foreach property of source\n    \n        if
+    property exists and is an object on both the target and the source\n    \n          merge(target[property],
+    source[property])\n    \n        else\n    \n          target[property] = source[property]\n\n\n\nWhen
+    the source object contains a property named `_proto_` defined with\n`Object.defineProperty()`
+    , the condition that checks if the property\nexists and is an object on both the
+    target and the source passes and the\nmerge recurses with the target, being the
+    prototype of `Object` and the\nsource of `Object` as defined by the attacker.
+    Properties are then\ncopied on the `Object` prototype.\n\nClone operations are
+    a special sub-class of unsafe recursive merges,\nwhich occur when a recursive
+    merge is conducted on an empty object:\n`merge({},source)`.\n\n`lodash` and `Hoek`
+    are examples of libraries susceptible to recursive\nmerge attacks.\n\n### Property
+    definition by path   {#property-definition-by-path}\n\nThere are a few JavaScript
+    libraries that use an API to define property\nvalues on an object based on a given
+    path. The function that is\ngenerally affected contains this signature: `theFunction(object,
+    path,\nvalue)`\n\nIf the attacker can control the value of “path”, they can set
+    this value\nto `_proto_.myValue`. `myValue` is then assigned to the prototype
+    of the\nclass of the object.\n\n"
+  affected_package: multi-ini
+  vulnerable_versions:
+  - "<2.1.1"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2020-28448
+  cwe:
+  - CWE-400
+  disclosed_date: 2020-12-08
+  created_date: 2020-12-21
+  last_modified_date: 2020-12-21
+  credit:
+  - Eugene Lim
+  - Government Technology Agency Cyber Security Group
+  references:
+  - https://github.com/evangelion1204/multi-ini/pull/37
+  source_url: https://snyk.io/vuln/SNYK-JS-MULTIINI-1048969
+- id: snykio:npm:multi-ini:1053229
+  title: Prototype Pollution
+  description: "[multi-ini][1] is an ini-file parser which supports multi line, multiple\nlevels
+    and arrays to get a maximum of compatibility with Zend config\nfiles.\n\nAffected
+    versions of this package are vulnerable to Prototype Pollution.\nIt is possible
+    to pollute an object\\'s prototype by specifying the\n`constructor.proto` object
+    as part of an array. This is a bypass of\n`CVE-2020-28448`.\n\n### PoC   {#poc}\n\n
+    \   $ cat payload.2.ini\n    [constructor]\n    prototype.polluted = polluted\n
+    \   \n    $ cat poc.multi-ini.js\n    const ini = require('multi-ini');\n    console.log('Before:',
+    {}.polluted);\n    var content = ini.read('payload.2.ini');\n    console.log('After:',
+    {}.polluted);\n\n\n\n[1]: https://www.npmjs.org/package/multi-ini\n\\nPrototype
+    Pollution is a vulnerability affecting JavaScript. Prototype\nPollution refers
+    to the ability to inject properties into existing\nJavaScript language construct
+    prototypes, such as objects. JavaScript\nallows all Object attributes to be altered,
+    including their magical\nattributes such as `_proto_`, `constructor` and `prototype`.
+    An attacker\nmanipulates these attributes to overwrite, or pollute, a JavaScript\napplication
+    object prototype of the base object by injecting other\nvalues. Properties on
+    the `Object.prototype` are then inherited by all\nthe JavaScript objects through
+    the prototype chain. When that happens,\nthis leads to either denial of service
+    by triggering JavaScript\nexceptions, or it tampers with the application source
+    code to force the\ncode path that the attacker injects, thereby leading to remote
+    code\nexecution.\n\nThere are two main ways in which the pollution of prototypes
+    occurs:\n\n* Unsafe `Object` recursive merge\n\n* Property definition by path\n\n###
+    Unsafe Object recursive merge   {#unsafe-object-recursive-merge}\n\nThe logic
+    of a vulnerable recursive merge function follows the following\nhigh-level model:\n\n
+    \   merge (target, source)\n    \n      foreach property of source\n    \n        if
+    property exists and is an object on both the target and the source\n    \n          merge(target[property],
+    source[property])\n    \n        else\n    \n          target[property] = source[property]\n\n\n\nWhen
+    the source object contains a property named `_proto_` defined with\n`Object.defineProperty()`
+    , the condition that checks if the property\nexists and is an object on both the
+    target and the source passes and the\nmerge recurses with the target, being the
+    prototype of `Object` and the\nsource of `Object` as defined by the attacker.
+    Properties are then\ncopied on the `Object` prototype.\n\nClone operations are
+    a special sub-class of unsafe recursive merges,\nwhich occur when a recursive
+    merge is conducted on an empty object:\n`merge({},source)`.\n\n`lodash` and `Hoek`
+    are examples of libraries susceptible to recursive\nmerge attacks.\n\n### Property
+    definition by path   {#property-definition-by-path}\n\nThere are a few JavaScript
+    libraries that use an API to define property\nvalues on an object based on a given
+    path. The function that is\ngenerally affected contains this signature: `theFunction(object,
+    path,\nvalue)`\n\nIf the attacker can control the value of “path”, they can set
+    this value\nto `_proto_.myValue`. `myValue` is then assigned to the prototype
+    of the\nclass of the object.\n\n"
+  affected_package: multi-ini
+  vulnerable_versions:
+  - "<2.1.2"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2020-28460
+  cwe:
+  - CWE-400
+  disclosed_date: 2020-12-20
+  created_date: 2020-12-21
+  last_modified_date: 2020-12-21
+  credit:
+  - Advanced Software Technology Lab
+  - Huawei
+  - Nikita Stupin
+  references:
+  - https://github.com/evangelion1204/multi-ini/commit/6b2212b2ce152c19538a2431415f72942c5a1bde
+  source_url: https://snyk.io/vuln/SNYK-JS-MULTIINI-1053229

