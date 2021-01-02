@@ -1,4 +1,35 @@
 ---
+- id: snykio:pypi:indy-node:1054609
+  title: Authorization Bypass
+  description: "[indy-node][1] is a package that implements server portion of a\ndistributed
+    ledger purpose-built for decentralized identity.\n\nAffected versions of this
+    package are vulnerable to Authorization\nBypass. There is lack of signature verification
+    on a specific\ntransaction which enables an attacker to make certain unauthorized\nalterations
+    to the ledger. Updating a DID with a nym transaction will be\nwritten to the ledger
+    if neither ROLE or VERKEY are being changed,\nregardless of sender. A malicious
+    DID with no particular role can ask an\nupdate for another DID (but cannot modify
+    its verkey or role). This is\nbad because:\n\n1.  Any DID can write a nym transaction
+    to the ledger (i.e., any DID can\n    spam the ledger with nym transactions)\n\n2.
+    \ Any DID can change any other DID\\'s alias\n\n3.  The update transaction modifies
+    the ledger metadata associated with\n    a DID.\n    \n    ## Remediation   {#remediation}\n
+    \   \n    Upgrade `indy-node` to version 1.12.4 or higher.\n    \n    ## References
+    \  {#references}\n\n* [GitHub Commit][2]\n\n\n\n[1]: https://github.com/hyperledger/indy-node\n[2]:
+    https://github.com/hyperledger/indy-node/commit/55056f22c83b7c3520488b615e1577e0f895d75a\n"
+  affected_package: indy-node
+  vulnerable_versions:
+  - ">= 0 < 1.12.4"
+  severity: medium
+  package_manager: pypi
+  cve:
+  - CVE-2020-11093
+  cwe:
+  - CWE-285
+  disclosed_date: 2020-12-27
+  created_date: 2020-12-27
+  last_modified_date: 2020-12-27
+  credit:
+  - Unknown
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-INDYNODE-1054609
 - id: snykio:pypi:indy-node:571993
   title: Denial of Service (DoS)
   description: |+
