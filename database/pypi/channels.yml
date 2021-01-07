@@ -1,4 +1,38 @@
 ---
+- id: snykio:pypi:channels:1055010
+  title: Information Exposure
+  description: |
+    [channels][1] is a Developer-friendly asynchrony for Django.
+
+    Affected versions of this package are vulnerable to Information
+    Exposure. The legacy `channels.http.AsgiHandler` class, used for
+    handling HTTP type requests in an ASGI environment prior to Django 3.0,
+    did not correctly separate request scopes in Channels 3.0. In many cases
+    this would result in a crash but, with correct timing responses could be
+    sent to the wrong client, resulting in potential leakage of session
+    identifiers and other sensitive data.
+
+
+
+    [1]: https://pypi.org/project/channels/
+  affected_package: channels
+  vulnerable_versions:
+  - ">= 3.0.0 < 3.0.3"
+  severity: high
+  package_manager: pypi
+  cve:
+  - CVE-2020-35681
+  cwe:
+  - CWE-200
+  disclosed_date: 2020-12-28
+  created_date: 2020-12-31
+  last_modified_date: 2020-12-31
+  credit:
+  - Unknown
+  references:
+  - https://bugzilla.redhat.com/show_bug.cgi?id=1911637
+  - https://channels.readthedocs.io/en/latest/releases/3.0.3.html
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-CHANNELS-1055010
 - id: snykio:pypi:channels:73623
   title: Denial of Service (DoS)
   description: "[channels][1] is a Developer-friendly asynchrony for Django.\n\nAffected
