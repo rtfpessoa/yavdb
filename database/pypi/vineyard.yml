@@ -1,10 +1,16 @@
 ---
-- id: snykio:pypi:asyncssh:1055221
+- id: snykio:pypi:vineyard:1055212
   title: Denial of Service (DoS)
   description: |
-    Affected versions of this package are vulnerable to Denial of Service
-    (DoS). It does not limit line length when the editor is in use.
+    [vineyard][1] is an An in-memory immutable data manager
 
+    Affected versions of this package are vulnerable to Denial of Service
+    (DoS) via `SocketConnection::doReadBody()` in
+    `src/server/async/socket_server.cc`.
+
+
+
+    [1]: https://pypi.org/project/vineyard
     \nDenial of Service (DoS) describes a family of attacks, all aimed at
     making a system inaccessible to its intended and legitimate users.
 
@@ -34,9 +40,9 @@
 
 
     [1]: https://snyk.io/vuln/npm:ws:20171108
-  affected_package: asyncssh
+  affected_package: vineyard
   vulnerable_versions:
-  - "< 2.5.0"
+  - "< 0.1.2"
   severity: high
   package_manager: pypi
   cwe:
@@ -47,38 +53,6 @@
   credit:
   - Unknown
   references:
-  - https://github.com/ronf/asyncssh/commit/d0f0725371a5082f1b88b5c23b438c0edf07846a
-  source_url: https://snyk.io/vuln/SNYK-PYTHON-ASYNCSSH-1055221
-- id: snykio:pypi:asyncssh:42082
-  title: Authentication Bypass
-  description: |
-    [asyncssh][1] is a Python package which provides an asynchronous client
-    and server implementation of the SSHv2 protocol on top of the Python
-    3.4+ asyncio framework.
-
-    Affected versions of this package are vulnerable to Authentication
-    Bypass. It does not properly check whether authentication is completed
-    before processing other requests. A customized SSH client can simply
-    skip the authentication step.
-
-
-
-    [1]: https://pypi.org/project/asyncssh/
-  affected_package: asyncssh
-  vulnerable_versions:
-  - "< 1.12.1"
-  severity: high
-  package_manager: pypi
-  cve:
-  - CVE-2018-7749
-  cwe:
-  - CWE-287
-  disclosed_date: 2018-03-08
-  created_date: 2018-03-18
-  last_modified_date: 2018-03-18
-  credit:
-  - Unknown
-  references:
-  - https://github.com/ronf/asyncssh/commit/c161e26cdc0d41b745b63d9f17b437f073bf7ba4
-  - https://nvd.nist.gov/vuln/detail/CVE-2018-7749
-  source_url: https://snyk.io/vuln/SNYK-PYTHON-ASYNCSSH-42082
+  - https://github.com/alibaba/libvineyard/commit/92574fb0fb397f8e99f8e17783effb05690d4cd7
+  - https://github.com/alibaba/libvineyard/pull/64
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-VINEYARD-1055212
