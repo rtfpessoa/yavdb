@@ -1,4 +1,64 @@
 ---
+- id: snykio:pypi:ipaddress:1041793
+  title: Hash Collision
+  description: |
+    [ipaddress][1] is an IPv4/IPv6 manipulation library
+
+    Affected versions of this package are vulnerable to Hash Collision. The
+    package improperly computes hash values in the `IPv4Interface` and`
+    IPv6Interface` classes, which might allow a remote attacker to cause a
+    denial of service if an application is affected by the performance of a
+    dictionary containing `IPv4Interface` or `IPv6Interface` objects, and
+    this attacker can cause many dictionary entries to be created.
+
+
+
+    [1]: https://www.pypi.org/project/ipaddress
+    \nDenial of Service (DoS) describes a family of attacks, all aimed at
+    making a system inaccessible to its intended and legitimate users.
+
+    Unlike other vulnerabilities, DoS attacks usually do not aim at
+    breaching security. Rather, they are focused on making websites and
+    services unavailable to genuine users resulting in downtime.
+
+    One popular Denial of Service vulnerability is DDoS (a Distributed
+    Denial of Service), an attack that attempts to clog network pipes to the
+    system by generating a large volume of traffic from many machines.
+
+    When it comes to open source libraries, DoS vulnerabilities allow
+    attackers to trigger such a crash or crippling of the service by using a
+    flaw either in the application code or from the use of open source
+    libraries.
+
+    Two common types of DoS vulnerabilities:
+
+    * High CPU/Memory Consumption- An attacker sending crafted requests that
+      could cause the system to take a disproportionate amount of time to
+      process. For example,
+      [commons-fileupload:commons-fileupload](SNYK-JAVA-COMMONSFILEUPLOAD-30082).
+
+    * Crash - An attacker sending crafted requests that could cause the
+      system to crash. For Example, [npm `ws` package][1]
+
+
+
+    [1]: https://snyk.io/vuln/npm:ws:20171108
+  affected_package: ipaddress
+  vulnerable_versions:
+  - ">= 0"
+  severity: medium
+  package_manager: pypi
+  cwe:
+  - CWE-327
+  disclosed_date: 2020-11-19
+  created_date: 2021-01-04
+  last_modified_date: 2021-01-04
+  credit:
+  - zoofood
+  references:
+  - https://github.com/phihag/ipaddress/pull/56#issuecomment-729847166
+  - https://github.com/phihag/ipaddress/pull/60
+  source_url: https://snyk.io/vuln/SNYK-PYTHON-IPADDRESS-1041793
 - id: snykio:pypi:ipaddress:590065
   title: Cryptographic Issues
   description: |
