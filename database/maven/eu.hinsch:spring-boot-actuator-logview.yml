@@ -1,0 +1,80 @@
+---
+- id: snykio:maven:eu.hinsch:spring-boot-actuator-logview:1055810
+  title: Directory Traversal
+  description: |
+    Affected versions of this package are vulnerable to Directory Traversal.
+    The nature of this library is to expose a log file directory via admin
+    (spring boot actuator) HTTP endpoints. Both the filename to view and a
+    base folder (relative to the logging folder root) can be specified via
+    request parameters. While the filename parameter was checked to prevent
+    directory traversal exploits (so that `filename=../somefile` would not
+    work), the base folder parameter was not sufficiently checked, so that
+    `filename=somefile&base=../` could access a file outside the logging
+    base directory).
+
+    \nA Directory Traversal attack (also known as path traversal) aims to
+    access files and directories that are stored outside the intended
+    folder. By manipulating files with \"dot-dot-slash (../)\" sequences and
+    its variations, or by using absolute file paths, it may be possible to
+    access arbitrary files and directories stored on file system, including
+    application source code, configuration, and other critical system files.
+
+    Directory Traversal vulnerabilities can be generally divided into two
+    types:
+
+    * **Information Disclosure**\: Allows the attacker to gain information
+      about the folder structure or read the contents of sensitive files on
+      the system.
+
+    `st` is a module for serving static files on web pages, and contains a
+    [vulnerability of this type][1]. In our example, we will serve files
+    from the `public` route.
+
+    If an attacker requests the following URL from our server, it will in
+    turn leak the sensitive private key of the root user.
+
+        curl http://localhost:8080/public/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/root/.ssh/id_rsa
+
+    **Note** `%2e` is the URL encoded version of `.` (dot).
+
+    * **Writing arbitrary files**\: Allows the attacker to create or replace
+      existing files. This type of vulnerability is also known as
+      `Zip-Slip`.
+
+    One way to achieve this is by using a malicious `zip` archive that holds
+    path traversal filenames. When each filename in the zip archive gets
+    concatenated to the target extraction folder, without validation, the
+    final path ends up outside of the target folder. If an executable or a
+    configuration file is overwritten with a file containing malicious code,
+    the problem can turn into an arbitrary code execution issue quite
+    easily.
+
+    The following is an example of a `zip` archive with one benign file and
+    one malicious file. Extracting the malicious file will result in
+    traversing out of the target folder, ending up in `/root/.ssh/`
+    overwriting the `authorized_keys` file:
+
+        2018-04-15 22:04:29 .....           19           19  good.txt
+        2018-04-15 22:04:42 .....           20           20  ../../../../../../root/.ssh/authorized_keys
+
+
+
+    [1]: https://snyk.io/vuln/npm:st:20140206
+  affected_package: eu.hinsch:spring-boot-actuator-logview
+  vulnerable_versions:
+  - "< 0.2.13"
+  severity: medium
+  package_manager: maven
+  cve:
+  - CVE-2021-21234
+  cwe:
+  - CWE-22
+  disclosed_date: 2021-01-06
+  created_date: 2021-01-06
+  last_modified_date: 2021-01-06
+  credit:
+  - Unknown
+  references:
+  - https://github.com/lukashinsch/spring-boot-actuator-logview/commit/1c76e1ec3588c9f39e1a94bf27b5ff56eb8b17d6
+  - https://github.com/lukashinsch/spring-boot-actuator-logview/commit/760acbb939a8d1f7d1a7dfcd51ca848eea04e772
+  source_url: https://snyk.io/vuln/SNYK-JAVA-EUHINSCH-1055810
