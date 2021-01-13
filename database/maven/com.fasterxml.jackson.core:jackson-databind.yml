@@ -489,6 +489,969 @@
   - https://github.com/FasterXML/jackson-databind/issues/2999
   - https://medium.com/@cowtowncoder/on-jackson-cves-dont-panic-here-is-what-you-need-to-know-54cd0d6e8062
   source_url: https://snyk.io/vuln/SNYK-JAVA-COMFASTERXMLJACKSONCORE-1054588
+- id: snykio:maven:com.fasterxml.jackson.core:jackson-databind:1056414
+  title: Deserialization of Untrusted Data
+  description: |
+    [com.fasterxml.jackson.core:jackson-databind][1] is a library which
+    contains the general-purpose data-binding functionality and tree-model
+    for Jackson Data Processor.
+
+    Affected versions of this package are vulnerable to Deserialization of
+    Untrusted Data. The package mishandles the interaction between
+    serialization gadgets and typing, related to
+    `org.apache.tomcat.dbcp.dbcp.datasources.SharedPoolDataSource`.
+
+
+
+    [1]: https://github.com/FasterXML/jackson-databind
+    \nSerialization is a process of converting an object into a sequence of
+    bytes which can be persisted to a disk or database or can be sent
+    through streams. The reverse process of creating objects from a sequence
+    of bytes is called deserialization. *Deserialization of untrusted data*
+    ([CWE-502][1]) occurs when an application deserializes untrusted data
+    without sufficiently verifying that the resulting data will be valid,
+    allowing the attacker to control the state or the flow of the execution.
+
+    `com.fasterxml.jackson.core:jackson-databind` allows deserialization of
+    JSON input to Java objects. If an application using this dependency has
+    the ability to deserialize a JSON string from an untrusted source, an
+    attacker could leverage this vulnerability to conduct deserialization
+    attacks.
+
+    Exploitation of unsafe deserialization attacks through
+    `jackson-databind` requires the following prerequisites:
+
+    ### 1. The target application allowing JSON user input which is processed by jackson-databind   {#1-the-target-application-allowing-json-user-input-which-is-processed-by-jackson-databind}
+
+    An application using `jackson-databind` is only vulnerable if a
+    user-provided JSON data is deserialized.
+
+    ### 2. Polymorphic type handling for properties with nominal type are enabled   {#2-polymorphic-type-handling-for-properties-with-nominal-type-are-enabled}
+
+    Polymorphic type handling refers to the addition of enough type
+    information so that the deserializer can instantiate the appropriate
+    subtype of a value. Use of \"default typing\" is considered dangerous
+    due to the possibility of an untrusted method (gadget) managing to
+    specify a class that is accessible through the class-loader and
+    therefore, exposing a set of methods and/or fields.
+
+    ### 3. An exploitable gadget class is available for the attacker to leverage   {#3-an-exploitable-gadget-class-is-available-for-the-attacker-to-leverage}
+
+    Gadget chains are specially crafted method sequences that can be created
+    by an attacker in order to change the flow of code execution. These
+    gadgets are often methods introduced by third-party components which an
+    attacker could utilise in order to attack the target application. Not
+    every gadget out there is supported by `jackson-databind`. The
+    maintainers of `jackson-databind` proactively blacklists possible
+    serialization gadgets in an attempt to ensure that it is not possible
+    for an attacker to chain gadgets during serialization.
+
+    ### Further reading:   {#further-reading}
+
+    * [On Jackson CVEs: Don’t Panic on Medium][2]
+    * [NCC Group Jackson Deserialization WhitePaper][3]
+    * [Java Security Best Practices][4]
+
+
+
+    [1]: https://cwe.mitre.org/data/definitions/502.html
+    [2]: https://medium.com/@cowtowncoder/on-jackson-cves-dont-panic-here-is-what-you-need-to-know-54cd0d6e8062
+    [3]: https://www.nccgroup.com/globalassets/our-research/us/whitepapers/2018/jackson_deserialization.pdf
+    [4]: https://snyk.io/blog/10-java-security-best-practices/
+  affected_package: com.fasterxml.jackson.core:jackson-databind
+  vulnerable_versions:
+  - "< 2.9.10.8"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2020-36187
+  cwe:
+  - CWE-502
+  disclosed_date: 2021-01-07
+  created_date: 2021-01-07
+  last_modified_date: 2021-01-07
+  credit:
+  - Unknown
+  references:
+  - https://cowtowncoder.medium.com/on-jackson-cves-dont-panic-here-is-what-you-need-to-know-54cd0d6e8062
+  - https://github.com/FasterXML/jackson-databind/commit/3e8fa3beea49ea62109df9e643c9cb678dabdde1
+  - https://github.com/FasterXML/jackson-databind/issues/2997
+  source_url: https://snyk.io/vuln/SNYK-JAVA-COMFASTERXMLJACKSONCORE-1056414
+- id: snykio:maven:com.fasterxml.jackson.core:jackson-databind:1056416
+  title: Deserialization of Untrusted Data
+  description: |
+    [com.fasterxml.jackson.core:jackson-databind][1] is a library which
+    contains the general-purpose data-binding functionality and tree-model
+    for Jackson Data Processor.
+
+    Affected versions of this package are vulnerable to Deserialization of
+    Untrusted Data. The package mishandles the interaction between
+    serialization gadgets and typing, related to
+    `org.apache.tomcat.dbcp.dbcp2.datasources.PerUserPoolDataSource`.
+
+
+
+    [1]: https://github.com/FasterXML/jackson-databind
+    \nSerialization is a process of converting an object into a sequence of
+    bytes which can be persisted to a disk or database or can be sent
+    through streams. The reverse process of creating objects from a sequence
+    of bytes is called deserialization. *Deserialization of untrusted data*
+    ([CWE-502][1]) occurs when an application deserializes untrusted data
+    without sufficiently verifying that the resulting data will be valid,
+    allowing the attacker to control the state or the flow of the execution.
+
+    `com.fasterxml.jackson.core:jackson-databind` allows deserialization of
+    JSON input to Java objects. If an application using this dependency has
+    the ability to deserialize a JSON string from an untrusted source, an
+    attacker could leverage this vulnerability to conduct deserialization
+    attacks.
+
+    Exploitation of unsafe deserialization attacks through
+    `jackson-databind` requires the following prerequisites:
+
+    ### 1. The target application allowing JSON user input which is processed by jackson-databind   {#1-the-target-application-allowing-json-user-input-which-is-processed-by-jackson-databind}
+
+    An application using `jackson-databind` is only vulnerable if a
+    user-provided JSON data is deserialized.
+
+    ### 2. Polymorphic type handling for properties with nominal type are enabled   {#2-polymorphic-type-handling-for-properties-with-nominal-type-are-enabled}
+
+    Polymorphic type handling refers to the addition of enough type
+    information so that the deserializer can instantiate the appropriate
+    subtype of a value. Use of \"default typing\" is considered dangerous
+    due to the possibility of an untrusted method (gadget) managing to
+    specify a class that is accessible through the class-loader and
+    therefore, exposing a set of methods and/or fields.
+
+    ### 3. An exploitable gadget class is available for the attacker to leverage   {#3-an-exploitable-gadget-class-is-available-for-the-attacker-to-leverage}
+
+    Gadget chains are specially crafted method sequences that can be created
+    by an attacker in order to change the flow of code execution. These
+    gadgets are often methods introduced by third-party components which an
+    attacker could utilise in order to attack the target application. Not
+    every gadget out there is supported by `jackson-databind`. The
+    maintainers of `jackson-databind` proactively blacklists possible
+    serialization gadgets in an attempt to ensure that it is not possible
+    for an attacker to chain gadgets during serialization.
+
+    ### Further reading:   {#further-reading}
+
+    * [On Jackson CVEs: Don’t Panic on Medium][2]
+    * [NCC Group Jackson Deserialization WhitePaper][3]
+    * [Java Security Best Practices][4]
+
+
+
+    [1]: https://cwe.mitre.org/data/definitions/502.html
+    [2]: https://medium.com/@cowtowncoder/on-jackson-cves-dont-panic-here-is-what-you-need-to-know-54cd0d6e8062
+    [3]: https://www.nccgroup.com/globalassets/our-research/us/whitepapers/2018/jackson_deserialization.pdf
+    [4]: https://snyk.io/blog/10-java-security-best-practices/
+  affected_package: com.fasterxml.jackson.core:jackson-databind
+  vulnerable_versions:
+  - "< 2.9.10.8"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2020-36184
+  cwe:
+  - CWE-502
+  disclosed_date: 2021-01-07
+  created_date: 2021-01-07
+  last_modified_date: 2021-01-07
+  credit:
+  - Unknown
+  references:
+  - https://cowtowncoder.medium.com/on-jackson-cves-dont-panic-here-is-what-you-need-to-know-54cd0d6e8062
+  - https://github.com/FasterXML/jackson-databind/issues/2998
+  source_url: https://snyk.io/vuln/SNYK-JAVA-COMFASTERXMLJACKSONCORE-1056416
+- id: snykio:maven:com.fasterxml.jackson.core:jackson-databind:1056417
+  title: Deserialization of Untrusted Data
+  description: |
+    [com.fasterxml.jackson.core:jackson-databind][1] is a library which
+    contains the general-purpose data-binding functionality and tree-model
+    for Jackson Data Processor.
+
+    Affected versions of this package are vulnerable to Deserialization of
+    Untrusted Data. The package mishandles the interaction between
+    serialization gadgets and typing, related to
+    `org.apache.tomcat.dbcp.dbcp.datasources.PerUserPoolDataSource`.
+
+
+
+    [1]: https://github.com/FasterXML/jackson-databind
+    \nSerialization is a process of converting an object into a sequence of
+    bytes which can be persisted to a disk or database or can be sent
+    through streams. The reverse process of creating objects from a sequence
+    of bytes is called deserialization. *Deserialization of untrusted data*
+    ([CWE-502][1]) occurs when an application deserializes untrusted data
+    without sufficiently verifying that the resulting data will be valid,
+    allowing the attacker to control the state or the flow of the execution.
+
+    `com.fasterxml.jackson.core:jackson-databind` allows deserialization of
+    JSON input to Java objects. If an application using this dependency has
+    the ability to deserialize a JSON string from an untrusted source, an
+    attacker could leverage this vulnerability to conduct deserialization
+    attacks.
+
+    Exploitation of unsafe deserialization attacks through
+    `jackson-databind` requires the following prerequisites:
+
+    ### 1. The target application allowing JSON user input which is processed by jackson-databind   {#1-the-target-application-allowing-json-user-input-which-is-processed-by-jackson-databind}
+
+    An application using `jackson-databind` is only vulnerable if a
+    user-provided JSON data is deserialized.
+
+    ### 2. Polymorphic type handling for properties with nominal type are enabled   {#2-polymorphic-type-handling-for-properties-with-nominal-type-are-enabled}
+
+    Polymorphic type handling refers to the addition of enough type
+    information so that the deserializer can instantiate the appropriate
+    subtype of a value. Use of \"default typing\" is considered dangerous
+    due to the possibility of an untrusted method (gadget) managing to
+    specify a class that is accessible through the class-loader and
+    therefore, exposing a set of methods and/or fields.
+
+    ### 3. An exploitable gadget class is available for the attacker to leverage   {#3-an-exploitable-gadget-class-is-available-for-the-attacker-to-leverage}
+
+    Gadget chains are specially crafted method sequences that can be created
+    by an attacker in order to change the flow of code execution. These
+    gadgets are often methods introduced by third-party components which an
+    attacker could utilise in order to attack the target application. Not
+    every gadget out there is supported by `jackson-databind`. The
+    maintainers of `jackson-databind` proactively blacklists possible
+    serialization gadgets in an attempt to ensure that it is not possible
+    for an attacker to chain gadgets during serialization.
+
+    ### Further reading:   {#further-reading}
+
+    * [On Jackson CVEs: Don’t Panic on Medium][2]
+    * [NCC Group Jackson Deserialization WhitePaper][3]
+    * [Java Security Best Practices][4]
+
+
+
+    [1]: https://cwe.mitre.org/data/definitions/502.html
+    [2]: https://medium.com/@cowtowncoder/on-jackson-cves-dont-panic-here-is-what-you-need-to-know-54cd0d6e8062
+    [3]: https://www.nccgroup.com/globalassets/our-research/us/whitepapers/2018/jackson_deserialization.pdf
+    [4]: https://snyk.io/blog/10-java-security-best-practices/
+  affected_package: com.fasterxml.jackson.core:jackson-databind
+  vulnerable_versions:
+  - "< 2.9.10.8"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2020-36186
+  cwe:
+  - CWE-502
+  disclosed_date: 2021-01-07
+  created_date: 2021-01-07
+  last_modified_date: 2021-01-07
+  credit:
+  - Unknown
+  references:
+  - https://cowtowncoder.medium.com/on-jackson-cves-dont-panic-here-is-what-you-need-to-know-54cd0d6e8062
+  - https://github.com/FasterXML/jackson-databind/issues/2997
+  source_url: https://snyk.io/vuln/SNYK-JAVA-COMFASTERXMLJACKSONCORE-1056417
+- id: snykio:maven:com.fasterxml.jackson.core:jackson-databind:1056418
+  title: Deserialization of Untrusted Data
+  description: |
+    [com.fasterxml.jackson.core:jackson-databind][1] is a library which
+    contains the general-purpose data-binding functionality and tree-model
+    for Jackson Data Processor.
+
+    Affected versions of this package are vulnerable to Deserialization of
+    Untrusted Data. The package mishandles the interaction between
+    serialization gadgets and typing, related to
+    `org.apache.commons.dbcp2.cpdsadapter.DriverAdapterCPDS`.
+
+
+
+    [1]: https://github.com/FasterXML/jackson-databind
+    \nSerialization is a process of converting an object into a sequence of
+    bytes which can be persisted to a disk or database or can be sent
+    through streams. The reverse process of creating objects from a sequence
+    of bytes is called deserialization. *Deserialization of untrusted data*
+    ([CWE-502][1]) occurs when an application deserializes untrusted data
+    without sufficiently verifying that the resulting data will be valid,
+    allowing the attacker to control the state or the flow of the execution.
+
+    `com.fasterxml.jackson.core:jackson-databind` allows deserialization of
+    JSON input to Java objects. If an application using this dependency has
+    the ability to deserialize a JSON string from an untrusted source, an
+    attacker could leverage this vulnerability to conduct deserialization
+    attacks.
+
+    Exploitation of unsafe deserialization attacks through
+    `jackson-databind` requires the following prerequisites:
+
+    ### 1. The target application allowing JSON user input which is processed by jackson-databind   {#1-the-target-application-allowing-json-user-input-which-is-processed-by-jackson-databind}
+
+    An application using `jackson-databind` is only vulnerable if a
+    user-provided JSON data is deserialized.
+
+    ### 2. Polymorphic type handling for properties with nominal type are enabled   {#2-polymorphic-type-handling-for-properties-with-nominal-type-are-enabled}
+
+    Polymorphic type handling refers to the addition of enough type
+    information so that the deserializer can instantiate the appropriate
+    subtype of a value. Use of \"default typing\" is considered dangerous
+    due to the possibility of an untrusted method (gadget) managing to
+    specify a class that is accessible through the class-loader and
+    therefore, exposing a set of methods and/or fields.
+
+    ### 3. An exploitable gadget class is available for the attacker to leverage   {#3-an-exploitable-gadget-class-is-available-for-the-attacker-to-leverage}
+
+    Gadget chains are specially crafted method sequences that can be created
+    by an attacker in order to change the flow of code execution. These
+    gadgets are often methods introduced by third-party components which an
+    attacker could utilise in order to attack the target application. Not
+    every gadget out there is supported by `jackson-databind`. The
+    maintainers of `jackson-databind` proactively blacklists possible
+    serialization gadgets in an attempt to ensure that it is not possible
+    for an attacker to chain gadgets during serialization.
+
+    ### Further reading:   {#further-reading}
+
+    * [On Jackson CVEs: Don’t Panic on Medium][2]
+    * [NCC Group Jackson Deserialization WhitePaper][3]
+    * [Java Security Best Practices][4]
+
+
+
+    [1]: https://cwe.mitre.org/data/definitions/502.html
+    [2]: https://medium.com/@cowtowncoder/on-jackson-cves-dont-panic-here-is-what-you-need-to-know-54cd0d6e8062
+    [3]: https://www.nccgroup.com/globalassets/our-research/us/whitepapers/2018/jackson_deserialization.pdf
+    [4]: https://snyk.io/blog/10-java-security-best-practices/
+  affected_package: com.fasterxml.jackson.core:jackson-databind
+  vulnerable_versions:
+  - "< 2.9.10.8"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2020-36180
+  cwe:
+  - CWE-502
+  disclosed_date: 2021-01-07
+  created_date: 2021-01-07
+  last_modified_date: 2021-01-07
+  credit:
+  - Unknown
+  references:
+  - https://cowtowncoder.medium.com/on-jackson-cves-dont-panic-here-is-what-you-need-to-know-54cd0d6e8062
+  - https://github.com/Al1ex/CVE-2020-36179
+  - https://github.com/FasterXML/jackson-databind/issues/3004
+  source_url: https://snyk.io/vuln/SNYK-JAVA-COMFASTERXMLJACKSONCORE-1056418
+- id: snykio:maven:com.fasterxml.jackson.core:jackson-databind:1056419
+  title: Deserialization of Untrusted Data
+  description: |
+    [com.fasterxml.jackson.core:jackson-databind][1] is a library which
+    contains the general-purpose data-binding functionality and tree-model
+    for Jackson Data Processor.
+
+    Affected versions of this package are vulnerable to Deserialization of
+    Untrusted Data. The package mishandles the interaction between
+    serialization gadgets and typing, related to
+    `org.docx4j.org.apache.xalan.lib.sql.JNDIConnectionPool`.
+
+
+
+    [1]: https://github.com/FasterXML/jackson-databind
+    \nSerialization is a process of converting an object into a sequence of
+    bytes which can be persisted to a disk or database or can be sent
+    through streams. The reverse process of creating objects from a sequence
+    of bytes is called deserialization. *Deserialization of untrusted data*
+    ([CWE-502][1]) occurs when an application deserializes untrusted data
+    without sufficiently verifying that the resulting data will be valid,
+    allowing the attacker to control the state or the flow of the execution.
+
+    `com.fasterxml.jackson.core:jackson-databind` allows deserialization of
+    JSON input to Java objects. If an application using this dependency has
+    the ability to deserialize a JSON string from an untrusted source, an
+    attacker could leverage this vulnerability to conduct deserialization
+    attacks.
+
+    Exploitation of unsafe deserialization attacks through
+    `jackson-databind` requires the following prerequisites:
+
+    ### 1. The target application allowing JSON user input which is processed by jackson-databind   {#1-the-target-application-allowing-json-user-input-which-is-processed-by-jackson-databind}
+
+    An application using `jackson-databind` is only vulnerable if a
+    user-provided JSON data is deserialized.
+
+    ### 2. Polymorphic type handling for properties with nominal type are enabled   {#2-polymorphic-type-handling-for-properties-with-nominal-type-are-enabled}
+
+    Polymorphic type handling refers to the addition of enough type
+    information so that the deserializer can instantiate the appropriate
+    subtype of a value. Use of \"default typing\" is considered dangerous
+    due to the possibility of an untrusted method (gadget) managing to
+    specify a class that is accessible through the class-loader and
+    therefore, exposing a set of methods and/or fields.
+
+    ### 3. An exploitable gadget class is available for the attacker to leverage   {#3-an-exploitable-gadget-class-is-available-for-the-attacker-to-leverage}
+
+    Gadget chains are specially crafted method sequences that can be created
+    by an attacker in order to change the flow of code execution. These
+    gadgets are often methods introduced by third-party components which an
+    attacker could utilise in order to attack the target application. Not
+    every gadget out there is supported by `jackson-databind`. The
+    maintainers of `jackson-databind` proactively blacklists possible
+    serialization gadgets in an attempt to ensure that it is not possible
+    for an attacker to chain gadgets during serialization.
+
+    ### Further reading:   {#further-reading}
+
+    * [On Jackson CVEs: Don’t Panic on Medium][2]
+    * [NCC Group Jackson Deserialization WhitePaper][3]
+    * [Java Security Best Practices][4]
+
+
+
+    [1]: https://cwe.mitre.org/data/definitions/502.html
+    [2]: https://medium.com/@cowtowncoder/on-jackson-cves-dont-panic-here-is-what-you-need-to-know-54cd0d6e8062
+    [3]: https://www.nccgroup.com/globalassets/our-research/us/whitepapers/2018/jackson_deserialization.pdf
+    [4]: https://snyk.io/blog/10-java-security-best-practices/
+  affected_package: com.fasterxml.jackson.core:jackson-databind
+  vulnerable_versions:
+  - "< 2.9.10.8"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2020-36183
+  cwe:
+  - CWE-502
+  disclosed_date: 2021-01-07
+  created_date: 2021-01-07
+  last_modified_date: 2021-01-07
+  credit:
+  - Unknown
+  references:
+  - https://cowtowncoder.medium.com/on-jackson-cves-dont-panic-here-is-what-you-need-to-know-54cd0d6e8062
+  - https://github.com/FasterXML/jackson-databind/issues/3003
+  source_url: https://snyk.io/vuln/SNYK-JAVA-COMFASTERXMLJACKSONCORE-1056419
+- id: snykio:maven:com.fasterxml.jackson.core:jackson-databind:1056420
+  title: Deserialization of Untrusted Data
+  description: |
+    [com.fasterxml.jackson.core:jackson-databind][1] is a library which
+    contains the general-purpose data-binding functionality and tree-model
+    for Jackson Data Processor.
+
+    Affected versions of this package are vulnerable to Deserialization of
+    Untrusted Data. The package mishandles the interaction between
+    serialization gadgets and typing, related to
+    `oadd.org.apache.commons.dbcp.cpdsadapter.DriverAdapterCPDS`.
+
+
+
+    [1]: https://github.com/FasterXML/jackson-databind
+    \nSerialization is a process of converting an object into a sequence of
+    bytes which can be persisted to a disk or database or can be sent
+    through streams. The reverse process of creating objects from a sequence
+    of bytes is called deserialization. *Deserialization of untrusted data*
+    ([CWE-502][1]) occurs when an application deserializes untrusted data
+    without sufficiently verifying that the resulting data will be valid,
+    allowing the attacker to control the state or the flow of the execution.
+
+    `com.fasterxml.jackson.core:jackson-databind` allows deserialization of
+    JSON input to Java objects. If an application using this dependency has
+    the ability to deserialize a JSON string from an untrusted source, an
+    attacker could leverage this vulnerability to conduct deserialization
+    attacks.
+
+    Exploitation of unsafe deserialization attacks through
+    `jackson-databind` requires the following prerequisites:
+
+    ### 1. The target application allowing JSON user input which is processed by jackson-databind   {#1-the-target-application-allowing-json-user-input-which-is-processed-by-jackson-databind}
+
+    An application using `jackson-databind` is only vulnerable if a
+    user-provided JSON data is deserialized.
+
+    ### 2. Polymorphic type handling for properties with nominal type are enabled   {#2-polymorphic-type-handling-for-properties-with-nominal-type-are-enabled}
+
+    Polymorphic type handling refers to the addition of enough type
+    information so that the deserializer can instantiate the appropriate
+    subtype of a value. Use of \"default typing\" is considered dangerous
+    due to the possibility of an untrusted method (gadget) managing to
+    specify a class that is accessible through the class-loader and
+    therefore, exposing a set of methods and/or fields.
+
+    ### 3. An exploitable gadget class is available for the attacker to leverage   {#3-an-exploitable-gadget-class-is-available-for-the-attacker-to-leverage}
+
+    Gadget chains are specially crafted method sequences that can be created
+    by an attacker in order to change the flow of code execution. These
+    gadgets are often methods introduced by third-party components which an
+    attacker could utilise in order to attack the target application. Not
+    every gadget out there is supported by `jackson-databind`. The
+    maintainers of `jackson-databind` proactively blacklists possible
+    serialization gadgets in an attempt to ensure that it is not possible
+    for an attacker to chain gadgets during serialization.
+
+    ### Further reading:   {#further-reading}
+
+    * [On Jackson CVEs: Don’t Panic on Medium][2]
+    * [NCC Group Jackson Deserialization WhitePaper][3]
+    * [Java Security Best Practices][4]
+
+
+
+    [1]: https://cwe.mitre.org/data/definitions/502.html
+    [2]: https://medium.com/@cowtowncoder/on-jackson-cves-dont-panic-here-is-what-you-need-to-know-54cd0d6e8062
+    [3]: https://www.nccgroup.com/globalassets/our-research/us/whitepapers/2018/jackson_deserialization.pdf
+    [4]: https://snyk.io/blog/10-java-security-best-practices/
+  affected_package: com.fasterxml.jackson.core:jackson-databind
+  vulnerable_versions:
+  - "< 2.9.10.8"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2020-36179
+  cwe:
+  - CWE-502
+  disclosed_date: 2021-01-07
+  created_date: 2021-01-07
+  last_modified_date: 2021-01-07
+  credit:
+  - Unknown
+  references:
+  - https://cowtowncoder.medium.com/on-jackson-cves-dont-panic-here-is-what-you-need-to-know-54cd0d6e8062
+  - https://github.com/Al1ex/CVE-2020-36179
+  - https://github.com/FasterXML/jackson-databind/issues/3004
+  source_url: https://snyk.io/vuln/SNYK-JAVA-COMFASTERXMLJACKSONCORE-1056420
+- id: snykio:maven:com.fasterxml.jackson.core:jackson-databind:1056421
+  title: Deserialization of Untrusted Data
+  description: |
+    [com.fasterxml.jackson.core:jackson-databind][1] is a library which
+    contains the general-purpose data-binding functionality and tree-model
+    for Jackson Data Processor.
+
+    Affected versions of this package are vulnerable to Deserialization of
+    Untrusted Data. The package mishandles the interaction between
+    serialization gadgets and typing, related to
+    `org.apache.tomcat.dbcp.dbcp2.cpdsadapter.DriverAdapterCPDS`.
+
+
+
+    [1]: https://github.com/FasterXML/jackson-databind
+    \nSerialization is a process of converting an object into a sequence of
+    bytes which can be persisted to a disk or database or can be sent
+    through streams. The reverse process of creating objects from a sequence
+    of bytes is called deserialization. *Deserialization of untrusted data*
+    ([CWE-502][1]) occurs when an application deserializes untrusted data
+    without sufficiently verifying that the resulting data will be valid,
+    allowing the attacker to control the state or the flow of the execution.
+
+    `com.fasterxml.jackson.core:jackson-databind` allows deserialization of
+    JSON input to Java objects. If an application using this dependency has
+    the ability to deserialize a JSON string from an untrusted source, an
+    attacker could leverage this vulnerability to conduct deserialization
+    attacks.
+
+    Exploitation of unsafe deserialization attacks through
+    `jackson-databind` requires the following prerequisites:
+
+    ### 1. The target application allowing JSON user input which is processed by jackson-databind   {#1-the-target-application-allowing-json-user-input-which-is-processed-by-jackson-databind}
+
+    An application using `jackson-databind` is only vulnerable if a
+    user-provided JSON data is deserialized.
+
+    ### 2. Polymorphic type handling for properties with nominal type are enabled   {#2-polymorphic-type-handling-for-properties-with-nominal-type-are-enabled}
+
+    Polymorphic type handling refers to the addition of enough type
+    information so that the deserializer can instantiate the appropriate
+    subtype of a value. Use of \"default typing\" is considered dangerous
+    due to the possibility of an untrusted method (gadget) managing to
+    specify a class that is accessible through the class-loader and
+    therefore, exposing a set of methods and/or fields.
+
+    ### 3. An exploitable gadget class is available for the attacker to leverage   {#3-an-exploitable-gadget-class-is-available-for-the-attacker-to-leverage}
+
+    Gadget chains are specially crafted method sequences that can be created
+    by an attacker in order to change the flow of code execution. These
+    gadgets are often methods introduced by third-party components which an
+    attacker could utilise in order to attack the target application. Not
+    every gadget out there is supported by `jackson-databind`. The
+    maintainers of `jackson-databind` proactively blacklists possible
+    serialization gadgets in an attempt to ensure that it is not possible
+    for an attacker to chain gadgets during serialization.
+
+    ### Further reading:   {#further-reading}
+
+    * [On Jackson CVEs: Don’t Panic on Medium][2]
+    * [NCC Group Jackson Deserialization WhitePaper][3]
+    * [Java Security Best Practices][4]
+
+
+
+    [1]: https://cwe.mitre.org/data/definitions/502.html
+    [2]: https://medium.com/@cowtowncoder/on-jackson-cves-dont-panic-here-is-what-you-need-to-know-54cd0d6e8062
+    [3]: https://www.nccgroup.com/globalassets/our-research/us/whitepapers/2018/jackson_deserialization.pdf
+    [4]: https://snyk.io/blog/10-java-security-best-practices/
+  affected_package: com.fasterxml.jackson.core:jackson-databind
+  vulnerable_versions:
+  - "< 2.9.10.8"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2020-36182
+  cwe:
+  - CWE-502
+  disclosed_date: 2021-01-07
+  created_date: 2021-01-07
+  last_modified_date: 2021-01-07
+  credit:
+  - Unknown
+  references:
+  - https://cowtowncoder.medium.com/on-jackson-cves-dont-panic-here-is-what-you-need-to-know-54cd0d6e8062
+  - https://github.com/Al1ex/CVE-2020-36179
+  - https://github.com/FasterXML/jackson-databind/issues/3004
+  source_url: https://snyk.io/vuln/SNYK-JAVA-COMFASTERXMLJACKSONCORE-1056421
+- id: snykio:maven:com.fasterxml.jackson.core:jackson-databind:1056424
+  title: Deserialization of Untrusted Data
+  description: |
+    [com.fasterxml.jackson.core:jackson-databind][1] is a library which
+    contains the general-purpose data-binding functionality and tree-model
+    for Jackson Data Processor.
+
+    Affected versions of this package are vulnerable to Deserialization of
+    Untrusted Data. The package mishandles the interaction between
+    serialization gadgets and typing, related to
+    `org.apache.tomcat.dbcp.dbcp2.datasources.SharedPoolDataSource`.
+
+
+
+    [1]: https://github.com/FasterXML/jackson-databind
+    \nSerialization is a process of converting an object into a sequence of
+    bytes which can be persisted to a disk or database or can be sent
+    through streams. The reverse process of creating objects from a sequence
+    of bytes is called deserialization. *Deserialization of untrusted data*
+    ([CWE-502][1]) occurs when an application deserializes untrusted data
+    without sufficiently verifying that the resulting data will be valid,
+    allowing the attacker to control the state or the flow of the execution.
+
+    `com.fasterxml.jackson.core:jackson-databind` allows deserialization of
+    JSON input to Java objects. If an application using this dependency has
+    the ability to deserialize a JSON string from an untrusted source, an
+    attacker could leverage this vulnerability to conduct deserialization
+    attacks.
+
+    Exploitation of unsafe deserialization attacks through
+    `jackson-databind` requires the following prerequisites:
+
+    ### 1. The target application allowing JSON user input which is processed by jackson-databind   {#1-the-target-application-allowing-json-user-input-which-is-processed-by-jackson-databind}
+
+    An application using `jackson-databind` is only vulnerable if a
+    user-provided JSON data is deserialized.
+
+    ### 2. Polymorphic type handling for properties with nominal type are enabled   {#2-polymorphic-type-handling-for-properties-with-nominal-type-are-enabled}
+
+    Polymorphic type handling refers to the addition of enough type
+    information so that the deserializer can instantiate the appropriate
+    subtype of a value. Use of \"default typing\" is considered dangerous
+    due to the possibility of an untrusted method (gadget) managing to
+    specify a class that is accessible through the class-loader and
+    therefore, exposing a set of methods and/or fields.
+
+    ### 3. An exploitable gadget class is available for the attacker to leverage   {#3-an-exploitable-gadget-class-is-available-for-the-attacker-to-leverage}
+
+    Gadget chains are specially crafted method sequences that can be created
+    by an attacker in order to change the flow of code execution. These
+    gadgets are often methods introduced by third-party components which an
+    attacker could utilise in order to attack the target application. Not
+    every gadget out there is supported by `jackson-databind`. The
+    maintainers of `jackson-databind` proactively blacklists possible
+    serialization gadgets in an attempt to ensure that it is not possible
+    for an attacker to chain gadgets during serialization.
+
+    ### Further reading:   {#further-reading}
+
+    * [On Jackson CVEs: Don’t Panic on Medium][2]
+    * [NCC Group Jackson Deserialization WhitePaper][3]
+    * [Java Security Best Practices][4]
+
+
+
+    [1]: https://cwe.mitre.org/data/definitions/502.html
+    [2]: https://medium.com/@cowtowncoder/on-jackson-cves-dont-panic-here-is-what-you-need-to-know-54cd0d6e8062
+    [3]: https://www.nccgroup.com/globalassets/our-research/us/whitepapers/2018/jackson_deserialization.pdf
+    [4]: https://snyk.io/blog/10-java-security-best-practices/
+  affected_package: com.fasterxml.jackson.core:jackson-databind
+  vulnerable_versions:
+  - "< 2.9.10.8"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2020-36185
+  cwe:
+  - CWE-502
+  disclosed_date: 2021-01-07
+  created_date: 2021-01-07
+  last_modified_date: 2021-01-07
+  credit:
+  - Unknown
+  references:
+  - https://cowtowncoder.medium.com/on-jackson-cves-dont-panic-here-is-what-you-need-to-know-54cd0d6e8062
+  - https://github.com/FasterXML/jackson-databind/issues/2998
+  source_url: https://snyk.io/vuln/SNYK-JAVA-COMFASTERXMLJACKSONCORE-1056424
+- id: snykio:maven:com.fasterxml.jackson.core:jackson-databind:1056425
+  title: Deserialization of Untrusted Data
+  description: |
+    [com.fasterxml.jackson.core:jackson-databind][1] is a library which
+    contains the general-purpose data-binding functionality and tree-model
+    for Jackson Data Processor.
+
+    Affected versions of this package are vulnerable to Deserialization of
+    Untrusted Data. The package mishandles the interaction between
+    serialization gadgets and typing, related to
+    `com.newrelic.agent.deps.ch.qos.logback.core.db.DriverManagerConnectionSource`.
+
+
+
+    [1]: https://github.com/FasterXML/jackson-databind
+    \nSerialization is a process of converting an object into a sequence of
+    bytes which can be persisted to a disk or database or can be sent
+    through streams. The reverse process of creating objects from a sequence
+    of bytes is called deserialization. *Deserialization of untrusted data*
+    ([CWE-502][1]) occurs when an application deserializes untrusted data
+    without sufficiently verifying that the resulting data will be valid,
+    allowing the attacker to control the state or the flow of the execution.
+
+    `com.fasterxml.jackson.core:jackson-databind` allows deserialization of
+    JSON input to Java objects. If an application using this dependency has
+    the ability to deserialize a JSON string from an untrusted source, an
+    attacker could leverage this vulnerability to conduct deserialization
+    attacks.
+
+    Exploitation of unsafe deserialization attacks through
+    `jackson-databind` requires the following prerequisites:
+
+    ### 1. The target application allowing JSON user input which is processed by jackson-databind   {#1-the-target-application-allowing-json-user-input-which-is-processed-by-jackson-databind}
+
+    An application using `jackson-databind` is only vulnerable if a
+    user-provided JSON data is deserialized.
+
+    ### 2. Polymorphic type handling for properties with nominal type are enabled   {#2-polymorphic-type-handling-for-properties-with-nominal-type-are-enabled}
+
+    Polymorphic type handling refers to the addition of enough type
+    information so that the deserializer can instantiate the appropriate
+    subtype of a value. Use of \"default typing\" is considered dangerous
+    due to the possibility of an untrusted method (gadget) managing to
+    specify a class that is accessible through the class-loader and
+    therefore, exposing a set of methods and/or fields.
+
+    ### 3. An exploitable gadget class is available for the attacker to leverage   {#3-an-exploitable-gadget-class-is-available-for-the-attacker-to-leverage}
+
+    Gadget chains are specially crafted method sequences that can be created
+    by an attacker in order to change the flow of code execution. These
+    gadgets are often methods introduced by third-party components which an
+    attacker could utilise in order to attack the target application. Not
+    every gadget out there is supported by `jackson-databind`. The
+    maintainers of `jackson-databind` proactively blacklists possible
+    serialization gadgets in an attempt to ensure that it is not possible
+    for an attacker to chain gadgets during serialization.
+
+    ### Further reading:   {#further-reading}
+
+    * [On Jackson CVEs: Don’t Panic on Medium][2]
+    * [NCC Group Jackson Deserialization WhitePaper][3]
+    * [Java Security Best Practices][4]
+
+
+
+    [1]: https://cwe.mitre.org/data/definitions/502.html
+    [2]: https://medium.com/@cowtowncoder/on-jackson-cves-dont-panic-here-is-what-you-need-to-know-54cd0d6e8062
+    [3]: https://www.nccgroup.com/globalassets/our-research/us/whitepapers/2018/jackson_deserialization.pdf
+    [4]: https://snyk.io/blog/10-java-security-best-practices/
+  affected_package: com.fasterxml.jackson.core:jackson-databind
+  vulnerable_versions:
+  - "< 2.9.10.8"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2020-36189
+  cwe:
+  - CWE-502
+  disclosed_date: 2021-01-07
+  created_date: 2021-01-07
+  last_modified_date: 2021-01-07
+  credit:
+  - Unknown
+  references:
+  - https://cowtowncoder.medium.com/on-jackson-cves-dont-panic-here-is-what-you-need-to-know-54cd0d6e8062
+  - https://github.com/FasterXML/jackson-databind/issues/2996
+  source_url: https://snyk.io/vuln/SNYK-JAVA-COMFASTERXMLJACKSONCORE-1056425
+- id: snykio:maven:com.fasterxml.jackson.core:jackson-databind:1056426
+  title: Deserialization of Untrusted Data
+  description: |
+    [com.fasterxml.jackson.core:jackson-databind][1] is a library which
+    contains the general-purpose data-binding functionality and tree-model
+    for Jackson Data Processor.
+
+    Affected versions of this package are vulnerable to Deserialization of
+    Untrusted Data. The package mishandles the interaction between
+    serialization gadgets and typing, related to
+    `com.newrelic.agent.deps.ch.qos.logback.core.db.JNDIConnectionSource`.
+
+
+
+    [1]: https://github.com/FasterXML/jackson-databind
+    \nSerialization is a process of converting an object into a sequence of
+    bytes which can be persisted to a disk or database or can be sent
+    through streams. The reverse process of creating objects from a sequence
+    of bytes is called deserialization. *Deserialization of untrusted data*
+    ([CWE-502][1]) occurs when an application deserializes untrusted data
+    without sufficiently verifying that the resulting data will be valid,
+    allowing the attacker to control the state or the flow of the execution.
+
+    `com.fasterxml.jackson.core:jackson-databind` allows deserialization of
+    JSON input to Java objects. If an application using this dependency has
+    the ability to deserialize a JSON string from an untrusted source, an
+    attacker could leverage this vulnerability to conduct deserialization
+    attacks.
+
+    Exploitation of unsafe deserialization attacks through
+    `jackson-databind` requires the following prerequisites:
+
+    ### 1. The target application allowing JSON user input which is processed by jackson-databind   {#1-the-target-application-allowing-json-user-input-which-is-processed-by-jackson-databind}
+
+    An application using `jackson-databind` is only vulnerable if a
+    user-provided JSON data is deserialized.
+
+    ### 2. Polymorphic type handling for properties with nominal type are enabled   {#2-polymorphic-type-handling-for-properties-with-nominal-type-are-enabled}
+
+    Polymorphic type handling refers to the addition of enough type
+    information so that the deserializer can instantiate the appropriate
+    subtype of a value. Use of \"default typing\" is considered dangerous
+    due to the possibility of an untrusted method (gadget) managing to
+    specify a class that is accessible through the class-loader and
+    therefore, exposing a set of methods and/or fields.
+
+    ### 3. An exploitable gadget class is available for the attacker to leverage   {#3-an-exploitable-gadget-class-is-available-for-the-attacker-to-leverage}
+
+    Gadget chains are specially crafted method sequences that can be created
+    by an attacker in order to change the flow of code execution. These
+    gadgets are often methods introduced by third-party components which an
+    attacker could utilise in order to attack the target application. Not
+    every gadget out there is supported by `jackson-databind`. The
+    maintainers of `jackson-databind` proactively blacklists possible
+    serialization gadgets in an attempt to ensure that it is not possible
+    for an attacker to chain gadgets during serialization.
+
+    ### Further reading:   {#further-reading}
+
+    * [On Jackson CVEs: Don’t Panic on Medium][2]
+    * [NCC Group Jackson Deserialization WhitePaper][3]
+    * [Java Security Best Practices][4]
+
+
+
+    [1]: https://cwe.mitre.org/data/definitions/502.html
+    [2]: https://medium.com/@cowtowncoder/on-jackson-cves-dont-panic-here-is-what-you-need-to-know-54cd0d6e8062
+    [3]: https://www.nccgroup.com/globalassets/our-research/us/whitepapers/2018/jackson_deserialization.pdf
+    [4]: https://snyk.io/blog/10-java-security-best-practices/
+  affected_package: com.fasterxml.jackson.core:jackson-databind
+  vulnerable_versions:
+  - "< 2.9.10.8"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2020-36188
+  cwe:
+  - CWE-502
+  disclosed_date: 2021-01-07
+  created_date: 2021-01-07
+  last_modified_date: 2021-01-07
+  credit:
+  - Unknown
+  references:
+  - https://cowtowncoder.medium.com/on-jackson-cves-dont-panic-here-is-what-you-need-to-know-54cd0d6e8062
+  - https://github.com/Al1ex/CVE-2020-36188
+  - https://github.com/FasterXML/jackson-databind/issues/2996
+  source_url: https://snyk.io/vuln/SNYK-JAVA-COMFASTERXMLJACKSONCORE-1056426
+- id: snykio:maven:com.fasterxml.jackson.core:jackson-databind:1056427
+  title: Deserialization of Untrusted Data
+  description: |
+    [com.fasterxml.jackson.core:jackson-databind][1] is a library which
+    contains the general-purpose data-binding functionality and tree-model
+    for Jackson Data Processor.
+
+    Affected versions of this package are vulnerable to Deserialization of
+    Untrusted Data. The package mishandles the interaction between
+    serialization gadgets and typing, related to
+    `org.apache.tomcat.dbcp.dbcp.cpdsadapter.DriverAdapterCPDS`.
+
+
+
+    [1]: https://github.com/FasterXML/jackson-databind
+    \nSerialization is a process of converting an object into a sequence of
+    bytes which can be persisted to a disk or database or can be sent
+    through streams. The reverse process of creating objects from a sequence
+    of bytes is called deserialization. *Deserialization of untrusted data*
+    ([CWE-502][1]) occurs when an application deserializes untrusted data
+    without sufficiently verifying that the resulting data will be valid,
+    allowing the attacker to control the state or the flow of the execution.
+
+    `com.fasterxml.jackson.core:jackson-databind` allows deserialization of
+    JSON input to Java objects. If an application using this dependency has
+    the ability to deserialize a JSON string from an untrusted source, an
+    attacker could leverage this vulnerability to conduct deserialization
+    attacks.
+
+    Exploitation of unsafe deserialization attacks through
+    `jackson-databind` requires the following prerequisites:
+
+    ### 1. The target application allowing JSON user input which is processed by jackson-databind   {#1-the-target-application-allowing-json-user-input-which-is-processed-by-jackson-databind}
+
+    An application using `jackson-databind` is only vulnerable if a
+    user-provided JSON data is deserialized.
+
+    ### 2. Polymorphic type handling for properties with nominal type are enabled   {#2-polymorphic-type-handling-for-properties-with-nominal-type-are-enabled}
+
+    Polymorphic type handling refers to the addition of enough type
+    information so that the deserializer can instantiate the appropriate
+    subtype of a value. Use of \"default typing\" is considered dangerous
+    due to the possibility of an untrusted method (gadget) managing to
+    specify a class that is accessible through the class-loader and
+    therefore, exposing a set of methods and/or fields.
+
+    ### 3. An exploitable gadget class is available for the attacker to leverage   {#3-an-exploitable-gadget-class-is-available-for-the-attacker-to-leverage}
+
+    Gadget chains are specially crafted method sequences that can be created
+    by an attacker in order to change the flow of code execution. These
+    gadgets are often methods introduced by third-party components which an
+    attacker could utilise in order to attack the target application. Not
+    every gadget out there is supported by `jackson-databind`. The
+    maintainers of `jackson-databind` proactively blacklists possible
+    serialization gadgets in an attempt to ensure that it is not possible
+    for an attacker to chain gadgets during serialization.
+
+    ### Further reading:   {#further-reading}
+
+    * [On Jackson CVEs: Don’t Panic on Medium][2]
+    * [NCC Group Jackson Deserialization WhitePaper][3]
+    * [Java Security Best Practices][4]
+
+
+
+    [1]: https://cwe.mitre.org/data/definitions/502.html
+    [2]: https://medium.com/@cowtowncoder/on-jackson-cves-dont-panic-here-is-what-you-need-to-know-54cd0d6e8062
+    [3]: https://www.nccgroup.com/globalassets/our-research/us/whitepapers/2018/jackson_deserialization.pdf
+    [4]: https://snyk.io/blog/10-java-security-best-practices/
+  affected_package: com.fasterxml.jackson.core:jackson-databind
+  vulnerable_versions:
+  - "< 2.9.10.8"
+  severity: high
+  package_manager: maven
+  cve:
+  - CVE-2020-36181
+  cwe:
+  - CWE-502
+  disclosed_date: 2021-01-07
+  created_date: 2021-01-07
+  last_modified_date: 2021-01-07
+  credit:
+  - Unknown
+  references:
+  - https://cowtowncoder.medium.com/on-jackson-cves-dont-panic-here-is-what-you-need-to-know-54cd0d6e8062
+  - https://github.com/Al1ex/CVE-2020-36179
+  - https://github.com/FasterXML/jackson-databind/issues/3004
+  source_url: https://snyk.io/vuln/SNYK-JAVA-COMFASTERXMLJACKSONCORE-1056427
 - id: snykio:maven:com.fasterxml.jackson.core:jackson-databind:174736
   title: Deserialization of Untrusted Data
   description: |

