@@ -1,0 +1,31 @@
+---
+- id: snykio:npm:buns:1050389
+  title: Command Injection
+  description: |+
+    Affected versions of this package are vulnerable to Command Injection.
+    The injection point is located in line 678 in index file `lib/index.js`
+    in the exported function `install(requestedModule)`.
+
+    ### PoC   {#poc}
+
+        var root = require("buns");
+        var name = "& touch JHU";
+        root.install(name);
+
+  affected_package: buns
+  vulnerable_versions:
+  - "*"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2020-7794
+  cwe:
+  - CWE-78
+  disclosed_date: 2020-12-11
+  created_date: 2021-01-08
+  last_modified_date: 2021-01-08
+  credit:
+  - JHU System Security Lab
+  references:
+  - https://www.npmjs.com/package/buns
+  source_url: https://snyk.io/vuln/SNYK-JS-BUNS-1050389
