@@ -1,0 +1,37 @@
+---
+- id: snykio:go:github.com/openshift/machine-config-operator/pkg/server:1059094
+  title: Insecure Permissions
+  description: |
+    [github.com/openshift/machine-config-operator/pkg/server][1] is an
+    OpenShift 4 is an operator-focused platform, and the Machine Config
+    operator extends that to the operating system itself, managing updates
+    and configuration changes to essentially everything between the kernel
+    and kubelet.
+
+    Affected versions of this package are vulnerable to Insecure Permissions
+    via the `/etc/kubernetes/kubeconfig` file. An attacker with access to a
+    running container which mounts `/etc/kubernetes` or has local access to
+    the node, may copy this `kubeconfig` file and attempt to add their own
+    node to the OpenShift cluster.
+
+
+
+    [1]: https://github.com/openshift/machine-config-operator
+  affected_package: github.com/openshift/machine-config-operator/pkg/server
+  vulnerable_versions:
+  - "*"
+  severity: medium
+  package_manager: go
+  cve:
+  - CVE-2020-35514
+  cwe:
+  - CWE-275
+  disclosed_date: 2020-11-05
+  created_date: 2021-01-12
+  last_modified_date: 2021-01-12
+  credit:
+  - Unknown
+  references:
+  - https://bugzilla.redhat.com/show_bug.cgi?id=1914714
+  - https://github.com/openshift/machine-config-operator/pull/2202/commits/ea1f3e854c52a09f5d3d52e1508626a62f3c809d
+  source_url: https://snyk.io/vuln/SNYK-GOLANG-GITHUBCOMOPENSHIFTMACHINECONFIGOPERATORPKGSERVER-1059094
