@@ -1,4 +1,27 @@
 ---
+- id: npmjs:npm:electron:1615
+  title: IPC messages delivered to the wrong frame
+  description: |
+    IPC messages sent from the main process to a subframe in the renderer process, through `webContents.sendToFrame`, `event.reply` or when using the remote module, can in some cases be delivered to the wrong frame.
+
+    If your app does ANY of the following, then it is impacted by this issue:
+    - Uses `remote`
+    - Calls `webContents.sendToFrame`
+    - Calls `event.reply` in an IPC message handler
+  affected_package: electron
+  vulnerable_versions:
+  - "<9.4.0"
+  - ">=10.0.0 <10.2.0"
+  - ">=11.0.0 <11.1.0"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2020-26272
+  cwe: CWE-668
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Anonymous
 - id: npmjs:npm:electron:539
   title: Chromium Remote Code Execution
   description: 'Affected versions of `ElectronJS` are susceptible to a remote code
