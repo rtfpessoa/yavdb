@@ -1,0 +1,37 @@
+---
+- id: npmjs:npm:less-openui5:1616
+  title: Arbitrary JavaScript Execution
+  description: "In affected versions of `less-openui5` processing untrusted theming
+    resources might execute arbitrary code.\n\n### Impact\n\nWhen processing theming
+    resources (i.e. `*.less` files) with less-openui5 that originate from an untrusted
+    source, those resources might contain JavaScript code which will be executed in
+    the context of the build process.\n\nWhile this is a [feature](http://lesscss.org/usage/#less-options-enable-inline-javascript-deprecated-)
+    of the [Less.js library](https://github.com/less/less.js), it is an unexpected
+    behavior in the context of OpenUI5 and SAPUI5 development.\n\nEspecially in the
+    context of [UI5 Tooling](https://github.com/SAP/ui5-tooling), which relies on
+    less-openui5, this poses a security threat:\n\nAn attacker might create a [library](https://sap.github.io/ui5-tooling/pages/Builder/#library)
+    or [theme-library](https://sap.github.io/ui5-tooling/pages/Builder/#theme-library)
+    containing a custom control or theme, hiding malicious JavaScript code in one
+    of the `.less` files.\n\nThis is an example of inline JavaScript in a Less file:\n```less\n.rule
+    {\n\t@var: `(function(){console.log('Hello from JavaScript'); process.exit(1);})()`;\n\tcolor:
+    @var;\n}\n```\n\nStarting with Less.js version 3.0.0, the Inline JavaScript feature
+    is disabled by default. less-openui5 however currently uses [a fork](https://github.com/SAP/less-openui5/tree/master/lib/thirdparty/less)
+    of Less.js v1.6.3.\n\nNote that disabling the Inline JavaScript feature in Less.js
+    versions 1.x, still evaluates code has additional double codes around it:\n```less\n.rule
+    {\n\t@var: \"`(function(){console.log('Hello from JavaScript'); process.exit(1);})()`\";\n\tcolor:
+    @var;\n}\n```\n\n### Patches\n\nWe decided to remove the inline JavaScript evaluation
+    feature completely from the code of our Less.js fork.\n\nThis fix is available
+    in less-openui5 version [v0.10.0](https://github.com/SAP/less-openui5/releases/tag/v0.10.0)\n\n###
+    Workarounds\n\nOnly process trusted theming resources."
+  affected_package: less-openui5
+  vulnerable_versions:
+  - "<0.10.0"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2021-21316
+  cwe: CWE-74
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Anonymous

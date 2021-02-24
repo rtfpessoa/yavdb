@@ -1,4 +1,31 @@
 ---
+- id: npmjs:npm:angular-expressions:1618
+  title: Remote Code Execution
+  description: "Affected versions of `angular-expressions` are affected by a remote
+    code execution vulnerability.\n\n### Impact\n\nIf you call `expressions.compile(userControlledInput)`
+    where `userControlledInput` is text that comes from user input you are potentially
+    impacted.\n\nThe security of the package could be bypassed by using a more complex
+    payload, using a `.constructor.constructor` technique.\n\n* If running `angular-expressions`
+    in the browser, an attacker could run any browser script when the application
+    code calls `expressions.compile(userControlledInput)`.\n* If running `angular-expressions`
+    on the server, an attacker could run any Javascript expression, thus gaining Remote
+    Code Execution.\n\n### Workarounds\n\nA temporary workaround might be either to
+    : \n\n* disable user-controlled input that will be fed into `angular-expressions`
+    in your application\n\nOR\n\n* allow only following characters in the userControlledInput
+    : \n\n```js\nif (/^[|a-zA-Z.0-9 :\"'+-?]+$/.test(userControlledInput)) {\n      var
+    result = expressions.compile(userControlledInput);\n}\nelse {\n     result = undefined;\n}\n```\n"
+  affected_package: angular-expressions
+  vulnerable_versions:
+  - "<1.1.2"
+  severity: low
+  package_manager: npm
+  cve:
+  - CVE-2021-21277
+  cwe: CWE-74
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Anonymous
 - id: snykio:npm:angular-expressions:543284
   title: Remote Code Execution (RCE)
   description: |
