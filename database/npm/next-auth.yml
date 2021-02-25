@@ -1,0 +1,35 @@
+---
+- id: npmjs:npm:next-auth:1627
+  title: Token Verification Bug
+  description: |-
+    ### Impact
+
+    `next-auth` implementations using the **Prisma database adapter** with the **Email provider** **are impacted**.
+
+    Implementations using the Prisma database adapter that are not using the Email provider are not impacted.
+    Implementations using the default database adapter (TypeORM) with the Email provider are not impacted.
+    Implementations not using a database are not impacted.
+
+    ### Description
+
+    The Prisma database adapter was checking the verification token but not the identifier (the email address associated with the token). This made it possible to use a valid token assigned to one user, to sign in as another user when using the Prima adapter in conjunction with the Email provider. The defect is specific to the community-supported Prisma database adapter in versions <3.3.0 and is not present in the default database adapter (TypeORM).
+
+    *Note:  The current community-supported adapter was not developed by Prisma.*
+
+    The defect was a problem in the implementation of verification function the adapter and is not directly related to Prisma.
+
+    The flaw may exist in other third party database adapters that do not check both the identifier and token values.
+
+    The design of the database adapter API may be revised in future to help reduce the likelyhood of similar defects.
+  affected_package: next-auth
+  vulnerable_versions:
+  - "<3.3.0"
+  severity: low
+  package_manager: npm
+  cve:
+  - CVE-2021-21310
+  cwe: CWE-290
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Anonymous

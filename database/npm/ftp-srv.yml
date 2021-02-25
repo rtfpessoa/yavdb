@@ -20,6 +20,32 @@
   created_date: 1970-01-01
   last_modified_date: 1970-01-01
   credit: Vincent
+- id: npmjs:npm:ftp-srv:1624
+  title: Directory Traversal
+  description: |-
+    ### Impact
+
+    Clients of FTP servers utilizing `ftp-srv` hosted on Windows machines can escape the  FTP user's defined root folder using the expected FTP commands, for example, `CWD` and `UPDR`.
+
+    ### Background
+
+    When windows separators exist within the path (`\`), `path.resolve` leaves the upper pointers intact and allows the user to move beyond the root folder defined for that user. We did not take that into account when creating the path resolve function.
+
+    ### Workarounds
+
+    There are no workarounds for windows servers. Hosting the server on a different OS mitigates the issue.
+  affected_package: ftp-srv
+  vulnerable_versions:
+  - "<4.4.0"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2020-26299
+  cwe: CWE-22
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Anonymous
 - id: snykio:npm:ftp-srv:597159
   title: Server-side Request Forgery (SSRF)
   description: |
