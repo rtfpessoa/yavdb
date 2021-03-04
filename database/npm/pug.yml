@@ -1,0 +1,27 @@
+---
+- id: npmjs:npm:pug:1643
+  title: Remote Code Execution
+  description: |-
+    ### Impact
+
+    In affected versions of `pug` and `pug-code-gen`, if a remote attacker was able to control the `pretty` option of the pug compiler, e.g. if you spread a user provided object such as the query parameters of a request into the pug template inputs, it was possible for them to achieve remote code execution on the node.js backend.
+
+    ### Patches
+
+    Upgrade to `pug@3.0.1` or `pug-code-gen@3.0.2` or `pug-code-gen@2.0.3`, which correctly sanitise the parameter.
+
+    ### Workarounds
+
+    If there is no way for un-trusted input to be passed to pug as the `pretty` option, e.g. if you compile templates in advance before applying user input to them, you do not need to upgrade.
+  affected_package: pug
+  vulnerable_versions:
+  - "<3.0.1"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2021-21353
+  cwe: CWE-74
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Anonymous
