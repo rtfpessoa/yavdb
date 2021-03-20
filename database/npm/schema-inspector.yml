@@ -1,4 +1,36 @@
 ---
+- id: npmjs:npm:schema-inspector:1656
+  title: Regular Expression Denial of Service
+  description: "There is a regular expression denial-of-service in `schema-inspector`.\n\n###
+    Impact\n\nEmail address validation is vulnerable to a denial-of-service attack
+    where some input (for example `a@0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.`)
+    will freeze the program or web browser page executing the code. This affects any
+    current schema-inspector users using any version to validate email addresses.
+    Users who do not do email validation, and instead do other types of validation
+    (like string min or max length, etc), are not affected.\n\n### Patches\n\nUsers
+    should upgrade to version 2.0.0, which uses a regex expression that isn't vulnerable
+    to ReDoS. The new regex expression is more limited in what it can check, so it
+    is more flexible than the one used before. Therefore, this was a new major version
+    instead of a new patch version to warn people upgrading that they should make
+    sure the email validation still works for their use case. \n\n### Workarounds\n\nIf
+    a user chooses to not upgrade, the only known workaround would be to stop using
+    the email validation feature in the library. The user could, for example, accept
+    the email address into their system but save it in a \"not yet validated\" state
+    in their system until a verification email is sent to it (to determine whether
+    the email is valid and belongs to the form submitter). Note that this is the preferred
+    way of validating email addresses anyways.\n"
+  affected_package: schema-inspector
+  vulnerable_versions:
+  - "<2.0.0"
+  severity: low
+  package_manager: npm
+  cve:
+  - CVE-2021-21267
+  cwe: CWE-400
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Anonymous
 - id: snykio:npm:schema-inspector:536970
   title: Internal Property Tampering
   description: |
