@@ -1,4 +1,23 @@
 ---
+- id: npmjs:npm:y18n:1654
+  title: Prototype Pollution
+  description: "`y18n` before versions 3.2.2, 4.0.1, and 5.0.5 is vulnerable to prototype
+    pollution.\n\n## POC\n\n```\nconst y18n = require('y18n')();\n \ny18n.setLocale('__proto__');\ny18n.updateLocale({polluted:
+    true});\n\nconsole.log(polluted); // true\n```"
+  affected_package: y18n
+  vulnerable_versions:
+  - "<3.2.2"
+  - "=4.0.0"
+  - ">=5.0.0 <5.0.5"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2020-7774
+  cwe: CWE-1321
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Anonymous
 - id: snykio:npm:y18n:1021887
   title: Prototype Pollution
   description: "[y18n][1] is a the bare-bones internationalization library used by
