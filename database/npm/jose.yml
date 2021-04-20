@@ -1,0 +1,25 @@
+---
+- id: npmjs:npm:jose:1661
+  title: Observable timing discrepancy
+  description: |-
+    ### Overview
+
+    Affected versions of `jose` are vulnerable to a Padding Oracle Attack due to Observable Timing Discrepancy.
+
+    ### Impact
+
+    [AES_CBC_HMAC_SHA2 Algorithm](https://tools.ietf.org/html/rfc7518#section-5.2) (A128CBC-HS256, A192CBC-HS384, A256CBC-HS512) decryption would always execute both HMAC tag verification and CBC decryption, if either failed `JWEDecryptionFailed` would be thrown. But a possibly observable difference in timing when padding error would occur while decrypting the ciphertext makes a padding oracle and an adversary might be able to make use of that oracle to decrypt data without knowing the decryption key by issuing on average 128*b calls to the padding oracle (where b is the number of bytes in the ciphertext block).
+  affected_package: jose
+  vulnerable_versions:
+  - ">= 3.0.0 < 3.11.4"
+  - ">=1.0.0 <1.28.1"
+  - ">=2.0.0 <2.0.5"
+  severity: medium
+  package_manager: npm
+  cve:
+  - CVE-2021-29443
+  cwe: CWE-208
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Anonymous
