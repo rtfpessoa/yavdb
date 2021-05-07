@@ -38,6 +38,34 @@
   created_date: 1970-01-01
   last_modified_date: 1970-01-01
   credit: Antonio de la Piedra
+- id: npmjs:npm:jsrsasign:1672
+  title: RSA signature validation vulnerability
+  description: |-
+    ### Impact
+    Vulnerable versions of `jsrsasign` will accept RSA signature with improper PKCS#1.5 padding.
+    Decoded RSA signature value consists following form:
+    01(ff...(8 or more ffs)...ff)00[ASN.1 OF DigestInfo]
+    Its byte length shall be the same as RSA key length however such checking was not sufficient.
+
+    To make crafted message for practical attack is very hard.
+
+    ### Patches
+    Users validating RSA signature should upgrade to 10.2.0 or later.
+
+    ### Workarounds
+    There is no workaround. Not to use RSA signature validation in jsrsasign.
+  affected_package: jsrsasign
+  vulnerable_versions:
+  - "<10.2.0"
+  severity: high
+  package_manager: npm
+  cve:
+  - CVE-2021-30246
+  cwe: CWE-347
+  disclosed_date: 1970-01-01
+  created_date: 1970-01-01
+  last_modified_date: 1970-01-01
+  credit: Anonymous
 - id: snykio:npm:jsrsasign:561755
   title: Timing Attack
   description: |
