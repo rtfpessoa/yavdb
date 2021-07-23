@@ -1,63 +1,63 @@
-version: 2
+# version: 2
 
-jobs:
-  update_database:
-    working_directory: ~/yavdb
-    docker:
-      - image: circleci/ruby:2.5.5
-    steps:
-      - checkout
+# jobs:
+#   update_database:
+#     working_directory: ~/yavdb
+#     docker:
+#       - image: circleci/ruby:2.5.5
+#     steps:
+#       - checkout
 
-      - name: Install YAVDB
-        type: shell
-        command: gem install yavdb
+#       - name: Install YAVDB
+#         type: shell
+#         command: gem install yavdb
 
-      - name: Restore yavdb cache
-        type: cache-restore
-        keys:
-          - crawler-yavdb-cache-2
+#       - name: Restore yavdb cache
+#         type: cache-restore
+#         keys:
+#           - crawler-yavdb-cache-2
 
-      - name: Generate database
-        type: shell
-        command: yavdb generate -p database
+#       - name: Generate database
+#         type: shell
+#         command: yavdb generate -p database
 
-      - name: Create cache stamp
-        type: shell
-        command: date > /tmp/cache-stamp.txt
+#       - name: Create cache stamp
+#         type: shell
+#         command: date > /tmp/cache-stamp.txt
 
-      - name: Save yavdb cache
-        type: cache-save
-        key: crawler-yavdb-cache-2-{{ checksum "/tmp/cache-stamp.txt" }}
-        paths:
-          - ~/.yavdb/cache
+#       - name: Save yavdb cache
+#         type: cache-save
+#         key: crawler-yavdb-cache-2-{{ checksum "/tmp/cache-stamp.txt" }}
+#         paths:
+#           - ~/.yavdb/cache
 
-      - add_ssh_keys:
-          fingerprints:
-            - "95:97:5b:40:42:c5:6a:35:78:73:7c:b0:38:5c:f0:9c"
+#       - add_ssh_keys:
+#           fingerprints:
+#             - "95:97:5b:40:42:c5:6a:35:78:73:7c:b0:38:5c:f0:9c"
 
-      - name: Push new database
-        type: shell
-        command: |
-          git config --global user.name "$GIT_NAME"
-          git config --global user.email "$GIT_EMAIL"
-          git add database
-          if ! git diff-index --quiet HEAD --
-          then
-            git commit -m "Update database $(date +"%d-%m-%Y")"
-            git push origin database
-          else
-            echo "No updates found."
-          fi
+#       - name: Push new database
+#         type: shell
+#         command: |
+#           git config --global user.name "$GIT_NAME"
+#           git config --global user.email "$GIT_EMAIL"
+#           git add database
+#           if ! git diff-index --quiet HEAD --
+#           then
+#             git commit -m "Update database $(date +"%d-%m-%Y")"
+#             git push origin database
+#           else
+#             echo "No updates found."
+#           fi
 
-workflows:
-  version: 2
-  nightly:
-    triggers:
-      - schedule:
-          cron: "0 0 * * *" # Every day “At minute 00:00”
-          filters:
-            branches:
-              only:
-                - database
-    jobs:
-      - update_database
+# workflows:
+#   version: 2
+#   nightly:
+#     triggers:
+#       - schedule:
+#           cron: "0 0 * * *" # Every day “At minute 00:00”
+#           filters:
+#             branches:
+#               only:
+#                 - database
+#     jobs:
+#       - update_database
